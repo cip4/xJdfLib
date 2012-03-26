@@ -26,8 +26,7 @@
 	
 	<scm>
     	<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
-    	<developerConnection>http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
-    	<connection>http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
+    	<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
   	</scm>
   	
   	<developers>
@@ -59,6 +58,11 @@
 					<outputDirectory>${build.directory}/generated-sources/jaxb</outputDirectory>
 					<arguments>-no-header -extension</arguments>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.2.1</version>
 			</plugin>
 		</plugins>
 	</build>
