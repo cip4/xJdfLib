@@ -3,7 +3,7 @@
 
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<packaging>jar</packaging>
 
 	<name>XJdfLib</name>
