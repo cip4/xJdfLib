@@ -3,7 +3,7 @@
 
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
-	<version>0.1</version>
+	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>XJdfLib</name>
@@ -24,9 +24,9 @@
 	</licenses>
 	
 	<scm>
-    	<url>http://svn.cip4.org/svnroot/tags/xJdfLib-0.1</url>
-    	<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.1</developerConnection>
-    	<connection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.1</connection>
+    	<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
+    	<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
+    	<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
   	</scm>
   	
   	<developers>
