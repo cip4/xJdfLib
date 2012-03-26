@@ -1,0 +1,3 @@
+generate sources
+mvn jaxb2:xjc
+
