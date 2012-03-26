@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!--
+	<jxb:bindings schemaLocation="test.xsd" node="/xs:schema">
+		<jxb:globalBindings>
+			<xjc:simple />
+			<xjc:serializable />
+		</jxb:globalBindings>
+		<jxb:schemaBindings>
+			<jxb:package name="org.cip4.lib.xjdf.schema.jdf" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+	-->
+	
+	<jxb:bindings schemaLocation="xsd/JDF20.xsd" node="/xs:schema">
+		<jxb:globalBindings>
+			<xjc:simple />
+			<xjc:serializable />
+		</jxb:globalBindings>
+		<jxb:schemaBindings>
+			<jxb:package name="org.cip4.lib.xjdf.schema.jdf" />
+		</jxb:schemaBindings>
+	</jxb:bindings>
+	
+
+	<!-- <jxb:bindings schemaLocation="PrintTalk.xsd" node="/xs:schema"> <jxb:schemaBindings> 
+		<jxb:package name="org.cip4.lib.xjdf.schema.ptk" /> </jxb:schemaBindings> 
+		</jxb:bindings> -->
+</jxb:bindings>
+
+	
