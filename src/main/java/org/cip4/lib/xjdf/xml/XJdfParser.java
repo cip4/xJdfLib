@@ -25,22 +25,22 @@ import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XmlParser {
+public class XJdfParser {
 
 	/**
 	 * Private default constructor.
 	 */
-	private XmlParser() {
+	private XJdfParser() {
 	}
 
 	/**
 	 * Factory method for getting a new XmlParser instance.
 	 * @return
 	 */
-	public static XmlParser newInstance() {
+	public static XJdfParser newInstance() {
 
 		// return new instance
-		return new XmlParser();
+		return new XJdfParser();
 	}
 
 	/**

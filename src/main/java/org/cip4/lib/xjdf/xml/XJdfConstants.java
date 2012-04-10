@@ -24,7 +24,7 @@ import org.xml.sax.InputSource;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XmlConstants {
+public class XJdfConstants {
 
 	/**
 	 * Default Namespace xJdf,
@@ -60,7 +60,7 @@ public class XmlConstants {
 			XPathExpression xPathExpression = xPath.compile("/xs:schema/@targetNamespace");
 
 			// execute xPath query
-			InputStream is = XmlConstants.class.getResourceAsStream(RES_JDF20_XSD);
+			InputStream is = XJdfConstants.class.getResourceAsStream(RES_JDF20_XSD);
 			result = xPathExpression.evaluate(new InputSource(is));
 
 		} catch (Exception ex) {

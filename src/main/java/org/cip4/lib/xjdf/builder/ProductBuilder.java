@@ -17,14 +17,16 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.jdf.Intent;
 import org.cip4.lib.xjdf.schema.jdf.IntentType;
 import org.cip4.lib.xjdf.schema.jdf.Product;
-import org.cip4.lib.xjdf.xml.XmlConstants;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
- * Implementation of a XJdf builder class.
+ * Implementation of a Product builder class.
  * @author s.meissner
  * @date 05.03.2012
  */
-public class ProductBuilder extends AbstractBuilder<Product> {
+public class ProductBuilder extends AbstractXJdfNodeBuilder<Product> {
+
+	private final XJdfNodeFactory xJdfNodeFactory;
 
 	/**
 	 * Default constructor.
@@ -32,7 +34,9 @@ public class ProductBuilder extends AbstractBuilder<Product> {
 	private ProductBuilder() {
 
 		// initialize objects
-		super(XJdfNodeFactory.getInstance().createProduct());
+		super(XJdfNodeFactory.newInstance().createProduct());
+
+		xJdfNodeFactory = XJdfNodeFactory.newInstance();
 	}
 
 	/**
@@ -79,10 +83,10 @@ public class ProductBuilder extends AbstractBuilder<Product> {
 		String intentName = intent.getClass().getSimpleName();
 
 		// create intent node
-		Intent it = XJdfNodeFactory.getInstance().createIntent();
+		Intent it = xJdfNodeFactory.createIntent();
 		it.setName(intentName);
 
-		QName qname = new QName(XmlConstants.NAMESPACE_JDF20, intentName);
+		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
 		JAXBElement obj = new JAXBElement(qname, intent.getClass(), null, intent);
 		it.getIntentTypes().add(obj);
 

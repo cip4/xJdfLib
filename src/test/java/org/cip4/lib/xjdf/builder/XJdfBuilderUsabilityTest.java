@@ -11,8 +11,6 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.builder.ProductBuilder;
-import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.jdf.FileSpec;
 import org.cip4.lib.xjdf.schema.jdf.GeneralID;
 import org.cip4.lib.xjdf.schema.jdf.Part;
@@ -64,30 +62,30 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
 
 		// xjdf attributes
-		xJdfBuilder.getxJdf().setCategory("Web2Print");
-		xJdfBuilder.getxJdf().setJobID("Job-12345");
+		xJdfBuilder.getXJdf().setCategory("Web2Print");
+		xJdfBuilder.getXJdf().setJobID("Job-12345");
 
 		// append GeneralID
-		GeneralID generalId = XJdfNodeFactory.getInstance().createGeneralID("CatalobID", "46");
+		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID("CatalobID", "46");
 		xJdfBuilder.addGeneralID(generalId);
 
 		// append Product
-		Product product = XJdfNodeFactory.getInstance().createProduct(1000);
+		Product product = XJdfNodeFactory.newInstance().createProduct(1000);
 		product.setDescriptiveName("Description is optional...");
 		xJdfBuilder.addProduct(product);
 
 		// append Cover File (using the detailed way - for customization)
-		FileSpec fileSpec = XJdfNodeFactory.getInstance().createFileSpec();
+		FileSpec fileSpec = XJdfNodeFactory.newInstance().createFileSpec();
 		fileSpec.setURL("http://www.example.org/xjdf/myCover.pdf");
-		RunList runCover = XJdfNodeFactory.getInstance().createRunList();
+		RunList runCover = XJdfNodeFactory.newInstance().createRunList();
 		runCover.setFileSpec(fileSpec);
-		Part partCover = XJdfNodeFactory.getInstance().createPart();
+		Part partCover = XJdfNodeFactory.newInstance().createPart();
 		partCover.setRun("Cover");
 		xJdfBuilder.addParameter(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-		RunList runContent = XJdfNodeFactory.getInstance().createRunList("http://www.example.org/xjdf/myContent.pdf");
-		Part partContent = XJdfNodeFactory.getInstance().createPart();
+		RunList runContent = XJdfNodeFactory.newInstance().createRunList("http://www.example.org/xjdf/myContent.pdf");
+		Part partContent = XJdfNodeFactory.newInstance().createPart();
 		partContent.setRun("Content");
 		xJdfBuilder.addParameter(runContent, partContent);
 
@@ -109,11 +107,11 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
 
 		// xjdf attributes
-		xJdfBuilder.getxJdf().setCategory("Web2Print");
-		xJdfBuilder.getxJdf().setJobID("Job-12345");
+		xJdfBuilder.getXJdf().setCategory("Web2Print");
+		xJdfBuilder.getXJdf().setJobID("Job-12345");
 
 		// append GeneralID
-		GeneralID generalId = XJdfNodeFactory.getInstance().createGeneralID("CatalobID", "46");
+		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID("CatalobID", "46");
 		xJdfBuilder.addGeneralID(generalId);
 
 		// create and append Product
@@ -122,17 +120,17 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addProduct(productBuilder.build());
 
 		// append Cover File (using the detailed way - for customization)
-		FileSpec fileSpec = XJdfNodeFactory.getInstance().createFileSpec();
+		FileSpec fileSpec = XJdfNodeFactory.newInstance().createFileSpec();
 		fileSpec.setURL("http://www.example.org/xjdf/myCover.pdf");
-		RunList runCover = XJdfNodeFactory.getInstance().createRunList();
+		RunList runCover = XJdfNodeFactory.newInstance().createRunList();
 		runCover.setFileSpec(fileSpec);
-		Part partCover = XJdfNodeFactory.getInstance().createPart();
+		Part partCover = XJdfNodeFactory.newInstance().createPart();
 		partCover.setRun("Cover");
 		xJdfBuilder.addParameter(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-		RunList runContent = XJdfNodeFactory.getInstance().createRunList("http://www.example.org/xjdf/myContent.pdf");
-		Part partContent = XJdfNodeFactory.getInstance().createPart();
+		RunList runContent = XJdfNodeFactory.newInstance().createRunList("http://www.example.org/xjdf/myContent.pdf");
+		Part partContent = XJdfNodeFactory.newInstance().createPart();
 		partContent.setRun("Content");
 		xJdfBuilder.addParameter(runContent, partContent);
 

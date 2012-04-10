@@ -14,7 +14,6 @@ import java.util.UUID;
 
 import junit.framework.Assert;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.jdf.Product;
 import org.cip4.lib.xjdf.schema.jdf.RunList;
 import org.junit.After;
@@ -36,7 +35,7 @@ public class XJdfNodeFactoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		xJdfNodeFactory = XJdfNodeFactory.getInstance();
+		xJdfNodeFactory = XJdfNodeFactory.newInstance();
 	}
 
 	/**

@@ -10,7 +10,7 @@
  */
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.cip4.lib.xjdf.xml.XmlConstants;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
@@ -46,7 +46,7 @@ public class XJdfNamespaceMapper extends NamespacePrefixMapper {
 
 		String result;
 
-		if (namespaceUri.equals(XmlConstants.NAMESPACE_JDF20)) {
+		if (namespaceUri.equals(XJdfConstants.NAMESPACE_JDF20)) {
 			result = "xjdf";
 		} else {
 			// other namespace
