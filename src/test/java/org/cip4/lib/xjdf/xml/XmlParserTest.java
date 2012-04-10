@@ -38,7 +38,7 @@ public class XmlParserTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
-	private XmlParser xmlParser;
+	private XJdfParser xmlParser;
 
 	/**
 	 * Set up unit test.
@@ -47,7 +47,7 @@ public class XmlParserTest {
 	@Before
 	public void setUp() throws Exception {
 		// new instance
-		xmlParser = XmlParser.newInstance();
+		xmlParser = XJdfParser.newInstance();
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class XmlParserTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XmlParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
 	 */
 	@Test
 	public void testParseXJdf() throws Exception {
@@ -69,7 +69,7 @@ public class XmlParserTest {
 		final String VALUE = UUID.randomUUID().toString();
 
 		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
-		xJdfBuilder.addGeneralID(XJdfNodeFactory.getInstance().createGeneralID("CatalobID", VALUE));
+		xJdfBuilder.addGeneralID(XJdfNodeFactory.newInstance().createGeneralID("CatalobID", VALUE));
 		XJDF xJdf = xJdfBuilder.build();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -79,7 +79,7 @@ public class XmlParserTest {
 
 		// assert
 		NamespaceManager nsManager = new NamespaceManager();
-		nsManager.addNamespace("ns", XmlConstants.NAMESPACE_JDF20);
+		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
 
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xPath = xPathFactory.newXPath();
@@ -93,7 +93,7 @@ public class XmlParserTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XmlParser#parseXmlStream(java.io.InputStream)}.
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
 	 */
 	@Test
 	public void testParseXmlStream() throws Exception {
