@@ -15,6 +15,6 @@ package org.cip4.lib.xjdf.xml;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XmlValidator {
+public class XJdfValidator {
 
 }

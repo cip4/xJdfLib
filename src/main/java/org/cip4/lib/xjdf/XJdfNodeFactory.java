@@ -12,6 +12,7 @@ package org.cip4.lib.xjdf;
 
 import org.cip4.lib.xjdf.schema.jdf.Address;
 import org.cip4.lib.xjdf.schema.jdf.ComChannel;
+import org.cip4.lib.xjdf.schema.jdf.Comment;
 import org.cip4.lib.xjdf.schema.jdf.Company;
 import org.cip4.lib.xjdf.schema.jdf.Contact;
 import org.cip4.lib.xjdf.schema.jdf.FileSpec;
@@ -38,7 +39,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * Get instance of XJdfNodeFactory.
 	 * @return
 	 */
-	public static XJdfNodeFactory getInstance() {
+	public static XJdfNodeFactory newInstance() {
 		return new XJdfNodeFactory();
 	}
 
@@ -50,7 +51,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public GeneralID createGeneralID(String idUsage, String idValue) {
 		// create new GeneralID object
-		GeneralID generalId = XJdfNodeFactory.getInstance().createGeneralID();
+		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID();
 		generalId.setIDUsage(idUsage);
 		generalId.setIDValue(idValue);
 
@@ -168,5 +169,21 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return contact;
+	}
+
+	/**
+	 * Create a new Comment Node with already contains a comment string as text.
+	 * @param comment Comment Node text value.
+	 * @return Comment Node which already contains a comment string as text.
+	 */
+	public Comment createComment(String comment) {
+		// create Comment Node
+		Comment obj = super.createComment();
+
+		// set attribute
+		obj.setValue(comment);
+
+		// return object
+		return obj;
 	}
 }

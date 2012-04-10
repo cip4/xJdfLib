@@ -16,14 +16,14 @@ package org.cip4.lib.xjdf.builder;
  * @author s.meissner
  * @date 05.03.2012
  */
-abstract class AbstractBuilder<T> {
+abstract class AbstractXJdfNodeBuilder<T> {
 
 	private final T node;
 
 	/**
 	 * Default constructor.
 	 */
-	AbstractBuilder(T node) {
+	AbstractXJdfNodeBuilder(T node) {
 		// initialize node
 		this.node = node;
 	}

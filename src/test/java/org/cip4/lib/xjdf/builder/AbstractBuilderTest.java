@@ -19,8 +19,8 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.cip4.lib.xjdf.builder.AbstractBuilder;
-import org.cip4.lib.xjdf.xml.XmlConstants;
+import org.cip4.lib.xjdf.builder.AbstractXJdfNodeBuilder;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
@@ -53,7 +53,7 @@ public abstract class AbstractBuilderTest<T> {
 	 * @return
 	 * @throws Exception
 	 */
-	protected byte[] marsahlResult(AbstractBuilder<T> builder) throws Exception {
+	protected byte[] marsahlResult(AbstractXJdfNodeBuilder<T> builder) throws Exception {
 
 		// get XJDF Node
 		T obj = builder.build();
@@ -94,7 +94,7 @@ public abstract class AbstractBuilderTest<T> {
 
 		// create XPath query
 		NamespaceManager nsManager = new NamespaceManager();
-		nsManager.addNamespace("ns", XmlConstants.NAMESPACE_JDF20);
+		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
 
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xPath = xPathFactory.newXPath();

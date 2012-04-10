@@ -13,7 +13,6 @@ package org.cip4.lib.xjdf.builder;
 import junit.framework.Assert;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.schema.jdf.BindingIntent;
 import org.cip4.lib.xjdf.schema.jdf.LayoutIntent;
 import org.cip4.lib.xjdf.schema.jdf.MediaIntent;
@@ -92,14 +91,14 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 	public void testAddIntent() throws Exception {
 
 		// arrange
-		MediaIntent mediaIntent = XJdfNodeFactory.getInstance().createMediaIntent();
+		MediaIntent mediaIntent = XJdfNodeFactory.newInstance().createMediaIntent();
 		mediaIntent.setWeight(135d);
 
-		LayoutIntent layoutIntent = XJdfNodeFactory.getInstance().createLayoutIntent();
+		LayoutIntent layoutIntent = XJdfNodeFactory.newInstance().createLayoutIntent();
 		layoutIntent.getFinishedDimensions().add(595.27559055d);
 		layoutIntent.getFinishedDimensions().add(822.04724409d);
 
-		BindingIntent bindingIntent = XJdfNodeFactory.getInstance().createBindingIntent();
+		BindingIntent bindingIntent = XJdfNodeFactory.newInstance().createBindingIntent();
 		bindingIntent.setBindingType("SaddleStitch");
 
 		// act

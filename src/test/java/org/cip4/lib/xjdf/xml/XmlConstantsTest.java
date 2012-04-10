@@ -48,7 +48,7 @@ public class XmlConstantsTest {
 		String expectedNs = doc.substring(i, n);
 
 		// act
-		String actualNs = XmlConstants.NAMESPACE_JDF20;
+		String actualNs = XJdfConstants.NAMESPACE_JDF20;
 
 		// assert
 		Assert.assertEquals("Namespace JDF20 is wrong.", expectedNs, actualNs);

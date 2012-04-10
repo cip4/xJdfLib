@@ -218,14 +218,14 @@ public class ConversionUtilTest {
 	public void testMm2Dtp() {
 
 		// arrange
-		final float mm = 10f;
-		final float expected = 28.346457f;
+		final double mm = 10d;
+		final double expected = 28.346457d;
 
 		// act
-		float actual = ConversionUtil.mm2Dtp(mm);
+		double actual = ConversionUtil.mm2Dtp(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual);
+		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
@@ -235,14 +235,14 @@ public class ConversionUtilTest {
 	public void testDtp2Mm() {
 
 		// arrange
-		final float dtp = 28.346457f;
-		final float expected = 10f;
+		final double dtp = 28.346457d;
+		final double expected = 10d;
 
 		// act
-		float actual = ConversionUtil.dtp2Mm(dtp);
+		double actual = ConversionUtil.dtp2Mm(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual);
+		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
@@ -253,13 +253,13 @@ public class ConversionUtilTest {
 
 		// arrange
 		final String dtp = "28.346457";
-		final float expected = 10f;
+		final double expected = 10d;
 
 		// act
-		float actual = ConversionUtil.dtp2MmS(dtp);
+		double actual = ConversionUtil.dtp2MmS(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual);
+		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
@@ -269,8 +269,8 @@ public class ConversionUtilTest {
 	public void testMm2DtpS() {
 
 		// arrange
-		final float mm = 10f;
-		final String expected = "28.346457";
+		final double mm = 10d;
+		final String expected = "28.34645669291339";
 
 		// act
 		String actual = ConversionUtil.mm2DtpS(mm);
