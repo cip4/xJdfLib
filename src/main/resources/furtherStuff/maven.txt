@@ -1,3 +1,19 @@
-generate sources
+1. Generate Sources from XSD
+============================
+
 mvn jaxb2:xjc
+
+
+2. Publish SNAPSHOT
+===================
+
+mvn clean deploy
+
+
+
+3. New Release
+==============
+
+mvn release:prepare
+mvn release:perform
 
