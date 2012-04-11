@@ -86,7 +86,7 @@ public class XJdfParser {
 			validator.check(is);
 
 			if (!validator.isValid()) {
-				String err = validator.getMessagesErrorText();
+				String err = validator.getMessagesText();
 				throw new ValidationException(err);
 			}
 		}

@@ -124,6 +124,29 @@ public class XJdfValidatorTest {
 	 * @throws Exception
 	 */
 	@Test
+	public void testIntegrationValideSingleLineCall() throws Exception {
+
+		// arrange
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+		xJdfBuilder.addGeneralID(generalId);
+
+		xJdfBuilder.getXJdf().setID("MyId");
+		xJdfBuilder.getXJdf().getTypes().add("Web2Print");
+		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+
+		// act
+		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+		boolean isValid = XJdfValidator.newInstance().check(xJdfFileStream).isValid();
+
+		// assert
+		Assert.assertTrue("Validation result is wrong", isValid);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
+	 * @throws Exception
+	 */
+	@Test
 	public void testIntegrationAnalyzeMessagesInvalid() throws Exception {
 
 		// arrange
