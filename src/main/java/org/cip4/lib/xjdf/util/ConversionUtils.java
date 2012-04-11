@@ -21,7 +21,7 @@ import java.util.TimeZone;
  * @author s.meissner
  * @date 21.03.2012
  */
-public class ConversionUtil {
+public class ConversionUtils {
 
 	private static final String patternUTC = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
@@ -31,7 +31,7 @@ public class ConversionUtil {
 	 * Private constructor.<br/>
 	 * This class cannot be instantiated.
 	 */
-	private ConversionUtil() {
+	private ConversionUtils() {
 	}
 
 	/**

@@ -79,13 +79,12 @@
 			<version>2.2.5</version>
 		</dependency>
 		
-		<!-- Apache Tools -->
+		<!-- Apache Tools
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.1</version>
-			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
