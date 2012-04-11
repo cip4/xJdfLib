@@ -61,10 +61,10 @@ public class XJdfValidator {
 	}
 
 	/**
-	 * Getter for messages as error text.
+	 * Getter for messages as single text.
 	 * @return the messages
 	 */
-	public String getMessagesErrorText() {
+	public String getMessagesText() {
 
 		String result = null;
 
