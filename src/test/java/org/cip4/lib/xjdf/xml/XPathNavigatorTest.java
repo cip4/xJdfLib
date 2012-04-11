@@ -16,7 +16,7 @@ import java.util.UUID;
 
 import junit.framework.Assert;
 
-import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.util.IOUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -133,6 +133,8 @@ public class XPathNavigatorTest {
 		long readSecondFinished = System.currentTimeMillis();
 
 		// assert
+		System.out.println("Result XPathNavigator Speed Test:");
+		System.out.println("---------------------------------");
 		System.out.println("Time first read: " + (readFirstFinished - startTime));
 		System.out.println("Time update: " + (updateFinished - readFirstFinished));
 		System.out.println("Time second read: " + (readSecondFinished - updateFinished));

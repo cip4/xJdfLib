@@ -23,10 +23,10 @@ import org.junit.Test;
  * @author stefan.meissner
  * @date 21.03.2012
  */
-public class ConversionUtilTest {
+public class ConversionUtilsTest {
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
 	 */
 	@Test
 	public void testDate2StringUTC() {
@@ -38,7 +38,7 @@ public class ConversionUtilTest {
 		calendar.set(2012, Calendar.MARCH, 4, 16, 20, 45);
 
 		// act
-		String actual = ConversionUtil.date2String(calendar);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		System.out.println("Result UTC: " + actual);
@@ -46,7 +46,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
 	 */
 	@Test
 	public void testDate2StringBerlin() {
@@ -58,7 +58,7 @@ public class ConversionUtilTest {
 		calendar.set(2012, Calendar.MARCH, 4, 13, 20, 40);
 
 		// act
-		String actual = ConversionUtil.date2String(calendar);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		System.out.println("Result other TimeZone: " + actual);
@@ -66,7 +66,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
 	 */
 	@Test
 	public void testDate2StringPacific() {
@@ -78,7 +78,7 @@ public class ConversionUtilTest {
 		calendar.set(2012, Calendar.MARCH, 4, 6, 20, 40);
 
 		// act
-		String actual = ConversionUtil.date2String(calendar);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		System.out.println("Result other TimeZone: " + actual);
@@ -86,7 +86,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -96,7 +96,7 @@ public class ConversionUtilTest {
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		Calendar cal = ConversionUtil.string2Date(strDate);
+		Calendar cal = ConversionUtils.string2Date(strDate);
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -109,7 +109,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -119,7 +119,7 @@ public class ConversionUtilTest {
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		Calendar cal = ConversionUtil.string2Date(strDate);
+		Calendar cal = ConversionUtils.string2Date(strDate);
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -132,7 +132,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -142,7 +142,7 @@ public class ConversionUtilTest {
 		final String strDate = "2012-11-04T15:30:40-08:00";
 
 		// act
-		Calendar cal = ConversionUtil.string2Date(strDate);
+		Calendar cal = ConversionUtils.string2Date(strDate);
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -155,7 +155,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -165,8 +165,8 @@ public class ConversionUtilTest {
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		Calendar calendar = ConversionUtil.string2Date(strDate);
-		String actual = ConversionUtil.date2String(calendar);
+		Calendar calendar = ConversionUtils.string2Date(strDate);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -174,7 +174,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -184,8 +184,8 @@ public class ConversionUtilTest {
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		Calendar calendar = ConversionUtil.string2Date(strDate);
-		String actual = ConversionUtil.date2String(calendar);
+		Calendar calendar = ConversionUtils.string2Date(strDate);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -193,7 +193,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#string2Date(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
 	 * @throws ParseException
 	 */
 	@Test
@@ -203,8 +203,8 @@ public class ConversionUtilTest {
 		final String strDate = "2012-03-04T13:20:40-08:00";
 
 		// act
-		Calendar calendar = ConversionUtil.string2Date(strDate);
-		String actual = ConversionUtil.date2String(calendar);
+		Calendar calendar = ConversionUtils.string2Date(strDate);
+		String actual = ConversionUtils.date2String(calendar);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -212,7 +212,7 @@ public class ConversionUtilTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#mm2Dtp(float)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
 	 */
 	@Test
 	public void testMm2Dtp() {
@@ -222,14 +222,14 @@ public class ConversionUtilTest {
 		final double expected = 28.346457d;
 
 		// act
-		double actual = ConversionUtil.mm2Dtp(mm);
+		double actual = ConversionUtils.mm2Dtp(mm);
 
 		// assert
 		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#dtp2Mm(float)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
 	 */
 	@Test
 	public void testDtp2Mm() {
@@ -239,14 +239,14 @@ public class ConversionUtilTest {
 		final double expected = 10d;
 
 		// act
-		double actual = ConversionUtil.dtp2Mm(dtp);
+		double actual = ConversionUtils.dtp2Mm(dtp);
 
 		// assert
 		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#dtp2MmS(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2MmS(java.lang.String)}.
 	 */
 	@Test
 	public void testDtp2MmS() {
@@ -256,14 +256,14 @@ public class ConversionUtilTest {
 		final double expected = 10d;
 
 		// act
-		double actual = ConversionUtil.dtp2MmS(dtp);
+		double actual = ConversionUtils.dtp2MmS(dtp);
 
 		// assert
 		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtil#mm2DtpS(float)}.
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2DtpS(float)}.
 	 */
 	@Test
 	public void testMm2DtpS() {
@@ -273,7 +273,7 @@ public class ConversionUtilTest {
 		final String expected = "28.34645669291339";
 
 		// act
-		String actual = ConversionUtil.mm2DtpS(mm);
+		String actual = ConversionUtils.mm2DtpS(mm);
 
 		// assert
 		Assert.assertEquals("DTP-Points are wrong.", expected, actual);

@@ -15,13 +15,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.ValidationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.schema.jdf.GeneralID;
 import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -39,6 +43,17 @@ public class XmlParserTest {
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
 	private XJdfParser xmlParser;
+
+	/**
+	 * Default constructor.
+	 */
+	public XmlParserTest() {
+		try {
+			JAXBContextFactory.init();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Set up unit test.
@@ -64,12 +79,84 @@ public class XmlParserTest {
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
 	 */
 	@Test
-	public void testParseXJdf() throws Exception {
+	public void testParseXJdfSkipValidation() throws Exception {
+
 		// arrange
 		final String VALUE = UUID.randomUUID().toString();
 
+		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
 		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
-		xJdfBuilder.addGeneralID(XJdfNodeFactory.newInstance().createGeneralID("CatalobID", VALUE));
+
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
+		xJdfBuilder.addGeneralID(generalId);
+
+		XJDF xJdf = xJdfBuilder.build();
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+		// act
+		xmlParser.parseXJdf(xJdf, bos, true);
+
+		// assert
+		NamespaceManager nsManager = new NamespaceManager();
+		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
+
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xPath = xPathFactory.newXPath();
+		xPath.setNamespaceContext(nsManager);
+
+		XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
+		InputStream is = new ByteArrayInputStream(bos.toByteArray());
+		String actual = xPathExpression.evaluate(new InputSource(is));
+
+		Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
+	 */
+	@Test(expected = ValidationException.class)
+	public void testParseXJdfInvalid() throws Exception {
+
+		// arrange
+		final String VALUE = UUID.randomUUID().toString();
+
+		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
+		xJdfBuilder.addGeneralID(generalId);
+
+		XJDF xJdf = xJdfBuilder.build();
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+		// act
+		xmlParser.parseXJdf(xJdf, bos);
+
+		// assert
+		// exception expected
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
+	 */
+	@Test
+	public void testParseXJdfValid() throws Exception {
+
+		// arrange
+		final String VALUE = UUID.randomUUID().toString();
+
+		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
+		xJdfBuilder.addGeneralID(generalId);
+
+		xJdfBuilder.getXJdf().setID("MyId");
+		xJdfBuilder.getXJdf().getTypes().add("MyType");
+		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+
 		XJDF xJdf = xJdfBuilder.build();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -103,7 +190,7 @@ public class XmlParserTest {
 		InputStream is = XmlParserTest.class.getResourceAsStream(RES_TEST_XJDF);
 
 		// act
-		XJDF xJdf = xmlParser.parseXmlStream(is);
+		XJDF xJdf = xmlParser.parseStream(is);
 
 		// assert
 		Assert.assertEquals("Result is wrong.", RESULT, xJdf.getGeneralIDs().get(0).getIDValue());
