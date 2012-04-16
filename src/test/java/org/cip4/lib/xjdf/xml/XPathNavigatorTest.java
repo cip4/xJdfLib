@@ -96,7 +96,6 @@ public class XPathNavigatorTest {
 		int i = doc.indexOf(NEW_VALUE);
 
 		Assert.assertFalse(i == -1);
-
 	}
 
 	@Test
