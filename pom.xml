@@ -1,20 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
 	<version>0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
-
 	<name>XJdfLib</name>
 	<url>http://www.cip4.org</url>
-	
 	<parent>
-    	<groupId>org.sonatype.oss</groupId>
-    	<artifactId>oss-parent</artifactId>
-    	<version>7</version>
-  	</parent>
-	
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<licenses>
 		<license>
 			<name>CIP4 Software License</name>
@@ -22,22 +19,38 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
-	
 	<scm>
-    	<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
-    	<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
-    	<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
-  	</scm>
-  	
-  	<developers>
-    	<developer>
-      		<id>s.meissner</id>
-      		<name>Stefan Meissner</name>
-      		<email>s.meissner@flyeralarm.de</email>
-    	</developer>
-  	</developers>
-	
-
+		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
+	</scm>
+	<issueManagement>
+		<system>JIRA</system>
+		<url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
+	</issueManagement>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-changes-plugin</artifactId>
+				<version>2.6</version>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<report>changes-report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+	<developers>
+		<developer>
+			<id>s.meissner</id>
+			<name>Stefan Meissner</name>
+			<email>s.meissner@flyeralarm.de</email>
+		</developer>
+	</developers>
 	<build>
 		<plugins>
 			<plugin>
@@ -71,21 +84,14 @@
 			</plugin>
 		</plugins>
 	</build>
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.5</version>
 		</dependency>
-		
-		<!-- Apache Tools
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.1</version>
-		</dependency> -->
-		
+		<!-- Apache Tools <dependency> <groupId>commons-io</groupId> <artifactId>commons-io</artifactId> <version>2.1</version> 
+			</dependency> -->
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>
