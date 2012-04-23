@@ -39,7 +39,7 @@ import org.xml.sax.InputSource;
 public class XPathNavigator {
 
 	private final XPath xPath;
-	
+
 	private final Document xmlDocument;
 
 	/**
@@ -78,35 +78,34 @@ public class XPathNavigator {
 	 * @throws XPathExpressionException Is being thrown in case an exception occurs.
 	 */
 	public String readAttribute(String xPath) throws XPathExpressionException {
-		
+
 		String result;
 
 		// reading of modified documents
-        NodeList nodes = (NodeList) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.NODESET);
-        
-        if(nodes.getLength() > 0) {
-        	result = nodes.item(0).getNodeValue();
-        } else {
-        	result = null;
-        }
+		NodeList nodes = (NodeList) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.NODESET);
 
-        // return result
+		if (nodes.getLength() > 0) {
+			result = nodes.item(0).getNodeValue();
+		} else {
+			result = null;
+		}
+
+		// return result
 		return result;
 	}
 
 	/**
-	 * Update attribute in XML Document. <br/>
-	 * !! ATTENTION: WHEN CALLING THIS METHOD READ OPERATIONS BECOME SLOWER !!
+	 * Update attribute in XML Document.
 	 * @param xPath XPath expression of attribute to read.
 	 * @value value New value of attribute defined by xPath.
 	 * @throws Exception Is being thrown in case an exception occurs.
 	 */
 	public void updateAttribute(String xPath, String value) throws Exception {
-		
+
 		// finalize XPath expression
 		String exprString = xPath;
-	    
-        // locate and modify the node
+
+		// locate and modify the node
 		Attr result = (Attr) this.xPath.evaluate(exprString, xmlDocument, XPathConstants.NODE);
 		result.setValue(value);
 	}
@@ -116,16 +115,16 @@ public class XPathNavigator {
 	 * @return XJdf document as input stream.
 	 */
 	public InputStream getXJdfStream() throws Exception {
-		
+
 		// save the result
 		Transformer xformer = TransformerFactory.newInstance().newTransformer();
-		
+
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		xformer.transform(new DOMSource(xmlDocument), new StreamResult(bos));
-		
+
 		InputStream resultStream = new ByteArrayInputStream(bos.toByteArray());
 		bos.close();
-		
+
 		// return result stream
 		return resultStream;
 	}
