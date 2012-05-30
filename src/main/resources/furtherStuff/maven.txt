@@ -17,3 +17,5 @@ mvn clean deploy
 mvn release:prepare
 mvn release:perform
 
+mvn release:rollback
+
