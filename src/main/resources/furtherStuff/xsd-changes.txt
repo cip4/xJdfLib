@@ -1,0 +1,7 @@
+1) Standardize Enum Names
+
+2) Reference Enums
+
+3) xs:sequence: Move attributes minOccurs and maxOccurs to subelements.
+
+4) Separated substitated elements in element and complexType nodes.
