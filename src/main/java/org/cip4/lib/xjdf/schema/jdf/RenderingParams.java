@@ -203,7 +203,7 @@ public class RenderingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getInterleaved() {
+    public Boolean isInterleaved() {
         return interleaved;
     }
 

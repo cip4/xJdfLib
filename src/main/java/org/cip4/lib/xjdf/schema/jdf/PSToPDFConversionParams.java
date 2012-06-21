@@ -95,7 +95,7 @@ public class PSToPDFConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getDetectBlend() {
+    public Boolean isDetectBlend() {
         return detectBlend;
     }
 
@@ -119,7 +119,7 @@ public class PSToPDFConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getCompressPages() {
+    public Boolean isCompressPages() {
         return compressPages;
     }
 
@@ -244,7 +244,7 @@ public class PSToPDFConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getOptimize() {
+    public Boolean isOptimize() {
         return optimize;
     }
 
@@ -321,7 +321,7 @@ public class PSToPDFConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getASCII85EncodePages() {
+    public Boolean isASCII85EncodePages() {
         return ascii85EncodePages;
     }
 
@@ -345,7 +345,7 @@ public class PSToPDFConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getDoThumbnails() {
+    public Boolean isDoThumbnails() {
         return doThumbnails;
     }
 

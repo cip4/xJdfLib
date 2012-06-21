@@ -69,7 +69,7 @@ public class WireCombBindingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getFlipBackCover() {
+    public Boolean isFlipBackCover() {
         return flipBackCover;
     }
 

@@ -80,7 +80,7 @@ public class CCITTFaxParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getUncompressed() {
+    public Boolean isUncompressed() {
         return uncompressed;
     }
 
@@ -104,7 +104,7 @@ public class CCITTFaxParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEncodedByteAlign() {
+    public Boolean isEncodedByteAlign() {
         return encodedByteAlign;
     }
 
@@ -128,7 +128,7 @@ public class CCITTFaxParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndOfBlock() {
+    public Boolean isEndOfBlock() {
         return endOfBlock;
     }
 
@@ -152,7 +152,7 @@ public class CCITTFaxParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndOfLine() {
+    public Boolean isEndOfLine() {
         return endOfLine;
     }
 

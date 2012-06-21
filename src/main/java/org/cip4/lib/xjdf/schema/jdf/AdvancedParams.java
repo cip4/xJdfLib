@@ -95,7 +95,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveOPIComments() {
+    public Boolean isPreserveOPIComments() {
         return preserveOPIComments;
     }
 
@@ -119,7 +119,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveCopyPage() {
+    public Boolean isPreserveCopyPage() {
         return preserveCopyPage;
     }
 
@@ -143,7 +143,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getUsePrologue() {
+    public Boolean isUsePrologue() {
         return usePrologue;
     }
 
@@ -167,7 +167,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getAllowTransparency() {
+    public Boolean isAllowTransparency() {
         return allowTransparency;
     }
 
@@ -191,7 +191,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmitDSCWarnings() {
+    public Boolean isEmitDSCWarnings() {
         return emitDSCWarnings;
     }
 
@@ -215,7 +215,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveOverprintSettings() {
+    public Boolean isPreserveOverprintSettings() {
         return preserveOverprintSettings;
     }
 
@@ -263,7 +263,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getParseDSCComments() {
+    public Boolean isParseDSCComments() {
         return parseDSCComments;
     }
 
@@ -287,7 +287,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPassThroughJPEGImages() {
+    public Boolean isPassThroughJPEGImages() {
         return passThroughJPEGImages;
     }
 
@@ -311,7 +311,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getLockDistillerParams() {
+    public Boolean isLockDistillerParams() {
         return lockDistillerParams;
     }
 
@@ -335,7 +335,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getAllowPSXObjects() {
+    public Boolean isAllowPSXObjects() {
         return allowPSXObjects;
     }
 
@@ -359,7 +359,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmbedJobOptions() {
+    public Boolean isEmbedJobOptions() {
         return embedJobOptions;
     }
 
@@ -383,7 +383,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveHalftoneInfo() {
+    public Boolean isPreserveHalftoneInfo() {
         return preserveHalftoneInfo;
     }
 
@@ -407,7 +407,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveEPSInfo() {
+    public Boolean isPreserveEPSInfo() {
         return preserveEPSInfo;
     }
 
@@ -455,7 +455,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getAutoPositionEPSInfo() {
+    public Boolean isAutoPositionEPSInfo() {
         return autoPositionEPSInfo;
     }
 
@@ -479,7 +479,7 @@ public class AdvancedParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getParseDSCCommentsForDocInfo() {
+    public Boolean isParseDSCCommentsForDocInfo() {
         return parseDSCCommentsForDocInfo;
     }
 

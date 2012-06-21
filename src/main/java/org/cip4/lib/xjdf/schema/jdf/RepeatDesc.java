@@ -93,7 +93,7 @@ public class RepeatDesc
      *     {@link Boolean }
      *     
      */
-    public Boolean getUseBleeds() {
+    public Boolean isUseBleeds() {
         return useBleeds;
     }
 

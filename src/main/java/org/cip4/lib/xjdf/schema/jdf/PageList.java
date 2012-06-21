@@ -171,7 +171,7 @@ public class PageList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsBlank() {
+    public Boolean isIsBlank() {
         return isBlank;
     }
 
@@ -296,7 +296,7 @@ public class PageList
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasBleeds() {
+    public Boolean isHasBleeds() {
         return hasBleeds;
     }
 
@@ -368,7 +368,7 @@ public class PageList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsTrapped() {
+    public Boolean isIsTrapped() {
         return isTrapped;
     }
 
@@ -392,7 +392,7 @@ public class PageList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsPrintable() {
+    public Boolean isIsPrintable() {
         return isPrintable;
     }
 

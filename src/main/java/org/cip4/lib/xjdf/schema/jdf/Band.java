@@ -128,7 +128,7 @@ public class Band
      *     {@link Boolean }
      *     
      */
-    public Boolean getWasMarked() {
+    public Boolean isWasMarked() {
         return wasMarked;
     }
 

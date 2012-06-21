@@ -77,7 +77,7 @@ public class PhaseTime
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "Status")

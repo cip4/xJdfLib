@@ -132,7 +132,7 @@ public class ThreadSealingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getBlindStitch() {
+    public Boolean isBlindStitch() {
         return blindStitch;
     }
 

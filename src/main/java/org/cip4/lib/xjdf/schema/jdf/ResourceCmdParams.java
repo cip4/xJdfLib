@@ -464,7 +464,7 @@ public class ResourceCmdParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getExact() {
+    public Boolean isExact() {
         return exact;
     }
 

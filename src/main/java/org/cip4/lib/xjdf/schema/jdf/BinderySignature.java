@@ -292,7 +292,7 @@ public class BinderySignature
      *     {@link Boolean }
      *     
      */
-    public Boolean getStaggerContinuous() {
+    public Boolean isStaggerContinuous() {
         return staggerContinuous;
     }
 
@@ -412,7 +412,7 @@ public class BinderySignature
      *     {@link Boolean }
      *     
      */
-    public Boolean getOutsideGutter() {
+    public Boolean isOutsideGutter() {
         return outsideGutter;
     }
 

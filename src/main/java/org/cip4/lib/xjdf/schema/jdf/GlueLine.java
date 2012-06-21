@@ -257,7 +257,7 @@ public class GlueLine
      *     {@link Boolean }
      *     
      */
-    public Boolean getAreaGlue() {
+    public Boolean isAreaGlue() {
         return areaGlue;
     }
 

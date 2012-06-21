@@ -196,7 +196,7 @@ public class TrackResult
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsDevice() {
+    public Boolean isIsDevice() {
         return isDevice;
     }
 

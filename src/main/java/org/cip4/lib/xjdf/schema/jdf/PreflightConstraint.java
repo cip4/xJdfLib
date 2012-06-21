@@ -94,7 +94,7 @@ public class PreflightConstraint
      *     {@link Boolean }
      *     
      */
-    public Boolean getAttemptFixupWarnings() {
+    public Boolean isAttemptFixupWarnings() {
         return attemptFixupWarnings;
     }
 
@@ -142,7 +142,7 @@ public class PreflightConstraint
      *     {@link Boolean }
      *     
      */
-    public Boolean getAttemptFixupErrors() {
+    public Boolean isAttemptFixupErrors() {
         return attemptFixupErrors;
     }
 

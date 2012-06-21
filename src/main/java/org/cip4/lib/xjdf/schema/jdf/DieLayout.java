@@ -214,7 +214,7 @@ public class DieLayout
      *     {@link Boolean }
      *     
      */
-    public Boolean getRotated() {
+    public Boolean isRotated() {
         return rotated;
     }
 

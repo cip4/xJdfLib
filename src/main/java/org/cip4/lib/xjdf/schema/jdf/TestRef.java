@@ -33,7 +33,7 @@ public class TestRef
     implements Serializable
 {
 
-    @XmlAttribute
+    @XmlAttribute(name = "rRef")
     @XmlIDREF
     protected Object rRef;
 

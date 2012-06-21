@@ -139,7 +139,7 @@ public class TIFFFormatParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getWhiteIsZero() {
+    public Boolean isWhiteIsZero() {
         return whiteIsZero;
     }
 

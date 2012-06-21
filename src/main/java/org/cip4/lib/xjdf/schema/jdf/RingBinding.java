@@ -72,7 +72,7 @@ public class RingBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getRivetsExposed() {
+    public Boolean isRivetsExposed() {
         return rivetsExposed;
     }
 
@@ -216,7 +216,7 @@ public class RingBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getRingMechanic() {
+    public Boolean isRingMechanic() {
         return ringMechanic;
     }
 

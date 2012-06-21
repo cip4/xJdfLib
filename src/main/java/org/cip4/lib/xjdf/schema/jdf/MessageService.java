@@ -187,7 +187,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getPersistent() {
+    public Boolean isPersistent() {
         return persistent;
     }
 
@@ -264,7 +264,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getAcknowledge() {
+    public Boolean isAcknowledge() {
         return acknowledge;
     }
 
@@ -341,7 +341,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getQuery() {
+    public Boolean isQuery() {
         return query;
     }
 
@@ -389,7 +389,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getSignal() {
+    public Boolean isSignal() {
         return signal;
     }
 
@@ -413,7 +413,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getRegistration() {
+    public Boolean isRegistration() {
         return registration;
     }
 
@@ -437,7 +437,7 @@ public class MessageService
      *     {@link Boolean }
      *     
      */
-    public Boolean getCommand() {
+    public Boolean isCommand() {
         return command;
     }
 

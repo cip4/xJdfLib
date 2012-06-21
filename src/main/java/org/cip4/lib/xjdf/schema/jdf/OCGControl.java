@@ -47,7 +47,7 @@ public class OCGControl
      *     {@link Boolean }
      *     
      */
-    public Boolean getIncludeOCG() {
+    public Boolean isIncludeOCG() {
         return includeOCG;
     }
 

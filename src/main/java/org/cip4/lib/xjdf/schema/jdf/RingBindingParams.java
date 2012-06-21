@@ -254,7 +254,7 @@ public class RingBindingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getRingMechanic() {
+    public Boolean isRingMechanic() {
         return ringMechanic;
     }
 
@@ -278,7 +278,7 @@ public class RingBindingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getRivetsExposed() {
+    public Boolean isRivetsExposed() {
         return rivetsExposed;
     }
 

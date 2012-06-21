@@ -182,7 +182,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreTTFontsFirst() {
+    public Boolean isIgnoreTTFontsFirst() {
         return ignoreTTFontsFirst;
     }
 
@@ -206,7 +206,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreTransfers() {
+    public Boolean isIgnoreTransfers() {
         return ignoreTransfers;
     }
 
@@ -230,7 +230,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreColorSeps() {
+    public Boolean isIgnoreColorSeps() {
         return ignoreColorSeps;
     }
 
@@ -254,7 +254,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getShrinkToFit() {
+    public Boolean isShrinkToFit() {
         return shrinkToFit;
     }
 
@@ -278,7 +278,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSuppressRotate() {
+    public Boolean isSuppressRotate() {
         return suppressRotate;
     }
 
@@ -326,7 +326,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getUseFontAliasNames() {
+    public Boolean isUseFontAliasNames() {
         return useFontAliasNames;
     }
 
@@ -350,7 +350,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreSeparableImagesOnly() {
+    public Boolean isIgnoreSeparableImagesOnly() {
         return ignoreSeparableImagesOnly;
     }
 
@@ -374,7 +374,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSetPageSize() {
+    public Boolean isSetPageSize() {
         return setPageSize;
     }
 
@@ -446,7 +446,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreOverprint() {
+    public Boolean isIgnoreOverprint() {
         return ignoreOverprint;
     }
 
@@ -494,7 +494,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getGeneratePageStreams() {
+    public Boolean isGeneratePageStreams() {
         return generatePageStreams;
     }
 
@@ -542,7 +542,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getCenterCropBox() {
+    public Boolean isCenterCropBox() {
         return centerCropBox;
     }
 
@@ -614,7 +614,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getTTasT42() {
+    public Boolean isTTasT42() {
         return tTasT42;
     }
 
@@ -638,7 +638,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreBG() {
+    public Boolean isIgnoreBG() {
         return ignoreBG;
     }
 
@@ -662,7 +662,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreHalftones() {
+    public Boolean isIgnoreHalftones() {
         return ignoreHalftones;
     }
 
@@ -686,7 +686,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSuppressCenter() {
+    public Boolean isSuppressCenter() {
         return suppressCenter;
     }
 
@@ -710,7 +710,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreExternStreamRef() {
+    public Boolean isIgnoreExternStreamRef() {
         return ignoreExternStreamRef;
     }
 
@@ -830,7 +830,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreDSC() {
+    public Boolean isIgnoreDSC() {
         return ignoreDSC;
     }
 
@@ -854,7 +854,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSetupProcsets() {
+    public Boolean isSetupProcsets() {
         return setupProcsets;
     }
 
@@ -878,7 +878,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreAnnotForms() {
+    public Boolean isIgnoreAnnotForms() {
         return ignoreAnnotForms;
     }
 
@@ -902,7 +902,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getBinaryOK() {
+    public Boolean isBinaryOK() {
         return binaryOK;
     }
 
@@ -926,7 +926,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreShowPage() {
+    public Boolean isIgnoreShowPage() {
         return ignoreShowPage;
     }
 
@@ -950,7 +950,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreRawData() {
+    public Boolean isIgnoreRawData() {
         return ignoreRawData;
     }
 
@@ -974,7 +974,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreUCR() {
+    public Boolean isIgnoreUCR() {
         return ignoreUCR;
     }
 
@@ -998,7 +998,7 @@ public class PDFToPSConversionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnorePageRotation() {
+    public Boolean isIgnorePageRotation() {
         return ignorePageRotation;
     }
 

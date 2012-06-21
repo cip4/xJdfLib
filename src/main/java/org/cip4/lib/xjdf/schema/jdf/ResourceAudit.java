@@ -75,7 +75,7 @@ public class ResourceAudit
     protected String id;
     @XmlAttribute(name = "NodeStatus")
     protected EnumNodeStatus nodeStatus;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")
@@ -328,7 +328,7 @@ public class ResourceAudit
      *     {@link Boolean }
      *     
      */
-    public Boolean getContentsModified() {
+    public Boolean isContentsModified() {
         return contentsModified;
     }
 

@@ -74,7 +74,7 @@ public class ProcessRun
     protected String id;
     @XmlAttribute(name = "Duration")
     protected String duration;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "SubmissionTime")

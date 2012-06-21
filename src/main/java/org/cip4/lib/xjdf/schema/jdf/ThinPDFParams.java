@@ -53,7 +53,7 @@ public class ThinPDFParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSidelineImages() {
+    public Boolean isSidelineImages() {
         return sidelineImages;
     }
 
@@ -77,7 +77,7 @@ public class ThinPDFParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getFilePerPage() {
+    public Boolean isFilePerPage() {
         return filePerPage;
     }
 
@@ -101,7 +101,7 @@ public class ThinPDFParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSidelineFonts() {
+    public Boolean isSidelineFonts() {
         return sidelineFonts;
     }
 
@@ -125,7 +125,7 @@ public class ThinPDFParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSidelineEPS() {
+    public Boolean isSidelineEPS() {
         return sidelineEPS;
     }
 

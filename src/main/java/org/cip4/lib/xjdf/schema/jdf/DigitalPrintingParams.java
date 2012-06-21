@@ -259,7 +259,7 @@ public class DigitalPrintingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getManualFeed() {
+    public Boolean isManualFeed() {
         return manualFeed;
     }
 

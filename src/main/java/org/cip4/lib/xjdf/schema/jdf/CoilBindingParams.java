@@ -89,7 +89,7 @@ public class CoilBindingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getTucked() {
+    public Boolean isTucked() {
         return tucked;
     }
 

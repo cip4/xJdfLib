@@ -52,7 +52,7 @@ public class FontPolicy
      *     {@link Boolean }
      *     
      */
-    public Boolean getUseDefaultFont() {
+    public Boolean isUseDefaultFont() {
         return useDefaultFont;
     }
 
@@ -76,7 +76,7 @@ public class FontPolicy
      *     {@link Boolean }
      *     
      */
-    public Boolean getUseFontEmulation() {
+    public Boolean isUseFontEmulation() {
         return useFontEmulation;
     }
 

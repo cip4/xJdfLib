@@ -49,7 +49,7 @@ public class BendingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getBend() {
+    public Boolean isBend() {
         return bend;
     }
 
@@ -97,7 +97,7 @@ public class BendingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPunch() {
+    public Boolean isPunch() {
         return punch;
     }
 

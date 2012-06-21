@@ -167,7 +167,7 @@ public class ExposedMedia
      *     {@link Boolean }
      *     
      */
-    public Boolean getPolarity() {
+    public Boolean isPolarity() {
         return polarity;
     }
 

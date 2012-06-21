@@ -348,7 +348,7 @@ public class Signature
      *     {@link Boolean }
      *     
      */
-    public Boolean getLocked() {
+    public Boolean isLocked() {
         return locked;
     }
 
@@ -689,7 +689,7 @@ public class Signature
      *     {@link Boolean }
      *     
      */
-    public Boolean getLockOrigins() {
+    public Boolean isLockOrigins() {
         return lockOrigins;
     }
 
@@ -761,7 +761,7 @@ public class Signature
      *     {@link Boolean }
      *     
      */
-    public Boolean getAutomated() {
+    public Boolean isAutomated() {
         return automated;
     }
 

@@ -394,7 +394,7 @@ public class StrippingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getAutomated() {
+    public Boolean isAutomated() {
         return automated;
     }
 

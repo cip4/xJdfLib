@@ -167,7 +167,7 @@ public class Tabs
      *     {@link Boolean }
      *     
      */
-    public Boolean getTabBodyCopy() {
+    public Boolean isTabBodyCopy() {
         return tabBodyCopy;
     }
 
@@ -191,7 +191,7 @@ public class Tabs
      *     {@link Boolean }
      *     
      */
-    public Boolean getTabExtensionMylar() {
+    public Boolean isTabExtensionMylar() {
         return tabExtensionMylar;
     }
 
@@ -263,7 +263,7 @@ public class Tabs
      *     {@link Boolean }
      *     
      */
-    public Boolean getTabBindMylar() {
+    public Boolean isTabBindMylar() {
         return tabBindMylar;
     }
 

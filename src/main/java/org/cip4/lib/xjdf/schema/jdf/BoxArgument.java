@@ -56,7 +56,7 @@ public class BoxArgument
      *     {@link Boolean }
      *     
      */
-    public Boolean getOverlap() {
+    public Boolean isOverlap() {
         return overlap;
     }
 

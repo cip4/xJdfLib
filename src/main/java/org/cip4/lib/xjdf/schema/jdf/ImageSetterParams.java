@@ -216,7 +216,7 @@ public class ImageSetterParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getCutMedia() {
+    public Boolean isCutMedia() {
         return cutMedia;
     }
 
@@ -389,7 +389,7 @@ public class ImageSetterParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getManualFeed() {
+    public Boolean isManualFeed() {
         return manualFeed;
     }
 

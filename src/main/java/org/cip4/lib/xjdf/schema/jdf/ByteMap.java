@@ -198,7 +198,7 @@ public class ByteMap
      *     {@link Boolean }
      *     
      */
-    public Boolean getHalftoned() {
+    public Boolean isHalftoned() {
         return halftoned;
     }
 
@@ -275,7 +275,7 @@ public class ByteMap
      *     {@link Boolean }
      *     
      */
-    public Boolean getInterleaved() {
+    public Boolean isInterleaved() {
         return interleaved;
     }
 

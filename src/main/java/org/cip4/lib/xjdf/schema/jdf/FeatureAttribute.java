@@ -98,7 +98,7 @@ public class FeatureAttribute
      *     {@link Boolean }
      *     
      */
-    public Boolean getEditable() {
+    public Boolean isEditable() {
         return editable;
     }
 

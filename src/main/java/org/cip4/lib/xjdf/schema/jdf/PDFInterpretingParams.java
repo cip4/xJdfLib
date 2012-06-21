@@ -180,7 +180,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmitPDFBG() {
+    public Boolean isEmitPDFBG() {
         return emitPDFBG;
     }
 
@@ -228,7 +228,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmitPDFHalftones() {
+    public Boolean isEmitPDFHalftones() {
         return emitPDFHalftones;
     }
 
@@ -252,7 +252,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmitPDFUCR() {
+    public Boolean isEmitPDFUCR() {
         return emitPDFUCR;
     }
 
@@ -276,7 +276,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPrintPDFAnnotations() {
+    public Boolean isPrintPDFAnnotations() {
         return printPDFAnnotations;
     }
 
@@ -300,7 +300,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPrintTrapAnnotations() {
+    public Boolean isPrintTrapAnnotations() {
         return printTrapAnnotations;
     }
 
@@ -348,7 +348,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getHonorPDFOverprint() {
+    public Boolean isHonorPDFOverprint() {
         return honorPDFOverprint;
     }
 
@@ -372,7 +372,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmitPDFTransfers() {
+    public Boolean isEmitPDFTransfers() {
         return emitPDFTransfers;
     }
 
@@ -396,7 +396,7 @@ public class PDFInterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getICCColorAsDeviceColor() {
+    public Boolean isICCColorAsDeviceColor() {
         return iccColorAsDeviceColor;
     }
 

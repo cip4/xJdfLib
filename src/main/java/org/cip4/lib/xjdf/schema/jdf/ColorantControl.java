@@ -198,7 +198,7 @@ public class ColorantControl
      *     {@link Boolean }
      *     
      */
-    public Boolean getForceSeparations() {
+    public Boolean isForceSeparations() {
         return forceSeparations;
     }
 
