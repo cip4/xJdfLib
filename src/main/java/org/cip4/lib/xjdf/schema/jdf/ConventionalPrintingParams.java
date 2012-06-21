@@ -224,7 +224,7 @@ public class ConventionalPrintingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getDirectProof() {
+    public Boolean isDirectProof() {
         return directProof;
     }
 

@@ -560,7 +560,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getSorted() {
+    public Boolean isSorted() {
         return sorted;
     }
 
@@ -608,7 +608,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndOfSet() {
+    public Boolean isEndOfSet() {
         return endOfSet;
     }
 
@@ -800,7 +800,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndOfBundleItem() {
+    public Boolean isEndOfBundleItem() {
         return endOfBundleItem;
     }
 
@@ -824,7 +824,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsPage() {
+    public Boolean isIsPage() {
         return isPage;
     }
 
@@ -872,7 +872,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndOfDocument() {
+    public Boolean isEndOfDocument() {
         return endOfDocument;
     }
 
@@ -944,7 +944,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsBlank() {
+    public Boolean isIsBlank() {
         return isBlank;
     }
 
@@ -968,7 +968,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnorePDLCopies() {
+    public Boolean isIgnorePDLCopies() {
         return ignorePDLCopies;
     }
 
@@ -1093,7 +1093,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnorePDLImposition() {
+    public Boolean isIgnorePDLImposition() {
         return ignorePDLImposition;
     }
 
@@ -1165,7 +1165,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasBleeds() {
+    public Boolean isHasBleeds() {
         return hasBleeds;
     }
 
@@ -1213,7 +1213,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsTrapped() {
+    public Boolean isIsTrapped() {
         return isTrapped;
     }
 
@@ -1237,7 +1237,7 @@ public class RunList
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsPrintable() {
+    public Boolean isIsPrintable() {
         return isPrintable;
     }
 

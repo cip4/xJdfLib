@@ -62,7 +62,7 @@ public class FontParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSubsetFonts() {
+    public Boolean isSubsetFonts() {
         return subsetFonts;
     }
 
@@ -163,7 +163,7 @@ public class FontParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmbedAllFonts() {
+    public Boolean isEmbedAllFonts() {
         return embedAllFonts;
     }
 

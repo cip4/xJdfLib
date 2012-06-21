@@ -135,7 +135,7 @@ public class ImageCompression
      *     {@link Boolean }
      *     
      */
-    public Boolean getConvertImagesToIndexed() {
+    public Boolean isConvertImagesToIndexed() {
         return convertImagesToIndexed;
     }
 
@@ -159,7 +159,7 @@ public class ImageCompression
      *     {@link Boolean }
      *     
      */
-    public Boolean getAntiAliasImages() {
+    public Boolean isAntiAliasImages() {
         return antiAliasImages;
     }
 
@@ -279,7 +279,7 @@ public class ImageCompression
      *     {@link Boolean }
      *     
      */
-    public Boolean getDownsampleImages() {
+    public Boolean isDownsampleImages() {
         return downsampleImages;
     }
 
@@ -303,7 +303,7 @@ public class ImageCompression
      *     {@link Boolean }
      *     
      */
-    public Boolean getAutoFilterImages() {
+    public Boolean isAutoFilterImages() {
         return autoFilterImages;
     }
 
@@ -351,7 +351,7 @@ public class ImageCompression
      *     {@link Boolean }
      *     
      */
-    public Boolean getEncodeImages() {
+    public Boolean isEncodeImages() {
         return encodeImages;
     }
 

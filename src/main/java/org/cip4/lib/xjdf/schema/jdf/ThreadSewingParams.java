@@ -142,7 +142,7 @@ public class ThreadSewingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getSealing() {
+    public Boolean isSealing() {
         return sealing;
     }
 
@@ -238,7 +238,7 @@ public class ThreadSewingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getBlindStitch() {
+    public Boolean isBlindStitch() {
         return blindStitch;
     }
 

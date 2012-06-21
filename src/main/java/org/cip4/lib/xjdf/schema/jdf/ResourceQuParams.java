@@ -433,7 +433,7 @@ public class ResourceQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getExact() {
+    public Boolean isExact() {
         return exact;
     }
 

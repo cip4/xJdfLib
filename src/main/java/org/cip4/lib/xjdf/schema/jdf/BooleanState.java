@@ -220,7 +220,7 @@ public class BooleanState
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasDefault() {
+    public Boolean isHasDefault() {
         return hasDefault;
     }
 
@@ -244,7 +244,7 @@ public class BooleanState
      *     {@link Boolean }
      *     
      */
-    public Boolean getRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
@@ -268,7 +268,7 @@ public class BooleanState
      *     {@link Boolean }
      *     
      */
-    public Boolean getEditable() {
+    public Boolean isEditable() {
         return editable;
     }
 
@@ -316,7 +316,7 @@ public class BooleanState
      *     {@link Boolean }
      *     
      */
-    public Boolean getCurrentValue() {
+    public Boolean isCurrentValue() {
         return currentValue;
     }
 
@@ -629,7 +629,7 @@ public class BooleanState
      *     {@link Boolean }
      *     
      */
-    public Boolean getDefaultValue() {
+    public Boolean isDefaultValue() {
         return defaultValue;
     }
 

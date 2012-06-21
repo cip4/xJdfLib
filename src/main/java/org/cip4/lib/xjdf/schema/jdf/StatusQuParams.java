@@ -226,7 +226,7 @@ public class StatusQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEmployeeInfo() {
+    public Boolean isEmployeeInfo() {
         return employeeInfo;
     }
 
@@ -250,7 +250,7 @@ public class StatusQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getQueueInfo() {
+    public Boolean isQueueInfo() {
         return queueInfo;
     }
 

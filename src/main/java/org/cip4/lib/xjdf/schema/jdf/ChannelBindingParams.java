@@ -110,7 +110,7 @@ public class ChannelBindingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getClampSystem() {
+    public Boolean isClampSystem() {
         return clampSystem;
     }
 

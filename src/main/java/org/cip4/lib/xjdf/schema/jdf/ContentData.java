@@ -135,7 +135,7 @@ public class ContentData
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasBleeds() {
+    public Boolean isHasBleeds() {
         return hasBleeds;
     }
 
@@ -183,7 +183,7 @@ public class ContentData
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsBlank() {
+    public Boolean isIsBlank() {
         return isBlank;
     }
 
@@ -279,7 +279,7 @@ public class ContentData
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsTrapped() {
+    public Boolean isIsTrapped() {
         return isTrapped;
     }
 

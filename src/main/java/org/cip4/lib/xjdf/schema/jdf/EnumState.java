@@ -220,7 +220,7 @@ public class EnumState
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasDefault() {
+    public Boolean isHasDefault() {
         return hasDefault;
     }
 
@@ -244,7 +244,7 @@ public class EnumState
      *     {@link Boolean }
      *     
      */
-    public Boolean getRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
@@ -292,7 +292,7 @@ public class EnumState
      *     {@link Boolean }
      *     
      */
-    public Boolean getEditable() {
+    public Boolean isEditable() {
         return editable;
     }
 

@@ -179,7 +179,7 @@ public class DieLayoutProductionParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getEstimate() {
+    public Boolean isEstimate() {
         return estimate;
     }
 

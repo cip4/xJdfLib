@@ -100,7 +100,7 @@ public class InsertSheet
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsWaste() {
+    public Boolean isIsWaste() {
         return isWaste;
     }
 

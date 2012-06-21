@@ -559,7 +559,7 @@ public class ResourceInfo
      *     {@link Boolean }
      *     
      */
-    public Boolean getLotControlled() {
+    public Boolean isLotControlled() {
         return lotControlled;
     }
 

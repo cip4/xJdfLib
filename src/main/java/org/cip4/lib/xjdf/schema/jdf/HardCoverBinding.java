@@ -246,7 +246,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getJapanBind() {
+    public Boolean isJapanBind() {
         return japanBind;
     }
 
@@ -270,7 +270,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineLevelling() {
+    public Boolean isSpineLevelling() {
         return spineLevelling;
     }
 
@@ -294,7 +294,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineSanding() {
+    public Boolean isSpineSanding() {
         return spineSanding;
     }
 
@@ -342,7 +342,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineFiberRoughing() {
+    public Boolean isSpineFiberRoughing() {
         return spineFiberRoughing;
     }
 
@@ -390,7 +390,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getHeadBands() {
+    public Boolean isHeadBands() {
         return headBands;
     }
 
@@ -414,7 +414,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineNotching() {
+    public Boolean isSpineNotching() {
         return spineNotching;
     }
 
@@ -438,7 +438,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineBrushing() {
+    public Boolean isSpineBrushing() {
         return spineBrushing;
     }
 
@@ -462,7 +462,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getEndSheets() {
+    public Boolean isEndSheets() {
         return endSheets;
     }
 
@@ -510,7 +510,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getBlockThreadSewing() {
+    public Boolean isBlockThreadSewing() {
         return blockThreadSewing;
     }
 
@@ -582,7 +582,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineShredding() {
+    public Boolean isSpineShredding() {
         return spineShredding;
     }
 
@@ -606,7 +606,7 @@ public class HardCoverBinding
      *     {@link Boolean }
      *     
      */
-    public Boolean getSpineMilling() {
+    public Boolean isSpineMilling() {
         return spineMilling;
     }
 

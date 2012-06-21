@@ -217,7 +217,7 @@ public class MediaIntent
      *     {@link Boolean }
      *     
      */
-    public Boolean getPrePrinted() {
+    public Boolean isPrePrinted() {
         return prePrinted;
     }
 
@@ -673,7 +673,7 @@ public class MediaIntent
      *     {@link Boolean }
      *     
      */
-    public Boolean getBuyerSupplied() {
+    public Boolean isBuyerSupplied() {
         return buyerSupplied;
     }
 

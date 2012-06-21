@@ -267,7 +267,7 @@ public class TrappingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getImageToObjectTrapping() {
+    public Boolean isImageToObjectTrapping() {
         return imageToObjectTrapping;
     }
 
@@ -291,7 +291,7 @@ public class TrappingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getImageMaskTrapping() {
+    public Boolean isImageMaskTrapping() {
         return imageMaskTrapping;
     }
 
@@ -387,7 +387,7 @@ public class TrappingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getImageInternalTrapping() {
+    public Boolean isImageInternalTrapping() {
         return imageInternalTrapping;
     }
 
@@ -555,7 +555,7 @@ public class TrappingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getImageToImageTrapping() {
+    public Boolean isImageToImageTrapping() {
         return imageToImageTrapping;
     }
 

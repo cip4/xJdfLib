@@ -438,7 +438,7 @@ public class Layout
      *     {@link Boolean }
      *     
      */
-    public Boolean getLockOrigins() {
+    public Boolean isLockOrigins() {
         return lockOrigins;
     }
 
@@ -510,7 +510,7 @@ public class Layout
      *     {@link Boolean }
      *     
      */
-    public Boolean getAutomated() {
+    public Boolean isAutomated() {
         return automated;
     }
 

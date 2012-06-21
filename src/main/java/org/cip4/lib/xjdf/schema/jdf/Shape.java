@@ -114,7 +114,7 @@ public class Shape
      *     {@link Boolean }
      *     
      */
-    public Boolean getCutOut() {
+    public Boolean isCutOut() {
         return cutOut;
     }
 
@@ -234,7 +234,7 @@ public class Shape
      *     {@link Boolean }
      *     
      */
-    public Boolean getLockOrigins() {
+    public Boolean isLockOrigins() {
         return lockOrigins;
     }
 

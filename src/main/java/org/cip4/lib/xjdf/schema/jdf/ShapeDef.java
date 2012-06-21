@@ -168,7 +168,7 @@ public class ShapeDef
      *     {@link Boolean }
      *     
      */
-    public Boolean getLockOrigins() {
+    public Boolean isLockOrigins() {
         return lockOrigins;
     }
 

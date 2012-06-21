@@ -76,7 +76,7 @@ public class PDFXParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPDFXNoTrimBoxError() {
+    public Boolean isPDFXNoTrimBoxError() {
         return pdfxNoTrimBoxError;
     }
 
@@ -148,7 +148,7 @@ public class PDFXParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPDFXCompliantPDFOnly() {
+    public Boolean isPDFXCompliantPDFOnly() {
         return pdfxCompliantPDFOnly;
     }
 
@@ -196,7 +196,7 @@ public class PDFXParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPDFX3Check() {
+    public Boolean isPDFX3Check() {
         return pdfx3Check;
     }
 
@@ -220,7 +220,7 @@ public class PDFXParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPDFXSetBleedBoxToMediaBox() {
+    public Boolean isPDFXSetBleedBoxToMediaBox() {
         return pdfxSetBleedBoxToMediaBox;
     }
 
@@ -292,7 +292,7 @@ public class PDFXParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPDFX1ACheck() {
+    public Boolean isPDFX1ACheck() {
         return pdfx1ACheck;
     }
 

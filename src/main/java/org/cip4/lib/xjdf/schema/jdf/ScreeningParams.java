@@ -84,7 +84,7 @@ public class ScreeningParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getIgnoreSourceFile() {
+    public Boolean isIgnoreSourceFile() {
         return ignoreSourceFile;
     }
 

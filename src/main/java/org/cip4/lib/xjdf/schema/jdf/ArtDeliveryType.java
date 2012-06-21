@@ -98,7 +98,7 @@ public class ArtDeliveryType
      *     {@link Boolean }
      *     
      */
-    public Boolean getLocked() {
+    public Boolean isLocked() {
         return locked;
     }
 

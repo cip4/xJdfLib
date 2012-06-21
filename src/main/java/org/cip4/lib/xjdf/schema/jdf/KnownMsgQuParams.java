@@ -64,7 +64,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPersistent() {
+    public Boolean isPersistent() {
         return persistent;
     }
 
@@ -88,7 +88,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getListSignals() {
+    public Boolean isListSignals() {
         return listSignals;
     }
 
@@ -112,7 +112,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getListQueries() {
+    public Boolean isListQueries() {
         return listQueries;
     }
 
@@ -160,7 +160,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getListRegistrations() {
+    public Boolean isListRegistrations() {
         return listRegistrations;
     }
 
@@ -184,7 +184,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getListCommands() {
+    public Boolean isListCommands() {
         return listCommands;
     }
 
@@ -208,7 +208,7 @@ public class KnownMsgQuParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getExact() {
+    public Boolean isExact() {
         return exact;
     }
 

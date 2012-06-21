@@ -44,7 +44,7 @@ public class JBIG2Params
      *     {@link Boolean }
      *     
      */
-    public Boolean getJBIG2Lossless() {
+    public Boolean isJBIG2Lossless() {
         return jbig2Lossless;
     }
 

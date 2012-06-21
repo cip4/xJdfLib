@@ -78,7 +78,7 @@ public class XJDF
     protected List<Comment> comments;
     @XmlElement(name = "ProductList")
     protected ProductList productList;
-    @XmlElementRef(name = "SetType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
+    @XmlElementRef(name = "SetType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
     protected List<JAXBElement<? extends SetType>> setTypes;
     @XmlAttribute(name = "ID", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
@@ -243,8 +243,8 @@ public class XJDF
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link JAXBElement }{@code <}{@link SetType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
      * {@link JAXBElement }{@code <}{@link ParameterSet }{@code >}
+     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
      * 
      * 
      */

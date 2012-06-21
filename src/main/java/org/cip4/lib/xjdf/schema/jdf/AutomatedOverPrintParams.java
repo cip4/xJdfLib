@@ -82,7 +82,7 @@ public class AutomatedOverPrintParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getKnockOutCMYKWhite() {
+    public Boolean isKnockOutCMYKWhite() {
         return knockOutCMYKWhite;
     }
 
@@ -154,7 +154,7 @@ public class AutomatedOverPrintParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getOverPrintBlackLineArt() {
+    public Boolean isOverPrintBlackLineArt() {
         return overPrintBlackLineArt;
     }
 
@@ -178,7 +178,7 @@ public class AutomatedOverPrintParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getOverPrintBlackText() {
+    public Boolean isOverPrintBlackText() {
         return overPrintBlackText;
     }
 

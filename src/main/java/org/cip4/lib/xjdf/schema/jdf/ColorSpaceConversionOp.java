@@ -232,7 +232,7 @@ public class ColorSpaceConversionOp
      *     {@link Boolean }
      *     
      */
-    public Boolean getPreserveBlack() {
+    public Boolean isPreserveBlack() {
         return preserveBlack;
     }
 
@@ -280,7 +280,7 @@ public class ColorSpaceConversionOp
      *     {@link Boolean }
      *     
      */
-    public Boolean getRGBGray2Black() {
+    public Boolean isRGBGray2Black() {
         return rgbGray2Black;
     }
 

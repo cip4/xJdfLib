@@ -230,7 +230,7 @@ public class ShapeState
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasDefault() {
+    public Boolean isHasDefault() {
         return hasDefault;
     }
 
@@ -254,7 +254,7 @@ public class ShapeState
      *     {@link Boolean }
      *     
      */
-    public Boolean getRequired() {
+    public Boolean isRequired() {
         return required;
     }
 
@@ -278,7 +278,7 @@ public class ShapeState
      *     {@link Boolean }
      *     
      */
-    public Boolean getEditable() {
+    public Boolean isEditable() {
         return editable;
     }
 

@@ -41,7 +41,7 @@ public class Not
     implements Serializable
 {
 
-    @XmlElementRef(name = "TermType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
+    @XmlElementRef(name = "TermType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
     protected List<JAXBElement<? extends TermType>> termTypes;
 
     /**
@@ -62,27 +62,27 @@ public class Not
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link DateTimeEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link ShapeEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link PDFPathEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link And }{@code >}
-     * {@link JAXBElement }{@code <}{@link Not }{@code >}
-     * {@link JAXBElement }{@code <}{@link RectangleEvaluation }{@code >}
      * {@link JAXBElement }{@code <}{@link DurationEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link Xor }{@code >}
-     * {@link JAXBElement }{@code <}{@link NameEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link TermType }{@code >}
-     * {@link JAXBElement }{@code <}{@link MatrixEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link PDFPathEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link BooleanEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link Test }{@code >}
+     * {@link JAXBElement }{@code <}{@link ShapeEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link RectangleEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link Or }{@code >}
+     * {@link JAXBElement }{@code <}{@link Not }{@code >}
      * {@link JAXBElement }{@code <}{@link IntegerEvaluation }{@code >}
      * {@link JAXBElement }{@code <}{@link EnumEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link XYPairEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link Test }{@code >}
-     * {@link JAXBElement }{@code <}{@link IsPresentEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link BooleanEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link TermType }{@code >}
+     * {@link JAXBElement }{@code <}{@link And }{@code >}
+     * {@link JAXBElement }{@code <}{@link Xor }{@code >}
      * {@link JAXBElement }{@code <}{@link NumberEvaluation }{@code >}
-     * {@link JAXBElement }{@code <}{@link TestRef }{@code >}
-     * {@link JAXBElement }{@code <}{@link Or }{@code >}
      * {@link JAXBElement }{@code <}{@link StringEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link IsPresentEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link MatrixEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link NameEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link XYPairEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link DateTimeEvaluation }{@code >}
+     * {@link JAXBElement }{@code <}{@link TestRef }{@code >}
      * 
      * 
      */

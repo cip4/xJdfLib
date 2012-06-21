@@ -191,7 +191,7 @@ public class ArtDelivery
      *     {@link Boolean }
      *     
      */
-    public Boolean getHasBleeds() {
+    public Boolean isHasBleeds() {
         return hasBleeds;
     }
 
@@ -239,7 +239,7 @@ public class ArtDelivery
      *     {@link Boolean }
      *     
      */
-    public Boolean getIsTrapped() {
+    public Boolean isIsTrapped() {
         return isTrapped;
     }
 

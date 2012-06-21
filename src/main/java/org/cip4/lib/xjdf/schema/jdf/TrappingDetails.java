@@ -125,7 +125,7 @@ public class TrappingDetails
      *     {@link Boolean }
      *     
      */
-    public Boolean getDefaultTrapping() {
+    public Boolean isDefaultTrapping() {
         return defaultTrapping;
     }
 

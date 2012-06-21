@@ -197,7 +197,7 @@ public class StackingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getLayerCompression() {
+    public Boolean isLayerCompression() {
         return layerCompression;
     }
 
@@ -221,7 +221,7 @@ public class StackingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getCompensate() {
+    public Boolean isCompensate() {
         return compensate;
     }
 
@@ -322,7 +322,7 @@ public class StackingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getStackCompression() {
+    public Boolean isStackCompression() {
         return stackCompression;
     }
 
@@ -346,7 +346,7 @@ public class StackingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getLayerLift() {
+    public Boolean isLayerLift() {
         return layerLift;
     }
 

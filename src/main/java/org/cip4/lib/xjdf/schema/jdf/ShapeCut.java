@@ -71,7 +71,7 @@ public class ShapeCut
      *     {@link Boolean }
      *     
      */
-    public Boolean getCutOut() {
+    public Boolean isCutOut() {
         return cutOut;
     }
 

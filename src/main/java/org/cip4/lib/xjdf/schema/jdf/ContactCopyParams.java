@@ -67,7 +67,7 @@ public class ContactCopyParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getContactScreen() {
+    public Boolean isContactScreen() {
         return contactScreen;
     }
 
@@ -115,7 +115,7 @@ public class ContactCopyParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getPolarityChange() {
+    public Boolean isPolarityChange() {
         return polarityChange;
     }
 

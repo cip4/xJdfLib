@@ -16,12 +16,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for ProofItem complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="ProofItem">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;attribute name="Contract" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
+@XmlType(name = "ProofItem")
 @XmlRootElement(name = "ProofItem")
 public class ProofItem
     implements Serializable
@@ -91,7 +91,7 @@ public class ProofItem
      *     {@link Boolean }
      *     
      */
-    public Boolean getContract() {
+    public Boolean isContract() {
         return contract;
     }
 
@@ -259,7 +259,7 @@ public class ProofItem
      *     {@link Boolean }
      *     
      */
-    public Boolean getHalfTone() {
+    public Boolean isHalfTone() {
         return halfTone;
     }
 

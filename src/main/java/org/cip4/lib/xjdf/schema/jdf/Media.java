@@ -775,7 +775,7 @@ public class Media
      *     {@link Boolean }
      *     
      */
-    public Boolean getPrePrinted() {
+    public Boolean isPrePrinted() {
         return prePrinted;
     }
 

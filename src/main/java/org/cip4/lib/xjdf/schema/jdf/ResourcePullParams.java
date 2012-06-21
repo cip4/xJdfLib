@@ -423,7 +423,7 @@ public class ResourcePullParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getHold() {
+    public Boolean isHold() {
         return hold;
     }
 

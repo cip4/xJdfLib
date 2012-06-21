@@ -281,7 +281,7 @@ public class InterpretingParams
      *     {@link Boolean }
      *     
      */
-    public Boolean getCenter() {
+    public Boolean isCenter() {
         return center;
     }
 

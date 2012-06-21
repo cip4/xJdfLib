@@ -104,7 +104,7 @@ public class Resource
     protected List<GeneralID> generalIDs;
     @XmlElement(name = "Part")
     protected List<Part> parts;
-    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
+    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
     protected List<JAXBElement<? extends ResourceType>> resourceTypes;
     @XmlElement(name = "Contact")
     protected List<Contact> contacts;
@@ -288,23 +288,23 @@ public class Resource
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Media }{@code >}
-     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     * {@link JAXBElement }{@code <}{@link Component }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
-     * {@link JAXBElement }{@code <}{@link Device }{@code >}
-     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
      * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
-     * {@link JAXBElement }{@code <}{@link Employee }{@code >}
-     * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
      * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     * {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Device }{@code >}
+     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     * {@link JAXBElement }{@code <}{@link Media }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link Component }{@code >}
      * 
      * 
      */
@@ -405,7 +405,7 @@ public class Resource
      *     {@link Boolean }
      *     
      */
-    public Boolean getLocked() {
+    public Boolean isLocked() {
         return locked;
     }
 

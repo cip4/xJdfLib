@@ -38,7 +38,7 @@ public class RefAnchor
 
     @XmlAttribute(name = "Anchor")
     protected EnumAnchor anchor;
-    @XmlAttribute
+    @XmlAttribute(name = "rRef")
     @XmlIDREF
     protected Object rRef;
     @XmlAttribute(name = "AnchorType")
