@@ -10,20 +10,19 @@
  */
 package org.cip4.lib.xjdf.builder;
 
-
 /**
  * Abstract Builder implementation where all builders are derived from.
  * @author s.meissner
  * @date 05.03.2012
  */
-abstract class AbstractXJdfNodeBuilder<T> {
+public abstract class AbstractNodeBuilder<T> {
 
 	private final T node;
 
 	/**
 	 * Default constructor.
 	 */
-	AbstractXJdfNodeBuilder(T node) {
+	protected AbstractNodeBuilder(T node) {
 		// initialize node
 		this.node = node;
 	}
@@ -32,7 +31,7 @@ abstract class AbstractXJdfNodeBuilder<T> {
 	 * Getter for node attribute.
 	 * @return the node
 	 */
-	T getNode() {
+	protected T getNode() {
 		return node;
 	}
 

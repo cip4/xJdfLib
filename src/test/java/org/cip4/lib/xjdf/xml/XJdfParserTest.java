@@ -38,7 +38,7 @@ import org.xml.sax.InputSource;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XmlParserTest {
+public class XJdfParserTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
@@ -47,7 +47,7 @@ public class XmlParserTest {
 	/**
 	 * Default constructor.
 	 */
-	public XmlParserTest() {
+	public XJdfParserTest() {
 		try {
 			JAXBContextFactory.init();
 		} catch (JAXBException e) {
@@ -187,7 +187,7 @@ public class XmlParserTest {
 		// arrange
 		final String RESULT = "890e81ed-6830-4868-b23d-8ab8af8a4047";
 
-		InputStream is = XmlParserTest.class.getResourceAsStream(RES_TEST_XJDF);
+		InputStream is = XJdfParserTest.class.getResourceAsStream(RES_TEST_XJDF);
 
 		// act
 		XJDF xJdf = xmlParser.parseStream(is);

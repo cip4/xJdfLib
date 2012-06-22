@@ -19,7 +19,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.cip4.lib.xjdf.builder.AbstractXJdfNodeBuilder;
+import org.cip4.lib.xjdf.builder.AbstractNodeBuilder;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
@@ -53,7 +53,7 @@ public abstract class AbstractBuilderTest<T> {
 	 * @return
 	 * @throws Exception
 	 */
-	protected byte[] marsahlResult(AbstractXJdfNodeBuilder<T> builder) throws Exception {
+	protected byte[] marsahlResult(AbstractNodeBuilder<T> builder) throws Exception {
 
 		// get XJDF Node
 		T obj = builder.build();

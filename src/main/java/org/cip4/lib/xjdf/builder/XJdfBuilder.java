@@ -31,14 +31,14 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
  * @author s.meissner
  * @date 29.02.2012
  */
-public class XJdfBuilder extends AbstractXJdfNodeBuilder<XJDF> {
+public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 	private final XJdfNodeFactory xJdfNodeFactory;
 
 	private final Map<String, ParameterSet> mapParameterSets;
 
 	/**
-	 * Default constructor.
+	 * Private default constructor. Class cannot being instantiated from external.
 	 */
 	private XJdfBuilder() {
 
@@ -57,6 +57,65 @@ public class XJdfBuilder extends AbstractXJdfNodeBuilder<XJDF> {
 
 		// return new instance
 		return new XJdfBuilder();
+	}
+
+	/**
+	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category (='Web2Print') and JobID.
+	 * @param jobID Value of attribute JobID.
+	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
+	 */
+	public static XJdfBuilder newInstance(String jobID) {
+
+		// return new instance
+		return newInstance(jobID, "Web2Print", null, null);
+	}
+
+	/**
+	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID.
+	 * @param jobID Value of attribute JobID.
+	 * @param category Value of attribute Category.
+	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
+	 */
+	public static XJdfBuilder newInstance(String jobID, String category) {
+
+		// return new instance
+		return newInstance(jobID, category, null, null);
+	}
+
+	/**
+	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName.
+	 * @param jobID Value of attribute JobID.
+	 * @param category Value of attribute Category.
+	 * @param descriptiveName Value of attribute DescriptiveName.
+	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
+	 */
+	public static XJdfBuilder newInstance(String jobID, String category, String descriptiveName) {
+
+		// return new instance
+		return newInstance(jobID, category, descriptiveName, null);
+	}
+
+	/**
+	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName and RelatedJobID.
+	 * @param jobID Value of attribute JobID.
+	 * @param category Value of attribute Category.
+	 * @param descriptiveName Value of attribute DescriptiveName.
+	 * @param relatedJobID Value of attribute RelatedJobID.
+	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
+	 */
+	public static XJdfBuilder newInstance(String jobID, String category, String descriptiveName, String relatedJobID) {
+
+		// create instance
+		XJdfBuilder xJdfBuilder = newInstance();
+
+		// preconfiguration
+		xJdfBuilder.getXJdf().setJobID(jobID);
+		xJdfBuilder.getXJdf().setCategory(category);
+		xJdfBuilder.getXJdf().setDescriptiveName(descriptiveName);
+		xJdfBuilder.getXJdf().setRelatedJobID(relatedJobID);
+
+		// return instance
+		return xJdfBuilder;
 	}
 
 	/**

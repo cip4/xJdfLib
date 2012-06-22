@@ -24,7 +24,7 @@ import org.junit.Test;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XmlConstantsTest {
+public class XJdfConstantsTest {
 
 	private static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
 
@@ -36,7 +36,7 @@ public class XmlConstantsTest {
 	public void testNamespaceJdf20() throws IOException {
 
 		// arrange
-		InputStream is = XmlConstantsTest.class.getResourceAsStream(RES_JDF20_XSD);
+		InputStream is = XJdfConstantsTest.class.getResourceAsStream(RES_JDF20_XSD);
 
 		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		IOUtils.copy(is, os);
