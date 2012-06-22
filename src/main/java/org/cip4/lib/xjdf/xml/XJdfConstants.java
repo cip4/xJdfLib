@@ -31,6 +31,8 @@ public class XJdfConstants {
 	 */
 	public static final String NAMESPACE_JDF20 = loadNamespaceJdf20();
 
+	public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
+
 	public static final String XJDF_CURRENT_VERSION = "2.0";
 
 	public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
@@ -38,8 +40,6 @@ public class XJdfConstants {
 	public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
 
 	static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
-
-	private static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
 	/**
 	 * Load the JDF20 Namespace from schema file.

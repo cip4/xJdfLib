@@ -24,7 +24,7 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
  * @author s.meissner
  * @date 05.03.2012
  */
-public class ProductBuilder extends AbstractXJdfNodeBuilder<Product> {
+public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
 	private final XJdfNodeFactory xJdfNodeFactory;
 
@@ -47,6 +47,40 @@ public class ProductBuilder extends AbstractXJdfNodeBuilder<Product> {
 
 		// return new instance
 		return new ProductBuilder();
+	}
+
+	/**
+	 * Create and return a new instance of ProductBuilder which already contains attribute Amount.
+	 * @param amount Value of Amount attribute
+	 * @return New instance of ProductBuilder which already contains values for defined attributes.
+	 */
+	public static ProductBuilder newInstance(int amount) {
+
+		// return new instance
+		return newInstance(amount, null, null, null);
+	}
+
+	/**
+	 * Create and return a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
+	 * @param amount Value of Amount attribute
+	 * @param id Value of ID attribute
+	 * @param productType Value of ProductType attribute
+	 * @param productTypeDetails Value of ProductTypeDetails attribute
+	 * @return New instance of ProductBuilder which already contains values for defined attributes.
+	 */
+	public static ProductBuilder newInstance(int amount, String id, String productType, String productTypeDetails) {
+
+		// create new instance
+		ProductBuilder builder = newInstance();
+
+		// set attributes
+		builder.getNode().setAmount(amount);
+		builder.getNode().setID(id);
+		builder.getNode().setProductType(productType);
+		builder.getNode().setProductTypeDetails(productTypeDetails);
+
+		// return instance
+		return builder;
 	}
 
 	/**

@@ -22,7 +22,7 @@ import org.cip4.lib.xjdf.schema.jdf.Person;
  * @author s.meissner
  * @date 28.03.2012
  */
-public class ContactBuilder extends AbstractXJdfNodeBuilder<Contact> {
+public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 
 	private final XJdfNodeFactory xJdfNodeFactory;
 
