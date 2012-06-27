@@ -5636,11 +5636,12 @@
 				<xs:attribute name="NumColors" type="IntegerList" use="optional" />
 				<xs:attribute name="ColorRef" type="IDREF" use="optional" />
 				<xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional" />
+				<xs:attribute name="ColorsUsedBack" type="NMTOKENS" use="optional" />
 				<xs:attribute name="Coverage" type="double" use="optional" />
 				<xs:attribute name="ColorStandard" type="NMTOKEN" use="optional" />
-				<xs:attribute name="ColorICCStandard" type="string"
-					use="optional" />
+				<xs:attribute name="ColorICCStandard" type="string" use="optional" />
 				<xs:attribute name="Coatings" type="string" use="optional" />
+				<xs:attribute name="CoatingsBack" type="string" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5789,18 +5790,14 @@
 				<xs:attribute name="FluteDirection" use="optional" />
 				<xs:attribute name="Texture" type="NMTOKEN" use="optional" />
 				<xs:attribute name="OpacityLevel" type="double" use="optional" />
-				<xs:attribute name="MediaColorDetails" type="string"
-					use="optional" />
+				<xs:attribute name="MediaColorDetails" type="string" use="optional" />
 				<xs:attribute name="Weight" type="double" use="optional" />
 				<xs:attribute name="Grade" type="integer" use="optional" />
-				<xs:attribute name="RecycledPercentage" type="double"
-					use="optional" />
-				<xs:attribute name="MediaTypeDetails" type="string"
-					use="optional" />
-				<xs:attribute name="MediaColor" type="EnumNamedColor"
-					use="optional" />
+				<xs:attribute name="RecycledPercentage" type="double" use="optional" />
+				<xs:attribute name="MediaTypeDetails" type="string" use="optional" />
+				<xs:attribute name="MediaColor" type="EnumNamedColor" use="optional" />
 				<xs:attribute name="Brightness" type="double" use="optional" />
-				<xs:attribute name="StockBrand" type="string" use="optional" />
+				<xs:attribute name="Brand" type="string" use="optional" />
 				<xs:attribute name="FrontCoatings" use="optional" />
 				<xs:attribute name="Opacity" use="optional" />
 				<xs:attribute name="StockType" type="NMTOKEN" use="optional" />

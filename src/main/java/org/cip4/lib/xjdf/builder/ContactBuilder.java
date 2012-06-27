@@ -60,13 +60,10 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param contactType ContactType attribute to add.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addContactType(String contactType) {
+	public void addContactType(String contactType) {
 
 		// add contact type
 		getContact().getContactTypes().add(contactType);
-
-		// return current builder
-		return this;
 	}
 
 	/**
@@ -74,13 +71,10 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param contactType ContactType attribute to add.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addContactType(Object contactType) {
+	public void addContactType(Object contactType) {
 
 		// add contact type
 		addContactType(contactType.toString());
-
-		// return current builder
-		return this;
 	}
 
 	/**
@@ -88,7 +82,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param contactType ContactType attribute to add.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addContactType(Object[] contactTypes) {
+	public void addContactType(Object[] contactTypes) {
 
 		// add contact type array
 		if (contactTypes != null) {
@@ -96,9 +90,6 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 				addContactType(contactTypes[i]);
 			}
 		}
-
-		// return current builder
-		return this;
 	}
 
 	/**
@@ -108,7 +99,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param namePrefix Persons name prefix.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addPerson(String familyName, String firstName, String namePrefix) {
+	public Person addPerson(String familyName, String firstName, String namePrefix) {
 
 		// new person object
 		Person person = xJdfNodeFactory.createPerson();
@@ -118,7 +109,17 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		getContact().getPersons().add(person);
 
 		// return current builder
-		return this;
+		return person;
+	}
+
+	/**
+	 * Create and add company node to contact.
+	 * @param name Organization Name.
+	 * @return The current contact builder instance.
+	 */
+	public Company addCompany(String organizationName) {
+
+		return addCompany(organizationName, null);
 	}
 
 	/**
@@ -127,16 +128,22 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param unit Organization Unit.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addCompany(String name, String unit) {
+	public Company addCompany(String organizationName, String unit) {
 
 		// new company object
 		Company company = xJdfNodeFactory.createCompany();
-		company.setOrganizationName(name);
+		company.setOrganizationName(organizationName);
 		company.setOrganizationalUnit(unit);
 		getContact().getCompanies().add(company);
 
 		// return current builder
-		return this;
+		return company;
+	}
+
+	public Address addAddress(String street, String postalCode, String city) {
+
+		// return current builder
+		return addAddress(street, postalCode, city, null, null);
 	}
 
 	/**
@@ -145,9 +152,10 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param postalCode PostalCode attribute in address.
 	 * @param city City attribute in address.
 	 * @param country Country attribute in address.
+	 * @param countryCode CountryCode attribute in address.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addAddress(String street, String postalCode, String city, String country) {
+	public Address addAddress(String street, String postalCode, String city, String country, String countryCode) {
 
 		// new address object
 		Address address = xJdfNodeFactory.createAddress();
@@ -155,10 +163,11 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		address.setPostalCode(postalCode);
 		address.setCity(city);
 		address.setCountry(country);
+		address.setCountryCode(countryCode);
 		getContact().getAddresses().add(address);
 
 		// return current builder
-		return this;
+		return address;
 	}
 
 	/**
@@ -167,15 +176,28 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * @param locator Locator attribute in node.
 	 * @return The current contact builder instance.
 	 */
-	public ContactBuilder addComChannel(String channelType, String locator) {
+	public ComChannel addComChannel(String channelType, String locator) {
 
-		// new comchannel object
+		return addComChannel(channelType, locator, null);
+	}
+
+	/**
+	 * Create and add ComChannel node to contact.
+	 * @param channelType ChannelType attribute in node.
+	 * @param locator Locator attribute in node.
+	 * @param channelTypeDetails ChannelTypeDetails attribute in node.
+	 * @return The current contact builder instance.
+	 */
+	public ComChannel addComChannel(String channelType, String locator, String channelTypeDetails) {
+
+		// new ComChannel object
 		ComChannel comChannel = xJdfNodeFactory.createComChannel();
 		comChannel.setChannelType(channelType);
 		comChannel.setLocator(locator);
+		comChannel.setChannelTypeDetails(channelTypeDetails);
 		getContact().getComChannels().add(comChannel);
 
 		// return current builder
-		return this;
+		return comChannel;
 	}
 }
