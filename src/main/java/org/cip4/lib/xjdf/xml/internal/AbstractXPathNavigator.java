@@ -8,7 +8,7 @@
  * info@flyeralarm.com
  * http://www.flyeralarm.com
  */
-package org.cip4.lib.xjdf.xml;
+package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -32,27 +32,27 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
- * Navigator class which simplify XPath handling using XJdf Documents.
+ * Abstract Navigator class which simplify XPath handling using XML Documents.
  * @author s.meissner
- * @date 06.03.2012
+ * @date 26.06.2012
  */
-public class XPathNavigator {
+public abstract class AbstractXPathNavigator {
 
-	private final XPath xPath;
+	protected final XPath xPath;
 
-	private final Document xmlDocument;
+	protected final Document xmlDocument;
 
 	/**
 	 * Private default constructor.
 	 * @throws IOException
 	 */
-	private XPathNavigator(InputStream xJdfStream) throws Exception {
+	protected AbstractXPathNavigator(InputStream xmlStream) throws Exception {
 
 		// parse input stream
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-		xmlDocument = docBuilder.parse(new InputSource(xJdfStream));
-		xJdfStream.close();
+		xmlDocument = docBuilder.parse(new InputSource(xmlStream));
+		xmlStream.close();
 
 		// create xPathFactory object
 		XPathFactory xPathFactory = XPathFactory.newInstance();
@@ -60,19 +60,7 @@ public class XPathNavigator {
 	}
 
 	/**
-	 * Factory method for creating a new XPathNavigator object.
-	 * @param xJdfStream XJdf document as input stream.
-	 * @return Initialized XPathNavigator instance.
-	 * @throws IOException Is being thrown in case an exception occurs.
-	 */
-	public static XPathNavigator newInstance(InputStream xJdfStream) throws Exception {
-
-		// create and return new instance
-		return new XPathNavigator(xJdfStream);
-	}
-
-	/**
-	 * Read attribute from XJdf Document using XPath.
+	 * Read attribute from XML Document using XPath.
 	 * @param xPath XPath expression of attribute to read.
 	 * @return Value of attribute as String.
 	 * @throws XPathExpressionException Is being thrown in case an exception occurs.
@@ -111,10 +99,10 @@ public class XPathNavigator {
 	}
 
 	/**
-	 * Return the xJdf document as input stream.
-	 * @return XJdf document as input stream.
+	 * Return the XML Document as input stream.
+	 * @return XML document as input stream.
 	 */
-	public InputStream getXJdfStream() throws Exception {
+	public InputStream getXmlStream() throws Exception {
 
 		// save the result
 		Transformer xformer = TransformerFactory.newInstance().newTransformer();
@@ -128,4 +116,5 @@ public class XPathNavigator {
 		// return result stream
 		return resultStream;
 	}
+
 }

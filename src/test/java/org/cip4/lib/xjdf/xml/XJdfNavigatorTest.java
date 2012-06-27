@@ -17,6 +17,7 @@ import java.util.UUID;
 import junit.framework.Assert;
 
 import org.cip4.lib.xjdf.util.IOUtils;
+import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,11 +27,11 @@ import org.junit.Test;
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XPathNavigatorTest {
+public class XJdfNavigatorTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
-	private XPathNavigator xPathNavigator;
+	private AbstractXPathNavigator xPathNavigator;
 
 	/**
 	 * Set up unit test.
@@ -39,8 +40,8 @@ public class XPathNavigatorTest {
 	@Before
 	public void setUp() throws Exception {
 
-		InputStream is = XPathNavigator.class.getResourceAsStream(RES_TEST_XJDF);
-		xPathNavigator = XPathNavigator.newInstance(is);
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		xPathNavigator = XJdfNavigator.newInstance(is);
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class XPathNavigatorTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XPathNavigator#readAttribute(java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#readAttribute(java.lang.String)}.
 	 */
 	@Test
 	public void testReadAttribute() throws Exception {
@@ -74,7 +75,7 @@ public class XPathNavigatorTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XPathNavigator#updateAttribute(java.lang.String, java.lang.String)}.
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
 	 * @throws Exception
 	 */
 	@Test
@@ -87,7 +88,7 @@ public class XPathNavigatorTest {
 		xPathNavigator.updateAttribute("/XJDF/GeneralID/@IDUsage", NEW_VALUE);
 
 		// assert
-		InputStream is = xPathNavigator.getXJdfStream();
+		InputStream is = xPathNavigator.getXmlStream();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		IOUtils.copy(is, bos);

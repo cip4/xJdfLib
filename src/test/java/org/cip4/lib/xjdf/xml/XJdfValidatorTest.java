@@ -22,6 +22,8 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.jdf.GeneralID;
 import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
+import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +36,7 @@ import org.junit.Test;
  */
 public class XJdfValidatorTest {
 
-	private XJdfValidator xJdfValidator;
+	private AbstractXmlValidator xJdfValidator;
 
 	private XJdfNodeFactory xJdfNodeFactory;
 
@@ -205,7 +207,7 @@ public class XJdfValidatorTest {
 		XJDF xJdf = xJdfBuilder.build();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser xJdfParser = XJdfParser.newInstance();
+		AbstractXmlParser xJdfParser = XJdfParser.newInstance();
 		xJdfParser.parseXJdf(xJdf, bos, true);
 
 		return new ByteArrayInputStream(bos.toByteArray());

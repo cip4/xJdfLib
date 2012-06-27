@@ -42,7 +42,7 @@ public class XJdfParserTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
-	private XJdfParser xmlParser;
+	private XJdfParser xJdfParser;
 
 	/**
 	 * Default constructor.
@@ -62,7 +62,7 @@ public class XJdfParserTest {
 	@Before
 	public void setUp() throws Exception {
 		// new instance
-		xmlParser = XJdfParser.newInstance();
+		xJdfParser = XJdfParser.newInstance();
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class XJdfParserTest {
 	@After
 	public void tearDown() throws Exception {
 		// clean up
-		xmlParser = null;
+		xJdfParser = null;
 	}
 
 	/**
@@ -95,7 +95,7 @@ public class XJdfParserTest {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
 		// act
-		xmlParser.parseXJdf(xJdf, bos, true);
+		xJdfParser.parseXJdf(xJdf, bos, true);
 
 		// assert
 		NamespaceManager nsManager = new NamespaceManager();
@@ -132,7 +132,7 @@ public class XJdfParserTest {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
 		// act
-		xmlParser.parseXJdf(xJdf, bos);
+		xJdfParser.parseXJdf(xJdf, bos);
 
 		// assert
 		// exception expected
@@ -162,7 +162,7 @@ public class XJdfParserTest {
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
 		// act
-		xmlParser.parseXJdf(xJdf, bos);
+		xJdfParser.parseXJdf(xJdf, bos);
 
 		// assert
 		NamespaceManager nsManager = new NamespaceManager();
@@ -190,7 +190,7 @@ public class XJdfParserTest {
 		InputStream is = XJdfParserTest.class.getResourceAsStream(RES_TEST_XJDF);
 
 		// act
-		XJDF xJdf = xmlParser.parseStream(is);
+		XJDF xJdf = xJdfParser.parseStream(is);
 
 		// assert
 		Assert.assertEquals("Result is wrong.", RESULT, xJdf.getGeneralIDs().get(0).getIDValue());

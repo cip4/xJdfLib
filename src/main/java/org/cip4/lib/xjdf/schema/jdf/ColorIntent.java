@@ -25,10 +25,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="NumColors" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerList" />
  *       &lt;attribute name="ColorRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
  *       &lt;attribute name="ColorsUsed" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
+ *       &lt;attribute name="ColorsUsedBack" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *       &lt;attribute name="Coverage" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
  *       &lt;attribute name="ColorStandard" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="ColorICCStandard" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="Coatings" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="CoatingsBack" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -50,6 +52,8 @@ public class ColorIntent
     protected Object colorRef;
     @XmlAttribute(name = "ColorsUsed")
     protected List<String> colorsUseds;
+    @XmlAttribute(name = "ColorsUsedBack")
+    protected List<String> colorsUsedBacks;
     @XmlAttribute(name = "Coverage")
     protected Double coverage;
     @XmlAttribute(name = "ColorStandard")
@@ -59,6 +63,8 @@ public class ColorIntent
     protected String colorICCStandard;
     @XmlAttribute(name = "Coatings")
     protected String coatings;
+    @XmlAttribute(name = "CoatingsBack")
+    protected String coatingsBack;
 
     /**
      * Gets the value of the numColors property.
@@ -140,6 +146,35 @@ public class ColorIntent
             colorsUseds = new ArrayList<String>();
         }
         return this.colorsUseds;
+    }
+
+    /**
+     * Gets the value of the colorsUsedBacks property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the colorsUsedBacks property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColorsUsedBacks().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getColorsUsedBacks() {
+        if (colorsUsedBacks == null) {
+            colorsUsedBacks = new ArrayList<String>();
+        }
+        return this.colorsUsedBacks;
     }
 
     /**
@@ -236,6 +271,30 @@ public class ColorIntent
      */
     public void setCoatings(String value) {
         this.coatings = value;
+    }
+
+    /**
+     * Gets the value of the coatingsBack property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCoatingsBack() {
+        return coatingsBack;
+    }
+
+    /**
+     * Sets the value of the coatingsBack property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCoatingsBack(String value) {
+        this.coatingsBack = value;
     }
 
 }

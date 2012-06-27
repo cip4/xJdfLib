@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="MediaTypeDetails" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="MediaColor" type="{http://www.CIP4.org/JDFSchema_2_0}EnumNamedColor" />
  *       &lt;attribute name="Brightness" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
- *       &lt;attribute name="StockBrand" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="Brand" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="FrontCoatings" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="Opacity" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="StockType" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
@@ -109,8 +109,8 @@ public class MediaIntent
     protected EnumNamedColor mediaColor;
     @XmlAttribute(name = "Brightness")
     protected Double brightness;
-    @XmlAttribute(name = "StockBrand")
-    protected String stockBrand;
+    @XmlAttribute(name = "Brand")
+    protected String brand;
     @XmlAttribute(name = "FrontCoatings")
     @XmlSchemaType(name = "anySimpleType")
     protected String frontCoatings;
@@ -570,27 +570,27 @@ public class MediaIntent
     }
 
     /**
-     * Gets the value of the stockBrand property.
+     * Gets the value of the brand property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getStockBrand() {
-        return stockBrand;
+    public String getBrand() {
+        return brand;
     }
 
     /**
-     * Sets the value of the stockBrand property.
+     * Sets the value of the brand property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setStockBrand(String value) {
-        this.stockBrand = value;
+    public void setBrand(String value) {
+        this.brand = value;
     }
 
     /**

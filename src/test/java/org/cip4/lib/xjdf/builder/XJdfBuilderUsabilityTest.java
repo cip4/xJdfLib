@@ -14,7 +14,6 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.jdf.FileSpec;
 import org.cip4.lib.xjdf.schema.jdf.GeneralID;
 import org.cip4.lib.xjdf.schema.jdf.Part;
-import org.cip4.lib.xjdf.schema.jdf.Product;
 import org.cip4.lib.xjdf.schema.jdf.RunList;
 import org.cip4.lib.xjdf.schema.jdf.XJDF;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
@@ -70,9 +69,9 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addGeneralID(generalId);
 
 		// append Product
-		Product product = XJdfNodeFactory.newInstance().createProduct(1000);
-		product.setDescriptiveName("Description is optional...");
-		xJdfBuilder.addProduct(product);
+		ProductBuilder productBuilder = ProductBuilder.newInstance(1000);
+		productBuilder.getProduct().setDescriptiveName("Description is optional...");
+		xJdfBuilder.addProduct(productBuilder.build());
 
 		// append Cover File (using the detailed way - for customization)
 		FileSpec fileSpec = XJdfNodeFactory.newInstance().createFileSpec();

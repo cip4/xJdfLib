@@ -10,15 +10,24 @@
  */
 package org.cip4.lib.xjdf;
 
-import org.cip4.lib.xjdf.schema.jdf.Address;
-import org.cip4.lib.xjdf.schema.jdf.ComChannel;
+import java.util.List;
+
+import org.cip4.lib.xjdf.schema.jdf.ApprovalParams;
+import org.cip4.lib.xjdf.schema.jdf.BindingIntent;
+import org.cip4.lib.xjdf.schema.jdf.ChildProduct;
+import org.cip4.lib.xjdf.schema.jdf.ColorIntent;
 import org.cip4.lib.xjdf.schema.jdf.Comment;
-import org.cip4.lib.xjdf.schema.jdf.Company;
-import org.cip4.lib.xjdf.schema.jdf.Contact;
+import org.cip4.lib.xjdf.schema.jdf.CustomerInfo;
 import org.cip4.lib.xjdf.schema.jdf.FileSpec;
+import org.cip4.lib.xjdf.schema.jdf.FoldingIntent;
 import org.cip4.lib.xjdf.schema.jdf.GeneralID;
+import org.cip4.lib.xjdf.schema.jdf.LayoutIntent;
+import org.cip4.lib.xjdf.schema.jdf.MediaIntent;
+import org.cip4.lib.xjdf.schema.jdf.NodeInfo;
 import org.cip4.lib.xjdf.schema.jdf.ObjectFactory;
-import org.cip4.lib.xjdf.schema.jdf.Product;
+import org.cip4.lib.xjdf.schema.jdf.ProductionIntent;
+import org.cip4.lib.xjdf.schema.jdf.ProofItem;
+import org.cip4.lib.xjdf.schema.jdf.ProofingIntent;
 import org.cip4.lib.xjdf.schema.jdf.RunList;
 
 /**
@@ -78,101 +87,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	}
 
 	/**
-	 * Create a new Product Node which already contains the attribute 'amount'.
-	 * @param amount Product Node Attribute 'amount' to set.
-	 * @return Product Node which already contains the attribute 'amount'.
-	 */
-	public Product createProduct(int amount) {
-		// create Product Node
-		Product product = super.createProduct();
-
-		// set amount
-		product.setAmount(amount);
-
-		// return product
-		return product;
-	}
-
-	/**
-	 * Create a new ComChannel Node which already contains defined attributes.
-	 * @param channelType ComChannel Node Attribute 'ChannelType' to set.
-	 * @param channelUsage ComChannel Node Attribute 'ChannelUsage' to set.
-	 * @param locator ComChannel Node Attribute 'Locator' to set.
-	 * @return ComChannel Node which already contains defined attributes.
-	 */
-	public ComChannel createComChannel(String channelType, String channelUsage, String locator) {
-		// create ComChannel Node
-		ComChannel comChannel = super.createComChannel();
-
-		// set attributes
-		comChannel.setChannelType(channelType);
-		comChannel.getChannelUsages().add(channelUsage);
-		comChannel.setLocator(locator);
-
-		// return object
-		return comChannel;
-	}
-
-	/**
-	 * Create a new Address Node which already contains defined attributes.
-	 * @param street Address Node Attribute 'Street' to set.
-	 * @param postalCode Address Node Attribute 'PostalCode' to set.
-	 * @param city Address Node Attribute 'City' to set.
-	 * @param country Address Node Attribute 'Country' to set.
-	 * @return Address Node which already contains defined attributes.
-	 */
-	public Address createAddress(String street, String postalCode, String city, String country) {
-		// create Address Node
-		Address address = super.createAddress();
-
-		// set attributes
-		address.setStreet(street);
-		address.setPostalCode(postalCode);
-		address.setCity(city);
-		address.setCountry(country);
-
-		// return object
-		return address;
-	}
-
-	/**
-	 * Create a new Company Node which already contains defined attributes.
-	 * @param name Company Node Attribute 'OrganizationName' to set.
-	 * @param unit Company Node Attribute 'OrganizationUnit' to set.
-	 * @return Company Node which already contains defined attributes.
-	 */
-	public Company createCompany(String name, String unit) {
-		// create Company Node
-		Company company = super.createCompany();
-
-		// set attributes
-		company.setOrganizationName(name);
-		company.setOrganizationalUnit(unit);
-
-		// return object
-		return company;
-	}
-
-	/**
-	 * Create a new Contact Node which already contains defined attributes.
-	 * @param contactTypes Contact Node Attribute 'ContactTypes' to set.
-	 * @return Contact Node which already contains defined attributes.
-	 */
-	public Contact createContact(String... contactTypes) {
-		// create Contact Node
-		Contact contact = super.createContact();
-
-		// set attributes
-		for (int i = 0; contactTypes != null && i < contactTypes.length; i++) {
-			contact.getContactTypes().add(contactTypes[i]);
-		}
-
-		// return object
-		return contact;
-	}
-
-	/**
-	 * Create a new Comment Node with already contains a comment string as text.
+	 * Create a new Comment Node which already contains a comment string as text.
 	 * @param comment Comment Node text value.
 	 * @return Comment Node which already contains a comment string as text.
 	 */
@@ -185,5 +100,259 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return obj;
+	}
+
+	/**
+	 * Create a new ApprovalParams Node which already contains values for attributes MinApprovals
+	 * @param minApprovals Value for MinApprovals attribute.
+	 * @return ApprovalParams Node which already contains defined attributes.
+	 */
+	public ApprovalParams createApprovalParams(int minApprovals) {
+
+		// create node
+		ApprovalParams approvalParams = super.createApprovalParams();
+
+		// set attributes
+		approvalParams.setMinApprovals(minApprovals);
+
+		// return object
+		return approvalParams;
+	}
+
+	/**
+	 * Create a new CustomerInfo Node which already contains values for attribute CustomerID
+	 * @param customerID Value for CustomerID attribute.
+	 * @return CustomerInfo Node which already contains defined attributes.
+	 */
+	public CustomerInfo createCustomerInfo(String customerID) {
+
+		// create node
+		CustomerInfo customerInfo = super.createCustomerInfo();
+
+		// set attributes
+		customerInfo.setCustomerID(customerID);
+
+		// return object
+		return customerInfo;
+	}
+
+	/**
+	 * Create a new NodeInfo Node which already contains values for attributes TotalDuration, End and NaturalLang.
+	 * @param totalDuration Value for NodeInfo attribute.
+	 * @param end Value for End attribute.
+	 * @param naturalLang Value for NaturalLang attribute.
+	 * @return NodeInfo Node which already contains defined attributes.
+	 */
+	public NodeInfo createNodeInfo(String totalDuration, String end, String naturalLang) {
+
+		// create node
+		NodeInfo nodeInfo = super.createNodeInfo();
+
+		// set attributes
+		nodeInfo.setTotalDuration(totalDuration);
+		nodeInfo.setEnd(end);
+		nodeInfo.setNaturalLang(naturalLang);
+
+		// return object
+		return nodeInfo;
+	}
+
+	/**
+	 * Create new ChildProduct Node which already contains values for attribute Childref.
+	 * @param childref Value for Childref attribute.
+	 * @return ChildProduct Node which already contains defined attributes.
+	 */
+	public ChildProduct createChildProduct(String childref) {
+
+		// create node
+		ChildProduct childProduct = super.createChildProduct();
+
+		// set attributes
+		childProduct.setChildRef(childref);
+
+		// return object
+		return childProduct;
+	}
+
+	/**
+	 * Create new MediaIntent Node which already contains values for attribute MediaQuality.
+	 * @param mediaQuality Value for MediaQuality attribute.
+	 * @return MediaIntent Node which already contains defined attributes.
+	 */
+	public MediaIntent createMediaIntent(String mediaQuality) {
+
+		// return object
+		return createMediaIntent(mediaQuality, null, null);
+	}
+
+	/**
+	 * Create new MediaIntent Node which already contains values for attributes MediaQuality, StockBrand and Weight.
+	 * @param mediaQuality Value for MediaQuality attribute.
+	 * @param stockBrand Value for StockBrand attribute.
+	 * @param weight Value for Weight attribute.
+	 * @return MediaIntent Node which already contains defined attributes.
+	 */
+	public MediaIntent createMediaIntent(String mediaQuality, String brand, Double weight) {
+
+		// create node
+		MediaIntent mediaIntent = super.createMediaIntent();
+
+		// set attributes
+		mediaIntent.setMediaQuality(mediaQuality);
+		mediaIntent.setBrand(brand);
+		mediaIntent.setWeight(weight);
+
+		// return object
+		return mediaIntent;
+	}
+
+	/**
+	 * Create new LayoutIntent Node which already contains values for attributes Pages, Sides, FinishedDimensions and Dimensions.
+	 * @param pages Value for Pages attribute.
+	 * @param sides Value for Sides attribute.
+	 * @param finishedDimensions Value for FinishedDimensions attribute.
+	 * @return LayoutIntent Node which already contains defined attributes.
+	 */
+	public LayoutIntent createLayoutIntent(Integer pages, String sides, List<Double> finishedDimensions) {
+
+		// return object
+		return createLayoutIntent(pages, sides, finishedDimensions, null);
+	}
+
+	/**
+	 * Create new LayoutIntent Node which already contains values for attributes Pages, Sides, FinishedDimensions and Dimensions.
+	 * @param pages Value for Pages attribute.
+	 * @param sides Value for Sides attribute.
+	 * @param finishedDimensions Value for FinishedDimensions attribute.
+	 * @param dimensions Value for Dimensions attribute.
+	 * @return LayoutIntent Node which already contains defined attributes.
+	 */
+	public LayoutIntent createLayoutIntent(Integer pages, String sides, List<Double> finishedDimensions, List<Double> dimensions) {
+
+		// create node
+		LayoutIntent layoutIntent = super.createLayoutIntent();
+
+		// set attributes
+		layoutIntent.setPages(pages);
+		layoutIntent.setSides(sides);
+		layoutIntent.getFinishedDimensions().addAll(finishedDimensions);
+
+		if (dimensions != null)
+			layoutIntent.getDimensions().addAll(dimensions);
+
+		// return object
+		return layoutIntent;
+	}
+
+	/**
+	 * Create new ProductionIntent Node which already contains values for attribute PrintProcess.
+	 * @param printProcess Value for PrintProcess attribute.
+	 * @return ProductionIntent Node which already contains defined attributes.
+	 */
+	public ProductionIntent createProductionIntent(String printProcess) {
+
+		// create node
+		ProductionIntent productionIntent = super.createProductionIntent();
+
+		// set attributes
+		productionIntent.setPrintProcess(printProcess);
+
+		// return object
+		return productionIntent;
+	}
+
+	/**
+	 * Create new ProofingIntent Node which already contains a ProofItem Node with an attribute BrandName.
+	 * @param brandName Value for ProofItem BrandName attribute.
+	 * @return ProofingIntent Node which already contains a ProofItem Node with defined attributes.
+	 */
+	public ProofingIntent createProofingIntent(String brandName) {
+
+		// create nodes
+		ProofingIntent proofingIntent = super.createProofingIntent();
+		ProofItem proofItem = super.createProofItem();
+
+		// set attributes
+		proofItem.setBrandName(brandName);
+		proofingIntent.getProofItems().add(proofItem);
+
+		// return object
+		return proofingIntent;
+	}
+
+	/**
+	 * Create new BindingIntent Node which already contains values for attribute BindingType.
+	 * @param bindingType Value for BindingType attribute.
+	 * @return BindingIntent Node which already contains defined attributes.
+	 */
+	public BindingIntent createBindingIntent(String bindingType) {
+
+		// create node
+		BindingIntent bindingIntent = super.createBindingIntent();
+
+		// set attributes
+		bindingIntent.setBindingType(bindingType);
+
+		// return object
+		return bindingIntent;
+	}
+
+	/**
+	 * Create new FoldingIntent Node which already contains values for attribute FoldingCatalog.
+	 * @param foldingCatalog Value for FoldingCatalog attribute.
+	 * @return FoldingIntent Node which already contains defined attributes.
+	 */
+	public FoldingIntent createFoldingIntent(String foldingCatalog) {
+
+		// create node
+		FoldingIntent foldingIntent = super.createFoldingIntent();
+
+		// set attributes
+		foldingIntent.setFoldingCatalog(foldingCatalog);
+
+		// return object
+		return foldingIntent;
+	}
+
+	/**
+	 * Create new ColorIntent Node which already contains values for attribute NumColors.
+	 * @param numColors Value for NumColors attribute.
+	 * @return ColorIntent Node which already contains defined attributes.
+	 */
+	public ColorIntent createColorIntent(List<Integer> numColors) {
+
+		// return object
+		return createColorIntent(numColors, null, null, null, null);
+	}
+
+	/**
+	 * Create new ColorIntent Node which already contains values for attributes NumColors, ColorsUsed and Coatings.
+	 * @param numColors Value for NumColors attribute.
+	 * @param colorsUsed Value for ColorsUsed attribute.
+	 * @param coatings Value for Coatings attribute.
+	 * @return ColorIntent Node which already contains defined attributes.
+	 */
+	public ColorIntent createColorIntent(List<Integer> numColors, List<String> colorsUsed, List<String> colorsUsedBack, String coatings, String coatingsBack) {
+
+		// create node
+		ColorIntent colorIntent = super.createColorIntent();
+
+		// TODO ColorUsedBack
+		// TODO CoatingsBack
+		// set attributes
+
+		colorIntent.getNumColors().addAll(numColors);
+
+		if (colorsUsed != null)
+			colorIntent.getColorsUseds().addAll(colorsUsed);
+
+		if (colorsUsedBack != null)
+			colorIntent.getColorsUsedBacks().addAll(colorsUsedBack);
+
+		colorIntent.setCoatings(coatings);
+		colorIntent.setCoatingsBack(coatingsBack);
+
+		// return object
+		return colorIntent;
 	}
 }
