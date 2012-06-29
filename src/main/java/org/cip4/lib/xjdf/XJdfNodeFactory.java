@@ -12,23 +12,23 @@ package org.cip4.lib.xjdf;
 
 import java.util.List;
 
-import org.cip4.lib.xjdf.schema.jdf.ApprovalParams;
-import org.cip4.lib.xjdf.schema.jdf.BindingIntent;
-import org.cip4.lib.xjdf.schema.jdf.ChildProduct;
-import org.cip4.lib.xjdf.schema.jdf.ColorIntent;
-import org.cip4.lib.xjdf.schema.jdf.Comment;
-import org.cip4.lib.xjdf.schema.jdf.CustomerInfo;
-import org.cip4.lib.xjdf.schema.jdf.FileSpec;
-import org.cip4.lib.xjdf.schema.jdf.FoldingIntent;
-import org.cip4.lib.xjdf.schema.jdf.GeneralID;
-import org.cip4.lib.xjdf.schema.jdf.LayoutIntent;
-import org.cip4.lib.xjdf.schema.jdf.MediaIntent;
-import org.cip4.lib.xjdf.schema.jdf.NodeInfo;
-import org.cip4.lib.xjdf.schema.jdf.ObjectFactory;
-import org.cip4.lib.xjdf.schema.jdf.ProductionIntent;
-import org.cip4.lib.xjdf.schema.jdf.ProofItem;
-import org.cip4.lib.xjdf.schema.jdf.ProofingIntent;
-import org.cip4.lib.xjdf.schema.jdf.RunList;
+import org.cip4.lib.xjdf.schema.ApprovalParams;
+import org.cip4.lib.xjdf.schema.BindingIntent;
+import org.cip4.lib.xjdf.schema.ChildProduct;
+import org.cip4.lib.xjdf.schema.ColorIntent;
+import org.cip4.lib.xjdf.schema.Comment;
+import org.cip4.lib.xjdf.schema.CustomerInfo;
+import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.FoldingIntent;
+import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.MediaIntent;
+import org.cip4.lib.xjdf.schema.NodeInfo;
+import org.cip4.lib.xjdf.schema.ObjectFactory;
+import org.cip4.lib.xjdf.schema.ProductionIntent;
+import org.cip4.lib.xjdf.schema.ProofItem;
+import org.cip4.lib.xjdf.schema.ProofingIntent;
+import org.cip4.lib.xjdf.schema.RunList;
 
 /**
  * Static Factory Class which is managing the creation of XJdfNodes.
