@@ -13,7 +13,7 @@ package org.cip4.lib.xjdf.xml;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import org.cip4.lib.xjdf.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 
 /**

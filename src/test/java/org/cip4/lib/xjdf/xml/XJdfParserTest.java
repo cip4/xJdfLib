@@ -23,8 +23,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
-import org.cip4.lib.xjdf.schema.jdf.GeneralID;
-import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;

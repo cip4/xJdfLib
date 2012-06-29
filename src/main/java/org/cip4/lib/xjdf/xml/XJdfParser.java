@@ -12,7 +12,7 @@ package org.cip4.lib.xjdf.xml;
 
 import javax.xml.bind.JAXBException;
 
-import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 

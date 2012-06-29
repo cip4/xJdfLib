@@ -16,7 +16,7 @@ import java.util.UUID;
 
 import junit.framework.Assert;
 
-import org.cip4.lib.xjdf.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
 import org.junit.After;
 import org.junit.Before;

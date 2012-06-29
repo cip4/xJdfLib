@@ -11,11 +11,11 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.jdf.FileSpec;
-import org.cip4.lib.xjdf.schema.jdf.GeneralID;
-import org.cip4.lib.xjdf.schema.jdf.Part;
-import org.cip4.lib.xjdf.schema.jdf.RunList;
-import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.Part;
+import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;

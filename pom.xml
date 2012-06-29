@@ -1,6 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
@@ -78,7 +78,7 @@
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.4</version>
 			</plugin>
-						<plugin>
+			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
 				<executions>
@@ -89,42 +89,43 @@
 								<!-- Prepare -->
 								<echo message="Remove old directory" />
 								<delete dir="target/generated-sources/jaxb" />
-								<mkdir dir="target/generated-sources/jaxb"/>
-								
+								<mkdir dir="target/generated-sources/jaxb" />
+
 								<!-- Generate java classes from XSD -->
 								<echo message="Generate classes..." />
-								<property environment="env"/>
-								<property name="jdk.dir" value="${env.JAVA_HOME}"/>
-								<exec executable="${jdk.dir}/bin/xjc.exe"> 
+								<property environment="env" />
+								<property name="jdk.dir" value="${env.JAVA_HOME}" />
+								<exec executable="${jdk.dir}/bin/xjc.exe">
 									<!-- binding file -->
-									<arg value="-b"/> 
-							        <arg value="src/main/resources/org/cip4/lib/xjdf/binding.xjb"/>
-							        
-							        <!-- further arguments --> 
-							        <arg value="-no-header"/>
-							        <arg value="-extension"/>
-							        
-							        <!-- target directory -->
-							        <arg value="-d"/> 
-							        <arg value="target\generated-sources\jaxb"/> 
-									
+									<arg value="-b" />
+									<arg value="src/main/resources/org/cip4/lib/xjdf/binding.xjb" />
+
+									<!-- further arguments -->
+									<arg value="-no-header" />
+									<arg value="-extension" />
+
+									<!-- target directory -->
+									<arg value="-d" />
+									<arg value="target\generated-sources\jaxb" />
+
 									<!-- XSD -->
-							        <arg value="src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd"/> 
-							    </exec> 
+									<arg value="src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd" />
+								</exec>
 
 								<!-- Remove old classes -->
 								<echo message="Remove old classes..." />
 								<delete>
-									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema/jdf"
+									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema"
 										includes="**/*.java" />
 								</delete>
 
 								<!-- Copy new classes to target location -->
 								<echo message="Copy new classes to target location..." />
-								<copy todir="src/main/java/org/cip4/lib/xjdf/schema/jdf">
-									<fileset dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema/jdf" />
+								<copy todir="src/main/java/org/cip4/lib/xjdf/schema">
+									<fileset
+										dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
 								</copy>
-								
+
 								<!-- clean up -->
 								<echo message="Clean up" />
 								<delete dir="target\generated-sources\jaxb" />
@@ -141,8 +142,12 @@
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.5</version>
 		</dependency>
-		<!-- Apache Tools <dependency> <groupId>commons-io</groupId> <artifactId>commons-io</artifactId> <version>2.1</version> 
-			</dependency> -->
+		<!-- Apache Tools -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.1</version>
+		</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-impl</artifactId>

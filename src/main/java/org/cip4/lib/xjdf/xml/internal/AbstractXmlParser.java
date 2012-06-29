@@ -20,7 +20,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
 
-import org.cip4.lib.xjdf.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 
 /**
