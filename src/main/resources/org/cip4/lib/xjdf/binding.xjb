@@ -19,7 +19,7 @@
 			<xjc:serializable />
 		</jxb:globalBindings>
 		<jxb:schemaBindings>
-			<jxb:package name="org.cip4.lib.xjdf.schema.jdf" />
+			<jxb:package name="org.cip4.lib.xjdf.schema" />
 		</jxb:schemaBindings>
 	</jxb:bindings>
 	

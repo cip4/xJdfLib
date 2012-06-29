@@ -22,6 +22,12 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
  */
 public class XJdfNavigator extends AbstractXPathNavigator {
 
+	public static final String XPATH_JOBID = "/XJDF/@JobID";
+
+	public static final String XPATH_CATEGORY = "/XJDF/Category";
+
+	public static final String XPATH_PROD_AMOUNT = "/XJDF/ProductList/Product/@Amount";
+
 	/**
 	 * Custom private default constructor. Accepting a XJdf InputStream for initializing.
 	 * @param xJdfStream The XJDF Input Stream.

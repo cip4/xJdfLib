@@ -13,10 +13,10 @@ package org.cip4.lib.xjdf.builder;
 import junit.framework.Assert;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.jdf.BindingIntent;
-import org.cip4.lib.xjdf.schema.jdf.LayoutIntent;
-import org.cip4.lib.xjdf.schema.jdf.MediaIntent;
-import org.cip4.lib.xjdf.schema.jdf.Product;
+import org.cip4.lib.xjdf.schema.BindingIntent;
+import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.MediaIntent;
+import org.cip4.lib.xjdf.schema.Product;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

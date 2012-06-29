@@ -1,4 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns:XJDF xmlns:ns="http://www.CIP4.org/JDFSchema_2_0">
-    <ns:GeneralID IDValue="890e81ed-6830-4868-b23d-8ab8af8a4047" IDUsage="CatalogID"/>
-</ns:XJDF>
+<XJDF Category="Web2Print" JobID="Job258596" xmlns:ns="http://www.CIP4.org/JDFSchema_2_0">
+	<GeneralID IDUsage="CatalogID" IDValue="890e81ed-6830-4868-b23d-8ab8af8a4047" />
+	<Comment>
+		This is a multiline
+		user comment
+	</Comment>
+	<ProductList>
+		<Product Amount="1000" ProductType="Brochure" ProductTypeDetails="4 Page Brochure">
+			<Intent Name="LayoutIntent">
+				<LayoutIntent FinishedDimensions="595.27559055 822.04724409" Pages="32" Sides="TwoSidedHeadToHead" />
+			</Intent>
+			<Intent Name="BindingIntent">
+				<BindingIntent BindingType="SaddleStitch" />
+			</Intent>
+			<Intent Name="MediaIntent">
+				<MediaIntent MediaQuality="Paper 135 Glossy" Weight="135" />
+			</Intent>
+			<Intent Name="ProductionIntent">
+				<ProductionIntent PrintProcess="Lithography" />
+			</Intent>
+		</Product>
+	</ProductList>
+	<ParameterSet Name="CustomerInfo">
+		<Parameter>
+			<CustomerInfo CustomerID="KundenIdentNummer" CustomerOrderID="Web2Print System JobID" />
+		</Parameter>
+	</ParameterSet>
+	<ParameterSet Name="RunList">
+		<Parameter>
+			<RunList>
+				<FileSpec URL="http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf" />
+			</RunList>
+		</Parameter>
+	</ParameterSet>
+	<ParameterSet Name="NodeInfo">
+		<Parameter>
+			<NodeInfo End="1286557458599" />
+		</Parameter>
+	</ParameterSet>
+	<ParameterSet Name="Contact">
+		<Parameter>
+			<Contact ContactTypes="Customer Delivery DeliveryCharge">
+				<Person FamilyName="Mustermann" FirstName="Max" NamePrefix="Dr." />
+				<Company OrganizationName="Firma Muster GmbH" />
+				<Address City="Stadt" Country="Deutschland" CountryCode="De"
+					PostalCode="12345" Street="Musterstraße 12" />
+				<ComChannel ChannelType="Email" Locator="mailto:info@muster.com" />
+				<ComChannel ChannelType="Phone" Locator="tel:+49.173.5678.901" />
+				<ComChannel ChannelType="Phone" Locator="tel:+0123.456.789" />
+			</Contact>
+		</Parameter>
+	</ParameterSet>
+</XJDF>

@@ -16,7 +16,7 @@ import java.io.InputStream;
 
 import junit.framework.Assert;
 
-import org.cip4.lib.xjdf.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 
 /**

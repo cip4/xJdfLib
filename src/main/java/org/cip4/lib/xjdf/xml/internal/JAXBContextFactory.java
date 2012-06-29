@@ -13,7 +13,7 @@ package org.cip4.lib.xjdf.xml.internal;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
-import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.schema.XJDF;
 
 /**
  * Static Factory Class which is managing a JAXB2 Marshaller instance.
