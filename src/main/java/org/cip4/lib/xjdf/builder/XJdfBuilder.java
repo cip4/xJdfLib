@@ -17,13 +17,13 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.jdf.GeneralID;
-import org.cip4.lib.xjdf.schema.jdf.Parameter;
-import org.cip4.lib.xjdf.schema.jdf.ParameterSet;
-import org.cip4.lib.xjdf.schema.jdf.ParameterType;
-import org.cip4.lib.xjdf.schema.jdf.Part;
-import org.cip4.lib.xjdf.schema.jdf.Product;
-import org.cip4.lib.xjdf.schema.jdf.XJDF;
+import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.Parameter;
+import org.cip4.lib.xjdf.schema.ParameterSet;
+import org.cip4.lib.xjdf.schema.ParameterType;
+import org.cip4.lib.xjdf.schema.Part;
+import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**

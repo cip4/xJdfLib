@@ -14,9 +14,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.jdf.Intent;
-import org.cip4.lib.xjdf.schema.jdf.IntentType;
-import org.cip4.lib.xjdf.schema.jdf.Product;
+import org.cip4.lib.xjdf.schema.Intent;
+import org.cip4.lib.xjdf.schema.IntentType;
+import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
