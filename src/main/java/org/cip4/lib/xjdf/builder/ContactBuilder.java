@@ -11,11 +11,11 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.jdf.Address;
-import org.cip4.lib.xjdf.schema.jdf.ComChannel;
-import org.cip4.lib.xjdf.schema.jdf.Company;
-import org.cip4.lib.xjdf.schema.jdf.Contact;
-import org.cip4.lib.xjdf.schema.jdf.Person;
+import org.cip4.lib.xjdf.schema.Address;
+import org.cip4.lib.xjdf.schema.ComChannel;
+import org.cip4.lib.xjdf.schema.Company;
+import org.cip4.lib.xjdf.schema.Contact;
+import org.cip4.lib.xjdf.schema.Person;
 
 /**
  * Builder class for simplify creating default XJDF Contact Nodes.
