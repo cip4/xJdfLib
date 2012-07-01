@@ -1,6 +1,5 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
@@ -79,6 +78,24 @@
 				<version>1.4</version>
 			</plugin>
 			<plugin>
+				<groupId>com.agilejava.docbkx</groupId>
+				<artifactId>docbkx-maven-plugin</artifactId>
+				<version>2.0.14</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate-html</goal>
+							<goal>generate-xhtml</goal>
+							<goal>generate-pdf</goal>
+						</goals>
+						<phase>generate-sources</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<includes>book.xml</includes>
+				</configuration>
+			</plugin>
+			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.7</version>
 				<executions>
@@ -90,7 +107,6 @@
 								<echo message="Remove old directory" />
 								<delete dir="target/generated-sources/jaxb" />
 								<mkdir dir="target/generated-sources/jaxb" />
-
 								<!-- Generate java classes from XSD -->
 								<echo message="Generate classes..." />
 								<property environment="env" />
@@ -99,33 +115,25 @@
 									<!-- binding file -->
 									<arg value="-b" />
 									<arg value="src/main/resources/org/cip4/lib/xjdf/binding.xjb" />
-
 									<!-- further arguments -->
 									<arg value="-no-header" />
 									<arg value="-extension" />
-
 									<!-- target directory -->
 									<arg value="-d" />
 									<arg value="target\generated-sources\jaxb" />
-
 									<!-- XSD -->
 									<arg value="src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd" />
 								</exec>
-
 								<!-- Remove old classes -->
 								<echo message="Remove old classes..." />
 								<delete>
-									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema"
-										includes="**/*.java" />
+									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema" includes="**/*.java" />
 								</delete>
-
 								<!-- Copy new classes to target location -->
 								<echo message="Copy new classes to target location..." />
 								<copy todir="src/main/java/org/cip4/lib/xjdf/schema">
-									<fileset
-										dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
+									<fileset dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
 								</copy>
-
 								<!-- clean up -->
 								<echo message="Clean up" />
 								<delete dir="target\generated-sources\jaxb" />

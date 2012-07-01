@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<book version="5.0" xmlns="http://docbook.org/ns/docbook"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:svg="http://www.w3.org/2000/svg"
+      xmlns:m="http://www.w3.org/1998/Math/MathML"
+      xmlns:html="http://www.w3.org/1999/xhtml"
+      xmlns:db="http://docbook.org/ns/docbook">
+  <info>
+    <title>CIP4 xJDFLib</title>
+
+    <author>
+      <personname><firstname>Stefan</firstname><surname>Meissner</surname></personname>
+
+      <affiliation>
+        <orgname>s.meissner@flyeralarm.de</orgname>
+      </affiliation>
+    </author>
+
+    <pubdate>July 2012</pubdate>
+  </info>
+
+  <chapter>
+    <title>Introduction</title>
+
+    <para>The major conceptual change is that JDF 2.0 (or XJDF) no longer
+    attempts to model the entire job as one large “job ticket” but rather
+    specifies an interchange format between two applications that are assumed
+    to have an internal data model that is not necessarily based on JDF. Thus
+    each JDF ticket specifies a single transaction between two parties. A
+    single job may be modeled as one or more JDF transactions.</para>
+
+    <para>The major change in JDF Technology also is a good ability for
+    thinking about a conceptual change of the JDF library as well. The focus
+    of the current library “JDFLibJ” is dealing with large XML files (XML
+    files were used as data storage), managing concurrency file access (spawn
+    and merge), handling the workflow logic (references) which also is part of
+    the 1.x JDF Documents etc. Even there are implemented some very common XML
+    functionalities like creating Java objects from XSD Schema and so
+    on.</para>
+
+    <para>Remember, the fundamental concepts of JDF (and the library) were
+    designed in the nineties. At that time XML was a very new technology and
+    just a few early XML Tools had existed. Further the XML technology itself
+    was in a very early phase of development. So it was essential to include
+    all this stuff like mentioned before to get JDF working.</para>
+
+    <para>Over the last two decades XML has become very popular. Many tools
+    were designed and many conceptual enhancements in XML have been done to
+    simplify working with. For example one significant enhancement has been
+    XPath. More details about the XPath W3C Standard later in this document or
+    on the W3C website: http://www.w3.org/TR/xpath/.</para>
+
+    <para>Due to the major change from JDF 1.x to JDF 2.0 it is strongly
+    recommended to redesign the JDF library as well. Similarly to the new JDF
+    Specification the new library “xJdfLib” also is based on commonly used
+    libraries and technologies like the Apache or JAXB framework.
+    Supplementary functionality which has been removed from Specification no
+    longer makes the library unnecessarily complex for reasons of backwards
+    compatibility. The goal of the new XJDF Library is to provide a
+    lightweight, up to date and easy to use library optimized for actual
+    requirements.</para>
+  </chapter>
+
+  <chapter>
+    <title>The xJdfLib Java Library</title>
+
+    <para>The CIP4 xJdfLib Java Library is based on Java 7. The latest stable
+    version is always being published on the CIP4 Website on page “Technical
+    Resources -&gt; Downloads -&gt; Internal Source”. Further xJdfLib is an
+    Apache Maven project. So the latest stable version also is available in
+    the public Central Maven Repositroy:</para>
+
+    <programlistingco>
+      <areaspec>
+        <area coords="???" xml:id="???"/>
+      </areaspec>
+
+      <programlisting>&lt;dependency&gt; 
+    &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt; 
+    &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt; 
+    &lt;version&gt;0.2&lt;/version&gt; 
+&lt;/dependency&gt;</programlisting>
+    </programlistingco>
+
+    <para/>
+
+    <para>Just a sample code...:</para>
+
+    <programlisting language="java">// new factory instance 
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance(); 
+
+// new GeneralID XJDF Node Object using the flexible way GeneralID 
+generalId = xJdfNodeFactory.createGeneralID(); 
+generalId.setIDUsage("IDCatalog"); 
+generalId.setIDValue("42");</programlisting>
+  </chapter>
+</book>
