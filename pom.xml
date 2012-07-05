@@ -93,12 +93,12 @@
 				<version>2.0.14</version>
 				<executions>
 					<execution>
+						<phase>generate-sources</phase>
 						<goals>
 							<goal>generate-html</goal>
 							<goal>generate-xhtml</goal>
 							<goal>generate-pdf</goal>
 						</goals>
-						<phase>generate-sources</phase>
 					</execution>
 				</executions>
 				<configuration>
@@ -351,11 +351,12 @@
 									<pluginExecutionFilter>
 										<groupId>com.agilejava.docbkx</groupId>
 										<artifactId>docbkx-maven-plugin</artifactId>
-										<versionRange>[2.0.14,)</versionRange>
+										<versionRange>[2.0.13,)</versionRange>
 										<goals>
 											<goal>generate-pdf</goal>
 											<goal>generate-xhtml</goal>
 											<goal>generate-html</goal>
+											<goal>generate-webhelp</goal>
 										</goals>
 									</pluginExecutionFilter>
 									<action>
