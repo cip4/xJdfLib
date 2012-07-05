@@ -71,18 +71,6 @@
     Apache Maven project. So the latest stable version also is available in
     the public Central Maven Repositroy:</para>
 
-    <programlistingco>
-      <areaspec>
-        <area coords="???" xml:id="???"/>
-      </areaspec>
-
-      <programlisting>&lt;dependency&gt; 
-    &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt; 
-    &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt; 
-    &lt;version&gt;0.2&lt;/version&gt; 
-&lt;/dependency&gt;</programlisting>
-    </programlistingco>
-
     <para/>
 
     <para>Just a sample code...:</para>
