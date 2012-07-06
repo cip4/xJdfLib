@@ -186,10 +186,6 @@
 							<name>projectversion</name>
 							<value>${project.version}</value>
 						</parameter>
-						<parameter>
-							<name>imageicon</name>
-							<value>images/cip4.png</value>
-						</parameter>
 					</customizationParameters>
 					<!-- Setzt die Dokumentensprache auf Deutsch -->
 					<l10nGentextLanguage>de</l10nGentextLanguage>
