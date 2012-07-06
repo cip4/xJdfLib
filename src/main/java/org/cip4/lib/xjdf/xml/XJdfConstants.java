@@ -73,4 +73,14 @@ public class XJdfConstants {
 		// return result
 		return result;
 	}
+
+	/**
+	 * Load and returns schema as input stream object.
+	 * @return schema as input stream
+	 */
+	public static InputStream loadSchema() {
+
+		// load and return
+		return XJdfConstants.class.getResourceAsStream(RES_JDF20_XSD);
+	}
 }

@@ -11,6 +11,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +19,16 @@ import java.util.List;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+import org.w3c.dom.ls.DOMImplementationLS;
+import org.w3c.dom.ls.LSInput;
+import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -32,7 +38,7 @@ import org.xml.sax.SAXParseException;
  * @author s.meissner
  * @date 11.04.2012
  */
-public abstract class AbstractXmlValidator {
+public abstract class AbstractXmlValidator<T> {
 
 	private final List<String> messages;
 
@@ -47,6 +53,12 @@ public abstract class AbstractXmlValidator {
 		messages = new ArrayList<String>();
 		this.xsdFile = xsdFile;
 	}
+
+	/**
+	 * Return the XSD Schema Path.
+	 * @return XSD Schema Path as String.
+	 */
+	protected abstract String getXsdPath();
 
 	/**
 	 * Getter for messages attribute.
@@ -82,8 +94,14 @@ public abstract class AbstractXmlValidator {
 
 	/**
 	 * Validation of XJDF Document based on XJDF Schema.
+	 * @throws SAXException
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
 	 */
-	public AbstractXmlValidator check(InputStream xJdfFileStream) throws Exception {
+	public T check(InputStream xJdfFileStream) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
 		// reset messages
 		messages.clear();
@@ -93,6 +111,7 @@ public abstract class AbstractXmlValidator {
 
 		// create a SchemaFactory and a Schema
 		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+		schemaFactory.setResourceResolver(new ResourceResolver());
 		Source schemaSource = new StreamSource(isSchema);
 		Schema schema = schemaFactory.newSchema(schemaSource);
 
@@ -112,7 +131,7 @@ public abstract class AbstractXmlValidator {
 			messages.addAll(errorHandler.getMessages());
 
 		// return current instance
-		return this;
+		return (T) this;
 	}
 
 	/**
@@ -183,6 +202,41 @@ public abstract class AbstractXmlValidator {
 			String msg = "FATAL in XJDF Doc ERROR at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber() + ": " + exception.getMessage();
 			messages.add(msg);
 		}
+	}
+
+	/**
+	 * Resolver class for resolving XSD Imports.
+	 * @author s.meissner
+	 * @date 04.07.2012
+	 */
+	private class ResourceResolver implements LSResourceResolver {
+
+		private DOMImplementationLS domImplementationLS;
+
+		/**
+		 * Default constructor.
+		 * @throws ClassNotFoundException
+		 * @throws IllegalAccessException
+		 * @throws InstantiationException
+		 */
+		private ResourceResolver() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+			// System.setProperty(DOMImplementationRegistry.PROPERTY, "org.apache.xerces.dom.DOMImplementationSourceImpl");
+			DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
+			domImplementationLS = (DOMImplementationLS) registry.getDOMImplementation("LS");
+		}
+
+		/**
+		 * @see org.w3c.dom.ls.LSResourceResolver#resolveResource(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+		 */
+		@Override
+		public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
+			LSInput lsInput = domImplementationLS.createLSInput();
+			InputStream is = getClass().getResourceAsStream(getXsdPath() + systemId);
+			lsInput.setByteStream(is);
+			lsInput.setSystemId(systemId);
+			return lsInput;
+		}
+
 	}
 
 }

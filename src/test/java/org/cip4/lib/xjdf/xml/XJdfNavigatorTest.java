@@ -17,7 +17,6 @@ import java.util.UUID;
 import junit.framework.Assert;
 
 import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +30,7 @@ public class XJdfNavigatorTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
-	private AbstractXPathNavigator xPathNavigator;
+	private XJdfNavigator xJdfNavigator;
 
 	/**
 	 * Set up unit test.
@@ -41,7 +40,7 @@ public class XJdfNavigatorTest {
 	public void setUp() throws Exception {
 
 		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
-		xPathNavigator = XJdfNavigator.newInstance(is);
+		xJdfNavigator = XJdfNavigator.newInstance(is);
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class XJdfNavigatorTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		xPathNavigator = null;
+		xJdfNavigator = null;
 	}
 
 	/**
@@ -64,9 +63,9 @@ public class XJdfNavigatorTest {
 		String expected_2 = "890e81ed-6830-4868-b23d-8ab8af8a4047";
 
 		// act
-		String actual_1 = xPathNavigator.readAttribute("/XJDF/GeneralID/@IDUsage");
-		String actual_2 = xPathNavigator.readAttribute("/XJDF/GeneralID/@IDValue");
-		String actual_3 = xPathNavigator.readAttribute("/XJDF/GeneralID/@IDValue1111");
+		String actual_1 = xJdfNavigator.readAttribute("/XJDF/GeneralID/@IDUsage");
+		String actual_2 = xJdfNavigator.readAttribute("/XJDF/GeneralID/@IDValue");
+		String actual_3 = xJdfNavigator.readAttribute("/XJDF/GeneralID/@IDValue1111");
 
 		// assert
 		Assert.assertEquals("Value IDUsage is wrong.", expected_1, actual_1);
@@ -85,10 +84,10 @@ public class XJdfNavigatorTest {
 		final String NEW_VALUE = UUID.randomUUID().toString();
 
 		// act
-		xPathNavigator.updateAttribute("/XJDF/GeneralID/@IDUsage", NEW_VALUE);
+		xJdfNavigator.updateAttribute("/XJDF/GeneralID/@IDUsage", NEW_VALUE);
 
 		// assert
-		InputStream is = xPathNavigator.getXmlStream();
+		InputStream is = xJdfNavigator.getXmlStream();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		IOUtils.copy(is, bos);
@@ -113,21 +112,21 @@ public class XJdfNavigatorTest {
 
 		for (int i = 0; i < MAX_LOOP; i++) {
 			// read
-			actual = xPathNavigator.readAttribute(XPATH);
+			actual = xJdfNavigator.readAttribute(XPATH);
 		}
 
 		long readFirstFinished = System.currentTimeMillis();
 
 		for (int i = 0; i < MAX_LOOP; i++) {
 			// update
-			xPathNavigator.updateAttribute(XPATH, NEW_VALUE);
+			xJdfNavigator.updateAttribute(XPATH, NEW_VALUE);
 		}
 
 		long updateFinished = System.currentTimeMillis();
 
 		for (int i = 0; i < MAX_LOOP; i++) {
 			// read
-			actual = xPathNavigator.readAttribute(XPATH);
+			actual = xJdfNavigator.readAttribute(XPATH);
 		}
 
 		long readSecondFinished = System.currentTimeMillis();
@@ -142,4 +141,51 @@ public class XJdfNavigatorTest {
 		Assert.assertEquals("New value is wrong.", NEW_VALUE, actual);
 	}
 
+	@Test
+	public void testXPathExpressions() throws Exception {
+
+		// arrange
+		String actual;
+
+		// act / assert
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
+		Assert.assertEquals("Value 'JobID' is wrong.", "Job258596", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.CATEGORY);
+		Assert.assertEquals("Value 'Category' is wrong.", "Web2Print", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.GENERAL_CATALOG_ID);
+		Assert.assertEquals("Value 'CatalogID' is wrong.", "890e81ed-6830-4868-b23d-8ab8af8a4047", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.GENERAL_LINE_ID);
+		Assert.assertEquals("Value 'LineID' is wrong.", null, actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.FILE_SPEC_URL);
+		Assert.assertEquals("Value 'FileSpec/Url' is wrong.", "http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.MIN_APPROVALS);
+		Assert.assertEquals("Value 'MinApprovals' is wrong.", "1", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.CUSTOMER_ID);
+		Assert.assertEquals("Value 'CustomerID' is wrong.", "FA-WEB-DE", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.AMOUNT);
+		Assert.assertEquals("Value 'Amount' is wrong.", "1000", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.MEDIA_QUALITY);
+		Assert.assertEquals("Value 'MediaQuality' is wrong.", "IPG_135", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.FINISHED_DIMENSIONS);
+		Assert.assertEquals("Value 'FinishedDimensions' is wrong.", "595.27559055 822.04724409", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRINT_PROCESS);
+		Assert.assertEquals("Value 'PrintProcess' is wrong.", "Lithography", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.FOLDING_CATALOG);
+		Assert.assertEquals("Value 'FoldingCatalog' is wrong.", "F6-1", actual);
+
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.NUM_COLORS);
+		Assert.assertEquals("Value 'NumColors' is wrong.", "4 4", actual);
+
+	}
 }

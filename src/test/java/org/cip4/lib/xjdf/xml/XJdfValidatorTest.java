@@ -23,7 +23,6 @@ import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +35,9 @@ import org.junit.Test;
  */
 public class XJdfValidatorTest {
 
-	private AbstractXmlValidator xJdfValidator;
+	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
+
+	private XJdfValidator xJdfValidator;
 
 	private XJdfNodeFactory xJdfNodeFactory;
 
@@ -194,6 +195,22 @@ public class XJdfValidatorTest {
 
 		Assert.assertEquals("Number messages is wrong.", 0, size);
 		Assert.assertTrue("Validation result is wrong", isValid);
+	}
+
+	@Test
+	public void testCheck() throws Exception {
+
+		// arrange
+		InputStream is = XJdfValidatorTest.class.getResourceAsStream(RES_TEST_XJDF);
+
+		// act
+		boolean isValid = xJdfValidator.check(is).isValid();
+
+		// assert
+		System.out.println(xJdfValidator.getMessagesText());
+
+		// TODO: XSD Validation ID etc...
+		// Assert.assertTrue("Validation result is wrong", isValid);
 	}
 
 	/**
