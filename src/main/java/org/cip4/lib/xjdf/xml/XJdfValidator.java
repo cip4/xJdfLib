@@ -11,8 +11,10 @@
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 
@@ -21,7 +23,7 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
  * @author s.meissner
  * @date 11.04.2012
  */
-public class XJdfValidator extends AbstractXmlValidator {
+public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
 
 	/**
 	 * Custom private constructor. Accepting XML Schema for initializing.
@@ -33,30 +35,32 @@ public class XJdfValidator extends AbstractXmlValidator {
 	/**
 	 * Factory method for getting a new XJdfValidator instance.
 	 * @return New XJdfValidator Instance
+	 * @throws IOException
 	 */
-	public static XJdfValidator newInstance() {
+	public static XJdfValidator newInstance() throws IOException {
 
 		// load xsd file
 		InputStream is = XJdfValidator.class.getResourceAsStream(XJdfConstants.RES_JDF20_XSD);
 
 		ByteArrayOutputStream bos;
 
-		try {
-
-			// convert input stream to byte array
-			bos = new ByteArrayOutputStream();
-			IOUtils.copy(is, bos);
-			bos.close();
-
-		} catch (Exception ex) {
-
-			// error
-			ex.printStackTrace();
-			throw new AssertionError(ex);
-		}
+		// convert input stream to byte array
+		bos = new ByteArrayOutputStream();
+		IOUtils.copy(is, bos);
+		bos.close();
 
 		// return new instance
 		return new XJdfValidator(bos.toByteArray());
+	}
+
+	/**
+	 * @see org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator#getXsdPath()
+	 */
+	@Override
+	protected String getXsdPath() {
+
+		// extract XSD Path
+		return FilenameUtils.getFullPath(XJdfConstants.RES_JDF20_XSD);
 	}
 
 }
