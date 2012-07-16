@@ -5,39 +5,26 @@
 	<artifactId>xJdfLib</artifactId>
 	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<name>xJdfLib</name>
+	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
+	
 	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<groupId>org.cip4.ci</groupId>
+		<artifactId>xCip4Style</artifactId>
+		<version>1.0-SNAPSHOT</version>
 	</parent>
-	<properties>
-		<!-- work directory Docbkx-Plugins -->
-		<workDirectory>${basedir}/target/work/docbkx</workDirectory>
-		<!-- version docbook documents -->
-		<docbook-styles.version>1.1.0</docbook-styles.version>
-		<docbkx-maven-plugin.version>2.0.13</docbkx-maven-plugin.version>
-		<docbook.version>5.0-all</docbook.version>
-		<fop-hyph.version>1.2</fop-hyph.version>
-		<maven-assembly-plugin.version>2.2.1</maven-assembly-plugin.version>
-	</properties>
-	<licenses>
-		<license>
-			<name>CIP4 Software License</name>
-			<url>http://www.cip4.org/open_source/cip4_software_license_v2.html</url>
-			<distribution>repo</distribution>
-		</license>
-	</licenses>
+
 	<scm>
 		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
 		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
 		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
 	</scm>
+	
 	<issueManagement>
 		<system>JIRA</system>
 		<url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
 	</issueManagement>
+	
 	<reporting>
 		<plugins>
 			<plugin>
@@ -54,6 +41,7 @@
 			</plugin>
 		</plugins>
 	</reporting>
+	
 	<developers>
 		<developer>
 			<id>r.prosi</id>
@@ -66,6 +54,7 @@
 			<email>s.meissner@flyeralarm.de</email>
 		</developer>
 	</developers>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -88,166 +77,16 @@
 				<version>1.4</version>
 			</plugin>
 			
-			<!-- DocBook Style -->
+			<!-- doc book generation -->
 			<plugin>
-				<!-- DocBook Styles, Bilder und Assembly ins Arbeitsverzeichnis entpacken -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-docbook-userguide</id>
-						<phase>generate-sources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<includes>styles/**,images/**,assembly/**</includes>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.cip4.ci</groupId>
-									<artifactId>xCIP4Style</artifactId>
-									<version>1.0-SNAPSHOT</version>
-									<type>zip</type>
-								</artifactItem>
-							</artifactItems>
-							<outputDirectory>${workDirectory}</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>com.agilejava.docbkx</groupId>
 				<artifactId>docbkx-maven-plugin</artifactId>
-				<version>${docbkx-maven-plugin.version}</version>
-				<dependencies>
-					<!-- DocBook-Version festlegen -->
-					<dependency>
-						<groupId>net.sf.docbook</groupId>
-						<artifactId>docbook-xml</artifactId>
-						<version>${docbook.version}</version>
-						<classifier>resources</classifier>
-						<type>zip</type>
-						<scope>runtime</scope>
-					</dependency>
-					<!-- Ermöglicht Silbentrennung -->
-					<dependency>
-						<groupId>net.sf.offo</groupId>
-						<artifactId>fop-hyph</artifactId>
-						<version>${fop-hyph.version}</version>
-						<scope>runtime</scope>
-					</dependency>
-				</dependencies>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<id>generate-userguide</id>
-						<goals>
-							<!-- PDF und HTML Ausgabe erzeugen -->
-							<goal>generate-pdf</goal>
-							<goal>generate-html</goal>
-							<goal>generate-webhelp</goal>
-						</goals>
-						<configuration>
-							<!-- DocBook-Dokument angeben -->
-							<includes>book.xml</includes>
-							<!-- Kopiert die notwendigen Sourcen -->
-							<preProcess>
-								<copy todir="${workDirectory}">
-									<fileset dir="${basedir}/src/docbkx" />
-								</copy>
-								<!-- Kopiert Bilder fuer die HTML-Version -->
-								<copy todir="${basedir}/target/docbkx/html/images">
-									<fileset dir="${workDirectory}/images">
-										<exclude name="**/*.pdf" />
-									</fileset>
-								</copy>
-								<!-- Kopiert Bilder fuer die Webhelp-Version. Muss angepasst werden, wenn sich der Name des DocBook-Dokuments ändert. -->
-								<copy todir="${basedir}/target/docbkx/webhelp/docbook_maven/content/images">
-									<fileset dir="${workDirectory}/images">
-										<exclude name="**/*.pdf" />
-									</fileset>
-								</copy>
-								<!-- Kopiert CSS-Styles fuer die HTML-Version -->
-								<copy todir="${basedir}/target/docbkx/html/styles">
-									<fileset dir="${workDirectory}/styles">
-										<include name="*.css" />
-									</fileset>
-								</copy>
-							</preProcess>
-						</configuration>
-					</execution>
-				</executions>
-				<configuration>
-					<!-- Arbeitsverzeichnis festlegen -->
-					<sourceDirectory>${workDirectory}</sourceDirectory>
-					<!-- Zusaetzliche XSLT Parameter -->
-					<customizationParameters>
-						<parameter>
-							<name>projectversion</name>
-							<value>${project.version}</value>
-						</parameter>
-					</customizationParameters>
-					<!-- Setzt die Dokumentensprache auf Deutsch -->
-					<l10nGentextLanguage>de</l10nGentextLanguage>
-					<!-- Eigene Sprachdefinitionen fuer Syntax highlighting laden -->
-					<highlightXslthlConfig>${workDirectory}/styles/highlighters/xslthl-config.xml</highlightXslthlConfig>
-					<!-- Allgemeine Schriftart angeben -->
-					<bodyFontFamily>Calibri</bodyFontFamily>
-					<!-- Eigene Fonts einbinden -->
-					<fonts>
-						<font>
-							<name>Calibri</name>
-							<style>normal</style>
-							<weight>normal</weight>
-							<embedFile>${workDirectory}/styles/fonts/Calibri/calibri.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Calibri/calibri.xml</metricsFile>
-						</font>
-						<font>
-							<name>Calibri</name>
-							<style>normal</style>
-							<weight>bold</weight>
-							<embedFile>${workDirectory}/styles/fonts/Calibri/calibrib.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Calibri/calibrib.xml</metricsFile>
-						</font>
-						<font>
-							<name>Calibri</name>
-							<style>italic</style>
-							<weight>normal</weight>
-							<embedFile>${workDirectory}/styles/fonts/Calibri/calibrii.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Calibri/calibrii.xml</metricsFile>
-						</font>
-						<font>
-							<name>Courier New</name>
-							<style>normal</style>
-							<weight>normal</weight>
-							<embedFile>${workDirectory}/styles/fonts/Courier/cour.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Courier/courier.xml</metricsFile>
-						</font>
-						<font>
-							<name>Courier New</name>
-							<style>normal</style>
-							<weight>bold</weight>
-							<embedFile>${workDirectory}/styles/fonts/Courier/courbd.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Courier/courier-bold.xml</metricsFile>
-						</font>
-						<font>
-							<name>Courier New</name>
-							<style>italic</style>
-							<weight>normal</weight>
-							<embedFile>${workDirectory}/styles/fonts/Courier/couri.ttf</embedFile>
-							<metricsFile>${workDirectory}/styles/fonts/Courier/courier-italic.xml</metricsFile>
-						</font>
-					</fonts>
-					<!-- Eigene Styles fuer PDF -->
-					<foCustomization>${workDirectory}/styles/docbook-pdf.xsl</foCustomization>
-					<!-- Eigene Styles fuer HTML -->
-					<htmlCustomization>${workDirectory}/styles/docbook-html.xsl</htmlCustomization>
-					<!-- Erlaubt Strukturierung einer XML-Datei ueber xi:include href="..." -->
-					<xincludeSupported>true</xincludeSupported>
-				</configuration>
 			</plugin>
 			<plugin>
-				<!-- Ausgabedateien in einem Zip-Archiv zusammenfassen -->
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>${maven-assembly-plugin.version}</version>
 				<executions>
@@ -267,6 +106,7 @@
 					</descriptors>
 				</configuration>
 			</plugin>
+
 			<!-- Ant Script: Update XSD -->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -316,39 +156,8 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>com.agilejava.docbkx</groupId>
-										<artifactId>docbkx-maven-plugin</artifactId>
-										<versionRange>[2.0.13,)</versionRange>
-										<goals>
-											<goal>generate-pdf</goal>
-											<goal>generate-xhtml</goal>
-											<goal>generate-html</goal>
-											<goal>generate-webhelp</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore></ignore>
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
