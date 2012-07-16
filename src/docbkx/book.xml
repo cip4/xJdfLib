@@ -8,11 +8,12 @@
       xmlns:db="http://docbook.org/ns/docbook">
   <info>
     <title>CIP4 xJDFLib</title>
+
     <abstract>
-    	<para>This document describes the structure and functionality of CIP4 xJdfLib and 
-    	how to use it. The library was written in Java and simplify dealing with JDF / JMF
-    	messages. It provides methods for creation, modification and analyzing.  
-    	</para>
+      <para>This document describes the structure and functionality of CIP4
+      xJdfLib and how to use it. The library was written in Java and simplify
+      dealing with JDF / JMF messages. It provides methods for creation,
+      modification and analyzing.</para>
     </abstract>
   </info>
 
@@ -67,16 +68,529 @@
     Apache Maven project. So the latest stable version also is available in
     the public Central Maven Repositroy:</para>
 
-    <para/>
+    <programlisting language="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
+    &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
+    &lt;version&gt;0.2&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
 
-    <para>Just a sample code...:</para>
+    <para>Early Next-Version-Snapshots of the CIP4 xJdfLib Library always are
+    being published in the public OSS Sonatype Snapshot Repository:</para>
 
-    <programlisting language="java">// new factory instance 
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance(); 
+    <programlisting language="xml">&lt;repository&gt;
+    &lt;id&gt;SnapshotOSS&lt;/id&gt;
+    &lt;name&gt;OSS Snapshot&lt;/name&gt;
+    &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots/&lt;/url&gt;
+    &lt;snapshots&gt;
+        &lt;enabled&gt;true&lt;/enabled&gt;
+    &lt;/snapshots&gt;
+&lt;/repository&gt;</programlisting>
 
-// new GeneralID XJDF Node Object using the flexible way GeneralID 
-generalId = xJdfNodeFactory.createGeneralID(); 
-generalId.setIDUsage("IDCatalog"); 
+    <programlisting language="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
+    &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
+    &lt;version&gt;0.3-SNAPSHOT&lt;/version&gt;
+&lt;/dependency&gt;</programlisting>
+  </chapter>
+
+  <chapter>
+    <title>Core Components</title>
+
+    <section>
+      <title>XJdfNodeFactory</title>
+
+      <para>The XJdfNodeFactory is a factory class for creating XJdf Node
+      elements. For each type of node at least one Creation-Method does exist.
+      Creation-Methods of commonly used objects (e. g. Comment, GeneralID
+      etc.) optionally provide parameters for initializing common attributes
+      when node is being created.</para>
+
+      <para>When using the XJdfNodeFactory first of all a new instance of the
+      factory class is required:</para>
+
+      <programlisting language="java">// new factory instance
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();</programlisting>
+
+      <para>GeneralIDs are very common elements in XJdf Documents. Most of
+      these elements only contain an “IDUsage” and an “IDValue” attribute. So
+      in addition the factory provides a method for creating a GeneralID
+      element initialized with these two attributes.</para>
+
+      <para>The first sample shows the creation of a GeneralID element using
+      the default way which also is valid to all other XJdf nodes. A new
+      GeneralID Node object is being created using the XJdfNodeFactory. All
+      attribute values of the element are being set in further steps
+      separately.</para>
+
+      <programlisting language="java">// new factory instance
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+
+// new GeneralID XJDF Node Object using the flexible way
+GeneralID generalId = xJdfNodeFactory.createGeneralID();
+generalId.setIDUsage("IDCatalog");
 generalId.setIDValue("42");</programlisting>
+
+      <para>As mentioned before commonly used elements also can be created by
+      a single call using the extended Creation-Method. Following a code
+      snippet which demonstrates how to create an equal GeneralID object using
+      the extended method in XJdfNodeFactory:</para>
+
+      <programlisting language="java">// new factory instance
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+
+// new GeneralID XJDF Node Object using the straightway
+GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting>
+
+      <para>Both mechanisms create one and the same GeneralID object. The
+      first one raises flexibility of attribute management whereas the second
+      one decreases complexity, maintenance and produces more clearly source
+      code. A combination of both also would be a valid solution. The best
+      practice for most use cases is using the extended Creation-Method
+      whenever provided.</para>
+    </section>
+
+    <section>
+      <title>XJdfNodeBuilder</title>
+
+      <para>Single XJdf Node elements easily can be created using the
+      XJdfNodeFactory. For the creation of more complex elements (e. g.
+      XJDF-Root-Node, Product-Node, Contact-Node etc.) the xJdfLib particular
+      provides classes derived from AbstractXJdfNodeBuilder. These classes
+      additionally contain logic for simplify dealing with attributes and
+      subnodes.</para>
+
+      <para>An example for a complex node is the XJDF Root Node itself. Each
+      Parameter defined always is embedded in a ParameterSet Node. The
+      attribute “Name” depends on the parameter type embedded. This mechanism
+      is a general logic which is covered by the method addParameter() in
+      XJdfNodeBuilder class. When called the Parameter automatically is being
+      appended to the right ParameterSet node. If the ParameterSet does not
+      exist yet a new node is being created. In case of partitioning the
+      method addParameter() optionally provides a parameter to achieve
+      this.</para>
+
+      <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
+    DescriptiveName="1234_56" JobID="FA-SIG-123456”&gt;
+    &lt;ProductList&gt;
+        &lt;Product DescriptiveName="1234_56" Amount="1500" ProductType="Poster"
+            ProductID="FA-SIG-123456" ProductTypeDetails="PTD Value" &gt;
+            &lt;Intent Name="LayoutIntent"&gt;
+                &lt;LayoutIntent Sides="TwoSidedHeadToHead" Pages="2" 
+                    FinishedDimensions="2664.5669291338586 1800.0 0.0"/&gt;
+            &lt;/Intent&gt;
+            &lt;Intent Name="MediaIntent"&gt;
+                &lt;MediaIntent MediaQuality="IPM_90"/&gt;
+            &lt;/Intent&gt;
+            &lt;Intent Name="ProductionIntent"&gt;
+                &lt;ProductionIntent PrintProcess="Lithography"/&gt;
+            &lt;/Intent&gt;
+            &lt;Intent Name="ColorIntent"&gt;
+                &lt;ColorIntent NumColors="4 0"/&gt;
+            &lt;/Intent&gt;
+        &lt;/Product&gt;
+    &lt;/ProductList&gt;
+    &lt;ParameterSet Name="CustomerInfo"&gt;
+        &lt;Parameter&gt;
+            &lt;CustomerInfo CustomerID="FA-42-940"/&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+    &lt;ParameterSet Name="RunList"&gt;
+        &lt;Parameter&gt;
+            &lt;RunList&gt;
+                &lt;FileSpec URL="test_file.pdf"/&gt;
+            &lt;/RunList&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+    &lt;ParameterSet Name="NodeInfo"&gt;
+        &lt;Parameter&gt;
+            &lt;NodeInfo End="2012-04-10T11:51:30+02:00"/&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+    &lt;ParameterSet Name="Contact"&gt;
+        &lt;Parameter&gt;
+            &lt;Contact ContactTypes="Customer Delivery"&gt;
+                &lt;Address PostalCode="97080" City="Würzburg" 
+                    Country="Germany" Street="Alfred-Nobel-Straße 18"/&gt;
+                &lt;ComChannel ChannelType="Email" Locator="info@flyeralarm.de"/&gt;
+                &lt;ComChannel ChannelType="Phone" Locator="+49.931.465840"/&gt;
+                &lt;Company OrganizationName="flyeralarm GmbH"/&gt;
+            &lt;/Contact&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+&lt;/XJDF&gt;</programlisting>
+
+      <para>Above a sample of a XJDF Document which describes a web-to-print
+      job submission. The document consists of a Product definition placed in
+      ProductList and several Parameter nodes. Analogous following the Java
+      code snippet how to use CIP4 xJdfLib Library for creating such a XJDF
+      Document.</para>
+
+      <programlisting language="java">// new factory instance
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+
+XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+xJdfBuilder.getXJdf().setJobID("FA-SIG-123456");
+xJdfBuilder.getXJdf().setCategory("Web2Print");
+xJdfBuilder.getXJdf().setDescriptiveName("1234_56");
+
+// product definitions using ProductBuilder
+ProductBuilder productBuilder = ProductBuilder.newInstance();
+productBuilder.getProduct().setAmount(1500);
+productBuilder.getProduct().setProductType("Poster");
+productBuilder.getProduct().setDescriptiveName("1234_56");
+productBuilder.getProduct().setProductID("FA-SIG-123456");
+productBuilder.getProduct().setProductTypeDetails("PTD Value");
+
+LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent();
+layoutIntent.setPages("2");
+layoutIntent.setSides("TwoSidedHeadToHead");
+layoutIntent.getFinishedDimensions().add(2664.5669291338586);
+layoutIntent.getFinishedDimensions().add(1800.0);
+layoutIntent.getFinishedDimensions().add(0.0);
+productBuilder.addIntent(layoutIntent);
+
+MediaIntent mediaIntent = xJdfNodeFactory.createMediaIntent();
+mediaIntent.setMediaQuality("IPM_90");
+productBuilder.addIntent(mediaIntent);
+
+ProductionIntent productionIntent = xJdfNodeFactory.createProductionIntent();
+productionIntent.setPrintProcess("Lithography");
+productBuilder.addIntent(productionIntent);
+
+ColorIntent colorIntent = xJdfNodeFactory.createColorIntent();
+colorIntent.getNumColors().add(4);
+colorIntent.getNumColors().add(0);
+productBuilder.addIntent(colorIntent);
+
+xJdfBuilder.addProduct(productBuilder.build());
+
+// Customer Info Parameter
+CustomerInfo customerInfo = xJdfNodeFactory.createCustomerInfo();
+customerInfo.setCustomerID("FA-42-940");	
+xJdfBuilder.addParameter(customerInfo);
+
+// RunList Parameter
+RunList runList = xJdfNodeFactory.createRunList("test_file.pdf");
+xJdfBuilder.addParameter(runList);
+
+// Node Info Parameter
+NodeInfo nodeInfo = xJdfNodeFactory.createNodeInfo();
+
+Calendar cal = Calendar.getInstance();
+cal.setTime(new Date());
+nodeInfo.setEnd(ConversionUtil.date2String(cal));
+xJdfBuilder.addParameter(nodeInfo);
+
+// Contact Parameter
+ContactBuilder contactBuilder = ContactBuilder.newInstance();
+contactBuilder.addContactType("Customer", "Delivery");
+contactBuilder.addCompany("flyeralarm GmbH", null);
+contactBuilder.addAddress("Alfred-Nobel-Straße 18", "97080", 
+    "Würzburg", "Germany");
+contactBuilder.addComChannel("Email", "info@flyeralarm.de");
+contactBuilder.addComChannel("Phone", "+49.0931.465840");
+xJdfBuilder.addParameter(contactBuilder.build());
+
+// build xJdf object 
+XJDF xJdf = xJdfBuilder.build();</programlisting>
+
+      <para>All in all the Java code snippet contains three different
+      implementations derived from XJdfNodeBuilder. At the beginning an
+      instance of XJdfBuilder is used for creating the fundamental XJDF
+      Document. Further a ProductBuilder as well as a ContactBuilder also is
+      used for creating the sub elements Product and Contact. Finally the
+      method build() creates the node object tree.</para>
+    </section>
+
+    <section>
+      <title>XJdfParser</title>
+
+      <para>The XJdfParser provides functionality for writing a XJDF Document
+      Object Tree to a binary stream and vice versa. Practical use cases are
+      dealing with XJDF Documents and http transmissions or working on file
+      system. The XJdfParser class internally is working with the Java
+      interfaces java.io.InputStream and java.io.OutputStream. So it doesn’t
+      matter which kind of stream is used for reading or writing. Following a
+      sample how to save a XJDF Document to file system:</para>
+
+      <programlisting language="java">// new factory instance 
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+
+// create simple XJDF Document using XJdfBuilder
+XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+
+GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalogID", "42");
+xJdfBuilder.addGeneralID(generalId);
+
+XJDF xJdf = xJdfBuilder.build();
+
+// target file
+File tmpFile = new File("D:\\Temp\\myXJdfDoc.xjdf");
+OutputStream os = new FileOutputStream(tmpFile);
+
+// write XJDF Document to file using XJdfParser
+XJdfParser xJdfParser = XJdfParser.newInstance();
+xJdfParser.parseXJdf(xJdf, os);
+
+// close stream
+os.close();</programlisting>
+
+      <para>As seen most lines in this Java code snippet are used for
+      preparing the document. Actually the process for writing the XJDF
+      Document to target location on file system only is one line. When
+      parsing XJDF Document Object Trees to a binary stream automatically the
+      document is being validated against the XJDF Schema. Internally the
+      XJdfValidator class is used to achieve this. In case the document is
+      invalid a ValidationException is thrown. The message of the exception
+      lists all points making the document invalid. In order to skip the
+      validation process during parsing there is an optional parameter
+      skipValidation in parseXJdf() method.</para>
+
+      <programlisting language="java">[…]
+xJdfParser.parseXJdf(xJdf, os, true);</programlisting>
+
+      <para>Further a snippet which shows how to parse a XJDF Document Object
+      Tree from an InputStream. In detail this sample demonstrates how to open
+      an XJDF Document stored on file system:</para>
+
+      <programlisting language="java">// open XJDF Document as InputStream
+File tmpFile = new File("D:\\Temp\\myXJdfDoc.xjdf");
+InputStream is = new FileInputStream(tmpFile);
+
+// parse stream to XJDF Document Object Tree
+XJdfParser xJdfParser = XJdfParser.newInstance();
+XJDF xJdf = xJdfParser.parseStream(is);</programlisting>
+
+      <para>The method parseStream() accepts all stream objects which
+      implements the interface java.io.InputStream. Out of the box the Java
+      framework provides many different implementations of this interface.
+      Here an implementation was used particularly for reading files from file
+      system (FileInputStream). All input streams easily can be parsed to an
+      XJDF Document Object Tree by calling the method parseStream().</para>
+    </section>
+
+    <section>
+      <title>XJdfValidator</title>
+
+      <para>The XJdfValidator class validates an XJDF binary stream against
+      the current XJDF Schema file. The XSD Schema also is included in the
+      xJdfLib. All XJDF Documents created with the library automatically are
+      being validated during parsing process.</para>
+
+      <programlisting language="java">InputStream xJdfStream = […]
+
+// new instance of XJdfValidator
+XJdfValidator xJdfValidator = XJdfValidator.newInstance();
+
+// check XJDF input stream
+xJdfValidator.check(xJdfStream);
+
+// get result
+boolean result = xJdfValidator.isValid();</programlisting>
+
+      <para>It is strongly recommended to create a new instance of
+      XJdfValidator per validation process. So first of all when validating a
+      XJDF Document a new validator object has to be created using the static
+      newInstance() method. The check() method validates the XJDF stream
+      against the schema. The method isValid() method returns the validation
+      result as Boolean. The whole validation procedure also can be done by a
+      single line:</para>
+
+      <programlisting language="java">InputStream xJdfStream = […]
+
+// process validation in a single line	
+boolean result = XJdfValidator.newInstance().check(xJdfStream).isValid();</programlisting>
+
+      <para>If a more detail output is needed all warnings, errors and fatal
+      errors can be returned as a list of Strings by calling the getMessages()
+      method. In order to simplify user output (e. g. for the creation of
+      exception messages) additionally there is an method getMessagesText()
+      which returns all messages occurred as a single String value.</para>
+
+      <programlisting language="java">InputStream xJdfStream = […]
+XJdfValidator xJdfValidator = XJdfValidator.newInstance();
+xJdfValidator.check(xJdfStream);
+boolean result = xJdfValidator.isValid();
+
+List&lt;String&gt; messages = xJdfValidator.getMessages(); // messages as list
+String msgText = xJdfValidator.getMessagesText(); // messages as String</programlisting>
+    </section>
+
+    <section>
+      <title>XPathNavigator</title>
+
+      <para>The XPathNavigator class simplifies reading and modifying XJDF
+      Documents using XPath. XPath is a very common XML Technology for working
+      with XML Documents. More details about the XPath W3C Standard can be
+      found here: http://www.w3.org/TR/xpath/.</para>
+
+      <para>XPathNavigator directly works with input streams. So there is no
+      necessity parsing the document first. This mechanism saves time, code
+      complexity and performance. One XPathNavigator instance is required per
+      XJDF Document processed. The method newInstance() creates a new object
+      and initializes it by the XJDF Document InputStream. Now all attributes
+      easily can be read by using the method readAttribute() and the specific
+      XPath expression as parameter. Modifications also can be done with
+      XPath. The method updateAttribute() accepts parameters for a XPath
+      definition and the (new) value of the attribute defined by the XPath.
+      When modifications are completed the new XJDF Document stream is
+      returned as InputStream by calling the method getXJdfStream().</para>
+
+      <programlisting language="java">// load XJDF Document as InputStream and create new XPathNavigator.
+InputStream is = […]
+XPathNavigator xPathNavigator = XPathNavigator.newInstance(is);
+
+// read JobID
+String xJobId = "/XJDF/@JobID";
+String jobId = xPathNavigator.readAttribute(xJobId);
+
+// read GeneralID IDUsage
+String xIdUsage = "/XJDF/GeneralID/@IDUsage";
+String idUsage = xPathNavigator.readAttribute(xIdUsage);
+
+// read FileSpec URL of partition "Cover"
+String xFileCover = "/XJDF/ParameterSet[@Name='RunList']/"
+                  +  "Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL";
+String fileCover = xPathNavigator.readAttribute(xFileCover);
+
+// update Product Amount to 1500
+String xAmount = "/XJDF/ProductList/Product/@Amount";
+xPathNavigator.updateAttribute(xAmount, "1500");
+
+// get modified XJDF Document as InputStream
+InputStream is = xPathNavigator.getXJdfStream();
+[…]</programlisting>
+
+      <para>All XPath definitions used in Java code snippet above references
+      the XJDF Document sample below. This sample shows a pretty easy document
+      of a web-to-print job submission.</para>
+
+      <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
+    DescriptiveName="PrintJob 123456" JobID="FA-SIG-123456”&gt;
+    &lt;GeneralID IDUsage="CatalogID" IDValue="46" /&gt;
+    &lt;ProductList&gt;
+        &lt;Product Amount="1000" /&gt;
+    &lt;/ProductList&gt;
+    &lt;ParameterSet Name="RunList"&gt;
+        &lt;Parameter&gt;
+            &lt;Part Run="Cover" /&gt;
+            &lt;RunList&gt;
+                &lt;FileSpec URL="cover.pdf" /&gt;
+            &lt;/RunList&gt;
+        &lt;/Parameter&gt;
+        &lt;Parameter&gt;
+            &lt;Part Run="Body" /&gt;
+            &lt;RunList&gt;
+                &lt;FileSpec URL="body.pdf" /&gt;
+            &lt;/RunList&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+&lt;/XJDF&gt;</programlisting>
+    </section>
+
+    <section>
+      <title>XJdfConstants</title>
+
+      <para>Common XJDF constants are defined in the static class
+      XJdfConstants. When working with XJDF Documents following values are
+      commonly used:</para>
+
+      <table>
+        <title>Overview xJdfLib Constants</title>
+
+        <tgroup cols="3">
+          <thead>
+            <row>
+              <entry align="center">Constant</entry>
+
+              <entry align="center">Value</entry>
+
+              <entry align="center">Use</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>NAMESPACE_JDF20</entry>
+
+              <entry>"http://www.cip4.org/JDFSchema_2_0"</entry>
+
+              <entry>JDF Default Namespace</entry>
+            </row>
+
+            <row>
+              <entry>XJDF_CURRENT_VERSION</entry>
+
+              <entry>"2.0"</entry>
+
+              <entry>Current JDF Version Number</entry>
+            </row>
+
+            <row>
+              <entry>MEDIA_TYPE_VND_JMF</entry>
+
+              <entry>"application/vnd.cip4-jmf+xml"</entry>
+
+              <entry>MIME Type JMF</entry>
+            </row>
+
+            <row>
+              <entry>MEDIA_TYPE_VND_JDF</entry>
+
+              <entry>"application/vnd.cip4-jdf+xml"</entry>
+
+              <entry>MIME Type JDF</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+
+      <para>All constants are static and public. So they easily can be a
+      accessed by typing the class name “XJdfConstants” and the specific name
+      of a constant:</para>
+
+      <programlisting language="java">// get XJDF default namespace
+String defaultNamespace = XJdfConstants.NAMESPACE_JDF20;
+
+// get current version of XJDF
+String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Developer Infos</title>
+
+    <para>This chapter tells about the internals of the XJDF Library. This is
+    useful when you are interest in getting involved to development. Otherwise
+    fell free to skip it.</para>
+
+    <section>
+      <title>Update XJDF Schema</title>
+
+      <para>Generating new sources after the XJDF Schema has changed is a very
+      common task. The XSD is located at
+      “src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd”. In order to update
+      sources just overwrite the schema file and run the “updateXJdfXSD.bat”
+      batch script. All files located in the java package
+      “org.cip4.lib.xjdf.schema.jdf” automatically are being replaced.</para>
+    </section>
+  </chapter>
+
+  <chapter>
+    <title>Conclusion</title>
+
+    <para>Currently the CIP4 xJdfLib project is still in a very early stadium.
+    In addition the library is based on a Specification which has not been
+    completely finished yet. So when using the library please keep in mind
+    that concepts or even the XJDF structure may change from one version to
+    the next. The first official stable version is indicated by starting with
+    1 in version number (1.x). </para>
+
+    <para>Feature requests and bug reports always are very welcome. Please do
+    not hesitate to create a new ticket for your issues. In CIP4 JIRA Ticket
+    System there you will find the project “xJdfLib” where you can place new
+    posts.</para>
   </chapter>
 </book>
