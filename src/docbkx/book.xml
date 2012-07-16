@@ -8,16 +8,12 @@
       xmlns:db="http://docbook.org/ns/docbook">
   <info>
     <title>CIP4 xJDFLib</title>
-
-    <author>
-      <personname><firstname>Stefan</firstname><surname>Meissner</surname></personname>
-
-      <affiliation>
-        <orgname>s.meissner@flyeralarm.de</orgname>
-      </affiliation>
-    </author>
-
-    <pubdate>July 2012</pubdate>
+    <abstract>
+    	<para>This document describes the structure and functionality of CIP4 xJdfLib and 
+    	how to use it. The library was written in Java and simplify dealing with JDF / JMF
+    	messages. It provides methods for creation, modification and analyzing.  
+    	</para>
+    </abstract>
   </info>
 
   <chapter>
