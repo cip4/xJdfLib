@@ -47,14 +47,14 @@
 			<id>r.prosi</id>
 			<name>Dr. Rainer Prosi</name>
 			<organization>Heidelberger Druckmaschinen AG</organization>
-			<organizationUrl>http://heidelberg.com</organizationUrl>
+			<organizationUrl>http://www.heidelberg.com</organizationUrl>
 			<email>rainer.prosi@heidelberg.com</email>
 		</developer>
 		<developer>
 			<id>s.meissner</id>
 			<name>Stefan Meissner</name>
 			<organization>flyeralarm GmbH</organization>
-			<organizationUrl>http://flyeralarm.com</organizationUrl>
+			<organizationUrl>http://www.flyeralarm.com</organizationUrl>
 			<email>s.meissner@flyeralarm.de</email>
 		</developer>
 	</developers>
