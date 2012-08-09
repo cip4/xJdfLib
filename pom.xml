@@ -9,8 +9,8 @@
 	<url>http://www.cip4.org</url>
 	
 	<parent>
-		<groupId>org.cip4.ci</groupId>
-		<artifactId>xCip4Style</artifactId>
+		<groupId>org.cip4.tools</groupId>
+		<artifactId>xCip4Master</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
