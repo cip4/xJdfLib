@@ -28,7 +28,7 @@
     single job may be modeled as one or more JDF transactions.</para>
 
     <para>The major change in JDF Technology also is a good ability for
-    thinking about a conceptual change of the JDF library as well. The focus
+    rethinking about a conceptual change of the JDF library as well. The focus
     of the current library “JDFLibJ” is dealing with large XML files (XML
     files were used as data storage), managing concurrency file access (spawn
     and merge), handling the workflow logic (references) which also is part of
@@ -63,7 +63,7 @@
     <title>The xJdfLib Java Library</title>
 
     <para>The CIP4 xJdfLib Java Library is based on Java 7. The latest stable
-    version is always being published on the CIP4 Website on page “Technical
+    version is being published on the CIP4 Website on page “Technical
     Resources -&gt; Downloads -&gt; Internal Source”. Further xJdfLib is an
     Apache Maven project. So the latest stable version also is available in
     the public Central Maven Repositroy:</para>
@@ -74,8 +74,8 @@
     &lt;version&gt;0.2&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
 
-    <para>Early Next-Version-Snapshots of the CIP4 xJdfLib Library always are
-    being published in the public OSS Sonatype Snapshot Repository:</para>
+    <para>Early Next-Version-Snapshots of CIP4 xJdfLib Library are being
+    published in the public OSS Sonatype Snapshot Repository:</para>
 
     <programlisting language="xml">&lt;repository&gt;
     &lt;id&gt;SnapshotOSS&lt;/id&gt;
@@ -99,54 +99,66 @@
     <section>
       <title>XJdfNodeFactory</title>
 
-      <para>The XJdfNodeFactory is a factory class for creating XJdf Node
-      elements. For each type of node at least one Creation-Method does exist.
-      Creation-Methods of commonly used objects (e. g. Comment, GeneralID
-      etc.) optionally provide parameters for initializing common attributes
-      when node is being created.</para>
+      <para>The XJdfNodeFactory is the fundamental factory class for creating
+      new instances of XJDF Nodes. The class provides at least one
+      Creation-Method per XJDF Node. For plain commonly used XJDF Nodes (e. g.
+      GeneralID, RunList etc.) there also are extended Creation-Methods which
+      additionally do initialize the node object after creation. </para>
 
-      <para>When using the XJdfNodeFactory first of all a new instance of the
-      factory class is required:</para>
+      <para>A new instance of XJdfNodeFactory can created by calling the
+      static method <emphasis>newInstance()</emphasis>:</para>
 
-      <programlisting language="java">// new factory instance
+      <programlisting language="java">// New Factory Instance
 XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();</programlisting>
 
-      <para>GeneralIDs are very common elements in XJdf Documents. Most of
-      these elements only contain an “IDUsage” and an “IDValue” attribute. So
-      in addition the factory provides a method for creating a GeneralID
-      element initialized with these two attributes.</para>
+      <para>The next two code snippets demonstrate the differance and usage of
+      normal and extended Creation-Methods. For example when working with
+      GeneralIDs most of them consist of the attributes "IDUsage" and
+      "IDValue". Using the flexible way the creation of GeneralID instances
+      takes three lines of code. The first line creates the new object whereas
+      the following two lines initialize the object by attribute values. Each
+      attribute explicitly can be set and modified:</para>
 
-      <para>The first sample shows the creation of a GeneralID element using
-      the default way which also is valid to all other XJdf nodes. A new
-      GeneralID Node object is being created using the XJdfNodeFactory. All
-      attribute values of the element are being set in further steps
-      separately.</para>
-
-      <programlisting language="java">// new factory instance
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
-
-// new GeneralID XJDF Node Object using the flexible way
+      <para><programlisting language="java">// New GeneralID XJDF Node Object using the flexible way
 GeneralID generalId = xJdfNodeFactory.createGeneralID();
 generalId.setIDUsage("IDCatalog");
-generalId.setIDValue("42");</programlisting>
+generalId.setIDValue("42");</programlisting>But when creating larger XJDF
+      Documents the flexible way unnecessarily does consume time for writing
+      and raise complexity enormously. Hence the factory class besides
+      provides extended Creation-Methods for a straighter way. Using this
+      methods plain commonly used XJDF Node structures can be created and
+      initialized by a single line of code: </para>
 
-      <para>As mentioned before commonly used elements also can be created by
-      a single call using the extended Creation-Method. Following a code
-      snippet which demonstrates how to create an equal GeneralID object using
-      the extended method in XJdfNodeFactory:</para>
+      <para><programlisting language="java">// New GeneralID XJDF Node Object using the straight way
+GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting></para>
 
-      <programlisting language="java">// new factory instance
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+      <para>Both ways produce one and the same GeneralID Node. The flexible
+      way raises flexibility of attribute management whereas the straight one
+      decreases complexity, maintenance and produces more clearly source code.
+      </para>
 
-// new GeneralID XJDF Node Object using the straightway
-GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting>
+      <para>Best practice is the combination of both ways. It is strongly
+      recommended using the extended Creation-Methods whenever one is
+      available. If the extended method does not fully fit the needs the
+      result always can be individualized in a separate operation after
+      creation by modifying attributes directly. In some situations
+      the<emphasis> /RunList/FileSpec</emphasis> Node may contain an addtional
+      attribute <emphasis>UserFileName</emphasis>:</para>
 
-      <para>Both mechanisms create one and the same GeneralID object. The
-      first one raises flexibility of attribute management whereas the second
-      one decreases complexity, maintenance and produces more clearly source
-      code. A combination of both also would be a valid solution. The best
-      practice for most use cases is using the extended Creation-Method
-      whenever provided.</para>
+      <para><programlisting language="xml">[...]
+&lt;RunList&gt;
+    &lt;FileSpec URL="http://192.168.1.113:80/4daction/Poster/10496" UserFileName="myFileName.pdf"/&gt;
+&lt;/RunList&gt;
+[...]</programlisting>In the latest version of XJdfNodeFactory for example
+      there is no extended Creation-Method for the creation of a
+      <emphasis>RunList</emphasis> node which also defines a
+      <emphasis>UserFileName</emphasis> attribute in
+      <emphasis>FileSpec</emphasis>. The best practice is using the extended
+      method despite and finally indivualize the result:</para>
+
+      <para><programlisting language="java">// Best practice creating indivudal nodes
+RunList runList = xJdfNodeFactory.createRunList("http://192.168.1.113:80/4daction/Poster/10496");
+runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
     </section>
 
     <section>
@@ -586,7 +598,7 @@ String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
     completely finished yet. So when using the library please keep in mind
     that concepts or even the XJDF structure may change from one version to
     the next. The first official stable version is indicated by starting with
-    1 in version number (1.x). </para>
+    1 in version number (1.x).</para>
 
     <para>Feature requests and bug reports always are very welcome. Please do
     not hesitate to create a new ticket for your issues. In CIP4 JIRA Ticket
