@@ -153,9 +153,9 @@ public class XJdfParserTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
-		xJdfBuilder.getXJdf().getTypes().add("MyType");
-		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().getTypes().add("MyType");
+		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
 		XJDF xJdf = xJdfBuilder.build();
 

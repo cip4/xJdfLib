@@ -122,7 +122,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * Getter for xJdf attribute.
 	 * @return the xJdf
 	 */
-	public XJDF getXJdf() {
+	protected XJDF getXJdf() {
 		return getNode();
 	}
 
