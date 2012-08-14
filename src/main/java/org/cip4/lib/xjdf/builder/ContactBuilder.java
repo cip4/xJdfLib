@@ -51,7 +51,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	 * Getter for product attribute.
 	 * @return the product
 	 */
-	public Contact getContact() {
+	protected Contact getContact() {
 		return getNode();
 	}
 

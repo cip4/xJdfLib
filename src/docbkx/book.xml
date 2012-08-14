@@ -103,7 +103,7 @@
       new instances of XJDF Nodes. The class provides at least one
       Creation-Method per XJDF Node. For plain commonly used XJDF Nodes (e. g.
       GeneralID, RunList etc.) there also are extended Creation-Methods which
-      additionally do initialize the node object after creation. </para>
+      additionally do initialize the node object after creation.</para>
 
       <para>A new instance of XJdfNodeFactory can created by calling the
       static method <emphasis>newInstance()</emphasis>:</para>
@@ -113,7 +113,7 @@ XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();</programlisting
 
       <para>The next two code snippets demonstrate the differance and usage of
       normal and extended Creation-Methods. For example when working with
-      GeneralIDs most of them consist of the attributes "IDUsage" and
+      GeneralIDs most of them only consist of the attributes "IDUsage" and
       "IDValue". Using the flexible way the creation of GeneralID instances
       takes three lines of code. The first line creates the new object whereas
       the following two lines initialize the object by attribute values. Each
@@ -127,27 +127,31 @@ generalId.setIDValue("42");</programlisting>But when creating larger XJDF
       and raise complexity enormously. Hence the factory class besides
       provides extended Creation-Methods for a straighter way. Using this
       methods plain commonly used XJDF Node structures can be created and
-      initialized by a single line of code: </para>
+      initialized by a single line of code:</para>
 
       <para><programlisting language="java">// New GeneralID XJDF Node Object using the straight way
 GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting></para>
 
       <para>Both ways produce one and the same GeneralID Node. The flexible
       way raises flexibility of attribute management whereas the straight one
-      decreases complexity, maintenance and produces more clearly source code.
-      </para>
+      decreases complexity, maintenance and produces more clearly source
+      code.</para>
 
       <para>Best practice is the combination of both ways. It is strongly
       recommended using the extended Creation-Methods whenever one is
       available. If the extended method does not fully fit the needs the
-      result always can be individualized in a separate operation after
-      creation by modifying attributes directly. In some situations
-      the<emphasis> /RunList/FileSpec</emphasis> Node may contain an addtional
-      attribute <emphasis>UserFileName</emphasis>:</para>
+      result always can be individualized in a further step after. All
+      attributes always are able being modified directly.</para>
+
+      <para>Following example showcases how to modify an XJDF Node after
+      creation. In some situations the<emphasis> /RunList/FileSpec</emphasis>
+      Node may contain an addtional attribute
+      <emphasis>UserFileName</emphasis>:</para>
 
       <para><programlisting language="xml">[...]
 &lt;RunList&gt;
-    &lt;FileSpec URL="http://192.168.1.113:80/4daction/Poster/10496" UserFileName="myFileName.pdf"/&gt;
+    &lt;FileSpec URL="http://192.168.1.113:80/4daction/Poster/10496" 
+        UserFileName="myFileName.pdf"/&gt;
 &lt;/RunList&gt;
 [...]</programlisting>In the latest version of XJdfNodeFactory for example
       there is no extended Creation-Method for the creation of a
@@ -157,66 +161,39 @@ GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</progra
       method despite and finally indivualize the result:</para>
 
       <para><programlisting language="java">// Best practice creating indivudal nodes
-RunList runList = xJdfNodeFactory.createRunList("http://192.168.1.113:80/4daction/Poster/10496");
+RunList runList = xJdfNodeFactory
+    .createRunList("http://192.168.1.113:80/4daction/Poster/10496");
 runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
     </section>
 
     <section>
-      <title>XJdfNodeBuilder</title>
+      <title>Builder Classes</title>
 
-      <para>Single XJdf Node elements easily can be created using the
-      XJdfNodeFactory. For the creation of more complex elements (e. g.
-      XJDF-Root-Node, Product-Node, Contact-Node etc.) the xJdfLib particular
-      provides classes derived from AbstractXJdfNodeBuilder. These classes
-      additionally contain logic for simplify dealing with attributes and
-      subnodes.</para>
+      <para>Plain XJDF Node elements easily can be created using the
+      XJdfNodeFactory. Complex elements (e. g. XJDF-Root-Node, Product-Node,
+      etc.) are elements which contains multiple subnodes in a defined manner.
+      For example you can say the XJDF-Root-Node is the container for Product
+      and Paramter nodes. All <emphasis>Product</emphasis> items are listed in
+      subelement <emphasis>ProductList</emphasis>. Also all
+      <emphasis>Parameter</emphasis> nodes are listed in specific
+      <emphasis>ParamterSet</emphasis> elements.</para>
 
-      <para>An example for a complex node is the XJDF Root Node itself. Each
-      Parameter defined always is embedded in a ParameterSet Node. The
-      attribute “Name” depends on the parameter type embedded. This mechanism
-      is a general logic which is covered by the method addParameter() in
-      XJdfNodeBuilder class. When called the Parameter automatically is being
-      appended to the right ParameterSet node. If the ParameterSet does not
-      exist yet a new node is being created. In case of partitioning the
-      method addParameter() optionally provides a parameter to achieve
-      this.</para>
-
-      <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+      <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
-    DescriptiveName="1234_56" JobID="FA-SIG-123456”&gt;
+    DescriptiveName="My lovely Poster" JobID="FA-SIG-123456”&gt;
     &lt;ProductList&gt;
         &lt;Product DescriptiveName="1234_56" Amount="1500" ProductType="Poster"
             ProductID="FA-SIG-123456" ProductTypeDetails="PTD Value" &gt;
-            &lt;Intent Name="LayoutIntent"&gt;
-                &lt;LayoutIntent Sides="TwoSidedHeadToHead" Pages="2" 
-                    FinishedDimensions="2664.5669291338586 1800.0 0.0"/&gt;
-            &lt;/Intent&gt;
             &lt;Intent Name="MediaIntent"&gt;
                 &lt;MediaIntent MediaQuality="IPM_90"/&gt;
             &lt;/Intent&gt;
-            &lt;Intent Name="ProductionIntent"&gt;
-                &lt;ProductionIntent PrintProcess="Lithography"/&gt;
-            &lt;/Intent&gt;
-            &lt;Intent Name="ColorIntent"&gt;
-                &lt;ColorIntent NumColors="4 0"/&gt;
-            &lt;/Intent&gt;
         &lt;/Product&gt;
     &lt;/ProductList&gt;
-    &lt;ParameterSet Name="CustomerInfo"&gt;
-        &lt;Parameter&gt;
-            &lt;CustomerInfo CustomerID="FA-42-940"/&gt;
-        &lt;/Parameter&gt;
-    &lt;/ParameterSet&gt;
     &lt;ParameterSet Name="RunList"&gt;
         &lt;Parameter&gt;
             &lt;RunList&gt;
                 &lt;FileSpec URL="test_file.pdf"/&gt;
             &lt;/RunList&gt;
-        &lt;/Parameter&gt;
-    &lt;/ParameterSet&gt;
-    &lt;ParameterSet Name="NodeInfo"&gt;
-        &lt;Parameter&gt;
-            &lt;NodeInfo End="2012-04-10T11:51:30+02:00"/&gt;
         &lt;/Parameter&gt;
     &lt;/ParameterSet&gt;
     &lt;ParameterSet Name="Contact"&gt;
@@ -230,89 +207,231 @@ runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
             &lt;/Contact&gt;
         &lt;/Parameter&gt;
     &lt;/ParameterSet&gt;
-&lt;/XJDF&gt;</programlisting>
+&lt;/XJDF&gt;</programlisting>Builder classes are designed and optimized for
+      simplify creating the container element and dealing with all subnodes in
+      a correct manner. In case of <date>XJdfBuilder</date> when adding a new
+      <emphasis>Parameter</emphasis> node the class automatically checks
+      whether the right <emphasis>ParameterSet</emphasis> element already does
+      exist. If not so the library creates a new one and finally embeds the
+      new parameter.</para>
 
-      <para>Above a sample of a XJDF Document which describes a web-to-print
-      job submission. The document consists of a Product definition placed in
-      ProductList and several Parameter nodes. Analogous following the Java
-      code snippet how to use CIP4 xJdfLib Library for creating such a XJDF
-      Document.</para>
+      <para>The CIP4 XJdfLib provides several element builders:</para>
 
-      <programlisting language="java">// new factory instance
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+      <itemizedlist spacing="compact">
+        <listitem>
+          <para><emphasis role="bold">XJdfBuilder</emphasis></para>
 
-XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
-xJdfBuilder.getXJdf().setJobID("FA-SIG-123456");
-xJdfBuilder.getXJdf().setCategory("Web2Print");
-xJdfBuilder.getXJdf().setDescriptiveName("1234_56");
+          <para>Creation of XJDF Documents. Manages dealing with Products and
+          Paramters.</para>
+        </listitem>
 
-// product definitions using ProductBuilder
+        <listitem>
+          <para><emphasis role="bold">ProductBuilder</emphasis></para>
+
+          <para>Creation of Product nodes. Handles Intent nodes.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">ContactBuilder</emphasis></para>
+
+          <para>Creation of Contact nodes. Simplify handling with contact
+          details.</para>
+        </listitem>
+      </itemizedlist>
+
+      <section>
+        <title>XJdfBuilder</title>
+
+        <para>The builder class XJdfBuilder covers logic to simplify the
+        creation of XJDF Root Nodes and the handling of their Product and
+        Parameter definitions. In order to add subelements there are several
+        "add"-methods to achieve this. Secondary these methods are responsible
+        keeping the structure of the XJDF Document in a well defined manner.
+        For instance the XJDF Specification defines all Parameter nodes have
+        to be embedded within a specific ParameterSet element. This mecanism
+        fully is supported by the builder class. So when adding a new
+        Parameter item the addParameter() method checks whether or not the
+        right ParameterSet node already does exist. In case the ParameterSet
+        node does not exist yet a new one is created automatically. Following
+        a Java Code Snippet how to use the XJdfBuilder for creating the XJDF
+        document above:</para>
+
+        <para><programlisting language="java">// new xJdfBuilder
+XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance("FA-SIG-123456", 
+                                             "Web2Print", "My lovely Poster");
+
+// create Product node
 ProductBuilder productBuilder = ProductBuilder.newInstance();
-productBuilder.getProduct().setAmount(1500);
-productBuilder.getProduct().setProductType("Poster");
-productBuilder.getProduct().setDescriptiveName("1234_56");
-productBuilder.getProduct().setProductID("FA-SIG-123456");
-productBuilder.getProduct().setProductTypeDetails("PTD Value");
+[...]
+Product product = productBuilder.build();
 
-LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent();
-layoutIntent.setPages("2");
-layoutIntent.setSides("TwoSidedHeadToHead");
-layoutIntent.getFinishedDimensions().add(2664.5669291338586);
-layoutIntent.getFinishedDimensions().add(1800.0);
-layoutIntent.getFinishedDimensions().add(0.0);
-productBuilder.addIntent(layoutIntent);
+// create Contact node
+ContactBuilder contactBuilder = ContactBuilder.newInstance();
+[...]
+Contact contact = contactBuilder.build();
 
-MediaIntent mediaIntent = xJdfNodeFactory.createMediaIntent();
-mediaIntent.setMediaQuality("IPM_90");
-productBuilder.addIntent(mediaIntent);
+// create RunList
+RunList runList = XJdfNodeFactory.newInstance().createRunList("test_file.pdf");
 
-ProductionIntent productionIntent = xJdfNodeFactory.createProductionIntent();
-productionIntent.setPrintProcess("Lithography");
-productBuilder.addIntent(productionIntent);
+// append product
+xJdfBuilder.addProduct(product);
 
-ColorIntent colorIntent = xJdfNodeFactory.createColorIntent();
-colorIntent.getNumColors().add(4);
-colorIntent.getNumColors().add(0);
-productBuilder.addIntent(colorIntent);
-
-xJdfBuilder.addProduct(productBuilder.build());
-
-// Customer Info Parameter
-CustomerInfo customerInfo = xJdfNodeFactory.createCustomerInfo();
-customerInfo.setCustomerID("FA-42-940");	
-xJdfBuilder.addParameter(customerInfo);
-
-// RunList Parameter
-RunList runList = xJdfNodeFactory.createRunList("test_file.pdf");
+// append parameters
+xJdfBuilder.addParameter(contact);
 xJdfBuilder.addParameter(runList);
 
-// Node Info Parameter
-NodeInfo nodeInfo = xJdfNodeFactory.createNodeInfo();
+// build XJDF Doc
+XJDF xJdf = xJdfBuilder.build();</programlisting></para>
 
-Calendar cal = Calendar.getInstance();
-cal.setTime(new Date());
-nodeInfo.setEnd(ConversionUtil.date2String(cal));
-xJdfBuilder.addParameter(nodeInfo);
+        <section>
+          <title>Partitioning of Parameter nodes</title>
 
-// Contact Parameter
+          <para>The XJDF Specification defines a partitioning mechanism of
+          Parameters. Here an example of a partitioned RunList in a XJDF
+          Document:</para>
+
+          <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0"&gt;
+    [...]
+    &lt;ParameterSet Name="RunList"&gt;
+        &lt;Parameter&gt;
+            &lt;Part Run="Cover"/&gt;
+            &lt;RunList&gt;
+                &lt;FileSpec URL="./artwork/cover.pdf"/&gt;
+            &lt;/RunList&gt;
+        &lt;/Parameter&gt;
+        &lt;Parameter&gt;
+            &lt;Part Run="Body"/&gt;
+            &lt;RunList&gt;
+                &lt;FileSpec URL="./artwork/body.pdf"/&gt;
+            &lt;/RunList&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+    [...]
+&lt;/XJDF&gt;</programlisting>In XJdfBuilder class there is a particular
+          addParameter() method override for partitioning. Following the
+          appendant code snippet for the creation of a partitioned RunList
+          ParameterSet:</para>
+
+          <para><programlisting language="java">// new factory
+XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
+
+// new XJdfBuilder
+XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+
+// parameter cover
+RunList runListCover = xJdfNodeFactory.createRunList("./artwork/cover.pdf");
+
+Part partCover = XJdfNodeFactory.newInstance().createPart();
+partCover.setRun("Cover");
+
+// parameter body
+RunList runListBody = xJdfNodeFactory.createRunList("./artwork/body.pdf");
+
+Part partBody = XJdfNodeFactory.newInstance().createPart();
+partBody.setRun("Body");
+
+// add parameters with partitioning
+xJdfBuilder.addParameter(runListCover, partCover);
+xJdfBuilder.addParameter(runListBody, partBody);
+
+// build XJDF
+XJDF xJdf = xJdfBuilder.build();</programlisting></para>
+        </section>
+      </section>
+
+      <section>
+        <title>ProductBuilder</title>
+
+        <para>The main task of ProductBuilder is the creation and
+        initialization of new product instances. Further the classes proper is
+        the handling of product Intents. In XJDF each product intent has to be
+        embedded within a separate Intent node. This mechanism also is covered
+        by the ProductBuilder. When adding a new concrete Intent node (e. g.
+        MediaIntent, LayoutIntent etc.) the class manages the
+        structure.</para>
+
+        <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0"&gt;
+    [...]
+    &lt;ProductList&gt;
+        &lt;Product ProductTypeDetails="MyJob" Amount="1500" ProductType="Poster"
+            ProductID="FA-SIG-123456" &gt;
+            &lt;Intent Name="MediaIntent"&gt;
+                &lt;MediaIntent Weight="135.0" /&gt;
+            &lt;/Intent&gt;
+            &lt;Intent Name="LayoutIntent"&gt;
+                &lt;LayoutIntent FinishedDimensions="595.27559055 822.04724409" /&gt;
+            &lt;/Intent&gt;
+            &lt;Intent Name="BindingIntent"&gt;
+                &lt;BindingIntent BindingType="SaddleStitch" /&gt;
+            &lt;/Intent&gt;
+        &lt;/Product&gt;
+    &lt;/ProductList&gt;
+    [...]
+&lt;/XJDF&gt;</programlisting>The snippet above shows a Product definition
+        within a XJDF Document. Using the ProductBuilder class there is no
+        longer a need managing the document structure manually. The only thing
+        to do is creating the particular Intent elements and add them to the
+        builder:</para>
+
+        <para><programlisting language="java">// new ProductBuilder instance 
+ProductBuilder productBuilder = ProductBuilder.newInstance(1500, 
+                                  "FA-SIG-123456", "Poster", "MyJob");
+
+// create Intents
+MediaIntent mediaIntent = [...];
+LayoutIntent layoutIntent = [...];
+BindingIntent bindingIntent = [...];
+
+// add Intents
+productBuilder.addIntent(mediaIntent);
+productBuilder.addIntent(layoutIntent);
+productBuilder.addIntent(bindingIntent);
+
+// build product
+Product prodcut = productBuilder.build();</programlisting></para>
+      </section>
+
+      <section>
+        <title>ContactBuilder</title>
+
+        <para>The Contact Node in XJDF keeps all customers contact details.
+        There are several types of subnodes for holding the information. In
+        order to simplify the creation and initialization of these elements
+        the ContactBuilder class has been designed and developed.</para>
+
+        <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0"&gt;
+    [...]
+    &lt;ParameterSet Name="Contact"&gt;
+        &lt;Parameter&gt;
+            &lt;Contact ContactTypes="Customer Delivery"&gt;
+                &lt;Address PostalCode="97080" City="Würzburg" 
+                    Country="Germany" Street="Alfred-Nobel-Straße 18"/&gt;
+                &lt;ComChannel ChannelType="Email" Locator="info@flyeralarm.de"/&gt;
+                &lt;ComChannel ChannelType="Phone" Locator="+49.931.465840"/&gt;
+                &lt;Company OrganizationName="flyeralarm GmbH"/&gt;
+            &lt;/Contact&gt;
+        &lt;/Parameter&gt;
+    &lt;/ParameterSet&gt;
+    [...]
+&lt;/XJDF&gt;</programlisting>Using the ContactBuilder Person-, Company-,
+        Address- and ComChannel nodes easily can be created and added by plain
+        method calls:</para>
+
+        <para><programlisting language="java">// new ContactBuilder instance 
 ContactBuilder contactBuilder = ContactBuilder.newInstance();
-contactBuilder.addContactType("Customer", "Delivery");
-contactBuilder.addCompany("flyeralarm GmbH", null);
-contactBuilder.addAddress("Alfred-Nobel-Straße 18", "97080", 
-    "Würzburg", "Germany");
+
+// set contact details
+contactBuilder.addAddress("Alfred-Nobel-Straße 18", "97080", "Würzburg");
 contactBuilder.addComChannel("Email", "info@flyeralarm.de");
-contactBuilder.addComChannel("Phone", "+49.0931.465840");
-xJdfBuilder.addParameter(contactBuilder.build());
+contactBuilder.addComChannel("Phone", "+49.931.465840");
+contactBuilder.addCompany("flyeralarm GmbH");
 
-// build xJdf object 
-XJDF xJdf = xJdfBuilder.build();</programlisting>
-
-      <para>All in all the Java code snippet contains three different
-      implementations derived from XJdfNodeBuilder. At the beginning an
-      instance of XJdfBuilder is used for creating the fundamental XJDF
-      Document. Further a ProductBuilder as well as a ContactBuilder also is
-      used for creating the sub elements Product and Contact. Finally the
-      method build() creates the node object tree.</para>
+// build contact
+Contact contact = contactBuilder.build();</programlisting></para>
+      </section>
     </section>
 
     <section>

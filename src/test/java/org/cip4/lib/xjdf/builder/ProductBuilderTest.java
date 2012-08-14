@@ -57,30 +57,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		final int AMOUNT = 5000;
 
 		// act
-		productBuilder.initAttributes(AMOUNT);
+		productBuilder = ProductBuilder.newInstance(AMOUNT);
 
 		// arrange
 		byte[] bytes = marsahlResult(productBuilder);
 
 		String actual = getXPathValue(bytes, "/ns:Product/@Amount");
 		Assert.assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.builder.ProductBuilder#initAttributes(java.lang.Integer)}.
-	 */
-	@Test
-	public void testInitAttributesEmtpyParams() throws Exception {
-		// arrange
-
-		// act
-		productBuilder.initAttributes(null);
-
-		// arrange
-		byte[] bytes = marsahlResult(productBuilder);
-
-		String actual = getXPathValue(bytes, "/ns:Product/@Amount");
-		Assert.assertEquals("Attribute Amount in Node Product is wrong.", "", actual);
 	}
 
 	/**

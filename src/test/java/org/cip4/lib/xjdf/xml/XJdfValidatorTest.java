@@ -89,7 +89,7 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
+		xJdfBuilder.build().setID("MyId");
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -110,9 +110,9 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
-		xJdfBuilder.getXJdf().getTypes().add("Web2Print");
-		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().getTypes().add("Web2Print");
+		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -133,9 +133,9 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
-		xJdfBuilder.getXJdf().getTypes().add("Web2Print");
-		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().getTypes().add("Web2Print");
+		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -156,7 +156,7 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
+		xJdfBuilder.build().setID("MyId");
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -181,9 +181,9 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.getXJdf().setID("MyId");
-		xJdfBuilder.getXJdf().getTypes().add("Web2Print");
-		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().getTypes().add("Web2Print");
+		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);

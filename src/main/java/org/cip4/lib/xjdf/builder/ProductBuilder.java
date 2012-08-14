@@ -68,16 +68,16 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * @param productTypeDetails Value of ProductTypeDetails attribute
 	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(int amount, String id, String productType, String productTypeDetails) {
+	public static ProductBuilder newInstance(int amount, String productId, String productType, String productTypeDetails) {
 
 		// create new instance
 		ProductBuilder builder = newInstance();
 
 		// set attributes
-		builder.getNode().setAmount(amount);
-		builder.getNode().setID(id);
-		builder.getNode().setProductType(productType);
-		builder.getNode().setProductTypeDetails(productTypeDetails);
+		builder.getProduct().setAmount(amount);
+		builder.getProduct().setID(productId);
+		builder.getProduct().setProductType(productType);
+		builder.getProduct().setProductTypeDetails(productTypeDetails);
 
 		// return instance
 		return builder;
@@ -87,23 +87,8 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * Getter for product attribute.
 	 * @return the product
 	 */
-	public Product getProduct() {
+	protected Product getProduct() {
 		return getNode();
-	}
-
-	/**
-	 * Initialize most common attributes of Product Node.
-	 * @param amount
-	 * @return
-	 */
-	public ProductBuilder initAttributes(Integer amount) {
-
-		// set attributes
-		getProduct().setAmount(amount);
-		// TODO implement further attributes
-
-		// return current builder
-		return this;
 	}
 
 	/**
