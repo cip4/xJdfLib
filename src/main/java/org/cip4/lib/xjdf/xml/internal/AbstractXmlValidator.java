@@ -44,14 +44,20 @@ public abstract class AbstractXmlValidator<T> {
 
 	private final byte[] xsdFile;
 
+	private final InputStream fileStream;
+
+	private Boolean documentIsValid;
+
 	/**
 	 * Custom constructor. Accepting a XML Schema file as byte array.
 	 */
-	protected AbstractXmlValidator(byte[] xsdFile) {
+	protected AbstractXmlValidator(byte[] xsdFile, InputStream fileStream) {
 
 		// initialize instance variables
 		messages = new ArrayList<String>();
 		this.xsdFile = xsdFile;
+		this.fileStream = fileStream;
+		documentIsValid = null;
 	}
 
 	/**
@@ -76,7 +82,7 @@ public abstract class AbstractXmlValidator<T> {
 
 		String result = null;
 
-		if (!isValid()) {
+		if (!documentIsValid) {
 			StringBuilder builder = new StringBuilder();
 			builder.append("XJDF Document is invalid:");
 
@@ -101,10 +107,7 @@ public abstract class AbstractXmlValidator<T> {
 	 * @throws IllegalAccessException
 	 * @throws ClassNotFoundException
 	 */
-	public T check(InputStream xJdfFileStream) throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-
-		// reset messages
-		messages.clear();
+	private T validate() throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
 
 		// load XJDF schema
 		InputStream isSchema = new ByteArrayInputStream(xsdFile);
@@ -124,7 +127,7 @@ public abstract class AbstractXmlValidator<T> {
 		dbf.setSchema(schema);
 		DocumentBuilder db = dbf.newDocumentBuilder();
 		db.setErrorHandler(errorHandler);
-		db.parse(xJdfFileStream);
+		db.parse(fileStream);
 
 		// get result
 		if (errorHandler.getMessages() != null)
@@ -137,15 +140,27 @@ public abstract class AbstractXmlValidator<T> {
 	/**
 	 * Returns whether or not checked XJDF Document is valid.
 	 * @return True in case XJDF Document is valid. Other wise false.
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 * @throws SAXException
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 * @throws ClassNotFoundException
 	 */
-	public boolean isValid() {
+	public boolean isValid() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SAXException, ParserConfigurationException, IOException {
 
-		if (messages == null) {
-			throw new NullPointerException("No XJDF Document was checked. Check a document before calling this method.");
+		// check whether document already is validated.
+		if (documentIsValid == null) {
+
+			// validate
+			validate();
+
+			// analyze result
+			documentIsValid = messages.size() == 0;
 		}
 
 		// return result
-		return messages.size() == 0;
+		return documentIsValid.booleanValue();
 	}
 
 	/**

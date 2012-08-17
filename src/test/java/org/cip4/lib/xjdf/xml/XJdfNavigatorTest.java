@@ -175,16 +175,16 @@ public class XJdfNavigatorTest {
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.MEDIA_QUALITY);
 		Assert.assertEquals("Value 'MediaQuality' is wrong.", "IPG_135", actual);
 
-		actual = xJdfNavigator.readAttribute(XJdfNavigator.FINISHED_DIMENSIONS);
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS);
 		Assert.assertEquals("Value 'FinishedDimensions' is wrong.", "595.27559055 822.04724409", actual);
 
-		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRINT_PROCESS);
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRODUCTION_PRINT_PROCESS);
 		Assert.assertEquals("Value 'PrintProcess' is wrong.", "Lithography", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.FOLDING_CATALOG);
 		Assert.assertEquals("Value 'FoldingCatalog' is wrong.", "F6-1", actual);
 
-		actual = xJdfNavigator.readAttribute(XJdfNavigator.NUM_COLORS);
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.COLOR_NUM_COLORS);
 		Assert.assertEquals("Value 'NumColors' is wrong.", "4 4", actual);
 
 	}

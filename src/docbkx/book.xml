@@ -437,27 +437,22 @@ Contact contact = contactBuilder.build();</programlisting></para>
     <section>
       <title>XJdfParser</title>
 
-      <para>The XJdfParser provides functionality for writing a XJDF Document
-      Object Tree to a binary stream and vice versa. Practical use cases are
-      dealing with XJDF Documents and http transmissions or working on file
-      system. The XJdfParser class internally is working with the Java
-      interfaces java.io.InputStream and java.io.OutputStream. So it doesn’t
-      matter which kind of stream is used for reading or writing. Following a
-      sample how to save a XJDF Document to file system:</para>
+      <para>The XJdfParser writes an XJDF Document Object Tree to a binary
+      stream and vice versa. Practical use cases are dealing with XJDF
+      Documents and http transmissions or working on file system. Internally
+      the parser class is working with the Java interfaces
+      <emphasis>java.io.InputStream</emphasis> and
+      <emphasis>java.io.OutputStream</emphasis>. So it doesn’t matter which
+      kind of stream is used for reading or writing. Following a sample how to
+      save a XJDF Document to local file system. For writing an XJDF Document
+      to a http stream just use the specific implementation to achieve
+      this.</para>
 
-      <programlisting language="java">// new factory instance 
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
-
-// create simple XJDF Document using XJdfBuilder
-XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
-
-GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalogID", "42");
-xJdfBuilder.addGeneralID(generalId);
-
-XJDF xJdf = xJdfBuilder.build();
+      <programlisting language="java">// any XJDF Document
+XJDF xJdf = [...];
 
 // target file
-File tmpFile = new File("D:\\Temp\\myXJdfDoc.xjdf");
+File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
 OutputStream os = new FileOutputStream(tmpFile);
 
 // write XJDF Document to file using XJdfParser
@@ -467,106 +462,124 @@ xJdfParser.parseXJdf(xJdf, os);
 // close stream
 os.close();</programlisting>
 
-      <para>As seen most lines in this Java code snippet are used for
-      preparing the document. Actually the process for writing the XJDF
-      Document to target location on file system only is one line. When
-      parsing XJDF Document Object Trees to a binary stream automatically the
-      document is being validated against the XJDF Schema. Internally the
-      XJdfValidator class is used to achieve this. In case the document is
-      invalid a ValidationException is thrown. The message of the exception
-      lists all points making the document invalid. In order to skip the
-      validation process during parsing there is an optional parameter
+      <para>When parsing XJDF Document Object Trees to a binary streams the
+      document automatically is being validated against the XJDF Schema.
+      Internally the <emphasis>XJdfValidator</emphasis> class is used to
+      achieve this. In case the document is invalid a
+      <emphasis>ValidationException</emphasis> is thrown. The message of the
+      exception lists all points making the document invalid. In order to skip
+      the validation process during parsing there is an optional parameter
       skipValidation in parseXJdf() method.</para>
 
-      <programlisting language="java">[…]
+      <programlisting language="java">// skip validation when parsing
 xJdfParser.parseXJdf(xJdf, os, true);</programlisting>
 
-      <para>Further a snippet which shows how to parse a XJDF Document Object
-      Tree from an InputStream. In detail this sample demonstrates how to open
-      an XJDF Document stored on file system:</para>
+      <para>In order to create an XJDF Object Tree from a binary stream the
+      XJdfParser class contains a method <emphasis>parseStream()</emphasis>.
+      This method accepts an InputStream as input parameter. Out of the box
+      the Java framework provides many different implementations of this
+      interface. All input streams easily can be parsed to an XJDF Document
+      Object Tree by calling the method <emphasis>parseStream()</emphasis>.
+      The sample below for example uses the
+      <emphasis>FileInputStream</emphasis> implementation which is responsible
+      for creating a <emphasis>InputStream</emphasis> from a local file. An
+      InputStream created from a HttpRequest also would be suitable and often
+      is being used when working with http transmissions.</para>
 
       <programlisting language="java">// open XJDF Document as InputStream
-File tmpFile = new File("D:\\Temp\\myXJdfDoc.xjdf");
+File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
 InputStream is = new FileInputStream(tmpFile);
 
 // parse stream to XJDF Document Object Tree
 XJdfParser xJdfParser = XJdfParser.newInstance();
 XJDF xJdf = xJdfParser.parseStream(is);</programlisting>
 
-      <para>The method parseStream() accepts all stream objects which
-      implements the interface java.io.InputStream. Out of the box the Java
-      framework provides many different implementations of this interface.
-      Here an implementation was used particularly for reading files from file
-      system (FileInputStream). All input streams easily can be parsed to an
-      XJDF Document Object Tree by calling the method parseStream().</para>
+      <note>
+        <para>In order to analyze or extract details from a XJDF Document it
+        is strongly recommended working with XPath expressions. Parsing the
+        whole document and working with the DOM Tree Objects is no longer
+        state of the art. This mechanism does consume time and raises code
+        complexity. Besides parsing an InputStream also prones to errors
+        because it requires fully conform documents. CIP4 xJdfLib provides an
+        extra class <emphasis>XJdfNavigator</emphasis> for dealing with XPath
+        expressions in XJDF Documents. XJDF is desinged for XPath so the
+        preferred way reading XJDF Documents is XPath.</para>
+      </note>
     </section>
 
     <section>
       <title>XJdfValidator</title>
 
-      <para>The XJdfValidator class validates an XJDF binary stream against
-      the current XJDF Schema file. The XSD Schema also is included in the
-      xJdfLib. All XJDF Documents created with the library automatically are
-      being validated during parsing process.</para>
+      <para>The XJdfValidator class validates an XJDF Binary Stream against
+      the latest XJDF Schema. A new instance is required per validation
+      process. So when validating an XJDF Document first of all a new
+      validator object has to be created using the static method
+      <emphasis>newInstance()</emphasis>. The method
+      <emphasis>isValid()</emphasis> runs the validation process and finally
+      returns the result as Boolean.</para>
 
-      <programlisting language="java">InputStream xJdfStream = […]
+      <para>Out of the box all XJDF Documents created with the library
+      automatically are being validated during parsing process. This mechanism
+      explicitly can be switched off. For more details about that see
+      XJdfParser.</para>
+
+      <programlisting language="java">// get binary stream
+InputStream xJdfStream = [...]
 
 // new instance of XJdfValidator
-XJdfValidator xJdfValidator = XJdfValidator.newInstance();
+XJdfValidator xJdfValidator = XJdfValidator.newInstance(xJdfStream);
 
-// check XJDF input stream
-xJdfValidator.check(xJdfStream);
-
-// get result
+// get validation result
 boolean result = xJdfValidator.isValid();</programlisting>
 
-      <para>It is strongly recommended to create a new instance of
-      XJdfValidator per validation process. So first of all when validating a
-      XJDF Document a new validator object has to be created using the static
-      newInstance() method. The check() method validates the XJDF stream
-      against the schema. The method isValid() method returns the validation
-      result as Boolean. The whole validation procedure also can be done by a
-      single line:</para>
+      <para> The validation procedure also can be done in a single
+      line:</para>
 
-      <programlisting language="java">InputStream xJdfStream = […]
+      <programlisting language="java">// get binary stream
+InputStream xJdfStream = [...]
 
-// process validation in a single line	
-boolean result = XJdfValidator.newInstance().check(xJdfStream).isValid();</programlisting>
+// process validation in a single line
+boolean result = XJdfValidator.newInstance(xJdfStream).isValid();</programlisting>
 
-      <para>If a more detail output is needed all warnings, errors and fatal
-      errors can be returned as a list of Strings by calling the getMessages()
-      method. In order to simplify user output (e. g. for the creation of
-      exception messages) additionally there is an method getMessagesText()
-      which returns all messages occurred as a single String value.</para>
+      <para>If a more detailed output is desired all errors are available as a
+      list of Strings by calling the method
+      <emphasis>getMessages()</emphasis>. In order to simplify user output (e.
+      g. for the creation of exception messages) additionally there is an
+      method <emphasis>getMessagesText()</emphasis> which converts all
+      messages into a single String value.</para>
 
-      <programlisting language="java">InputStream xJdfStream = […]
-XJdfValidator xJdfValidator = XJdfValidator.newInstance();
-xJdfValidator.check(xJdfStream);
+      <programlisting language="java">// get binary stream
+InputStream xJdfStream = [...]
+
+// validate
+XJdfValidator xJdfValidator = XJdfValidator.newInstance(xJdfStream);
 boolean result = xJdfValidator.isValid();
 
-List&lt;String&gt; messages = xJdfValidator.getMessages(); // messages as list
-String msgText = xJdfValidator.getMessagesText(); // messages as String</programlisting>
+// message output
+List&lt;String&gt; messages = xJdfValidator.getMessages(); 
+String msgText = xJdfValidator.getMessagesText(); </programlisting>
     </section>
 
     <section>
-      <title>XPathNavigator</title>
+      <title>XJdfNavigator</title>
 
-      <para>The XPathNavigator class simplifies reading and modifying XJDF
-      Documents using XPath. XPath is a very common XML Technology for working
-      with XML Documents. More details about the XPath W3C Standard can be
-      found here: http://www.w3.org/TR/xpath/.</para>
+      <para>The XPathNavigator class covers functionality for reading and
+      modifying XJDF Documents using XPath. XPath is a very common XML
+      Technology for working with XML Documents. More details about the XPath
+      W3C Standard can be found here: http://www.w3.org/TR/xpath/.</para>
 
-      <para>XPathNavigator directly works with input streams. So there is no
-      necessity parsing the document first. This mechanism saves time, code
-      complexity and performance. One XPathNavigator instance is required per
-      XJDF Document processed. The method newInstance() creates a new object
-      and initializes it by the XJDF Document InputStream. Now all attributes
-      easily can be read by using the method readAttribute() and the specific
-      XPath expression as parameter. Modifications also can be done with
-      XPath. The method updateAttribute() accepts parameters for a XPath
-      definition and the (new) value of the attribute defined by the XPath.
-      When modifications are completed the new XJDF Document stream is
-      returned as InputStream by calling the method getXJdfStream().</para>
+      <para>XPathNavigator directly works with InputStream objects. So there
+      is no need to parse the document first. This mechanism saves time, code
+      complexity and performance. A XPathNavigator instance is required per
+      XJDF Document processed. The method <emphasis>newInstance()
+      </emphasis>creates a new object and initializes it by the XJDF Document
+      InputStream. All XJDF Attributes can be addressed and read by using the
+      method <emphasis>readAttribute()</emphasis> and the specific XPath
+      expression as parameter. Modifications also can be done with XPath. The
+      method updateAttribute() accepts parameters for a XPath definition and
+      the (new) value of the attribute defined by the XPath. When
+      modifications are completed the new XJDF Document stream is returned as
+      InputStream by calling the method getXJdfStream().</para>
 
       <programlisting language="java">// load XJDF Document as InputStream and create new XPathNavigator.
 InputStream is = […]
