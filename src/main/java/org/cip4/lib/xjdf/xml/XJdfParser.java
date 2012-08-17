@@ -10,7 +10,11 @@
  */
 package org.cip4.lib.xjdf.xml;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.ValidationException;
 
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
@@ -37,19 +41,43 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 	 * Factory method for getting a new XJdfParser instance.
 	 * @return New XJdfParser instance.
 	 */
-	public static XJdfParser newInstance() {
+	public static XJdfParser newInstance() throws JAXBException {
 
-		try {
+		// return new instance
+		return new XJdfParser();
+	}
 
-			// return new instance
-			return new XJdfParser();
+	/**
+	 * Parse a XJDF Object Tree to a binary output stream.
+	 * @param xJdf XJDF Object Tree for parsing.
+	 * @param os Target OutputStream where XJdfDocument is being parsed.
+	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	public void parseXJdf(XJDF xJdf, OutputStream os) throws Exception {
+		parseXml(xJdf, os);
+	}
 
-		} catch (JAXBException e) {
+	/**
+	 * Parse a XJDF Object Tree to a binary output stream.
+	 * @param xJdf XJDF Object Tree for parsing.
+	 * @param os Target OutputStream where XJdfDocument is being parsed.
+	 * @param skipValidation Indicates whether or not validation has to be skipped.
+	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	public void parseXJdf(XJDF xJdf, OutputStream os, boolean skipValidation) throws Exception {
+		parseXml(xJdf, os, skipValidation);
+	}
 
-			// error
-			e.printStackTrace();
-			throw new AssertionError(e);
-
-		}
+	/**
+	 * Parse a binary input stream to a XJDF Object Tree.
+	 * @param is Binary XJDF Input Stream for parsing.
+	 * @return XJDF Object Tree parsed from binary input stream.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	@Override
+	public XJDF parseStream(InputStream is) throws Exception {
+		return super.parseStream(is);
 	}
 }

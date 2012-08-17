@@ -70,17 +70,17 @@ public class XJdfNavigator extends AbstractXPathNavigator {
 	/**
 	 * XPath to attribute 'FinishedDimensions' of LayoutIntent Node in XJDF Document.
 	 */
-	public static final String FINISHED_DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions";
+	public static final String LAYOUT_FINISHED_DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions";
 
 	/**
 	 * XPath to attribute 'Dimensions' of LayoutIntent Node in XJDF Document.
 	 */
-	public static final String DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions";
+	public static final String LAYOUT_DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions";
 
 	/**
 	 * XPath to attribute 'PrintProcess' of ProductionIntent Node in XJDF Document.
 	 */
-	public static final String PRINT_PROCESS = "/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess";
+	public static final String PRODUCTION_PRINT_PROCESS = "/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess";
 
 	/**
 	 * XPath to attribute 'FoldingCatalog' of FoldingIntent Node in XJDF Document.
@@ -90,7 +90,7 @@ public class XJdfNavigator extends AbstractXPathNavigator {
 	/**
 	 * XPath to attribute 'NumColors' of ColorIntent Node in XJDF Document.
 	 */
-	public static final String NUM_COLORS = "/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors";
+	public static final String COLOR_NUM_COLORS = "/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors";
 
 	/**
 	 * Custom private default constructor. Accepting a XJdf InputStream for initializing.

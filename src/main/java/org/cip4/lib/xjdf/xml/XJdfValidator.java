@@ -28,8 +28,8 @@ public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
 	/**
 	 * Custom private constructor. Accepting XML Schema for initializing.
 	 */
-	private XJdfValidator(byte[] xsdFile) {
-		super(xsdFile);
+	private XJdfValidator(byte[] xsdFile, InputStream xJdfStream) {
+		super(xsdFile, xJdfStream);
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
 	 * @return New XJdfValidator Instance
 	 * @throws IOException
 	 */
-	public static XJdfValidator newInstance() throws IOException {
+	public static XJdfValidator newInstance(InputStream xJdfStream) throws IOException {
 
 		// load xsd file
 		InputStream is = XJdfValidator.class.getResourceAsStream(XJdfConstants.RES_JDF20_XSD);
@@ -50,7 +50,7 @@ public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
 		bos.close();
 
 		// return new instance
-		return new XJdfValidator(bos.toByteArray());
+		return new XJdfValidator(bos.toByteArray(), xJdfStream);
 	}
 
 	/**

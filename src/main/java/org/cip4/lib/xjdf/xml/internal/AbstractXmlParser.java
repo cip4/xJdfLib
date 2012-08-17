@@ -45,12 +45,11 @@ public abstract class AbstractXmlParser<T> {
 	 * Parse a object tree to a binary output stream.
 	 * @param object Object tree for parsing.
 	 * @param os Target OutputStream where XJdfDocument is being parsed.
-	 * @param skipValidation Indicates whether or not validation has to be skipped.
 	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
-	public void parseXJdf(T obj, OutputStream os) throws Exception {
-		parseXJdf(obj, os, false);
+	protected void parseXml(T obj, OutputStream os) throws Exception {
+		parseXml(obj, os, false);
 	}
 
 	/**
@@ -61,7 +60,7 @@ public abstract class AbstractXmlParser<T> {
 	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
-	public void parseXJdf(T obj, OutputStream os, boolean skipValidation) throws Exception {
+	protected void parseXml(T obj, OutputStream os, boolean skipValidation) throws Exception {
 
 		// marshall XJDF object to output stream
 		Marshaller m = jaxbContext.createMarshaller();
@@ -76,8 +75,7 @@ public abstract class AbstractXmlParser<T> {
 		if (!skipValidation) {
 
 			InputStream is = new ByteArrayInputStream(bos.toByteArray());
-			AbstractXmlValidator validator = XJdfValidator.newInstance();
-			validator.check(is);
+			AbstractXmlValidator validator = XJdfValidator.newInstance(is);
 
 			if (!validator.isValid()) {
 				String err = validator.getMessagesText();
@@ -96,7 +94,7 @@ public abstract class AbstractXmlParser<T> {
 	 * @return Object tree parsed from binary input stream.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
-	public T parseStream(InputStream is) throws Exception {
+	protected T parseStream(InputStream is) throws Exception {
 
 		// unmarshall XJDF stream
 		Unmarshaller u = jaxbContext.createUnmarshaller();

@@ -22,7 +22,6 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -62,7 +61,6 @@ public class XJdfValidatorTest {
 	public void setUp() throws Exception {
 
 		// init instance variables
-		xJdfValidator = XJdfValidator.newInstance();
 		xJdfNodeFactory = XJdfNodeFactory.newInstance();
 		xJdfBuilder = XJdfBuilder.newInstance();
 	}
@@ -93,7 +91,9 @@ public class XJdfValidatorTest {
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-		boolean isValid = xJdfValidator.check(xJdfFileStream).isValid();
+
+		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		Assert.assertFalse("Validation result is wrong", isValid);
@@ -116,7 +116,9 @@ public class XJdfValidatorTest {
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-		boolean isValid = xJdfValidator.check(xJdfFileStream).isValid();
+
+		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		Assert.assertTrue("Validation result is wrong", isValid);
@@ -139,7 +141,9 @@ public class XJdfValidatorTest {
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-		boolean isValid = XJdfValidator.newInstance().check(xJdfFileStream).isValid();
+
+		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		Assert.assertTrue("Validation result is wrong", isValid);
@@ -160,11 +164,12 @@ public class XJdfValidatorTest {
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-		xJdfValidator.check(xJdfFileStream);
+
+		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		int size = xJdfValidator.getMessages().size();
-		boolean isValid = xJdfValidator.isValid();
 
 		Assert.assertEquals("Number messages is wrong.", 2, size);
 		Assert.assertFalse("Validation result is wrong", isValid);
@@ -187,11 +192,12 @@ public class XJdfValidatorTest {
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-		xJdfValidator.check(xJdfFileStream);
+
+		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		int size = xJdfValidator.getMessages().size();
-		boolean isValid = xJdfValidator.isValid();
 
 		Assert.assertEquals("Number messages is wrong.", 0, size);
 		Assert.assertTrue("Validation result is wrong", isValid);
@@ -204,7 +210,8 @@ public class XJdfValidatorTest {
 		InputStream is = XJdfValidatorTest.class.getResourceAsStream(RES_TEST_XJDF);
 
 		// act
-		boolean isValid = xJdfValidator.check(is).isValid();
+		xJdfValidator = XJdfValidator.newInstance(is);
+		boolean isValid = xJdfValidator.isValid();
 
 		// assert
 		System.out.println(xJdfValidator.getMessagesText());
@@ -224,7 +231,7 @@ public class XJdfValidatorTest {
 		XJDF xJdf = xJdfBuilder.build();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		AbstractXmlParser xJdfParser = XJdfParser.newInstance();
+		XJdfParser xJdfParser = XJdfParser.newInstance();
 		xJdfParser.parseXJdf(xJdf, bos, true);
 
 		return new ByteArrayInputStream(bos.toByteArray());
