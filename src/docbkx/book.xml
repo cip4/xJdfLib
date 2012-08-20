@@ -532,8 +532,7 @@ XJdfValidator xJdfValidator = XJdfValidator.newInstance(xJdfStream);
 // get validation result
 boolean result = xJdfValidator.isValid();</programlisting>
 
-      <para> The validation procedure also can be done in a single
-      line:</para>
+      <para>The validation procedure also can be done in a single line:</para>
 
       <programlisting language="java">// get binary stream
 InputStream xJdfStream = [...]
@@ -563,23 +562,23 @@ String msgText = xJdfValidator.getMessagesText(); </programlisting>
     <section>
       <title>XJdfNavigator</title>
 
-      <para>The XPathNavigator class covers functionality for reading and
-      modifying XJDF Documents using XPath. XPath is a very common XML
+      <para>The XPathNavigator class provides functionality for reading and
+      modifying XJDF Documents using XPath. XPath is a very powerful XML
       Technology for working with XML Documents. More details about the XPath
       W3C Standard can be found here: http://www.w3.org/TR/xpath/.</para>
 
-      <para>XPathNavigator directly works with InputStream objects. So there
-      is no need to parse the document first. This mechanism saves time, code
-      complexity and performance. A XPathNavigator instance is required per
+      <para>XPathNavigator directly works on InputStream objects. So there is
+      no need parsing the document before. This mechanism saves time, code
+      complexity and performance. One XPathNavigator instance is required per
       XJDF Document processed. The method <emphasis>newInstance()
       </emphasis>creates a new object and initializes it by the XJDF Document
-      InputStream. All XJDF Attributes can be addressed and read by using the
-      method <emphasis>readAttribute()</emphasis> and the specific XPath
-      expression as parameter. Modifications also can be done with XPath. The
-      method updateAttribute() accepts parameters for a XPath definition and
-      the (new) value of the attribute defined by the XPath. When
-      modifications are completed the new XJDF Document stream is returned as
-      InputStream by calling the method getXJdfStream().</para>
+      InputStream. All attributes in document easily can be addressed and read
+      using the method <emphasis>readAttribute()</emphasis> and the specific
+      XPath expression as parameter. Modifications also can be done. The
+      method <emphasis>updateAttribute()</emphasis> accepts a XPath expression
+      plus the (new) attribute value. When all modifications are done finally
+      the new XJDF Document stream is returned as InputStream by calling the
+      method <emphasis>getXJdfStream():</emphasis></para>
 
       <programlisting language="java">// load XJDF Document as InputStream and create new XPathNavigator.
 InputStream is = […]
@@ -606,9 +605,8 @@ xPathNavigator.updateAttribute(xAmount, "1500");
 InputStream is = xPathNavigator.getXJdfStream();
 […]</programlisting>
 
-      <para>All XPath definitions used in Java code snippet above references
-      the XJDF Document sample below. This sample shows a pretty easy document
-      of a web-to-print job submission.</para>
+      <para>Following a XPath definitions used in Java code snippet above
+      references the XJDF Document sample below. </para>
 
       <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
