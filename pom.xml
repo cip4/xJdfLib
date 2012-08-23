@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
-	<version>0.3-SNAPSHOT</version>
+	<version>0.3</version>
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
@@ -15,9 +14,9 @@
 	</parent>
 
 	<scm>
-		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
+		<url>http://svn.cip4.org/svnroot/tags/xJdfLib-0.3</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.3</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.3</connection>
 	</scm>
 	
 	<issueManagement>
@@ -179,7 +178,7 @@
 										</goals>
 									</pluginExecutionFilter>
 									<action>
-										<ignore></ignore>
+										<ignore />
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
