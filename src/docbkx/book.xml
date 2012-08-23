@@ -20,43 +20,42 @@
   <chapter>
     <title>Introduction</title>
 
-    <para>The major conceptual change is that JDF 2.0 (or XJDF) no longer
-    attempts to model the entire job as one large “job ticket” but rather
-    specifies an interchange format between two applications that are assumed
-    to have an internal data model that is not necessarily based on JDF. Thus
-    each JDF ticket specifies a single transaction between two parties. A
-    single job may be modeled as one or more JDF transactions.</para>
+    <para>The major conceptual change in JDF 2.0 (or XJDF) is the technology
+    does no longer attempts to model the entire job as one large "job ticket"
+    but rather specifies an interchange format between two applications that
+    are assumed to have an internal data model that is not necessarily based
+    on JDF. Thus each JDF ticket specifies a single transaction between two
+    parties. A single job may be modeled as one or more JDF
+    transactions.</para>
 
-    <para>The major change in JDF Technology also is a good ability for
-    rethinking about a conceptual change of the JDF library as well. The focus
-    of the current library “JDFLibJ” is dealing with large XML files (XML
-    files were used as data storage), managing concurrency file access (spawn
-    and merge), handling the workflow logic (references) which also is part of
-    the 1.x JDF Documents etc. Even there are implemented some very common XML
-    functionalities like creating Java objects from XSD Schema and so
-    on.</para>
+    <para>This fact also requires a conceptual change of JDF libraries as
+    well. Among other things the focus of 1.x libraries is dealing with large
+    XML files (XML files were used as data storage), managing concurrency file
+    access (spawn and merge) and handling the workflow logic (references).
+    Further there even are implemented some very common XML functionalities
+    like creating Java objects from XSD Schema and so on.</para>
 
     <para>Remember, the fundamental concepts of JDF (and the library) were
-    designed in the nineties. At that time XML was a very new technology and
-    just a few early XML Tools had existed. Further the XML technology itself
-    was in a very early phase of development. So it was essential to include
-    all this stuff like mentioned before to get JDF working.</para>
+    designed in the nineties. At this time XML was a very new technology and
+    just a few early XML Tools already had existed. Further the XML technology
+    itself was in a very early phase of development. So it was essential to
+    include all this stuff mentioned getting JDF working.</para>
 
     <para>Over the last two decades XML has become very popular. Many tools
-    were designed and many conceptual enhancements in XML have been done to
-    simplify working with. For example one significant enhancement has been
-    XPath. More details about the XPath W3C Standard later in this document or
-    on the W3C website: http://www.w3.org/TR/xpath/.</para>
+    were designed and many conceptual enhancements in XML has been done. For
+    example one significant enhancement has been XPath. More details about the
+    XPath W3C Standard later in this document or on the W3C website:
+    http://www.w3.org/TR/xpath/.</para>
 
-    <para>Due to the major change from JDF 1.x to JDF 2.0 it is strongly
-    recommended to redesign the JDF library as well. Similarly to the new JDF
-    Specification the new library “xJdfLib” also is based on commonly used
-    libraries and technologies like the Apache or JAXB framework.
-    Supplementary functionality which has been removed from Specification no
-    longer makes the library unnecessarily complex for reasons of backwards
-    compatibility. The goal of the new XJDF Library is to provide a
+    <para>Due to the major change from JDF 1.x to JDF 2.0 a redesign of the
+    JDF libraries is strongly recommended. The new XJDF library now is based
+    on commonly used libraries and technologies like the Apache or JAXB
+    framework. Supplementary functionality which has been removed from JDF
+    Specification no longer makes the library unnecessarily complex for
+    reasons of backwards compatibility. The goal of xJdfLib is to provide a
     lightweight, up to date and easy to use library optimized for actual
-    requirements.</para>
+    requirements. This document describes the concepts and the usage of the
+    CIP4 xJdfLib.</para>
   </chapter>
 
   <chapter>
@@ -605,8 +604,47 @@ xPathNavigator.updateAttribute(xAmount, "1500");
 InputStream is = xPathNavigator.getXJdfStream();
 […]</programlisting>
 
-      <para>Following a XPath definitions used in Java code snippet above
-      references the XJDF Document sample below. </para>
+      <para>Following a short XPath overview of expressions which are
+      significant to XJDF Documents. The XJDF snippet after is used for
+      extracting these attribute values:</para>
+
+      <table>
+        <title>XPath expressions</title>
+
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">XPath Expression</entry>
+
+              <entry align="center">Attribute Value</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>/XJDF/GeneralID/@IDUsage</entry>
+
+              <entry>"CatalogID"</entry>
+            </row>
+
+            <row>
+              <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL</entry>
+
+              <entry>"cover.pdf"</entry>
+            </row>
+
+            <row>
+              <entry>/XJDF/ProductList/Product/@Amount</entry>
+
+              <entry>"1000"</entry>
+            </row>
+
+            <row>
+              <entry/>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
 
       <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
@@ -635,9 +673,10 @@ InputStream is = xPathNavigator.getXJdfStream();
     <section>
       <title>XJdfConstants</title>
 
-      <para>Common XJDF constants are defined in the static class
-      XJdfConstants. When working with XJDF Documents following values are
-      commonly used:</para>
+      <para>When working with XJDF there are several constants which are
+      required in some use cases. So the CIP4 xJdfLib also provides a static
+      class <emphasis>XJdfConstants</emphasis> where most common constants
+      already are defined. Here a list of all items in this class:</para>
 
       <table>
         <title>Overview xJdfLib Constants</title>
@@ -660,6 +699,14 @@ InputStream is = xPathNavigator.getXJdfStream();
               <entry>"http://www.cip4.org/JDFSchema_2_0"</entry>
 
               <entry>JDF Default Namespace</entry>
+            </row>
+
+            <row>
+              <entry>NAMESPACE_W3_XML</entry>
+
+              <entry>"http://www.w3.org/2001/XMLSchema"</entry>
+
+              <entry>W3C XML Namespace</entry>
             </row>
 
             <row>
@@ -690,14 +737,52 @@ InputStream is = xPathNavigator.getXJdfStream();
       </table>
 
       <para>All constants are static and public. So they easily can be a
-      accessed by typing the class name “XJdfConstants” and the specific name
-      of a constant:</para>
+      accessed by typing the class name XJdfConstants and the specific name of
+      the constant:</para>
 
       <programlisting language="java">// get XJDF default namespace
 String defaultNamespace = XJdfConstants.NAMESPACE_JDF20;
 
 // get current version of XJDF
 String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
+    </section>
+
+    <section>
+      <title>Converter Classes</title>
+
+      <para>In order to convert from Java datatypes to JDF or ISO datatypes
+      and the way around the library provides several converter classes.
+      Folowing a list of all converters with a short description:</para>
+
+      <table>
+        <title>Overview Converter classes</title>
+
+        <tgroup cols="2">
+          <thead>
+            <row>
+              <entry align="center">Converter Class</entry>
+
+              <entry align="center">Description</entry>
+            </row>
+          </thead>
+
+          <tbody>
+            <row>
+              <entry>DateConverter</entry>
+
+              <entry>Conversion between the Java Calendar object and the ISO
+              Date String how specified in XJDF Specification.</entry>
+            </row>
+
+            <row>
+              <entry>DimensionConverter</entry>
+
+              <entry>Conversion from millimeter to dtp and the way
+              around.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
     </section>
   </chapter>
 
