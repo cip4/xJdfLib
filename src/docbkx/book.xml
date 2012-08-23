@@ -70,7 +70,7 @@
     <programlisting language="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
     &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
-    &lt;version&gt;0.2&lt;/version&gt;
+    &lt;version&gt;0.3&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
 
     <para>Early Next-Version-Snapshots of CIP4 xJdfLib Library are being
@@ -88,7 +88,7 @@
     <programlisting language="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
     &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
-    &lt;version&gt;0.3-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;0.4-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
   </chapter>
 
@@ -172,10 +172,10 @@ runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
       XJdfNodeFactory. Complex elements (e. g. XJDF-Root-Node, Product-Node,
       etc.) are elements which contains multiple subnodes in a defined manner.
       For example you can say the XJDF-Root-Node is the container for Product
-      and Paramter nodes. All <emphasis>Product</emphasis> items are listed in
-      subelement <emphasis>ProductList</emphasis>. Also all
+      and Parameter nodes. All <emphasis>Product</emphasis> items are listed
+      in subelement <emphasis>ProductList</emphasis>. Also all
       <emphasis>Parameter</emphasis> nodes are listed in specific
-      <emphasis>ParamterSet</emphasis> elements.</para>
+      <emphasis>ParameterSet</emphasis> elements.</para>
 
       <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
@@ -221,7 +221,7 @@ runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
           <para><emphasis role="bold">XJdfBuilder</emphasis></para>
 
           <para>Creation of XJDF Documents. Manages dealing with Products and
-          Paramters.</para>
+          Parameters.</para>
         </listitem>
 
         <listitem>
