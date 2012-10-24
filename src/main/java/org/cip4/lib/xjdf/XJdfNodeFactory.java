@@ -59,6 +59,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @return Pre-filled GeneralID object.
 	 */
 	public GeneralID createGeneralID(String idUsage, String idValue) {
+
 		// create new GeneralID object
 		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID();
 		generalId.setIDUsage(idUsage);
@@ -74,6 +75,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @return RunList Node which already contains a FileSpec URL definition.
 	 */
 	public RunList createRunList(String fileSpecUrl) {
+
 		// create RunList Node
 		RunList runList = super.createRunList();
 
@@ -92,6 +94,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @return Comment Node which already contains a comment string as text.
 	 */
 	public Comment createComment(String comment) {
+
 		// create Comment Node
 		Comment obj = super.createComment();
 

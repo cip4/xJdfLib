@@ -11,44 +11,45 @@
 
     <abstract>
       <para>This document describes the structure and functionality of CIP4
-      xJdfLib and how to use it. The library was written in Java and simplify
-      dealing with JDF / JMF messages. It provides methods for creation,
-      modification and analyzing.</para>
+      xJdfLib and how to use it. The library was written in Java and
+      simplifies dealing with JDF / JMF messages. It provides methods for
+      creation, modification and analyzing.</para>
     </abstract>
   </info>
 
   <chapter>
     <title>Introduction</title>
 
-    <para>The major conceptual change in JDF 2.0 (or XJDF) is the technology
-    does no longer attempts to model the entire job as one large "job ticket"
-    but rather specifies an interchange format between two applications that
-    are assumed to have an internal data model that is not necessarily based
-    on JDF. Thus each JDF ticket specifies a single transaction between two
-    parties. A single job may be modeled as one or more JDF
-    transactions.</para>
+    <para>The major conceptual change in JDF 2.0 (or XJDF) is that the
+    technology no longer attempts to model the entire job as one large "job
+    ticket" but rather specifies an interchange format between two
+    applications that are assumed to have an internal data model that is not
+    necessarily based on JDF. Thus each JDF ticket specifies a single
+    transaction between two parties. A single job may be modeled as one or
+    more JDF transactions.</para>
 
     <para>This fact also requires a conceptual change of JDF libraries as
     well. Among other things the focus of 1.x libraries is dealing with large
     XML files (XML files were used as data storage), managing concurrency file
     access (spawn and merge) and handling the workflow logic (references).
-    Further there even are implemented some very common XML functionalities
-    like creating Java objects from XSD Schema and so on.</para>
+    Furthermore, even very common XML functionalities like creating Java
+    objects from XSD Schema and so on are implemented.</para>
 
     <para>Remember, the fundamental concepts of JDF (and the library) were
     designed in the nineties. At this time XML was a very new technology and
-    just a few early XML Tools already had existed. Further the XML technology
-    itself was in a very early phase of development. So it was essential to
-    include all this stuff mentioned getting JDF working.</para>
+    just a few early XML Tools already had existed. Furthermore, the XML
+    technology itself was in a very early phase of development. Therefore, it
+    was essential to include all of the implementations mentioned getting JDF
+    working.</para>
 
     <para>Over the last two decades XML has become very popular. Many tools
-    were designed and many conceptual enhancements in XML has been done. For
+    were designed and many conceptual enhancements in XML have been done. For
     example one significant enhancement has been XPath. More details about the
     XPath W3C Standard later in this document or on the W3C website:
     http://www.w3.org/TR/xpath/.</para>
 
     <para>Due to the major change from JDF 1.x to JDF 2.0 a redesign of the
-    JDF libraries is strongly recommended. The new XJDF library now is based
+    JDF libraries is strongly recommended. The new XJDF library is now based
     on commonly used libraries and technologies like the Apache or JAXB
     framework. Supplementary functionality which has been removed from JDF
     Specification no longer makes the library unnecessarily complex for
@@ -715,6 +716,14 @@ InputStream is = xPathNavigator.getXJdfStream();
               <entry>"2.0"</entry>
 
               <entry>Current JDF Version Number</entry>
+            </row>
+            
+            <row>
+              <entry>XJDF_LIB_VERSION</entry>
+
+              <entry>"0.4"</entry>
+
+              <entry>xJdfLib Version Number</entry>
             </row>
 
             <row>

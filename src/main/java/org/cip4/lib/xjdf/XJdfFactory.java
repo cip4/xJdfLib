@@ -33,6 +33,8 @@ public class XJdfFactory {
 
 		// init constants
 		@SuppressWarnings("unused")
-		String tmp = XJdfConstants.NAMESPACE_JDF20;
+		String tmp;
+		tmp = XJdfConstants.NAMESPACE_JDF20;
+		tmp = XJdfConstants.XJDF_LIB_VERSION;
 	}
 }
