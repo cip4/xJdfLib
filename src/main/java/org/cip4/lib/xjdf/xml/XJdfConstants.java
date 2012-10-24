@@ -31,6 +31,8 @@ public class XJdfConstants {
 	 */
 	public static final String NAMESPACE_JDF20 = loadNamespaceJdf20();
 
+	public static final String XJDF_LIB_VERSION = loadLibraryVersion();
+
 	public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
 	public static final String XJDF_CURRENT_VERSION = "2.0";
@@ -68,6 +70,24 @@ public class XJdfConstants {
 		} catch (Exception ex) {
 			// throw error
 			throw new AssertionError(ex);
+		}
+
+		// return result
+		return result;
+	}
+
+	/**
+	 * Load Version Number from Package.
+	 * @return Version Number as String
+	 */
+	private static String loadLibraryVersion() {
+
+		// load Version
+		String result = XJdfConstants.class.getPackage().getImplementationVersion();
+
+		// default
+		if (result == null || result == "") {
+			result = "[version not specified]";
 		}
 
 		// return result

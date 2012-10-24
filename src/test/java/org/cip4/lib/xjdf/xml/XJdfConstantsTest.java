@@ -53,4 +53,20 @@ public class XJdfConstantsTest {
 		// assert
 		Assert.assertEquals("Namespace JDF20 is wrong.", expectedNs, actualNs);
 	}
+
+	/**
+	 * JUnit test
+	 * @throws IOException
+	 */
+	@Test
+	public void testLoadLibraryVersion() throws IOException {
+
+		// arrange
+
+		// act
+		String val = XJdfConstants.XJDF_LIB_VERSION;
+
+		// assert
+		Assert.assertEquals("XJDF library version is wrong.", "[version not specified]", val);
+	}
 }

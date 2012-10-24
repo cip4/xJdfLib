@@ -172,6 +172,8 @@ public class XJdfParserTest {
 		XPath xPath = xPathFactory.newXPath();
 		xPath.setNamespaceContext(nsManager);
 
+		System.out.println(new String(bos.toByteArray()));
+
 		XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
 		InputStream is = new ByteArrayInputStream(bos.toByteArray());
 		String actual = xPathExpression.evaluate(new InputSource(is));
