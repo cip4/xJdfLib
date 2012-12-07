@@ -72,10 +72,10 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
 
-		String actualIDUsage = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID/@IDUsage");
+		String actualIDUsage = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID/@IDUsage");
 		Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE, actualIDUsage);
 
-		String actualIDValue = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID/@IDValue");
+		String actualIDValue = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID/@IDValue");
 		Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE, actualIDValue);
 
 	}
@@ -102,19 +102,19 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
 
-		String actualIDUsage_1 = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID[1]/@IDUsage");
+		String actualIDUsage_1 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[1]/@IDUsage");
 		Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE_1, actualIDUsage_1);
 
-		String actualIDValue_1 = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID[1]/@IDValue");
+		String actualIDValue_1 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[1]/@IDValue");
 		Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_1, actualIDValue_1);
 
-		String actualIDUsage_2 = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID[2]/@IDUsage");
+		String actualIDUsage_2 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[2]/@IDUsage");
 		Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE_2, actualIDUsage_2);
 
-		String actualIDValue_2 = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID[2]/@IDValue");
+		String actualIDValue_2 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[2]/@IDValue");
 		Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_2, actualIDValue_2);
 
-		String actualIDValue_3 = getXPathValue(bytes, "/ns:XJDF/ns:GeneralID[3]/@IDValue");
+		String actualIDValue_3 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[3]/@IDValue");
 		Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_3, actualIDValue_3);
 
 	}
@@ -165,13 +165,13 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
 
-		String actualName = getXPathValue(bytes, "/ns:XJDF/ns:ParameterSet/@Name");
+		String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
 		Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
 
-		String actualPartRun = getXPathValue(bytes, "/ns:XJDF/ns:ParameterSet/ns:Parameter/ns:Part/@Run");
+		String actualPartRun = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/xjdf:Parameter/xjdf:Part/@Run");
 		Assert.assertEquals("RunTag in RunList is wrong.", "Cover", actualPartRun);
 
-		String actualUrl = getXPathValue(bytes, "/ns:XJDF/ns:ParameterSet/ns:Parameter/ns:RunList/ns:FileSpec/@URL");
+		String actualUrl = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL");
 		Assert.assertEquals("RunTag in RunList is wrong.", URL, actualUrl);
 	}
 
@@ -205,7 +205,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
 
-		String actualName = getXPathValue(bytes, "/ns:XJDF/ns:ParameterSet/@Name");
+		String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
 		Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
 
 	}

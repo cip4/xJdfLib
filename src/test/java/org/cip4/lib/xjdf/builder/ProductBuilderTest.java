@@ -62,7 +62,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		// arrange
 		byte[] bytes = marsahlResult(productBuilder);
 
-		String actual = getXPathValue(bytes, "/ns:Product/@Amount");
+		String actual = getXPathValue(bytes, "/xjdf:Product/@Amount");
 		Assert.assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
 	}
 
@@ -93,13 +93,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		byte[] bytes = marsahlResult(productBuilder);
 		String actual;
 
-		actual = getXPathValue(bytes, "/ns:Product/ns:Intent/ns:MediaIntent/@Weight");
+		actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:MediaIntent/@Weight");
 		Assert.assertEquals("Attribute Weight in Node MediaIntent is wrong.", "135.0", actual);
 
-		actual = getXPathValue(bytes, "/ns:Product/ns:Intent/@Name");
+		actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/@Name");
 		Assert.assertEquals("Attribute Name in Node Intent is wrong.", "MediaIntent", actual);
 
-		actual = getXPathValue(bytes, "/ns:Product/ns:Intent/ns:LayoutIntent/@FinishedDimensions");
+		actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:LayoutIntent/@FinishedDimensions");
 		Assert.assertEquals("Attribute FinishedDimensions in Node LayoutIntent is wrong.", "595.27559055 822.04724409", actual);
 	}
 

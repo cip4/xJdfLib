@@ -94,7 +94,7 @@ public abstract class AbstractBuilderTest<T> {
 
 		// create XPath query
 		NamespaceManager nsManager = new NamespaceManager();
-		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
+		nsManager.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
 
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		XPath xPath = xPathFactory.newXPath();

@@ -37,6 +37,8 @@ public class XJdfConstants {
 
 	public static final String XJDF_CURRENT_VERSION = "2.0";
 
+	public static final String JMF_ICS_VERSION = "JMF_L1-2.0";
+
 	public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
 
 	public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
