@@ -43,8 +43,8 @@
     working.</para>
 
     <para>Over the last two decades XML has become very popular. Many tools
-    were designed and many conceptual enhancements in XML have been done. For
-    example one significant enhancement has been XPath. More details about the
+    have been designed and many conceptual enhancements in XML have been done. For
+    example, one significant enhancement has been XPath. More details about the
     XPath W3C Standard later in this document or on the W3C website:
     http://www.w3.org/TR/xpath/.</para>
 
@@ -64,7 +64,7 @@
 
     <para>The CIP4 xJdfLib Java Library is based on Java 7. The latest stable
     version is being published on the CIP4 Website on page “Technical
-    Resources -&gt; Downloads -&gt; Internal Source”. Further xJdfLib is an
+    Resources -&gt; Downloads -&gt; Internal Source”. Further more, xJdfLib is an
     Apache Maven project. So the latest stable version also is available in
     the public Central Maven Repositroy:</para>
 
@@ -105,7 +105,7 @@
       GeneralID, RunList etc.) there also are extended Creation-Methods which
       additionally do initialize the node object after creation.</para>
 
-      <para>A new instance of XJdfNodeFactory can created by calling the
+      <para>A new instance of XJdfNodeFactory can be created by calling the
       static method <emphasis>newInstance()</emphasis>:</para>
 
       <programlisting language="java">// New Factory Instance
@@ -122,28 +122,28 @@ XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();</programlisting
       <para><programlisting language="java">// New GeneralID XJDF Node Object using the flexible way
 GeneralID generalId = xJdfNodeFactory.createGeneralID();
 generalId.setIDUsage("IDCatalog");
-generalId.setIDValue("42");</programlisting>But when creating larger XJDF
-      Documents the flexible way unnecessarily does consume time for writing
+generalId.setIDValue("42");</programlisting>How ever, when creating larger XJDF
+      Documents the flexible way unnecessarily consumes time for writing
       and raise complexity enormously. Hence the factory class besides
       provides extended Creation-Methods for a straighter way. Using this
-      methods plain commonly used XJDF Node structures can be created and
+      method plain commonly used XJDF Node structures can be created and
       initialized by a single line of code:</para>
 
       <para><programlisting language="java">// New GeneralID XJDF Node Object using the straight way
 GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting></para>
 
       <para>Both ways produce one and the same GeneralID Node. The flexible
-      way raises flexibility of attribute management whereas the straight one
-      decreases complexity, maintenance and produces more clearly source
-      code.</para>
+      way raises the flexibility of attribute management whereas the straight one
+      decreases complexity, maintenance and produces the source
+      code more clearly.</para>
 
-      <para>Best practice is the combination of both ways. It is strongly
-      recommended using the extended Creation-Methods whenever one is
+      <para>It is best practice to combine both ways. It is strongly
+      recommended to use the extended Creation-Methods whenever one is
       available. If the extended method does not fully fit the needs the
       result always can be individualized in a further step after. All
-      attributes always are able being modified directly.</para>
+      attributes can always be modified directly.</para>
 
-      <para>Following example showcases how to modify an XJDF Node after
+      <para>The following example showcases how to modify an XJDF Node after
       creation. In some situations the<emphasis> /RunList/FileSpec</emphasis>
       Node may contain an addtional attribute
       <emphasis>UserFileName</emphasis>:</para>
@@ -153,12 +153,12 @@ GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</progra
     &lt;FileSpec URL="http://192.168.1.113:80/4daction/Poster/10496" 
         UserFileName="myFileName.pdf"/&gt;
 &lt;/RunList&gt;
-[...]</programlisting>In the latest version of XJdfNodeFactory for example
+[...]</programlisting>In the latest version of XJdfNodeFactory, for example,
       there is no extended Creation-Method for the creation of a
       <emphasis>RunList</emphasis> node which also defines a
       <emphasis>UserFileName</emphasis> attribute in
-      <emphasis>FileSpec</emphasis>. The best practice is using the extended
-      method despite and finally indivualize the result:</para>
+      <emphasis>FileSpec</emphasis>. It is still best to use the extended
+      method and finally indivualize the result:</para>
 
       <para><programlisting language="java">// Best practice creating indivudal nodes
 RunList runList = xJdfNodeFactory
@@ -169,10 +169,10 @@ runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
     <section>
       <title>Builder Classes</title>
 
-      <para>Plain XJDF Node elements easily can be created using the
+      <para>Plain XJDF Node elements can easily be created using the
       XJdfNodeFactory. Complex elements (e. g. XJDF-Root-Node, Product-Node,
-      etc.) are elements which contains multiple subnodes in a defined manner.
-      For example you can say the XJDF-Root-Node is the container for Product
+      etc.) are elements which contain multiple subnodes in a defined manner.
+      For example, you can say the XJDF-Root-Node is the container for Product
       and Parameter nodes. All <emphasis>Product</emphasis> items are listed
       in subelement <emphasis>ProductList</emphasis>. Also all
       <emphasis>Parameter</emphasis> nodes are listed in specific
