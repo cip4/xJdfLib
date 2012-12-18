@@ -57,7 +57,7 @@ public class ScanParams
     @XmlSchemaType(name = "anySimpleType")
     protected String mounting;
     @XmlAttribute(name = "InputBox")
-    protected Double inputBox;
+    protected List<Double> inputBoxes;
     @XmlAttribute(name = "DCTQuality")
     protected Double dctQuality;
     @XmlAttribute(name = "MountID")
@@ -183,27 +183,32 @@ public class ScanParams
     }
 
     /**
-     * Gets the value of the inputBox property.
+     * Gets the value of the inputBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getInputBox() {
-        return inputBox;
-    }
-
-    /**
-     * Sets the value of the inputBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the inputBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getInputBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setInputBox(Double value) {
-        this.inputBox = value;
+    public List<Double> getInputBoxes() {
+        if (inputBoxes == null) {
+            inputBoxes = new ArrayList<Double>();
+        }
+        return this.inputBoxes;
     }
 
     /**

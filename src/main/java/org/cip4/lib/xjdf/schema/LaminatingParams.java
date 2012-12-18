@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -52,7 +54,7 @@ public class LaminatingParams
     @XmlAttribute(name = "NipWidth")
     protected Double nipWidth;
     @XmlAttribute(name = "LaminatingBox")
-    protected Double laminatingBox;
+    protected List<Double> laminatingBoxes;
     @XmlAttribute(name = "ModuleIndex")
     protected Integer moduleIndex;
     @XmlAttribute(name = "GapList")
@@ -179,27 +181,32 @@ public class LaminatingParams
     }
 
     /**
-     * Gets the value of the laminatingBox property.
+     * Gets the value of the laminatingBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getLaminatingBox() {
-        return laminatingBox;
-    }
-
-    /**
-     * Sets the value of the laminatingBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the laminatingBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLaminatingBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setLaminatingBox(Double value) {
-        this.laminatingBox = value;
+    public List<Double> getLaminatingBoxes() {
+        if (laminatingBoxes == null) {
+            laminatingBoxes = new ArrayList<Double>();
+        }
+        return this.laminatingBoxes;
     }
 
     /**

@@ -48,7 +48,7 @@ public class PageElement
     @XmlIDREF
     protected List<Object> contentDataRefs;
     @XmlAttribute(name = "RelativeBox")
-    protected Double relativeBox;
+    protected List<Double> relativeBoxes;
     @XmlAttribute(name = "ElementPages")
     protected Integer elementPages;
 
@@ -106,27 +106,32 @@ public class PageElement
     }
 
     /**
-     * Gets the value of the relativeBox property.
+     * Gets the value of the relativeBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getRelativeBox() {
-        return relativeBox;
-    }
-
-    /**
-     * Sets the value of the relativeBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the relativeBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRelativeBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setRelativeBox(Double value) {
-        this.relativeBox = value;
+    public List<Double> getRelativeBoxes() {
+        if (relativeBoxes == null) {
+            relativeBoxes = new ArrayList<Double>();
+        }
+        return this.relativeBoxes;
     }
 
     /**

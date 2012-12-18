@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -46,7 +48,7 @@ public class BoxArgument
     @XmlSchemaType(name = "anySimpleType")
     protected String mirrorMargins;
     @XmlAttribute(name = "Offset")
-    protected Double offset;
+    protected List<Double> offsets;
 
     /**
      * Gets the value of the overlap property.
@@ -121,27 +123,32 @@ public class BoxArgument
     }
 
     /**
-     * Gets the value of the offset property.
+     * Gets the value of the offsets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getOffset() {
-        return offset;
-    }
-
-    /**
-     * Sets the value of the offset property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the offsets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getOffsets().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setOffset(Double value) {
-        this.offset = value;
+    public List<Double> getOffsets() {
+        if (offsets == null) {
+            offsets = new ArrayList<Double>();
+        }
+        return this.offsets;
     }
 
 }

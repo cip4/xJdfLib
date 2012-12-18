@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -49,7 +51,7 @@ public class ShapeCut
     @XmlAttribute(name = "Pages")
     protected Integer pages;
     @XmlAttribute(name = "CutBox")
-    protected Double cutBox;
+    protected List<Double> cutBoxes;
     @XmlAttribute(name = "ShapeType")
     @XmlSchemaType(name = "anySimpleType")
     protected String shapeType;
@@ -136,27 +138,32 @@ public class ShapeCut
     }
 
     /**
-     * Gets the value of the cutBox property.
+     * Gets the value of the cutBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getCutBox() {
-        return cutBox;
-    }
-
-    /**
-     * Sets the value of the cutBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the cutBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCutBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setCutBox(Double value) {
-        this.cutBox = value;
+    public List<Double> getCutBoxes() {
+        if (cutBoxes == null) {
+            cutBoxes = new ArrayList<Double>();
+        }
+        return this.cutBoxes;
     }
 
     /**

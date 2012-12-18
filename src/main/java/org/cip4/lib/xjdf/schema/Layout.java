@@ -4,10 +4,12 @@ package org.cip4.lib.xjdf.schema;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -24,12 +26,11 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
  *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ContentObject" maxOccurs="unbounded" minOccurs="0"/>
+ *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}PlacedObject" maxOccurs="unbounded" minOccurs="0"/>
  *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}TransferCurvePool" maxOccurs="unbounded" minOccurs="0"/>
  *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InsertSheet" maxOccurs="unbounded" minOccurs="0"/>
  *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}PageCondition" maxOccurs="unbounded" minOccurs="0"/>
  *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}LayerList" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MarkObject" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;/choice>
  *       &lt;/sequence>
  *       &lt;attribute name="SheetCountReset" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
@@ -55,20 +56,17 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Layout", propOrder = {
-    "markObjects",
     "layerLists",
     "pageConditions",
     "insertSheets",
     "transferCurvePools",
-    "contentObjects"
+    "placedObjects"
 })
 public class Layout
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "MarkObject")
-    protected List<MarkObject> markObjects;
     @XmlElement(name = "LayerList")
     protected List<LayerList> layerLists;
     @XmlElement(name = "PageCondition")
@@ -77,8 +75,8 @@ public class Layout
     protected List<InsertSheet> insertSheets;
     @XmlElement(name = "TransferCurvePool")
     protected List<TransferCurvePool> transferCurvePools;
-    @XmlElement(name = "ContentObject")
-    protected List<ContentObject> contentObjects;
+    @XmlElementRef(name = "PlacedObject", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
+    protected List<JAXBElement<? extends PlacedObject>> placedObjects;
     @XmlAttribute(name = "SheetCountReset")
     @XmlSchemaType(name = "anySimpleType")
     protected String sheetCountReset;
@@ -90,7 +88,7 @@ public class Layout
     @XmlAttribute(name = "SheetNameFormat")
     protected String sheetNameFormat;
     @XmlAttribute(name = "SurfaceContentsBox")
-    protected Double surfaceContentsBox;
+    protected List<Double> surfaceContentsBoxes;
     @XmlAttribute(name = "StackDepth")
     protected Integer stackDepth;
     @XmlAttribute(name = "LockOrigins")
@@ -111,35 +109,6 @@ public class Layout
     @XmlAttribute(name = "MediaRef")
     @XmlIDREF
     protected Object mediaRef;
-
-    /**
-     * Gets the value of the markObjects property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markObjects property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMarkObjects().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MarkObject }
-     * 
-     * 
-     */
-    public List<MarkObject> getMarkObjects() {
-        if (markObjects == null) {
-            markObjects = new ArrayList<MarkObject>();
-        }
-        return this.markObjects;
-    }
 
     /**
      * Gets the value of the layerLists property.
@@ -258,32 +227,34 @@ public class Layout
     }
 
     /**
-     * Gets the value of the contentObjects property.
+     * Gets the value of the placedObjects property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contentObjects property.
+     * This is why there is not a <CODE>set</CODE> method for the placedObjects property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContentObjects().add(newItem);
+     *    getPlacedObjects().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link ContentObject }
+     * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link ContentObject }{@code >}
      * 
      * 
      */
-    public List<ContentObject> getContentObjects() {
-        if (contentObjects == null) {
-            contentObjects = new ArrayList<ContentObject>();
+    public List<JAXBElement<? extends PlacedObject>> getPlacedObjects() {
+        if (placedObjects == null) {
+            placedObjects = new ArrayList<JAXBElement<? extends PlacedObject>>();
         }
-        return this.contentObjects;
+        return this.placedObjects;
     }
 
     /**
@@ -383,27 +354,32 @@ public class Layout
     }
 
     /**
-     * Gets the value of the surfaceContentsBox property.
+     * Gets the value of the surfaceContentsBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSurfaceContentsBox() {
-        return surfaceContentsBox;
-    }
-
-    /**
-     * Sets the value of the surfaceContentsBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the surfaceContentsBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSurfaceContentsBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSurfaceContentsBox(Double value) {
-        this.surfaceContentsBox = value;
+    public List<Double> getSurfaceContentsBoxes() {
+        if (surfaceContentsBoxes == null) {
+            surfaceContentsBoxes = new ArrayList<Double>();
+        }
+        return this.surfaceContentsBoxes;
     }
 
     /**

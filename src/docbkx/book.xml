@@ -180,7 +180,7 @@ runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
 
       <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
-    DescriptiveName="My lovely Poster" JobID="FA-SIG-123456”&gt;
+    DescriptiveName="My lovely Poster" JobID="FA-SIG-123456"&gt;
     &lt;ProductList&gt;
         &lt;Product DescriptiveName="1234_56" Amount="1500" ProductType="Poster"
             ProductID="FA-SIG-123456" ProductTypeDetails="PTD Value" &gt;
@@ -649,7 +649,7 @@ InputStream is = xPathNavigator.getXJdfStream();
 
       <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;XJDF xmlns ="http://www.CIP4.org/JDFSchema_2_0" Category="Web2Print" 
-    DescriptiveName="PrintJob 123456" JobID="FA-SIG-123456”&gt;
+    DescriptiveName="PrintJob 123456" JobID="FA-SIG-123456"&gt;
     &lt;GeneralID IDUsage="CatalogID" IDValue="46" /&gt;
     &lt;ProductList&gt;
         &lt;Product Amount="1000" /&gt;

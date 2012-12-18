@@ -58,7 +58,7 @@ public class IdentificationField
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String encodingDetails;
     @XmlAttribute(name = "BoundingBox")
-    protected Double boundingBox;
+    protected List<Double> boundingBoxes;
     @XmlAttribute(name = "ValueFormat")
     protected String valueFormat;
     @XmlAttribute(name = "Orientation")
@@ -151,27 +151,32 @@ public class IdentificationField
     }
 
     /**
-     * Gets the value of the boundingBox property.
+     * Gets the value of the boundingBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getBoundingBox() {
-        return boundingBox;
-    }
-
-    /**
-     * Sets the value of the boundingBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the boundingBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBoundingBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setBoundingBox(Double value) {
-        this.boundingBox = value;
+    public List<Double> getBoundingBoxes() {
+        if (boundingBoxes == null) {
+            boundingBoxes = new ArrayList<Double>();
+        }
+        return this.boundingBoxes;
     }
 
     /**

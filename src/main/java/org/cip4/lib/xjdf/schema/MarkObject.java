@@ -9,19 +9,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for MarkObject complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="MarkObject">
  *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
+ *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}PlacedObject">
  *       &lt;sequence>
  *         &lt;choice>
  *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ScavengerArea" maxOccurs="unbounded" minOccurs="0"/>
@@ -40,7 +39,6 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="CompensationCTMTemplate" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="TrimClipPath" type="{http://www.CIP4.org/JDFSchema_2_0}PDFPath" />
  *       &lt;attribute name="ClipBox" type="{http://www.CIP4.org/JDFSchema_2_0}rectangle" />
- *       &lt;attribute name="CTM" type="{http://www.CIP4.org/JDFSchema_2_0}matrix" />
  *       &lt;attribute name="OrdID" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *       &lt;attribute name="LogicalStackOrd" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *       &lt;attribute name="Anchor" type="{http://www.CIP4.org/JDFSchema_2_0}EnumAnchor" />
@@ -56,7 +54,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;attribute name="HalfTonePhaseOrigin" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
  *       &lt;attribute name="CompensationCTMFormat" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="IdentificationFieldRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
- *     &lt;/restriction>
+ *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
  * </pre>
@@ -64,7 +62,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "MarkObject", propOrder = {
     "markActivations",
     "refAnchors",
     "deviceMarks",
@@ -77,8 +75,8 @@ import javax.xml.bind.annotation.XmlType;
     "densityMeasuringFields",
     "scavengerAreas"
 })
-@XmlRootElement(name = "MarkObject")
 public class MarkObject
+    extends PlacedObject
     implements Serializable
 {
 
@@ -109,9 +107,7 @@ public class MarkObject
     @XmlAttribute(name = "TrimClipPath")
     protected String trimClipPath;
     @XmlAttribute(name = "ClipBox")
-    protected Double clipBox;
-    @XmlAttribute(name = "CTM")
-    protected List<Double> ctms;
+    protected List<Double> clipBoxes;
     @XmlAttribute(name = "OrdID")
     protected Integer ordID;
     @XmlAttribute(name = "LogicalStackOrd")
@@ -513,42 +509,18 @@ public class MarkObject
     }
 
     /**
-     * Gets the value of the clipBox property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getClipBox() {
-        return clipBox;
-    }
-
-    /**
-     * Sets the value of the clipBox property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
-     */
-    public void setClipBox(Double value) {
-        this.clipBox = value;
-    }
-
-    /**
-     * Gets the value of the ctms property.
+     * Gets the value of the clipBoxes property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ctms property.
+     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCTMS().add(newItem);
+     *    getClipBoxes().add(newItem);
      * </pre>
      * 
      * 
@@ -558,11 +530,11 @@ public class MarkObject
      * 
      * 
      */
-    public List<Double> getCTMS() {
-        if (ctms == null) {
-            ctms = new ArrayList<Double>();
+    public List<Double> getClipBoxes() {
+        if (clipBoxes == null) {
+            clipBoxes = new ArrayList<Double>();
         }
-        return this.ctms;
+        return this.clipBoxes;
     }
 
     /**

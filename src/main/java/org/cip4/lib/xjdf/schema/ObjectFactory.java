@@ -52,6 +52,7 @@ public class ObjectFactory {
     private final static QName _ShapeRangeList_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ShapeRangeList");
     private final static QName _ScreeningParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ScreeningParams");
     private final static QName _Hole_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Hole");
+    private final static QName _ContentObject_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ContentObject");
     private final static QName _ThreadSealingParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ThreadSealingParams");
     private final static QName _RectangleRangeList_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "RectangleRangeList");
     private final static QName _HoleMakingIntent_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "HoleMakingIntent");
@@ -69,8 +70,8 @@ public class ObjectFactory {
     private final static QName _XYPairRange_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "XYPairRange");
     private final static QName _And_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "and");
     private final static QName _CMYKColor_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "CMYKColor");
-    private final static QName _QualityControlParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "QualityControlParams");
     private final static QName _ElementColorParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ElementColorParams");
+    private final static QName _QualityControlParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "QualityControlParams");
     private final static QName _PackingIntent_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "PackingIntent");
     private final static QName _BufferParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "BufferParams");
     private final static QName _PreflightReport_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "PreflightReport");
@@ -204,6 +205,7 @@ public class ObjectFactory {
     private final static QName _Component_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Component");
     private final static QName _Strap_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Strap");
     private final static QName _ColorSpaceConversionParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ColorSpaceConversionParams");
+    private final static QName _PlacedObject_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "PlacedObject");
     private final static QName _Tool_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Tool");
     private final static QName _TrimmingParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "TrimmingParams");
     private final static QName _DeviceMark_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "DeviceMark");
@@ -216,6 +218,7 @@ public class ObjectFactory {
     private final static QName _AdhesiveBinding_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "AdhesiveBinding");
     private final static QName _TransferCurve_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "TransferCurve");
     private final static QName _OrderingParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "OrderingParams");
+    private final static QName _MarkObject_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "MarkObject");
     private final static QName _RingBindingParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "RingBindingParams");
     private final static QName _Added_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Added");
     private final static QName _Versions_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Versions");
@@ -1688,6 +1691,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PlacedObject }
+     * 
+     */
+    public PlacedObject createPlacedObject() {
+        return new PlacedObject();
+    }
+
+    /**
      * Create an instance of {@link BendingParams }
      * 
      */
@@ -1717,78 +1728,6 @@ public class ObjectFactory {
      */
     public MarkObject createMarkObject() {
         return new MarkObject();
-    }
-
-    /**
-     * Create an instance of {@link MarkActivation }
-     * 
-     */
-    public MarkActivation createMarkActivation() {
-        return new MarkActivation();
-    }
-
-    /**
-     * Create an instance of {@link DeviceMark }
-     * 
-     */
-    public DeviceMark createDeviceMark() {
-        return new DeviceMark();
-    }
-
-    /**
-     * Create an instance of {@link CutMark }
-     * 
-     */
-    public CutMark createCutMark() {
-        return new CutMark();
-    }
-
-    /**
-     * Create an instance of {@link DynamicField }
-     * 
-     */
-    public DynamicField createDynamicField() {
-        return new DynamicField();
-    }
-
-    /**
-     * Create an instance of {@link RegisterMark }
-     * 
-     */
-    public RegisterMark createRegisterMark() {
-        return new RegisterMark();
-    }
-
-    /**
-     * Create an instance of {@link JobField }
-     * 
-     */
-    public JobField createJobField() {
-        return new JobField();
-    }
-
-    /**
-     * Create an instance of {@link ColorControlStrip }
-     * 
-     */
-    public ColorControlStrip createColorControlStrip() {
-        return new ColorControlStrip();
-    }
-
-    /**
-     * Create an instance of {@link CIELABMeasuringField }
-     * 
-     */
-    public CIELABMeasuringField createCIELABMeasuringField() {
-        return new CIELABMeasuringField();
-    }
-
-    /**
-     * Create an instance of {@link ScavengerArea }
-     * 
-     */
-    public ScavengerArea createScavengerArea() {
-        return new ScavengerArea();
     }
 
     /**
@@ -1901,6 +1840,14 @@ public class ObjectFactory {
      */
     public StripMark createStripMark() {
         return new StripMark();
+    }
+
+    /**
+     * Create an instance of {@link JobField }
+     * 
+     */
+    public JobField createJobField() {
+        return new JobField();
     }
 
     /**
@@ -2296,6 +2243,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link DeviceMark }
+     * 
+     */
+    public DeviceMark createDeviceMark() {
+        return new DeviceMark();
+    }
+
+    /**
      * Create an instance of {@link FitPolicy }
      * 
      */
@@ -2445,6 +2400,14 @@ public class ObjectFactory {
      */
     public Person createPerson() {
         return new Person();
+    }
+
+    /**
+     * Create an instance of {@link ScavengerArea }
+     * 
+     */
+    public ScavengerArea createScavengerArea() {
+        return new ScavengerArea();
     }
 
     /**
@@ -2744,6 +2707,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link CIELABMeasuringField }
+     * 
+     */
+    public CIELABMeasuringField createCIELABMeasuringField() {
+        return new CIELABMeasuringField();
+    }
+
+    /**
      * Create an instance of {@link PlasticCombBindingParams }
      * 
      */
@@ -2781,6 +2752,14 @@ public class ObjectFactory {
      */
     public NodeInfo createNodeInfo() {
         return new NodeInfo();
+    }
+
+    /**
+     * Create an instance of {@link MarkActivation }
+     * 
+     */
+    public MarkActivation createMarkActivation() {
+        return new MarkActivation();
     }
 
     /**
@@ -3013,6 +2992,14 @@ public class ObjectFactory {
      */
     public JacketingParams createJacketingParams() {
         return new JacketingParams();
+    }
+
+    /**
+     * Create an instance of {@link RegisterMark }
+     * 
+     */
+    public RegisterMark createRegisterMark() {
+        return new RegisterMark();
     }
 
     /**
@@ -3349,6 +3336,14 @@ public class ObjectFactory {
      */
     public ShapeEvaluation createShapeEvaluation() {
         return new ShapeEvaluation();
+    }
+
+    /**
+     * Create an instance of {@link DynamicField }
+     * 
+     */
+    public DynamicField createDynamicField() {
+        return new DynamicField();
     }
 
     /**
@@ -3768,6 +3763,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ColorControlStrip }
+     * 
+     */
+    public ColorControlStrip createColorControlStrip() {
+        return new ColorControlStrip();
+    }
+
+    /**
      * Create an instance of {@link BundlingParams }
      * 
      */
@@ -4005,6 +4008,14 @@ public class ObjectFactory {
      */
     public FeedingParams createFeedingParams() {
         return new FeedingParams();
+    }
+
+    /**
+     * Create an instance of {@link CutMark }
+     * 
+     */
+    public CutMark createCutMark() {
+        return new CutMark();
     }
 
     /**
@@ -4612,6 +4623,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ContentObject }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "ContentObject", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "PlacedObject")
+    public JAXBElement<ContentObject> createContentObject(ContentObject value) {
+        return new JAXBElement<ContentObject>(_ContentObject_QNAME, ContentObject.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ThreadSealingParams }{@code >}}
      * 
      */
@@ -4765,21 +4785,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link QualityControlParams }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "QualityControlParams", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "ParameterType")
-    public JAXBElement<QualityControlParams> createQualityControlParams(QualityControlParams value) {
-        return new JAXBElement<QualityControlParams>(_QualityControlParams_QNAME, QualityControlParams.class, null, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link ElementColorParams }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "ElementColorParams", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "ParameterType")
     public JAXBElement<ElementColorParams> createElementColorParams(ElementColorParams value) {
         return new JAXBElement<ElementColorParams>(_ElementColorParams_QNAME, ElementColorParams.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link QualityControlParams }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "QualityControlParams", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "ParameterType")
+    public JAXBElement<QualityControlParams> createQualityControlParams(QualityControlParams value) {
+        return new JAXBElement<QualityControlParams>(_QualityControlParams_QNAME, QualityControlParams.class, null, value);
     }
 
     /**
@@ -5980,6 +6000,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "PlacedObject")
+    public JAXBElement<PlacedObject> createPlacedObject(PlacedObject value) {
+        return new JAXBElement<PlacedObject>(_PlacedObject_QNAME, PlacedObject.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Tool }{@code >}}
      * 
      */
@@ -6085,6 +6114,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "OrderingParams", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "ParameterType")
     public JAXBElement<OrderingParams> createOrderingParams(OrderingParams value) {
         return new JAXBElement<OrderingParams>(_OrderingParams_QNAME, OrderingParams.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link MarkObject }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "MarkObject", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "PlacedObject")
+    public JAXBElement<MarkObject> createMarkObject(MarkObject value) {
+        return new JAXBElement<MarkObject>(_MarkObject_QNAME, MarkObject.class, null, value);
     }
 
     /**

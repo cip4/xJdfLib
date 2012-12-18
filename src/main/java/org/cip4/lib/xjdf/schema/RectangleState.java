@@ -88,7 +88,7 @@ public class RectangleState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected Double currentValue;
+    protected List<Double> currentValues;
     @XmlAttribute(name = "AllowedHWRelation")
     protected EnumXYRelation allowedHWRelation;
     @XmlAttribute(name = "PresentValueList")
@@ -120,7 +120,7 @@ public class RectangleState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected Double defaultValue;
+    protected List<Double> defaultValues;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
@@ -331,27 +331,32 @@ public class RectangleState
     }
 
     /**
-     * Gets the value of the currentValue property.
+     * Gets the value of the currentValues property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getCurrentValue() {
-        return currentValue;
-    }
-
-    /**
-     * Sets the value of the currentValue property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the currentValues property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCurrentValues().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setCurrentValue(Double value) {
-        this.currentValue = value;
+    public List<Double> getCurrentValues() {
+        if (currentValues == null) {
+            currentValues = new ArrayList<Double>();
+        }
+        return this.currentValues;
     }
 
     /**
@@ -658,27 +663,32 @@ public class RectangleState
     }
 
     /**
-     * Gets the value of the defaultValue property.
+     * Gets the value of the defaultValues property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getDefaultValue() {
-        return defaultValue;
-    }
-
-    /**
-     * Sets the value of the defaultValue property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the defaultValues property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDefaultValues().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setDefaultValue(Double value) {
-        this.defaultValue = value;
+    public List<Double> getDefaultValues() {
+        if (defaultValues == null) {
+            defaultValues = new ArrayList<Double>();
+        }
+        return this.defaultValues;
     }
 
     /**
