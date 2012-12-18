@@ -44,18 +44,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DieLayout", propOrder = {
-    "stations",
-    "ruleLengths"
+    "ruleLength",
+    "station"
 })
 public class DieLayout
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Station")
-    protected List<Station> stations;
     @XmlElement(name = "RuleLength")
-    protected List<RuleLength> ruleLengths;
+    protected List<RuleLength> ruleLength;
+    @XmlElement(name = "Station")
+    protected List<Station> station;
     @XmlAttribute(name = "Waste")
     protected Double waste;
     @XmlAttribute(name = "DieSide")
@@ -77,47 +77,18 @@ public class DieLayout
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the stations property.
+     * Gets the value of the ruleLength property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the stations property.
+     * This is why there is not a <CODE>set</CODE> method for the ruleLength property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Station }
-     * 
-     * 
-     */
-    public List<Station> getStations() {
-        if (stations == null) {
-            stations = new ArrayList<Station>();
-        }
-        return this.stations;
-    }
-
-    /**
-     * Gets the value of the ruleLengths property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ruleLengths property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRuleLengths().add(newItem);
+     *    getRuleLength().add(newItem);
      * </pre>
      * 
      * 
@@ -127,11 +98,40 @@ public class DieLayout
      * 
      * 
      */
-    public List<RuleLength> getRuleLengths() {
-        if (ruleLengths == null) {
-            ruleLengths = new ArrayList<RuleLength>();
+    public List<RuleLength> getRuleLength() {
+        if (ruleLength == null) {
+            ruleLength = new ArrayList<RuleLength>();
         }
-        return this.ruleLengths;
+        return this.ruleLength;
+    }
+
+    /**
+     * Gets the value of the station property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the station property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStation().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Station }
+     * 
+     * 
+     */
+    public List<Station> getStation() {
+        if (station == null) {
+            station = new ArrayList<Station>();
+        }
+        return this.station;
     }
 
     /**

@@ -55,21 +55,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "jobFields",
-    "refAnchors",
-    "positions"
+    "position",
+    "refAnchor",
+    "jobField"
 })
 @XmlRootElement(name = "StripMark")
 public class StripMark
     implements Serializable
 {
 
-    @XmlElement(name = "JobField")
-    protected List<JobField> jobFields;
-    @XmlElement(name = "RefAnchor")
-    protected List<RefAnchor> refAnchors;
     @XmlElement(name = "Position")
-    protected List<Position> positions;
+    protected List<Position> position;
+    @XmlElement(name = "RefAnchor")
+    protected List<RefAnchor> refAnchor;
+    @XmlElement(name = "JobField")
+    protected List<JobField> jobField;
     @XmlAttribute(name = "MarkContext")
     @XmlSchemaType(name = "anySimpleType")
     protected String markContext;
@@ -101,83 +101,26 @@ public class StripMark
     @XmlSchemaType(name = "anySimpleType")
     protected String horizontalFitPolicy;
     @XmlAttribute(name = "Offset")
-    protected List<Double> offsets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair offset;
     @XmlAttribute(name = "Orientation")
     protected EnumOrientation orientation;
     @XmlAttribute(name = "StripMarkDetails")
     protected String stripMarkDetails;
 
     /**
-     * Gets the value of the jobFields property.
+     * Gets the value of the position property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jobFields property.
+     * This is why there is not a <CODE>set</CODE> method for the position property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getJobFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JobField }
-     * 
-     * 
-     */
-    public List<JobField> getJobFields() {
-        if (jobFields == null) {
-            jobFields = new ArrayList<JobField>();
-        }
-        return this.jobFields;
-    }
-
-    /**
-     * Gets the value of the refAnchors property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the refAnchors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRefAnchors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RefAnchor }
-     * 
-     * 
-     */
-    public List<RefAnchor> getRefAnchors() {
-        if (refAnchors == null) {
-            refAnchors = new ArrayList<RefAnchor>();
-        }
-        return this.refAnchors;
-    }
-
-    /**
-     * Gets the value of the positions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the positions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPositions().add(newItem);
+     *    getPosition().add(newItem);
      * </pre>
      * 
      * 
@@ -187,11 +130,69 @@ public class StripMark
      * 
      * 
      */
-    public List<Position> getPositions() {
-        if (positions == null) {
-            positions = new ArrayList<Position>();
+    public List<Position> getPosition() {
+        if (position == null) {
+            position = new ArrayList<Position>();
         }
-        return this.positions;
+        return this.position;
+    }
+
+    /**
+     * Gets the value of the refAnchor property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the refAnchor property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRefAnchor().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RefAnchor }
+     * 
+     * 
+     */
+    public List<RefAnchor> getRefAnchor() {
+        if (refAnchor == null) {
+            refAnchor = new ArrayList<RefAnchor>();
+        }
+        return this.refAnchor;
+    }
+
+    /**
+     * Gets the value of the jobField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the jobField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getJobField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JobField }
+     * 
+     * 
+     */
+    public List<JobField> getJobField() {
+        if (jobField == null) {
+            jobField = new ArrayList<JobField>();
+        }
+        return this.jobField;
     }
 
     /**
@@ -483,32 +484,27 @@ public class StripMark
     }
 
     /**
-     * Gets the value of the offsets property.
+     * Gets the value of the offset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the offsets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOffsets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOffsets() {
-        if (offsets == null) {
-            offsets = new ArrayList<Double>();
-        }
-        return this.offsets;
+    public org.cip4.lib.xjdf.type.XYPair getOffset() {
+        return offset;
+    }
+
+    /**
+     * Sets the value of the offset property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOffset(org.cip4.lib.xjdf.type.XYPair value) {
+        this.offset = value;
     }
 
     /**

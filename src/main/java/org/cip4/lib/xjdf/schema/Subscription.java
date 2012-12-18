@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "observationTargets"
+    "observationTarget"
 })
 @XmlRootElement(name = "Subscription")
 public class Subscription
@@ -51,7 +51,7 @@ public class Subscription
 {
 
     @XmlElement(name = "ObservationTarget")
-    protected List<ObservationTarget> observationTargets;
+    protected List<ObservationTarget> observationTarget;
     @XmlAttribute(name = "URL")
     protected String url;
     @XmlAttribute(name = "RepeatStep")
@@ -70,18 +70,18 @@ public class Subscription
     protected String format;
 
     /**
-     * Gets the value of the observationTargets property.
+     * Gets the value of the observationTarget property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the observationTargets property.
+     * This is why there is not a <CODE>set</CODE> method for the observationTarget property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getObservationTargets().add(newItem);
+     *    getObservationTarget().add(newItem);
      * </pre>
      * 
      * 
@@ -91,11 +91,11 @@ public class Subscription
      * 
      * 
      */
-    public List<ObservationTarget> getObservationTargets() {
-        if (observationTargets == null) {
-            observationTargets = new ArrayList<ObservationTarget>();
+    public List<ObservationTarget> getObservationTarget() {
+        if (observationTarget == null) {
+            observationTarget = new ArrayList<ObservationTarget>();
         }
-        return this.observationTargets;
+        return this.observationTarget;
     }
 
     /**

@@ -42,18 +42,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Person", propOrder = {
-    "addresses",
-    "comChannels"
+    "comChannel",
+    "address"
 })
 public class Person
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Address")
-    protected List<Address> addresses;
     @XmlElement(name = "ComChannel")
-    protected List<ComChannel> comChannels;
+    protected List<ComChannel> comChannel;
+    @XmlElement(name = "Address")
+    protected List<Address> address;
     @XmlAttribute(name = "JobTitle")
     protected String jobTitle;
     @XmlAttribute(name = "NamePrefix")
@@ -70,47 +70,18 @@ public class Person
     protected String nameSuffix;
 
     /**
-     * Gets the value of the addresses property.
+     * Gets the value of the comChannel property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the addresses property.
+     * This is why there is not a <CODE>set</CODE> method for the comChannel property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAddresses().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Address }
-     * 
-     * 
-     */
-    public List<Address> getAddresses() {
-        if (addresses == null) {
-            addresses = new ArrayList<Address>();
-        }
-        return this.addresses;
-    }
-
-    /**
-     * Gets the value of the comChannels property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comChannels property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getComChannels().add(newItem);
+     *    getComChannel().add(newItem);
      * </pre>
      * 
      * 
@@ -120,11 +91,40 @@ public class Person
      * 
      * 
      */
-    public List<ComChannel> getComChannels() {
-        if (comChannels == null) {
-            comChannels = new ArrayList<ComChannel>();
+    public List<ComChannel> getComChannel() {
+        if (comChannel == null) {
+            comChannel = new ArrayList<ComChannel>();
         }
-        return this.comChannels;
+        return this.comChannel;
+    }
+
+    /**
+     * Gets the value of the address property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the address property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAddress().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Address }
+     * 
+     * 
+     */
+    public List<Address> getAddress() {
+        if (address == null) {
+            address = new ArrayList<Address>();
+        }
+        return this.address;
     }
 
     /**

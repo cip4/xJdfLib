@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "glueLines"
+    "glueLine"
 })
 @XmlRootElement(name = "BoxFoldAction")
 public class BoxFoldAction
@@ -46,26 +47,27 @@ public class BoxFoldAction
 {
 
     @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "FoldIndex")
-    protected List<Double> foldIndices;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair foldIndex;
     @XmlAttribute(name = "Action")
     @XmlSchemaType(name = "anySimpleType")
     protected String action;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the glueLine property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
+     *    getGlueLine().add(newItem);
      * </pre>
      * 
      * 
@@ -75,40 +77,35 @@ public class BoxFoldAction
      * 
      * 
      */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
         }
-        return this.glueLines;
+        return this.glueLine;
     }
 
     /**
-     * Gets the value of the foldIndices property.
+     * Gets the value of the foldIndex property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the foldIndices property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFoldIndices().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getFoldIndices() {
-        if (foldIndices == null) {
-            foldIndices = new ArrayList<Double>();
-        }
-        return this.foldIndices;
+    public org.cip4.lib.xjdf.type.XYPair getFoldIndex() {
+        return foldIndex;
+    }
+
+    /**
+     * Sets the value of the foldIndex property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFoldIndex(org.cip4.lib.xjdf.type.XYPair value) {
+        this.foldIndex = value;
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -34,29 +33,28 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "macros"
+    "macro"
 })
 @XmlRootElement(name = "MacroPool")
 public class MacroPool
     implements Serializable
 {
 
-    @XmlElement(name = "macro")
-    protected List<Macro> macros;
+    protected List<Macro> macro;
 
     /**
-     * Gets the value of the macros property.
+     * Gets the value of the macro property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the macros property.
+     * This is why there is not a <CODE>set</CODE> method for the macro property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMacros().add(newItem);
+     *    getMacro().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +64,11 @@ public class MacroPool
      * 
      * 
      */
-    public List<Macro> getMacros() {
-        if (macros == null) {
-            macros = new ArrayList<Macro>();
+    public List<Macro> getMacro() {
+        if (macro == null) {
+            macro = new ArrayList<Macro>();
         }
-        return this.macros;
+        return this.macro;
     }
 
 }

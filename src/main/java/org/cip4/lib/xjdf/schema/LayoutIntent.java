@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -53,7 +52,8 @@ public class LayoutIntent
     @XmlSchemaType(name = "anySimpleType")
     protected String folioCount;
     @XmlAttribute(name = "NumberUp")
-    protected List<Double> numberUps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair numberUp;
     @XmlAttribute(name = "Sides")
     @XmlSchemaType(name = "anySimpleType")
     protected String sides;
@@ -68,9 +68,11 @@ public class LayoutIntent
     @XmlAttribute(name = "PageVariance")
     protected Integer pageVariance;
     @XmlAttribute(name = "FinishedDimensions")
-    protected List<Double> finishedDimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape finishedDimensions;
     @XmlAttribute(name = "Dimensions")
-    protected List<Double> dimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair dimensions;
     @XmlAttribute(name = "FinishedGrainDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String finishedGrainDirection;
@@ -124,32 +126,27 @@ public class LayoutIntent
     }
 
     /**
-     * Gets the value of the numberUps property.
+     * Gets the value of the numberUp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numberUps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getNumberUps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getNumberUps() {
-        if (numberUps == null) {
-            numberUps = new ArrayList<Double>();
-        }
-        return this.numberUps;
+    public org.cip4.lib.xjdf.type.XYPair getNumberUp() {
+        return numberUp;
+    }
+
+    /**
+     * Sets the value of the numberUp property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumberUp(org.cip4.lib.xjdf.type.XYPair value) {
+        this.numberUp = value;
     }
 
     /**
@@ -275,59 +272,49 @@ public class LayoutIntent
     /**
      * Gets the value of the finishedDimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the finishedDimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFinishedDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getFinishedDimensions() {
-        if (finishedDimensions == null) {
-            finishedDimensions = new ArrayList<Double>();
-        }
-        return this.finishedDimensions;
+    public org.cip4.lib.xjdf.type.Shape getFinishedDimensions() {
+        return finishedDimensions;
+    }
+
+    /**
+     * Sets the value of the finishedDimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFinishedDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.finishedDimensions = value;
     }
 
     /**
      * Gets the value of the dimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDimensions() {
-        if (dimensions == null) {
-            dimensions = new ArrayList<Double>();
-        }
-        return this.dimensions;
+    public org.cip4.lib.xjdf.type.XYPair getDimensions() {
+        return dimensions;
+    }
+
+    /**
+     * Sets the value of the dimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDimensions(org.cip4.lib.xjdf.type.XYPair value) {
+        this.dimensions = value;
     }
 
     /**

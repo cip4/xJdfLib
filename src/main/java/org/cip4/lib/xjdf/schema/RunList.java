@@ -87,33 +87,33 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RunList", propOrder = {
-    "dependencies",
-    "interpretedPDLData",
-    "fileSpec",
-    "byteMap",
-    "disposition",
+    "metadataMap",
     "insertSheet",
-    "metadataMap"
+    "disposition",
+    "byteMap",
+    "fileSpec",
+    "interpretedPDLData",
+    "dependencies"
 })
 public class RunList
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Dependencies")
-    protected Dependencies dependencies;
-    @XmlElement(name = "InterpretedPDLData")
-    protected InterpretedPDLData interpretedPDLData;
-    @XmlElement(name = "FileSpec")
-    protected FileSpec fileSpec;
-    @XmlElement(name = "ByteMap")
-    protected ByteMap byteMap;
-    @XmlElement(name = "Disposition")
-    protected Disposition disposition;
-    @XmlElement(name = "InsertSheet")
-    protected InsertSheet insertSheet;
     @XmlElement(name = "MetadataMap")
     protected MetadataMap metadataMap;
+    @XmlElement(name = "InsertSheet")
+    protected InsertSheet insertSheet;
+    @XmlElement(name = "Disposition")
+    protected Disposition disposition;
+    @XmlElement(name = "ByteMap")
+    protected ByteMap byteMap;
+    @XmlElement(name = "FileSpec")
+    protected FileSpec fileSpec;
+    @XmlElement(name = "InterpretedPDLData")
+    protected InterpretedPDLData interpretedPDLData;
+    @XmlElement(name = "Dependencies")
+    protected Dependencies dependencies;
     @XmlAttribute(name = "Directory")
     protected String directory;
     @XmlAttribute(name = "Sets")
@@ -128,7 +128,7 @@ public class RunList
     @XmlAttribute(name = "NPage")
     protected Integer nPage;
     @XmlAttribute(name = "IgnoreContext")
-    protected List<String> ignoreContexts;
+    protected List<String> ignoreContext;
     @XmlAttribute(name = "Sorted")
     protected Boolean sorted;
     @XmlAttribute(name = "Docs")
@@ -170,9 +170,11 @@ public class RunList
     @XmlAttribute(name = "SetLevel")
     protected String setLevel;
     @XmlAttribute(name = "SourceTrimBox")
-    protected List<Double> sourceTrimBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceTrimBox;
     @XmlAttribute(name = "SourceMediaBox")
-    protected List<Double> sourceMediaBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceMediaBox;
     @XmlAttribute(name = "ContentDataRefs")
     @XmlIDREF
     protected List<Object> contentDataRefs;
@@ -186,13 +188,15 @@ public class RunList
     @XmlAttribute(name = "HasBleeds")
     protected Boolean hasBleeds;
     @XmlAttribute(name = "SourceClipBox")
-    protected List<Double> sourceClipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceClipBox;
     @XmlAttribute(name = "IsTrapped")
     protected Boolean isTrapped;
     @XmlAttribute(name = "IsPrintable")
     protected Boolean isPrintable;
     @XmlAttribute(name = "SourceBleedBox")
-    protected List<Double> sourceBleedBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceBleedBox;
     @XmlAttribute(name = "ElementColorParamsRef")
     @XmlIDREF
     protected Object elementColorParamsRef;
@@ -212,123 +216,27 @@ public class RunList
     protected List<String> separationNames;
 
     /**
-     * Gets the value of the dependencies property.
+     * Gets the value of the metadataMap property.
      * 
      * @return
      *     possible object is
-     *     {@link Dependencies }
+     *     {@link MetadataMap }
      *     
      */
-    public Dependencies getDependencies() {
-        return dependencies;
+    public MetadataMap getMetadataMap() {
+        return metadataMap;
     }
 
     /**
-     * Sets the value of the dependencies property.
+     * Sets the value of the metadataMap property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Dependencies }
+     *     {@link MetadataMap }
      *     
      */
-    public void setDependencies(Dependencies value) {
-        this.dependencies = value;
-    }
-
-    /**
-     * Gets the value of the interpretedPDLData property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link InterpretedPDLData }
-     *     
-     */
-    public InterpretedPDLData getInterpretedPDLData() {
-        return interpretedPDLData;
-    }
-
-    /**
-     * Sets the value of the interpretedPDLData property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link InterpretedPDLData }
-     *     
-     */
-    public void setInterpretedPDLData(InterpretedPDLData value) {
-        this.interpretedPDLData = value;
-    }
-
-    /**
-     * Gets the value of the fileSpec property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link FileSpec }
-     *     
-     */
-    public FileSpec getFileSpec() {
-        return fileSpec;
-    }
-
-    /**
-     * Sets the value of the fileSpec property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link FileSpec }
-     *     
-     */
-    public void setFileSpec(FileSpec value) {
-        this.fileSpec = value;
-    }
-
-    /**
-     * Gets the value of the byteMap property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ByteMap }
-     *     
-     */
-    public ByteMap getByteMap() {
-        return byteMap;
-    }
-
-    /**
-     * Sets the value of the byteMap property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ByteMap }
-     *     
-     */
-    public void setByteMap(ByteMap value) {
-        this.byteMap = value;
-    }
-
-    /**
-     * Gets the value of the disposition property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Disposition }
-     *     
-     */
-    public Disposition getDisposition() {
-        return disposition;
-    }
-
-    /**
-     * Sets the value of the disposition property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Disposition }
-     *     
-     */
-    public void setDisposition(Disposition value) {
-        this.disposition = value;
+    public void setMetadataMap(MetadataMap value) {
+        this.metadataMap = value;
     }
 
     /**
@@ -356,27 +264,123 @@ public class RunList
     }
 
     /**
-     * Gets the value of the metadataMap property.
+     * Gets the value of the disposition property.
      * 
      * @return
      *     possible object is
-     *     {@link MetadataMap }
+     *     {@link Disposition }
      *     
      */
-    public MetadataMap getMetadataMap() {
-        return metadataMap;
+    public Disposition getDisposition() {
+        return disposition;
     }
 
     /**
-     * Sets the value of the metadataMap property.
+     * Sets the value of the disposition property.
      * 
      * @param value
      *     allowed object is
-     *     {@link MetadataMap }
+     *     {@link Disposition }
      *     
      */
-    public void setMetadataMap(MetadataMap value) {
-        this.metadataMap = value;
+    public void setDisposition(Disposition value) {
+        this.disposition = value;
+    }
+
+    /**
+     * Gets the value of the byteMap property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link ByteMap }
+     *     
+     */
+    public ByteMap getByteMap() {
+        return byteMap;
+    }
+
+    /**
+     * Sets the value of the byteMap property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link ByteMap }
+     *     
+     */
+    public void setByteMap(ByteMap value) {
+        this.byteMap = value;
+    }
+
+    /**
+     * Gets the value of the fileSpec property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FileSpec }
+     *     
+     */
+    public FileSpec getFileSpec() {
+        return fileSpec;
+    }
+
+    /**
+     * Sets the value of the fileSpec property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FileSpec }
+     *     
+     */
+    public void setFileSpec(FileSpec value) {
+        this.fileSpec = value;
+    }
+
+    /**
+     * Gets the value of the interpretedPDLData property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link InterpretedPDLData }
+     *     
+     */
+    public InterpretedPDLData getInterpretedPDLData() {
+        return interpretedPDLData;
+    }
+
+    /**
+     * Sets the value of the interpretedPDLData property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link InterpretedPDLData }
+     *     
+     */
+    public void setInterpretedPDLData(InterpretedPDLData value) {
+        this.interpretedPDLData = value;
+    }
+
+    /**
+     * Gets the value of the dependencies property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Dependencies }
+     *     
+     */
+    public Dependencies getDependencies() {
+        return dependencies;
+    }
+
+    /**
+     * Sets the value of the dependencies property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Dependencies }
+     *     
+     */
+    public void setDependencies(Dependencies value) {
+        this.dependencies = value;
     }
 
     /**
@@ -524,18 +528,18 @@ public class RunList
     }
 
     /**
-     * Gets the value of the ignoreContexts property.
+     * Gets the value of the ignoreContext property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ignoreContexts property.
+     * This is why there is not a <CODE>set</CODE> method for the ignoreContext property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIgnoreContexts().add(newItem);
+     *    getIgnoreContext().add(newItem);
      * </pre>
      * 
      * 
@@ -545,11 +549,11 @@ public class RunList
      * 
      * 
      */
-    public List<String> getIgnoreContexts() {
-        if (ignoreContexts == null) {
-            ignoreContexts = new ArrayList<String>();
+    public List<String> getIgnoreContext() {
+        if (ignoreContext == null) {
+            ignoreContext = new ArrayList<String>();
         }
-        return this.ignoreContexts;
+        return this.ignoreContext;
     }
 
     /**
@@ -1009,61 +1013,51 @@ public class RunList
     }
 
     /**
-     * Gets the value of the sourceTrimBoxes property.
+     * Gets the value of the sourceTrimBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceTrimBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceTrimBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceTrimBoxes() {
-        if (sourceTrimBoxes == null) {
-            sourceTrimBoxes = new ArrayList<Double>();
-        }
-        return this.sourceTrimBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceTrimBox() {
+        return sourceTrimBox;
     }
 
     /**
-     * Gets the value of the sourceMediaBoxes property.
+     * Sets the value of the sourceTrimBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceMediaBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceMediaBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceMediaBoxes() {
-        if (sourceMediaBoxes == null) {
-            sourceMediaBoxes = new ArrayList<Double>();
-        }
-        return this.sourceMediaBoxes;
+    public void setSourceTrimBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceTrimBox = value;
+    }
+
+    /**
+     * Gets the value of the sourceMediaBox property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.Rectangle getSourceMediaBox() {
+        return sourceMediaBox;
+    }
+
+    /**
+     * Sets the value of the sourceMediaBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceMediaBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceMediaBox = value;
     }
 
     /**
@@ -1192,32 +1186,27 @@ public class RunList
     }
 
     /**
-     * Gets the value of the sourceClipBoxes property.
+     * Gets the value of the sourceClipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceClipBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceClipBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceClipBoxes() {
-        if (sourceClipBoxes == null) {
-            sourceClipBoxes = new ArrayList<Double>();
-        }
-        return this.sourceClipBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceClipBox() {
+        return sourceClipBox;
+    }
+
+    /**
+     * Sets the value of the sourceClipBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceClipBox = value;
     }
 
     /**
@@ -1269,32 +1258,27 @@ public class RunList
     }
 
     /**
-     * Gets the value of the sourceBleedBoxes property.
+     * Gets the value of the sourceBleedBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceBleedBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceBleedBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceBleedBoxes() {
-        if (sourceBleedBoxes == null) {
-            sourceBleedBoxes = new ArrayList<Double>();
-        }
-        return this.sourceBleedBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceBleedBox() {
+        return sourceBleedBox;
+    }
+
+    /**
+     * Sets the value of the sourceBleedBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceBleedBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceBleedBox = value;
     }
 
     /**

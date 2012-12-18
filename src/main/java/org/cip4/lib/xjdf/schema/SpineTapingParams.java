@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpineTapingParams", propOrder = {
-    "glueApplications"
+    "glueApplication"
 })
 public class SpineTapingParams
     extends ParameterType
@@ -51,7 +51,7 @@ public class SpineTapingParams
 {
 
     @XmlElement(name = "GlueApplication")
-    protected List<GlueApplication> glueApplications;
+    protected List<GlueApplication> glueApplication;
     @XmlAttribute(name = "HorizontalExcess")
     protected Double horizontalExcess;
     @XmlAttribute(name = "TopExcess")
@@ -71,18 +71,18 @@ public class SpineTapingParams
     protected String stripColor;
 
     /**
-     * Gets the value of the glueApplications property.
+     * Gets the value of the glueApplication property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueApplications property.
+     * This is why there is not a <CODE>set</CODE> method for the glueApplication property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueApplications().add(newItem);
+     *    getGlueApplication().add(newItem);
      * </pre>
      * 
      * 
@@ -92,11 +92,11 @@ public class SpineTapingParams
      * 
      * 
      */
-    public List<GlueApplication> getGlueApplications() {
-        if (glueApplications == null) {
-            glueApplications = new ArrayList<GlueApplication>();
+    public List<GlueApplication> getGlueApplication() {
+        if (glueApplication == null) {
+            glueApplication = new ArrayList<GlueApplication>();
         }
-        return this.glueApplications;
+        return this.glueApplication;
     }
 
     /**

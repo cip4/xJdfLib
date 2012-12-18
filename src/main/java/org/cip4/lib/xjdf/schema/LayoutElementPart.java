@@ -42,18 +42,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "runLists",
-    "positionObjs"
+    "positionObj",
+    "runList"
 })
 @XmlRootElement(name = "LayoutElementPart")
 public class LayoutElementPart
     implements Serializable
 {
 
-    @XmlElement(name = "RunList")
-    protected List<RunList> runLists;
     @XmlElement(name = "PositionObj")
-    protected List<PositionObj> positionObjs;
+    protected List<PositionObj> positionObj;
+    @XmlElement(name = "RunList")
+    protected List<RunList> runList;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -63,47 +63,18 @@ public class LayoutElementPart
     protected Object barcodeProductionParamsRef;
 
     /**
-     * Gets the value of the runLists property.
+     * Gets the value of the positionObj property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the runLists property.
+     * This is why there is not a <CODE>set</CODE> method for the positionObj property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRunLists().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RunList }
-     * 
-     * 
-     */
-    public List<RunList> getRunLists() {
-        if (runLists == null) {
-            runLists = new ArrayList<RunList>();
-        }
-        return this.runLists;
-    }
-
-    /**
-     * Gets the value of the positionObjs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the positionObjs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPositionObjs().add(newItem);
+     *    getPositionObj().add(newItem);
      * </pre>
      * 
      * 
@@ -113,11 +84,40 @@ public class LayoutElementPart
      * 
      * 
      */
-    public List<PositionObj> getPositionObjs() {
-        if (positionObjs == null) {
-            positionObjs = new ArrayList<PositionObj>();
+    public List<PositionObj> getPositionObj() {
+        if (positionObj == null) {
+            positionObj = new ArrayList<PositionObj>();
         }
-        return this.positionObjs;
+        return this.positionObj;
+    }
+
+    /**
+     * Gets the value of the runList property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the runList property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRunList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RunList }
+     * 
+     * 
+     */
+    public List<RunList> getRunList() {
+        if (runList == null) {
+            runList = new ArrayList<RunList>();
+        }
+        return this.runList;
     }
 
     /**

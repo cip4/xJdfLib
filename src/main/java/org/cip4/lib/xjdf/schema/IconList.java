@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "icons"
+    "icon"
 })
 @XmlRootElement(name = "IconList")
 public class IconList
@@ -42,21 +42,21 @@ public class IconList
 {
 
     @XmlElement(name = "Icon")
-    protected List<Icon> icons;
+    protected List<Icon> icon;
 
     /**
-     * Gets the value of the icons property.
+     * Gets the value of the icon property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the icons property.
+     * This is why there is not a <CODE>set</CODE> method for the icon property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIcons().add(newItem);
+     *    getIcon().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class IconList
      * 
      * 
      */
-    public List<Icon> getIcons() {
-        if (icons == null) {
-            icons = new ArrayList<Icon>();
+    public List<Icon> getIcon() {
+        if (icon == null) {
+            icon = new ArrayList<Icon>();
         }
-        return this.icons;
+        return this.icon;
     }
 
 }

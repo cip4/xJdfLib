@@ -328,6 +328,7 @@ public class ObjectFactory {
     private final static QName _Person_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "Person");
     private final static QName _ScavengerArea_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ScavengerArea");
     private final static QName _EndSheetGluingParams_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "EndSheetGluingParams");
+    private final static QName _ProofItem_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ProofItem");
     private final static QName _PrintCondition_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "PrintCondition");
     private final static QName _ExposedMedia_QNAME = new QName("http://www.CIP4.org/JDFSchema_2_0", "ExposedMedia");
 
@@ -603,19 +604,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Loc }
-     * 
-     */
-    public Loc createLoc() {
-        return new Loc();
-    }
-
-    /**
      * Create an instance of {@link ValueLoc }
      * 
      */
     public ValueLoc createValueLoc() {
         return new ValueLoc();
+    }
+
+    /**
+     * Create an instance of {@link Loc }
+     * 
+     */
+    public Loc createLoc() {
+        return new Loc();
     }
 
     /**
@@ -699,38 +700,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Notification }
-     * 
-     */
-    public Notification createNotification() {
-        return new Notification();
-    }
-
-    /**
-     * Create an instance of {@link Barcode }
-     * 
-     */
-    public Barcode createBarcode() {
-        return new Barcode();
-    }
-
-    /**
-     * Create an instance of {@link Event }
-     * 
-     */
-    public Event createEvent() {
-        return new Event();
-    }
-
-    /**
-     * Create an instance of {@link SystemTimeSet }
-     * 
-     */
-    public SystemTimeSet createSystemTimeSet() {
-        return new SystemTimeSet();
-    }
-
-    /**
      * Create an instance of {@link Employee }
      * 
      */
@@ -739,27 +708,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Error }
+     * Create an instance of {@link Notification }
      * 
      */
-    public Error createError() {
-        return new Error();
+    public Notification createNotification() {
+        return new Notification();
     }
 
     /**
-     * Create an instance of {@link FCNKey }
+     * Create an instance of {@link CostCenter }
      * 
      */
-    public FCNKey createFCNKey() {
-        return new FCNKey();
-    }
-
-    /**
-     * Create an instance of {@link Milestone }
-     * 
-     */
-    public Milestone createMilestone() {
-        return new Milestone();
+    public CostCenter createCostCenter() {
+        return new CostCenter();
     }
 
     /**
@@ -771,11 +732,51 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CostCenter }
+     * Create an instance of {@link Milestone }
      * 
      */
-    public CostCenter createCostCenter() {
-        return new CostCenter();
+    public Milestone createMilestone() {
+        return new Milestone();
+    }
+
+    /**
+     * Create an instance of {@link FCNKey }
+     * 
+     */
+    public FCNKey createFCNKey() {
+        return new FCNKey();
+    }
+
+    /**
+     * Create an instance of {@link Error }
+     * 
+     */
+    public Error createError() {
+        return new Error();
+    }
+
+    /**
+     * Create an instance of {@link SystemTimeSet }
+     * 
+     */
+    public SystemTimeSet createSystemTimeSet() {
+        return new SystemTimeSet();
+    }
+
+    /**
+     * Create an instance of {@link Event }
+     * 
+     */
+    public Event createEvent() {
+        return new Event();
+    }
+
+    /**
+     * Create an instance of {@link Barcode }
+     * 
+     */
+    public Barcode createBarcode() {
+        return new Barcode();
     }
 
     /**
@@ -955,6 +956,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ModuleStatus }
+     * 
+     */
+    public ModuleStatus createModuleStatus() {
+        return new ModuleStatus();
+    }
+
+    /**
      * Create an instance of {@link JobPhase }
      * 
      */
@@ -968,14 +977,6 @@ public class ObjectFactory {
      */
     public MISDetails createMISDetails() {
         return new MISDetails();
-    }
-
-    /**
-     * Create an instance of {@link ModuleStatus }
-     * 
-     */
-    public ModuleStatus createModuleStatus() {
-        return new ModuleStatus();
     }
 
     /**
@@ -1075,11 +1076,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Deleted }
+     * Create an instance of {@link ResourceAudit }
      * 
      */
-    public Deleted createDeleted() {
-        return new Deleted();
+    public ResourceAudit createResourceAudit() {
+        return new ResourceAudit();
+    }
+
+    /**
+     * Create an instance of {@link Modified }
+     * 
+     */
+    public Modified createModified() {
+        return new Modified();
+    }
+
+    /**
+     * Create an instance of {@link Created }
+     * 
+     */
+    public Created createCreated() {
+        return new Created();
     }
 
     /**
@@ -1099,27 +1116,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Created }
+     * Create an instance of {@link Deleted }
      * 
      */
-    public Created createCreated() {
-        return new Created();
-    }
-
-    /**
-     * Create an instance of {@link Modified }
-     * 
-     */
-    public Modified createModified() {
-        return new Modified();
-    }
-
-    /**
-     * Create an instance of {@link ResourceAudit }
-     * 
-     */
-    public ResourceAudit createResourceAudit() {
-        return new ResourceAudit();
+    public Deleted createDeleted() {
+        return new Deleted();
     }
 
     /**
@@ -1243,99 +1244,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TestPool }
+     * Create an instance of {@link BooleanState }
      * 
      */
-    public TestPool createTestPool() {
-        return new TestPool();
+    public BooleanState createBooleanState() {
+        return new BooleanState();
     }
 
     /**
-     * Create an instance of {@link Test }
+     * Create an instance of {@link StringState }
      * 
      */
-    public Test createTest() {
-        return new Test();
+    public StringState createStringState() {
+        return new StringState();
     }
 
     /**
-     * Create an instance of {@link MatrixState }
+     * Create an instance of {@link XYPairState }
      * 
      */
-    public MatrixState createMatrixState() {
-        return new MatrixState();
+    public XYPairState createXYPairState() {
+        return new XYPairState();
     }
 
     /**
-     * Create an instance of {@link Performance }
+     * Create an instance of {@link DateTimeState }
      * 
      */
-    public Performance createPerformance() {
-        return new Performance();
-    }
-
-    /**
-     * Create an instance of {@link ModulePool }
-     * 
-     */
-    public ModulePool createModulePool() {
-        return new ModulePool();
-    }
-
-    /**
-     * Create an instance of {@link ModuleCap }
-     * 
-     */
-    public ModuleCap createModuleCap() {
-        return new ModuleCap();
-    }
-
-    /**
-     * Create an instance of {@link DurationState }
-     * 
-     */
-    public DurationState createDurationState() {
-        return new DurationState();
-    }
-
-    /**
-     * Create an instance of {@link IntegerState }
-     * 
-     */
-    public IntegerState createIntegerState() {
-        return new IntegerState();
-    }
-
-    /**
-     * Create an instance of {@link NumberState }
-     * 
-     */
-    public NumberState createNumberState() {
-        return new NumberState();
-    }
-
-    /**
-     * Create an instance of {@link RectangleState }
-     * 
-     */
-    public RectangleState createRectangleState() {
-        return new RectangleState();
-    }
-
-    /**
-     * Create an instance of {@link ActionPool }
-     * 
-     */
-    public ActionPool createActionPool() {
-        return new ActionPool();
-    }
-
-    /**
-     * Create an instance of {@link ShapeState }
-     * 
-     */
-    public ShapeState createShapeState() {
-        return new ShapeState();
+    public DateTimeState createDateTimeState() {
+        return new DateTimeState();
     }
 
     /**
@@ -1355,30 +1292,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Call }
-     * 
-     */
-    public Call createCall() {
-        return new Call();
-    }
-
-    /**
-     * Create an instance of {@link Choice }
-     * 
-     */
-    public Choice createChoice() {
-        return new Choice();
-    }
-
-    /**
-     * Create an instance of {@link When }
-     * 
-     */
-    public When createWhen() {
-        return new When();
-    }
-
-    /**
      * Create an instance of {@link Set }
      * 
      */
@@ -1395,6 +1308,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Choice }
+     * 
+     */
+    public Choice createChoice() {
+        return new Choice();
+    }
+
+    /**
      * Create an instance of {@link Otherwise }
      * 
      */
@@ -1403,35 +1324,115 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link DateTimeState }
+     * Create an instance of {@link When }
      * 
      */
-    public DateTimeState createDateTimeState() {
-        return new DateTimeState();
+    public When createWhen() {
+        return new When();
     }
 
     /**
-     * Create an instance of {@link XYPairState }
+     * Create an instance of {@link Call }
      * 
      */
-    public XYPairState createXYPairState() {
-        return new XYPairState();
+    public Call createCall() {
+        return new Call();
     }
 
     /**
-     * Create an instance of {@link StringState }
+     * Create an instance of {@link ShapeState }
      * 
      */
-    public StringState createStringState() {
-        return new StringState();
+    public ShapeState createShapeState() {
+        return new ShapeState();
     }
 
     /**
-     * Create an instance of {@link BooleanState }
+     * Create an instance of {@link ActionPool }
      * 
      */
-    public BooleanState createBooleanState() {
-        return new BooleanState();
+    public ActionPool createActionPool() {
+        return new ActionPool();
+    }
+
+    /**
+     * Create an instance of {@link RectangleState }
+     * 
+     */
+    public RectangleState createRectangleState() {
+        return new RectangleState();
+    }
+
+    /**
+     * Create an instance of {@link NumberState }
+     * 
+     */
+    public NumberState createNumberState() {
+        return new NumberState();
+    }
+
+    /**
+     * Create an instance of {@link IntegerState }
+     * 
+     */
+    public IntegerState createIntegerState() {
+        return new IntegerState();
+    }
+
+    /**
+     * Create an instance of {@link DurationState }
+     * 
+     */
+    public DurationState createDurationState() {
+        return new DurationState();
+    }
+
+    /**
+     * Create an instance of {@link ModulePool }
+     * 
+     */
+    public ModulePool createModulePool() {
+        return new ModulePool();
+    }
+
+    /**
+     * Create an instance of {@link ModuleCap }
+     * 
+     */
+    public ModuleCap createModuleCap() {
+        return new ModuleCap();
+    }
+
+    /**
+     * Create an instance of {@link Performance }
+     * 
+     */
+    public Performance createPerformance() {
+        return new Performance();
+    }
+
+    /**
+     * Create an instance of {@link MatrixState }
+     * 
+     */
+    public MatrixState createMatrixState() {
+        return new MatrixState();
+    }
+
+    /**
+     * Create an instance of {@link TestPool }
+     * 
+     */
+    public TestPool createTestPool() {
+        return new TestPool();
+    }
+
+    /**
+     * Create an instance of {@link Test }
+     * 
+     */
+    public Test createTest() {
+        return new Test();
     }
 
     /**
@@ -1611,19 +1612,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Command }
+     * Create an instance of {@link Query }
      * 
      */
-    public Command createCommand() {
-        return new Command();
-    }
-
-    /**
-     * Create an instance of {@link Registration }
-     * 
-     */
-    public Registration createRegistration() {
-        return new Registration();
+    public Query createQuery() {
+        return new Query();
     }
 
     /**
@@ -1659,11 +1652,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Query }
+     * Create an instance of {@link Registration }
      * 
      */
-    public Query createQuery() {
-        return new Query();
+    public Registration createRegistration() {
+        return new Registration();
+    }
+
+    /**
+     * Create an instance of {@link Command }
+     * 
+     */
+    public Command createCommand() {
+        return new Command();
     }
 
     /**
@@ -1723,27 +1724,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link MarkObject }
+     * Create an instance of {@link TransferCurvePool }
      * 
      */
-    public MarkObject createMarkObject() {
-        return new MarkObject();
-    }
-
-    /**
-     * Create an instance of {@link LayerList }
-     * 
-     */
-    public LayerList createLayerList() {
-        return new LayerList();
-    }
-
-    /**
-     * Create an instance of {@link PageCondition }
-     * 
-     */
-    public PageCondition createPageCondition() {
-        return new PageCondition();
+    public TransferCurvePool createTransferCurvePool() {
+        return new TransferCurvePool();
     }
 
     /**
@@ -1755,11 +1740,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TransferCurvePool }
+     * Create an instance of {@link PageCondition }
      * 
      */
-    public TransferCurvePool createTransferCurvePool() {
-        return new TransferCurvePool();
+    public PageCondition createPageCondition() {
+        return new PageCondition();
+    }
+
+    /**
+     * Create an instance of {@link LayerList }
+     * 
+     */
+    public LayerList createLayerList() {
+        return new LayerList();
+    }
+
+    /**
+     * Create an instance of {@link MarkObject }
+     * 
+     */
+    public MarkObject createMarkObject() {
+        return new MarkObject();
     }
 
     /**
@@ -1811,19 +1812,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
-    }
-
-    /**
      * Create an instance of {@link GeneralID }
      * 
      */
     public GeneralID createGeneralID() {
         return new GeneralID();
+    }
+
+    /**
+     * Create an instance of {@link Comment }
+     * 
+     */
+    public Comment createComment() {
+        return new Comment();
     }
 
     /**
@@ -1843,19 +1844,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JobField }
-     * 
-     */
-    public JobField createJobField() {
-        return new JobField();
-    }
-
-    /**
      * Create an instance of {@link Position }
      * 
      */
     public Position createPosition() {
         return new Position();
+    }
+
+    /**
+     * Create an instance of {@link JobField }
+     * 
+     */
+    public JobField createJobField() {
+        return new JobField();
     }
 
     /**
@@ -2235,11 +2236,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ImageShift }
+     * Create an instance of {@link FitPolicy }
      * 
      */
-    public ImageShift createImageShift() {
-        return new ImageShift();
+    public FitPolicy createFitPolicy() {
+        return new FitPolicy();
     }
 
     /**
@@ -2251,11 +2252,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link FitPolicy }
+     * Create an instance of {@link ImageShift }
      * 
      */
-    public FitPolicy createFitPolicy() {
-        return new FitPolicy();
+    public ImageShift createImageShift() {
+        return new ImageShift();
     }
 
     /**
@@ -2475,19 +2476,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Intent }
-     * 
-     */
-    public Intent createIntent() {
-        return new Intent();
-    }
-
-    /**
      * Create an instance of {@link ChildProduct }
      * 
      */
     public ChildProduct createChildProduct() {
         return new ChildProduct();
+    }
+
+    /**
+     * Create an instance of {@link Intent }
+     * 
+     */
+    public Intent createIntent() {
+        return new Intent();
     }
 
     /**
@@ -3019,19 +3020,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link RollStand }
+     * Create an instance of {@link Pallet }
      * 
      */
-    public RollStand createRollStand() {
-        return new RollStand();
-    }
-
-    /**
-     * Create an instance of {@link Bundle }
-     * 
-     */
-    public Bundle createBundle() {
-        return new Bundle();
+    public Pallet createPallet() {
+        return new Pallet();
     }
 
     /**
@@ -3043,11 +3036,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Pallet }
+     * Create an instance of {@link Bundle }
      * 
      */
-    public Pallet createPallet() {
-        return new Pallet();
+    public Bundle createBundle() {
+        return new Bundle();
+    }
+
+    /**
+     * Create an instance of {@link RollStand }
+     * 
+     */
+    public RollStand createRollStand() {
+        return new RollStand();
     }
 
     /**
@@ -7104,6 +7105,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "EndSheetGluingParams", substitutionHeadNamespace = "http://www.CIP4.org/JDFSchema_2_0", substitutionHeadName = "ParameterType")
     public JAXBElement<EndSheetGluingParams> createEndSheetGluingParams(EndSheetGluingParams value) {
         return new JAXBElement<EndSheetGluingParams>(_EndSheetGluingParams_QNAME, EndSheetGluingParams.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ProofItem }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.CIP4.org/JDFSchema_2_0", name = "ProofItem")
+    public JAXBElement<ProofItem> createProofItem(ProofItem value) {
+        return new JAXBElement<ProofItem>(_ProofItem_QNAME, ProofItem.class, null, value);
     }
 
     /**

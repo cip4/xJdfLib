@@ -40,7 +40,7 @@ public class DeviceFilter
 {
 
     @XmlAttribute(name = "Localization")
-    protected List<String> localizations;
+    protected List<String> localization;
     @XmlAttribute(name = "DeviceDetails")
     @XmlSchemaType(name = "anySimpleType")
     protected String deviceDetails;
@@ -49,18 +49,18 @@ public class DeviceFilter
     protected Object deviceRef;
 
     /**
-     * Gets the value of the localizations property.
+     * Gets the value of the localization property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the localizations property.
+     * This is why there is not a <CODE>set</CODE> method for the localization property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLocalizations().add(newItem);
+     *    getLocalization().add(newItem);
      * </pre>
      * 
      * 
@@ -70,11 +70,11 @@ public class DeviceFilter
      * 
      * 
      */
-    public List<String> getLocalizations() {
-        if (localizations == null) {
-            localizations = new ArrayList<String>();
+    public List<String> getLocalization() {
+        if (localization == null) {
+            localization = new ArrayList<String>();
         }
-        return this.localizations;
+        return this.localization;
     }
 
     /**

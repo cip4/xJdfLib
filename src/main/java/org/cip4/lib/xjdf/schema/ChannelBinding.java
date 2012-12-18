@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "covers"
+    "cover"
 })
 @XmlRootElement(name = "ChannelBinding")
 public class ChannelBinding
@@ -45,25 +45,25 @@ public class ChannelBinding
 {
 
     @XmlElement(name = "Cover")
-    protected List<Cover> covers;
+    protected List<Cover> cover;
     @XmlAttribute(name = "ChannelBrand")
     protected String channelBrand;
     @XmlAttribute(name = "Thickness")
     protected Double thickness;
 
     /**
-     * Gets the value of the covers property.
+     * Gets the value of the cover property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the covers property.
+     * This is why there is not a <CODE>set</CODE> method for the cover property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCovers().add(newItem);
+     *    getCover().add(newItem);
      * </pre>
      * 
      * 
@@ -73,11 +73,11 @@ public class ChannelBinding
      * 
      * 
      */
-    public List<Cover> getCovers() {
-        if (covers == null) {
-            covers = new ArrayList<Cover>();
+    public List<Cover> getCover() {
+        if (cover == null) {
+            cover = new ArrayList<Cover>();
         }
-        return this.covers;
+        return this.cover;
     }
 
     /**

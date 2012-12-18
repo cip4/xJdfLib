@@ -93,27 +93,27 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Media", propOrder = {
-    "tabDimensions",
-    "holeLists",
-    "contacts",
-    "locations",
-    "mediaLayers"
+    "mediaLayers",
+    "location",
+    "contact",
+    "holeList",
+    "tabDimensions"
 })
 public class Media
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "TabDimensions")
-    protected List<TabDimensions> tabDimensions;
-    @XmlElement(name = "HoleList")
-    protected List<HoleList> holeLists;
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
-    @XmlElement(name = "Location")
-    protected List<Location> locations;
     @XmlElement(name = "MediaLayers")
     protected List<MediaLayers> mediaLayers;
+    @XmlElement(name = "Location")
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
+    @XmlElement(name = "HoleList")
+    protected List<HoleList> holeList;
+    @XmlElement(name = "TabDimensions")
+    protected List<TabDimensions> tabDimensions;
     @XmlAttribute(name = "GrainDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String grainDirection;
@@ -123,7 +123,8 @@ public class Media
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String stockType;
     @XmlAttribute(name = "Dimension")
-    protected List<Double> dimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair dimension;
     @XmlAttribute(name = "FrontCoatings")
     protected EnumCoatings frontCoatings;
     @XmlAttribute(name = "SleeveInterlock")
@@ -134,7 +135,8 @@ public class Media
     @XmlAttribute(name = "RollDiameter")
     protected Double rollDiameter;
     @XmlAttribute(name = "ShrinkIndex")
-    protected List<Double> shrinkIndices;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair shrinkIndex;
     @XmlAttribute(name = "Grade")
     protected Integer grade;
     @XmlAttribute(name = "OpacityLevel")
@@ -202,7 +204,7 @@ public class Media
     @XmlAttribute(name = "Weight")
     protected Double weight;
     @XmlAttribute(name = "LabColorValue")
-    protected List<Double> labColorValues;
+    protected List<Double> labColorValue;
     @XmlAttribute(name = "Texture")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String texture;
@@ -210,7 +212,7 @@ public class Media
     @XmlSchemaType(name = "anySimpleType")
     protected String fluteDirection;
     @XmlAttribute(name = "HoleType")
-    protected List<EnumHoleType> holeTypes;
+    protected List<EnumHoleType> holeType;
     @XmlAttribute(name = "MediaType")
     @XmlSchemaType(name = "anySimpleType")
     protected String mediaType;
@@ -227,122 +229,6 @@ public class Media
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
     @XmlIDREF
     protected Object colorMeasurementConditionsRef;
-
-    /**
-     * Gets the value of the tabDimensions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tabDimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTabDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TabDimensions }
-     * 
-     * 
-     */
-    public List<TabDimensions> getTabDimensions() {
-        if (tabDimensions == null) {
-            tabDimensions = new ArrayList<TabDimensions>();
-        }
-        return this.tabDimensions;
-    }
-
-    /**
-     * Gets the value of the holeLists property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeLists property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHoleLists().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link HoleList }
-     * 
-     * 
-     */
-    public List<HoleList> getHoleLists() {
-        if (holeLists == null) {
-            holeLists = new ArrayList<HoleList>();
-        }
-        return this.holeLists;
-    }
-
-    /**
-     * Gets the value of the contacts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the locations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Location }
-     * 
-     * 
-     */
-    public List<Location> getLocations() {
-        if (locations == null) {
-            locations = new ArrayList<Location>();
-        }
-        return this.locations;
-    }
 
     /**
      * Gets the value of the mediaLayers property.
@@ -371,6 +257,122 @@ public class Media
             mediaLayers = new ArrayList<MediaLayers>();
         }
         return this.mediaLayers;
+    }
+
+    /**
+     * Gets the value of the location property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLocation().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Location }
+     * 
+     * 
+     */
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
+        }
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
+    }
+
+    /**
+     * Gets the value of the holeList property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the holeList property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getHoleList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link HoleList }
+     * 
+     * 
+     */
+    public List<HoleList> getHoleList() {
+        if (holeList == null) {
+            holeList = new ArrayList<HoleList>();
+        }
+        return this.holeList;
+    }
+
+    /**
+     * Gets the value of the tabDimensions property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the tabDimensions property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTabDimensions().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TabDimensions }
+     * 
+     * 
+     */
+    public List<TabDimensions> getTabDimensions() {
+        if (tabDimensions == null) {
+            tabDimensions = new ArrayList<TabDimensions>();
+        }
+        return this.tabDimensions;
     }
 
     /**
@@ -446,32 +448,27 @@ public class Media
     }
 
     /**
-     * Gets the value of the dimensions property.
+     * Gets the value of the dimension property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDimensions() {
-        if (dimensions == null) {
-            dimensions = new ArrayList<Double>();
-        }
-        return this.dimensions;
+    public org.cip4.lib.xjdf.type.XYPair getDimension() {
+        return dimension;
+    }
+
+    /**
+     * Sets the value of the dimension property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDimension(org.cip4.lib.xjdf.type.XYPair value) {
+        this.dimension = value;
     }
 
     /**
@@ -571,32 +568,27 @@ public class Media
     }
 
     /**
-     * Gets the value of the shrinkIndices property.
+     * Gets the value of the shrinkIndex property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shrinkIndices property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getShrinkIndices().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getShrinkIndices() {
-        if (shrinkIndices == null) {
-            shrinkIndices = new ArrayList<Double>();
-        }
-        return this.shrinkIndices;
+    public org.cip4.lib.xjdf.type.XYPair getShrinkIndex() {
+        return shrinkIndex;
+    }
+
+    /**
+     * Sets the value of the shrinkIndex property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setShrinkIndex(org.cip4.lib.xjdf.type.XYPair value) {
+        this.shrinkIndex = value;
     }
 
     /**
@@ -1272,18 +1264,18 @@ public class Media
     }
 
     /**
-     * Gets the value of the labColorValues property.
+     * Gets the value of the labColorValue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the labColorValues property.
+     * This is why there is not a <CODE>set</CODE> method for the labColorValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLabColorValues().add(newItem);
+     *    getLabColorValue().add(newItem);
      * </pre>
      * 
      * 
@@ -1293,11 +1285,11 @@ public class Media
      * 
      * 
      */
-    public List<Double> getLabColorValues() {
-        if (labColorValues == null) {
-            labColorValues = new ArrayList<Double>();
+    public List<Double> getLabColorValue() {
+        if (labColorValue == null) {
+            labColorValue = new ArrayList<Double>();
         }
-        return this.labColorValues;
+        return this.labColorValue;
     }
 
     /**
@@ -1349,18 +1341,18 @@ public class Media
     }
 
     /**
-     * Gets the value of the holeTypes property.
+     * Gets the value of the holeType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the holeType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleTypes().add(newItem);
+     *    getHoleType().add(newItem);
      * </pre>
      * 
      * 
@@ -1370,11 +1362,11 @@ public class Media
      * 
      * 
      */
-    public List<EnumHoleType> getHoleTypes() {
-        if (holeTypes == null) {
-            holeTypes = new ArrayList<EnumHoleType>();
+    public List<EnumHoleType> getHoleType() {
+        if (holeType == null) {
+            holeType = new ArrayList<EnumHoleType>();
         }
-        return this.holeTypes;
+        return this.holeType;
     }
 
     /**

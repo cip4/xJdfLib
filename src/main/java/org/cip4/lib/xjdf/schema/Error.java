@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "errorDatas"
+    "errorData"
 })
 @XmlRootElement(name = "Error")
 public class Error
@@ -47,7 +47,7 @@ public class Error
 {
 
     @XmlElement(name = "ErrorData")
-    protected List<ErrorData> errorDatas;
+    protected List<ErrorData> errorData;
     @XmlAttribute(name = "ErrorID")
     protected String errorID;
     @XmlAttribute(name = "Resend")
@@ -57,18 +57,18 @@ public class Error
     protected Integer returnCode;
 
     /**
-     * Gets the value of the errorDatas property.
+     * Gets the value of the errorData property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the errorDatas property.
+     * This is why there is not a <CODE>set</CODE> method for the errorData property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getErrorDatas().add(newItem);
+     *    getErrorData().add(newItem);
      * </pre>
      * 
      * 
@@ -78,11 +78,11 @@ public class Error
      * 
      * 
      */
-    public List<ErrorData> getErrorDatas() {
-        if (errorDatas == null) {
-            errorDatas = new ArrayList<ErrorData>();
+    public List<ErrorData> getErrorData() {
+        if (errorData == null) {
+            errorData = new ArrayList<ErrorData>();
         }
-        return this.errorDatas;
+        return this.errorData;
     }
 
     /**

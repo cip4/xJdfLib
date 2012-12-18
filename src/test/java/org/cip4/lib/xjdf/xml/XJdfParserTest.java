@@ -195,7 +195,7 @@ public class XJdfParserTest {
 		XJDF xJdf = xJdfParser.parseStream(is);
 
 		// assert
-		Assert.assertEquals("Result is wrong.", RESULT, xJdf.getGeneralIDs().get(0).getIDValue());
+		Assert.assertEquals("Result is wrong.", RESULT, xJdf.getGeneralID().get(0).getIDValue());
 	}
 
 }

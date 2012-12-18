@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "contacts"
+    "contact"
 })
 @XmlRootElement(name = "ApprovalDetails")
 public class ApprovalDetails
@@ -48,7 +48,7 @@ public class ApprovalDetails
 {
 
     @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
+    protected List<Contact> contact;
     @XmlAttribute(name = "ApprovalState")
     @XmlSchemaType(name = "anySimpleType")
     protected String approvalState;
@@ -59,18 +59,18 @@ public class ApprovalDetails
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the contact property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
+     *    getContact().add(newItem);
      * </pre>
      * 
      * 
@@ -80,11 +80,11 @@ public class ApprovalDetails
      * 
      * 
      */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
         }
-        return this.contacts;
+        return this.contact;
     }
 
     /**

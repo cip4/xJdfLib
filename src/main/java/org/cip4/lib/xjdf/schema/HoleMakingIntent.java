@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HoleMakingIntent", propOrder = {
-    "holeLists"
+    "holeList"
 })
 public class HoleMakingIntent
     extends IntentType
@@ -46,28 +47,29 @@ public class HoleMakingIntent
 {
 
     @XmlElement(name = "HoleList")
-    protected List<HoleList> holeLists;
+    protected List<HoleList> holeList;
     @XmlAttribute(name = "HoleReferenceEdge")
     @XmlSchemaType(name = "anySimpleType")
     protected String holeReferenceEdge;
     @XmlAttribute(name = "Extent")
-    protected List<Double> extents;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair extent;
     @XmlAttribute(name = "HoleType")
     protected String holeType;
 
     /**
-     * Gets the value of the holeLists property.
+     * Gets the value of the holeList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeLists property.
+     * This is why there is not a <CODE>set</CODE> method for the holeList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleLists().add(newItem);
+     *    getHoleList().add(newItem);
      * </pre>
      * 
      * 
@@ -77,11 +79,11 @@ public class HoleMakingIntent
      * 
      * 
      */
-    public List<HoleList> getHoleLists() {
-        if (holeLists == null) {
-            holeLists = new ArrayList<HoleList>();
+    public List<HoleList> getHoleList() {
+        if (holeList == null) {
+            holeList = new ArrayList<HoleList>();
         }
-        return this.holeLists;
+        return this.holeList;
     }
 
     /**
@@ -109,32 +111,27 @@ public class HoleMakingIntent
     }
 
     /**
-     * Gets the value of the extents property.
+     * Gets the value of the extent property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extents property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getExtents().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getExtents() {
-        if (extents == null) {
-            extents = new ArrayList<Double>();
-        }
-        return this.extents;
+    public org.cip4.lib.xjdf.type.XYPair getExtent() {
+        return extent;
+    }
+
+    /**
+     * Sets the value of the extent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExtent(org.cip4.lib.xjdf.type.XYPair value) {
+        this.extent = value;
     }
 
     /**

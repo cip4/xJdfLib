@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PerforatingParams", propOrder = {
-    "perforates"
+    "perforate"
 })
 public class PerforatingParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class PerforatingParams
 {
 
     @XmlElement(name = "Perforate")
-    protected List<Perforate> perforates;
+    protected List<Perforate> perforate;
 
     /**
-     * Gets the value of the perforates property.
+     * Gets the value of the perforate property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the perforates property.
+     * This is why there is not a <CODE>set</CODE> method for the perforate property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPerforates().add(newItem);
+     *    getPerforate().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class PerforatingParams
      * 
      * 
      */
-    public List<Perforate> getPerforates() {
-        if (perforates == null) {
-            perforates = new ArrayList<Perforate>();
+    public List<Perforate> getPerforate() {
+        if (perforate == null) {
+            perforate = new ArrayList<Perforate>();
         }
-        return this.perforates;
+        return this.perforate;
     }
 
 }

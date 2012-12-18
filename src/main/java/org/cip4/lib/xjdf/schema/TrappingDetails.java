@@ -39,68 +39,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TrappingDetails", propOrder = {
-    "trapRegions",
-    "objectResolutions"
+    "objectResolution",
+    "trapRegion"
 })
 public class TrappingDetails
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "TrapRegion")
-    protected List<TrapRegion> trapRegions;
     @XmlElement(name = "ObjectResolution")
-    protected List<ObjectResolution> objectResolutions;
+    protected List<ObjectResolution> objectResolution;
+    @XmlElement(name = "TrapRegion")
+    protected List<TrapRegion> trapRegion;
     @XmlAttribute(name = "DefaultTrapping")
     protected Boolean defaultTrapping;
     @XmlAttribute(name = "TrappingParamsRef")
     @XmlIDREF
     protected Object trappingParamsRef;
     @XmlAttribute(name = "TrappingOrder")
-    protected List<String> trappingOrders;
+    protected List<String> trappingOrder;
 
     /**
-     * Gets the value of the trapRegions property.
+     * Gets the value of the objectResolution property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trapRegions property.
+     * This is why there is not a <CODE>set</CODE> method for the objectResolution property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTrapRegions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TrapRegion }
-     * 
-     * 
-     */
-    public List<TrapRegion> getTrapRegions() {
-        if (trapRegions == null) {
-            trapRegions = new ArrayList<TrapRegion>();
-        }
-        return this.trapRegions;
-    }
-
-    /**
-     * Gets the value of the objectResolutions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the objectResolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getObjectResolutions().add(newItem);
+     *    getObjectResolution().add(newItem);
      * </pre>
      * 
      * 
@@ -110,11 +81,40 @@ public class TrappingDetails
      * 
      * 
      */
-    public List<ObjectResolution> getObjectResolutions() {
-        if (objectResolutions == null) {
-            objectResolutions = new ArrayList<ObjectResolution>();
+    public List<ObjectResolution> getObjectResolution() {
+        if (objectResolution == null) {
+            objectResolution = new ArrayList<ObjectResolution>();
         }
-        return this.objectResolutions;
+        return this.objectResolution;
+    }
+
+    /**
+     * Gets the value of the trapRegion property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the trapRegion property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTrapRegion().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TrapRegion }
+     * 
+     * 
+     */
+    public List<TrapRegion> getTrapRegion() {
+        if (trapRegion == null) {
+            trapRegion = new ArrayList<TrapRegion>();
+        }
+        return this.trapRegion;
     }
 
     /**
@@ -166,18 +166,18 @@ public class TrappingDetails
     }
 
     /**
-     * Gets the value of the trappingOrders property.
+     * Gets the value of the trappingOrder property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trappingOrders property.
+     * This is why there is not a <CODE>set</CODE> method for the trappingOrder property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTrappingOrders().add(newItem);
+     *    getTrappingOrder().add(newItem);
      * </pre>
      * 
      * 
@@ -187,11 +187,11 @@ public class TrappingDetails
      * 
      * 
      */
-    public List<String> getTrappingOrders() {
-        if (trappingOrders == null) {
-            trappingOrders = new ArrayList<String>();
+    public List<String> getTrappingOrder() {
+        if (trappingOrder == null) {
+            trappingOrder = new ArrayList<String>();
         }
-        return this.trappingOrders;
+        return this.trappingOrder;
     }
 
 }

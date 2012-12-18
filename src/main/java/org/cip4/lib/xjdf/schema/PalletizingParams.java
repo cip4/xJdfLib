@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -40,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PalletizingParams", propOrder = {
-    "bundles"
+    "bundle"
 })
 public class PalletizingParams
     extends ParameterType
@@ -48,7 +49,7 @@ public class PalletizingParams
 {
 
     @XmlElement(name = "Bundle")
-    protected List<Bundle> bundles;
+    protected List<Bundle> bundle;
     @XmlAttribute(name = "MaxWeight")
     protected Double maxWeight;
     @XmlAttribute(name = "Pattern")
@@ -56,25 +57,27 @@ public class PalletizingParams
     @XmlAttribute(name = "MaxHeight")
     protected Double maxHeight;
     @XmlAttribute(name = "OverhangOffset")
-    protected List<Double> overhangOffsets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair overhangOffset;
     @XmlAttribute(name = "Overhang")
-    protected List<Double> overhangs;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair overhang;
     @XmlAttribute(name = "LayerAmount")
-    protected List<Integer> layerAmounts;
+    protected List<Integer> layerAmount;
 
     /**
-     * Gets the value of the bundles property.
+     * Gets the value of the bundle property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bundles property.
+     * This is why there is not a <CODE>set</CODE> method for the bundle property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBundles().add(newItem);
+     *    getBundle().add(newItem);
      * </pre>
      * 
      * 
@@ -84,11 +87,11 @@ public class PalletizingParams
      * 
      * 
      */
-    public List<Bundle> getBundles() {
-        if (bundles == null) {
-            bundles = new ArrayList<Bundle>();
+    public List<Bundle> getBundle() {
+        if (bundle == null) {
+            bundle = new ArrayList<Bundle>();
         }
-        return this.bundles;
+        return this.bundle;
     }
 
     /**
@@ -164,76 +167,66 @@ public class PalletizingParams
     }
 
     /**
-     * Gets the value of the overhangOffsets property.
+     * Gets the value of the overhangOffset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the overhangOffsets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOverhangOffsets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOverhangOffsets() {
-        if (overhangOffsets == null) {
-            overhangOffsets = new ArrayList<Double>();
-        }
-        return this.overhangOffsets;
+    public org.cip4.lib.xjdf.type.XYPair getOverhangOffset() {
+        return overhangOffset;
     }
 
     /**
-     * Gets the value of the overhangs property.
+     * Sets the value of the overhangOffset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the overhangs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOverhangs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOverhangs() {
-        if (overhangs == null) {
-            overhangs = new ArrayList<Double>();
-        }
-        return this.overhangs;
+    public void setOverhangOffset(org.cip4.lib.xjdf.type.XYPair value) {
+        this.overhangOffset = value;
     }
 
     /**
-     * Gets the value of the layerAmounts property.
+     * Gets the value of the overhang property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getOverhang() {
+        return overhang;
+    }
+
+    /**
+     * Sets the value of the overhang property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOverhang(org.cip4.lib.xjdf.type.XYPair value) {
+        this.overhang = value;
+    }
+
+    /**
+     * Gets the value of the layerAmount property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerAmounts property.
+     * This is why there is not a <CODE>set</CODE> method for the layerAmount property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLayerAmounts().add(newItem);
+     *    getLayerAmount().add(newItem);
      * </pre>
      * 
      * 
@@ -243,11 +236,11 @@ public class PalletizingParams
      * 
      * 
      */
-    public List<Integer> getLayerAmounts() {
-        if (layerAmounts == null) {
-            layerAmounts = new ArrayList<Integer>();
+    public List<Integer> getLayerAmount() {
+        if (layerAmount == null) {
+            layerAmount = new ArrayList<Integer>();
         }
-        return this.layerAmounts;
+        return this.layerAmount;
     }
 
 }

@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "values"
+    "value"
 })
 @XmlRootElement(name = "StringListValue")
 public class StringListValue
@@ -46,24 +46,24 @@ public class StringListValue
 {
 
     @XmlElement(name = "Value")
-    protected List<Object> values;
+    protected List<Object> value;
     @XmlAttribute(name = "Name")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String name;
 
     /**
-     * Gets the value of the values property.
+     * Gets the value of the value property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the values property.
+     * This is why there is not a <CODE>set</CODE> method for the value property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValues().add(newItem);
+     *    getValue().add(newItem);
      * </pre>
      * 
      * 
@@ -73,11 +73,11 @@ public class StringListValue
      * 
      * 
      */
-    public List<Object> getValues() {
-        if (values == null) {
-            values = new ArrayList<Object>();
+    public List<Object> getValue() {
+        if (value == null) {
+            value = new ArrayList<Object>();
         }
-        return this.values;
+        return this.value;
     }
 
     /**

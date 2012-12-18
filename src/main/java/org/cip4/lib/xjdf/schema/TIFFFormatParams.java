@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -44,18 +45,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "tifFtags",
-    "tiffEmbeddedFiles"
+    "tiffEmbeddedFile",
+    "tifFtag"
 })
 @XmlRootElement(name = "TIFFFormatParams")
 public class TIFFFormatParams
     implements Serializable
 {
 
-    @XmlElement(name = "TIFFtag")
-    protected List<TIFFtag> tifFtags;
     @XmlElement(name = "TIFFEmbeddedFile")
-    protected List<TIFFEmbeddedFile> tiffEmbeddedFiles;
+    protected List<TIFFEmbeddedFile> tiffEmbeddedFile;
+    @XmlElement(name = "TIFFtag")
+    protected List<TIFFtag> tifFtag;
     @XmlAttribute(name = "WhiteIsZero")
     protected Boolean whiteIsZero;
     @XmlAttribute(name = "Segmentation")
@@ -65,7 +66,8 @@ public class TIFFFormatParams
     @XmlSchemaType(name = "anySimpleType")
     protected String byteOrder;
     @XmlAttribute(name = "TileSize")
-    protected List<Double> tileSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair tileSize;
     @XmlAttribute(name = "RowsPerStrip")
     protected Integer rowsPerStrip;
     @XmlAttribute(name = "Interleaving")
@@ -74,47 +76,18 @@ public class TIFFFormatParams
     protected Integer separationNameTag;
 
     /**
-     * Gets the value of the tifFtags property.
+     * Gets the value of the tiffEmbeddedFile property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tifFtags property.
+     * This is why there is not a <CODE>set</CODE> method for the tiffEmbeddedFile property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTIFFtags().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TIFFtag }
-     * 
-     * 
-     */
-    public List<TIFFtag> getTIFFtags() {
-        if (tifFtags == null) {
-            tifFtags = new ArrayList<TIFFtag>();
-        }
-        return this.tifFtags;
-    }
-
-    /**
-     * Gets the value of the tiffEmbeddedFiles property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tiffEmbeddedFiles property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTIFFEmbeddedFiles().add(newItem);
+     *    getTIFFEmbeddedFile().add(newItem);
      * </pre>
      * 
      * 
@@ -124,11 +97,40 @@ public class TIFFFormatParams
      * 
      * 
      */
-    public List<TIFFEmbeddedFile> getTIFFEmbeddedFiles() {
-        if (tiffEmbeddedFiles == null) {
-            tiffEmbeddedFiles = new ArrayList<TIFFEmbeddedFile>();
+    public List<TIFFEmbeddedFile> getTIFFEmbeddedFile() {
+        if (tiffEmbeddedFile == null) {
+            tiffEmbeddedFile = new ArrayList<TIFFEmbeddedFile>();
         }
-        return this.tiffEmbeddedFiles;
+        return this.tiffEmbeddedFile;
+    }
+
+    /**
+     * Gets the value of the tifFtag property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the tifFtag property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTIFFtag().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TIFFtag }
+     * 
+     * 
+     */
+    public List<TIFFtag> getTIFFtag() {
+        if (tifFtag == null) {
+            tifFtag = new ArrayList<TIFFtag>();
+        }
+        return this.tifFtag;
     }
 
     /**
@@ -204,32 +206,27 @@ public class TIFFFormatParams
     }
 
     /**
-     * Gets the value of the tileSizes property.
+     * Gets the value of the tileSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tileSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTileSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTileSizes() {
-        if (tileSizes == null) {
-            tileSizes = new ArrayList<Double>();
-        }
-        return this.tileSizes;
+    public org.cip4.lib.xjdf.type.XYPair getTileSize() {
+        return tileSize;
+    }
+
+    /**
+     * Sets the value of the tileSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTileSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.tileSize = value;
     }
 
     /**

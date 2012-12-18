@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GlueApplication", propOrder = {
-    "glueLines"
+    "glueLine"
 })
 public class GlueApplication
     extends ParameterType
@@ -44,24 +44,24 @@ public class GlueApplication
 {
 
     @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "GluingTechnique")
     @XmlSchemaType(name = "anySimpleType")
     protected String gluingTechnique;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the glueLine property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
+     *    getGlueLine().add(newItem);
      * </pre>
      * 
      * 
@@ -71,11 +71,11 @@ public class GlueApplication
      * 
      * 
      */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
         }
-        return this.glueLines;
+        return this.glueLine;
     }
 
     /**

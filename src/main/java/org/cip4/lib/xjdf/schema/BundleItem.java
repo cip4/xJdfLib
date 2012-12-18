@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -50,7 +48,8 @@ public class BundleItem
     @XmlAttribute(name = "Amount")
     protected Integer amount;
     @XmlAttribute(name = "Transformation")
-    protected List<Double> transformations;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix transformation;
     @XmlAttribute(name = "ComponentRef")
     @XmlIDREF
     protected Object componentRef;
@@ -128,32 +127,27 @@ public class BundleItem
     }
 
     /**
-     * Gets the value of the transformations property.
+     * Gets the value of the transformation property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transformations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransformations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTransformations() {
-        if (transformations == null) {
-            transformations = new ArrayList<Double>();
-        }
-        return this.transformations;
+    public org.cip4.lib.xjdf.type.Matrix getTransformation() {
+        return transformation;
+    }
+
+    /**
+     * Sets the value of the transformation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTransformation(org.cip4.lib.xjdf.type.Matrix value) {
+        this.transformation = value;
     }
 
     /**

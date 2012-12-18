@@ -194,13 +194,14 @@ public class Part
     @XmlAttribute(name = "RunPage")
     protected Integer runPage;
     @XmlAttribute(name = "PartVersion")
-    protected List<String> partVersions;
+    protected List<String> partVersion;
     @XmlAttribute(name = "SetRunIndex")
     protected Integer setRunIndex;
     @XmlAttribute(name = "SignatureName")
     protected String signatureName;
     @XmlAttribute(name = "TileID")
-    protected List<Double> tileIDs;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair tileID;
     @XmlAttribute(name = "DocCopies")
     protected Integer docCopies;
     @XmlAttribute(name = "DocTags")
@@ -1224,18 +1225,18 @@ public class Part
     }
 
     /**
-     * Gets the value of the partVersions property.
+     * Gets the value of the partVersion property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the partVersions property.
+     * This is why there is not a <CODE>set</CODE> method for the partVersion property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPartVersions().add(newItem);
+     *    getPartVersion().add(newItem);
      * </pre>
      * 
      * 
@@ -1245,11 +1246,11 @@ public class Part
      * 
      * 
      */
-    public List<String> getPartVersions() {
-        if (partVersions == null) {
-            partVersions = new ArrayList<String>();
+    public List<String> getPartVersion() {
+        if (partVersion == null) {
+            partVersion = new ArrayList<String>();
         }
-        return this.partVersions;
+        return this.partVersion;
     }
 
     /**
@@ -1301,32 +1302,27 @@ public class Part
     }
 
     /**
-     * Gets the value of the tileIDs property.
+     * Gets the value of the tileID property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tileIDs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTileIDs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTileIDs() {
-        if (tileIDs == null) {
-            tileIDs = new ArrayList<Double>();
-        }
-        return this.tileIDs;
+    public org.cip4.lib.xjdf.type.XYPair getTileID() {
+        return tileID;
+    }
+
+    /**
+     * Sets the value of the tileID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTileID(org.cip4.lib.xjdf.type.XYPair value) {
+        this.tileID = value;
     }
 
     /**

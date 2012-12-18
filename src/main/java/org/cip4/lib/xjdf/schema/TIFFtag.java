@@ -51,7 +51,7 @@ public class TIFFtag
     @XmlAttribute(name = "StringValue")
     protected String stringValue;
     @XmlAttribute(name = "IntegerValue")
-    protected List<Integer> integerValues;
+    protected List<Integer> integerValue;
 
     /**
      * Gets the value of the tagNumber property.
@@ -174,18 +174,18 @@ public class TIFFtag
     }
 
     /**
-     * Gets the value of the integerValues property.
+     * Gets the value of the integerValue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the integerValues property.
+     * This is why there is not a <CODE>set</CODE> method for the integerValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIntegerValues().add(newItem);
+     *    getIntegerValue().add(newItem);
      * </pre>
      * 
      * 
@@ -195,11 +195,11 @@ public class TIFFtag
      * 
      * 
      */
-    public List<Integer> getIntegerValues() {
-        if (integerValues == null) {
-            integerValues = new ArrayList<Integer>();
+    public List<Integer> getIntegerValue() {
+        if (integerValue == null) {
+            integerValue = new ArrayList<Integer>();
         }
-        return this.integerValues;
+        return this.integerValue;
     }
 
 }

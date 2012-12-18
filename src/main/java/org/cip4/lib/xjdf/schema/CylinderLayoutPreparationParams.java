@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CylinderLayoutPreparationParams", propOrder = {
-    "productionPaths"
+    "productionPath"
 })
 public class CylinderLayoutPreparationParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class CylinderLayoutPreparationParams
 {
 
     @XmlElement(name = "ProductionPath")
-    protected List<ProductionPath> productionPaths;
+    protected List<ProductionPath> productionPath;
 
     /**
-     * Gets the value of the productionPaths property.
+     * Gets the value of the productionPath property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the productionPaths property.
+     * This is why there is not a <CODE>set</CODE> method for the productionPath property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getProductionPaths().add(newItem);
+     *    getProductionPath().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class CylinderLayoutPreparationParams
      * 
      * 
      */
-    public List<ProductionPath> getProductionPaths() {
-        if (productionPaths == null) {
-            productionPaths = new ArrayList<ProductionPath>();
+    public List<ProductionPath> getProductionPath() {
+        if (productionPath == null) {
+            productionPath = new ArrayList<ProductionPath>();
         }
-        return this.productionPaths;
+        return this.productionPath;
     }
 
 }

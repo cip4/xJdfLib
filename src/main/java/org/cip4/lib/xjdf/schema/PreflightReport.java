@@ -43,18 +43,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PreflightReport", propOrder = {
-    "prItems",
-    "preflightReportRulePools"
+    "preflightReportRulePool",
+    "prItem"
 })
 public class PreflightReport
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "PRItem")
-    protected List<PRItem> prItems;
     @XmlElement(name = "PreflightReportRulePool")
-    protected List<PreflightReportRulePool> preflightReportRulePools;
+    protected List<PreflightReportRulePool> preflightReportRulePool;
+    @XmlElement(name = "PRItem")
+    protected List<PRItem> prItem;
     @XmlAttribute(name = "WarningCount")
     protected Integer warningCount;
     @XmlAttribute(name = "ErrorState")
@@ -73,47 +73,18 @@ public class PreflightReport
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the prItems property.
+     * Gets the value of the preflightReportRulePool property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the prItems property.
+     * This is why there is not a <CODE>set</CODE> method for the preflightReportRulePool property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPRItems().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PRItem }
-     * 
-     * 
-     */
-    public List<PRItem> getPRItems() {
-        if (prItems == null) {
-            prItems = new ArrayList<PRItem>();
-        }
-        return this.prItems;
-    }
-
-    /**
-     * Gets the value of the preflightReportRulePools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the preflightReportRulePools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPreflightReportRulePools().add(newItem);
+     *    getPreflightReportRulePool().add(newItem);
      * </pre>
      * 
      * 
@@ -123,11 +94,40 @@ public class PreflightReport
      * 
      * 
      */
-    public List<PreflightReportRulePool> getPreflightReportRulePools() {
-        if (preflightReportRulePools == null) {
-            preflightReportRulePools = new ArrayList<PreflightReportRulePool>();
+    public List<PreflightReportRulePool> getPreflightReportRulePool() {
+        if (preflightReportRulePool == null) {
+            preflightReportRulePool = new ArrayList<PreflightReportRulePool>();
         }
-        return this.preflightReportRulePools;
+        return this.preflightReportRulePool;
+    }
+
+    /**
+     * Gets the value of the prItem property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the prItem property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPRItem().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PRItem }
+     * 
+     * 
+     */
+    public List<PRItem> getPRItem() {
+        if (prItem == null) {
+            prItem = new ArrayList<PRItem>();
+        }
+        return this.prItem;
     }
 
     /**

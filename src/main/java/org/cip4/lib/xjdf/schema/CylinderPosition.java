@@ -40,7 +40,7 @@ public class CylinderPosition
 {
 
     @XmlAttribute(name = "PlatePosition")
-    protected List<Double> platePositions;
+    protected List<Double> platePosition;
     @XmlAttribute(name = "PlateUsage")
     @XmlSchemaType(name = "anySimpleType")
     protected String plateUsage;
@@ -51,18 +51,18 @@ public class CylinderPosition
     protected Integer deviceModuleIndex;
 
     /**
-     * Gets the value of the platePositions property.
+     * Gets the value of the platePosition property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the platePositions property.
+     * This is why there is not a <CODE>set</CODE> method for the platePosition property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPlatePositions().add(newItem);
+     *    getPlatePosition().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class CylinderPosition
      * 
      * 
      */
-    public List<Double> getPlatePositions() {
-        if (platePositions == null) {
-            platePositions = new ArrayList<Double>();
+    public List<Double> getPlatePosition() {
+        if (platePosition == null) {
+            platePosition = new ArrayList<Double>();
         }
-        return this.platePositions;
+        return this.platePosition;
     }
 
     /**

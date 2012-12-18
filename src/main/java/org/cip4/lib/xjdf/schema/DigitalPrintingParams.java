@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DigitalPrintingParams", propOrder = {
-    "disjointings"
+    "disjointing"
 })
 public class DigitalPrintingParams
     extends ParameterType
@@ -61,7 +61,7 @@ public class DigitalPrintingParams
 {
 
     @XmlElement(name = "Disjointing")
-    protected List<Disjointing> disjointings;
+    protected List<Disjointing> disjointing;
     @XmlAttribute(name = "NonPrintableMarginLeft")
     protected Double nonPrintableMarginLeft;
     @XmlAttribute(name = "NonPrintableMarginTop")
@@ -103,18 +103,18 @@ public class DigitalPrintingParams
     protected Object componentRef;
 
     /**
-     * Gets the value of the disjointings property.
+     * Gets the value of the disjointing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the disjointings property.
+     * This is why there is not a <CODE>set</CODE> method for the disjointing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDisjointings().add(newItem);
+     *    getDisjointing().add(newItem);
      * </pre>
      * 
      * 
@@ -124,11 +124,11 @@ public class DigitalPrintingParams
      * 
      * 
      */
-    public List<Disjointing> getDisjointings() {
-        if (disjointings == null) {
-            disjointings = new ArrayList<Disjointing>();
+    public List<Disjointing> getDisjointing() {
+        if (disjointing == null) {
+            disjointing = new ArrayList<Disjointing>();
         }
-        return this.disjointings;
+        return this.disjointing;
     }
 
     /**

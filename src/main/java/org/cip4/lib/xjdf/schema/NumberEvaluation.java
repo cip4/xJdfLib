@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NumberEvaluation", propOrder = {
-    "basicPreflightTests"
+    "basicPreflightTest"
 })
 public class NumberEvaluation
     extends TermType
@@ -47,31 +48,33 @@ public class NumberEvaluation
 {
 
     @XmlElement(name = "BasicPreflightTest")
-    protected List<BasicPreflightTest> basicPreflightTests;
+    protected List<BasicPreflightTest> basicPreflightTest;
     @XmlAttribute(name = "ValueMod")
-    protected List<Double> valueMods;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair valueMod;
     @XmlAttribute(name = "ValueList")
-    protected List<Double> valueLists;
+    protected List<Double> valueList;
     @XmlAttribute(name = "Tolerance")
-    protected List<Double> tolerances;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair tolerance;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
     protected String xPathRoot;
 
     /**
-     * Gets the value of the basicPreflightTests property.
+     * Gets the value of the basicPreflightTest property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTests property.
+     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTest property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBasicPreflightTests().add(newItem);
+     *    getBasicPreflightTest().add(newItem);
      * </pre>
      * 
      * 
@@ -81,26 +84,50 @@ public class NumberEvaluation
      * 
      * 
      */
-    public List<BasicPreflightTest> getBasicPreflightTests() {
-        if (basicPreflightTests == null) {
-            basicPreflightTests = new ArrayList<BasicPreflightTest>();
+    public List<BasicPreflightTest> getBasicPreflightTest() {
+        if (basicPreflightTest == null) {
+            basicPreflightTest = new ArrayList<BasicPreflightTest>();
         }
-        return this.basicPreflightTests;
+        return this.basicPreflightTest;
     }
 
     /**
-     * Gets the value of the valueMods property.
+     * Gets the value of the valueMod property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getValueMod() {
+        return valueMod;
+    }
+
+    /**
+     * Sets the value of the valueMod property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setValueMod(org.cip4.lib.xjdf.type.XYPair value) {
+        this.valueMod = value;
+    }
+
+    /**
+     * Gets the value of the valueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueMods property.
+     * This is why there is not a <CODE>set</CODE> method for the valueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValueMods().add(newItem);
+     *    getValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -110,69 +137,35 @@ public class NumberEvaluation
      * 
      * 
      */
-    public List<Double> getValueMods() {
-        if (valueMods == null) {
-            valueMods = new ArrayList<Double>();
+    public List<Double> getValueList() {
+        if (valueList == null) {
+            valueList = new ArrayList<Double>();
         }
-        return this.valueMods;
+        return this.valueList;
     }
 
     /**
-     * Gets the value of the valueLists property.
+     * Gets the value of the tolerance property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueLists property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getValueLists().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getValueLists() {
-        if (valueLists == null) {
-            valueLists = new ArrayList<Double>();
-        }
-        return this.valueLists;
+    public org.cip4.lib.xjdf.type.XYPair getTolerance() {
+        return tolerance;
     }
 
     /**
-     * Gets the value of the tolerances property.
+     * Sets the value of the tolerance property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tolerances property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTolerances().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTolerances() {
-        if (tolerances == null) {
-            tolerances = new ArrayList<Double>();
-        }
-        return this.tolerances;
+    public void setTolerance(org.cip4.lib.xjdf.type.XYPair value) {
+        this.tolerance = value;
     }
 
     /**

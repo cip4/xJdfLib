@@ -52,7 +52,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "deviceNSpaces"
+    "deviceNSpace"
 })
 @XmlRootElement(name = "ColorSpaceConversionOp")
 public class ColorSpaceConversionOp
@@ -60,7 +60,7 @@ public class ColorSpaceConversionOp
 {
 
     @XmlElement(name = "DeviceNSpace")
-    protected List<DeviceNSpace> deviceNSpaces;
+    protected List<DeviceNSpace> deviceNSpace;
     @XmlAttribute(name = "RenderingIntent")
     @XmlSchemaType(name = "anySimpleType")
     protected String renderingIntent;
@@ -90,18 +90,18 @@ public class ColorSpaceConversionOp
     protected List<String> separationNames;
 
     /**
-     * Gets the value of the deviceNSpaces property.
+     * Gets the value of the deviceNSpace property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceNSpaces property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceNSpace property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeviceNSpaces().add(newItem);
+     *    getDeviceNSpace().add(newItem);
      * </pre>
      * 
      * 
@@ -111,11 +111,11 @@ public class ColorSpaceConversionOp
      * 
      * 
      */
-    public List<DeviceNSpace> getDeviceNSpaces() {
-        if (deviceNSpaces == null) {
-            deviceNSpaces = new ArrayList<DeviceNSpace>();
+    public List<DeviceNSpace> getDeviceNSpace() {
+        if (deviceNSpace == null) {
+            deviceNSpace = new ArrayList<DeviceNSpace>();
         }
-        return this.deviceNSpaces;
+        return this.deviceNSpace;
     }
 
     /**

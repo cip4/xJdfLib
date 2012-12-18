@@ -53,18 +53,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BinderySignature", propOrder = {
-    "signatureCells",
-    "folds"
+    "fold",
+    "signatureCell"
 })
 public class BinderySignature
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "SignatureCell")
-    protected List<SignatureCell> signatureCells;
     @XmlElement(name = "Fold")
-    protected List<Fold> folds;
+    protected List<Fold> fold;
+    @XmlElement(name = "SignatureCell")
+    protected List<SignatureCell> signatureCell;
     @XmlAttribute(name = "BindingEdge")
     @XmlSchemaType(name = "anySimpleType")
     protected String bindingEdge;
@@ -77,7 +77,8 @@ public class BinderySignature
     @XmlAttribute(name = "FoldCatalog")
     protected String foldCatalog;
     @XmlAttribute(name = "WebCellAlignment")
-    protected List<Double> webCellAlignments;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair webCellAlignment;
     @XmlAttribute(name = "StaggerContinuous")
     protected Boolean staggerContinuous;
     @XmlAttribute(name = "StaggerRows")
@@ -94,7 +95,8 @@ public class BinderySignature
     @XmlAttribute(name = "OutsideGutter")
     protected Boolean outsideGutter;
     @XmlAttribute(name = "NumberUp")
-    protected List<Double> numberUps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair numberUp;
     @XmlAttribute(name = "StaggerColumns")
     protected String staggerColumns;
     @XmlAttribute(name = "DieLayoutRef")
@@ -102,47 +104,18 @@ public class BinderySignature
     protected Object dieLayoutRef;
 
     /**
-     * Gets the value of the signatureCells property.
+     * Gets the value of the fold property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the signatureCells property.
+     * This is why there is not a <CODE>set</CODE> method for the fold property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSignatureCells().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SignatureCell }
-     * 
-     * 
-     */
-    public List<SignatureCell> getSignatureCells() {
-        if (signatureCells == null) {
-            signatureCells = new ArrayList<SignatureCell>();
-        }
-        return this.signatureCells;
-    }
-
-    /**
-     * Gets the value of the folds property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the folds property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFolds().add(newItem);
+     *    getFold().add(newItem);
      * </pre>
      * 
      * 
@@ -152,11 +125,40 @@ public class BinderySignature
      * 
      * 
      */
-    public List<Fold> getFolds() {
-        if (folds == null) {
-            folds = new ArrayList<Fold>();
+    public List<Fold> getFold() {
+        if (fold == null) {
+            fold = new ArrayList<Fold>();
         }
-        return this.folds;
+        return this.fold;
+    }
+
+    /**
+     * Gets the value of the signatureCell property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the signatureCell property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSignatureCell().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SignatureCell }
+     * 
+     * 
+     */
+    public List<SignatureCell> getSignatureCell() {
+        if (signatureCell == null) {
+            signatureCell = new ArrayList<SignatureCell>();
+        }
+        return this.signatureCell;
     }
 
     /**
@@ -256,32 +258,27 @@ public class BinderySignature
     }
 
     /**
-     * Gets the value of the webCellAlignments property.
+     * Gets the value of the webCellAlignment property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the webCellAlignments property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getWebCellAlignments().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getWebCellAlignments() {
-        if (webCellAlignments == null) {
-            webCellAlignments = new ArrayList<Double>();
-        }
-        return this.webCellAlignments;
+    public org.cip4.lib.xjdf.type.XYPair getWebCellAlignment() {
+        return webCellAlignment;
+    }
+
+    /**
+     * Sets the value of the webCellAlignment property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setWebCellAlignment(org.cip4.lib.xjdf.type.XYPair value) {
+        this.webCellAlignment = value;
     }
 
     /**
@@ -429,32 +426,27 @@ public class BinderySignature
     }
 
     /**
-     * Gets the value of the numberUps property.
+     * Gets the value of the numberUp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numberUps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getNumberUps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getNumberUps() {
-        if (numberUps == null) {
-            numberUps = new ArrayList<Double>();
-        }
-        return this.numberUps;
+    public org.cip4.lib.xjdf.type.XYPair getNumberUp() {
+        return numberUp;
+    }
+
+    /**
+     * Sets the value of the numberUp property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumberUp(org.cip4.lib.xjdf.type.XYPair value) {
+        this.numberUp = value;
     }
 
     /**

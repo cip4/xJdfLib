@@ -63,44 +63,44 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "barcodes",
-    "events",
-    "systemTimeSets",
-    "employees",
-    "errors",
-    "fcnKeies",
-    "milestones",
-    "counterResets",
-    "costCenters",
-    "parts"
+    "part",
+    "costCenter",
+    "counterReset",
+    "milestone",
+    "fcnKey",
+    "error",
+    "employee",
+    "systemTimeSet",
+    "event",
+    "barcode"
 })
 @XmlRootElement(name = "Notification")
 public class Notification
     implements Serializable
 {
 
-    @XmlElement(name = "Barcode")
-    protected List<Barcode> barcodes;
-    @XmlElement(name = "Event")
-    protected List<Event> events;
-    @XmlElement(name = "SystemTimeSet")
-    protected List<SystemTimeSet> systemTimeSets;
-    @XmlElement(name = "Employee")
-    protected List<Employee> employees;
-    @XmlElement(name = "Error")
-    protected List<Error> errors;
-    @XmlElement(name = "FCNKey")
-    protected List<FCNKey> fcnKeies;
-    @XmlElement(name = "Milestone")
-    protected List<Milestone> milestones;
-    @XmlElement(name = "CounterReset")
-    protected List<CounterReset> counterResets;
-    @XmlElement(name = "CostCenter")
-    protected List<CostCenter> costCenters;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "CostCenter")
+    protected List<CostCenter> costCenter;
+    @XmlElement(name = "CounterReset")
+    protected List<CounterReset> counterReset;
+    @XmlElement(name = "Milestone")
+    protected List<Milestone> milestone;
+    @XmlElement(name = "FCNKey")
+    protected List<FCNKey> fcnKey;
+    @XmlElement(name = "Error")
+    protected List<Error> error;
+    @XmlElement(name = "Employee")
+    protected List<Employee> employee;
+    @XmlElement(name = "SystemTimeSet")
+    protected List<SystemTimeSet> systemTimeSet;
+    @XmlElement(name = "Event")
+    protected List<Event> event;
+    @XmlElement(name = "Barcode")
+    protected List<Barcode> barcode;
     @XmlAttribute(name = "CombinedProcessIndex")
-    protected List<Integer> combinedProcessIndices;
+    protected List<Integer> combinedProcessIndex;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -135,279 +135,18 @@ public class Notification
     protected String agentVersion;
 
     /**
-     * Gets the value of the barcodes property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the barcodes property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBarcodes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Barcode }
-     * 
-     * 
-     */
-    public List<Barcode> getBarcodes() {
-        if (barcodes == null) {
-            barcodes = new ArrayList<Barcode>();
-        }
-        return this.barcodes;
-    }
-
-    /**
-     * Gets the value of the events property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the events property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEvents().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Event }
-     * 
-     * 
-     */
-    public List<Event> getEvents() {
-        if (events == null) {
-            events = new ArrayList<Event>();
-        }
-        return this.events;
-    }
-
-    /**
-     * Gets the value of the systemTimeSets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the systemTimeSets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSystemTimeSets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SystemTimeSet }
-     * 
-     * 
-     */
-    public List<SystemTimeSet> getSystemTimeSets() {
-        if (systemTimeSets == null) {
-            systemTimeSets = new ArrayList<SystemTimeSet>();
-        }
-        return this.systemTimeSets;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Employee }
-     * 
-     * 
-     */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
-        }
-        return this.employees;
-    }
-
-    /**
-     * Gets the value of the errors property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the errors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getErrors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Error }
-     * 
-     * 
-     */
-    public List<Error> getErrors() {
-        if (errors == null) {
-            errors = new ArrayList<Error>();
-        }
-        return this.errors;
-    }
-
-    /**
-     * Gets the value of the fcnKeies property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fcnKeies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFCNKeies().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link FCNKey }
-     * 
-     * 
-     */
-    public List<FCNKey> getFCNKeies() {
-        if (fcnKeies == null) {
-            fcnKeies = new ArrayList<FCNKey>();
-        }
-        return this.fcnKeies;
-    }
-
-    /**
-     * Gets the value of the milestones property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the milestones property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMilestones().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Milestone }
-     * 
-     * 
-     */
-    public List<Milestone> getMilestones() {
-        if (milestones == null) {
-            milestones = new ArrayList<Milestone>();
-        }
-        return this.milestones;
-    }
-
-    /**
-     * Gets the value of the counterResets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the counterResets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCounterResets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CounterReset }
-     * 
-     * 
-     */
-    public List<CounterReset> getCounterResets() {
-        if (counterResets == null) {
-            counterResets = new ArrayList<CounterReset>();
-        }
-        return this.counterResets;
-    }
-
-    /**
-     * Gets the value of the costCenters property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the costCenters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCostCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CostCenter }
-     * 
-     * 
-     */
-    public List<CostCenter> getCostCenters() {
-        if (costCenters == null) {
-            costCenters = new ArrayList<CostCenter>();
-        }
-        return this.costCenters;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -417,26 +156,287 @@ public class Notification
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
     }
 
     /**
-     * Gets the value of the combinedProcessIndices property.
+     * Gets the value of the costCenter property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the combinedProcessIndices property.
+     * This is why there is not a <CODE>set</CODE> method for the costCenter property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCombinedProcessIndices().add(newItem);
+     *    getCostCenter().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CostCenter }
+     * 
+     * 
+     */
+    public List<CostCenter> getCostCenter() {
+        if (costCenter == null) {
+            costCenter = new ArrayList<CostCenter>();
+        }
+        return this.costCenter;
+    }
+
+    /**
+     * Gets the value of the counterReset property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the counterReset property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCounterReset().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CounterReset }
+     * 
+     * 
+     */
+    public List<CounterReset> getCounterReset() {
+        if (counterReset == null) {
+            counterReset = new ArrayList<CounterReset>();
+        }
+        return this.counterReset;
+    }
+
+    /**
+     * Gets the value of the milestone property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the milestone property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMilestone().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Milestone }
+     * 
+     * 
+     */
+    public List<Milestone> getMilestone() {
+        if (milestone == null) {
+            milestone = new ArrayList<Milestone>();
+        }
+        return this.milestone;
+    }
+
+    /**
+     * Gets the value of the fcnKey property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the fcnKey property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFCNKey().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link FCNKey }
+     * 
+     * 
+     */
+    public List<FCNKey> getFCNKey() {
+        if (fcnKey == null) {
+            fcnKey = new ArrayList<FCNKey>();
+        }
+        return this.fcnKey;
+    }
+
+    /**
+     * Gets the value of the error property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the error property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getError().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Error }
+     * 
+     * 
+     */
+    public List<Error> getError() {
+        if (error == null) {
+            error = new ArrayList<Error>();
+        }
+        return this.error;
+    }
+
+    /**
+     * Gets the value of the employee property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEmployee().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Employee }
+     * 
+     * 
+     */
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
+        }
+        return this.employee;
+    }
+
+    /**
+     * Gets the value of the systemTimeSet property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the systemTimeSet property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSystemTimeSet().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SystemTimeSet }
+     * 
+     * 
+     */
+    public List<SystemTimeSet> getSystemTimeSet() {
+        if (systemTimeSet == null) {
+            systemTimeSet = new ArrayList<SystemTimeSet>();
+        }
+        return this.systemTimeSet;
+    }
+
+    /**
+     * Gets the value of the event property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the event property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEvent().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Event }
+     * 
+     * 
+     */
+    public List<Event> getEvent() {
+        if (event == null) {
+            event = new ArrayList<Event>();
+        }
+        return this.event;
+    }
+
+    /**
+     * Gets the value of the barcode property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the barcode property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBarcode().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Barcode }
+     * 
+     * 
+     */
+    public List<Barcode> getBarcode() {
+        if (barcode == null) {
+            barcode = new ArrayList<Barcode>();
+        }
+        return this.barcode;
+    }
+
+    /**
+     * Gets the value of the combinedProcessIndex property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the combinedProcessIndex property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCombinedProcessIndex().add(newItem);
      * </pre>
      * 
      * 
@@ -446,11 +446,11 @@ public class Notification
      * 
      * 
      */
-    public List<Integer> getCombinedProcessIndices() {
-        if (combinedProcessIndices == null) {
-            combinedProcessIndices = new ArrayList<Integer>();
+    public List<Integer> getCombinedProcessIndex() {
+        if (combinedProcessIndex == null) {
+            combinedProcessIndex = new ArrayList<Integer>();
         }
-        return this.combinedProcessIndices;
+        return this.combinedProcessIndex;
     }
 
     /**

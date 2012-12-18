@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BlockPreparationParams", propOrder = {
-    "registerRibbons"
+    "registerRibbon"
 })
 public class BlockPreparationParams
     extends ParameterType
@@ -46,7 +46,7 @@ public class BlockPreparationParams
 {
 
     @XmlElement(name = "RegisterRibbon")
-    protected List<RegisterRibbon> registerRibbons;
+    protected List<RegisterRibbon> registerRibbon;
     @XmlAttribute(name = "Rounding")
     protected Double rounding;
     @XmlAttribute(name = "Backing")
@@ -56,18 +56,18 @@ public class BlockPreparationParams
     protected String tightBacking;
 
     /**
-     * Gets the value of the registerRibbons property.
+     * Gets the value of the registerRibbon property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the registerRibbons property.
+     * This is why there is not a <CODE>set</CODE> method for the registerRibbon property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRegisterRibbons().add(newItem);
+     *    getRegisterRibbon().add(newItem);
      * </pre>
      * 
      * 
@@ -77,11 +77,11 @@ public class BlockPreparationParams
      * 
      * 
      */
-    public List<RegisterRibbon> getRegisterRibbons() {
-        if (registerRibbons == null) {
-            registerRibbons = new ArrayList<RegisterRibbon>();
+    public List<RegisterRibbon> getRegisterRibbon() {
+        if (registerRibbon == null) {
+            registerRibbon = new ArrayList<RegisterRibbon>();
         }
-        return this.registerRibbons;
+        return this.registerRibbon;
     }
 
     /**

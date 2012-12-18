@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ImageCompressionParams", propOrder = {
-    "imageCompressions"
+    "imageCompression"
 })
 public class ImageCompressionParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class ImageCompressionParams
 {
 
     @XmlElement(name = "ImageCompression")
-    protected List<ImageCompression> imageCompressions;
+    protected List<ImageCompression> imageCompression;
 
     /**
-     * Gets the value of the imageCompressions property.
+     * Gets the value of the imageCompression property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the imageCompressions property.
+     * This is why there is not a <CODE>set</CODE> method for the imageCompression property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getImageCompressions().add(newItem);
+     *    getImageCompression().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class ImageCompressionParams
      * 
      * 
      */
-    public List<ImageCompression> getImageCompressions() {
-        if (imageCompressions == null) {
-            imageCompressions = new ArrayList<ImageCompression>();
+    public List<ImageCompression> getImageCompression() {
+        if (imageCompression == null) {
+            imageCompression = new ArrayList<ImageCompression>();
         }
-        return this.imageCompressions;
+        return this.imageCompression;
     }
 
 }

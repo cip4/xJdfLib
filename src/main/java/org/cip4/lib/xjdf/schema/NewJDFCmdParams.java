@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idInfos"
+    "idInfo"
 })
 @XmlRootElement(name = "NewJDFCmdParams")
 public class NewJDFCmdParams
@@ -44,23 +44,23 @@ public class NewJDFCmdParams
 {
 
     @XmlElement(name = "IDInfo")
-    protected List<IDInfo> idInfos;
+    protected List<IDInfo> idInfo;
     @XmlAttribute(name = "JDFDetails")
     protected String jdfDetails;
 
     /**
-     * Gets the value of the idInfos property.
+     * Gets the value of the idInfo property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the idInfos property.
+     * This is why there is not a <CODE>set</CODE> method for the idInfo property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIDInfos().add(newItem);
+     *    getIDInfo().add(newItem);
      * </pre>
      * 
      * 
@@ -70,11 +70,11 @@ public class NewJDFCmdParams
      * 
      * 
      */
-    public List<IDInfo> getIDInfos() {
-        if (idInfos == null) {
-            idInfos = new ArrayList<IDInfo>();
+    public List<IDInfo> getIDInfo() {
+        if (idInfo == null) {
+            idInfo = new ArrayList<IDInfo>();
         }
-        return this.idInfos;
+        return this.idInfo;
     }
 
     /**

@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -40,7 +39,8 @@ public class ShapeTemplate
 {
 
     @XmlAttribute(name = "InnerDimensions")
-    protected List<Double> innerDimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape innerDimensions;
     @XmlAttribute(name = "Standard")
     protected String standard;
     @XmlAttribute(name = "Name")
@@ -52,30 +52,25 @@ public class ShapeTemplate
     /**
      * Gets the value of the innerDimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the innerDimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInnerDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getInnerDimensions() {
-        if (innerDimensions == null) {
-            innerDimensions = new ArrayList<Double>();
-        }
-        return this.innerDimensions;
+    public org.cip4.lib.xjdf.type.Shape getInnerDimensions() {
+        return innerDimensions;
+    }
+
+    /**
+     * Sets the value of the innerDimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInnerDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.innerDimensions = value;
     }
 
     /**

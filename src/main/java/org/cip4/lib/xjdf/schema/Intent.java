@@ -71,24 +71,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "comments",
-    "generalIDs",
-    "parts",
-    "intentTypes"
+    "intentType",
+    "part",
+    "generalID",
+    "comment"
 })
 @XmlRootElement(name = "Intent")
 public class Intent
     implements Serializable
 {
 
-    @XmlElement(name = "Comment")
-    protected List<Comment> comments;
-    @XmlElement(name = "GeneralID")
-    protected List<GeneralID> generalIDs;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
     @XmlElementRef(name = "IntentType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
-    protected List<JAXBElement<? extends IntentType>> intentTypes;
+    protected List<JAXBElement<? extends IntentType>> intentType;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
+    @XmlElement(name = "GeneralID")
+    protected List<GeneralID> generalID;
+    @XmlElement(name = "Comment")
+    protected List<Comment> comment;
     @XmlAttribute(name = "Locked")
     protected Boolean locked;
     @XmlAttribute(name = "PipeURL")
@@ -135,76 +135,65 @@ public class Intent
     protected String descriptiveName;
 
     /**
-     * Gets the value of the comments property.
+     * Gets the value of the intentType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comments property.
+     * This is why there is not a <CODE>set</CODE> method for the intentType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getComments().add(newItem);
+     *    getIntentType().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Comment }
+     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ColorIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link SizeIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link IntentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link IntentResource }{@code >}
+     * {@link JAXBElement }{@code <}{@link FoldingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link LaminatingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProductionIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link LayoutIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link InsertingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link EmbossingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link MediaIntent }{@code >}
      * 
      * 
      */
-    public List<Comment> getComments() {
-        if (comments == null) {
-            comments = new ArrayList<Comment>();
+    public List<JAXBElement<? extends IntentType>> getIntentType() {
+        if (intentType == null) {
+            intentType = new ArrayList<JAXBElement<? extends IntentType>>();
         }
-        return this.comments;
+        return this.intentType;
     }
 
     /**
-     * Gets the value of the generalIDs property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalIDs property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGeneralIDs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GeneralID }
-     * 
-     * 
-     */
-    public List<GeneralID> getGeneralIDs() {
-        if (generalIDs == null) {
-            generalIDs = new ArrayList<GeneralID>();
-        }
-        return this.generalIDs;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -214,58 +203,69 @@ public class Intent
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
     }
 
     /**
-     * Gets the value of the intentTypes property.
+     * Gets the value of the generalID property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the intentTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the generalID property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIntentTypes().add(newItem);
+     *    getGeneralID().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link MediaIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link SizeIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProductionIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link IntentResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link IntentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link FoldingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ColorIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link LaminatingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link LayoutIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link EmbossingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link InsertingIntent }{@code >}
+     * {@link GeneralID }
      * 
      * 
      */
-    public List<JAXBElement<? extends IntentType>> getIntentTypes() {
-        if (intentTypes == null) {
-            intentTypes = new ArrayList<JAXBElement<? extends IntentType>>();
+    public List<GeneralID> getGeneralID() {
+        if (generalID == null) {
+            generalID = new ArrayList<GeneralID>();
         }
-        return this.intentTypes;
+        return this.generalID;
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the comment property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getComment().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Comment }
+     * 
+     * 
+     */
+    public List<Comment> getComment() {
+        if (comment == null) {
+            comment = new ArrayList<Comment>();
+        }
+        return this.comment;
     }
 
     /**

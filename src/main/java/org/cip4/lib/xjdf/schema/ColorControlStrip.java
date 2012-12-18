@@ -42,24 +42,26 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ColorControlStrip", propOrder = {
-    "cielabMeasuringFields",
-    "densityMeasuringFields"
+    "densityMeasuringField",
+    "cielabMeasuringField"
 })
 public class ColorControlStrip
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "CIELABMeasuringField")
-    protected List<CIELABMeasuringField> cielabMeasuringFields;
     @XmlElement(name = "DensityMeasuringField")
-    protected List<DensityMeasuringField> densityMeasuringFields;
+    protected List<DensityMeasuringField> densityMeasuringField;
+    @XmlElement(name = "CIELABMeasuringField")
+    protected List<CIELABMeasuringField> cielabMeasuringField;
     @XmlAttribute(name = "Rotation")
     protected Double rotation;
     @XmlAttribute(name = "Size")
-    protected List<Double> sizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair size;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
     @XmlAttribute(name = "StripType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String stripType;
@@ -67,47 +69,18 @@ public class ColorControlStrip
     protected List<String> separationNames;
 
     /**
-     * Gets the value of the cielabMeasuringFields property.
+     * Gets the value of the densityMeasuringField property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cielabMeasuringFields property.
+     * This is why there is not a <CODE>set</CODE> method for the densityMeasuringField property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCIELABMeasuringFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CIELABMeasuringField }
-     * 
-     * 
-     */
-    public List<CIELABMeasuringField> getCIELABMeasuringFields() {
-        if (cielabMeasuringFields == null) {
-            cielabMeasuringFields = new ArrayList<CIELABMeasuringField>();
-        }
-        return this.cielabMeasuringFields;
-    }
-
-    /**
-     * Gets the value of the densityMeasuringFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the densityMeasuringFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDensityMeasuringFields().add(newItem);
+     *    getDensityMeasuringField().add(newItem);
      * </pre>
      * 
      * 
@@ -117,11 +90,40 @@ public class ColorControlStrip
      * 
      * 
      */
-    public List<DensityMeasuringField> getDensityMeasuringFields() {
-        if (densityMeasuringFields == null) {
-            densityMeasuringFields = new ArrayList<DensityMeasuringField>();
+    public List<DensityMeasuringField> getDensityMeasuringField() {
+        if (densityMeasuringField == null) {
+            densityMeasuringField = new ArrayList<DensityMeasuringField>();
         }
-        return this.densityMeasuringFields;
+        return this.densityMeasuringField;
+    }
+
+    /**
+     * Gets the value of the cielabMeasuringField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the cielabMeasuringField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCIELABMeasuringField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CIELABMeasuringField }
+     * 
+     * 
+     */
+    public List<CIELABMeasuringField> getCIELABMeasuringField() {
+        if (cielabMeasuringField == null) {
+            cielabMeasuringField = new ArrayList<CIELABMeasuringField>();
+        }
+        return this.cielabMeasuringField;
     }
 
     /**
@@ -149,61 +151,51 @@ public class ColorControlStrip
     }
 
     /**
-     * Gets the value of the sizes property.
+     * Gets the value of the size property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSizes() {
-        if (sizes == null) {
-            sizes = new ArrayList<Double>();
-        }
-        return this.sizes;
+    public org.cip4.lib.xjdf.type.XYPair getSize() {
+        return size;
     }
 
     /**
-     * Gets the value of the centers property.
+     * Sets the value of the size property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public void setSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.size = value;
+    }
+
+    /**
+     * Gets the value of the center property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
+    }
+
+    /**
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
     }
 
     /**

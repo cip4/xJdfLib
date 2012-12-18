@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StackingParams", propOrder = {
-    "disjointings"
+    "disjointing"
 })
 public class StackingParams
     extends ParameterType
@@ -57,7 +57,7 @@ public class StackingParams
 {
 
     @XmlElement(name = "Disjointing")
-    protected List<Disjointing> disjointings;
+    protected List<Disjointing> disjointing;
     @XmlAttribute(name = "MaxWeight")
     protected Double maxWeight;
     @XmlAttribute(name = "MaxHeight")
@@ -84,23 +84,23 @@ public class StackingParams
     @XmlSchemaType(name = "anySimpleType")
     protected String preStackMethod;
     @XmlAttribute(name = "LayerAmount")
-    protected List<Integer> layerAmounts;
+    protected List<Integer> layerAmount;
     @XmlAttribute(name = "PreStackAmount")
     protected Integer preStackAmount;
 
     /**
-     * Gets the value of the disjointings property.
+     * Gets the value of the disjointing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the disjointings property.
+     * This is why there is not a <CODE>set</CODE> method for the disjointing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDisjointings().add(newItem);
+     *    getDisjointing().add(newItem);
      * </pre>
      * 
      * 
@@ -110,11 +110,11 @@ public class StackingParams
      * 
      * 
      */
-    public List<Disjointing> getDisjointings() {
-        if (disjointings == null) {
-            disjointings = new ArrayList<Disjointing>();
+    public List<Disjointing> getDisjointing() {
+        if (disjointing == null) {
+            disjointing = new ArrayList<Disjointing>();
         }
-        return this.disjointings;
+        return this.disjointing;
     }
 
     /**
@@ -411,18 +411,18 @@ public class StackingParams
     }
 
     /**
-     * Gets the value of the layerAmounts property.
+     * Gets the value of the layerAmount property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerAmounts property.
+     * This is why there is not a <CODE>set</CODE> method for the layerAmount property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLayerAmounts().add(newItem);
+     *    getLayerAmount().add(newItem);
      * </pre>
      * 
      * 
@@ -432,11 +432,11 @@ public class StackingParams
      * 
      * 
      */
-    public List<Integer> getLayerAmounts() {
-        if (layerAmounts == null) {
-            layerAmounts = new ArrayList<Integer>();
+    public List<Integer> getLayerAmount() {
+        if (layerAmount == null) {
+            layerAmount = new ArrayList<Integer>();
         }
-        return this.layerAmounts;
+        return this.layerAmount;
     }
 
     /**

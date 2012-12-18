@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "employees"
+    "employee"
 })
 @XmlRootElement(name = "ModuleStatus")
 public class ModuleStatus
@@ -51,13 +51,13 @@ public class ModuleStatus
 {
 
     @XmlElement(name = "Employee")
-    protected List<Employee> employees;
+    protected List<Employee> employee;
     @XmlAttribute(name = "DeviceStatus")
     protected EnumDeviceStatus deviceStatus;
     @XmlAttribute(name = "StatusDetails")
     protected String statusDetails;
     @XmlAttribute(name = "CombinedProcessIndex")
-    protected List<Integer> combinedProcessIndices;
+    protected List<Integer> combinedProcessIndex;
     @XmlAttribute(name = "ModuleType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String moduleType;
@@ -67,18 +67,18 @@ public class ModuleStatus
     protected Integer moduleIndex;
 
     /**
-     * Gets the value of the employees property.
+     * Gets the value of the employee property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEmployees().add(newItem);
+     *    getEmployee().add(newItem);
      * </pre>
      * 
      * 
@@ -88,11 +88,11 @@ public class ModuleStatus
      * 
      * 
      */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
         }
-        return this.employees;
+        return this.employee;
     }
 
     /**
@@ -144,18 +144,18 @@ public class ModuleStatus
     }
 
     /**
-     * Gets the value of the combinedProcessIndices property.
+     * Gets the value of the combinedProcessIndex property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the combinedProcessIndices property.
+     * This is why there is not a <CODE>set</CODE> method for the combinedProcessIndex property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCombinedProcessIndices().add(newItem);
+     *    getCombinedProcessIndex().add(newItem);
      * </pre>
      * 
      * 
@@ -165,11 +165,11 @@ public class ModuleStatus
      * 
      * 
      */
-    public List<Integer> getCombinedProcessIndices() {
-        if (combinedProcessIndices == null) {
-            combinedProcessIndices = new ArrayList<Integer>();
+    public List<Integer> getCombinedProcessIndex() {
+        if (combinedProcessIndex == null) {
+            combinedProcessIndex = new ArrayList<Integer>();
         }
-        return this.combinedProcessIndices;
+        return this.combinedProcessIndex;
     }
 
     /**

@@ -21,6 +21,7 @@ import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.ColorIntent;
 import org.cip4.lib.xjdf.schema.Comment;
+import org.cip4.lib.xjdf.schema.ContentObject;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.GeneralID;
@@ -31,6 +32,10 @@ import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.type.Matrix;
+import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -195,44 +200,37 @@ public class XJdfNodeFactoryTest {
 	public void testCreateLayoutIntent() {
 
 		// arrange
-		final Integer PAGES = 23;
-		final String SIDES = UUID.randomUUID().toString();
-		final List<Double> FINISHED_DIMENSIONS = new ArrayList<Double>();
-		FINISHED_DIMENSIONS.add(4.4d);
-		FINISHED_DIMENSIONS.add(6.6d);
-
-		final List<Double> DIMENSIONS = new ArrayList<Double>();
-		DIMENSIONS.add(5.5d);
-		DIMENSIONS.add(7.7d);
+		final Integer pages = 23;
+		final String sides = UUID.randomUUID().toString();
+		final Shape finishedDimensions = Shape.newInstance(4.4, 6.6);
+		final XYPair dimensions = XYPair.newInstance(5.5, 7.7);
 
 		// act
-		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(PAGES, SIDES, FINISHED_DIMENSIONS, DIMENSIONS);
+		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions, dimensions);
 
 		// assert
-		Assert.assertEquals("Pages is wrong", PAGES, layoutIntent.getPages());
-		Assert.assertEquals("Sides is wrong", SIDES, layoutIntent.getSides());
-		Assert.assertEquals("FinishedDimensions is wrong", FINISHED_DIMENSIONS, layoutIntent.getFinishedDimensions());
-		Assert.assertEquals("Dimensions is wrong", DIMENSIONS, layoutIntent.getDimensions());
+		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPages());
+		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
+		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
+		Assert.assertEquals("Dimensions is wrong", dimensions, layoutIntent.getDimensions());
 	}
 
 	@Test
 	public void testCreateLayoutIntentLight() {
 
 		// arrange
-		final Integer PAGES = 23;
-		final String SIDES = UUID.randomUUID().toString();
-		final List<Double> FINISHED_DIMENSIONS = new ArrayList<Double>();
-		FINISHED_DIMENSIONS.add(4.4d);
-		FINISHED_DIMENSIONS.add(6.6d);
+		final Integer pages = 23;
+		final String sides = UUID.randomUUID().toString();
+		final Shape finishedDimensions = Shape.newInstance(4.4, 6.6);
 
 		// act
-		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(PAGES, SIDES, FINISHED_DIMENSIONS);
+		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions);
 
 		// assert
-		Assert.assertEquals("Pages is wrong", PAGES, layoutIntent.getPages());
-		Assert.assertEquals("Sides is wrong", SIDES, layoutIntent.getSides());
-		Assert.assertEquals("FinishedDimensions is wrong", FINISHED_DIMENSIONS, layoutIntent.getFinishedDimensions());
-		Assert.assertEquals("Dimensions is wrong", 0, layoutIntent.getDimensions().size());
+		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPages());
+		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
+		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
+		Assert.assertEquals("Dimensions is wrong", null, layoutIntent.getDimensions());
 	}
 
 	@Test
@@ -258,7 +256,7 @@ public class XJdfNodeFactoryTest {
 		ProofingIntent proofingIntent = xJdfNodeFactory.createProofingIntent(BRAND_NAME);
 
 		// assert
-		Assert.assertEquals("BrandName is wrong", BRAND_NAME, proofingIntent.getProofItems().get(0).getBrandName());
+		Assert.assertEquals("BrandName is wrong", BRAND_NAME, proofingIntent.getProofItem().get(0).getBrandName());
 	}
 
 	@Test
@@ -311,8 +309,8 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
-		Assert.assertEquals("ColorsUsed is wrong", COLORS_USED, colorIntent.getColorsUseds());
-		Assert.assertEquals("ColorsUsedBack is wrong", COLORS_USED_BACK, colorIntent.getColorsUsedBacks());
+		Assert.assertEquals("ColorsUsed is wrong", COLORS_USED, colorIntent.getColorsUsed());
+		Assert.assertEquals("ColorsUsedBack is wrong", COLORS_USED_BACK, colorIntent.getColorsUsedBack());
 		Assert.assertEquals("Coatings is wrong", COATINGS, colorIntent.getCoatings());
 		Assert.assertEquals("CoatingsBack is wrong", COATINGS_BACK, colorIntent.getCoatingsBack());
 	}
@@ -330,7 +328,7 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
-		Assert.assertEquals("ColorsUsed is wrong", 0, colorIntent.getColorsUseds().size());
+		Assert.assertEquals("ColorsUsed is wrong", 0, colorIntent.getColorsUsed().size());
 		Assert.assertEquals("Coatings is wrong", null, colorIntent.getCoatings());
 	}
 
@@ -338,16 +336,37 @@ public class XJdfNodeFactoryTest {
 	public void testMarkObject() {
 
 		// arrange
-		final String ctm = "1 0 0 1 0.0000 0.0000";
-		final String clipBox = "0.0000 0.0000 2976.3779527559 2125.9842519685";
+		final Matrix ctm = Matrix.newInstance();
+		final Rectangle clipBox = Rectangle.newInstance("0.0000 0.0000 2976.3779527559 2125.9842519685");
 		final Integer ord = 8;
 
 		// act
 		MarkObject markObject = xJdfNodeFactory.createMarkObject(ctm, clipBox, ord);
 
 		// assert
-		Assert.assertEquals("CTM is wrong.", 1d, markObject.getCTMS().get(3));
-		Assert.assertEquals("ClipBox is wrong.", 2976.3779527559d, markObject.getClipBoxes().get(2));
+		Assert.assertEquals("CTM is wrong.", 1d, markObject.getCTM().getD());
+		Assert.assertEquals("ClipBox is wrong.", 2976.3779527559d, markObject.getClipBox().getUrx());
 		Assert.assertEquals("Ord is wrong.", new Integer(8), markObject.getOrd());
+	}
+
+	@Test
+	public void testContentObject() {
+
+		// arrange
+		final Matrix ctm = Matrix.newInstance("1 0 0 1 0.0000 0.0000");
+		final Rectangle clipBox = Rectangle.newInstance("0.0000 0.0000 2976.3779527559 2125.9842519685");
+		final Integer ord = 8;
+		final Matrix trimCtm = Matrix.newInstance("1 0 0 1 36.8509397008 958.1102362205");
+		final XYPair trimSize = XYPair.newInstance("425.1968503937 813.5433070866");
+
+		// act
+		ContentObject contentObject = xJdfNodeFactory.createContentObject(ctm, clipBox, ord, trimCtm, trimSize);
+
+		// assert
+		Assert.assertEquals("CTM is wrong.", 1d, contentObject.getCTM().getD());
+		Assert.assertEquals("ClipBox is wrong.", 2976.3779527559d, contentObject.getClipBox().getUrx());
+		Assert.assertEquals("Ord is wrong.", new Integer(8), contentObject.getOrd());
+		Assert.assertEquals("TrimCTM is wrong.", 36.8509397008d, contentObject.getTrimCTM().getTx());
+		Assert.assertEquals("TrimSize is wrong.", 813.5433070866d, contentObject.getTrimSize().getY());
 	}
 }

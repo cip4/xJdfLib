@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RenderingParams", propOrder = {
-    "objectResolutions"
+    "objectResolution"
 })
 public class RenderingParams
     extends ParameterType
@@ -51,7 +51,7 @@ public class RenderingParams
 {
 
     @XmlElement(name = "ObjectResolution")
-    protected List<ObjectResolution> objectResolutions;
+    protected List<ObjectResolution> objectResolution;
     @XmlAttribute(name = "BandWidth")
     protected Integer bandWidth;
     @XmlAttribute(name = "BandHeight")
@@ -71,18 +71,18 @@ public class RenderingParams
     protected Object automatedOverPrintParamsRef;
 
     /**
-     * Gets the value of the objectResolutions property.
+     * Gets the value of the objectResolution property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the objectResolutions property.
+     * This is why there is not a <CODE>set</CODE> method for the objectResolution property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getObjectResolutions().add(newItem);
+     *    getObjectResolution().add(newItem);
      * </pre>
      * 
      * 
@@ -92,11 +92,11 @@ public class RenderingParams
      * 
      * 
      */
-    public List<ObjectResolution> getObjectResolutions() {
-        if (objectResolutions == null) {
-            objectResolutions = new ArrayList<ObjectResolution>();
+    public List<ObjectResolution> getObjectResolution() {
+        if (objectResolution == null) {
+            objectResolution = new ArrayList<ObjectResolution>();
         }
-        return this.objectResolutions;
+        return this.objectResolution;
     }
 
     /**

@@ -37,64 +37,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PreflightParams", propOrder = {
-    "actionPools",
-    "testPools"
+    "testPool",
+    "actionPool"
 })
 public class PreflightParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "ActionPool")
-    protected List<ActionPool> actionPools;
     @XmlElement(name = "TestPool")
-    protected List<TestPool> testPools;
+    protected List<TestPool> testPool;
+    @XmlElement(name = "ActionPool")
+    protected List<ActionPool> actionPool;
     @XmlAttribute(name = "FileSpecRef")
     @XmlIDREF
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the actionPools property.
+     * Gets the value of the testPool property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actionPools property.
+     * This is why there is not a <CODE>set</CODE> method for the testPool property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActionPools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ActionPool }
-     * 
-     * 
-     */
-    public List<ActionPool> getActionPools() {
-        if (actionPools == null) {
-            actionPools = new ArrayList<ActionPool>();
-        }
-        return this.actionPools;
-    }
-
-    /**
-     * Gets the value of the testPools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the testPools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTestPools().add(newItem);
+     *    getTestPool().add(newItem);
      * </pre>
      * 
      * 
@@ -104,11 +75,40 @@ public class PreflightParams
      * 
      * 
      */
-    public List<TestPool> getTestPools() {
-        if (testPools == null) {
-            testPools = new ArrayList<TestPool>();
+    public List<TestPool> getTestPool() {
+        if (testPool == null) {
+            testPool = new ArrayList<TestPool>();
         }
-        return this.testPools;
+        return this.testPool;
+    }
+
+    /**
+     * Gets the value of the actionPool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actionPool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActionPool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ActionPool }
+     * 
+     * 
+     */
+    public List<ActionPool> getActionPool() {
+        if (actionPool == null) {
+            actionPool = new ArrayList<ActionPool>();
+        }
+        return this.actionPool;
     }
 
     /**

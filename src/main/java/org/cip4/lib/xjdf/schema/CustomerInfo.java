@@ -40,18 +40,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CustomerInfo", propOrder = {
-    "contacts",
-    "customerMessages"
+    "customerMessage",
+    "contact"
 })
 public class CustomerInfo
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
     @XmlElement(name = "CustomerMessage")
-    protected List<CustomerMessage> customerMessages;
+    protected List<CustomerMessage> customerMessage;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "CustomerProjectID")
     protected String customerProjectID;
     @XmlAttribute(name = "BillingCode")
@@ -64,47 +64,18 @@ public class CustomerInfo
     protected String customerJobName;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the customerMessage property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the customerMessage property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the customerMessages property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the customerMessages property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCustomerMessages().add(newItem);
+     *    getCustomerMessage().add(newItem);
      * </pre>
      * 
      * 
@@ -114,11 +85,40 @@ public class CustomerInfo
      * 
      * 
      */
-    public List<CustomerMessage> getCustomerMessages() {
-        if (customerMessages == null) {
-            customerMessages = new ArrayList<CustomerMessage>();
+    public List<CustomerMessage> getCustomerMessage() {
+        if (customerMessage == null) {
+            customerMessage = new ArrayList<CustomerMessage>();
         }
-        return this.customerMessages;
+        return this.customerMessage;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**

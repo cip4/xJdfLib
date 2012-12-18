@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "locs"
+    "loc"
 })
 @XmlRootElement(name = "ValueLoc")
 public class ValueLoc
@@ -44,23 +44,23 @@ public class ValueLoc
 {
 
     @XmlElement(name = "Loc")
-    protected List<Loc> locs;
+    protected List<Loc> loc;
     @XmlAttribute(name = "Value")
     protected String value;
 
     /**
-     * Gets the value of the locs property.
+     * Gets the value of the loc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLocs().add(newItem);
+     *    getLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -70,11 +70,11 @@ public class ValueLoc
      * 
      * 
      */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
         }
-        return this.locs;
+        return this.loc;
     }
 
     /**

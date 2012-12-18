@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "exprs"
+    "expr"
 })
 @XmlRootElement(name = "MetadataMap")
 public class MetadataMap
@@ -51,7 +51,7 @@ public class MetadataMap
 {
 
     @XmlElement(name = "Expr")
-    protected List<Expr> exprs;
+    protected List<Expr> expr;
     @XmlAttribute(name = "ValueFormat")
     protected String valueFormat;
     @XmlAttribute(name = "Context")
@@ -67,18 +67,18 @@ public class MetadataMap
     protected String name;
 
     /**
-     * Gets the value of the exprs property.
+     * Gets the value of the expr property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the exprs property.
+     * This is why there is not a <CODE>set</CODE> method for the expr property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getExprs().add(newItem);
+     *    getExpr().add(newItem);
      * </pre>
      * 
      * 
@@ -88,11 +88,11 @@ public class MetadataMap
      * 
      * 
      */
-    public List<Expr> getExprs() {
-        if (exprs == null) {
-            exprs = new ArrayList<Expr>();
+    public List<Expr> getExpr() {
+        if (expr == null) {
+            expr = new ArrayList<Expr>();
         }
-        return this.exprs;
+        return this.expr;
     }
 
     /**

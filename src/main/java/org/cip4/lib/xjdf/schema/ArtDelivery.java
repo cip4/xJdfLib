@@ -60,18 +60,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "contacts",
-    "digitalMedias"
+    "digitalMedia",
+    "contact"
 })
 @XmlRootElement(name = "ArtDelivery")
 public class ArtDelivery
     implements Serializable
 {
 
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
     @XmlElement(name = "DigitalMedia")
-    protected List<DigitalMedia> digitalMedias;
+    protected List<DigitalMedia> digitalMedia;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "HasBleeds")
     protected Boolean hasBleeds;
     @XmlAttribute(name = "ArtDeliveryType")
@@ -126,47 +126,18 @@ public class ArtDelivery
     protected String artDeliveryDuration;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the digitalMedia property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the digitalMedia property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the digitalMedias property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the digitalMedias property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDigitalMedias().add(newItem);
+     *    getDigitalMedia().add(newItem);
      * </pre>
      * 
      * 
@@ -176,11 +147,40 @@ public class ArtDelivery
      * 
      * 
      */
-    public List<DigitalMedia> getDigitalMedias() {
-        if (digitalMedias == null) {
-            digitalMedias = new ArrayList<DigitalMedia>();
+    public List<DigitalMedia> getDigitalMedia() {
+        if (digitalMedia == null) {
+            digitalMedia = new ArrayList<DigitalMedia>();
         }
-        return this.digitalMedias;
+        return this.digitalMedia;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**

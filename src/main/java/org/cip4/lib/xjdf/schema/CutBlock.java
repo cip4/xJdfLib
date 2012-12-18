@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -43,51 +44,50 @@ public class CutBlock
 {
 
     @XmlAttribute(name = "BlockSubdivision")
-    protected List<Double> blockSubdivisions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair blockSubdivision;
     @XmlAttribute(name = "AssemblyIDs")
     protected List<String> assemblyIDs;
     @XmlAttribute(name = "BlockType")
     @XmlSchemaType(name = "anySimpleType")
     protected String blockType;
     @XmlAttribute(name = "BlockElementSize")
-    protected List<Double> blockElementSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair blockElementSize;
     @XmlAttribute(name = "CutWidth")
     protected Double cutWidth;
     @XmlAttribute(name = "BlockSize")
-    protected List<Double> blockSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair blockSize;
     @XmlAttribute(name = "BlockTrf")
-    protected List<Double> blockTrves;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix blockTrf;
     @XmlAttribute(name = "BlockElementType")
     @XmlSchemaType(name = "anySimpleType")
     protected String blockElementType;
 
     /**
-     * Gets the value of the blockSubdivisions property.
+     * Gets the value of the blockSubdivision property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the blockSubdivisions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBlockSubdivisions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBlockSubdivisions() {
-        if (blockSubdivisions == null) {
-            blockSubdivisions = new ArrayList<Double>();
-        }
-        return this.blockSubdivisions;
+    public org.cip4.lib.xjdf.type.XYPair getBlockSubdivision() {
+        return blockSubdivision;
+    }
+
+    /**
+     * Sets the value of the blockSubdivision property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBlockSubdivision(org.cip4.lib.xjdf.type.XYPair value) {
+        this.blockSubdivision = value;
     }
 
     /**
@@ -144,32 +144,27 @@ public class CutBlock
     }
 
     /**
-     * Gets the value of the blockElementSizes property.
+     * Gets the value of the blockElementSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the blockElementSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBlockElementSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBlockElementSizes() {
-        if (blockElementSizes == null) {
-            blockElementSizes = new ArrayList<Double>();
-        }
-        return this.blockElementSizes;
+    public org.cip4.lib.xjdf.type.XYPair getBlockElementSize() {
+        return blockElementSize;
+    }
+
+    /**
+     * Sets the value of the blockElementSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBlockElementSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.blockElementSize = value;
     }
 
     /**
@@ -197,61 +192,51 @@ public class CutBlock
     }
 
     /**
-     * Gets the value of the blockSizes property.
+     * Gets the value of the blockSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the blockSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBlockSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBlockSizes() {
-        if (blockSizes == null) {
-            blockSizes = new ArrayList<Double>();
-        }
-        return this.blockSizes;
+    public org.cip4.lib.xjdf.type.XYPair getBlockSize() {
+        return blockSize;
     }
 
     /**
-     * Gets the value of the blockTrves property.
+     * Sets the value of the blockSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the blockTrves property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBlockTrves().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBlockTrves() {
-        if (blockTrves == null) {
-            blockTrves = new ArrayList<Double>();
-        }
-        return this.blockTrves;
+    public void setBlockSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.blockSize = value;
+    }
+
+    /**
+     * Gets the value of the blockTrf property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.Matrix getBlockTrf() {
+        return blockTrf;
+    }
+
+    /**
+     * Sets the value of the blockTrf property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBlockTrf(org.cip4.lib.xjdf.type.Matrix value) {
+        this.blockTrf = value;
     }
 
     /**

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -36,63 +37,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CuttingParams", propOrder = {
-    "cuts",
-    "cutBlocks"
+    "cutBlock",
+    "cut"
 })
 public class CuttingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Cut")
-    protected List<Cut> cuts;
     @XmlElement(name = "CutBlock")
-    protected List<CutBlock> cutBlocks;
+    protected List<CutBlock> cutBlock;
+    @XmlElement(name = "Cut")
+    protected List<Cut> cut;
     @XmlAttribute(name = "NUpSeparation")
-    protected List<Double> nUpSeparations;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair nUpSeparation;
 
     /**
-     * Gets the value of the cuts property.
+     * Gets the value of the cutBlock property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cuts property.
+     * This is why there is not a <CODE>set</CODE> method for the cutBlock property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCuts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Cut }
-     * 
-     * 
-     */
-    public List<Cut> getCuts() {
-        if (cuts == null) {
-            cuts = new ArrayList<Cut>();
-        }
-        return this.cuts;
-    }
-
-    /**
-     * Gets the value of the cutBlocks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cutBlocks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCutBlocks().add(newItem);
+     *    getCutBlock().add(newItem);
      * </pre>
      * 
      * 
@@ -102,40 +75,64 @@ public class CuttingParams
      * 
      * 
      */
-    public List<CutBlock> getCutBlocks() {
-        if (cutBlocks == null) {
-            cutBlocks = new ArrayList<CutBlock>();
+    public List<CutBlock> getCutBlock() {
+        if (cutBlock == null) {
+            cutBlock = new ArrayList<CutBlock>();
         }
-        return this.cutBlocks;
+        return this.cutBlock;
     }
 
     /**
-     * Gets the value of the nUpSeparations property.
+     * Gets the value of the cut property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the nUpSeparations property.
+     * This is why there is not a <CODE>set</CODE> method for the cut property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNUpSeparations().add(newItem);
+     *    getCut().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Double }
+     * {@link Cut }
      * 
      * 
      */
-    public List<Double> getNUpSeparations() {
-        if (nUpSeparations == null) {
-            nUpSeparations = new ArrayList<Double>();
+    public List<Cut> getCut() {
+        if (cut == null) {
+            cut = new ArrayList<Cut>();
         }
-        return this.nUpSeparations;
+        return this.cut;
+    }
+
+    /**
+     * Gets the value of the nUpSeparation property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getNUpSeparation() {
+        return nUpSeparation;
+    }
+
+    /**
+     * Sets the value of the nUpSeparation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNUpSeparation(org.cip4.lib.xjdf.type.XYPair value) {
+        this.nUpSeparation = value;
     }
 
 }

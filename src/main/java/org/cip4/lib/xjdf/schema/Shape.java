@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Shape", propOrder = {
-    "shapes"
+    "shape"
 })
 public class Shape
     extends ParameterType
@@ -53,7 +54,7 @@ public class Shape
 {
 
     @XmlElement(name = "Shape")
-    protected List<Shape> shapes;
+    protected List<Shape> shape;
     @XmlAttribute(name = "CutOut")
     protected Boolean cutOut;
     @XmlAttribute(name = "CutType")
@@ -75,21 +76,22 @@ public class Shape
     @XmlSchemaType(name = "anySimpleType")
     protected String shapeType;
     @XmlAttribute(name = "CutBox")
-    protected List<Double> cutBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle cutBox;
 
     /**
-     * Gets the value of the shapes property.
+     * Gets the value of the shape property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapes property.
+     * This is why there is not a <CODE>set</CODE> method for the shape property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapes().add(newItem);
+     *    getShape().add(newItem);
      * </pre>
      * 
      * 
@@ -99,11 +101,11 @@ public class Shape
      * 
      * 
      */
-    public List<Shape> getShapes() {
-        if (shapes == null) {
-            shapes = new ArrayList<Shape>();
+    public List<Shape> getShape() {
+        if (shape == null) {
+            shape = new ArrayList<Shape>();
         }
-        return this.shapes;
+        return this.shape;
     }
 
     /**
@@ -323,32 +325,27 @@ public class Shape
     }
 
     /**
-     * Gets the value of the cutBoxes property.
+     * Gets the value of the cutBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cutBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCutBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCutBoxes() {
-        if (cutBoxes == null) {
-            cutBoxes = new ArrayList<Double>();
-        }
-        return this.cutBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getCutBox() {
+        return cutBox;
+    }
+
+    /**
+     * Sets the value of the cutBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCutBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.cutBox = value;
     }
 
 }

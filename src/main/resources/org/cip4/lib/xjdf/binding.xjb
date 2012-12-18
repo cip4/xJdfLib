@@ -1,32 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
-	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-<!--
-	<jxb:bindings schemaLocation="test.xsd" node="/xs:schema">
-		<jxb:globalBindings>
-			<xjc:simple />
-			<xjc:serializable />
-		</jxb:globalBindings>
-		<jxb:schemaBindings>
-			<jxb:package name="org.cip4.lib.xjdf.schema.jdf" />
-		</jxb:schemaBindings>
-	</jxb:bindings>
-	-->
-	
+<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
+	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
+
 	<jxb:bindings schemaLocation="xsd/JDF20.xsd" node="/xs:schema">
 		<jxb:globalBindings>
-			<xjc:simple />
+			<!-- <xjc:simple /> -->
 			<xjc:serializable />
+
+			<xjc:javaType name="org.cip4.lib.xjdf.type.Matrix"
+                       xmlType="xjdf:matrix"
+                       adapter="org.cip4.lib.xjdf.type.Matrix" />
+
+			<xjc:javaType name="org.cip4.lib.xjdf.type.Rectangle"
+                       xmlType="xjdf:rectangle"
+                       adapter="org.cip4.lib.xjdf.type.Rectangle" />
+                       
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Shape"
+                       xmlType="xjdf:shape"
+                       adapter="org.cip4.lib.xjdf.type.Shape" />
+                       
+            <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair"
+                       xmlType="xjdf:XYPair"
+                       adapter="org.cip4.lib.xjdf.type.XYPair" />
+                       
 		</jxb:globalBindings>
 		<jxb:schemaBindings>
 			<jxb:package name="org.cip4.lib.xjdf.schema" />
 		</jxb:schemaBindings>
 	</jxb:bindings>
 	
-
-	<!-- <jxb:bindings schemaLocation="PrintTalk.xsd" node="/xs:schema"> <jxb:schemaBindings> 
-		<jxb:package name="org.cip4.lib.xjdf.schema.ptk" /> </jxb:schemaBindings> 
-		</jxb:bindings> -->
 </jxb:bindings>
 
 	

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "terms"
+    "term"
 })
 @XmlRootElement(name = "Expr")
 public class Expr
@@ -48,7 +48,7 @@ public class Expr
 {
 
     @XmlElement(name = "Term")
-    protected List<Object> terms;
+    protected List<Object> term;
     @XmlAttribute(name = "Path")
     protected String path;
     @XmlAttribute(name = "Value")
@@ -58,18 +58,18 @@ public class Expr
     protected String name;
 
     /**
-     * Gets the value of the terms property.
+     * Gets the value of the term property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the terms property.
+     * This is why there is not a <CODE>set</CODE> method for the term property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTerms().add(newItem);
+     *    getTerm().add(newItem);
      * </pre>
      * 
      * 
@@ -79,11 +79,11 @@ public class Expr
      * 
      * 
      */
-    public List<Object> getTerms() {
-        if (terms == null) {
-            terms = new ArrayList<Object>();
+    public List<Object> getTerm() {
+        if (term == null) {
+            term = new ArrayList<Object>();
         }
-        return this.terms;
+        return this.term;
     }
 
     /**

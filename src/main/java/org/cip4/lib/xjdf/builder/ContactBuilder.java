@@ -106,7 +106,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		person.setFamilyName(familyName);
 		person.setFirstName(firstName);
 		person.setNamePrefix(namePrefix);
-		getContact().getPersons().add(person);
+		getContact().getPerson().add(person);
 
 		// return current builder
 		return person;
@@ -134,7 +134,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		Company company = xJdfNodeFactory.createCompany();
 		company.setOrganizationName(organizationName);
 		company.setOrganizationalUnit(unit);
-		getContact().getCompanies().add(company);
+		getContact().getCompany().add(company);
 
 		// return current builder
 		return company;
@@ -164,7 +164,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		address.setCity(city);
 		address.setCountry(country);
 		address.setCountryCode(countryCode);
-		getContact().getAddresses().add(address);
+		getContact().getAddress().add(address);
 
 		// return current builder
 		return address;
@@ -195,7 +195,7 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 		comChannel.setChannelType(channelType);
 		comChannel.setLocator(locator);
 		comChannel.setChannelTypeDetails(channelTypeDetails);
-		getContact().getComChannels().add(comChannel);
+		getContact().getComChannel().add(comChannel);
 
 		// return current builder
 		return comChannel;

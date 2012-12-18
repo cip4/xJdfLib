@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "deviceMarks"
+    "deviceMark"
 })
 @XmlRootElement(name = "DynamicField")
 public class DynamicField
@@ -47,7 +47,7 @@ public class DynamicField
 {
 
     @XmlElement(name = "DeviceMark")
-    protected List<DeviceMark> deviceMarks;
+    protected List<DeviceMark> deviceMark;
     @XmlAttribute(name = "OrdExpression")
     protected String ordExpression;
     @XmlAttribute(name = "ReplaceField")
@@ -58,18 +58,18 @@ public class DynamicField
     protected String format;
 
     /**
-     * Gets the value of the deviceMarks property.
+     * Gets the value of the deviceMark property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceMarks property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceMark property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeviceMarks().add(newItem);
+     *    getDeviceMark().add(newItem);
      * </pre>
      * 
      * 
@@ -79,11 +79,11 @@ public class DynamicField
      * 
      * 
      */
-    public List<DeviceMark> getDeviceMarks() {
-        if (deviceMarks == null) {
-            deviceMarks = new ArrayList<DeviceMark>();
+    public List<DeviceMark> getDeviceMark() {
+        if (deviceMark == null) {
+            deviceMark = new ArrayList<DeviceMark>();
         }
-        return this.deviceMarks;
+        return this.deviceMark;
     }
 
     /**

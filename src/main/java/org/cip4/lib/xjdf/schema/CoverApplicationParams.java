@@ -34,61 +34,32 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CoverApplicationParams", propOrder = {
-    "glueApplications",
-    "scores"
+    "score",
+    "glueApplication"
 })
 public class CoverApplicationParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "GlueApplication")
-    protected List<GlueApplication> glueApplications;
     @XmlElement(name = "Score")
-    protected List<Score> scores;
+    protected List<Score> score;
+    @XmlElement(name = "GlueApplication")
+    protected List<GlueApplication> glueApplication;
 
     /**
-     * Gets the value of the glueApplications property.
+     * Gets the value of the score property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueApplications property.
+     * This is why there is not a <CODE>set</CODE> method for the score property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueApplications().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GlueApplication }
-     * 
-     * 
-     */
-    public List<GlueApplication> getGlueApplications() {
-        if (glueApplications == null) {
-            glueApplications = new ArrayList<GlueApplication>();
-        }
-        return this.glueApplications;
-    }
-
-    /**
-     * Gets the value of the scores property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scores property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getScores().add(newItem);
+     *    getScore().add(newItem);
      * </pre>
      * 
      * 
@@ -98,11 +69,40 @@ public class CoverApplicationParams
      * 
      * 
      */
-    public List<Score> getScores() {
-        if (scores == null) {
-            scores = new ArrayList<Score>();
+    public List<Score> getScore() {
+        if (score == null) {
+            score = new ArrayList<Score>();
         }
-        return this.scores;
+        return this.score;
+    }
+
+    /**
+     * Gets the value of the glueApplication property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the glueApplication property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getGlueApplication().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link GlueApplication }
+     * 
+     * 
+     */
+    public List<GlueApplication> getGlueApplication() {
+        if (glueApplication == null) {
+            glueApplication = new ArrayList<GlueApplication>();
+        }
+        return this.glueApplication;
     }
 
 }

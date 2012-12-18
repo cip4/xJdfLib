@@ -63,18 +63,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "locs",
-    "valueLocs"
+    "valueLoc",
+    "loc"
 })
 @XmlRootElement(name = "NameState")
 public class NameState
     implements Serializable
 {
 
-    @XmlElement(name = "Loc")
-    protected List<Loc> locs;
     @XmlElement(name = "ValueLoc")
-    protected List<ValueLoc> valueLocs;
+    protected List<ValueLoc> valueLoc;
+    @XmlElement(name = "Loc")
+    protected List<Loc> loc;
     @XmlAttribute(name = "UserDisplay")
     protected EnumUserDisplay userDisplay;
     @XmlAttribute(name = "HasDefault")
@@ -88,15 +88,15 @@ public class NameState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected List<String> currentValues;
+    protected List<String> currentValue;
     @XmlAttribute(name = "PresentValueList")
-    protected List<String> presentValueLists;
+    protected List<String> presentValueList;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
     @XmlAttribute(name = "AllowedValueList")
-    protected List<String> allowedValueLists;
+    protected List<String> allowedValueList;
     @XmlAttribute(name = "DevNS")
     protected String devNS;
     @XmlAttribute(name = "Availability")
@@ -118,7 +118,7 @@ public class NameState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected List<String> defaultValues;
+    protected List<String> defaultValue;
     @XmlAttribute(name = "PresentRegExp")
     protected String presentRegExp;
     @XmlAttribute(name = "XPath", required = true)
@@ -129,47 +129,18 @@ public class NameState
     protected String descriptiveName;
 
     /**
-     * Gets the value of the locs property.
+     * Gets the value of the valueLoc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
+     * This is why there is not a <CODE>set</CODE> method for the valueLoc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLocs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Loc }
-     * 
-     * 
-     */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
-        }
-        return this.locs;
-    }
-
-    /**
-     * Gets the value of the valueLocs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueLocs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getValueLocs().add(newItem);
+     *    getValueLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -179,11 +150,40 @@ public class NameState
      * 
      * 
      */
-    public List<ValueLoc> getValueLocs() {
-        if (valueLocs == null) {
-            valueLocs = new ArrayList<ValueLoc>();
+    public List<ValueLoc> getValueLoc() {
+        if (valueLoc == null) {
+            valueLoc = new ArrayList<ValueLoc>();
         }
-        return this.valueLocs;
+        return this.valueLoc;
+    }
+
+    /**
+     * Gets the value of the loc property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLoc().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Loc }
+     * 
+     * 
+     */
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
+        }
+        return this.loc;
     }
 
     /**
@@ -331,18 +331,18 @@ public class NameState
     }
 
     /**
-     * Gets the value of the currentValues property.
+     * Gets the value of the currentValue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the currentValues property.
+     * This is why there is not a <CODE>set</CODE> method for the currentValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCurrentValues().add(newItem);
+     *    getCurrentValue().add(newItem);
      * </pre>
      * 
      * 
@@ -352,26 +352,26 @@ public class NameState
      * 
      * 
      */
-    public List<String> getCurrentValues() {
-        if (currentValues == null) {
-            currentValues = new ArrayList<String>();
+    public List<String> getCurrentValue() {
+        if (currentValue == null) {
+            currentValue = new ArrayList<String>();
         }
-        return this.currentValues;
+        return this.currentValue;
     }
 
     /**
-     * Gets the value of the presentValueLists property.
+     * Gets the value of the presentValueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presentValueLists property.
+     * This is why there is not a <CODE>set</CODE> method for the presentValueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresentValueLists().add(newItem);
+     *    getPresentValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -381,11 +381,11 @@ public class NameState
      * 
      * 
      */
-    public List<String> getPresentValueLists() {
-        if (presentValueLists == null) {
-            presentValueLists = new ArrayList<String>();
+    public List<String> getPresentValueList() {
+        if (presentValueList == null) {
+            presentValueList = new ArrayList<String>();
         }
-        return this.presentValueLists;
+        return this.presentValueList;
     }
 
     /**
@@ -413,18 +413,18 @@ public class NameState
     }
 
     /**
-     * Gets the value of the allowedValueLists property.
+     * Gets the value of the allowedValueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedValueLists property.
+     * This is why there is not a <CODE>set</CODE> method for the allowedValueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAllowedValueLists().add(newItem);
+     *    getAllowedValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -434,11 +434,11 @@ public class NameState
      * 
      * 
      */
-    public List<String> getAllowedValueLists() {
-        if (allowedValueLists == null) {
-            allowedValueLists = new ArrayList<String>();
+    public List<String> getAllowedValueList() {
+        if (allowedValueList == null) {
+            allowedValueList = new ArrayList<String>();
         }
-        return this.allowedValueLists;
+        return this.allowedValueList;
     }
 
     /**
@@ -649,18 +649,18 @@ public class NameState
     }
 
     /**
-     * Gets the value of the defaultValues property.
+     * Gets the value of the defaultValue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the defaultValues property.
+     * This is why there is not a <CODE>set</CODE> method for the defaultValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDefaultValues().add(newItem);
+     *    getDefaultValue().add(newItem);
      * </pre>
      * 
      * 
@@ -670,11 +670,11 @@ public class NameState
      * 
      * 
      */
-    public List<String> getDefaultValues() {
-        if (defaultValues == null) {
-            defaultValues = new ArrayList<String>();
+    public List<String> getDefaultValue() {
+        if (defaultValue == null) {
+            defaultValue = new ArrayList<String>();
         }
-        return this.defaultValues;
+        return this.defaultValue;
     }
 
     /**

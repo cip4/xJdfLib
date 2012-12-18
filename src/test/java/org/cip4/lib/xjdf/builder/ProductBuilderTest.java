@@ -17,6 +17,7 @@ import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.type.Shape;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -78,9 +79,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		mediaIntent.setWeight(135d);
 
 		LayoutIntent layoutIntent = XJdfNodeFactory.newInstance().createLayoutIntent();
-		layoutIntent.getFinishedDimensions().add(595.27559055d);
-		layoutIntent.getFinishedDimensions().add(822.04724409d);
-
+		layoutIntent.setFinishedDimensions(Shape.newInstance(595.27559055d, 822.04724409d));
 		BindingIntent bindingIntent = XJdfNodeFactory.newInstance().createBindingIntent();
 		bindingIntent.setBindingType("SaddleStitch");
 
@@ -100,7 +99,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		Assert.assertEquals("Attribute Name in Node Intent is wrong.", "MediaIntent", actual);
 
 		actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:LayoutIntent/@FinishedDimensions");
-		Assert.assertEquals("Attribute FinishedDimensions in Node LayoutIntent is wrong.", "595.27559055 822.04724409", actual);
+		Assert.assertEquals("Attribute FinishedDimensions in Node LayoutIntent is wrong.", "595.27559055 822.04724409 0.0", actual);
 	}
-
 }

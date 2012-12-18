@@ -107,10 +107,10 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
 		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
 		JAXBElement obj = new JAXBElement(qname, intent.getClass(), null, intent);
-		it.getIntentTypes().add(obj);
+		it.getIntentType().add(obj);
 
 		// append intent to product
-		getProduct().getIntents().add(it);
+		getProduct().getIntent().add(it);
 
 		// return current builder
 		return this;

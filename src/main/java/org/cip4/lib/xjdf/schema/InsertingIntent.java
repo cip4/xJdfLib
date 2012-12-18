@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InsertingIntent", propOrder = {
-    "insertLists"
+    "insertList"
 })
 public class InsertingIntent
     extends IntentType
@@ -45,7 +45,7 @@ public class InsertingIntent
 {
 
     @XmlElement(name = "InsertList")
-    protected List<InsertList> insertLists;
+    protected List<InsertList> insertList;
     @XmlAttribute(name = "GlueType")
     @XmlSchemaType(name = "anySimpleType")
     protected String glueType;
@@ -54,18 +54,18 @@ public class InsertingIntent
     protected String method;
 
     /**
-     * Gets the value of the insertLists property.
+     * Gets the value of the insertList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the insertLists property.
+     * This is why there is not a <CODE>set</CODE> method for the insertList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getInsertLists().add(newItem);
+     *    getInsertList().add(newItem);
      * </pre>
      * 
      * 
@@ -75,11 +75,11 @@ public class InsertingIntent
      * 
      * 
      */
-    public List<InsertList> getInsertLists() {
-        if (insertLists == null) {
-            insertLists = new ArrayList<InsertList>();
+    public List<InsertList> getInsertList() {
+        if (insertList == null) {
+            insertList = new ArrayList<InsertList>();
         }
-        return this.insertLists;
+        return this.insertList;
     }
 
     /**

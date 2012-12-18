@@ -63,18 +63,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "locs",
-    "valueLocs"
+    "valueLoc",
+    "loc"
 })
 @XmlRootElement(name = "DateTimeState")
 public class DateTimeState
     implements Serializable
 {
 
-    @XmlElement(name = "Loc")
-    protected List<Loc> locs;
     @XmlElement(name = "ValueLoc")
-    protected List<ValueLoc> valueLocs;
+    protected List<ValueLoc> valueLoc;
+    @XmlElement(name = "Loc")
+    protected List<Loc> loc;
     @XmlAttribute(name = "UserDisplay")
     protected EnumUserDisplay userDisplay;
     @XmlAttribute(name = "HasDefault")
@@ -129,47 +129,18 @@ public class DateTimeState
     protected String descriptiveName;
 
     /**
-     * Gets the value of the locs property.
+     * Gets the value of the valueLoc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
+     * This is why there is not a <CODE>set</CODE> method for the valueLoc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLocs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Loc }
-     * 
-     * 
-     */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
-        }
-        return this.locs;
-    }
-
-    /**
-     * Gets the value of the valueLocs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueLocs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getValueLocs().add(newItem);
+     *    getValueLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -179,11 +150,40 @@ public class DateTimeState
      * 
      * 
      */
-    public List<ValueLoc> getValueLocs() {
-        if (valueLocs == null) {
-            valueLocs = new ArrayList<ValueLoc>();
+    public List<ValueLoc> getValueLoc() {
+        if (valueLoc == null) {
+            valueLoc = new ArrayList<ValueLoc>();
         }
-        return this.valueLocs;
+        return this.valueLoc;
+    }
+
+    /**
+     * Gets the value of the loc property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLoc().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Loc }
+     * 
+     * 
+     */
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
+        }
+        return this.loc;
     }
 
     /**

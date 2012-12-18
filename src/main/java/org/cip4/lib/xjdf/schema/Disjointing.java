@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -42,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "insertSheets"
+    "insertSheet"
 })
 @XmlRootElement(name = "Disjointing")
 public class Disjointing
@@ -50,14 +51,15 @@ public class Disjointing
 {
 
     @XmlElement(name = "InsertSheet")
-    protected List<InsertSheet> insertSheets;
+    protected List<InsertSheet> insertSheet;
     @XmlAttribute(name = "OffsetAmount")
     protected Integer offsetAmount;
     @XmlAttribute(name = "OffsetDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String offsetDirection;
     @XmlAttribute(name = "Offset")
-    protected List<Double> offsets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair offset;
     @XmlAttribute(name = "Number")
     protected Integer number;
     @XmlAttribute(name = "IdentificationFieldRef")
@@ -65,18 +67,18 @@ public class Disjointing
     protected Object identificationFieldRef;
 
     /**
-     * Gets the value of the insertSheets property.
+     * Gets the value of the insertSheet property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the insertSheets property.
+     * This is why there is not a <CODE>set</CODE> method for the insertSheet property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getInsertSheets().add(newItem);
+     *    getInsertSheet().add(newItem);
      * </pre>
      * 
      * 
@@ -86,11 +88,11 @@ public class Disjointing
      * 
      * 
      */
-    public List<InsertSheet> getInsertSheets() {
-        if (insertSheets == null) {
-            insertSheets = new ArrayList<InsertSheet>();
+    public List<InsertSheet> getInsertSheet() {
+        if (insertSheet == null) {
+            insertSheet = new ArrayList<InsertSheet>();
         }
-        return this.insertSheets;
+        return this.insertSheet;
     }
 
     /**
@@ -142,32 +144,27 @@ public class Disjointing
     }
 
     /**
-     * Gets the value of the offsets property.
+     * Gets the value of the offset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the offsets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOffsets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOffsets() {
-        if (offsets == null) {
-            offsets = new ArrayList<Double>();
-        }
-        return this.offsets;
+    public org.cip4.lib.xjdf.type.XYPair getOffset() {
+        return offset;
+    }
+
+    /**
+     * Sets the value of the offset property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOffset(org.cip4.lib.xjdf.type.XYPair value) {
+        this.offset = value;
     }
 
     /**

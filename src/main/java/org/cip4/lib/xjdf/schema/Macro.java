@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
@@ -41,97 +40,36 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "calls",
-    "choices",
-    "sets"
+    "set",
+    "choice",
+    "call"
 })
 @XmlRootElement(name = "macro")
 public class Macro
     implements Serializable
 {
 
-    @XmlElement(name = "call")
-    protected List<Call> calls;
-    @XmlElement(name = "choice")
-    protected List<Choice> choices;
-    @XmlElement(name = "set")
-    protected List<Set> sets;
+    protected List<Set> set;
+    protected List<Choice> choice;
+    protected List<Call> call;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
 
     /**
-     * Gets the value of the calls property.
+     * Gets the value of the set property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the calls property.
+     * This is why there is not a <CODE>set</CODE> method for the set property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCalls().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Call }
-     * 
-     * 
-     */
-    public List<Call> getCalls() {
-        if (calls == null) {
-            calls = new ArrayList<Call>();
-        }
-        return this.calls;
-    }
-
-    /**
-     * Gets the value of the choices property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the choices property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChoices().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Choice }
-     * 
-     * 
-     */
-    public List<Choice> getChoices() {
-        if (choices == null) {
-            choices = new ArrayList<Choice>();
-        }
-        return this.choices;
-    }
-
-    /**
-     * Gets the value of the sets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSets().add(newItem);
+     *    getSet().add(newItem);
      * </pre>
      * 
      * 
@@ -141,11 +79,69 @@ public class Macro
      * 
      * 
      */
-    public List<Set> getSets() {
-        if (sets == null) {
-            sets = new ArrayList<Set>();
+    public List<Set> getSet() {
+        if (set == null) {
+            set = new ArrayList<Set>();
         }
-        return this.sets;
+        return this.set;
+    }
+
+    /**
+     * Gets the value of the choice property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the choice property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getChoice().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Choice }
+     * 
+     * 
+     */
+    public List<Choice> getChoice() {
+        if (choice == null) {
+            choice = new ArrayList<Choice>();
+        }
+        return this.choice;
+    }
+
+    /**
+     * Gets the value of the call property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the call property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCall().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Call }
+     * 
+     * 
+     */
+    public List<Call> getCall() {
+        if (call == null) {
+            call = new ArrayList<Call>();
+        }
+        return this.call;
     }
 
     /**

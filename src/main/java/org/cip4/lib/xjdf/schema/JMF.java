@@ -51,33 +51,33 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "commands",
-    "registrations",
-    "signals",
-    "queries",
-    "responses",
-    "employees",
-    "acknowledges"
+    "acknowledge",
+    "employee",
+    "response",
+    "query",
+    "signal",
+    "registration",
+    "command"
 })
 @XmlRootElement(name = "JMF")
 public class JMF
     implements Serializable
 {
 
-    @XmlElement(name = "Command")
-    protected List<Command> commands;
-    @XmlElement(name = "Registration")
-    protected List<Registration> registrations;
-    @XmlElement(name = "Signal")
-    protected List<Signal> signals;
-    @XmlElement(name = "Query")
-    protected List<Query> queries;
-    @XmlElement(name = "Response")
-    protected List<Response> responses;
-    @XmlElement(name = "Employee")
-    protected List<Employee> employees;
     @XmlElement(name = "Acknowledge")
-    protected List<Acknowledge> acknowledges;
+    protected List<Acknowledge> acknowledge;
+    @XmlElement(name = "Employee")
+    protected List<Employee> employee;
+    @XmlElement(name = "Response")
+    protected List<Response> response;
+    @XmlElement(name = "Query")
+    protected List<Query> query;
+    @XmlElement(name = "Signal")
+    protected List<Signal> signal;
+    @XmlElement(name = "Registration")
+    protected List<Registration> registration;
+    @XmlElement(name = "Command")
+    protected List<Command> command;
     @XmlAttribute(name = "SenderID")
     protected String senderID;
     @XmlAttribute(name = "Version")
@@ -99,192 +99,18 @@ public class JMF
     protected String agentVersion;
 
     /**
-     * Gets the value of the commands property.
+     * Gets the value of the acknowledge property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the commands property.
+     * This is why there is not a <CODE>set</CODE> method for the acknowledge property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCommands().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Command }
-     * 
-     * 
-     */
-    public List<Command> getCommands() {
-        if (commands == null) {
-            commands = new ArrayList<Command>();
-        }
-        return this.commands;
-    }
-
-    /**
-     * Gets the value of the registrations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the registrations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRegistrations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Registration }
-     * 
-     * 
-     */
-    public List<Registration> getRegistrations() {
-        if (registrations == null) {
-            registrations = new ArrayList<Registration>();
-        }
-        return this.registrations;
-    }
-
-    /**
-     * Gets the value of the signals property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the signals property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSignals().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Signal }
-     * 
-     * 
-     */
-    public List<Signal> getSignals() {
-        if (signals == null) {
-            signals = new ArrayList<Signal>();
-        }
-        return this.signals;
-    }
-
-    /**
-     * Gets the value of the queries property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queries property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getQueries().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Query }
-     * 
-     * 
-     */
-    public List<Query> getQueries() {
-        if (queries == null) {
-            queries = new ArrayList<Query>();
-        }
-        return this.queries;
-    }
-
-    /**
-     * Gets the value of the responses property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the responses property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResponses().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Response }
-     * 
-     * 
-     */
-    public List<Response> getResponses() {
-        if (responses == null) {
-            responses = new ArrayList<Response>();
-        }
-        return this.responses;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Employee }
-     * 
-     * 
-     */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
-        }
-        return this.employees;
-    }
-
-    /**
-     * Gets the value of the acknowledges property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the acknowledges property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAcknowledges().add(newItem);
+     *    getAcknowledge().add(newItem);
      * </pre>
      * 
      * 
@@ -294,11 +120,185 @@ public class JMF
      * 
      * 
      */
-    public List<Acknowledge> getAcknowledges() {
-        if (acknowledges == null) {
-            acknowledges = new ArrayList<Acknowledge>();
+    public List<Acknowledge> getAcknowledge() {
+        if (acknowledge == null) {
+            acknowledge = new ArrayList<Acknowledge>();
         }
-        return this.acknowledges;
+        return this.acknowledge;
+    }
+
+    /**
+     * Gets the value of the employee property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEmployee().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Employee }
+     * 
+     * 
+     */
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
+        }
+        return this.employee;
+    }
+
+    /**
+     * Gets the value of the response property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the response property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getResponse().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Response }
+     * 
+     * 
+     */
+    public List<Response> getResponse() {
+        if (response == null) {
+            response = new ArrayList<Response>();
+        }
+        return this.response;
+    }
+
+    /**
+     * Gets the value of the query property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the query property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getQuery().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Query }
+     * 
+     * 
+     */
+    public List<Query> getQuery() {
+        if (query == null) {
+            query = new ArrayList<Query>();
+        }
+        return this.query;
+    }
+
+    /**
+     * Gets the value of the signal property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the signal property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSignal().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Signal }
+     * 
+     * 
+     */
+    public List<Signal> getSignal() {
+        if (signal == null) {
+            signal = new ArrayList<Signal>();
+        }
+        return this.signal;
+    }
+
+    /**
+     * Gets the value of the registration property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the registration property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRegistration().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Registration }
+     * 
+     * 
+     */
+    public List<Registration> getRegistration() {
+        if (registration == null) {
+            registration = new ArrayList<Registration>();
+        }
+        return this.registration;
+    }
+
+    /**
+     * Gets the value of the command property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the command property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCommand().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Command }
+     * 
+     * 
+     */
+    public List<Command> getCommand() {
+        if (command == null) {
+            command = new ArrayList<Command>();
+        }
+        return this.command;
     }
 
     /**

@@ -40,29 +40,29 @@ public class PRRuleAttr
 {
 
     @XmlAttribute(name = "GroupBy")
-    protected List<String> groupBies;
+    protected List<String> groupBy;
     @XmlAttribute(name = "LogErrors")
     protected Integer logErrors;
     @XmlAttribute(name = "ReportAttr")
-    protected List<String> reportAttrs;
+    protected List<String> reportAttr;
     @XmlAttribute(name = "MaxPerGroup")
     protected Integer maxPerGroup;
     @XmlAttribute(name = "MaxGroups")
     protected Integer maxGroups;
 
     /**
-     * Gets the value of the groupBies property.
+     * Gets the value of the groupBy property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the groupBies property.
+     * This is why there is not a <CODE>set</CODE> method for the groupBy property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGroupBies().add(newItem);
+     *    getGroupBy().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class PRRuleAttr
      * 
      * 
      */
-    public List<String> getGroupBies() {
-        if (groupBies == null) {
-            groupBies = new ArrayList<String>();
+    public List<String> getGroupBy() {
+        if (groupBy == null) {
+            groupBy = new ArrayList<String>();
         }
-        return this.groupBies;
+        return this.groupBy;
     }
 
     /**
@@ -104,18 +104,18 @@ public class PRRuleAttr
     }
 
     /**
-     * Gets the value of the reportAttrs property.
+     * Gets the value of the reportAttr property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the reportAttrs property.
+     * This is why there is not a <CODE>set</CODE> method for the reportAttr property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getReportAttrs().add(newItem);
+     *    getReportAttr().add(newItem);
      * </pre>
      * 
      * 
@@ -125,11 +125,11 @@ public class PRRuleAttr
      * 
      * 
      */
-    public List<String> getReportAttrs() {
-        if (reportAttrs == null) {
-            reportAttrs = new ArrayList<String>();
+    public List<String> getReportAttr() {
+        if (reportAttr == null) {
+            reportAttr = new ArrayList<String>();
         }
-        return this.reportAttrs;
+        return this.reportAttr;
     }
 
     /**

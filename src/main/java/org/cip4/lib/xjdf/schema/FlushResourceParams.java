@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "queueFilters"
+    "queueFilter"
 })
 @XmlRootElement(name = "FlushResourceParams")
 public class FlushResourceParams
@@ -45,24 +45,24 @@ public class FlushResourceParams
 {
 
     @XmlElement(name = "QueueFilter")
-    protected List<QueueFilter> queueFilters;
+    protected List<QueueFilter> queueFilter;
     @XmlAttribute(name = "FlushPolicy")
     @XmlSchemaType(name = "anySimpleType")
     protected String flushPolicy;
 
     /**
-     * Gets the value of the queueFilters property.
+     * Gets the value of the queueFilter property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queueFilters property.
+     * This is why there is not a <CODE>set</CODE> method for the queueFilter property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQueueFilters().add(newItem);
+     *    getQueueFilter().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class FlushResourceParams
      * 
      * 
      */
-    public List<QueueFilter> getQueueFilters() {
-        if (queueFilters == null) {
-            queueFilters = new ArrayList<QueueFilter>();
+    public List<QueueFilter> getQueueFilter() {
+        if (queueFilter == null) {
+            queueFilter = new ArrayList<QueueFilter>();
         }
-        return this.queueFilters;
+        return this.queueFilter;
     }
 
     /**

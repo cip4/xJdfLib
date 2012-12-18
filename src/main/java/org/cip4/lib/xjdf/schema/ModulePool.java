@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "moduleCaps"
+    "moduleCap"
 })
 @XmlRootElement(name = "ModulePool")
 public class ModulePool
@@ -42,21 +42,21 @@ public class ModulePool
 {
 
     @XmlElement(name = "ModuleCap")
-    protected List<ModuleCap> moduleCaps;
+    protected List<ModuleCap> moduleCap;
 
     /**
-     * Gets the value of the moduleCaps property.
+     * Gets the value of the moduleCap property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the moduleCaps property.
+     * This is why there is not a <CODE>set</CODE> method for the moduleCap property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getModuleCaps().add(newItem);
+     *    getModuleCap().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class ModulePool
      * 
      * 
      */
-    public List<ModuleCap> getModuleCaps() {
-        if (moduleCaps == null) {
-            moduleCaps = new ArrayList<ModuleCap>();
+    public List<ModuleCap> getModuleCap() {
+        if (moduleCap == null) {
+            moduleCap = new ArrayList<ModuleCap>();
         }
-        return this.moduleCaps;
+        return this.moduleCap;
     }
 
 }

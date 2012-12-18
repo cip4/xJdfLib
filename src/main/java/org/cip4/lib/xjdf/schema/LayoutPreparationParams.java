@@ -68,56 +68,62 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LayoutPreparationParams", propOrder = {
-    "imageShifts",
-    "deviceMarks",
-    "jobFields",
-    "pageCells",
-    "insertSheets",
-    "fitPolicies"
+    "fitPolicy",
+    "insertSheet",
+    "pageCell",
+    "jobField",
+    "deviceMark",
+    "imageShift"
 })
 public class LayoutPreparationParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "ImageShift")
-    protected List<ImageShift> imageShifts;
-    @XmlElement(name = "DeviceMark")
-    protected List<DeviceMark> deviceMarks;
-    @XmlElement(name = "JobField")
-    protected List<JobField> jobFields;
-    @XmlElement(name = "PageCell")
-    protected List<PageCell> pageCells;
-    @XmlElement(name = "InsertSheet")
-    protected List<InsertSheet> insertSheets;
     @XmlElement(name = "FitPolicy")
-    protected List<FitPolicy> fitPolicies;
+    protected List<FitPolicy> fitPolicy;
+    @XmlElement(name = "InsertSheet")
+    protected List<InsertSheet> insertSheet;
+    @XmlElement(name = "PageCell")
+    protected List<PageCell> pageCell;
+    @XmlElement(name = "JobField")
+    protected List<JobField> jobField;
+    @XmlElement(name = "DeviceMark")
+    protected List<DeviceMark> deviceMark;
+    @XmlElement(name = "ImageShift")
+    protected List<ImageShift> imageShift;
     @XmlAttribute(name = "FinishingOrder")
     @XmlSchemaType(name = "anySimpleType")
     protected String finishingOrder;
     @XmlAttribute(name = "ImplicitGutterMinimumLimit")
-    protected List<Double> implicitGutterMinimumLimits;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair implicitGutterMinimumLimit;
     @XmlAttribute(name = "GutterMinimumLimit")
-    protected List<Double> gutterMinimumLimits;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair gutterMinimumLimit;
     @XmlAttribute(name = "HorizontalCreep")
-    protected List<Integer> horizontalCreeps;
+    protected List<Integer> horizontalCreep;
     @XmlAttribute(name = "PresentationDirection")
     protected String presentationDirection;
     @XmlAttribute(name = "Rotate")
     @XmlSchemaType(name = "anySimpleType")
     protected String rotate;
     @XmlAttribute(name = "ImplicitGutter")
-    protected List<Double> implicitGutters;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair implicitGutter;
     @XmlAttribute(name = "StackDepth")
     protected Integer stackDepth;
     @XmlAttribute(name = "NumberUp")
-    protected List<Double> numberUps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair numberUp;
     @XmlAttribute(name = "Gutter")
-    protected List<Double> gutters;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair gutter;
     @XmlAttribute(name = "StepRepeat")
     protected String stepRepeat;
     @XmlAttribute(name = "StepDocs")
-    protected List<Double> stepDocs;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair stepDocs;
     @XmlAttribute(name = "BindingEdge")
     @XmlSchemaType(name = "anySimpleType")
     protected String bindingEdge;
@@ -127,18 +133,20 @@ public class LayoutPreparationParams
     @XmlAttribute(name = "FoldCatalog")
     protected String foldCatalog;
     @XmlAttribute(name = "BackMarkList")
-    protected List<String> backMarkLists;
+    protected List<String> backMarkList;
     @XmlAttribute(name = "SurfaceContentsBox")
-    protected List<Double> surfaceContentsBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle surfaceContentsBox;
     @XmlAttribute(name = "PageOrder")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String pageOrder;
     @XmlAttribute(name = "FrontMarkList")
-    protected List<String> frontMarkLists;
+    protected List<String> frontMarkList;
     @XmlAttribute(name = "VerticalCreep")
-    protected List<Integer> verticalCreeps;
+    protected List<Integer> verticalCreep;
     @XmlAttribute(name = "CreepValue")
-    protected List<Double> creepValues;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair creepValue;
     @XmlAttribute(name = "Sides")
     @XmlSchemaType(name = "anySimpleType")
     protected String sides;
@@ -153,163 +161,18 @@ public class LayoutPreparationParams
     protected Object externalImpositionTemplateRef;
 
     /**
-     * Gets the value of the imageShifts property.
+     * Gets the value of the fitPolicy property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the imageShifts property.
+     * This is why there is not a <CODE>set</CODE> method for the fitPolicy property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getImageShifts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ImageShift }
-     * 
-     * 
-     */
-    public List<ImageShift> getImageShifts() {
-        if (imageShifts == null) {
-            imageShifts = new ArrayList<ImageShift>();
-        }
-        return this.imageShifts;
-    }
-
-    /**
-     * Gets the value of the deviceMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDeviceMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceMark }
-     * 
-     * 
-     */
-    public List<DeviceMark> getDeviceMarks() {
-        if (deviceMarks == null) {
-            deviceMarks = new ArrayList<DeviceMark>();
-        }
-        return this.deviceMarks;
-    }
-
-    /**
-     * Gets the value of the jobFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jobFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getJobFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JobField }
-     * 
-     * 
-     */
-    public List<JobField> getJobFields() {
-        if (jobFields == null) {
-            jobFields = new ArrayList<JobField>();
-        }
-        return this.jobFields;
-    }
-
-    /**
-     * Gets the value of the pageCells property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pageCells property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPageCells().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PageCell }
-     * 
-     * 
-     */
-    public List<PageCell> getPageCells() {
-        if (pageCells == null) {
-            pageCells = new ArrayList<PageCell>();
-        }
-        return this.pageCells;
-    }
-
-    /**
-     * Gets the value of the insertSheets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the insertSheets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInsertSheets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link InsertSheet }
-     * 
-     * 
-     */
-    public List<InsertSheet> getInsertSheets() {
-        if (insertSheets == null) {
-            insertSheets = new ArrayList<InsertSheet>();
-        }
-        return this.insertSheets;
-    }
-
-    /**
-     * Gets the value of the fitPolicies property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fitPolicies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFitPolicies().add(newItem);
+     *    getFitPolicy().add(newItem);
      * </pre>
      * 
      * 
@@ -319,11 +182,156 @@ public class LayoutPreparationParams
      * 
      * 
      */
-    public List<FitPolicy> getFitPolicies() {
-        if (fitPolicies == null) {
-            fitPolicies = new ArrayList<FitPolicy>();
+    public List<FitPolicy> getFitPolicy() {
+        if (fitPolicy == null) {
+            fitPolicy = new ArrayList<FitPolicy>();
         }
-        return this.fitPolicies;
+        return this.fitPolicy;
+    }
+
+    /**
+     * Gets the value of the insertSheet property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the insertSheet property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getInsertSheet().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link InsertSheet }
+     * 
+     * 
+     */
+    public List<InsertSheet> getInsertSheet() {
+        if (insertSheet == null) {
+            insertSheet = new ArrayList<InsertSheet>();
+        }
+        return this.insertSheet;
+    }
+
+    /**
+     * Gets the value of the pageCell property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pageCell property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPageCell().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PageCell }
+     * 
+     * 
+     */
+    public List<PageCell> getPageCell() {
+        if (pageCell == null) {
+            pageCell = new ArrayList<PageCell>();
+        }
+        return this.pageCell;
+    }
+
+    /**
+     * Gets the value of the jobField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the jobField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getJobField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JobField }
+     * 
+     * 
+     */
+    public List<JobField> getJobField() {
+        if (jobField == null) {
+            jobField = new ArrayList<JobField>();
+        }
+        return this.jobField;
+    }
+
+    /**
+     * Gets the value of the deviceMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the deviceMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDeviceMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DeviceMark }
+     * 
+     * 
+     */
+    public List<DeviceMark> getDeviceMark() {
+        if (deviceMark == null) {
+            deviceMark = new ArrayList<DeviceMark>();
+        }
+        return this.deviceMark;
+    }
+
+    /**
+     * Gets the value of the imageShift property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the imageShift property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getImageShift().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ImageShift }
+     * 
+     * 
+     */
+    public List<ImageShift> getImageShift() {
+        if (imageShift == null) {
+            imageShift = new ArrayList<ImageShift>();
+        }
+        return this.imageShift;
     }
 
     /**
@@ -351,76 +359,66 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the implicitGutterMinimumLimits property.
+     * Gets the value of the implicitGutterMinimumLimit property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the implicitGutterMinimumLimits property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getImplicitGutterMinimumLimits().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getImplicitGutterMinimumLimits() {
-        if (implicitGutterMinimumLimits == null) {
-            implicitGutterMinimumLimits = new ArrayList<Double>();
-        }
-        return this.implicitGutterMinimumLimits;
+    public org.cip4.lib.xjdf.type.XYPair getImplicitGutterMinimumLimit() {
+        return implicitGutterMinimumLimit;
     }
 
     /**
-     * Gets the value of the gutterMinimumLimits property.
+     * Sets the value of the implicitGutterMinimumLimit property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the gutterMinimumLimits property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGutterMinimumLimits().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getGutterMinimumLimits() {
-        if (gutterMinimumLimits == null) {
-            gutterMinimumLimits = new ArrayList<Double>();
-        }
-        return this.gutterMinimumLimits;
+    public void setImplicitGutterMinimumLimit(org.cip4.lib.xjdf.type.XYPair value) {
+        this.implicitGutterMinimumLimit = value;
     }
 
     /**
-     * Gets the value of the horizontalCreeps property.
+     * Gets the value of the gutterMinimumLimit property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getGutterMinimumLimit() {
+        return gutterMinimumLimit;
+    }
+
+    /**
+     * Sets the value of the gutterMinimumLimit property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGutterMinimumLimit(org.cip4.lib.xjdf.type.XYPair value) {
+        this.gutterMinimumLimit = value;
+    }
+
+    /**
+     * Gets the value of the horizontalCreep property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the horizontalCreeps property.
+     * This is why there is not a <CODE>set</CODE> method for the horizontalCreep property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHorizontalCreeps().add(newItem);
+     *    getHorizontalCreep().add(newItem);
      * </pre>
      * 
      * 
@@ -430,11 +428,11 @@ public class LayoutPreparationParams
      * 
      * 
      */
-    public List<Integer> getHorizontalCreeps() {
-        if (horizontalCreeps == null) {
-            horizontalCreeps = new ArrayList<Integer>();
+    public List<Integer> getHorizontalCreep() {
+        if (horizontalCreep == null) {
+            horizontalCreep = new ArrayList<Integer>();
         }
-        return this.horizontalCreeps;
+        return this.horizontalCreep;
     }
 
     /**
@@ -486,32 +484,27 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the implicitGutters property.
+     * Gets the value of the implicitGutter property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the implicitGutters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getImplicitGutters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getImplicitGutters() {
-        if (implicitGutters == null) {
-            implicitGutters = new ArrayList<Double>();
-        }
-        return this.implicitGutters;
+    public org.cip4.lib.xjdf.type.XYPair getImplicitGutter() {
+        return implicitGutter;
+    }
+
+    /**
+     * Sets the value of the implicitGutter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setImplicitGutter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.implicitGutter = value;
     }
 
     /**
@@ -539,61 +532,51 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the numberUps property.
+     * Gets the value of the numberUp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numberUps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getNumberUps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getNumberUps() {
-        if (numberUps == null) {
-            numberUps = new ArrayList<Double>();
-        }
-        return this.numberUps;
+    public org.cip4.lib.xjdf.type.XYPair getNumberUp() {
+        return numberUp;
     }
 
     /**
-     * Gets the value of the gutters property.
+     * Sets the value of the numberUp property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the gutters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGutters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getGutters() {
-        if (gutters == null) {
-            gutters = new ArrayList<Double>();
-        }
-        return this.gutters;
+    public void setNumberUp(org.cip4.lib.xjdf.type.XYPair value) {
+        this.numberUp = value;
+    }
+
+    /**
+     * Gets the value of the gutter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getGutter() {
+        return gutter;
+    }
+
+    /**
+     * Sets the value of the gutter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGutter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.gutter = value;
     }
 
     /**
@@ -623,30 +606,25 @@ public class LayoutPreparationParams
     /**
      * Gets the value of the stepDocs property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the stepDocs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStepDocs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getStepDocs() {
-        if (stepDocs == null) {
-            stepDocs = new ArrayList<Double>();
-        }
-        return this.stepDocs;
+    public org.cip4.lib.xjdf.type.XYPair getStepDocs() {
+        return stepDocs;
+    }
+
+    /**
+     * Sets the value of the stepDocs property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setStepDocs(org.cip4.lib.xjdf.type.XYPair value) {
+        this.stepDocs = value;
     }
 
     /**
@@ -722,18 +700,18 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the backMarkLists property.
+     * Gets the value of the backMarkList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the backMarkLists property.
+     * This is why there is not a <CODE>set</CODE> method for the backMarkList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBackMarkLists().add(newItem);
+     *    getBackMarkList().add(newItem);
      * </pre>
      * 
      * 
@@ -743,40 +721,35 @@ public class LayoutPreparationParams
      * 
      * 
      */
-    public List<String> getBackMarkLists() {
-        if (backMarkLists == null) {
-            backMarkLists = new ArrayList<String>();
+    public List<String> getBackMarkList() {
+        if (backMarkList == null) {
+            backMarkList = new ArrayList<String>();
         }
-        return this.backMarkLists;
+        return this.backMarkList;
     }
 
     /**
-     * Gets the value of the surfaceContentsBoxes property.
+     * Gets the value of the surfaceContentsBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the surfaceContentsBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSurfaceContentsBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSurfaceContentsBoxes() {
-        if (surfaceContentsBoxes == null) {
-            surfaceContentsBoxes = new ArrayList<Double>();
-        }
-        return this.surfaceContentsBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSurfaceContentsBox() {
+        return surfaceContentsBox;
+    }
+
+    /**
+     * Sets the value of the surfaceContentsBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSurfaceContentsBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.surfaceContentsBox = value;
     }
 
     /**
@@ -804,18 +777,18 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the frontMarkLists property.
+     * Gets the value of the frontMarkList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the frontMarkLists property.
+     * This is why there is not a <CODE>set</CODE> method for the frontMarkList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFrontMarkLists().add(newItem);
+     *    getFrontMarkList().add(newItem);
      * </pre>
      * 
      * 
@@ -825,26 +798,26 @@ public class LayoutPreparationParams
      * 
      * 
      */
-    public List<String> getFrontMarkLists() {
-        if (frontMarkLists == null) {
-            frontMarkLists = new ArrayList<String>();
+    public List<String> getFrontMarkList() {
+        if (frontMarkList == null) {
+            frontMarkList = new ArrayList<String>();
         }
-        return this.frontMarkLists;
+        return this.frontMarkList;
     }
 
     /**
-     * Gets the value of the verticalCreeps property.
+     * Gets the value of the verticalCreep property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the verticalCreeps property.
+     * This is why there is not a <CODE>set</CODE> method for the verticalCreep property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getVerticalCreeps().add(newItem);
+     *    getVerticalCreep().add(newItem);
      * </pre>
      * 
      * 
@@ -854,40 +827,35 @@ public class LayoutPreparationParams
      * 
      * 
      */
-    public List<Integer> getVerticalCreeps() {
-        if (verticalCreeps == null) {
-            verticalCreeps = new ArrayList<Integer>();
+    public List<Integer> getVerticalCreep() {
+        if (verticalCreep == null) {
+            verticalCreep = new ArrayList<Integer>();
         }
-        return this.verticalCreeps;
+        return this.verticalCreep;
     }
 
     /**
-     * Gets the value of the creepValues property.
+     * Gets the value of the creepValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the creepValues property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCreepValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCreepValues() {
-        if (creepValues == null) {
-            creepValues = new ArrayList<Double>();
-        }
-        return this.creepValues;
+    public org.cip4.lib.xjdf.type.XYPair getCreepValue() {
+        return creepValue;
+    }
+
+    /**
+     * Sets the value of the creepValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCreepValue(org.cip4.lib.xjdf.type.XYPair value) {
+        this.creepValue = value;
     }
 
     /**

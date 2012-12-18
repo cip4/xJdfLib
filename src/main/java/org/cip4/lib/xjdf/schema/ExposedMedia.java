@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -51,18 +52,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ExposedMedia", propOrder = {
-    "contacts",
-    "locations"
+    "location",
+    "contact"
 })
 public class ExposedMedia
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
     @XmlElement(name = "Location")
-    protected List<Location> locations;
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "Polarity")
     protected Boolean polarity;
     @XmlAttribute(name = "PunchType")
@@ -72,7 +73,8 @@ public class ExposedMedia
     @XmlAttribute(name = "ProofName")
     protected String proofName;
     @XmlAttribute(name = "Resolution")
-    protected List<Double> resolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair resolution;
     @XmlAttribute(name = "ProofQuality")
     @XmlSchemaType(name = "anySimpleType")
     protected String proofQuality;
@@ -102,47 +104,18 @@ public class ExposedMedia
     protected Object screeningParamsRef;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the location property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the locations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocations().add(newItem);
+     *    getLocation().add(newItem);
      * </pre>
      * 
      * 
@@ -152,11 +125,40 @@ public class ExposedMedia
      * 
      * 
      */
-    public List<Location> getLocations() {
-        if (locations == null) {
-            locations = new ArrayList<Location>();
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
         }
-        return this.locations;
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**
@@ -256,32 +258,27 @@ public class ExposedMedia
     }
 
     /**
-     * Gets the value of the resolutions property.
+     * Gets the value of the resolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getResolutions() {
-        if (resolutions == null) {
-            resolutions = new ArrayList<Double>();
-        }
-        return this.resolutions;
+    public org.cip4.lib.xjdf.type.XYPair getResolution() {
+        return resolution;
+    }
+
+    /**
+     * Sets the value of the resolution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.resolution = value;
     }
 
     /**

@@ -35,46 +35,46 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProductionPath", propOrder = {
-    "postPressComponentPath",
+    "printingUnitWebPath",
     "folderSuperStructureWebPath",
-    "printingUnitWebPath"
+    "postPressComponentPath"
 })
 public class ProductionPath
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "PostPressComponentPath", namespace = "")
-    protected ProductionSubPath postPressComponentPath;
-    @XmlElement(name = "FolderSuperStructureWebPath", namespace = "")
-    protected ProductionSubPath folderSuperStructureWebPath;
     @XmlElement(name = "PrintingUnitWebPath", namespace = "")
     protected ProductionSubPath printingUnitWebPath;
+    @XmlElement(name = "FolderSuperStructureWebPath", namespace = "")
+    protected ProductionSubPath folderSuperStructureWebPath;
+    @XmlElement(name = "PostPressComponentPath", namespace = "")
+    protected ProductionSubPath postPressComponentPath;
     @XmlAttribute(name = "ProductionPathID")
     protected String productionPathID;
 
     /**
-     * Gets the value of the postPressComponentPath property.
+     * Gets the value of the printingUnitWebPath property.
      * 
      * @return
      *     possible object is
      *     {@link ProductionSubPath }
      *     
      */
-    public ProductionSubPath getPostPressComponentPath() {
-        return postPressComponentPath;
+    public ProductionSubPath getPrintingUnitWebPath() {
+        return printingUnitWebPath;
     }
 
     /**
-     * Sets the value of the postPressComponentPath property.
+     * Sets the value of the printingUnitWebPath property.
      * 
      * @param value
      *     allowed object is
      *     {@link ProductionSubPath }
      *     
      */
-    public void setPostPressComponentPath(ProductionSubPath value) {
-        this.postPressComponentPath = value;
+    public void setPrintingUnitWebPath(ProductionSubPath value) {
+        this.printingUnitWebPath = value;
     }
 
     /**
@@ -102,27 +102,27 @@ public class ProductionPath
     }
 
     /**
-     * Gets the value of the printingUnitWebPath property.
+     * Gets the value of the postPressComponentPath property.
      * 
      * @return
      *     possible object is
      *     {@link ProductionSubPath }
      *     
      */
-    public ProductionSubPath getPrintingUnitWebPath() {
-        return printingUnitWebPath;
+    public ProductionSubPath getPostPressComponentPath() {
+        return postPressComponentPath;
     }
 
     /**
-     * Sets the value of the printingUnitWebPath property.
+     * Sets the value of the postPressComponentPath property.
      * 
      * @param value
      *     allowed object is
      *     {@link ProductionSubPath }
      *     
      */
-    public void setPrintingUnitWebPath(ProductionSubPath value) {
-        this.printingUnitWebPath = value;
+    public void setPostPressComponentPath(ProductionSubPath value) {
+        this.postPressComponentPath = value;
     }
 
     /**

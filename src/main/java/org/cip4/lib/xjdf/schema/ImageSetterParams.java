@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -53,7 +54,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ImageSetterParams", propOrder = {
-    "fitPolicies"
+    "fitPolicy"
 })
 public class ImageSetterParams
     extends ParameterType
@@ -61,9 +62,9 @@ public class ImageSetterParams
 {
 
     @XmlElement(name = "FitPolicy")
-    protected List<FitPolicy> fitPolicies;
+    protected List<FitPolicy> fitPolicy;
     @XmlAttribute(name = "TransferCurve")
-    protected List<Double> transferCurves;
+    protected List<Double> transferCurve;
     @XmlAttribute(name = "Polarity")
     @XmlSchemaType(name = "anySimpleType")
     protected String polarity;
@@ -84,7 +85,8 @@ public class ImageSetterParams
     @XmlAttribute(name = "AdvanceDistance")
     protected Double advanceDistance;
     @XmlAttribute(name = "Resolution")
-    protected List<Double> resolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair resolution;
     @XmlAttribute(name = "ManualFeed")
     protected Boolean manualFeed;
     @XmlAttribute(name = "RollCut")
@@ -97,24 +99,25 @@ public class ImageSetterParams
     @XmlSchemaType(name = "anySimpleType")
     protected String sides;
     @XmlAttribute(name = "BurnOutArea")
-    protected List<Double> burnOutAreas;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair burnOutArea;
     @XmlAttribute(name = "MediaRef")
     @XmlIDREF
     protected Object mediaRef;
 
     /**
-     * Gets the value of the fitPolicies property.
+     * Gets the value of the fitPolicy property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fitPolicies property.
+     * This is why there is not a <CODE>set</CODE> method for the fitPolicy property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFitPolicies().add(newItem);
+     *    getFitPolicy().add(newItem);
      * </pre>
      * 
      * 
@@ -124,26 +127,26 @@ public class ImageSetterParams
      * 
      * 
      */
-    public List<FitPolicy> getFitPolicies() {
-        if (fitPolicies == null) {
-            fitPolicies = new ArrayList<FitPolicy>();
+    public List<FitPolicy> getFitPolicy() {
+        if (fitPolicy == null) {
+            fitPolicy = new ArrayList<FitPolicy>();
         }
-        return this.fitPolicies;
+        return this.fitPolicy;
     }
 
     /**
-     * Gets the value of the transferCurves property.
+     * Gets the value of the transferCurve property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferCurves property.
+     * This is why there is not a <CODE>set</CODE> method for the transferCurve property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTransferCurves().add(newItem);
+     *    getTransferCurve().add(newItem);
      * </pre>
      * 
      * 
@@ -153,11 +156,11 @@ public class ImageSetterParams
      * 
      * 
      */
-    public List<Double> getTransferCurves() {
-        if (transferCurves == null) {
-            transferCurves = new ArrayList<Double>();
+    public List<Double> getTransferCurve() {
+        if (transferCurve == null) {
+            transferCurve = new ArrayList<Double>();
         }
-        return this.transferCurves;
+        return this.transferCurve;
     }
 
     /**
@@ -353,32 +356,27 @@ public class ImageSetterParams
     }
 
     /**
-     * Gets the value of the resolutions property.
+     * Gets the value of the resolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getResolutions() {
-        if (resolutions == null) {
-            resolutions = new ArrayList<Double>();
-        }
-        return this.resolutions;
+    public org.cip4.lib.xjdf.type.XYPair getResolution() {
+        return resolution;
+    }
+
+    /**
+     * Sets the value of the resolution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.resolution = value;
     }
 
     /**
@@ -502,32 +500,27 @@ public class ImageSetterParams
     }
 
     /**
-     * Gets the value of the burnOutAreas property.
+     * Gets the value of the burnOutArea property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the burnOutAreas property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBurnOutAreas().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBurnOutAreas() {
-        if (burnOutAreas == null) {
-            burnOutAreas = new ArrayList<Double>();
-        }
-        return this.burnOutAreas;
+    public org.cip4.lib.xjdf.type.XYPair getBurnOutArea() {
+        return burnOutArea;
+    }
+
+    /**
+     * Sets the value of the burnOutArea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBurnOutArea(org.cip4.lib.xjdf.type.XYPair value) {
+        this.burnOutArea = value;
     }
 
     /**

@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -47,7 +46,8 @@ public class Preview
     @XmlSchemaType(name = "anySimpleType")
     protected String previewUsage;
     @XmlAttribute(name = "CTM")
-    protected List<Double> ctms;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix ctm;
     @XmlAttribute(name = "MimeTypeDetails")
     protected String mimeTypeDetails;
     @XmlAttribute(name = "URL")
@@ -108,32 +108,27 @@ public class Preview
     }
 
     /**
-     * Gets the value of the ctms property.
+     * Gets the value of the ctm property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ctms property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCTMS().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCTMS() {
-        if (ctms == null) {
-            ctms = new ArrayList<Double>();
-        }
-        return this.ctms;
+    public org.cip4.lib.xjdf.type.Matrix getCTM() {
+        return ctm;
+    }
+
+    /**
+     * Sets the value of the ctm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.ctm = value;
     }
 
     /**

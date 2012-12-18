@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -44,7 +45,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "refAnchors"
+    "refAnchor"
 })
 @XmlRootElement(name = "PositionObj")
 public class PositionObj
@@ -52,13 +53,16 @@ public class PositionObj
 {
 
     @XmlElement(name = "RefAnchor")
-    protected List<RefAnchor> refAnchors;
+    protected List<RefAnchor> refAnchor;
     @XmlAttribute(name = "Size")
-    protected List<Double> sizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair size;
     @XmlAttribute(name = "CTM")
-    protected List<Double> ctms;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix ctm;
     @XmlAttribute(name = "RelativeSize")
-    protected List<Double> relativeSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair relativeSize;
     @XmlAttribute(name = "Anchor")
     protected EnumAnchor anchor;
     @XmlAttribute(name = "RotationPolicy")
@@ -74,18 +78,18 @@ public class PositionObj
     protected String positionPolicy;
 
     /**
-     * Gets the value of the refAnchors property.
+     * Gets the value of the refAnchor property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the refAnchors property.
+     * This is why there is not a <CODE>set</CODE> method for the refAnchor property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRefAnchors().add(newItem);
+     *    getRefAnchor().add(newItem);
      * </pre>
      * 
      * 
@@ -95,98 +99,83 @@ public class PositionObj
      * 
      * 
      */
-    public List<RefAnchor> getRefAnchors() {
-        if (refAnchors == null) {
-            refAnchors = new ArrayList<RefAnchor>();
+    public List<RefAnchor> getRefAnchor() {
+        if (refAnchor == null) {
+            refAnchor = new ArrayList<RefAnchor>();
         }
-        return this.refAnchors;
+        return this.refAnchor;
     }
 
     /**
-     * Gets the value of the sizes property.
+     * Gets the value of the size property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSizes() {
-        if (sizes == null) {
-            sizes = new ArrayList<Double>();
-        }
-        return this.sizes;
+    public org.cip4.lib.xjdf.type.XYPair getSize() {
+        return size;
     }
 
     /**
-     * Gets the value of the ctms property.
+     * Sets the value of the size property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ctms property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCTMS().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCTMS() {
-        if (ctms == null) {
-            ctms = new ArrayList<Double>();
-        }
-        return this.ctms;
+    public void setSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.size = value;
     }
 
     /**
-     * Gets the value of the relativeSizes property.
+     * Gets the value of the ctm property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relativeSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRelativeSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRelativeSizes() {
-        if (relativeSizes == null) {
-            relativeSizes = new ArrayList<Double>();
-        }
-        return this.relativeSizes;
+    public org.cip4.lib.xjdf.type.Matrix getCTM() {
+        return ctm;
+    }
+
+    /**
+     * Sets the value of the ctm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.ctm = value;
+    }
+
+    /**
+     * Gets the value of the relativeSize property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getRelativeSize() {
+        return relativeSize;
+    }
+
+    /**
+     * Sets the value of the relativeSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRelativeSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.relativeSize = value;
     }
 
     /**

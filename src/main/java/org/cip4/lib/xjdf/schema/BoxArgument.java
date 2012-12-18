@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -48,7 +47,8 @@ public class BoxArgument
     @XmlSchemaType(name = "anySimpleType")
     protected String mirrorMargins;
     @XmlAttribute(name = "Offset")
-    protected List<Double> offsets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle offset;
 
     /**
      * Gets the value of the overlap property.
@@ -123,32 +123,27 @@ public class BoxArgument
     }
 
     /**
-     * Gets the value of the offsets property.
+     * Gets the value of the offset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the offsets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOffsets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOffsets() {
-        if (offsets == null) {
-            offsets = new ArrayList<Double>();
-        }
-        return this.offsets;
+    public org.cip4.lib.xjdf.type.Rectangle getOffset() {
+        return offset;
+    }
+
+    /**
+     * Sets the value of the offset property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOffset(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.offset = value;
     }
 
 }

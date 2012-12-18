@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "glueLines"
+    "glueLine"
 })
 @XmlRootElement(name = "Insert")
 public class Insert
@@ -49,13 +50,14 @@ public class Insert
 {
 
     @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "WrapPages")
     protected Integer wrapPages;
     @XmlAttribute(name = "Folio")
     protected Integer folio;
     @XmlAttribute(name = "Transformation")
-    protected List<Double> transformations;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix transformation;
     @XmlAttribute(name = "GlueType")
     @XmlSchemaType(name = "anySimpleType")
     protected String glueType;
@@ -64,18 +66,18 @@ public class Insert
     protected String method;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the glueLine property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
+     *    getGlueLine().add(newItem);
      * </pre>
      * 
      * 
@@ -85,11 +87,11 @@ public class Insert
      * 
      * 
      */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
         }
-        return this.glueLines;
+        return this.glueLine;
     }
 
     /**
@@ -141,32 +143,27 @@ public class Insert
     }
 
     /**
-     * Gets the value of the transformations property.
+     * Gets the value of the transformation property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transformations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransformations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTransformations() {
-        if (transformations == null) {
-            transformations = new ArrayList<Double>();
-        }
-        return this.transformations;
+    public org.cip4.lib.xjdf.type.Matrix getTransformation() {
+        return transformation;
+    }
+
+    /**
+     * Sets the value of the transformation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTransformation(org.cip4.lib.xjdf.type.Matrix value) {
+        this.transformation = value;
     }
 
     /**

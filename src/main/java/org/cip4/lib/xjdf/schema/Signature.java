@@ -79,30 +79,30 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "markObjects",
-    "layerLists",
-    "pageConditions",
-    "insertSheets",
-    "transferCurvePools",
-    "contentObjects"
+    "contentObject",
+    "transferCurvePool",
+    "insertSheet",
+    "pageCondition",
+    "layerList",
+    "markObject"
 })
 @XmlRootElement(name = "Signature")
 public class Signature
     implements Serializable
 {
 
-    @XmlElement(name = "MarkObject")
-    protected List<MarkObject> markObjects;
-    @XmlElement(name = "LayerList")
-    protected List<LayerList> layerLists;
-    @XmlElement(name = "PageCondition")
-    protected List<PageCondition> pageConditions;
-    @XmlElement(name = "InsertSheet")
-    protected List<InsertSheet> insertSheets;
-    @XmlElement(name = "TransferCurvePool")
-    protected List<TransferCurvePool> transferCurvePools;
     @XmlElement(name = "ContentObject")
-    protected List<ContentObject> contentObjects;
+    protected List<ContentObject> contentObject;
+    @XmlElement(name = "TransferCurvePool")
+    protected List<TransferCurvePool> transferCurvePool;
+    @XmlElement(name = "InsertSheet")
+    protected List<InsertSheet> insertSheet;
+    @XmlElement(name = "PageCondition")
+    protected List<PageCondition> pageCondition;
+    @XmlElement(name = "LayerList")
+    protected List<LayerList> layerList;
+    @XmlElement(name = "MarkObject")
+    protected List<MarkObject> markObject;
     @XmlAttribute(name = "Locked")
     protected Boolean locked;
     @XmlAttribute(name = "PipeURL")
@@ -132,7 +132,8 @@ public class Signature
     @XmlAttribute(name = "AgentVersion")
     protected String agentVersion;
     @XmlAttribute(name = "SurfaceContentsBox")
-    protected List<Double> surfaceContentsBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle surfaceContentsBox;
     @XmlAttribute(name = "StackDepth")
     protected Integer stackDepth;
     @XmlAttribute(name = "LockOrigins")
@@ -167,163 +168,18 @@ public class Signature
     protected List<Object> sourceResourceRefs;
 
     /**
-     * Gets the value of the markObjects property.
+     * Gets the value of the contentObject property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markObjects property.
+     * This is why there is not a <CODE>set</CODE> method for the contentObject property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkObjects().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MarkObject }
-     * 
-     * 
-     */
-    public List<MarkObject> getMarkObjects() {
-        if (markObjects == null) {
-            markObjects = new ArrayList<MarkObject>();
-        }
-        return this.markObjects;
-    }
-
-    /**
-     * Gets the value of the layerLists property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerLists property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLayerLists().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link LayerList }
-     * 
-     * 
-     */
-    public List<LayerList> getLayerLists() {
-        if (layerLists == null) {
-            layerLists = new ArrayList<LayerList>();
-        }
-        return this.layerLists;
-    }
-
-    /**
-     * Gets the value of the pageConditions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pageConditions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPageConditions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PageCondition }
-     * 
-     * 
-     */
-    public List<PageCondition> getPageConditions() {
-        if (pageConditions == null) {
-            pageConditions = new ArrayList<PageCondition>();
-        }
-        return this.pageConditions;
-    }
-
-    /**
-     * Gets the value of the insertSheets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the insertSheets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInsertSheets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link InsertSheet }
-     * 
-     * 
-     */
-    public List<InsertSheet> getInsertSheets() {
-        if (insertSheets == null) {
-            insertSheets = new ArrayList<InsertSheet>();
-        }
-        return this.insertSheets;
-    }
-
-    /**
-     * Gets the value of the transferCurvePools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferCurvePools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransferCurvePools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TransferCurvePool }
-     * 
-     * 
-     */
-    public List<TransferCurvePool> getTransferCurvePools() {
-        if (transferCurvePools == null) {
-            transferCurvePools = new ArrayList<TransferCurvePool>();
-        }
-        return this.transferCurvePools;
-    }
-
-    /**
-     * Gets the value of the contentObjects property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contentObjects property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContentObjects().add(newItem);
+     *    getContentObject().add(newItem);
      * </pre>
      * 
      * 
@@ -333,11 +189,156 @@ public class Signature
      * 
      * 
      */
-    public List<ContentObject> getContentObjects() {
-        if (contentObjects == null) {
-            contentObjects = new ArrayList<ContentObject>();
+    public List<ContentObject> getContentObject() {
+        if (contentObject == null) {
+            contentObject = new ArrayList<ContentObject>();
         }
-        return this.contentObjects;
+        return this.contentObject;
+    }
+
+    /**
+     * Gets the value of the transferCurvePool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the transferCurvePool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTransferCurvePool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TransferCurvePool }
+     * 
+     * 
+     */
+    public List<TransferCurvePool> getTransferCurvePool() {
+        if (transferCurvePool == null) {
+            transferCurvePool = new ArrayList<TransferCurvePool>();
+        }
+        return this.transferCurvePool;
+    }
+
+    /**
+     * Gets the value of the insertSheet property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the insertSheet property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getInsertSheet().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link InsertSheet }
+     * 
+     * 
+     */
+    public List<InsertSheet> getInsertSheet() {
+        if (insertSheet == null) {
+            insertSheet = new ArrayList<InsertSheet>();
+        }
+        return this.insertSheet;
+    }
+
+    /**
+     * Gets the value of the pageCondition property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pageCondition property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPageCondition().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PageCondition }
+     * 
+     * 
+     */
+    public List<PageCondition> getPageCondition() {
+        if (pageCondition == null) {
+            pageCondition = new ArrayList<PageCondition>();
+        }
+        return this.pageCondition;
+    }
+
+    /**
+     * Gets the value of the layerList property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the layerList property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLayerList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link LayerList }
+     * 
+     * 
+     */
+    public List<LayerList> getLayerList() {
+        if (layerList == null) {
+            layerList = new ArrayList<LayerList>();
+        }
+        return this.layerList;
+    }
+
+    /**
+     * Gets the value of the markObject property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the markObject property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMarkObject().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link MarkObject }
+     * 
+     * 
+     */
+    public List<MarkObject> getMarkObject() {
+        if (markObject == null) {
+            markObject = new ArrayList<MarkObject>();
+        }
+        return this.markObject;
     }
 
     /**
@@ -634,32 +635,27 @@ public class Signature
     }
 
     /**
-     * Gets the value of the surfaceContentsBoxes property.
+     * Gets the value of the surfaceContentsBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the surfaceContentsBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSurfaceContentsBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSurfaceContentsBoxes() {
-        if (surfaceContentsBoxes == null) {
-            surfaceContentsBoxes = new ArrayList<Double>();
-        }
-        return this.surfaceContentsBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSurfaceContentsBox() {
+        return surfaceContentsBox;
+    }
+
+    /**
+     * Sets the value of the surfaceContentsBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSurfaceContentsBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.surfaceContentsBox = value;
     }
 
     /**

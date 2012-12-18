@@ -34,61 +34,32 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FeedingParams", propOrder = {
-    "feeders",
-    "collatingItems"
+    "collatingItem",
+    "feeder"
 })
 public class FeedingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Feeder")
-    protected List<Feeder> feeders;
     @XmlElement(name = "CollatingItem")
-    protected List<CollatingItem> collatingItems;
+    protected List<CollatingItem> collatingItem;
+    @XmlElement(name = "Feeder")
+    protected List<Feeder> feeder;
 
     /**
-     * Gets the value of the feeders property.
+     * Gets the value of the collatingItem property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the feeders property.
+     * This is why there is not a <CODE>set</CODE> method for the collatingItem property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFeeders().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Feeder }
-     * 
-     * 
-     */
-    public List<Feeder> getFeeders() {
-        if (feeders == null) {
-            feeders = new ArrayList<Feeder>();
-        }
-        return this.feeders;
-    }
-
-    /**
-     * Gets the value of the collatingItems property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the collatingItems property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCollatingItems().add(newItem);
+     *    getCollatingItem().add(newItem);
      * </pre>
      * 
      * 
@@ -98,11 +69,40 @@ public class FeedingParams
      * 
      * 
      */
-    public List<CollatingItem> getCollatingItems() {
-        if (collatingItems == null) {
-            collatingItems = new ArrayList<CollatingItem>();
+    public List<CollatingItem> getCollatingItem() {
+        if (collatingItem == null) {
+            collatingItem = new ArrayList<CollatingItem>();
         }
-        return this.collatingItems;
+        return this.collatingItem;
+    }
+
+    /**
+     * Gets the value of the feeder property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the feeder property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getFeeder().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Feeder }
+     * 
+     * 
+     */
+    public List<Feeder> getFeeder() {
+        if (feeder == null) {
+            feeder = new ArrayList<Feeder>();
+        }
+        return this.feeder;
     }
 
 }

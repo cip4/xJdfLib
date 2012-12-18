@@ -35,61 +35,32 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "boxToBoxDifferences",
-    "boxArguments"
+    "boxArgument",
+    "boxToBoxDifference"
 })
 @XmlRootElement(name = "PreflightArgument")
 public class PreflightArgument
     implements Serializable
 {
 
-    @XmlElement(name = "BoxToBoxDifference")
-    protected List<BoxToBoxDifference> boxToBoxDifferences;
     @XmlElement(name = "BoxArgument")
-    protected List<BoxArgument> boxArguments;
+    protected List<BoxArgument> boxArgument;
+    @XmlElement(name = "BoxToBoxDifference")
+    protected List<BoxToBoxDifference> boxToBoxDifference;
 
     /**
-     * Gets the value of the boxToBoxDifferences property.
+     * Gets the value of the boxArgument property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boxToBoxDifferences property.
+     * This is why there is not a <CODE>set</CODE> method for the boxArgument property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBoxToBoxDifferences().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link BoxToBoxDifference }
-     * 
-     * 
-     */
-    public List<BoxToBoxDifference> getBoxToBoxDifferences() {
-        if (boxToBoxDifferences == null) {
-            boxToBoxDifferences = new ArrayList<BoxToBoxDifference>();
-        }
-        return this.boxToBoxDifferences;
-    }
-
-    /**
-     * Gets the value of the boxArguments property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boxArguments property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBoxArguments().add(newItem);
+     *    getBoxArgument().add(newItem);
      * </pre>
      * 
      * 
@@ -99,11 +70,40 @@ public class PreflightArgument
      * 
      * 
      */
-    public List<BoxArgument> getBoxArguments() {
-        if (boxArguments == null) {
-            boxArguments = new ArrayList<BoxArgument>();
+    public List<BoxArgument> getBoxArgument() {
+        if (boxArgument == null) {
+            boxArgument = new ArrayList<BoxArgument>();
         }
-        return this.boxArguments;
+        return this.boxArgument;
+    }
+
+    /**
+     * Gets the value of the boxToBoxDifference property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the boxToBoxDifference property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBoxToBoxDifference().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link BoxToBoxDifference }
+     * 
+     * 
+     */
+    public List<BoxToBoxDifference> getBoxToBoxDifference() {
+        if (boxToBoxDifference == null) {
+            boxToBoxDifference = new ArrayList<BoxToBoxDifference>();
+        }
+        return this.boxToBoxDifference;
     }
 
 }

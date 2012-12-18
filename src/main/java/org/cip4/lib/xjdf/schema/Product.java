@@ -47,24 +47,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "intents",
-    "childProducts",
-    "comments",
-    "generalIDs"
+    "generalID",
+    "comment",
+    "childProduct",
+    "intent"
 })
 @XmlRootElement(name = "Product")
 public class Product
     implements Serializable
 {
 
-    @XmlElement(name = "Intent")
-    protected List<Intent> intents;
-    @XmlElement(name = "ChildProduct")
-    protected List<ChildProduct> childProducts;
-    @XmlElement(name = "Comment")
-    protected List<Comment> comments;
     @XmlElement(name = "GeneralID")
-    protected List<GeneralID> generalIDs;
+    protected List<GeneralID> generalID;
+    @XmlElement(name = "Comment")
+    protected List<Comment> comment;
+    @XmlElement(name = "ChildProduct")
+    protected List<ChildProduct> childProduct;
+    @XmlElement(name = "Intent")
+    protected List<Intent> intent;
     @XmlAttribute(name = "ID", required = true)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -82,105 +82,18 @@ public class Product
     protected String productTypeDetails;
 
     /**
-     * Gets the value of the intents property.
+     * Gets the value of the generalID property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the intents property.
+     * This is why there is not a <CODE>set</CODE> method for the generalID property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIntents().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Intent }
-     * 
-     * 
-     */
-    public List<Intent> getIntents() {
-        if (intents == null) {
-            intents = new ArrayList<Intent>();
-        }
-        return this.intents;
-    }
-
-    /**
-     * Gets the value of the childProducts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the childProducts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChildProducts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ChildProduct }
-     * 
-     * 
-     */
-    public List<ChildProduct> getChildProducts() {
-        if (childProducts == null) {
-            childProducts = new ArrayList<ChildProduct>();
-        }
-        return this.childProducts;
-    }
-
-    /**
-     * Gets the value of the comments property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comments property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getComments().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Comment }
-     * 
-     * 
-     */
-    public List<Comment> getComments() {
-        if (comments == null) {
-            comments = new ArrayList<Comment>();
-        }
-        return this.comments;
-    }
-
-    /**
-     * Gets the value of the generalIDs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalIDs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGeneralIDs().add(newItem);
+     *    getGeneralID().add(newItem);
      * </pre>
      * 
      * 
@@ -190,11 +103,98 @@ public class Product
      * 
      * 
      */
-    public List<GeneralID> getGeneralIDs() {
-        if (generalIDs == null) {
-            generalIDs = new ArrayList<GeneralID>();
+    public List<GeneralID> getGeneralID() {
+        if (generalID == null) {
+            generalID = new ArrayList<GeneralID>();
         }
-        return this.generalIDs;
+        return this.generalID;
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the comment property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getComment().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Comment }
+     * 
+     * 
+     */
+    public List<Comment> getComment() {
+        if (comment == null) {
+            comment = new ArrayList<Comment>();
+        }
+        return this.comment;
+    }
+
+    /**
+     * Gets the value of the childProduct property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the childProduct property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getChildProduct().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ChildProduct }
+     * 
+     * 
+     */
+    public List<ChildProduct> getChildProduct() {
+        if (childProduct == null) {
+            childProduct = new ArrayList<ChildProduct>();
+        }
+        return this.childProduct;
+    }
+
+    /**
+     * Gets the value of the intent property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the intent property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getIntent().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Intent }
+     * 
+     * 
+     */
+    public List<Intent> getIntent() {
+        if (intent == null) {
+            intent = new ArrayList<Intent>();
+        }
+        return this.intent;
     }
 
     /**

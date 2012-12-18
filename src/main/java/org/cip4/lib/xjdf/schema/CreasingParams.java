@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CreasingParams", propOrder = {
-    "creases"
+    "crease"
 })
 public class CreasingParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class CreasingParams
 {
 
     @XmlElement(name = "Crease")
-    protected List<Crease> creases;
+    protected List<Crease> crease;
 
     /**
-     * Gets the value of the creases property.
+     * Gets the value of the crease property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the creases property.
+     * This is why there is not a <CODE>set</CODE> method for the crease property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCreases().add(newItem);
+     *    getCrease().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class CreasingParams
      * 
      * 
      */
-    public List<Crease> getCreases() {
-        if (creases == null) {
-            creases = new ArrayList<Crease>();
+    public List<Crease> getCrease() {
+        if (crease == null) {
+            crease = new ArrayList<Crease>();
         }
-        return this.creases;
+        return this.crease;
     }
 
 }

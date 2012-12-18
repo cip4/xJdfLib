@@ -49,7 +49,7 @@ public class DCTParams
     @XmlAttribute(name = "QuantTable")
     protected String quantTable;
     @XmlAttribute(name = "SourceCSs")
-    protected List<EnumSourceCSs> sourceCsses;
+    protected List<EnumSourceCSs> sourceCSs;
     @XmlAttribute(name = "HuffTable")
     protected String huffTable;
     @XmlAttribute(name = "HSamples")
@@ -87,18 +87,18 @@ public class DCTParams
     }
 
     /**
-     * Gets the value of the sourceCsses property.
+     * Gets the value of the sourceCSs property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceCsses property.
+     * This is why there is not a <CODE>set</CODE> method for the sourceCSs property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSourceCsses().add(newItem);
+     *    getSourceCSs().add(newItem);
      * </pre>
      * 
      * 
@@ -108,11 +108,11 @@ public class DCTParams
      * 
      * 
      */
-    public List<EnumSourceCSs> getSourceCsses() {
-        if (sourceCsses == null) {
-            sourceCsses = new ArrayList<EnumSourceCSs>();
+    public List<EnumSourceCSs> getSourceCSs() {
+        if (sourceCSs == null) {
+            sourceCSs = new ArrayList<EnumSourceCSs>();
         }
-        return this.sourceCsses;
+        return this.sourceCSs;
     }
 
     /**

@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -46,9 +45,11 @@ public class PreviewGenerationParams
     @XmlSchemaType(name = "anySimpleType")
     protected String previewUsage;
     @XmlAttribute(name = "Resolution")
-    protected List<Double> resolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair resolution;
     @XmlAttribute(name = "Size")
-    protected List<Double> sizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair size;
     @XmlAttribute(name = "AspectRatio")
     @XmlSchemaType(name = "anySimpleType")
     protected String aspectRatio;
@@ -87,61 +88,51 @@ public class PreviewGenerationParams
     }
 
     /**
-     * Gets the value of the resolutions property.
+     * Gets the value of the resolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getResolutions() {
-        if (resolutions == null) {
-            resolutions = new ArrayList<Double>();
-        }
-        return this.resolutions;
+    public org.cip4.lib.xjdf.type.XYPair getResolution() {
+        return resolution;
     }
 
     /**
-     * Gets the value of the sizes property.
+     * Sets the value of the resolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSizes() {
-        if (sizes == null) {
-            sizes = new ArrayList<Double>();
-        }
-        return this.sizes;
+    public void setResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.resolution = value;
+    }
+
+    /**
+     * Gets the value of the size property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getSize() {
+        return size;
+    }
+
+    /**
+     * Sets the value of the size property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.size = value;
     }
 
     /**

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -49,11 +50,12 @@ public class CIELABMeasuringField
     @XmlAttribute(name = "ScreenShape")
     protected String screenShape;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
     @XmlAttribute(name = "Diameter")
     protected Double diameter;
     @XmlAttribute(name = "CIELab")
-    protected List<Double> cieLabs;
+    protected List<Double> cieLab;
     @XmlAttribute(name = "Tolerance")
     protected Double tolerance;
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
@@ -133,32 +135,27 @@ public class CIELABMeasuringField
     }
 
     /**
-     * Gets the value of the centers property.
+     * Gets the value of the center property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
+    }
+
+    /**
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
     }
 
     /**
@@ -186,18 +183,18 @@ public class CIELABMeasuringField
     }
 
     /**
-     * Gets the value of the cieLabs property.
+     * Gets the value of the cieLab property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cieLabs property.
+     * This is why there is not a <CODE>set</CODE> method for the cieLab property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCIELabs().add(newItem);
+     *    getCIELab().add(newItem);
      * </pre>
      * 
      * 
@@ -207,11 +204,11 @@ public class CIELABMeasuringField
      * 
      * 
      */
-    public List<Double> getCIELabs() {
-        if (cieLabs == null) {
-            cieLabs = new ArrayList<Double>();
+    public List<Double> getCIELab() {
+        if (cieLab == null) {
+            cieLab = new ArrayList<Double>();
         }
-        return this.cieLabs;
+        return this.cieLab;
     }
 
     /**

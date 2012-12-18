@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "constraintValues"
+    "constraintValue"
 })
 @XmlRootElement(name = "PreflightConstraint")
 public class PreflightConstraint
@@ -47,7 +47,7 @@ public class PreflightConstraint
 {
 
     @XmlElement(name = "ConstraintValue")
-    protected List<ConstraintValue> constraintValues;
+    protected List<ConstraintValue> constraintValue;
     @XmlAttribute(name = "AttemptFixupWarnings")
     protected Boolean attemptFixupWarnings;
     @XmlAttribute(name = "Constraint")
@@ -58,18 +58,18 @@ public class PreflightConstraint
     protected EnumNodeStatus status;
 
     /**
-     * Gets the value of the constraintValues property.
+     * Gets the value of the constraintValue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the constraintValues property.
+     * This is why there is not a <CODE>set</CODE> method for the constraintValue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConstraintValues().add(newItem);
+     *    getConstraintValue().add(newItem);
      * </pre>
      * 
      * 
@@ -79,11 +79,11 @@ public class PreflightConstraint
      * 
      * 
      */
-    public List<ConstraintValue> getConstraintValues() {
-        if (constraintValues == null) {
-            constraintValues = new ArrayList<ConstraintValue>();
+    public List<ConstraintValue> getConstraintValue() {
+        if (constraintValue == null) {
+            constraintValue = new ArrayList<ConstraintValue>();
         }
-        return this.constraintValues;
+        return this.constraintValue;
     }
 
     /**

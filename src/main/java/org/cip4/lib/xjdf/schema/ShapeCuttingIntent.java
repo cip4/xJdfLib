@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShapeCuttingIntent", propOrder = {
-    "shapeCuts"
+    "shapeCut"
 })
 public class ShapeCuttingIntent
     extends IntentType
@@ -41,21 +41,21 @@ public class ShapeCuttingIntent
 {
 
     @XmlElement(name = "ShapeCut")
-    protected List<ShapeCut> shapeCuts;
+    protected List<ShapeCut> shapeCut;
 
     /**
-     * Gets the value of the shapeCuts property.
+     * Gets the value of the shapeCut property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapeCuts property.
+     * This is why there is not a <CODE>set</CODE> method for the shapeCut property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapeCuts().add(newItem);
+     *    getShapeCut().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class ShapeCuttingIntent
      * 
      * 
      */
-    public List<ShapeCut> getShapeCuts() {
-        if (shapeCuts == null) {
-            shapeCuts = new ArrayList<ShapeCut>();
+    public List<ShapeCut> getShapeCut() {
+        if (shapeCut == null) {
+            shapeCut = new ArrayList<ShapeCut>();
         }
-        return this.shapeCuts;
+        return this.shapeCut;
     }
 
 }

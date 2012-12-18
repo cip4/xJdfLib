@@ -51,7 +51,7 @@ public class InsertSheet
     @XmlAttribute(name = "IsWaste")
     protected Boolean isWaste;
     @XmlAttribute(name = "MarkList")
-    protected List<String> markLists;
+    protected List<String> markList;
     @XmlAttribute(name = "SheetFormat")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String sheetFormat;
@@ -117,18 +117,18 @@ public class InsertSheet
     }
 
     /**
-     * Gets the value of the markLists property.
+     * Gets the value of the markList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markLists property.
+     * This is why there is not a <CODE>set</CODE> method for the markList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkLists().add(newItem);
+     *    getMarkList().add(newItem);
      * </pre>
      * 
      * 
@@ -138,11 +138,11 @@ public class InsertSheet
      * 
      * 
      */
-    public List<String> getMarkLists() {
-        if (markLists == null) {
-            markLists = new ArrayList<String>();
+    public List<String> getMarkList() {
+        if (markList == null) {
+            markList = new ArrayList<String>();
         }
-        return this.markLists;
+        return this.markList;
     }
 
     /**

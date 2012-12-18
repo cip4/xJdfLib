@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -44,42 +45,38 @@ public class Icon
 {
 
     @XmlAttribute(name = "Size")
-    protected List<Double> sizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair size;
     @XmlAttribute(name = "BitDepth")
     protected Integer bitDepth;
     @XmlAttribute(name = "IconUsage")
-    protected List<EnumIconUsage> iconUsages;
+    protected List<EnumIconUsage> iconUsage;
     @XmlAttribute(name = "FileSpecRef")
     @XmlIDREF
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the sizes property.
+     * Gets the value of the size property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSizes() {
-        if (sizes == null) {
-            sizes = new ArrayList<Double>();
-        }
-        return this.sizes;
+    public org.cip4.lib.xjdf.type.XYPair getSize() {
+        return size;
+    }
+
+    /**
+     * Sets the value of the size property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.size = value;
     }
 
     /**
@@ -107,18 +104,18 @@ public class Icon
     }
 
     /**
-     * Gets the value of the iconUsages property.
+     * Gets the value of the iconUsage property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the iconUsages property.
+     * This is why there is not a <CODE>set</CODE> method for the iconUsage property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIconUsages().add(newItem);
+     *    getIconUsage().add(newItem);
      * </pre>
      * 
      * 
@@ -128,11 +125,11 @@ public class Icon
      * 
      * 
      */
-    public List<EnumIconUsage> getIconUsages() {
-        if (iconUsages == null) {
-            iconUsages = new ArrayList<EnumIconUsage>();
+    public List<EnumIconUsage> getIconUsage() {
+        if (iconUsage == null) {
+            iconUsage = new ArrayList<EnumIconUsage>();
         }
-        return this.iconUsages;
+        return this.iconUsage;
     }
 
     /**

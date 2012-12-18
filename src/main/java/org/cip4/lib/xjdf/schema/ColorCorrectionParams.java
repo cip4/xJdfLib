@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ColorCorrectionParams", propOrder = {
-    "colorCorrectionOps"
+    "colorCorrectionOp"
 })
 public class ColorCorrectionParams
     extends ParameterType
@@ -45,7 +45,7 @@ public class ColorCorrectionParams
 {
 
     @XmlElement(name = "ColorCorrectionOp")
-    protected List<ColorCorrectionOp> colorCorrectionOps;
+    protected List<ColorCorrectionOp> colorCorrectionOp;
     @XmlAttribute(name = "ColorManagementSystem")
     protected String colorManagementSystem;
     @XmlAttribute(name = "FileSpecRef")
@@ -53,18 +53,18 @@ public class ColorCorrectionParams
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the colorCorrectionOps property.
+     * Gets the value of the colorCorrectionOp property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorCorrectionOps property.
+     * This is why there is not a <CODE>set</CODE> method for the colorCorrectionOp property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorCorrectionOps().add(newItem);
+     *    getColorCorrectionOp().add(newItem);
      * </pre>
      * 
      * 
@@ -74,11 +74,11 @@ public class ColorCorrectionParams
      * 
      * 
      */
-    public List<ColorCorrectionOp> getColorCorrectionOps() {
-        if (colorCorrectionOps == null) {
-            colorCorrectionOps = new ArrayList<ColorCorrectionOp>();
+    public List<ColorCorrectionOp> getColorCorrectionOp() {
+        if (colorCorrectionOp == null) {
+            colorCorrectionOp = new ArrayList<ColorCorrectionOp>();
         }
-        return this.colorCorrectionOps;
+        return this.colorCorrectionOp;
     }
 
     /**

@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -64,7 +62,8 @@ public class Range
     @XmlAttribute(name = "Path")
     protected String path;
     @XmlAttribute(name = "Box")
-    protected List<Double> boxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle box;
     @XmlAttribute(name = "Author")
     protected String author;
     @XmlAttribute(name = "AgentName")
@@ -217,32 +216,27 @@ public class Range
     }
 
     /**
-     * Gets the value of the boxes property.
+     * Gets the value of the box property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBoxes() {
-        if (boxes == null) {
-            boxes = new ArrayList<Double>();
-        }
-        return this.boxes;
+    public org.cip4.lib.xjdf.type.Rectangle getBox() {
+        return box;
+    }
+
+    /**
+     * Sets the value of the box property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.box = value;
     }
 
     /**

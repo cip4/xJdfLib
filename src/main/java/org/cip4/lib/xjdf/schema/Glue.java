@@ -38,64 +38,35 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "glueLines",
-    "glueApplications"
+    "glueApplication",
+    "glueLine"
 })
 @XmlRootElement(name = "Glue")
 public class Glue
     implements Serializable
 {
 
-    @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
     @XmlElement(name = "GlueApplication")
-    protected List<GlueApplication> glueApplications;
+    protected List<GlueApplication> glueApplication;
+    @XmlElement(name = "GlueLine")
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "WorkingDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String workingDirection;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the glueApplication property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the glueApplication property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GlueLine }
-     * 
-     * 
-     */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
-        }
-        return this.glueLines;
-    }
-
-    /**
-     * Gets the value of the glueApplications property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueApplications property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGlueApplications().add(newItem);
+     *    getGlueApplication().add(newItem);
      * </pre>
      * 
      * 
@@ -105,11 +76,40 @@ public class Glue
      * 
      * 
      */
-    public List<GlueApplication> getGlueApplications() {
-        if (glueApplications == null) {
-            glueApplications = new ArrayList<GlueApplication>();
+    public List<GlueApplication> getGlueApplication() {
+        if (glueApplication == null) {
+            glueApplication = new ArrayList<GlueApplication>();
         }
-        return this.glueApplications;
+        return this.glueApplication;
+    }
+
+    /**
+     * Gets the value of the glueLine property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getGlueLine().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link GlueLine }
+     * 
+     * 
+     */
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
+        }
+        return this.glueLine;
     }
 
     /**

@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sealings"
+    "sealing"
 })
 @XmlRootElement(name = "ThreadSewing")
 public class ThreadSewing
@@ -42,21 +42,21 @@ public class ThreadSewing
 {
 
     @XmlElement(name = "Sealing")
-    protected List<Sealing> sealings;
+    protected List<Sealing> sealing;
 
     /**
-     * Gets the value of the sealings property.
+     * Gets the value of the sealing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sealings property.
+     * This is why there is not a <CODE>set</CODE> method for the sealing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSealings().add(newItem);
+     *    getSealing().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class ThreadSewing
      * 
      * 
      */
-    public List<Sealing> getSealings() {
-        if (sealings == null) {
-            sealings = new ArrayList<Sealing>();
+    public List<Sealing> getSealing() {
+        if (sealing == null) {
+            sealing = new ArrayList<Sealing>();
         }
-        return this.sealings;
+        return this.sealing;
     }
 
 }

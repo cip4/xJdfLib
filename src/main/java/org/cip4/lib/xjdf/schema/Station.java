@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "shapeDeves"
+    "shapeDef"
 })
 @XmlRootElement(name = "Station")
 public class Station
@@ -46,7 +46,7 @@ public class Station
 {
 
     @XmlElement(name = "ShapeDef")
-    protected List<ShapeDef> shapeDeves;
+    protected List<ShapeDef> shapeDef;
     @XmlAttribute(name = "StationName")
     protected String stationName;
     @XmlAttribute(name = "StationAmount")
@@ -55,18 +55,18 @@ public class Station
     protected List<String> assemblyIDs;
 
     /**
-     * Gets the value of the shapeDeves property.
+     * Gets the value of the shapeDef property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapeDeves property.
+     * This is why there is not a <CODE>set</CODE> method for the shapeDef property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapeDeves().add(newItem);
+     *    getShapeDef().add(newItem);
      * </pre>
      * 
      * 
@@ -76,11 +76,11 @@ public class Station
      * 
      * 
      */
-    public List<ShapeDef> getShapeDeves() {
-        if (shapeDeves == null) {
-            shapeDeves = new ArrayList<ShapeDef>();
+    public List<ShapeDef> getShapeDef() {
+        if (shapeDef == null) {
+            shapeDef = new ArrayList<ShapeDef>();
         }
-        return this.shapeDeves;
+        return this.shapeDef;
     }
 
     /**

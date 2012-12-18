@@ -57,24 +57,24 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Device", propOrder = {
-    "iconLists",
-    "costCenters",
-    "deviceCaps",
-    "modules"
+    "module",
+    "deviceCap",
+    "costCenter",
+    "iconList"
 })
 public class Device
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "IconList")
-    protected List<IconList> iconLists;
-    @XmlElement(name = "CostCenter")
-    protected List<CostCenter> costCenters;
-    @XmlElement(name = "DeviceCap")
-    protected List<DeviceCap> deviceCaps;
     @XmlElement(name = "Module")
-    protected List<Module> modules;
+    protected List<Module> module;
+    @XmlElement(name = "DeviceCap")
+    protected List<DeviceCap> deviceCap;
+    @XmlElement(name = "CostCenter")
+    protected List<CostCenter> costCenter;
+    @XmlElement(name = "IconList")
+    protected List<IconList> iconList;
     @XmlAttribute(name = "Directory")
     protected String directory;
     @XmlAttribute(name = "ModelName")
@@ -117,105 +117,18 @@ public class Device
     protected String deviceType;
 
     /**
-     * Gets the value of the iconLists property.
+     * Gets the value of the module property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the iconLists property.
+     * This is why there is not a <CODE>set</CODE> method for the module property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getIconLists().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link IconList }
-     * 
-     * 
-     */
-    public List<IconList> getIconLists() {
-        if (iconLists == null) {
-            iconLists = new ArrayList<IconList>();
-        }
-        return this.iconLists;
-    }
-
-    /**
-     * Gets the value of the costCenters property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the costCenters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCostCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CostCenter }
-     * 
-     * 
-     */
-    public List<CostCenter> getCostCenters() {
-        if (costCenters == null) {
-            costCenters = new ArrayList<CostCenter>();
-        }
-        return this.costCenters;
-    }
-
-    /**
-     * Gets the value of the deviceCaps property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceCaps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDeviceCaps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceCap }
-     * 
-     * 
-     */
-    public List<DeviceCap> getDeviceCaps() {
-        if (deviceCaps == null) {
-            deviceCaps = new ArrayList<DeviceCap>();
-        }
-        return this.deviceCaps;
-    }
-
-    /**
-     * Gets the value of the modules property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the modules property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getModules().add(newItem);
+     *    getModule().add(newItem);
      * </pre>
      * 
      * 
@@ -225,11 +138,98 @@ public class Device
      * 
      * 
      */
-    public List<Module> getModules() {
-        if (modules == null) {
-            modules = new ArrayList<Module>();
+    public List<Module> getModule() {
+        if (module == null) {
+            module = new ArrayList<Module>();
         }
-        return this.modules;
+        return this.module;
+    }
+
+    /**
+     * Gets the value of the deviceCap property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the deviceCap property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDeviceCap().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DeviceCap }
+     * 
+     * 
+     */
+    public List<DeviceCap> getDeviceCap() {
+        if (deviceCap == null) {
+            deviceCap = new ArrayList<DeviceCap>();
+        }
+        return this.deviceCap;
+    }
+
+    /**
+     * Gets the value of the costCenter property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the costCenter property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCostCenter().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CostCenter }
+     * 
+     * 
+     */
+    public List<CostCenter> getCostCenter() {
+        if (costCenter == null) {
+            costCenter = new ArrayList<CostCenter>();
+        }
+        return this.costCenter;
+    }
+
+    /**
+     * Gets the value of the iconList property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the iconList property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getIconList().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link IconList }
+     * 
+     * 
+     */
+    public List<IconList> getIconList() {
+        if (iconList == null) {
+            iconList = new ArrayList<IconList>();
+        }
+        return this.iconList;
     }
 
     /**

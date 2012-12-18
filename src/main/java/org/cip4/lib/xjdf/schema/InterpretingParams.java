@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -47,25 +48,27 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "InterpretingParams", propOrder = {
-    "objectResolutions",
-    "fitPolicies"
+    "fitPolicy",
+    "objectResolution"
 })
 public class InterpretingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "ObjectResolution")
-    protected List<ObjectResolution> objectResolutions;
     @XmlElement(name = "FitPolicy")
-    protected List<FitPolicy> fitPolicies;
+    protected List<FitPolicy> fitPolicy;
+    @XmlElement(name = "ObjectResolution")
+    protected List<ObjectResolution> objectResolution;
     @XmlAttribute(name = "Scaling")
-    protected List<Double> scalings;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair scaling;
     @XmlAttribute(name = "Polarity")
     @XmlSchemaType(name = "anySimpleType")
     protected String polarity;
     @XmlAttribute(name = "ScalingOrigin")
-    protected List<Double> scalingOrigins;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair scalingOrigin;
     @XmlAttribute(name = "MirrorAround")
     @XmlSchemaType(name = "anySimpleType")
     protected String mirrorAround;
@@ -75,9 +78,11 @@ public class InterpretingParams
     @XmlAttribute(name = "Center")
     protected Boolean center;
     @XmlAttribute(name = "PosterOverlap")
-    protected List<Double> posterOverlaps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair posterOverlap;
     @XmlAttribute(name = "Poster")
-    protected List<Double> posters;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair poster;
     @XmlAttribute(name = "PDFInterpretingParamsRef")
     @XmlIDREF
     protected Object pdfInterpretingParamsRef;
@@ -86,47 +91,18 @@ public class InterpretingParams
     protected Object mediaRef;
 
     /**
-     * Gets the value of the objectResolutions property.
+     * Gets the value of the fitPolicy property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the objectResolutions property.
+     * This is why there is not a <CODE>set</CODE> method for the fitPolicy property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getObjectResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ObjectResolution }
-     * 
-     * 
-     */
-    public List<ObjectResolution> getObjectResolutions() {
-        if (objectResolutions == null) {
-            objectResolutions = new ArrayList<ObjectResolution>();
-        }
-        return this.objectResolutions;
-    }
-
-    /**
-     * Gets the value of the fitPolicies property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fitPolicies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFitPolicies().add(newItem);
+     *    getFitPolicy().add(newItem);
      * </pre>
      * 
      * 
@@ -136,40 +112,64 @@ public class InterpretingParams
      * 
      * 
      */
-    public List<FitPolicy> getFitPolicies() {
-        if (fitPolicies == null) {
-            fitPolicies = new ArrayList<FitPolicy>();
+    public List<FitPolicy> getFitPolicy() {
+        if (fitPolicy == null) {
+            fitPolicy = new ArrayList<FitPolicy>();
         }
-        return this.fitPolicies;
+        return this.fitPolicy;
     }
 
     /**
-     * Gets the value of the scalings property.
+     * Gets the value of the objectResolution property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scalings property.
+     * This is why there is not a <CODE>set</CODE> method for the objectResolution property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getScalings().add(newItem);
+     *    getObjectResolution().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Double }
+     * {@link ObjectResolution }
      * 
      * 
      */
-    public List<Double> getScalings() {
-        if (scalings == null) {
-            scalings = new ArrayList<Double>();
+    public List<ObjectResolution> getObjectResolution() {
+        if (objectResolution == null) {
+            objectResolution = new ArrayList<ObjectResolution>();
         }
-        return this.scalings;
+        return this.objectResolution;
+    }
+
+    /**
+     * Gets the value of the scaling property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getScaling() {
+        return scaling;
+    }
+
+    /**
+     * Sets the value of the scaling property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setScaling(org.cip4.lib.xjdf.type.XYPair value) {
+        this.scaling = value;
     }
 
     /**
@@ -197,32 +197,27 @@ public class InterpretingParams
     }
 
     /**
-     * Gets the value of the scalingOrigins property.
+     * Gets the value of the scalingOrigin property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scalingOrigins property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getScalingOrigins().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getScalingOrigins() {
-        if (scalingOrigins == null) {
-            scalingOrigins = new ArrayList<Double>();
-        }
-        return this.scalingOrigins;
+    public org.cip4.lib.xjdf.type.XYPair getScalingOrigin() {
+        return scalingOrigin;
+    }
+
+    /**
+     * Sets the value of the scalingOrigin property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setScalingOrigin(org.cip4.lib.xjdf.type.XYPair value) {
+        this.scalingOrigin = value;
     }
 
     /**
@@ -298,61 +293,51 @@ public class InterpretingParams
     }
 
     /**
-     * Gets the value of the posterOverlaps property.
+     * Gets the value of the posterOverlap property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the posterOverlaps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPosterOverlaps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getPosterOverlaps() {
-        if (posterOverlaps == null) {
-            posterOverlaps = new ArrayList<Double>();
-        }
-        return this.posterOverlaps;
+    public org.cip4.lib.xjdf.type.XYPair getPosterOverlap() {
+        return posterOverlap;
     }
 
     /**
-     * Gets the value of the posters property.
+     * Sets the value of the posterOverlap property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the posters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPosters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getPosters() {
-        if (posters == null) {
-            posters = new ArrayList<Double>();
-        }
-        return this.posters;
+    public void setPosterOverlap(org.cip4.lib.xjdf.type.XYPair value) {
+        this.posterOverlap = value;
+    }
+
+    /**
+     * Gets the value of the poster property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getPoster() {
+        return poster;
+    }
+
+    /**
+     * Sets the value of the poster property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPoster(org.cip4.lib.xjdf.type.XYPair value) {
+        this.poster = value;
     }
 
     /**

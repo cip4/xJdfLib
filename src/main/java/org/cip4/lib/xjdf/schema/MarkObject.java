@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -63,51 +64,52 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MarkObject", propOrder = {
-    "markActivations",
-    "refAnchors",
-    "deviceMarks",
-    "cutMarks",
-    "dynamicFields",
-    "registerMarks",
-    "jobFields",
-    "colorControlStrips",
-    "cielabMeasuringFields",
-    "densityMeasuringFields",
-    "scavengerAreas"
+    "scavengerArea",
+    "densityMeasuringField",
+    "cielabMeasuringField",
+    "colorControlStrip",
+    "jobField",
+    "registerMark",
+    "dynamicField",
+    "cutMark",
+    "deviceMark",
+    "refAnchor",
+    "markActivation"
 })
 public class MarkObject
     extends PlacedObject
     implements Serializable
 {
 
-    @XmlElement(name = "MarkActivation")
-    protected List<MarkActivation> markActivations;
-    @XmlElement(name = "RefAnchor")
-    protected List<RefAnchor> refAnchors;
-    @XmlElement(name = "DeviceMark")
-    protected List<DeviceMark> deviceMarks;
-    @XmlElement(name = "CutMark")
-    protected List<CutMark> cutMarks;
-    @XmlElement(name = "DynamicField")
-    protected List<DynamicField> dynamicFields;
-    @XmlElement(name = "RegisterMark")
-    protected List<RegisterMark> registerMarks;
-    @XmlElement(name = "JobField")
-    protected List<JobField> jobFields;
-    @XmlElement(name = "ColorControlStrip")
-    protected List<ColorControlStrip> colorControlStrips;
-    @XmlElement(name = "CIELABMeasuringField")
-    protected List<CIELABMeasuringField> cielabMeasuringFields;
-    @XmlElement(name = "DensityMeasuringField")
-    protected List<DensityMeasuringField> densityMeasuringFields;
     @XmlElement(name = "ScavengerArea")
-    protected List<ScavengerArea> scavengerAreas;
+    protected List<ScavengerArea> scavengerArea;
+    @XmlElement(name = "DensityMeasuringField")
+    protected List<DensityMeasuringField> densityMeasuringField;
+    @XmlElement(name = "CIELABMeasuringField")
+    protected List<CIELABMeasuringField> cielabMeasuringField;
+    @XmlElement(name = "ColorControlStrip")
+    protected List<ColorControlStrip> colorControlStrip;
+    @XmlElement(name = "JobField")
+    protected List<JobField> jobField;
+    @XmlElement(name = "RegisterMark")
+    protected List<RegisterMark> registerMark;
+    @XmlElement(name = "DynamicField")
+    protected List<DynamicField> dynamicField;
+    @XmlElement(name = "CutMark")
+    protected List<CutMark> cutMark;
+    @XmlElement(name = "DeviceMark")
+    protected List<DeviceMark> deviceMark;
+    @XmlElement(name = "RefAnchor")
+    protected List<RefAnchor> refAnchor;
+    @XmlElement(name = "MarkActivation")
+    protected List<MarkActivation> markActivation;
     @XmlAttribute(name = "CompensationCTMTemplate")
     protected String compensationCTMTemplate;
     @XmlAttribute(name = "TrimClipPath")
     protected String trimClipPath;
     @XmlAttribute(name = "ClipBox")
-    protected List<Double> clipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle clipBox;
     @XmlAttribute(name = "OrdID")
     protected Integer ordID;
     @XmlAttribute(name = "LogicalStackOrd")
@@ -117,7 +119,8 @@ public class MarkObject
     @XmlAttribute(name = "ClipBoxFormat")
     protected String clipBoxFormat;
     @XmlAttribute(name = "TrimCTM")
-    protected List<Double> trimCTMs;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix trimCTM;
     @XmlAttribute(name = "LayerID")
     protected Integer layerID;
     @XmlAttribute(name = "SourceClipPath")
@@ -132,9 +135,11 @@ public class MarkObject
     @XmlAttribute(name = "Ord")
     protected Integer ord;
     @XmlAttribute(name = "TrimSize")
-    protected List<Double> trimSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair trimSize;
     @XmlAttribute(name = "HalfTonePhaseOrigin")
-    protected List<Double> halfTonePhaseOrigins;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair halfTonePhaseOrigin;
     @XmlAttribute(name = "CompensationCTMFormat")
     protected String compensationCTMFormat;
     @XmlAttribute(name = "IdentificationFieldRef")
@@ -142,308 +147,18 @@ public class MarkObject
     protected Object identificationFieldRef;
 
     /**
-     * Gets the value of the markActivations property.
+     * Gets the value of the scavengerArea property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markActivations property.
+     * This is why there is not a <CODE>set</CODE> method for the scavengerArea property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkActivations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link MarkActivation }
-     * 
-     * 
-     */
-    public List<MarkActivation> getMarkActivations() {
-        if (markActivations == null) {
-            markActivations = new ArrayList<MarkActivation>();
-        }
-        return this.markActivations;
-    }
-
-    /**
-     * Gets the value of the refAnchors property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the refAnchors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRefAnchors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RefAnchor }
-     * 
-     * 
-     */
-    public List<RefAnchor> getRefAnchors() {
-        if (refAnchors == null) {
-            refAnchors = new ArrayList<RefAnchor>();
-        }
-        return this.refAnchors;
-    }
-
-    /**
-     * Gets the value of the deviceMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDeviceMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceMark }
-     * 
-     * 
-     */
-    public List<DeviceMark> getDeviceMarks() {
-        if (deviceMarks == null) {
-            deviceMarks = new ArrayList<DeviceMark>();
-        }
-        return this.deviceMarks;
-    }
-
-    /**
-     * Gets the value of the cutMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cutMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCutMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CutMark }
-     * 
-     * 
-     */
-    public List<CutMark> getCutMarks() {
-        if (cutMarks == null) {
-            cutMarks = new ArrayList<CutMark>();
-        }
-        return this.cutMarks;
-    }
-
-    /**
-     * Gets the value of the dynamicFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dynamicFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDynamicFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DynamicField }
-     * 
-     * 
-     */
-    public List<DynamicField> getDynamicFields() {
-        if (dynamicFields == null) {
-            dynamicFields = new ArrayList<DynamicField>();
-        }
-        return this.dynamicFields;
-    }
-
-    /**
-     * Gets the value of the registerMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the registerMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRegisterMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RegisterMark }
-     * 
-     * 
-     */
-    public List<RegisterMark> getRegisterMarks() {
-        if (registerMarks == null) {
-            registerMarks = new ArrayList<RegisterMark>();
-        }
-        return this.registerMarks;
-    }
-
-    /**
-     * Gets the value of the jobFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jobFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getJobFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JobField }
-     * 
-     * 
-     */
-    public List<JobField> getJobFields() {
-        if (jobFields == null) {
-            jobFields = new ArrayList<JobField>();
-        }
-        return this.jobFields;
-    }
-
-    /**
-     * Gets the value of the colorControlStrips property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorControlStrips property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getColorControlStrips().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ColorControlStrip }
-     * 
-     * 
-     */
-    public List<ColorControlStrip> getColorControlStrips() {
-        if (colorControlStrips == null) {
-            colorControlStrips = new ArrayList<ColorControlStrip>();
-        }
-        return this.colorControlStrips;
-    }
-
-    /**
-     * Gets the value of the cielabMeasuringFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cielabMeasuringFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCIELABMeasuringFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CIELABMeasuringField }
-     * 
-     * 
-     */
-    public List<CIELABMeasuringField> getCIELABMeasuringFields() {
-        if (cielabMeasuringFields == null) {
-            cielabMeasuringFields = new ArrayList<CIELABMeasuringField>();
-        }
-        return this.cielabMeasuringFields;
-    }
-
-    /**
-     * Gets the value of the densityMeasuringFields property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the densityMeasuringFields property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDensityMeasuringFields().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DensityMeasuringField }
-     * 
-     * 
-     */
-    public List<DensityMeasuringField> getDensityMeasuringFields() {
-        if (densityMeasuringFields == null) {
-            densityMeasuringFields = new ArrayList<DensityMeasuringField>();
-        }
-        return this.densityMeasuringFields;
-    }
-
-    /**
-     * Gets the value of the scavengerAreas property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the scavengerAreas property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getScavengerAreas().add(newItem);
+     *    getScavengerArea().add(newItem);
      * </pre>
      * 
      * 
@@ -453,11 +168,301 @@ public class MarkObject
      * 
      * 
      */
-    public List<ScavengerArea> getScavengerAreas() {
-        if (scavengerAreas == null) {
-            scavengerAreas = new ArrayList<ScavengerArea>();
+    public List<ScavengerArea> getScavengerArea() {
+        if (scavengerArea == null) {
+            scavengerArea = new ArrayList<ScavengerArea>();
         }
-        return this.scavengerAreas;
+        return this.scavengerArea;
+    }
+
+    /**
+     * Gets the value of the densityMeasuringField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the densityMeasuringField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDensityMeasuringField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DensityMeasuringField }
+     * 
+     * 
+     */
+    public List<DensityMeasuringField> getDensityMeasuringField() {
+        if (densityMeasuringField == null) {
+            densityMeasuringField = new ArrayList<DensityMeasuringField>();
+        }
+        return this.densityMeasuringField;
+    }
+
+    /**
+     * Gets the value of the cielabMeasuringField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the cielabMeasuringField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCIELABMeasuringField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CIELABMeasuringField }
+     * 
+     * 
+     */
+    public List<CIELABMeasuringField> getCIELABMeasuringField() {
+        if (cielabMeasuringField == null) {
+            cielabMeasuringField = new ArrayList<CIELABMeasuringField>();
+        }
+        return this.cielabMeasuringField;
+    }
+
+    /**
+     * Gets the value of the colorControlStrip property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the colorControlStrip property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColorControlStrip().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ColorControlStrip }
+     * 
+     * 
+     */
+    public List<ColorControlStrip> getColorControlStrip() {
+        if (colorControlStrip == null) {
+            colorControlStrip = new ArrayList<ColorControlStrip>();
+        }
+        return this.colorControlStrip;
+    }
+
+    /**
+     * Gets the value of the jobField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the jobField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getJobField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JobField }
+     * 
+     * 
+     */
+    public List<JobField> getJobField() {
+        if (jobField == null) {
+            jobField = new ArrayList<JobField>();
+        }
+        return this.jobField;
+    }
+
+    /**
+     * Gets the value of the registerMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the registerMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRegisterMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RegisterMark }
+     * 
+     * 
+     */
+    public List<RegisterMark> getRegisterMark() {
+        if (registerMark == null) {
+            registerMark = new ArrayList<RegisterMark>();
+        }
+        return this.registerMark;
+    }
+
+    /**
+     * Gets the value of the dynamicField property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the dynamicField property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDynamicField().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DynamicField }
+     * 
+     * 
+     */
+    public List<DynamicField> getDynamicField() {
+        if (dynamicField == null) {
+            dynamicField = new ArrayList<DynamicField>();
+        }
+        return this.dynamicField;
+    }
+
+    /**
+     * Gets the value of the cutMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the cutMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCutMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CutMark }
+     * 
+     * 
+     */
+    public List<CutMark> getCutMark() {
+        if (cutMark == null) {
+            cutMark = new ArrayList<CutMark>();
+        }
+        return this.cutMark;
+    }
+
+    /**
+     * Gets the value of the deviceMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the deviceMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDeviceMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DeviceMark }
+     * 
+     * 
+     */
+    public List<DeviceMark> getDeviceMark() {
+        if (deviceMark == null) {
+            deviceMark = new ArrayList<DeviceMark>();
+        }
+        return this.deviceMark;
+    }
+
+    /**
+     * Gets the value of the refAnchor property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the refAnchor property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRefAnchor().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RefAnchor }
+     * 
+     * 
+     */
+    public List<RefAnchor> getRefAnchor() {
+        if (refAnchor == null) {
+            refAnchor = new ArrayList<RefAnchor>();
+        }
+        return this.refAnchor;
+    }
+
+    /**
+     * Gets the value of the markActivation property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the markActivation property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getMarkActivation().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link MarkActivation }
+     * 
+     * 
+     */
+    public List<MarkActivation> getMarkActivation() {
+        if (markActivation == null) {
+            markActivation = new ArrayList<MarkActivation>();
+        }
+        return this.markActivation;
     }
 
     /**
@@ -509,32 +514,27 @@ public class MarkObject
     }
 
     /**
-     * Gets the value of the clipBoxes property.
+     * Gets the value of the clipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getClipBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getClipBoxes() {
-        if (clipBoxes == null) {
-            clipBoxes = new ArrayList<Double>();
-        }
-        return this.clipBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getClipBox() {
+        return clipBox;
+    }
+
+    /**
+     * Sets the value of the clipBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.clipBox = value;
     }
 
     /**
@@ -634,32 +634,27 @@ public class MarkObject
     }
 
     /**
-     * Gets the value of the trimCTMs property.
+     * Gets the value of the trimCTM property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trimCTMs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTrimCTMs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTrimCTMs() {
-        if (trimCTMs == null) {
-            trimCTMs = new ArrayList<Double>();
-        }
-        return this.trimCTMs;
+    public org.cip4.lib.xjdf.type.Matrix getTrimCTM() {
+        return trimCTM;
+    }
+
+    /**
+     * Sets the value of the trimCTM property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTrimCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.trimCTM = value;
     }
 
     /**
@@ -807,61 +802,51 @@ public class MarkObject
     }
 
     /**
-     * Gets the value of the trimSizes property.
+     * Gets the value of the trimSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trimSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTrimSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTrimSizes() {
-        if (trimSizes == null) {
-            trimSizes = new ArrayList<Double>();
-        }
-        return this.trimSizes;
+    public org.cip4.lib.xjdf.type.XYPair getTrimSize() {
+        return trimSize;
     }
 
     /**
-     * Gets the value of the halfTonePhaseOrigins property.
+     * Sets the value of the trimSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the halfTonePhaseOrigins property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHalfTonePhaseOrigins().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getHalfTonePhaseOrigins() {
-        if (halfTonePhaseOrigins == null) {
-            halfTonePhaseOrigins = new ArrayList<Double>();
-        }
-        return this.halfTonePhaseOrigins;
+    public void setTrimSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.trimSize = value;
+    }
+
+    /**
+     * Gets the value of the halfTonePhaseOrigin property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getHalfTonePhaseOrigin() {
+        return halfTonePhaseOrigin;
+    }
+
+    /**
+     * Sets the value of the halfTonePhaseOrigin property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHalfTonePhaseOrigin(org.cip4.lib.xjdf.type.XYPair value) {
+        this.halfTonePhaseOrigin = value;
     }
 
     /**

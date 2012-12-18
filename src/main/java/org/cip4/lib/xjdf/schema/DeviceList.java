@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "deviceInfos"
+    "deviceInfo"
 })
 @XmlRootElement(name = "DeviceList")
 public class DeviceList
@@ -42,21 +42,21 @@ public class DeviceList
 {
 
     @XmlElement(name = "DeviceInfo")
-    protected List<DeviceInfo> deviceInfos;
+    protected List<DeviceInfo> deviceInfo;
 
     /**
-     * Gets the value of the deviceInfos property.
+     * Gets the value of the deviceInfo property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceInfos property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceInfo property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeviceInfos().add(newItem);
+     *    getDeviceInfo().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class DeviceList
      * 
      * 
      */
-    public List<DeviceInfo> getDeviceInfos() {
-        if (deviceInfos == null) {
-            deviceInfos = new ArrayList<DeviceInfo>();
+    public List<DeviceInfo> getDeviceInfo() {
+        if (deviceInfo == null) {
+            deviceInfo = new ArrayList<DeviceInfo>();
         }
-        return this.deviceInfos;
+        return this.deviceInfo;
     }
 
 }

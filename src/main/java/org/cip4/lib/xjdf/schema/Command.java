@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "employees"
+    "employee"
 })
 @XmlRootElement(name = "Command")
 public class Command
@@ -64,9 +64,9 @@ public class Command
 {
 
     @XmlElement(name = "Employee")
-    protected List<Employee> employees;
+    protected List<Employee> employee;
     @XmlAttribute(name = "AcknowledgeType")
-    protected List<EnumAcknowledgeType> acknowledgeTypes;
+    protected List<EnumAcknowledgeType> acknowledgeType;
     @XmlAttribute(name = "SenderID")
     protected String senderID;
     @XmlAttribute(name = "Version")
@@ -98,18 +98,18 @@ public class Command
     protected String agentVersion;
 
     /**
-     * Gets the value of the employees property.
+     * Gets the value of the employee property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEmployees().add(newItem);
+     *    getEmployee().add(newItem);
      * </pre>
      * 
      * 
@@ -119,26 +119,26 @@ public class Command
      * 
      * 
      */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
         }
-        return this.employees;
+        return this.employee;
     }
 
     /**
-     * Gets the value of the acknowledgeTypes property.
+     * Gets the value of the acknowledgeType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the acknowledgeTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the acknowledgeType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAcknowledgeTypes().add(newItem);
+     *    getAcknowledgeType().add(newItem);
      * </pre>
      * 
      * 
@@ -148,11 +148,11 @@ public class Command
      * 
      * 
      */
-    public List<EnumAcknowledgeType> getAcknowledgeTypes() {
-        if (acknowledgeTypes == null) {
-            acknowledgeTypes = new ArrayList<EnumAcknowledgeType>();
+    public List<EnumAcknowledgeType> getAcknowledgeType() {
+        if (acknowledgeType == null) {
+            acknowledgeType = new ArrayList<EnumAcknowledgeType>();
         }
-        return this.acknowledgeTypes;
+        return this.acknowledgeType;
     }
 
     /**

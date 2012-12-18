@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,107 +46,51 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "imageShifts",
-    "deviceMarks",
-    "fitPolicies"
+    "fitPolicy",
+    "deviceMark",
+    "imageShift"
 })
 @XmlRootElement(name = "PageCell")
 public class PageCell
     implements Serializable
 {
 
-    @XmlElement(name = "ImageShift")
-    protected List<ImageShift> imageShifts;
-    @XmlElement(name = "DeviceMark")
-    protected List<DeviceMark> deviceMarks;
     @XmlElement(name = "FitPolicy")
-    protected List<FitPolicy> fitPolicies;
+    protected List<FitPolicy> fitPolicy;
+    @XmlElement(name = "DeviceMark")
+    protected List<DeviceMark> deviceMark;
+    @XmlElement(name = "ImageShift")
+    protected List<ImageShift> imageShift;
     @XmlAttribute(name = "ClipBox")
-    protected List<Double> clipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle clipBox;
     @XmlAttribute(name = "Rotate")
     @XmlSchemaType(name = "anySimpleType")
     protected String rotate;
     @XmlAttribute(name = "Border")
     protected Double border;
     @XmlAttribute(name = "MarkList")
-    protected List<String> markLists;
+    protected List<String> markList;
     @XmlAttribute(name = "TrimSize")
-    protected List<Double> trimSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair trimSize;
     @XmlAttribute(name = "ColorRef")
     @XmlIDREF
     protected Object colorRef;
 
     /**
-     * Gets the value of the imageShifts property.
+     * Gets the value of the fitPolicy property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the imageShifts property.
+     * This is why there is not a <CODE>set</CODE> method for the fitPolicy property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getImageShifts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ImageShift }
-     * 
-     * 
-     */
-    public List<ImageShift> getImageShifts() {
-        if (imageShifts == null) {
-            imageShifts = new ArrayList<ImageShift>();
-        }
-        return this.imageShifts;
-    }
-
-    /**
-     * Gets the value of the deviceMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDeviceMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceMark }
-     * 
-     * 
-     */
-    public List<DeviceMark> getDeviceMarks() {
-        if (deviceMarks == null) {
-            deviceMarks = new ArrayList<DeviceMark>();
-        }
-        return this.deviceMarks;
-    }
-
-    /**
-     * Gets the value of the fitPolicies property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the fitPolicies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFitPolicies().add(newItem);
+     *    getFitPolicy().add(newItem);
      * </pre>
      * 
      * 
@@ -155,40 +100,93 @@ public class PageCell
      * 
      * 
      */
-    public List<FitPolicy> getFitPolicies() {
-        if (fitPolicies == null) {
-            fitPolicies = new ArrayList<FitPolicy>();
+    public List<FitPolicy> getFitPolicy() {
+        if (fitPolicy == null) {
+            fitPolicy = new ArrayList<FitPolicy>();
         }
-        return this.fitPolicies;
+        return this.fitPolicy;
     }
 
     /**
-     * Gets the value of the clipBoxes property.
+     * Gets the value of the deviceMark property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceMark property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getClipBoxes().add(newItem);
+     *    getDeviceMark().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Double }
+     * {@link DeviceMark }
      * 
      * 
      */
-    public List<Double> getClipBoxes() {
-        if (clipBoxes == null) {
-            clipBoxes = new ArrayList<Double>();
+    public List<DeviceMark> getDeviceMark() {
+        if (deviceMark == null) {
+            deviceMark = new ArrayList<DeviceMark>();
         }
-        return this.clipBoxes;
+        return this.deviceMark;
+    }
+
+    /**
+     * Gets the value of the imageShift property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the imageShift property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getImageShift().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ImageShift }
+     * 
+     * 
+     */
+    public List<ImageShift> getImageShift() {
+        if (imageShift == null) {
+            imageShift = new ArrayList<ImageShift>();
+        }
+        return this.imageShift;
+    }
+
+    /**
+     * Gets the value of the clipBox property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.Rectangle getClipBox() {
+        return clipBox;
+    }
+
+    /**
+     * Sets the value of the clipBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.clipBox = value;
     }
 
     /**
@@ -240,18 +238,18 @@ public class PageCell
     }
 
     /**
-     * Gets the value of the markLists property.
+     * Gets the value of the markList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markLists property.
+     * This is why there is not a <CODE>set</CODE> method for the markList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkLists().add(newItem);
+     *    getMarkList().add(newItem);
      * </pre>
      * 
      * 
@@ -261,40 +259,35 @@ public class PageCell
      * 
      * 
      */
-    public List<String> getMarkLists() {
-        if (markLists == null) {
-            markLists = new ArrayList<String>();
+    public List<String> getMarkList() {
+        if (markList == null) {
+            markList = new ArrayList<String>();
         }
-        return this.markLists;
+        return this.markList;
     }
 
     /**
-     * Gets the value of the trimSizes property.
+     * Gets the value of the trimSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trimSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTrimSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTrimSizes() {
-        if (trimSizes == null) {
-            trimSizes = new ArrayList<Double>();
-        }
-        return this.trimSizes;
+    public org.cip4.lib.xjdf.type.XYPair getTrimSize() {
+        return trimSize;
+    }
+
+    /**
+     * Sets the value of the trimSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTrimSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.trimSize = value;
     }
 
     /**

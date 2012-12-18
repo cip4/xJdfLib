@@ -38,18 +38,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Employee", propOrder = {
-    "costCenters",
-    "persons"
+    "person",
+    "costCenter"
 })
 public class Employee
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "CostCenter")
-    protected List<CostCenter> costCenters;
     @XmlElement(name = "Person")
-    protected List<Person> persons;
+    protected List<Person> person;
+    @XmlElement(name = "CostCenter")
+    protected List<CostCenter> costCenter;
     @XmlAttribute(name = "Shift")
     protected String shift;
     @XmlAttribute(name = "Roles")
@@ -58,47 +58,18 @@ public class Employee
     protected String personalID;
 
     /**
-     * Gets the value of the costCenters property.
+     * Gets the value of the person property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the costCenters property.
+     * This is why there is not a <CODE>set</CODE> method for the person property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCostCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CostCenter }
-     * 
-     * 
-     */
-    public List<CostCenter> getCostCenters() {
-        if (costCenters == null) {
-            costCenters = new ArrayList<CostCenter>();
-        }
-        return this.costCenters;
-    }
-
-    /**
-     * Gets the value of the persons property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the persons property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPersons().add(newItem);
+     *    getPerson().add(newItem);
      * </pre>
      * 
      * 
@@ -108,11 +79,40 @@ public class Employee
      * 
      * 
      */
-    public List<Person> getPersons() {
-        if (persons == null) {
-            persons = new ArrayList<Person>();
+    public List<Person> getPerson() {
+        if (person == null) {
+            person = new ArrayList<Person>();
         }
-        return this.persons;
+        return this.person;
+    }
+
+    /**
+     * Gets the value of the costCenter property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the costCenter property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCostCenter().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CostCenter }
+     * 
+     * 
+     */
+    public List<CostCenter> getCostCenter() {
+        if (costCenter == null) {
+            costCenter = new ArrayList<CostCenter>();
+        }
+        return this.costCenter;
     }
 
     /**

@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "positions"
+    "position"
 })
 @XmlRootElement(name = "EmbossingItem")
 public class EmbossingItem
@@ -53,7 +54,7 @@ public class EmbossingItem
 {
 
     @XmlElement(name = "Position")
-    protected List<Position> positions;
+    protected List<Position> position;
     @XmlAttribute(name = "Direction")
     @XmlSchemaType(name = "anySimpleType")
     protected String direction;
@@ -67,7 +68,8 @@ public class EmbossingItem
     @XmlAttribute(name = "Height")
     protected Double height;
     @XmlAttribute(name = "ImageSize")
-    protected List<Double> imageSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair imageSize;
     @XmlAttribute(name = "FoilColorDetails")
     protected String foilColorDetails;
     @XmlAttribute(name = "FoilColor")
@@ -77,18 +79,18 @@ public class EmbossingItem
     protected String level;
 
     /**
-     * Gets the value of the positions property.
+     * Gets the value of the position property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the positions property.
+     * This is why there is not a <CODE>set</CODE> method for the position property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPositions().add(newItem);
+     *    getPosition().add(newItem);
      * </pre>
      * 
      * 
@@ -98,11 +100,11 @@ public class EmbossingItem
      * 
      * 
      */
-    public List<Position> getPositions() {
-        if (positions == null) {
-            positions = new ArrayList<Position>();
+    public List<Position> getPosition() {
+        if (position == null) {
+            position = new ArrayList<Position>();
         }
-        return this.positions;
+        return this.position;
     }
 
     /**
@@ -226,32 +228,27 @@ public class EmbossingItem
     }
 
     /**
-     * Gets the value of the imageSizes property.
+     * Gets the value of the imageSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the imageSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getImageSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getImageSizes() {
-        if (imageSizes == null) {
-            imageSizes = new ArrayList<Double>();
-        }
-        return this.imageSizes;
+    public org.cip4.lib.xjdf.type.XYPair getImageSize() {
+        return imageSize;
+    }
+
+    /**
+     * Sets the value of the imageSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setImageSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.imageSize = value;
     }
 
     /**

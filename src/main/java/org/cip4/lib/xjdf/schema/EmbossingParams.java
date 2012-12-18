@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EmbossingParams", propOrder = {
-    "embosses"
+    "emboss"
 })
 public class EmbossingParams
     extends ParameterType
@@ -43,23 +43,23 @@ public class EmbossingParams
 {
 
     @XmlElement(name = "Emboss")
-    protected List<Emboss> embosses;
+    protected List<Emboss> emboss;
     @XmlAttribute(name = "ModuleIndex")
     protected Integer moduleIndex;
 
     /**
-     * Gets the value of the embosses property.
+     * Gets the value of the emboss property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the embosses property.
+     * This is why there is not a <CODE>set</CODE> method for the emboss property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEmbosses().add(newItem);
+     *    getEmboss().add(newItem);
      * </pre>
      * 
      * 
@@ -69,11 +69,11 @@ public class EmbossingParams
      * 
      * 
      */
-    public List<Emboss> getEmbosses() {
-        if (embosses == null) {
-            embosses = new ArrayList<Emboss>();
+    public List<Emboss> getEmboss() {
+        if (emboss == null) {
+            emboss = new ArrayList<Emboss>();
         }
-        return this.embosses;
+        return this.emboss;
     }
 
     /**

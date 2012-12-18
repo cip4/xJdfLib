@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GatheringParams", propOrder = {
-    "disjointings"
+    "disjointing"
 })
 public class GatheringParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class GatheringParams
 {
 
     @XmlElement(name = "Disjointing")
-    protected List<Disjointing> disjointings;
+    protected List<Disjointing> disjointing;
 
     /**
-     * Gets the value of the disjointings property.
+     * Gets the value of the disjointing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the disjointings property.
+     * This is why there is not a <CODE>set</CODE> method for the disjointing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDisjointings().add(newItem);
+     *    getDisjointing().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class GatheringParams
      * 
      * 
      */
-    public List<Disjointing> getDisjointings() {
-        if (disjointings == null) {
-            disjointings = new ArrayList<Disjointing>();
+    public List<Disjointing> getDisjointing() {
+        if (disjointing == null) {
+            disjointing = new ArrayList<Disjointing>();
         }
-        return this.disjointings;
+        return this.disjointing;
     }
 
 }

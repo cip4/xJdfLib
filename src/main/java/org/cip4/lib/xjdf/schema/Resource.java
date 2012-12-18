@@ -86,30 +86,30 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "comments",
-    "generalIDs",
-    "parts",
-    "resourceTypes",
-    "contacts",
-    "locations"
+    "location",
+    "contact",
+    "resourceType",
+    "part",
+    "generalID",
+    "comment"
 })
 @XmlRootElement(name = "Resource")
 public class Resource
     implements Serializable
 {
 
-    @XmlElement(name = "Comment")
-    protected List<Comment> comments;
-    @XmlElement(name = "GeneralID")
-    protected List<GeneralID> generalIDs;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
-    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
-    protected List<JAXBElement<? extends ResourceType>> resourceTypes;
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
     @XmlElement(name = "Location")
-    protected List<Location> locations;
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
+    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
+    protected List<JAXBElement<? extends ResourceType>> resourceType;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
+    @XmlElement(name = "GeneralID")
+    protected List<GeneralID> generalID;
+    @XmlElement(name = "Comment")
+    protected List<Comment> comment;
     @XmlAttribute(name = "AmountProduced")
     protected Double amountProduced;
     @XmlAttribute(name = "Locked")
@@ -184,179 +184,18 @@ public class Resource
     protected String descriptiveName;
 
     /**
-     * Gets the value of the comments property.
+     * Gets the value of the location property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comments property.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getComments().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Comment }
-     * 
-     * 
-     */
-    public List<Comment> getComments() {
-        if (comments == null) {
-            comments = new ArrayList<Comment>();
-        }
-        return this.comments;
-    }
-
-    /**
-     * Gets the value of the generalIDs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalIDs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGeneralIDs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GeneralID }
-     * 
-     * 
-     */
-    public List<GeneralID> getGeneralIDs() {
-        if (generalIDs == null) {
-            generalIDs = new ArrayList<GeneralID>();
-        }
-        return this.generalIDs;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Part }
-     * 
-     * 
-     */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
-        }
-        return this.parts;
-    }
-
-    /**
-     * Gets the value of the resourceTypes property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resourceTypes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResourceTypes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     * {@link JAXBElement }{@code <}{@link Employee }{@code >}
-     * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     * {@link JAXBElement }{@code <}{@link Media }{@code >}
-     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
-     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
-     * {@link JAXBElement }{@code <}{@link Component }{@code >}
-     * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
-     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
-     * {@link JAXBElement }{@code <}{@link Device }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
-     * 
-     * 
-     */
-    public List<JAXBElement<? extends ResourceType>> getResourceTypes() {
-        if (resourceTypes == null) {
-            resourceTypes = new ArrayList<JAXBElement<? extends ResourceType>>();
-        }
-        return this.resourceTypes;
-    }
-
-    /**
-     * Gets the value of the contacts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the locations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocations().add(newItem);
+     *    getLocation().add(newItem);
      * </pre>
      * 
      * 
@@ -366,11 +205,172 @@ public class Resource
      * 
      * 
      */
-    public List<Location> getLocations() {
-        if (locations == null) {
-            locations = new ArrayList<Location>();
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
         }
-        return this.locations;
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
+    }
+
+    /**
+     * Gets the value of the resourceType property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the resourceType property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getResourceType().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
+     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     * {@link JAXBElement }{@code <}{@link Media }{@code >}
+     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
+     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
+     * {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
+     * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     * {@link JAXBElement }{@code <}{@link Device }{@code >}
+     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     * {@link JAXBElement }{@code <}{@link Component }{@code >}
+     * 
+     * 
+     */
+    public List<JAXBElement<? extends ResourceType>> getResourceType() {
+        if (resourceType == null) {
+            resourceType = new ArrayList<JAXBElement<? extends ResourceType>>();
+        }
+        return this.resourceType;
+    }
+
+    /**
+     * Gets the value of the part property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPart().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Part }
+     * 
+     * 
+     */
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
+        }
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the generalID property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the generalID property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getGeneralID().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link GeneralID }
+     * 
+     * 
+     */
+    public List<GeneralID> getGeneralID() {
+        if (generalID == null) {
+            generalID = new ArrayList<GeneralID>();
+        }
+        return this.generalID;
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the comment property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getComment().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Comment }
+     * 
+     * 
+     */
+    public List<Comment> getComment() {
+        if (comment == null) {
+            comment = new ArrayList<Comment>();
+        }
+        return this.comment;
     }
 
     /**

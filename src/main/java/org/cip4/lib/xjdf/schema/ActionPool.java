@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "actions"
+    "action"
 })
 @XmlRootElement(name = "ActionPool")
 public class ActionPool
@@ -42,21 +42,21 @@ public class ActionPool
 {
 
     @XmlElement(name = "Action")
-    protected List<Action> actions;
+    protected List<Action> action;
 
     /**
-     * Gets the value of the actions property.
+     * Gets the value of the action property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actions property.
+     * This is why there is not a <CODE>set</CODE> method for the action property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActions().add(newItem);
+     *    getAction().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class ActionPool
      * 
      * 
      */
-    public List<Action> getActions() {
-        if (actions == null) {
-            actions = new ArrayList<Action>();
+    public List<Action> getAction() {
+        if (action == null) {
+            action = new ArrayList<Action>();
         }
-        return this.actions;
+        return this.action;
     }
 
 }

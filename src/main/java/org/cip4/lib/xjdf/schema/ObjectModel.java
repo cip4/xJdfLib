@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +37,8 @@ public class ObjectModel
 {
 
     @XmlAttribute(name = "Dimensions")
-    protected List<Double> dimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape dimensions;
     @XmlAttribute(name = "FileSpecRef")
     @XmlIDREF
     protected Object fileSpecRef;
@@ -46,30 +46,25 @@ public class ObjectModel
     /**
      * Gets the value of the dimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDimensions() {
-        if (dimensions == null) {
-            dimensions = new ArrayList<Double>();
-        }
-        return this.dimensions;
+    public org.cip4.lib.xjdf.type.Shape getDimensions() {
+        return dimensions;
+    }
+
+    /**
+     * Sets the value of the dimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.dimensions = value;
     }
 
     /**

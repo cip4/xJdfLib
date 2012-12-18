@@ -49,7 +49,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "dispositions"
+    "disposition"
 })
 @XmlRootElement(name = "QueueSubmissionParams")
 public class QueueSubmissionParams
@@ -57,7 +57,7 @@ public class QueueSubmissionParams
 {
 
     @XmlElement(name = "Disposition")
-    protected List<Disposition> dispositions;
+    protected List<Disposition> disposition;
     @XmlAttribute(name = "ReturnURL")
     protected String returnURL;
     @XmlAttribute(name = "WatchURL")
@@ -85,18 +85,18 @@ public class QueueSubmissionParams
     protected Boolean hold;
 
     /**
-     * Gets the value of the dispositions property.
+     * Gets the value of the disposition property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dispositions property.
+     * This is why there is not a <CODE>set</CODE> method for the disposition property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDispositions().add(newItem);
+     *    getDisposition().add(newItem);
      * </pre>
      * 
      * 
@@ -106,11 +106,11 @@ public class QueueSubmissionParams
      * 
      * 
      */
-    public List<Disposition> getDispositions() {
-        if (dispositions == null) {
-            dispositions = new ArrayList<Disposition>();
+    public List<Disposition> getDisposition() {
+        if (disposition == null) {
+            disposition = new ArrayList<Disposition>();
         }
-        return this.dispositions;
+        return this.disposition;
     }
 
     /**

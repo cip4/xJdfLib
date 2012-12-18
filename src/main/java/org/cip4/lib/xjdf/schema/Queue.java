@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "queueEntries"
+    "queueEntry"
 })
 @XmlRootElement(name = "Queue")
 public class Queue
@@ -49,7 +49,7 @@ public class Queue
 {
 
     @XmlElement(name = "QueueEntry")
-    protected List<QueueEntry> queueEntries;
+    protected List<QueueEntry> queueEntry;
     @XmlAttribute(name = "DeviceID")
     protected String deviceID;
     @XmlAttribute(name = "QueueSize")
@@ -62,18 +62,18 @@ public class Queue
     protected Object deviceRef;
 
     /**
-     * Gets the value of the queueEntries property.
+     * Gets the value of the queueEntry property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queueEntries property.
+     * This is why there is not a <CODE>set</CODE> method for the queueEntry property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQueueEntries().add(newItem);
+     *    getQueueEntry().add(newItem);
      * </pre>
      * 
      * 
@@ -83,11 +83,11 @@ public class Queue
      * 
      * 
      */
-    public List<QueueEntry> getQueueEntries() {
-        if (queueEntries == null) {
-            queueEntries = new ArrayList<QueueEntry>();
+    public List<QueueEntry> getQueueEntry() {
+        if (queueEntry == null) {
+            queueEntry = new ArrayList<QueueEntry>();
         }
-        return this.queueEntries;
+        return this.queueEntry;
     }
 
     /**

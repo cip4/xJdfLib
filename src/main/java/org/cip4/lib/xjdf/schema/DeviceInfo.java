@@ -52,21 +52,21 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "jobPhases",
-    "moduleStatuses",
-    "employees"
+    "employee",
+    "moduleStatus",
+    "jobPhase"
 })
 @XmlRootElement(name = "DeviceInfo")
 public class DeviceInfo
     implements Serializable
 {
 
-    @XmlElement(name = "JobPhase")
-    protected List<JobPhase> jobPhases;
-    @XmlElement(name = "ModuleStatus")
-    protected List<ModuleStatus> moduleStatuses;
     @XmlElement(name = "Employee")
-    protected List<Employee> employees;
+    protected List<Employee> employee;
+    @XmlElement(name = "ModuleStatus")
+    protected List<ModuleStatus> moduleStatus;
+    @XmlElement(name = "JobPhase")
+    protected List<JobPhase> jobPhase;
     @XmlAttribute(name = "DeviceCondition")
     @XmlSchemaType(name = "anySimpleType")
     protected String deviceCondition;
@@ -98,76 +98,18 @@ public class DeviceInfo
     protected Object deviceRef;
 
     /**
-     * Gets the value of the jobPhases property.
+     * Gets the value of the employee property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jobPhases property.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getJobPhases().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JobPhase }
-     * 
-     * 
-     */
-    public List<JobPhase> getJobPhases() {
-        if (jobPhases == null) {
-            jobPhases = new ArrayList<JobPhase>();
-        }
-        return this.jobPhases;
-    }
-
-    /**
-     * Gets the value of the moduleStatuses property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the moduleStatuses property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getModuleStatuses().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ModuleStatus }
-     * 
-     * 
-     */
-    public List<ModuleStatus> getModuleStatuses() {
-        if (moduleStatuses == null) {
-            moduleStatuses = new ArrayList<ModuleStatus>();
-        }
-        return this.moduleStatuses;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
+     *    getEmployee().add(newItem);
      * </pre>
      * 
      * 
@@ -177,11 +119,69 @@ public class DeviceInfo
      * 
      * 
      */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
         }
-        return this.employees;
+        return this.employee;
+    }
+
+    /**
+     * Gets the value of the moduleStatus property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the moduleStatus property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getModuleStatus().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ModuleStatus }
+     * 
+     * 
+     */
+    public List<ModuleStatus> getModuleStatus() {
+        if (moduleStatus == null) {
+            moduleStatus = new ArrayList<ModuleStatus>();
+        }
+        return this.moduleStatus;
+    }
+
+    /**
+     * Gets the value of the jobPhase property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the jobPhase property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getJobPhase().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JobPhase }
+     * 
+     * 
+     */
+    public List<JobPhase> getJobPhase() {
+        if (jobPhase == null) {
+            jobPhase = new ArrayList<JobPhase>();
+        }
+        return this.jobPhase;
     }
 
     /**

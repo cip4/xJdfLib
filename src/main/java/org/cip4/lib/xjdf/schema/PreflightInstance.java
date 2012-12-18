@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "preflightInstanceDetails"
+    "preflightInstanceDetail"
 })
 @XmlRootElement(name = "PreflightInstance")
 public class PreflightInstance
@@ -45,25 +45,25 @@ public class PreflightInstance
 {
 
     @XmlElement(name = "PreflightInstanceDetail")
-    protected List<PreflightInstanceDetail> preflightInstanceDetails;
+    protected List<PreflightInstanceDetail> preflightInstanceDetail;
     @XmlAttribute(name = "Identifier")
     protected String identifier;
     @XmlAttribute(name = "PageRefs")
     protected Integer pageRefs;
 
     /**
-     * Gets the value of the preflightInstanceDetails property.
+     * Gets the value of the preflightInstanceDetail property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the preflightInstanceDetails property.
+     * This is why there is not a <CODE>set</CODE> method for the preflightInstanceDetail property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPreflightInstanceDetails().add(newItem);
+     *    getPreflightInstanceDetail().add(newItem);
      * </pre>
      * 
      * 
@@ -73,11 +73,11 @@ public class PreflightInstance
      * 
      * 
      */
-    public List<PreflightInstanceDetail> getPreflightInstanceDetails() {
-        if (preflightInstanceDetails == null) {
-            preflightInstanceDetails = new ArrayList<PreflightInstanceDetail>();
+    public List<PreflightInstanceDetail> getPreflightInstanceDetail() {
+        if (preflightInstanceDetail == null) {
+            preflightInstanceDetail = new ArrayList<PreflightInstanceDetail>();
         }
-        return this.preflightInstanceDetails;
+        return this.preflightInstanceDetail;
     }
 
     /**
