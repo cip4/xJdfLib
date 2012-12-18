@@ -22,6 +22,7 @@ import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
@@ -357,5 +358,34 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return colorIntent;
+	}
+
+	/**
+	 * Create a new MarkObject Node which already contains defined attributes.
+	 * @param ctm Value of CTM attribute as String.
+	 * @param clipBox
+	 * @param ord
+	 * @return MarkObject Node which already contains defined attributes.
+	 */
+	public MarkObject createMarkObject(String ctm, String clipBox, Integer ord) {
+
+		// create node
+		MarkObject markObject = super.createMarkObject();
+
+		// set attributes
+		for (String s : ctm.split(" ")) {
+			Double d = Double.valueOf(s);
+			markObject.getCTMS().add(d);
+		}
+
+		for (String s : clipBox.split(" ")) {
+			Double d = Double.valueOf(s);
+			markObject.getClipBoxes().add(d);
+		}
+
+		markObject.setOrd(ord);
+
+		// return object
+		return markObject;
 	}
 }

@@ -61,7 +61,7 @@ public class PageCell
     @XmlElement(name = "FitPolicy")
     protected List<FitPolicy> fitPolicies;
     @XmlAttribute(name = "ClipBox")
-    protected Double clipBox;
+    protected List<Double> clipBoxes;
     @XmlAttribute(name = "Rotate")
     @XmlSchemaType(name = "anySimpleType")
     protected String rotate;
@@ -163,27 +163,32 @@ public class PageCell
     }
 
     /**
-     * Gets the value of the clipBox property.
+     * Gets the value of the clipBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getClipBox() {
-        return clipBox;
-    }
-
-    /**
-     * Sets the value of the clipBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getClipBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setClipBox(Double value) {
-        this.clipBox = value;
+    public List<Double> getClipBoxes() {
+        if (clipBoxes == null) {
+            clipBoxes = new ArrayList<Double>();
+        }
+        return this.clipBoxes;
     }
 
     /**

@@ -93,7 +93,7 @@ public class Component
     @XmlSchemaType(name = "anySimpleType")
     protected String overfoldSide;
     @XmlAttribute(name = "SheetPart")
-    protected Double sheetPart;
+    protected List<Double> sheetParts;
     @XmlAttribute(name = "Dimensions")
     protected List<Double> dimensions;
     @XmlAttribute(name = "PageListIndex")
@@ -395,27 +395,32 @@ public class Component
     }
 
     /**
-     * Gets the value of the sheetPart property.
+     * Gets the value of the sheetParts property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSheetPart() {
-        return sheetPart;
-    }
-
-    /**
-     * Sets the value of the sheetPart property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sheetParts property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSheetParts().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSheetPart(Double value) {
-        this.sheetPart = value;
+    public List<Double> getSheetParts() {
+        if (sheetParts == null) {
+            sheetParts = new ArrayList<Double>();
+        }
+        return this.sheetParts;
     }
 
     /**

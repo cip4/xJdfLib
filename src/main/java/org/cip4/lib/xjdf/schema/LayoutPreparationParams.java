@@ -129,7 +129,7 @@ public class LayoutPreparationParams
     @XmlAttribute(name = "BackMarkList")
     protected List<String> backMarkLists;
     @XmlAttribute(name = "SurfaceContentsBox")
-    protected Double surfaceContentsBox;
+    protected List<Double> surfaceContentsBoxes;
     @XmlAttribute(name = "PageOrder")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String pageOrder;
@@ -751,27 +751,32 @@ public class LayoutPreparationParams
     }
 
     /**
-     * Gets the value of the surfaceContentsBox property.
+     * Gets the value of the surfaceContentsBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSurfaceContentsBox() {
-        return surfaceContentsBox;
-    }
-
-    /**
-     * Sets the value of the surfaceContentsBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the surfaceContentsBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSurfaceContentsBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSurfaceContentsBox(Double value) {
-        this.surfaceContentsBox = value;
+    public List<Double> getSurfaceContentsBoxes() {
+        if (surfaceContentsBoxes == null) {
+            surfaceContentsBoxes = new ArrayList<Double>();
+        }
+        return this.surfaceContentsBoxes;
     }
 
     /**

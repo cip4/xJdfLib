@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -53,7 +55,7 @@ public class PDFXParams
     @XmlAttribute(name = "PDFXCompliantPDFOnly")
     protected Boolean pdfxCompliantPDFOnly;
     @XmlAttribute(name = "PDFXTrimBoxToMediaBoxOffset")
-    protected Double pdfxTrimBoxToMediaBoxOffset;
+    protected List<Double> pdfxTrimBoxToMediaBoxOffsets;
     @XmlAttribute(name = "PDFX3Check")
     protected Boolean pdfx3Check;
     @XmlAttribute(name = "PDFXSetBleedBoxToMediaBox")
@@ -66,7 +68,7 @@ public class PDFXParams
     @XmlAttribute(name = "PDFX1aCheck")
     protected Boolean pdfx1ACheck;
     @XmlAttribute(name = "PDFXBleedBoxToTrimBoxOffset")
-    protected Double pdfxBleedBoxToTrimBoxOffset;
+    protected List<Double> pdfxBleedBoxToTrimBoxOffsets;
 
     /**
      * Gets the value of the pdfxNoTrimBoxError property.
@@ -165,27 +167,32 @@ public class PDFXParams
     }
 
     /**
-     * Gets the value of the pdfxTrimBoxToMediaBoxOffset property.
+     * Gets the value of the pdfxTrimBoxToMediaBoxOffsets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPDFXTrimBoxToMediaBoxOffset() {
-        return pdfxTrimBoxToMediaBoxOffset;
-    }
-
-    /**
-     * Sets the value of the pdfxTrimBoxToMediaBoxOffset property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pdfxTrimBoxToMediaBoxOffsets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPDFXTrimBoxToMediaBoxOffsets().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setPDFXTrimBoxToMediaBoxOffset(Double value) {
-        this.pdfxTrimBoxToMediaBoxOffset = value;
+    public List<Double> getPDFXTrimBoxToMediaBoxOffsets() {
+        if (pdfxTrimBoxToMediaBoxOffsets == null) {
+            pdfxTrimBoxToMediaBoxOffsets = new ArrayList<Double>();
+        }
+        return this.pdfxTrimBoxToMediaBoxOffsets;
     }
 
     /**
@@ -309,27 +316,32 @@ public class PDFXParams
     }
 
     /**
-     * Gets the value of the pdfxBleedBoxToTrimBoxOffset property.
+     * Gets the value of the pdfxBleedBoxToTrimBoxOffsets property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPDFXBleedBoxToTrimBoxOffset() {
-        return pdfxBleedBoxToTrimBoxOffset;
-    }
-
-    /**
-     * Sets the value of the pdfxBleedBoxToTrimBoxOffset property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pdfxBleedBoxToTrimBoxOffsets property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPDFXBleedBoxToTrimBoxOffsets().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setPDFXBleedBoxToTrimBoxOffset(Double value) {
-        this.pdfxBleedBoxToTrimBoxOffset = value;
+    public List<Double> getPDFXBleedBoxToTrimBoxOffsets() {
+        if (pdfxBleedBoxToTrimBoxOffsets == null) {
+            pdfxBleedBoxToTrimBoxOffsets = new ArrayList<Double>();
+        }
+        return this.pdfxBleedBoxToTrimBoxOffsets;
     }
 
 }

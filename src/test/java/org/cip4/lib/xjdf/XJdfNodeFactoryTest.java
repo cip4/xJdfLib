@@ -25,6 +25,7 @@ import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
@@ -331,5 +332,22 @@ public class XJdfNodeFactoryTest {
 		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
 		Assert.assertEquals("ColorsUsed is wrong", 0, colorIntent.getColorsUseds().size());
 		Assert.assertEquals("Coatings is wrong", null, colorIntent.getCoatings());
+	}
+
+	@Test
+	public void testMarkObject() {
+
+		// arrange
+		final String ctm = "1 0 0 1 0.0000 0.0000";
+		final String clipBox = "0.0000 0.0000 2976.3779527559 2125.9842519685";
+		final Integer ord = 8;
+
+		// act
+		MarkObject markObject = xJdfNodeFactory.createMarkObject(ctm, clipBox, ord);
+
+		// assert
+		Assert.assertEquals("CTM is wrong.", 1d, markObject.getCTMS().get(3));
+		Assert.assertEquals("ClipBox is wrong.", 2976.3779527559d, markObject.getClipBoxes().get(2));
+		Assert.assertEquals("Ord is wrong.", new Integer(8), markObject.getOrd());
 	}
 }

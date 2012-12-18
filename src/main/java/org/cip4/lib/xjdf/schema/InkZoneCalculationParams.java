@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -50,7 +52,7 @@ public class InkZoneCalculationParams
     @XmlAttribute(name = "ZoneHeight")
     protected Double zoneHeight;
     @XmlAttribute(name = "PrintableArea")
-    protected Double printableArea;
+    protected List<Double> printableAreas;
     @XmlAttribute(name = "DeviceRef")
     @XmlIDREF
     protected Object deviceRef;
@@ -176,27 +178,32 @@ public class InkZoneCalculationParams
     }
 
     /**
-     * Gets the value of the printableArea property.
+     * Gets the value of the printableAreas property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getPrintableArea() {
-        return printableArea;
-    }
-
-    /**
-     * Sets the value of the printableArea property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the printableAreas property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPrintableAreas().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setPrintableArea(Double value) {
-        this.printableArea = value;
+    public List<Double> getPrintableAreas() {
+        if (printableAreas == null) {
+            printableAreas = new ArrayList<Double>();
+        }
+        return this.printableAreas;
     }
 
     /**

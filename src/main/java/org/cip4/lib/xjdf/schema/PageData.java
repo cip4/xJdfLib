@@ -79,7 +79,7 @@ public class PageData
     @XmlAttribute(name = "FoldOutPages")
     protected List<Integer> foldOutPages;
     @XmlAttribute(name = "SourceTrimBox")
-    protected Double sourceTrimBox;
+    protected List<Double> sourceTrimBoxes;
     @XmlAttribute(name = "CatalogDetails")
     protected String catalogDetails;
     @XmlAttribute(name = "PageLabel")
@@ -97,7 +97,7 @@ public class PageData
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String pageFormat;
     @XmlAttribute(name = "SourceClipBox")
-    protected Double sourceClipBox;
+    protected List<Double> sourceClipBoxes;
     @XmlAttribute(name = "PageIndex")
     protected Integer pageIndex;
     @XmlAttribute(name = "PageLabelPrefix")
@@ -109,7 +109,7 @@ public class PageData
     @XmlAttribute(name = "ProductID")
     protected String productID;
     @XmlAttribute(name = "SourceBleedBox")
-    protected Double sourceBleedBox;
+    protected List<Double> sourceBleedBoxes;
     @XmlAttribute(name = "ElementColorParamsRef")
     @XmlIDREF
     protected Object elementColorParamsRef;
@@ -253,27 +253,32 @@ public class PageData
     }
 
     /**
-     * Gets the value of the sourceTrimBox property.
+     * Gets the value of the sourceTrimBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSourceTrimBox() {
-        return sourceTrimBox;
-    }
-
-    /**
-     * Sets the value of the sourceTrimBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sourceTrimBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSourceTrimBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSourceTrimBox(Double value) {
-        this.sourceTrimBox = value;
+    public List<Double> getSourceTrimBoxes() {
+        if (sourceTrimBoxes == null) {
+            sourceTrimBoxes = new ArrayList<Double>();
+        }
+        return this.sourceTrimBoxes;
     }
 
     /**
@@ -450,27 +455,32 @@ public class PageData
     }
 
     /**
-     * Gets the value of the sourceClipBox property.
+     * Gets the value of the sourceClipBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSourceClipBox() {
-        return sourceClipBox;
-    }
-
-    /**
-     * Sets the value of the sourceClipBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sourceClipBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSourceClipBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSourceClipBox(Double value) {
-        this.sourceClipBox = value;
+    public List<Double> getSourceClipBoxes() {
+        if (sourceClipBoxes == null) {
+            sourceClipBoxes = new ArrayList<Double>();
+        }
+        return this.sourceClipBoxes;
     }
 
     /**
@@ -594,27 +604,32 @@ public class PageData
     }
 
     /**
-     * Gets the value of the sourceBleedBox property.
+     * Gets the value of the sourceBleedBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getSourceBleedBox() {
-        return sourceBleedBox;
-    }
-
-    /**
-     * Sets the value of the sourceBleedBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sourceBleedBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSourceBleedBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setSourceBleedBox(Double value) {
-        this.sourceBleedBox = value;
+    public List<Double> getSourceBleedBoxes() {
+        if (sourceBleedBoxes == null) {
+            sourceBleedBoxes = new ArrayList<Double>();
+        }
+        return this.sourceBleedBoxes;
     }
 
     /**

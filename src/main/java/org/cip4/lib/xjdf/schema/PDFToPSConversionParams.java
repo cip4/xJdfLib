@@ -2,6 +2,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -111,7 +113,7 @@ public class PDFToPSConversionParams
     @XmlSchemaType(name = "anySimpleType")
     protected String includeType3Fonts;
     @XmlAttribute(name = "BoundingBox")
-    protected Double boundingBox;
+    protected List<Double> boundingBoxes;
     @XmlAttribute(name = "TTasT42")
     protected Boolean tTasT42;
     @XmlAttribute(name = "IgnoreBG")
@@ -583,27 +585,32 @@ public class PDFToPSConversionParams
     }
 
     /**
-     * Gets the value of the boundingBox property.
+     * Gets the value of the boundingBoxes property.
      * 
-     * @return
-     *     possible object is
-     *     {@link Double }
-     *     
-     */
-    public Double getBoundingBox() {
-        return boundingBox;
-    }
-
-    /**
-     * Sets the value of the boundingBox property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the boundingBoxes property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link Double }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBoundingBoxes().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
      */
-    public void setBoundingBox(Double value) {
-        this.boundingBox = value;
+    public List<Double> getBoundingBoxes() {
+        if (boundingBoxes == null) {
+            boundingBoxes = new ArrayList<Double>();
+        }
+        return this.boundingBoxes;
     }
 
     /**

@@ -71,7 +71,7 @@
 	</xs:simpleType>
 
 	<xs:simpleType name="rectangle">
-		<xs:restriction base="xs:double" />
+		<xs:list itemType="xs:double" />
 	</xs:simpleType>
 
 	<xs:simpleType name="RectangleRangeList">
@@ -842,7 +842,14 @@
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 		</xs:complexType>
 	</xs:element>
+	
+	<!--** abstract type for substitution only ** -->
+	<xs:element abstract="true" name="PlacedObject" type="PlacedObject" />
+	<xs:complexType name="PlacedObject">
+		<xs:attribute name="CTM" type="matrix" use="optional" />
+	</xs:complexType>
 
+	
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="IntentType" type="IntentType" />
 	<xs:complexType name="IntentType" />
@@ -3294,50 +3301,53 @@
 	</xs:element>
 
 	<!-- ** Complex type definition for MarkObject ** -->
-	<xs:element name="MarkObject">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:choice>
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ScavengerArea" />
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						ref="DensityMeasuringField" />
-					<xs:element minOccurs="0" maxOccurs="unbounded"
-						ref="CIELABMeasuringField" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorControlStrip" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterMark" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DynamicField" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CutMark" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkActivation" />
-				</xs:choice>
-			</xs:sequence>
-			<xs:attribute name="CompensationCTMTemplate" type="string"
-				use="optional" />
-			<xs:attribute name="TrimClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="ClipBox" type="rectangle" use="optional" />
-			<xs:attribute name="CTM" type="matrix" use="optional" />
-			<xs:attribute name="OrdID" type="integer" use="optional" />
-			<xs:attribute name="LogicalStackOrd" type="integer" use="optional" />
-			<xs:attribute name="Anchor" type="EnumAnchor" use="optional" />
-			<xs:attribute name="ClipBoxFormat" type="string" use="optional" />
-			<xs:attribute name="TrimCTM" type="matrix" use="optional" />
-			<xs:attribute name="LayerID" type="integer" use="optional" />
-			<xs:attribute name="SourceClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="ClipBoxTemplate" type="string" use="optional" />
-			<xs:attribute name="ClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="ContentRef" type="IDREF" use="optional" />
-			<xs:attribute name="Ord" type="integer" use="optional" />
-			<xs:attribute name="TrimSize" type="XYPair" use="optional" />
-			<xs:attribute name="HalfTonePhaseOrigin" type="XYPair"
-				use="optional" />
-			<xs:attribute name="CompensationCTMFormat" type="string"
-				use="optional" />
-			<xs:attribute name="IdentificationFieldRef" type="IDREF"
-				use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="MarkObject" substitutionGroup="PlacedObject" type="MarkObject"/>
+	<xs:complexType name="MarkObject">
+		<xs:complexContent>
+			<xs:extension base="PlacedObject">
+				<xs:sequence>
+					<xs:choice>
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ScavengerArea" />
+						<xs:element minOccurs="0" maxOccurs="unbounded"
+							ref="DensityMeasuringField" />
+						<xs:element minOccurs="0" maxOccurs="unbounded"
+							ref="CIELABMeasuringField" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorControlStrip" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterMark" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DynamicField" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CutMark" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkActivation" />
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="CompensationCTMTemplate" type="string"
+					use="optional" />
+				<xs:attribute name="TrimClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="ClipBox" type="rectangle" use="optional" />
+				<xs:attribute name="OrdID" type="integer" use="optional" />
+				<xs:attribute name="LogicalStackOrd" type="integer" use="optional" />
+				<xs:attribute name="Anchor" type="EnumAnchor" use="optional" />
+				<xs:attribute name="ClipBoxFormat" type="string" use="optional" />
+				<xs:attribute name="TrimCTM" type="matrix" use="optional" />
+				<xs:attribute name="LayerID" type="integer" use="optional" />
+				<xs:attribute name="SourceClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="ClipBoxTemplate" type="string" use="optional" />
+				<xs:attribute name="ClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="ContentRef" type="IDREF" use="optional" />
+				<xs:attribute name="Ord" type="integer" use="optional" />
+				<xs:attribute name="TrimSize" type="XYPair" use="optional" />
+				<xs:attribute name="HalfTonePhaseOrigin" type="XYPair"
+					use="optional" />
+				<xs:attribute name="CompensationCTMFormat" type="string"
+					use="optional" />
+				<xs:attribute name="IdentificationFieldRef" type="IDREF"
+					use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 
 	<!-- ** Complex type definition for Milestone ** -->
 	<xs:element name="Milestone">
@@ -6715,33 +6725,36 @@
 	</xs:element>
 
 	<!-- ** Complex type definition for ContentObject ** -->
-	<xs:element name="ContentObject">
-		<xs:complexType>
-			<xs:attribute name="CompensationCTMTemplate" type="string"
-				use="optional" />
-			<xs:attribute name="OrdExpression" type="string" use="optional" />
-			<xs:attribute name="TrimClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="ClipBox" type="rectangle" use="optional" />
-			<xs:attribute name="CTM" type="matrix" use="optional" />
-			<xs:attribute name="OrdID" type="integer" use="optional" />
-			<xs:attribute name="LogicalStackOrd" type="integer" use="optional" />
-			<xs:attribute name="Anchor" type="EnumAnchor" use="optional" />
-			<xs:attribute name="ClipBoxFormat" type="string" use="optional" />
-			<xs:attribute name="TrimCTM" type="matrix" use="optional" />
-			<xs:attribute name="LayerID" type="integer" use="optional" />
-			<xs:attribute name="SourceClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="ClipBoxTemplate" type="string" use="optional" />
-			<xs:attribute name="ClipPath" type="PDFPath" use="optional" />
-			<xs:attribute name="SetOrd" type="integer" use="optional" />
-			<xs:attribute name="Ord" type="integer" use="optional" />
-			<xs:attribute name="DocOrd" type="integer" use="optional" />
-			<xs:attribute name="TrimSize" type="XYPair" use="optional" />
-			<xs:attribute name="HalfTonePhaseOrigin" type="XYPair"
-				use="optional" />
-			<xs:attribute name="CompensationCTMFormat" type="string"
-				use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="ContentObject" substitutionGroup="PlacedObject" type="ContentObject" />
+	<xs:complexType name="ContentObject">
+		<xs:complexContent>
+			<xs:extension base="PlacedObject">
+				<xs:attribute name="CompensationCTMTemplate" type="string"
+					use="optional" />
+				<xs:attribute name="OrdExpression" type="string" use="optional" />
+				<xs:attribute name="TrimClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="ClipBox" type="rectangle" use="optional" />
+				<xs:attribute name="OrdID" type="integer" use="optional" />
+				<xs:attribute name="LogicalStackOrd" type="integer" use="optional" />
+				<xs:attribute name="Anchor" type="EnumAnchor" use="optional" />
+				<xs:attribute name="ClipBoxFormat" type="string" use="optional" />
+				<xs:attribute name="TrimCTM" type="matrix" use="optional" />
+				<xs:attribute name="LayerID" type="integer" use="optional" />
+				<xs:attribute name="SourceClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="ClipBoxTemplate" type="string" use="optional" />
+				<xs:attribute name="ClipPath" type="PDFPath" use="optional" />
+				<xs:attribute name="SetOrd" type="integer" use="optional" />
+				<xs:attribute name="Ord" type="integer" use="optional" />
+				<xs:attribute name="DocOrd" type="integer" use="optional" />
+				<xs:attribute name="TrimSize" type="XYPair" use="optional" />
+				<xs:attribute name="HalfTonePhaseOrigin" type="XYPair"
+					use="optional" />
+				<xs:attribute name="CompensationCTMFormat" type="string"
+					use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	
 
 	<!-- ** Complex type definition for ConventionalPrintingParams ** -->
 	<xs:element name="ConventionalPrintingParams" type="ConventionalPrintingParams"
@@ -7709,12 +7722,11 @@
 			<xs:extension base="ParameterType">
 				<xs:sequence>
 					<xs:choice>
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentObject" />
+						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PlacedObject" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCondition" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerList" />
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkObject" />
 					</xs:choice>
 				</xs:sequence>
 				<xs:attribute name="SheetCountReset" use="optional" />
