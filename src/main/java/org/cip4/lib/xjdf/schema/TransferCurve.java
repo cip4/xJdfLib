@@ -35,21 +35,21 @@ public class TransferCurve
 {
 
     @XmlAttribute(name = "Curve")
-    protected List<Double> curves;
+    protected List<Double> curve;
 
     /**
-     * Gets the value of the curves property.
+     * Gets the value of the curve property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the curves property.
+     * This is why there is not a <CODE>set</CODE> method for the curve property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCurves().add(newItem);
+     *    getCurve().add(newItem);
      * </pre>
      * 
      * 
@@ -59,11 +59,11 @@ public class TransferCurve
      * 
      * 
      */
-    public List<Double> getCurves() {
-        if (curves == null) {
-            curves = new ArrayList<Double>();
+    public List<Double> getCurve() {
+        if (curve == null) {
+            curve = new ArrayList<Double>();
         }
-        return this.curves;
+        return this.curve;
     }
 
 }

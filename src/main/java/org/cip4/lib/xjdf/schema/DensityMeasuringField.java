@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -48,7 +47,8 @@ public class DensityMeasuringField
 {
 
     @XmlAttribute(name = "ToleranceDotGain")
-    protected List<Double> toleranceDotGains;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair toleranceDotGain;
     @XmlAttribute(name = "Setup")
     protected String setup;
     @XmlAttribute(name = "Density")
@@ -58,17 +58,22 @@ public class DensityMeasuringField
     @XmlAttribute(name = "Percentage")
     protected Double percentage;
     @XmlAttribute(name = "ToleranceCyan")
-    protected List<Double> toleranceCyen;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair toleranceCyan;
     @XmlAttribute(name = "ToleranceMagenta")
-    protected List<Double> toleranceMagentas;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair toleranceMagenta;
     @XmlAttribute(name = "ToleranceBlack")
-    protected List<Double> toleranceBlacks;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair toleranceBlack;
     @XmlAttribute(name = "ToleranceYellow")
-    protected List<Double> toleranceYellows;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair toleranceYellow;
     @XmlAttribute(name = "Screen")
     protected String screen;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
     @XmlAttribute(name = "Diameter")
     protected Double diameter;
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
@@ -76,32 +81,27 @@ public class DensityMeasuringField
     protected Object colorMeasurementConditionsRef;
 
     /**
-     * Gets the value of the toleranceDotGains property.
+     * Gets the value of the toleranceDotGain property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the toleranceDotGains property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getToleranceDotGains().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getToleranceDotGains() {
-        if (toleranceDotGains == null) {
-            toleranceDotGains = new ArrayList<Double>();
-        }
-        return this.toleranceDotGains;
+    public org.cip4.lib.xjdf.type.XYPair getToleranceDotGain() {
+        return toleranceDotGain;
+    }
+
+    /**
+     * Sets the value of the toleranceDotGain property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setToleranceDotGain(org.cip4.lib.xjdf.type.XYPair value) {
+        this.toleranceDotGain = value;
     }
 
     /**
@@ -201,119 +201,99 @@ public class DensityMeasuringField
     }
 
     /**
-     * Gets the value of the toleranceCyen property.
+     * Gets the value of the toleranceCyan property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the toleranceCyen property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getToleranceCyen().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getToleranceCyen() {
-        if (toleranceCyen == null) {
-            toleranceCyen = new ArrayList<Double>();
-        }
-        return this.toleranceCyen;
+    public org.cip4.lib.xjdf.type.XYPair getToleranceCyan() {
+        return toleranceCyan;
     }
 
     /**
-     * Gets the value of the toleranceMagentas property.
+     * Sets the value of the toleranceCyan property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the toleranceMagentas property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getToleranceMagentas().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getToleranceMagentas() {
-        if (toleranceMagentas == null) {
-            toleranceMagentas = new ArrayList<Double>();
-        }
-        return this.toleranceMagentas;
+    public void setToleranceCyan(org.cip4.lib.xjdf.type.XYPair value) {
+        this.toleranceCyan = value;
     }
 
     /**
-     * Gets the value of the toleranceBlacks property.
+     * Gets the value of the toleranceMagenta property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the toleranceBlacks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getToleranceBlacks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getToleranceBlacks() {
-        if (toleranceBlacks == null) {
-            toleranceBlacks = new ArrayList<Double>();
-        }
-        return this.toleranceBlacks;
+    public org.cip4.lib.xjdf.type.XYPair getToleranceMagenta() {
+        return toleranceMagenta;
     }
 
     /**
-     * Gets the value of the toleranceYellows property.
+     * Sets the value of the toleranceMagenta property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the toleranceYellows property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getToleranceYellows().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getToleranceYellows() {
-        if (toleranceYellows == null) {
-            toleranceYellows = new ArrayList<Double>();
-        }
-        return this.toleranceYellows;
+    public void setToleranceMagenta(org.cip4.lib.xjdf.type.XYPair value) {
+        this.toleranceMagenta = value;
+    }
+
+    /**
+     * Gets the value of the toleranceBlack property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getToleranceBlack() {
+        return toleranceBlack;
+    }
+
+    /**
+     * Sets the value of the toleranceBlack property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setToleranceBlack(org.cip4.lib.xjdf.type.XYPair value) {
+        this.toleranceBlack = value;
+    }
+
+    /**
+     * Gets the value of the toleranceYellow property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getToleranceYellow() {
+        return toleranceYellow;
+    }
+
+    /**
+     * Sets the value of the toleranceYellow property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setToleranceYellow(org.cip4.lib.xjdf.type.XYPair value) {
+        this.toleranceYellow = value;
     }
 
     /**
@@ -341,32 +321,27 @@ public class DensityMeasuringField
     }
 
     /**
-     * Gets the value of the centers property.
+     * Gets the value of the center property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
+    }
+
+    /**
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
     }
 
     /**

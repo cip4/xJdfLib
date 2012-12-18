@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -53,18 +54,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PageList", propOrder = {
-    "assemblies",
-    "pageDatas"
+    "pageData",
+    "assembly"
 })
 public class PageList
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Assembly")
-    protected List<Assembly> assemblies;
     @XmlElement(name = "PageData")
-    protected List<PageData> pageDatas;
+    protected List<PageData> pageData;
+    @XmlElement(name = "Assembly")
+    protected List<Assembly> assembly;
     @XmlAttribute(name = "IsBlank")
     protected Boolean isBlank;
     @XmlAttribute(name = "JobID")
@@ -72,13 +73,15 @@ public class PageList
     @XmlAttribute(name = "PageLabelSuffix")
     protected String pageLabelSuffix;
     @XmlAttribute(name = "SourceTrimBox")
-    protected List<Double> sourceTrimBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceTrimBox;
     @XmlAttribute(name = "AssemblyIDs")
     protected List<String> assemblyIDs;
     @XmlAttribute(name = "HasBleeds")
     protected Boolean hasBleeds;
     @XmlAttribute(name = "SourceClipBox")
-    protected List<Double> sourceClipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceClipBox;
     @XmlAttribute(name = "PageLabelPrefix")
     protected String pageLabelPrefix;
     @XmlAttribute(name = "IsTrapped")
@@ -86,7 +89,8 @@ public class PageList
     @XmlAttribute(name = "IsPrintable")
     protected Boolean isPrintable;
     @XmlAttribute(name = "SourceBleedBox")
-    protected List<Double> sourceBleedBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sourceBleedBox;
     @XmlAttribute(name = "ElementColorParamsRef")
     @XmlIDREF
     protected Object elementColorParamsRef;
@@ -106,47 +110,18 @@ public class PageList
     protected List<String> separationNames;
 
     /**
-     * Gets the value of the assemblies property.
+     * Gets the value of the pageData property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the assemblies property.
+     * This is why there is not a <CODE>set</CODE> method for the pageData property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAssemblies().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Assembly }
-     * 
-     * 
-     */
-    public List<Assembly> getAssemblies() {
-        if (assemblies == null) {
-            assemblies = new ArrayList<Assembly>();
-        }
-        return this.assemblies;
-    }
-
-    /**
-     * Gets the value of the pageDatas property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pageDatas property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPageDatas().add(newItem);
+     *    getPageData().add(newItem);
      * </pre>
      * 
      * 
@@ -156,11 +131,40 @@ public class PageList
      * 
      * 
      */
-    public List<PageData> getPageDatas() {
-        if (pageDatas == null) {
-            pageDatas = new ArrayList<PageData>();
+    public List<PageData> getPageData() {
+        if (pageData == null) {
+            pageData = new ArrayList<PageData>();
         }
-        return this.pageDatas;
+        return this.pageData;
+    }
+
+    /**
+     * Gets the value of the assembly property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the assembly property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAssembly().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Assembly }
+     * 
+     * 
+     */
+    public List<Assembly> getAssembly() {
+        if (assembly == null) {
+            assembly = new ArrayList<Assembly>();
+        }
+        return this.assembly;
     }
 
     /**
@@ -236,32 +240,27 @@ public class PageList
     }
 
     /**
-     * Gets the value of the sourceTrimBoxes property.
+     * Gets the value of the sourceTrimBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceTrimBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceTrimBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceTrimBoxes() {
-        if (sourceTrimBoxes == null) {
-            sourceTrimBoxes = new ArrayList<Double>();
-        }
-        return this.sourceTrimBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceTrimBox() {
+        return sourceTrimBox;
+    }
+
+    /**
+     * Sets the value of the sourceTrimBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceTrimBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceTrimBox = value;
     }
 
     /**
@@ -318,32 +317,27 @@ public class PageList
     }
 
     /**
-     * Gets the value of the sourceClipBoxes property.
+     * Gets the value of the sourceClipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceClipBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceClipBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceClipBoxes() {
-        if (sourceClipBoxes == null) {
-            sourceClipBoxes = new ArrayList<Double>();
-        }
-        return this.sourceClipBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceClipBox() {
+        return sourceClipBox;
+    }
+
+    /**
+     * Sets the value of the sourceClipBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceClipBox = value;
     }
 
     /**
@@ -419,32 +413,27 @@ public class PageList
     }
 
     /**
-     * Gets the value of the sourceBleedBoxes property.
+     * Gets the value of the sourceBleedBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sourceBleedBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSourceBleedBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSourceBleedBoxes() {
-        if (sourceBleedBoxes == null) {
-            sourceBleedBoxes = new ArrayList<Double>();
-        }
-        return this.sourceBleedBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getSourceBleedBox() {
+        return sourceBleedBox;
+    }
+
+    /**
+     * Sets the value of the sourceBleedBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSourceBleedBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sourceBleedBox = value;
     }
 
     /**

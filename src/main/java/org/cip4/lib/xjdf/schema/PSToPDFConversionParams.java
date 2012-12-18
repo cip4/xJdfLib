@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -63,14 +62,16 @@ public class PSToPDFConversionParams
     @XmlSchemaType(name = "anySimpleType")
     protected String binding;
     @XmlAttribute(name = "InitialResolution")
-    protected List<Double> initialResolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair initialResolution;
     @XmlAttribute(name = "Optimize")
     protected Boolean optimize;
     @XmlAttribute(name = "AutoRotatePages")
     @XmlSchemaType(name = "anySimpleType")
     protected String autoRotatePages;
     @XmlAttribute(name = "InitialPageSize")
-    protected List<Double> initialPageSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair initialPageSize;
     @XmlAttribute(name = "ASCII85EncodePages")
     protected Boolean ascii85EncodePages;
     @XmlAttribute(name = "DoThumbnails")
@@ -208,32 +209,27 @@ public class PSToPDFConversionParams
     }
 
     /**
-     * Gets the value of the initialResolutions property.
+     * Gets the value of the initialResolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the initialResolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInitialResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getInitialResolutions() {
-        if (initialResolutions == null) {
-            initialResolutions = new ArrayList<Double>();
-        }
-        return this.initialResolutions;
+    public org.cip4.lib.xjdf.type.XYPair getInitialResolution() {
+        return initialResolution;
+    }
+
+    /**
+     * Sets the value of the initialResolution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInitialResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.initialResolution = value;
     }
 
     /**
@@ -285,32 +281,27 @@ public class PSToPDFConversionParams
     }
 
     /**
-     * Gets the value of the initialPageSizes property.
+     * Gets the value of the initialPageSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the initialPageSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInitialPageSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getInitialPageSizes() {
-        if (initialPageSizes == null) {
-            initialPageSizes = new ArrayList<Double>();
-        }
-        return this.initialPageSizes;
+    public org.cip4.lib.xjdf.type.XYPair getInitialPageSize() {
+        return initialPageSize;
+    }
+
+    /**
+     * Sets the value of the initialPageSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInitialPageSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.initialPageSize = value;
     }
 
     /**

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prErrors"
+    "prError"
 })
 @XmlRootElement(name = "PRItem")
 public class PRItem
@@ -47,7 +47,7 @@ public class PRItem
 {
 
     @XmlElement(name = "PRError")
-    protected List<PRError> prErrors;
+    protected List<PRError> prError;
     @XmlAttribute(name = "PageSet")
     protected Integer pageSet;
     @XmlAttribute(name = "Occurrences")
@@ -57,18 +57,18 @@ public class PRItem
     protected Object actionRef;
 
     /**
-     * Gets the value of the prErrors property.
+     * Gets the value of the prError property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the prErrors property.
+     * This is why there is not a <CODE>set</CODE> method for the prError property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPRErrors().add(newItem);
+     *    getPRError().add(newItem);
      * </pre>
      * 
      * 
@@ -78,11 +78,11 @@ public class PRItem
      * 
      * 
      */
-    public List<PRError> getPRErrors() {
-        if (prErrors == null) {
-            prErrors = new ArrayList<PRError>();
+    public List<PRError> getPRError() {
+        if (prError == null) {
+            prError = new ArrayList<PRError>();
         }
-        return this.prErrors;
+        return this.prError;
     }
 
     /**

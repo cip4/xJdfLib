@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -35,61 +34,30 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "whens",
-    "otherwises"
+    "otherwise",
+    "when"
 })
 @XmlRootElement(name = "choice")
 public class Choice
     implements Serializable
 {
 
-    @XmlElement(name = "when")
-    protected List<When> whens;
-    @XmlElement(name = "otherwise")
-    protected List<Otherwise> otherwises;
+    protected List<Otherwise> otherwise;
+    protected List<When> when;
 
     /**
-     * Gets the value of the whens property.
+     * Gets the value of the otherwise property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the whens property.
+     * This is why there is not a <CODE>set</CODE> method for the otherwise property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getWhens().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link When }
-     * 
-     * 
-     */
-    public List<When> getWhens() {
-        if (whens == null) {
-            whens = new ArrayList<When>();
-        }
-        return this.whens;
-    }
-
-    /**
-     * Gets the value of the otherwises property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the otherwises property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOtherwises().add(newItem);
+     *    getOtherwise().add(newItem);
      * </pre>
      * 
      * 
@@ -99,11 +67,40 @@ public class Choice
      * 
      * 
      */
-    public List<Otherwise> getOtherwises() {
-        if (otherwises == null) {
-            otherwises = new ArrayList<Otherwise>();
+    public List<Otherwise> getOtherwise() {
+        if (otherwise == null) {
+            otherwise = new ArrayList<Otherwise>();
         }
-        return this.otherwises;
+        return this.otherwise;
+    }
+
+    /**
+     * Gets the value of the when property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the when property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getWhen().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link When }
+     * 
+     * 
+     */
+    public List<When> getWhen() {
+        if (when == null) {
+            when = new ArrayList<When>();
+        }
+        return this.when;
     }
 
 }

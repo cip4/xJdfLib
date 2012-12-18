@@ -39,18 +39,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BoxFoldingParams", propOrder = {
-    "glueLines",
-    "boxFoldActions"
+    "boxFoldAction",
+    "glueLine"
 })
 public class BoxFoldingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
     @XmlElement(name = "BoxFoldAction")
-    protected List<BoxFoldAction> boxFoldActions;
+    protected List<BoxFoldAction> boxFoldAction;
+    @XmlElement(name = "GlueLine")
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "BlankDimensionsY")
     protected String blankDimensionsY;
     @XmlAttribute(name = "BoxFoldingType")
@@ -60,47 +60,18 @@ public class BoxFoldingParams
     protected String blankDimensionsX;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the boxFoldAction property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the boxFoldAction property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link GlueLine }
-     * 
-     * 
-     */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
-        }
-        return this.glueLines;
-    }
-
-    /**
-     * Gets the value of the boxFoldActions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boxFoldActions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBoxFoldActions().add(newItem);
+     *    getBoxFoldAction().add(newItem);
      * </pre>
      * 
      * 
@@ -110,11 +81,40 @@ public class BoxFoldingParams
      * 
      * 
      */
-    public List<BoxFoldAction> getBoxFoldActions() {
-        if (boxFoldActions == null) {
-            boxFoldActions = new ArrayList<BoxFoldAction>();
+    public List<BoxFoldAction> getBoxFoldAction() {
+        if (boxFoldAction == null) {
+            boxFoldAction = new ArrayList<BoxFoldAction>();
         }
-        return this.boxFoldActions;
+        return this.boxFoldAction;
+    }
+
+    /**
+     * Gets the value of the glueLine property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getGlueLine().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link GlueLine }
+     * 
+     * 
+     */
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
+        }
+        return this.glueLine;
     }
 
     /**

@@ -55,20 +55,20 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "subscriptions",
-    "employees"
+    "employee",
+    "subscription"
 })
 @XmlRootElement(name = "Query")
 public class Query
     implements Serializable
 {
 
-    @XmlElement(name = "Subscription")
-    protected List<Subscription> subscriptions;
     @XmlElement(name = "Employee")
-    protected List<Employee> employees;
+    protected List<Employee> employee;
+    @XmlElement(name = "Subscription")
+    protected List<Subscription> subscription;
     @XmlAttribute(name = "AcknowledgeType")
-    protected List<EnumAcknowledgeType> acknowledgeTypes;
+    protected List<EnumAcknowledgeType> acknowledgeType;
     @XmlAttribute(name = "SenderID")
     protected String senderID;
     @XmlAttribute(name = "Version")
@@ -96,47 +96,18 @@ public class Query
     protected String agentVersion;
 
     /**
-     * Gets the value of the subscriptions property.
+     * Gets the value of the employee property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subscriptions property.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSubscriptions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Subscription }
-     * 
-     * 
-     */
-    public List<Subscription> getSubscriptions() {
-        if (subscriptions == null) {
-            subscriptions = new ArrayList<Subscription>();
-        }
-        return this.subscriptions;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
+     *    getEmployee().add(newItem);
      * </pre>
      * 
      * 
@@ -146,26 +117,55 @@ public class Query
      * 
      * 
      */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
         }
-        return this.employees;
+        return this.employee;
     }
 
     /**
-     * Gets the value of the acknowledgeTypes property.
+     * Gets the value of the subscription property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the acknowledgeTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the subscription property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAcknowledgeTypes().add(newItem);
+     *    getSubscription().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Subscription }
+     * 
+     * 
+     */
+    public List<Subscription> getSubscription() {
+        if (subscription == null) {
+            subscription = new ArrayList<Subscription>();
+        }
+        return this.subscription;
+    }
+
+    /**
+     * Gets the value of the acknowledgeType property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the acknowledgeType property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAcknowledgeType().add(newItem);
      * </pre>
      * 
      * 
@@ -175,11 +175,11 @@ public class Query
      * 
      * 
      */
-    public List<EnumAcknowledgeType> getAcknowledgeTypes() {
-        if (acknowledgeTypes == null) {
-            acknowledgeTypes = new ArrayList<EnumAcknowledgeType>();
+    public List<EnumAcknowledgeType> getAcknowledgeType() {
+        if (acknowledgeType == null) {
+            acknowledgeType = new ArrayList<EnumAcknowledgeType>();
         }
-        return this.acknowledgeTypes;
+        return this.acknowledgeType;
     }
 
     /**

@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "featureAttributes"
+    "featureAttribute"
 })
 @XmlRootElement(name = "set")
 public class Set
@@ -45,24 +45,24 @@ public class Set
 {
 
     @XmlElement(name = "FeatureAttribute")
-    protected List<FeatureAttribute> featureAttributes;
+    protected List<FeatureAttribute> featureAttribute;
     @XmlAttribute(name = "rRef")
     @XmlIDREF
     protected Object rRef;
 
     /**
-     * Gets the value of the featureAttributes property.
+     * Gets the value of the featureAttribute property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the featureAttributes property.
+     * This is why there is not a <CODE>set</CODE> method for the featureAttribute property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFeatureAttributes().add(newItem);
+     *    getFeatureAttribute().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class Set
      * 
      * 
      */
-    public List<FeatureAttribute> getFeatureAttributes() {
-        if (featureAttributes == null) {
-            featureAttributes = new ArrayList<FeatureAttribute>();
+    public List<FeatureAttribute> getFeatureAttribute() {
+        if (featureAttribute == null) {
+            featureAttribute = new ArrayList<FeatureAttribute>();
         }
-        return this.featureAttributes;
+        return this.featureAttribute;
     }
 
     /**

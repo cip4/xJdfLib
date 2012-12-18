@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "GluingParams", propOrder = {
-    "glues"
+    "glue"
 })
 public class GluingParams
     extends ParameterType
@@ -43,23 +43,23 @@ public class GluingParams
 {
 
     @XmlElement(name = "Glue")
-    protected List<Glue> glues;
+    protected List<Glue> glue;
     @XmlAttribute(name = "GluingProductionID")
     protected String gluingProductionID;
 
     /**
-     * Gets the value of the glues property.
+     * Gets the value of the glue property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glues property.
+     * This is why there is not a <CODE>set</CODE> method for the glue property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlues().add(newItem);
+     *    getGlue().add(newItem);
      * </pre>
      * 
      * 
@@ -69,11 +69,11 @@ public class GluingParams
      * 
      * 
      */
-    public List<Glue> getGlues() {
-        if (glues == null) {
-            glues = new ArrayList<Glue>();
+    public List<Glue> getGlue() {
+        if (glue == null) {
+            glue = new ArrayList<Glue>();
         }
-        return this.glues;
+        return this.glue;
     }
 
     /**

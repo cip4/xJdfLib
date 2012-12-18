@@ -39,7 +39,7 @@ public class JobField
 {
 
     @XmlAttribute(name = "ShowList")
-    protected List<String> showLists;
+    protected List<String> showList;
     @XmlAttribute(name = "JobFormat")
     protected String jobFormat;
     @XmlAttribute(name = "JobTemplate")
@@ -50,18 +50,18 @@ public class JobField
     protected String userText;
 
     /**
-     * Gets the value of the showLists property.
+     * Gets the value of the showList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the showLists property.
+     * This is why there is not a <CODE>set</CODE> method for the showList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShowLists().add(newItem);
+     *    getShowList().add(newItem);
      * </pre>
      * 
      * 
@@ -71,11 +71,11 @@ public class JobField
      * 
      * 
      */
-    public List<String> getShowLists() {
-        if (showLists == null) {
-            showLists = new ArrayList<String>();
+    public List<String> getShowList() {
+        if (showList == null) {
+            showList = new ArrayList<String>();
         }
-        return this.showLists;
+        return this.showList;
     }
 
     /**

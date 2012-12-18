@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,9 +46,10 @@ public class RegisterMark
     @XmlSchemaType(name = "anySimpleType")
     protected String markUsage;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
     @XmlAttribute(name = "MarkType")
-    protected List<String> markTypes;
+    protected List<String> markType;
     @XmlAttribute(name = "SeparationNames")
     protected List<String> separationNames;
 
@@ -100,47 +102,42 @@ public class RegisterMark
     }
 
     /**
-     * Gets the value of the centers property.
+     * Gets the value of the center property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
     }
 
     /**
-     * Gets the value of the markTypes property.
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
+    }
+
+    /**
+     * Gets the value of the markType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the markType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkTypes().add(newItem);
+     *    getMarkType().add(newItem);
      * </pre>
      * 
      * 
@@ -150,11 +147,11 @@ public class RegisterMark
      * 
      * 
      */
-    public List<String> getMarkTypes() {
-        if (markTypes == null) {
-            markTypes = new ArrayList<String>();
+    public List<String> getMarkType() {
+        if (markType == null) {
+            markType = new ArrayList<String>();
         }
-        return this.markTypes;
+        return this.markType;
     }
 
     /**

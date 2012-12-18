@@ -18,6 +18,7 @@ import org.cip4.lib.xjdf.schema.ContentObject;
 import org.cip4.lib.xjdf.schema.Layout;
 import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.PlacedObject;
+import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
@@ -55,16 +56,13 @@ public class LayoutBuilder extends AbstractNodeBuilder<Layout> {
 	 * @param surfaceContentsBox Value of SurfaceContentsBox Attribute.
 	 * @return New LayoutBuilder instance.
 	 */
-	public static LayoutBuilder newInstance(String surfaceContentsBox) {
+	public static LayoutBuilder newInstance(Rectangle surfaceContentsBox) {
 
 		// new instance
 		LayoutBuilder builder = newInstance();
 
 		// set attributes
-		for (String s : surfaceContentsBox.split(" ")) {
-			Double d = Double.valueOf(s);
-			builder.getLayout().getSurfaceContentsBoxes().add(d);
-		}
+		builder.getLayout().setSurfaceContentsBox(surfaceContentsBox);
 
 		// return instance
 		return builder;
@@ -101,7 +99,7 @@ public class LayoutBuilder extends AbstractNodeBuilder<Layout> {
 		JAXBElement obj = new JAXBElement(qname, objName.getClass(), null, objName);
 
 		// append intent to product
-		getLayout().getPlacedObjects().add(obj);
+		getLayout().getPlacedObject().add(obj);
 
 		// return current builder
 		return this;

@@ -48,11 +48,11 @@ public class FontParams
     @XmlSchemaType(name = "anySimpleType")
     protected String cannotEmbedFontPolicy;
     @XmlAttribute(name = "NeverEmbed")
-    protected List<String> neverEmbeds;
+    protected List<String> neverEmbed;
     @XmlAttribute(name = "EmbedAllFonts")
     protected Boolean embedAllFonts;
     @XmlAttribute(name = "AlwaysEmbed")
-    protected List<String> alwaysEmbeds;
+    protected List<String> alwaysEmbed;
 
     /**
      * Gets the value of the subsetFonts property.
@@ -127,18 +127,18 @@ public class FontParams
     }
 
     /**
-     * Gets the value of the neverEmbeds property.
+     * Gets the value of the neverEmbed property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the neverEmbeds property.
+     * This is why there is not a <CODE>set</CODE> method for the neverEmbed property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNeverEmbeds().add(newItem);
+     *    getNeverEmbed().add(newItem);
      * </pre>
      * 
      * 
@@ -148,11 +148,11 @@ public class FontParams
      * 
      * 
      */
-    public List<String> getNeverEmbeds() {
-        if (neverEmbeds == null) {
-            neverEmbeds = new ArrayList<String>();
+    public List<String> getNeverEmbed() {
+        if (neverEmbed == null) {
+            neverEmbed = new ArrayList<String>();
         }
-        return this.neverEmbeds;
+        return this.neverEmbed;
     }
 
     /**
@@ -180,18 +180,18 @@ public class FontParams
     }
 
     /**
-     * Gets the value of the alwaysEmbeds property.
+     * Gets the value of the alwaysEmbed property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the alwaysEmbeds property.
+     * This is why there is not a <CODE>set</CODE> method for the alwaysEmbed property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAlwaysEmbeds().add(newItem);
+     *    getAlwaysEmbed().add(newItem);
      * </pre>
      * 
      * 
@@ -201,11 +201,11 @@ public class FontParams
      * 
      * 
      */
-    public List<String> getAlwaysEmbeds() {
-        if (alwaysEmbeds == null) {
-            alwaysEmbeds = new ArrayList<String>();
+    public List<String> getAlwaysEmbed() {
+        if (alwaysEmbed == null) {
+            alwaysEmbed = new ArrayList<String>();
         }
-        return this.alwaysEmbeds;
+        return this.alwaysEmbed;
     }
 
 }

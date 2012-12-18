@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ResourceDefinitionParams", propOrder = {
-    "resourceParams"
+    "resourceParam"
 })
 public class ResourceDefinitionParams
     extends ParameterType
@@ -45,7 +45,7 @@ public class ResourceDefinitionParams
 {
 
     @XmlElement(name = "ResourceParam")
-    protected List<ResourceParam> resourceParams;
+    protected List<ResourceParam> resourceParam;
     @XmlAttribute(name = "DefaultPriority")
     @XmlSchemaType(name = "anySimpleType")
     protected String defaultPriority;
@@ -53,18 +53,18 @@ public class ResourceDefinitionParams
     protected String defaultJDF;
 
     /**
-     * Gets the value of the resourceParams property.
+     * Gets the value of the resourceParam property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resourceParams property.
+     * This is why there is not a <CODE>set</CODE> method for the resourceParam property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getResourceParams().add(newItem);
+     *    getResourceParam().add(newItem);
      * </pre>
      * 
      * 
@@ -74,11 +74,11 @@ public class ResourceDefinitionParams
      * 
      * 
      */
-    public List<ResourceParam> getResourceParams() {
-        if (resourceParams == null) {
-            resourceParams = new ArrayList<ResourceParam>();
+    public List<ResourceParam> getResourceParam() {
+        if (resourceParam == null) {
+            resourceParam = new ArrayList<ResourceParam>();
         }
-        return this.resourceParams;
+        return this.resourceParam;
     }
 
     /**

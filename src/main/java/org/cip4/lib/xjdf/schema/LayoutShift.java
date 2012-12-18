@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LayoutShift", propOrder = {
-    "shiftPoints"
+    "shiftPoint"
 })
 public class LayoutShift
     extends ParameterType
@@ -41,21 +41,21 @@ public class LayoutShift
 {
 
     @XmlElement(name = "ShiftPoint")
-    protected List<ShiftPoint> shiftPoints;
+    protected List<ShiftPoint> shiftPoint;
 
     /**
-     * Gets the value of the shiftPoints property.
+     * Gets the value of the shiftPoint property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shiftPoints property.
+     * This is why there is not a <CODE>set</CODE> method for the shiftPoint property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShiftPoints().add(newItem);
+     *    getShiftPoint().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class LayoutShift
      * 
      * 
      */
-    public List<ShiftPoint> getShiftPoints() {
-        if (shiftPoints == null) {
-            shiftPoints = new ArrayList<ShiftPoint>();
+    public List<ShiftPoint> getShiftPoint() {
+        if (shiftPoint == null) {
+            shiftPoint = new ArrayList<ShiftPoint>();
         }
-        return this.shiftPoints;
+        return this.shiftPoint;
     }
 
 }

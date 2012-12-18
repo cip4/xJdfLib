@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -49,9 +48,11 @@ public class FitPolicy
     @XmlSchemaType(name = "anySimpleType")
     protected String sizePolicy;
     @XmlAttribute(name = "ClipOffset")
-    protected List<Double> clipOffsets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair clipOffset;
     @XmlAttribute(name = "MinGutter")
-    protected List<Double> minGutters;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair minGutter;
 
     /**
      * Gets the value of the gutterPolicy property.
@@ -126,61 +127,51 @@ public class FitPolicy
     }
 
     /**
-     * Gets the value of the clipOffsets property.
+     * Gets the value of the clipOffset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clipOffsets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getClipOffsets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getClipOffsets() {
-        if (clipOffsets == null) {
-            clipOffsets = new ArrayList<Double>();
-        }
-        return this.clipOffsets;
+    public org.cip4.lib.xjdf.type.XYPair getClipOffset() {
+        return clipOffset;
     }
 
     /**
-     * Gets the value of the minGutters property.
+     * Sets the value of the clipOffset property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the minGutters property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMinGutters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getMinGutters() {
-        if (minGutters == null) {
-            minGutters = new ArrayList<Double>();
-        }
-        return this.minGutters;
+    public void setClipOffset(org.cip4.lib.xjdf.type.XYPair value) {
+        this.clipOffset = value;
+    }
+
+    /**
+     * Gets the value of the minGutter property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getMinGutter() {
+        return minGutter;
+    }
+
+    /**
+     * Sets the value of the minGutter property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMinGutter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.minGutter = value;
     }
 
 }

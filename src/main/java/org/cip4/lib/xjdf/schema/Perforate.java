@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -43,48 +42,47 @@ public class Perforate
 {
 
     @XmlAttribute(name = "RelativeWorkingPath")
-    protected List<Double> relativeWorkingPaths;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair relativeWorkingPath;
     @XmlAttribute(name = "TeethPerDimension")
     protected Double teethPerDimension;
     @XmlAttribute(name = "StartPosition")
-    protected List<Double> startPositions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair startPosition;
     @XmlAttribute(name = "WorkingPath")
-    protected List<Double> workingPaths;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair workingPath;
     @XmlAttribute(name = "Depth")
     protected Double depth;
     @XmlAttribute(name = "RelativeStartPosition")
-    protected List<Double> relativeStartPositions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair relativeStartPosition;
     @XmlAttribute(name = "WorkingDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String workingDirection;
 
     /**
-     * Gets the value of the relativeWorkingPaths property.
+     * Gets the value of the relativeWorkingPath property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relativeWorkingPaths property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRelativeWorkingPaths().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRelativeWorkingPaths() {
-        if (relativeWorkingPaths == null) {
-            relativeWorkingPaths = new ArrayList<Double>();
-        }
-        return this.relativeWorkingPaths;
+    public org.cip4.lib.xjdf.type.XYPair getRelativeWorkingPath() {
+        return relativeWorkingPath;
+    }
+
+    /**
+     * Sets the value of the relativeWorkingPath property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRelativeWorkingPath(org.cip4.lib.xjdf.type.XYPair value) {
+        this.relativeWorkingPath = value;
     }
 
     /**
@@ -112,61 +110,51 @@ public class Perforate
     }
 
     /**
-     * Gets the value of the startPositions property.
+     * Gets the value of the startPosition property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the startPositions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStartPositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getStartPositions() {
-        if (startPositions == null) {
-            startPositions = new ArrayList<Double>();
-        }
-        return this.startPositions;
+    public org.cip4.lib.xjdf.type.XYPair getStartPosition() {
+        return startPosition;
     }
 
     /**
-     * Gets the value of the workingPaths property.
+     * Sets the value of the startPosition property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the workingPaths property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getWorkingPaths().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getWorkingPaths() {
-        if (workingPaths == null) {
-            workingPaths = new ArrayList<Double>();
-        }
-        return this.workingPaths;
+    public void setStartPosition(org.cip4.lib.xjdf.type.XYPair value) {
+        this.startPosition = value;
+    }
+
+    /**
+     * Gets the value of the workingPath property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getWorkingPath() {
+        return workingPath;
+    }
+
+    /**
+     * Sets the value of the workingPath property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setWorkingPath(org.cip4.lib.xjdf.type.XYPair value) {
+        this.workingPath = value;
     }
 
     /**
@@ -194,32 +182,27 @@ public class Perforate
     }
 
     /**
-     * Gets the value of the relativeStartPositions property.
+     * Gets the value of the relativeStartPosition property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relativeStartPositions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRelativeStartPositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRelativeStartPositions() {
-        if (relativeStartPositions == null) {
-            relativeStartPositions = new ArrayList<Double>();
-        }
-        return this.relativeStartPositions;
+    public org.cip4.lib.xjdf.type.XYPair getRelativeStartPosition() {
+        return relativeStartPosition;
+    }
+
+    /**
+     * Sets the value of the relativeStartPosition property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRelativeStartPosition(org.cip4.lib.xjdf.type.XYPair value) {
+        this.relativeStartPosition = value;
     }
 
     /**

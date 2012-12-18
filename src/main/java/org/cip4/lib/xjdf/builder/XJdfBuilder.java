@@ -134,7 +134,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	public XJdfBuilder addGeneralID(GeneralID generalId) {
 
 		// append GeneralID object
-		getXJdf().getGeneralIDs().add(generalId);
+		getXJdf().getGeneralID().add(generalId);
 
 		// return XJdfBuilder object
 		return this;
@@ -153,7 +153,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		}
 
 		// add product
-		getXJdf().getProductList().getProducts().add(product);
+		getXJdf().getProductList().getProduct().add(product);
 
 		// return XJdfBuilder object
 		return this;
@@ -186,10 +186,10 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
 		JAXBElement obj = new JAXBElement(qname, parameter.getClass(), null, parameter);
-		param.getParameterTypes().add(obj);
+		param.getParameterType().add(obj);
 
 		if (part != null) {
-			param.getParts().add(part);
+			param.getPart().add(part);
 		}
 
 		// get ParameterSet according to parameter
@@ -205,12 +205,12 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 			parameterSet.setName(paramName);
 
 			// append element to lists
-			getXJdf().getSetTypes().add(xJdfNodeFactory.createParameterSet(parameterSet));
+			getXJdf().getSetType().add(xJdfNodeFactory.createParameterSet(parameterSet));
 			mapParameterSets.put(paramName, parameterSet);
 		}
 
 		// append parameter to parameterSet
-		parameterSet.getParameters().add(param);
+		parameterSet.getParameter().add(param);
 
 		// return XJdfBuilder object
 		return this;

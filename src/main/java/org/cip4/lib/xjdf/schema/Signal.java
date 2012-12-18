@@ -52,21 +52,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "notifications",
-    "employees",
-    "triggers"
+    "trigger",
+    "employee",
+    "notification"
 })
 @XmlRootElement(name = "Signal")
 public class Signal
     implements Serializable
 {
 
-    @XmlElement(name = "Notification")
-    protected List<Notification> notifications;
-    @XmlElement(name = "Employee")
-    protected List<Employee> employees;
     @XmlElement(name = "Trigger")
-    protected List<Trigger> triggers;
+    protected List<Trigger> trigger;
+    @XmlElement(name = "Employee")
+    protected List<Employee> employee;
+    @XmlElement(name = "Notification")
+    protected List<Notification> notification;
     @XmlAttribute(name = "SenderID")
     protected String senderID;
     @XmlAttribute(name = "Version")
@@ -96,76 +96,18 @@ public class Signal
     protected String agentVersion;
 
     /**
-     * Gets the value of the notifications property.
+     * Gets the value of the trigger property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the notifications property.
+     * This is why there is not a <CODE>set</CODE> method for the trigger property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNotifications().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Notification }
-     * 
-     * 
-     */
-    public List<Notification> getNotifications() {
-        if (notifications == null) {
-            notifications = new ArrayList<Notification>();
-        }
-        return this.notifications;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Employee }
-     * 
-     * 
-     */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
-        }
-        return this.employees;
-    }
-
-    /**
-     * Gets the value of the triggers property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the triggers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTriggers().add(newItem);
+     *    getTrigger().add(newItem);
      * </pre>
      * 
      * 
@@ -175,11 +117,69 @@ public class Signal
      * 
      * 
      */
-    public List<Trigger> getTriggers() {
-        if (triggers == null) {
-            triggers = new ArrayList<Trigger>();
+    public List<Trigger> getTrigger() {
+        if (trigger == null) {
+            trigger = new ArrayList<Trigger>();
         }
-        return this.triggers;
+        return this.trigger;
+    }
+
+    /**
+     * Gets the value of the employee property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEmployee().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Employee }
+     * 
+     * 
+     */
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
+        }
+        return this.employee;
+    }
+
+    /**
+     * Gets the value of the notification property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the notification property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getNotification().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Notification }
+     * 
+     * 
+     */
+    public List<Notification> getNotification() {
+        if (notification == null) {
+            notification = new ArrayList<Notification>();
+        }
+        return this.notification;
     }
 
     /**

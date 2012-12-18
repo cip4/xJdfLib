@@ -36,63 +36,34 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PreflightReportRulePool", propOrder = {
-    "prRules",
-    "prRuleAttrs"
+    "prRuleAttr",
+    "prRule"
 })
 public class PreflightReportRulePool
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "PRRule")
-    protected List<PRRule> prRules;
     @XmlElement(name = "PRRuleAttr")
-    protected List<PRRuleAttr> prRuleAttrs;
+    protected List<PRRuleAttr> prRuleAttr;
+    @XmlElement(name = "PRRule")
+    protected List<PRRule> prRule;
     @XmlAttribute(name = "MaxOccurrences")
     protected Integer maxOccurrences;
 
     /**
-     * Gets the value of the prRules property.
+     * Gets the value of the prRuleAttr property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the prRules property.
+     * This is why there is not a <CODE>set</CODE> method for the prRuleAttr property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPRRules().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PRRule }
-     * 
-     * 
-     */
-    public List<PRRule> getPRRules() {
-        if (prRules == null) {
-            prRules = new ArrayList<PRRule>();
-        }
-        return this.prRules;
-    }
-
-    /**
-     * Gets the value of the prRuleAttrs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the prRuleAttrs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPRRuleAttrs().add(newItem);
+     *    getPRRuleAttr().add(newItem);
      * </pre>
      * 
      * 
@@ -102,11 +73,40 @@ public class PreflightReportRulePool
      * 
      * 
      */
-    public List<PRRuleAttr> getPRRuleAttrs() {
-        if (prRuleAttrs == null) {
-            prRuleAttrs = new ArrayList<PRRuleAttr>();
+    public List<PRRuleAttr> getPRRuleAttr() {
+        if (prRuleAttr == null) {
+            prRuleAttr = new ArrayList<PRRuleAttr>();
         }
-        return this.prRuleAttrs;
+        return this.prRuleAttr;
+    }
+
+    /**
+     * Gets the value of the prRule property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the prRule property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPRRule().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PRRule }
+     * 
+     * 
+     */
+    public List<PRRule> getPRRule() {
+        if (prRule == null) {
+            prRule = new ArrayList<PRRule>();
+        }
+        return this.prRule;
     }
 
     /**

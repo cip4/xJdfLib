@@ -36,125 +36,38 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LayoutElementProductionParams", propOrder = {
-    "layoutElementParts",
-    "actionPools",
-    "testPools",
-    "shapeDeves"
+    "shapeDef",
+    "testPool",
+    "actionPool",
+    "layoutElementPart"
 })
 public class LayoutElementProductionParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "LayoutElementPart")
-    protected List<LayoutElementPart> layoutElementParts;
-    @XmlElement(name = "ActionPool")
-    protected List<ActionPool> actionPools;
-    @XmlElement(name = "TestPool")
-    protected List<TestPool> testPools;
     @XmlElement(name = "ShapeDef")
-    protected List<ShapeDef> shapeDeves;
+    protected List<ShapeDef> shapeDef;
+    @XmlElement(name = "TestPool")
+    protected List<TestPool> testPool;
+    @XmlElement(name = "ActionPool")
+    protected List<ActionPool> actionPool;
+    @XmlElement(name = "LayoutElementPart")
+    protected List<LayoutElementPart> layoutElementPart;
 
     /**
-     * Gets the value of the layoutElementParts property.
+     * Gets the value of the shapeDef property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layoutElementParts property.
+     * This is why there is not a <CODE>set</CODE> method for the shapeDef property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLayoutElementParts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link LayoutElementPart }
-     * 
-     * 
-     */
-    public List<LayoutElementPart> getLayoutElementParts() {
-        if (layoutElementParts == null) {
-            layoutElementParts = new ArrayList<LayoutElementPart>();
-        }
-        return this.layoutElementParts;
-    }
-
-    /**
-     * Gets the value of the actionPools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actionPools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getActionPools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ActionPool }
-     * 
-     * 
-     */
-    public List<ActionPool> getActionPools() {
-        if (actionPools == null) {
-            actionPools = new ArrayList<ActionPool>();
-        }
-        return this.actionPools;
-    }
-
-    /**
-     * Gets the value of the testPools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the testPools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTestPools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TestPool }
-     * 
-     * 
-     */
-    public List<TestPool> getTestPools() {
-        if (testPools == null) {
-            testPools = new ArrayList<TestPool>();
-        }
-        return this.testPools;
-    }
-
-    /**
-     * Gets the value of the shapeDeves property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapeDeves property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getShapeDeves().add(newItem);
+     *    getShapeDef().add(newItem);
      * </pre>
      * 
      * 
@@ -164,11 +77,98 @@ public class LayoutElementProductionParams
      * 
      * 
      */
-    public List<ShapeDef> getShapeDeves() {
-        if (shapeDeves == null) {
-            shapeDeves = new ArrayList<ShapeDef>();
+    public List<ShapeDef> getShapeDef() {
+        if (shapeDef == null) {
+            shapeDef = new ArrayList<ShapeDef>();
         }
-        return this.shapeDeves;
+        return this.shapeDef;
+    }
+
+    /**
+     * Gets the value of the testPool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the testPool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTestPool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TestPool }
+     * 
+     * 
+     */
+    public List<TestPool> getTestPool() {
+        if (testPool == null) {
+            testPool = new ArrayList<TestPool>();
+        }
+        return this.testPool;
+    }
+
+    /**
+     * Gets the value of the actionPool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actionPool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActionPool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ActionPool }
+     * 
+     * 
+     */
+    public List<ActionPool> getActionPool() {
+        if (actionPool == null) {
+            actionPool = new ArrayList<ActionPool>();
+        }
+        return this.actionPool;
+    }
+
+    /**
+     * Gets the value of the layoutElementPart property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the layoutElementPart property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLayoutElementPart().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link LayoutElementPart }
+     * 
+     * 
+     */
+    public List<LayoutElementPart> getLayoutElementPart() {
+        if (layoutElementPart == null) {
+            layoutElementPart = new ArrayList<LayoutElementPart>();
+        }
+        return this.layoutElementPart;
     }
 
 }

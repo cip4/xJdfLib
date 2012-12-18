@@ -41,18 +41,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DeliveryParams", propOrder = {
-    "drops",
-    "contacts"
+    "contact",
+    "drop"
 })
 public class DeliveryParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "Drop")
-    protected List<Drop> drops;
     @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
+    protected List<Contact> contact;
+    @XmlElement(name = "Drop")
+    protected List<Drop> drop;
     @XmlAttribute(name = "Required")
     protected String required;
     @XmlAttribute(name = "Transfer")
@@ -66,47 +66,18 @@ public class DeliveryParams
     protected String method;
 
     /**
-     * Gets the value of the drops property.
+     * Gets the value of the contact property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the drops property.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDrops().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Drop }
-     * 
-     * 
-     */
-    public List<Drop> getDrops() {
-        if (drops == null) {
-            drops = new ArrayList<Drop>();
-        }
-        return this.drops;
-    }
-
-    /**
-     * Gets the value of the contacts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContacts().add(newItem);
+     *    getContact().add(newItem);
      * </pre>
      * 
      * 
@@ -116,11 +87,40 @@ public class DeliveryParams
      * 
      * 
      */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
         }
-        return this.contacts;
+        return this.contact;
+    }
+
+    /**
+     * Gets the value of the drop property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the drop property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDrop().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Drop }
+     * 
+     * 
+     */
+    public List<Drop> getDrop() {
+        if (drop == null) {
+            drop = new ArrayList<Drop>();
+        }
+        return this.drop;
     }
 
     /**

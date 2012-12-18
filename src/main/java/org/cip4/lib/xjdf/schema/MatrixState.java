@@ -64,24 +64,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "values",
-    "locs"
+    "loc",
+    "value"
 })
 @XmlRootElement(name = "MatrixState")
 public class MatrixState
     implements Serializable
 {
 
-    @XmlElement(name = "Value")
-    protected List<Object> values;
     @XmlElement(name = "Loc")
-    protected List<Loc> locs;
+    protected List<Loc> loc;
+    @XmlElement(name = "Value")
+    protected List<Object> value;
     @XmlAttribute(name = "PresentRotateMod")
     protected Double presentRotateMod;
     @XmlAttribute(name = "UserDisplay")
     protected EnumUserDisplay userDisplay;
     @XmlAttribute(name = "PresentShift")
-    protected List<Double> presentShifts;
+    protected List<Double> presentShift;
     @XmlAttribute(name = "HasDefault")
     protected Boolean hasDefault;
     @XmlAttribute(name = "Required")
@@ -91,13 +91,14 @@ public class MatrixState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected List<Double> currentValues;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix currentValue;
     @XmlAttribute(name = "AllowedRotateMod")
     protected Double allowedRotateMod;
     @XmlAttribute(name = "AllowedTransforms")
     protected EnumOrientation allowedTransforms;
     @XmlAttribute(name = "AllowedShift")
-    protected List<Double> allowedShifts;
+    protected List<Double> allowedShift;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -123,7 +124,8 @@ public class MatrixState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected List<Double> defaultValues;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix defaultValue;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
@@ -132,47 +134,18 @@ public class MatrixState
     protected String descriptiveName;
 
     /**
-     * Gets the value of the values property.
+     * Gets the value of the loc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the values property.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Object }
-     * 
-     * 
-     */
-    public List<Object> getValues() {
-        if (values == null) {
-            values = new ArrayList<Object>();
-        }
-        return this.values;
-    }
-
-    /**
-     * Gets the value of the locs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocs().add(newItem);
+     *    getLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -182,11 +155,40 @@ public class MatrixState
      * 
      * 
      */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
         }
-        return this.locs;
+        return this.loc;
+    }
+
+    /**
+     * Gets the value of the value property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getValue().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getValue() {
+        if (value == null) {
+            value = new ArrayList<Object>();
+        }
+        return this.value;
     }
 
     /**
@@ -238,18 +240,18 @@ public class MatrixState
     }
 
     /**
-     * Gets the value of the presentShifts property.
+     * Gets the value of the presentShift property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presentShifts property.
+     * This is why there is not a <CODE>set</CODE> method for the presentShift property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresentShifts().add(newItem);
+     *    getPresentShift().add(newItem);
      * </pre>
      * 
      * 
@@ -259,11 +261,11 @@ public class MatrixState
      * 
      * 
      */
-    public List<Double> getPresentShifts() {
-        if (presentShifts == null) {
-            presentShifts = new ArrayList<Double>();
+    public List<Double> getPresentShift() {
+        if (presentShift == null) {
+            presentShift = new ArrayList<Double>();
         }
-        return this.presentShifts;
+        return this.presentShift;
     }
 
     /**
@@ -363,32 +365,27 @@ public class MatrixState
     }
 
     /**
-     * Gets the value of the currentValues property.
+     * Gets the value of the currentValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the currentValues property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCurrentValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCurrentValues() {
-        if (currentValues == null) {
-            currentValues = new ArrayList<Double>();
-        }
-        return this.currentValues;
+    public org.cip4.lib.xjdf.type.Matrix getCurrentValue() {
+        return currentValue;
+    }
+
+    /**
+     * Sets the value of the currentValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCurrentValue(org.cip4.lib.xjdf.type.Matrix value) {
+        this.currentValue = value;
     }
 
     /**
@@ -440,18 +437,18 @@ public class MatrixState
     }
 
     /**
-     * Gets the value of the allowedShifts property.
+     * Gets the value of the allowedShift property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedShifts property.
+     * This is why there is not a <CODE>set</CODE> method for the allowedShift property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAllowedShifts().add(newItem);
+     *    getAllowedShift().add(newItem);
      * </pre>
      * 
      * 
@@ -461,11 +458,11 @@ public class MatrixState
      * 
      * 
      */
-    public List<Double> getAllowedShifts() {
-        if (allowedShifts == null) {
-            allowedShifts = new ArrayList<Double>();
+    public List<Double> getAllowedShift() {
+        if (allowedShift == null) {
+            allowedShift = new ArrayList<Double>();
         }
-        return this.allowedShifts;
+        return this.allowedShift;
     }
 
     /**
@@ -700,32 +697,27 @@ public class MatrixState
     }
 
     /**
-     * Gets the value of the defaultValues property.
+     * Gets the value of the defaultValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the defaultValues property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDefaultValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDefaultValues() {
-        if (defaultValues == null) {
-            defaultValues = new ArrayList<Double>();
-        }
-        return this.defaultValues;
+    public org.cip4.lib.xjdf.type.Matrix getDefaultValue() {
+        return defaultValue;
+    }
+
+    /**
+     * Sets the value of the defaultValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDefaultValue(org.cip4.lib.xjdf.type.Matrix value) {
+        this.defaultValue = value;
     }
 
     /**

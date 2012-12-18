@@ -41,18 +41,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "certificates",
-    "parts"
+    "part",
+    "certificate"
 })
 @XmlRootElement(name = "AuthenticationCmdParams")
 public class AuthenticationCmdParams
     implements Serializable
 {
 
-    @XmlElement(name = "Certificate")
-    protected List<Object> certificates;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "Certificate")
+    protected List<Object> certificate;
     @XmlAttribute(name = "Reason")
     @XmlSchemaType(name = "anySimpleType")
     protected String reason;
@@ -65,47 +65,18 @@ public class AuthenticationCmdParams
     protected String authenticationType;
 
     /**
-     * Gets the value of the certificates property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the certificates property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCertificates().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Object }
-     * 
-     * 
-     */
-    public List<Object> getCertificates() {
-        if (certificates == null) {
-            certificates = new ArrayList<Object>();
-        }
-        return this.certificates;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -115,11 +86,40 @@ public class AuthenticationCmdParams
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the certificate property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the certificate property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCertificate().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getCertificate() {
+        if (certificate == null) {
+            certificate = new ArrayList<Object>();
+        }
+        return this.certificate;
     }
 
     /**

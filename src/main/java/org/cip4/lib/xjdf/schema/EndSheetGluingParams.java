@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EndSheetGluingParams", propOrder = {
-    "endSheets"
+    "endSheet"
 })
 public class EndSheetGluingParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class EndSheetGluingParams
 {
 
     @XmlElement(name = "EndSheet")
-    protected List<EndSheet> endSheets;
+    protected List<EndSheet> endSheet;
 
     /**
-     * Gets the value of the endSheets property.
+     * Gets the value of the endSheet property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the endSheets property.
+     * This is why there is not a <CODE>set</CODE> method for the endSheet property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEndSheets().add(newItem);
+     *    getEndSheet().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class EndSheetGluingParams
      * 
      * 
      */
-    public List<EndSheet> getEndSheets() {
-        if (endSheets == null) {
-            endSheets = new ArrayList<EndSheet>();
+    public List<EndSheet> getEndSheet() {
+        if (endSheet == null) {
+            endSheet = new ArrayList<EndSheet>();
         }
-        return this.endSheets;
+        return this.endSheet;
     }
 
 }

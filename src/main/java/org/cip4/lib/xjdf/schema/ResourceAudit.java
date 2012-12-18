@@ -51,21 +51,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "misDetails",
-    "parts",
-    "employees"
+    "employee",
+    "part",
+    "misDetails"
 })
 @XmlRootElement(name = "ResourceAudit")
 public class ResourceAudit
     implements Serializable
 {
 
+    @XmlElement(name = "Employee")
+    protected List<Employee> employee;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
     @XmlElement(name = "MISDetails")
     protected List<MISDetails> misDetails;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
-    @XmlElement(name = "Employee")
-    protected List<Employee> employees;
     @XmlAttribute(name = "Reason")
     @XmlSchemaType(name = "anySimpleType")
     protected String reason;
@@ -88,6 +88,64 @@ public class ResourceAudit
     protected String agentName;
     @XmlAttribute(name = "AgentVersion")
     protected String agentVersion;
+
+    /**
+     * Gets the value of the employee property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the employee property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getEmployee().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Employee }
+     * 
+     * 
+     */
+    public List<Employee> getEmployee() {
+        if (employee == null) {
+            employee = new ArrayList<Employee>();
+        }
+        return this.employee;
+    }
+
+    /**
+     * Gets the value of the part property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPart().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Part }
+     * 
+     * 
+     */
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
+        }
+        return this.part;
+    }
 
     /**
      * Gets the value of the misDetails property.
@@ -116,64 +174,6 @@ public class ResourceAudit
             misDetails = new ArrayList<MISDetails>();
         }
         return this.misDetails;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Part }
-     * 
-     * 
-     */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
-        }
-        return this.parts;
-    }
-
-    /**
-     * Gets the value of the employees property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the employees property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEmployees().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Employee }
-     * 
-     * 
-     */
-    public List<Employee> getEmployees() {
-        if (employees == null) {
-            employees = new ArrayList<Employee>();
-        }
-        return this.employees;
     }
 
     /**

@@ -46,9 +46,9 @@ public class ReturnQueueEntryParams
     @XmlAttribute(name = "URL")
     protected String url;
     @XmlAttribute(name = "Aborted")
-    protected List<String> aborteds;
+    protected List<String> aborted;
     @XmlAttribute(name = "Completed")
-    protected List<String> completeds;
+    protected List<String> completed;
 
     /**
      * Gets the value of the priority property.
@@ -123,18 +123,18 @@ public class ReturnQueueEntryParams
     }
 
     /**
-     * Gets the value of the aborteds property.
+     * Gets the value of the aborted property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the aborteds property.
+     * This is why there is not a <CODE>set</CODE> method for the aborted property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAborteds().add(newItem);
+     *    getAborted().add(newItem);
      * </pre>
      * 
      * 
@@ -144,26 +144,26 @@ public class ReturnQueueEntryParams
      * 
      * 
      */
-    public List<String> getAborteds() {
-        if (aborteds == null) {
-            aborteds = new ArrayList<String>();
+    public List<String> getAborted() {
+        if (aborted == null) {
+            aborted = new ArrayList<String>();
         }
-        return this.aborteds;
+        return this.aborted;
     }
 
     /**
-     * Gets the value of the completeds property.
+     * Gets the value of the completed property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the completeds property.
+     * This is why there is not a <CODE>set</CODE> method for the completed property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCompleteds().add(newItem);
+     *    getCompleted().add(newItem);
      * </pre>
      * 
      * 
@@ -173,11 +173,11 @@ public class ReturnQueueEntryParams
      * 
      * 
      */
-    public List<String> getCompleteds() {
-        if (completeds == null) {
-            completeds = new ArrayList<String>();
+    public List<String> getCompleted() {
+        if (completed == null) {
+            completed = new ArrayList<String>();
         }
-        return this.completeds;
+        return this.completed;
     }
 
 }

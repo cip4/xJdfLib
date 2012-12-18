@@ -55,7 +55,7 @@ public class RepeatDesc
     @XmlAttribute(name = "GutterX2")
     protected Double gutterX2;
     @XmlAttribute(name = "LayoutStyle")
-    protected List<String> layoutStyles;
+    protected List<String> layoutStyle;
     @XmlAttribute(name = "GutterX")
     protected Double gutterX;
     @XmlAttribute(name = "GutterY")
@@ -182,18 +182,18 @@ public class RepeatDesc
     }
 
     /**
-     * Gets the value of the layoutStyles property.
+     * Gets the value of the layoutStyle property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layoutStyles property.
+     * This is why there is not a <CODE>set</CODE> method for the layoutStyle property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLayoutStyles().add(newItem);
+     *    getLayoutStyle().add(newItem);
      * </pre>
      * 
      * 
@@ -203,11 +203,11 @@ public class RepeatDesc
      * 
      * 
      */
-    public List<String> getLayoutStyles() {
-        if (layoutStyles == null) {
-            layoutStyles = new ArrayList<String>();
+    public List<String> getLayoutStyle() {
+        if (layoutStyle == null) {
+            layoutStyle = new ArrayList<String>();
         }
-        return this.layoutStyles;
+        return this.layoutStyle;
     }
 
     /**

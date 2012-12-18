@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -50,9 +49,11 @@ public class Position
     @XmlAttribute(name = "MarginTop")
     protected Double marginTop;
     @XmlAttribute(name = "RelativeBox")
-    protected List<Double> relativeBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle relativeBox;
     @XmlAttribute(name = "AbsoluteBox")
-    protected List<Double> absoluteBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle absoluteBox;
     @XmlAttribute(name = "Orientation")
     protected EnumOrientation orientation;
 
@@ -153,61 +154,51 @@ public class Position
     }
 
     /**
-     * Gets the value of the relativeBoxes property.
+     * Gets the value of the relativeBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relativeBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRelativeBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRelativeBoxes() {
-        if (relativeBoxes == null) {
-            relativeBoxes = new ArrayList<Double>();
-        }
-        return this.relativeBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getRelativeBox() {
+        return relativeBox;
     }
 
     /**
-     * Gets the value of the absoluteBoxes property.
+     * Sets the value of the relativeBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the absoluteBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAbsoluteBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getAbsoluteBoxes() {
-        if (absoluteBoxes == null) {
-            absoluteBoxes = new ArrayList<Double>();
-        }
-        return this.absoluteBoxes;
+    public void setRelativeBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.relativeBox = value;
+    }
+
+    /**
+     * Gets the value of the absoluteBox property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.Rectangle getAbsoluteBox() {
+        return absoluteBox;
+    }
+
+    /**
+     * Sets the value of the absoluteBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAbsoluteBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.absoluteBox = value;
     }
 
     /**

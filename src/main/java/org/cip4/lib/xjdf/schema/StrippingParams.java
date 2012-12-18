@@ -52,24 +52,24 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StrippingParams", propOrder = {
-    "stripMarks",
-    "positions"
+    "position",
+    "stripMark"
 })
 public class StrippingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "StripMark")
-    protected List<StripMark> stripMarks;
     @XmlElement(name = "Position")
-    protected List<Position> positions;
+    protected List<Position> position;
+    @XmlElement(name = "StripMark")
+    protected List<StripMark> stripMark;
     @XmlAttribute(name = "WorkStyle")
     protected EnumWorkStyle workStyle;
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "SectionList")
-    protected List<Integer> sectionLists;
+    protected List<Integer> sectionList;
     @XmlAttribute(name = "InnermostShingling")
     protected Double innermostShingling;
     @XmlAttribute(name = "AssemblyIDs")
@@ -103,47 +103,18 @@ public class StrippingParams
     protected Object externalImpositionTemplateRef;
 
     /**
-     * Gets the value of the stripMarks property.
+     * Gets the value of the position property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the stripMarks property.
+     * This is why there is not a <CODE>set</CODE> method for the position property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStripMarks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link StripMark }
-     * 
-     * 
-     */
-    public List<StripMark> getStripMarks() {
-        if (stripMarks == null) {
-            stripMarks = new ArrayList<StripMark>();
-        }
-        return this.stripMarks;
-    }
-
-    /**
-     * Gets the value of the positions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the positions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPositions().add(newItem);
+     *    getPosition().add(newItem);
      * </pre>
      * 
      * 
@@ -153,11 +124,40 @@ public class StrippingParams
      * 
      * 
      */
-    public List<Position> getPositions() {
-        if (positions == null) {
-            positions = new ArrayList<Position>();
+    public List<Position> getPosition() {
+        if (position == null) {
+            position = new ArrayList<Position>();
         }
-        return this.positions;
+        return this.position;
+    }
+
+    /**
+     * Gets the value of the stripMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the stripMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStripMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StripMark }
+     * 
+     * 
+     */
+    public List<StripMark> getStripMark() {
+        if (stripMark == null) {
+            stripMark = new ArrayList<StripMark>();
+        }
+        return this.stripMark;
     }
 
     /**
@@ -209,18 +209,18 @@ public class StrippingParams
     }
 
     /**
-     * Gets the value of the sectionLists property.
+     * Gets the value of the sectionList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sectionLists property.
+     * This is why there is not a <CODE>set</CODE> method for the sectionList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSectionLists().add(newItem);
+     *    getSectionList().add(newItem);
      * </pre>
      * 
      * 
@@ -230,11 +230,11 @@ public class StrippingParams
      * 
      * 
      */
-    public List<Integer> getSectionLists() {
-        if (sectionLists == null) {
-            sectionLists = new ArrayList<Integer>();
+    public List<Integer> getSectionList() {
+        if (sectionList == null) {
+            sectionList = new ArrayList<Integer>();
         }
-        return this.sectionLists;
+        return this.sectionList;
     }
 
     /**

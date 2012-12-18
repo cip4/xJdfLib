@@ -39,21 +39,21 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DieLayoutProductionParams", propOrder = {
-    "convertingConfigs",
-    "repeatDescs",
-    "contacts"
+    "contact",
+    "repeatDesc",
+    "convertingConfig"
 })
 public class DieLayoutProductionParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "ConvertingConfig")
-    protected List<ConvertingConfig> convertingConfigs;
-    @XmlElement(name = "RepeatDesc")
-    protected List<RepeatDesc> repeatDescs;
     @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
+    protected List<Contact> contact;
+    @XmlElement(name = "RepeatDesc")
+    protected List<RepeatDesc> repeatDesc;
+    @XmlElement(name = "ConvertingConfig")
+    protected List<ConvertingConfig> convertingConfig;
     @XmlAttribute(name = "Position")
     @XmlSchemaType(name = "anySimpleType")
     protected String position;
@@ -61,76 +61,18 @@ public class DieLayoutProductionParams
     protected Boolean estimate;
 
     /**
-     * Gets the value of the convertingConfigs property.
+     * Gets the value of the contact property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the convertingConfigs property.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getConvertingConfigs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ConvertingConfig }
-     * 
-     * 
-     */
-    public List<ConvertingConfig> getConvertingConfigs() {
-        if (convertingConfigs == null) {
-            convertingConfigs = new ArrayList<ConvertingConfig>();
-        }
-        return this.convertingConfigs;
-    }
-
-    /**
-     * Gets the value of the repeatDescs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the repeatDescs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRepeatDescs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RepeatDesc }
-     * 
-     * 
-     */
-    public List<RepeatDesc> getRepeatDescs() {
-        if (repeatDescs == null) {
-            repeatDescs = new ArrayList<RepeatDesc>();
-        }
-        return this.repeatDescs;
-    }
-
-    /**
-     * Gets the value of the contacts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContacts().add(newItem);
+     *    getContact().add(newItem);
      * </pre>
      * 
      * 
@@ -140,11 +82,69 @@ public class DieLayoutProductionParams
      * 
      * 
      */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
         }
-        return this.contacts;
+        return this.contact;
+    }
+
+    /**
+     * Gets the value of the repeatDesc property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the repeatDesc property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRepeatDesc().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RepeatDesc }
+     * 
+     * 
+     */
+    public List<RepeatDesc> getRepeatDesc() {
+        if (repeatDesc == null) {
+            repeatDesc = new ArrayList<RepeatDesc>();
+        }
+        return this.repeatDesc;
+    }
+
+    /**
+     * Gets the value of the convertingConfig property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the convertingConfig property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getConvertingConfig().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ConvertingConfig }
+     * 
+     * 
+     */
+    public List<ConvertingConfig> getConvertingConfig() {
+        if (convertingConfig == null) {
+            convertingConfig = new ArrayList<ConvertingConfig>();
+        }
+        return this.convertingConfig;
     }
 
     /**

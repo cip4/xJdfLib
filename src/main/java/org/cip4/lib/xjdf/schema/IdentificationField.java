@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -58,11 +56,13 @@ public class IdentificationField
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String encodingDetails;
     @XmlAttribute(name = "BoundingBox")
-    protected List<Double> boundingBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle boundingBox;
     @XmlAttribute(name = "ValueFormat")
     protected String valueFormat;
     @XmlAttribute(name = "Orientation")
-    protected List<Double> orientations;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix orientation;
     @XmlAttribute(name = "PurposeDetails")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String purposeDetails;
@@ -151,32 +151,27 @@ public class IdentificationField
     }
 
     /**
-     * Gets the value of the boundingBoxes property.
+     * Gets the value of the boundingBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boundingBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBoundingBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBoundingBoxes() {
-        if (boundingBoxes == null) {
-            boundingBoxes = new ArrayList<Double>();
-        }
-        return this.boundingBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getBoundingBox() {
+        return boundingBox;
+    }
+
+    /**
+     * Sets the value of the boundingBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBoundingBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.boundingBox = value;
     }
 
     /**
@@ -204,32 +199,27 @@ public class IdentificationField
     }
 
     /**
-     * Gets the value of the orientations property.
+     * Gets the value of the orientation property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the orientations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOrientations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOrientations() {
-        if (orientations == null) {
-            orientations = new ArrayList<Double>();
-        }
-        return this.orientations;
+    public org.cip4.lib.xjdf.type.Matrix getOrientation() {
+        return orientation;
+    }
+
+    /**
+     * Sets the value of the orientation property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOrientation(org.cip4.lib.xjdf.type.Matrix value) {
+        this.orientation = value;
     }
 
     /**

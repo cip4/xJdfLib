@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resources"
+    "resource"
 })
 @XmlRootElement(name = "PipeParams")
 public class PipeParams
@@ -48,7 +48,7 @@ public class PipeParams
 {
 
     @XmlElement(name = "Resource")
-    protected List<Resource> resources;
+    protected List<Resource> resource;
     @XmlAttribute(name = "PipeID")
     protected String pipeID;
     @XmlAttribute(name = "JobID")
@@ -61,18 +61,18 @@ public class PipeParams
     protected EnumNodeStatus status;
 
     /**
-     * Gets the value of the resources property.
+     * Gets the value of the resource property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resources property.
+     * This is why there is not a <CODE>set</CODE> method for the resource property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getResources().add(newItem);
+     *    getResource().add(newItem);
      * </pre>
      * 
      * 
@@ -82,11 +82,11 @@ public class PipeParams
      * 
      * 
      */
-    public List<Resource> getResources() {
-        if (resources == null) {
-            resources = new ArrayList<Resource>();
+    public List<Resource> getResource() {
+        if (resource == null) {
+            resource = new ArrayList<Resource>();
         }
-        return this.resources;
+        return this.resource;
     }
 
     /**

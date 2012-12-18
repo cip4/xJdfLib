@@ -49,21 +49,21 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "misDetails",
-    "dispositions",
-    "parts"
+    "part",
+    "disposition",
+    "misDetails"
 })
 @XmlRootElement(name = "ResourcePullParams")
 public class ResourcePullParams
     implements Serializable
 {
 
+    @XmlElement(name = "Part")
+    protected List<Part> part;
+    @XmlElement(name = "Disposition")
+    protected List<Disposition> disposition;
     @XmlElement(name = "MISDetails")
     protected List<MISDetails> misDetails;
-    @XmlElement(name = "Disposition")
-    protected List<Disposition> dispositions;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
     @XmlAttribute(name = "ReturnURL")
     protected String returnURL;
     @XmlAttribute(name = "WatchURL")
@@ -87,6 +87,64 @@ public class ResourcePullParams
     protected Double amount;
     @XmlAttribute(name = "Hold")
     protected Boolean hold;
+
+    /**
+     * Gets the value of the part property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPart().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Part }
+     * 
+     * 
+     */
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
+        }
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the disposition property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the disposition property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDisposition().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Disposition }
+     * 
+     * 
+     */
+    public List<Disposition> getDisposition() {
+        if (disposition == null) {
+            disposition = new ArrayList<Disposition>();
+        }
+        return this.disposition;
+    }
 
     /**
      * Gets the value of the misDetails property.
@@ -115,64 +173,6 @@ public class ResourcePullParams
             misDetails = new ArrayList<MISDetails>();
         }
         return this.misDetails;
-    }
-
-    /**
-     * Gets the value of the dispositions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dispositions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDispositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Disposition }
-     * 
-     * 
-     */
-    public List<Disposition> getDispositions() {
-        if (dispositions == null) {
-            dispositions = new ArrayList<Disposition>();
-        }
-        return this.dispositions;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Part }
-     * 
-     * 
-     */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
-        }
-        return this.parts;
     }
 
     /**

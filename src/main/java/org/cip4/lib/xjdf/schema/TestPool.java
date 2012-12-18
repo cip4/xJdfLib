@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "tests"
+    "test"
 })
 @XmlRootElement(name = "TestPool")
 public class TestPool
@@ -42,21 +42,21 @@ public class TestPool
 {
 
     @XmlElement(name = "Test")
-    protected List<Test> tests;
+    protected List<Test> test;
 
     /**
-     * Gets the value of the tests property.
+     * Gets the value of the test property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tests property.
+     * This is why there is not a <CODE>set</CODE> method for the test property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTests().add(newItem);
+     *    getTest().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class TestPool
      * 
      * 
      */
-    public List<Test> getTests() {
-        if (tests == null) {
-            tests = new ArrayList<Test>();
+    public List<Test> getTest() {
+        if (test == null) {
+            test = new ArrayList<Test>();
         }
-        return this.tests;
+        return this.test;
     }
 
 }

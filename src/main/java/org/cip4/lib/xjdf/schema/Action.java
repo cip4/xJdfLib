@@ -44,18 +44,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "preflightActions",
-    "locs"
+    "loc",
+    "preflightAction"
 })
 @XmlRootElement(name = "Action")
 public class Action
     implements Serializable
 {
 
-    @XmlElement(name = "PreflightAction")
-    protected List<PreflightAction> preflightActions;
     @XmlElement(name = "Loc")
-    protected List<Loc> locs;
+    protected List<Loc> loc;
+    @XmlElement(name = "PreflightAction")
+    protected List<PreflightAction> preflightAction;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -68,47 +68,18 @@ public class Action
     protected Object testRef;
 
     /**
-     * Gets the value of the preflightActions property.
+     * Gets the value of the loc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the preflightActions property.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPreflightActions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PreflightAction }
-     * 
-     * 
-     */
-    public List<PreflightAction> getPreflightActions() {
-        if (preflightActions == null) {
-            preflightActions = new ArrayList<PreflightAction>();
-        }
-        return this.preflightActions;
-    }
-
-    /**
-     * Gets the value of the locs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocs().add(newItem);
+     *    getLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -118,11 +89,40 @@ public class Action
      * 
      * 
      */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
         }
-        return this.locs;
+        return this.loc;
+    }
+
+    /**
+     * Gets the value of the preflightAction property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the preflightAction property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPreflightAction().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PreflightAction }
+     * 
+     * 
+     */
+    public List<PreflightAction> getPreflightAction() {
+        if (preflightAction == null) {
+            preflightAction = new ArrayList<PreflightAction>();
+        }
+        return this.preflightAction;
     }
 
     /**

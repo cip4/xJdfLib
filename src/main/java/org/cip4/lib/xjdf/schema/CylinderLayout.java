@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CylinderLayout", propOrder = {
-    "cylinderPositions"
+    "cylinderPosition"
 })
 public class CylinderLayout
     extends ParameterType
@@ -47,7 +47,7 @@ public class CylinderLayout
 {
 
     @XmlElement(name = "CylinderPosition")
-    protected List<CylinderPosition> cylinderPositions;
+    protected List<CylinderPosition> cylinderPosition;
     @XmlAttribute(name = "DeviceID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String deviceID;
@@ -56,18 +56,18 @@ public class CylinderLayout
     protected Object layoutRef;
 
     /**
-     * Gets the value of the cylinderPositions property.
+     * Gets the value of the cylinderPosition property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cylinderPositions property.
+     * This is why there is not a <CODE>set</CODE> method for the cylinderPosition property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCylinderPositions().add(newItem);
+     *    getCylinderPosition().add(newItem);
      * </pre>
      * 
      * 
@@ -77,11 +77,11 @@ public class CylinderLayout
      * 
      * 
      */
-    public List<CylinderPosition> getCylinderPositions() {
-        if (cylinderPositions == null) {
-            cylinderPositions = new ArrayList<CylinderPosition>();
+    public List<CylinderPosition> getCylinderPosition() {
+        if (cylinderPosition == null) {
+            cylinderPosition = new ArrayList<CylinderPosition>();
         }
-        return this.cylinderPositions;
+        return this.cylinderPosition;
     }
 
     /**

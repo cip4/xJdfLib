@@ -57,18 +57,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "queueEntryDeves",
-    "parts"
+    "part",
+    "queueEntryDef"
 })
 @XmlRootElement(name = "QueueFilter")
 public class QueueFilter
     implements Serializable
 {
 
-    @XmlElement(name = "QueueEntryDef")
-    protected List<QueueEntryDef> queueEntryDeves;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "QueueEntryDef")
+    protected List<QueueEntryDef> queueEntryDef;
     @XmlAttribute(name = "OlderThan")
     protected String olderThan;
     @XmlAttribute(name = "UpgradeGranularity")
@@ -90,53 +90,24 @@ public class QueueFilter
     @XmlSchemaType(name = "anySimpleType")
     protected String queueEntryDetails;
     @XmlAttribute(name = "StatusList")
-    protected List<EnumStatusList> statusLists;
+    protected List<EnumStatusList> statusList;
     @XmlAttribute(name = "DeviceRef")
     @XmlIDREF
     protected Object deviceRef;
 
     /**
-     * Gets the value of the queueEntryDeves property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queueEntryDeves property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQueueEntryDeves().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link QueueEntryDef }
-     * 
-     * 
-     */
-    public List<QueueEntryDef> getQueueEntryDeves() {
-        if (queueEntryDeves == null) {
-            queueEntryDeves = new ArrayList<QueueEntryDef>();
-        }
-        return this.queueEntryDeves;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -146,11 +117,40 @@ public class QueueFilter
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the queueEntryDef property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the queueEntryDef property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getQueueEntryDef().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link QueueEntryDef }
+     * 
+     * 
+     */
+    public List<QueueEntryDef> getQueueEntryDef() {
+        if (queueEntryDef == null) {
+            queueEntryDef = new ArrayList<QueueEntryDef>();
+        }
+        return this.queueEntryDef;
     }
 
     /**
@@ -380,18 +380,18 @@ public class QueueFilter
     }
 
     /**
-     * Gets the value of the statusLists property.
+     * Gets the value of the statusList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the statusLists property.
+     * This is why there is not a <CODE>set</CODE> method for the statusList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStatusLists().add(newItem);
+     *    getStatusList().add(newItem);
      * </pre>
      * 
      * 
@@ -401,11 +401,11 @@ public class QueueFilter
      * 
      * 
      */
-    public List<EnumStatusList> getStatusLists() {
-        if (statusLists == null) {
-            statusLists = new ArrayList<EnumStatusList>();
+    public List<EnumStatusList> getStatusList() {
+        if (statusList == null) {
+            statusList = new ArrayList<EnumStatusList>();
         }
-        return this.statusLists;
+        return this.statusList;
     }
 
     /**

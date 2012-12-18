@@ -51,21 +51,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "actionPools",
-    "testPools",
-    "modulePools"
+    "modulePool",
+    "testPool",
+    "actionPool"
 })
 @XmlRootElement(name = "MessageService")
 public class MessageService
     implements Serializable
 {
 
-    @XmlElement(name = "ActionPool")
-    protected List<ActionPool> actionPools;
-    @XmlElement(name = "TestPool")
-    protected List<TestPool> testPools;
     @XmlElement(name = "ModulePool")
-    protected List<ModulePool> modulePools;
+    protected List<ModulePool> modulePool;
+    @XmlElement(name = "TestPool")
+    protected List<TestPool> testPool;
+    @XmlElement(name = "ActionPool")
+    protected List<ActionPool> actionPool;
     @XmlAttribute(name = "Persistent")
     protected Boolean persistent;
     @XmlAttribute(name = "ChannelMode")
@@ -93,76 +93,18 @@ public class MessageService
     protected Boolean command;
 
     /**
-     * Gets the value of the actionPools property.
+     * Gets the value of the modulePool property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the actionPools property.
+     * This is why there is not a <CODE>set</CODE> method for the modulePool property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getActionPools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ActionPool }
-     * 
-     * 
-     */
-    public List<ActionPool> getActionPools() {
-        if (actionPools == null) {
-            actionPools = new ArrayList<ActionPool>();
-        }
-        return this.actionPools;
-    }
-
-    /**
-     * Gets the value of the testPools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the testPools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTestPools().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link TestPool }
-     * 
-     * 
-     */
-    public List<TestPool> getTestPools() {
-        if (testPools == null) {
-            testPools = new ArrayList<TestPool>();
-        }
-        return this.testPools;
-    }
-
-    /**
-     * Gets the value of the modulePools property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the modulePools property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getModulePools().add(newItem);
+     *    getModulePool().add(newItem);
      * </pre>
      * 
      * 
@@ -172,11 +114,69 @@ public class MessageService
      * 
      * 
      */
-    public List<ModulePool> getModulePools() {
-        if (modulePools == null) {
-            modulePools = new ArrayList<ModulePool>();
+    public List<ModulePool> getModulePool() {
+        if (modulePool == null) {
+            modulePool = new ArrayList<ModulePool>();
         }
-        return this.modulePools;
+        return this.modulePool;
+    }
+
+    /**
+     * Gets the value of the testPool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the testPool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTestPool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link TestPool }
+     * 
+     * 
+     */
+    public List<TestPool> getTestPool() {
+        if (testPool == null) {
+            testPool = new ArrayList<TestPool>();
+        }
+        return this.testPool;
+    }
+
+    /**
+     * Gets the value of the actionPool property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the actionPool property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getActionPool().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ActionPool }
+     * 
+     * 
+     */
+    public List<ActionPool> getActionPool() {
+        if (actionPool == null) {
+            actionPool = new ArrayList<ActionPool>();
+        }
+        return this.actionPool;
     }
 
     /**

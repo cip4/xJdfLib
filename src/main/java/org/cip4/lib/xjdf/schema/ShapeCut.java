@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -51,7 +50,8 @@ public class ShapeCut
     @XmlAttribute(name = "Pages")
     protected Integer pages;
     @XmlAttribute(name = "CutBox")
-    protected List<Double> cutBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle cutBox;
     @XmlAttribute(name = "ShapeType")
     @XmlSchemaType(name = "anySimpleType")
     protected String shapeType;
@@ -138,32 +138,27 @@ public class ShapeCut
     }
 
     /**
-     * Gets the value of the cutBoxes property.
+     * Gets the value of the cutBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cutBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCutBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCutBoxes() {
-        if (cutBoxes == null) {
-            cutBoxes = new ArrayList<Double>();
-        }
-        return this.cutBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getCutBox() {
+        return cutBox;
+    }
+
+    /**
+     * Sets the value of the cutBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCutBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.cutBox = value;
     }
 
     /**

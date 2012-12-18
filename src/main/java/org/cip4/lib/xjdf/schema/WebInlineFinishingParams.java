@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WebInlineFinishingParams", propOrder = {
-    "folderProductions"
+    "folderProduction"
 })
 public class WebInlineFinishingParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class WebInlineFinishingParams
 {
 
     @XmlElement(name = "FolderProduction")
-    protected List<FolderProduction> folderProductions;
+    protected List<FolderProduction> folderProduction;
 
     /**
-     * Gets the value of the folderProductions property.
+     * Gets the value of the folderProduction property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the folderProductions property.
+     * This is why there is not a <CODE>set</CODE> method for the folderProduction property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFolderProductions().add(newItem);
+     *    getFolderProduction().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class WebInlineFinishingParams
      * 
      * 
      */
-    public List<FolderProduction> getFolderProductions() {
-        if (folderProductions == null) {
-            folderProductions = new ArrayList<FolderProduction>();
+    public List<FolderProduction> getFolderProduction() {
+        if (folderProduction == null) {
+            folderProduction = new ArrayList<FolderProduction>();
         }
-        return this.folderProductions;
+        return this.folderProduction;
     }
 
 }

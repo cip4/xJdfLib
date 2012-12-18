@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -52,7 +51,8 @@ public class InkZoneCalculationParams
     @XmlAttribute(name = "ZoneHeight")
     protected Double zoneHeight;
     @XmlAttribute(name = "PrintableArea")
-    protected List<Double> printableAreas;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle printableArea;
     @XmlAttribute(name = "DeviceRef")
     @XmlIDREF
     protected Object deviceRef;
@@ -178,32 +178,27 @@ public class InkZoneCalculationParams
     }
 
     /**
-     * Gets the value of the printableAreas property.
+     * Gets the value of the printableArea property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the printableAreas property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPrintableAreas().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getPrintableAreas() {
-        if (printableAreas == null) {
-            printableAreas = new ArrayList<Double>();
-        }
-        return this.printableAreas;
+    public org.cip4.lib.xjdf.type.Rectangle getPrintableArea() {
+        return printableArea;
+    }
+
+    /**
+     * Sets the value of the printableArea property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPrintableArea(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.printableArea = value;
     }
 
     /**

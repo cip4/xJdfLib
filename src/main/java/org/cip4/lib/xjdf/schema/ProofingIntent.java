@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProofingIntent", propOrder = {
-    "proofItems"
+    "proofItem"
 })
 public class ProofingIntent
     extends IntentType
@@ -41,21 +41,21 @@ public class ProofingIntent
 {
 
     @XmlElement(name = "ProofItem")
-    protected List<ProofItem> proofItems;
+    protected List<ProofItem> proofItem;
 
     /**
-     * Gets the value of the proofItems property.
+     * Gets the value of the proofItem property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the proofItems property.
+     * This is why there is not a <CODE>set</CODE> method for the proofItem property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getProofItems().add(newItem);
+     *    getProofItem().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class ProofingIntent
      * 
      * 
      */
-    public List<ProofItem> getProofItems() {
-        if (proofItems == null) {
-            proofItems = new ArrayList<ProofItem>();
+    public List<ProofItem> getProofItem() {
+        if (proofItem == null) {
+            proofItem = new ArrayList<ProofItem>();
         }
-        return this.proofItems;
+        return this.proofItem;
     }
 
 }

@@ -51,9 +51,9 @@ public class ColorIntent
     @XmlIDREF
     protected Object colorRef;
     @XmlAttribute(name = "ColorsUsed")
-    protected List<String> colorsUseds;
+    protected List<String> colorsUsed;
     @XmlAttribute(name = "ColorsUsedBack")
-    protected List<String> colorsUsedBacks;
+    protected List<String> colorsUsedBack;
     @XmlAttribute(name = "Coverage")
     protected Double coverage;
     @XmlAttribute(name = "ColorStandard")
@@ -120,18 +120,18 @@ public class ColorIntent
     }
 
     /**
-     * Gets the value of the colorsUseds property.
+     * Gets the value of the colorsUsed property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorsUseds property.
+     * This is why there is not a <CODE>set</CODE> method for the colorsUsed property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorsUseds().add(newItem);
+     *    getColorsUsed().add(newItem);
      * </pre>
      * 
      * 
@@ -141,26 +141,26 @@ public class ColorIntent
      * 
      * 
      */
-    public List<String> getColorsUseds() {
-        if (colorsUseds == null) {
-            colorsUseds = new ArrayList<String>();
+    public List<String> getColorsUsed() {
+        if (colorsUsed == null) {
+            colorsUsed = new ArrayList<String>();
         }
-        return this.colorsUseds;
+        return this.colorsUsed;
     }
 
     /**
-     * Gets the value of the colorsUsedBacks property.
+     * Gets the value of the colorsUsedBack property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorsUsedBacks property.
+     * This is why there is not a <CODE>set</CODE> method for the colorsUsedBack property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorsUsedBacks().add(newItem);
+     *    getColorsUsedBack().add(newItem);
      * </pre>
      * 
      * 
@@ -170,11 +170,11 @@ public class ColorIntent
      * 
      * 
      */
-    public List<String> getColorsUsedBacks() {
-        if (colorsUsedBacks == null) {
-            colorsUsedBacks = new ArrayList<String>();
+    public List<String> getColorsUsedBack() {
+        if (colorsUsedBack == null) {
+            colorsUsedBack = new ArrayList<String>();
         }
-        return this.colorsUsedBacks;
+        return this.colorsUsedBack;
     }
 
     /**

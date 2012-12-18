@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Tile", propOrder = {
-    "markObjects"
+    "markObject"
 })
 public class Tile
     extends ParameterType
@@ -46,28 +47,30 @@ public class Tile
 {
 
     @XmlElement(name = "MarkObject")
-    protected List<MarkObject> markObjects;
+    protected List<MarkObject> markObject;
     @XmlAttribute(name = "ClipBox")
-    protected List<Double> clipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle clipBox;
     @XmlAttribute(name = "CTM")
-    protected List<Double> ctms;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix ctm;
     @XmlAttribute(name = "MediaRef")
     @XmlIDREF
     protected Object mediaRef;
 
     /**
-     * Gets the value of the markObjects property.
+     * Gets the value of the markObject property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the markObjects property.
+     * This is why there is not a <CODE>set</CODE> method for the markObject property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getMarkObjects().add(newItem);
+     *    getMarkObject().add(newItem);
      * </pre>
      * 
      * 
@@ -77,69 +80,59 @@ public class Tile
      * 
      * 
      */
-    public List<MarkObject> getMarkObjects() {
-        if (markObjects == null) {
-            markObjects = new ArrayList<MarkObject>();
+    public List<MarkObject> getMarkObject() {
+        if (markObject == null) {
+            markObject = new ArrayList<MarkObject>();
         }
-        return this.markObjects;
+        return this.markObject;
     }
 
     /**
-     * Gets the value of the clipBoxes property.
+     * Gets the value of the clipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getClipBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getClipBoxes() {
-        if (clipBoxes == null) {
-            clipBoxes = new ArrayList<Double>();
-        }
-        return this.clipBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getClipBox() {
+        return clipBox;
     }
 
     /**
-     * Gets the value of the ctms property.
+     * Sets the value of the clipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ctms property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCTMS().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCTMS() {
-        if (ctms == null) {
-            ctms = new ArrayList<Double>();
-        }
-        return this.ctms;
+    public void setClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.clipBox = value;
+    }
+
+    /**
+     * Gets the value of the ctm property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.Matrix getCTM() {
+        return ctm;
+    }
+
+    /**
+     * Sets the value of the ctm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.ctm = value;
     }
 
     /**

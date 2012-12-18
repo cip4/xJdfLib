@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "contentMetaDatas"
+    "contentMetaData"
 })
 @XmlRootElement(name = "ContentData")
 public class ContentData
@@ -61,7 +61,7 @@ public class ContentData
 {
 
     @XmlElement(name = "ContentMetaData")
-    protected List<ContentMetaData> contentMetaDatas;
+    protected List<ContentMetaData> contentMetaData;
     @XmlAttribute(name = "HasBleeds")
     protected Boolean hasBleeds;
     @XmlAttribute(name = "ContentType")
@@ -99,18 +99,18 @@ public class ContentData
     protected List<String> separationNames;
 
     /**
-     * Gets the value of the contentMetaDatas property.
+     * Gets the value of the contentMetaData property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contentMetaDatas property.
+     * This is why there is not a <CODE>set</CODE> method for the contentMetaData property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContentMetaDatas().add(newItem);
+     *    getContentMetaData().add(newItem);
      * </pre>
      * 
      * 
@@ -120,11 +120,11 @@ public class ContentData
      * 
      * 
      */
-    public List<ContentMetaData> getContentMetaDatas() {
-        if (contentMetaDatas == null) {
-            contentMetaDatas = new ArrayList<ContentMetaData>();
+    public List<ContentMetaData> getContentMetaData() {
+        if (contentMetaData == null) {
+            contentMetaData = new ArrayList<ContentMetaData>();
         }
-        return this.contentMetaDatas;
+        return this.contentMetaData;
     }
 
     /**

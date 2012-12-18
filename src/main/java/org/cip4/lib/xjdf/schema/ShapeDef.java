@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShapeDef", propOrder = {
-    "shapes"
+    "shape"
 })
 public class ShapeDef
     extends ParameterType
@@ -53,12 +54,13 @@ public class ShapeDef
 {
 
     @XmlElement(name = "Shape")
-    protected List<Shape> shapes;
+    protected List<org.cip4.lib.xjdf.schema.Shape> shape;
     @XmlAttribute(name = "GrainDirection")
     @XmlSchemaType(name = "anySimpleType")
     protected String grainDirection;
     @XmlAttribute(name = "Dimensions")
-    protected List<Double> dimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape dimensions;
     @XmlAttribute(name = "LockOrigins")
     protected Boolean lockOrigins;
     @XmlAttribute(name = "FluteDirection")
@@ -70,7 +72,8 @@ public class ShapeDef
     @XmlAttribute(name = "Area")
     protected Double area;
     @XmlAttribute(name = "CutBox")
-    protected List<Double> cutBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle cutBox;
     @XmlAttribute(name = "MediaRef")
     @XmlIDREF
     protected Object mediaRef;
@@ -79,32 +82,32 @@ public class ShapeDef
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the shapes property.
+     * Gets the value of the shape property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapes property.
+     * This is why there is not a <CODE>set</CODE> method for the shape property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapes().add(newItem);
+     *    getShape().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Shape }
+     * {@link org.cip4.lib.xjdf.schema.Shape }
      * 
      * 
      */
-    public List<Shape> getShapes() {
-        if (shapes == null) {
-            shapes = new ArrayList<Shape>();
+    public List<org.cip4.lib.xjdf.schema.Shape> getShape() {
+        if (shape == null) {
+            shape = new ArrayList<org.cip4.lib.xjdf.schema.Shape>();
         }
-        return this.shapes;
+        return this.shape;
     }
 
     /**
@@ -134,30 +137,25 @@ public class ShapeDef
     /**
      * Gets the value of the dimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDimensions() {
-        if (dimensions == null) {
-            dimensions = new ArrayList<Double>();
-        }
-        return this.dimensions;
+    public org.cip4.lib.xjdf.type.Shape getDimensions() {
+        return dimensions;
+    }
+
+    /**
+     * Sets the value of the dimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.dimensions = value;
     }
 
     /**
@@ -257,32 +255,27 @@ public class ShapeDef
     }
 
     /**
-     * Gets the value of the cutBoxes property.
+     * Gets the value of the cutBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cutBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCutBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCutBoxes() {
-        if (cutBoxes == null) {
-            cutBoxes = new ArrayList<Double>();
-        }
-        return this.cutBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getCutBox() {
+        return cutBox;
+    }
+
+    /**
+     * Sets the value of the cutBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCutBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.cutBox = value;
     }
 
     /**

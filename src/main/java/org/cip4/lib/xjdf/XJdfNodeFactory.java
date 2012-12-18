@@ -17,6 +17,7 @@ import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.ColorIntent;
 import org.cip4.lib.xjdf.schema.Comment;
+import org.cip4.lib.xjdf.schema.ContentObject;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
@@ -30,6 +31,10 @@ import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofItem;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.type.Matrix;
+import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.XYPair;
 
 /**
  * Static Factory Class which is managing the creation of XJdfNodes.
@@ -217,7 +222,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param finishedDimensions Value for FinishedDimensions attribute.
 	 * @return LayoutIntent Node which already contains defined attributes.
 	 */
-	public LayoutIntent createLayoutIntent(Integer pages, String sides, List<Double> finishedDimensions) {
+	public LayoutIntent createLayoutIntent(Integer pages, String sides, Shape finishedDimensions) {
 
 		// return object
 		return createLayoutIntent(pages, sides, finishedDimensions, null);
@@ -231,7 +236,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param dimensions Value for Dimensions attribute.
 	 * @return LayoutIntent Node which already contains defined attributes.
 	 */
-	public LayoutIntent createLayoutIntent(Integer pages, String sides, List<Double> finishedDimensions, List<Double> dimensions) {
+	public LayoutIntent createLayoutIntent(Integer pages, String sides, Shape finishedDimensions, XYPair dimensions) {
 
 		// create node
 		LayoutIntent layoutIntent = super.createLayoutIntent();
@@ -239,10 +244,8 @@ public class XJdfNodeFactory extends ObjectFactory {
 		// set attributes
 		layoutIntent.setPages(pages);
 		layoutIntent.setSides(sides);
-		layoutIntent.getFinishedDimensions().addAll(finishedDimensions);
-
-		if (dimensions != null)
-			layoutIntent.getDimensions().addAll(dimensions);
+		layoutIntent.setFinishedDimensions(finishedDimensions);
+		layoutIntent.setDimensions(dimensions);
 
 		// return object
 		return layoutIntent;
@@ -278,7 +281,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// set attributes
 		proofItem.setBrandName(brandName);
-		proofingIntent.getProofItems().add(proofItem);
+		proofingIntent.getProofItem().add(proofItem);
 
 		// return object
 		return proofingIntent;
@@ -348,10 +351,10 @@ public class XJdfNodeFactory extends ObjectFactory {
 		colorIntent.getNumColors().addAll(numColors);
 
 		if (colorsUsed != null)
-			colorIntent.getColorsUseds().addAll(colorsUsed);
+			colorIntent.getColorsUsed().addAll(colorsUsed);
 
 		if (colorsUsedBack != null)
-			colorIntent.getColorsUsedBacks().addAll(colorsUsedBack);
+			colorIntent.getColorsUsedBack().addAll(colorsUsedBack);
 
 		colorIntent.setCoatings(coatings);
 		colorIntent.setCoatingsBack(coatingsBack);
@@ -363,29 +366,46 @@ public class XJdfNodeFactory extends ObjectFactory {
 	/**
 	 * Create a new MarkObject Node which already contains defined attributes.
 	 * @param ctm Value of CTM attribute as String.
-	 * @param clipBox
-	 * @param ord
+	 * @param clipBox Value of ClipBox attribute as String.
+	 * @param ord Value of Ord attribute as Integer.
 	 * @return MarkObject Node which already contains defined attributes.
 	 */
-	public MarkObject createMarkObject(String ctm, String clipBox, Integer ord) {
+	public MarkObject createMarkObject(Matrix ctm, Rectangle clipBox, Integer ord) {
 
 		// create node
 		MarkObject markObject = super.createMarkObject();
 
 		// set attributes
-		for (String s : ctm.split(" ")) {
-			Double d = Double.valueOf(s);
-			markObject.getCTMS().add(d);
-		}
-
-		for (String s : clipBox.split(" ")) {
-			Double d = Double.valueOf(s);
-			markObject.getClipBoxes().add(d);
-		}
-
+		markObject.setCTM(ctm);
+		markObject.setClipBox(clipBox);
 		markObject.setOrd(ord);
 
 		// return object
 		return markObject;
+	}
+
+	/**
+	 * Create a new ContentObject Node which already contains defined attributes.
+	 * @param ctm Value of CTM attribute as String.
+	 * @param clipBox Value of ClipBox attribute as String.
+	 * @param ord Value of Ord attribute as Integer
+	 * @param trimCtm Value of TrimCTM as String
+	 * @param trimSize Value of TrimSize as String
+	 * @return ContentObject Node which already contains defined attributes.
+	 */
+	public ContentObject createContentObject(Matrix ctm, Rectangle clipBox, Integer ord, Matrix trimCtm, XYPair trimSize) {
+
+		// create node
+		ContentObject contentObject = super.createContentObject();
+
+		// set attributes
+		contentObject.setCTM(ctm);
+		contentObject.setClipBox(clipBox);
+		contentObject.setOrd(ord);
+		contentObject.setTrimCTM(trimCtm);
+		contentObject.setTrimSize(trimSize);
+
+		// return object
+		return contentObject;
 	}
 }

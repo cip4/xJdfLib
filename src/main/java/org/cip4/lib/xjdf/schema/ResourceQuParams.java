@@ -56,7 +56,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "parts"
+    "part"
 })
 @XmlRootElement(name = "ResourceQuParams")
 public class ResourceQuParams
@@ -64,7 +64,7 @@ public class ResourceQuParams
 {
 
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
     @XmlAttribute(name = "JobPartID")
     protected String jobPartID;
     @XmlAttribute(name = "JobID")
@@ -80,7 +80,7 @@ public class ResourceQuParams
     @XmlAttribute(name = "LotID")
     protected String lotID;
     @XmlAttribute(name = "ResourceName")
-    protected List<String> resourceNames;
+    protected List<String> resourceName;
     @XmlAttribute(name = "Location")
     protected String location;
     @XmlAttribute(name = "ProductID")
@@ -99,18 +99,18 @@ public class ResourceQuParams
     protected String processUsage;
 
     /**
-     * Gets the value of the parts property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -120,11 +120,11 @@ public class ResourceQuParams
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
     }
 
     /**
@@ -272,18 +272,18 @@ public class ResourceQuParams
     }
 
     /**
-     * Gets the value of the resourceNames property.
+     * Gets the value of the resourceName property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resourceNames property.
+     * This is why there is not a <CODE>set</CODE> method for the resourceName property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getResourceNames().add(newItem);
+     *    getResourceName().add(newItem);
      * </pre>
      * 
      * 
@@ -293,11 +293,11 @@ public class ResourceQuParams
      * 
      * 
      */
-    public List<String> getResourceNames() {
-        if (resourceNames == null) {
-            resourceNames = new ArrayList<String>();
+    public List<String> getResourceName() {
+        if (resourceName == null) {
+            resourceName = new ArrayList<String>();
         }
-        return this.resourceNames;
+        return this.resourceName;
     }
 
     /**

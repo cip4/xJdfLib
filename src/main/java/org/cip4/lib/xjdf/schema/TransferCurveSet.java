@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "transferCurves"
+    "transferCurve"
 })
 @XmlRootElement(name = "TransferCurveSet")
 public class TransferCurveSet
@@ -47,26 +47,27 @@ public class TransferCurveSet
 {
 
     @XmlElement(name = "TransferCurve")
-    protected List<TransferCurve> transferCurves;
+    protected List<TransferCurve> transferCurve;
     @XmlAttribute(name = "CTM")
-    protected List<Double> ctms;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix ctm;
     @XmlAttribute(name = "Name")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String name;
 
     /**
-     * Gets the value of the transferCurves property.
+     * Gets the value of the transferCurve property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferCurves property.
+     * This is why there is not a <CODE>set</CODE> method for the transferCurve property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTransferCurves().add(newItem);
+     *    getTransferCurve().add(newItem);
      * </pre>
      * 
      * 
@@ -76,40 +77,35 @@ public class TransferCurveSet
      * 
      * 
      */
-    public List<TransferCurve> getTransferCurves() {
-        if (transferCurves == null) {
-            transferCurves = new ArrayList<TransferCurve>();
+    public List<TransferCurve> getTransferCurve() {
+        if (transferCurve == null) {
+            transferCurve = new ArrayList<TransferCurve>();
         }
-        return this.transferCurves;
+        return this.transferCurve;
     }
 
     /**
-     * Gets the value of the ctms property.
+     * Gets the value of the ctm property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ctms property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCTMS().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCTMS() {
-        if (ctms == null) {
-            ctms = new ArrayList<Double>();
-        }
-        return this.ctms;
+    public org.cip4.lib.xjdf.type.Matrix getCTM() {
+        return ctm;
+    }
+
+    /**
+     * Sets the value of the ctm property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.ctm = value;
     }
 
     /**

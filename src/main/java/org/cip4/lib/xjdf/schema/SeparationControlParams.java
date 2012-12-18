@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SeparationControlParams", propOrder = {
-    "transferFunctionControls"
+    "transferFunctionControl"
 })
 public class SeparationControlParams
     extends ParameterType
@@ -44,24 +44,24 @@ public class SeparationControlParams
 {
 
     @XmlElement(name = "TransferFunctionControl")
-    protected List<TransferFunctionControl> transferFunctionControls;
+    protected List<TransferFunctionControl> transferFunctionControl;
     @XmlAttribute(name = "AutomatedOverPrintParamsRef")
     @XmlIDREF
     protected Object automatedOverPrintParamsRef;
 
     /**
-     * Gets the value of the transferFunctionControls property.
+     * Gets the value of the transferFunctionControl property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferFunctionControls property.
+     * This is why there is not a <CODE>set</CODE> method for the transferFunctionControl property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTransferFunctionControls().add(newItem);
+     *    getTransferFunctionControl().add(newItem);
      * </pre>
      * 
      * 
@@ -71,11 +71,11 @@ public class SeparationControlParams
      * 
      * 
      */
-    public List<TransferFunctionControl> getTransferFunctionControls() {
-        if (transferFunctionControls == null) {
-            transferFunctionControls = new ArrayList<TransferFunctionControl>();
+    public List<TransferFunctionControl> getTransferFunctionControl() {
+        if (transferFunctionControl == null) {
+            transferFunctionControl = new ArrayList<TransferFunctionControl>();
         }
-        return this.transferFunctionControls;
+        return this.transferFunctionControl;
     }
 
     /**

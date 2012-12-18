@@ -40,21 +40,21 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "products",
-    "comments",
-    "generalIDs"
+    "generalID",
+    "comment",
+    "product"
 })
 @XmlRootElement(name = "ProductList")
 public class ProductList
     implements Serializable
 {
 
-    @XmlElement(name = "Product")
-    protected List<Product> products;
-    @XmlElement(name = "Comment")
-    protected List<Comment> comments;
     @XmlElement(name = "GeneralID")
-    protected List<GeneralID> generalIDs;
+    protected List<GeneralID> generalID;
+    @XmlElement(name = "Comment")
+    protected List<Comment> comment;
+    @XmlElement(name = "Product")
+    protected List<Product> product;
     @XmlAttribute(name = "RootProducts", required = true)
     @XmlIDREF
     protected List<Object> rootProducts;
@@ -62,76 +62,18 @@ public class ProductList
     protected String descriptiveName;
 
     /**
-     * Gets the value of the products property.
+     * Gets the value of the generalID property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the products property.
+     * This is why there is not a <CODE>set</CODE> method for the generalID property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getProducts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Product }
-     * 
-     * 
-     */
-    public List<Product> getProducts() {
-        if (products == null) {
-            products = new ArrayList<Product>();
-        }
-        return this.products;
-    }
-
-    /**
-     * Gets the value of the comments property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comments property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getComments().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Comment }
-     * 
-     * 
-     */
-    public List<Comment> getComments() {
-        if (comments == null) {
-            comments = new ArrayList<Comment>();
-        }
-        return this.comments;
-    }
-
-    /**
-     * Gets the value of the generalIDs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the generalIDs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGeneralIDs().add(newItem);
+     *    getGeneralID().add(newItem);
      * </pre>
      * 
      * 
@@ -141,11 +83,69 @@ public class ProductList
      * 
      * 
      */
-    public List<GeneralID> getGeneralIDs() {
-        if (generalIDs == null) {
-            generalIDs = new ArrayList<GeneralID>();
+    public List<GeneralID> getGeneralID() {
+        if (generalID == null) {
+            generalID = new ArrayList<GeneralID>();
         }
-        return this.generalIDs;
+        return this.generalID;
+    }
+
+    /**
+     * Gets the value of the comment property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the comment property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getComment().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Comment }
+     * 
+     * 
+     */
+    public List<Comment> getComment() {
+        if (comment == null) {
+            comment = new ArrayList<Comment>();
+        }
+        return this.comment;
+    }
+
+    /**
+     * Gets the value of the product property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the product property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getProduct().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Product }
+     * 
+     * 
+     */
+    public List<Product> getProduct() {
+        if (product == null) {
+            product = new ArrayList<Product>();
+        }
+        return this.product;
     }
 
     /**

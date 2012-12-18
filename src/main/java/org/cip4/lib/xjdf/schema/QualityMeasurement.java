@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "bindingQualityMeasurements"
+    "bindingQualityMeasurement"
 })
 @XmlRootElement(name = "QualityMeasurement")
 public class QualityMeasurement
@@ -47,7 +47,7 @@ public class QualityMeasurement
 {
 
     @XmlElement(name = "BindingQualityMeasurement")
-    protected List<BindingQualityMeasurement> bindingQualityMeasurements;
+    protected List<BindingQualityMeasurement> bindingQualityMeasurement;
     @XmlAttribute(name = "Failed")
     protected Integer failed;
     @XmlAttribute(name = "Passed")
@@ -58,18 +58,18 @@ public class QualityMeasurement
     protected String end;
 
     /**
-     * Gets the value of the bindingQualityMeasurements property.
+     * Gets the value of the bindingQualityMeasurement property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bindingQualityMeasurements property.
+     * This is why there is not a <CODE>set</CODE> method for the bindingQualityMeasurement property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBindingQualityMeasurements().add(newItem);
+     *    getBindingQualityMeasurement().add(newItem);
      * </pre>
      * 
      * 
@@ -79,11 +79,11 @@ public class QualityMeasurement
      * 
      * 
      */
-    public List<BindingQualityMeasurement> getBindingQualityMeasurements() {
-        if (bindingQualityMeasurements == null) {
-            bindingQualityMeasurements = new ArrayList<BindingQualityMeasurement>();
+    public List<BindingQualityMeasurement> getBindingQualityMeasurement() {
+        if (bindingQualityMeasurement == null) {
+            bindingQualityMeasurement = new ArrayList<BindingQualityMeasurement>();
         }
-        return this.bindingQualityMeasurements;
+        return this.bindingQualityMeasurement;
     }
 
     /**

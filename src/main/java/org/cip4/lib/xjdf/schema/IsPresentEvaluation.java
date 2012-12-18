@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "IsPresentEvaluation", propOrder = {
-    "basicPreflightTests"
+    "basicPreflightTest"
 })
 public class IsPresentEvaluation
     extends TermType
@@ -44,25 +44,25 @@ public class IsPresentEvaluation
 {
 
     @XmlElement(name = "BasicPreflightTest")
-    protected List<BasicPreflightTest> basicPreflightTests;
+    protected List<BasicPreflightTest> basicPreflightTest;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
     protected String xPathRoot;
 
     /**
-     * Gets the value of the basicPreflightTests property.
+     * Gets the value of the basicPreflightTest property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTests property.
+     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTest property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBasicPreflightTests().add(newItem);
+     *    getBasicPreflightTest().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class IsPresentEvaluation
      * 
      * 
      */
-    public List<BasicPreflightTest> getBasicPreflightTests() {
-        if (basicPreflightTests == null) {
-            basicPreflightTests = new ArrayList<BasicPreflightTest>();
+    public List<BasicPreflightTest> getBasicPreflightTest() {
+        if (basicPreflightTest == null) {
+            basicPreflightTest = new ArrayList<BasicPreflightTest>();
         }
-        return this.basicPreflightTests;
+        return this.basicPreflightTest;
     }
 
     /**

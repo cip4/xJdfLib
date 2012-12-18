@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ColorSpaceConversionParams", propOrder = {
-    "colorSpaceConversionOps"
+    "colorSpaceConversionOp"
 })
 public class ColorSpaceConversionParams
     extends ParameterType
@@ -47,7 +47,7 @@ public class ColorSpaceConversionParams
 {
 
     @XmlElement(name = "ColorSpaceConversionOp")
-    protected List<ColorSpaceConversionOp> colorSpaceConversionOps;
+    protected List<ColorSpaceConversionOp> colorSpaceConversionOp;
     @XmlAttribute(name = "ICCProfileUsage")
     @XmlSchemaType(name = "anySimpleType")
     protected String iccProfileUsage;
@@ -58,18 +58,18 @@ public class ColorSpaceConversionParams
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the colorSpaceConversionOps property.
+     * Gets the value of the colorSpaceConversionOp property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorSpaceConversionOps property.
+     * This is why there is not a <CODE>set</CODE> method for the colorSpaceConversionOp property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorSpaceConversionOps().add(newItem);
+     *    getColorSpaceConversionOp().add(newItem);
      * </pre>
      * 
      * 
@@ -79,11 +79,11 @@ public class ColorSpaceConversionParams
      * 
      * 
      */
-    public List<ColorSpaceConversionOp> getColorSpaceConversionOps() {
-        if (colorSpaceConversionOps == null) {
-            colorSpaceConversionOps = new ArrayList<ColorSpaceConversionOp>();
+    public List<ColorSpaceConversionOp> getColorSpaceConversionOp() {
+        if (colorSpaceConversionOp == null) {
+            colorSpaceConversionOp = new ArrayList<ColorSpaceConversionOp>();
         }
-        return this.colorSpaceConversionOps;
+        return this.colorSpaceConversionOp;
     }
 
     /**

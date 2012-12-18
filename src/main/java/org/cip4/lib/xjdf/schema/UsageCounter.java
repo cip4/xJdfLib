@@ -41,18 +41,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "UsageCounter", propOrder = {
-    "contacts",
-    "locations"
+    "location",
+    "contact"
 })
 public class UsageCounter
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
     @XmlElement(name = "Location")
-    protected List<Location> locations;
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "CounterID")
     protected String counterID;
     @XmlAttribute(name = "CounterTypes")
@@ -65,47 +65,18 @@ public class UsageCounter
     protected Object identificationFieldRef;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the location property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the locations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocations().add(newItem);
+     *    getLocation().add(newItem);
      * </pre>
      * 
      * 
@@ -115,11 +86,40 @@ public class UsageCounter
      * 
      * 
      */
-    public List<Location> getLocations() {
-        if (locations == null) {
-            locations = new ArrayList<Location>();
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
         }
-        return this.locations;
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**

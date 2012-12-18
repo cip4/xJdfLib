@@ -39,18 +39,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "StringEvaluation", propOrder = {
-    "values",
-    "basicPreflightTests"
+    "basicPreflightTest",
+    "value"
 })
 public class StringEvaluation
     extends TermType
     implements Serializable
 {
 
-    @XmlElement(name = "Value")
-    protected List<Object> values;
     @XmlElement(name = "BasicPreflightTest")
-    protected List<BasicPreflightTest> basicPreflightTests;
+    protected List<BasicPreflightTest> basicPreflightTest;
+    @XmlElement(name = "Value")
+    protected List<Object> value;
     @XmlAttribute(name = "RegExp")
     protected String regExp;
     @XmlAttribute(name = "Length")
@@ -61,47 +61,18 @@ public class StringEvaluation
     protected String xPathRoot;
 
     /**
-     * Gets the value of the values property.
+     * Gets the value of the basicPreflightTest property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the values property.
+     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTest property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Object }
-     * 
-     * 
-     */
-    public List<Object> getValues() {
-        if (values == null) {
-            values = new ArrayList<Object>();
-        }
-        return this.values;
-    }
-
-    /**
-     * Gets the value of the basicPreflightTests property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTests property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBasicPreflightTests().add(newItem);
+     *    getBasicPreflightTest().add(newItem);
      * </pre>
      * 
      * 
@@ -111,11 +82,40 @@ public class StringEvaluation
      * 
      * 
      */
-    public List<BasicPreflightTest> getBasicPreflightTests() {
-        if (basicPreflightTests == null) {
-            basicPreflightTests = new ArrayList<BasicPreflightTest>();
+    public List<BasicPreflightTest> getBasicPreflightTest() {
+        if (basicPreflightTest == null) {
+            basicPreflightTest = new ArrayList<BasicPreflightTest>();
         }
-        return this.basicPreflightTests;
+        return this.basicPreflightTest;
+    }
+
+    /**
+     * Gets the value of the value property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getValue().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getValue() {
+        if (value == null) {
+            value = new ArrayList<Object>();
+        }
+        return this.value;
     }
 
     /**

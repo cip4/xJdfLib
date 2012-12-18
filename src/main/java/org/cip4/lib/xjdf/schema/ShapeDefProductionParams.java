@@ -34,61 +34,32 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShapeDefProductionParams", propOrder = {
-    "shapeTemplates",
-    "objectModels"
+    "objectModel",
+    "shapeTemplate"
 })
 public class ShapeDefProductionParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "ShapeTemplate")
-    protected List<ShapeTemplate> shapeTemplates;
     @XmlElement(name = "ObjectModel")
-    protected List<ObjectModel> objectModels;
+    protected List<ObjectModel> objectModel;
+    @XmlElement(name = "ShapeTemplate")
+    protected List<ShapeTemplate> shapeTemplate;
 
     /**
-     * Gets the value of the shapeTemplates property.
+     * Gets the value of the objectModel property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapeTemplates property.
+     * This is why there is not a <CODE>set</CODE> method for the objectModel property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapeTemplates().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ShapeTemplate }
-     * 
-     * 
-     */
-    public List<ShapeTemplate> getShapeTemplates() {
-        if (shapeTemplates == null) {
-            shapeTemplates = new ArrayList<ShapeTemplate>();
-        }
-        return this.shapeTemplates;
-    }
-
-    /**
-     * Gets the value of the objectModels property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the objectModels property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getObjectModels().add(newItem);
+     *    getObjectModel().add(newItem);
      * </pre>
      * 
      * 
@@ -98,11 +69,40 @@ public class ShapeDefProductionParams
      * 
      * 
      */
-    public List<ObjectModel> getObjectModels() {
-        if (objectModels == null) {
-            objectModels = new ArrayList<ObjectModel>();
+    public List<ObjectModel> getObjectModel() {
+        if (objectModel == null) {
+            objectModel = new ArrayList<ObjectModel>();
         }
-        return this.objectModels;
+        return this.objectModel;
+    }
+
+    /**
+     * Gets the value of the shapeTemplate property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the shapeTemplate property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getShapeTemplate().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ShapeTemplate }
+     * 
+     * 
+     */
+    public List<ShapeTemplate> getShapeTemplate() {
+        if (shapeTemplate == null) {
+            shapeTemplate = new ArrayList<ShapeTemplate>();
+        }
+        return this.shapeTemplate;
     }
 
 }

@@ -67,18 +67,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "locs",
-    "valueLocs"
+    "valueLoc",
+    "loc"
 })
 @XmlRootElement(name = "ShapeState")
 public class ShapeState
     implements Serializable
 {
 
-    @XmlElement(name = "Loc")
-    protected List<Loc> locs;
     @XmlElement(name = "ValueLoc")
-    protected List<ValueLoc> valueLocs;
+    protected List<ValueLoc> valueLoc;
+    @XmlElement(name = "Loc")
+    protected List<Loc> loc;
     @XmlAttribute(name = "UserDisplay")
     protected EnumUserDisplay userDisplay;
     @XmlAttribute(name = "HasDefault")
@@ -88,23 +88,24 @@ public class ShapeState
     @XmlAttribute(name = "Editable")
     protected Boolean editable;
     @XmlAttribute(name = "PresentZ")
-    protected List<Double> presentZs;
+    protected List<Double> presentZ;
     @XmlAttribute(name = "PresentY")
-    protected List<Double> presenties;
+    protected List<Double> presentY;
     @XmlAttribute(name = "PresentX")
-    protected List<Double> presentxes;
+    protected List<Double> presentX;
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected List<Double> currentValues;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape currentValue;
     @XmlAttribute(name = "PresentValueList")
-    protected List<Double> presentValueLists;
+    protected List<Double> presentValueList;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
     @XmlAttribute(name = "AllowedValueList")
-    protected List<Double> allowedValueLists;
+    protected List<Double> allowedValueList;
     @XmlAttribute(name = "DevNS")
     protected String devNS;
     @XmlAttribute(name = "Availability")
@@ -126,13 +127,14 @@ public class ShapeState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected List<Double> defaultValues;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape defaultValue;
     @XmlAttribute(name = "AllowedY")
-    protected List<Double> allowedies;
+    protected List<Double> allowedY;
     @XmlAttribute(name = "AllowedX")
-    protected List<Double> allowedxes;
+    protected List<Double> allowedX;
     @XmlAttribute(name = "AllowedZ")
-    protected List<Double> allowedZs;
+    protected List<Double> allowedZ;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
@@ -141,47 +143,18 @@ public class ShapeState
     protected String descriptiveName;
 
     /**
-     * Gets the value of the locs property.
+     * Gets the value of the valueLoc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
+     * This is why there is not a <CODE>set</CODE> method for the valueLoc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLocs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Loc }
-     * 
-     * 
-     */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
-        }
-        return this.locs;
-    }
-
-    /**
-     * Gets the value of the valueLocs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueLocs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getValueLocs().add(newItem);
+     *    getValueLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -191,11 +164,40 @@ public class ShapeState
      * 
      * 
      */
-    public List<ValueLoc> getValueLocs() {
-        if (valueLocs == null) {
-            valueLocs = new ArrayList<ValueLoc>();
+    public List<ValueLoc> getValueLoc() {
+        if (valueLoc == null) {
+            valueLoc = new ArrayList<ValueLoc>();
         }
-        return this.valueLocs;
+        return this.valueLoc;
+    }
+
+    /**
+     * Gets the value of the loc property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLoc().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Loc }
+     * 
+     * 
+     */
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
+        }
+        return this.loc;
     }
 
     /**
@@ -295,18 +297,18 @@ public class ShapeState
     }
 
     /**
-     * Gets the value of the presentZs property.
+     * Gets the value of the presentZ property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presentZs property.
+     * This is why there is not a <CODE>set</CODE> method for the presentZ property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresentZs().add(newItem);
+     *    getPresentZ().add(newItem);
      * </pre>
      * 
      * 
@@ -316,26 +318,26 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getPresentZs() {
-        if (presentZs == null) {
-            presentZs = new ArrayList<Double>();
+    public List<Double> getPresentZ() {
+        if (presentZ == null) {
+            presentZ = new ArrayList<Double>();
         }
-        return this.presentZs;
+        return this.presentZ;
     }
 
     /**
-     * Gets the value of the presenties property.
+     * Gets the value of the presentY property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presenties property.
+     * This is why there is not a <CODE>set</CODE> method for the presentY property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresenties().add(newItem);
+     *    getPresentY().add(newItem);
      * </pre>
      * 
      * 
@@ -345,26 +347,26 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getPresenties() {
-        if (presenties == null) {
-            presenties = new ArrayList<Double>();
+    public List<Double> getPresentY() {
+        if (presentY == null) {
+            presentY = new ArrayList<Double>();
         }
-        return this.presenties;
+        return this.presentY;
     }
 
     /**
-     * Gets the value of the presentxes property.
+     * Gets the value of the presentX property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presentxes property.
+     * This is why there is not a <CODE>set</CODE> method for the presentX property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresentxes().add(newItem);
+     *    getPresentX().add(newItem);
      * </pre>
      * 
      * 
@@ -374,11 +376,11 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getPresentxes() {
-        if (presentxes == null) {
-            presentxes = new ArrayList<Double>();
+    public List<Double> getPresentX() {
+        if (presentX == null) {
+            presentX = new ArrayList<Double>();
         }
-        return this.presentxes;
+        return this.presentX;
     }
 
     /**
@@ -406,47 +408,42 @@ public class ShapeState
     }
 
     /**
-     * Gets the value of the currentValues property.
+     * Gets the value of the currentValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the currentValues property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCurrentValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCurrentValues() {
-        if (currentValues == null) {
-            currentValues = new ArrayList<Double>();
-        }
-        return this.currentValues;
+    public org.cip4.lib.xjdf.type.Shape getCurrentValue() {
+        return currentValue;
     }
 
     /**
-     * Gets the value of the presentValueLists property.
+     * Sets the value of the currentValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCurrentValue(org.cip4.lib.xjdf.type.Shape value) {
+        this.currentValue = value;
+    }
+
+    /**
+     * Gets the value of the presentValueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the presentValueLists property.
+     * This is why there is not a <CODE>set</CODE> method for the presentValueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPresentValueLists().add(newItem);
+     *    getPresentValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -456,11 +453,11 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getPresentValueLists() {
-        if (presentValueLists == null) {
-            presentValueLists = new ArrayList<Double>();
+    public List<Double> getPresentValueList() {
+        if (presentValueList == null) {
+            presentValueList = new ArrayList<Double>();
         }
-        return this.presentValueLists;
+        return this.presentValueList;
     }
 
     /**
@@ -488,18 +485,18 @@ public class ShapeState
     }
 
     /**
-     * Gets the value of the allowedValueLists property.
+     * Gets the value of the allowedValueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedValueLists property.
+     * This is why there is not a <CODE>set</CODE> method for the allowedValueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAllowedValueLists().add(newItem);
+     *    getAllowedValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -509,11 +506,11 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getAllowedValueLists() {
-        if (allowedValueLists == null) {
-            allowedValueLists = new ArrayList<Double>();
+    public List<Double> getAllowedValueList() {
+        if (allowedValueList == null) {
+            allowedValueList = new ArrayList<Double>();
         }
-        return this.allowedValueLists;
+        return this.allowedValueList;
     }
 
     /**
@@ -724,76 +721,42 @@ public class ShapeState
     }
 
     /**
-     * Gets the value of the defaultValues property.
+     * Gets the value of the defaultValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the defaultValues property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDefaultValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDefaultValues() {
-        if (defaultValues == null) {
-            defaultValues = new ArrayList<Double>();
-        }
-        return this.defaultValues;
+    public org.cip4.lib.xjdf.type.Shape getDefaultValue() {
+        return defaultValue;
     }
 
     /**
-     * Gets the value of the allowedies property.
+     * Sets the value of the defaultValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAllowedies().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getAllowedies() {
-        if (allowedies == null) {
-            allowedies = new ArrayList<Double>();
-        }
-        return this.allowedies;
+    public void setDefaultValue(org.cip4.lib.xjdf.type.Shape value) {
+        this.defaultValue = value;
     }
 
     /**
-     * Gets the value of the allowedxes property.
+     * Gets the value of the allowedY property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedxes property.
+     * This is why there is not a <CODE>set</CODE> method for the allowedY property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAllowedxes().add(newItem);
+     *    getAllowedY().add(newItem);
      * </pre>
      * 
      * 
@@ -803,26 +766,26 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getAllowedxes() {
-        if (allowedxes == null) {
-            allowedxes = new ArrayList<Double>();
+    public List<Double> getAllowedY() {
+        if (allowedY == null) {
+            allowedY = new ArrayList<Double>();
         }
-        return this.allowedxes;
+        return this.allowedY;
     }
 
     /**
-     * Gets the value of the allowedZs property.
+     * Gets the value of the allowedX property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the allowedZs property.
+     * This is why there is not a <CODE>set</CODE> method for the allowedX property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAllowedZs().add(newItem);
+     *    getAllowedX().add(newItem);
      * </pre>
      * 
      * 
@@ -832,11 +795,40 @@ public class ShapeState
      * 
      * 
      */
-    public List<Double> getAllowedZs() {
-        if (allowedZs == null) {
-            allowedZs = new ArrayList<Double>();
+    public List<Double> getAllowedX() {
+        if (allowedX == null) {
+            allowedX = new ArrayList<Double>();
         }
-        return this.allowedZs;
+        return this.allowedX;
+    }
+
+    /**
+     * Gets the value of the allowedZ property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the allowedZ property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAllowedZ().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Double }
+     * 
+     * 
+     */
+    public List<Double> getAllowedZ() {
+        if (allowedZ == null) {
+            allowedZ = new ArrayList<Double>();
+        }
+        return this.allowedZ;
     }
 
     /**

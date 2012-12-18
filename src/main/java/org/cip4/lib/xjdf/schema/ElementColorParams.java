@@ -43,18 +43,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ElementColorParams", propOrder = {
-    "colorantAlias",
-    "colorSpaceConversionOps"
+    "colorSpaceConversionOp",
+    "colorantAlias"
 })
 public class ElementColorParams
     extends ParameterType
     implements Serializable
 {
 
+    @XmlElement(name = "ColorSpaceConversionOp")
+    protected List<ColorSpaceConversionOp> colorSpaceConversionOp;
     @XmlElement(name = "ColorantAlias")
     protected List<ColorantAlias> colorantAlias;
-    @XmlElement(name = "ColorSpaceConversionOp")
-    protected List<ColorSpaceConversionOp> colorSpaceConversionOps;
     @XmlAttribute(name = "ICCOutputProfileUsage")
     @XmlSchemaType(name = "anySimpleType")
     protected String iccOutputProfileUsage;
@@ -67,6 +67,35 @@ public class ElementColorParams
     @XmlAttribute(name = "AutomatedOverPrintParamsRef")
     @XmlIDREF
     protected Object automatedOverPrintParamsRef;
+
+    /**
+     * Gets the value of the colorSpaceConversionOp property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the colorSpaceConversionOp property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColorSpaceConversionOp().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ColorSpaceConversionOp }
+     * 
+     * 
+     */
+    public List<ColorSpaceConversionOp> getColorSpaceConversionOp() {
+        if (colorSpaceConversionOp == null) {
+            colorSpaceConversionOp = new ArrayList<ColorSpaceConversionOp>();
+        }
+        return this.colorSpaceConversionOp;
+    }
 
     /**
      * Gets the value of the colorantAlias property.
@@ -95,35 +124,6 @@ public class ElementColorParams
             colorantAlias = new ArrayList<ColorantAlias>();
         }
         return this.colorantAlias;
-    }
-
-    /**
-     * Gets the value of the colorSpaceConversionOps property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorSpaceConversionOps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getColorSpaceConversionOps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ColorSpaceConversionOp }
-     * 
-     * 
-     */
-    public List<ColorSpaceConversionOp> getColorSpaceConversionOps() {
-        if (colorSpaceConversionOps == null) {
-            colorSpaceConversionOps = new ArrayList<ColorSpaceConversionOp>();
-        }
-        return this.colorSpaceConversionOps;
     }
 
     /**

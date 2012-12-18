@@ -58,27 +58,27 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resources",
-    "costCenters",
+    "part",
+    "lot",
     "misDetails",
-    "lots",
-    "parts"
+    "costCenter",
+    "resource"
 })
 @XmlRootElement(name = "ResourceInfo")
 public class ResourceInfo
     implements Serializable
 {
 
-    @XmlElement(name = "Resource")
-    protected List<Resource> resources;
-    @XmlElement(name = "CostCenter")
-    protected List<CostCenter> costCenters;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
+    @XmlElement(name = "Lot")
+    protected List<Lot> lot;
     @XmlElement(name = "MISDetails")
     protected List<MISDetails> misDetails;
-    @XmlElement(name = "Lot")
-    protected List<Lot> lots;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
+    @XmlElement(name = "CostCenter")
+    protected List<CostCenter> costCenter;
+    @XmlElement(name = "Resource")
+    protected List<Resource> resource;
     @XmlAttribute(name = "Level")
     @XmlSchemaType(name = "anySimpleType")
     protected String level;
@@ -119,61 +119,61 @@ public class ResourceInfo
     protected String processUsage;
 
     /**
-     * Gets the value of the resources property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resources property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getResources().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Resource }
+     * {@link Part }
      * 
      * 
      */
-    public List<Resource> getResources() {
-        if (resources == null) {
-            resources = new ArrayList<Resource>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.resources;
+        return this.part;
     }
 
     /**
-     * Gets the value of the costCenters property.
+     * Gets the value of the lot property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the costCenters property.
+     * This is why there is not a <CODE>set</CODE> method for the lot property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCostCenters().add(newItem);
+     *    getLot().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CostCenter }
+     * {@link Lot }
      * 
      * 
      */
-    public List<CostCenter> getCostCenters() {
-        if (costCenters == null) {
-            costCenters = new ArrayList<CostCenter>();
+    public List<Lot> getLot() {
+        if (lot == null) {
+            lot = new ArrayList<Lot>();
         }
-        return this.costCenters;
+        return this.lot;
     }
 
     /**
@@ -206,61 +206,61 @@ public class ResourceInfo
     }
 
     /**
-     * Gets the value of the lots property.
+     * Gets the value of the costCenter property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the lots property.
+     * This is why there is not a <CODE>set</CODE> method for the costCenter property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLots().add(newItem);
+     *    getCostCenter().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Lot }
+     * {@link CostCenter }
      * 
      * 
      */
-    public List<Lot> getLots() {
-        if (lots == null) {
-            lots = new ArrayList<Lot>();
+    public List<CostCenter> getCostCenter() {
+        if (costCenter == null) {
+            costCenter = new ArrayList<CostCenter>();
         }
-        return this.lots;
+        return this.costCenter;
     }
 
     /**
-     * Gets the value of the parts property.
+     * Gets the value of the resource property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
+     * This is why there is not a <CODE>set</CODE> method for the resource property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getParts().add(newItem);
+     *    getResource().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Part }
+     * {@link Resource }
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Resource> getResource() {
+        if (resource == null) {
+            resource = new ArrayList<Resource>();
         }
-        return this.parts;
+        return this.resource;
     }
 
     /**

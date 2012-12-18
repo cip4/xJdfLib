@@ -2,13 +2,12 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,40 +37,37 @@ public class Hole
 {
 
     @XmlAttribute(name = "Extent")
-    protected List<Double> extents;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair extent;
     @XmlAttribute(name = "Shape")
     @XmlSchemaType(name = "anySimpleType")
     protected String shape;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
 
     /**
-     * Gets the value of the extents property.
+     * Gets the value of the extent property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extents property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getExtents().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getExtents() {
-        if (extents == null) {
-            extents = new ArrayList<Double>();
-        }
-        return this.extents;
+    public org.cip4.lib.xjdf.type.XYPair getExtent() {
+        return extent;
+    }
+
+    /**
+     * Sets the value of the extent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExtent(org.cip4.lib.xjdf.type.XYPair value) {
+        this.extent = value;
     }
 
     /**
@@ -99,32 +95,27 @@ public class Hole
     }
 
     /**
-     * Gets the value of the centers property.
+     * Gets the value of the center property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
+    }
+
+    /**
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
     }
 
 }

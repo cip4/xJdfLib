@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "RectangleEvaluation", propOrder = {
-    "basicPreflightTests"
+    "basicPreflightTest"
 })
 public class RectangleEvaluation
     extends TermType
@@ -47,31 +48,32 @@ public class RectangleEvaluation
 {
 
     @XmlElement(name = "BasicPreflightTest")
-    protected List<BasicPreflightTest> basicPreflightTests;
+    protected List<BasicPreflightTest> basicPreflightTest;
     @XmlAttribute(name = "HWRelation")
     protected EnumXYRelation hwRelation;
     @XmlAttribute(name = "ValueList")
     protected String valueList;
     @XmlAttribute(name = "Tolerance")
-    protected List<Double> tolerances;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair tolerance;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
     protected String xPathRoot;
 
     /**
-     * Gets the value of the basicPreflightTests property.
+     * Gets the value of the basicPreflightTest property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTests property.
+     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTest property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBasicPreflightTests().add(newItem);
+     *    getBasicPreflightTest().add(newItem);
      * </pre>
      * 
      * 
@@ -81,11 +83,11 @@ public class RectangleEvaluation
      * 
      * 
      */
-    public List<BasicPreflightTest> getBasicPreflightTests() {
-        if (basicPreflightTests == null) {
-            basicPreflightTests = new ArrayList<BasicPreflightTest>();
+    public List<BasicPreflightTest> getBasicPreflightTest() {
+        if (basicPreflightTest == null) {
+            basicPreflightTest = new ArrayList<BasicPreflightTest>();
         }
-        return this.basicPreflightTests;
+        return this.basicPreflightTest;
     }
 
     /**
@@ -137,32 +139,27 @@ public class RectangleEvaluation
     }
 
     /**
-     * Gets the value of the tolerances property.
+     * Gets the value of the tolerance property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tolerances property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTolerances().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTolerances() {
-        if (tolerances == null) {
-            tolerances = new ArrayList<Double>();
-        }
-        return this.tolerances;
+    public org.cip4.lib.xjdf.type.XYPair getTolerance() {
+        return tolerance;
+    }
+
+    /**
+     * Sets the value of the tolerance property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTolerance(org.cip4.lib.xjdf.type.XYPair value) {
+        this.tolerance = value;
     }
 
     /**

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -34,29 +33,28 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "sets"
+    "set"
 })
 @XmlRootElement(name = "when")
 public class When
     implements Serializable
 {
 
-    @XmlElement(name = "set")
-    protected List<Set> sets;
+    protected List<Set> set;
 
     /**
-     * Gets the value of the sets property.
+     * Gets the value of the set property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sets property.
+     * This is why there is not a <CODE>set</CODE> method for the set property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSets().add(newItem);
+     *    getSet().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +64,11 @@ public class When
      * 
      * 
      */
-    public List<Set> getSets() {
-        if (sets == null) {
-            sets = new ArrayList<Set>();
+    public List<Set> getSet() {
+        if (set == null) {
+            set = new ArrayList<Set>();
         }
-        return this.sets;
+        return this.set;
     }
 
 }

@@ -57,24 +57,24 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "costCenters",
+    "moduleStatus",
+    "part",
     "misDetails",
-    "parts",
-    "moduleStatuses"
+    "costCenter"
 })
 @XmlRootElement(name = "JobPhase")
 public class JobPhase
     implements Serializable
 {
 
-    @XmlElement(name = "CostCenter")
-    protected List<CostCenter> costCenters;
+    @XmlElement(name = "ModuleStatus")
+    protected List<ModuleStatus> moduleStatus;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
     @XmlElement(name = "MISDetails")
     protected List<MISDetails> misDetails;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
-    @XmlElement(name = "ModuleStatus")
-    protected List<ModuleStatus> moduleStatuses;
+    @XmlElement(name = "CostCenter")
+    protected List<CostCenter> costCenter;
     @XmlAttribute(name = "PhaseAmount")
     protected Double phaseAmount;
     @XmlAttribute(name = "StatusDetails")
@@ -115,32 +115,61 @@ public class JobPhase
     protected String activation;
 
     /**
-     * Gets the value of the costCenters property.
+     * Gets the value of the moduleStatus property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the costCenters property.
+     * This is why there is not a <CODE>set</CODE> method for the moduleStatus property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCostCenters().add(newItem);
+     *    getModuleStatus().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link CostCenter }
+     * {@link ModuleStatus }
      * 
      * 
      */
-    public List<CostCenter> getCostCenters() {
-        if (costCenters == null) {
-            costCenters = new ArrayList<CostCenter>();
+    public List<ModuleStatus> getModuleStatus() {
+        if (moduleStatus == null) {
+            moduleStatus = new ArrayList<ModuleStatus>();
         }
-        return this.costCenters;
+        return this.moduleStatus;
+    }
+
+    /**
+     * Gets the value of the part property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPart().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Part }
+     * 
+     * 
+     */
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
+        }
+        return this.part;
     }
 
     /**
@@ -173,61 +202,32 @@ public class JobPhase
     }
 
     /**
-     * Gets the value of the parts property.
+     * Gets the value of the costCenter property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
+     * This is why there is not a <CODE>set</CODE> method for the costCenter property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getParts().add(newItem);
+     *    getCostCenter().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Part }
+     * {@link CostCenter }
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<CostCenter> getCostCenter() {
+        if (costCenter == null) {
+            costCenter = new ArrayList<CostCenter>();
         }
-        return this.parts;
-    }
-
-    /**
-     * Gets the value of the moduleStatuses property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the moduleStatuses property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getModuleStatuses().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ModuleStatus }
-     * 
-     * 
-     */
-    public List<ModuleStatus> getModuleStatuses() {
-        if (moduleStatuses == null) {
-            moduleStatuses = new ArrayList<ModuleStatus>();
-        }
-        return this.moduleStatuses;
+        return this.costCenter;
     }
 
     /**

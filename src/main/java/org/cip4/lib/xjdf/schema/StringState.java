@@ -63,18 +63,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "values",
-    "locs"
+    "loc",
+    "value"
 })
 @XmlRootElement(name = "StringState")
 public class StringState
     implements Serializable
 {
 
-    @XmlElement(name = "Value")
-    protected List<Object> values;
     @XmlElement(name = "Loc")
-    protected List<Loc> locs;
+    protected List<Loc> loc;
+    @XmlElement(name = "Value")
+    protected List<Object> value;
     @XmlAttribute(name = "UserDisplay")
     protected EnumUserDisplay userDisplay;
     @XmlAttribute(name = "HasDefault")
@@ -129,47 +129,18 @@ public class StringState
     protected String descriptiveName;
 
     /**
-     * Gets the value of the values property.
+     * Gets the value of the loc property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the values property.
+     * This is why there is not a <CODE>set</CODE> method for the loc property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Object }
-     * 
-     * 
-     */
-    public List<Object> getValues() {
-        if (values == null) {
-            values = new ArrayList<Object>();
-        }
-        return this.values;
-    }
-
-    /**
-     * Gets the value of the locs property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocs().add(newItem);
+     *    getLoc().add(newItem);
      * </pre>
      * 
      * 
@@ -179,11 +150,40 @@ public class StringState
      * 
      * 
      */
-    public List<Loc> getLocs() {
-        if (locs == null) {
-            locs = new ArrayList<Loc>();
+    public List<Loc> getLoc() {
+        if (loc == null) {
+            loc = new ArrayList<Loc>();
         }
-        return this.locs;
+        return this.loc;
+    }
+
+    /**
+     * Gets the value of the value property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the value property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getValue().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getValue() {
+        if (value == null) {
+            value = new ArrayList<Object>();
+        }
+        return this.value;
     }
 
     /**

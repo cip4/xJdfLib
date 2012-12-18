@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "certificates"
+    "certificate"
 })
 @XmlRootElement(name = "AuthenticationResp")
 public class AuthenticationResp
@@ -44,23 +44,23 @@ public class AuthenticationResp
 {
 
     @XmlElement(name = "Certificate")
-    protected List<Object> certificates;
+    protected List<Object> certificate;
     @XmlAttribute(name = "URL")
     protected String url;
 
     /**
-     * Gets the value of the certificates property.
+     * Gets the value of the certificate property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the certificates property.
+     * This is why there is not a <CODE>set</CODE> method for the certificate property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCertificates().add(newItem);
+     *    getCertificate().add(newItem);
      * </pre>
      * 
      * 
@@ -70,11 +70,11 @@ public class AuthenticationResp
      * 
      * 
      */
-    public List<Object> getCertificates() {
-        if (certificates == null) {
-            certificates = new ArrayList<Object>();
+    public List<Object> getCertificate() {
+        if (certificate == null) {
+            certificate = new ArrayList<Object>();
         }
-        return this.certificates;
+        return this.certificate;
     }
 
     /**

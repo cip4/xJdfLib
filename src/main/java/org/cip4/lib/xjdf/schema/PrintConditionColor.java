@@ -54,24 +54,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "deviceNColors",
-    "transferCurves"
+    "transferCurve",
+    "deviceNColor"
 })
 @XmlRootElement(name = "PrintConditionColor")
 public class PrintConditionColor
     implements Serializable
 {
 
-    @XmlElement(name = "DeviceNColor")
-    protected List<DeviceNColor> deviceNColors;
     @XmlElement(name = "TransferCurve")
-    protected List<TransferCurve> transferCurves;
+    protected List<TransferCurve> transferCurve;
+    @XmlElement(name = "DeviceNColor")
+    protected List<DeviceNColor> deviceNColor;
     @XmlAttribute(name = "Lab")
-    protected List<Double> labs;
+    protected List<Double> lab;
     @XmlAttribute(name = "ColorBookPrefix")
     protected String colorBookPrefix;
     @XmlAttribute(name = "CMYK")
-    protected List<Double> cmyks;
+    protected List<Double> cmyk;
     @XmlAttribute(name = "NeutralDensity")
     protected Double neutralDensity;
     @XmlAttribute(name = "ColorBookSuffix")
@@ -101,47 +101,18 @@ public class PrintConditionColor
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the deviceNColors property.
+     * Gets the value of the transferCurve property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceNColors property.
+     * This is why there is not a <CODE>set</CODE> method for the transferCurve property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeviceNColors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceNColor }
-     * 
-     * 
-     */
-    public List<DeviceNColor> getDeviceNColors() {
-        if (deviceNColors == null) {
-            deviceNColors = new ArrayList<DeviceNColor>();
-        }
-        return this.deviceNColors;
-    }
-
-    /**
-     * Gets the value of the transferCurves property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferCurves property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTransferCurves().add(newItem);
+     *    getTransferCurve().add(newItem);
      * </pre>
      * 
      * 
@@ -151,26 +122,55 @@ public class PrintConditionColor
      * 
      * 
      */
-    public List<TransferCurve> getTransferCurves() {
-        if (transferCurves == null) {
-            transferCurves = new ArrayList<TransferCurve>();
+    public List<TransferCurve> getTransferCurve() {
+        if (transferCurve == null) {
+            transferCurve = new ArrayList<TransferCurve>();
         }
-        return this.transferCurves;
+        return this.transferCurve;
     }
 
     /**
-     * Gets the value of the labs property.
+     * Gets the value of the deviceNColor property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the labs property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceNColor property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getLabs().add(newItem);
+     *    getDeviceNColor().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DeviceNColor }
+     * 
+     * 
+     */
+    public List<DeviceNColor> getDeviceNColor() {
+        if (deviceNColor == null) {
+            deviceNColor = new ArrayList<DeviceNColor>();
+        }
+        return this.deviceNColor;
+    }
+
+    /**
+     * Gets the value of the lab property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the lab property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLab().add(newItem);
      * </pre>
      * 
      * 
@@ -180,11 +180,11 @@ public class PrintConditionColor
      * 
      * 
      */
-    public List<Double> getLabs() {
-        if (labs == null) {
-            labs = new ArrayList<Double>();
+    public List<Double> getLab() {
+        if (lab == null) {
+            lab = new ArrayList<Double>();
         }
-        return this.labs;
+        return this.lab;
     }
 
     /**
@@ -212,18 +212,18 @@ public class PrintConditionColor
     }
 
     /**
-     * Gets the value of the cmyks property.
+     * Gets the value of the cmyk property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cmyks property.
+     * This is why there is not a <CODE>set</CODE> method for the cmyk property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getCMYKS().add(newItem);
+     *    getCMYK().add(newItem);
      * </pre>
      * 
      * 
@@ -233,11 +233,11 @@ public class PrintConditionColor
      * 
      * 
      */
-    public List<Double> getCMYKS() {
-        if (cmyks == null) {
-            cmyks = new ArrayList<Double>();
+    public List<Double> getCMYK() {
+        if (cmyk == null) {
+            cmyk = new ArrayList<Double>();
         }
-        return this.cmyks;
+        return this.cmyk;
     }
 
     /**

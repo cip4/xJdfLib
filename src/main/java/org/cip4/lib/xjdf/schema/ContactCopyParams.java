@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -54,7 +53,8 @@ public class ContactCopyParams
     @XmlSchemaType(name = "anySimpleType")
     protected String diffusion;
     @XmlAttribute(name = "RepeatStep")
-    protected List<Double> repeatSteps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair repeatStep;
     @XmlAttribute(name = "ScreeningParamsRef")
     @XmlIDREF
     protected Object screeningParamsRef;
@@ -180,32 +180,27 @@ public class ContactCopyParams
     }
 
     /**
-     * Gets the value of the repeatSteps property.
+     * Gets the value of the repeatStep property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the repeatSteps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRepeatSteps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRepeatSteps() {
-        if (repeatSteps == null) {
-            repeatSteps = new ArrayList<Double>();
-        }
-        return this.repeatSteps;
+    public org.cip4.lib.xjdf.type.XYPair getRepeatStep() {
+        return repeatStep;
+    }
+
+    /**
+     * Sets the value of the repeatStep property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRepeatStep(org.cip4.lib.xjdf.type.XYPair value) {
+        this.repeatStep = value;
     }
 
     /**

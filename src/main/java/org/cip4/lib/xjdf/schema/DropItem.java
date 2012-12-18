@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -55,33 +56,33 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "digitalMedias",
-    "rollStands",
-    "bundles",
-    "inks",
-    "straps",
-    "pallets",
-    "registerRibbons"
+    "registerRibbon",
+    "pallet",
+    "strap",
+    "ink",
+    "bundle",
+    "rollStand",
+    "digitalMedia"
 })
 @XmlRootElement(name = "DropItem")
 public class DropItem
     implements Serializable
 {
 
-    @XmlElement(name = "DigitalMedia")
-    protected List<DigitalMedia> digitalMedias;
-    @XmlElement(name = "RollStand")
-    protected List<RollStand> rollStands;
-    @XmlElement(name = "Bundle")
-    protected List<Bundle> bundles;
-    @XmlElement(name = "Ink")
-    protected List<Ink> inks;
-    @XmlElement(name = "Strap")
-    protected List<Strap> straps;
-    @XmlElement(name = "Pallet")
-    protected List<Pallet> pallets;
     @XmlElement(name = "RegisterRibbon")
-    protected List<RegisterRibbon> registerRibbons;
+    protected List<RegisterRibbon> registerRibbon;
+    @XmlElement(name = "Pallet")
+    protected List<Pallet> pallet;
+    @XmlElement(name = "Strap")
+    protected List<Strap> strap;
+    @XmlElement(name = "Ink")
+    protected List<Ink> ink;
+    @XmlElement(name = "Bundle")
+    protected List<Bundle> bundle;
+    @XmlElement(name = "RollStand")
+    protected List<RollStand> rollStand;
+    @XmlElement(name = "DigitalMedia")
+    protected List<DigitalMedia> digitalMedia;
     @XmlAttribute(name = "TotalAmount")
     protected Integer totalAmount;
     @XmlAttribute(name = "TrackingID")
@@ -95,7 +96,8 @@ public class DropItem
     @XmlAttribute(name = "TotalVolume")
     protected Double totalVolume;
     @XmlAttribute(name = "TotalDimensions")
-    protected List<Double> totalDimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape totalDimensions;
     @XmlAttribute(name = "Amount")
     protected Integer amount;
     @XmlAttribute(name = "ActualTotalAmount")
@@ -114,192 +116,18 @@ public class DropItem
     protected Object componentRef;
 
     /**
-     * Gets the value of the digitalMedias property.
+     * Gets the value of the registerRibbon property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the digitalMedias property.
+     * This is why there is not a <CODE>set</CODE> method for the registerRibbon property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDigitalMedias().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DigitalMedia }
-     * 
-     * 
-     */
-    public List<DigitalMedia> getDigitalMedias() {
-        if (digitalMedias == null) {
-            digitalMedias = new ArrayList<DigitalMedia>();
-        }
-        return this.digitalMedias;
-    }
-
-    /**
-     * Gets the value of the rollStands property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the rollStands property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRollStands().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RollStand }
-     * 
-     * 
-     */
-    public List<RollStand> getRollStands() {
-        if (rollStands == null) {
-            rollStands = new ArrayList<RollStand>();
-        }
-        return this.rollStands;
-    }
-
-    /**
-     * Gets the value of the bundles property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bundles property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBundles().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Bundle }
-     * 
-     * 
-     */
-    public List<Bundle> getBundles() {
-        if (bundles == null) {
-            bundles = new ArrayList<Bundle>();
-        }
-        return this.bundles;
-    }
-
-    /**
-     * Gets the value of the inks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the inks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInks().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Ink }
-     * 
-     * 
-     */
-    public List<Ink> getInks() {
-        if (inks == null) {
-            inks = new ArrayList<Ink>();
-        }
-        return this.inks;
-    }
-
-    /**
-     * Gets the value of the straps property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the straps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getStraps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Strap }
-     * 
-     * 
-     */
-    public List<Strap> getStraps() {
-        if (straps == null) {
-            straps = new ArrayList<Strap>();
-        }
-        return this.straps;
-    }
-
-    /**
-     * Gets the value of the pallets property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pallets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPallets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Pallet }
-     * 
-     * 
-     */
-    public List<Pallet> getPallets() {
-        if (pallets == null) {
-            pallets = new ArrayList<Pallet>();
-        }
-        return this.pallets;
-    }
-
-    /**
-     * Gets the value of the registerRibbons property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the registerRibbons property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRegisterRibbons().add(newItem);
+     *    getRegisterRibbon().add(newItem);
      * </pre>
      * 
      * 
@@ -309,11 +137,185 @@ public class DropItem
      * 
      * 
      */
-    public List<RegisterRibbon> getRegisterRibbons() {
-        if (registerRibbons == null) {
-            registerRibbons = new ArrayList<RegisterRibbon>();
+    public List<RegisterRibbon> getRegisterRibbon() {
+        if (registerRibbon == null) {
+            registerRibbon = new ArrayList<RegisterRibbon>();
         }
-        return this.registerRibbons;
+        return this.registerRibbon;
+    }
+
+    /**
+     * Gets the value of the pallet property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the pallet property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPallet().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Pallet }
+     * 
+     * 
+     */
+    public List<Pallet> getPallet() {
+        if (pallet == null) {
+            pallet = new ArrayList<Pallet>();
+        }
+        return this.pallet;
+    }
+
+    /**
+     * Gets the value of the strap property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the strap property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStrap().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Strap }
+     * 
+     * 
+     */
+    public List<Strap> getStrap() {
+        if (strap == null) {
+            strap = new ArrayList<Strap>();
+        }
+        return this.strap;
+    }
+
+    /**
+     * Gets the value of the ink property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the ink property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getInk().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Ink }
+     * 
+     * 
+     */
+    public List<Ink> getInk() {
+        if (ink == null) {
+            ink = new ArrayList<Ink>();
+        }
+        return this.ink;
+    }
+
+    /**
+     * Gets the value of the bundle property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the bundle property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBundle().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Bundle }
+     * 
+     * 
+     */
+    public List<Bundle> getBundle() {
+        if (bundle == null) {
+            bundle = new ArrayList<Bundle>();
+        }
+        return this.bundle;
+    }
+
+    /**
+     * Gets the value of the rollStand property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the rollStand property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRollStand().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RollStand }
+     * 
+     * 
+     */
+    public List<RollStand> getRollStand() {
+        if (rollStand == null) {
+            rollStand = new ArrayList<RollStand>();
+        }
+        return this.rollStand;
+    }
+
+    /**
+     * Gets the value of the digitalMedia property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the digitalMedia property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDigitalMedia().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DigitalMedia }
+     * 
+     * 
+     */
+    public List<DigitalMedia> getDigitalMedia() {
+        if (digitalMedia == null) {
+            digitalMedia = new ArrayList<DigitalMedia>();
+        }
+        return this.digitalMedia;
     }
 
     /**
@@ -463,30 +465,25 @@ public class DropItem
     /**
      * Gets the value of the totalDimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the totalDimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTotalDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTotalDimensions() {
-        if (totalDimensions == null) {
-            totalDimensions = new ArrayList<Double>();
-        }
-        return this.totalDimensions;
+    public org.cip4.lib.xjdf.type.Shape getTotalDimensions() {
+        return totalDimensions;
+    }
+
+    /**
+     * Sets the value of the totalDimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTotalDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.totalDimensions = value;
     }
 
     /**

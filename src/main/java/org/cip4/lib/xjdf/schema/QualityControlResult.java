@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QualityControlResult", propOrder = {
-    "qualityMeasurements"
+    "qualityMeasurement"
 })
 public class QualityControlResult
     extends ParameterType
@@ -47,7 +47,7 @@ public class QualityControlResult
 {
 
     @XmlElement(name = "QualityMeasurement")
-    protected List<QualityMeasurement> qualityMeasurements;
+    protected List<QualityMeasurement> qualityMeasurement;
     @XmlAttribute(name = "Failed")
     protected Integer failed;
     @XmlAttribute(name = "Passed")
@@ -60,18 +60,18 @@ public class QualityControlResult
     protected Object bindingQualityParamsRef;
 
     /**
-     * Gets the value of the qualityMeasurements property.
+     * Gets the value of the qualityMeasurement property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the qualityMeasurements property.
+     * This is why there is not a <CODE>set</CODE> method for the qualityMeasurement property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQualityMeasurements().add(newItem);
+     *    getQualityMeasurement().add(newItem);
      * </pre>
      * 
      * 
@@ -81,11 +81,11 @@ public class QualityControlResult
      * 
      * 
      */
-    public List<QualityMeasurement> getQualityMeasurements() {
-        if (qualityMeasurements == null) {
-            qualityMeasurements = new ArrayList<QualityMeasurement>();
+    public List<QualityMeasurement> getQualityMeasurement() {
+        if (qualityMeasurement == null) {
+            qualityMeasurement = new ArrayList<QualityMeasurement>();
         }
-        return this.qualityMeasurements;
+        return this.qualityMeasurement;
     }
 
     /**

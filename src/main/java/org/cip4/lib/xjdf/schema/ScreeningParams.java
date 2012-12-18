@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ScreeningParams", propOrder = {
-    "screenSelectors"
+    "screenSelector"
 })
 public class ScreeningParams
     extends ParameterType
@@ -43,23 +43,23 @@ public class ScreeningParams
 {
 
     @XmlElement(name = "ScreenSelector")
-    protected List<ScreenSelector> screenSelectors;
+    protected List<ScreenSelector> screenSelector;
     @XmlAttribute(name = "IgnoreSourceFile")
     protected Boolean ignoreSourceFile;
 
     /**
-     * Gets the value of the screenSelectors property.
+     * Gets the value of the screenSelector property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the screenSelectors property.
+     * This is why there is not a <CODE>set</CODE> method for the screenSelector property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getScreenSelectors().add(newItem);
+     *    getScreenSelector().add(newItem);
      * </pre>
      * 
      * 
@@ -69,11 +69,11 @@ public class ScreeningParams
      * 
      * 
      */
-    public List<ScreenSelector> getScreenSelectors() {
-        if (screenSelectors == null) {
-            screenSelectors = new ArrayList<ScreenSelector>();
+    public List<ScreenSelector> getScreenSelector() {
+        if (screenSelector == null) {
+            screenSelector = new ArrayList<ScreenSelector>();
         }
-        return this.screenSelectors;
+        return this.screenSelector;
     }
 
     /**

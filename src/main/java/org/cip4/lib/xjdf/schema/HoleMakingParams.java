@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -47,25 +48,26 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HoleMakingParams", propOrder = {
-    "holeLines",
-    "holes",
-    "registerMarks"
+    "registerMark",
+    "hole",
+    "holeLine"
 })
 public class HoleMakingParams
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "HoleLine")
-    protected List<HoleLine> holeLines;
-    @XmlElement(name = "Hole")
-    protected List<Hole> holes;
     @XmlElement(name = "RegisterMark")
-    protected List<RegisterMark> registerMarks;
+    protected List<RegisterMark> registerMark;
+    @XmlElement(name = "Hole")
+    protected List<Hole> hole;
+    @XmlElement(name = "HoleLine")
+    protected List<HoleLine> holeLine;
     @XmlAttribute(name = "HoleCount")
-    protected List<Integer> holeCounts;
+    protected List<Integer> holeCount;
     @XmlAttribute(name = "Extent")
-    protected List<Double> extents;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair extent;
     @XmlAttribute(name = "Shape")
     @XmlSchemaType(name = "anySimpleType")
     protected String shape;
@@ -73,81 +75,24 @@ public class HoleMakingParams
     @XmlSchemaType(name = "anySimpleType")
     protected String centerReference;
     @XmlAttribute(name = "Center")
-    protected List<Double> centers;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair center;
     @XmlAttribute(name = "HoleType")
-    protected List<EnumHoleType> holeTypes;
+    protected List<EnumHoleType> holeType;
 
     /**
-     * Gets the value of the holeLines property.
+     * Gets the value of the registerMark property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeLines property.
+     * This is why there is not a <CODE>set</CODE> method for the registerMark property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleLines().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link HoleLine }
-     * 
-     * 
-     */
-    public List<HoleLine> getHoleLines() {
-        if (holeLines == null) {
-            holeLines = new ArrayList<HoleLine>();
-        }
-        return this.holeLines;
-    }
-
-    /**
-     * Gets the value of the holes property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHoles().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Hole }
-     * 
-     * 
-     */
-    public List<Hole> getHoles() {
-        if (holes == null) {
-            holes = new ArrayList<Hole>();
-        }
-        return this.holes;
-    }
-
-    /**
-     * Gets the value of the registerMarks property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the registerMarks property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRegisterMarks().add(newItem);
+     *    getRegisterMark().add(newItem);
      * </pre>
      * 
      * 
@@ -157,26 +102,84 @@ public class HoleMakingParams
      * 
      * 
      */
-    public List<RegisterMark> getRegisterMarks() {
-        if (registerMarks == null) {
-            registerMarks = new ArrayList<RegisterMark>();
+    public List<RegisterMark> getRegisterMark() {
+        if (registerMark == null) {
+            registerMark = new ArrayList<RegisterMark>();
         }
-        return this.registerMarks;
+        return this.registerMark;
     }
 
     /**
-     * Gets the value of the holeCounts property.
+     * Gets the value of the hole property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeCounts property.
+     * This is why there is not a <CODE>set</CODE> method for the hole property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleCounts().add(newItem);
+     *    getHole().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Hole }
+     * 
+     * 
+     */
+    public List<Hole> getHole() {
+        if (hole == null) {
+            hole = new ArrayList<Hole>();
+        }
+        return this.hole;
+    }
+
+    /**
+     * Gets the value of the holeLine property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the holeLine property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getHoleLine().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link HoleLine }
+     * 
+     * 
+     */
+    public List<HoleLine> getHoleLine() {
+        if (holeLine == null) {
+            holeLine = new ArrayList<HoleLine>();
+        }
+        return this.holeLine;
+    }
+
+    /**
+     * Gets the value of the holeCount property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the holeCount property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getHoleCount().add(newItem);
      * </pre>
      * 
      * 
@@ -186,40 +189,35 @@ public class HoleMakingParams
      * 
      * 
      */
-    public List<Integer> getHoleCounts() {
-        if (holeCounts == null) {
-            holeCounts = new ArrayList<Integer>();
+    public List<Integer> getHoleCount() {
+        if (holeCount == null) {
+            holeCount = new ArrayList<Integer>();
         }
-        return this.holeCounts;
+        return this.holeCount;
     }
 
     /**
-     * Gets the value of the extents property.
+     * Gets the value of the extent property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the extents property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getExtents().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getExtents() {
-        if (extents == null) {
-            extents = new ArrayList<Double>();
-        }
-        return this.extents;
+    public org.cip4.lib.xjdf.type.XYPair getExtent() {
+        return extent;
+    }
+
+    /**
+     * Sets the value of the extent property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExtent(org.cip4.lib.xjdf.type.XYPair value) {
+        this.extent = value;
     }
 
     /**
@@ -271,47 +269,42 @@ public class HoleMakingParams
     }
 
     /**
-     * Gets the value of the centers property.
+     * Gets the value of the center property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the centers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCenters().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCenters() {
-        if (centers == null) {
-            centers = new ArrayList<Double>();
-        }
-        return this.centers;
+    public org.cip4.lib.xjdf.type.XYPair getCenter() {
+        return center;
     }
 
     /**
-     * Gets the value of the holeTypes property.
+     * Sets the value of the center property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCenter(org.cip4.lib.xjdf.type.XYPair value) {
+        this.center = value;
+    }
+
+    /**
+     * Gets the value of the holeType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the holeType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleTypes().add(newItem);
+     *    getHoleType().add(newItem);
      * </pre>
      * 
      * 
@@ -321,11 +314,11 @@ public class HoleMakingParams
      * 
      * 
      */
-    public List<EnumHoleType> getHoleTypes() {
-        if (holeTypes == null) {
-            holeTypes = new ArrayList<EnumHoleType>();
+    public List<EnumHoleType> getHoleType() {
+        if (holeType == null) {
+            holeType = new ArrayList<EnumHoleType>();
         }
-        return this.holeTypes;
+        return this.holeType;
     }
 
 }

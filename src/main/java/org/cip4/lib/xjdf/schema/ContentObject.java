@@ -2,12 +2,11 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -59,7 +58,8 @@ public class ContentObject
     @XmlAttribute(name = "TrimClipPath")
     protected String trimClipPath;
     @XmlAttribute(name = "ClipBox")
-    protected List<Double> clipBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle clipBox;
     @XmlAttribute(name = "OrdID")
     protected Integer ordID;
     @XmlAttribute(name = "LogicalStackOrd")
@@ -69,7 +69,8 @@ public class ContentObject
     @XmlAttribute(name = "ClipBoxFormat")
     protected String clipBoxFormat;
     @XmlAttribute(name = "TrimCTM")
-    protected List<Double> trimCTMs;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
+    protected org.cip4.lib.xjdf.type.Matrix trimCTM;
     @XmlAttribute(name = "LayerID")
     protected Integer layerID;
     @XmlAttribute(name = "SourceClipPath")
@@ -85,9 +86,11 @@ public class ContentObject
     @XmlAttribute(name = "DocOrd")
     protected Integer docOrd;
     @XmlAttribute(name = "TrimSize")
-    protected List<Double> trimSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair trimSize;
     @XmlAttribute(name = "HalfTonePhaseOrigin")
-    protected List<Double> halfTonePhaseOrigins;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair halfTonePhaseOrigin;
     @XmlAttribute(name = "CompensationCTMFormat")
     protected String compensationCTMFormat;
 
@@ -164,32 +167,27 @@ public class ContentObject
     }
 
     /**
-     * Gets the value of the clipBoxes property.
+     * Gets the value of the clipBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the clipBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getClipBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getClipBoxes() {
-        if (clipBoxes == null) {
-            clipBoxes = new ArrayList<Double>();
-        }
-        return this.clipBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getClipBox() {
+        return clipBox;
+    }
+
+    /**
+     * Sets the value of the clipBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setClipBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.clipBox = value;
     }
 
     /**
@@ -289,32 +287,27 @@ public class ContentObject
     }
 
     /**
-     * Gets the value of the trimCTMs property.
+     * Gets the value of the trimCTM property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trimCTMs property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTrimCTMs().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTrimCTMs() {
-        if (trimCTMs == null) {
-            trimCTMs = new ArrayList<Double>();
-        }
-        return this.trimCTMs;
+    public org.cip4.lib.xjdf.type.Matrix getTrimCTM() {
+        return trimCTM;
+    }
+
+    /**
+     * Sets the value of the trimCTM property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTrimCTM(org.cip4.lib.xjdf.type.Matrix value) {
+        this.trimCTM = value;
     }
 
     /**
@@ -486,61 +479,51 @@ public class ContentObject
     }
 
     /**
-     * Gets the value of the trimSizes property.
+     * Gets the value of the trimSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the trimSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTrimSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTrimSizes() {
-        if (trimSizes == null) {
-            trimSizes = new ArrayList<Double>();
-        }
-        return this.trimSizes;
+    public org.cip4.lib.xjdf.type.XYPair getTrimSize() {
+        return trimSize;
     }
 
     /**
-     * Gets the value of the halfTonePhaseOrigins property.
+     * Sets the value of the trimSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the halfTonePhaseOrigins property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHalfTonePhaseOrigins().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getHalfTonePhaseOrigins() {
-        if (halfTonePhaseOrigins == null) {
-            halfTonePhaseOrigins = new ArrayList<Double>();
-        }
-        return this.halfTonePhaseOrigins;
+    public void setTrimSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.trimSize = value;
+    }
+
+    /**
+     * Gets the value of the halfTonePhaseOrigin property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getHalfTonePhaseOrigin() {
+        return halfTonePhaseOrigin;
+    }
+
+    /**
+     * Sets the value of the halfTonePhaseOrigin property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHalfTonePhaseOrigin(org.cip4.lib.xjdf.type.XYPair value) {
+        this.halfTonePhaseOrigin = value;
     }
 
     /**

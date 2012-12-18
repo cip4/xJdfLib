@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TransferFunctionControl", propOrder = {
-    "transferCurvePools"
+    "transferCurvePool"
 })
 public class TransferFunctionControl
     extends ParameterType
@@ -44,24 +44,24 @@ public class TransferFunctionControl
 {
 
     @XmlElement(name = "TransferCurvePool")
-    protected List<TransferCurvePool> transferCurvePools;
+    protected List<TransferCurvePool> transferCurvePool;
     @XmlAttribute(name = "TransferFunctionSource")
     @XmlSchemaType(name = "anySimpleType")
     protected String transferFunctionSource;
 
     /**
-     * Gets the value of the transferCurvePools property.
+     * Gets the value of the transferCurvePool property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the transferCurvePools property.
+     * This is why there is not a <CODE>set</CODE> method for the transferCurvePool property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTransferCurvePools().add(newItem);
+     *    getTransferCurvePool().add(newItem);
      * </pre>
      * 
      * 
@@ -71,11 +71,11 @@ public class TransferFunctionControl
      * 
      * 
      */
-    public List<TransferCurvePool> getTransferCurvePools() {
-        if (transferCurvePools == null) {
-            transferCurvePools = new ArrayList<TransferCurvePool>();
+    public List<TransferCurvePool> getTransferCurvePool() {
+        if (transferCurvePool == null) {
+            transferCurvePool = new ArrayList<TransferCurvePool>();
         }
-        return this.transferCurvePools;
+        return this.transferCurvePool;
     }
 
     /**

@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NumberingIntent", propOrder = {
-    "numberItems"
+    "numberItem"
 })
 public class NumberingIntent
     extends IntentType
@@ -46,7 +46,7 @@ public class NumberingIntent
 {
 
     @XmlElement(name = "NumberItem")
-    protected List<NumberItem> numberItems;
+    protected List<NumberItem> numberItem;
     @XmlAttribute(name = "ColorRef")
     @XmlIDREF
     protected Object colorRef;
@@ -56,18 +56,18 @@ public class NumberingIntent
     protected String colorNameDetails;
 
     /**
-     * Gets the value of the numberItems property.
+     * Gets the value of the numberItem property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numberItems property.
+     * This is why there is not a <CODE>set</CODE> method for the numberItem property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNumberItems().add(newItem);
+     *    getNumberItem().add(newItem);
      * </pre>
      * 
      * 
@@ -77,11 +77,11 @@ public class NumberingIntent
      * 
      * 
      */
-    public List<NumberItem> getNumberItems() {
-        if (numberItems == null) {
-            numberItems = new ArrayList<NumberItem>();
+    public List<NumberItem> getNumberItem() {
+        if (numberItem == null) {
+            numberItem = new ArrayList<NumberItem>();
         }
-        return this.numberItems;
+        return this.numberItem;
     }
 
     /**

@@ -61,63 +61,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BindingIntent", propOrder = {
-    "stripBindings",
-    "saddleStitchings",
-    "threadSewings",
-    "channelBindings",
-    "ringBindings",
-    "sideStitchings",
-    "coilBindings",
-    "wireCombBindings",
-    "plasticCombBindings",
-    "sideSewings",
-    "tapes",
-    "hardCoverBindings",
-    "softCoverBindings",
-    "edgeGluings",
+    "bindList",
+    "threadSealing",
     "tabs",
-    "threadSealings",
-    "bindLists"
+    "edgeGluing",
+    "softCoverBinding",
+    "hardCoverBinding",
+    "tape",
+    "sideSewing",
+    "plasticCombBinding",
+    "wireCombBinding",
+    "coilBinding",
+    "sideStitching",
+    "ringBinding",
+    "channelBinding",
+    "threadSewing",
+    "saddleStitching",
+    "stripBinding"
 })
 public class BindingIntent
     extends IntentType
     implements Serializable
 {
 
-    @XmlElement(name = "StripBinding")
-    protected List<StripBinding> stripBindings;
-    @XmlElement(name = "SaddleStitching")
-    protected List<SaddleStitching> saddleStitchings;
-    @XmlElement(name = "ThreadSewing")
-    protected List<ThreadSewing> threadSewings;
-    @XmlElement(name = "ChannelBinding")
-    protected List<ChannelBinding> channelBindings;
-    @XmlElement(name = "RingBinding")
-    protected List<RingBinding> ringBindings;
-    @XmlElement(name = "SideStitching")
-    protected List<SideStitching> sideStitchings;
-    @XmlElement(name = "CoilBinding")
-    protected List<CoilBinding> coilBindings;
-    @XmlElement(name = "WireCombBinding")
-    protected List<WireCombBinding> wireCombBindings;
-    @XmlElement(name = "PlasticCombBinding")
-    protected List<PlasticCombBinding> plasticCombBindings;
-    @XmlElement(name = "SideSewing")
-    protected List<Object> sideSewings;
-    @XmlElement(name = "Tape")
-    protected List<Object> tapes;
-    @XmlElement(name = "HardCoverBinding")
-    protected List<HardCoverBinding> hardCoverBindings;
-    @XmlElement(name = "SoftCoverBinding")
-    protected List<SoftCoverBinding> softCoverBindings;
-    @XmlElement(name = "EdgeGluing")
-    protected List<EdgeGluing> edgeGluings;
+    @XmlElement(name = "BindList")
+    protected List<Object> bindList;
+    @XmlElement(name = "ThreadSealing")
+    protected List<Object> threadSealing;
     @XmlElement(name = "Tabs")
     protected List<Tabs> tabs;
-    @XmlElement(name = "ThreadSealing")
-    protected List<Object> threadSealings;
-    @XmlElement(name = "BindList")
-    protected List<Object> bindLists;
+    @XmlElement(name = "EdgeGluing")
+    protected List<EdgeGluing> edgeGluing;
+    @XmlElement(name = "SoftCoverBinding")
+    protected List<SoftCoverBinding> softCoverBinding;
+    @XmlElement(name = "HardCoverBinding")
+    protected List<HardCoverBinding> hardCoverBinding;
+    @XmlElement(name = "Tape")
+    protected List<Object> tape;
+    @XmlElement(name = "SideSewing")
+    protected List<Object> sideSewing;
+    @XmlElement(name = "PlasticCombBinding")
+    protected List<PlasticCombBinding> plasticCombBinding;
+    @XmlElement(name = "WireCombBinding")
+    protected List<WireCombBinding> wireCombBinding;
+    @XmlElement(name = "CoilBinding")
+    protected List<CoilBinding> coilBinding;
+    @XmlElement(name = "SideStitching")
+    protected List<SideStitching> sideStitching;
+    @XmlElement(name = "RingBinding")
+    protected List<RingBinding> ringBinding;
+    @XmlElement(name = "ChannelBinding")
+    protected List<ChannelBinding> channelBinding;
+    @XmlElement(name = "ThreadSewing")
+    protected List<ThreadSewing> threadSewing;
+    @XmlElement(name = "SaddleStitching")
+    protected List<SaddleStitching> saddleStitching;
+    @XmlElement(name = "StripBinding")
+    protected List<StripBinding> stripBinding;
     @XmlAttribute(name = "BindingOrder")
     @XmlSchemaType(name = "anySimpleType")
     protected String bindingOrder;
@@ -144,279 +144,18 @@ public class BindingIntent
     protected String coverColorDetails;
 
     /**
-     * Gets the value of the stripBindings property.
+     * Gets the value of the bindList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the stripBindings property.
+     * This is why there is not a <CODE>set</CODE> method for the bindList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getStripBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link StripBinding }
-     * 
-     * 
-     */
-    public List<StripBinding> getStripBindings() {
-        if (stripBindings == null) {
-            stripBindings = new ArrayList<StripBinding>();
-        }
-        return this.stripBindings;
-    }
-
-    /**
-     * Gets the value of the saddleStitchings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the saddleStitchings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSaddleStitchings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SaddleStitching }
-     * 
-     * 
-     */
-    public List<SaddleStitching> getSaddleStitchings() {
-        if (saddleStitchings == null) {
-            saddleStitchings = new ArrayList<SaddleStitching>();
-        }
-        return this.saddleStitchings;
-    }
-
-    /**
-     * Gets the value of the threadSewings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the threadSewings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getThreadSewings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ThreadSewing }
-     * 
-     * 
-     */
-    public List<ThreadSewing> getThreadSewings() {
-        if (threadSewings == null) {
-            threadSewings = new ArrayList<ThreadSewing>();
-        }
-        return this.threadSewings;
-    }
-
-    /**
-     * Gets the value of the channelBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the channelBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getChannelBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ChannelBinding }
-     * 
-     * 
-     */
-    public List<ChannelBinding> getChannelBindings() {
-        if (channelBindings == null) {
-            channelBindings = new ArrayList<ChannelBinding>();
-        }
-        return this.channelBindings;
-    }
-
-    /**
-     * Gets the value of the ringBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ringBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRingBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link RingBinding }
-     * 
-     * 
-     */
-    public List<RingBinding> getRingBindings() {
-        if (ringBindings == null) {
-            ringBindings = new ArrayList<RingBinding>();
-        }
-        return this.ringBindings;
-    }
-
-    /**
-     * Gets the value of the sideStitchings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sideStitchings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSideStitchings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SideStitching }
-     * 
-     * 
-     */
-    public List<SideStitching> getSideStitchings() {
-        if (sideStitchings == null) {
-            sideStitchings = new ArrayList<SideStitching>();
-        }
-        return this.sideStitchings;
-    }
-
-    /**
-     * Gets the value of the coilBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the coilBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCoilBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link CoilBinding }
-     * 
-     * 
-     */
-    public List<CoilBinding> getCoilBindings() {
-        if (coilBindings == null) {
-            coilBindings = new ArrayList<CoilBinding>();
-        }
-        return this.coilBindings;
-    }
-
-    /**
-     * Gets the value of the wireCombBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the wireCombBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getWireCombBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link WireCombBinding }
-     * 
-     * 
-     */
-    public List<WireCombBinding> getWireCombBindings() {
-        if (wireCombBindings == null) {
-            wireCombBindings = new ArrayList<WireCombBinding>();
-        }
-        return this.wireCombBindings;
-    }
-
-    /**
-     * Gets the value of the plasticCombBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the plasticCombBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPlasticCombBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PlasticCombBinding }
-     * 
-     * 
-     */
-    public List<PlasticCombBinding> getPlasticCombBindings() {
-        if (plasticCombBindings == null) {
-            plasticCombBindings = new ArrayList<PlasticCombBinding>();
-        }
-        return this.plasticCombBindings;
-    }
-
-    /**
-     * Gets the value of the sideSewings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sideSewings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSideSewings().add(newItem);
+     *    getBindList().add(newItem);
      * </pre>
      * 
      * 
@@ -426,26 +165,26 @@ public class BindingIntent
      * 
      * 
      */
-    public List<Object> getSideSewings() {
-        if (sideSewings == null) {
-            sideSewings = new ArrayList<Object>();
+    public List<Object> getBindList() {
+        if (bindList == null) {
+            bindList = new ArrayList<Object>();
         }
-        return this.sideSewings;
+        return this.bindList;
     }
 
     /**
-     * Gets the value of the tapes property.
+     * Gets the value of the threadSealing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tapes property.
+     * This is why there is not a <CODE>set</CODE> method for the threadSealing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getTapes().add(newItem);
+     *    getThreadSealing().add(newItem);
      * </pre>
      * 
      * 
@@ -455,98 +194,11 @@ public class BindingIntent
      * 
      * 
      */
-    public List<Object> getTapes() {
-        if (tapes == null) {
-            tapes = new ArrayList<Object>();
+    public List<Object> getThreadSealing() {
+        if (threadSealing == null) {
+            threadSealing = new ArrayList<Object>();
         }
-        return this.tapes;
-    }
-
-    /**
-     * Gets the value of the hardCoverBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the hardCoverBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHardCoverBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link HardCoverBinding }
-     * 
-     * 
-     */
-    public List<HardCoverBinding> getHardCoverBindings() {
-        if (hardCoverBindings == null) {
-            hardCoverBindings = new ArrayList<HardCoverBinding>();
-        }
-        return this.hardCoverBindings;
-    }
-
-    /**
-     * Gets the value of the softCoverBindings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the softCoverBindings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSoftCoverBindings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link SoftCoverBinding }
-     * 
-     * 
-     */
-    public List<SoftCoverBinding> getSoftCoverBindings() {
-        if (softCoverBindings == null) {
-            softCoverBindings = new ArrayList<SoftCoverBinding>();
-        }
-        return this.softCoverBindings;
-    }
-
-    /**
-     * Gets the value of the edgeGluings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the edgeGluings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getEdgeGluings().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link EdgeGluing }
-     * 
-     * 
-     */
-    public List<EdgeGluing> getEdgeGluings() {
-        if (edgeGluings == null) {
-            edgeGluings = new ArrayList<EdgeGluing>();
-        }
-        return this.edgeGluings;
+        return this.threadSealing;
     }
 
     /**
@@ -579,47 +231,105 @@ public class BindingIntent
     }
 
     /**
-     * Gets the value of the threadSealings property.
+     * Gets the value of the edgeGluing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the threadSealings property.
+     * This is why there is not a <CODE>set</CODE> method for the edgeGluing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getThreadSealings().add(newItem);
+     *    getEdgeGluing().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Object }
+     * {@link EdgeGluing }
      * 
      * 
      */
-    public List<Object> getThreadSealings() {
-        if (threadSealings == null) {
-            threadSealings = new ArrayList<Object>();
+    public List<EdgeGluing> getEdgeGluing() {
+        if (edgeGluing == null) {
+            edgeGluing = new ArrayList<EdgeGluing>();
         }
-        return this.threadSealings;
+        return this.edgeGluing;
     }
 
     /**
-     * Gets the value of the bindLists property.
+     * Gets the value of the softCoverBinding property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bindLists property.
+     * This is why there is not a <CODE>set</CODE> method for the softCoverBinding property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBindLists().add(newItem);
+     *    getSoftCoverBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SoftCoverBinding }
+     * 
+     * 
+     */
+    public List<SoftCoverBinding> getSoftCoverBinding() {
+        if (softCoverBinding == null) {
+            softCoverBinding = new ArrayList<SoftCoverBinding>();
+        }
+        return this.softCoverBinding;
+    }
+
+    /**
+     * Gets the value of the hardCoverBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the hardCoverBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getHardCoverBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link HardCoverBinding }
+     * 
+     * 
+     */
+    public List<HardCoverBinding> getHardCoverBinding() {
+        if (hardCoverBinding == null) {
+            hardCoverBinding = new ArrayList<HardCoverBinding>();
+        }
+        return this.hardCoverBinding;
+    }
+
+    /**
+     * Gets the value of the tape property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the tape property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getTape().add(newItem);
      * </pre>
      * 
      * 
@@ -629,11 +339,301 @@ public class BindingIntent
      * 
      * 
      */
-    public List<Object> getBindLists() {
-        if (bindLists == null) {
-            bindLists = new ArrayList<Object>();
+    public List<Object> getTape() {
+        if (tape == null) {
+            tape = new ArrayList<Object>();
         }
-        return this.bindLists;
+        return this.tape;
+    }
+
+    /**
+     * Gets the value of the sideSewing property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sideSewing property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSideSewing().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Object }
+     * 
+     * 
+     */
+    public List<Object> getSideSewing() {
+        if (sideSewing == null) {
+            sideSewing = new ArrayList<Object>();
+        }
+        return this.sideSewing;
+    }
+
+    /**
+     * Gets the value of the plasticCombBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the plasticCombBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPlasticCombBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PlasticCombBinding }
+     * 
+     * 
+     */
+    public List<PlasticCombBinding> getPlasticCombBinding() {
+        if (plasticCombBinding == null) {
+            plasticCombBinding = new ArrayList<PlasticCombBinding>();
+        }
+        return this.plasticCombBinding;
+    }
+
+    /**
+     * Gets the value of the wireCombBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the wireCombBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getWireCombBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link WireCombBinding }
+     * 
+     * 
+     */
+    public List<WireCombBinding> getWireCombBinding() {
+        if (wireCombBinding == null) {
+            wireCombBinding = new ArrayList<WireCombBinding>();
+        }
+        return this.wireCombBinding;
+    }
+
+    /**
+     * Gets the value of the coilBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the coilBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCoilBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link CoilBinding }
+     * 
+     * 
+     */
+    public List<CoilBinding> getCoilBinding() {
+        if (coilBinding == null) {
+            coilBinding = new ArrayList<CoilBinding>();
+        }
+        return this.coilBinding;
+    }
+
+    /**
+     * Gets the value of the sideStitching property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the sideStitching property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSideStitching().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SideStitching }
+     * 
+     * 
+     */
+    public List<SideStitching> getSideStitching() {
+        if (sideStitching == null) {
+            sideStitching = new ArrayList<SideStitching>();
+        }
+        return this.sideStitching;
+    }
+
+    /**
+     * Gets the value of the ringBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the ringBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getRingBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link RingBinding }
+     * 
+     * 
+     */
+    public List<RingBinding> getRingBinding() {
+        if (ringBinding == null) {
+            ringBinding = new ArrayList<RingBinding>();
+        }
+        return this.ringBinding;
+    }
+
+    /**
+     * Gets the value of the channelBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the channelBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getChannelBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ChannelBinding }
+     * 
+     * 
+     */
+    public List<ChannelBinding> getChannelBinding() {
+        if (channelBinding == null) {
+            channelBinding = new ArrayList<ChannelBinding>();
+        }
+        return this.channelBinding;
+    }
+
+    /**
+     * Gets the value of the threadSewing property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the threadSewing property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getThreadSewing().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ThreadSewing }
+     * 
+     * 
+     */
+    public List<ThreadSewing> getThreadSewing() {
+        if (threadSewing == null) {
+            threadSewing = new ArrayList<ThreadSewing>();
+        }
+        return this.threadSewing;
+    }
+
+    /**
+     * Gets the value of the saddleStitching property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the saddleStitching property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSaddleStitching().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SaddleStitching }
+     * 
+     * 
+     */
+    public List<SaddleStitching> getSaddleStitching() {
+        if (saddleStitching == null) {
+            saddleStitching = new ArrayList<SaddleStitching>();
+        }
+        return this.saddleStitching;
+    }
+
+    /**
+     * Gets the value of the stripBinding property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the stripBinding property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStripBinding().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StripBinding }
+     * 
+     * 
+     */
+    public List<StripBinding> getStripBinding() {
+        if (stripBinding == null) {
+            stripBinding = new ArrayList<StripBinding>();
+        }
+        return this.stripBinding;
     }
 
     /**

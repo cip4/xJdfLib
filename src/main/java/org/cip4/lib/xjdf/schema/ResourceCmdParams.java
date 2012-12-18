@@ -53,21 +53,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "resources",
+    "part",
     "misDetails",
-    "parts"
+    "resource"
 })
 @XmlRootElement(name = "ResourceCmdParams")
 public class ResourceCmdParams
     implements Serializable
 {
 
-    @XmlElement(name = "Resource")
-    protected List<Resource> resources;
+    @XmlElement(name = "Part")
+    protected List<Part> part;
     @XmlElement(name = "MISDetails")
     protected List<MISDetails> misDetails;
-    @XmlElement(name = "Part")
-    protected List<Part> parts;
+    @XmlElement(name = "Resource")
+    protected List<Resource> resource;
     @XmlAttribute(name = "UpdateMethod")
     @XmlSchemaType(name = "anySimpleType")
     protected String updateMethod;
@@ -101,32 +101,32 @@ public class ResourceCmdParams
     protected String activation;
 
     /**
-     * Gets the value of the resources property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resources property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getResources().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Resource }
+     * {@link Part }
      * 
      * 
      */
-    public List<Resource> getResources() {
-        if (resources == null) {
-            resources = new ArrayList<Resource>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.resources;
+        return this.part;
     }
 
     /**
@@ -159,32 +159,32 @@ public class ResourceCmdParams
     }
 
     /**
-     * Gets the value of the parts property.
+     * Gets the value of the resource property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
+     * This is why there is not a <CODE>set</CODE> method for the resource property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getParts().add(newItem);
+     *    getResource().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Part }
+     * {@link Resource }
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Resource> getResource() {
+        if (resource == null) {
+            resource = new ArrayList<Resource>();
         }
-        return this.parts;
+        return this.resource;
     }
 
     /**

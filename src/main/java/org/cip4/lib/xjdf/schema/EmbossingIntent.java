@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "EmbossingIntent", propOrder = {
-    "embossingItems"
+    "embossingItem"
 })
 public class EmbossingIntent
     extends IntentType
@@ -41,21 +41,21 @@ public class EmbossingIntent
 {
 
     @XmlElement(name = "EmbossingItem")
-    protected List<EmbossingItem> embossingItems;
+    protected List<EmbossingItem> embossingItem;
 
     /**
-     * Gets the value of the embossingItems property.
+     * Gets the value of the embossingItem property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the embossingItems property.
+     * This is why there is not a <CODE>set</CODE> method for the embossingItem property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getEmbossingItems().add(newItem);
+     *    getEmbossingItem().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class EmbossingIntent
      * 
      * 
      */
-    public List<EmbossingItem> getEmbossingItems() {
-        if (embossingItems == null) {
-            embossingItems = new ArrayList<EmbossingItem>();
+    public List<EmbossingItem> getEmbossingItem() {
+        if (embossingItem == null) {
+            embossingItem = new ArrayList<EmbossingItem>();
         }
-        return this.embossingItems;
+        return this.embossingItem;
     }
 
 }

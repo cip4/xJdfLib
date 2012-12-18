@@ -48,7 +48,8 @@ public class PageElement
     @XmlIDREF
     protected List<Object> contentDataRefs;
     @XmlAttribute(name = "RelativeBox")
-    protected List<Double> relativeBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle relativeBox;
     @XmlAttribute(name = "ElementPages")
     protected Integer elementPages;
 
@@ -106,32 +107,27 @@ public class PageElement
     }
 
     /**
-     * Gets the value of the relativeBoxes property.
+     * Gets the value of the relativeBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the relativeBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRelativeBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getRelativeBoxes() {
-        if (relativeBoxes == null) {
-            relativeBoxes = new ArrayList<Double>();
-        }
-        return this.relativeBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getRelativeBox() {
+        return relativeBox;
+    }
+
+    /**
+     * Sets the value of the relativeBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRelativeBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.relativeBox = value;
     }
 
     /**

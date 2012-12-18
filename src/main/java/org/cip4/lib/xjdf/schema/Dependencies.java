@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "runLists"
+    "runList"
 })
 @XmlRootElement(name = "Dependencies")
 public class Dependencies
@@ -42,21 +42,21 @@ public class Dependencies
 {
 
     @XmlElement(name = "RunList")
-    protected List<RunList> runLists;
+    protected List<RunList> runList;
 
     /**
-     * Gets the value of the runLists property.
+     * Gets the value of the runList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the runLists property.
+     * This is why there is not a <CODE>set</CODE> method for the runList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRunLists().add(newItem);
+     *    getRunList().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class Dependencies
      * 
      * 
      */
-    public List<RunList> getRunLists() {
-        if (runLists == null) {
-            runLists = new ArrayList<RunList>();
+    public List<RunList> getRunList() {
+        if (runList == null) {
+            runList = new ArrayList<RunList>();
         }
-        return this.runLists;
+        return this.runList;
     }
 
 }

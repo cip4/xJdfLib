@@ -44,22 +44,22 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Assembly", propOrder = {
-    "assemblySections",
-    "pageAssignedLists"
+    "pageAssignedList",
+    "assemblySection"
 })
 public class Assembly
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElement(name = "AssemblySection")
-    protected List<AssemblySection> assemblySections;
     @XmlElement(name = "PageAssignedList")
-    protected List<PageAssignedList> pageAssignedLists;
+    protected List<PageAssignedList> pageAssignedList;
+    @XmlElement(name = "AssemblySection")
+    protected List<AssemblySection> assemblySection;
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "PhysicalSection")
-    protected List<Integer> physicalSections;
+    protected List<Integer> physicalSection;
     @XmlAttribute(name = "AssemblyIDs")
     protected List<String> assemblyIDs;
     @XmlAttribute(name = "BindingSide")
@@ -76,47 +76,18 @@ public class Assembly
     protected Object pageListRef;
 
     /**
-     * Gets the value of the assemblySections property.
+     * Gets the value of the pageAssignedList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the assemblySections property.
+     * This is why there is not a <CODE>set</CODE> method for the pageAssignedList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAssemblySections().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link AssemblySection }
-     * 
-     * 
-     */
-    public List<AssemblySection> getAssemblySections() {
-        if (assemblySections == null) {
-            assemblySections = new ArrayList<AssemblySection>();
-        }
-        return this.assemblySections;
-    }
-
-    /**
-     * Gets the value of the pageAssignedLists property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the pageAssignedLists property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPageAssignedLists().add(newItem);
+     *    getPageAssignedList().add(newItem);
      * </pre>
      * 
      * 
@@ -126,11 +97,40 @@ public class Assembly
      * 
      * 
      */
-    public List<PageAssignedList> getPageAssignedLists() {
-        if (pageAssignedLists == null) {
-            pageAssignedLists = new ArrayList<PageAssignedList>();
+    public List<PageAssignedList> getPageAssignedList() {
+        if (pageAssignedList == null) {
+            pageAssignedList = new ArrayList<PageAssignedList>();
         }
-        return this.pageAssignedLists;
+        return this.pageAssignedList;
+    }
+
+    /**
+     * Gets the value of the assemblySection property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the assemblySection property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAssemblySection().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link AssemblySection }
+     * 
+     * 
+     */
+    public List<AssemblySection> getAssemblySection() {
+        if (assemblySection == null) {
+            assemblySection = new ArrayList<AssemblySection>();
+        }
+        return this.assemblySection;
     }
 
     /**
@@ -158,18 +158,18 @@ public class Assembly
     }
 
     /**
-     * Gets the value of the physicalSections property.
+     * Gets the value of the physicalSection property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the physicalSections property.
+     * This is why there is not a <CODE>set</CODE> method for the physicalSection property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPhysicalSections().add(newItem);
+     *    getPhysicalSection().add(newItem);
      * </pre>
      * 
      * 
@@ -179,11 +179,11 @@ public class Assembly
      * 
      * 
      */
-    public List<Integer> getPhysicalSections() {
-        if (physicalSections == null) {
-            physicalSections = new ArrayList<Integer>();
+    public List<Integer> getPhysicalSection() {
+        if (physicalSection == null) {
+            physicalSection = new ArrayList<Integer>();
         }
-        return this.physicalSections;
+        return this.physicalSection;
     }
 
     /**

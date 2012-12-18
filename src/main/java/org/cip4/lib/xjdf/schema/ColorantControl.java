@@ -46,21 +46,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ColorantControl", propOrder = {
-    "colorantAlias",
-    "colorSpaceSubstitutes",
-    "deviceNSpaces"
+    "deviceNSpace",
+    "colorSpaceSubstitute",
+    "colorantAlias"
 })
 public class ColorantControl
     extends ParameterType
     implements Serializable
 {
 
+    @XmlElement(name = "DeviceNSpace")
+    protected List<DeviceNSpace> deviceNSpace;
+    @XmlElement(name = "ColorSpaceSubstitute")
+    protected List<ColorSpaceSubstitute> colorSpaceSubstitute;
     @XmlElement(name = "ColorantAlias")
     protected List<ColorantAlias> colorantAlias;
-    @XmlElement(name = "ColorSpaceSubstitute")
-    protected List<ColorSpaceSubstitute> colorSpaceSubstitutes;
-    @XmlElement(name = "DeviceNSpace")
-    protected List<DeviceNSpace> deviceNSpaces;
     @XmlAttribute(name = "ProcessColorModel")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String processColorModel;
@@ -73,11 +73,69 @@ public class ColorantControl
     @XmlIDREF
     protected Object colorantParamsRef;
     @XmlAttribute(name = "DeviceColorantOrder")
-    protected List<String> deviceColorantOrders;
+    protected List<String> deviceColorantOrder;
     @XmlAttribute(name = "ColorantConvertProcess")
-    protected List<String> colorantConvertProcesses;
+    protected List<String> colorantConvertProcess;
     @XmlAttribute(name = "ColorantOrder")
-    protected List<String> colorantOrders;
+    protected List<String> colorantOrder;
+
+    /**
+     * Gets the value of the deviceNSpace property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the deviceNSpace property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDeviceNSpace().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link DeviceNSpace }
+     * 
+     * 
+     */
+    public List<DeviceNSpace> getDeviceNSpace() {
+        if (deviceNSpace == null) {
+            deviceNSpace = new ArrayList<DeviceNSpace>();
+        }
+        return this.deviceNSpace;
+    }
+
+    /**
+     * Gets the value of the colorSpaceSubstitute property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the colorSpaceSubstitute property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColorSpaceSubstitute().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ColorSpaceSubstitute }
+     * 
+     * 
+     */
+    public List<ColorSpaceSubstitute> getColorSpaceSubstitute() {
+        if (colorSpaceSubstitute == null) {
+            colorSpaceSubstitute = new ArrayList<ColorSpaceSubstitute>();
+        }
+        return this.colorSpaceSubstitute;
+    }
 
     /**
      * Gets the value of the colorantAlias property.
@@ -106,64 +164,6 @@ public class ColorantControl
             colorantAlias = new ArrayList<ColorantAlias>();
         }
         return this.colorantAlias;
-    }
-
-    /**
-     * Gets the value of the colorSpaceSubstitutes property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorSpaceSubstitutes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getColorSpaceSubstitutes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ColorSpaceSubstitute }
-     * 
-     * 
-     */
-    public List<ColorSpaceSubstitute> getColorSpaceSubstitutes() {
-        if (colorSpaceSubstitutes == null) {
-            colorSpaceSubstitutes = new ArrayList<ColorSpaceSubstitute>();
-        }
-        return this.colorSpaceSubstitutes;
-    }
-
-    /**
-     * Gets the value of the deviceNSpaces property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceNSpaces property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDeviceNSpaces().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DeviceNSpace }
-     * 
-     * 
-     */
-    public List<DeviceNSpace> getDeviceNSpaces() {
-        if (deviceNSpaces == null) {
-            deviceNSpaces = new ArrayList<DeviceNSpace>();
-        }
-        return this.deviceNSpaces;
     }
 
     /**
@@ -263,18 +263,18 @@ public class ColorantControl
     }
 
     /**
-     * Gets the value of the deviceColorantOrders property.
+     * Gets the value of the deviceColorantOrder property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deviceColorantOrders property.
+     * This is why there is not a <CODE>set</CODE> method for the deviceColorantOrder property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeviceColorantOrders().add(newItem);
+     *    getDeviceColorantOrder().add(newItem);
      * </pre>
      * 
      * 
@@ -284,26 +284,26 @@ public class ColorantControl
      * 
      * 
      */
-    public List<String> getDeviceColorantOrders() {
-        if (deviceColorantOrders == null) {
-            deviceColorantOrders = new ArrayList<String>();
+    public List<String> getDeviceColorantOrder() {
+        if (deviceColorantOrder == null) {
+            deviceColorantOrder = new ArrayList<String>();
         }
-        return this.deviceColorantOrders;
+        return this.deviceColorantOrder;
     }
 
     /**
-     * Gets the value of the colorantConvertProcesses property.
+     * Gets the value of the colorantConvertProcess property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorantConvertProcesses property.
+     * This is why there is not a <CODE>set</CODE> method for the colorantConvertProcess property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorantConvertProcesses().add(newItem);
+     *    getColorantConvertProcess().add(newItem);
      * </pre>
      * 
      * 
@@ -313,26 +313,26 @@ public class ColorantControl
      * 
      * 
      */
-    public List<String> getColorantConvertProcesses() {
-        if (colorantConvertProcesses == null) {
-            colorantConvertProcesses = new ArrayList<String>();
+    public List<String> getColorantConvertProcess() {
+        if (colorantConvertProcess == null) {
+            colorantConvertProcess = new ArrayList<String>();
         }
-        return this.colorantConvertProcesses;
+        return this.colorantConvertProcess;
     }
 
     /**
-     * Gets the value of the colorantOrders property.
+     * Gets the value of the colorantOrder property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the colorantOrders property.
+     * This is why there is not a <CODE>set</CODE> method for the colorantOrder property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getColorantOrders().add(newItem);
+     *    getColorantOrder().add(newItem);
      * </pre>
      * 
      * 
@@ -342,11 +342,11 @@ public class ColorantControl
      * 
      * 
      */
-    public List<String> getColorantOrders() {
-        if (colorantOrders == null) {
-            colorantOrders = new ArrayList<String>();
+    public List<String> getColorantOrder() {
+        if (colorantOrder == null) {
+            colorantOrder = new ArrayList<String>();
         }
-        return this.colorantOrders;
+        return this.colorantOrder;
     }
 
 }

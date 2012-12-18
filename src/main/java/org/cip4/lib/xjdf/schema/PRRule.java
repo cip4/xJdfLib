@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "prRuleAttrs"
+    "prRuleAttr"
 })
 @XmlRootElement(name = "PRRule")
 public class PRRule
@@ -45,24 +45,24 @@ public class PRRule
 {
 
     @XmlElement(name = "PRRuleAttr")
-    protected List<PRRuleAttr> prRuleAttrs;
+    protected List<PRRuleAttr> prRuleAttr;
     @XmlAttribute(name = "ActionRefs")
     @XmlIDREF
     protected List<Object> actionRefs;
 
     /**
-     * Gets the value of the prRuleAttrs property.
+     * Gets the value of the prRuleAttr property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the prRuleAttrs property.
+     * This is why there is not a <CODE>set</CODE> method for the prRuleAttr property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPRRuleAttrs().add(newItem);
+     *    getPRRuleAttr().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class PRRule
      * 
      * 
      */
-    public List<PRRuleAttr> getPRRuleAttrs() {
-        if (prRuleAttrs == null) {
-            prRuleAttrs = new ArrayList<PRRuleAttr>();
+    public List<PRRuleAttr> getPRRuleAttr() {
+        if (prRuleAttr == null) {
+            prRuleAttr = new ArrayList<PRRuleAttr>();
         }
-        return this.prRuleAttrs;
+        return this.prRuleAttr;
     }
 
     /**

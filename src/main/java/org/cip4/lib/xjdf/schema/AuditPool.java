@@ -40,221 +40,47 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "deleteds",
-    "processRuns",
-    "phaseTimes",
-    "createds",
-    "modifieds",
-    "resourceAudits",
-    "notifications"
+    "notification",
+    "resourceAudit",
+    "modified",
+    "created",
+    "phaseTime",
+    "processRun",
+    "deleted"
 })
 @XmlRootElement(name = "AuditPool")
 public class AuditPool
     implements Serializable
 {
 
-    @XmlElement(name = "Deleted")
-    protected List<Deleted> deleteds;
-    @XmlElement(name = "ProcessRun")
-    protected List<ProcessRun> processRuns;
-    @XmlElement(name = "PhaseTime")
-    protected List<PhaseTime> phaseTimes;
-    @XmlElement(name = "Created")
-    protected List<Created> createds;
-    @XmlElement(name = "Modified")
-    protected List<Modified> modifieds;
-    @XmlElement(name = "ResourceAudit")
-    protected List<ResourceAudit> resourceAudits;
     @XmlElement(name = "Notification")
-    protected List<Notification> notifications;
+    protected List<Notification> notification;
+    @XmlElement(name = "ResourceAudit")
+    protected List<ResourceAudit> resourceAudit;
+    @XmlElement(name = "Modified")
+    protected List<Modified> modified;
+    @XmlElement(name = "Created")
+    protected List<Created> created;
+    @XmlElement(name = "PhaseTime")
+    protected List<PhaseTime> phaseTime;
+    @XmlElement(name = "ProcessRun")
+    protected List<ProcessRun> processRun;
+    @XmlElement(name = "Deleted")
+    protected List<Deleted> deleted;
 
     /**
-     * Gets the value of the deleteds property.
+     * Gets the value of the notification property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the deleteds property.
+     * This is why there is not a <CODE>set</CODE> method for the notification property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getDeleteds().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Deleted }
-     * 
-     * 
-     */
-    public List<Deleted> getDeleteds() {
-        if (deleteds == null) {
-            deleteds = new ArrayList<Deleted>();
-        }
-        return this.deleteds;
-    }
-
-    /**
-     * Gets the value of the processRuns property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the processRuns property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getProcessRuns().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ProcessRun }
-     * 
-     * 
-     */
-    public List<ProcessRun> getProcessRuns() {
-        if (processRuns == null) {
-            processRuns = new ArrayList<ProcessRun>();
-        }
-        return this.processRuns;
-    }
-
-    /**
-     * Gets the value of the phaseTimes property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the phaseTimes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPhaseTimes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link PhaseTime }
-     * 
-     * 
-     */
-    public List<PhaseTime> getPhaseTimes() {
-        if (phaseTimes == null) {
-            phaseTimes = new ArrayList<PhaseTime>();
-        }
-        return this.phaseTimes;
-    }
-
-    /**
-     * Gets the value of the createds property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the createds property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCreateds().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Created }
-     * 
-     * 
-     */
-    public List<Created> getCreateds() {
-        if (createds == null) {
-            createds = new ArrayList<Created>();
-        }
-        return this.createds;
-    }
-
-    /**
-     * Gets the value of the modifieds property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the modifieds property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getModifieds().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Modified }
-     * 
-     * 
-     */
-    public List<Modified> getModifieds() {
-        if (modifieds == null) {
-            modifieds = new ArrayList<Modified>();
-        }
-        return this.modifieds;
-    }
-
-    /**
-     * Gets the value of the resourceAudits property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resourceAudits property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResourceAudits().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link ResourceAudit }
-     * 
-     * 
-     */
-    public List<ResourceAudit> getResourceAudits() {
-        if (resourceAudits == null) {
-            resourceAudits = new ArrayList<ResourceAudit>();
-        }
-        return this.resourceAudits;
-    }
-
-    /**
-     * Gets the value of the notifications property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the notifications property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getNotifications().add(newItem);
+     *    getNotification().add(newItem);
      * </pre>
      * 
      * 
@@ -264,11 +90,185 @@ public class AuditPool
      * 
      * 
      */
-    public List<Notification> getNotifications() {
-        if (notifications == null) {
-            notifications = new ArrayList<Notification>();
+    public List<Notification> getNotification() {
+        if (notification == null) {
+            notification = new ArrayList<Notification>();
         }
-        return this.notifications;
+        return this.notification;
+    }
+
+    /**
+     * Gets the value of the resourceAudit property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the resourceAudit property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getResourceAudit().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ResourceAudit }
+     * 
+     * 
+     */
+    public List<ResourceAudit> getResourceAudit() {
+        if (resourceAudit == null) {
+            resourceAudit = new ArrayList<ResourceAudit>();
+        }
+        return this.resourceAudit;
+    }
+
+    /**
+     * Gets the value of the modified property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the modified property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getModified().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Modified }
+     * 
+     * 
+     */
+    public List<Modified> getModified() {
+        if (modified == null) {
+            modified = new ArrayList<Modified>();
+        }
+        return this.modified;
+    }
+
+    /**
+     * Gets the value of the created property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the created property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getCreated().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Created }
+     * 
+     * 
+     */
+    public List<Created> getCreated() {
+        if (created == null) {
+            created = new ArrayList<Created>();
+        }
+        return this.created;
+    }
+
+    /**
+     * Gets the value of the phaseTime property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the phaseTime property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPhaseTime().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PhaseTime }
+     * 
+     * 
+     */
+    public List<PhaseTime> getPhaseTime() {
+        if (phaseTime == null) {
+            phaseTime = new ArrayList<PhaseTime>();
+        }
+        return this.phaseTime;
+    }
+
+    /**
+     * Gets the value of the processRun property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the processRun property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getProcessRun().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link ProcessRun }
+     * 
+     * 
+     */
+    public List<ProcessRun> getProcessRun() {
+        if (processRun == null) {
+            processRun = new ArrayList<ProcessRun>();
+        }
+        return this.processRun;
+    }
+
+    /**
+     * Gets the value of the deleted property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the deleted property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDeleted().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Deleted }
+     * 
+     * 
+     */
+    public List<Deleted> getDeleted() {
+        if (deleted == null) {
+            deleted = new ArrayList<Deleted>();
+        }
+        return this.deleted;
     }
 
 }

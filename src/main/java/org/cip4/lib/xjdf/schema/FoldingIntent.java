@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FoldingIntent", propOrder = {
-    "folds"
+    "fold"
 })
 public class FoldingIntent
     extends IntentType
@@ -45,24 +45,24 @@ public class FoldingIntent
 {
 
     @XmlElement(name = "Fold")
-    protected List<Fold> folds;
+    protected List<Fold> fold;
     @XmlAttribute(name = "FoldingCatalog")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String foldingCatalog;
 
     /**
-     * Gets the value of the folds property.
+     * Gets the value of the fold property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the folds property.
+     * This is why there is not a <CODE>set</CODE> method for the fold property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFolds().add(newItem);
+     *    getFold().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class FoldingIntent
      * 
      * 
      */
-    public List<Fold> getFolds() {
-        if (folds == null) {
-            folds = new ArrayList<Fold>();
+    public List<Fold> getFold() {
+        if (fold == null) {
+            fold = new ArrayList<Fold>();
         }
-        return this.folds;
+        return this.fold;
     }
 
     /**

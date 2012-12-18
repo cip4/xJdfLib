@@ -45,18 +45,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "subscriptions",
-    "parts"
+    "part",
+    "subscription"
 })
 @XmlRootElement(name = "SubscriptionInfo")
 public class SubscriptionInfo
     implements Serializable
 {
 
-    @XmlElement(name = "Subscription")
-    protected List<Subscription> subscriptions;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "Subscription")
+    protected List<Subscription> subscription;
     @XmlAttribute(name = "MessageType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String messageType;
@@ -76,47 +76,18 @@ public class SubscriptionInfo
     protected String queueEntryID;
 
     /**
-     * Gets the value of the subscriptions property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the subscriptions property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getSubscriptions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Subscription }
-     * 
-     * 
-     */
-    public List<Subscription> getSubscriptions() {
-        if (subscriptions == null) {
-            subscriptions = new ArrayList<Subscription>();
-        }
-        return this.subscriptions;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -126,11 +97,40 @@ public class SubscriptionInfo
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the subscription property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the subscription property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSubscription().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Subscription }
+     * 
+     * 
+     */
+    public List<Subscription> getSubscription() {
+        if (subscription == null) {
+            subscription = new ArrayList<Subscription>();
+        }
+        return this.subscription;
     }
 
     /**

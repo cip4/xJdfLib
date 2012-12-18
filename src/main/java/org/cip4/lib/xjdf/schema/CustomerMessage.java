@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "comChannels"
+    "comChannel"
 })
 @XmlRootElement(name = "CustomerMessage")
 public class CustomerMessage
@@ -46,27 +46,27 @@ public class CustomerMessage
 {
 
     @XmlElement(name = "ComChannel")
-    protected List<ComChannel> comChannels;
+    protected List<ComChannel> comChannel;
     @XmlAttribute(name = "MessageEvents")
     protected List<String> messageEvents;
     @XmlAttribute(name = "Language")
     protected String language;
     @XmlAttribute(name = "ShowList")
-    protected List<String> showLists;
+    protected List<String> showList;
 
     /**
-     * Gets the value of the comChannels property.
+     * Gets the value of the comChannel property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the comChannels property.
+     * This is why there is not a <CODE>set</CODE> method for the comChannel property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getComChannels().add(newItem);
+     *    getComChannel().add(newItem);
      * </pre>
      * 
      * 
@@ -76,11 +76,11 @@ public class CustomerMessage
      * 
      * 
      */
-    public List<ComChannel> getComChannels() {
-        if (comChannels == null) {
-            comChannels = new ArrayList<ComChannel>();
+    public List<ComChannel> getComChannel() {
+        if (comChannel == null) {
+            comChannel = new ArrayList<ComChannel>();
         }
-        return this.comChannels;
+        return this.comChannel;
     }
 
     /**
@@ -137,18 +137,18 @@ public class CustomerMessage
     }
 
     /**
-     * Gets the value of the showLists property.
+     * Gets the value of the showList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the showLists property.
+     * This is why there is not a <CODE>set</CODE> method for the showList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShowLists().add(newItem);
+     *    getShowList().add(newItem);
      * </pre>
      * 
      * 
@@ -158,11 +158,11 @@ public class CustomerMessage
      * 
      * 
      */
-    public List<String> getShowLists() {
-        if (showLists == null) {
-            showLists = new ArrayList<String>();
+    public List<String> getShowList() {
+        if (showList == null) {
+            showList = new ArrayList<String>();
         }
-        return this.showLists;
+        return this.showList;
     }
 
 }

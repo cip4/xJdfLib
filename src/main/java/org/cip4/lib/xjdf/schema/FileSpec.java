@@ -63,21 +63,21 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FileSpec", propOrder = {
-    "fileAlias",
-    "dispositions",
-    "containers"
+    "container",
+    "disposition",
+    "fileAlias"
 })
 public class FileSpec
     extends ParameterType
     implements Serializable
 {
 
+    @XmlElement(name = "Container")
+    protected List<Container> container;
+    @XmlElement(name = "Disposition")
+    protected List<Disposition> disposition;
     @XmlElement(name = "FileAlias")
     protected List<FileAlias> fileAlias;
-    @XmlElement(name = "Disposition")
-    protected List<Disposition> dispositions;
-    @XmlElement(name = "Container")
-    protected List<Container> containers;
     @XmlAttribute(name = "DocumentNaturalLang")
     protected String documentNaturalLang;
     @XmlAttribute(name = "Compression")
@@ -132,6 +132,64 @@ public class FileSpec
     protected String overwritePolicy;
 
     /**
+     * Gets the value of the container property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the container property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContainer().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Container }
+     * 
+     * 
+     */
+    public List<Container> getContainer() {
+        if (container == null) {
+            container = new ArrayList<Container>();
+        }
+        return this.container;
+    }
+
+    /**
+     * Gets the value of the disposition property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the disposition property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getDisposition().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Disposition }
+     * 
+     * 
+     */
+    public List<Disposition> getDisposition() {
+        if (disposition == null) {
+            disposition = new ArrayList<Disposition>();
+        }
+        return this.disposition;
+    }
+
+    /**
      * Gets the value of the fileAlias property.
      * 
      * <p>
@@ -158,64 +216,6 @@ public class FileSpec
             fileAlias = new ArrayList<FileAlias>();
         }
         return this.fileAlias;
-    }
-
-    /**
-     * Gets the value of the dispositions property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dispositions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDispositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Disposition }
-     * 
-     * 
-     */
-    public List<Disposition> getDispositions() {
-        if (dispositions == null) {
-            dispositions = new ArrayList<Disposition>();
-        }
-        return this.dispositions;
-    }
-
-    /**
-     * Gets the value of the containers property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the containers property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContainers().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Container }
-     * 
-     * 
-     */
-    public List<Container> getContainers() {
-        if (containers == null) {
-            containers = new ArrayList<Container>();
-        }
-        return this.containers;
     }
 
     /**

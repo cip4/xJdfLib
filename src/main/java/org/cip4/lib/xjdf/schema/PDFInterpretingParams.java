@@ -53,7 +53,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "ocgControls"
+    "ocgControl"
 })
 @XmlRootElement(name = "PDFInterpretingParams")
 public class PDFInterpretingParams
@@ -61,7 +61,7 @@ public class PDFInterpretingParams
 {
 
     @XmlElement(name = "OCGControl")
-    protected List<OCGControl> ocgControls;
+    protected List<OCGControl> ocgControl;
     @XmlAttribute(name = "OCGProcess")
     @XmlSchemaType(name = "anySimpleType")
     protected String ocgProcess;
@@ -96,18 +96,18 @@ public class PDFInterpretingParams
     protected Object referenceXObjParamsRef;
 
     /**
-     * Gets the value of the ocgControls property.
+     * Gets the value of the ocgControl property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ocgControls property.
+     * This is why there is not a <CODE>set</CODE> method for the ocgControl property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getOCGControls().add(newItem);
+     *    getOCGControl().add(newItem);
      * </pre>
      * 
      * 
@@ -117,11 +117,11 @@ public class PDFInterpretingParams
      * 
      * 
      */
-    public List<OCGControl> getOCGControls() {
-        if (ocgControls == null) {
-            ocgControls = new ArrayList<OCGControl>();
+    public List<OCGControl> getOCGControl() {
+        if (ocgControl == null) {
+            ocgControl = new ArrayList<OCGControl>();
         }
-        return this.ocgControls;
+        return this.ocgControl;
     }
 
     /**

@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShapeCuttingParams", propOrder = {
-    "shapes"
+    "shape"
 })
 public class ShapeCuttingParams
     extends ParameterType
@@ -48,7 +48,7 @@ public class ShapeCuttingParams
 {
 
     @XmlElement(name = "Shape")
-    protected List<Shape> shapes;
+    protected List<Shape> shape;
     @XmlAttribute(name = "DeliveryMode")
     @XmlSchemaType(name = "anySimpleType")
     protected String deliveryMode;
@@ -62,18 +62,18 @@ public class ShapeCuttingParams
     protected Object dieLayoutRef;
 
     /**
-     * Gets the value of the shapes property.
+     * Gets the value of the shape property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the shapes property.
+     * This is why there is not a <CODE>set</CODE> method for the shape property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getShapes().add(newItem);
+     *    getShape().add(newItem);
      * </pre>
      * 
      * 
@@ -83,11 +83,11 @@ public class ShapeCuttingParams
      * 
      * 
      */
-    public List<Shape> getShapes() {
-        if (shapes == null) {
-            shapes = new ArrayList<Shape>();
+    public List<Shape> getShape() {
+        if (shape == null) {
+            shape = new ArrayList<Shape>();
         }
-        return this.shapes;
+        return this.shape;
     }
 
     /**

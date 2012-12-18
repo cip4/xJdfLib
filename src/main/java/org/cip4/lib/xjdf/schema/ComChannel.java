@@ -47,7 +47,7 @@ public class ComChannel
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String channelTypeDetails;
     @XmlAttribute(name = "ChannelUsage")
-    protected List<String> channelUsages;
+    protected List<String> channelUsage;
     @XmlAttribute(name = "Locator")
     protected String locator;
 
@@ -100,18 +100,18 @@ public class ComChannel
     }
 
     /**
-     * Gets the value of the channelUsages property.
+     * Gets the value of the channelUsage property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the channelUsages property.
+     * This is why there is not a <CODE>set</CODE> method for the channelUsage property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getChannelUsages().add(newItem);
+     *    getChannelUsage().add(newItem);
      * </pre>
      * 
      * 
@@ -121,11 +121,11 @@ public class ComChannel
      * 
      * 
      */
-    public List<String> getChannelUsages() {
-        if (channelUsages == null) {
-            channelUsages = new ArrayList<String>();
+    public List<String> getChannelUsage() {
+        if (channelUsage == null) {
+            channelUsage = new ArrayList<String>();
         }
-        return this.channelUsages;
+        return this.channelUsage;
     }
 
     /**

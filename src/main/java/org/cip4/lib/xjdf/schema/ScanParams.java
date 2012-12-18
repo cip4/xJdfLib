@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -48,16 +47,19 @@ public class ScanParams
 {
 
     @XmlAttribute(name = "Magnification")
-    protected List<Double> magnifications;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair magnification;
     @XmlAttribute(name = "OutputResolution")
-    protected List<Double> outputResolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair outputResolution;
     @XmlAttribute(name = "BitDepth")
     protected Integer bitDepth;
     @XmlAttribute(name = "Mounting")
     @XmlSchemaType(name = "anySimpleType")
     protected String mounting;
     @XmlAttribute(name = "InputBox")
-    protected List<Double> inputBoxes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle inputBox;
     @XmlAttribute(name = "DCTQuality")
     protected Double dctQuality;
     @XmlAttribute(name = "MountID")
@@ -71,67 +73,58 @@ public class ScanParams
     @XmlSchemaType(name = "anySimpleType")
     protected String compressionFilter;
     @XmlAttribute(name = "OutputSize")
-    protected List<Double> outputSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair outputSize;
     @XmlAttribute(name = "FileSpecRef")
     @XmlIDREF
     protected Object fileSpecRef;
 
     /**
-     * Gets the value of the magnifications property.
+     * Gets the value of the magnification property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the magnifications property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getMagnifications().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getMagnifications() {
-        if (magnifications == null) {
-            magnifications = new ArrayList<Double>();
-        }
-        return this.magnifications;
+    public org.cip4.lib.xjdf.type.XYPair getMagnification() {
+        return magnification;
     }
 
     /**
-     * Gets the value of the outputResolutions property.
+     * Sets the value of the magnification property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the outputResolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOutputResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOutputResolutions() {
-        if (outputResolutions == null) {
-            outputResolutions = new ArrayList<Double>();
-        }
-        return this.outputResolutions;
+    public void setMagnification(org.cip4.lib.xjdf.type.XYPair value) {
+        this.magnification = value;
+    }
+
+    /**
+     * Gets the value of the outputResolution property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getOutputResolution() {
+        return outputResolution;
+    }
+
+    /**
+     * Sets the value of the outputResolution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOutputResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.outputResolution = value;
     }
 
     /**
@@ -183,32 +176,27 @@ public class ScanParams
     }
 
     /**
-     * Gets the value of the inputBoxes property.
+     * Gets the value of the inputBox property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the inputBoxes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getInputBoxes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getInputBoxes() {
-        if (inputBoxes == null) {
-            inputBoxes = new ArrayList<Double>();
-        }
-        return this.inputBoxes;
+    public org.cip4.lib.xjdf.type.Rectangle getInputBox() {
+        return inputBox;
+    }
+
+    /**
+     * Sets the value of the inputBox property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setInputBox(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.inputBox = value;
     }
 
     /**
@@ -332,32 +320,27 @@ public class ScanParams
     }
 
     /**
-     * Gets the value of the outputSizes property.
+     * Gets the value of the outputSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the outputSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getOutputSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getOutputSizes() {
-        if (outputSizes == null) {
-            outputSizes = new ArrayList<Double>();
-        }
-        return this.outputSizes;
+    public org.cip4.lib.xjdf.type.XYPair getOutputSize() {
+        return outputSize;
+    }
+
+    /**
+     * Sets the value of the outputSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setOutputSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.outputSize = value;
     }
 
     /**

@@ -45,7 +45,7 @@ public class PrintCondition
     @XmlAttribute(name = "Density")
     protected Double density;
     @XmlAttribute(name = "AimCurve")
-    protected List<Double> aimCurves;
+    protected List<Double> aimCurve;
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
     @XmlIDREF
     protected Object colorMeasurementConditionsRef;
@@ -105,18 +105,18 @@ public class PrintCondition
     }
 
     /**
-     * Gets the value of the aimCurves property.
+     * Gets the value of the aimCurve property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the aimCurves property.
+     * This is why there is not a <CODE>set</CODE> method for the aimCurve property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAimCurves().add(newItem);
+     *    getAimCurve().add(newItem);
      * </pre>
      * 
      * 
@@ -126,11 +126,11 @@ public class PrintCondition
      * 
      * 
      */
-    public List<Double> getAimCurves() {
-        if (aimCurves == null) {
-            aimCurves = new ArrayList<Double>();
+    public List<Double> getAimCurve() {
+        if (aimCurve == null) {
+            aimCurve = new ArrayList<Double>();
         }
-        return this.aimCurves;
+        return this.aimCurve;
     }
 
     /**

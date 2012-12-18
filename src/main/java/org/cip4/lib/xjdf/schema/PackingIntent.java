@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -63,7 +61,8 @@ public class PackingIntent
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String palletCornerBoards;
     @XmlAttribute(name = "PalletSize")
-    protected List<Double> palletSizes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair palletSize;
     @XmlAttribute(name = "CartonMaxWeight")
     protected Double cartonMaxWeight;
     @XmlAttribute(name = "PalletWrapping")
@@ -72,7 +71,8 @@ public class PackingIntent
     @XmlAttribute(name = "CartonQuantity")
     protected Integer cartonQuantity;
     @XmlAttribute(name = "CartonShape")
-    protected List<Double> cartonShapes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape cartonShape;
     @XmlAttribute(name = "PalletMaxHeight")
     protected Double palletMaxHeight;
     @XmlAttribute(name = "CartonStrength")
@@ -84,7 +84,8 @@ public class PackingIntent
     @XmlAttribute(name = "PalletQuantity")
     protected Integer palletQuantity;
     @XmlAttribute(name = "BoxShape")
-    protected List<Double> boxShapes;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape boxShape;
     @XmlAttribute(name = "FoldingCatalog")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String foldingCatalog;
@@ -186,32 +187,27 @@ public class PackingIntent
     }
 
     /**
-     * Gets the value of the palletSizes property.
+     * Gets the value of the palletSize property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the palletSizes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPalletSizes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getPalletSizes() {
-        if (palletSizes == null) {
-            palletSizes = new ArrayList<Double>();
-        }
-        return this.palletSizes;
+    public org.cip4.lib.xjdf.type.XYPair getPalletSize() {
+        return palletSize;
+    }
+
+    /**
+     * Sets the value of the palletSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPalletSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.palletSize = value;
     }
 
     /**
@@ -287,32 +283,27 @@ public class PackingIntent
     }
 
     /**
-     * Gets the value of the cartonShapes property.
+     * Gets the value of the cartonShape property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cartonShapes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCartonShapes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCartonShapes() {
-        if (cartonShapes == null) {
-            cartonShapes = new ArrayList<Double>();
-        }
-        return this.cartonShapes;
+    public org.cip4.lib.xjdf.type.Shape getCartonShape() {
+        return cartonShape;
+    }
+
+    /**
+     * Sets the value of the cartonShape property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCartonShape(org.cip4.lib.xjdf.type.Shape value) {
+        this.cartonShape = value;
     }
 
     /**
@@ -436,32 +427,27 @@ public class PackingIntent
     }
 
     /**
-     * Gets the value of the boxShapes property.
+     * Gets the value of the boxShape property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the boxShapes property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBoxShapes().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getBoxShapes() {
-        if (boxShapes == null) {
-            boxShapes = new ArrayList<Double>();
-        }
-        return this.boxShapes;
+    public org.cip4.lib.xjdf.type.Shape getBoxShape() {
+        return boxShape;
+    }
+
+    /**
+     * Sets the value of the boxShape property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBoxShape(org.cip4.lib.xjdf.type.Shape value) {
+        this.boxShape = value;
     }
 
     /**

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShapeEvaluation", propOrder = {
-    "basicPreflightTests"
+    "basicPreflightTest"
 })
 public class ShapeEvaluation
     extends TermType
@@ -49,35 +50,36 @@ public class ShapeEvaluation
 {
 
     @XmlElement(name = "BasicPreflightTest")
-    protected List<BasicPreflightTest> basicPreflightTests;
+    protected List<BasicPreflightTest> basicPreflightTest;
     @XmlAttribute(name = "Z")
-    protected List<Double> zs;
+    protected List<Double> z;
     @XmlAttribute(name = "X")
-    protected List<Double> xs;
+    protected List<Double> x;
     @XmlAttribute(name = "Y")
-    protected List<Double> ys;
+    protected List<Double> y;
     @XmlAttribute(name = "ValueList")
-    protected List<Double> valueLists;
+    protected List<Double> valueList;
     @XmlAttribute(name = "Tolerance")
-    protected List<Double> tolerances;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair tolerance;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
     protected String xPathRoot;
 
     /**
-     * Gets the value of the basicPreflightTests property.
+     * Gets the value of the basicPreflightTest property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTests property.
+     * This is why there is not a <CODE>set</CODE> method for the basicPreflightTest property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getBasicPreflightTests().add(newItem);
+     *    getBasicPreflightTest().add(newItem);
      * </pre>
      * 
      * 
@@ -87,26 +89,26 @@ public class ShapeEvaluation
      * 
      * 
      */
-    public List<BasicPreflightTest> getBasicPreflightTests() {
-        if (basicPreflightTests == null) {
-            basicPreflightTests = new ArrayList<BasicPreflightTest>();
+    public List<BasicPreflightTest> getBasicPreflightTest() {
+        if (basicPreflightTest == null) {
+            basicPreflightTest = new ArrayList<BasicPreflightTest>();
         }
-        return this.basicPreflightTests;
+        return this.basicPreflightTest;
     }
 
     /**
-     * Gets the value of the zs property.
+     * Gets the value of the z property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the zs property.
+     * This is why there is not a <CODE>set</CODE> method for the z property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getZS().add(newItem);
+     *    getZ().add(newItem);
      * </pre>
      * 
      * 
@@ -116,26 +118,26 @@ public class ShapeEvaluation
      * 
      * 
      */
-    public List<Double> getZS() {
-        if (zs == null) {
-            zs = new ArrayList<Double>();
+    public List<Double> getZ() {
+        if (z == null) {
+            z = new ArrayList<Double>();
         }
-        return this.zs;
+        return this.z;
     }
 
     /**
-     * Gets the value of the xs property.
+     * Gets the value of the x property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the xs property.
+     * This is why there is not a <CODE>set</CODE> method for the x property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getXS().add(newItem);
+     *    getX().add(newItem);
      * </pre>
      * 
      * 
@@ -145,26 +147,26 @@ public class ShapeEvaluation
      * 
      * 
      */
-    public List<Double> getXS() {
-        if (xs == null) {
-            xs = new ArrayList<Double>();
+    public List<Double> getX() {
+        if (x == null) {
+            x = new ArrayList<Double>();
         }
-        return this.xs;
+        return this.x;
     }
 
     /**
-     * Gets the value of the ys property.
+     * Gets the value of the y property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ys property.
+     * This is why there is not a <CODE>set</CODE> method for the y property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getYS().add(newItem);
+     *    getY().add(newItem);
      * </pre>
      * 
      * 
@@ -174,26 +176,26 @@ public class ShapeEvaluation
      * 
      * 
      */
-    public List<Double> getYS() {
-        if (ys == null) {
-            ys = new ArrayList<Double>();
+    public List<Double> getY() {
+        if (y == null) {
+            y = new ArrayList<Double>();
         }
-        return this.ys;
+        return this.y;
     }
 
     /**
-     * Gets the value of the valueLists property.
+     * Gets the value of the valueList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the valueLists property.
+     * This is why there is not a <CODE>set</CODE> method for the valueList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getValueLists().add(newItem);
+     *    getValueList().add(newItem);
      * </pre>
      * 
      * 
@@ -203,40 +205,35 @@ public class ShapeEvaluation
      * 
      * 
      */
-    public List<Double> getValueLists() {
-        if (valueLists == null) {
-            valueLists = new ArrayList<Double>();
+    public List<Double> getValueList() {
+        if (valueList == null) {
+            valueList = new ArrayList<Double>();
         }
-        return this.valueLists;
+        return this.valueList;
     }
 
     /**
-     * Gets the value of the tolerances property.
+     * Gets the value of the tolerance property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the tolerances property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTolerances().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getTolerances() {
-        if (tolerances == null) {
-            tolerances = new ArrayList<Double>();
-        }
-        return this.tolerances;
+    public org.cip4.lib.xjdf.type.XYPair getTolerance() {
+        return tolerance;
+    }
+
+    /**
+     * Sets the value of the tolerance property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTolerance(org.cip4.lib.xjdf.type.XYPair value) {
+        this.tolerance = value;
     }
 
     /**

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CutMark", propOrder = {
-    "assemblies"
+    "assembly"
 })
 public class CutMark
     extends ParameterType
@@ -46,9 +47,10 @@ public class CutMark
 {
 
     @XmlElement(name = "Assembly")
-    protected List<Assembly> assemblies;
+    protected List<Assembly> assembly;
     @XmlAttribute(name = "Position")
-    protected List<Double> positions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair position;
     @XmlAttribute(name = "Blocks")
     protected List<String> blocks;
     @XmlAttribute(name = "MarkType")
@@ -56,18 +58,18 @@ public class CutMark
     protected String markType;
 
     /**
-     * Gets the value of the assemblies property.
+     * Gets the value of the assembly property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the assemblies property.
+     * This is why there is not a <CODE>set</CODE> method for the assembly property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAssemblies().add(newItem);
+     *    getAssembly().add(newItem);
      * </pre>
      * 
      * 
@@ -77,40 +79,35 @@ public class CutMark
      * 
      * 
      */
-    public List<Assembly> getAssemblies() {
-        if (assemblies == null) {
-            assemblies = new ArrayList<Assembly>();
+    public List<Assembly> getAssembly() {
+        if (assembly == null) {
+            assembly = new ArrayList<Assembly>();
         }
-        return this.assemblies;
+        return this.assembly;
     }
 
     /**
-     * Gets the value of the positions property.
+     * Gets the value of the position property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the positions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getPositions() {
-        if (positions == null) {
-            positions = new ArrayList<Double>();
-        }
-        return this.positions;
+    public org.cip4.lib.xjdf.type.XYPair getPosition() {
+        return position;
+    }
+
+    /**
+     * Sets the value of the position property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setPosition(org.cip4.lib.xjdf.type.XYPair value) {
+        this.position = value;
     }
 
     /**

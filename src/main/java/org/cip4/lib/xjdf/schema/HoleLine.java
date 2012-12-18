@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HoleLine", propOrder = {
-    "holes"
+    "hole"
 })
 public class HoleLine
     extends ParameterType
@@ -43,23 +43,23 @@ public class HoleLine
 {
 
     @XmlElement(name = "Hole")
-    protected List<Hole> holes;
+    protected List<Hole> hole;
     @XmlAttribute(name = "Pitch")
     protected Double pitch;
 
     /**
-     * Gets the value of the holes property.
+     * Gets the value of the hole property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holes property.
+     * This is why there is not a <CODE>set</CODE> method for the hole property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoles().add(newItem);
+     *    getHole().add(newItem);
      * </pre>
      * 
      * 
@@ -69,11 +69,11 @@ public class HoleLine
      * 
      * 
      */
-    public List<Hole> getHoles() {
-        if (holes == null) {
-            holes = new ArrayList<Hole>();
+    public List<Hole> getHole() {
+        if (hole == null) {
+            hole = new ArrayList<Hole>();
         }
-        return this.holes;
+        return this.hole;
     }
 
     /**

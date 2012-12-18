@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CaseMakingParams", propOrder = {
-    "glueLines"
+    "glueLine"
 })
 public class CaseMakingParams
     extends ParameterType
@@ -52,7 +52,7 @@ public class CaseMakingParams
 {
 
     @XmlElement(name = "GlueLine")
-    protected List<GlueLine> glueLines;
+    protected List<GlueLine> glueLine;
     @XmlAttribute(name = "TopFoldIn")
     protected Double topFoldIn;
     @XmlAttribute(name = "FrontFoldIn")
@@ -72,18 +72,18 @@ public class CaseMakingParams
     protected Double coverWidth;
 
     /**
-     * Gets the value of the glueLines property.
+     * Gets the value of the glueLine property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLines property.
+     * This is why there is not a <CODE>set</CODE> method for the glueLine property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getGlueLines().add(newItem);
+     *    getGlueLine().add(newItem);
      * </pre>
      * 
      * 
@@ -93,11 +93,11 @@ public class CaseMakingParams
      * 
      * 
      */
-    public List<GlueLine> getGlueLines() {
-        if (glueLines == null) {
-            glueLines = new ArrayList<GlueLine>();
+    public List<GlueLine> getGlueLine() {
+        if (glueLine == null) {
+            glueLine = new ArrayList<GlueLine>();
         }
-        return this.glueLines;
+        return this.glueLine;
     }
 
     /**

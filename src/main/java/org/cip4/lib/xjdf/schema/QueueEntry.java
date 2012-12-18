@@ -49,18 +49,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "jobPhases",
-    "parts"
+    "part",
+    "jobPhase"
 })
 @XmlRootElement(name = "QueueEntry")
 public class QueueEntry
     implements Serializable
 {
 
-    @XmlElement(name = "JobPhase")
-    protected List<JobPhase> jobPhases;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "JobPhase")
+    protected List<JobPhase> jobPhase;
     @XmlAttribute(name = "GangName")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String gangName;
@@ -85,47 +85,18 @@ public class QueueEntry
     protected String deviceID;
 
     /**
-     * Gets the value of the jobPhases property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the jobPhases property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getJobPhases().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JobPhase }
-     * 
-     * 
-     */
-    public List<JobPhase> getJobPhases() {
-        if (jobPhases == null) {
-            jobPhases = new ArrayList<JobPhase>();
-        }
-        return this.jobPhases;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -135,11 +106,40 @@ public class QueueEntry
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the jobPhase property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the jobPhase property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getJobPhase().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link JobPhase }
+     * 
+     * 
+     */
+    public List<JobPhase> getJobPhase() {
+        if (jobPhase == null) {
+            jobPhase = new ArrayList<JobPhase>();
+        }
+        return this.jobPhase;
     }
 
     /**

@@ -49,7 +49,8 @@ public class ObjectResolution
     @XmlAttribute(name = "SourceObjects")
     protected List<EnumSourceObjects> sourceObjects;
     @XmlAttribute(name = "Resolution")
-    protected List<Double> resolutions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair resolution;
     @XmlAttribute(name = "ObjectTags")
     protected List<String> objectTags;
 
@@ -107,32 +108,27 @@ public class ObjectResolution
     }
 
     /**
-     * Gets the value of the resolutions property.
+     * Gets the value of the resolution property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resolutions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResolutions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getResolutions() {
-        if (resolutions == null) {
-            resolutions = new ArrayList<Double>();
-        }
-        return this.resolutions;
+    public org.cip4.lib.xjdf.type.XYPair getResolution() {
+        return resolution;
+    }
+
+    /**
+     * Sets the value of the resolution property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setResolution(org.cip4.lib.xjdf.type.XYPair value) {
+        this.resolution = value;
     }
 
     /**

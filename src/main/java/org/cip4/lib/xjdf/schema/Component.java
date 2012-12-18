@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -60,48 +61,51 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Component", propOrder = {
-    "contacts",
-    "locations",
-    "assemblies",
-    "bundles",
-    "disjointings"
+    "disjointing",
+    "bundle",
+    "assembly",
+    "location",
+    "contact"
 })
 public class Component
     extends ResourceType
     implements Serializable
 {
 
-    @XmlElement(name = "Contact")
-    protected List<Contact> contacts;
-    @XmlElement(name = "Location")
-    protected List<Location> locations;
-    @XmlElement(name = "Assembly")
-    protected List<Assembly> assemblies;
-    @XmlElement(name = "Bundle")
-    protected List<Bundle> bundles;
     @XmlElement(name = "Disjointing")
-    protected List<Disjointing> disjointings;
+    protected List<Disjointing> disjointing;
+    @XmlElement(name = "Bundle")
+    protected List<Bundle> bundle;
+    @XmlElement(name = "Assembly")
+    protected List<Assembly> assembly;
+    @XmlElement(name = "Location")
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "AssemblyIDs")
     protected List<String> assemblyIDs;
     @XmlAttribute(name = "Overfold")
     protected Double overfold;
     @XmlAttribute(name = "ComponentType")
-    protected List<EnumComponentType> componentTypes;
+    protected List<EnumComponentType> componentType;
     @XmlAttribute(name = "SpineThickness")
     protected Double spineThickness;
     @XmlAttribute(name = "OverfoldSide")
     @XmlSchemaType(name = "anySimpleType")
     protected String overfoldSide;
     @XmlAttribute(name = "SheetPart")
-    protected List<Double> sheetParts;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
+    protected org.cip4.lib.xjdf.type.Rectangle sheetPart;
     @XmlAttribute(name = "Dimensions")
-    protected List<Double> dimensions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Shape.class)
+    protected org.cip4.lib.xjdf.type.Shape dimensions;
     @XmlAttribute(name = "PageListIndex")
     protected Integer pageListIndex;
     @XmlAttribute(name = "SurfaceCount")
     protected Integer surfaceCount;
     @XmlAttribute(name = "CartonTopFlaps")
-    protected List<Double> cartonTopFlaps;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair cartonTopFlaps;
     @XmlAttribute(name = "MaxHeat")
     protected Double maxHeat;
     @XmlAttribute(name = "ReaderPageCount")
@@ -120,134 +124,18 @@ public class Component
     protected Object layoutRef;
 
     /**
-     * Gets the value of the contacts property.
+     * Gets the value of the disjointing property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contacts property.
+     * This is why there is not a <CODE>set</CODE> method for the disjointing property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getContacts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContacts() {
-        if (contacts == null) {
-            contacts = new ArrayList<Contact>();
-        }
-        return this.contacts;
-    }
-
-    /**
-     * Gets the value of the locations property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the locations property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocations().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Location }
-     * 
-     * 
-     */
-    public List<Location> getLocations() {
-        if (locations == null) {
-            locations = new ArrayList<Location>();
-        }
-        return this.locations;
-    }
-
-    /**
-     * Gets the value of the assemblies property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the assemblies property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAssemblies().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Assembly }
-     * 
-     * 
-     */
-    public List<Assembly> getAssemblies() {
-        if (assemblies == null) {
-            assemblies = new ArrayList<Assembly>();
-        }
-        return this.assemblies;
-    }
-
-    /**
-     * Gets the value of the bundles property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the bundles property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBundles().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Bundle }
-     * 
-     * 
-     */
-    public List<Bundle> getBundles() {
-        if (bundles == null) {
-            bundles = new ArrayList<Bundle>();
-        }
-        return this.bundles;
-    }
-
-    /**
-     * Gets the value of the disjointings property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the disjointings property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDisjointings().add(newItem);
+     *    getDisjointing().add(newItem);
      * </pre>
      * 
      * 
@@ -257,11 +145,127 @@ public class Component
      * 
      * 
      */
-    public List<Disjointing> getDisjointings() {
-        if (disjointings == null) {
-            disjointings = new ArrayList<Disjointing>();
+    public List<Disjointing> getDisjointing() {
+        if (disjointing == null) {
+            disjointing = new ArrayList<Disjointing>();
         }
-        return this.disjointings;
+        return this.disjointing;
+    }
+
+    /**
+     * Gets the value of the bundle property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the bundle property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBundle().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Bundle }
+     * 
+     * 
+     */
+    public List<Bundle> getBundle() {
+        if (bundle == null) {
+            bundle = new ArrayList<Bundle>();
+        }
+        return this.bundle;
+    }
+
+    /**
+     * Gets the value of the assembly property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the assembly property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAssembly().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Assembly }
+     * 
+     * 
+     */
+    public List<Assembly> getAssembly() {
+        if (assembly == null) {
+            assembly = new ArrayList<Assembly>();
+        }
+        return this.assembly;
+    }
+
+    /**
+     * Gets the value of the location property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLocation().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Location }
+     * 
+     * 
+     */
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
+        }
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**
@@ -318,18 +322,18 @@ public class Component
     }
 
     /**
-     * Gets the value of the componentTypes property.
+     * Gets the value of the componentType property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the componentTypes property.
+     * This is why there is not a <CODE>set</CODE> method for the componentType property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getComponentTypes().add(newItem);
+     *    getComponentType().add(newItem);
      * </pre>
      * 
      * 
@@ -339,11 +343,11 @@ public class Component
      * 
      * 
      */
-    public List<EnumComponentType> getComponentTypes() {
-        if (componentTypes == null) {
-            componentTypes = new ArrayList<EnumComponentType>();
+    public List<EnumComponentType> getComponentType() {
+        if (componentType == null) {
+            componentType = new ArrayList<EnumComponentType>();
         }
-        return this.componentTypes;
+        return this.componentType;
     }
 
     /**
@@ -395,61 +399,51 @@ public class Component
     }
 
     /**
-     * Gets the value of the sheetParts property.
+     * Gets the value of the sheetPart property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sheetParts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSheetParts().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getSheetParts() {
-        if (sheetParts == null) {
-            sheetParts = new ArrayList<Double>();
-        }
-        return this.sheetParts;
+    public org.cip4.lib.xjdf.type.Rectangle getSheetPart() {
+        return sheetPart;
+    }
+
+    /**
+     * Sets the value of the sheetPart property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSheetPart(org.cip4.lib.xjdf.type.Rectangle value) {
+        this.sheetPart = value;
     }
 
     /**
      * Gets the value of the dimensions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the dimensions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDimensions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getDimensions() {
-        if (dimensions == null) {
-            dimensions = new ArrayList<Double>();
-        }
-        return this.dimensions;
+    public org.cip4.lib.xjdf.type.Shape getDimensions() {
+        return dimensions;
+    }
+
+    /**
+     * Sets the value of the dimensions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDimensions(org.cip4.lib.xjdf.type.Shape value) {
+        this.dimensions = value;
     }
 
     /**
@@ -503,30 +497,25 @@ public class Component
     /**
      * Gets the value of the cartonTopFlaps property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the cartonTopFlaps property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCartonTopFlaps().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Double }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Double> getCartonTopFlaps() {
-        if (cartonTopFlaps == null) {
-            cartonTopFlaps = new ArrayList<Double>();
-        }
-        return this.cartonTopFlaps;
+    public org.cip4.lib.xjdf.type.XYPair getCartonTopFlaps() {
+        return cartonTopFlaps;
+    }
+
+    /**
+     * Sets the value of the cartonTopFlaps property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCartonTopFlaps(org.cip4.lib.xjdf.type.XYPair value) {
+        this.cartonTopFlaps = value;
     }
 
     /**

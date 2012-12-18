@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "holeLists"
+    "holeList"
 })
 @XmlRootElement(name = "CoilBinding")
 public class CoilBinding
@@ -46,7 +46,7 @@ public class CoilBinding
 {
 
     @XmlElement(name = "HoleList")
-    protected List<HoleList> holeLists;
+    protected List<HoleList> holeList;
     @XmlAttribute(name = "CoilMaterial")
     @XmlSchemaType(name = "anySimpleType")
     protected String coilMaterial;
@@ -54,18 +54,18 @@ public class CoilBinding
     protected String coilBrand;
 
     /**
-     * Gets the value of the holeLists property.
+     * Gets the value of the holeList property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeLists property.
+     * This is why there is not a <CODE>set</CODE> method for the holeList property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getHoleLists().add(newItem);
+     *    getHoleList().add(newItem);
      * </pre>
      * 
      * 
@@ -75,11 +75,11 @@ public class CoilBinding
      * 
      * 
      */
-    public List<HoleList> getHoleLists() {
-        if (holeLists == null) {
-            holeLists = new ArrayList<HoleList>();
+    public List<HoleList> getHoleList() {
+        if (holeList == null) {
+            holeList = new ArrayList<HoleList>();
         }
-        return this.holeLists;
+        return this.holeList;
     }
 
     /**

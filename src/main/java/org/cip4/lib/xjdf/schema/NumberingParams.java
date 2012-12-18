@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NumberingParams", propOrder = {
-    "numberingParams"
+    "numberingParam"
 })
 public class NumberingParams
     extends ParameterType
@@ -41,21 +41,21 @@ public class NumberingParams
 {
 
     @XmlElement(name = "NumberingParam")
-    protected List<NumberingParam> numberingParams;
+    protected List<NumberingParam> numberingParam;
 
     /**
-     * Gets the value of the numberingParams property.
+     * Gets the value of the numberingParam property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numberingParams property.
+     * This is why there is not a <CODE>set</CODE> method for the numberingParam property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getNumberingParams().add(newItem);
+     *    getNumberingParam().add(newItem);
      * </pre>
      * 
      * 
@@ -65,11 +65,11 @@ public class NumberingParams
      * 
      * 
      */
-    public List<NumberingParam> getNumberingParams() {
-        if (numberingParams == null) {
-            numberingParams = new ArrayList<NumberingParam>();
+    public List<NumberingParam> getNumberingParam() {
+        if (numberingParam == null) {
+            numberingParam = new ArrayList<NumberingParam>();
         }
-        return this.numberingParams;
+        return this.numberingParam;
     }
 
 }

@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Trigger", propOrder = {
-    "changedPaths"
+    "changedPath"
 })
 public class Trigger
     extends ParameterType
@@ -44,25 +44,25 @@ public class Trigger
 {
 
     @XmlElement(name = "ChangedPath")
-    protected List<ChangedPath> changedPaths;
+    protected List<ChangedPath> changedPath;
     @XmlAttribute(name = "RepeatTime")
     protected Double repeatTime;
     @XmlAttribute(name = "RepeatStep")
     protected Integer repeatStep;
 
     /**
-     * Gets the value of the changedPaths property.
+     * Gets the value of the changedPath property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the changedPaths property.
+     * This is why there is not a <CODE>set</CODE> method for the changedPath property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getChangedPaths().add(newItem);
+     *    getChangedPath().add(newItem);
      * </pre>
      * 
      * 
@@ -72,11 +72,11 @@ public class Trigger
      * 
      * 
      */
-    public List<ChangedPath> getChangedPaths() {
-        if (changedPaths == null) {
-            changedPaths = new ArrayList<ChangedPath>();
+    public List<ChangedPath> getChangedPath() {
+        if (changedPath == null) {
+            changedPath = new ArrayList<ChangedPath>();
         }
-        return this.changedPaths;
+        return this.changedPath;
     }
 
     /**

@@ -41,18 +41,18 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "queues",
-    "parts"
+    "part",
+    "queue"
 })
 @XmlRootElement(name = "RequestQueueEntryParams")
 public class RequestQueueEntryParams
     implements Serializable
 {
 
-    @XmlElement(name = "Queue")
-    protected List<Queue> queues;
     @XmlElement(name = "Part")
-    protected List<Part> parts;
+    protected List<Part> part;
+    @XmlElement(name = "Queue")
+    protected List<Queue> queue;
     @XmlAttribute(name = "SubmitPolicy")
     @XmlSchemaType(name = "anySimpleType")
     protected String submitPolicy;
@@ -64,47 +64,18 @@ public class RequestQueueEntryParams
     protected String queueURL;
 
     /**
-     * Gets the value of the queues property.
+     * Gets the value of the part property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the queues property.
+     * This is why there is not a <CODE>set</CODE> method for the part property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getQueues().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Queue }
-     * 
-     * 
-     */
-    public List<Queue> getQueues() {
-        if (queues == null) {
-            queues = new ArrayList<Queue>();
-        }
-        return this.queues;
-    }
-
-    /**
-     * Gets the value of the parts property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the parts property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getParts().add(newItem);
+     *    getPart().add(newItem);
      * </pre>
      * 
      * 
@@ -114,11 +85,40 @@ public class RequestQueueEntryParams
      * 
      * 
      */
-    public List<Part> getParts() {
-        if (parts == null) {
-            parts = new ArrayList<Part>();
+    public List<Part> getPart() {
+        if (part == null) {
+            part = new ArrayList<Part>();
         }
-        return this.parts;
+        return this.part;
+    }
+
+    /**
+     * Gets the value of the queue property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the queue property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getQueue().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Queue }
+     * 
+     * 
+     */
+    public List<Queue> getQueue() {
+        if (queue == null) {
+            queue = new ArrayList<Queue>();
+        }
+        return this.queue;
     }
 
     /**

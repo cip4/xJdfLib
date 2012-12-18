@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "preflightArguments"
+    "preflightArgument"
 })
 @XmlRootElement(name = "ArgumentValue")
 public class ArgumentValue
@@ -46,24 +46,24 @@ public class ArgumentValue
 {
 
     @XmlElement(name = "PreflightArgument")
-    protected List<PreflightArgument> preflightArguments;
+    protected List<PreflightArgument> preflightArgument;
     @XmlAttribute(name = "Name")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String name;
 
     /**
-     * Gets the value of the preflightArguments property.
+     * Gets the value of the preflightArgument property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the preflightArguments property.
+     * This is why there is not a <CODE>set</CODE> method for the preflightArgument property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPreflightArguments().add(newItem);
+     *    getPreflightArgument().add(newItem);
      * </pre>
      * 
      * 
@@ -73,11 +73,11 @@ public class ArgumentValue
      * 
      * 
      */
-    public List<PreflightArgument> getPreflightArguments() {
-        if (preflightArguments == null) {
-            preflightArguments = new ArrayList<PreflightArgument>();
+    public List<PreflightArgument> getPreflightArgument() {
+        if (preflightArgument == null) {
+            preflightArgument = new ArrayList<PreflightArgument>();
         }
-        return this.preflightArguments;
+        return this.preflightArgument;
     }
 
     /**

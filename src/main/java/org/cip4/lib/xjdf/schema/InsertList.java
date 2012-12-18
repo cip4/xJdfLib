@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "inserts"
+    "insert"
 })
 @XmlRootElement(name = "InsertList")
 public class InsertList
@@ -42,21 +42,21 @@ public class InsertList
 {
 
     @XmlElement(name = "Insert")
-    protected List<Insert> inserts;
+    protected List<Insert> insert;
 
     /**
-     * Gets the value of the inserts property.
+     * Gets the value of the insert property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the inserts property.
+     * This is why there is not a <CODE>set</CODE> method for the insert property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getInserts().add(newItem);
+     *    getInsert().add(newItem);
      * </pre>
      * 
      * 
@@ -66,11 +66,11 @@ public class InsertList
      * 
      * 
      */
-    public List<Insert> getInserts() {
-        if (inserts == null) {
-            inserts = new ArrayList<Insert>();
+    public List<Insert> getInsert() {
+        if (insert == null) {
+            insert = new ArrayList<Insert>();
         }
-        return this.inserts;
+        return this.insert;
     }
 
 }
