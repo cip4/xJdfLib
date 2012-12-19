@@ -96,7 +96,7 @@ public class LayoutBuilder extends AbstractNodeBuilder<Layout> {
 		// create JAXBElement
 		String objName = placedObject.getClass().getSimpleName();
 		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, objName);
-		JAXBElement obj = new JAXBElement(qname, objName.getClass(), null, objName);
+		JAXBElement<PlacedObject> obj = new JAXBElement<PlacedObject>(qname, PlacedObject.class, placedObject);
 
 		// append intent to product
 		getLayout().getPlacedObject().add(obj);

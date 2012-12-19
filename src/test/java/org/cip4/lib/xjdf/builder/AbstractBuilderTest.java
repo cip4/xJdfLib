@@ -19,6 +19,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
@@ -56,6 +57,34 @@ public abstract class AbstractBuilderTest<T> {
 
 		// get XJDF Node
 		T obj = builder.build();
+
+		// return bytes
+		return marshall(obj);
+	}
+
+	/**
+	 * Embed XJDF Parameter in XJDF Document an return as byte stream.
+	 * @param xJdfBuilder
+	 * @return
+	 * @throws Exception
+	 */
+	protected byte[] marsahlResultParameter(AbstractNodeBuilder<T> builder) throws Exception {
+
+		// get XJDF Node
+		XJdfBuilder xjdfBuilder = XJdfBuilder.newInstance();
+		xjdfBuilder.addParameter((ParameterType) builder.build());
+
+		// return bytes
+		return marshall(xjdfBuilder.build());
+
+	}
+
+	/**
+	 * Marshall a builder
+	 * @return Document as byte array.
+	 * @throws Exception
+	 */
+	private byte[] marshall(Object obj) throws Exception {
 
 		// marshall XJDF document
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
