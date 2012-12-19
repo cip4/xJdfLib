@@ -133,6 +133,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 */
 	public XJdfBuilder addGeneralID(GeneralID generalId) {
 
+		if (generalId == null)
+			return this;
+
 		// append GeneralID object
 		getXJdf().getGeneralID().add(generalId);
 
@@ -146,6 +149,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @return The current XJdfBuilder instance.
 	 */
 	public XJdfBuilder addProduct(Product product) {
+
+		if (product == null)
+			return this;
 
 		// if necessary, create new ProductList object
 		if (getXJdf().getProductList() == null) {
@@ -177,6 +183,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @return The current XJdfBuilder instance.
 	 */
 	public XJdfBuilder addParameter(ParameterType parameter, Part part) {
+
+		if (parameter == null)
+			return this;
 
 		// get parameter name
 		String paramName = parameter.getClass().getSimpleName();

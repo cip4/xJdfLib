@@ -98,6 +98,9 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 */
 	public ProductBuilder addIntent(IntentType intent) {
 
+		if (intent == null)
+			return this;
+
 		// get parameter name
 		String intentName = intent.getClass().getSimpleName();
 

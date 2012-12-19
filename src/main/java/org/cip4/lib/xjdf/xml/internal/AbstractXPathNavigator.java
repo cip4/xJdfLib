@@ -28,7 +28,6 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -67,16 +66,8 @@ public abstract class AbstractXPathNavigator {
 	 */
 	public String readAttribute(String xPath) throws XPathExpressionException {
 
-		String result;
-
-		// reading of modified documents
-		NodeList nodes = (NodeList) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.NODESET);
-
-		if (nodes.getLength() > 0) {
-			result = nodes.item(0).getNodeValue();
-		} else {
-			result = null;
-		}
+		// read attribute
+		String result = (String) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.STRING);
 
 		// return result
 		return result;

@@ -61,6 +61,7 @@ public class XJdfNavigatorTest {
 		// arrange
 		String expected_1 = "CatalogID";
 		String expected_2 = "890e81ed-6830-4868-b23d-8ab8af8a4047";
+		String expected_3 = "";
 
 		// act
 		String actual_1 = xJdfNavigator.readAttribute("/XJDF/GeneralID/@IDUsage");
@@ -70,7 +71,7 @@ public class XJdfNavigatorTest {
 		// assert
 		Assert.assertEquals("Value IDUsage is wrong.", expected_1, actual_1);
 		Assert.assertEquals("Value IDValue is wrong.", expected_2, actual_2);
-		Assert.assertNull("Value IDValue is wrong.", actual_3);
+		Assert.assertEquals("Value IDValue is wrong.", expected_3, actual_3);
 	}
 
 	/**
@@ -158,7 +159,7 @@ public class XJdfNavigatorTest {
 		Assert.assertEquals("Value 'CatalogID' is wrong.", "890e81ed-6830-4868-b23d-8ab8af8a4047", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.GENERAL_LINE_ID);
-		Assert.assertEquals("Value 'LineID' is wrong.", null, actual);
+		Assert.assertEquals("Value 'LineID' is wrong.", "", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.FILE_SPEC_URL);
 		Assert.assertEquals("Value 'FileSpec/Url' is wrong.", "http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf", actual);

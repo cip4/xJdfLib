@@ -93,6 +93,9 @@ public class LayoutBuilder extends AbstractNodeBuilder<Layout> {
 	 */
 	public LayoutBuilder addPlacedObject(PlacedObject placedObject) {
 
+		if (placedObject == null)
+			return this;
+
 		// create JAXBElement
 		String objName = placedObject.getClass().getSimpleName();
 		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, objName);
