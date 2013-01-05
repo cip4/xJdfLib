@@ -24,6 +24,10 @@
                        xmlType="xjdf:XYPair"
                        adapter="org.cip4.lib.xjdf.type.XYPair" />
                        
+            <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime"
+                       xmlType="xjdf:dateTime"
+                       adapter="org.cip4.lib.xjdf.type.DateTime" />
+                       
 		</jxb:globalBindings>
 		<jxb:schemaBindings>
 			<jxb:package name="org.cip4.lib.xjdf.schema" />

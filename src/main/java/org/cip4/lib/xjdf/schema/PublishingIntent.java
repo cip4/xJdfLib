@@ -52,7 +52,8 @@ public class PublishingIntent
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String issueType;
     @XmlAttribute(name = "IssueDate")
-    protected String issueDate;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime issueDate;
     @XmlAttribute(name = "IssueName")
     protected String issueName;
     @XmlAttribute(name = "Circulation")
@@ -143,7 +144,7 @@ public class PublishingIntent
      *     {@link String }
      *     
      */
-    public String getIssueDate() {
+    public org.cip4.lib.xjdf.type.DateTime getIssueDate() {
         return issueDate;
     }
 
@@ -155,7 +156,7 @@ public class PublishingIntent
      *     {@link String }
      *     
      */
-    public void setIssueDate(String value) {
+    public void setIssueDate(org.cip4.lib.xjdf.type.DateTime value) {
         this.issueDate = value;
     }
 

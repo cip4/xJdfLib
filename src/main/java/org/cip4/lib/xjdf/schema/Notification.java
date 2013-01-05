@@ -116,7 +116,8 @@ public class Notification
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")
-    protected String timeStamp;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
     @XmlAttribute(name = "ModuleType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String moduleType;
@@ -581,7 +582,7 @@ public class Notification
      *     {@link String }
      *     
      */
-    public String getTimeStamp() {
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -593,7 +594,7 @@ public class Notification
      *     {@link String }
      *     
      */
-    public void setTimeStamp(String value) {
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
         this.timeStamp = value;
     }
 

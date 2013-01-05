@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -71,9 +72,11 @@ public class NodeInfo
     @XmlSchemaType(name = "anySimpleType")
     protected String dueLevel;
     @XmlAttribute(name = "LastStart")
-    protected String lastStart;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime lastStart;
     @XmlAttribute(name = "FirstEnd")
-    protected String firstEnd;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime firstEnd;
     @XmlAttribute(name = "TotalDuration")
     protected String totalDuration;
     @XmlAttribute(name = "NodeStatus")
@@ -89,15 +92,19 @@ public class NodeInfo
     @XmlAttribute(name = "CleanupDuration")
     protected String cleanupDuration;
     @XmlAttribute(name = "FirstStart")
-    protected String firstStart;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime firstStart;
     @XmlAttribute(name = "Start")
-    protected String start;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime start;
     @XmlAttribute(name = "End")
-    protected String end;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime end;
     @XmlAttribute(name = "NodeStatusDetails")
     protected String nodeStatusDetails;
     @XmlAttribute(name = "LastEnd")
-    protected String lastEnd;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime lastEnd;
 
     /**
      * Gets the value of the employee property.
@@ -218,7 +225,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getLastStart() {
+    public org.cip4.lib.xjdf.type.DateTime getLastStart() {
         return lastStart;
     }
 
@@ -230,7 +237,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setLastStart(String value) {
+    public void setLastStart(org.cip4.lib.xjdf.type.DateTime value) {
         this.lastStart = value;
     }
 
@@ -242,7 +249,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getFirstEnd() {
+    public org.cip4.lib.xjdf.type.DateTime getFirstEnd() {
         return firstEnd;
     }
 
@@ -254,7 +261,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setFirstEnd(String value) {
+    public void setFirstEnd(org.cip4.lib.xjdf.type.DateTime value) {
         this.firstEnd = value;
     }
 
@@ -434,7 +441,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getFirstStart() {
+    public org.cip4.lib.xjdf.type.DateTime getFirstStart() {
         return firstStart;
     }
 
@@ -446,7 +453,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setFirstStart(String value) {
+    public void setFirstStart(org.cip4.lib.xjdf.type.DateTime value) {
         this.firstStart = value;
     }
 
@@ -458,7 +465,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getStart() {
+    public org.cip4.lib.xjdf.type.DateTime getStart() {
         return start;
     }
 
@@ -470,7 +477,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setStart(String value) {
+    public void setStart(org.cip4.lib.xjdf.type.DateTime value) {
         this.start = value;
     }
 
@@ -482,7 +489,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getEnd() {
+    public org.cip4.lib.xjdf.type.DateTime getEnd() {
         return end;
     }
 
@@ -494,7 +501,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setEnd(String value) {
+    public void setEnd(org.cip4.lib.xjdf.type.DateTime value) {
         this.end = value;
     }
 
@@ -530,7 +537,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getLastEnd() {
+    public org.cip4.lib.xjdf.type.DateTime getLastEnd() {
         return lastEnd;
     }
 
@@ -542,7 +549,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setLastEnd(String value) {
+    public void setLastEnd(org.cip4.lib.xjdf.type.DateTime value) {
         this.lastEnd = value;
     }
 

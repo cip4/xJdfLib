@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -35,9 +36,11 @@ public class SystemTimeSet
 {
 
     @XmlAttribute(name = "OldTime")
-    protected String oldTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime oldTime;
     @XmlAttribute(name = "NewTime")
-    protected String newTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime newTime;
 
     /**
      * Gets the value of the oldTime property.
@@ -47,7 +50,7 @@ public class SystemTimeSet
      *     {@link String }
      *     
      */
-    public String getOldTime() {
+    public org.cip4.lib.xjdf.type.DateTime getOldTime() {
         return oldTime;
     }
 
@@ -59,7 +62,7 @@ public class SystemTimeSet
      *     {@link String }
      *     
      */
-    public void setOldTime(String value) {
+    public void setOldTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.oldTime = value;
     }
 
@@ -71,7 +74,7 @@ public class SystemTimeSet
      *     {@link String }
      *     
      */
-    public String getNewTime() {
+    public org.cip4.lib.xjdf.type.DateTime getNewTime() {
         return newTime;
     }
 
@@ -83,7 +86,7 @@ public class SystemTimeSet
      *     {@link String }
      *     
      */
-    public void setNewTime(String value) {
+    public void setNewTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.newTime = value;
     }
 

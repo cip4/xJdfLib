@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -70,7 +71,8 @@ public class QueueFilter
     @XmlElement(name = "QueueEntryDef")
     protected List<QueueEntryDef> queueEntryDef;
     @XmlAttribute(name = "OlderThan")
-    protected String olderThan;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime olderThan;
     @XmlAttribute(name = "UpgradeGranularity")
     @XmlSchemaType(name = "anySimpleType")
     protected String upgradeGranularity;
@@ -83,7 +85,8 @@ public class QueueFilter
     @XmlAttribute(name = "PreviewUsages")
     protected List<String> previewUsages;
     @XmlAttribute(name = "NewerThan")
-    protected String newerThan;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime newerThan;
     @XmlAttribute(name = "GangNames")
     protected List<String> gangNames;
     @XmlAttribute(name = "QueueEntryDetails")
@@ -161,7 +164,7 @@ public class QueueFilter
      *     {@link String }
      *     
      */
-    public String getOlderThan() {
+    public org.cip4.lib.xjdf.type.DateTime getOlderThan() {
         return olderThan;
     }
 
@@ -173,7 +176,7 @@ public class QueueFilter
      *     {@link String }
      *     
      */
-    public void setOlderThan(String value) {
+    public void setOlderThan(org.cip4.lib.xjdf.type.DateTime value) {
         this.olderThan = value;
     }
 
@@ -310,7 +313,7 @@ public class QueueFilter
      *     {@link String }
      *     
      */
-    public String getNewerThan() {
+    public org.cip4.lib.xjdf.type.DateTime getNewerThan() {
         return newerThan;
     }
 
@@ -322,7 +325,7 @@ public class QueueFilter
      *     {@link String }
      *     
      */
-    public void setNewerThan(String value) {
+    public void setNewerThan(org.cip4.lib.xjdf.type.DateTime value) {
         this.newerThan = value;
     }
 

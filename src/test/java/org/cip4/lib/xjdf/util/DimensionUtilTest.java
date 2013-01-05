@@ -8,7 +8,7 @@
  * Email: info@flyeralarm.com
  * Website: http://www.flyeralarm.com
  */
-package org.cip4.lib.xjdf.convert;
+package org.cip4.lib.xjdf.util;
 
 import junit.framework.Assert;
 
@@ -17,11 +17,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * JUnit test case for DimensionConverter class.
+ * JUnit test case for DimensionUtil class.
  * @author s.meissner
  * @date 28.06.2012
  */
-public class DimensionConverterTest {
+public class DimensionUtilTest {
 
 	/**
 	 * Setup unit test.
@@ -50,7 +50,7 @@ public class DimensionConverterTest {
 		final double expected = 28.346457d;
 
 		// act
-		double actual = DimensionConverter.mm2Dtp(mm);
+		double actual = DimensionUtil.mm2Dtp(mm);
 
 		// assert
 		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
@@ -67,7 +67,7 @@ public class DimensionConverterTest {
 		final double expected = 10d;
 
 		// act
-		double actual = DimensionConverter.dtp2Mm(dtp);
+		double actual = DimensionUtil.dtp2Mm(dtp);
 
 		// assert
 		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
@@ -84,7 +84,7 @@ public class DimensionConverterTest {
 		final double expected = 10d;
 
 		// act
-		double actual = DimensionConverter.dtp2MmS(dtp);
+		double actual = DimensionUtil.dtp2MmS(dtp);
 
 		// assert
 		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
@@ -101,7 +101,7 @@ public class DimensionConverterTest {
 		final String expected = "28.34645669291339";
 
 		// act
-		String actual = DimensionConverter.mm2DtpS(mm);
+		String actual = DimensionUtil.mm2DtpS(mm);
 
 		// assert
 		Assert.assertEquals("DTP-Points are wrong.", expected, actual);

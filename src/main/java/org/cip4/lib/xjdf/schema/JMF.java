@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -88,7 +89,8 @@ public class JMF
     @XmlAttribute(name = "ICSVersions")
     protected List<String> icsVersions;
     @XmlAttribute(name = "TimeStamp")
-    protected String timeStamp;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
     @XmlAttribute(name = "ResponseURL")
     protected String responseURL;
     @XmlAttribute(name = "DeviceID")
@@ -410,7 +412,7 @@ public class JMF
      *     {@link String }
      *     
      */
-    public String getTimeStamp() {
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -422,7 +424,7 @@ public class JMF
      *     {@link String }
      *     
      */
-    public void setTimeStamp(String value) {
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
         this.timeStamp = value;
     }
 

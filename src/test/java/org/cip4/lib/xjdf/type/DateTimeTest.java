@@ -8,9 +8,8 @@
  * Email: info@flyeralarm.com
  * Website: http://www.flyeralarm.com
  */
-package org.cip4.lib.xjdf.convert;
+package org.cip4.lib.xjdf.type;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.TimeZone;
 
@@ -21,11 +20,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * JUnit test case for DateConverter.
- * @author s.meissner
- * @date 28.06.2012
+ * JUnit Test Case for XJDF DateTime
+ * @author stefan.meissner
+ * @date 05.01.2013
  */
-public class DateConverterTest {
+public class DateTimeTest {
 
 	/**
 	 * Set up unit test.
@@ -44,10 +43,10 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
 	 */
 	@Test
-	public void testDate2StringUTC() {
+	public void testMarshalDateTimeUTC() throws Exception {
 
 		// arrange
 		String expected = "2012-03-04T16:20:45Z";
@@ -56,18 +55,19 @@ public class DateConverterTest {
 		calendar.set(2012, Calendar.MARCH, 4, 16, 20, 45);
 
 		// act
-		String actual = DateConverter.date2String(calendar);
+		DateTime r = DateTime.newInstance(calendar);
+		String actual = DateTime.newInstance().marshal(r);
 
 		// assert
 		System.out.println("Result UTC: " + actual);
-		Assert.assertEquals("Date format is wrong.", expected, actual);
+		Assert.assertEquals("DateTime format is wrong.", expected, actual);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
 	 */
 	@Test
-	public void testDate2StringBerlin() {
+	public void testMarshalDateTimeBerlin() throws Exception {
 
 		// arrange
 		String expected = "2012-03-04T13:20:40+01:00";
@@ -76,18 +76,19 @@ public class DateConverterTest {
 		calendar.set(2012, Calendar.MARCH, 4, 13, 20, 40);
 
 		// act
-		String actual = DateConverter.date2String(calendar);
+		DateTime r = DateTime.newInstance(calendar);
+		String actual = DateTime.newInstance().marshal(r);
 
 		// assert
-		System.out.println("Result other TimeZone: " + actual);
+		System.out.println("Result TimeZone 'Europe/Berlin': " + actual);
 		Assert.assertEquals("Date format is wrong.", expected, actual);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#date2String(java.util.Date)}.
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
 	 */
 	@Test
-	public void testDate2StringPacific() {
+	public void testMarshalDateTimePacific() throws Exception {
 
 		// arrange
 		String expected = "2012-03-04T06:20:40-08:00";
@@ -96,25 +97,26 @@ public class DateConverterTest {
 		calendar.set(2012, Calendar.MARCH, 4, 6, 20, 40);
 
 		// act
-		String actual = DateConverter.date2String(calendar);
+		DateTime r = DateTime.newInstance(calendar);
+		String actual = DateTime.newInstance().marshal(r);
 
 		// assert
-		System.out.println("Result other TimeZone: " + actual);
+		System.out.println("Result TimeZone 'US/Pacific': " + actual);
 		Assert.assertEquals("Date format is wrong.", expected, actual);
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
 	 */
 	@Test
-	public void testString2DateUTC() throws ParseException {
+	public void testUnmarshalStringUTC() throws Exception {
 
 		// arrange
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		Calendar cal = DateConverter.string2Date(strDate);
+		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		Calendar cal = r.getCalendar();
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -127,17 +129,17 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
 	 */
 	@Test
-	public void testString2DateBerlin() throws ParseException {
+	public void testUnmarshalStringBerlin() throws Exception {
 
 		// arrange
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		Calendar cal = DateConverter.string2Date(strDate);
+		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		Calendar cal = r.getCalendar();
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -150,17 +152,17 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
 	 */
 	@Test
-	public void testString2DatePacifc() throws ParseException {
+	public void testUnmarshalStringPacifc() throws Exception {
 
 		// arrange
 		final String strDate = "2012-11-04T15:30:40-08:00";
 
 		// act
-		Calendar cal = DateConverter.string2Date(strDate);
+		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		Calendar cal = r.getCalendar();
 
 		// assert
 		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
@@ -173,18 +175,18 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for marshal and unmarshal in combination.
+	 * @throws Exception
 	 */
 	@Test
-	public void testForwardAndBackwardBerlin() throws ParseException {
+	public void testMarshalUnmarshalBerlin() throws Exception {
 
 		// arrange
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		Calendar calendar = DateConverter.string2Date(strDate);
-		String actual = DateConverter.date2String(calendar);
+		DateTime dt = DateTime.newInstance().unmarshal(strDate);
+		String actual = DateTime.newInstance().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -192,18 +194,18 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for marshal and unmarshal in combination.
+	 * @throws Exception
 	 */
 	@Test
-	public void testForwardAndBackwardUTC() throws ParseException {
+	public void testMarshalUnmarshalUTC() throws Exception {
 
 		// arrange
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		Calendar calendar = DateConverter.string2Date(strDate);
-		String actual = DateConverter.date2String(calendar);
+		DateTime dt = DateTime.newInstance().unmarshal(strDate);
+		String actual = DateTime.newInstance().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -211,22 +213,21 @@ public class DateConverterTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#string2Date(java.lang.String)}.
-	 * @throws ParseException
+	 * Test method for marshal and unmarshal in combination.
+	 * @throws Exception
 	 */
 	@Test
-	public void testForwardAndBackwardPacific() throws ParseException {
+	public void testMarshalUnmarshalPacific() throws Exception {
 
 		// arrange
 		final String strDate = "2012-03-04T13:20:40-08:00";
 
 		// act
-		Calendar calendar = DateConverter.string2Date(strDate);
-		String actual = DateConverter.date2String(calendar);
+		DateTime dt = DateTime.newInstance().unmarshal(strDate);
+		String actual = DateTime.newInstance().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
 
 	}
-
 }

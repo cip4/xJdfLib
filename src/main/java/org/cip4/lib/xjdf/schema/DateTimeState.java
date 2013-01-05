@@ -86,7 +86,8 @@ public class DateTimeState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected String currentValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime currentValue;
     @XmlAttribute(name = "PresentValueList")
     protected String presentValueList;
     @XmlAttribute(name = "ID")
@@ -118,7 +119,8 @@ public class DateTimeState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected String defaultValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime defaultValue;
     @XmlAttribute(name = "AllowedValueDurationList")
     protected String allowedValueDurationList;
     @XmlAttribute(name = "XPath", required = true)
@@ -314,7 +316,7 @@ public class DateTimeState
      *     {@link String }
      *     
      */
-    public String getCurrentValue() {
+    public org.cip4.lib.xjdf.type.DateTime getCurrentValue() {
         return currentValue;
     }
 
@@ -326,7 +328,7 @@ public class DateTimeState
      *     {@link String }
      *     
      */
-    public void setCurrentValue(String value) {
+    public void setCurrentValue(org.cip4.lib.xjdf.type.DateTime value) {
         this.currentValue = value;
     }
 
@@ -641,7 +643,7 @@ public class DateTimeState
      *     {@link String }
      *     
      */
-    public String getDefaultValue() {
+    public org.cip4.lib.xjdf.type.DateTime getDefaultValue() {
         return defaultValue;
     }
 
@@ -653,7 +655,7 @@ public class DateTimeState
      *     {@link String }
      *     
      */
-    public void setDefaultValue(String value) {
+    public void setDefaultValue(org.cip4.lib.xjdf.type.DateTime value) {
         this.defaultValue = value;
     }
 

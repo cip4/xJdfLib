@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -53,9 +54,11 @@ public class QualityMeasurement
     @XmlAttribute(name = "Passed")
     protected Integer passed;
     @XmlAttribute(name = "Start")
-    protected String start;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime start;
     @XmlAttribute(name = "End")
-    protected String end;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime end;
 
     /**
      * Gets the value of the bindingQualityMeasurement property.
@@ -142,7 +145,7 @@ public class QualityMeasurement
      *     {@link String }
      *     
      */
-    public String getStart() {
+    public org.cip4.lib.xjdf.type.DateTime getStart() {
         return start;
     }
 
@@ -154,7 +157,7 @@ public class QualityMeasurement
      *     {@link String }
      *     
      */
-    public void setStart(String value) {
+    public void setStart(org.cip4.lib.xjdf.type.DateTime value) {
         this.start = value;
     }
 
@@ -166,7 +169,7 @@ public class QualityMeasurement
      *     {@link String }
      *     
      */
-    public String getEnd() {
+    public org.cip4.lib.xjdf.type.DateTime getEnd() {
         return end;
     }
 
@@ -178,7 +181,7 @@ public class QualityMeasurement
      *     {@link String }
      *     
      */
-    public void setEnd(String value) {
+    public void setEnd(org.cip4.lib.xjdf.type.DateTime value) {
         this.end = value;
     }
 

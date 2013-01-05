@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -84,7 +85,8 @@ public class JobPhase
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "PhaseStartTime")
-    protected String phaseStartTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime phaseStartTime;
     @XmlAttribute(name = "Speed")
     protected Double speed;
     @XmlAttribute(name = "Status")
@@ -98,7 +100,8 @@ public class JobPhase
     @XmlAttribute(name = "URL")
     protected String url;
     @XmlAttribute(name = "StartTime")
-    protected String startTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime startTime;
     @XmlAttribute(name = "JobPartID")
     protected String jobPartID;
     @XmlAttribute(name = "PhaseWaste")
@@ -334,7 +337,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public String getPhaseStartTime() {
+    public org.cip4.lib.xjdf.type.DateTime getPhaseStartTime() {
         return phaseStartTime;
     }
 
@@ -346,7 +349,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public void setPhaseStartTime(String value) {
+    public void setPhaseStartTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.phaseStartTime = value;
     }
 
@@ -502,7 +505,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public String getStartTime() {
+    public org.cip4.lib.xjdf.type.DateTime getStartTime() {
         return startTime;
     }
 
@@ -514,7 +517,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public void setStartTime(String value) {
+    public void setStartTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.startTime = value;
     }
 

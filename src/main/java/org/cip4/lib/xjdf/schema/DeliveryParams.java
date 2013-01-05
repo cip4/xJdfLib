@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -54,14 +55,16 @@ public class DeliveryParams
     @XmlElement(name = "Drop")
     protected List<Drop> drop;
     @XmlAttribute(name = "Required")
-    protected String required;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime required;
     @XmlAttribute(name = "Transfer")
     @XmlSchemaType(name = "anySimpleType")
     protected String transfer;
     @XmlAttribute(name = "ServiceLevel")
     protected String serviceLevel;
     @XmlAttribute(name = "Earliest")
-    protected String earliest;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime earliest;
     @XmlAttribute(name = "Method")
     protected String method;
 
@@ -131,7 +134,7 @@ public class DeliveryParams
      *     {@link String }
      *     
      */
-    public String getRequired() {
+    public org.cip4.lib.xjdf.type.DateTime getRequired() {
         return required;
     }
 
@@ -143,7 +146,7 @@ public class DeliveryParams
      *     {@link String }
      *     
      */
-    public void setRequired(String value) {
+    public void setRequired(org.cip4.lib.xjdf.type.DateTime value) {
         this.required = value;
     }
 
@@ -203,7 +206,7 @@ public class DeliveryParams
      *     {@link String }
      *     
      */
-    public String getEarliest() {
+    public org.cip4.lib.xjdf.type.DateTime getEarliest() {
         return earliest;
     }
 
@@ -215,7 +218,7 @@ public class DeliveryParams
      *     {@link String }
      *     
      */
-    public void setEarliest(String value) {
+    public void setEarliest(org.cip4.lib.xjdf.type.DateTime value) {
         this.earliest = value;
     }
 

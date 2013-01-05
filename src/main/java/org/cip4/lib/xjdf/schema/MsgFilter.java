@@ -76,11 +76,13 @@ public class MsgFilter
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String messageID;
     @XmlAttribute(name = "After")
-    protected String after;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime after;
     @XmlAttribute(name = "QueueEntryID")
     protected String queueEntryID;
     @XmlAttribute(name = "Before")
-    protected String before;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime before;
     @XmlAttribute(name = "ReceiverURL")
     protected String receiverURL;
     @XmlAttribute(name = "DeviceID")
@@ -269,7 +271,7 @@ public class MsgFilter
      *     {@link String }
      *     
      */
-    public String getAfter() {
+    public org.cip4.lib.xjdf.type.DateTime getAfter() {
         return after;
     }
 
@@ -281,7 +283,7 @@ public class MsgFilter
      *     {@link String }
      *     
      */
-    public void setAfter(String value) {
+    public void setAfter(org.cip4.lib.xjdf.type.DateTime value) {
         this.after = value;
     }
 
@@ -317,7 +319,7 @@ public class MsgFilter
      *     {@link String }
      *     
      */
-    public String getBefore() {
+    public org.cip4.lib.xjdf.type.DateTime getBefore() {
         return before;
     }
 
@@ -329,7 +331,7 @@ public class MsgFilter
      *     {@link String }
      *     
      */
-    public void setBefore(String value) {
+    public void setBefore(org.cip4.lib.xjdf.type.DateTime value) {
         this.before = value;
     }
 

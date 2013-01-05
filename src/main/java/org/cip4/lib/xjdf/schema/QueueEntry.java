@@ -65,15 +65,18 @@ public class QueueEntry
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String gangName;
     @XmlAttribute(name = "StartTime")
-    protected String startTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime startTime;
     @XmlAttribute(name = "EndTime")
-    protected String endTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime endTime;
     @XmlAttribute(name = "JobPartID")
     protected String jobPartID;
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "SubmissionTime")
-    protected String submissionTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime submissionTime;
     @XmlAttribute(name = "Status")
     @XmlSchemaType(name = "anySimpleType")
     protected String status;
@@ -174,7 +177,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public String getStartTime() {
+    public org.cip4.lib.xjdf.type.DateTime getStartTime() {
         return startTime;
     }
 
@@ -186,7 +189,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public void setStartTime(String value) {
+    public void setStartTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.startTime = value;
     }
 
@@ -198,7 +201,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public String getEndTime() {
+    public org.cip4.lib.xjdf.type.DateTime getEndTime() {
         return endTime;
     }
 
@@ -210,7 +213,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public void setEndTime(String value) {
+    public void setEndTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.endTime = value;
     }
 
@@ -270,7 +273,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public String getSubmissionTime() {
+    public org.cip4.lib.xjdf.type.DateTime getSubmissionTime() {
         return submissionTime;
     }
 
@@ -282,7 +285,7 @@ public class QueueEntry
      *     {@link String }
      *     
      */
-    public void setSubmissionTime(String value) {
+    public void setSubmissionTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.submissionTime = value;
     }
 

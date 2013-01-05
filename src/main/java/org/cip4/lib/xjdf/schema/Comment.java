@@ -63,7 +63,8 @@ public class Comment
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String name;
     @XmlAttribute(name = "TimeStamp")
-    protected String timeStamp;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
     @XmlAttribute(name = "Path")
     protected String path;
     @XmlAttribute(name = "Box")
@@ -204,7 +205,7 @@ public class Comment
      *     {@link String }
      *     
      */
-    public String getTimeStamp() {
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -216,7 +217,7 @@ public class Comment
      *     {@link String }
      *     
      */
-    public void setTimeStamp(String value) {
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
         this.timeStamp = value;
     }
 

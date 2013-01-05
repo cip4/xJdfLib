@@ -78,19 +78,24 @@ public class ProcessRun
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "SubmissionTime")
-    protected String submissionTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime submissionTime;
     @XmlAttribute(name = "ReturnTime")
-    protected String returnTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime returnTime;
     @XmlAttribute(name = "TimeStamp")
-    protected String timeStamp;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
     @XmlAttribute(name = "QueueEntryID")
     protected String queueEntryID;
     @XmlAttribute(name = "Start")
-    protected String start;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime start;
     @XmlAttribute(name = "AgentName")
     protected String agentName;
     @XmlAttribute(name = "End")
-    protected String end;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime end;
     @XmlAttribute(name = "AgentVersion")
     protected String agentVersion;
 
@@ -256,7 +261,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getSubmissionTime() {
+    public org.cip4.lib.xjdf.type.DateTime getSubmissionTime() {
         return submissionTime;
     }
 
@@ -268,7 +273,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setSubmissionTime(String value) {
+    public void setSubmissionTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.submissionTime = value;
     }
 
@@ -280,7 +285,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getReturnTime() {
+    public org.cip4.lib.xjdf.type.DateTime getReturnTime() {
         return returnTime;
     }
 
@@ -292,7 +297,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setReturnTime(String value) {
+    public void setReturnTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.returnTime = value;
     }
 
@@ -304,7 +309,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getTimeStamp() {
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -316,7 +321,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setTimeStamp(String value) {
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
         this.timeStamp = value;
     }
 
@@ -352,7 +357,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getStart() {
+    public org.cip4.lib.xjdf.type.DateTime getStart() {
         return start;
     }
 
@@ -364,7 +369,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setStart(String value) {
+    public void setStart(org.cip4.lib.xjdf.type.DateTime value) {
         this.start = value;
     }
 
@@ -400,7 +405,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getEnd() {
+    public org.cip4.lib.xjdf.type.DateTime getEnd() {
         return end;
     }
 
@@ -412,7 +417,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setEnd(String value) {
+    public void setEnd(org.cip4.lib.xjdf.type.DateTime value) {
         this.end = value;
     }
 

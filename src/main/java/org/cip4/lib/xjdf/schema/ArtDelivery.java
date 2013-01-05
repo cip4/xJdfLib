@@ -110,7 +110,8 @@ public class ArtDelivery
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String method;
     @XmlAttribute(name = "ArtDeliveryDate")
-    protected String artDeliveryDate;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime artDeliveryDate;
     @XmlAttribute(name = "Transfer")
     @XmlSchemaType(name = "anySimpleType")
     protected String transfer;
@@ -527,7 +528,7 @@ public class ArtDelivery
      *     {@link String }
      *     
      */
-    public String getArtDeliveryDate() {
+    public org.cip4.lib.xjdf.type.DateTime getArtDeliveryDate() {
         return artDeliveryDate;
     }
 
@@ -539,7 +540,7 @@ public class ArtDelivery
      *     {@link String }
      *     
      */
-    public void setArtDeliveryDate(String value) {
+    public void setArtDeliveryDate(org.cip4.lib.xjdf.type.DateTime value) {
         this.artDeliveryDate = value;
     }
 
