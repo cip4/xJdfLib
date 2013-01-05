@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -40,7 +41,8 @@ public class Disposition
 {
 
     @XmlAttribute(name = "Until")
-    protected String until;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime until;
     @XmlAttribute(name = "MinDuration")
     protected String minDuration;
     @XmlAttribute(name = "ExtraDuration")
@@ -62,7 +64,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public String getUntil() {
+    public org.cip4.lib.xjdf.type.DateTime getUntil() {
         return until;
     }
 
@@ -74,7 +76,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public void setUntil(String value) {
+    public void setUntil(org.cip4.lib.xjdf.type.DateTime value) {
         this.until = value;
     }
 

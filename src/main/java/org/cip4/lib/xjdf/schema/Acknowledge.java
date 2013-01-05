@@ -80,7 +80,8 @@ public class Acknowledge
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String refID;
     @XmlAttribute(name = "Time")
-    protected String time;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime time;
     @XmlAttribute(name = "ICSVersions")
     protected List<String> icsVersions;
     @XmlAttribute(name = "Type")
@@ -284,7 +285,7 @@ public class Acknowledge
      *     {@link String }
      *     
      */
-    public String getTime() {
+    public org.cip4.lib.xjdf.type.DateTime getTime() {
         return time;
     }
 
@@ -296,7 +297,7 @@ public class Acknowledge
      *     {@link String }
      *     
      */
-    public void setTime(String value) {
+    public void setTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.time = value;
     }
 

@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -82,11 +83,13 @@ public class DeviceInfo
     @XmlAttribute(name = "Speed")
     protected Double speed;
     @XmlAttribute(name = "IdleStartTime")
-    protected String idleStartTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime idleStartTime;
     @XmlAttribute(name = "HourCounter")
     protected String hourCounter;
     @XmlAttribute(name = "PowerOnTime")
-    protected String powerOnTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime powerOnTime;
     @XmlAttribute(name = "TotalProductionCounter")
     protected Double totalProductionCounter;
     @XmlAttribute(name = "ProductionCounter")
@@ -336,7 +339,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public String getIdleStartTime() {
+    public org.cip4.lib.xjdf.type.DateTime getIdleStartTime() {
         return idleStartTime;
     }
 
@@ -348,7 +351,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public void setIdleStartTime(String value) {
+    public void setIdleStartTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.idleStartTime = value;
     }
 
@@ -384,7 +387,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public String getPowerOnTime() {
+    public org.cip4.lib.xjdf.type.DateTime getPowerOnTime() {
         return powerOnTime;
     }
 
@@ -396,7 +399,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public void setPowerOnTime(String value) {
+    public void setPowerOnTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.powerOnTime = value;
     }
 

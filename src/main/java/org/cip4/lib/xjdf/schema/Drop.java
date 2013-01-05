@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -60,9 +61,11 @@ public class Drop
     @XmlAttribute(name = "ServiceLevel")
     protected String serviceLevel;
     @XmlAttribute(name = "Required")
-    protected String required;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime required;
     @XmlAttribute(name = "Earliest")
-    protected String earliest;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime earliest;
     @XmlAttribute(name = "Transfer")
     @XmlSchemaType(name = "anySimpleType")
     protected String transfer;
@@ -183,7 +186,7 @@ public class Drop
      *     {@link String }
      *     
      */
-    public String getRequired() {
+    public org.cip4.lib.xjdf.type.DateTime getRequired() {
         return required;
     }
 
@@ -195,7 +198,7 @@ public class Drop
      *     {@link String }
      *     
      */
-    public void setRequired(String value) {
+    public void setRequired(org.cip4.lib.xjdf.type.DateTime value) {
         this.required = value;
     }
 
@@ -207,7 +210,7 @@ public class Drop
      *     {@link String }
      *     
      */
-    public String getEarliest() {
+    public org.cip4.lib.xjdf.type.DateTime getEarliest() {
         return earliest;
     }
 
@@ -219,7 +222,7 @@ public class Drop
      *     {@link String }
      *     
      */
-    public void setEarliest(String value) {
+    public void setEarliest(org.cip4.lib.xjdf.type.DateTime value) {
         this.earliest = value;
     }
 

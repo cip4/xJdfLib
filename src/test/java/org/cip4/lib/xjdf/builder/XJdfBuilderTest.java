@@ -20,6 +20,7 @@ import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Assert;
@@ -195,7 +196,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		partContent.setRun("Content");
 
 		NodeInfo nodeInfo = new NodeInfo();
-		nodeInfo.setEnd("now");
+		nodeInfo.setEnd(DateTime.newInstance());
 
 		// act
 		xJdfBuilder.addParameter(runListCover, partCover);

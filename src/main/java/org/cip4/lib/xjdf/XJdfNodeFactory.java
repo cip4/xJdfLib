@@ -31,6 +31,7 @@ import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofItem;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -152,7 +153,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param naturalLang Value for NaturalLang attribute.
 	 * @return NodeInfo Node which already contains defined attributes.
 	 */
-	public NodeInfo createNodeInfo(String totalDuration, String end, String naturalLang) {
+	public NodeInfo createNodeInfo(String totalDuration, DateTime end, String naturalLang) {
 
 		// create node
 		NodeInfo nodeInfo = super.createNodeInfo();

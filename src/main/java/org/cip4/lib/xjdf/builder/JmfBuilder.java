@@ -10,12 +10,10 @@
  */
 package org.cip4.lib.xjdf.builder;
 
-import java.util.Calendar;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.convert.DateConverter;
 import org.cip4.lib.xjdf.schema.JMF;
 import org.cip4.lib.xjdf.schema.Message;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
@@ -60,7 +58,7 @@ public class JmfBuilder extends AbstractNodeBuilder<JMF> {
 		JmfBuilder jmfBuilder = new JmfBuilder();
 
 		// preconfiguration
-		jmfBuilder.getJMF().setTimeStamp(DateConverter.date2String(Calendar.getInstance()));
+		jmfBuilder.getJMF().setTimeStamp(DateTime.newInstance());
 		jmfBuilder.getJMF().setMaxVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 		jmfBuilder.getJMF().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 		jmfBuilder.getJMF().setDeviceID(deviceID);

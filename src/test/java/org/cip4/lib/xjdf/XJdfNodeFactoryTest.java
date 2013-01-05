@@ -32,6 +32,7 @@ import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -139,7 +140,7 @@ public class XJdfNodeFactoryTest {
 
 		// arrange
 		final String TOTAL_DURATION = UUID.randomUUID().toString();
-		final String END = UUID.randomUUID().toString();
+		final DateTime END = new DateTime();
 		final String NATURAL_LANG = UUID.randomUUID().toString();
 
 		// act

@@ -8,20 +8,20 @@
  * Email: info@flyeralarm.com
  * Website: http://www.flyeralarm.com
  */
-package org.cip4.lib.xjdf.convert;
+package org.cip4.lib.xjdf.util;
 
 /**
  * Static helper class which provides dimension conversion functionality.
  * @author s.meissner
  * @date 28.06.2012
  */
-public class DimensionConverter {
+public class DimensionUtil {
 
 	/**
 	 * Private constructor.<br/>
 	 * This class cannot be instantiated.
 	 */
-	private DimensionConverter() {
+	private DimensionUtil() {
 
 		// protection from reflection
 		throw new AssertionError("Class cannot be instantiated.");

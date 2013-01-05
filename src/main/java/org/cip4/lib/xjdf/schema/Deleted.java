@@ -65,7 +65,8 @@ public class Deleted
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")
-    protected String timeStamp;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
     @XmlAttribute(name = "QueueEntryID")
     protected String queueEntryID;
     @XmlAttribute(name = "AgentName")
@@ -182,7 +183,7 @@ public class Deleted
      *     {@link String }
      *     
      */
-    public String getTimeStamp() {
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
         return timeStamp;
     }
 
@@ -194,7 +195,7 @@ public class Deleted
      *     {@link String }
      *     
      */
-    public void setTimeStamp(String value) {
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
         this.timeStamp = value;
     }
 

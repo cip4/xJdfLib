@@ -68,7 +68,8 @@ public class Registration
     @XmlID
     protected String id;
     @XmlAttribute(name = "Time")
-    protected String time;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime time;
     @XmlAttribute(name = "ICSVersions")
     protected List<String> icsVersions;
     @XmlAttribute(name = "Type")
@@ -217,7 +218,7 @@ public class Registration
      *     {@link String }
      *     
      */
-    public String getTime() {
+    public org.cip4.lib.xjdf.type.DateTime getTime() {
         return time;
     }
 
@@ -229,7 +230,7 @@ public class Registration
      *     {@link String }
      *     
      */
-    public void setTime(String value) {
+    public void setTime(org.cip4.lib.xjdf.type.DateTime value) {
         this.time = value;
     }
 
