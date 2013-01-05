@@ -97,8 +97,12 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	@Override
 	public String marshal(DateTime dateTime) throws Exception {
 
+		if (dateTime == null)
+			return null;
+
 		DateFormat dateFormat;
 
+		// check time zone
 		if (dateTime.getCalendar().getTimeZone().getRawOffset() == 0) {
 
 			// UTC
