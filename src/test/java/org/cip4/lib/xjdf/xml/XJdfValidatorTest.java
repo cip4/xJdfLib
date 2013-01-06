@@ -19,9 +19,11 @@ import javax.xml.bind.JAXBException;
 import junit.framework.Assert;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;
@@ -215,9 +217,7 @@ public class XJdfValidatorTest {
 
 		// assert
 		System.out.println(xJdfValidator.getMessagesText());
-
-		// TODO: XSD Validation ID etc...
-		// Assert.assertTrue("Validation result is wrong", isValid);
+		Assert.assertTrue("Validation result is wrong", isValid);
 	}
 
 	/**
@@ -236,5 +236,44 @@ public class XJdfValidatorTest {
 
 		return new ByteArrayInputStream(bos.toByteArray());
 
+	}
+
+	@Test
+	public void createTestXJDFDocument() throws Exception {
+
+		XJdfNodeFactory nf = XJdfNodeFactory.newInstance();
+
+		// create product
+		ProductBuilder productBuilder = ProductBuilder.newInstance(1000, "BROCHURE-01", "Brochure", "4 Page Brochure");
+		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", Shape.newInstance(595.27559055, 822.04724409)));
+		productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
+		productBuilder.addIntent(nf.createProductionIntent("Lithography"));
+		productBuilder.addIntent(nf.createFoldingIntent("F6-1"));
+		// TODO productBuilder.addIntent(nf.createcol)
+
+		// create contact
+		// TODO
+
+		// create XJDF
+		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance("Web2Print", "Job258596");
+		xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
+		xJdfBuilder.addProduct(productBuilder.build());
+		xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
+		xJdfBuilder.addParameter(nf.createRunList("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf"));
+		xJdfBuilder.addParameter(nf.createApprovalParams(1));
+		// TODO xJdfBuilder.addParameter(nf.createNodeInfo());
+		// TODO xJdfBuilder.addParameter(Contact);
+
+		XJDF xJdf = xJdfBuilder.build();
+		xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));
+
+		// parse
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		XJdfParser.newInstance().parseXJdf(xJdf, bos, true);
+		bos.close();
+
+		//
+		String doc = new String(bos.toByteArray());
+		System.out.println(doc);
 	}
 }
