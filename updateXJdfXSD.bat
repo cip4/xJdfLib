@@ -12,7 +12,7 @@ echo -------------------------------
 
 :: update schema
 echo.
-echo Update Schema...
+echo   Update Schema...
 echo.
 chdir /D %rootPath%
 mvn antrun:run
