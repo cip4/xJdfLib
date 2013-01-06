@@ -779,7 +779,7 @@
 			<xs:attribute name="PipeID" type="string" use="optional" />
 			<xs:attribute name="AgentName" type="string" use="optional" />
 			<xs:attribute name="AgentVersion" type="string" use="optional" />
-			<xs:attribute name="ID" type="ID" use="required" />
+			<xs:attribute name="ID" type="ID" use="optional" />
 			<xs:attribute name="NoOp" type="boolean" use="optional" />
 			<xs:attribute name="PartUsage" use="optional" />
 			<xs:attribute name="ProductID" type="string" use="optional" />
@@ -826,7 +826,7 @@
 			<xs:attribute name="PipeID" type="string" use="optional" />
 			<xs:attribute name="AgentName" type="string" use="optional" />
 			<xs:attribute name="AgentVersion" type="string" use="optional" />
-			<xs:attribute name="ID" type="ID" use="required" />
+			<xs:attribute name="ID" type="ID" use="optional" />
 			<xs:attribute name="PartUsage" use="optional" />
 			<xs:attribute name="ProductID" type="string" use="optional" />
 			<xs:attribute name="Author" type="string" use="optional" />
@@ -996,7 +996,7 @@
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
 					</xs:choice>
 				</xs:sequence>
-				<xs:attribute name="ID" type="ID" use="required" />
+				<xs:attribute name="ID" type="ID" use="optional" />
 				<xs:attribute name="DescriptiveName" type="string" use="optional" />
 				<xs:attribute name="Name" type="NMTOKEN" use="required" />
 				<xs:attribute name="Usage" use="optional" />
