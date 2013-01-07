@@ -101,7 +101,7 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
-	public String marshal(XYPair xyPair) throws Exception {
+	public String marshal(XYPair xyPair) {
 
 		if (xyPair == null)
 			return null;
@@ -125,4 +125,11 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 		return newInstance(v);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
 }

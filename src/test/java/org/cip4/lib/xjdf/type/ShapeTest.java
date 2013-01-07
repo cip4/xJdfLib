@@ -109,6 +109,20 @@ public class ShapeTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#toString()}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString() throws Exception {
+
+		// arrange / act
+		String result = Shape.newInstance(10.1, 20.33, 40).toString();
+
+		// assert
+		Assert.assertEquals("String is wrong.", "10.1 20.33 40.0", result);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#marshal(org.cip4.lib.xjdf.type.Shape)}.
 	 * @throws Exception
 	 */

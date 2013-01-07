@@ -123,7 +123,7 @@ public class Shape extends XmlAdapter<String, Shape> {
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
-	public String marshal(Shape shape) throws Exception {
+	public String marshal(Shape shape) {
 
 		if (shape == null)
 			return null;
@@ -148,4 +148,11 @@ public class Shape extends XmlAdapter<String, Shape> {
 		return newInstance(v);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
 }

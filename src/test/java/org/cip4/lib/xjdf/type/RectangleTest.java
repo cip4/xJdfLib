@@ -95,6 +95,20 @@ public class RectangleTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#toString()}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString() throws Exception {
+
+		// arrange / act
+		String result = Rectangle.newInstance(1d, 0d, 3.14d, 21631.3d).toString();
+
+		// assert
+		Assert.assertEquals("Result is wrong.", "1.0 0.0 3.14 21631.3", result);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#marshal(org.cip4.lib.xjdf.type.Rectangle)}.
 	 * @throws Exception
 	 */

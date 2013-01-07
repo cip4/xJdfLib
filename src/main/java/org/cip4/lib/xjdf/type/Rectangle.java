@@ -135,7 +135,7 @@ public class Rectangle extends XmlAdapter<String, Rectangle> {
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
-	public String marshal(Rectangle v) throws Exception {
+	public String marshal(Rectangle v) {
 
 		if (v == null)
 			return null;
@@ -162,4 +162,11 @@ public class Rectangle extends XmlAdapter<String, Rectangle> {
 		return newInstance(v);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
 }

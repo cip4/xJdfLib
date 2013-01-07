@@ -90,6 +90,20 @@ public class XYPairTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#toString()}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString() throws Exception {
+
+		// arrange / act
+		String result = XYPair.newInstance(612.22, 792.44).toString();
+
+		// assert
+		Assert.assertEquals("Result is wrong.", "612.22 792.44", result);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#marshal(org.cip4.lib.xjdf.type.XYPair)}.
 	 * @throws Exception
 	 */
