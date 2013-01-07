@@ -95,7 +95,7 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
-	public String marshal(DateTime dateTime) throws Exception {
+	public String marshal(DateTime dateTime) {
 
 		if (dateTime == null)
 			return null;
@@ -131,4 +131,11 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 		return newInstance(dateTime);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
 }

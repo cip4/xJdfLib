@@ -156,7 +156,7 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
 	 */
 	@Override
-	public String marshal(Matrix matrix) throws Exception {
+	public String marshal(Matrix matrix) {
 
 		if (matrix == null)
 			return null;
@@ -183,6 +183,14 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	public Matrix unmarshal(String v) throws Exception {
 
 		return newInstance(v);
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
 	}
 
 }

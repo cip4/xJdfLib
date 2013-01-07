@@ -43,6 +43,26 @@ public class DateTimeTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#toString()}.
+	 */
+	@Test
+	public void testToString() throws Exception {
+
+		// arrange
+		String expected = "2012-03-04T16:20:45Z";
+
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		calendar.set(2012, Calendar.MARCH, 4, 16, 20, 45);
+
+		// act
+		String actual = DateTime.newInstance(calendar).toString();
+
+		// assert
+		System.out.println("Result UTC: " + actual);
+		Assert.assertEquals("DateTime format is wrong.", expected, actual);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
 	 */
 	@Test

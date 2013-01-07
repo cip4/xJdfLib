@@ -107,6 +107,28 @@ public class MatrixTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#toString()}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testToString() throws Exception {
+
+		// arrange
+		final double a = 1d;
+		final double b = 0d;
+		final double c = 0d;
+		final double d = 1d;
+		final double tx = 3.14d;
+		final double ty = 21631.3d;
+
+		// act
+		String actual = Matrix.newInstance(a, b, c, d, tx, ty).toString();
+
+		// assert
+		Assert.assertEquals("String value is wrong.", "1.0 0.0 0.0 1.0 3.14 21631.3", actual);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#marshal(org.cip4.lib.xjdf.type.Matrix)}.
 	 * @throws Exception
 	 */
