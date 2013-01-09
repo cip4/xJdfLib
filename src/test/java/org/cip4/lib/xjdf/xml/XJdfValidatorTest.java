@@ -174,7 +174,7 @@ public class XJdfValidatorTest {
 		// assert
 		int size = xJdfValidator.getMessages().size();
 
-		Assert.assertEquals("Number messages is wrong.", 2, size);
+		Assert.assertEquals("Number messages is wrong.", 1, size);
 		Assert.assertFalse("Validation result is wrong", isValid);
 	}
 
@@ -245,7 +245,7 @@ public class XJdfValidatorTest {
 		XJdfNodeFactory nf = XJdfNodeFactory.newInstance();
 
 		// create product
-		ProductBuilder productBuilder = ProductBuilder.newInstance(1000, null, "Brochure", "4 Page Brochure");
+		ProductBuilder productBuilder = ProductBuilder.newInstance(1000, "Brochure", "4 Page Brochure");
 		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", Shape.newInstance(595.27559055, 822.04724409)));
 		productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
 		productBuilder.addIntent(nf.createProductionIntent("Lithography"));

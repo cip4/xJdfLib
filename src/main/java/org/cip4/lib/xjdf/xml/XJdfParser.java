@@ -55,7 +55,7 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
 	public void parseXJdf(XJDF xJdf, OutputStream os) throws Exception {
-		parseXml(xJdf, os);
+		parseXml(xJdf, os, XJdfValidator.class);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
 	public void parseXJdf(XJDF xJdf, OutputStream os, boolean skipValidation) throws Exception {
-		parseXml(xJdf, os, skipValidation);
+		parseXml(xJdf, os, skipValidation, XJdfValidator.class);
 	}
 
 	/**

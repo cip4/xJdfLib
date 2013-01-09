@@ -941,7 +941,7 @@
 			</xs:sequence>
 			<xs:attribute name="ID" type="ID" use="required" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
-			<xs:attribute name="Types" type="NMTOKENS" use="required" />
+			<xs:attribute name="Types" type="NMTOKENS" use="optional" />
 			<xs:attribute name="CommentURL" type="URL" use="optional" />
 			<xs:attribute name="JobID" type="string" use="optional" />
 			<xs:attribute name="ICSVersions" type="NMTOKENS" use="optional" />

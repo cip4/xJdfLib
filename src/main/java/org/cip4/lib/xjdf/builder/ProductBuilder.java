@@ -17,6 +17,7 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
@@ -57,7 +58,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	public static ProductBuilder newInstance(int amount) {
 
 		// return new instance
-		return newInstance(amount, null, null, null);
+		return newInstance(amount, null, null);
 	}
 
 	/**
@@ -68,16 +69,18 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * @param productTypeDetails Value of ProductTypeDetails attribute
 	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(int amount, String productId, String productType, String productTypeDetails) {
+	public static ProductBuilder newInstance(int amount, String productType, String productTypeDetails) {
 
 		// create new instance
 		ProductBuilder builder = newInstance();
 
 		// set attributes
 		builder.getProduct().setAmount(amount);
-		builder.getProduct().setID(productId);
 		builder.getProduct().setProductType(productType);
 		builder.getProduct().setProductTypeDetails(productTypeDetails);
+
+		// default values
+		builder.getProduct().setID(IDGeneratorUtil.generateID("PRD"));
 
 		// return instance
 		return builder;

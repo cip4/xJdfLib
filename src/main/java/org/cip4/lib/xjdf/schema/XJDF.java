@@ -36,7 +36,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;/sequence>
  *       &lt;attribute name="ID" use="required" type="{http://www.CIP4.org/JDFSchema_2_0}ID" />
  *       &lt;attribute name="DescriptiveName" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
- *       &lt;attribute name="Types" use="required" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
+ *       &lt;attribute name="Types" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *       &lt;attribute name="CommentURL" type="{http://www.CIP4.org/JDFSchema_2_0}URL" />
  *       &lt;attribute name="JobID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="ICSVersions" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
@@ -86,7 +86,7 @@ public class XJDF
     protected String id;
     @XmlAttribute(name = "DescriptiveName")
     protected String descriptiveName;
-    @XmlAttribute(name = "Types", required = true)
+    @XmlAttribute(name = "Types")
     protected List<String> types;
     @XmlAttribute(name = "CommentURL")
     protected String commentURL;
@@ -242,9 +242,9 @@ public class XJDF
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
      * {@link JAXBElement }{@code <}{@link SetType }{@code >}
      * {@link JAXBElement }{@code <}{@link ParameterSet }{@code >}
+     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
      * 
      * 
      */
