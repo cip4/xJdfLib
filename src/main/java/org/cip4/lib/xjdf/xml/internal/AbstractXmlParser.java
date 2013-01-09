@@ -14,6 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Method;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -22,7 +23,6 @@ import javax.xml.bind.ValidationException;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfValidator;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
@@ -51,8 +51,8 @@ public abstract class AbstractXmlParser<T> {
 	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
-	protected void parseXml(T obj, OutputStream os) throws Exception {
-		parseXml(obj, os, false);
+	protected void parseXml(T obj, OutputStream os, Class abstractValidatorClass) throws Exception {
+		parseXml(obj, os, false, abstractValidatorClass);
 	}
 
 	/**
@@ -63,7 +63,7 @@ public abstract class AbstractXmlParser<T> {
 	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
-	protected void parseXml(T obj, OutputStream os, boolean skipValidation) throws Exception {
+	protected void parseXml(T obj, OutputStream os, boolean skipValidation, Class abstractValidatorClass) throws Exception {
 
 		// marshall XJDF object to output stream
 		Marshaller m = jaxbContext.createMarshaller();
@@ -79,7 +79,9 @@ public abstract class AbstractXmlParser<T> {
 		if (!skipValidation) {
 
 			InputStream is = new ByteArrayInputStream(bos.toByteArray());
-			AbstractXmlValidator validator = XJdfValidator.newInstance(is);
+
+			Method method = abstractValidatorClass.getMethod("newInstance", InputStream.class);
+			AbstractXmlValidator validator = (AbstractXmlValidator) method.invoke(abstractValidatorClass, is);
 
 			if (!validator.isValid()) {
 				String err = validator.getMessagesText();

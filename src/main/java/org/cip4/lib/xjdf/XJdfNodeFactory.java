@@ -217,6 +217,17 @@ public class XJdfNodeFactory extends ObjectFactory {
 	}
 
 	/**
+	 * Create new LayoutIntent Node which already contains values for attribute Pages.
+	 * @param pages Value for Pages attribute.
+	 * @return LayoutIntent Node which already contains defined attributes.
+	 */
+	public LayoutIntent createLayoutIntent(Integer pages) {
+
+		// return object
+		return createLayoutIntent(pages, null, null, null);
+	}
+
+	/**
 	 * Create new LayoutIntent Node which already contains values for attributes Pages, Sides, FinishedDimensions and Dimensions.
 	 * @param pages Value for Pages attribute.
 	 * @param sides Value for Sides attribute.

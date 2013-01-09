@@ -24,6 +24,7 @@ import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
@@ -114,6 +115,10 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		xJdfBuilder.getXJdf().setDescriptiveName(descriptiveName);
 		xJdfBuilder.getXJdf().setRelatedJobID(relatedJobID);
 
+		// default values
+		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		xJdfBuilder.getXJdf().setID(IDGeneratorUtil.generateID("XJDF"));
+
 		// return instance
 		return xJdfBuilder;
 	}
@@ -160,6 +165,16 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// add product
 		getXJdf().getProductList().getProduct().add(product);
+
+		// if necessary, update root product
+		if (getXJdf().getProductList().getRootProducts().size() == 0) {
+
+			if (product.getID() == null || product.getID().isEmpty()) {
+				product.setID(IDGeneratorUtil.generateID());
+			}
+
+			getXJdf().getProductList().getRootProducts().add(product);
+		}
 
 		// return XJdfBuilder object
 		return this;
