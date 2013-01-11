@@ -85,7 +85,7 @@ public class IDGeneratorUtilTest {
 
 		// assert
 		System.out.println(result);
-		Assert.assertTrue("ID is wrong.", result.startsWith("XJDF_"));
+		Assert.assertTrue("ID is wrong.", result.startsWith("ID_"));
 	}
 
 	/**
@@ -95,18 +95,37 @@ public class IDGeneratorUtilTest {
 	public void testGenerateID4_PREFIX() {
 
 		// arrange
+		final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+		int[] array = new int[CHARACTERS.length()];
 
 		// act
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 4000; i++) {
 			String result = IDGeneratorUtil.generateID("");
-			System.out.print(result + "; ");
+
+			String id = result.split("_")[1];
+
+			for (int n = 0; n < id.length(); n++) {
+				int m = CHARACTERS.indexOf(id.charAt(n));
+				array[m]++;
+			}
 		}
 
-		for (int i = 0; i < 1000; i++) {
+		for (int i = 0; i < 4000; i++) {
 			String result = IDGeneratorUtil.generateID("abc");
-			System.out.print(result + "; ");
+
+			String id = result.split("_")[1];
+
+			for (int n = 0; n < id.length(); n++) {
+				int m = CHARACTERS.indexOf(id.charAt(n));
+				array[m]++;
+			}
 		}
 
 		// assert
+		for (int i = 0; i < array.length; i++) {
+			System.out.println("Character " + CHARACTERS.charAt(i) + ": " + array[i]);
+			Assert.assertFalse("Character '" + CHARACTERS.charAt(i) + "' isn't used.", array[i] == 0);
+		}
 	}
+
 }

@@ -86,7 +86,8 @@ public class DeviceInfo
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime idleStartTime;
     @XmlAttribute(name = "HourCounter")
-    protected String hourCounter;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration hourCounter;
     @XmlAttribute(name = "PowerOnTime")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime powerOnTime;
@@ -363,7 +364,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public String getHourCounter() {
+    public org.cip4.lib.xjdf.type.Duration getHourCounter() {
         return hourCounter;
     }
 
@@ -375,7 +376,7 @@ public class DeviceInfo
      *     {@link String }
      *     
      */
-    public void setHourCounter(String value) {
+    public void setHourCounter(org.cip4.lib.xjdf.type.Duration value) {
         this.hourCounter = value;
     }
 

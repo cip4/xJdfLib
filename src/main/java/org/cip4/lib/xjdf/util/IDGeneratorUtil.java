@@ -19,7 +19,7 @@ public class IDGeneratorUtil {
 
 	private final static String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-	private final static String DEFAULT_PREFIX = "XJDF";
+	private final static String DEFAULT_PREFIX = "ID";
 
 	private final static int ID_LENGTH = 8;
 

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -41,7 +42,8 @@ public class ShrinkingParams
     @XmlAttribute(name = "Temperature")
     protected Double temperature;
     @XmlAttribute(name = "Duration")
-    protected String duration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration duration;
 
     /**
      * Gets the value of the shrinkingMethod property.
@@ -99,7 +101,7 @@ public class ShrinkingParams
      *     {@link String }
      *     
      */
-    public String getDuration() {
+    public org.cip4.lib.xjdf.type.Duration getDuration() {
         return duration;
     }
 
@@ -111,7 +113,7 @@ public class ShrinkingParams
      *     {@link String }
      *     
      */
-    public void setDuration(String value) {
+    public void setDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.duration = value;
     }
 

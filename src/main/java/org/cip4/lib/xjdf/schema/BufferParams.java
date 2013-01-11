@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -33,7 +34,8 @@ public class BufferParams
 {
 
     @XmlAttribute(name = "MinimumWait")
-    protected String minimumWait;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration minimumWait;
 
     /**
      * Gets the value of the minimumWait property.
@@ -43,7 +45,7 @@ public class BufferParams
      *     {@link String }
      *     
      */
-    public String getMinimumWait() {
+    public org.cip4.lib.xjdf.type.Duration getMinimumWait() {
         return minimumWait;
     }
 
@@ -55,7 +57,7 @@ public class BufferParams
      *     {@link String }
      *     
      */
-    public void setMinimumWait(String value) {
+    public void setMinimumWait(org.cip4.lib.xjdf.type.Duration value) {
         this.minimumWait = value;
     }
 

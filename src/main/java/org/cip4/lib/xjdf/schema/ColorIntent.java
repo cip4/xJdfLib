@@ -46,7 +46,8 @@ public class ColorIntent
 {
 
     @XmlAttribute(name = "NumColors")
-    protected List<Integer> numColors;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList numColors;
     @XmlAttribute(name = "ColorRef")
     @XmlIDREF
     protected Object colorRef;
@@ -69,30 +70,25 @@ public class ColorIntent
     /**
      * Gets the value of the numColors property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the numColors property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getNumColors().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getNumColors() {
-        if (numColors == null) {
-            numColors = new ArrayList<Integer>();
-        }
-        return this.numColors;
+    public org.cip4.lib.xjdf.type.IntegerList getNumColors() {
+        return numColors;
+    }
+
+    /**
+     * Sets the value of the numColors property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNumColors(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.numColors = value;
     }
 
     /**

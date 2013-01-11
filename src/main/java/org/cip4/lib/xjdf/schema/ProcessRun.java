@@ -73,7 +73,8 @@ public class ProcessRun
     @XmlID
     protected String id;
     @XmlAttribute(name = "Duration")
-    protected String duration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration duration;
     @XmlAttribute(name = "refID")
     @XmlIDREF
     protected Object refID;
@@ -213,7 +214,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public String getDuration() {
+    public org.cip4.lib.xjdf.type.Duration getDuration() {
         return duration;
     }
 
@@ -225,7 +226,7 @@ public class ProcessRun
      *     {@link String }
      *     
      */
-    public void setDuration(String value) {
+    public void setDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.duration = value;
     }
 

@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -56,7 +54,8 @@ public class Feeder
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String feederType;
     @XmlAttribute(name = "AlternatePositions")
-    protected List<Integer> alternatePositions;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList alternatePositions;
     @XmlAttribute(name = "FeederSynchronization")
     @XmlSchemaType(name = "anySimpleType")
     protected String feederSynchronization;
@@ -148,30 +147,25 @@ public class Feeder
     /**
      * Gets the value of the alternatePositions property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the alternatePositions property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getAlternatePositions().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getAlternatePositions() {
-        if (alternatePositions == null) {
-            alternatePositions = new ArrayList<Integer>();
-        }
-        return this.alternatePositions;
+    public org.cip4.lib.xjdf.type.IntegerList getAlternatePositions() {
+        return alternatePositions;
+    }
+
+    /**
+     * Sets the value of the alternatePositions property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAlternatePositions(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.alternatePositions = value;
     }
 
     /**

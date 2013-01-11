@@ -32,6 +32,8 @@ import org.cip4.lib.xjdf.schema.ProofItem;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.type.Duration;
+import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -147,13 +149,47 @@ public class XJdfNodeFactory extends ObjectFactory {
 	}
 
 	/**
+	 * Create a new NodeInfo Node which already contains values for attributes TotalDuration.
+	 * @param totalDuration Value for NodeInfo attribute.
+	 * @return NodeInfo Node which already contains defined attributes.
+	 */
+	public NodeInfo createNodeInfo(Duration totalDuration) {
+
+		// create node
+		NodeInfo nodeInfo = super.createNodeInfo();
+
+		// set attributes
+		nodeInfo.setTotalDuration(totalDuration);
+
+		// return object
+		return nodeInfo;
+	}
+
+	/**
+	 * Create a new NodeInfo Node which already contains values for attributes End.
+	 * @param end Value for End attribute.
+	 * @return NodeInfo Node which already contains defined attributes.
+	 */
+	public NodeInfo createNodeInfo(DateTime end) {
+
+		// create node
+		NodeInfo nodeInfo = super.createNodeInfo();
+
+		// set attributes
+		nodeInfo.setEnd(end);
+
+		// return object
+		return nodeInfo;
+	}
+
+	/**
 	 * Create a new NodeInfo Node which already contains values for attributes TotalDuration, End and NaturalLang.
 	 * @param totalDuration Value for NodeInfo attribute.
 	 * @param end Value for End attribute.
 	 * @param naturalLang Value for NaturalLang attribute.
 	 * @return NodeInfo Node which already contains defined attributes.
 	 */
-	public NodeInfo createNodeInfo(String totalDuration, DateTime end, String naturalLang) {
+	public NodeInfo createNodeInfo(Duration totalDuration, DateTime end, String naturalLang) {
 
 		// create node
 		NodeInfo nodeInfo = super.createNodeInfo();
@@ -338,7 +374,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param numColors Value for NumColors attribute.
 	 * @return ColorIntent Node which already contains defined attributes.
 	 */
-	public ColorIntent createColorIntent(List<Integer> numColors) {
+	public ColorIntent createColorIntent(IntegerList numColors) {
 
 		// return object
 		return createColorIntent(numColors, null, null, null, null);
@@ -351,7 +387,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param coatings Value for Coatings attribute.
 	 * @return ColorIntent Node which already contains defined attributes.
 	 */
-	public ColorIntent createColorIntent(List<Integer> numColors, List<String> colorsUsed, List<String> colorsUsedBack, String coatings, String coatingsBack) {
+	public ColorIntent createColorIntent(IntegerList numColors, List<String> colorsUsed, List<String> colorsUsedBack, String coatings, String coatingsBack) {
 
 		// create node
 		ColorIntent colorIntent = super.createColorIntent();
@@ -360,7 +396,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 		// TODO CoatingsBack
 		// set attributes
 
-		colorIntent.getNumColors().addAll(numColors);
+		colorIntent.setNumColors(numColors);
 
 		if (colorsUsed != null)
 			colorIntent.getColorsUsed().addAll(colorsUsed);

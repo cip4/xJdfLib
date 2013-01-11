@@ -100,7 +100,8 @@ public class Notification
     @XmlElement(name = "Barcode")
     protected List<Barcode> barcode;
     @XmlAttribute(name = "CombinedProcessIndex")
-    protected List<Integer> combinedProcessIndex;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList combinedProcessIndex;
     @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
@@ -428,30 +429,25 @@ public class Notification
     /**
      * Gets the value of the combinedProcessIndex property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the combinedProcessIndex property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCombinedProcessIndex().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getCombinedProcessIndex() {
-        if (combinedProcessIndex == null) {
-            combinedProcessIndex = new ArrayList<Integer>();
-        }
-        return this.combinedProcessIndex;
+    public org.cip4.lib.xjdf.type.IntegerList getCombinedProcessIndex() {
+        return combinedProcessIndex;
+    }
+
+    /**
+     * Sets the value of the combinedProcessIndex property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCombinedProcessIndex(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.combinedProcessIndex = value;
     }
 
     /**

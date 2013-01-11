@@ -196,7 +196,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		partContent.setRun("Content");
 
 		NodeInfo nodeInfo = new NodeInfo();
-		nodeInfo.setEnd(DateTime.newInstance());
+		nodeInfo.setEnd(new DateTime());
 
 		// act
 		xJdfBuilder.addParameter(runListCover, partCover);

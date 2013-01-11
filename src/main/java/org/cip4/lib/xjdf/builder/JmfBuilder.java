@@ -58,7 +58,7 @@ public class JmfBuilder extends AbstractNodeBuilder<JMF> {
 		JmfBuilder jmfBuilder = new JmfBuilder();
 
 		// preconfiguration
-		jmfBuilder.getJMF().setTimeStamp(DateTime.newInstance());
+		jmfBuilder.getJMF().setTimeStamp(new DateTime());
 		jmfBuilder.getJMF().setMaxVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 		jmfBuilder.getJMF().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 		jmfBuilder.getJMF().setDeviceID(deviceID);

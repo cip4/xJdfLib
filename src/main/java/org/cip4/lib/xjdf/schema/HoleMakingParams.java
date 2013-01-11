@@ -64,7 +64,8 @@ public class HoleMakingParams
     @XmlElement(name = "HoleLine")
     protected List<HoleLine> holeLine;
     @XmlAttribute(name = "HoleCount")
-    protected List<Integer> holeCount;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList holeCount;
     @XmlAttribute(name = "Extent")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair extent;
@@ -170,30 +171,25 @@ public class HoleMakingParams
     /**
      * Gets the value of the holeCount property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the holeCount property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHoleCount().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getHoleCount() {
-        if (holeCount == null) {
-            holeCount = new ArrayList<Integer>();
-        }
-        return this.holeCount;
+    public org.cip4.lib.xjdf.type.IntegerList getHoleCount() {
+        return holeCount;
+    }
+
+    /**
+     * Sets the value of the holeCount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHoleCount(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.holeCount = value;
     }
 
     /**

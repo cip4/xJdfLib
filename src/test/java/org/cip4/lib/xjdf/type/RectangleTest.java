@@ -48,7 +48,7 @@ public class RectangleTest {
 		// arrange
 
 		// act
-		Rectangle r = Rectangle.newInstance();
+		Rectangle r = new Rectangle();
 
 		// assert
 		Assert.assertEquals("Llx is wrong.", 0d, r.getLlx());
@@ -67,7 +67,7 @@ public class RectangleTest {
 		final String value = "1 0 3.14 21631.3";
 
 		// act
-		Rectangle r = Rectangle.newInstance(value);
+		Rectangle r = new Rectangle(value);
 
 		// assert
 		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx());
@@ -85,7 +85,7 @@ public class RectangleTest {
 		// arrange
 
 		// act
-		Rectangle r = Rectangle.newInstance(1d, 0d, 3.14d, 21631.3d);
+		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
 
 		// assert
 		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx());
@@ -102,7 +102,7 @@ public class RectangleTest {
 	public void testToString() throws Exception {
 
 		// arrange / act
-		String result = Rectangle.newInstance(1d, 0d, 3.14d, 21631.3d).toString();
+		String result = new Rectangle(1d, 0d, 3.14d, 21631.3d).toString();
 
 		// assert
 		Assert.assertEquals("Result is wrong.", "1.0 0.0 3.14 21631.3", result);
@@ -116,10 +116,10 @@ public class RectangleTest {
 	public void testMarshalRectangle() throws Exception {
 
 		// arrange
-		Rectangle r = Rectangle.newInstance(1d, 0d, 3.14d, 21631.3d);
+		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
 
 		// act
-		String result = Rectangle.newInstance().marshal(r);
+		String result = new Rectangle().marshal(r);
 
 		// assert
 		Assert.assertEquals("Result is wrong.", "1.0 0.0 3.14 21631.3", result);
@@ -136,7 +136,7 @@ public class RectangleTest {
 		final String value = "1 0 3.14 21631.3";
 
 		// act
-		Rectangle r = Rectangle.newInstance().unmarshal(value);
+		Rectangle r = new Rectangle().unmarshal(value);
 
 		// assert
 		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx());

@@ -33,6 +33,8 @@ import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.type.Duration;
+import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -139,7 +141,7 @@ public class XJdfNodeFactoryTest {
 	public void testCreateNodeInfo() {
 
 		// arrange
-		final String TOTAL_DURATION = UUID.randomUUID().toString();
+		final Duration TOTAL_DURATION = new Duration(4);
 		final DateTime END = new DateTime();
 		final String NATURAL_LANG = UUID.randomUUID().toString();
 
@@ -203,8 +205,8 @@ public class XJdfNodeFactoryTest {
 		// arrange
 		final Integer pages = 23;
 		final String sides = UUID.randomUUID().toString();
-		final Shape finishedDimensions = Shape.newInstance(4.4, 6.6);
-		final XYPair dimensions = XYPair.newInstance(5.5, 7.7);
+		final Shape finishedDimensions = new Shape(4.4, 6.6);
+		final XYPair dimensions = new XYPair(5.5, 7.7);
 
 		// act
 		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions, dimensions);
@@ -222,7 +224,7 @@ public class XJdfNodeFactoryTest {
 		// arrange
 		final Integer pages = 23;
 		final String sides = UUID.randomUUID().toString();
-		final Shape finishedDimensions = Shape.newInstance(4.4, 6.6);
+		final Shape finishedDimensions = new Shape(4.4, 6.6);
 
 		// act
 		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions);
@@ -290,9 +292,7 @@ public class XJdfNodeFactoryTest {
 	public void testCreateColorIntent() {
 
 		// arrange
-		final List<Integer> NUM_COLORS = new ArrayList<Integer>();
-		NUM_COLORS.add(2);
-		NUM_COLORS.add(4);
+		final IntegerList NUM_COLORS = new IntegerList(2, 4);
 
 		final List<String> COLORS_USED = new ArrayList<String>();
 		COLORS_USED.add(UUID.randomUUID().toString());
@@ -306,7 +306,7 @@ public class XJdfNodeFactoryTest {
 		final String COATINGS_BACK = UUID.randomUUID().toString();
 
 		// act
-		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS, COLORS_USED, COLORS_USED_BACK, COATINGS, COATINGS_BACK);
+		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(new IntegerList(2, 4), COLORS_USED, COLORS_USED_BACK, COATINGS, COATINGS_BACK);
 
 		// assert
 		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
@@ -320,9 +320,7 @@ public class XJdfNodeFactoryTest {
 	public void testCreateColorIntentLight() {
 
 		// arrange
-		final List<Integer> NUM_COLORS = new ArrayList<Integer>();
-		NUM_COLORS.add(2);
-		NUM_COLORS.add(4);
+		final IntegerList NUM_COLORS = new IntegerList(2, 4);
 
 		// act
 		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS);
@@ -337,8 +335,8 @@ public class XJdfNodeFactoryTest {
 	public void testMarkObject() {
 
 		// arrange
-		final Matrix ctm = Matrix.newInstance();
-		final Rectangle clipBox = Rectangle.newInstance("0.0000 0.0000 2976.3779527559 2125.9842519685");
+		final Matrix ctm = new Matrix();
+		final Rectangle clipBox = new Rectangle("0.0000 0.0000 2976.3779527559 2125.9842519685");
 		final Integer ord = 8;
 
 		// act
@@ -354,11 +352,11 @@ public class XJdfNodeFactoryTest {
 	public void testContentObject() {
 
 		// arrange
-		final Matrix ctm = Matrix.newInstance("1 0 0 1 0.0000 0.0000");
-		final Rectangle clipBox = Rectangle.newInstance("0.0000 0.0000 2976.3779527559 2125.9842519685");
+		final Matrix ctm = new Matrix("1 0 0 1 0.0000 0.0000");
+		final Rectangle clipBox = new Rectangle("0.0000 0.0000 2976.3779527559 2125.9842519685");
 		final Integer ord = 8;
-		final Matrix trimCtm = Matrix.newInstance("1 0 0 1 36.8509397008 958.1102362205");
-		final XYPair trimSize = XYPair.newInstance("425.1968503937 813.5433070866");
+		final Matrix trimCtm = new Matrix("1 0 0 1 36.8509397008 958.1102362205");
+		final XYPair trimSize = new XYPair("425.1968503937 813.5433070866");
 
 		// act
 		ContentObject contentObject = xJdfNodeFactory.createContentObject(ctm, clipBox, ord, trimCtm, trimSize);

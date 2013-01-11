@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -37,11 +38,14 @@ public class DevelopingParams
 {
 
     @XmlAttribute(name = "PostBakeTime")
-    protected String postBakeTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration postBakeTime;
     @XmlAttribute(name = "PostExposeTime")
-    protected String postExposeTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration postExposeTime;
     @XmlAttribute(name = "PreHeatTime")
-    protected String preHeatTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration preHeatTime;
     @XmlAttribute(name = "PostBakeTemp")
     protected Double postBakeTemp;
     @XmlAttribute(name = "PreHeatTemp")
@@ -55,7 +59,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public String getPostBakeTime() {
+    public org.cip4.lib.xjdf.type.Duration getPostBakeTime() {
         return postBakeTime;
     }
 
@@ -67,7 +71,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public void setPostBakeTime(String value) {
+    public void setPostBakeTime(org.cip4.lib.xjdf.type.Duration value) {
         this.postBakeTime = value;
     }
 
@@ -79,7 +83,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public String getPostExposeTime() {
+    public org.cip4.lib.xjdf.type.Duration getPostExposeTime() {
         return postExposeTime;
     }
 
@@ -91,7 +95,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public void setPostExposeTime(String value) {
+    public void setPostExposeTime(org.cip4.lib.xjdf.type.Duration value) {
         this.postExposeTime = value;
     }
 
@@ -103,7 +107,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public String getPreHeatTime() {
+    public org.cip4.lib.xjdf.type.Duration getPreHeatTime() {
         return preHeatTime;
     }
 
@@ -115,7 +119,7 @@ public class DevelopingParams
      *     {@link String }
      *     
      */
-    public void setPreHeatTime(String value) {
+    public void setPreHeatTime(org.cip4.lib.xjdf.type.Duration value) {
         this.preHeatTime = value;
     }
 

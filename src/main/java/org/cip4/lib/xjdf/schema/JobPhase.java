@@ -112,7 +112,8 @@ public class JobPhase
     @XmlAttribute(name = "PercentCompleted")
     protected Double percentCompleted;
     @XmlAttribute(name = "RestTime")
-    protected String restTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration restTime;
     @XmlAttribute(name = "Activation")
     @XmlSchemaType(name = "anySimpleType")
     protected String activation;
@@ -625,7 +626,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public String getRestTime() {
+    public org.cip4.lib.xjdf.type.Duration getRestTime() {
         return restTime;
     }
 
@@ -637,7 +638,7 @@ public class JobPhase
      *     {@link String }
      *     
      */
-    public void setRestTime(String value) {
+    public void setRestTime(org.cip4.lib.xjdf.type.Duration value) {
         this.restTime = value;
     }
 

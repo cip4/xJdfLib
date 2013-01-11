@@ -61,7 +61,7 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 	public void testNewInstanceRectangle() throws Exception {
 
 		// arrange
-		Rectangle surfaceContentsBox = Rectangle.newInstance(1, 2, 3, 4);
+		Rectangle surfaceContentsBox = new Rectangle(1, 2, 3, 4);
 
 		// act
 		layoutBuilder = LayoutBuilder.newInstance(surfaceContentsBox);
@@ -103,15 +103,15 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 		final String markObject_2_ClipBox = "2.0000 2.0000 976.3779527559 125.9842519685";
 		final String markObject_2_Ord = "5";
 
-		MarkObject markObject_1 = xJdfNodeFactory.createMarkObject(Matrix.newInstance(markObject_1_CTM), Rectangle.newInstance(markObject_1_ClipBox), Integer.valueOf(markObject_1_Ord));
-		ContentObject contentObject_1 = xJdfNodeFactory.createContentObject(Matrix.newInstance(contentObject_1_CTM), Rectangle.newInstance(contentObject_1_ClipBox),
-				Integer.valueOf(contentObject_1_Ord), Matrix.newInstance(contentObject_1_TrimCTM), XYPair.newInstance(contentObject_1_TrimSize));
-		ContentObject contentObject_2 = xJdfNodeFactory.createContentObject(Matrix.newInstance(contentObject_2_CTM), Rectangle.newInstance(contentObject_2_ClipBox),
-				Integer.valueOf(contentObject_2_Ord), Matrix.newInstance(contentObject_2_TrimCTM), XYPair.newInstance(contentObject_2_TrimSize));
-		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(Matrix.newInstance(markObject_2_CTM), Rectangle.newInstance(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
+		MarkObject markObject_1 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_1_CTM), new Rectangle(markObject_1_ClipBox), Integer.valueOf(markObject_1_Ord));
+		ContentObject contentObject_1 = xJdfNodeFactory.createContentObject(new Matrix(contentObject_1_CTM), new Rectangle(contentObject_1_ClipBox), Integer.valueOf(contentObject_1_Ord), new Matrix(
+				contentObject_1_TrimCTM), new XYPair(contentObject_1_TrimSize));
+		ContentObject contentObject_2 = xJdfNodeFactory.createContentObject(new Matrix(contentObject_2_CTM), new Rectangle(contentObject_2_ClipBox), Integer.valueOf(contentObject_2_Ord), new Matrix(
+				contentObject_2_TrimCTM), new XYPair(contentObject_2_TrimSize));
+		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_2_CTM), new Rectangle(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
 
 		// act
-		layoutBuilder = LayoutBuilder.newInstance(Rectangle.newInstance(surfaceContentsBox));
+		layoutBuilder = LayoutBuilder.newInstance(new Rectangle(surfaceContentsBox));
 
 		layoutBuilder.addMarkObject(markObject_1);
 		layoutBuilder.addPlacedObject(contentObject_1);
@@ -168,15 +168,15 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 		final String markObject_2_ClipBox = "2.0000 2.0000 976.3779527559 125.9842519685";
 		final String markObject_2_Ord = "5";
 
-		MarkObject markObject_1 = xJdfNodeFactory.createMarkObject(Matrix.newInstance(markObject_1_CTM), Rectangle.newInstance(markObject_1_ClipBox), Integer.valueOf(markObject_1_Ord));
-		ContentObject contentObject_1 = xJdfNodeFactory.createContentObject(Matrix.newInstance(contentObject_1_CTM), Rectangle.newInstance(contentObject_1_ClipBox),
-				Integer.valueOf(contentObject_1_Ord), Matrix.newInstance(contentObject_1_TrimCTM), XYPair.newInstance(contentObject_1_TrimSize));
-		ContentObject contentObject_2 = xJdfNodeFactory.createContentObject(Matrix.newInstance(contentObject_2_CTM), Rectangle.newInstance(contentObject_2_ClipBox),
-				Integer.valueOf(contentObject_2_Ord), Matrix.newInstance(contentObject_2_TrimCTM), XYPair.newInstance(contentObject_2_TrimSize));
-		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(Matrix.newInstance(markObject_2_CTM), Rectangle.newInstance(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
+		MarkObject markObject_1 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_1_CTM), new Rectangle(markObject_1_ClipBox), Integer.valueOf(markObject_1_Ord));
+		ContentObject contentObject_1 = xJdfNodeFactory.createContentObject(new Matrix(contentObject_1_CTM), new Rectangle(contentObject_1_ClipBox), Integer.valueOf(contentObject_1_Ord), new Matrix(
+				contentObject_1_TrimCTM), new XYPair(contentObject_1_TrimSize));
+		ContentObject contentObject_2 = xJdfNodeFactory.createContentObject(new Matrix(contentObject_2_CTM), new Rectangle(contentObject_2_ClipBox), Integer.valueOf(contentObject_2_Ord), new Matrix(
+				contentObject_2_TrimCTM), new XYPair(contentObject_2_TrimSize));
+		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_2_CTM), new Rectangle(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
 
 		// act
-		layoutBuilder = LayoutBuilder.newInstance(Rectangle.newInstance(surfaceContentsBox));
+		layoutBuilder = LayoutBuilder.newInstance(new Rectangle(surfaceContentsBox));
 
 		layoutBuilder.addPlacedObject(markObject_1);
 		layoutBuilder.addPlacedObject(contentObject_1);

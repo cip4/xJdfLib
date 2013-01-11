@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -69,7 +70,8 @@ public class StrippingParams
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "SectionList")
-    protected List<Integer> sectionList;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList sectionList;
     @XmlAttribute(name = "InnermostShingling")
     protected Double innermostShingling;
     @XmlAttribute(name = "AssemblyIDs")
@@ -211,30 +213,25 @@ public class StrippingParams
     /**
      * Gets the value of the sectionList property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the sectionList property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getSectionList().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getSectionList() {
-        if (sectionList == null) {
-            sectionList = new ArrayList<Integer>();
-        }
-        return this.sectionList;
+    public org.cip4.lib.xjdf.type.IntegerList getSectionList() {
+        return sectionList;
+    }
+
+    /**
+     * Sets the value of the sectionList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSectionList(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.sectionList = value;
     }
 
     /**

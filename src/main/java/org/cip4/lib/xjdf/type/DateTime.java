@@ -39,48 +39,29 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	}
 
 	/**
-	 * Private custom constructor. Accepting a Calendar object for initializing.
+	 * Custom constructor. Accepting a Calendar object for initializing.
 	 * @param calendar Calendar object for initializing.
 	 */
-	private DateTime(Calendar calendar) {
+	public DateTime(Calendar calendar) {
 		this.calendar = calendar;
 	}
 
 	/**
-	 * Returns the current time as XJDF DateTime.
-	 * @return Current Time as XJDF DateTime
-	 */
-	public static DateTime newInstance() {
-		return new DateTime();
-	}
-
-	/**
-	 * Creates a XJDF DateTime instance by a Calendar object.
-	 * @param calendar Calendar object for initializing.
-	 * @return created XJDF DateTime object.
-	 */
-	public static DateTime newInstance(Calendar calendar) {
-		return new DateTime(calendar);
-	}
-
-	/**
-	 * Creates a XJDF DateTime instance by a String expression object.
+	 * Custom constructor. Creates a XJDF DateTime instance by a String expression object.
 	 * @param expression XJDF DateTime String expression.
 	 * @return XJDF DateTime data type object.
 	 * @throws ParseException
 	 */
-	public static DateTime newInstance(String expression) throws ParseException {
+	public DateTime(String expression) throws ParseException {
 
 		// parse
 		DateFormat dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
 		dateFormat.parse(expression);
-		Calendar result = dateFormat.getCalendar();
+		this.calendar = dateFormat.getCalendar();
 
-		String[] ids = TimeZone.getAvailableIDs(result.get(Calendar.ZONE_OFFSET));
-		result.setTimeZone(TimeZone.getTimeZone(ids[0]));
+		String[] ids = TimeZone.getAvailableIDs(this.calendar.get(Calendar.ZONE_OFFSET));
+		this.calendar.setTimeZone(TimeZone.getTimeZone(ids[0]));
 
-		// return result
-		return new DateTime(result);
 	}
 
 	/**
@@ -128,7 +109,7 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	 */
 	@Override
 	public DateTime unmarshal(String dateTime) throws Exception {
-		return newInstance(dateTime);
+		return new DateTime(dateTime);
 	}
 
 	/**

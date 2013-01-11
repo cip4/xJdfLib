@@ -48,7 +48,7 @@ public class MatrixTest {
 		// arrange
 
 		// act
-		Matrix r = Matrix.newInstance();
+		Matrix r = new Matrix();
 
 		// assert
 		Assert.assertEquals("a value is wrong.", 1d, r.getA());
@@ -69,7 +69,7 @@ public class MatrixTest {
 		final String VALUE = "1 0 0 1 3.14 21631.3";
 
 		// act
-		Matrix r = Matrix.newInstance(VALUE);
+		Matrix r = new Matrix(VALUE);
 
 		// assert
 		Assert.assertEquals("a value is wrong.", 1d, r.getA());
@@ -95,7 +95,7 @@ public class MatrixTest {
 		final double ty = 21631.3d;
 
 		// act
-		Matrix r = Matrix.newInstance(a, b, c, d, tx, ty);
+		Matrix r = new Matrix(a, b, c, d, tx, ty);
 
 		// assert
 		Assert.assertEquals("a value is wrong.", 1d, r.getA());
@@ -122,7 +122,7 @@ public class MatrixTest {
 		final double ty = 21631.3d;
 
 		// act
-		String actual = Matrix.newInstance(a, b, c, d, tx, ty).toString();
+		String actual = new Matrix(a, b, c, d, tx, ty).toString();
 
 		// assert
 		Assert.assertEquals("String value is wrong.", "1.0 0.0 0.0 1.0 3.14 21631.3", actual);
@@ -144,8 +144,8 @@ public class MatrixTest {
 		final double ty = 21631.3d;
 
 		// act
-		Matrix r = Matrix.newInstance(a, b, c, d, tx, ty);
-		String actual = Matrix.newInstance().marshal(r);
+		Matrix r = new Matrix(a, b, c, d, tx, ty);
+		String actual = new Matrix().marshal(r);
 
 		// assert
 		Assert.assertEquals("String value is wrong.", "1.0 0.0 0.0 1.0 3.14 21631.3", actual);
@@ -161,7 +161,7 @@ public class MatrixTest {
 		final String VALUE = "1 0 0 1 3.14 21631.3";
 
 		// act
-		Matrix r = Matrix.newInstance().unmarshal(VALUE);
+		Matrix r = new Matrix().unmarshal(VALUE);
 
 		// assert
 		Assert.assertEquals("a value is wrong.", 1d, r.getA());

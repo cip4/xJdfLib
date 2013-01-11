@@ -63,7 +63,8 @@ public class PalletizingParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair overhang;
     @XmlAttribute(name = "LayerAmount")
-    protected List<Integer> layerAmount;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList layerAmount;
 
     /**
      * Gets the value of the bundle property.
@@ -217,30 +218,25 @@ public class PalletizingParams
     /**
      * Gets the value of the layerAmount property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerAmount property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLayerAmount().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getLayerAmount() {
-        if (layerAmount == null) {
-            layerAmount = new ArrayList<Integer>();
-        }
-        return this.layerAmount;
+    public org.cip4.lib.xjdf.type.IntegerList getLayerAmount() {
+        return layerAmount;
+    }
+
+    /**
+     * Sets the value of the layerAmount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLayerAmount(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.layerAmount = value;
     }
 
 }

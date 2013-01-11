@@ -84,7 +84,8 @@ public class DurationState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected String currentValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration currentValue;
     @XmlAttribute(name = "PresentValueList")
     protected String presentValueList;
     @XmlAttribute(name = "ID")
@@ -114,7 +115,8 @@ public class DurationState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected String defaultValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration defaultValue;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
@@ -308,7 +310,7 @@ public class DurationState
      *     {@link String }
      *     
      */
-    public String getCurrentValue() {
+    public org.cip4.lib.xjdf.type.Duration getCurrentValue() {
         return currentValue;
     }
 
@@ -320,7 +322,7 @@ public class DurationState
      *     {@link String }
      *     
      */
-    public void setCurrentValue(String value) {
+    public void setCurrentValue(org.cip4.lib.xjdf.type.Duration value) {
         this.currentValue = value;
     }
 
@@ -611,7 +613,7 @@ public class DurationState
      *     {@link String }
      *     
      */
-    public String getDefaultValue() {
+    public org.cip4.lib.xjdf.type.Duration getDefaultValue() {
         return defaultValue;
     }
 
@@ -623,7 +625,7 @@ public class DurationState
      *     {@link String }
      *     
      */
-    public void setDefaultValue(String value) {
+    public void setDefaultValue(org.cip4.lib.xjdf.type.Duration value) {
         this.defaultValue = value;
     }
 

@@ -47,29 +47,35 @@ public class Performance
 {
 
     @XmlAttribute(name = "MaxCleanup")
-    protected String maxCleanup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration maxCleanup;
     @XmlAttribute(name = "MaxAmount")
     protected Double maxAmount;
     @XmlAttribute(name = "AverageCleanup")
-    protected String averageCleanup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration averageCleanup;
     @XmlAttribute(name = "DevCapsRef")
     @XmlIDREF
     protected Object devCapsRef;
     @XmlAttribute(name = "MinCleanup")
-    protected String minCleanup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration minCleanup;
     @XmlAttribute(name = "AverageAmount")
     protected Double averageAmount;
     @XmlAttribute(name = "MaxSetup")
-    protected String maxSetup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration maxSetup;
     @XmlAttribute(name = "Unit")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String unit;
     @XmlAttribute(name = "MinSetup")
-    protected String minSetup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration minSetup;
     @XmlAttribute(name = "MinAmount")
     protected Double minAmount;
     @XmlAttribute(name = "AverageSetup")
-    protected String averageSetup;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration averageSetup;
 
     /**
      * Gets the value of the maxCleanup property.
@@ -79,7 +85,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getMaxCleanup() {
+    public org.cip4.lib.xjdf.type.Duration getMaxCleanup() {
         return maxCleanup;
     }
 
@@ -91,7 +97,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setMaxCleanup(String value) {
+    public void setMaxCleanup(org.cip4.lib.xjdf.type.Duration value) {
         this.maxCleanup = value;
     }
 
@@ -127,7 +133,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getAverageCleanup() {
+    public org.cip4.lib.xjdf.type.Duration getAverageCleanup() {
         return averageCleanup;
     }
 
@@ -139,7 +145,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setAverageCleanup(String value) {
+    public void setAverageCleanup(org.cip4.lib.xjdf.type.Duration value) {
         this.averageCleanup = value;
     }
 
@@ -175,7 +181,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getMinCleanup() {
+    public org.cip4.lib.xjdf.type.Duration getMinCleanup() {
         return minCleanup;
     }
 
@@ -187,7 +193,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setMinCleanup(String value) {
+    public void setMinCleanup(org.cip4.lib.xjdf.type.Duration value) {
         this.minCleanup = value;
     }
 
@@ -223,7 +229,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getMaxSetup() {
+    public org.cip4.lib.xjdf.type.Duration getMaxSetup() {
         return maxSetup;
     }
 
@@ -235,7 +241,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setMaxSetup(String value) {
+    public void setMaxSetup(org.cip4.lib.xjdf.type.Duration value) {
         this.maxSetup = value;
     }
 
@@ -271,7 +277,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getMinSetup() {
+    public org.cip4.lib.xjdf.type.Duration getMinSetup() {
         return minSetup;
     }
 
@@ -283,7 +289,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setMinSetup(String value) {
+    public void setMinSetup(org.cip4.lib.xjdf.type.Duration value) {
         this.minSetup = value;
     }
 
@@ -319,7 +325,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public String getAverageSetup() {
+    public org.cip4.lib.xjdf.type.Duration getAverageSetup() {
         return averageSetup;
     }
 
@@ -331,7 +337,7 @@ public class Performance
      *     {@link String }
      *     
      */
-    public void setAverageSetup(String value) {
+    public void setAverageSetup(org.cip4.lib.xjdf.type.Duration value) {
         this.averageSetup = value;
     }
 

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,7 +39,8 @@ public class QualityControlParams
     @XmlAttribute(name = "SampleInterval")
     protected Integer sampleInterval;
     @XmlAttribute(name = "TimeInterval")
-    protected String timeInterval;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration timeInterval;
     @XmlAttribute(name = "BindingQualityParamsRef")
     @XmlIDREF
     protected Object bindingQualityParamsRef;
@@ -75,7 +77,7 @@ public class QualityControlParams
      *     {@link String }
      *     
      */
-    public String getTimeInterval() {
+    public org.cip4.lib.xjdf.type.Duration getTimeInterval() {
         return timeInterval;
     }
 
@@ -87,7 +89,7 @@ public class QualityControlParams
      *     {@link String }
      *     
      */
-    public void setTimeInterval(String value) {
+    public void setTimeInterval(org.cip4.lib.xjdf.type.Duration value) {
         this.timeInterval = value;
     }
 

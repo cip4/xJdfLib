@@ -1,0 +1,208 @@
+/**
+ * All rights reserved by
+ * 
+ * flyeralarm GmbH
+ * Alfred-Nobel-Straße 18
+ * 97080 Würzburg
+ *
+ * Email: info@flyeralarm.com
+ * Website: http://www.flyeralarm.com
+ */
+package org.cip4.lib.xjdf.type;
+
+import javax.xml.bind.annotation.adapters.XmlAdapter;
+
+/**
+ * Durations are a component of time intervals and define the amount of intervening time in a time interval. Durations are represented by the format
+ * P[n]Y[n]M[n]DT[n]H[n]M[n]S
+ * @author s.meissner
+ * @date 11.01.2013
+ */
+public class Duration extends XmlAdapter<String, Duration> {
+
+	private final int year;
+
+	private final int month;
+
+	private final int day;
+
+	private final int hour;
+
+	private final int minute;
+
+	private final int second;
+
+	/**
+	 * Default constructor.
+	 */
+	public Duration() {
+		year = 0;
+		month = 0;
+		day = 0;
+		hour = 0;
+		minute = 0;
+		second = 0;
+	}
+
+	/**
+	 * Custom constructor. Accepting a value for day.
+	 */
+	public Duration(int day) {
+		this(0, 0, day, 0, 0, 0);
+	}
+
+	/**
+	 * Custom constructor. Accepting values for day and hour.
+	 */
+	public Duration(int day, int hour) {
+		this(0, 0, day, hour, 0, 0);
+	}
+
+	/**
+	 * Custom constructor. Accepting accepting a String expression for initializing..
+	 */
+	public Duration(String expression) {
+
+		this();
+
+		// TODO
+		new UnsupportedOperationException("Operation does not exist yet.");
+	}
+
+	/**
+	 * Custom constructor. Accepting values for all attributes.
+	 */
+	public Duration(int year, int month, int day, int hour, int minute, int second) {
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		this.hour = hour;
+		this.minute = minute;
+		this.second = second;
+	}
+
+	/**
+	 * Getter for year attribute.
+	 * @return the year
+	 */
+	public int getYear() {
+		return year;
+	}
+
+	/**
+	 * Getter for month attribute.
+	 * @return the month
+	 */
+	public int getMonth() {
+		return month;
+	}
+
+	/**
+	 * Getter for day attribute.
+	 * @return the day
+	 */
+	public int getDay() {
+		return day;
+	}
+
+	/**
+	 * Getter for hour attribute.
+	 * @return the hour
+	 */
+	public int getHour() {
+		return hour;
+	}
+
+	/**
+	 * Getter for minute attribute.
+	 * @return the minute
+	 */
+	public int getMinute() {
+		return minute;
+	}
+
+	/**
+	 * Getter for second attribute.
+	 * @return the second
+	 */
+	public int getSecond() {
+		return second;
+	}
+
+	/**
+	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+	 */
+	@Override
+	public Duration unmarshal(String v) {
+		return new Duration(v);
+	}
+
+	/**
+	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+	 */
+	@Override
+	public String marshal(Duration duration) {
+
+		if (duration == null)
+			return null;
+
+		// format: P[n]Y[n]M[n]DT[n]H[n]M[n]S
+		StringBuilder b = new StringBuilder(25);
+
+		if (duration.year != 0 || duration.month != 0 || duration.day != 0) {
+			b.append("P");
+
+			// year expression
+			if (duration.year > 0) {
+				b.append(duration.year);
+				b.append("Y");
+			}
+
+			// month expression
+			if (duration.month > 0) {
+				b.append(duration.month);
+				b.append("M");
+			}
+
+			// day expression
+			if (duration.day > 0) {
+				b.append(duration.day);
+				b.append("D");
+			}
+		}
+
+		if (duration.hour != 0 || duration.minute != 0 || duration.second != 0) {
+			b.append("T");
+
+			// hour expression
+			if (duration.hour > 0) {
+				b.append(duration.hour);
+				b.append("H");
+			}
+
+			// minute expression
+			if (duration.minute > 0) {
+				b.append(duration.minute);
+				b.append("M");
+			}
+
+			// second expression
+			if (duration.second > 0) {
+				b.append(duration.second);
+				b.append("S");
+			}
+		}
+
+		// return result
+		return b.toString();
+	}
+
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
+
+}
