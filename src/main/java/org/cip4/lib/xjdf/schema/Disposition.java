@@ -44,9 +44,11 @@ public class Disposition
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime until;
     @XmlAttribute(name = "MinDuration")
-    protected String minDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration minDuration;
     @XmlAttribute(name = "ExtraDuration")
-    protected String extraDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration extraDuration;
     @XmlAttribute(name = "Priority")
     protected Integer priority;
     @XmlAttribute(name = "DispositionUsage")
@@ -88,7 +90,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public String getMinDuration() {
+    public org.cip4.lib.xjdf.type.Duration getMinDuration() {
         return minDuration;
     }
 
@@ -100,7 +102,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public void setMinDuration(String value) {
+    public void setMinDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.minDuration = value;
     }
 
@@ -112,7 +114,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public String getExtraDuration() {
+    public org.cip4.lib.xjdf.type.Duration getExtraDuration() {
         return extraDuration;
     }
 
@@ -124,7 +126,7 @@ public class Disposition
      *     {@link String }
      *     
      */
-    public void setExtraDuration(String value) {
+    public void setExtraDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.extraDuration = value;
     }
 

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -53,9 +54,11 @@ public class DCTParams
     @XmlAttribute(name = "HuffTable")
     protected String huffTable;
     @XmlAttribute(name = "HSamples")
-    protected List<Integer> hSamples;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList hSamples;
     @XmlAttribute(name = "VSamples")
-    protected List<Integer> vSamples;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList vSamples;
     @XmlAttribute(name = "ColorTransform")
     @XmlSchemaType(name = "anySimpleType")
     protected String colorTransform;
@@ -142,59 +145,49 @@ public class DCTParams
     /**
      * Gets the value of the hSamples property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the hSamples property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHSamples().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getHSamples() {
-        if (hSamples == null) {
-            hSamples = new ArrayList<Integer>();
-        }
-        return this.hSamples;
+    public org.cip4.lib.xjdf.type.IntegerList getHSamples() {
+        return hSamples;
+    }
+
+    /**
+     * Sets the value of the hSamples property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHSamples(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.hSamples = value;
     }
 
     /**
      * Gets the value of the vSamples property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the vSamples property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getVSamples().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getVSamples() {
-        if (vSamples == null) {
-            vSamples = new ArrayList<Integer>();
-        }
-        return this.vSamples;
+    public org.cip4.lib.xjdf.type.IntegerList getVSamples() {
+        return vSamples;
+    }
+
+    /**
+     * Sets the value of the vSamples property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVSamples(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.vSamples = value;
     }
 
     /**

@@ -124,7 +124,8 @@ public class ArtDelivery
     @XmlAttribute(name = "ServiceLevel")
     protected String serviceLevel;
     @XmlAttribute(name = "ArtDeliveryDuration")
-    protected String artDeliveryDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration artDeliveryDuration;
 
     /**
      * Gets the value of the digitalMedia property.
@@ -648,7 +649,7 @@ public class ArtDelivery
      *     {@link String }
      *     
      */
-    public String getArtDeliveryDuration() {
+    public org.cip4.lib.xjdf.type.Duration getArtDeliveryDuration() {
         return artDeliveryDuration;
     }
 
@@ -660,7 +661,7 @@ public class ArtDelivery
      *     {@link String }
      *     
      */
-    public void setArtDeliveryDuration(String value) {
+    public void setArtDeliveryDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.artDeliveryDuration = value;
     }
 

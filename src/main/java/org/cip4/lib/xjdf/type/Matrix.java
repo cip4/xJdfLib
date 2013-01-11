@@ -37,7 +37,7 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	private final double ty;
 
 	/**
-	 * Default constructor.
+	 * Default constructor. Creates the "identity matrix", which is "1 0 0 1 0 0" and often used as a default throughout in XJDF Specification.
 	 */
 	public Matrix() {
 		this.a = 1d;
@@ -51,7 +51,7 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	/**
 	 * Custom constructor, accepting several values for initializing.
 	 */
-	private Matrix(double a, double b, double c, double d, double tx, double ty) {
+	public Matrix(double a, double b, double c, double d, double tx, double ty) {
 
 		// init class
 		this.a = a;
@@ -63,45 +63,22 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	}
 
 	/**
-	 * Creates the "identity matrix", which is "1 0 0 1 0 0" and often used as a default throughout in XJDF Specification.
-	 * @return Returns the Identity Matrix.
-	 */
-	public static Matrix newInstance() {
-
-		// create Identity Matrix
-		return new Matrix();
-	}
-
-	/**
-	 * Creates a new Matrix instance by a String expression.
+	 * Custom constructor, accepting a String expression for initializing.
 	 * @param expression Matrix as String expression.
 	 * @return New Matrix instance.
 	 */
-	public static Matrix newInstance(String expression) {
+	public Matrix(String expression) {
 
 		// split string
 		String[] s = expression.split(" ");
 
 		// extract values
-		double a = Double.valueOf(s[0]);
-		double b = Double.valueOf(s[1]);
-		double c = Double.valueOf(s[2]);
-		double d = Double.valueOf(s[3]);
-		double tx = Double.valueOf(s[4]);
-		double ty = Double.valueOf(s[5]);
-
-		// create new object
-		return new Matrix(a, b, c, d, tx, ty);
-	}
-
-	/**
-	 * Creates a new Matrix instance.
-	 * @return New Matrix instance.
-	 */
-	public static Matrix newInstance(double a, double b, double c, double d, double tx, double ty) {
-
-		// create new object
-		return new Matrix(a, b, c, d, tx, ty);
+		this.a = Double.valueOf(s[0]);
+		this.b = Double.valueOf(s[1]);
+		this.c = Double.valueOf(s[2]);
+		this.d = Double.valueOf(s[3]);
+		this.tx = Double.valueOf(s[4]);
+		this.ty = Double.valueOf(s[5]);
 	}
 
 	/**
@@ -182,7 +159,7 @@ public class Matrix extends XmlAdapter<String, Matrix> {
 	@Override
 	public Matrix unmarshal(String v) throws Exception {
 
-		return newInstance(v);
+		return new Matrix(v);
 	}
 
 	/**

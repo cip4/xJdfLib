@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -48,7 +49,8 @@ public class PageCondition
     @XmlElement(name = "Part")
     protected List<Part> part;
     @XmlAttribute(name = "RestrictedContentObjects")
-    protected List<Integer> restrictedContentObjects;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList restrictedContentObjects;
     @XmlAttribute(name = "RunListRef")
     @XmlIDREF
     protected Object runListRef;
@@ -85,30 +87,25 @@ public class PageCondition
     /**
      * Gets the value of the restrictedContentObjects property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the restrictedContentObjects property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getRestrictedContentObjects().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getRestrictedContentObjects() {
-        if (restrictedContentObjects == null) {
-            restrictedContentObjects = new ArrayList<Integer>();
-        }
-        return this.restrictedContentObjects;
+    public org.cip4.lib.xjdf.type.IntegerList getRestrictedContentObjects() {
+        return restrictedContentObjects;
+    }
+
+    /**
+     * Sets the value of the restrictedContentObjects property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setRestrictedContentObjects(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.restrictedContentObjects = value;
     }
 
     /**

@@ -102,7 +102,8 @@ public class LayoutPreparationParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair gutterMinimumLimit;
     @XmlAttribute(name = "HorizontalCreep")
-    protected List<Integer> horizontalCreep;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList horizontalCreep;
     @XmlAttribute(name = "PresentationDirection")
     protected String presentationDirection;
     @XmlAttribute(name = "Rotate")
@@ -143,7 +144,8 @@ public class LayoutPreparationParams
     @XmlAttribute(name = "FrontMarkList")
     protected List<String> frontMarkList;
     @XmlAttribute(name = "VerticalCreep")
-    protected List<Integer> verticalCreep;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList verticalCreep;
     @XmlAttribute(name = "CreepValue")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair creepValue;
@@ -409,30 +411,25 @@ public class LayoutPreparationParams
     /**
      * Gets the value of the horizontalCreep property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the horizontalCreep property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getHorizontalCreep().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getHorizontalCreep() {
-        if (horizontalCreep == null) {
-            horizontalCreep = new ArrayList<Integer>();
-        }
-        return this.horizontalCreep;
+    public org.cip4.lib.xjdf.type.IntegerList getHorizontalCreep() {
+        return horizontalCreep;
+    }
+
+    /**
+     * Sets the value of the horizontalCreep property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setHorizontalCreep(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.horizontalCreep = value;
     }
 
     /**
@@ -808,30 +805,25 @@ public class LayoutPreparationParams
     /**
      * Gets the value of the verticalCreep property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the verticalCreep property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getVerticalCreep().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getVerticalCreep() {
-        if (verticalCreep == null) {
-            verticalCreep = new ArrayList<Integer>();
-        }
-        return this.verticalCreep;
+    public org.cip4.lib.xjdf.type.IntegerList getVerticalCreep() {
+        return verticalCreep;
+    }
+
+    /**
+     * Sets the value of the verticalCreep property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setVerticalCreep(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.verticalCreep = value;
     }
 
     /**

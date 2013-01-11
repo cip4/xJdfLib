@@ -46,7 +46,7 @@ public class Rectangle extends XmlAdapter<String, Rectangle> {
 	 * @param urx Upper-right x.
 	 * @param ury Upper-right y.
 	 */
-	private Rectangle(double llx, double lly, double urx, double ury) {
+	public Rectangle(double llx, double lly, double urx, double ury) {
 
 		// init class
 		this.llx = llx;
@@ -56,47 +56,20 @@ public class Rectangle extends XmlAdapter<String, Rectangle> {
 	}
 
 	/**
-	 * Creates a new Rectangle instance by a String expression.
+	 * Custom Constructor. Creates a new Rectangle instance by a String expression.
 	 * @param expression Rectangle as String expression.
 	 * @return New Rectangle instance.
 	 */
-	public static Rectangle newInstance(String expression) {
+	public Rectangle(String expression) {
 
 		// split string
 		String[] s = expression.split(" ");
 
 		// extract values
-		double llx = Double.valueOf(s[0]);
-		double lly = Double.valueOf(s[1]);
-		double urx = Double.valueOf(s[2]);
-		double ury = Double.valueOf(s[3]);
-
-		// create new object
-		return new Rectangle(llx, lly, urx, ury);
-	}
-
-	/**
-	 * Creates a new Rectangle instance.
-	 * @return New Rectangle instance.
-	 */
-	public static Rectangle newInstance() {
-
-		// create new object
-		return new Rectangle();
-	}
-
-	/**
-	 * Creates a new Rectangle instance.
-	 * @param llx Lower-left x.
-	 * @param lly Lower-left y.
-	 * @param urx Upper-right x.
-	 * @param ury Upper-right y.
-	 * @return New Rectangle instance.
-	 */
-	public static Rectangle newInstance(double llx, double lly, double urx, double ury) {
-
-		// create new object
-		return new Rectangle(llx, lly, urx, ury);
+		this.llx = Double.valueOf(s[0]);
+		this.lly = Double.valueOf(s[1]);
+		this.urx = Double.valueOf(s[2]);
+		this.ury = Double.valueOf(s[3]);
 	}
 
 	/**
@@ -159,7 +132,7 @@ public class Rectangle extends XmlAdapter<String, Rectangle> {
 	@Override
 	public Rectangle unmarshal(String v) throws Exception {
 
-		return newInstance(v);
+		return new Rectangle(v);
 	}
 
 	/**

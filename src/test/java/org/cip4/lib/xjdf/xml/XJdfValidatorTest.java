@@ -246,7 +246,7 @@ public class XJdfValidatorTest {
 
 		// create product
 		ProductBuilder productBuilder = ProductBuilder.newInstance(1000, "Brochure", "4 Page Brochure");
-		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", Shape.newInstance(595.27559055, 822.04724409)));
+		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", new Shape(595.27559055, 822.04724409)));
 		productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
 		productBuilder.addIntent(nf.createProductionIntent("Lithography"));
 		productBuilder.addIntent(nf.createFoldingIntent("F6-1"));

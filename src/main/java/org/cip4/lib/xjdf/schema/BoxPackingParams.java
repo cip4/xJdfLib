@@ -2,8 +2,6 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -54,12 +52,14 @@ public class BoxPackingParams
     @XmlAttribute(name = "Layers")
     protected Integer layers;
     @XmlAttribute(name = "Ties")
-    protected List<Integer> ties;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList ties;
     @XmlAttribute(name = "FillMaterial")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String fillMaterial;
     @XmlAttribute(name = "UnderLays")
-    protected List<Integer> underLays;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList underLays;
     @XmlAttribute(name = "ComponentsPerRow")
     protected Integer componentsPerRow;
     @XmlAttribute(name = "ComponentOrientation")
@@ -147,30 +147,25 @@ public class BoxPackingParams
     /**
      * Gets the value of the ties property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the ties property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getTies().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getTies() {
-        if (ties == null) {
-            ties = new ArrayList<Integer>();
-        }
-        return this.ties;
+    public org.cip4.lib.xjdf.type.IntegerList getTies() {
+        return ties;
+    }
+
+    /**
+     * Sets the value of the ties property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTies(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.ties = value;
     }
 
     /**
@@ -200,30 +195,25 @@ public class BoxPackingParams
     /**
      * Gets the value of the underLays property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the underLays property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getUnderLays().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getUnderLays() {
-        if (underLays == null) {
-            underLays = new ArrayList<Integer>();
-        }
-        return this.underLays;
+    public org.cip4.lib.xjdf.type.IntegerList getUnderLays() {
+        return underLays;
+    }
+
+    /**
+     * Sets the value of the underLays property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUnderLays(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.underLays = value;
     }
 
     /**

@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -71,7 +72,8 @@ public class StackingParams
     @XmlAttribute(name = "BundleDepth")
     protected Integer bundleDepth;
     @XmlAttribute(name = "UnderLays")
-    protected List<Integer> underLays;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList underLays;
     @XmlAttribute(name = "MaxAmount")
     protected Integer maxAmount;
     @XmlAttribute(name = "StackCompression")
@@ -84,7 +86,8 @@ public class StackingParams
     @XmlSchemaType(name = "anySimpleType")
     protected String preStackMethod;
     @XmlAttribute(name = "LayerAmount")
-    protected List<Integer> layerAmount;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList layerAmount;
     @XmlAttribute(name = "PreStackAmount")
     protected Integer preStackAmount;
 
@@ -264,30 +267,25 @@ public class StackingParams
     /**
      * Gets the value of the underLays property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the underLays property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getUnderLays().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getUnderLays() {
-        if (underLays == null) {
-            underLays = new ArrayList<Integer>();
-        }
-        return this.underLays;
+    public org.cip4.lib.xjdf.type.IntegerList getUnderLays() {
+        return underLays;
+    }
+
+    /**
+     * Sets the value of the underLays property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setUnderLays(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.underLays = value;
     }
 
     /**
@@ -413,30 +411,25 @@ public class StackingParams
     /**
      * Gets the value of the layerAmount property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the layerAmount property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLayerAmount().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getLayerAmount() {
-        if (layerAmount == null) {
-            layerAmount = new ArrayList<Integer>();
-        }
-        return this.layerAmount;
+    public org.cip4.lib.xjdf.type.IntegerList getLayerAmount() {
+        return layerAmount;
+    }
+
+    /**
+     * Sets the value of the layerAmount property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setLayerAmount(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.layerAmount = value;
     }
 
     /**

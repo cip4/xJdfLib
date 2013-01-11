@@ -2,14 +2,13 @@
 package org.cip4.lib.xjdf.schema;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -49,13 +48,16 @@ public class SignatureCell
     @XmlSchemaType(name = "anySimpleType")
     protected String bottleAxis;
     @XmlAttribute(name = "FrontPages")
-    protected List<Integer> frontPages;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList frontPages;
     @XmlAttribute(name = "BackPages")
-    protected List<Integer> backPages;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList backPages;
     @XmlAttribute(name = "SectionIndex")
     protected Integer sectionIndex;
     @XmlAttribute(name = "FaceCells")
-    protected List<Integer> faceCells;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList faceCells;
     @XmlAttribute(name = "BottleAngle")
     protected Double bottleAngle;
     @XmlAttribute(name = "Orientation")
@@ -112,59 +114,49 @@ public class SignatureCell
     /**
      * Gets the value of the frontPages property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the frontPages property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFrontPages().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getFrontPages() {
-        if (frontPages == null) {
-            frontPages = new ArrayList<Integer>();
-        }
-        return this.frontPages;
+    public org.cip4.lib.xjdf.type.IntegerList getFrontPages() {
+        return frontPages;
+    }
+
+    /**
+     * Sets the value of the frontPages property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFrontPages(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.frontPages = value;
     }
 
     /**
      * Gets the value of the backPages property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the backPages property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getBackPages().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getBackPages() {
-        if (backPages == null) {
-            backPages = new ArrayList<Integer>();
-        }
-        return this.backPages;
+    public org.cip4.lib.xjdf.type.IntegerList getBackPages() {
+        return backPages;
+    }
+
+    /**
+     * Sets the value of the backPages property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBackPages(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.backPages = value;
     }
 
     /**
@@ -194,30 +186,25 @@ public class SignatureCell
     /**
      * Gets the value of the faceCells property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the faceCells property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getFaceCells().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getFaceCells() {
-        if (faceCells == null) {
-            faceCells = new ArrayList<Integer>();
-        }
-        return this.faceCells;
+    public org.cip4.lib.xjdf.type.IntegerList getFaceCells() {
+        return faceCells;
+    }
+
+    /**
+     * Sets the value of the faceCells property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setFaceCells(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.faceCells = value;
     }
 
     /**

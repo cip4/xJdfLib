@@ -26,7 +26,7 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 	private final double y;
 
 	/**
-	 * Default constructor.
+	 * Default constructor. Creates an default XYPair object.
 	 */
 	public XYPair() {
 		x = 0;
@@ -36,7 +36,7 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 	/**
 	 * Custom constructor, accepting several values for initializing.
 	 */
-	private XYPair(double x, double y) {
+	public XYPair(double x, double y) {
 
 		// init class
 		this.x = x;
@@ -44,41 +44,18 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 	}
 
 	/**
-	 * Creates an default XYPair object.
-	 * @return Returns the default XYPair object.
-	 */
-	public static XYPair newInstance() {
-
-		// create default XYPair
-		return new XYPair();
-	}
-
-	/**
-	 * Creates a new XYPair instance by a String expression.
+	 * Custom Constructor. Creates a new XYPair instance by a String expression.
 	 * @param expression XYPair as String expression.
 	 * @return New XYPair instance.
 	 */
-	public static XYPair newInstance(String expression) {
+	public XYPair(String expression) {
 
 		// split string
 		String[] s = expression.split(" ");
 
 		// extract values
-		double x = Double.valueOf(s[0]);
-		double y = Double.valueOf(s[1]);
-
-		// create new object
-		return new XYPair(x, y);
-	}
-
-	/**
-	 * Creates a new XYPair instance.
-	 * @return New XYPair instance.
-	 */
-	public static XYPair newInstance(double x, double y) {
-
-		// create new object
-		return new XYPair(x, y);
+		this.x = Double.valueOf(s[0]);
+		this.y = Double.valueOf(s[1]);
 	}
 
 	/**
@@ -122,7 +99,7 @@ public class XYPair extends XmlAdapter<String, XYPair> {
 	 */
 	@Override
 	public XYPair unmarshal(String v) throws Exception {
-		return newInstance(v);
+		return new XYPair(v);
 	}
 
 	/**

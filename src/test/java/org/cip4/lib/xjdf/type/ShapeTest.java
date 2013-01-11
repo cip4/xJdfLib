@@ -48,7 +48,7 @@ public class ShapeTest {
 		// arrange
 
 		// act
-		Shape s = Shape.newInstance();
+		Shape s = new Shape();
 
 		// assert
 		Assert.assertEquals("X is wrong.", 0d, s.getX());
@@ -66,7 +66,7 @@ public class ShapeTest {
 		final String value = "10.1 20.33 40";
 
 		// act
-		Shape s = Shape.newInstance(value);
+		Shape s = new Shape(value);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 10.1d, s.getX());
@@ -83,7 +83,7 @@ public class ShapeTest {
 		// arrange
 
 		// act
-		Shape s = Shape.newInstance(10.1, 20.33, 40);
+		Shape s = new Shape(10.1, 20.33, 40);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 10.1d, s.getX());
@@ -100,7 +100,7 @@ public class ShapeTest {
 		// arrange
 
 		// act
-		Shape s = Shape.newInstance(10.1, 20.33);
+		Shape s = new Shape(10.1, 20.33);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 10.1d, s.getX());
@@ -116,7 +116,7 @@ public class ShapeTest {
 	public void testToString() throws Exception {
 
 		// arrange / act
-		String result = Shape.newInstance(10.1, 20.33, 40).toString();
+		String result = new Shape(10.1, 20.33, 40).toString();
 
 		// assert
 		Assert.assertEquals("String is wrong.", "10.1 20.33 40.0", result);
@@ -130,10 +130,10 @@ public class ShapeTest {
 	public void testMarshalShape() throws Exception {
 
 		// arrange
-		Shape s = Shape.newInstance(10.1, 20.33, 40);
+		Shape s = new Shape(10.1, 20.33, 40);
 
 		// act
-		String result = Shape.newInstance().marshal(s);
+		String result = new Shape().marshal(s);
 
 		// assert
 		Assert.assertEquals("String is wrong.", "10.1 20.33 40.0", result);
@@ -150,7 +150,7 @@ public class ShapeTest {
 		final String value = "10.1 20.33 40";
 
 		// act
-		Shape s = Shape.newInstance().unmarshal(value);
+		Shape s = new Shape().unmarshal(value);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 10.1d, s.getX());

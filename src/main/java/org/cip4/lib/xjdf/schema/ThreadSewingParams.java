@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -72,7 +73,8 @@ public class ThreadSewingParams
     @XmlAttribute(name = "NeedlePositions")
     protected String needlePositions;
     @XmlAttribute(name = "GlueLineRefSheets")
-    protected List<Integer> glueLineRefSheets;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList glueLineRefSheets;
     @XmlAttribute(name = "Offset")
     protected Double offset;
     @XmlAttribute(name = "ThreadThickness")
@@ -281,30 +283,25 @@ public class ThreadSewingParams
     /**
      * Gets the value of the glueLineRefSheets property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the glueLineRefSheets property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getGlueLineRefSheets().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getGlueLineRefSheets() {
-        if (glueLineRefSheets == null) {
-            glueLineRefSheets = new ArrayList<Integer>();
-        }
-        return this.glueLineRefSheets;
+    public org.cip4.lib.xjdf.type.IntegerList getGlueLineRefSheets() {
+        return glueLineRefSheets;
+    }
+
+    /**
+     * Sets the value of the glueLineRefSheets property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setGlueLineRefSheets(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.glueLineRefSheets = value;
     }
 
     /**

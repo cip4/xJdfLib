@@ -78,11 +78,13 @@ public class NodeInfo
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime firstEnd;
     @XmlAttribute(name = "TotalDuration")
-    protected String totalDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration totalDuration;
     @XmlAttribute(name = "NodeStatus")
     protected EnumNodeStatus nodeStatus;
     @XmlAttribute(name = "SetupDuration")
-    protected String setupDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration setupDuration;
     @XmlAttribute(name = "JobPriority")
     protected Integer jobPriority;
     @XmlAttribute(name = "WorkStepID")
@@ -90,7 +92,8 @@ public class NodeInfo
     @XmlAttribute(name = "NaturalLang")
     protected String naturalLang;
     @XmlAttribute(name = "CleanupDuration")
-    protected String cleanupDuration;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration cleanupDuration;
     @XmlAttribute(name = "FirstStart")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime firstStart;
@@ -273,7 +276,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getTotalDuration() {
+    public org.cip4.lib.xjdf.type.Duration getTotalDuration() {
         return totalDuration;
     }
 
@@ -285,7 +288,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setTotalDuration(String value) {
+    public void setTotalDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.totalDuration = value;
     }
 
@@ -321,7 +324,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getSetupDuration() {
+    public org.cip4.lib.xjdf.type.Duration getSetupDuration() {
         return setupDuration;
     }
 
@@ -333,7 +336,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setSetupDuration(String value) {
+    public void setSetupDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.setupDuration = value;
     }
 
@@ -417,7 +420,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public String getCleanupDuration() {
+    public org.cip4.lib.xjdf.type.Duration getCleanupDuration() {
         return cleanupDuration;
     }
 
@@ -429,7 +432,7 @@ public class NodeInfo
      *     {@link String }
      *     
      */
-    public void setCleanupDuration(String value) {
+    public void setCleanupDuration(org.cip4.lib.xjdf.type.Duration value) {
         this.cleanupDuration = value;
     }
 

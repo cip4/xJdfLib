@@ -48,7 +48,7 @@ public class XYPairTest {
 		// arrange
 
 		// act
-		XYPair p = XYPair.newInstance();
+		XYPair p = new XYPair();
 
 		// assert
 		Assert.assertEquals("X is wrong.", 0d, p.getX());
@@ -66,7 +66,7 @@ public class XYPairTest {
 		final String value = "612.22 792.44";
 
 		// act
-		XYPair p = XYPair.newInstance(value);
+		XYPair p = new XYPair(value);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 612.22d, p.getX());
@@ -82,7 +82,7 @@ public class XYPairTest {
 		// arrange
 
 		// act
-		XYPair p = XYPair.newInstance(612.22, 792.44);
+		XYPair p = new XYPair(612.22, 792.44);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 612.22d, p.getX());
@@ -97,7 +97,7 @@ public class XYPairTest {
 	public void testToString() throws Exception {
 
 		// arrange / act
-		String result = XYPair.newInstance(612.22, 792.44).toString();
+		String result = new XYPair(612.22, 792.44).toString();
 
 		// assert
 		Assert.assertEquals("Result is wrong.", "612.22 792.44", result);
@@ -111,10 +111,10 @@ public class XYPairTest {
 	public void testMarshalXYPair() throws Exception {
 
 		// arrange
-		XYPair p = XYPair.newInstance(612.22, 792.44);
+		XYPair p = new XYPair(612.22, 792.44);
 
 		// act
-		String result = XYPair.newInstance().marshal(p);
+		String result = new XYPair().marshal(p);
 
 		// assert
 		Assert.assertEquals("Result is wrong.", "612.22 792.44", result);
@@ -131,7 +131,7 @@ public class XYPairTest {
 		final String value = "612.22 792.44";
 
 		// act
-		XYPair p = XYPair.newInstance().unmarshal(value);
+		XYPair p = new XYPair().unmarshal(value);
 
 		// assert
 		Assert.assertEquals("X is wrong.", 612.22d, p.getX());

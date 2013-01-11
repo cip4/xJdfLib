@@ -90,7 +90,8 @@ public class IntegerState
     @XmlAttribute(name = "MaxOccurs")
     protected String maxOccurs;
     @XmlAttribute(name = "CurrentValue")
-    protected List<Integer> currentValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList currentValue;
     @XmlAttribute(name = "PresentValueList")
     protected Integer presentValueList;
     @XmlAttribute(name = "ID")
@@ -126,7 +127,8 @@ public class IntegerState
     @XmlIDREF
     protected Object dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
-    protected List<Integer> defaultValue;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList defaultValue;
     @XmlAttribute(name = "XPath", required = true)
     protected String xPath;
     @XmlAttribute(name = "XPathRoot")
@@ -339,30 +341,25 @@ public class IntegerState
     /**
      * Gets the value of the currentValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the currentValue property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getCurrentValue().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getCurrentValue() {
-        if (currentValue == null) {
-            currentValue = new ArrayList<Integer>();
-        }
-        return this.currentValue;
+    public org.cip4.lib.xjdf.type.IntegerList getCurrentValue() {
+        return currentValue;
+    }
+
+    /**
+     * Sets the value of the currentValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCurrentValue(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.currentValue = value;
     }
 
     /**
@@ -695,30 +692,25 @@ public class IntegerState
     /**
      * Gets the value of the defaultValue property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the defaultValue property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getDefaultValue().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public List<Integer> getDefaultValue() {
-        if (defaultValue == null) {
-            defaultValue = new ArrayList<Integer>();
-        }
-        return this.defaultValue;
+    public org.cip4.lib.xjdf.type.IntegerList getDefaultValue() {
+        return defaultValue;
+    }
+
+    /**
+     * Sets the value of the defaultValue property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDefaultValue(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.defaultValue = value;
     }
 
     /**

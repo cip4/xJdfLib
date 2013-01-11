@@ -79,7 +79,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		mediaIntent.setWeight(135d);
 
 		LayoutIntent layoutIntent = XJdfNodeFactory.newInstance().createLayoutIntent();
-		layoutIntent.setFinishedDimensions(Shape.newInstance(595.27559055d, 822.04724409d));
+		layoutIntent.setFinishedDimensions(new Shape(595.27559055d, 822.04724409d));
 		BindingIntent bindingIntent = XJdfNodeFactory.newInstance().createBindingIntent();
 		bindingIntent.setBindingType("SaddleStitch");
 

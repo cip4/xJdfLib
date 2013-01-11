@@ -55,7 +55,7 @@ public class DateTimeTest {
 		calendar.set(2012, Calendar.MARCH, 4, 16, 20, 45);
 
 		// act
-		String actual = DateTime.newInstance(calendar).toString();
+		String actual = new DateTime(calendar).toString();
 
 		// assert
 		System.out.println("Result UTC: " + actual);
@@ -75,8 +75,8 @@ public class DateTimeTest {
 		calendar.set(2012, Calendar.MARCH, 4, 16, 20, 45);
 
 		// act
-		DateTime r = DateTime.newInstance(calendar);
-		String actual = DateTime.newInstance().marshal(r);
+		DateTime r = new DateTime(calendar);
+		String actual = new DateTime().marshal(r);
 
 		// assert
 		System.out.println("Result UTC: " + actual);
@@ -96,8 +96,8 @@ public class DateTimeTest {
 		calendar.set(2012, Calendar.MARCH, 4, 13, 20, 40);
 
 		// act
-		DateTime r = DateTime.newInstance(calendar);
-		String actual = DateTime.newInstance().marshal(r);
+		DateTime r = new DateTime(calendar);
+		String actual = new DateTime().marshal(r);
 
 		// assert
 		System.out.println("Result TimeZone 'Europe/Berlin': " + actual);
@@ -117,8 +117,8 @@ public class DateTimeTest {
 		calendar.set(2012, Calendar.MARCH, 4, 6, 20, 40);
 
 		// act
-		DateTime r = DateTime.newInstance(calendar);
-		String actual = DateTime.newInstance().marshal(r);
+		DateTime r = new DateTime(calendar);
+		String actual = new DateTime().marshal(r);
 
 		// assert
 		System.out.println("Result TimeZone 'US/Pacific': " + actual);
@@ -135,7 +135,7 @@ public class DateTimeTest {
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		DateTime r = new DateTime().unmarshal(strDate);
 		Calendar cal = r.getCalendar();
 
 		// assert
@@ -158,7 +158,7 @@ public class DateTimeTest {
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		DateTime r = new DateTime().unmarshal(strDate);
 		Calendar cal = r.getCalendar();
 
 		// assert
@@ -181,7 +181,7 @@ public class DateTimeTest {
 		final String strDate = "2012-11-04T15:30:40-08:00";
 
 		// act
-		DateTime r = DateTime.newInstance().unmarshal(strDate);
+		DateTime r = new DateTime().unmarshal(strDate);
 		Calendar cal = r.getCalendar();
 
 		// assert
@@ -205,8 +205,8 @@ public class DateTimeTest {
 		final String strDate = "2012-03-04T13:20:40+01:00";
 
 		// act
-		DateTime dt = DateTime.newInstance().unmarshal(strDate);
-		String actual = DateTime.newInstance().marshal(dt);
+		DateTime dt = new DateTime().unmarshal(strDate);
+		String actual = new DateTime().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -224,8 +224,8 @@ public class DateTimeTest {
 		final String strDate = "2012-03-04T13:20:40Z";
 
 		// act
-		DateTime dt = DateTime.newInstance().unmarshal(strDate);
-		String actual = DateTime.newInstance().marshal(dt);
+		DateTime dt = new DateTime().unmarshal(strDate);
+		String actual = new DateTime().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);
@@ -243,8 +243,8 @@ public class DateTimeTest {
 		final String strDate = "2012-03-04T13:20:40-08:00";
 
 		// act
-		DateTime dt = DateTime.newInstance().unmarshal(strDate);
-		String actual = DateTime.newInstance().marshal(dt);
+		DateTime dt = new DateTime().unmarshal(strDate);
+		String actual = new DateTime().marshal(dt);
 
 		// assert
 		Assert.assertEquals("Date is wrong.", strDate, actual);

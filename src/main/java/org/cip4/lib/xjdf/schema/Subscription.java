@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -65,7 +66,8 @@ public class Subscription
     @XmlSchemaType(name = "anySimpleType")
     protected String retryPolicy;
     @XmlAttribute(name = "MinDelayTime")
-    protected String minDelayTime;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
+    protected org.cip4.lib.xjdf.type.Duration minDelayTime;
     @XmlAttribute(name = "Format")
     protected String format;
 
@@ -226,7 +228,7 @@ public class Subscription
      *     {@link String }
      *     
      */
-    public String getMinDelayTime() {
+    public org.cip4.lib.xjdf.type.Duration getMinDelayTime() {
         return minDelayTime;
     }
 
@@ -238,7 +240,7 @@ public class Subscription
      *     {@link String }
      *     
      */
-    public void setMinDelayTime(String value) {
+    public void setMinDelayTime(org.cip4.lib.xjdf.type.Duration value) {
         this.minDelayTime = value;
     }
 

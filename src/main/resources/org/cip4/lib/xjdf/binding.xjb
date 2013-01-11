@@ -28,6 +28,14 @@
                        xmlType="xjdf:dateTime"
                        adapter="org.cip4.lib.xjdf.type.DateTime" />
                        
+           	<xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList"
+                       xmlType="xjdf:IntegerList"
+                       adapter="org.cip4.lib.xjdf.type.IntegerList" />
+                       
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Duration"
+                       xmlType="xjdf:duration"
+                       adapter="org.cip4.lib.xjdf.type.Duration" />
+                       
 		</jxb:globalBindings>
 		<jxb:schemaBindings>
 			<jxb:package name="org.cip4.lib.xjdf.schema" />

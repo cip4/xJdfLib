@@ -38,7 +38,18 @@ public class Shape extends XmlAdapter<String, Shape> {
 	/**
 	 * Custom constructor, accepting several values for initializing.
 	 */
-	private Shape(double x, double y, double z) {
+	public Shape(double x, double y) {
+
+		// init class
+		this.x = x;
+		this.y = y;
+		this.z = 0d;
+	}
+
+	/**
+	 * Custom constructor, accepting several values for initializing.
+	 */
+	public Shape(double x, double y, double z) {
 
 		// init class
 		this.x = x;
@@ -47,52 +58,19 @@ public class Shape extends XmlAdapter<String, Shape> {
 	}
 
 	/**
-	 * Creates an default Shape object.
-	 * @return Returns the default Shape object.
-	 */
-	public static Shape newInstance() {
-
-		// create default Shape
-		return new Shape();
-	}
-
-	/**
-	 * Creates a new Shape instance by a String expression.
+	 * Custom Constructor. Creates a new Shape instance by a String expression.
 	 * @param expression Shape as String expression.
 	 * @return New Shape instance.
 	 */
-	public static Shape newInstance(String expression) {
+	public Shape(String expression) {
 
 		// split string
 		String[] s = expression.split(" ");
 
 		// extract values
-		double x = Double.valueOf(s[0]);
-		double y = Double.valueOf(s[1]);
-		double z = Double.valueOf(s[2]);
-
-		// create new object
-		return new Shape(x, y, z);
-	}
-
-	/**
-	 * Creates a new Shape instance.
-	 * @return New Shape instance.
-	 */
-	public static Shape newInstance(double x, double y) {
-
-		// create new object
-		return new Shape(x, y, 0);
-	}
-
-	/**
-	 * Creates a new Shape instance.
-	 * @return New Shape instance.
-	 */
-	public static Shape newInstance(double x, double y, double z) {
-
-		// create new object
-		return new Shape(x, y, z);
+		this.x = Double.valueOf(s[0]);
+		this.y = Double.valueOf(s[1]);
+		this.z = Double.valueOf(s[2]);
 	}
 
 	/**
@@ -145,7 +123,7 @@ public class Shape extends XmlAdapter<String, Shape> {
 	 */
 	@Override
 	public Shape unmarshal(String v) throws Exception {
-		return newInstance(v);
+		return new Shape(v);
 	}
 
 	/**
