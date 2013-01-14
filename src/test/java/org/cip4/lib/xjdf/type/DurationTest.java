@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import static org.junit.Assert.fail;
 import junit.framework.Assert;
 
 import org.junit.After;
@@ -38,54 +37,6 @@ public class DurationTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#Duration()}.
-	 */
-	@Test
-	public void testDuration() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#Duration(int)}.
-	 */
-	@Test
-	public void testDurationInt() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#Duration(int, int)}.
-	 */
-	@Test
-	public void testDurationIntInt() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#Duration(java.lang.String)}.
-	 */
-	@Test
-	public void testDurationString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#Duration(int, int, int, int, int, int)}.
-	 */
-	@Test
-	public void testDurationIntIntIntIntIntInt() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#unmarshal(java.lang.String)}.
-	 */
-	@Test
-	public void testUnmarshalString() {
-		fail("Not yet implemented");
 	}
 
 	/**
@@ -153,11 +104,86 @@ public class DurationTest {
 	}
 
 	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#toString()}.
+	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#unmarshal(java.lang.String)}.
 	 */
 	@Test
-	public void testToString() {
-		fail("Not yet implemented");
+	public void testUnmarshalDuration1() {
+
+		// arrange
+		String duration = "P1Y2M3DT4H5M6S";
+
+		// act
+		Duration actual = new Duration().unmarshal(duration);
+
+		// assert
+		Assert.assertEquals("Year is wrong.", 1, actual.getYear());
+		Assert.assertEquals("Month is wrong.", 2, actual.getMonth());
+		Assert.assertEquals("Day is wrong.", 3, actual.getDay());
+		Assert.assertEquals("Hour is wrong.", 4, actual.getHour());
+		Assert.assertEquals("Minute is wrong.", 5, actual.getMinute());
+		Assert.assertEquals("Second is wrong.", 6, actual.getSecond());
 	}
 
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#unmarshal(java.lang.String)}.
+	 */
+	@Test
+	public void testUnmarshalDuration2() {
+
+		// arrange
+		String duration = "P2DT12H";
+
+		// act
+		Duration actual = new Duration().unmarshal(duration);
+
+		// assert
+		Assert.assertEquals("Year is wrong.", 0, actual.getYear());
+		Assert.assertEquals("Month is wrong.", 0, actual.getMonth());
+		Assert.assertEquals("Day is wrong.", 2, actual.getDay());
+		Assert.assertEquals("Hour is wrong.", 12, actual.getHour());
+		Assert.assertEquals("Minute is wrong.", 0, actual.getMinute());
+		Assert.assertEquals("Second is wrong.", 0, actual.getSecond());
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#unmarshal(java.lang.String)}.
+	 */
+	@Test
+	public void testUnmarshalDuration3() {
+
+		// arrange
+		String duration = "P4D";
+
+		// act
+		Duration actual = new Duration().unmarshal(duration);
+
+		// assert
+		Assert.assertEquals("Year is wrong.", 0, actual.getYear());
+		Assert.assertEquals("Month is wrong.", 0, actual.getMonth());
+		Assert.assertEquals("Day is wrong.", 4, actual.getDay());
+		Assert.assertEquals("Hour is wrong.", 0, actual.getHour());
+		Assert.assertEquals("Minute is wrong.", 0, actual.getMinute());
+		Assert.assertEquals("Second is wrong.", 0, actual.getSecond());
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#unmarshal(java.lang.String)}.
+	 */
+	@Test
+	public void testUnmarshalDuration4() {
+
+		// arrange
+		String duration = "T4H";
+
+		// act
+		Duration actual = new Duration().unmarshal(duration);
+
+		// assert
+		Assert.assertEquals("Year is wrong.", 0, actual.getYear());
+		Assert.assertEquals("Month is wrong.", 0, actual.getMonth());
+		Assert.assertEquals("Day is wrong.", 0, actual.getDay());
+		Assert.assertEquals("Hour is wrong.", 4, actual.getHour());
+		Assert.assertEquals("Minute is wrong.", 0, actual.getMinute());
+		Assert.assertEquals("Second is wrong.", 0, actual.getSecond());
+	}
 }

@@ -61,12 +61,111 @@ public class Duration extends XmlAdapter<String, Duration> {
 	/**
 	 * Custom constructor. Accepting accepting a String expression for initializing..
 	 */
-	public Duration(String expression) {
+	public Duration(final String expression) {
 
-		this();
+		if (expression == null) {
 
-		// TODO
-		new UnsupportedOperationException("Operation does not exist yet.");
+			// default values
+			year = 0;
+			month = 0;
+			day = 0;
+			hour = 0;
+			minute = 0;
+			second = 0;
+
+			// return
+			return;
+		}
+
+		// format: P[n]Y[n]M[n]DT[n]H[n]M[n]S
+		String expr = expression;
+
+		// extract daytime
+		int posDaytime = expr.indexOf("T");
+
+		if (posDaytime != -1) {
+			String daytime = expr.substring(posDaytime + 1);
+			expr = expr.substring(0, posDaytime);
+
+			// extract hour
+			int posHour = daytime.indexOf("H");
+
+			if (posHour != -1) {
+				hour = Integer.parseInt(daytime.substring(0, posHour));
+			} else {
+				hour = 0;
+			}
+
+			daytime = daytime.substring(posHour + 1);
+
+			// extract minute
+			int posMinute = daytime.indexOf("M");
+
+			if (posMinute != -1) {
+				minute = Integer.parseInt(daytime.substring(0, posMinute));
+			} else {
+				minute = 0;
+			}
+
+			daytime = daytime.substring(posMinute + 1);
+
+			// extract second
+			int posSecond = daytime.indexOf("S");
+
+			if (posSecond != -1) {
+				second = Integer.parseInt(daytime.substring(0, posSecond));
+			} else {
+				second = 0;
+			}
+
+		} else {
+			hour = 0;
+			minute = 0;
+			second = 0;
+		}
+
+		// extract date
+		int posDate = expression.indexOf("P");
+
+		if (posDate != -1) {
+			String date = expr.substring(posDate + 1);
+
+			// extract year
+			int posYear = date.indexOf("Y");
+
+			if (posYear != -1) {
+				year = Integer.parseInt(date.substring(0, posYear));
+			} else {
+				year = 0;
+			}
+
+			date = date.substring(posYear + 1);
+
+			// extract month
+			int posMonth = date.indexOf("M");
+
+			if (posMonth != -1) {
+				month = Integer.parseInt(date.substring(0, posMonth));
+			} else {
+				month = 0;
+			}
+
+			date = date.substring(posMonth + 1);
+
+			// extract day
+			int posDay = date.indexOf("D");
+
+			if (posDay != -1) {
+				day = Integer.parseInt(date.substring(0, posDay));
+			} else {
+				day = 0;
+			}
+
+		} else {
+			year = 0;
+			month = 0;
+			day = 0;
+		}
 	}
 
 	/**

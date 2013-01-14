@@ -306,7 +306,7 @@ public class XJdfNodeFactoryTest {
 		final String COATINGS_BACK = UUID.randomUUID().toString();
 
 		// act
-		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(new IntegerList(2, 4), COLORS_USED, COLORS_USED_BACK, COATINGS, COATINGS_BACK);
+		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS, COLORS_USED, COLORS_USED_BACK, COATINGS, COATINGS_BACK);
 
 		// assert
 		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
