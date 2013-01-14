@@ -11,9 +11,11 @@
 package org.cip4.lib.xjdf.builder;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.ValidationException;
 import javax.xml.namespace.QName;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
@@ -26,6 +28,8 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
  * @date 05.03.2012
  */
 public class ProductBuilder extends AbstractNodeBuilder<Product> {
+
+	private static final String ID_PREFIX = "PRD";
 
 	private final XJdfNodeFactory xJdfNodeFactory;
 
@@ -55,10 +59,10 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * @param amount Value of Amount attribute
 	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(int amount) {
+	public static ProductBuilder newInstance(Integer amount) {
 
 		// return new instance
-		return newInstance(amount, null, null);
+		return newInstance(amount, null, null, null);
 	}
 
 	/**
@@ -69,7 +73,22 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * @param productTypeDetails Value of ProductTypeDetails attribute
 	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(int amount, String productType, String productTypeDetails) {
+	public static ProductBuilder newInstance(Integer amount, String productType, String productTypeDetails) {
+
+		// return new instance
+		return newInstance(amount, null, null, null);
+	}
+
+	/**
+	 * Create and return a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
+	 * @param amount Value of Amount attribute
+	 * @param id Value of ID attribute
+	 * @param productType Value of ProductType attribute
+	 * @param productTypeDetails Value of ProductTypeDetails attribute
+	 * @param descriptiveName String value for DescriptiveName attribute.
+	 * @return New instance of ProductBuilder which already contains values for defined attributes.
+	 */
+	public static ProductBuilder newInstance(Integer amount, String productType, String productTypeDetails, String descriptiveName) {
 
 		// create new instance
 		ProductBuilder builder = newInstance();
@@ -78,9 +97,10 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 		builder.getProduct().setAmount(amount);
 		builder.getProduct().setProductType(productType);
 		builder.getProduct().setProductTypeDetails(productTypeDetails);
+		builder.getProduct().setDescriptiveName(descriptiveName);
 
 		// default values
-		builder.getProduct().setID(IDGeneratorUtil.generateID("PRD"));
+		// builder.getProduct().setID(IDGeneratorUtil.generateID(ID_PREFIX));
 
 		// return instance
 		return builder;
@@ -117,6 +137,41 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
 		// append intent to product
 		getProduct().getIntent().add(it);
+
+		// return current builder
+		return this;
+	}
+
+	/**
+	 * Append another product as child.
+	 * @param intent Intent object to append to.
+	 * @return The current ProductBuilder instance.
+	 * @throws ValidationException
+	 */
+	public ProductBuilder addChildProduct(Product product) throws ValidationException {
+
+		// if necessary, create root ID
+		if (getNode().getID() == null || getNode().getID().equals("")) {
+			getNode().setID(IDGeneratorUtil.generateID(ID_PREFIX));
+		}
+
+		// if neccessary, create child ID
+		if (product.getID() == null || product.getID().equals("")) {
+			product.setID(IDGeneratorUtil.generateID(ID_PREFIX));
+		}
+
+		// create child product
+		ChildProduct childProduct = xJdfNodeFactory.createChildProduct();
+		childProduct.setChildRef(product);
+		getProduct().getChildProduct().add(childProduct);
+
+		// set root flag
+		getProduct().setIsRoot(true);
+
+		// validation
+		if (product.getChildProduct().size() > 0) {
+			throw new ValidationException("A Child Product cannot have children!");
+		}
 
 		// return current builder
 		return this;

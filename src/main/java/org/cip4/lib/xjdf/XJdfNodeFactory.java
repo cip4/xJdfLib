@@ -138,11 +138,23 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public CustomerInfo createCustomerInfo(String customerID) {
 
+		return createCustomerInfo(customerID, null);
+	}
+
+	/**
+	 * Create a new CustomerInfo Node which already contains values for attribute CustomerID
+	 * @param customerID Value for CustomerID attribute.
+	 * @param customerOrderID Value for CustomerOrderID attribute.
+	 * @return CustomerInfo Node which already contains defined attributes.
+	 */
+	public CustomerInfo createCustomerInfo(String customerID, String customerOrderID) {
+
 		// create node
 		CustomerInfo customerInfo = super.createCustomerInfo();
 
 		// set attributes
 		customerInfo.setCustomerID(customerID);
+		customerInfo.setCustomerOrderID(customerOrderID);
 
 		// return object
 		return customerInfo;

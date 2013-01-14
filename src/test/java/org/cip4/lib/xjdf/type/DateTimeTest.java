@@ -250,4 +250,36 @@ public class DateTimeTest {
 		Assert.assertEquals("Date is wrong.", strDate, actual);
 
 	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
+	 */
+	@Test
+	public void testMarshalString() throws Exception {
+
+		// arrange
+		final DateTime date = new DateTime(2012, 11, 04, 15, 30);
+
+		// act
+		String r = new DateTime().marshal(date);
+
+		// assert
+		Assert.assertTrue("Date is wrong.", r.startsWith("2012-11-04T15:30:00"));
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
+	 */
+	@Test
+	public void testMarshalString2() throws Exception {
+
+		// arrange
+		final DateTime date = new DateTime(2012, 11, 04);
+
+		// act
+		String r = new DateTime().marshal(date);
+
+		// assert
+		Assert.assertTrue("Date is wrong.", r.startsWith("2012-11-04T23:59:00"));
+	}
 }

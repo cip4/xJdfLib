@@ -17,6 +17,8 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.ChildProduct;
+import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterSet;
@@ -57,7 +59,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	public static XJdfBuilder newInstance() {
 
 		// return new instance
-		return new XJdfBuilder();
+		return newInstance(null, null, null, null);
 	}
 
 	/**
@@ -107,7 +109,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	public static XJdfBuilder newInstance(String jobID, String category, String descriptiveName, String relatedJobID) {
 
 		// create instance
-		XJdfBuilder xJdfBuilder = newInstance();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
 		// preconfiguration
 		xJdfBuilder.getXJdf().setJobID(jobID);
@@ -129,6 +131,20 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 */
 	protected XJDF getXJdf() {
 		return getNode();
+	}
+
+	/**
+	 * Append Comment to XJDF Document.
+	 * @param comment Comment to append to.
+	 * @return The current XJdfBuilder instance.
+	 */
+	public XJdfBuilder addComment(String comment) {
+
+		Comment obj = xJdfNodeFactory.createComment(comment);
+		getNode().getComment().add(obj);
+
+		// return XJdfBuilder object
+		return this;
 	}
 
 	/**
@@ -166,14 +182,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		// add product
 		getXJdf().getProductList().getProduct().add(product);
 
-		// if necessary, update root product
-		if (getXJdf().getProductList().getRootProducts().size() == 0) {
-
-			if (product.getID() == null || product.getID().isEmpty()) {
-				product.setID(IDGeneratorUtil.generateID());
-			}
-
-			getXJdf().getProductList().getRootProducts().add(product);
+		// add all child products
+		for (ChildProduct child : product.getChildProduct()) {
+			getXJdf().getProductList().getProduct().add((Product) child.getChildRef());
 		}
 
 		// return XJdfBuilder object

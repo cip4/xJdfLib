@@ -19,9 +19,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element name="OrganizationalUnit" type="{http://www.CIP4.org/JDFSchema_2_0}TextElement" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element name="OrganizationalUnit" type="{http://www.CIP4.org/JDFSchema_2_0}TextElement" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="OrganizationName" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *     &lt;/extension>

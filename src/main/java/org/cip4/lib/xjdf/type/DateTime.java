@@ -39,6 +39,34 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	}
 
 	/**
+	 * Custom constructor. Accepting values for initializing.
+	 * @param year The value used to set the YEAR.
+	 * @param month The value used to set the MONTH in year. January is "1".
+	 * @param day The value used to set the DAY in month.
+	 */
+	public DateTime(int year, int month, int day) {
+
+		this(year, month, day, 23, 59);
+	}
+
+	/**
+	 * Custom constructor. Accepting values for initializing.
+	 * @param year The value used to set the YEAR.
+	 * @param month The value used to set the MONTH in year. January is "1".
+	 * @param day The value used to set the DAY in month.
+	 * @param hour The value used to set the HOUR of day.
+	 * @param minute The value used to set the MINUTE in of.
+	 */
+	public DateTime(int year, int month, int day, int hour, int minute) {
+
+		Calendar cal = Calendar.getInstance();
+		cal.set(year, month - 1, day, hour, minute, 0);
+
+		// initialize instance variable
+		this.calendar = cal;
+	}
+
+	/**
 	 * Custom constructor. Accepting a Calendar object for initializing.
 	 * @param calendar Calendar object for initializing.
 	 */

@@ -25,14 +25,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ChildProduct" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Intent" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ChildProduct" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Intent" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="ID" use="required" type="{http://www.CIP4.org/JDFSchema_2_0}ID" />
+ *       &lt;attribute name="ID" type="{http://www.CIP4.org/JDFSchema_2_0}ID" />
+ *       &lt;attribute name="IsRoot" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
  *       &lt;attribute name="DescriptiveName" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="Amount" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *       &lt;attribute name="ProductID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
@@ -65,10 +64,12 @@ public class Product
     protected List<ChildProduct> childProduct;
     @XmlElement(name = "Intent")
     protected List<Intent> intent;
-    @XmlAttribute(name = "ID", required = true)
+    @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
+    @XmlAttribute(name = "IsRoot")
+    protected Boolean isRoot;
     @XmlAttribute(name = "DescriptiveName")
     protected String descriptiveName;
     @XmlAttribute(name = "Amount")
@@ -219,6 +220,30 @@ public class Product
      */
     public void setID(String value) {
         this.id = value;
+    }
+
+    /**
+     * Gets the value of the isRoot property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *     
+     */
+    public Boolean isIsRoot() {
+        return isRoot;
+    }
+
+    /**
+     * Sets the value of the isRoot property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *     
+     */
+    public void setIsRoot(Boolean value) {
+        this.isRoot = value;
     }
 
     /**
