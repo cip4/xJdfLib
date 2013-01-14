@@ -23,10 +23,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Position" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}StripMark" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Position" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}StripMark" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="WorkStyle" type="{http://www.CIP4.org/JDFSchema_2_0}EnumWorkStyle" />
  *       &lt;attribute name="JobID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />

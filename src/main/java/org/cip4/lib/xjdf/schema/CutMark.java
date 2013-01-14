@@ -23,9 +23,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Assembly" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Assembly" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="Position" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
  *       &lt;attribute name="Blocks" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />

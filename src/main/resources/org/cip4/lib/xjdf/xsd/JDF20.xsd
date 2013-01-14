@@ -697,14 +697,14 @@
 	<xs:element name="Resource">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceType" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="AmountProduced" type="double" use="optional" />
 			<xs:attribute name="Locked" type="boolean" use="optional" />
@@ -759,12 +759,12 @@
 	<xs:element name="Parameter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ParameterType" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Locked" type="boolean" use="optional" />
 			<xs:attribute name="PipeURL" type="URL" use="optional" />
@@ -805,12 +805,12 @@
 	<xs:element name="Intent">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="IntentType" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Locked" type="boolean" use="optional" />
 			<xs:attribute name="PipeURL" type="URL" use="optional" />
@@ -874,14 +874,15 @@
 	<xs:element name="Product">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ChildProduct" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Intent" />
-				</xs:choice>
+				
 			</xs:sequence>
-			<xs:attribute name="ID" type="ID" use="required" />
+			<xs:attribute name="ID" type="ID" use="optional" />
+			<xs:attribute name="IsRoot" type="boolean" use="optional" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 			<xs:attribute name="Amount" type="integer" use="optional" />
 			<xs:attribute name="ProductID" type="shortString" use="optional" />
@@ -895,13 +896,12 @@
 	<xs:element name="ProductList">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Product" />
-				</xs:choice>
+				
 			</xs:sequence>
-			<xs:attribute name="RootProducts" type="IDREFS" use="required" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 		</xs:complexType>
 	</xs:element>
@@ -966,12 +966,12 @@
 		<xs:complexContent>
 			<xs:extension base="SetType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Dependent" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ID" type="ID" use="required" />
 				<xs:attribute name="DescriptiveName" type="string" use="optional" />
@@ -989,12 +989,12 @@
 		<xs:complexContent>
 			<xs:extension base="SetType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Parameter" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Dependent" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ID" type="ID" use="optional" />
 				<xs:attribute name="DescriptiveName" type="string" use="optional" />
@@ -1035,10 +1035,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CustomerMessage" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="CustomerProjectID" type="string"
 					use="optional" />
@@ -1054,9 +1054,9 @@
 	<xs:element name="CustomerMessage">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MessageEvents" type="NMTOKENS" use="optional" />
 			<xs:attribute name="Language" type="language" use="optional" />
@@ -1071,12 +1071,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="NotificationFilter" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DueLevel" use="optional" />
 				<xs:attribute name="LastStart" type="dateTime" use="optional" />
@@ -1197,9 +1197,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Shape" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="CutOut" type="boolean" use="optional" />
 				<xs:attribute name="CutType" use="optional" />
@@ -1241,10 +1241,10 @@
 	<xs:element name="Acknowledge">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="AcknowledgeType" use="optional">
 				<xs:simpleType>
@@ -1272,10 +1272,10 @@
 	<xs:element name="AuthenticationCmdParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Certificate" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Reason" use="optional" />
 			<xs:attribute name="URL" type="URL" use="optional" />
@@ -1295,9 +1295,9 @@
 	<xs:element name="AuthenticationResp">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Certificate" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="URL" type="URL" use="optional" />
 		</xs:complexType>
@@ -1320,9 +1320,9 @@
 	<xs:element name="Command">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="AcknowledgeType" use="optional">
 				<xs:simpleType>
@@ -1374,11 +1374,11 @@
 	<xs:element name="DeviceInfo">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobPhase" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="DeviceCondition" use="optional" />
 			<xs:attribute name="DeviceStatus" type="EnumDeviceStatus"
@@ -1414,9 +1414,9 @@
 	<xs:element name="FlushQueueInfo">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -1425,9 +1425,9 @@
 	<xs:element name="FlushQueueParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -1436,9 +1436,9 @@
 	<xs:element name="FlushResourceParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="FlushPolicy" use="optional" />
 		</xs:complexType>
@@ -1495,7 +1495,7 @@
 	<xs:element name="JMF">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Acknowledge" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Response" />
@@ -1503,7 +1503,7 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Signal" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Registration" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Command" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SenderID" type="shortString" use="optional" />
 			<xs:attribute name="Version" type="EnumJDFJMFVersion"
@@ -1522,12 +1522,12 @@
 	<xs:element name="JobPhase">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="PhaseAmount" type="double" use="optional" />
 			<xs:attribute name="StatusDetails" type="shortString"
@@ -1570,9 +1570,9 @@
 	<xs:element name="Message">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SenderID" type="shortString" use="optional" />
 			<xs:attribute name="Version" type="EnumJDFJMFVersion"
@@ -1590,11 +1590,11 @@
 	<xs:element name="MessageService">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePool" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TestPool" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ActionPool" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Persistent" type="boolean" use="optional" />
 			<xs:attribute name="ChannelMode" use="optional" />
@@ -1624,9 +1624,9 @@
 	<xs:element name="MsgFilter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MessageType" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Family" use="optional" />
@@ -1648,9 +1648,9 @@
 	<xs:element name="NewJDFCmdParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="IDInfo" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="JDFDetails" type="string" use="optional" />
 		</xs:complexType>
@@ -1692,10 +1692,10 @@
 	<xs:element name="Occupation">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="QueueEntryID" type="shortString"
 				use="optional" />
@@ -1710,9 +1710,9 @@
 	<xs:element name="PipeParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="PipeID" type="shortString" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -1727,10 +1727,10 @@
 	<xs:element name="Query">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="AcknowledgeType" use="optional">
 				<xs:simpleType>
@@ -1758,9 +1758,9 @@
 	<xs:element name="Queue">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueEntry" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="DeviceID" type="shortString" use="optional" />
 			<xs:attribute name="QueueSize" type="integer" use="optional" />
@@ -1773,10 +1773,10 @@
 	<xs:element name="QueueEntry">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobPhase" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="GangName" type="NMTOKEN" use="optional" />
 			<xs:attribute name="StartTime" type="dateTime" use="optional" />
@@ -1826,10 +1826,10 @@
 	<xs:element name="QueueFilter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueEntryDef" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="OlderThan" type="dateTime" use="optional" />
 			<xs:attribute name="UpgradeGranularity" use="optional" />
@@ -1857,9 +1857,9 @@
 	<xs:element name="QueueSubmissionParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ReturnURL" type="URL" use="optional" />
 			<xs:attribute name="WatchURL" type="URL" use="optional" />
@@ -1881,10 +1881,10 @@
 	<xs:element name="Registration">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SenderID" type="shortString" use="optional" />
 			<xs:attribute name="Version" type="EnumJDFJMFVersion"
@@ -1910,10 +1910,10 @@
 	<xs:element name="RequestQueueEntryParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Queue" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SubmitPolicy" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -1926,11 +1926,11 @@
 	<xs:element name="ResourceCmdParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UpdateMethod" use="optional" />
 			<xs:attribute name="JobPartID" type="shortString" use="optional" />
@@ -1953,13 +1953,13 @@
 	<xs:element name="ResourceInfo">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Lot" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Level" use="optional" />
 			<xs:attribute name="CommandResult" use="optional" />
@@ -1985,11 +1985,11 @@
 	<xs:element name="ResourcePullParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ReturnURL" type="URL" use="optional" />
 			<xs:attribute name="WatchURL" type="URL" use="optional" />
@@ -2012,9 +2012,9 @@
 	<xs:element name="ResourceQuParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="JobPartID" type="shortString" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -2042,10 +2042,10 @@
 	<xs:element name="Response">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Acknowledged" type="boolean" use="optional" />
 			<xs:attribute name="SenderID" type="shortString" use="optional" />
@@ -2097,11 +2097,11 @@
 	<xs:element name="Signal">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Trigger" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SenderID" type="shortString" use="optional" />
 			<xs:attribute name="Version" type="EnumJDFJMFVersion"
@@ -2122,9 +2122,9 @@
 	<xs:element name="StatusQuParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="JobPartID" type="shortString" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -2141,9 +2141,9 @@
 	<xs:element name="StopPersChParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MessageType" type="NMTOKEN" use="optional" />
 			<xs:attribute name="URL" type="URL" use="optional" />
@@ -2172,9 +2172,9 @@
 	<xs:element name="Subscription">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ObservationTarget" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="URL" type="URL" use="optional" />
 			<xs:attribute name="RepeatStep" type="integer" use="optional" />
@@ -2190,9 +2190,9 @@
 	<xs:element name="SubscriptionFilter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MessageTypes" type="NMTOKENS" use="optional" />
 			<xs:attribute name="URL" type="URL" use="optional" />
@@ -2209,10 +2209,10 @@
 	<xs:element name="SubscriptionInfo">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MessageType" type="NMTOKEN" use="optional" />
 			<xs:attribute name="SenderID" type="string" use="optional" />
@@ -2228,9 +2228,9 @@
 	<xs:element name="TrackFilter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ProjectID" type="shortString" use="optional" />
 			<xs:attribute name="QueueEntryID" type="shortString"
@@ -2245,9 +2245,9 @@
 	<xs:element name="TrackResult">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ProjectID" type="shortString" use="optional" />
 			<xs:attribute name="URL" type="URL" use="optional" />
@@ -2265,9 +2265,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ChangedPath" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RepeatTime" type="double" use="optional" />
 				<xs:attribute name="RepeatStep" type="integer" use="optional" />
@@ -2282,7 +2282,7 @@
 	<xs:element name="AuditPool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceAudit" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Modified" />
@@ -2290,7 +2290,7 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PhaseTime" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ProcessRun" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Deleted" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -2351,9 +2351,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterRibbon" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Rounding" type="double" use="optional" />
 				<xs:attribute name="Backing" type="double" use="optional" />
@@ -2401,11 +2401,11 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="BundleItem" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="TotalAmount" type="integer" use="optional" />
 				<xs:attribute name="BundleType" use="optional" />
@@ -2437,9 +2437,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="TopFoldIn" type="double" use="optional" />
 				<xs:attribute name="FrontFoldIn" type="double" use="optional" />
@@ -2460,9 +2460,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="CaseRadius" type="double" use="optional" />
 			</xs:extension>
@@ -2549,10 +2549,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Score" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -2565,9 +2565,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Crease" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -2577,9 +2577,9 @@
 	<xs:element name="Created">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="XPath" type="XPath" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
@@ -2605,10 +2605,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CutBlock" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Cut" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="NUpSeparation" type="XYPair" use="optional" />
 			</xs:extension>
@@ -2630,9 +2630,9 @@
 	<xs:element name="Deleted">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="XPath" type="XPath" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
@@ -2667,12 +2667,12 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Module" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceCap" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="IconList" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Directory" type="URL" use="optional" />
 				<xs:attribute name="ModelName" type="string" use="optional" />
@@ -2705,9 +2705,9 @@
 	<xs:element name="DeviceList">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceInfo" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -2759,9 +2759,9 @@
 	<xs:element name="EmbossingItem">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Direction" use="optional" />
 			<xs:attribute name="EdgeShape" use="optional" />
@@ -2783,9 +2783,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Emboss" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ModuleIndex" type="integer" use="optional" />
 			</xs:extension>
@@ -2799,9 +2799,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="EndSheet" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -2811,9 +2811,9 @@
 	<xs:element name="Error">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ErrorData" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ErrorID" type="string" use="optional" />
 			<xs:attribute name="Resend" use="optional" />
@@ -2884,9 +2884,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -2899,9 +2899,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="GluingProductionID" type="string"
 					use="optional" />
@@ -2913,9 +2913,9 @@
 	<xs:element name="HardCoverBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterRibbon" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="TightBacking" use="optional" />
 			<xs:attribute name="HeadBandColor" type="EnumNamedColor"
@@ -2952,9 +2952,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BottomColor" type="string" use="optional" />
 				<xs:attribute name="BottomColorDetails" type="string"
@@ -2978,9 +2978,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Pitch" type="double" use="optional" />
 			</xs:extension>
@@ -3005,9 +3005,9 @@
 	<xs:element name="IconList">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Icon" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -3056,9 +3056,9 @@
 	<xs:element name="Insert">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="WrapPages" type="IntegerRangeList"
 				use="optional" />
@@ -3076,9 +3076,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="InsertLocation" use="optional" />
 				<xs:attribute name="FinishedPage" type="integer" use="optional" />
@@ -3091,9 +3091,9 @@
 	<xs:element name="InsertList">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Insert" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -3105,10 +3105,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Scaling" type="XYPair" use="optional" />
 				<xs:attribute name="Polarity" use="optional" />
@@ -3219,9 +3219,9 @@
 	<xs:element name="LayerList">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerDetails" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -3233,14 +3233,14 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCell" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ImageShift" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="FinishingOrder" use="optional" />
 				<xs:attribute name="ImplicitGutterMinimumLimit" type="XYPair"
@@ -3283,9 +3283,9 @@
 	<xs:element name="Location">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Address" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="LocationName" type="string" use="optional" />
 			<xs:attribute name="LocID" type="shortString" use="optional" />
@@ -3306,7 +3306,7 @@
 		<xs:complexContent>
 			<xs:extension base="PlacedObject">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ScavengerArea" />
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="DensityMeasuringField" />
@@ -3320,7 +3320,7 @@
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkActivation" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="CompensationCTMTemplate" type="string"
 					use="optional" />
@@ -3361,9 +3361,9 @@
 	<xs:element name="Modified">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="XPath" type="XPath" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
@@ -3380,9 +3380,9 @@
 	<xs:element name="ModulePhase">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="DeviceStatus" type="EnumDeviceStatus"
 				use="optional" />
@@ -3402,9 +3402,9 @@
 	<xs:element name="ModuleStatus">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="DeviceStatus" type="EnumDeviceStatus"
 				use="optional" />
@@ -3423,7 +3423,7 @@
 	<xs:element name="Notification">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CounterReset" />
@@ -3434,7 +3434,7 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="SystemTimeSet" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Event" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Barcode" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="CombinedProcessIndex" type="IntegerList"
 				use="optional" />
@@ -3463,9 +3463,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="NumberingParam" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -3498,11 +3498,11 @@
 	<xs:element name="PageCell">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ImageShift" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ClipBox" type="rectangle" use="optional" />
 			<xs:attribute name="Rotate" use="optional" />
@@ -3517,9 +3517,9 @@
 	<xs:element name="PageCondition">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="RestrictedContentObjects" type="IntegerList"
 				use="optional" />
@@ -3534,10 +3534,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageData" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="IsBlank" type="boolean" use="optional" />
 				<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -3573,10 +3573,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="PalletType" type="NMTOKEN" use="optional" />
 				<xs:attribute name="Size" type="XYPair" use="optional" />
@@ -3593,9 +3593,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="MaxWeight" type="double" use="optional" />
 				<xs:attribute name="Pattern" type="string" use="optional" />
@@ -3706,9 +3706,9 @@
 	<xs:element name="PDFInterpretingParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="OCGControl" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="OCGProcess" use="optional" />
 			<xs:attribute name="OCGDefault" use="optional" />
@@ -3742,9 +3742,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Perforate" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -3771,12 +3771,12 @@
 	<xs:element name="PhaseTime">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="StatusDetails" type="shortString"
 				use="optional" />
@@ -3816,10 +3816,10 @@
 	<xs:element name="ProcessRun">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="EndStatus" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
@@ -3880,10 +3880,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RibbonColorDetails" type="string"
 					use="optional" />
@@ -3905,11 +3905,11 @@
 	<xs:element name="ResourceAudit">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Reason" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
@@ -3957,9 +3957,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Shape" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DeliveryMode" use="optional" />
 				<xs:attribute name="SheetLay" use="optional" />
@@ -3989,14 +3989,14 @@
 	<xs:element name="Signature">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentObject" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCondition" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerList" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkObject" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Locked" type="boolean" use="optional" />
 			<xs:attribute name="PipeURL" type="URL" use="optional" />
@@ -4088,9 +4088,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="HorizontalExcess" type="double"
 					use="optional" />
@@ -4114,9 +4114,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="MaxWeight" type="double" use="optional" />
 				<xs:attribute name="MaxHeight" type="integer" use="optional" />
@@ -4145,10 +4145,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="StrapColor" type="string" use="optional" />
 				<xs:attribute name="Material" use="optional" />
@@ -4174,9 +4174,9 @@
 	<xs:element name="StripBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4188,10 +4188,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="StripMark" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="WorkStyle" type="EnumWorkStyle"
 					use="optional" />
@@ -4276,10 +4276,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ToolType" type="NMTOKEN" use="optional" />
 				<xs:attribute name="IdentificationFieldRef" type="IDREF"
@@ -4295,9 +4295,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="TransferFunctionSource" use="optional" />
 			</xs:extension>
@@ -4354,10 +4354,10 @@
 	<xs:element name="Action">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightAction" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ID" type="ID" use="optional" />
 			<xs:attribute name="Severity" use="optional" />
@@ -4369,9 +4369,9 @@
 	<xs:element name="ActionPool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Action" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4382,9 +4382,9 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TermType" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -4394,9 +4394,9 @@
 	<xs:element name="BasicPreflightTest">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightArgument" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ClassName" type="NMTOKEN" use="optional" />
 			<xs:attribute name="DevNS" type="URI" use="optional" />
@@ -4415,10 +4415,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ValueList" use="optional">
 					<xs:simpleType>
@@ -4435,10 +4435,10 @@
 	<xs:element name="BooleanState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -4485,10 +4485,10 @@
 	<xs:element name="choice">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="otherwise" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="when" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4500,10 +4500,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ValueDurationList" type="DurationRangeList"
 					use="optional" />
@@ -4519,10 +4519,10 @@
 	<xs:element name="DateTimeState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -4560,7 +4560,7 @@
 	<xs:element name="DeviceCap">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="BooleanState" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="StringState" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="EnumState" />
@@ -4580,7 +4580,7 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MatrixState" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TestPool" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ElementState" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Lang" type="languages" use="optional" />
 		</xs:complexType>
@@ -4593,9 +4593,9 @@
 	<xs:element name="DisplayGroup">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4607,10 +4607,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ValueList" type="DurationRangeList"
 					use="optional" />
@@ -4624,10 +4624,10 @@
 	<xs:element name="DurationState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -4664,10 +4664,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RegExp" type="RegExp" use="optional" />
 				<xs:attribute name="ValueList" type="NMTOKENS" use="optional" />
@@ -4681,10 +4681,10 @@
 	<xs:element name="EnumState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -4736,10 +4736,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ValueMod" type="XYPair" use="optional" />
 				<xs:attribute name="ValueList" type="IntegerRangeList"
@@ -4754,10 +4754,10 @@
 	<xs:element name="IntegerState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -4799,10 +4799,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="XPath" type="XPath" use="required" />
 				<xs:attribute name="XPathRoot" type="XPath" use="optional" />
@@ -4824,11 +4824,11 @@
 	<xs:element name="macro">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="set" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="choice" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="call" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ID" type="ID" use="optional" />
 		</xs:complexType>
@@ -4838,9 +4838,9 @@
 	<xs:element name="MacroPool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="macro" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4852,10 +4852,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RotateMod" type="double" use="optional" />
 				<xs:attribute name="Shift" type="NumberList" use="optional" />
@@ -4872,10 +4872,10 @@
 	<xs:element name="MatrixState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="PresentRotateMod" type="double" use="optional" />
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
@@ -4911,9 +4911,9 @@
 	<xs:element name="Module">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Module" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ModelName" type="string" use="optional" />
 			<xs:attribute name="Manufacturer" type="string" use="optional" />
@@ -4944,9 +4944,9 @@
 	<xs:element name="ModulePool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleCap" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -4958,10 +4958,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RegExp" type="RegExp" use="optional" />
 				<xs:attribute name="ValueList" type="NMTOKENS" use="optional" />
@@ -4975,10 +4975,10 @@
 	<xs:element name="NameState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5019,9 +5019,9 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TermType" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5034,10 +5034,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ValueMod" type="XYPair" use="optional" />
 				<xs:attribute name="ValueList" type="NumberRangeList"
@@ -5053,10 +5053,10 @@
 	<xs:element name="NumberState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5095,9 +5095,9 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TermType" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5107,9 +5107,9 @@
 	<xs:element name="otherwise">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="set" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -5121,11 +5121,11 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Length" type="IntegerRange" use="optional" />
 				<xs:attribute name="XPath" type="XPath" use="required" />
@@ -5138,10 +5138,10 @@
 	<xs:element name="PDFPathState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5178,10 +5178,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="HWRelation" type="EnumXYRelation"
 					use="optional" />
@@ -5198,10 +5198,10 @@
 	<xs:element name="RectangleState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5239,9 +5239,9 @@
 	<xs:element name="set">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="FeatureAttribute" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="rRef" type="IDREF" use="optional" />
 		</xs:complexType>
@@ -5254,10 +5254,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Z" type="NumberRangeList" use="optional" />
 				<xs:attribute name="X" type="NumberRangeList" use="optional" />
@@ -5275,10 +5275,10 @@
 	<xs:element name="ShapeState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5327,11 +5327,11 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="RegExp" type="RegExp" use="optional" />
 				<xs:attribute name="Length" type="IntegerRange" use="optional" />
@@ -5345,10 +5345,10 @@
 	<xs:element name="StringState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5389,9 +5389,9 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TermType" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ID" type="ID" use="optional" />
 				<xs:attribute name="Context" type="XPath" use="optional" />
@@ -5403,9 +5403,9 @@
 	<xs:element name="TestPool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Test" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -5424,9 +5424,9 @@
 	<xs:element name="ValueLoc">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Value" type="string" use="optional" />
 		</xs:complexType>
@@ -5436,9 +5436,9 @@
 	<xs:element name="when">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="set" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -5449,9 +5449,9 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TermType" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5464,10 +5464,10 @@
 		<xs:complexContent>
 			<xs:extension base="TermType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="BasicPreflightTest" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="EnumXYRelation" type="EnumXYRelation"
 					use="optional" />
@@ -5484,10 +5484,10 @@
 	<xs:element name="XYPairState">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ValueLoc" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Loc" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="UserDisplay" type="EnumUserDisplay"
 				use="optional" />
@@ -5526,10 +5526,10 @@
 	<xs:element name="ArtDelivery">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DigitalMedia" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="HasBleeds" type="boolean" use="optional" />
 			<xs:attribute name="ArtDeliveryType" type="NMTOKEN" use="optional" />
@@ -5593,7 +5593,7 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="BindList" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ThreadSealing" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Tabs" />
@@ -5612,7 +5612,7 @@
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ThreadSewing" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="SaddleStitching" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="StripBinding" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BindingOrder" use="optional" />
 				<xs:attribute name="BindingType" use="optional" />
@@ -5676,9 +5676,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="EmbossingItem" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5691,9 +5691,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional" />
 			</xs:extension>
@@ -5707,9 +5707,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="HoleReferenceEdge" use="optional" />
 				<xs:attribute name="Extent" type="XYPair" use="optional" />
@@ -5725,9 +5725,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertList" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="GlueType" use="optional" />
 				<xs:attribute name="Method" use="optional" />
@@ -5786,9 +5786,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="MediaSetCount" type="integer" use="optional" />
 				<xs:attribute name="UserMediaType" type="NMTOKEN" use="optional" />
@@ -5826,9 +5826,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="NumberItem" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ColorRef" type="IDREF" use="optional" />
 				<xs:attribute name="ColorName" type="EnumNamedColor"
@@ -5878,9 +5878,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ProofItem" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5939,9 +5939,9 @@
 		<xs:complexContent>
 			<xs:extension base="IntentType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeCut" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -5962,9 +5962,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" name="ExtendedAddress" type="TextElement" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="PostalCode" type="string" use="optional" />
 				<xs:attribute name="City" type="string" use="optional" />
@@ -6014,9 +6014,9 @@
 	<xs:element name="ApprovalDetails">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ApprovalState" use="optional" />
 			<xs:attribute name="ApprovalStateDetails" type="string"
@@ -6042,9 +6042,9 @@
 	<xs:element name="ApprovalPerson">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ApprovalRole" use="optional" />
 			<xs:attribute name="ApprovalRoleDetails" type="string"
@@ -6059,9 +6059,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ApprovalDetails" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="FileSpecRef" type="IDREF" use="optional" />
 			</xs:extension>
@@ -6072,9 +6072,9 @@
 	<xs:element name="ArgumentValue">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightArgument" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Name" type="NMTOKEN" use="optional" />
 		</xs:complexType>
@@ -6087,10 +6087,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="JobID" type="shortString" use="optional" />
 				<xs:attribute name="PhysicalSection" type="IntegerList"
@@ -6108,10 +6108,10 @@
 	<xs:element name="AssemblySection">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="JobID" type="shortString" use="optional" />
 			<xs:attribute name="Order" use="optional" />
@@ -6213,10 +6213,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BindingEdge" use="optional" />
 				<xs:attribute name="BindingOrientation" use="optional" />
@@ -6276,9 +6276,9 @@
 	<xs:element name="BoxFoldAction">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="FoldIndex" type="XYPair" use="optional" />
 			<xs:attribute name="Action" use="optional" />
@@ -6292,10 +6292,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="BoxFoldAction" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BlankDimensionsY" type="string"
 					use="optional" />
@@ -6320,10 +6320,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PixelColorant" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Band" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BandOrdering" use="optional" />
 				<xs:attribute name="ElementType" use="optional" />
@@ -6399,12 +6399,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve" />
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="PrintConditionColor" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNColor" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Lab" type="LabColor" use="optional" />
 				<xs:attribute name="RawName" type="hexBinary" use="optional" />
@@ -6453,12 +6453,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace" />
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="ColorSpaceSubstitute" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ProcessColorModel" type="NMTOKEN"
 					use="optional" />
@@ -6492,12 +6492,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="DensityMeasuringField" />
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="CIELABMeasuringField" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Rotation" type="double" use="optional" />
 				<xs:attribute name="Size" type="XYPair" use="optional" />
@@ -6559,10 +6559,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" name="OrganizationalUnit"
 							type="TextElement" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="OrganizationName" type="string"
 					use="optional" />
@@ -6577,13 +6577,13 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional" />
 				<xs:attribute name="Overfold" type="double" use="optional" />
@@ -6647,15 +6647,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Person" />
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Company" />
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel" />
-						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Address" />
-					</xs:choice>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Person" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Company" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Address" />
 				</xs:sequence>
-				<xs:attribute name="ContactTypeDetails" type="string"
-					use="optional" />
+				<xs:attribute name="ContactTypeDetails" type="string" use="optional" />
 				<xs:attribute name="ContactTypes" type="NMTOKENS" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
@@ -6672,9 +6669,7 @@
 	<xs:element name="ContentData">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentMetaData" />
-				</xs:choice>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentMetaData" />
 			</xs:sequence>
 			<xs:attribute name="HasBleeds" type="boolean" use="optional" />
 			<xs:attribute name="ContentType" type="NMTOKEN" use="optional" />
@@ -6712,11 +6707,9 @@
 	<xs:element name="ContentMetaData">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-				</xs:choice>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 			</xs:sequence>
 			<xs:attribute name="Title" type="string" use="optional" />
 			<xs:attribute name="ISBN13" type="string" use="optional" />
@@ -6869,9 +6862,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CylinderPosition" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DeviceID" type="NMTOKEN" use="optional" />
 				<xs:attribute name="LayoutRef" type="IDREF" use="optional" />
@@ -6886,9 +6879,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ProductionPath" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -6964,10 +6957,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Drop" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Required" type="dateTime" use="optional" />
 				<xs:attribute name="Transfer" use="optional" />
@@ -7008,9 +7001,9 @@
 	<xs:element name="Dependencies">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RunList" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -7045,10 +7038,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RuleLength" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Station" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Waste" type="double" use="optional" />
 				<xs:attribute name="DieSide" use="optional" />
@@ -7068,11 +7061,11 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RepeatDesc" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ConvertingConfig" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Position" use="optional" />
 				<xs:attribute name="Estimate" type="boolean" use="optional" />
@@ -7087,10 +7080,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Capacity" type="integer" use="optional" />
 				<xs:attribute name="MediaTypeDetails" type="string"
@@ -7111,9 +7104,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="NonPrintableMarginLeft" type="double"
 					use="optional" />
@@ -7144,9 +7137,9 @@
 	<xs:element name="Disjointing">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="OffsetAmount" type="integer" use="optional" />
 			<xs:attribute name="OffsetDirection" use="optional" />
@@ -7211,10 +7204,10 @@
 	<xs:element name="Drop">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DropItem" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="TrackingID" type="string" use="optional" />
 			<xs:attribute name="ServiceLevel" type="string" use="optional" />
@@ -7229,7 +7222,7 @@
 	<xs:element name="DropItem">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterRibbon" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Pallet" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Strap" />
@@ -7237,7 +7230,7 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RollStand" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DigitalMedia" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="TotalAmount" type="integer" use="optional" />
 			<xs:attribute name="TrackingID" type="string" use="optional" />
@@ -7260,9 +7253,9 @@
 	<xs:element name="DynamicField">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="OrdExpression" type="string" use="optional" />
 			<xs:attribute name="ReplaceField" type="string" use="optional" />
@@ -7281,11 +7274,11 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="ColorSpaceConversionOp" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ICCOutputProfileUsage" use="optional" />
 				<xs:attribute name="ColorManagementSystem" type="NMTOKEN"
@@ -7304,10 +7297,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Person" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Shift" type="string" use="optional" />
 				<xs:attribute name="Roles" type="NMTOKENS" use="optional" />
@@ -7323,10 +7316,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Polarity" type="boolean" use="optional" />
 				<xs:attribute name="PunchType" type="string" use="optional" />
@@ -7353,9 +7346,9 @@
 	<xs:element name="Expr">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Term" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Path" type="XPath" use="optional" />
 			<xs:attribute name="Value" type="string" use="optional" />
@@ -7419,10 +7412,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="CollatingItem" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Feeder" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -7444,11 +7437,11 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Container" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="FileAlias" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DocumentNaturalLang" type="language"
 					use="optional" />
@@ -7575,9 +7568,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ImageCompression" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -7609,9 +7602,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="TransferCurve" type="TransferFunction"
 					use="optional" />
@@ -7721,13 +7714,13 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PlacedObject" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCondition" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerList" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="SheetCountReset" use="optional" />
 				<xs:attribute name="OrdsConsumed" type="IntegerRangeList"
@@ -7755,10 +7748,10 @@
 	<xs:element name="LayoutElementPart">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PositionObj" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RunList" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ID" type="ID" use="optional" />
 			<xs:attribute name="BarcodeProductionParamsRef" type="IDREF"
@@ -7773,12 +7766,12 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeDef" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TestPool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ActionPool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="LayoutElementPart" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -7791,9 +7784,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShiftPoint" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -7855,13 +7848,13 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TabDimensions" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="GrainDirection" use="optional" />
 				<xs:attribute name="FrontGlossValue" type="double" use="optional" />
@@ -7934,9 +7927,9 @@
 	<xs:element name="MediaLayers">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MediaRef" type="IDREF" use="optional" />
 		</xs:complexType>
@@ -7958,9 +7951,9 @@
 	<xs:element name="MetadataMap">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Expr" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ValueFormat" type="string" use="optional" />
 			<xs:attribute name="Context" use="optional" />
@@ -7977,10 +7970,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ConsumableType" type="NMTOKEN" use="optional" />
 				<xs:attribute name="IdentificationFieldRef" type="IDREF"
@@ -8003,9 +7996,9 @@
 	<xs:element name="NotificationFilter">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="JobPartID" type="shortString" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -8074,9 +8067,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -8142,9 +8135,9 @@
 	<xs:element name="PageData">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PageElement" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="IsBlank" type="boolean" use="optional" />
 			<xs:attribute name="JobID" type="shortString" use="optional" />
@@ -8251,10 +8244,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Address" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="JobTitle" type="string" use="optional" />
 				<xs:attribute name="NamePrefix" type="string" use="optional" />
@@ -8302,9 +8295,9 @@
 	<xs:element name="PositionObj">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Size" type="XYPair" use="optional" />
 			<xs:attribute name="CTM" type="matrix" use="optional" />
@@ -8330,10 +8323,10 @@
 	<xs:element name="PreflightArgument">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="BoxArgument" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="BoxToBoxDifference" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -8345,10 +8338,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TestPool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ActionPool" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="FileSpecRef" type="IDREF" use="optional" />
 			</xs:extension>
@@ -8362,11 +8355,11 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="PreflightReportRulePool" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PRItem" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="WarningCount" type="integer" use="optional" />
 				<xs:attribute name="ErrorState" use="optional" />
@@ -8386,10 +8379,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRuleAttr" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRule" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="MaxOccurrences" type="integer" use="optional" />
 			</xs:extension>
@@ -8424,10 +8417,10 @@
 	<xs:element name="PrintConditionColor">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNColor" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Lab" type="LabColor" use="optional" />
 			<xs:attribute name="ColorBookPrefix" type="string" use="optional" />
@@ -8463,9 +8456,9 @@
 	<xs:element name="PRItem">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PRError" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="PageSet" type="IntegerRangeList"
 				use="optional" />
@@ -8481,14 +8474,14 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" name="PrintingUnitWebPath"
 							type="ProductionSubPath" />
 						<xs:element minOccurs="0" name="FolderSuperStructureWebPath"
 							type="ProductionSubPath" />
 						<xs:element minOccurs="0" name="PostPressComponentPath"
 							type="ProductionSubPath" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ProductionPathID" type="string"
 					use="optional" />
@@ -8517,9 +8510,9 @@
 	<xs:element name="PRRule">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRuleAttr" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ActionRefs" type="IDREFS" use="optional" />
 		</xs:complexType>
@@ -8557,10 +8550,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="QualityMeasurement" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Failed" type="integer" use="optional" />
 				<xs:attribute name="Passed" type="integer" use="optional" />
@@ -8575,10 +8568,10 @@
 	<xs:element name="QualityMeasurement">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded"
 						ref="BindingQualityMeasurement" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Failed" type="integer" use="optional" />
 			<xs:attribute name="Passed" type="integer" use="optional" />
@@ -8632,9 +8625,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceParam" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DefaultPriority" use="optional" />
 				<xs:attribute name="DefaultJDF" type="URL" use="optional" />
@@ -8649,10 +8642,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="MaxDiameter" type="double" use="optional" />
 				<xs:attribute name="MaxWidth" type="double" use="optional" />
@@ -8667,9 +8660,9 @@
 	<xs:element name="RuleLength">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeDef" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="StationName" type="string" use="optional" />
 			<xs:attribute name="StationAmount" type="integer" use="optional" />
@@ -8683,7 +8676,7 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" ref="MetadataMap" />
 						<xs:element minOccurs="0" ref="InsertSheet" />
 						<xs:element minOccurs="0" ref="Disposition" />
@@ -8691,7 +8684,7 @@
 						<xs:element minOccurs="0" ref="FileSpec" />
 						<xs:element minOccurs="0" ref="InterpretedPDLData" />
 						<xs:element minOccurs="0" ref="Dependencies" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Directory" type="URL" use="optional" />
 				<xs:attribute name="Sets" type="IntegerRangeList" use="optional" />
@@ -8810,10 +8803,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="TransferFunctionControl" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF"
 					use="optional" />
@@ -8828,9 +8821,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Shape" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="GrainDirection" use="optional" />
 				<xs:attribute name="Dimensions" type="shape" use="optional" />
@@ -8852,10 +8845,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectModel" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeTemplate" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -8901,9 +8894,9 @@
 	<xs:element name="Station">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeDef" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="StationName" type="string" use="optional" />
 			<xs:attribute name="StationAmount" type="integer" use="optional" />
@@ -8915,9 +8908,9 @@
 	<xs:element name="StringListValue">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Name" type="NMTOKEN" use="optional" />
 		</xs:complexType>
@@ -8952,11 +8945,11 @@
 	<xs:element name="StripMark">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="MarkContext" use="optional" />
 			<xs:attribute name="AbsoluteHeight" type="double" use="optional" />
@@ -9014,10 +9007,10 @@
 	<xs:element name="TIFFFormatParams">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TIFFEmbeddedFile" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TIFFtag" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="WhiteIsZero" type="boolean" use="optional" />
 			<xs:attribute name="Segmentation" use="optional" />
@@ -9049,9 +9042,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkObject" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ClipBox" type="rectangle" use="optional" />
 				<xs:attribute name="CTM" type="matrix" use="optional" />
@@ -9078,9 +9071,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurveSet" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -9090,9 +9083,9 @@
 	<xs:element name="TransferCurveSet">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="CTM" type="matrix" use="optional" />
 			<xs:attribute name="Name" type="NMTOKEN" use="optional" />
@@ -9120,10 +9113,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="CounterID" type="string" use="optional" />
 				<xs:attribute name="CounterTypes" type="NMTOKENS" use="optional" />
@@ -9153,9 +9146,9 @@
 	<xs:element name="ChannelBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Cover" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="ChannelBrand" type="string" use="optional" />
 			<xs:attribute name="Thickness" type="double" use="optional" />
@@ -9182,9 +9175,9 @@
 	<xs:element name="CoilBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="CoilMaterial" use="optional" />
 			<xs:attribute name="CoilBrand" type="string" use="optional" />
@@ -9227,9 +9220,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Position" type="XYPair" use="optional" />
 				<xs:attribute name="Blocks" type="NMTOKENS" use="optional" />
@@ -9242,9 +9235,9 @@
 	<xs:element name="EndSheet">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Side" use="optional" />
 		</xs:complexType>
@@ -9270,9 +9263,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="FoldCatalog" type="string" use="optional" />
 				<xs:attribute name="SheetLay" use="optional" />
@@ -9284,10 +9277,10 @@
 	<xs:element name="Glue">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="WorkingDirection" use="optional" />
 		</xs:complexType>
@@ -9300,9 +9293,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="GluingTechnique" use="optional" />
 			</xs:extension>
@@ -9351,10 +9344,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -9367,11 +9360,11 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterMark" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="HoleCount" type="IntegerList" use="optional" />
 				<xs:attribute name="Extent" type="XYPair" use="optional" />
@@ -9391,9 +9384,9 @@
 	<xs:element name="PlasticCombBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="CombBrand" type="string" use="optional" />
 			<xs:attribute name="PlasticCombType" type="NMTOKEN" use="optional" />
@@ -9543,9 +9536,9 @@
 	<xs:element name="ThreadSewing">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Sealing" />
-				</xs:choice>
+				
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
@@ -9557,9 +9550,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ThreadBrand" type="string" use="optional" />
 				<xs:attribute name="Sealing" type="boolean" use="optional" />
@@ -9628,9 +9621,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="FolderProduction" />
-					</xs:choice>
+					
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -9640,9 +9633,9 @@
 	<xs:element name="WireCombBinding">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="WireCombMaterial" use="optional" />
 			<xs:attribute name="WireCombBrand" type="string" use="optional" />
@@ -9710,9 +9703,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorCorrectionOp" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ColorManagementSystem" type="string"
 					use="optional" />
@@ -9725,9 +9718,9 @@
 	<xs:element name="ColorSpaceConversionOp">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="RenderingIntent" use="optional" />
 			<xs:attribute name="ObjectTags" type="NMTOKENS" use="optional" />
@@ -9756,10 +9749,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="ColorSpaceConversionOp" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="ICCProfileUsage" use="optional" />
 				<xs:attribute name="ColorManagementSystem" type="string"
@@ -9773,9 +9766,9 @@
 	<xs:element name="ColorSpaceSubstitute">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PDLResourceAlias" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="SeparationNames" type="NMTOKENS"
 				use="optional" />
@@ -9789,9 +9782,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DigitalDeliveryProtocol" type="NMTOKEN"
 					use="optional" />
@@ -9865,10 +9858,10 @@
 		<xs:complexContent>
 			<xs:extension base="ResourceType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="Family" type="NMTOKEN" use="optional" />
 				<xs:attribute name="SpecificYield" type="double" use="optional" />
@@ -10017,9 +10010,9 @@
 	<xs:element name="PreflightConstraint">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ConstraintValue" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="AttemptFixupWarnings" type="boolean"
 				use="optional" />
@@ -10034,9 +10027,9 @@
 	<xs:element name="PreflightDetail">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Property" type="string" use="optional" />
 			<xs:attribute name="PageRefs" type="IntegerRangeList"
@@ -10049,10 +10042,10 @@
 	<xs:element name="PreflightInstance">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded"
 						ref="PreflightInstanceDetail" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Identifier" type="string" use="optional" />
 			<xs:attribute name="PageRefs" type="IntegerRangeList"
@@ -10064,9 +10057,9 @@
 	<xs:element name="PreflightInstanceDetail">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:choice>
+				
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Value" />
-				</xs:choice>
+				
 			</xs:sequence>
 			<xs:attribute name="Property" type="string" use="optional" />
 			<xs:attribute name="Status" type="EnumNodeStatus" use="optional" />
@@ -10144,9 +10137,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="BandWidth" type="integer" use="optional" />
 				<xs:attribute name="BandHeight" type="integer" use="optional" />
@@ -10190,9 +10183,9 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ScreenSelector" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="IgnoreSourceFile" type="boolean"
 					use="optional" />
@@ -10207,10 +10200,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution" />
 						<xs:element minOccurs="0" maxOccurs="unbounded" ref="TrapRegion" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="DefaultTrapping" type="boolean"
 					use="optional" />
@@ -10228,10 +10221,10 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:sequence>
-					<xs:choice>
+					
 						<xs:element minOccurs="0" maxOccurs="unbounded"
 							ref="ColorantZoneDetails" />
-					</xs:choice>
+					
 				</xs:sequence>
 				<xs:attribute name="HalftoneName" type="string" use="optional" />
 				<xs:attribute name="TrapWidthY" type="double" use="optional" />

@@ -25,10 +25,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Fold" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}SignatureCell" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Fold" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}SignatureCell" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="BindingEdge" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="BindingOrientation" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />

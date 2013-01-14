@@ -23,19 +23,17 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}PlacedObject">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ScavengerArea" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DensityMeasuringField" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}CIELABMeasuringField" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ColorControlStrip" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}JobField" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}RegisterMark" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DynamicField" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}CutMark" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DeviceMark" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}RefAnchor" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MarkActivation" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ScavengerArea" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DensityMeasuringField" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}CIELABMeasuringField" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ColorControlStrip" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}JobField" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}RegisterMark" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DynamicField" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}CutMark" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}DeviceMark" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}RefAnchor" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MarkActivation" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="CompensationCTMTemplate" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="TrimClipPath" type="{http://www.CIP4.org/JDFSchema_2_0}PDFPath" />

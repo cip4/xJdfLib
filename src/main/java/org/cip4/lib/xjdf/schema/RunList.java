@@ -25,15 +25,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MetadataMap" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InsertSheet" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Disposition" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ByteMap" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}FileSpec" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InterpretedPDLData" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Dependencies" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MetadataMap" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InsertSheet" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Disposition" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ByteMap" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}FileSpec" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InterpretedPDLData" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Dependencies" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="Directory" type="{http://www.CIP4.org/JDFSchema_2_0}URL" />
  *       &lt;attribute name="Sets" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerRangeList" />

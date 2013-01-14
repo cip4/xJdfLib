@@ -29,12 +29,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}IntentType" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}IntentType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="Locked" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
  *       &lt;attribute name="PipeURL" type="{http://www.CIP4.org/JDFSchema_2_0}URL" />
@@ -152,25 +150,25 @@ public class Intent
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link LaminatingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link IntentResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ColorIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link LayoutIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link IntentType }{@code >}
      * {@link JAXBElement }{@code <}{@link EmbossingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link LayoutIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ColorIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link SizeIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link FoldingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link IntentResource }{@code >}
      * {@link JAXBElement }{@code <}{@link MediaIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProductionIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link InsertingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link IntentType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProductionIntent }{@code >}
      * 
      * 
      */

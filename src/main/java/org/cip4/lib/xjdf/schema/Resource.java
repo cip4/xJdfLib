@@ -29,14 +29,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;choice>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Location" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Contact" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ResourceType" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
- *           &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;/choice>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Location" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Contact" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ResourceType" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AmountProduced" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
  *       &lt;attribute name="Locked" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
@@ -259,23 +257,23 @@ public class Resource
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
-     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
-     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     * {@link JAXBElement }{@code <}{@link Device }{@code >}
-     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
-     * {@link JAXBElement }{@code <}{@link Component }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
-     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
      * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link Media }{@code >}
-     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
+     * {@link JAXBElement }{@code <}{@link Device }{@code >}
+     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
      * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
+     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
      * {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     * {@link JAXBElement }{@code <}{@link Component }{@code >}
+     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     * {@link JAXBElement }{@code <}{@link Media }{@code >}
+     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
      * 
      * 
      */

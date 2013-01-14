@@ -128,6 +128,7 @@ public class XJdfParserTest {
 		xJdfBuilder.addGeneralID(generalId);
 
 		XJDF xJdf = xJdfBuilder.build();
+		xJdf.setID(null);
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 

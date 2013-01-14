@@ -87,10 +87,9 @@ public class XJdfValidatorTest {
 	public void testIntegrationInvalide() throws Exception {
 
 		// arrange
-		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-		xJdfBuilder.addGeneralID(generalId);
-
-		xJdfBuilder.build().setID("MyId");
+		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
+		xJdfBuilder.build().setID(null);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -163,7 +162,7 @@ public class XJdfValidatorTest {
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
 		xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().setID(null);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -276,7 +275,7 @@ public class XJdfValidatorTest {
 
 		// parse
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser.newInstance().parseXJdf(xJdf, bos, true);
+		XJdfParser.newInstance().parseXJdf(xJdf, bos);
 		bos.close();
 
 		//

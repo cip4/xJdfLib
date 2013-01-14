@@ -76,7 +76,6 @@ public abstract class AbstractBuilderTest<T> {
 
 		// return bytes
 		return marshall(xjdfBuilder.build());
-
 	}
 
 	/**
