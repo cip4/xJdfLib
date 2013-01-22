@@ -64,8 +64,8 @@ public class XJdfValidatorTest {
 	public void setUp() throws Exception {
 
 		// init instance variables
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
-		xJdfBuilder = XJdfBuilder.newInstance();
+		xJdfNodeFactory = new XJdfNodeFactory();
+		xJdfBuilder = new XJdfBuilder();
 	}
 
 	/**
@@ -87,14 +87,14 @@ public class XJdfValidatorTest {
 	public void testIntegrationInvalide() throws Exception {
 
 		// arrange
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 		xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
 		xJdfBuilder.build().setID(null);
 
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		xJdfValidator = new XJdfValidator(xJdfFileStream);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -119,7 +119,7 @@ public class XJdfValidatorTest {
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		xJdfValidator = new XJdfValidator(xJdfFileStream);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -144,7 +144,7 @@ public class XJdfValidatorTest {
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		xJdfValidator = new XJdfValidator(xJdfFileStream);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -167,7 +167,7 @@ public class XJdfValidatorTest {
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		xJdfValidator = new XJdfValidator(xJdfFileStream);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -195,7 +195,7 @@ public class XJdfValidatorTest {
 		// act
 		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = XJdfValidator.newInstance(xJdfFileStream);
+		xJdfValidator = new XJdfValidator(xJdfFileStream);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -212,7 +212,7 @@ public class XJdfValidatorTest {
 		InputStream is = XJdfValidatorTest.class.getResourceAsStream(RES_TEST_XJDF);
 
 		// act
-		xJdfValidator = XJdfValidator.newInstance(is);
+		xJdfValidator = new XJdfValidator(is);
 		boolean isValid = xJdfValidator.isValid();
 
 		// assert
@@ -231,7 +231,7 @@ public class XJdfValidatorTest {
 		XJDF xJdf = xJdfBuilder.build();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser xJdfParser = XJdfParser.newInstance();
+		XJdfParser xJdfParser = new XJdfParser();
 		xJdfParser.parseXJdf(xJdf, bos, true);
 
 		return new ByteArrayInputStream(bos.toByteArray());
@@ -241,10 +241,10 @@ public class XJdfValidatorTest {
 	@Test
 	public void createTestXJDFDocument() throws Exception {
 
-		XJdfNodeFactory nf = XJdfNodeFactory.newInstance();
+		XJdfNodeFactory nf = new XJdfNodeFactory();
 
 		// create product
-		ProductBuilder productBuilder = ProductBuilder.newInstance(1000, "Brochure", "4 Page Brochure");
+		ProductBuilder productBuilder = new ProductBuilder(1000, "Brochure", "4 Page Brochure");
 		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", new Shape(595.27559055, 822.04724409)));
 		productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
 		productBuilder.addIntent(nf.createProductionIntent("Lithography"));
@@ -252,7 +252,7 @@ public class XJdfValidatorTest {
 		// TODO productBuilder.addIntent(nf.createcol)
 
 		// create contact
-		ContactBuilder contactBuilder = ContactBuilder.newInstance();
+		ContactBuilder contactBuilder = new ContactBuilder();
 		contactBuilder.addPerson("Mustermann", "Max", "Dr.");
 		contactBuilder.addCompany("Firma Muster GmbH");
 		contactBuilder.addAddress("Musterstraße 12", "12345", "Stadt", "Deutschland", "de");
@@ -260,7 +260,7 @@ public class XJdfValidatorTest {
 		contactBuilder.addComChannel("Phone", "tel:+49.173.1234.567");
 
 		// create XJDF
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance("Web2Print", "Job258596");
+		XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
 		xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
 		xJdfBuilder.addProduct(productBuilder.build());
 		xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
@@ -275,7 +275,7 @@ public class XJdfValidatorTest {
 
 		// parse
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser.newInstance().parseXJdf(xJdf, bos);
+		new XJdfParser().parseXJdf(xJdf, bos);
 		bos.close();
 
 		//

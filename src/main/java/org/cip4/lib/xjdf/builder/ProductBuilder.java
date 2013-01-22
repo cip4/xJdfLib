@@ -36,74 +36,50 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	/**
 	 * Default constructor.
 	 */
-	private ProductBuilder() {
+	public ProductBuilder() {
 
-		// initialize objects
-		super(XJdfNodeFactory.newInstance().createProduct());
-
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
+		this(null, null, null, null);
 	}
 
 	/**
-	 * Create and return a new instance of ProductBuilder.
-	 * @return New ProductBuilder instance.
-	 */
-	public static ProductBuilder newInstance() {
-
-		// return new instance
-		return new ProductBuilder();
-	}
-
-	/**
-	 * Create and return a new instance of ProductBuilder which already contains attribute Amount.
+	 * Custom Constructor. Creates a new instance of ProductBuilder which already contains attribute Amount.
 	 * @param amount Value of Amount attribute
-	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(Integer amount) {
+	public ProductBuilder(Integer amount) {
 
-		// return new instance
-		return newInstance(amount, null, null, null);
+		this(amount, null, null, null);
 	}
 
 	/**
-	 * Create and return a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
+	 * Custom Constructor. Creates a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
 	 * @param amount Value of Amount attribute
-	 * @param id Value of ID attribute
 	 * @param productType Value of ProductType attribute
 	 * @param productTypeDetails Value of ProductTypeDetails attribute
-	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(Integer amount, String productType, String productTypeDetails) {
+	public ProductBuilder(Integer amount, String productType, String productTypeDetails) {
 
-		// return new instance
-		return newInstance(amount, null, null, null);
+		this(amount, productType, productTypeDetails, null);
 	}
 
 	/**
-	 * Create and return a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
+	 * Custom Constructor. Creates a new instance of ProductBuilder which already contains attributes Amount, ID, ProductType and ProductTypeDetails.
 	 * @param amount Value of Amount attribute
 	 * @param id Value of ID attribute
 	 * @param productType Value of ProductType attribute
 	 * @param productTypeDetails Value of ProductTypeDetails attribute
 	 * @param descriptiveName String value for DescriptiveName attribute.
-	 * @return New instance of ProductBuilder which already contains values for defined attributes.
 	 */
-	public static ProductBuilder newInstance(Integer amount, String productType, String productTypeDetails, String descriptiveName) {
+	public ProductBuilder(Integer amount, String productType, String productTypeDetails, String descriptiveName) {
 
-		// create new instance
-		ProductBuilder builder = newInstance();
+		// initialize objects
+		super(new XJdfNodeFactory().createProduct());
+		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// set attributes
-		builder.getProduct().setAmount(amount);
-		builder.getProduct().setProductType(productType);
-		builder.getProduct().setProductTypeDetails(productTypeDetails);
-		builder.getProduct().setDescriptiveName(descriptiveName);
-
-		// default values
-		// builder.getProduct().setID(IDGeneratorUtil.generateID(ID_PREFIX));
-
-		// return instance
-		return builder;
+		getProduct().setAmount(amount);
+		getProduct().setProductType(productType);
+		getProduct().setProductTypeDetails(productTypeDetails);
+		getProduct().setDescriptiveName(descriptiveName);
 	}
 
 	/**

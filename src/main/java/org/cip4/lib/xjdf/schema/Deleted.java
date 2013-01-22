@@ -59,7 +59,7 @@ public class Deleted
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")

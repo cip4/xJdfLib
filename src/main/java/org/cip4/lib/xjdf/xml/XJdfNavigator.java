@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.xml;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
@@ -93,22 +92,11 @@ public class XJdfNavigator extends AbstractXPathNavigator {
 	public static final String COLOR_NUM_COLORS = "/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors";
 
 	/**
-	 * Custom private default constructor. Accepting a XJdf InputStream for initializing.
+	 * Custom constructor. Accepting a XJdf InputStream for initializing.
 	 * @param xJdfStream The XJDF Input Stream.
 	 */
-	private XJdfNavigator(InputStream xJdfStream) throws Exception {
+	public XJdfNavigator(InputStream xJdfStream) throws Exception {
 		super(xJdfStream);
 	}
 
-	/**
-	 * Factory method for creating a new XJdfNavigator object.
-	 * @param xmlStream XML document as input stream.
-	 * @return Initialized XPathNavigator instance.
-	 * @throws IOException Is being thrown in case an exception occurs.
-	 */
-	public static XJdfNavigator newInstance(InputStream xmlStream) throws Exception {
-
-		// create and return new instance
-		return new XJdfNavigator(xmlStream);
-	}
 }

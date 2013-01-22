@@ -14,7 +14,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Method;
+import java.lang.reflect.Constructor;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -80,8 +80,8 @@ public abstract class AbstractXmlParser<T> {
 
 			InputStream is = new ByteArrayInputStream(bos.toByteArray());
 
-			Method method = abstractValidatorClass.getMethod("newInstance", InputStream.class);
-			AbstractXmlValidator validator = (AbstractXmlValidator) method.invoke(abstractValidatorClass, is);
+			Constructor ctor = abstractValidatorClass.getDeclaredConstructor(InputStream.class);
+			AbstractXmlValidator validator = (AbstractXmlValidator) ctor.newInstance(is);
 
 			if (!validator.isValid()) {
 				String err = validator.getMessagesText();

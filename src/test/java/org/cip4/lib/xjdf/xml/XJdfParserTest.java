@@ -62,7 +62,7 @@ public class XJdfParserTest {
 	@Before
 	public void setUp() throws Exception {
 		// new instance
-		xJdfParser = XJdfParser.newInstance();
+		xJdfParser = new XJdfParser();
 	}
 
 	/**
@@ -84,8 +84,8 @@ public class XJdfParserTest {
 		// arrange
 		final String VALUE = UUID.randomUUID().toString();
 
-		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
 		xJdfBuilder.addGeneralID(generalId);
@@ -121,8 +121,8 @@ public class XJdfParserTest {
 		// arrange
 		final String VALUE = UUID.randomUUID().toString();
 
-		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
 		xJdfBuilder.addGeneralID(generalId);
@@ -148,8 +148,8 @@ public class XJdfParserTest {
 		// arrange
 		final String VALUE = UUID.randomUUID().toString();
 
-		XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
 		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
 		xJdfBuilder.addGeneralID(generalId);

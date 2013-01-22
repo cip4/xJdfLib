@@ -42,7 +42,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		xJdfBuilder = XJdfBuilder.newInstance();
+		xJdfBuilder = new XJdfBuilder();
 
 		JAXBContextFactory.init();
 	}
@@ -67,7 +67,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		final String ID_VALUE = UUID.randomUUID().toString();
 
 		// act
-		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID(ID_USAGE, ID_VALUE);
+		GeneralID generalId = new XJdfNodeFactory().createGeneralID(ID_USAGE, ID_VALUE);
 		xJdfBuilder.addGeneralID(generalId);
 
 		// assert
@@ -97,8 +97,8 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		final String ID_VALUE_3 = "";
 
 		// act
-		xJdfBuilder.addGeneralID(XJdfNodeFactory.newInstance().createGeneralID(ID_USAGE_1, ID_VALUE_1));
-		xJdfBuilder.addGeneralID(XJdfNodeFactory.newInstance().createGeneralID(ID_USAGE_2, ID_VALUE_2));
+		xJdfBuilder.addGeneralID(new XJdfNodeFactory().createGeneralID(ID_USAGE_1, ID_VALUE_1));
+		xJdfBuilder.addGeneralID(new XJdfNodeFactory().createGeneralID(ID_USAGE_2, ID_VALUE_2));
 
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
@@ -127,7 +127,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 	@Test
 	public void testAddProductSimple() throws Exception {
 		// arrange
-		Product product = XJdfNodeFactory.newInstance().createProduct();
+		Product product = new XJdfNodeFactory().createProduct();
 		product.setAmount(1000);
 
 		// act
@@ -148,16 +148,16 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// arrange
 		final String URL = "http://www.example.org/w2p/Cover.pdf";
 
-		FileSpec fileSpec = XJdfNodeFactory.newInstance().createFileSpec();
+		FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
 		fileSpec.setURL(URL);
 
-		RunList runList = XJdfNodeFactory.newInstance().createRunList();
+		RunList runList = new XJdfNodeFactory().createRunList();
 		runList.setFileSpec(fileSpec);
 
-		Part partCover = XJdfNodeFactory.newInstance().createPart();
+		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
 
-		Part partContent = XJdfNodeFactory.newInstance().createPart();
+		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
 
 		// act
@@ -186,13 +186,13 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		final String urlContent = "http://www.example.org/w2p/Content.pdf";
 		final String urlCover = "http://www.example.org/w2p/Cover.pdf";
 
-		RunList runListCover = XJdfNodeFactory.newInstance().createRunList(urlCover);
-		RunList runListContent = XJdfNodeFactory.newInstance().createRunList(urlContent);
+		RunList runListCover = new XJdfNodeFactory().createRunList(urlCover);
+		RunList runListContent = new XJdfNodeFactory().createRunList(urlContent);
 
-		Part partCover = XJdfNodeFactory.newInstance().createPart();
+		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
 
-		Part partContent = XJdfNodeFactory.newInstance().createPart();
+		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
 
 		NodeInfo nodeInfo = new NodeInfo();

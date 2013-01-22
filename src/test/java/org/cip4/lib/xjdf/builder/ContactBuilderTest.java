@@ -41,7 +41,7 @@ public class ContactBuilderTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		contactBuilder = ContactBuilder.newInstance();
+		contactBuilder = new ContactBuilder();
 	}
 
 	/**

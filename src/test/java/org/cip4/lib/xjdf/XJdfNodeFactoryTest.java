@@ -58,7 +58,7 @@ public class XJdfNodeFactoryTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
+		xJdfNodeFactory = new XJdfNodeFactory();
 	}
 
 	/**

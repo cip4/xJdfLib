@@ -40,7 +40,7 @@ public class XJdfNavigatorTest {
 	public void setUp() throws Exception {
 
 		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
-		xJdfNavigator = XJdfNavigator.newInstance(is);
+		xJdfNavigator = new XJdfNavigator(is);
 	}
 
 	/**

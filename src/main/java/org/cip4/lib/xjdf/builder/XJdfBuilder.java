@@ -41,88 +41,70 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	private final Map<String, ParameterSet> mapParameterSets;
 
 	/**
-	 * Private default constructor. Class cannot being instantiated from external.
+	 * Default constructor.
 	 */
-	private XJdfBuilder() {
+	public XJdfBuilder() {
 
-		// initialize objects
-		super(XJdfNodeFactory.newInstance().createXJDF());
-		mapParameterSets = new HashMap<String, ParameterSet>(20);
-
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
+		this(null, null, null, null);
 	}
 
 	/**
-	 * Create and return a new instance of XJdfBuilder.
-	 * @return New XJdfBuilder instance.
-	 */
-	public static XJdfBuilder newInstance() {
-
-		// return new instance
-		return newInstance(null, null, null, null);
-	}
-
-	/**
-	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category (='Web2Print') and JobID.
+	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains values for attributes Category (='Web2Print') and JobID.
 	 * @param jobID Value of attribute JobID.
-	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
 	 */
-	public static XJdfBuilder newInstance(String jobID) {
+	public XJdfBuilder(String jobID) {
 
 		// return new instance
-		return newInstance(jobID, "Web2Print", null, null);
+		this(jobID, "Web2Print", null, null);
 	}
 
 	/**
-	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID.
+	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains values for attributes Category, JobID.
 	 * @param jobID Value of attribute JobID.
 	 * @param category Value of attribute Category.
-	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
 	 */
-	public static XJdfBuilder newInstance(String jobID, String category) {
+	public XJdfBuilder(String jobID, String category) {
 
 		// return new instance
-		return newInstance(jobID, category, null, null);
+		this(jobID, category, null, null);
 	}
 
 	/**
-	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName.
+	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName.
 	 * @param jobID Value of attribute JobID.
 	 * @param category Value of attribute Category.
 	 * @param descriptiveName Value of attribute DescriptiveName.
-	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
 	 */
-	public static XJdfBuilder newInstance(String jobID, String category, String descriptiveName) {
+	public XJdfBuilder(String jobID, String category, String descriptiveName) {
 
 		// return new instance
-		return newInstance(jobID, category, descriptiveName, null);
+		this(jobID, category, descriptiveName, null);
 	}
 
 	/**
-	 * Create and return a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName and RelatedJobID.
+	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains values for attributes Category, JobID, DescriptiveName and RelatedJobID.
 	 * @param jobID Value of attribute JobID.
 	 * @param category Value of attribute Category.
 	 * @param descriptiveName Value of attribute DescriptiveName.
 	 * @param relatedJobID Value of attribute RelatedJobID.
 	 * @return New instance of XJDFBuilder which already contains values for defined attributes.
 	 */
-	public static XJdfBuilder newInstance(String jobID, String category, String descriptiveName, String relatedJobID) {
+	public XJdfBuilder(String jobID, String category, String descriptiveName, String relatedJobID) {
 
-		// create instance
-		XJdfBuilder xJdfBuilder = new XJdfBuilder();
+		// initialize objects
+		super(new XJdfNodeFactory().createXJDF());
+		mapParameterSets = new HashMap<String, ParameterSet>(20);
+		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// preconfiguration
-		xJdfBuilder.getXJdf().setJobID(jobID);
-		xJdfBuilder.getXJdf().setCategory(category);
-		xJdfBuilder.getXJdf().setDescriptiveName(descriptiveName);
-		xJdfBuilder.getXJdf().setRelatedJobID(relatedJobID);
+		getXJdf().setJobID(jobID);
+		getXJdf().setCategory(category);
+		getXJdf().setDescriptiveName(descriptiveName);
+		getXJdf().setRelatedJobID(relatedJobID);
 
 		// default values
-		xJdfBuilder.getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-		xJdfBuilder.getXJdf().setID(IDGeneratorUtil.generateID("XJDF"));
-
-		// return instance
-		return xJdfBuilder;
+		getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		getXJdf().setID(IDGeneratorUtil.generateID("XJDF"));
 	}
 
 	/**

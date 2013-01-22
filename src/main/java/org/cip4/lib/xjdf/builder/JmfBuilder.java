@@ -26,46 +26,39 @@ public class JmfBuilder extends AbstractNodeBuilder<JMF> {
 	private final XJdfNodeFactory xJdfNodeFactory;
 
 	/**
-	 * Private default constructor. Class cannot being instantiated from external.
+	 * Default constructor.
 	 */
-	private JmfBuilder() {
+	public JmfBuilder() {
+		this(null);
+	}
+
+	/**
+	 * Custom Constructor. Creates a new instance of JmfBuilder which already contains values some attributes.
+	 * @param senderID ID of Sender.
+	 */
+	public JmfBuilder(String senderID) {
+
+		// chain
+		this(senderID, null);
+	}
+
+	/**
+	 * Custom Constructor. Creates a new instance of JmfBuilder which already contains values some attributes.
+	 * @param senderID ID of Sender.
+	 * @param deviceID ID of Device.
+	 */
+	public JmfBuilder(String senderID, String deviceID) {
 
 		// initialize objects
-		super(XJdfNodeFactory.newInstance().createJMF());
-
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
-	}
-
-	/**
-	 * Create and return a new instance of JmfBuilder which already contains values some attributes.
-	 * @param senderID ID of Sender.
-	 * @return New instance of JmfBuilder which already contains values for defined attributes.
-	 */
-	public static JmfBuilder newInstance(String senderID) {
-
-		// return new instance
-		return newInstance(senderID, null);
-	}
-
-	/**
-	 * Create and return a new instance of JmfBuilder which already contains values some attributes.
-	 * @param senderID ID of Sender.
-	 * @return New instance of JmfBuilder which already contains values for defined attributes.
-	 */
-	public static JmfBuilder newInstance(String senderID, String deviceID) {
-
-		// new instance
-		JmfBuilder jmfBuilder = new JmfBuilder();
+		super(new XJdfNodeFactory().createJMF());
+		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// preconfiguration
-		jmfBuilder.getJMF().setTimeStamp(new DateTime());
-		jmfBuilder.getJMF().setMaxVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-		jmfBuilder.getJMF().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-		jmfBuilder.getJMF().setDeviceID(deviceID);
-		jmfBuilder.getJMF().setSenderID(senderID);
-
-		// return instance
-		return jmfBuilder;
+		getJMF().setTimeStamp(new DateTime());
+		getJMF().setMaxVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		getJMF().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+		getJMF().setDeviceID(deviceID);
+		getJMF().setSenderID(senderID);
 	}
 
 	/**

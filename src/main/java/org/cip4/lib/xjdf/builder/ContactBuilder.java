@@ -29,22 +29,11 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	/**
 	 * Default constructor.
 	 */
-	private ContactBuilder() {
+	public ContactBuilder() {
 
 		// initialize objects
-		super(XJdfNodeFactory.newInstance().createContact());
-
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
-	}
-
-	/**
-	 * Create and return a new instance of ContactBuilder.
-	 * @return New ProductBuilder instance.
-	 */
-	public static ContactBuilder newInstance() {
-
-		// return new instance
-		return new ContactBuilder();
+		super(new XJdfNodeFactory().createContact());
+		xJdfNodeFactory = new XJdfNodeFactory();
 	}
 
 	/**
