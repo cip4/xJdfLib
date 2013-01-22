@@ -27,7 +27,10 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 
 	private static final String PATTERN_UTC = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-	private static final String PATTERN_GLOBAL = "yyyy-MM-dd'T'HH:mm:ssXXX";
+	private static final String PATTERN_GLOBAL = "yyyy-MM-dd'T'HH:mm:ssZ";
+
+	// not supported in 1.6
+	// private static final String PATTERN_GLOBAL = "yyyy-MM-dd'T'HH:mm:ssXXX";
 
 	private final Calendar calendar;
 
@@ -82,14 +85,38 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	 */
 	public DateTime(String expression) throws ParseException {
 
+		// // timezone
+		// int offset = 0;
+		//
+		// int posPlus = expression.lastIndexOf("+");
+		// int posMinus = expression.lastIndexOf("-");
+		//
+		// if (posPlus > -1) {
+		// offset = Integer.valueOf(expression.substring(posPlus + 1, posPlus + 3));
+		//
+		// } else if (posMinus > -1) {
+		// offset = Integer.valueOf(expression.substring(posMinus, posMinus + 3));
+		//
+		// }
+		//
+		// String[] ids = TimeZone.getAvailableIDs(offset * 3600 * 1000);
+		// this.calendar.setTimeZone(TimeZone.getTimeZone(ids[0]));
+
+		// prepare expression
+		if (expression.endsWith(":00")) {
+			expression = expression.substring(0, expression.length() - 3) + "00";
+		} else if (expression.endsWith("Z")) {
+			expression = expression.replaceFirst("Z", "+0000");
+		}
+
 		// parse
 		DateFormat dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
 		dateFormat.parse(expression);
 		this.calendar = dateFormat.getCalendar();
 
+		// only java 1.7
 		String[] ids = TimeZone.getAvailableIDs(this.calendar.get(Calendar.ZONE_OFFSET));
 		this.calendar.setTimeZone(TimeZone.getTimeZone(ids[0]));
-
 	}
 
 	/**
@@ -106,27 +133,32 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 	@Override
 	public String marshal(DateTime dateTime) {
 
+		String result;
+
 		if (dateTime == null)
 			return null;
 
-		DateFormat dateFormat;
+		TimeZone timeZone = dateTime.getCalendar().getTimeZone();
 
 		// check time zone
-		if (dateTime.getCalendar().getTimeZone().getRawOffset() == 0) {
+		if (timeZone.getRawOffset() == 0) {
 
 			// UTC
-			dateFormat = new SimpleDateFormat(PATTERN_UTC);
+			DateFormat dateFormat = new SimpleDateFormat(PATTERN_UTC);
+			dateFormat.setTimeZone(timeZone);
+			result = dateFormat.format(dateTime.getCalendar().getTime());
 
 		} else {
 
 			// different TimeZone
-			dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
+			DateFormat dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
+			dateFormat.setTimeZone(timeZone);
+			result = dateFormat.format(dateTime.getCalendar().getTime());
+
+			// extend result by a ":"
+			result = result.substring(0, result.length() - 2) + ":" + result.substring(result.length() - 2);
 
 		}
-
-		// parse
-		dateFormat.setTimeZone(dateTime.getCalendar().getTimeZone());
-		String result = dateFormat.format(dateTime.getCalendar().getTime());
 
 		// return result
 		return result;

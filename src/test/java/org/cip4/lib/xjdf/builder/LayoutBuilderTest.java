@@ -40,8 +40,8 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		xJdfNodeFactory = xJdfNodeFactory.newInstance();
-		layoutBuilder = LayoutBuilder.newInstance();
+		xJdfNodeFactory = new XJdfNodeFactory();
+		layoutBuilder = new LayoutBuilder();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 		Rectangle surfaceContentsBox = new Rectangle(1, 2, 3, 4);
 
 		// act
-		layoutBuilder = LayoutBuilder.newInstance(surfaceContentsBox);
+		layoutBuilder = new LayoutBuilder(surfaceContentsBox);
 
 		// assert
 		byte[] bytes = marsahlResultParameter(layoutBuilder);
@@ -111,7 +111,7 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_2_CTM), new Rectangle(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
 
 		// act
-		layoutBuilder = LayoutBuilder.newInstance(new Rectangle(surfaceContentsBox));
+		layoutBuilder = new LayoutBuilder(new Rectangle(surfaceContentsBox));
 
 		layoutBuilder.addMarkObject(markObject_1);
 		layoutBuilder.addPlacedObject(contentObject_1);
@@ -176,7 +176,7 @@ public class LayoutBuilderTest extends AbstractBuilderTest<Layout> {
 		MarkObject markObject_2 = xJdfNodeFactory.createMarkObject(new Matrix(markObject_2_CTM), new Rectangle(markObject_2_ClipBox), Integer.valueOf(markObject_2_Ord));
 
 		// act
-		layoutBuilder = LayoutBuilder.newInstance(new Rectangle(surfaceContentsBox));
+		layoutBuilder = new LayoutBuilder(new Rectangle(surfaceContentsBox));
 
 		layoutBuilder.addPlacedObject(markObject_1);
 		layoutBuilder.addPlacedObject(contentObject_1);

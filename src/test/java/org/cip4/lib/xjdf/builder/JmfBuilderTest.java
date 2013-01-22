@@ -59,7 +59,7 @@ public class JmfBuilderTest extends AbstractBuilderTest<JMF> {
 		final String VERSION = "2.0";
 
 		// act
-		jmfBuilder = JmfBuilder.newInstance(SENDER_ID, DEVICE_ID);
+		jmfBuilder = new JmfBuilder(SENDER_ID, DEVICE_ID);
 
 		// arrange
 		byte[] bytes = marsahlResult(jmfBuilder);
@@ -85,7 +85,7 @@ public class JmfBuilderTest extends AbstractBuilderTest<JMF> {
 		final String SENDER_ID = "SenderID";
 
 		// act
-		jmfBuilder = JmfBuilder.newInstance(SENDER_ID);
+		jmfBuilder = new JmfBuilder(SENDER_ID);
 
 		// arrange
 		byte[] bytes = marsahlResult(jmfBuilder);

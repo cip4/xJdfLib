@@ -41,7 +41,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		productBuilder = ProductBuilder.newInstance();
+		productBuilder = new ProductBuilder();
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		final int AMOUNT = 5000;
 
 		// act
-		productBuilder = ProductBuilder.newInstance(AMOUNT);
+		productBuilder = new ProductBuilder(AMOUNT);
 
 		// arrange
 		byte[] bytes = marsahlResult(productBuilder);
@@ -79,12 +79,12 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 	public void testAddIntent() throws Exception {
 
 		// arrange
-		MediaIntent mediaIntent = XJdfNodeFactory.newInstance().createMediaIntent();
+		MediaIntent mediaIntent = new XJdfNodeFactory().createMediaIntent();
 		mediaIntent.setWeight(135d);
 
-		LayoutIntent layoutIntent = XJdfNodeFactory.newInstance().createLayoutIntent();
+		LayoutIntent layoutIntent = new XJdfNodeFactory().createLayoutIntent();
 		layoutIntent.setFinishedDimensions(new Shape(595.27559055d, 822.04724409d));
-		BindingIntent bindingIntent = XJdfNodeFactory.newInstance().createBindingIntent();
+		BindingIntent bindingIntent = new XJdfNodeFactory().createBindingIntent();
 		bindingIntent.setBindingType("SaddleStitch");
 
 		// act
@@ -114,18 +114,18 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 	public void testWithoutChildren() throws Exception {
 
 		// arrange
-		XJdfNodeFactory nf = XJdfNodeFactory.newInstance();
+		XJdfNodeFactory nf = new XJdfNodeFactory();
 
-		ProductBuilder dbRoot = productBuilder.newInstance(1000);
+		ProductBuilder dbRoot = new ProductBuilder(1000);
 		dbRoot.addIntent(nf.createColorIntent(new IntegerList(4, 5)));
 
 		// act
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 		xJdfBuilder.addProduct(dbRoot.build());
 
 		// assert
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser.newInstance().parseXJdf(xJdfBuilder.build(), bos);
+		new XJdfParser().parseXJdf(xJdfBuilder.build(), bos);
 		bos.close();
 
 		byte[] bytes = bos.toByteArray();
@@ -146,27 +146,27 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 	public void testMultipleChildren() throws Exception {
 
 		// arrange
-		XJdfNodeFactory nf = XJdfNodeFactory.newInstance();
+		XJdfNodeFactory nf = new XJdfNodeFactory();
 
-		ProductBuilder pbRoot = productBuilder.newInstance(1000);
+		ProductBuilder pbRoot = new ProductBuilder(1000);
 		pbRoot.addIntent(nf.createColorIntent(new IntegerList(4, 5)));
 
-		ProductBuilder pbChild_1 = productBuilder.newInstance();
+		ProductBuilder pbChild_1 = new ProductBuilder();
 		pbChild_1.addIntent(nf.createMediaIntent("IPG_135"));
 
-		ProductBuilder pbChild_2 = productBuilder.newInstance();
+		ProductBuilder pbChild_2 = new ProductBuilder();
 		pbChild_2.addIntent(nf.createMediaIntent("IPG_90"));
 
 		// act
 		pbRoot.addChildProduct(pbChild_1.build());
 		pbRoot.addChildProduct(pbChild_2.build());
 
-		XJdfBuilder xJdfBuilder = XJdfBuilder.newInstance();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 		xJdfBuilder.addProduct(pbRoot.build());
 
 		// assert
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser.newInstance().parseXJdf(xJdfBuilder.build(), bos);
+		new XJdfParser().parseXJdf(xJdfBuilder.build(), bos);
 		bos.close();
 
 		byte[] bytes = bos.toByteArray();

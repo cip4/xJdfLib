@@ -47,18 +47,10 @@ import org.cip4.lib.xjdf.type.XYPair;
 public class XJdfNodeFactory extends ObjectFactory {
 
 	/**
-	 * Private default constructor. Class cannot being instantiated from external.
+	 * Default constructor.
 	 */
-	private XJdfNodeFactory() {
+	public XJdfNodeFactory() {
 		// no action
-	}
-
-	/**
-	 * Get instance of XJdfNodeFactory.
-	 * @return
-	 */
-	public static XJdfNodeFactory newInstance() {
-		return new XJdfNodeFactory();
 	}
 
 	/**
@@ -70,7 +62,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	public GeneralID createGeneralID(String idUsage, String idValue) {
 
 		// create new GeneralID object
-		GeneralID generalId = XJdfNodeFactory.newInstance().createGeneralID();
+		GeneralID generalId = createGeneralID();
 		generalId.setIDUsage(idUsage);
 		generalId.setIDValue(idValue);
 

@@ -11,6 +11,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -25,6 +26,9 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
@@ -44,27 +48,35 @@ public abstract class AbstractXmlValidator<T> {
 
 	private final byte[] xsdFile;
 
+	private final String xsdResPath;
+
 	private final InputStream fileStream;
 
 	private Boolean documentIsValid;
 
 	/**
 	 * Custom constructor. Accepting a XML Schema file as byte array.
+	 * @throws IOException
 	 */
-	protected AbstractXmlValidator(byte[] xsdFile, InputStream fileStream) {
+	public AbstractXmlValidator(String xsdResPath, InputStream fileStream) throws IOException {
+
+		// load xsd file
+		InputStream is = XJdfValidator.class.getResourceAsStream(xsdResPath);
+
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		IOUtils.copy(is, bos);
+		bos.close();
+
+		is.close();
 
 		// initialize instance variables
-		messages = new ArrayList<String>();
-		this.xsdFile = xsdFile;
+		this.messages = new ArrayList<String>();
+		this.xsdFile = bos.toByteArray();
 		this.fileStream = fileStream;
-		documentIsValid = null;
-	}
+		this.documentIsValid = null;
+		this.xsdResPath = xsdResPath;
 
-	/**
-	 * Return the XSD Schema Path.
-	 * @return XSD Schema Path as String.
-	 */
-	protected abstract String getXsdPath();
+	}
 
 	/**
 	 * Getter for messages attribute.
@@ -246,7 +258,7 @@ public abstract class AbstractXmlValidator<T> {
 		@Override
 		public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 			LSInput lsInput = domImplementationLS.createLSInput();
-			InputStream is = getClass().getResourceAsStream(getXsdPath() + systemId);
+			InputStream is = getClass().getResourceAsStream(FilenameUtils.getFullPath(xsdResPath) + systemId);
 			lsInput.setByteStream(is);
 			lsInput.setSystemId(systemId);
 			return lsInput;

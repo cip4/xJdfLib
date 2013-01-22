@@ -33,39 +33,23 @@ public class LayoutBuilder extends AbstractNodeBuilder<Layout> {
 	/**
 	 * Default constructor.
 	 */
-	private LayoutBuilder() {
-
-		// initialize objects
-		super(XJdfNodeFactory.newInstance().createLayout());
-
-		xJdfNodeFactory = XJdfNodeFactory.newInstance();
+	public LayoutBuilder() {
+		this(null);
 	}
 
 	/**
-	 * Create and return a new instance of LayoutBuilder.
-	 * @return New LayoutBuilder instance.
-	 */
-	public static LayoutBuilder newInstance() {
-
-		// return new instance
-		return new LayoutBuilder();
-	}
-
-	/**
-	 * Create and return a new instance of LayoutBuilder, which already contains preconfigured values.
+	 * Custom Construcotr. Creates an new instance of LayoutBuilder, which already contains preconfigured values.
 	 * @param surfaceContentsBox Value of SurfaceContentsBox Attribute.
 	 * @return New LayoutBuilder instance.
 	 */
-	public static LayoutBuilder newInstance(Rectangle surfaceContentsBox) {
+	public LayoutBuilder(Rectangle surfaceContentsBox) {
 
-		// new instance
-		LayoutBuilder builder = newInstance();
+		// initialize objects
+		super(new XJdfNodeFactory().createLayout());
+		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// set attributes
-		builder.getLayout().setSurfaceContentsBox(surfaceContentsBox);
-
-		// return instance
-		return builder;
+		getLayout().setSurfaceContentsBox(surfaceContentsBox);
 	}
 
 	/**

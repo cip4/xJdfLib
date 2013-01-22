@@ -28,23 +28,13 @@ import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 public class XJdfParser extends AbstractXmlParser<XJDF> {
 
 	/**
-	 * Private default constructor.
+	 * Default constructor.
 	 * @throws JAXBException Thrown in case a JAXBException occurs.
 	 */
-	private XJdfParser() throws JAXBException {
+	public XJdfParser() throws JAXBException {
 
 		// call super class
 		super(JAXBContextFactory.getInstance());
-	}
-
-	/**
-	 * Factory method for getting a new XJdfParser instance.
-	 * @return New XJdfParser instance.
-	 */
-	public static XJdfParser newInstance() throws JAXBException {
-
-		// return new instance
-		return new XJdfParser();
 	}
 
 	/**

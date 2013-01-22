@@ -126,6 +126,48 @@ public class DateTimeTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
+	 */
+	@Test
+	public void testMarshalDateTimeHawaii() throws Exception {
+
+		// arrange
+		String expected = "2012-03-04T06:20:40-10:00";
+
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("US/Hawaii"));
+		calendar.set(2012, Calendar.MARCH, 4, 6, 20, 40);
+
+		// act
+		DateTime r = new DateTime(calendar);
+		String actual = new DateTime().marshal(r);
+
+		// assert
+		System.out.println("Result TimeZone 'US/Pacific': " + actual);
+		Assert.assertEquals("Date format is wrong.", expected, actual);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
+	 */
+	@Test
+	public void testMarshalDateTimeVladivostok() throws Exception {
+
+		// arrange
+		String expected = "2012-03-04T06:20:40+10:00";
+
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Vladivostok"));
+		calendar.set(2012, Calendar.MARCH, 4, 6, 20, 40);
+
+		// act
+		DateTime r = new DateTime(calendar);
+		String actual = new DateTime().marshal(r);
+
+		// assert
+		System.out.println("Result TimeZone 'US/Pacific': " + actual);
+		Assert.assertEquals("Date format is wrong.", expected, actual);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#unmarshal(java.lang.String)}.
 	 */
 	@Test
@@ -192,6 +234,29 @@ public class DateTimeTest {
 		Assert.assertEquals("Minutes is wrong.", 30, cal.get(Calendar.MINUTE));
 		Assert.assertEquals("Secondes is wrong.", 40, cal.get(Calendar.SECOND));
 		Assert.assertEquals("TimeZone is wrong.", -28800000, cal.get(Calendar.ZONE_OFFSET));
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.type.DateTime#marshal(org.cip4.lib.xjdf.type.DateTime)}.
+	 */
+	@Test
+	public void testUnmarshalStringHawaii() throws Exception {
+
+		// arrange
+		String strDate = "2012-03-04T06:20:40-10:00";
+
+		// act
+		DateTime r = new DateTime().unmarshal(strDate);
+		Calendar cal = r.getCalendar();
+
+		// assert
+		Assert.assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
+		Assert.assertEquals("Month is wrong.", Calendar.MARCH, cal.get(Calendar.MONTH));
+		Assert.assertEquals("Day is wrong.", 4, cal.get(Calendar.DAY_OF_MONTH));
+		Assert.assertEquals("Hour is wrong.", 6, cal.get(Calendar.HOUR_OF_DAY));
+		Assert.assertEquals("Minutes is wrong.", 20, cal.get(Calendar.MINUTE));
+		Assert.assertEquals("Secondes is wrong.", 40, cal.get(Calendar.SECOND));
+		Assert.assertEquals("TimeZone is wrong.", -3600 * 1000 * 10, cal.get(Calendar.ZONE_OFFSET));
 	}
 
 	/**

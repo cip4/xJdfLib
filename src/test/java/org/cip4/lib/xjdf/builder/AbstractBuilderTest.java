@@ -71,7 +71,7 @@ public abstract class AbstractBuilderTest<T> {
 	protected byte[] marsahlResultParameter(AbstractNodeBuilder<T> builder) throws Exception {
 
 		// get XJDF Node
-		XJdfBuilder xjdfBuilder = XJdfBuilder.newInstance();
+		XJdfBuilder xjdfBuilder = new XJdfBuilder();
 		xjdfBuilder.addParameter((ParameterType) builder.build());
 
 		// return bytes
