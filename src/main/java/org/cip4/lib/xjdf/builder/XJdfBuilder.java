@@ -11,6 +11,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.JAXBElement;
@@ -182,6 +183,22 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// call default implementation
 		return addParameter(parameter, null);
+	}
+
+	/**
+	 * Append Parameter List to xJdf Document.
+	 * @param parameter Parameter object to append.
+	 * @return The current XJdfBuilder instance.
+	 */
+	public XJdfBuilder addParameter(List<ParameterType> parameters) {
+
+		// add all parameters
+		for (ParameterType parameter : parameters) {
+			addParameter(parameter, null);
+		}
+
+		// return current instance
+		return this;
 	}
 
 	/**
