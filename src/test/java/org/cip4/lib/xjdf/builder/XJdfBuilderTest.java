@@ -10,12 +10,15 @@
  */
 package org.cip4.lib.xjdf.builder;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.NodeInfo;
+import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.RunList;
@@ -182,6 +185,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 	 */
 	@Test
 	public void testAddParameterMultiple() throws Exception {
+
 		// arrange
 		final String urlContent = "http://www.example.org/w2p/Content.pdf";
 		final String urlCover = "http://www.example.org/w2p/Cover.pdf";
@@ -208,6 +212,46 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
 		String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
 		Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
+
+	}
+
+	/**
+	 * Add Multiple Parameter o XJDF document.
+	 * @throws Exception
+	 */
+	@Test
+	public void testAddParameterList() throws Exception {
+
+		// arrange
+		final String urlCover = "http://www.example.org/w2p/Cover.pdf";
+		final String urlContent_1 = "http://www.example.org/w2p/Content_1.pdf";
+		final String urlContent_2 = "http://www.example.org/w2p/Content_2.pdf";
+
+		List<ParameterType> runLists = new ArrayList<ParameterType>();
+
+		runLists.add(new XJdfNodeFactory().createRunList(urlCover));
+		runLists.add(new XJdfNodeFactory().createRunList(urlContent_1));
+		runLists.add(new XJdfNodeFactory().createRunList(urlContent_2));
+
+		// act
+		xJdfBuilder.addParameter(runLists);
+
+		// assert
+		String actual;
+
+		byte[] bytes = marsahlResult(xJdfBuilder);
+
+		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
+		Assert.assertEquals("Attribute Name in ParameterSet is wrong.", "RunList", actual);
+
+		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[1]/xjdf:RunList/xjdf:FileSpec/@URL");
+		Assert.assertEquals("Attribute FileSpec URL is wrong.", urlCover, actual);
+
+		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[2]/xjdf:RunList/xjdf:FileSpec/@URL");
+		Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_1, actual);
+
+		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[3]/xjdf:RunList/xjdf:FileSpec/@URL");
+		Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_2, actual);
 
 	}
 
