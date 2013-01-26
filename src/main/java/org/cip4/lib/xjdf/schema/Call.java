@@ -34,7 +34,7 @@ public class Call
     implements Serializable
 {
 
-    @XmlAttribute
+    @XmlAttribute(name = "rRef")
     @XmlIDREF
     protected Object rRef;
 

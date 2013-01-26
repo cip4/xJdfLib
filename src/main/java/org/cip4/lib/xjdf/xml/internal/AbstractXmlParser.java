@@ -92,6 +92,7 @@ public abstract class AbstractXmlParser<T> {
 		// write output
 		InputStream is = new ByteArrayInputStream(bos.toByteArray());
 		IOUtils.copy(is, os);
+		is.close();
 	}
 
 	/**

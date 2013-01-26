@@ -10,7 +10,9 @@
  */
 package org.cip4.lib.xjdf.xml;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.util.Properties;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
@@ -33,6 +35,8 @@ public class XJdfConstants {
 
 	public static final String XJDF_LIB_VERSION = loadLibraryVersion();
 
+	public static final String XJDF_LIB_BUILD_DATE = loadLibraryBuildDate();
+
 	public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
 	public static final String XJDF_CURRENT_VERSION = "2.0";
@@ -42,6 +46,8 @@ public class XJdfConstants {
 	public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
 
 	public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
+
+	private static final String RES_BUILD_PROPS = "/org/cip4/lib/xjdf/build.properties";
 
 	static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
 
@@ -84,12 +90,48 @@ public class XJdfConstants {
 	 */
 	private static String loadLibraryVersion() {
 
+		String result = null;
+
 		// load Version
-		String result = XJdfConstants.class.getPackage().getImplementationVersion();
+		Properties props = new Properties();
+
+		try {
+			props.load(XJdfConstants.class.getResourceAsStream(RES_BUILD_PROPS));
+			result = props.getProperty("version", "UNKNOWN");
+
+		} catch (IOException e) {
+		}
 
 		// default
-		if (result == null || result == "") {
+		if (result == null) {
 			// result = "[version not specified]";
+			result = "";
+		}
+
+		// return result
+		return result;
+	}
+
+	/**
+	 * Load Build Date from Package.
+	 * @return Version Number as String
+	 */
+	private static String loadLibraryBuildDate() {
+
+		String result = null;
+
+		// load Version
+		Properties props = new Properties();
+
+		try {
+			props.load(XJdfConstants.class.getResourceAsStream(RES_BUILD_PROPS));
+			result = props.getProperty("build.date", "UNKNOWN");
+
+		} catch (IOException e) {
+		}
+
+		// default
+		if (result == null) {
 			result = "";
 		}
 
