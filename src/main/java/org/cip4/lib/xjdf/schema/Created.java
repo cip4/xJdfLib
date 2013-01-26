@@ -62,10 +62,10 @@ public class Created
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlIDREF
     protected Object refID;
-    @XmlAttribute
+    @XmlAttribute(name = "ref")
     @XmlIDREF
     protected Object ref;
     @XmlAttribute(name = "TemplateVersion")

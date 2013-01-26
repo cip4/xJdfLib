@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
@@ -6,24 +7,24 @@
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
-	
 	<parent>
 		<groupId>org.cip4.tools</groupId>
 		<artifactId>xCIP4Master</artifactId>
 		<version>1.0</version>
 	</parent>
-
+	<properties>
+		<timestamp>${maven.build.timestamp}</timestamp>
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+	</properties>
 	<scm>
 		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
 		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
 		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
 	</scm>
-	
 	<issueManagement>
 		<system>JIRA</system>
 		<url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
 	</issueManagement>
-	
 	<reporting>
 		<plugins>
 			<plugin>
@@ -40,7 +41,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	
 	<developers>
 		<developer>
 			<id>r.prosi</id>
@@ -57,8 +57,13 @@
 			<email>s.meissner@flyeralarm.de</email>
 		</developer>
 	</developers>
-	
 	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -78,20 +83,19 @@
 				<artifactId>maven-gpg-plugin</artifactId>
 				<version>1.4</version>
 			</plugin>
-			<plugin> 
-			    <groupId>org.apache.maven.plugins</groupId> 
-			    <artifactId>maven-jar-plugin</artifactId> 
-			    <inherited>true</inherited> 
-			    <configuration> 
-			        <archive>                    
-			            <manifest> 
-			                <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
-			                <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> 
-			            </manifest> 
-			        </archive> 
-			    </configuration> 
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<inherited>true</inherited>
+				<configuration>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+					</archive>
+				</configuration>
 			</plugin>
-			
 			<!-- doc book generation -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -121,7 +125,6 @@
 					</descriptors>
 				</configuration>
 			</plugin>
-
 			<!-- Ant Script: Update XSD -->
 			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -173,7 +176,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
 					<artifactId>lifecycle-mapping</artifactId>
@@ -214,7 +217,6 @@
 			</plugins>
 		</pluginManagement>
 	</build>
-	
 	<dependencies>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
