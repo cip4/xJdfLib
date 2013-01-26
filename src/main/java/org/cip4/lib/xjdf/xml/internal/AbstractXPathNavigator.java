@@ -28,6 +28,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -70,6 +71,21 @@ public abstract class AbstractXPathNavigator {
 		String result = (String) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.STRING);
 
 		// return result
+		return result;
+	}
+
+	/**
+	 * Execute an XPath expression on XML Document.
+	 * @param xPath XPath expression to execute to.
+	 * @return List of affected nodes.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public NodeList executeXPath(String xPath) throws XPathExpressionException {
+
+		// execute xpath
+		NodeList result = (NodeList) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.NODESET);
+
+		// reteurn result
 		return result;
 	}
 
