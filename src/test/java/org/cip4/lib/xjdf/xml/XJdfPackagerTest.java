@@ -20,6 +20,7 @@ import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.xml.XJdfPackager.CompressionLevel;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -34,6 +35,8 @@ public class XJdfPackagerTest {
 	private final static String RES_PDF = "/org/cip4/lib/xjdf/test.pdf";
 
 	private final static String RES_XML = "/org/cip4/lib/xjdf/NewFile.xml";
+
+	private final static String RES_JDF = "/org/cip4/lib/xjdf/layout.jdf";
 
 	/**
 	 * Setup unit test.
@@ -61,6 +64,7 @@ public class XJdfPackagerTest {
 		// arrange
 		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
 		String resXml = XJdfPackagerTest.class.getResource(RES_XML).getFile();
+		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).getFile();
 
 		XJdfNodeFactory nf = new XJdfNodeFactory();
 
@@ -72,17 +76,19 @@ public class XJdfPackagerTest {
 		xJdfBuilder.addParameter(nf.createRunList(resPdf));
 		xJdfBuilder.addParameter(nf.createRunList(resXml));
 		XJDF xjdf = xJdfBuilder.build();
+		xjdf.setCommentURL(resJdf);
 
 		// act
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
-		XJdfPackager packager = new XJdfPackager();
-		packager.packageXJdf(xjdf, bos);
+		XJdfPackager packager = new XJdfPackager(xjdf);
+		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
+		packager.packageXJdf(bos);
 
 		bos.close();
 
 		// assert
-		FileOutputStream fos = new FileOutputStream("D:\\Temp\\myZip.zip");
+		FileOutputStream fos = new FileOutputStream("D:\\Temp\\myZip-" + System.currentTimeMillis() + ".zip");
 		IOUtils.copy(new ByteArrayInputStream(bos.toByteArray()), fos);
 		fos.close();
 	}
