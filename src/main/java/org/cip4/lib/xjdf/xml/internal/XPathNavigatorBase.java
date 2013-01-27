@@ -32,11 +32,11 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
- * Abstract Navigator class which simplify XPath handling using XML Documents.
+ * Navigator class which simplify XPath handling using XML Documents.
  * @author s.meissner
  * @date 26.06.2012
  */
-public abstract class AbstractXPathNavigator {
+public class XPathNavigatorBase {
 
 	protected final XPath xPath;
 
@@ -46,7 +46,7 @@ public abstract class AbstractXPathNavigator {
 	 * Private default constructor.
 	 * @throws IOException
 	 */
-	protected AbstractXPathNavigator(InputStream xmlStream) throws Exception {
+	protected XPathNavigatorBase(InputStream xmlStream) throws Exception {
 
 		// parse input stream
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();

@@ -12,16 +12,26 @@ package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.xml.XJdfPackager.CompressionLevel;
+import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager.CompressionLevel;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -78,18 +88,71 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
+		XJdfParser parser = new XJdfParser();
+		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
+		parser.parseXJdf(xjdf, bosXJdf);
+		bosXJdf.close();
+
 		// act
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
 
-		XJdfPackager packager = new XJdfPackager(xjdf);
+		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray());
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bos);
+		packager.packageXJdf(bosResult, "MyFile.xjdf");
 
-		bos.close();
+		bosResult.close();
 
 		// assert
-		FileOutputStream fos = new FileOutputStream("D:\\Temp\\myZip-" + System.currentTimeMillis() + ".zip");
-		IOUtils.copy(new ByteArrayInputStream(bos.toByteArray()), fos);
-		fos.close();
+		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
+
+		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
+
+		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
+		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+
+		Assert.assertTrue("PDF File does not exist.", pdf.exists());
+		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+
+		FileUtils.deleteDirectory(new File(dir));
 	}
+
+	/**
+	 * Private helper method for unpackaging zip stream.
+	 * @param inputStream ZipStream as InputStream.
+	 * @param dir Target directory.
+	 * @throws IOException
+	 */
+	private String unzipStream(InputStream inputStream) throws IOException {
+
+		// create packaging root
+		String strDir = FilenameUtils.concat(FileUtils.getTempDirectoryPath(), "XJDF-Packaging-" + UUID.randomUUID().toString());
+		File dir = new File(strDir);
+		dir.deleteOnExit();
+
+		ZipInputStream zis = new ZipInputStream(inputStream);
+		ZipEntry entry = null;
+
+		while ((entry = zis.getNextEntry()) != null) {
+
+			String entryName = entry.getName();
+
+			if (!entry.isDirectory()) {
+				// target path
+				File f = new File(FilenameUtils.concat(dir.getAbsolutePath(), entryName));
+
+				// create directory
+				String s = FilenameUtils.getFullPath(f.getPath());
+				new File(s).mkdirs();
+
+				// create file
+				OutputStream out = new FileOutputStream(f);
+				IOUtils.copy(zis, out);
+				out.close();
+			}
+		}
+
+		return strDir;
+	}
+
 }
