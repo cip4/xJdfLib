@@ -12,14 +12,14 @@ package org.cip4.lib.xjdf.xml;
 
 import java.io.InputStream;
 
-import org.cip4.lib.xjdf.xml.internal.AbstractXPathNavigator;
+import org.cip4.lib.xjdf.xml.internal.XPathNavigatorBase;
 
 /**
  * Navigator class which simplify XPath handling using XJdf Documents.
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XJdfNavigator extends AbstractXPathNavigator {
+public class XJdfNavigator extends XPathNavigatorBase {
 
 	/**
 	 * XPath to attribute 'JobID' in XJDF Document.
