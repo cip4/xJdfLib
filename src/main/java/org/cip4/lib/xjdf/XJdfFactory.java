@@ -16,11 +16,30 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 
 /**
- * Factory class for globa library functionality.
+ * Factory class for global library initialization.
  * @author stefan.meissner
  * @date 23.04.2012
  */
-public class XJdfFactory {
+public class XJdfFactory implements Runnable {
+
+	/**
+	 * Private custom constructor.
+	 */
+	private XJdfFactory(boolean initAsync) {
+
+		// init
+		if (initAsync) {
+
+			// synchronous call
+			new Thread(this).start();
+
+		} else {
+
+			// synchronous call
+			run();
+		}
+
+	}
 
 	/**
 	 * Initialize the xJdf Library.
@@ -28,13 +47,52 @@ public class XJdfFactory {
 	 */
 	public static void init() throws JAXBException {
 
-		// load JAXB framework
-		JAXBContextFactory.init();
+		// init JAXB
+		initXJdf();
 
+		// init constants
+		initXJdfConstants();
+	}
+
+	/**
+	 * Initialize the JAXB framework.
+	 * @throws JAXBException
+	 */
+	public static void initXJdf() throws JAXBException {
+
+		// init JAXB framework
+		JAXBContextFactory.init();
+	}
+
+	/**
+	 * Initialize XJDF Constants.
+	 */
+	public static void initXJdfConstants() {
 		// init constants
 		@SuppressWarnings("unused")
 		String tmp;
 		tmp = XJdfConstants.NAMESPACE_JDF20;
 		tmp = XJdfConstants.XJDF_LIB_VERSION;
+		tmp = XJdfConstants.XJDF_LIB_BUILD_DATE;
+	}
+
+	/**
+	 * @see java.lang.Runnable#run()
+	 */
+	@Override
+	public void run() {
+
+		// init JAXB
+		try {
+			initXJdf();
+		} catch (JAXBException e) {
+			throw new AssertionError(e);
+		}
+
+		// init XJDF Constants
+		XJdfFactory.initXJdfConstants();
+
+		// init PrintTalk Constants
+		initXJdfConstants();
 	}
 }
