@@ -7,7 +7,8 @@
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
-	<parent>
+	
+	<parent> 
 		<groupId>org.cip4.tools</groupId>
 		<artifactId>xCIP4Master</artifactId>
 		<version>1.0</version>
