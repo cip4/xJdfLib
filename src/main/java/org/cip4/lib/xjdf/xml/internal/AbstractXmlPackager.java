@@ -115,7 +115,7 @@ public abstract class AbstractXmlPackager {
 		ZipEntry zipEntryXml = new ZipEntry(docName);
 		zout.putNextEntry(zipEntryXml);
 
-		InputStream isXJdf = new ByteArrayInputStream(xmlDoc);
+		InputStream isXJdf = xPathNav.getXmlStream();
 		IOUtils.copy(isXJdf, zout);
 		isXJdf.close();
 
@@ -154,6 +154,7 @@ public abstract class AbstractXmlPackager {
 
 				// update filename
 				String fileName = FilenameUtils.concat(targetDir, file.getName());
+				fileName = FilenameUtils.separatorsToUnix(fileName);
 				node.setNodeValue(fileName);
 
 				// register

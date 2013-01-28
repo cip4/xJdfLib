@@ -13,6 +13,7 @@ package org.cip4.lib.xjdf.xml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -110,6 +111,10 @@ public class XJdfPackagerTest {
 
 		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
 		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+		
+		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
+		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
