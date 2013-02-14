@@ -115,6 +115,41 @@ public class XJdfParserTest {
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
 	 */
+	@Test
+	public void testParseXJdfSkipValidationByteArray() throws Exception {
+
+		// arrange
+		final String VALUE = UUID.randomUUID().toString();
+
+		XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
+
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
+		xJdfBuilder.addGeneralID(generalId);
+
+		XJDF xJdf = xJdfBuilder.build();
+
+		// act
+		byte[] bytes = xJdfParser.parseXJdf(xJdf, true);
+
+		// assert
+		NamespaceManager nsManager = new NamespaceManager();
+		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
+
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xPath = xPathFactory.newXPath();
+		xPath.setNamespaceContext(nsManager);
+
+		XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
+		InputStream is = new ByteArrayInputStream(bytes);
+		String actual = xPathExpression.evaluate(new InputSource(is));
+
+		Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
+	 */
 	@Test(expected = ValidationException.class)
 	public void testParseXJdfInvalid() throws Exception {
 
@@ -177,6 +212,47 @@ public class XJdfParserTest {
 
 		XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
 		InputStream is = new ByteArrayInputStream(bos.toByteArray());
+		String actual = xPathExpression.evaluate(new InputSource(is));
+
+		Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
+	 */
+	@Test
+	public void testParseXJdfValidByteArray() throws Exception {
+
+		// arrange
+		final String VALUE = UUID.randomUUID().toString();
+
+		XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
+		XJdfBuilder xJdfBuilder = new XJdfBuilder();
+
+		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
+		xJdfBuilder.addGeneralID(generalId);
+
+		xJdfBuilder.build().setID("MyId");
+		xJdfBuilder.build().getTypes().add("MyType");
+		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+
+		XJDF xJdf = xJdfBuilder.build();
+
+		// act
+		byte[] bytes = xJdfParser.parseXJdf(xJdf);
+
+		// assert
+		NamespaceManager nsManager = new NamespaceManager();
+		nsManager.addNamespace("ns", XJdfConstants.NAMESPACE_JDF20);
+
+		XPathFactory xPathFactory = XPathFactory.newInstance();
+		XPath xPath = xPathFactory.newXPath();
+		xPath.setNamespaceContext(nsManager);
+
+		System.out.println(new String(bytes));
+
+		XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
+		InputStream is = new ByteArrayInputStream(bytes);
 		String actual = xPathExpression.evaluate(new InputSource(is));
 
 		Assert.assertEquals("Expected value is wrong.", VALUE, actual);

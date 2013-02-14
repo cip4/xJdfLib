@@ -52,12 +52,33 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 	 * Parse a XJDF Object Tree to a binary output stream.
 	 * @param xJdf XJDF Object Tree for parsing.
 	 * @param os Target OutputStream where XJdfDocument is being parsed.
-	 * @param skipValidation Indicates whether or not validation has to be skipped.
+	 * @param skipValidation Skip validation.
 	 * @throws ValidationException Is thrown in case XJDF is not valid and validation process is not being skipped.
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
 	public void parseXJdf(XJDF xJdf, OutputStream os, boolean skipValidation) throws Exception {
 		parseXml(xJdf, os, skipValidation, XJdfValidator.class);
+	}
+
+	/**
+	 * Parse a XJDF Object Tree to a byte array.
+	 * @param xJdf XJDF Object Tree for parsing.
+	 * @return XJDF as byte array.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	public byte[] parseXJdf(XJDF xJdf) throws Exception {
+		return parseXml(xJdf, XJdfValidator.class);
+	}
+
+	/**
+	 * Parse a XJDF Object Tree to a byte array.
+	 * @param xJdf XJDF Object Tree for parsing.
+	 * @param skipValidation Skip validation.
+	 * @return XJDF as byte array.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	public byte[] parseXJdf(XJDF xJdf, boolean skipValidation) throws Exception {
+		return parseXml(xJdf, skipValidation, XJdfValidator.class);
 	}
 
 	/**
