@@ -99,4 +99,13 @@ public class XJdfNavigator extends XPathNavigatorBase {
 		super(xJdfStream);
 	}
 
+	/**
+	 * Custom constructor. Accepting a XJdf InputStream for initializing.
+	 * @param xJdfBytes The XJDF as byte array.
+	 * @throws Exception
+	 */
+	public XJdfNavigator(byte[] xJdfBytes) throws Exception {
+		super(xJdfBytes);
+	}
+
 }
