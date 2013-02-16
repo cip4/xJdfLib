@@ -12,7 +12,6 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -43,8 +42,18 @@ public class XPathNavigatorBase {
 	protected final Document xmlDocument;
 
 	/**
-	 * Private default constructor.
-	 * @throws IOException
+	 * Custom constructor. Accepting a XML Document as Byte Array for initializing.
+	 * @param xmlBytes
+	 * @throws Exception
+	 */
+	protected XPathNavigatorBase(byte[] xmlBytes) throws Exception {
+
+		// chained constructor call
+		this(new ByteArrayInputStream(xmlBytes));
+	}
+
+	/**
+	 * Custom constructor. Accepting a XML Document as Stream for initializing.
 	 */
 	protected XPathNavigatorBase(InputStream xmlStream) throws Exception {
 

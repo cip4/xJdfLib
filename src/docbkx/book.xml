@@ -11,8 +11,8 @@
 
     <abstract>
       <para>This document describes the structure and functionality of CIP4
-      xJdfLib and how to use it. The library was written in Java and
-      simplifies dealing with JDF / JMF messages. It provides methods for
+      xJdfLib and how to use it. The library is written in Java and manages
+      the dealing with XJDF Documents and JMF Messages. It provides methods for
       creation, modification and analyzing.</para>
     </abstract>
   </info>
@@ -28,33 +28,33 @@
     transaction between two parties. A single job may be modeled as one or
     more JDF transactions.</para>
 
-    <para>This fact also requires a conceptual change of JDF libraries as
+    <para>This fact also requires a conceptual change of the JDF libraries as
     well. Among other things the focus of 1.x libraries is dealing with large
     XML files (XML files were used as data storage), managing concurrency file
     access (spawn and merge) and handling the workflow logic (references).
-    Furthermore, even very common XML functionalities like creating Java
-    objects from XSD Schema and so on are implemented.</para>
+    Also there are implemented very common XML functionalities like creating
+    Java objects from XSD Schema etc.</para>
 
-    <para>Remember, the fundamental concepts of JDF (and the library) were
-    designed in the nineties. At this time XML was a very new technology and
-    just a few early XML Tools already had existed. Furthermore, the XML
-    technology itself was in a very early phase of development. Therefore, it
-    was essential to include all of the implementations mentioned getting JDF
-    working.</para>
+    <para>The fundamental concepts of JDF (and the library) were designed in
+    the nineties. At this time XML was a very new technology and just a few
+    early XML Tools had existed. Further, the XML technology itself was in a
+    very early phase of development. Therefore, it was essential to include
+    all the implementation specific details mentioned into the JDF
+    Specification to get it working.</para>
 
     <para>Over the last two decades XML has become very popular. Many tools
     have been designed and many conceptual enhancements in XML have been done.
-    For example, one significant enhancement has been XPath. More details
-    about the XPath W3C Standard later in this document or on the W3C website:
+    For example, one significant enhancement is XPath. More details about the
+    XPath W3C Standard later in this document or on the W3C website:
     http://www.w3.org/TR/xpath/.</para>
 
     <para>Due to the major change from JDF 1.x to JDF 2.0 a redesign of the
-    JDF libraries is strongly recommended. The new XJDF library is now based
-    on commonly used libraries and technologies like the Apache or JAXB
-    framework. Supplementary functionality which has been removed from JDF
-    Specification no longer makes the library unnecessarily complex for
-    reasons of backwards compatibility. The goal of xJdfLib is to provide a
-    lightweight, up to date and easy to use library optimized for actual
+    JDF libraries is strongly recommended. The new CIP4 XJDF Library
+    ("xJdfLib") is based on commonly used libraries and technologies like the
+    Apache or JAXB framework. Supplementary functionality which has been
+    removed from JDF Specification no longer makes the library unnecessarily
+    complex for reasons of backwards compatibility. The goal of xJdfLib is to
+    provide a lightweight, modern and easy to use library optimized for actual
     requirements. This document describes the concepts and the usage of the
     CIP4 xJdfLib.</para>
   </chapter>
@@ -62,19 +62,19 @@
   <chapter>
     <title>The xJdfLib Java Library</title>
 
-    <para>The CIP4 xJdfLib Java Library is based on Java 7. The latest stable
-    version is being published on the CIP4 Website on page “Technical
-    Resources -&gt; Downloads -&gt; Internal Source”. Further more, xJdfLib is
-    an Apache Maven project. So the latest stable version also is available in
-    the public Central Maven Repositroy:</para>
+    <para>The CIP4 xJdfLib Java Library is based on Java. The latest stable
+    version always is being published on the CIP4 Website on page “Technical
+    Resources -&gt; Downloads -&gt; Internal Source”. Furthermore, the library
+    is an Apache Maven project. So the latest stable version also is available
+    in the public Central Maven Repositroy:</para>
 
     <programlisting language="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
     &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
-    &lt;version&gt;0.3&lt;/version&gt;
+    &lt;version&gt;0.4&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
 
-    <para>Early Next-Version-Snapshots of CIP4 xJdfLib Library are being
+    <para>Early Next-Version-Snapshots of the CIP4 xJdfLib Library are being
     published in the public OSS Sonatype Snapshot Repository:</para>
 
     <programlisting language="xml">&lt;repository&gt;
@@ -89,7 +89,7 @@
     <programlisting language="xml">&lt;dependency&gt;
     &lt;groupId&gt;org.cip4.lib.xjdf&lt;/groupId&gt;
     &lt;artifactId&gt;xJdfLib&lt;/artifactId&gt;
-    &lt;version&gt;0.4-SNAPSHOT&lt;/version&gt;
+    &lt;version&gt;0.5-SNAPSHOT&lt;/version&gt;
 &lt;/dependency&gt;</programlisting>
   </chapter>
 
@@ -99,70 +99,67 @@
     <section>
       <title>XJdfNodeFactory</title>
 
-      <para>The XJdfNodeFactory is the fundamental factory class for creating
-      new instances of XJDF Nodes. The class provides at least one
-      Creation-Method per XJDF Node. For plain commonly used XJDF Nodes (e. g.
-      GeneralID, RunList etc.) there also are extended Creation-Methods which
-      additionally do initialize the node object after creation.</para>
+      <para>The XJdfNodeFactory is the factory class for creating new
+      instances of XJDF-Node-Objects. The class provides at least one simple
+      Creation-Method per XJDF Node defined in XJDF Specification. Moreover,
+      the class also provides extended Creation-Methods for commonly used
+      nodes (e. g. GeneralID, RunList etc.) which also initializes the object
+      after creation. </para>
 
-      <para>A new instance of XJdfNodeFactory can be created by calling the
-      static method <emphasis>newInstance()</emphasis>:</para>
+      <programlisting language="java">// New XJDF Factory Instance
+XJdfNodeFactory nf = new XJdfNodeFactory();</programlisting>
 
-      <programlisting language="java">// New Factory Instance
-XJdfNodeFactory xJdfNodeFactory = XJdfNodeFactory.newInstance();</programlisting>
+      <para>Following a demonstration about the differance between simple and
+      extended Creation-Methods. For example, when working with GeneralIDs
+      most of them consist only of the attributes "IDUsage" and "IDValue".
+      Using the simple method, the creation of such a GeneralID Node would
+      require three lines of code. The first line creates the new Node-Object
+      whereas the next two lines initialize the object. Each attribute
+      explicitly is set by a setter call:</para>
 
-      <para>The next two code snippets demonstrate the differance and usage of
-      normal and extended Creation-Methods. For example when working with
-      GeneralIDs most of them only consist of the attributes "IDUsage" and
-      "IDValue". Using the flexible way the creation of GeneralID instances
-      takes three lines of code. The first line creates the new object whereas
-      the following two lines initialize the object by attribute values. Each
-      attribute explicitly can be set and modified:</para>
+      <para><programlisting language="java">// New XJDF Factory Instance
+XJdfNodeFactory nf = new XJdfNodeFactory();
 
-      <para><programlisting language="java">// New GeneralID XJDF Node Object using the flexible way
-GeneralID generalId = xJdfNodeFactory.createGeneralID();
+// New GeneralID XJDF Node Object using the simple method
+GeneralID generalId = nf.createGeneralID();
 generalId.setIDUsage("IDCatalog");
-generalId.setIDValue("42");</programlisting>How ever, when creating larger
-      XJDF Documents the flexible way unnecessarily consumes time for writing
-      and raise complexity enormously. Hence the factory class besides
-      provides extended Creation-Methods for a straighter way. Using this
-      method plain commonly used XJDF Node structures can be created and
-      initialized by a single line of code:</para>
+generalId.setIDValue("42");</programlisting>How ever, the creation of XJDF
+      Documents only with the usage of simple Creation-Methods probably will
+      consumes time and would raise code complexity. Extended Creation-Methods
+      provides a more straighter way. Using these methods commonly used XJDF
+      Nodes are able to be created and initialized by a single line of
+      code:</para>
 
-      <para><programlisting language="java">// New GeneralID XJDF Node Object using the straight way
-GeneralID generalId = xJdfNodeFactory.createGeneralID("IDCatalog","42");</programlisting></para>
+      <para><programlisting language="java">// New XJDF Factory Instance
+XJdfNodeFactory nf = new XJdfNodeFactory();
 
-      <para>Both ways produce one and the same GeneralID Node. The flexible
-      way raises the flexibility of attribute management whereas the straight
-      one decreases complexity, maintenance and produces the source code more
-      clearly.</para>
+// New GeneralID XJDF Node Object using the extended method
+GeneralID generalId = nf.createGeneralID("IDCatalog", "42");</programlisting></para>
 
-      <para>It is best practice to combine both ways. It is strongly
-      recommended to use the extended Creation-Methods whenever one is
-      available. If the extended method does not fully fit the needs the
-      result always can be individualized in a further step after. All
-      attributes can always be modified directly.</para>
+      <para>Both methods creates one and the same GeneralID Node. Simple
+      methods raise the flexibility of attribute management whereas the
+      extended ones decrease complexity, maintenance and produce a more
+      clearly source code.</para>
 
-      <para>The following example showcases how to modify an XJDF Node after
-      creation. In some situations the<emphasis> /RunList/FileSpec</emphasis>
-      Node may contain an addtional attribute
-      <emphasis>UserFileName</emphasis>:</para>
+      <para>It is recommended to use the extended Creation-Methods whenever
+      there is one available. If the extended method does not fit the needs,
+      the preinitialized node object always can be modified in a further line
+      of code. For instance, in some situations the<emphasis>
+      /RunList/FileSpec</emphasis> Node may contain an addtional attribute
+      <emphasis>UserFileName</emphasis> which is not supported by an extended
+      method:</para>
 
       <para><programlisting language="xml">[...]
-&lt;RunList&gt;
-    &lt;FileSpec URL="http://192.168.1.113:80/4daction/Poster/10496" 
+&lt;xjdf:RunList&gt;
+    &lt;xjdf:FileSpec URL="http://192.168.1.113:80/10496" 
         UserFileName="myFileName.pdf"/&gt;
-&lt;/RunList&gt;
-[...]</programlisting>In the latest version of XJdfNodeFactory, for example,
-      there is no extended Creation-Method for the creation of a
-      <emphasis>RunList</emphasis> node which also defines a
-      <emphasis>UserFileName</emphasis> attribute in
-      <emphasis>FileSpec</emphasis>. It is still best to use the extended
-      method and finally indivualize the result:</para>
+&lt;/xjdf:RunList&gt;
+[...]</programlisting>Here the demonstration how to realize such a
+      modification in a further step:<programlisting language="java">// New XJDF Factory Instance
+XJdfNodeFactory nf = new XJdfNodeFactory();
 
-      <para><programlisting language="java">// Best practice creating indivudal nodes
-RunList runList = xJdfNodeFactory
-    .createRunList("http://192.168.1.113:80/4daction/Poster/10496");
+// Best practice creating indivudal nodes
+RunList runList = nf.createRunList("http://192.168.1.113:80/10496");
 runList.getFileSpec().setUserFileName("myFileName.pdf");</programlisting></para>
     </section>
 
