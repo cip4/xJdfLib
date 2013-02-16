@@ -7,8 +7,7 @@
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
-	
-	<parent> 
+	<parent>
 		<groupId>org.cip4.tools</groupId>
 		<artifactId>xCIP4Master</artifactId>
 		<version>1.0</version>
@@ -39,6 +38,11 @@
 						</reports>
 					</reportSet>
 				</reportSets>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.9</version>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -226,7 +230,6 @@
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
 		</dependency>
-		
 		<!-- JAXB -->
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
@@ -238,7 +241,6 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>2.2.7-b53</version>
 		</dependency>
-		
 		<!-- JUnit -->
 		<dependency>
 			<groupId>junit</groupId>
