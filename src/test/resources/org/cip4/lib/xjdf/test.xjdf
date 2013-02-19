@@ -8,7 +8,7 @@
 	<ProductList>
 		<Product Amount="1000" ProductType="Brochure" ProductTypeDetails="4 Page Brochure">
 			<Intent Name="LayoutIntent">
-				<LayoutIntent FinishedDimensions="595.27559055 822.04724409" Pages="32" Sides="TwoSidedHeadToHead" />
+				<LayoutIntent FinishedDimensions="595.27559055 822.04724409 0.0" Pages="32" Sides="TwoSidedHeadToHead" />
 			</Intent>
 			<Intent Name="MediaIntent">
 				<MediaIntent MediaQuality="IPG_135" Weight="135" />
