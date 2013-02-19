@@ -126,6 +126,21 @@ public abstract class AbstractXmlParser<T> {
 	}
 
 	/**
+	 * Parse a byte array to a object tree.
+	 * @param bytes Byte Array for parsing.
+	 * @return Object treee parsed from Byte Array.
+	 * @throws Exception Is thrown in cas an exception occurs.
+	 */
+	protected T parseBytes(byte[] bytes) throws Exception {
+
+		// create Stream
+		InputStream is = new ByteArrayInputStream(bytes);
+
+		// retrun object
+		return parseStream(is);
+	}
+
+	/**
 	 * Parse a binary input stream to a object tree.
 	 * @param is Binary xjdf input stream for parsing.
 	 * @return Object tree parsed from binary input stream.

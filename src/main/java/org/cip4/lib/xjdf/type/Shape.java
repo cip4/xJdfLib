@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * XML Attributes of type shape are used to describe a three dimensional box. A shape is represented as an array of three (positive or zero) numbers — x y z —
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author stefan.meissner
  * @date 18.12.2012
  */
-public class Shape extends XmlAdapter<String, Shape> {
+public class Shape extends AbstractXJdfType<String, Shape> {
 
 	private final double x;
 

@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Durations are a component of time intervals and define the amount of intervening time in a time interval. Durations are represented by the format
@@ -18,7 +17,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author s.meissner
  * @date 11.01.2013
  */
-public class Duration extends XmlAdapter<String, Duration> {
+public class Duration extends AbstractXJdfType<String, Duration> {
 
 	private final int year;
 

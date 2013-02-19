@@ -21,6 +21,7 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FilenameUtils;
@@ -141,7 +142,7 @@ public abstract class AbstractXmlPackager {
 	protected void registerFiles(String xPathAttribute, String targetDir) throws XPathExpressionException {
 
 		// iterate over all attributes
-		NodeList nodeList = xPathNav.executeXPath(xPathAttribute);
+		NodeList nodeList = (NodeList) xPathNav.evaluate(xPathAttribute, XPathConstants.NODESET);
 
 		for (int i = 0; i < nodeList.getLength(); i++) {
 

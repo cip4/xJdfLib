@@ -13,7 +13,10 @@ package org.cip4.lib.xjdf.xml.internal;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.Transformer;
@@ -25,9 +28,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -76,23 +79,48 @@ public class XPathNavigatorBase {
 	 */
 	public String readAttribute(String xPath) throws XPathExpressionException {
 
-		// read attribute
-		String result = (String) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.STRING);
-
-		// return result
-		return result;
+		// evaluate as string
+		return (String) evaluate(xPath, XPathConstants.STRING);
 	}
 
 	/**
-	 * Execute an XPath expression on XML Document.
+	 * Read attribute from XML Document using XPath and convert to JDF Datatype.
+	 * @param xPath XPath expression to evaluate.
+	 * @param xJdfType Target JDF Data Type of attribute.
+	 * @return Value as JDF Data Type.
+	 * @throws XPathExpressionException
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws InvocationTargetException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
+	 */
+	public Object readAttribute(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+
+		// evaluate as String
+		String value = (String) evaluate(xPath, XPathConstants.STRING);
+
+		// convert to data type
+		Constructor ctor = xJdfType.getDeclaredConstructor(String.class);
+		AbstractXJdfType validator = (AbstractXJdfType) ctor.newInstance(value);
+
+		// return object
+		return validator;
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document.
 	 * @param xPath XPath expression to execute to.
-	 * @return List of affected nodes.
+	 * @param qname QName as javax.xml.xpath.XPathConstants
+	 * @return Generic result.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
-	public NodeList executeXPath(String xPath) throws XPathExpressionException {
+	public Object evaluate(String xPath, QName qname) throws XPathExpressionException {
 
 		// execute xpath
-		NodeList result = (NodeList) this.xPath.evaluate(xPath, xmlDocument, XPathConstants.NODESET);
+		Object result = this.xPath.evaluate(xPath, xmlDocument, qname);
 
 		// reteurn result
 		return result;
@@ -110,7 +138,7 @@ public class XPathNavigatorBase {
 		String exprString = xPath;
 
 		// locate and modify the node
-		Attr result = (Attr) this.xPath.evaluate(exprString, xmlDocument, XPathConstants.NODE);
+		Attr result = (Attr) evaluate(exprString, XPathConstants.NODE);
 		result.setValue(value);
 	}
 
@@ -120,17 +148,30 @@ public class XPathNavigatorBase {
 	 */
 	public InputStream getXmlStream() throws Exception {
 
+		// get bytes
+		InputStream resultStream = new ByteArrayInputStream(getXmlBytes());
+
+		// return result stream
+		return resultStream;
+	}
+
+	/**
+	 * Return the XML Document as Byte Array.
+	 * @return XML Document as Byte Array.
+	 * @throws Exception Is thrown in case an Exception occurs.
+	 */
+	public byte[] getXmlBytes() throws Exception {
+
 		// save the result
 		Transformer xformer = TransformerFactory.newInstance().newTransformer();
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		xformer.transform(new DOMSource(xmlDocument), new StreamResult(bos));
-
-		InputStream resultStream = new ByteArrayInputStream(bos.toByteArray());
 		bos.close();
 
-		// return result stream
-		return resultStream;
+		// return bytes
+		return bos.toByteArray();
+
 	}
 
 }

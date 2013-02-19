@@ -14,10 +14,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
-import junit.framework.Assert;
-
 import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.type.Shape;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -72,6 +72,22 @@ public class XJdfNavigatorTest {
 		Assert.assertEquals("Value IDUsage is wrong.", expected_1, actual_1);
 		Assert.assertEquals("Value IDValue is wrong.", expected_2, actual_2);
 		Assert.assertEquals("Value IDValue is wrong.", expected_3, actual_3);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#readAttribute(java.lang.String)}.
+	 */
+	@Test
+	public void testReadAttributeDataType() throws Exception {
+
+		// arrange
+		Shape expected = new Shape("595.27559055 822.04724409 0.0");
+
+		// act
+		Shape actual = (Shape) xJdfNavigator.readAttribute("/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions", Shape.class);
+
+		// assert
+		Assert.assertEquals("Shape is wrong.", expected, actual);
 	}
 
 	/**
