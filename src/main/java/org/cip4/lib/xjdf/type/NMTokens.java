@@ -60,4 +60,12 @@ public class NMTokens extends AbstractList<String> {
 		return value;
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
+
 }

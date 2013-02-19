@@ -60,4 +60,11 @@ public class IntegerList extends AbstractList<Integer> {
 		return Integer.valueOf(value);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
 }
