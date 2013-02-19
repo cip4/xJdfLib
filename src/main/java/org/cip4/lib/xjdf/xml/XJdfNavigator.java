@@ -108,4 +108,22 @@ public class XJdfNavigator extends XPathNavigatorBase {
 		super(xJdfBytes);
 	}
 
+	/**
+	 * Returns the XJDF Document as Byte Array.
+	 * @return XJDF Document as Byte Array.
+	 */
+	public byte[] getXJdfBytes() throws Exception {
+		return super.getXmlBytes();
+	}
+
+	/**
+	 * Retruns the XJDF Document as Stream.
+	 * @return XJDF Document as Stream.
+	 * @throws Exception Is thrown in case an exception occurs.
+	 */
+	public InputStream getXJdfStream() throws Exception {
+		// TODO Auto-generated method stub
+		return super.getXmlStream();
+	}
+
 }

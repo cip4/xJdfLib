@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Coordinate transformation matrices are widely used throughout the whole printing Process, especially in Layout Resources. They represent two dimensional
@@ -22,7 +21,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author stefan.meissner
  * @date 18.12.2012
  */
-public class Matrix extends XmlAdapter<String, Matrix> {
+public class Matrix extends AbstractXJdfType<String, Matrix> {
 
 	private final double a;
 

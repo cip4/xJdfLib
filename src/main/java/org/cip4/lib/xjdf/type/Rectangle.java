@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * XML Attributes of type rectangle are used to describe rectangular locations on the page, Sheet or other printable surface. A rectangle is represented as an
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author stefan.meissner
  * @date 18.12.2012
  */
-public class Rectangle extends XmlAdapter<String, Rectangle> {
+public class Rectangle extends AbstractXJdfType<String, Rectangle> {
 
 	private final double llx;
 

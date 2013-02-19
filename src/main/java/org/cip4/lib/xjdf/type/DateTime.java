@@ -16,14 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
-
 /**
  * Implementation of the XJDF DateTime data type.
  * @author stefan.meissner
  * @date 05.01.2013
  */
-public class DateTime extends XmlAdapter<String, DateTime> {
+public class DateTime extends AbstractXJdfType<String, DateTime> {
 
 	private static final String PATTERN_UTC = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
@@ -172,11 +170,4 @@ public class DateTime extends XmlAdapter<String, DateTime> {
 		return new DateTime(dateTime);
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return marshal(this);
-	}
 }

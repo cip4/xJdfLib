@@ -91,4 +91,13 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 	public XJDF parseStream(InputStream is) throws Exception {
 		return super.parseStream(is);
 	}
+
+	/**
+	 * Parse a byte array to a XJDF Object Tree.
+	 * @see org.cip4.lib.xjdf.xml.internal.AbstractXmlParser#parseBytes(byte[])
+	 */
+	@Override
+	protected XJDF parseBytes(byte[] bytes) throws Exception {
+		return super.parseBytes(bytes);
+	}
 }

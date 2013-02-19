@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * XML Attributes of type XYPair are used to describe sizes like Dimensions and StartPosition. They can also be used to describe positions on a page. All
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author stefan.meissner
  * @date 18.12.2012
  */
-public class XYPair extends XmlAdapter<String, XYPair> {
+public class XYPair extends AbstractXJdfType<String, XYPair> {
 
 	private final double x;
 
