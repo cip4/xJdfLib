@@ -122,8 +122,20 @@ public class XPathNavigatorBase {
 		// execute xpath
 		Object result = this.xPath.evaluate(xPath, xmlDocument, qname);
 
-		// reteurn result
+		// return result
 		return result;
+	}
+
+	/**
+	 * Update attribute in XML Document.
+	 * @param xPath XPath expression of attribute to read.
+	 * @value value New value of attribute defined by xPath.
+	 * @throws Exception Is being thrown in case an exception occurs.
+	 */
+	public void updateAttribute(String xPath, AbstractXJdfType value) throws Exception {
+
+		// update
+		updateAttribute(xPath, value.toString());
 	}
 
 	/**

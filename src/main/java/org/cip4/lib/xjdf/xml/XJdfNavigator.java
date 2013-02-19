@@ -122,7 +122,6 @@ public class XJdfNavigator extends XPathNavigatorBase {
 	 * @throws Exception Is thrown in case an exception occurs.
 	 */
 	public InputStream getXJdfStream() throws Exception {
-		// TODO Auto-generated method stub
 		return super.getXmlStream();
 	}
 

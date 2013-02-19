@@ -170,4 +170,12 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
 		return new DateTime(dateTime);
 	}
 
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return marshal(this);
+	}
+
 }

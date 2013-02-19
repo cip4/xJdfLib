@@ -10,11 +10,9 @@
  */
 package org.cip4.lib.xjdf.xml;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
-import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.type.Shape;
 import org.junit.After;
 import org.junit.Assert;
@@ -104,13 +102,32 @@ public class XJdfNavigatorTest {
 		xJdfNavigator.updateAttribute("/XJDF/GeneralID/@IDUsage", NEW_VALUE);
 
 		// assert
-		InputStream is = xJdfNavigator.getXmlStream();
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		IOUtils.copy(is, bos);
-		String doc = new String(bos.toByteArray());
+		byte[] bytes = xJdfNavigator.getXmlBytes();
+		String doc = new String(bytes);
 
 		int i = doc.indexOf(NEW_VALUE);
+
+		Assert.assertFalse(i == -1);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testUpdateAttributeXJdfType() throws Exception {
+
+		// arrange
+		final Shape fdim = new Shape(10d, 20d, 30d);
+
+		// act
+		xJdfNavigator.updateAttribute("/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions", fdim);
+
+		// assert
+		byte[] bytes = xJdfNavigator.getXmlBytes();
+		String doc = new String(bytes);
+
+		int i = doc.indexOf("10.0 20.0 30.0");
 
 		Assert.assertFalse(i == -1);
 	}
@@ -193,7 +210,7 @@ public class XJdfNavigatorTest {
 		Assert.assertEquals("Value 'MediaQuality' is wrong.", "IPG_135", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS);
-		Assert.assertEquals("Value 'FinishedDimensions' is wrong.", "595.27559055 822.04724409", actual);
+		Assert.assertEquals("Value 'FinishedDimensions' is wrong.", "595.27559055 822.04724409 0.0", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRODUCTION_PRINT_PROCESS);
 		Assert.assertEquals("Value 'PrintProcess' is wrong.", "Lithography", actual);
