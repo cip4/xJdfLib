@@ -94,7 +94,334 @@
   </chapter>
 
   <chapter>
-    <title>Core Components</title>
+    <title>Components Description</title>
+
+    <section>
+      <title>XJDF Data Types</title>
+
+      <para>The XJDF Specification specifies several data types. At this time
+      not all but the most significant data types already are implemented in
+      CIP4 XJDF Java Library. The next versions of xJdfLib will complete the
+      list step by step.</para>
+
+      <para>All XJDF Type classes are derived from AbstractXJdfType and
+      provide a custom <emphasis>toString()</emphasis> method for converting a
+      data type to a string expression. The way around is coverted by a custom
+      constructor. Each XJDF Data Type provides at least a default and several
+      custom constructor for initializing.</para>
+
+      <section>
+        <title>DateTime</title>
+
+        <para>A DateTime object represents a specific instant of time. It must
+        be a Coordinated Universal Time (UTC) or the time zone must be
+        indicated by the offset to UTC. In other words, the time must be
+        unique in all time zones around the world.</para>
+
+        <para>The XJDF DateTime object provides different constructors for
+        initializing. The default constructor creates the current date as XJDF
+        DateTime object whereas the custom constructors initialize the object
+        by a custom value.</para>
+
+        <programlisting language="java">// current time
+DateTime d1 = new DateTime();
+System.out.println(d1.toString()); // 2013-02-24T18:34:01+01:00
+
+// specify date only
+DateTime d2 = new DateTime(2013, 02, 24);
+System.out.println(d2.toString()); // 2013-02-24T23:59:00+01:00
+
+// specify date and time
+DateTime d3 = new DateTime(2013, 02, 24, 15, 30);
+System.out.println(d3.toString()); // 2013-02-24T15:30:00+01:00
+
+// specify date as string
+DateTime d4 = new DateTime("2013-02-24T18:30:00+00:00");
+System.out.println(d4.toString()); // 2013-02-24T18:30:00Z
+
+// initialize DateTime from Calendar
+DateTime d5 = new DateTime(new GregorianCalendar());
+System.out.println(d5.toString()); // 2013-02-24T18:42:46+01:00</programlisting>
+
+        <para>Internally the XJDF DateTime object holds the information as
+        Calendar. This object can also be accessed using the
+        Getter-Method:</para>
+
+        <programlisting language="java">// read DateTime
+DateTime dateTime = new DateTime();
+dateTime.getCalendar();</programlisting>
+      </section>
+
+      <section>
+        <title>Duration</title>
+
+        <para>Durations are a component of time intervals and define the
+        amount of intervening time in a time interval. Durations are
+        represented by the format P[n]Y[n]M[n]DT[n]H[n]M[n]S.</para>
+
+        <para>The XJDF Duration object provides several constructors for
+        initializing. The default constructor creates an empty XJDF Duration
+        object whereas the custom constructors initialize the object by a
+        custom value.</para>
+
+        <programlisting language="java">// empty duration
+Duration d1 = new Duration();
+System.out.println(d1.toString()); // [no output]
+
+// two days
+Duration d2 = new Duration(2);
+System.out.println(d2.toString()); // P2D
+
+// two days and twelve hours
+Duration d3 = new Duration(2, 12);
+System.out.println(d3.toString()); // P2DT12H
+
+// full initialization
+Duration d4 = new Duration(1, 2, 3, 4, 5, 6);
+System.out.println(d4.toString()); // P1Y2M3DT4H5M6S
+
+// string expression
+Duration d5 = new Duration("P3DT4H5M");
+System.out.println(d5.toString()); // P3DT4H5M</programlisting>
+
+        <para>All duration values can easily be accessed using the
+        Getter-Methods:</para>
+
+        <programlisting language="java">// read Duration
+Duration duration = new Duration(0, 6);
+int year = duration.getYear();
+int month = duration.getMonth();
+int day = duration.getDay();
+int hour = duration.getHour(); // 6
+int minute = duration.getMinute();
+int second = duration.getSecond();</programlisting>
+      </section>
+
+      <section>
+        <title>IntegerList</title>
+
+        <para>An IntegerList is an enumerated set of Integers, which is
+        expressed as a list of space separated values.</para>
+
+        <para>The XJDF IntegerList object provides several constructors for
+        initializing. The default constructor creates an empty XJDF
+        IntegerList object whereas the custom constructors initialize the
+        object by a custom value. That constructor which accepts a varible
+        number of integer values is the most preferred one for creating
+        IntegerList objects.</para>
+
+        <programlisting language="java">// empty list
+IntegerList l1 = new IntegerList();
+System.out.println(l1.toString()); // [no output]
+
+// integer list with 2 elements
+IntegerList l2 = new IntegerList(4, 4);
+System.out.println(l2.toString()); // 4 4
+
+// integer list with 4 elements
+IntegerList l3 = new IntegerList(1, 2, 3, 4);
+System.out.println(l3.toString()); // 1 2 3 4
+
+// string expresssion
+IntegerList l4 = new IntegerList("2 2");
+System.out.println(l4.toString()); // 2 2</programlisting>
+
+        <para>Internally the XJDF IntegerList data type holds all items as a
+        List of Integers. This list can be addressed using the
+        Getter-Method:</para>
+
+        <programlisting language="java">// read IntegerList
+IntegerList integerList = new IntegerList(4, 0);
+List&lt;Integer&gt; lst = integerList.getList();</programlisting>
+      </section>
+
+      <section>
+        <title>Matrix</title>
+
+        <para>Coordinate transformation matrices are widely used throughout
+        the whole printing Process, especially in Layout Resources. They
+        represent two dimensional transformations as defined by [PS] and
+        [PDF1.6]. For more information, refer to the respective reference
+        manuals, and look for "Coordinate Systems and Transformations." The
+        "identity matrix", which is "1 0 0 1 0 0", is often used as a default
+        throughout this specification. When another matrix is factored against
+        a matrix with the identity matrix value, the result is that the
+        original matrix remains unchanged. Coordinate transformation matrices
+        are primitive data types and are encoded as a list of six numbers (as
+        doubles), separated by whitespace: "a b c d Tx Ty". The variables Tx
+        and Ty describe distances and are defined in points.</para>
+
+        <para>The XJDF Matrix object provides several constructors for
+        initializing. The default constructor creates a default XJDF Matrix
+        object ("1 0 0 1 0 0") whereas the custom constructors initialize the
+        object by a custom value.</para>
+
+        <programlisting language="java">// default matrix
+Matrix m1 = new Matrix();
+System.out.println(m1.toString()); // 1.0 0.0 0.0 1.0 0.0 0.0
+
+// custom matrix
+Matrix m2 = new Matrix(1, 2, 3, 4, 5, 6);
+System.out.println(m2.toString()); // 1.0 2.0 3.0 4.0 5.0 6.0
+
+// string expression
+Matrix m3 = new Matrix("2 2 4 4 0 0");
+System.out.println(m3.toString()); // 2.0 2.0 4.0 4.0 0.0 0.0</programlisting>
+
+        <para>In case a detailed access of all elements is required, the XJDF
+        Matrix class provides several Getter-Methods to achieve this.</para>
+
+        <programlisting>// read matrix
+Matrix matrix = new Matrix(1, 2, 3, 4, 5, 6);
+double a = matrix.getA(); // 1.0
+double b = matrix.getB(); // 2.0
+double c = matrix.getC(); // 3.0
+double d = matrix.getD(); // 4.0
+double tx = matrix.getTx(); // 5.0
+double ty = matrix.getTy(); // 6.0</programlisting>
+      </section>
+
+      <section>
+        <title>NMTokens</title>
+
+        <para>NMTOKENS is an enumerated set of NMTOKEN, which is expressed as
+        a list of space separated values.</para>
+
+        <para>The XJDF NMTokens object provides several constructors for
+        initializing. The default constructor creates an empty XJDF NMTokens
+        object whereas the custom constructors initialize the object by custom
+        values.</para>
+
+        <programlisting language="java">// emtpy object
+NMTokens n1 = new NMTokens();
+System.out.println(n1.toString()); // [no output]
+
+// multiple string expression
+NMTokens n2 = new NMTokens("Val_1", "Val_2", "Val_3");
+System.out.println(n2.toString()); // Val_1 Val_2 Val_3
+
+// single string expression
+NMTokens n3 = new NMTokens("Val_1 Val_2 Val_3");
+System.out.println(n3.toString()); // Val_1 Val_2 Val_3</programlisting>
+
+        <para>Internally the XJDF NMTokens data type holds all details as a
+        List of Strings. This list can be addressed using the
+        Getter-Method:</para>
+
+        <programlisting language="java">// read NMTokens
+NMTokens nmTokens = new NMTokens("Val_1 Val_2 Val_3");
+List&lt;String&gt; lst = nmTokens.getList();</programlisting>
+      </section>
+
+      <section>
+        <title>Rectangle</title>
+
+        <para>Rectangles are used to describe rectangular locations on the
+        page, sheet or other printable surface. A rectangle is represented as
+        an array of four numbers — llx lly urx ury — specifying the lower-left
+        x, lowerleft y, upper-right x and upper-right y coordinates of the
+        rectangle, in that order. This is equivalent to the ordering: Left
+        Bottom Right Top. All numbers are defined in points.</para>
+
+        <para>The XJDF Rectangle object provides several constructors for
+        initializing. The default constructor creates an empty XJDF Rectangle
+        object whereas the custom constructors initialize the object by custom
+        values.<programlisting>// empty rectangle
+Rectangle r1 = new Rectangle();
+System.out.println(r1.toString()); // 0.0 0.0 0.0 0.0
+
+// customized rectangle
+Rectangle r2 = new Rectangle(1, 2, 3, 4);
+System.out.println(r2.toString()); // 1.0 2.0 3.0 4.0
+
+Rectangle r3 = new Rectangle("2 4 6 8");
+System.out.println(r3.toString()); // 2.0 4.0 6.0 8.0</programlisting></para>
+
+        <para>All elements of the rectangle can be read using of the
+        Getter-Methods:</para>
+
+        <programlisting>// read Rectangle
+Rectangle rectangle = new Rectangle(1, 2, 3, 4);
+double llx = rectangle.getLlx();
+double lly = rectangle.getLly();
+double urx = rectangle.getUrx();
+double ury = rectangle.getUry();</programlisting>
+      </section>
+
+      <section>
+        <title>Shape</title>
+
+        <para>Shape data types are used to describe a three dimensional box. A
+        shape is represented as an array of three (positive or zero) numbers x
+        y z specifying the Width x, height y and depth z coordinates of the
+        shape, in that order.</para>
+
+        <para>The XJDF Shape object provides several constructors for
+        initializing. The default constructor creates an empty XJDF Shape
+        object whereas the custom constructors initialize the object by custom
+        values.</para>
+
+        <programlisting>// empty shape
+Shape s1 = new Shape();
+System.out.println(s1.toString()); // 0.0 0.0 0.0
+
+// definition of x and y only
+Shape s2 = new Shape(4.5, 7.8);
+System.out.println(s2.toString()); // 4.5 7.8 0.0
+
+// definition of all elements
+Shape s3 = new Shape(6.4, 5.7, 9.9);
+System.out.println(s3.toString()); // 6.4 5.7 9.9
+
+// string expression
+Shape s4 = new Shape("3 5.6 8.0");
+System.out.println(s4.toString()); // 3.0 5.6 8.0</programlisting>
+
+        <para>All elements of the shape can be read using of the
+        Getter-Methods:</para>
+
+        <programlisting>// read Shape
+Shape shape = new Shape(10.5, 15.2);
+double x = shape.getX(); // 10.5
+double y = shape.getY(); // 15.2
+double z = shape.getZ(); // 0.0</programlisting>
+      </section>
+
+      <section>
+        <title>XYPair</title>
+
+        <para>XYPairs are used to describe sizes like Dimensions and
+        StartPosition. They can also be used to describe positions on a page.
+        All numbers that describe lengths are defined in points. XYPair
+        Attributes are primitive data types and are encoded as a string of two
+        numbers, separated by whitespace: "x y".</para>
+
+        <para>The XJDF XYPair object provides several constructors for
+        initializing. The default constructor creates an empty XJDF XYPair
+        object whereas the custom constructors initialize the object by custom
+        values.</para>
+
+        <programlisting>// empty object
+XYPair p1 = new XYPair();
+System.out.println(p1.toString()); // 0.0 0.0
+
+// definition of x and y
+XYPair p2 = new XYPair(4.4, 5.9);
+System.out.println(p2.toString()); // 4.4 5.9
+
+// string expression
+XYPair p3 = new XYPair("3 8.9");
+System.out.println(p3.toString()); // 3.0 8.9</programlisting>
+
+        <para>All elements of the XYPair can be read using of the
+        Getter-Methods:</para>
+
+        <programlisting>// read XYPair
+XYPair xyPair = new XYPair(4.5, 5.0);
+double x = xyPair.getX();
+double y = xyPair.getY();</programlisting>
+      </section>
+    </section>
 
     <section>
       <title>XJdfNodeFactory</title>
@@ -398,8 +725,8 @@ XJDF xjdf = xJdfBuilder.build();</programlisting></para>
             &lt;/xjdf:Intent&gt;
         &lt;/xjdf:Product&gt;
     &lt;/xjdf:ProductList&gt;
-&lt;/xjdf:XJDF&gt;</programlisting>Following, the associated Java code snippet
-        for the creation of such a Product-Node:</para>
+&lt;/xjdf:XJDF&gt;</programlisting>The following the associated Java code
+        snippet for the creation of such a Product-Node:</para>
 
         <para><programlisting language="java">// new factory instance
 XJdfNodeFactory nf = new XJdfNodeFactory();
@@ -424,7 +751,7 @@ XJDF xjdf = xJdfBuilder.build();</programlisting></para>
         Contact-Nodes hold all the customers contact and delivery details and
         can be added as parameter to an XJDF Document. Usually, a contact
         parameter consists of the Contact-Node with at least an Address-Node,
-        a Company-Node and a ComChannel-Node as subelements. </para>
+        a Company-Node and a ComChannel-Node as subelements.</para>
 
         <para><programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!-- Generated by CIP4 xJdfLib 0.4 --&gt;
@@ -545,7 +872,7 @@ XJDF xjdf = xJdfBuilder.build();</programlisting></para>
       with the Java interfaces <emphasis>java.io.InputStream</emphasis> and
       <emphasis>java.io.OutputStream</emphasis>. So it doesn’t matter which
       kind of stream is used for reading or writing. The following is a sample
-      of how to save an XJDF Document to a local file system. </para>
+      of how to save an XJDF Document to a local file system.</para>
 
       <programlisting language="java">// any XJDF Document
 XJDF xJdf = [...];
@@ -680,92 +1007,60 @@ String msgText = xJdfValidator.getMessagesText(); </programlisting>
     <section>
       <title>XJdfNavigator</title>
 
-      <para>The XPathNavigator class provides functionality for reading and
-      modifying XJDF Documents using XPath. XPath is a very powerful XML
-      Technology for working with XML Documents. More details about the XPath
-      W3C Standard can be found here: http://www.w3.org/TR/xpath/.</para>
+      <para>The XJdfNavigator class provides functionality for reading,
+      modifying and analyzing XJDF Documents using XPath. XPath is a very
+      powerful XML Technology for working with XML Documents. More details
+      about the XPath W3C Standard can be found here:
+      http://www.w3.org/TR/xpath/.</para>
 
-      <para>XPathNavigator directly works on InputStream objects or Byte
+      <para>XJdfNavigator directly works on InputStream objects or Byte
       Arrays, so there is no need to parse the document before hand. This
-      mechanism saves time, code complexity and performance. One
-      XPathNavigator instance is required for each XJDF Document processed.
-      All attributes in document easily can be addressed and read using the
-      method <emphasis>readAttribute()</emphasis> and the specific XPath
-      expression as parameter. Modifications also can be done. The method
-      <emphasis>updateAttribute()</emphasis> accepts a XPath expression plus
-      the (new) attribute value. When all modifications are done finally the
-      new XJDF Document is returned as InputStream by calling the
-      <emphasis>getXJdfStream()</emphasis> method or as Byte Array by calling
-      the <emphasis>getXJdfBytes()</emphasis> method.</para>
+      mechanism saves time, code complexity and performance. One XJdfNavigator
+      instance is required for each XJDF Document processed. There are several
+      methods for reading, modifying and analyzing the document.</para>
 
-      <programlisting language="java">// load XJDF Document as InputStream and create new XPathNavigator.
-InputStream is = […]
-XPathNavigator xPathNavigator = XPathNavigator.newInstance(is);
+      <section>
+        <title>XPath Expressions</title>
 
-// read JobID
-String xJobId = "/XJDF/@JobID";
-String jobId = xPathNavigator.readAttribute(xJobId);
+        <para>The following is a short XPath overview of expressions which are
+        significant to XJDF Documents. The XJDF snippet after is used for
+        extracting these attribute values:</para>
 
-// read GeneralID IDUsage
-String xIdUsage = "/XJDF/GeneralID/@IDUsage";
-String idUsage = xPathNavigator.readAttribute(xIdUsage);
+        <table>
+          <title>XPath expressions</title>
 
-// read FileSpec URL of partition "Cover"
-String xFileCover = "/XJDF/ParameterSet[@Name='RunList']/"
-                  +  "Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL";
-String fileCover = xPathNavigator.readAttribute(xFileCover);
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry align="center">XPath Expression</entry>
 
-// update Product Amount to 1500
-String xAmount = "/XJDF/ProductList/Product/@Amount";
-xPathNavigator.updateAttribute(xAmount, "1500");
+                <entry align="center">Attribute Value</entry>
+              </row>
+            </thead>
 
-// get modified XJDF Document as InputStream
-InputStream is = xPathNavigator.getXJdfStream();
-[…]</programlisting>
+            <tbody>
+              <row>
+                <entry>/XJDF/GeneralID/@IDUsage</entry>
 
-      <para>The following is a short XPath overview of expressions which are
-      significant to XJDF Documents. The XJDF snippet after is used for
-      extracting these attribute values:</para>
+                <entry>"CatalogID"</entry>
+              </row>
 
-      <table>
-        <title>XPath expressions</title>
+              <row>
+                <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL</entry>
 
-        <tgroup cols="2">
-          <thead>
-            <row>
-              <entry align="center">XPath Expression</entry>
+                <entry>"cover.pdf"</entry>
+              </row>
 
-              <entry align="center">Attribute Value</entry>
-            </row>
-          </thead>
+              <row>
+                <entry>/XJDF/ProductList/Product/@Amount</entry>
 
-          <tbody>
-            <row>
-              <entry>/XJDF/GeneralID/@IDUsage</entry>
+                <entry>"1500"</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
 
-              <entry>"CatalogID"</entry>
-            </row>
-
-            <row>
-              <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL</entry>
-
-              <entry>"cover.pdf"</entry>
-            </row>
-
-            <row>
-              <entry>/XJDF/ProductList/Product/@Amount</entry>
-
-              <entry>"1500"</entry>
-            </row>
-
-            <row>
-              <entry/>
-            </row>
-          </tbody>
-        </tgroup>
-      </table>
-
-      <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+        <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
 &lt;!-- Generated by CIP4 xJdfLib 0.4 --&gt;
 &lt;xjdf:XJDF xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0" ID="XJDF_2GYLJJJG" 
     JobID="FA-SIG-123456" Category="Web2Print" Version="2.0"&gt;
@@ -788,15 +1083,331 @@ InputStream is = xPathNavigator.getXJdfStream();
         &lt;/xjdf:Parameter&gt;
     &lt;/xjdf:ParameterSet&gt;
 &lt;/xjdf:XJDF&gt;</programlisting>
+
+        <para>Commonly used XPath Expression also are provided as Java
+        Constants in XJdfNavigator as well. Here a list of such predefined
+        XPath Expressions:</para>
+
+        <para><table>
+            <title>Java Constants of XPath Expressions</title>
+
+            <tgroup cols="2">
+              <thead>
+                <row>
+                  <entry align="center">Java Constant Name</entry>
+
+                  <entry align="center">Expression</entry>
+                </row>
+              </thead>
+
+              <tbody>
+                <row>
+                  <entry>JOB_ID</entry>
+
+                  <entry>/XJDF/@JobID</entry>
+                </row>
+
+                <row>
+                  <entry>CATEGORY</entry>
+
+                  <entry>/XJDF/@Category</entry>
+                </row>
+
+                <row>
+                  <entry>GENERAL_CATALOG_ID</entry>
+
+                  <entry>/XJDF/GeneralID[@IDUsage='CatalogID']/@IDValue</entry>
+                </row>
+
+                <row>
+                  <entry>GENERAL_LINE_ID</entry>
+
+                  <entry>/XJDF/GeneralID[@IDUsage='LineID']/@IDValue</entry>
+                </row>
+
+                <row>
+                  <entry>FILE_SPEC_URL</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter/RunList/FileSpec/@URL</entry>
+                </row>
+
+                <row>
+                  <entry>MIN_APPROVALS</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals</entry>
+                </row>
+
+                <row>
+                  <entry>CUSTOMER_ID</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='CustomerInfo']/Parameter/CustomerInfo/@CustomerID</entry>
+                </row>
+
+                <row>
+                  <entry>AMOUNT</entry>
+
+                  <entry>/XJDF/ProductList/Product/@Amount</entry>
+                </row>
+
+                <row>
+                  <entry>MEDIA_QUALITY</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent/@MediaQuality</entry>
+                </row>
+
+                <row>
+                  <entry>LAYOUT_FINISHED_DIMENSIONS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions</entry>
+                </row>
+
+                <row>
+                  <entry>LAYOUT_DIMENSIONS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions</entry>
+                </row>
+
+                <row>
+                  <entry>PRODUCTION_PRINT_PROCESS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess</entry>
+                </row>
+
+                <row>
+                  <entry>FOLDING_CATALOG</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldingCatalog</entry>
+                </row>
+
+                <row>
+                  <entry>COLOR_NUM_COLORS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></para>
+      </section>
+
+      <section>
+        <title>Read and Modify Attributes</title>
+
+        <para>All attributes in document easily can be addressed and read
+        using the method <emphasis>readAttribute()</emphasis> and the specific
+        XPath expression as parameter. Modifications also can be done. The
+        method <emphasis>updateAttribute()</emphasis> accepts a XPath
+        expression plus the (new) attribute value. When all modifications are
+        done finally the new XJDF Document is returned as InputStream by
+        calling the <emphasis>getXJdfStream()</emphasis> method or as Byte
+        Array by calling the <emphasis>getXJdfBytes()</emphasis>
+        method.</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// define xPath
+String xPath = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']";
+       xPath += "/LayoutIntent/@FinishedDimensions";
+
+// read finished dimensions
+String att = nav.readAttribute(xPath);
+
+// modify attribute
+att = att.replace("0.0", "2.222");
+
+// update finished dimensions
+nav.updateAttribute(xPath, att);
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+
+        <para>The sample above is working with String objects. The
+        XJdfNavigator also provides a second way for reading and modifying
+        based on XJDF Data Types. The following a Java code snippet which has
+        quitely exactly the same functionalty but is using XJDF Data Types and
+        Java Constants for XPath expressions:</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// define xPath
+String xPath = XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS;
+
+// read finished dimensions
+Shape attShape = (Shape) nav.readAttribute(xPath, Shape.class);
+
+// modify attribute
+attShape = new Shape(attShape.getX(), attShape.getY(), 2.222);
+
+// update finished dimensions
+nav.updateAttribute(xPath, attShape);
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+      </section>
+
+      <section>
+        <title>Extended XPath Functionality</title>
+
+        <para>Specific XPath expressions can be evaluated using the method
+        <emphasis>evaluate()</emphasis>. The return type of this method is
+        <emphasis>Object</emphasis> but in specific it depends on the XPath
+        expression and the resultant return type. Both parameters must be
+        defined when using this method. The following a table of all supported
+        return types:</para>
+
+        <table>
+          <title>Overview XPathConstants</title>
+
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry align="center">XPathConstants</entry>
+
+                <entry align="center">Description</entry>
+              </row>
+            </thead>
+
+            <tbody>
+              <row>
+                <entry>XPathConstants.BOOLEAN</entry>
+
+                <entry>Returns a <emphasis>Boolean</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                Boolean value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NUMBER</entry>
+
+                <entry>Returns a <emphasis>Double</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                Double value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.STRING</entry>
+
+                <entry>Returns a <emphasis>String</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                String value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NODE</entry>
+
+                <entry>Returns an <emphasis>org.w3c.dom.Node</emphasis>
+                object. This constant must be used in case the XPath
+                expression returns a single node.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NODESET</entry>
+
+                <entry>Returns an <emphasis>org.w3c.dom.NodeList</emphasis>
+                object. This constant must be used in case the XPath
+                expression returns multiple nodes.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+        <para>The next few samples demonstrate how to use the
+        <emphasis>evaluate()</emphasis> method in detail:</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// get number of Intent nodes
+String xPath = "count(/XJDF/ProductList/Product/Intent)";
+double cnt = (Double) nav.evaluate(xPath, XPathConstants.NUMBER);
+
+// print result
+System.out.println("Count: " + cnt);</programlisting>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// read names of all Intent nodes
+String xPath = "/XJDF/ProductList/Product/Intent";
+NodeList nodes = (NodeList) nav.evaluate(xPath, XPathConstants.NODESET);
+
+for (int i = 0; i &lt; nodes.getLength(); i++) {
+    Node node = nodes.item(i);
+    String name = node.getAttributes().getNamedItem("Name").getTextContent();
+    System.out.println(name);
+}</programlisting>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// update node
+String xPath = "/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent";
+Node node = (Node) nav.evaluate(xPath, XPathConstants.NODE);
+node.getAttributes().getNamedItem("MediaQuality").setNodeValue("IPM_170");
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+      </section>
+    </section>
+
+    <section>
+      <title>XJdfPackager</title>
+
+      <para>The XJdfPackager is responsible for the packaging of an XJDF
+      Document including all its references into a ZIP Package. One instance
+      is required for each XJDF Document processed. If necessary, the
+      compression level can be adjusted manually using the method
+      <emphasis>setCompressionLevel()</emphasis>. The optional parameter
+      "docName" of method <emphasis>packageXJdf()</emphasis> defines the name
+      of the XJDF Document file within the ZIP Package. Out of the box the
+      documents name is the XJDFs JobID plus the extension ".xjdf". The
+      following there is a demonstration how to use the XJdfPackager
+      class:</para>
+
+      <programlisting language="java">// path to artwork
+String pathArtwork = XJdfLibSamples.class.getResource(RES_PDF_ARTWORK).getFile();
+
+// build XJDF Document
+XJdfNodeFactory nf = new XJdfNodeFactory();
+
+ProductBuilder productBuilder = new ProductBuilder(1500);
+Product product = productBuilder.build();
+
+XJdfBuilder xJdfBuilder = new XJdfBuilder("JOB-12345678");
+xJdfBuilder.addProduct(product);
+xJdfBuilder.addParameter(nf.createRunList(pathArtwork));
+XJDF xJdf = xJdfBuilder.build();
+
+byte[] bytes = new XJdfParser().parseXJdf(xJdf, true);
+
+// package to temporarily file
+File tmp = File.createTempFile("XJdfPackage", "zip");
+tmp.deleteOnExit();
+OutputStream os = new FileOutputStream(tmp);
+
+XJdfPackager packager = new XJdfPackager(bytes);
+packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
+packager.packageXJdf(os);
+
+os.close();</programlisting>
     </section>
 
     <section>
       <title>XJdfConstants</title>
 
       <para>When working with XJDF, there are several constants which are
-      required in some use cases. So the CIP4 xJdfLib also provides a static
-      class <emphasis>XJdfConstants</emphasis>, where most common constants
-      are already defined. Here is a list of all items in this class:</para>
+      required in some cases. So the CIP4 xJdfLib also provides a static class
+      <emphasis>XJdfConstants</emphasis>, where most common constants are
+      already defined. Here is a list of all items in this class:</para>
 
       <table>
         <title>Overview xJdfLib Constants</title>
@@ -846,6 +1457,22 @@ InputStream is = xPathNavigator.getXJdfStream();
             </row>
 
             <row>
+              <entry>XJDF_LIB_BUILD_DATE</entry>
+
+              <entry>"2013-02-24 13:19"</entry>
+
+              <entry>xJdfLib Build Date</entry>
+            </row>
+
+            <row>
+              <entry>JMF_ICS_VERSION</entry>
+
+              <entry>"JMF_L1-2.0"</entry>
+
+              <entry>JMF ICS Version Number</entry>
+            </row>
+
+            <row>
               <entry>MEDIA_TYPE_VND_JMF</entry>
 
               <entry>"application/vnd.cip4-jmf+xml"</entry>
@@ -876,19 +1503,19 @@ String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
     </section>
 
     <section>
-      <title>Converter Classes</title>
+      <title>Util Classes</title>
 
-      <para>In order to convert from Java datatypes to JDF or ISO datatypes
-      and the way around the library provides several converter classes. The
-      following is a list of all converters with a short description:</para>
+      <para>Util classes provide tools and other simplifications for
+      simplifying working with XJDF. The following is a list of all utils with
+      a short description:</para>
 
       <table>
-        <title>Overview Converter classes</title>
+        <title>Overview Util classes</title>
 
         <tgroup cols="2">
           <thead>
             <row>
-              <entry align="center">Converter Class</entry>
+              <entry align="center">Util Class</entry>
 
               <entry align="center">Description</entry>
             </row>
@@ -896,14 +1523,14 @@ String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
 
           <tbody>
             <row>
-              <entry>DateConverter</entry>
+              <entry>IDGeneratorUtil</entry>
 
-              <entry>Conversion between the Java Calendar object and the ISO
-              Date String how specified in XJDF Specification.</entry>
+              <entry>Generation of randomly created alphanumeric 8-digits IDs
+              with or without customized prefix.</entry>
             </row>
 
             <row>
-              <entry>DimensionConverter</entry>
+              <entry>DimensionUtil</entry>
 
               <entry>Conversion from millimeter to dtp and the way
               around.</entry>
@@ -911,6 +1538,29 @@ String currentVersion = XJdfConstants.XJDF_CURRENT_VERSION;</programlisting>
           </tbody>
         </tgroup>
       </table>
+    </section>
+
+    <section>
+      <title>Performance Optimizations</title>
+
+      <para>The CIP4 XJDF Library is based on the Java JAX-B Framework. The
+      framework brings a lot of benefits to the CIP4 xJdfLib but unfortunately
+      the initialization takes a few seconds. Usually this happens
+      automatically when the first XJDF Document is being parsed. In some
+      cases this is not acceptable, thus the library provides additional
+      functionalty for manual initialization. The XJdfFactory class is
+      responsible for such a manual initialization process. The
+      <emphasis>init()</emphasis> method starts the process synchronously. By
+      setting the parameter "initAsync", the same process starts
+      asynchronously. A recommendation is using the asynchronous method when
+      the application starts. By the way the manual initialization process
+      also initializes some other components.</para>
+
+      <programlisting language="java">// synchronous initialization
+XJdfFactory.init();
+
+// asynchronous initialization
+XJdfFactory.init(true);</programlisting>
     </section>
   </chapter>
 

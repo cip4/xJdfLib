@@ -86,6 +86,14 @@ public abstract class AbstractXmlPackager {
 	}
 
 	/**
+	 * Getter for xmlDoc attribute.
+	 * @return the xmlDoc
+	 */
+	protected byte[] getXmlDoc() {
+		return xmlDoc;
+	}
+
+	/**
 	 * Getter for compressionLevel attribute.
 	 * @return the compressionLevel
 	 */

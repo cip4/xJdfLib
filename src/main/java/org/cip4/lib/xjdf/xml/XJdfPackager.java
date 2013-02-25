@@ -38,6 +38,27 @@ public class XJdfPackager extends AbstractXmlPackager {
 	 * @param os Target OutputStream where XJdfDocument is being packaged.
 	 * @throws Exception
 	 */
+	public void packageXJdf(OutputStream os) throws Exception {
+
+		XJdfNavigator nav = new XJdfNavigator(getXmlDoc());
+
+		// get document name
+		String jobId = nav.readAttribute(XJdfNavigator.JOB_ID);
+
+		if (jobId != null) {
+			jobId += ".xjdf";
+		}
+
+		// package
+		packageXJdf(os, jobId);
+	}
+
+	/**
+	 * Packages an XJDF Document to a zipped binary output stream.
+	 * @param os Target OutputStream where XJdfDocument is being packaged.
+	 * @param docName Documents name in ZIP Package.
+	 * @throws Exception
+	 */
 	public void packageXJdf(OutputStream os, String docName) throws Exception {
 
 		// register files
