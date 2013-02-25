@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
-	<version>0.4</version>
+	<version>0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<url>http://www.cip4.org</url>
@@ -16,9 +16,9 @@
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 	<scm>
-		<url>http://svn.cip4.org/svnroot/tags/xJdfLib-0.4</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.4</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.4</connection>
+		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
 	</scm>
 	<issueManagement>
 		<system>JIRA</system>
