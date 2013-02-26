@@ -19,3 +19,6 @@ mvn release:perform
 
 mvn release:rollback
 
+-> oss.sonatype.org
+   user: s.meissner
+
