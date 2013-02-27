@@ -73,7 +73,7 @@ public class ProcessRun
     @XmlAttribute(name = "Duration")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
     protected org.cip4.lib.xjdf.type.Duration duration;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "SubmissionTime")
