@@ -44,7 +44,7 @@ public class Set
 
     @XmlElement(name = "FeatureAttribute")
     protected List<FeatureAttribute> featureAttribute;
-    @XmlAttribute(name = "rRef")
+    @XmlAttribute
     @XmlIDREF
     protected Object rRef;
 

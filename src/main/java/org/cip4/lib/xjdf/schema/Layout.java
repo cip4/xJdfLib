@@ -66,7 +66,7 @@ public class Layout
     implements Serializable
 {
 
-    @XmlElementRef(name = "PlacedObject", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
+    @XmlElementRef(name = "PlacedObject", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
     protected List<JAXBElement<? extends PlacedObject>> placedObject;
     @XmlElement(name = "TransferCurvePool")
     protected List<TransferCurvePool> transferCurvePool;
@@ -128,9 +128,9 @@ public class Layout
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ContentObject }{@code >}
-     * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
      * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link ContentObject }{@code >}
      * 
      * 
      */

@@ -73,7 +73,7 @@ public class ResourceAudit
     protected String id;
     @XmlAttribute(name = "NodeStatus")
     protected EnumNodeStatus nodeStatus;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")

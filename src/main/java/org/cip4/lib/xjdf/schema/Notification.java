@@ -111,7 +111,7 @@ public class Notification
     @XmlAttribute(name = "Class")
     @XmlSchemaType(name = "anySimpleType")
     protected String clazz;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlIDREF
     protected Object refID;
     @XmlAttribute(name = "TimeStamp")
