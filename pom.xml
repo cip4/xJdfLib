@@ -9,9 +9,9 @@
 	<description>CIP4 XJDF Java Library</description>
 	<url>http://www.cip4.org</url>
 	<parent>
-		<groupId>org.sonatype.oss</groupId>
-		<artifactId>oss-parent</artifactId>
-		<version>7</version>
+		<groupId>org.cip4.tools</groupId>
+		<artifactId>xCIP4Master</artifactId>
+		<version>1.0</version>
 	</parent>
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
