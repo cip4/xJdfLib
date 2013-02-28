@@ -1,15 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
 	<version>0.5-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
+	<description>CIP4 XJDF Java Library</description>
 	<url>http://www.cip4.org</url>
 	<parent>
-		<groupId>org.cip4.tools</groupId>
-		<artifactId>xCIP4Master</artifactId>
-		<version>1.0</version>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
 	</parent>
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
@@ -20,6 +22,18 @@
 		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
 		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
 	</scm>
+	<ciManagement>
+		<system>continuum</system>
+		<notifiers>
+			<notifier>
+				<configuration>
+					<address>stefanmeissner@hotmail.com</address>
+					<committers>true</committers>
+					<developers>true</developers>
+				</configuration>
+			</notifier>
+		</notifiers>
+	</ciManagement>
 	<issueManagement>
 		<system>JIRA</system>
 		<url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
