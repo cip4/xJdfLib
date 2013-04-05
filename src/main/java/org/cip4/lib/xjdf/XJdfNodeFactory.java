@@ -27,6 +27,7 @@ import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
+import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofItem;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
@@ -205,6 +206,37 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return nodeInfo;
+	}
+
+	/**
+	 * Create a new Preview Node which already contains a value for attribute URL.
+	 * @param URL Value for URL attribute.
+	 * @return Preview Node which already contains defined attributes.
+	 */
+	public Preview createPreview(String URL) {
+
+		return createPreview(URL, null, null);
+	}
+
+	/**
+	 * Create a new Preview Node which already contains values for attributes PreviewUsage, URL and PreviewFileType.
+	 * @param URL Value for URL attribute.
+	 * @param previewUsage Value for previewUsage attribute.
+	 * @param previewFileType Value for PreviewFileType attribute.
+	 * @return Preview Node which already contains defined attributes.
+	 */
+	public Preview createPreview(String URL, String previewUsage, String previewFileType) {
+
+		// create node
+		Preview preview = super.createPreview();
+
+		// set attributes
+		preview.setPreviewUsage(previewUsage);
+		preview.setURL(URL);
+		preview.setPreviewFileType(previewFileType);
+
+		// return object
+		return preview;
 	}
 
 	/**
