@@ -63,6 +63,7 @@ public class XJdfPackager extends AbstractXmlPackager {
 
 		// register files
 		registerFiles("//FileSpec/@URL", "artwork");
+		registerFiles("//Preview/@URL", "preview");
 
 		// create main doc Name
 		if (docName == null || docName.equals("")) {
