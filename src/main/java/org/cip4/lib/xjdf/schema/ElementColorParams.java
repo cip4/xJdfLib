@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -60,11 +59,11 @@ public class ElementColorParams
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String colorManagementSystem;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
     @XmlAttribute(name = "AutomatedOverPrintParamsRef")
-    @XmlIDREF
-    protected Object automatedOverPrintParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF automatedOverPrintParamsRef;
 
     /**
      * Gets the value of the colorSpaceConversionOp property.
@@ -177,10 +176,10 @@ public class ElementColorParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -189,10 +188,10 @@ public class ElementColorParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 
@@ -201,10 +200,10 @@ public class ElementColorParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getAutomatedOverPrintParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getAutomatedOverPrintParamsRef() {
         return automatedOverPrintParamsRef;
     }
 
@@ -213,10 +212,10 @@ public class ElementColorParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setAutomatedOverPrintParamsRef(Object value) {
+    public void setAutomatedOverPrintParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.automatedOverPrintParamsRef = value;
     }
 

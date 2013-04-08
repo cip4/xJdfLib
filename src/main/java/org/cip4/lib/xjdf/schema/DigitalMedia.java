@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -64,11 +63,11 @@ public class DigitalMedia
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String mediaType;
     @XmlAttribute(name = "RunListRef")
-    @XmlIDREF
-    protected Object runListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF runListRef;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
 
     /**
      * Gets the value of the location property.
@@ -229,10 +228,10 @@ public class DigitalMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRunListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRunListRef() {
         return runListRef;
     }
 
@@ -241,10 +240,10 @@ public class DigitalMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRunListRef(Object value) {
+    public void setRunListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.runListRef = value;
     }
 
@@ -253,10 +252,10 @@ public class DigitalMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -265,10 +264,10 @@ public class DigitalMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 

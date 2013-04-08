@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -44,8 +44,8 @@ public class SeparationControlParams
     @XmlElement(name = "TransferFunctionControl")
     protected List<TransferFunctionControl> transferFunctionControl;
     @XmlAttribute(name = "AutomatedOverPrintParamsRef")
-    @XmlIDREF
-    protected Object automatedOverPrintParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF automatedOverPrintParamsRef;
 
     /**
      * Gets the value of the transferFunctionControl property.
@@ -81,10 +81,10 @@ public class SeparationControlParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getAutomatedOverPrintParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getAutomatedOverPrintParamsRef() {
         return automatedOverPrintParamsRef;
     }
 
@@ -93,10 +93,10 @@ public class SeparationControlParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setAutomatedOverPrintParamsRef(Object value) {
+    public void setAutomatedOverPrintParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.automatedOverPrintParamsRef = value;
     }
 

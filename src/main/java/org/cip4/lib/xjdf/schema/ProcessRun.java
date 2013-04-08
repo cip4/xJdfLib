@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -73,9 +72,9 @@ public class ProcessRun
     @XmlAttribute(name = "Duration")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
     protected org.cip4.lib.xjdf.type.Duration duration;
-    @XmlAttribute
-    @XmlIDREF
-    protected Object refID;
+    @XmlAttribute(name = "refID")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF refID;
     @XmlAttribute(name = "SubmissionTime")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime submissionTime;
@@ -233,10 +232,10 @@ public class ProcessRun
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRefID() {
+    public org.cip4.lib.xjdf.type.IDREF getRefID() {
         return refID;
     }
 
@@ -245,10 +244,10 @@ public class ProcessRun
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRefID(Object value) {
+    public void setRefID(org.cip4.lib.xjdf.type.IDREF value) {
         this.refID = value;
     }
 

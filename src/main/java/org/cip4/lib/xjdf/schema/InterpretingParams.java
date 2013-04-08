@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -82,11 +81,11 @@ public class InterpretingParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair poster;
     @XmlAttribute(name = "PDFInterpretingParamsRef")
-    @XmlIDREF
-    protected Object pdfInterpretingParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF pdfInterpretingParamsRef;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
 
     /**
      * Gets the value of the fitPolicy property.
@@ -343,10 +342,10 @@ public class InterpretingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPDFInterpretingParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPDFInterpretingParamsRef() {
         return pdfInterpretingParamsRef;
     }
 
@@ -355,10 +354,10 @@ public class InterpretingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPDFInterpretingParamsRef(Object value) {
+    public void setPDFInterpretingParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.pdfInterpretingParamsRef = value;
     }
 
@@ -367,10 +366,10 @@ public class InterpretingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -379,10 +378,10 @@ public class InterpretingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 

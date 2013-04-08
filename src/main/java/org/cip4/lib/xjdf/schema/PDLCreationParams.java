@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,11 +38,11 @@ public class PDLCreationParams
     @XmlAttribute(name = "MimeType")
     protected String mimeType;
     @XmlAttribute(name = "PDFToPSConversionParamsRef")
-    @XmlIDREF
-    protected Object pdfToPSConversionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF pdfToPSConversionParamsRef;
     @XmlAttribute(name = "PSToPDFConversionParamsRef")
-    @XmlIDREF
-    protected Object psToPDFConversionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF psToPDFConversionParamsRef;
 
     /**
      * Gets the value of the mimeType property.
@@ -73,10 +73,10 @@ public class PDLCreationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPDFToPSConversionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPDFToPSConversionParamsRef() {
         return pdfToPSConversionParamsRef;
     }
 
@@ -85,10 +85,10 @@ public class PDLCreationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPDFToPSConversionParamsRef(Object value) {
+    public void setPDFToPSConversionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.pdfToPSConversionParamsRef = value;
     }
 
@@ -97,10 +97,10 @@ public class PDLCreationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPSToPDFConversionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPSToPDFConversionParamsRef() {
         return psToPDFConversionParamsRef;
     }
 
@@ -109,10 +109,10 @@ public class PDLCreationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPSToPDFConversionParamsRef(Object value) {
+    public void setPSToPDFConversionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.psToPDFConversionParamsRef = value;
     }
 

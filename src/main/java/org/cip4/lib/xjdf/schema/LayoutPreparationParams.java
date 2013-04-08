@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -154,11 +153,11 @@ public class LayoutPreparationParams
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String pageDistributionScheme;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
     @XmlAttribute(name = "ExternalImpositionTemplateRef")
-    @XmlIDREF
-    protected Object externalImpositionTemplateRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF externalImpositionTemplateRef;
 
     /**
      * Gets the value of the fitPolicy property.
@@ -901,10 +900,10 @@ public class LayoutPreparationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -913,10 +912,10 @@ public class LayoutPreparationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 
@@ -925,10 +924,10 @@ public class LayoutPreparationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getExternalImpositionTemplateRef() {
+    public org.cip4.lib.xjdf.type.IDREF getExternalImpositionTemplateRef() {
         return externalImpositionTemplateRef;
     }
 
@@ -937,10 +936,10 @@ public class LayoutPreparationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setExternalImpositionTemplateRef(Object value) {
+    public void setExternalImpositionTemplateRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.externalImpositionTemplateRef = value;
     }
 

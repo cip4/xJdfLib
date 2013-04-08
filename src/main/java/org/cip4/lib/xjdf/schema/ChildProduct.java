@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -39,8 +38,8 @@ public class ChildProduct
 {
 
     @XmlAttribute(name = "ChildRef", required = true)
-    @XmlIDREF
-    protected Object childRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF childRef;
     @XmlAttribute(name = "Amount")
     protected Integer amount;
     @XmlAttribute(name = "ProductUsage")
@@ -52,10 +51,10 @@ public class ChildProduct
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getChildRef() {
+    public org.cip4.lib.xjdf.type.IDREF getChildRef() {
         return childRef;
     }
 
@@ -64,10 +63,10 @@ public class ChildProduct
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setChildRef(Object value) {
+    public void setChildRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.childRef = value;
     }
 

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -86,20 +85,20 @@ public class ExposedMedia
     @XmlSchemaType(name = "anySimpleType")
     protected String colorType;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
     @XmlAttribute(name = "PageListRef")
-    @XmlIDREF
-    protected Object pageListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF pageListRef;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
     @XmlAttribute(name = "ScreeningParamsRef")
-    @XmlIDREF
-    protected Object screeningParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF screeningParamsRef;
 
     /**
      * Gets the value of the location property.
@@ -380,10 +379,10 @@ public class ExposedMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -392,10 +391,10 @@ public class ExposedMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 
@@ -404,10 +403,10 @@ public class ExposedMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -416,10 +415,10 @@ public class ExposedMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 
@@ -428,10 +427,10 @@ public class ExposedMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPageListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPageListRef() {
         return pageListRef;
     }
 
@@ -440,10 +439,10 @@ public class ExposedMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPageListRef(Object value) {
+    public void setPageListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.pageListRef = value;
     }
 
@@ -452,10 +451,10 @@ public class ExposedMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -464,10 +463,10 @@ public class ExposedMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 
@@ -476,10 +475,10 @@ public class ExposedMedia
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getScreeningParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getScreeningParamsRef() {
         return screeningParamsRef;
     }
 
@@ -488,10 +487,10 @@ public class ExposedMedia
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setScreeningParamsRef(Object value) {
+    public void setScreeningParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.screeningParamsRef = value;
     }
 

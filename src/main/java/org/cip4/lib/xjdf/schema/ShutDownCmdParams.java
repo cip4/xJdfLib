@@ -5,10 +5,10 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -40,8 +40,8 @@ public class ShutDownCmdParams
     @XmlSchemaType(name = "anySimpleType")
     protected String shutDownType;
     @XmlAttribute(name = "FlushQueueParamsRef")
-    @XmlIDREF
-    protected Object flushQueueParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF flushQueueParamsRef;
 
     /**
      * Gets the value of the shutDownType property.
@@ -72,10 +72,10 @@ public class ShutDownCmdParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFlushQueueParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFlushQueueParamsRef() {
         return flushQueueParamsRef;
     }
 
@@ -84,10 +84,10 @@ public class ShutDownCmdParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFlushQueueParamsRef(Object value) {
+    public void setFlushQueueParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.flushQueueParamsRef = value;
     }
 

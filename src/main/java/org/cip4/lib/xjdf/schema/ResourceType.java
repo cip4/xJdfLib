@@ -39,7 +39,6 @@ import javax.xml.bind.annotation.XmlType;
     Bundle.class,
     RollStand.class,
     PlaceHolderResource.class,
-    Media.class,
     MiscConsumable.class,
     Device.class,
     Component.class

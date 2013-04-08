@@ -36,6 +36,10 @@
                        xmlType="xjdf:duration"
                        adapter="org.cip4.lib.xjdf.type.Duration" />
                        
+             <xjc:javaType name="org.cip4.lib.xjdf.type.IDREF"
+                       xmlType="xjdf:IDREF"
+                       adapter="org.cip4.lib.xjdf.type.IDREF" />
+                       
 		</jxb:globalBindings>
 		<jxb:schemaBindings>
 			<jxb:package name="org.cip4.lib.xjdf.schema" />

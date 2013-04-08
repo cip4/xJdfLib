@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -79,14 +78,14 @@ public class PSToPDFConversionParams
     @XmlAttribute(name = "OverPrintMode")
     protected Integer overPrintMode;
     @XmlAttribute(name = "ThinPDFParamsRef")
-    @XmlIDREF
-    protected Object thinPDFParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF thinPDFParamsRef;
     @XmlAttribute(name = "AdvancedParamsRef")
-    @XmlIDREF
-    protected Object advancedParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF advancedParamsRef;
     @XmlAttribute(name = "PDFXParamsRef")
-    @XmlIDREF
-    protected Object pdfxParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF pdfxParamsRef;
 
     /**
      * Gets the value of the detectBlend property.
@@ -381,10 +380,10 @@ public class PSToPDFConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getThinPDFParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getThinPDFParamsRef() {
         return thinPDFParamsRef;
     }
 
@@ -393,10 +392,10 @@ public class PSToPDFConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setThinPDFParamsRef(Object value) {
+    public void setThinPDFParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.thinPDFParamsRef = value;
     }
 
@@ -405,10 +404,10 @@ public class PSToPDFConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getAdvancedParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getAdvancedParamsRef() {
         return advancedParamsRef;
     }
 
@@ -417,10 +416,10 @@ public class PSToPDFConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setAdvancedParamsRef(Object value) {
+    public void setAdvancedParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.advancedParamsRef = value;
     }
 
@@ -429,10 +428,10 @@ public class PSToPDFConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPDFXParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPDFXParamsRef() {
         return pdfxParamsRef;
     }
 
@@ -441,10 +440,10 @@ public class PSToPDFConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPDFXParamsRef(Object value) {
+    public void setPDFXParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.pdfxParamsRef = value;
     }
 

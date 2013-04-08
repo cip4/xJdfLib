@@ -69,7 +69,7 @@ public class QueueSubmissionParams
     protected String gangName;
     @XmlAttribute(name = "ReturnJMF")
     protected String returnJMF;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String refID;
     @XmlAttribute(name = "NextQueueEntryID")

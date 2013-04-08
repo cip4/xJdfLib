@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -35,18 +35,18 @@ public class BoxApplication
 {
 
     @XmlAttribute(name = "ComponentRef")
-    @XmlIDREF
-    protected Object componentRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF componentRef;
 
     /**
      * Gets the value of the componentRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getComponentRef() {
+    public org.cip4.lib.xjdf.type.IDREF getComponentRef() {
         return componentRef;
     }
 
@@ -55,10 +55,10 @@ public class BoxApplication
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setComponentRef(Object value) {
+    public void setComponentRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.componentRef = value;
     }
 

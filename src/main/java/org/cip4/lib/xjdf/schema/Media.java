@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -23,7 +22,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * <pre>
  * &lt;complexType name="Media">
  *   &lt;complexContent>
- *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ResourceType">
+ *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}MediaLayers" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Location" maxOccurs="unbounded" minOccurs="0"/>
@@ -98,7 +97,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "tabDimensions"
 })
 public class Media
-    extends ResourceType
+    extends ParameterType
     implements Serializable
 {
 
@@ -219,14 +218,14 @@ public class Media
     @XmlAttribute(name = "ReliefThickness")
     protected Double reliefThickness;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
-    @XmlIDREF
-    protected Object colorMeasurementConditionsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorMeasurementConditionsRef;
 
     /**
      * Gets the value of the mediaLayers property.
@@ -1444,10 +1443,10 @@ public class Media
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -1456,10 +1455,10 @@ public class Media
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 
@@ -1468,10 +1467,10 @@ public class Media
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -1480,10 +1479,10 @@ public class Media
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 
@@ -1492,10 +1491,10 @@ public class Media
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorMeasurementConditionsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorMeasurementConditionsRef() {
         return colorMeasurementConditionsRef;
     }
 
@@ -1504,10 +1503,10 @@ public class Media
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorMeasurementConditionsRef(Object value) {
+    public void setColorMeasurementConditionsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorMeasurementConditionsRef = value;
     }
 

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -73,8 +72,8 @@ public class PageCell
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair trimSize;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
 
     /**
      * Gets the value of the fitPolicy property.
@@ -293,10 +292,10 @@ public class PageCell
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -305,10 +304,10 @@ public class PageCell
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 

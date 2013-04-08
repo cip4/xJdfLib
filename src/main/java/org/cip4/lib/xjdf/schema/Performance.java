@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -55,8 +54,8 @@ public class Performance
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
     protected org.cip4.lib.xjdf.type.Duration averageCleanup;
     @XmlAttribute(name = "DevCapsRef")
-    @XmlIDREF
-    protected Object devCapsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF devCapsRef;
     @XmlAttribute(name = "MinCleanup")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
     protected org.cip4.lib.xjdf.type.Duration minCleanup;
@@ -154,10 +153,10 @@ public class Performance
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDevCapsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDevCapsRef() {
         return devCapsRef;
     }
 
@@ -166,10 +165,10 @@ public class Performance
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDevCapsRef(Object value) {
+    public void setDevCapsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.devCapsRef = value;
     }
 

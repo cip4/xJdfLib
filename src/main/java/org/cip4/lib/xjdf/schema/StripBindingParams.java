@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -43,8 +43,8 @@ public class StripBindingParams
     @XmlAttribute(name = "StripColor")
     protected String stripColor;
     @XmlAttribute(name = "HoleMakingParamsRef")
-    @XmlIDREF
-    protected Object holeMakingParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF holeMakingParamsRef;
 
     /**
      * Gets the value of the lengthJDF property.
@@ -123,10 +123,10 @@ public class StripBindingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getHoleMakingParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getHoleMakingParamsRef() {
         return holeMakingParamsRef;
     }
 
@@ -135,10 +135,10 @@ public class StripBindingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setHoleMakingParamsRef(Object value) {
+    public void setHoleMakingParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.holeMakingParamsRef = value;
     }
 

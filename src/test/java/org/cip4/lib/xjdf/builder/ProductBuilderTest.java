@@ -19,6 +19,7 @@ import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.XJdfParser;
@@ -153,16 +154,20 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
 		ProductBuilder pbChild_1 = new ProductBuilder();
 		pbChild_1.addIntent(nf.createMediaIntent("IPG_135"));
+		IDREF childRef_1 = new IDREF(pbChild_1.build());
 
 		ProductBuilder pbChild_2 = new ProductBuilder();
 		pbChild_2.addIntent(nf.createMediaIntent("IPG_90"));
+		IDREF childRef_2 = new IDREF(pbChild_2.build());
 
 		// act
-		pbRoot.addChildProduct(pbChild_1.build());
-		pbRoot.addChildProduct(pbChild_2.build());
+		pbRoot.addChildProduct(childRef_1);
+		pbRoot.addChildProduct(childRef_2);
 
 		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 		xJdfBuilder.addProduct(pbRoot.build());
+		xJdfBuilder.addProduct(childRef_1.getProduct());
+		xJdfBuilder.addProduct(childRef_1.getProduct());
 
 		// assert
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();

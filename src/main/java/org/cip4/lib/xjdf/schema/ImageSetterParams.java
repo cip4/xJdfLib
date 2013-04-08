@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -100,8 +99,8 @@ public class ImageSetterParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair burnOutArea;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
 
     /**
      * Gets the value of the fitPolicy property.
@@ -526,10 +525,10 @@ public class ImageSetterParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -538,10 +537,10 @@ public class ImageSetterParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 

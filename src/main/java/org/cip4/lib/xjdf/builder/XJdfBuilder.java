@@ -14,11 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Parameter;
@@ -56,7 +52,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	public XJdfBuilder(String jobID) {
 
 		// return new instance
-		this(jobID, "Web2Print", null, null);
+		this(jobID, null, null, null);
 	}
 
 	/**
@@ -121,13 +117,10 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @param comment Comment to append to.
 	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addComment(String comment) {
+	public void addComment(String comment) {
 
 		Comment obj = xJdfNodeFactory.createComment(comment);
 		getNode().getComment().add(obj);
-
-		// return XJdfBuilder object
-		return this;
 	}
 
 	/**
@@ -135,16 +128,13 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @param generalId GeneralID object to append.
 	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addGeneralID(GeneralID generalId) {
+	public void addGeneralID(GeneralID generalId) {
 
 		if (generalId == null)
-			return this;
+			return;
 
 		// append GeneralID object
 		getXJdf().getGeneralID().add(generalId);
-
-		// return XJdfBuilder object
-		return this;
 	}
 
 	/**
@@ -152,10 +142,10 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @param product Product object to append.
 	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addProduct(Product product) {
+	public void addProduct(Product product) {
 
 		if (product == null)
-			return this;
+			return;
 
 		// if necessary, create new ProductList object
 		if (getXJdf().getProductList() == null) {
@@ -164,25 +154,17 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// add product
 		getXJdf().getProductList().getProduct().add(product);
-
-		// add all child products
-		for (ChildProduct child : product.getChildProduct()) {
-			getXJdf().getProductList().getProduct().add((Product) child.getChildRef());
-		}
-
-		// return XJdfBuilder object
-		return this;
 	}
 
 	/**
 	 * Append Parameter node to xJdf Document.
-	 * @param parameter Parameter object to append.
+	 * @param parameterType Parameter object to append.
 	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addParameter(ParameterType parameter) {
+	public void addParameter(ParameterType parameterType) {
 
 		// call default implementation
-		return addParameter(parameter, null);
+		addParameter(parameterType, null);
 	}
 
 	/**
@@ -190,41 +172,39 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * @param parameter Parameter object to append.
 	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addParameter(List<ParameterType> parameters) {
+	public void addParameter(List<ParameterType> parameterTypes) {
 
 		// add all parameters
-		for (ParameterType parameter : parameters) {
+		for (ParameterType parameter : parameterTypes) {
 			addParameter(parameter, null);
 		}
-
-		// return current instance
-		return this;
 	}
 
 	/**
 	 * Append Parameter node to xJdf Document.
-	 * @param parameter Parameter object to append.
+	 * @param parameterType Parameter object to append.
 	 * @param part Partitioning definitions.
-	 * @return The current XJdfBuilder instance.
 	 */
-	public XJdfBuilder addParameter(ParameterType parameter, Part part) {
+	public void addParameter(ParameterType parameterType, Part part) {
 
-		if (parameter == null)
-			return this;
-
-		// get parameter name
-		String paramName = parameter.getClass().getSimpleName();
+		if (parameterType == null)
+			return;
 
 		// create parameter
-		Parameter param = xJdfNodeFactory.createParameter();
+		Parameter parameter = xJdfNodeFactory.createParameter(parameterType, part);
 
-		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-		JAXBElement obj = new JAXBElement(qname, parameter.getClass(), null, parameter);
-		param.getParameterType().add(obj);
+		// add parameter
+		addParameter(parameter);
 
-		if (part != null) {
-			param.getPart().add(part);
-		}
+	}
+
+	/**
+	 * Append Parameter node to xJdf Document.
+	 * @param parameter Parameter node to append to.
+	 */
+	public void addParameter(Parameter parameter) {
+
+		String paramName = parameter.getParameterType().getName().getLocalPart();
 
 		// get ParameterSet according to parameter
 		ParameterSet parameterSet;
@@ -244,9 +224,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		}
 
 		// append parameter to parameterSet
-		parameterSet.getParameter().add(param);
-
-		// return XJdfBuilder object
-		return this;
+		parameterSet.getParameter().add(parameter);
 	}
 }

@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -33,19 +33,19 @@ public class TestRef
     implements Serializable
 {
 
-    @XmlAttribute
-    @XmlIDREF
-    protected Object rRef;
+    @XmlAttribute(name = "rRef")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF rRef;
 
     /**
      * Gets the value of the rRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRRef() {
         return rRef;
     }
 
@@ -54,10 +54,10 @@ public class TestRef
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRRef(Object value) {
+    public void setRRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.rRef = value;
     }
 

@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -37,8 +37,8 @@ public class ApprovalParams
     @XmlAttribute(name = "MinApprovals")
     protected Integer minApprovals;
     @XmlAttribute(name = "ApprovalPersonRef")
-    @XmlIDREF
-    protected Object approvalPersonRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF approvalPersonRef;
 
     /**
      * Gets the value of the minApprovals property.
@@ -69,10 +69,10 @@ public class ApprovalParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getApprovalPersonRef() {
+    public org.cip4.lib.xjdf.type.IDREF getApprovalPersonRef() {
         return approvalPersonRef;
     }
 
@@ -81,10 +81,10 @@ public class ApprovalParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setApprovalPersonRef(Object value) {
+    public void setApprovalPersonRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.approvalPersonRef = value;
     }
 

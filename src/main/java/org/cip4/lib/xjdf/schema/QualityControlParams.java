@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -42,8 +41,8 @@ public class QualityControlParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Duration.class)
     protected org.cip4.lib.xjdf.type.Duration timeInterval;
     @XmlAttribute(name = "BindingQualityParamsRef")
-    @XmlIDREF
-    protected Object bindingQualityParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF bindingQualityParamsRef;
 
     /**
      * Gets the value of the sampleInterval property.
@@ -98,10 +97,10 @@ public class QualityControlParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBindingQualityParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getBindingQualityParamsRef() {
         return bindingQualityParamsRef;
     }
 
@@ -110,10 +109,10 @@ public class QualityControlParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBindingQualityParamsRef(Object value) {
+    public void setBindingQualityParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.bindingQualityParamsRef = value;
     }
 

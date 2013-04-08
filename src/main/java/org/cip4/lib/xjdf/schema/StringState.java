@@ -111,8 +111,8 @@ public class StringState
     @XmlIDREF
     protected List<Object> actionRefs;
     @XmlAttribute(name = "DependentMacroRef")
-    @XmlIDREF
-    protected Object dependentMacroRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF dependentMacroRef;
     @XmlAttribute(name = "DefaultValue")
     protected String defaultValue;
     @XmlAttribute(name = "PresentRegExp")
@@ -588,10 +588,10 @@ public class StringState
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDependentMacroRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDependentMacroRef() {
         return dependentMacroRef;
     }
 
@@ -600,10 +600,10 @@ public class StringState
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDependentMacroRef(Object value) {
+    public void setDependentMacroRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.dependentMacroRef = value;
     }
 

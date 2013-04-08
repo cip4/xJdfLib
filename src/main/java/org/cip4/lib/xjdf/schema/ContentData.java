@@ -85,14 +85,14 @@ public class ContentData
     @XmlAttribute(name = "CatalogID")
     protected String catalogID;
     @XmlAttribute(name = "ElementColorParamsRef")
-    @XmlIDREF
-    protected Object elementColorParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF elementColorParamsRef;
     @XmlAttribute(name = "ImageCompressionParamsRef")
-    @XmlIDREF
-    protected Object imageCompressionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF imageCompressionParamsRef;
     @XmlAttribute(name = "ScreeningParamsRef")
-    @XmlIDREF
-    protected Object screeningParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF screeningParamsRef;
     @XmlAttribute(name = "SeparationNames")
     protected List<String> separationNames;
 
@@ -375,10 +375,10 @@ public class ContentData
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getElementColorParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getElementColorParamsRef() {
         return elementColorParamsRef;
     }
 
@@ -387,10 +387,10 @@ public class ContentData
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setElementColorParamsRef(Object value) {
+    public void setElementColorParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.elementColorParamsRef = value;
     }
 
@@ -399,10 +399,10 @@ public class ContentData
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getImageCompressionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getImageCompressionParamsRef() {
         return imageCompressionParamsRef;
     }
 
@@ -411,10 +411,10 @@ public class ContentData
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setImageCompressionParamsRef(Object value) {
+    public void setImageCompressionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.imageCompressionParamsRef = value;
     }
 
@@ -423,10 +423,10 @@ public class ContentData
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getScreeningParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getScreeningParamsRef() {
         return screeningParamsRef;
     }
 
@@ -435,10 +435,10 @@ public class ContentData
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setScreeningParamsRef(Object value) {
+    public void setScreeningParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.screeningParamsRef = value;
     }
 

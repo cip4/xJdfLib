@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -72,8 +71,8 @@ public class Assembly
     @XmlSchemaType(name = "anySimpleType")
     protected String order;
     @XmlAttribute(name = "PageListRef")
-    @XmlIDREF
-    protected Object pageListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF pageListRef;
 
     /**
      * Gets the value of the pageAssignedList property.
@@ -287,10 +286,10 @@ public class Assembly
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPageListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPageListRef() {
         return pageListRef;
     }
 
@@ -299,10 +298,10 @@ public class Assembly
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPageListRef(Object value) {
+    public void setPageListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.pageListRef = value;
     }
 

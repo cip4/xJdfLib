@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -51,11 +51,11 @@ public class QualityControlResult
     @XmlAttribute(name = "Passed")
     protected Integer passed;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
     @XmlAttribute(name = "BindingQualityParamsRef")
-    @XmlIDREF
-    protected Object bindingQualityParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF bindingQualityParamsRef;
 
     /**
      * Gets the value of the qualityMeasurement property.
@@ -139,10 +139,10 @@ public class QualityControlResult
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -151,10 +151,10 @@ public class QualityControlResult
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 
@@ -163,10 +163,10 @@ public class QualityControlResult
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBindingQualityParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getBindingQualityParamsRef() {
         return bindingQualityParamsRef;
     }
 
@@ -175,10 +175,10 @@ public class QualityControlResult
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBindingQualityParamsRef(Object value) {
+    public void setBindingQualityParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.bindingQualityParamsRef = value;
     }
 

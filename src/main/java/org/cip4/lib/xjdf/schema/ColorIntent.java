@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -49,8 +48,8 @@ public class ColorIntent
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
     protected org.cip4.lib.xjdf.type.IntegerList numColors;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
     @XmlAttribute(name = "ColorsUsed")
     protected List<String> colorsUsed;
     @XmlAttribute(name = "ColorsUsedBack")
@@ -96,10 +95,10 @@ public class ColorIntent
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -108,10 +107,10 @@ public class ColorIntent
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 

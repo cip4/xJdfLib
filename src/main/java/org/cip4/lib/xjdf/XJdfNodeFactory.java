@@ -12,6 +12,9 @@ package org.cip4.lib.xjdf;
 
 import java.util.List;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.cip4.lib.xjdf.schema.ApprovalParams;
 import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.ChildProduct;
@@ -27,6 +30,9 @@ import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
+import org.cip4.lib.xjdf.schema.Parameter;
+import org.cip4.lib.xjdf.schema.ParameterType;
+import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofItem;
@@ -34,11 +40,13 @@ import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
+import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.XYPair;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
  * Static Factory Class which is managing the creation of XJdfNodes.
@@ -52,6 +60,35 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public XJdfNodeFactory() {
 		// no action
+	}
+
+	/**
+	 * Create a new Parameter node from ParameterType and Part
+	 * @param parameterType The ParameterType Node
+	 * @param part The Part Node
+	 * @return New Parameter node from ParametType and Part node.
+	 */
+	public Parameter createParameter(ParameterType parameterType, Part part) {
+
+		if (parameterType == null)
+			return null;
+
+		// get parameter name
+		String paramName = parameterType.getClass().getSimpleName();
+
+		// create parameter
+		Parameter parameter = super.createParameter();
+
+		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
+		JAXBElement obj = new JAXBElement(qname, parameterType.getClass(), null, parameterType);
+		parameter.setParameterType(obj);
+
+		if (part != null) {
+			parameter.getPart().add(part);
+		}
+
+		// return node
+		return parameter;
 	}
 
 	/**
@@ -244,13 +281,13 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param childref Value for Childref attribute.
 	 * @return ChildProduct Node which already contains defined attributes.
 	 */
-	public ChildProduct createChildProduct(String childref) {
+	public ChildProduct createChildProduct(IDREF idRef) {
 
 		// create node
 		ChildProduct childProduct = super.createChildProduct();
 
 		// set attributes
-		childProduct.setChildRef(childref);
+		childProduct.setChildRef(idRef);
 
 		// return object
 		return childProduct;

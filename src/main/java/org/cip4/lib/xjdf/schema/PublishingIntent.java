@@ -46,8 +46,8 @@ public class PublishingIntent
     @XmlIDREF
     protected List<Object> contentDataRefs;
     @XmlAttribute(name = "ContentListRef")
-    @XmlIDREF
-    protected Object contentListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF contentListRef;
     @XmlAttribute(name = "IssueType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String issueType;
@@ -93,10 +93,10 @@ public class PublishingIntent
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getContentListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getContentListRef() {
         return contentListRef;
     }
 
@@ -105,10 +105,10 @@ public class PublishingIntent
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setContentListRef(Object value) {
+    public void setContentListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.contentListRef = value;
     }
 

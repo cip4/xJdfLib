@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -128,8 +127,8 @@ public class MarkObject
     @XmlAttribute(name = "ClipPath")
     protected String clipPath;
     @XmlAttribute(name = "ContentRef")
-    @XmlIDREF
-    protected Object contentRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF contentRef;
     @XmlAttribute(name = "Ord")
     protected Integer ord;
     @XmlAttribute(name = "TrimSize")
@@ -141,8 +140,8 @@ public class MarkObject
     @XmlAttribute(name = "CompensationCTMFormat")
     protected String compensationCTMFormat;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
 
     /**
      * Gets the value of the scavengerArea property.
@@ -756,10 +755,10 @@ public class MarkObject
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getContentRef() {
+    public org.cip4.lib.xjdf.type.IDREF getContentRef() {
         return contentRef;
     }
 
@@ -768,10 +767,10 @@ public class MarkObject
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setContentRef(Object value) {
+    public void setContentRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.contentRef = value;
     }
 
@@ -876,10 +875,10 @@ public class MarkObject
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -888,10 +887,10 @@ public class MarkObject
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 

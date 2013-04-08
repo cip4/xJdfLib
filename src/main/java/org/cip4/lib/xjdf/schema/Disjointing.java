@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -61,8 +60,8 @@ public class Disjointing
     @XmlAttribute(name = "Number")
     protected Integer number;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
 
     /**
      * Gets the value of the insertSheet property.
@@ -194,10 +193,10 @@ public class Disjointing
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -206,10 +205,10 @@ public class Disjointing
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 

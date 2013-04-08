@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -38,9 +38,9 @@ public class RefAnchor
 
     @XmlAttribute(name = "Anchor")
     protected EnumAnchor anchor;
-    @XmlAttribute
-    @XmlIDREF
-    protected Object rRef;
+    @XmlAttribute(name = "rRef")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF rRef;
     @XmlAttribute(name = "AnchorType")
     @XmlSchemaType(name = "anySimpleType")
     protected String anchorType;
@@ -74,10 +74,10 @@ public class RefAnchor
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRRef() {
         return rRef;
     }
 
@@ -86,10 +86,10 @@ public class RefAnchor
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRRef(Object value) {
+    public void setRRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.rRef = value;
     }
 

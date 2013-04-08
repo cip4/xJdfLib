@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -53,8 +52,8 @@ public class Tile
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
     protected org.cip4.lib.xjdf.type.Matrix ctm;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
 
     /**
      * Gets the value of the markObject property.
@@ -138,10 +137,10 @@ public class Tile
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -150,10 +149,10 @@ public class Tile
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 

@@ -7,9 +7,9 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -68,8 +68,8 @@ public class ColorCorrectionOp
     @XmlAttribute(name = "AdjustCyanRed")
     protected Double adjustCyanRed;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
 
     /**
      * Gets the value of the adjustContrast property.
@@ -302,10 +302,10 @@ public class ColorCorrectionOp
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -314,10 +314,10 @@ public class ColorCorrectionOp
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 

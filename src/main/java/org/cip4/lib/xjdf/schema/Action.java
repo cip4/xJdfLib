@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -62,8 +61,8 @@ public class Action
     @XmlSchemaType(name = "anySimpleType")
     protected String severity;
     @XmlAttribute(name = "TestRef")
-    @XmlIDREF
-    protected Object testRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF testRef;
 
     /**
      * Gets the value of the loc property.
@@ -176,10 +175,10 @@ public class Action
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getTestRef() {
+    public org.cip4.lib.xjdf.type.IDREF getTestRef() {
         return testRef;
     }
 
@@ -188,10 +187,10 @@ public class Action
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setTestRef(Object value) {
+    public void setTestRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.testRef = value;
     }
 
