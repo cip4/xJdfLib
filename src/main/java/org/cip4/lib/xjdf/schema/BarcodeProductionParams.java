@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -36,21 +36,21 @@ public class BarcodeProductionParams
 {
 
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
     @XmlAttribute(name = "BarcodeReproParamsRef")
-    @XmlIDREF
-    protected Object barcodeReproParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF barcodeReproParamsRef;
 
     /**
      * Gets the value of the identificationFieldRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -59,10 +59,10 @@ public class BarcodeProductionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 
@@ -71,10 +71,10 @@ public class BarcodeProductionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBarcodeReproParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getBarcodeReproParamsRef() {
         return barcodeReproParamsRef;
     }
 
@@ -83,10 +83,10 @@ public class BarcodeProductionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBarcodeReproParamsRef(Object value) {
+    public void setBarcodeReproParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.barcodeReproParamsRef = value;
     }
 

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -50,8 +49,8 @@ public class PageCondition
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
     protected org.cip4.lib.xjdf.type.IntegerList restrictedContentObjects;
     @XmlAttribute(name = "RunListRef")
-    @XmlIDREF
-    protected Object runListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF runListRef;
 
     /**
      * Gets the value of the part property.
@@ -111,10 +110,10 @@ public class PageCondition
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRunListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRunListRef() {
         return runListRef;
     }
 
@@ -123,10 +122,10 @@ public class PageCondition
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRunListRef(Object value) {
+    public void setRunListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.runListRef = value;
     }
 

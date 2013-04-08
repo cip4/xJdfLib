@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -90,8 +89,8 @@ public class PDFInterpretingParams
     @XmlAttribute(name = "OCGZoom")
     protected Double ocgZoom;
     @XmlAttribute(name = "ReferenceXObjParamsRef")
-    @XmlIDREF
-    protected Object referenceXObjParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF referenceXObjParamsRef;
 
     /**
      * Gets the value of the ocgControl property.
@@ -439,10 +438,10 @@ public class PDFInterpretingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getReferenceXObjParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getReferenceXObjParamsRef() {
         return referenceXObjParamsRef;
     }
 
@@ -451,10 +450,10 @@ public class PDFInterpretingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setReferenceXObjParamsRef(Object value) {
+    public void setReferenceXObjParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.referenceXObjParamsRef = value;
     }
 

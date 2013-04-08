@@ -7,10 +7,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -45,8 +45,8 @@ public class DeviceFilter
     @XmlSchemaType(name = "anySimpleType")
     protected String deviceDetails;
     @XmlAttribute(name = "DeviceRef")
-    @XmlIDREF
-    protected Object deviceRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF deviceRef;
 
     /**
      * Gets the value of the localization property.
@@ -106,10 +106,10 @@ public class DeviceFilter
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDeviceRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDeviceRef() {
         return deviceRef;
     }
 
@@ -118,10 +118,10 @@ public class DeviceFilter
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDeviceRef(Object value) {
+    public void setDeviceRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.deviceRef = value;
     }
 

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -65,11 +64,11 @@ public class ColorantControl
     @XmlAttribute(name = "ForceSeparations")
     protected Boolean forceSeparations;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
     @XmlAttribute(name = "ColorantParamsRef")
-    @XmlIDREF
-    protected Object colorantParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorantParamsRef;
     @XmlAttribute(name = "DeviceColorantOrder")
     protected List<String> deviceColorantOrder;
     @XmlAttribute(name = "ColorantConvertProcess")
@@ -217,10 +216,10 @@ public class ColorantControl
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -229,10 +228,10 @@ public class ColorantControl
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 
@@ -241,10 +240,10 @@ public class ColorantControl
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorantParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorantParamsRef() {
         return colorantParamsRef;
     }
 
@@ -253,10 +252,10 @@ public class ColorantControl
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorantParamsRef(Object value) {
+    public void setColorantParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorantParamsRef = value;
     }
 

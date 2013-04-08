@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -88,20 +87,20 @@ public class ImageCompression
     @XmlSchemaType(name = "anySimpleType")
     protected String imageType;
     @XmlAttribute(name = "JBIG2ParamsRef")
-    @XmlIDREF
-    protected Object jbig2ParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF jbig2ParamsRef;
     @XmlAttribute(name = "DCTParamsRef")
-    @XmlIDREF
-    protected Object dctParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF dctParamsRef;
     @XmlAttribute(name = "CCITTFaxParamsRef")
-    @XmlIDREF
-    protected Object ccittFaxParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF ccittFaxParamsRef;
     @XmlAttribute(name = "LZWParamsRef")
-    @XmlIDREF
-    protected Object lzwParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF lzwParamsRef;
     @XmlAttribute(name = "JPEG2000ParamsRef")
-    @XmlIDREF
-    protected Object jpeg2000ParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF jpeg2000ParamsRef;
 
     /**
      * Gets the value of the imageDownsampleType property.
@@ -444,10 +443,10 @@ public class ImageCompression
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getJBIG2ParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getJBIG2ParamsRef() {
         return jbig2ParamsRef;
     }
 
@@ -456,10 +455,10 @@ public class ImageCompression
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setJBIG2ParamsRef(Object value) {
+    public void setJBIG2ParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.jbig2ParamsRef = value;
     }
 
@@ -468,10 +467,10 @@ public class ImageCompression
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDCTParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDCTParamsRef() {
         return dctParamsRef;
     }
 
@@ -480,10 +479,10 @@ public class ImageCompression
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDCTParamsRef(Object value) {
+    public void setDCTParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.dctParamsRef = value;
     }
 
@@ -492,10 +491,10 @@ public class ImageCompression
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getCCITTFaxParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getCCITTFaxParamsRef() {
         return ccittFaxParamsRef;
     }
 
@@ -504,10 +503,10 @@ public class ImageCompression
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setCCITTFaxParamsRef(Object value) {
+    public void setCCITTFaxParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.ccittFaxParamsRef = value;
     }
 
@@ -516,10 +515,10 @@ public class ImageCompression
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getLZWParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getLZWParamsRef() {
         return lzwParamsRef;
     }
 
@@ -528,10 +527,10 @@ public class ImageCompression
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setLZWParamsRef(Object value) {
+    public void setLZWParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.lzwParamsRef = value;
     }
 
@@ -540,10 +539,10 @@ public class ImageCompression
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getJPEG2000ParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getJPEG2000ParamsRef() {
         return jpeg2000ParamsRef;
     }
 
@@ -552,10 +551,10 @@ public class ImageCompression
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setJPEG2000ParamsRef(Object value) {
+    public void setJPEG2000ParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.jpeg2000ParamsRef = value;
     }
 

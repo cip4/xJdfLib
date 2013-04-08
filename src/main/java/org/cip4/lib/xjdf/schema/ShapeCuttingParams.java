@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -56,8 +56,8 @@ public class ShapeCuttingParams
     @XmlAttribute(name = "ModuleIndex")
     protected Integer moduleIndex;
     @XmlAttribute(name = "DieLayoutRef")
-    @XmlIDREF
-    protected Object dieLayoutRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF dieLayoutRef;
 
     /**
      * Gets the value of the shape property.
@@ -165,10 +165,10 @@ public class ShapeCuttingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDieLayoutRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDieLayoutRef() {
         return dieLayoutRef;
     }
 
@@ -177,10 +177,10 @@ public class ShapeCuttingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDieLayoutRef(Object value) {
+    public void setDieLayoutRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.dieLayoutRef = value;
     }
 

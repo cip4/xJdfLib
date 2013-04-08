@@ -156,11 +156,11 @@ public class Signature
     @XmlAttribute(name = "PipePartIDKeys")
     protected List<EnumPartIDKeys> pipePartIDKeys;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
     @XmlAttribute(name = "QualityControlResultRef")
-    @XmlIDREF
-    protected Object qualityControlResultRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF qualityControlResultRef;
     @XmlAttribute(name = "SourceResourceRefs")
     @XmlIDREF
     protected List<Object> sourceResourceRefs;
@@ -930,10 +930,10 @@ public class Signature
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -942,10 +942,10 @@ public class Signature
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
     }
 
@@ -954,10 +954,10 @@ public class Signature
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getQualityControlResultRef() {
+    public org.cip4.lib.xjdf.type.IDREF getQualityControlResultRef() {
         return qualityControlResultRef;
     }
 
@@ -966,10 +966,10 @@ public class Signature
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setQualityControlResultRef(Object value) {
+    public void setQualityControlResultRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.qualityControlResultRef = value;
     }
 

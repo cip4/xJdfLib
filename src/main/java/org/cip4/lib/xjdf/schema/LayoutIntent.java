@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -58,8 +57,8 @@ public class LayoutIntent
     @XmlSchemaType(name = "anySimpleType")
     protected String sides;
     @XmlAttribute(name = "LayoutRef")
-    @XmlIDREF
-    protected Object layoutRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF layoutRef;
     @XmlAttribute(name = "SizePolicy")
     @XmlSchemaType(name = "anySimpleType")
     protected String sizePolicy;
@@ -178,10 +177,10 @@ public class LayoutIntent
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getLayoutRef() {
+    public org.cip4.lib.xjdf.type.IDREF getLayoutRef() {
         return layoutRef;
     }
 
@@ -190,10 +189,10 @@ public class LayoutIntent
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setLayoutRef(Object value) {
+    public void setLayoutRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.layoutRef = value;
     }
 

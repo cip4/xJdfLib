@@ -37,6 +37,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="ProductID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
  *       &lt;attribute name="ProductType" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="ProductTypeDetails" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="AssemblyIDs" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -81,6 +82,8 @@ public class Product
     protected String productType;
     @XmlAttribute(name = "ProductTypeDetails")
     protected String productTypeDetails;
+    @XmlAttribute(name = "AssemblyIDs")
+    protected List<String> assemblyIDs;
 
     /**
      * Gets the value of the generalID property.
@@ -364,6 +367,35 @@ public class Product
      */
     public void setProductTypeDetails(String value) {
         this.productTypeDetails = value;
+    }
+
+    /**
+     * Gets the value of the assemblyIDs property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the assemblyIDs property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAssemblyIDs().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getAssemblyIDs() {
+        if (assemblyIDs == null) {
+            assemblyIDs = new ArrayList<String>();
+        }
+        return this.assemblyIDs;
     }
 
 }

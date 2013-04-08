@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -34,18 +34,18 @@ public class ContentList
 {
 
     @XmlAttribute(name = "ContentDataRef")
-    @XmlIDREF
-    protected Object contentDataRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF contentDataRef;
 
     /**
      * Gets the value of the contentDataRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getContentDataRef() {
+    public org.cip4.lib.xjdf.type.IDREF getContentDataRef() {
         return contentDataRef;
     }
 
@@ -54,10 +54,10 @@ public class ContentList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setContentDataRef(Object value) {
+    public void setContentDataRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.contentDataRef = value;
     }
 

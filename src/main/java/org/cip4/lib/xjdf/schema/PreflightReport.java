@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -61,14 +61,14 @@ public class PreflightReport
     @XmlAttribute(name = "ErrorCount")
     protected Integer errorCount;
     @XmlAttribute(name = "PreflightParamsRef")
-    @XmlIDREF
-    protected Object preflightParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF preflightParamsRef;
     @XmlAttribute(name = "RunListRef")
-    @XmlIDREF
-    protected Object runListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF runListRef;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
 
     /**
      * Gets the value of the preflightReportRulePool property.
@@ -205,10 +205,10 @@ public class PreflightReport
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getPreflightParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getPreflightParamsRef() {
         return preflightParamsRef;
     }
 
@@ -217,10 +217,10 @@ public class PreflightReport
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setPreflightParamsRef(Object value) {
+    public void setPreflightParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.preflightParamsRef = value;
     }
 
@@ -229,10 +229,10 @@ public class PreflightReport
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRunListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRunListRef() {
         return runListRef;
     }
 
@@ -241,10 +241,10 @@ public class PreflightReport
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRunListRef(Object value) {
+    public void setRunListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.runListRef = value;
     }
 
@@ -253,10 +253,10 @@ public class PreflightReport
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -265,10 +265,10 @@ public class PreflightReport
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 

@@ -5,10 +5,10 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -37,8 +37,8 @@ public class PreflightAction
 {
 
     @XmlAttribute(name = "SetRef")
-    @XmlIDREF
-    protected Object setRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF setRef;
     @XmlAttribute(name = "SetSplitBy")
     @XmlSchemaType(name = "anySimpleType")
     protected String setSplitBy;
@@ -48,10 +48,10 @@ public class PreflightAction
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getSetRef() {
+    public org.cip4.lib.xjdf.type.IDREF getSetRef() {
         return setRef;
     }
 
@@ -60,10 +60,10 @@ public class PreflightAction
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setSetRef(Object value) {
+    public void setSetRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.setRef = value;
     }
 

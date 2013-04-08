@@ -8,9 +8,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -51,8 +51,8 @@ public class PRItem
     @XmlAttribute(name = "Occurrences")
     protected Integer occurrences;
     @XmlAttribute(name = "ActionRef")
-    @XmlIDREF
-    protected Object actionRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF actionRef;
 
     /**
      * Gets the value of the prError property.
@@ -136,10 +136,10 @@ public class PRItem
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getActionRef() {
+    public org.cip4.lib.xjdf.type.IDREF getActionRef() {
         return actionRef;
     }
 
@@ -148,10 +148,10 @@ public class PRItem
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setActionRef(Object value) {
+    public void setActionRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.actionRef = value;
     }
 

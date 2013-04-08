@@ -29,12 +29,12 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Location" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Contact" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ResourceType" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ResourceType" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Part" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}GeneralID" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Comment" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Location" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Contact" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AmountProduced" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
  *       &lt;attribute name="Locked" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
@@ -84,30 +84,30 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "location",
-    "contact",
     "resourceType",
     "part",
     "generalID",
-    "comment"
+    "comment",
+    "location",
+    "contact"
 })
 @XmlRootElement(name = "Resource")
 public class Resource
     implements Serializable
 {
 
-    @XmlElement(name = "Location")
-    protected List<Location> location;
-    @XmlElement(name = "Contact")
-    protected List<Contact> contact;
-    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
-    protected List<JAXBElement<? extends ResourceType>> resourceType;
+    @XmlElementRef(name = "ResourceType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
+    protected JAXBElement<? extends ResourceType> resourceType;
     @XmlElement(name = "Part")
-    protected List<Part> part;
+    protected Part part;
     @XmlElement(name = "GeneralID")
     protected List<GeneralID> generalID;
     @XmlElement(name = "Comment")
     protected List<Comment> comment;
+    @XmlElement(name = "Location")
+    protected List<Location> location;
+    @XmlElement(name = "Contact")
+    protected List<Contact> contact;
     @XmlAttribute(name = "AmountProduced")
     protected Double amountProduced;
     @XmlAttribute(name = "Locked")
@@ -166,14 +166,14 @@ public class Resource
     @XmlAttribute(name = "Brand")
     protected String brand;
     @XmlAttribute(name = "QualityControlResultRef")
-    @XmlIDREF
-    protected Object qualityControlResultRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF qualityControlResultRef;
     @XmlAttribute(name = "SourceResourceRefs")
     @XmlIDREF
     protected List<Object> sourceResourceRefs;
     @XmlAttribute(name = "IdentificationFieldRef")
-    @XmlIDREF
-    protected Object identificationFieldRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF identificationFieldRef;
     @XmlAttribute(name = "AmountGood")
     protected Double amountGood;
     @XmlAttribute(name = "AmountWaste")
@@ -182,135 +182,81 @@ public class Resource
     protected String descriptiveName;
 
     /**
-     * Gets the value of the location property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the location property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getLocation().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Location }
-     * 
-     * 
-     */
-    public List<Location> getLocation() {
-        if (location == null) {
-            location = new ArrayList<Location>();
-        }
-        return this.location;
-    }
-
-    /**
-     * Gets the value of the contact property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the contact property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getContact().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Contact }
-     * 
-     * 
-     */
-    public List<Contact> getContact() {
-        if (contact == null) {
-            contact = new ArrayList<Contact>();
-        }
-        return this.contact;
-    }
-
-    /**
      * Gets the value of the resourceType property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the resourceType property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getResourceType().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     * {@link JAXBElement }{@code <}{@link RollStand }{@code >}
-     * {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     * {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
-     * {@link JAXBElement }{@code <}{@link Media }{@code >}
-     * {@link JAXBElement }{@code <}{@link Bundle }{@code >}
-     * {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link Employee }{@code >}
-     * {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     * {@link JAXBElement }{@code <}{@link Pallet }{@code >}
-     * {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     * {@link JAXBElement }{@code <}{@link Tool }{@code >}
-     * {@link JAXBElement }{@code <}{@link Component }{@code >}
-     * {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     * {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     * {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
-     * {@link JAXBElement }{@code <}{@link Device }{@code >}
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Device }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     *     
      */
-    public List<JAXBElement<? extends ResourceType>> getResourceType() {
-        if (resourceType == null) {
-            resourceType = new ArrayList<JAXBElement<? extends ResourceType>>();
-        }
-        return this.resourceType;
+    public JAXBElement<? extends ResourceType> getResourceType() {
+        return resourceType;
+    }
+
+    /**
+     * Sets the value of the resourceType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Device }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     *     {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     *     
+     */
+    public void setResourceType(JAXBElement<? extends ResourceType> value) {
+        this.resourceType = value;
     }
 
     /**
      * Gets the value of the part property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the part property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPart().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Part }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link Part }
+     *     
      */
-    public List<Part> getPart() {
-        if (part == null) {
-            part = new ArrayList<Part>();
-        }
-        return this.part;
+    public Part getPart() {
+        return part;
+    }
+
+    /**
+     * Sets the value of the part property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Part }
+     *     
+     */
+    public void setPart(Part value) {
+        this.part = value;
     }
 
     /**
@@ -369,6 +315,64 @@ public class Resource
             comment = new ArrayList<Comment>();
         }
         return this.comment;
+    }
+
+    /**
+     * Gets the value of the location property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the location property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getLocation().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Location }
+     * 
+     * 
+     */
+    public List<Location> getLocation() {
+        if (location == null) {
+            location = new ArrayList<Location>();
+        }
+        return this.location;
+    }
+
+    /**
+     * Gets the value of the contact property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the contact property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getContact().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Contact }
+     * 
+     * 
+     */
+    public List<Contact> getContact() {
+        if (contact == null) {
+            contact = new ArrayList<Contact>();
+        }
+        return this.contact;
     }
 
     /**
@@ -986,10 +990,10 @@ public class Resource
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getQualityControlResultRef() {
+    public org.cip4.lib.xjdf.type.IDREF getQualityControlResultRef() {
         return qualityControlResultRef;
     }
 
@@ -998,10 +1002,10 @@ public class Resource
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setQualityControlResultRef(Object value) {
+    public void setQualityControlResultRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.qualityControlResultRef = value;
     }
 
@@ -1039,10 +1043,10 @@ public class Resource
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getIdentificationFieldRef() {
+    public org.cip4.lib.xjdf.type.IDREF getIdentificationFieldRef() {
         return identificationFieldRef;
     }
 
@@ -1051,10 +1055,10 @@ public class Resource
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setIdentificationFieldRef(Object value) {
+    public void setIdentificationFieldRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.identificationFieldRef = value;
     }
 

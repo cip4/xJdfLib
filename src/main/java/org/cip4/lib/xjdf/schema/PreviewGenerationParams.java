@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -60,8 +59,8 @@ public class PreviewGenerationParams
     @XmlSchemaType(name = "anySimpleType")
     protected String compensation;
     @XmlAttribute(name = "ImageSetterParamsRef")
-    @XmlIDREF
-    protected Object imageSetterParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF imageSetterParamsRef;
 
     /**
      * Gets the value of the previewUsage property.
@@ -212,10 +211,10 @@ public class PreviewGenerationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getImageSetterParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getImageSetterParamsRef() {
         return imageSetterParamsRef;
     }
 
@@ -224,10 +223,10 @@ public class PreviewGenerationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setImageSetterParamsRef(Object value) {
+    public void setImageSetterParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.imageSetterParamsRef = value;
     }
 

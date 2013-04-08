@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -37,27 +37,27 @@ public class FormatConversionParams
 {
 
     @XmlAttribute(name = "TIFFFormatParamsRef")
-    @XmlIDREF
-    protected Object tiffFormatParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF tiffFormatParamsRef;
     @XmlAttribute(name = "ImageCompressionParamsRef")
-    @XmlIDREF
-    protected Object imageCompressionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF imageCompressionParamsRef;
     @XmlAttribute(name = "FileSpecRef")
-    @XmlIDREF
-    protected Object fileSpecRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF fileSpecRef;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
 
     /**
      * Gets the value of the tiffFormatParamsRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getTIFFFormatParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getTIFFFormatParamsRef() {
         return tiffFormatParamsRef;
     }
 
@@ -66,10 +66,10 @@ public class FormatConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setTIFFFormatParamsRef(Object value) {
+    public void setTIFFFormatParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.tiffFormatParamsRef = value;
     }
 
@@ -78,10 +78,10 @@ public class FormatConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getImageCompressionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getImageCompressionParamsRef() {
         return imageCompressionParamsRef;
     }
 
@@ -90,10 +90,10 @@ public class FormatConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setImageCompressionParamsRef(Object value) {
+    public void setImageCompressionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.imageCompressionParamsRef = value;
     }
 
@@ -102,10 +102,10 @@ public class FormatConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getFileSpecRef() {
+    public org.cip4.lib.xjdf.type.IDREF getFileSpecRef() {
         return fileSpecRef;
     }
 
@@ -114,10 +114,10 @@ public class FormatConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setFileSpecRef(Object value) {
+    public void setFileSpecRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.fileSpecRef = value;
     }
 
@@ -126,10 +126,10 @@ public class FormatConversionParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -138,10 +138,10 @@ public class FormatConversionParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 

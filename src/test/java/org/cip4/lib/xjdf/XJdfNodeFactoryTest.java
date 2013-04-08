@@ -34,6 +34,7 @@ import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
+import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
@@ -158,7 +159,7 @@ public class XJdfNodeFactoryTest {
 	public void testCreateChildProduct() {
 
 		// arrange
-		final String CHILDREF = UUID.randomUUID().toString();
+		final IDREF CHILDREF = new IDREF(UUID.randomUUID().toString());
 
 		// act
 		ChildProduct childProduct = xJdfNodeFactory.createChildProduct(CHILDREF);

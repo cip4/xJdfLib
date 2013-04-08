@@ -19,7 +19,7 @@ import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.util.IDGeneratorUtil;
+import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
@@ -93,12 +93,11 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	/**
 	 * Append Intent node to Product Definition.
 	 * @param intent Intent object to append to.
-	 * @return The current ProductBuilder instance.
 	 */
-	public ProductBuilder addIntent(IntentType intent) {
+	public void addIntent(IntentType intent) {
 
 		if (intent == null)
-			return this;
+			return;
 
 		// get parameter name
 		String intentName = intent.getClass().getSimpleName();
@@ -113,44 +112,32 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
 		// append intent to product
 		getProduct().getIntent().add(it);
-
-		// return current builder
-		return this;
 	}
 
 	/**
 	 * Append another product as child.
 	 * @param intent Intent object to append to.
-	 * @return The current ProductBuilder instance.
 	 * @throws ValidationException
 	 */
-	public ProductBuilder addChildProduct(Product product) throws ValidationException {
+	public void addChildProduct(IDREF childRef) throws ValidationException {
 
 		// if necessary, create root ID
-		if (getNode().getID() == null || getNode().getID().equals("")) {
-			getNode().setID(IDGeneratorUtil.generateID(ID_PREFIX));
-		}
+		// if (getNode().getID() == null || getNode().getID().equals("")) {
+		// getNode().setID(IDGeneratorUtil.generateID(ID_PREFIX));
+		// }
 
 		// if neccessary, create child ID
-		if (product.getID() == null || product.getID().equals("")) {
-			product.setID(IDGeneratorUtil.generateID(ID_PREFIX));
-		}
+		// if (product.getID() == null || product.getID().equals("")) {
+		// product.setID(IDGeneratorUtil.generateID(ID_PREFIX));
+		// }
 
 		// create child product
 		ChildProduct childProduct = xJdfNodeFactory.createChildProduct();
-		childProduct.setChildRef(product);
+		childProduct.setChildRef(childRef);
 		getProduct().getChildProduct().add(childProduct);
 
 		// set root flag
 		getProduct().setIsRoot(true);
-
-		// validation
-		if (product.getChildProduct().size() > 0) {
-			throw new ValidationException("A Child Product cannot have children!");
-		}
-
-		// return current builder
-		return this;
 	}
 
 }

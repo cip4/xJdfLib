@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -96,8 +95,8 @@ public class DeviceInfo
     @XmlAttribute(name = "DeviceID")
     protected String deviceID;
     @XmlAttribute(name = "DeviceRef")
-    @XmlIDREF
-    protected Object deviceRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF deviceRef;
 
     /**
      * Gets the value of the employee property.
@@ -479,10 +478,10 @@ public class DeviceInfo
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDeviceRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDeviceRef() {
         return deviceRef;
     }
 
@@ -491,10 +490,10 @@ public class DeviceInfo
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDeviceRef(Object value) {
+    public void setDeviceRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.deviceRef = value;
     }
 

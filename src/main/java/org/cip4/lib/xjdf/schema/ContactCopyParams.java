@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -56,8 +55,8 @@ public class ContactCopyParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair repeatStep;
     @XmlAttribute(name = "ScreeningParamsRef")
-    @XmlIDREF
-    protected Object screeningParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF screeningParamsRef;
 
     /**
      * Gets the value of the contactScreen property.
@@ -208,10 +207,10 @@ public class ContactCopyParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getScreeningParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getScreeningParamsRef() {
         return screeningParamsRef;
     }
 
@@ -220,10 +219,10 @@ public class ContactCopyParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setScreeningParamsRef(Object value) {
+    public void setScreeningParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.screeningParamsRef = value;
     }
 

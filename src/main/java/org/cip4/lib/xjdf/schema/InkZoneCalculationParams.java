@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -54,8 +53,8 @@ public class InkZoneCalculationParams
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
     protected org.cip4.lib.xjdf.type.Rectangle printableArea;
     @XmlAttribute(name = "DeviceRef")
-    @XmlIDREF
-    protected Object deviceRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF deviceRef;
 
     /**
      * Gets the value of the zoneWidth property.
@@ -206,10 +205,10 @@ public class InkZoneCalculationParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDeviceRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDeviceRef() {
         return deviceRef;
     }
 
@@ -218,10 +217,10 @@ public class InkZoneCalculationParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDeviceRef(Object value) {
+    public void setDeviceRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.deviceRef = value;
     }
 

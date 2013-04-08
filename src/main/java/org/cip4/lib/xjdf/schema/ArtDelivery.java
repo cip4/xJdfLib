@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
@@ -87,20 +86,20 @@ public class ArtDelivery
     @XmlAttribute(name = "Amount")
     protected Integer amount;
     @XmlAttribute(name = "ToolRef")
-    @XmlIDREF
-    protected Object toolRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF toolRef;
     @XmlAttribute(name = "ScanParamsRef")
-    @XmlIDREF
-    protected Object scanParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF scanParamsRef;
     @XmlAttribute(name = "ExposedMediaRef")
-    @XmlIDREF
-    protected Object exposedMediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF exposedMediaRef;
     @XmlAttribute(name = "RunListRef")
-    @XmlIDREF
-    protected Object runListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF runListRef;
     @XmlAttribute(name = "ComponentRef")
-    @XmlIDREF
-    protected Object componentRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF componentRef;
     @XmlAttribute(name = "ReturnMethod")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String returnMethod;
@@ -356,10 +355,10 @@ public class ArtDelivery
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getToolRef() {
+    public org.cip4.lib.xjdf.type.IDREF getToolRef() {
         return toolRef;
     }
 
@@ -368,10 +367,10 @@ public class ArtDelivery
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setToolRef(Object value) {
+    public void setToolRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.toolRef = value;
     }
 
@@ -380,10 +379,10 @@ public class ArtDelivery
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getScanParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getScanParamsRef() {
         return scanParamsRef;
     }
 
@@ -392,10 +391,10 @@ public class ArtDelivery
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setScanParamsRef(Object value) {
+    public void setScanParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.scanParamsRef = value;
     }
 
@@ -404,10 +403,10 @@ public class ArtDelivery
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getExposedMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getExposedMediaRef() {
         return exposedMediaRef;
     }
 
@@ -416,10 +415,10 @@ public class ArtDelivery
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setExposedMediaRef(Object value) {
+    public void setExposedMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.exposedMediaRef = value;
     }
 
@@ -428,10 +427,10 @@ public class ArtDelivery
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRunListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRunListRef() {
         return runListRef;
     }
 
@@ -440,10 +439,10 @@ public class ArtDelivery
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRunListRef(Object value) {
+    public void setRunListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.runListRef = value;
     }
 
@@ -452,10 +451,10 @@ public class ArtDelivery
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getComponentRef() {
+    public org.cip4.lib.xjdf.type.IDREF getComponentRef() {
         return componentRef;
     }
 
@@ -464,10 +463,10 @@ public class ArtDelivery
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setComponentRef(Object value) {
+    public void setComponentRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.componentRef = value;
     }
 

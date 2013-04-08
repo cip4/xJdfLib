@@ -79,7 +79,7 @@ public class Intent
     implements Serializable
 {
 
-    @XmlElementRef(name = "IntentType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
+    @XmlElementRef(name = "IntentType", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
     protected List<JAXBElement<? extends IntentType>> intentType;
     @XmlElement(name = "Part")
     protected List<Part> part;
@@ -124,8 +124,8 @@ public class Intent
     @XmlAttribute(name = "PipePartIDKeys")
     protected List<EnumPartIDKeys> pipePartIDKeys;
     @XmlAttribute(name = "QualityControlResultRef")
-    @XmlIDREF
-    protected Object qualityControlResultRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF qualityControlResultRef;
     @XmlAttribute(name = "SourceResourceRefs")
     @XmlIDREF
     protected List<Object> sourceResourceRefs;
@@ -150,24 +150,24 @@ public class Intent
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link SizeIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link LaminatingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link IntentType }{@code >}
-     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link ProductionIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link InsertingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProofingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link FoldingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link LaminatingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link PublishingIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link MediaIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link IntentResource }{@code >}
      * {@link JAXBElement }{@code <}{@link ColorIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ScreeningIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link LayoutIntent }{@code >}
-     * {@link JAXBElement }{@code <}{@link NumberingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link MediaIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link HoleMakingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link ShapeCuttingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link SizeIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link BindingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link PackingIntent }{@code >}
+     * {@link JAXBElement }{@code <}{@link FoldingIntent }{@code >}
      * {@link JAXBElement }{@code <}{@link EmbossingIntent }{@code >}
      * 
      * 
@@ -641,10 +641,10 @@ public class Intent
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getQualityControlResultRef() {
+    public org.cip4.lib.xjdf.type.IDREF getQualityControlResultRef() {
         return qualityControlResultRef;
     }
 
@@ -653,10 +653,10 @@ public class Intent
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setQualityControlResultRef(Object value) {
+    public void setQualityControlResultRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.qualityControlResultRef = value;
     }
 

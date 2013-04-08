@@ -10,7 +10,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementRef;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -31,6 +30,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}InsertSheet" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}PageCondition" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}LayerList" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Position" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}StripMark" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}BinderySignature" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}SignatureCell" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="SheetCountReset" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="OrdsConsumed" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerRangeList" />
@@ -45,7 +48,16 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="MaxCollect" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *       &lt;attribute name="SourceWorkStyle" type="{http://www.CIP4.org/JDFSchema_2_0}EnumWorkStyle" />
  *       &lt;attribute name="MinCollect" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
+ *       &lt;attribute name="WorkStyle" type="{http://www.CIP4.org/JDFSchema_2_0}EnumWorkStyle" />
+ *       &lt;attribute name="JobID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
+ *       &lt;attribute name="SectionList" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerList" />
+ *       &lt;attribute name="InnermostShingling" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
+ *       &lt;attribute name="AssemblyIDs" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
+ *       &lt;attribute name="AssemblyID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="DeviceRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
  *       &lt;attribute name="MediaRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
+ *       &lt;attribute name="OutermostShingling" type="{http://www.CIP4.org/JDFSchema_2_0}double" />
+ *       &lt;attribute name="ExternalImpositionTemplateRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
  *     &lt;/extension>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -59,14 +71,18 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     "transferCurvePool",
     "insertSheet",
     "pageCondition",
-    "layerList"
+    "layerList",
+    "position",
+    "stripMark",
+    "binderySignature",
+    "signatureCell"
 })
 public class Layout
     extends ParameterType
     implements Serializable
 {
 
-    @XmlElementRef(name = "PlacedObject", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class)
+    @XmlElementRef(name = "PlacedObject", namespace = "http://www.CIP4.org/JDFSchema_2_0", type = JAXBElement.class, required = false)
     protected List<JAXBElement<? extends PlacedObject>> placedObject;
     @XmlElement(name = "TransferCurvePool")
     protected List<TransferCurvePool> transferCurvePool;
@@ -76,6 +92,14 @@ public class Layout
     protected List<PageCondition> pageCondition;
     @XmlElement(name = "LayerList")
     protected List<LayerList> layerList;
+    @XmlElement(name = "Position")
+    protected List<Position> position;
+    @XmlElement(name = "StripMark")
+    protected List<StripMark> stripMark;
+    @XmlElement(name = "BinderySignature")
+    protected List<BinderySignature> binderySignature;
+    @XmlElement(name = "SignatureCell")
+    protected List<SignatureCell> signatureCell;
     @XmlAttribute(name = "SheetCountReset")
     @XmlSchemaType(name = "anySimpleType")
     protected String sheetCountReset;
@@ -106,9 +130,30 @@ public class Layout
     protected EnumWorkStyle sourceWorkStyle;
     @XmlAttribute(name = "MinCollect")
     protected Integer minCollect;
+    @XmlAttribute(name = "WorkStyle")
+    protected EnumWorkStyle workStyle;
+    @XmlAttribute(name = "JobID")
+    protected String jobID;
+    @XmlAttribute(name = "SectionList")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
+    protected org.cip4.lib.xjdf.type.IntegerList sectionList;
+    @XmlAttribute(name = "InnermostShingling")
+    protected Double innermostShingling;
+    @XmlAttribute(name = "AssemblyIDs")
+    protected List<String> assemblyIDs;
+    @XmlAttribute(name = "AssemblyID")
+    protected String assemblyID;
+    @XmlAttribute(name = "DeviceRef")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF deviceRef;
     @XmlAttribute(name = "MediaRef")
-    @XmlIDREF
-    protected Object mediaRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF mediaRef;
+    @XmlAttribute(name = "OutermostShingling")
+    protected Double outermostShingling;
+    @XmlAttribute(name = "ExternalImpositionTemplateRef")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF externalImpositionTemplateRef;
 
     /**
      * Gets the value of the placedObject property.
@@ -128,9 +173,9 @@ public class Layout
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
-     * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
      * {@link JAXBElement }{@code <}{@link ContentObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
      * 
      * 
      */
@@ -255,6 +300,122 @@ public class Layout
             layerList = new ArrayList<LayerList>();
         }
         return this.layerList;
+    }
+
+    /**
+     * Gets the value of the position property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the position property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPosition().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Position }
+     * 
+     * 
+     */
+    public List<Position> getPosition() {
+        if (position == null) {
+            position = new ArrayList<Position>();
+        }
+        return this.position;
+    }
+
+    /**
+     * Gets the value of the stripMark property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the stripMark property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getStripMark().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link StripMark }
+     * 
+     * 
+     */
+    public List<StripMark> getStripMark() {
+        if (stripMark == null) {
+            stripMark = new ArrayList<StripMark>();
+        }
+        return this.stripMark;
+    }
+
+    /**
+     * Gets the value of the binderySignature property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the binderySignature property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getBinderySignature().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link BinderySignature }
+     * 
+     * 
+     */
+    public List<BinderySignature> getBinderySignature() {
+        if (binderySignature == null) {
+            binderySignature = new ArrayList<BinderySignature>();
+        }
+        return this.binderySignature;
+    }
+
+    /**
+     * Gets the value of the signatureCell property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the signatureCell property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getSignatureCell().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link SignatureCell }
+     * 
+     * 
+     */
+    public List<SignatureCell> getSignatureCell() {
+        if (signatureCell == null) {
+            signatureCell = new ArrayList<SignatureCell>();
+        }
+        return this.signatureCell;
     }
 
     /**
@@ -570,14 +731,187 @@ public class Layout
     }
 
     /**
+     * Gets the value of the workStyle property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link EnumWorkStyle }
+     *     
+     */
+    public EnumWorkStyle getWorkStyle() {
+        return workStyle;
+    }
+
+    /**
+     * Sets the value of the workStyle property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link EnumWorkStyle }
+     *     
+     */
+    public void setWorkStyle(EnumWorkStyle value) {
+        this.workStyle = value;
+    }
+
+    /**
+     * Gets the value of the jobID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getJobID() {
+        return jobID;
+    }
+
+    /**
+     * Sets the value of the jobID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setJobID(String value) {
+        this.jobID = value;
+    }
+
+    /**
+     * Gets the value of the sectionList property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.IntegerList getSectionList() {
+        return sectionList;
+    }
+
+    /**
+     * Sets the value of the sectionList property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setSectionList(org.cip4.lib.xjdf.type.IntegerList value) {
+        this.sectionList = value;
+    }
+
+    /**
+     * Gets the value of the innermostShingling property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
+     */
+    public Double getInnermostShingling() {
+        return innermostShingling;
+    }
+
+    /**
+     * Sets the value of the innermostShingling property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
+     */
+    public void setInnermostShingling(Double value) {
+        this.innermostShingling = value;
+    }
+
+    /**
+     * Gets the value of the assemblyIDs property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the assemblyIDs property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getAssemblyIDs().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getAssemblyIDs() {
+        if (assemblyIDs == null) {
+            assemblyIDs = new ArrayList<String>();
+        }
+        return this.assemblyIDs;
+    }
+
+    /**
+     * Gets the value of the assemblyID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAssemblyID() {
+        return assemblyID;
+    }
+
+    /**
+     * Sets the value of the assemblyID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAssemblyID(String value) {
+        this.assemblyID = value;
+    }
+
+    /**
+     * Gets the value of the deviceRef property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.IDREF getDeviceRef() {
+        return deviceRef;
+    }
+
+    /**
+     * Sets the value of the deviceRef property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setDeviceRef(org.cip4.lib.xjdf.type.IDREF value) {
+        this.deviceRef = value;
+    }
+
+    /**
      * Gets the value of the mediaRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getMediaRef() {
+    public org.cip4.lib.xjdf.type.IDREF getMediaRef() {
         return mediaRef;
     }
 
@@ -586,11 +920,59 @@ public class Layout
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setMediaRef(Object value) {
+    public void setMediaRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.mediaRef = value;
+    }
+
+    /**
+     * Gets the value of the outermostShingling property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Double }
+     *     
+     */
+    public Double getOutermostShingling() {
+        return outermostShingling;
+    }
+
+    /**
+     * Sets the value of the outermostShingling property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Double }
+     *     
+     */
+    public void setOutermostShingling(Double value) {
+        this.outermostShingling = value;
+    }
+
+    /**
+     * Gets the value of the externalImpositionTemplateRef property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.IDREF getExternalImpositionTemplateRef() {
+        return externalImpositionTemplateRef;
+    }
+
+    /**
+     * Sets the value of the externalImpositionTemplateRef property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setExternalImpositionTemplateRef(org.cip4.lib.xjdf.type.IDREF value) {
+        this.externalImpositionTemplateRef = value;
     }
 
 }

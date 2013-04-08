@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -93,8 +93,8 @@ public class ConventionalPrintingParams
     @XmlAttribute(name = "Powder")
     protected Double powder;
     @XmlAttribute(name = "ApprovalParamsRef")
-    @XmlIDREF
-    protected Object approvalParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF approvalParamsRef;
 
     /**
      * Gets the value of the workStyle property.
@@ -509,10 +509,10 @@ public class ConventionalPrintingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getApprovalParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getApprovalParamsRef() {
         return approvalParamsRef;
     }
 
@@ -521,10 +521,10 @@ public class ConventionalPrintingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setApprovalParamsRef(Object value) {
+    public void setApprovalParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.approvalParamsRef = value;
     }
 

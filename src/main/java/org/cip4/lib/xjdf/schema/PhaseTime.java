@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -75,9 +74,9 @@ public class PhaseTime
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute
-    @XmlIDREF
-    protected Object refID;
+    @XmlAttribute(name = "refID")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF refID;
     @XmlAttribute(name = "Status")
     protected EnumNodeStatus status;
     @XmlAttribute(name = "TimeStamp")
@@ -96,8 +95,8 @@ public class PhaseTime
     @XmlAttribute(name = "AgentVersion")
     protected String agentVersion;
     @XmlAttribute(name = "DeviceRef")
-    @XmlIDREF
-    protected Object deviceRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF deviceRef;
 
     /**
      * Gets the value of the employee property.
@@ -268,10 +267,10 @@ public class PhaseTime
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRefID() {
+    public org.cip4.lib.xjdf.type.IDREF getRefID() {
         return refID;
     }
 
@@ -280,10 +279,10 @@ public class PhaseTime
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRefID(Object value) {
+    public void setRefID(org.cip4.lib.xjdf.type.IDREF value) {
         this.refID = value;
     }
 
@@ -460,10 +459,10 @@ public class PhaseTime
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getDeviceRef() {
+    public org.cip4.lib.xjdf.type.IDREF getDeviceRef() {
         return deviceRef;
     }
 
@@ -472,10 +471,10 @@ public class PhaseTime
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setDeviceRef(Object value) {
+    public void setDeviceRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.deviceRef = value;
     }
 

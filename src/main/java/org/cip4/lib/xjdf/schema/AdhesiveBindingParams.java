@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -36,24 +36,24 @@ public class AdhesiveBindingParams
 {
 
     @XmlAttribute(name = "CoverApplicationParamsRef")
-    @XmlIDREF
-    protected Object coverApplicationParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF coverApplicationParamsRef;
     @XmlAttribute(name = "SpineTapingParamsRef")
-    @XmlIDREF
-    protected Object spineTapingParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF spineTapingParamsRef;
     @XmlAttribute(name = "SpinePreparationParamsRef")
-    @XmlIDREF
-    protected Object spinePreparationParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF spinePreparationParamsRef;
 
     /**
      * Gets the value of the coverApplicationParamsRef property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getCoverApplicationParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getCoverApplicationParamsRef() {
         return coverApplicationParamsRef;
     }
 
@@ -62,10 +62,10 @@ public class AdhesiveBindingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setCoverApplicationParamsRef(Object value) {
+    public void setCoverApplicationParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.coverApplicationParamsRef = value;
     }
 
@@ -74,10 +74,10 @@ public class AdhesiveBindingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getSpineTapingParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getSpineTapingParamsRef() {
         return spineTapingParamsRef;
     }
 
@@ -86,10 +86,10 @@ public class AdhesiveBindingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setSpineTapingParamsRef(Object value) {
+    public void setSpineTapingParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.spineTapingParamsRef = value;
     }
 
@@ -98,10 +98,10 @@ public class AdhesiveBindingParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getSpinePreparationParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getSpinePreparationParamsRef() {
         return spinePreparationParamsRef;
     }
 
@@ -110,10 +110,10 @@ public class AdhesiveBindingParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setSpinePreparationParamsRef(Object value) {
+    public void setSpinePreparationParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.spinePreparationParamsRef = value;
     }
 

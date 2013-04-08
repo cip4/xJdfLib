@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -52,8 +52,8 @@ public class TrappingDetails
     @XmlAttribute(name = "DefaultTrapping")
     protected Boolean defaultTrapping;
     @XmlAttribute(name = "TrappingParamsRef")
-    @XmlIDREF
-    protected Object trappingParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF trappingParamsRef;
     @XmlAttribute(name = "TrappingOrder")
     protected List<String> trappingOrder;
 
@@ -144,10 +144,10 @@ public class TrappingDetails
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getTrappingParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getTrappingParamsRef() {
         return trappingParamsRef;
     }
 
@@ -156,10 +156,10 @@ public class TrappingDetails
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setTrappingParamsRef(Object value) {
+    public void setTrappingParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.trappingParamsRef = value;
     }
 

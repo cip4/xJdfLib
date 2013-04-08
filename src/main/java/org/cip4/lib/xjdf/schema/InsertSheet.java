@@ -7,7 +7,6 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -62,11 +61,11 @@ public class InsertSheet
     @XmlSchemaType(name = "anySimpleType")
     protected String includeInBundleItem;
     @XmlAttribute(name = "LayoutRef")
-    @XmlIDREF
-    protected Object layoutRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF layoutRef;
     @XmlAttribute(name = "RunListRef")
-    @XmlIDREF
-    protected Object runListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF runListRef;
 
     /**
      * Gets the value of the sheetType property.
@@ -222,10 +221,10 @@ public class InsertSheet
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getLayoutRef() {
+    public org.cip4.lib.xjdf.type.IDREF getLayoutRef() {
         return layoutRef;
     }
 
@@ -234,10 +233,10 @@ public class InsertSheet
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setLayoutRef(Object value) {
+    public void setLayoutRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.layoutRef = value;
     }
 
@@ -246,10 +245,10 @@ public class InsertSheet
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getRunListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getRunListRef() {
         return runListRef;
     }
 
@@ -258,10 +257,10 @@ public class InsertSheet
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setRunListRef(Object value) {
+    public void setRunListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.runListRef = value;
     }
 

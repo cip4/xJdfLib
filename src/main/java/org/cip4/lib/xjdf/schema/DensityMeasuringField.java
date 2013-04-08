@@ -5,7 +5,6 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -77,8 +76,8 @@ public class DensityMeasuringField
     @XmlAttribute(name = "Diameter")
     protected Double diameter;
     @XmlAttribute(name = "ColorMeasurementConditionsRef")
-    @XmlIDREF
-    protected Object colorMeasurementConditionsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorMeasurementConditionsRef;
 
     /**
      * Gets the value of the toleranceDotGain property.
@@ -373,10 +372,10 @@ public class DensityMeasuringField
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorMeasurementConditionsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorMeasurementConditionsRef() {
         return colorMeasurementConditionsRef;
     }
 
@@ -385,10 +384,10 @@ public class DensityMeasuringField
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorMeasurementConditionsRef(Object value) {
+    public void setColorMeasurementConditionsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorMeasurementConditionsRef = value;
     }
 

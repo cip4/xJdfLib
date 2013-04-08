@@ -5,8 +5,8 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -40,8 +40,8 @@ public class TrapRegion
     @XmlAttribute(name = "TrapZone")
     protected String trapZone;
     @XmlAttribute(name = "TrappingParamsRef")
-    @XmlIDREF
-    protected Object trappingParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF trappingParamsRef;
 
     /**
      * Gets the value of the pages property.
@@ -96,10 +96,10 @@ public class TrapRegion
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getTrappingParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getTrappingParamsRef() {
         return trappingParamsRef;
     }
 
@@ -108,10 +108,10 @@ public class TrapRegion
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setTrappingParamsRef(Object value) {
+    public void setTrappingParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.trappingParamsRef = value;
     }
 

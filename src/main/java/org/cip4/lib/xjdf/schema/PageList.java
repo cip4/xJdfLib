@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
@@ -90,20 +89,20 @@ public class PageList
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Rectangle.class)
     protected org.cip4.lib.xjdf.type.Rectangle sourceBleedBox;
     @XmlAttribute(name = "ElementColorParamsRef")
-    @XmlIDREF
-    protected Object elementColorParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF elementColorParamsRef;
     @XmlAttribute(name = "ContentListRef")
-    @XmlIDREF
-    protected Object contentListRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF contentListRef;
     @XmlAttribute(name = "ImageCompressionParamsRef")
-    @XmlIDREF
-    protected Object imageCompressionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF imageCompressionParamsRef;
     @XmlAttribute(name = "ColorRef")
-    @XmlIDREF
-    protected Object colorRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF colorRef;
     @XmlAttribute(name = "ScreeningParamsRef")
-    @XmlIDREF
-    protected Object screeningParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF screeningParamsRef;
     @XmlAttribute(name = "SeparationNames")
     protected List<String> separationNames;
 
@@ -439,10 +438,10 @@ public class PageList
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getElementColorParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getElementColorParamsRef() {
         return elementColorParamsRef;
     }
 
@@ -451,10 +450,10 @@ public class PageList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setElementColorParamsRef(Object value) {
+    public void setElementColorParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.elementColorParamsRef = value;
     }
 
@@ -463,10 +462,10 @@ public class PageList
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getContentListRef() {
+    public org.cip4.lib.xjdf.type.IDREF getContentListRef() {
         return contentListRef;
     }
 
@@ -475,10 +474,10 @@ public class PageList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setContentListRef(Object value) {
+    public void setContentListRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.contentListRef = value;
     }
 
@@ -487,10 +486,10 @@ public class PageList
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getImageCompressionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getImageCompressionParamsRef() {
         return imageCompressionParamsRef;
     }
 
@@ -499,10 +498,10 @@ public class PageList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setImageCompressionParamsRef(Object value) {
+    public void setImageCompressionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.imageCompressionParamsRef = value;
     }
 
@@ -511,10 +510,10 @@ public class PageList
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getColorRef() {
+    public org.cip4.lib.xjdf.type.IDREF getColorRef() {
         return colorRef;
     }
 
@@ -523,10 +522,10 @@ public class PageList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setColorRef(Object value) {
+    public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
     }
 
@@ -535,10 +534,10 @@ public class PageList
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getScreeningParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getScreeningParamsRef() {
         return screeningParamsRef;
     }
 
@@ -547,10 +546,10 @@ public class PageList
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setScreeningParamsRef(Object value) {
+    public void setScreeningParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.screeningParamsRef = value;
     }
 

@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -50,8 +49,8 @@ public class CylinderLayout
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String deviceID;
     @XmlAttribute(name = "LayoutRef")
-    @XmlIDREF
-    protected Object layoutRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF layoutRef;
 
     /**
      * Gets the value of the cylinderPosition property.
@@ -111,10 +110,10 @@ public class CylinderLayout
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getLayoutRef() {
+    public org.cip4.lib.xjdf.type.IDREF getLayoutRef() {
         return layoutRef;
     }
 
@@ -123,10 +122,10 @@ public class CylinderLayout
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setLayoutRef(Object value) {
+    public void setLayoutRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.layoutRef = value;
     }
 

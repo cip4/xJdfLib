@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
@@ -57,8 +56,8 @@ public class LayoutElementPart
     @XmlID
     protected String id;
     @XmlAttribute(name = "BarcodeProductionParamsRef")
-    @XmlIDREF
-    protected Object barcodeProductionParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF barcodeProductionParamsRef;
 
     /**
      * Gets the value of the positionObj property.
@@ -147,10 +146,10 @@ public class LayoutElementPart
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBarcodeProductionParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getBarcodeProductionParamsRef() {
         return barcodeProductionParamsRef;
     }
 
@@ -159,10 +158,10 @@ public class LayoutElementPart
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBarcodeProductionParamsRef(Object value) {
+    public void setBarcodeProductionParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.barcodeProductionParamsRef = value;
     }
 

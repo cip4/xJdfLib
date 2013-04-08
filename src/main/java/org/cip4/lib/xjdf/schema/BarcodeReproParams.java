@@ -5,9 +5,9 @@ import java.io.Serializable;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -58,8 +58,8 @@ public class BarcodeReproParams
     @XmlSchemaType(name = "anySimpleType")
     protected String bearerBars;
     @XmlAttribute(name = "BarcodeCompParamsRef")
-    @XmlIDREF
-    protected Object barcodeCompParamsRef;
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF barcodeCompParamsRef;
 
     /**
      * Gets the value of the magnification property.
@@ -234,10 +234,10 @@ public class BarcodeReproParams
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public Object getBarcodeCompParamsRef() {
+    public org.cip4.lib.xjdf.type.IDREF getBarcodeCompParamsRef() {
         return barcodeCompParamsRef;
     }
 
@@ -246,10 +246,10 @@ public class BarcodeReproParams
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link String }
      *     
      */
-    public void setBarcodeCompParamsRef(Object value) {
+    public void setBarcodeCompParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.barcodeCompParamsRef = value;
     }
 

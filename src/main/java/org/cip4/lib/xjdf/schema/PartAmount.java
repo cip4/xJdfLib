@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * &lt;complexType>
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="rRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
+ *       &lt;attribute name="Amount" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -29,37 +28,36 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "")
-@XmlRootElement(name = "call")
-public class Call
+@XmlRootElement(name = "PartAmount")
+public class PartAmount
     implements Serializable
 {
 
-    @XmlAttribute(name = "rRef")
-    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
-    protected org.cip4.lib.xjdf.type.IDREF rRef;
+    @XmlAttribute(name = "Amount")
+    protected Integer amount;
 
     /**
-     * Gets the value of the rRef property.
+     * Gets the value of the amount property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public org.cip4.lib.xjdf.type.IDREF getRRef() {
-        return rRef;
+    public Integer getAmount() {
+        return amount;
     }
 
     /**
-     * Sets the value of the rRef property.
+     * Sets the value of the amount property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link Integer }
      *     
      */
-    public void setRRef(org.cip4.lib.xjdf.type.IDREF value) {
-        this.rRef = value;
+    public void setAmount(Integer value) {
+        this.amount = value;
     }
 
 }
