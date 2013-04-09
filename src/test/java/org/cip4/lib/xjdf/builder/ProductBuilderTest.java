@@ -167,7 +167,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 		XJdfBuilder xJdfBuilder = new XJdfBuilder();
 		xJdfBuilder.addProduct(pbRoot.build());
 		xJdfBuilder.addProduct(childRef_1.getProduct());
-		xJdfBuilder.addProduct(childRef_1.getProduct());
+		xJdfBuilder.addProduct(childRef_2.getProduct());
 
 		// assert
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
