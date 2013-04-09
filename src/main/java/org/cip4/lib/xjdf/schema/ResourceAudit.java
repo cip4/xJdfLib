@@ -72,7 +72,7 @@ public class ResourceAudit
     protected String id;
     @XmlAttribute(name = "NodeStatus")
     protected EnumNodeStatus nodeStatus;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF refID;
     @XmlAttribute(name = "TimeStamp")

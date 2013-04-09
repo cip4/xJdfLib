@@ -74,7 +74,7 @@ public class Acknowledge
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String refID;
     @XmlAttribute(name = "Time")

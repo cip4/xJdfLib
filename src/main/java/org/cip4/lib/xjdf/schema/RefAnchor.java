@@ -38,7 +38,7 @@ public class RefAnchor
 
     @XmlAttribute(name = "Anchor")
     protected EnumAnchor anchor;
-    @XmlAttribute(name = "rRef")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF rRef;
     @XmlAttribute(name = "AnchorType")

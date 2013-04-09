@@ -110,7 +110,7 @@ public class Notification
     @XmlAttribute(name = "Class")
     @XmlSchemaType(name = "anySimpleType")
     protected String clazz;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF refID;
     @XmlAttribute(name = "TimeStamp")
