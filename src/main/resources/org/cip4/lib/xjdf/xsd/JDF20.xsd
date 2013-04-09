@@ -887,6 +887,7 @@
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 			<xs:attribute name="Amount" type="integer" use="optional" />
 			<xs:attribute name="ProductID" type="shortString" use="optional" />
+			<xs:attribute name="JobID" type="shortString" use="optional" />
 			<xs:attribute name="ProductType" type="NMTOKEN" use="optional" />
 			<xs:attribute name="ProductTypeDetails" type="string" use="optional" />
 			<xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional" />
@@ -3308,6 +3309,7 @@
 			<xs:attribute name="DeliveryUnit7" type="Any" use="optional" />
 			<xs:attribute name="DeliveryUnit6" type="Any" use="optional" />
 			<xs:attribute name="Run" type="NMTOKEN" use="optional" />
+			<xs:attribute name="ProductPart" type="NMTOKEN" use="optional" />
 			<xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional" />
 			<xs:attribute name="DeliveryUnit1" type="Any" use="optional" />
 			<xs:attribute name="DeliveryUnit0" type="Any" use="optional" />

@@ -61,10 +61,10 @@ public class Created
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute(name = "refID")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF refID;
-    @XmlAttribute(name = "ref")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF ref;
     @XmlAttribute(name = "TemplateVersion")

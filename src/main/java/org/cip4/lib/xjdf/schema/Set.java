@@ -44,7 +44,7 @@ public class Set
 
     @XmlElement(name = "FeatureAttribute")
     protected List<FeatureAttribute> featureAttribute;
-    @XmlAttribute(name = "rRef")
+    @XmlAttribute
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF rRef;
 

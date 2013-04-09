@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="DescriptiveName" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="Amount" type="{http://www.CIP4.org/JDFSchema_2_0}integer" />
  *       &lt;attribute name="ProductID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
+ *       &lt;attribute name="JobID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
  *       &lt;attribute name="ProductType" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="ProductTypeDetails" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="AssemblyIDs" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
@@ -77,6 +78,8 @@ public class Product
     protected Integer amount;
     @XmlAttribute(name = "ProductID")
     protected String productID;
+    @XmlAttribute(name = "JobID")
+    protected String jobID;
     @XmlAttribute(name = "ProductType")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String productType;
@@ -319,6 +322,30 @@ public class Product
      */
     public void setProductID(String value) {
         this.productID = value;
+    }
+
+    /**
+     * Gets the value of the jobID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getJobID() {
+        return jobID;
+    }
+
+    /**
+     * Sets the value of the jobID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setJobID(String value) {
+        this.jobID = value;
     }
 
     /**

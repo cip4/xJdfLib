@@ -52,6 +52,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="DeliveryUnit7" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="DeliveryUnit6" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="Run" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
+ *       &lt;attribute name="ProductPart" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="DocRunIndex" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerRangeList" />
  *       &lt;attribute name="DeliveryUnit1" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="DeliveryUnit0" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
@@ -170,6 +171,9 @@ public class Part
     @XmlAttribute(name = "Run")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String run;
+    @XmlAttribute(name = "ProductPart")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String productPart;
     @XmlAttribute(name = "DocRunIndex")
     protected Integer docRunIndex;
     @XmlAttribute(name = "DeliveryUnit1")
@@ -958,6 +962,30 @@ public class Part
      */
     public void setRun(String value) {
         this.run = value;
+    }
+
+    /**
+     * Gets the value of the productPart property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getProductPart() {
+        return productPart;
+    }
+
+    /**
+     * Sets the value of the productPart property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setProductPart(String value) {
+        this.productPart = value;
     }
 
     /**
