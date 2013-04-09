@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ColorSpaceSubstitute" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}ColorantAlias" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="ColorantParams" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *       &lt;attribute name="ProcessColorModel" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="ForceSeparations" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
  *       &lt;attribute name="ColorRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
- *       &lt;attribute name="ColorantParamsRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
  *       &lt;attribute name="DeviceColorantOrder" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *       &lt;attribute name="ColorantConvertProcess" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
  *       &lt;attribute name="ColorantOrder" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKENS" />
@@ -58,6 +58,8 @@ public class ColorantControl
     protected List<ColorSpaceSubstitute> colorSpaceSubstitute;
     @XmlElement(name = "ColorantAlias")
     protected List<ColorantAlias> colorantAlias;
+    @XmlAttribute(name = "ColorantParams")
+    protected List<String> colorantParams;
     @XmlAttribute(name = "ProcessColorModel")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String processColorModel;
@@ -66,9 +68,6 @@ public class ColorantControl
     @XmlAttribute(name = "ColorRef")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF colorRef;
-    @XmlAttribute(name = "ColorantParamsRef")
-    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
-    protected org.cip4.lib.xjdf.type.IDREF colorantParamsRef;
     @XmlAttribute(name = "DeviceColorantOrder")
     protected List<String> deviceColorantOrder;
     @XmlAttribute(name = "ColorantConvertProcess")
@@ -164,6 +163,35 @@ public class ColorantControl
     }
 
     /**
+     * Gets the value of the colorantParams property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the colorantParams property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getColorantParams().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link String }
+     * 
+     * 
+     */
+    public List<String> getColorantParams() {
+        if (colorantParams == null) {
+            colorantParams = new ArrayList<String>();
+        }
+        return this.colorantParams;
+    }
+
+    /**
      * Gets the value of the processColorModel property.
      * 
      * @return
@@ -233,30 +261,6 @@ public class ColorantControl
      */
     public void setColorRef(org.cip4.lib.xjdf.type.IDREF value) {
         this.colorRef = value;
-    }
-
-    /**
-     * Gets the value of the colorantParamsRef property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public org.cip4.lib.xjdf.type.IDREF getColorantParamsRef() {
-        return colorantParamsRef;
-    }
-
-    /**
-     * Sets the value of the colorantParamsRef property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setColorantParamsRef(org.cip4.lib.xjdf.type.IDREF value) {
-        this.colorantParamsRef = value;
     }
 
     /**

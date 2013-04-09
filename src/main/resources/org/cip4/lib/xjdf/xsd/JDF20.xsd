@@ -5651,10 +5651,10 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorSpaceSubstitute" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias" />
 				</xs:sequence>
+				<xs:attribute name="ColorantParams" type="NMTOKENS" use="optional" />
 				<xs:attribute name="ProcessColorModel" type="NMTOKEN" use="optional" />
 				<xs:attribute name="ForceSeparations" type="boolean" use="optional" />
 				<xs:attribute name="ColorRef" type="IDREF" use="optional" />
-				<xs:attribute name="ColorantParamsRef" type="IDREF" use="optional" />
 				<xs:attribute name="DeviceColorantOrder" type="NMTOKENS" use="optional" />
 				<xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional" />
 				<xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional" />
