@@ -15,29 +15,37 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.cip4.lib.xjdf.schema.AmountPool;
 import org.cip4.lib.xjdf.schema.ApprovalParams;
+import org.cip4.lib.xjdf.schema.BinderySignature;
 import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.ColorIntent;
+import org.cip4.lib.xjdf.schema.ColorantControl;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.ContentObject;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
+import org.cip4.lib.xjdf.schema.EnumOrientation;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MarkObject;
+import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
+import org.cip4.lib.xjdf.schema.PartAmount;
+import org.cip4.lib.xjdf.schema.Position;
 import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.ProductionIntent;
 import org.cip4.lib.xjdf.schema.ProofItem;
 import org.cip4.lib.xjdf.schema.ProofingIntent;
 import org.cip4.lib.xjdf.schema.RunList;
+import org.cip4.lib.xjdf.schema.SignatureCell;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.IDREF;
@@ -528,5 +536,122 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return contentObject;
+	}
+
+	/**
+	 * Create a new Media Node which already contains defined attributes.
+	 * @param dimensions Value of Dimensions attribute as XYPair.
+	 * @param mediaQuality Value of MediaQuality as String.
+	 * @return Media Node which already contains defined attributes.
+	 */
+	public Media createMedia(XYPair dimensions, String mediaQuality) {
+
+		// create Media Node
+		Media media = super.createMedia();
+
+		// set attributes
+		media.setDimension(dimensions);
+		media.setMediaQuality(mediaQuality);
+
+		// return node
+		return media;
+	}
+
+	/**
+	 * Create a new BinderySignature Node which already contains defined attributes.
+	 * @param foldCatalog Value of FoldCatalog attribute as String.
+	 * @return BinderySignature Node which already contains defined attributes.
+	 */
+	public BinderySignature createBinderySignature(String foldCatalog) {
+
+		// create BinderySignature Node
+		BinderySignature binderySignature = super.createBinderySignature();
+
+		// set attributes
+		binderySignature.setFoldCatalog(foldCatalog);
+
+		// return node
+		return binderySignature;
+	}
+
+	/**
+	 * Create a new SignatureCell Node which already contains defined attributes.
+	 * @param trim All Trim attributes (TrimFace, TrimFoot, TrimHead, TrimSpine) as Double.
+	 * @param trimBox TrimBox attribute as Double.
+	 * @param backOverfold BackOverfold attribute as Double.
+	 * @param frontOverfold FrontOverfold attribute as Double.
+	 * @return SignatureCell Node which already contains defined attributes.
+	 */
+	public SignatureCell createSignatureCell(Double trim, XYPair trimBox, Double backOverfold, Double frontOverfold) {
+
+		// create SignatureCell Node
+		SignatureCell signatureCell = super.createSignatureCell();
+
+		// set attributes
+		signatureCell.setBackOverfold(backOverfold);
+		signatureCell.setFrontOverfold(frontOverfold);
+		signatureCell.setTrimFace(trim);
+		signatureCell.setTrimFoot(trim);
+		signatureCell.setTrimHead(trim);
+		signatureCell.setSpine(trim);
+		signatureCell.setTrimSize(trimBox);
+
+		// return node
+		return signatureCell;
+	}
+
+	/**
+	 * Create a new Position Node which already contains defined attributes.
+	 * @param absoluteBox AbsoluteBox attribute as Rectangle.
+	 * @param orientation Orientation attribute as EnumOrientation.
+	 * @return Position Node which already contains defined attributes.
+	 */
+	public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation) {
+
+		// create Position Node
+		Position position = super.createPosition();
+
+		// set attributes
+		position.setAbsoluteBox(absoluteBox);
+		position.setOrientation(orientation);
+
+		// return node
+		return position;
+	}
+
+	/**
+	 * Create a new AmountPool Node which already contains a PartAmount Subelement with attribute amount.
+	 * @param amount Amount attribute of Subnode PartAmount.
+	 * @return AmountPool Node which already contains a PartAmount Subelement with attribute amount.
+	 */
+	public AmountPool createAmountPool(Integer amount) {
+
+		// create AmountPool Node
+		AmountPool amountPool = super.createAmountPool();
+
+		// set attributes
+		PartAmount partAmount = super.createPartAmount();
+		partAmount.setAmount(amount);
+		amountPool.getPartAmount().add(partAmount);
+
+		// return node
+		return amountPool;
+	}
+
+	/**
+	 * Create a new ColorantControl Node which already contains a processColorModel.
+	 * @param processColorModel ProcessColorModel attribute as String.
+	 * @return ColorantControl Node which already contains defined attributes.
+	 */
+	public ColorantControl createColorantControl(String processColorModel) {
+
+		// create node
+		ColorantControl colorantControl = super.createColorantControl();
+
+		// set attributes
+		colorantControl.setProcessColorModel(processColorModel);
+
+		// return node
+		return colorantControl;
 	}
 }
