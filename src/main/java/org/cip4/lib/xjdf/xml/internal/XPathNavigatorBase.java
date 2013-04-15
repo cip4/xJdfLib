@@ -72,6 +72,14 @@ public class XPathNavigatorBase {
 	}
 
 	/**
+	 * Getter for xmlDocument attribute.
+	 * @return the xmlDocument
+	 */
+	public Document getXmlDocument() {
+		return xmlDocument;
+	}
+
+	/**
 	 * Read attribute from XML Document using XPath.
 	 * @param xPath XPath expression of attribute to read.
 	 * @return Value of attribute as String.
@@ -96,8 +104,7 @@ public class XPathNavigatorBase {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public Object readAttribute(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+	public Object readAttribute(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 
 		// evaluate as String
 		String value = (String) evaluate(xPath, XPathConstants.STRING);
