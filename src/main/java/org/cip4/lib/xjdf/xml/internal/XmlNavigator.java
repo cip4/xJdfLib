@@ -31,6 +31,7 @@ import javax.xml.xpath.XPathFactory;
 import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 /**
@@ -38,30 +39,62 @@ import org.xml.sax.InputSource;
  * @author s.meissner
  * @date 26.06.2012
  */
-public class XPathNavigatorBase {
+public class XmlNavigator {
 
 	protected final XPath xPath;
 
 	protected final Document xmlDocument;
 
+	protected final NamespaceManager nsManager;
+
 	/**
 	 * Custom constructor. Accepting a XML Document as Byte Array for initializing.
-	 * @param xmlBytes
+	 * @param xmlBytes XML Document as Byte Array.
 	 * @throws Exception
 	 */
-	protected XPathNavigatorBase(byte[] xmlBytes) throws Exception {
+	public XmlNavigator(byte[] xmlBytes) throws Exception {
 
 		// chained constructor call
-		this(new ByteArrayInputStream(xmlBytes));
+		this(xmlBytes, false);
+	}
+
+	/**
+	 * Custom constructor. Accepting a XML Document as Byte Array for initializing.
+	 * @param xmlBytes XML Document as Byte Array.
+	 * @param namespaceAware True if navigator should be XML Namespace aware.
+	 * @throws Exception
+	 */
+	public XmlNavigator(byte[] xmlBytes, boolean namespaceAware) throws Exception {
+
+		// chained constructor call
+		this(new ByteArrayInputStream(xmlBytes), namespaceAware);
 	}
 
 	/**
 	 * Custom constructor. Accepting a XML Document as Stream for initializing.
+	 * @param xmlStream XML Document as Input Stream.
+	 * @throws Exception
 	 */
-	protected XPathNavigatorBase(InputStream xmlStream) throws Exception {
+	public XmlNavigator(InputStream xmlStream) throws Exception {
+
+		// chained constructor call
+		this(xmlStream, false);
+	}
+
+	/**
+	 * Custom constructor. Accepting a XML Document as Stream for initializing.
+	 * @param xmlStream XML Document as Input Stream.
+	 * @param namespaceAware True if navigator should be XML Namespace aware.
+	 * @throws Exception
+	 */
+	public XmlNavigator(InputStream xmlStream, boolean namespaceAware) throws Exception {
+
+		// init namespace manager
+		nsManager = new NamespaceManager();
 
 		// parse input stream
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		docBuilderFactory.setNamespaceAware(namespaceAware);
 		DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
 		xmlDocument = docBuilder.parse(new InputSource(xmlStream));
 		xmlStream.close();
@@ -69,6 +102,8 @@ public class XPathNavigatorBase {
 		// create xPathFactory object
 		XPathFactory xPathFactory = XPathFactory.newInstance();
 		this.xPath = xPathFactory.newXPath();
+		this.xPath.setNamespaceContext(nsManager);
+
 	}
 
 	/**
@@ -77,6 +112,17 @@ public class XPathNavigatorBase {
 	 */
 	public Document getXmlDocument() {
 		return xmlDocument;
+	}
+
+	/**
+	 * Add XML Namespace if navigator works namespace aware.
+	 * @param prefix Prefix of Namespace.
+	 * @param uri Namespace URI.
+	 */
+	public void addNamespace(String prefix, String uri) {
+
+		// add namespace
+		nsManager.addNamespace(prefix, uri);
 	}
 
 	/**
@@ -104,7 +150,8 @@ public class XPathNavigatorBase {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public Object readAttribute(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	public Object readAttribute(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
 
 		// evaluate as String
 		String value = (String) evaluate(xPath, XPathConstants.STRING);
@@ -131,6 +178,64 @@ public class XPathNavigatorBase {
 
 		// return result
 		return result;
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document and return result as Double.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as double.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public Double evaluateDouble(String xPath) throws XPathExpressionException {
+
+		// evaluate and return result.
+		return (Double) evaluate(xPath, XPathConstants.NUMBER);
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document and return result as Integer.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as integer.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public int evaluateInteger(String xPath) throws XPathExpressionException {
+
+		// evaluate expression.
+		String s = (String) evaluate(xPath, XPathConstants.STRING);
+
+		// convert to integer
+		int result = 0;
+
+		if (s != null && !s.equals("")) {
+			result = Integer.parseInt(s);
+		}
+
+		// return result
+		return result;
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document and return result as String.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as string.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public String evaluateString(String xPath) throws XPathExpressionException {
+
+		// evaluate and return result.
+		return (String) evaluate(xPath, XPathConstants.STRING);
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document and return result as Node object.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as node object.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public Node evaluateNode(String xPath) throws XPathExpressionException {
+
+		// evaluate and return result.
+		return (Node) evaluate(xPath, XPathConstants.NODE);
 	}
 
 	/**

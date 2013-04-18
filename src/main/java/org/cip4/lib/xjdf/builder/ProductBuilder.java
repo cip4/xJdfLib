@@ -11,6 +11,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
 import javax.xml.namespace.QName;
 
@@ -21,6 +22,8 @@ import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
+import org.w3c.dom.Node;
 
 /**
  * Implementation of a Product builder class.
@@ -39,6 +42,34 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	public ProductBuilder() {
 
 		this(null, null, null, null);
+	}
+
+	/**
+	 * Custom constructor. Accepting a W3C Node object for initializing.
+	 * @param node W2C Node object for
+	 */
+	public ProductBuilder(Node node) {
+
+		super(unmarshalProduct(node));
+		xJdfNodeFactory = new XJdfNodeFactory();
+	}
+
+	/**
+	 * Static helper method vor unmarshalling Product from XJDF Node;
+	 * @param node
+	 * @return
+	 */
+	private static Product unmarshalProduct(Node node) {
+		Product product = null;
+
+		try {
+			Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
+			product = (Product) u.unmarshal(node);
+		} catch (Exception ex) {
+			System.out.println(ex);
+		}
+
+		return product;
 	}
 
 	/**
@@ -120,16 +151,6 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	 * @throws ValidationException
 	 */
 	public void addChildProduct(IDREF childRef) throws ValidationException {
-
-		// if necessary, create root ID
-		// if (getNode().getID() == null || getNode().getID().equals("")) {
-		// getNode().setID(IDGeneratorUtil.generateID(ID_PREFIX));
-		// }
-
-		// if neccessary, create child ID
-		// if (product.getID() == null || product.getID().equals("")) {
-		// product.setID(IDGeneratorUtil.generateID(ID_PREFIX));
-		// }
 
 		// create child product
 		ChildProduct childProduct = xJdfNodeFactory.createChildProduct();

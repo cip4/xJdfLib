@@ -12,14 +12,14 @@ package org.cip4.lib.xjdf.xml;
 
 import java.io.InputStream;
 
-import org.cip4.lib.xjdf.xml.internal.XPathNavigatorBase;
+import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
 
 /**
  * Navigator class which simplify XPath handling using XJdf Documents.
  * @author s.meissner
  * @date 06.03.2012
  */
-public class XJdfNavigator extends XPathNavigatorBase {
+public class XJdfNavigator extends XmlNavigator {
 
 	/**
 	 * XPath to attribute 'JobID' in XJDF Document.
@@ -101,11 +101,30 @@ public class XJdfNavigator extends XPathNavigatorBase {
 
 	/**
 	 * Custom constructor. Accepting a XJdf InputStream for initializing.
+	 * @param xJdfStream The XJDF Input Stream.
+	 * @param namespaceAware True if navigator should be XML Namespace aware.
+	 */
+	public XJdfNavigator(InputStream xJdfStream, boolean namespaceAware) throws Exception {
+		super(xJdfStream, namespaceAware);
+	}
+
+	/**
+	 * Custom constructor. Accepting a XJdf InputStream for initializing.
 	 * @param xJdfBytes The XJDF as byte array.
 	 * @throws Exception
 	 */
 	public XJdfNavigator(byte[] xJdfBytes) throws Exception {
 		super(xJdfBytes);
+	}
+
+	/**
+	 * Custom constructor. Accepting a XJdf InputStream for initializing.
+	 * @param xJdfBytes The XJDF as byte array.
+	 * @param namespaceAware True if navigator should be XML Namespace aware.
+	 * @throws Exception
+	 */
+	public XJdfNavigator(byte[] xJdfBytes, boolean namespaceAware) throws Exception {
+		super(xJdfBytes, namespaceAware);
 	}
 
 	/**
