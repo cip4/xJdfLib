@@ -40,7 +40,7 @@ public abstract class AbstractXmlPackager {
 
 	private final Map<String, File> fileMap;
 
-	private final XPathNavigatorBase xPathNav;
+	private final XmlNavigator xPathNav;
 
 	private final byte[] xmlDoc;
 
@@ -77,7 +77,7 @@ public abstract class AbstractXmlPackager {
 
 		// new navigator
 		InputStream isXml = new ByteArrayInputStream(xmlDoc);
-		this.xPathNav = new XPathNavigatorBase(isXml);
+		this.xPathNav = new XmlNavigator(isXml);
 
 		// init instance variables
 		compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;

@@ -11,8 +11,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import java.io.ByteArrayOutputStream;
-
-import junit.framework.Assert;
+import java.io.InputStream;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.BindingIntent;
@@ -22,10 +21,14 @@ import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Node;
 
 /**
  * JUnit test case for Product Builder class.
@@ -33,6 +36,8 @@ import org.junit.Test;
  * @date 05.03.2012
  */
 public class ProductBuilderTest extends AbstractBuilderTest<Product> {
+
+	private final static String RES_XJDF = "/org/cip4/lib/xjdf/JOB_1.xjdf";
 
 	private ProductBuilder productBuilder;
 
@@ -197,5 +202,29 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
 		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[3]/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality");
 		Assert.assertEquals("MediaQuality is wrong.", "IPG_90", actual);
+	}
+
+	/**
+	 * Create new Builder instance from W3C Node object.
+	 * @throws Exception
+	 */
+	@Test
+	public void testConstructorNode() throws Exception {
+
+		// arrange
+		InputStream is = ProductBuilderTest.class.getResourceAsStream(RES_XJDF);
+		XJdfNavigator nav = new XJdfNavigator(is, true);
+		nav.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+
+		Node node = nav.evaluateNode("//xjdf:XJDF/xjdf:ProductList/xjdf:Product");
+
+		// act
+		ProductBuilder builder = new ProductBuilder(node);
+
+		// assert
+		Product product = builder.build();
+
+		Assert.assertNotNull("Amount is null.", product.getAmount());
+		Assert.assertEquals("Amount is wrong.", 15000, product.getAmount().intValue());
 	}
 }
