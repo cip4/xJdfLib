@@ -10,12 +10,15 @@
  */
 package org.cip4.lib.xjdf.builder;
 
+import javax.xml.bind.JAXBException;
+
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Address;
 import org.cip4.lib.xjdf.schema.ComChannel;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
 import org.cip4.lib.xjdf.schema.Person;
+import org.w3c.dom.Node;
 
 /**
  * Builder class for simplify creating default XJDF Contact Nodes.
@@ -33,6 +36,19 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 
 		// initialize objects
 		super(new XJdfNodeFactory().createContact());
+		xJdfNodeFactory = new XJdfNodeFactory();
+	}
+
+	/**
+	 * Custom constructor. Accepting a W3C Node object for initializing.
+	 * @param node W2C Node object for
+	 * @throws JAXBException
+	 */
+	public ContactBuilder(Node contactNode) throws JAXBException {
+
+		super(contactNode, Contact.class);
+
+		// init factory
 		xJdfNodeFactory = new XJdfNodeFactory();
 	}
 

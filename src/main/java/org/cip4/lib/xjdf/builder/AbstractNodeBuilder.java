@@ -10,6 +10,13 @@
  */
 package org.cip4.lib.xjdf.builder;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+
+import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
+import org.w3c.dom.Node;
+
 /**
  * Abstract Builder implementation where all builders are derived from.
  * @author s.meissner
@@ -25,6 +32,19 @@ public abstract class AbstractNodeBuilder<T> {
 	protected AbstractNodeBuilder(T node) {
 		// initialize node
 		this.node = node;
+	}
+
+	/**
+	 * Custom constructor. Accepting a Node object for initializing. !! THIS NODE MUST BE NAMESPACE AWARE !!
+	 * @param node Namespace aware node object.
+	 * @throws JAXBException Is thrown in case an exception.
+	 */
+	protected AbstractNodeBuilder(Node node, Class<T> typeParameterClass) throws JAXBException {
+
+		Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
+		JAXBElement<T> element = u.unmarshal(node, typeParameterClass);
+		T obj = element.getValue();
+		this.node = obj;
 	}
 
 	/**
