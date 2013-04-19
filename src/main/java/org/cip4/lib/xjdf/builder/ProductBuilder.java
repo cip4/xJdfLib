@@ -11,7 +11,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.ValidationException;
 import javax.xml.namespace.QName;
 
@@ -22,7 +22,6 @@ import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.w3c.dom.Node;
 
 /**
@@ -47,29 +46,14 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	/**
 	 * Custom constructor. Accepting a W3C Node object for initializing.
 	 * @param node W2C Node object for
+	 * @throws JAXBException
 	 */
-	public ProductBuilder(Node node) {
+	public ProductBuilder(Node productNode) throws JAXBException {
 
-		super(unmarshalProduct(node));
+		super(productNode, Product.class);
+
+		// init factory
 		xJdfNodeFactory = new XJdfNodeFactory();
-	}
-
-	/**
-	 * Static helper method vor unmarshalling Product from XJDF Node;
-	 * @param node
-	 * @return
-	 */
-	private static Product unmarshalProduct(Node node) {
-		Product product = null;
-
-		try {
-			Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
-			product = (Product) u.unmarshal(node);
-		} catch (Exception ex) {
-			System.out.println(ex);
-		}
-
-		return product;
 	}
 
 	/**

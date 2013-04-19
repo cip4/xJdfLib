@@ -186,22 +186,22 @@ public class Resource
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
      *     {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
      *     {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
      *     {@link JAXBElement }{@code <}{@link Device }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
      *     
      */
     public JAXBElement<? extends ResourceType> getResourceType() {
@@ -213,22 +213,22 @@ public class Resource
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
-     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
      *     {@link JAXBElement }{@code <}{@link ExposedMedia }{@code >}
-     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
-     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
-     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
      *     {@link JAXBElement }{@code <}{@link ResourceType }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
-     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Component }{@code >}
+     *     {@link JAXBElement }{@code <}{@link UsageCounter }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Strap }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Tool }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RollStand }{@code >}
+     *     {@link JAXBElement }{@code <}{@link PlaceHolderResource }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Employee }{@code >}
+     *     {@link JAXBElement }{@code <}{@link MiscConsumable }{@code >}
+     *     {@link JAXBElement }{@code <}{@link RegisterRibbon }{@code >}
      *     {@link JAXBElement }{@code <}{@link Device }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Bundle }{@code >}
+     *     {@link JAXBElement }{@code <}{@link DigitalMedia }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Pallet }{@code >}
+     *     {@link JAXBElement }{@code <}{@link Ink }{@code >}
      *     
      */
     public void setResourceType(JAXBElement<? extends ResourceType> value) {
