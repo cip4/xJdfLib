@@ -21,7 +21,6 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FilenameUtils;
@@ -51,10 +50,7 @@ public abstract class AbstractXmlPackager {
 	 */
 	public enum CompressionLevel {
 
-		BEST_SPEED(Deflater.BEST_SPEED),
-		BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
-		DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION),
-		NO_COMPRESSION(Deflater.NO_COMPRESSION);
+		BEST_SPEED(Deflater.BEST_SPEED), BEST_COMPRESSION(Deflater.BEST_COMPRESSION), DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION), NO_COMPRESSION(Deflater.NO_COMPRESSION);
 
 		private final int level;
 
@@ -150,7 +146,7 @@ public abstract class AbstractXmlPackager {
 	protected void registerFiles(String xPathAttribute, String targetDir) throws XPathExpressionException {
 
 		// iterate over all attributes
-		NodeList nodeList = (NodeList) xPathNav.evaluate(xPathAttribute, XPathConstants.NODESET);
+		NodeList nodeList = xPathNav.evaluateNodeList(xPathAttribute);
 
 		for (int i = 0; i < nodeList.getLength(); i++) {
 

@@ -105,7 +105,12 @@ public class XJdfNavigator extends XmlNavigator {
 	 * @param namespaceAware True if navigator should be XML Namespace aware.
 	 */
 	public XJdfNavigator(InputStream xJdfStream, boolean namespaceAware) throws Exception {
+
+		// call super class
 		super(xJdfStream, namespaceAware);
+
+		// add namespace
+		addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
 	}
 
 	/**
@@ -124,24 +129,12 @@ public class XJdfNavigator extends XmlNavigator {
 	 * @throws Exception
 	 */
 	public XJdfNavigator(byte[] xJdfBytes, boolean namespaceAware) throws Exception {
+
+		// call super class
 		super(xJdfBytes, namespaceAware);
-	}
 
-	/**
-	 * Returns the XJDF Document as Byte Array.
-	 * @return XJDF Document as Byte Array.
-	 */
-	public byte[] getXJdfBytes() throws Exception {
-		return super.getXmlBytes();
-	}
-
-	/**
-	 * Retruns the XJDF Document as Stream.
-	 * @return XJDF Document as Stream.
-	 * @throws Exception Is thrown in case an exception occurs.
-	 */
-	public InputStream getXJdfStream() throws Exception {
-		return super.getXmlStream();
+		// add namespace
+		addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
 	}
 
 }
