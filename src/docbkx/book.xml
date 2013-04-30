@@ -424,6 +424,452 @@ double y = xyPair.getY();</programlisting>
     </section>
 
     <section>
+      <title>XJdfParser</title>
+
+      <para>The XJdfParser writes an XJDF Document Object Tree either to a
+      binary stream or to a byte array and vice versa. Cases of practical use
+      are dealing with XJDF Documents and http transmissions or working on
+      file system. When using binary streams, internally the parser is working
+      with the Java interfaces <emphasis>java.io.InputStream</emphasis> and
+      <emphasis>java.io.OutputStream</emphasis>. So it doesn’t matter which
+      kind of stream is used for reading or writing. The following is a sample
+      of how to save an XJDF Document to a local file system.</para>
+
+      <programlisting language="java">// any XJDF Document
+XJDF xJdf = [...];
+
+// target file
+File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
+OutputStream os = new FileOutputStream(tmpFile);
+
+// write XJDF Document to file using XJdfParser
+XJdfParser xJdfParser = new XJdfParser();
+xJdfParser.parseXJdf(xJdf, os);
+
+// close stream
+os.close();</programlisting>
+
+      <para>The other option is working with a byte array. Here a sample of
+      how to get a Byte Array from a XJDF Document:</para>
+
+      <para><programlisting language="java">// any XJDF Document
+XJDF xJdf = [...];
+
+// write XJDF Document to file using XJdfParser
+XJdfParser xJdfParser = new XJdfParser();
+byte[] bytes = xJdfParser.parseXJdf(xJdf);</programlisting></para>
+
+      <para>When parsing XJDF Document Object Trees to binary streams, the
+      document is automatically being validated against the XJDF Schema.
+      Internally the <emphasis>XJdfValidator</emphasis> class is used to
+      achieve this. In case the document is invalid a
+      <emphasis>ValidationException</emphasis> is thrown. The message of the
+      exception lists all points making the document invalid. In order to skip
+      the validation process during parsing there is an optional parameter
+      skipValidation in parseXJdf() method.</para>
+
+      <programlisting language="java">// skip validation when parsing
+xJdfParser.parseXJdf(xJdf, os, true);</programlisting>
+
+      <para>In order to create an XJDF Object Tree from a binary stream the
+      XJdfParser class contains a method <emphasis>parseStream()</emphasis>.
+      This method accepts an InputStream as input parameter. Out of the box
+      the Java framework provides many different implementations of this
+      interface. All InputStreams can easily be parsed to an XJDF Document
+      Object Tree by calling the method <emphasis>parseStream()</emphasis>.
+      The sample below, for example, uses the
+      <emphasis>FileInputStream</emphasis> implementation which is responsible
+      for creating an <emphasis>InputStream</emphasis> from a local file. An
+      InputStream created from an HttpRequest also would be suitable and often
+      is being used when working with http transmissions.</para>
+
+      <programlisting language="java">// open XJDF Document as InputStream
+File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
+InputStream is = new FileInputStream(tmpFile);
+
+// parse stream to XJDF Document Object Tree
+XJdfParser xJdfParser = XJdfParser.newInstance();
+XJDF xJdf = xJdfParser.parseStream(is);</programlisting>
+
+      <para>As before, there also is a second method for using Byte
+      Arrays:</para>
+
+      <programlisting language="java">// XJDF Byte Array
+byte[] bytes = [...];
+
+// write XJDF Document to file using XJdfParser
+XJdfParser xJdfParser = new XJdfParser();
+XJDF xJdf = xJdfParser.parseBytes(bytes);</programlisting>
+
+      <note>
+        <para>In order to analyze or extract details from an XJDF Document it
+        is recommended to work with XPath expressions. Parsing the whole
+        document and working with the DOM Tree Objects is no longer state of
+        the art. This mechanism consumes time and raises code complexity.
+        Besides, parsing an InputStream is also prone to errors because it
+        requires fully conform documents. CIP4 xJdfLib provides an extra class
+        <emphasis>XJdfNavigator</emphasis> for dealing with XPath expressions
+        in XJDF Documents. XJDF is desinged for XPath so the preferred way of
+        reading XJDF Documents is XPath.</para>
+      </note>
+    </section>
+
+    <section>
+      <title>XJdfNavigator</title>
+
+      <para>The XJdfNavigator class provides functionality for reading,
+      modifying and analyzing existing XJDF Documents using XPath. XPath is a
+      very powerful and high-performance XML Technology for working with XML
+      Documents. More details about the XPath W3C Standard can be found here:
+      http://www.w3.org/TR/xpath/.</para>
+
+      <para>XJdfNavigator directly works on InputStream or Byte Arrays, so
+      there is no need to parse the document before hand. This mechanism saves
+      time, code complexity and especially performance. One XJdfNavigator
+      instance is required for each XJDF Document processed. There are several
+      methods for reading, modifying and analyzing the document.</para>
+
+      <section>
+        <title>XPath Expressions</title>
+
+        <para>The following is a short XPath overview of expressions which are
+        significant to XJDF Documents. The XJDF snippet after is used for
+        extracting these attribute values:</para>
+
+        <table>
+          <title>XPath expressions</title>
+
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry align="center">XPath Expression</entry>
+
+                <entry align="center">Attribute Value</entry>
+              </row>
+            </thead>
+
+            <tbody>
+              <row>
+                <entry>/XJDF/GeneralID/@IDUsage</entry>
+
+                <entry>"CatalogID"</entry>
+              </row>
+
+              <row>
+                <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL</entry>
+
+                <entry>"cover.pdf"</entry>
+              </row>
+
+              <row>
+                <entry>/XJDF/ProductList/Product/@Amount</entry>
+
+                <entry>"1500"</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+        <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!-- Generated by CIP4 xJdfLib 0.4 --&gt;
+&lt;xjdf:XJDF xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0" ID="XJDF_2GYLJJJG" 
+    JobID="FA-SIG-123456" Category="Web2Print" Version="2.0"&gt;
+    &lt;xjdf:GeneralID IDUsage="CatalogID" IDValue="46" /&gt;
+    &lt;xjdf:ProductList&gt;
+        &lt;xjdf:Product Amount="1500"/&gt;
+    &lt;/xjdf:ProductList&gt;
+    &lt;xjdf:ParameterSet Name="RunList"&gt;
+        &lt;xjdf:Parameter&gt;
+            &lt;xjdf:RunList&gt;
+                &lt;xjdf:FileSpec URL="cover.pdf"/&gt;
+            &lt;/xjdf:RunList&gt;
+            &lt;xjdf:Part Run="cover"/&gt;
+        &lt;/xjdf:Parameter&gt;
+        &lt;xjdf:Parameter&gt;
+            &lt;xjdf:RunList&gt;
+                &lt;xjdf:FileSpec URL="body.pdf"/&gt;
+            &lt;/xjdf:RunList&gt;
+            &lt;xjdf:Part Run="body"/&gt;
+        &lt;/xjdf:Parameter&gt;
+    &lt;/xjdf:ParameterSet&gt;
+&lt;/xjdf:XJDF&gt;</programlisting>
+
+        <para>Commonly used XPath Expression also are provided as Java
+        Constants in XJdfNavigator as well. Here a list of such predefined
+        XPath Expressions:</para>
+
+        <para><table>
+            <title>Java Constants of XPath Expressions</title>
+
+            <tgroup cols="2">
+              <thead>
+                <row>
+                  <entry align="center">Java Constant Name</entry>
+
+                  <entry align="center">Expression</entry>
+                </row>
+              </thead>
+
+              <tbody>
+                <row>
+                  <entry>JOB_ID</entry>
+
+                  <entry>/XJDF/@JobID</entry>
+                </row>
+
+                <row>
+                  <entry>CATEGORY</entry>
+
+                  <entry>/XJDF/@Category</entry>
+                </row>
+
+                <row>
+                  <entry>GENERAL_CATALOG_ID</entry>
+
+                  <entry>/XJDF/GeneralID[@IDUsage='CatalogID']/@IDValue</entry>
+                </row>
+
+                <row>
+                  <entry>GENERAL_LINE_ID</entry>
+
+                  <entry>/XJDF/GeneralID[@IDUsage='LineID']/@IDValue</entry>
+                </row>
+
+                <row>
+                  <entry>FILE_SPEC_URL</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter/RunList/FileSpec/@URL</entry>
+                </row>
+
+                <row>
+                  <entry>MIN_APPROVALS</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals</entry>
+                </row>
+
+                <row>
+                  <entry>CUSTOMER_ID</entry>
+
+                  <entry>/XJDF/ParameterSet[@Name='CustomerInfo']/Parameter/CustomerInfo/@CustomerID</entry>
+                </row>
+
+                <row>
+                  <entry>AMOUNT</entry>
+
+                  <entry>/XJDF/ProductList/Product/@Amount</entry>
+                </row>
+
+                <row>
+                  <entry>MEDIA_QUALITY</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent/@MediaQuality</entry>
+                </row>
+
+                <row>
+                  <entry>LAYOUT_FINISHED_DIMENSIONS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions</entry>
+                </row>
+
+                <row>
+                  <entry>LAYOUT_DIMENSIONS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions</entry>
+                </row>
+
+                <row>
+                  <entry>PRODUCTION_PRINT_PROCESS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess</entry>
+                </row>
+
+                <row>
+                  <entry>FOLDING_CATALOG</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldingCatalog</entry>
+                </row>
+
+                <row>
+                  <entry>COLOR_NUM_COLORS</entry>
+
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors</entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table></para>
+      </section>
+
+      <section>
+        <title>Read and Update Attributes</title>
+
+        <para>All attributes in document easily can be addressed and read
+        using the method <emphasis>readAttribute()</emphasis> and the specific
+        XPath expression as parameter. Modifications can also be done. The
+        method <emphasis>updateAttribute()</emphasis> accepts a XPath
+        expression plus the (new) attribute value. When all modifications are
+        done finally the new XJDF Document is returned as InputStream by
+        calling the <emphasis>getXJdfStream()</emphasis> method or as Byte
+        Array by calling the <emphasis>getXJdfBytes()</emphasis>
+        method.</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// define xPath
+String xPath = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']";
+       xPath += "/LayoutIntent/@FinishedDimensions";
+
+// read finished dimensions
+String att = nav.readAttribute(xPath);
+
+// modify attribute
+att = att.replace("0.0", "2.222");
+
+// update finished dimensions
+nav.updateAttribute(xPath, att);
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+
+        <para>The sample above is working with String objects. The
+        XJdfNavigator also provides a second way for reading and modifying
+        based on XJDF Data Types. The following a Java code snippet which has
+        quitely exactly the same functionalty but is using XJDF Data Types and
+        Java Constants for XPath expressions:</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// define xPath
+String xPath = XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS;
+
+// read finished dimensions
+Shape attShape = (Shape) nav.readAttribute(xPath, Shape.class);
+
+// modify attribute
+attShape = new Shape(attShape.getX(), attShape.getY(), 2.222);
+
+// update finished dimensions
+nav.updateAttribute(xPath, attShape);
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+      </section>
+
+      <section>
+        <title>Extended XPath Functionality</title>
+
+        <para>Specific XPath expressions can be evaluated using the method
+        <emphasis>evaluate()</emphasis>. The return type of this method is
+        <emphasis>Object</emphasis> but in specific it depends on the XPath
+        expression and the resultant return type. Both parameters must be
+        defined when using this method. The following a table of all supported
+        return types:</para>
+
+        <table>
+          <title>Overview XPathConstants</title>
+
+          <tgroup cols="2">
+            <thead>
+              <row>
+                <entry align="center">XPathConstants</entry>
+
+                <entry align="center">Description</entry>
+              </row>
+            </thead>
+
+            <tbody>
+              <row>
+                <entry>XPathConstants.BOOLEAN</entry>
+
+                <entry>Returns a <emphasis>Boolean</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                Boolean value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NUMBER</entry>
+
+                <entry>Returns a <emphasis>Double</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                Double value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.STRING</entry>
+
+                <entry>Returns a <emphasis>String</emphasis> object. This
+                constant must be used in case the XPath expressions return a
+                String value.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NODE</entry>
+
+                <entry>Returns an <emphasis>org.w3c.dom.Node</emphasis>
+                object. This constant must be used in case the XPath
+                expression returns a single node.</entry>
+              </row>
+
+              <row>
+                <entry>XPathConstants.NODESET</entry>
+
+                <entry>Returns an <emphasis>org.w3c.dom.NodeList</emphasis>
+                object. This constant must be used in case the XPath
+                expression returns multiple nodes.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+
+        <para>The next few samples demonstrate how to use the
+        <emphasis>evaluate()</emphasis> method in detail:</para>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// get number of Intent nodes
+String xPath = "count(/XJDF/ProductList/Product/Intent)";
+double cnt = (Double) nav.evaluate(xPath, XPathConstants.NUMBER);
+
+// print result
+System.out.println("Count: " + cnt);</programlisting>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// read names of all Intent nodes
+String xPath = "/XJDF/ProductList/Product/Intent";
+NodeList nodes = (NodeList) nav.evaluate(xPath, XPathConstants.NODESET);
+
+for (int i = 0; i &lt; nodes.getLength(); i++) {
+    Node node = nodes.item(i);
+    String name = node.getAttributes().getNamedItem("Name").getTextContent();
+    System.out.println(name);
+}</programlisting>
+
+        <programlisting language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is);
+
+// update node
+String xPath = "/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent";
+Node node = (Node) nav.evaluate(xPath, XPathConstants.NODE);
+node.getAttributes().getNamedItem("MediaQuality").setNodeValue("IPM_170");
+
+// output
+byte[] bytes = nav.getXJdfBytes();
+System.out.println(new String(bytes));</programlisting>
+      </section>
+    </section>
+
+    <section>
       <title>XJdfNodeFactory</title>
 
       <para>The XJdfNodeFactory is the factory class for creating new
@@ -742,6 +1188,28 @@ Product product = productBuilder.build();
 XJdfBuilder xJdfBuilder = new XJdfBuilder("FA-SIG-123456", "Web2Print");
 xJdfBuilder.addProduct(product);
 XJDF xjdf = xJdfBuilder.build();</programlisting></para>
+
+        <section>
+          <title>Import Product-Node from existing XJDF Document</title>
+
+          <para>Product elements can also be created by extracting existing
+          Product-Nodes from XJDF Documents. In order to achieve this, the
+          ProductBuilder provides a custom constructor which accepts and Node
+          Object for initializing. Using the XJdfNavigator, a Product-Node can
+          be extracted from an XJDF Document by evaluating an XPath
+          Expression. Please keep in mind, Product-Nodes can only be imported
+          if they were extracted Namespace-Aware. <programlisting
+          language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is, true); // !! NAMESPACE AWARE !!
+
+// get product node
+Node node = navXJdf.evaluateNode("//xjdf:XJDF/xjdf:ProductList/xjdf:Product");
+
+// create product from node
+ProductBuilder productBuilder = new ProductBuilder(node);
+Product product = productBuilder.build();</programlisting></para>
+        </section>
       </section>
 
       <section>
@@ -784,6 +1252,29 @@ Contact contact = contactBuilder.build();
 XJdfBuilder xJdfBuilder = new XJdfBuilder("FA-SIG-123456", "Web2Print");
 xJdfBuilder.addParameter(contact);
 XJDF xjdf = xJdfBuilder.build();</programlisting></para>
+
+        <section>
+          <title>Import Contact-Node from existing XJDF Document</title>
+
+          <para>Contact elements can also be created by extracting existing
+          Contact-Nodes from XJDF Documents. In order to achieve this, the
+          ContactBuilder provides a custom constructor which accepts and Node
+          Object for initializing. Using the XJdfNavigator, a Contact-Node can
+          be extracted from an XJDF Document by evaluating an XPath
+          Expression. Please keep in mind, Contact-Nodes can only be imported
+          if they were extracted Namespace-Aware. <programlisting
+          language="java">// load XJDF as InputStream
+InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
+XJdfNavigator nav = new XJdfNavigator(is, true); // !! NAMESPACE AWARE !!
+
+// get product node
+String xPath = "//xjdf:XJDF/xjdf:ParameterSet[@Name='Contact']/xjdf:Parameter/xjdf:Contact";
+Node node = navXJdf.evaluateNode(xPath);
+
+// create contact from node
+ContactBuilder contactBuilder = new ContactBuilder(node);
+Contact contact = contactBuilder.build();</programlisting></para>
+        </section>
       </section>
 
       <section>
@@ -863,97 +1354,6 @@ XJDF xjdf = xJdfBuilder.build();</programlisting></para>
     </section>
 
     <section>
-      <title>XJdfParser</title>
-
-      <para>The XJdfParser writes an XJDF Document Object Tree either to a
-      binary stream or to a byte array and vice versa. Cases of practical use
-      are dealing with XJDF Documents and http transmissions or working on
-      file system. When using binary streams, internally the parser is working
-      with the Java interfaces <emphasis>java.io.InputStream</emphasis> and
-      <emphasis>java.io.OutputStream</emphasis>. So it doesn’t matter which
-      kind of stream is used for reading or writing. The following is a sample
-      of how to save an XJDF Document to a local file system.</para>
-
-      <programlisting language="java">// any XJDF Document
-XJDF xJdf = [...];
-
-// target file
-File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
-OutputStream os = new FileOutputStream(tmpFile);
-
-// write XJDF Document to file using XJdfParser
-XJdfParser xJdfParser = new XJdfParser();
-xJdfParser.parseXJdf(xJdf, os);
-
-// close stream
-os.close();</programlisting>
-
-      <para>The other option is working with a byte array. Here a sample of
-      how to get a Byte Array from a XJDF Document:</para>
-
-      <para><programlisting language="java">// any XJDF Document
-XJDF xJdf = [...];
-
-// write XJDF Document to file using XJdfParser
-XJdfParser xJdfParser = new XJdfParser();
-byte[] bytes = xJdfParser.parseXJdf(xJdf);</programlisting></para>
-
-      <para>When parsing XJDF Document Object Trees to binary streams, the
-      document is automatically being validated against the XJDF Schema.
-      Internally the <emphasis>XJdfValidator</emphasis> class is used to
-      achieve this. In case the document is invalid a
-      <emphasis>ValidationException</emphasis> is thrown. The message of the
-      exception lists all points making the document invalid. In order to skip
-      the validation process during parsing there is an optional parameter
-      skipValidation in parseXJdf() method.</para>
-
-      <programlisting language="java">// skip validation when parsing
-xJdfParser.parseXJdf(xJdf, os, true);</programlisting>
-
-      <para>In order to create an XJDF Object Tree from a binary stream the
-      XJdfParser class contains a method <emphasis>parseStream()</emphasis>.
-      This method accepts an InputStream as input parameter. Out of the box
-      the Java framework provides many different implementations of this
-      interface. All InputStreams can easily be parsed to an XJDF Document
-      Object Tree by calling the method <emphasis>parseStream()</emphasis>.
-      The sample below, for example, uses the
-      <emphasis>FileInputStream</emphasis> implementation which is responsible
-      for creating an <emphasis>InputStream</emphasis> from a local file. An
-      InputStream created from an HttpRequest also would be suitable and often
-      is being used when working with http transmissions.</para>
-
-      <programlisting language="java">// open XJDF Document as InputStream
-File tmpFile = new File("/var/tmp/myXJdfDoc.xjdf");
-InputStream is = new FileInputStream(tmpFile);
-
-// parse stream to XJDF Document Object Tree
-XJdfParser xJdfParser = XJdfParser.newInstance();
-XJDF xJdf = xJdfParser.parseStream(is);</programlisting>
-
-      <para>As before, there also is a second method for using Byte
-      Arrays:</para>
-
-      <programlisting language="java">// XJDF Byte Array
-byte[] bytes = [...];
-
-// write XJDF Document to file using XJdfParser
-XJdfParser xJdfParser = new XJdfParser();
-XJDF xJdf = xJdfParser.parseBytes(bytes);</programlisting>
-
-      <note>
-        <para>In order to analyze or extract details from an XJDF Document it
-        is recommended to work with XPath expressions. Parsing the whole
-        document and working with the DOM Tree Objects is no longer state of
-        the art. This mechanism consumes time and raises code complexity.
-        Besides, parsing an InputStream is also prone to errors because it
-        requires fully conform documents. CIP4 xJdfLib provides an extra class
-        <emphasis>XJdfNavigator</emphasis> for dealing with XPath expressions
-        in XJDF Documents. XJDF is desinged for XPath so the preferred way of
-        reading XJDF Documents is XPath.</para>
-      </note>
-    </section>
-
-    <section>
       <title>XJdfValidator</title>
 
       <para>The XJdfValidator class validates an XJDF Binary Stream against
@@ -1002,361 +1402,6 @@ boolean result = xJdfValidator.isValid();
 // message output
 List&lt;String&gt; messages = xJdfValidator.getMessages(); 
 String msgText = xJdfValidator.getMessagesText(); </programlisting>
-    </section>
-
-    <section>
-      <title>XJdfNavigator</title>
-
-      <para>The XJdfNavigator class provides functionality for reading,
-      modifying and analyzing XJDF Documents using XPath. XPath is a very
-      powerful XML Technology for working with XML Documents. More details
-      about the XPath W3C Standard can be found here:
-      http://www.w3.org/TR/xpath/.</para>
-
-      <para>XJdfNavigator directly works on InputStream objects or Byte
-      Arrays, so there is no need to parse the document before hand. This
-      mechanism saves time, code complexity and performance. One XJdfNavigator
-      instance is required for each XJDF Document processed. There are several
-      methods for reading, modifying and analyzing the document.</para>
-
-      <section>
-        <title>XPath Expressions</title>
-
-        <para>The following is a short XPath overview of expressions which are
-        significant to XJDF Documents. The XJDF snippet after is used for
-        extracting these attribute values:</para>
-
-        <table>
-          <title>XPath expressions</title>
-
-          <tgroup cols="2">
-            <thead>
-              <row>
-                <entry align="center">XPath Expression</entry>
-
-                <entry align="center">Attribute Value</entry>
-              </row>
-            </thead>
-
-            <tbody>
-              <row>
-                <entry>/XJDF/GeneralID/@IDUsage</entry>
-
-                <entry>"CatalogID"</entry>
-              </row>
-
-              <row>
-                <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter[./Part/@Run='Cover']/RunList/FileSpec/@URL</entry>
-
-                <entry>"cover.pdf"</entry>
-              </row>
-
-              <row>
-                <entry>/XJDF/ProductList/Product/@Amount</entry>
-
-                <entry>"1500"</entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-
-        <programlisting language="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
-&lt;!-- Generated by CIP4 xJdfLib 0.4 --&gt;
-&lt;xjdf:XJDF xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0" ID="XJDF_2GYLJJJG" 
-    JobID="FA-SIG-123456" Category="Web2Print" Version="2.0"&gt;
-    &lt;xjdf:GeneralID IDUsage="CatalogID" IDValue="46" /&gt;
-    &lt;xjdf:ProductList&gt;
-        &lt;xjdf:Product Amount="1500"/&gt;
-    &lt;/xjdf:ProductList&gt;
-    &lt;xjdf:ParameterSet Name="RunList"&gt;
-        &lt;xjdf:Parameter&gt;
-            &lt;xjdf:RunList&gt;
-                &lt;xjdf:FileSpec URL="cover.pdf"/&gt;
-            &lt;/xjdf:RunList&gt;
-            &lt;xjdf:Part Run="cover"/&gt;
-        &lt;/xjdf:Parameter&gt;
-        &lt;xjdf:Parameter&gt;
-            &lt;xjdf:RunList&gt;
-                &lt;xjdf:FileSpec URL="body.pdf"/&gt;
-            &lt;/xjdf:RunList&gt;
-            &lt;xjdf:Part Run="body"/&gt;
-        &lt;/xjdf:Parameter&gt;
-    &lt;/xjdf:ParameterSet&gt;
-&lt;/xjdf:XJDF&gt;</programlisting>
-
-        <para>Commonly used XPath Expression also are provided as Java
-        Constants in XJdfNavigator as well. Here a list of such predefined
-        XPath Expressions:</para>
-
-        <para><table>
-            <title>Java Constants of XPath Expressions</title>
-
-            <tgroup cols="2">
-              <thead>
-                <row>
-                  <entry align="center">Java Constant Name</entry>
-
-                  <entry align="center">Expression</entry>
-                </row>
-              </thead>
-
-              <tbody>
-                <row>
-                  <entry>JOB_ID</entry>
-
-                  <entry>/XJDF/@JobID</entry>
-                </row>
-
-                <row>
-                  <entry>CATEGORY</entry>
-
-                  <entry>/XJDF/@Category</entry>
-                </row>
-
-                <row>
-                  <entry>GENERAL_CATALOG_ID</entry>
-
-                  <entry>/XJDF/GeneralID[@IDUsage='CatalogID']/@IDValue</entry>
-                </row>
-
-                <row>
-                  <entry>GENERAL_LINE_ID</entry>
-
-                  <entry>/XJDF/GeneralID[@IDUsage='LineID']/@IDValue</entry>
-                </row>
-
-                <row>
-                  <entry>FILE_SPEC_URL</entry>
-
-                  <entry>/XJDF/ParameterSet[@Name='RunList']/Parameter/RunList/FileSpec/@URL</entry>
-                </row>
-
-                <row>
-                  <entry>MIN_APPROVALS</entry>
-
-                  <entry>/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals</entry>
-                </row>
-
-                <row>
-                  <entry>CUSTOMER_ID</entry>
-
-                  <entry>/XJDF/ParameterSet[@Name='CustomerInfo']/Parameter/CustomerInfo/@CustomerID</entry>
-                </row>
-
-                <row>
-                  <entry>AMOUNT</entry>
-
-                  <entry>/XJDF/ProductList/Product/@Amount</entry>
-                </row>
-
-                <row>
-                  <entry>MEDIA_QUALITY</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent/@MediaQuality</entry>
-                </row>
-
-                <row>
-                  <entry>LAYOUT_FINISHED_DIMENSIONS</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions</entry>
-                </row>
-
-                <row>
-                  <entry>LAYOUT_DIMENSIONS</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions</entry>
-                </row>
-
-                <row>
-                  <entry>PRODUCTION_PRINT_PROCESS</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess</entry>
-                </row>
-
-                <row>
-                  <entry>FOLDING_CATALOG</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldingCatalog</entry>
-                </row>
-
-                <row>
-                  <entry>COLOR_NUM_COLORS</entry>
-
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors</entry>
-                </row>
-              </tbody>
-            </tgroup>
-          </table></para>
-      </section>
-
-      <section>
-        <title>Read and Modify Attributes</title>
-
-        <para>All attributes in document easily can be addressed and read
-        using the method <emphasis>readAttribute()</emphasis> and the specific
-        XPath expression as parameter. Modifications also can be done. The
-        method <emphasis>updateAttribute()</emphasis> accepts a XPath
-        expression plus the (new) attribute value. When all modifications are
-        done finally the new XJDF Document is returned as InputStream by
-        calling the <emphasis>getXJdfStream()</emphasis> method or as Byte
-        Array by calling the <emphasis>getXJdfBytes()</emphasis>
-        method.</para>
-
-        <programlisting language="java">// load XJDF as InputStream
-InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
-XJdfNavigator nav = new XJdfNavigator(is);
-
-// define xPath
-String xPath = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']";
-       xPath += "/LayoutIntent/@FinishedDimensions";
-
-// read finished dimensions
-String att = nav.readAttribute(xPath);
-
-// modify attribute
-att = att.replace("0.0", "2.222");
-
-// update finished dimensions
-nav.updateAttribute(xPath, att);
-
-// output
-byte[] bytes = nav.getXJdfBytes();
-System.out.println(new String(bytes));</programlisting>
-
-        <para>The sample above is working with String objects. The
-        XJdfNavigator also provides a second way for reading and modifying
-        based on XJDF Data Types. The following a Java code snippet which has
-        quitely exactly the same functionalty but is using XJDF Data Types and
-        Java Constants for XPath expressions:</para>
-
-        <programlisting language="java">// load XJDF as InputStream
-InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
-XJdfNavigator nav = new XJdfNavigator(is);
-
-// define xPath
-String xPath = XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS;
-
-// read finished dimensions
-Shape attShape = (Shape) nav.readAttribute(xPath, Shape.class);
-
-// modify attribute
-attShape = new Shape(attShape.getX(), attShape.getY(), 2.222);
-
-// update finished dimensions
-nav.updateAttribute(xPath, attShape);
-
-// output
-byte[] bytes = nav.getXJdfBytes();
-System.out.println(new String(bytes));</programlisting>
-      </section>
-
-      <section>
-        <title>Extended XPath Functionality</title>
-
-        <para>Specific XPath expressions can be evaluated using the method
-        <emphasis>evaluate()</emphasis>. The return type of this method is
-        <emphasis>Object</emphasis> but in specific it depends on the XPath
-        expression and the resultant return type. Both parameters must be
-        defined when using this method. The following a table of all supported
-        return types:</para>
-
-        <table>
-          <title>Overview XPathConstants</title>
-
-          <tgroup cols="2">
-            <thead>
-              <row>
-                <entry align="center">XPathConstants</entry>
-
-                <entry align="center">Description</entry>
-              </row>
-            </thead>
-
-            <tbody>
-              <row>
-                <entry>XPathConstants.BOOLEAN</entry>
-
-                <entry>Returns a <emphasis>Boolean</emphasis> object. This
-                constant must be used in case the XPath expressions return a
-                Boolean value.</entry>
-              </row>
-
-              <row>
-                <entry>XPathConstants.NUMBER</entry>
-
-                <entry>Returns a <emphasis>Double</emphasis> object. This
-                constant must be used in case the XPath expressions return a
-                Double value.</entry>
-              </row>
-
-              <row>
-                <entry>XPathConstants.STRING</entry>
-
-                <entry>Returns a <emphasis>String</emphasis> object. This
-                constant must be used in case the XPath expressions return a
-                String value.</entry>
-              </row>
-
-              <row>
-                <entry>XPathConstants.NODE</entry>
-
-                <entry>Returns an <emphasis>org.w3c.dom.Node</emphasis>
-                object. This constant must be used in case the XPath
-                expression returns a single node.</entry>
-              </row>
-
-              <row>
-                <entry>XPathConstants.NODESET</entry>
-
-                <entry>Returns an <emphasis>org.w3c.dom.NodeList</emphasis>
-                object. This constant must be used in case the XPath
-                expression returns multiple nodes.</entry>
-              </row>
-            </tbody>
-          </tgroup>
-        </table>
-
-        <para>The next few samples demonstrate how to use the
-        <emphasis>evaluate()</emphasis> method in detail:</para>
-
-        <programlisting language="java">// load XJDF as InputStream
-InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
-XJdfNavigator nav = new XJdfNavigator(is);
-
-// get number of Intent nodes
-String xPath = "count(/XJDF/ProductList/Product/Intent)";
-double cnt = (Double) nav.evaluate(xPath, XPathConstants.NUMBER);
-
-// print result
-System.out.println("Count: " + cnt);</programlisting>
-
-        <programlisting language="java">// load XJDF as InputStream
-InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
-XJdfNavigator nav = new XJdfNavigator(is);
-
-// read names of all Intent nodes
-String xPath = "/XJDF/ProductList/Product/Intent";
-NodeList nodes = (NodeList) nav.evaluate(xPath, XPathConstants.NODESET);
-
-for (int i = 0; i &lt; nodes.getLength(); i++) {
-    Node node = nodes.item(i);
-    String name = node.getAttributes().getNamedItem("Name").getTextContent();
-    System.out.println(name);
-}</programlisting>
-
-        <programlisting language="java">// load XJDF as InputStream
-InputStream is = XJdfLibSamples.class.getResourceAsStream(RES_SIMPLE_PRODUCT);
-XJdfNavigator nav = new XJdfNavigator(is);
-
-// update node
-String xPath = "/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent";
-Node node = (Node) nav.evaluate(xPath, XPathConstants.NODE);
-node.getAttributes().getNamedItem("MediaQuality").setNodeValue("IPM_170");
-
-// output
-byte[] bytes = nav.getXJdfBytes();
-System.out.println(new String(bytes));</programlisting>
-      </section>
     </section>
 
     <section>

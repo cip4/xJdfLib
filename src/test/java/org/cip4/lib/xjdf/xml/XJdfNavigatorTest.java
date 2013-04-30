@@ -10,14 +10,18 @@
  */
 package org.cip4.lib.xjdf.xml;
 
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.type.Shape;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * JUnit test case for XPathNavigator.
@@ -28,7 +32,7 @@ public class XJdfNavigatorTest {
 
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
-	private XJdfNavigator xJdfNavigator;
+	private final String RES_TEST_JDF = "/org/cip4/lib/xjdf/layout.jdf";
 
 	/**
 	 * Set up unit test.
@@ -37,8 +41,6 @@ public class XJdfNavigatorTest {
 	@Before
 	public void setUp() throws Exception {
 
-		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
-		xJdfNavigator = new XJdfNavigator(is);
 	}
 
 	/**
@@ -47,7 +49,6 @@ public class XJdfNavigatorTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
-		xJdfNavigator = null;
 	}
 
 	/**
@@ -57,6 +58,9 @@ public class XJdfNavigatorTest {
 	public void testReadAttribute() throws Exception {
 
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		String expected_1 = "CatalogID";
 		String expected_2 = "890e81ed-6830-4868-b23d-8ab8af8a4047";
 		String expected_3 = "";
@@ -79,6 +83,9 @@ public class XJdfNavigatorTest {
 	public void testReadAttributeDataType() throws Exception {
 
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		Shape expected = new Shape("595.27559055 822.04724409 0.0");
 
 		// act
@@ -96,6 +103,9 @@ public class XJdfNavigatorTest {
 	public void testUpdateAttribute() throws Exception {
 
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		final String NEW_VALUE = UUID.randomUUID().toString();
 
 		// act
@@ -118,6 +128,9 @@ public class XJdfNavigatorTest {
 	public void testUpdateAttributeXJdfType() throws Exception {
 
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		final Shape fdim = new Shape(10d, 20d, 30d);
 
 		// act
@@ -135,6 +148,9 @@ public class XJdfNavigatorTest {
 	@Test
 	public void testSpeedTest() throws Exception {
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		final int MAX_LOOP = 100;
 		final String NEW_VALUE = "newValue";
 		final String XPATH = "/XJDF/GeneralID/@IDUsage";
@@ -179,6 +195,9 @@ public class XJdfNavigatorTest {
 	public void testXPathExpressions() throws Exception {
 
 		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
 		String actual;
 
 		// act / assert
@@ -221,5 +240,145 @@ public class XJdfNavigatorTest {
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.COLOR_NUM_COLORS);
 		Assert.assertEquals("Value 'NumColors' is wrong.", "4 4", actual);
 
+	}
+
+	@Test
+	public void testEvaluateDouble() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_JDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		double version = xJdfNavigator.evaluateDouble("/JDF/@Version");
+
+		// assert
+		Assert.assertEquals("Version is wrong.", 1.2d, version, 0);
+	}
+
+	@Test
+	public void testEvaluateInt() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		int val = xJdfNavigator.evaluateInt("/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals");
+
+		// assert
+		Assert.assertEquals("Value is wrong.", 1, val);
+	}
+
+	@Test
+	public void testEvaluateString() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		String version = xJdfNavigator.evaluateString("/XJDF/@Category");
+
+		// assert
+		Assert.assertEquals("Category is wrong.", "Web2Print", version);
+	}
+
+	@Test
+	public void testEvaluateNodeBytes() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		IOUtils.copy(is, bos);
+		is.close();
+		bos.close();
+
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(bos.toByteArray());
+
+		// act
+		Node node = xJdfNavigator.evaluateNode("/XJDF/ProductList/Product");
+
+		// assert
+		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
+		Assert.assertEquals("Node-Name is wrong.", null, node.getNamespaceURI());
+	}
+
+	@Test
+	public void testEvaluateNodeNamespaceAwareBytes() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		IOUtils.copy(is, bos);
+		is.close();
+		bos.close();
+
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(bos.toByteArray(), true);
+
+		// act
+		Node node = xJdfNavigator.evaluateNode("/xjdf:XJDF/xjdf:ProductList/xjdf:Product");
+
+		// assert
+		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
+		Assert.assertEquals("Node-Name is wrong.", "http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI());
+	}
+
+	@Test
+	public void testEvaluateNodeIS() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		Node node = xJdfNavigator.evaluateNode("/XJDF/ProductList/Product");
+
+		// assert
+		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
+		Assert.assertEquals("Node-Name is wrong.", null, node.getNamespaceURI());
+	}
+
+	@Test
+	public void testEvaluateNodeNamespaceAwareIS() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is, true);
+
+		// act
+		Node node = xJdfNavigator.evaluateNode("/xjdf:XJDF/xjdf:ProductList/xjdf:Product");
+
+		// assert
+		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
+		Assert.assertEquals("Node-Name is wrong.", "http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI());
+	}
+
+	@Test
+	public void testEvaluateNodeList() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		NodeList nodeList = xJdfNavigator.evaluateNodeList("/XJDF/ProductList/Product/Intent");
+
+		// assert
+		Assert.assertEquals("Number intent elements is wrong.", 5, nodeList.getLength());
+	}
+
+	@Test
+	public void testEvaluateBoolean() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		boolean val = xJdfNavigator.evaluateBoolean("/XJDF/ProductList/Product/@IsRoot");
+
+		// assert
+		Assert.assertEquals("Value is wrong.", true, val);
 	}
 }

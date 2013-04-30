@@ -32,6 +32,7 @@ import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 /**
@@ -154,7 +155,7 @@ public class XmlNavigator {
 			IllegalArgumentException, InvocationTargetException {
 
 		// evaluate as String
-		String value = (String) evaluate(xPath, XPathConstants.STRING);
+		String value = evaluateString(xPath);
 
 		// convert to data type
 		Constructor ctor = xJdfType.getDeclaredConstructor(String.class);
@@ -165,13 +166,13 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Evaluate an XPath expression on XML Document.
+	 * Evaluates an XPath expression on XML Document and returns an generic object as result.
 	 * @param xPath XPath expression to execute to.
 	 * @param qname QName as javax.xml.xpath.XPathConstants
 	 * @return Generic result.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
-	public Object evaluate(String xPath, QName qname) throws XPathExpressionException {
+	private Object evaluate(String xPath, QName qname) throws XPathExpressionException {
 
 		// execute xpath
 		Object result = this.xPath.evaluate(xPath, xmlDocument, qname);
@@ -181,24 +182,24 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Evaluate an XPath expression on XML Document and return result as Double.
+	 * Evaluates an XPath expression on XML Document and returns a Double object as result.
 	 * @param xPath XPath expression to execute to.
 	 * @return Expression result as double.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
-	public Double evaluateDouble(String xPath) throws XPathExpressionException {
+	public double evaluateDouble(String xPath) throws XPathExpressionException {
 
 		// evaluate and return result.
 		return (Double) evaluate(xPath, XPathConstants.NUMBER);
 	}
 
 	/**
-	 * Evaluate an XPath expression on XML Document and return result as Integer.
+	 * Evaluates an XPath expression on XML Document and returns an Integer value as result.
 	 * @param xPath XPath expression to execute to.
 	 * @return Expression result as integer.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
-	public int evaluateInteger(String xPath) throws XPathExpressionException {
+	public int evaluateInt(String xPath) throws XPathExpressionException {
 
 		// evaluate expression.
 		String s = (String) evaluate(xPath, XPathConstants.STRING);
@@ -215,7 +216,7 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Evaluate an XPath expression on XML Document and return result as String.
+	 * Evaluates an XPath expression on XML Document and returns a String object as result.
 	 * @param xPath XPath expression to execute to.
 	 * @return Expression result as string.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
@@ -227,7 +228,7 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Evaluate an XPath expression on XML Document and return result as Node object.
+	 * Evaluates an XPath expression on XML Document and returns a Node object as result.
 	 * @param xPath XPath expression to execute to.
 	 * @return Expression result as node object.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
@@ -236,6 +237,30 @@ public class XmlNavigator {
 
 		// evaluate and return result.
 		return (Node) evaluate(xPath, XPathConstants.NODE);
+	}
+
+	/**
+	 * Evaluates an XPath expression on XML Document and returns a Node object as result.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as list of node object.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public NodeList evaluateNodeList(String xPath) throws XPathExpressionException {
+
+		// evaluate and return result.
+		return (NodeList) evaluate(xPath, XPathConstants.NODESET);
+	}
+
+	/**
+	 * Evaluate an XPath expression on XML Document and returns an Boolean value as result.
+	 * @param xPath XPath expression to execute to.
+	 * @return Expression result as boolean value.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 */
+	public boolean evaluateBoolean(String xPath) throws XPathExpressionException {
+
+		// evaluate and return result.
+		return (Boolean) evaluate(xPath, XPathConstants.BOOLEAN);
 	}
 
 	/**
@@ -295,7 +320,6 @@ public class XmlNavigator {
 
 		// return bytes
 		return bos.toByteArray();
-
 	}
 
 }
