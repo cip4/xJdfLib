@@ -60,10 +60,26 @@ public class XJdfPackager extends AbstractXmlPackager {
 	 * @throws Exception
 	 */
 	public void packageXJdf(OutputStream os, String docName) throws Exception {
+		packageXJdf(os, docName, false);
+	}
+
+	/**
+	 * Packages an XJDF Document to a zipped binary output stream.
+	 * @param os Target OutputStream where XJdfDocument is being packaged.
+	 * @param docName Documents name in ZIP Package.
+	 * @param withoutHierarchy Put all files into the ZIP Root.
+	 * @throws Exception
+	 */
+	public void packageXJdf(OutputStream os, String docName, boolean withoutHierarchy) throws Exception {
 
 		// register files
-		registerFiles("//FileSpec/@URL", "artwork");
-		registerFiles("//Preview/@URL", "preview");
+		if (withoutHierarchy) {
+			registerFiles("//FileSpec/@URL", "");
+			registerFiles("//Preview/@URL", "");
+		} else {
+			registerFiles("//FileSpec/@URL", "artwork");
+			registerFiles("//Preview/@URL", "preview");
+		}
 
 		// create main doc Name
 		if (docName == null || docName.equals("")) {
