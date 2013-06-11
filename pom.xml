@@ -172,7 +172,7 @@
 									<arg value="-extension" />
 									<!-- target directory -->
 									<arg value="-d" />
-									<arg value="target\generated-sources\jaxb" />
+									<arg value="target/generated-sources/jaxb" />
 									<!-- XSD -->
 									<arg value="src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd" />
 								</exec>

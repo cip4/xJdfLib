@@ -747,7 +747,7 @@
 
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="ResourceType" type="ResourceType" />
-	<xs:complexType name="ResourceType" />
+	<xs:complexType name="ResourceType" abstract="true" />
 
 	<!-- ** Complex type definition for Parameter ** -->
 	<xs:element name="Parameter">
@@ -790,7 +790,7 @@
 
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="ParameterType" type="ParameterType" />
-	<xs:complexType name="ParameterType" />
+	<xs:complexType name="ParameterType" abstract="true" />
 
 	<!-- ** Complex type definition for Intent ** -->
 	<xs:element name="Intent">
@@ -832,18 +832,17 @@
 
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="PlacedObject" type="PlacedObject" />
-	<xs:complexType name="PlacedObject">
+	<xs:complexType name="PlacedObject" abstract="true">
 		<xs:attribute name="CTM" type="matrix" use="optional" />
 	</xs:complexType>
 
-
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="IntentType" type="IntentType" />
-	<xs:complexType name="IntentType" />
+	<xs:complexType name="IntentType" abstract="true" />
 
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="SetType" type="SetType" />
-	<xs:complexType name="SetType" />
+	<xs:complexType name="SetType" abstract="true" />
 
 	<!-- ** Complex type definition for IntentSet ** -->
 	<xs:element name="IntentSet" />
@@ -2139,16 +2138,24 @@
 	<xs:element name="AuditPool">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceAudit" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Modified" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Created" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="PhaseTime" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ProcessRun" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Deleted" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Audit" />
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
+	
+	<!--** abstract type for substitution only ** -->
+	<xs:element abstract="true" name="Audit" type="Audit" />
+	<xs:complexType name="Audit" abstract="true">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
+		</xs:sequence>
+		<xs:attribute name="AgentName" type="string" use="optional" />
+		<xs:attribute name="AgentVersion" type="string" use="optional" />
+		<xs:attribute name="ID" type="ID" use="optional" />
+		<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
+		<xs:attribute name="refID" type="IDREF" use="optional" />
+		<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
+	</xs:complexType>
 
 	<!-- ** Complex type definition for Pool ** -->
 	<xs:element name="Pool" />
@@ -2397,23 +2404,17 @@
 	</xs:complexType>
 
 	<!-- ** Complex type definition for Created ** -->
-	<xs:element name="Created">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-			</xs:sequence>
-			<xs:attribute name="XPath" type="XPath" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="ref" type="IDREF" use="optional" />
-			<xs:attribute name="TemplateVersion" type="string" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="TemplateID" type="shortString" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="Created" type="Created" substitutionGroup="Audit" />
+	<xs:complexType name="Created">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:attribute name="XPath" type="XPath" use="optional" />
+				<xs:attribute name="ref" type="IDREF" use="optional" />
+				<xs:attribute name="TemplateVersion" type="string" use="optional" />
+				<xs:attribute name="TemplateID" type="shortString" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for CreditCard ** -->
 	<xs:element name="CreditCard" />
@@ -2443,20 +2444,14 @@
 	</xs:complexType>
 
 	<!-- ** Complex type definition for Deleted ** -->
-	<xs:element name="Deleted">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-			</xs:sequence>
-			<xs:attribute name="XPath" type="XPath" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="Deleted" type="Deleted" substitutionGroup="Audit" />
+	<xs:complexType name="Deleted">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:attribute name="XPath" type="XPath" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for DevelopingParams ** -->
 	<xs:element name="DevelopingParams" type="DevelopingParams" substitutionGroup="ParameterType" />
@@ -3074,20 +3069,14 @@
 	</xs:element>
 
 	<!-- ** Complex type definition for Modified ** -->
-	<xs:element name="Modified">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-			</xs:sequence>
-			<xs:attribute name="XPath" type="XPath" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="Modified" type="Modified" substitutionGroup="Audit" />
+	<xs:complexType name="Modified">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:attribute name="XPath" type="XPath" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for ModulePhase ** -->
 	<xs:element name="ModulePhase">
@@ -3121,36 +3110,32 @@
 	</xs:element>
 
 	<!-- ** Complex type definition for Notification ** -->
-	<xs:element name="Notification">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="CounterReset" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Milestone" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="FCNKey" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Error" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="SystemTimeSet" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Event" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Barcode" />
-			</xs:sequence>
-			<xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="JobID" type="string" use="optional" />
-			<xs:attribute name="JobPartID" type="string" use="optional" />
-			<xs:attribute name="Class" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="ModuleType" type="NMTOKEN" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="ModuleID" type="string" use="optional" />
-			<xs:attribute name="Type" type="NMTOKEN" use="optional" />
-			<xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="Notification" type="Notification" substitutionGroup="Audit" />
+	<xs:complexType name="Notification">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CounterReset" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Milestone" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="FCNKey" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Error" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="SystemTimeSet" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Event" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Barcode" />
+				</xs:sequence>
+				<xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional" />
+				<xs:attribute name="JobID" type="string" use="optional" />
+				<xs:attribute name="JobPartID" type="string" use="optional" />
+				<xs:attribute name="Class" use="optional" />
+				<xs:attribute name="ModuleType" type="NMTOKEN" use="optional" />
+				<xs:attribute name="ModuleID" type="string" use="optional" />
+				<xs:attribute name="Type" type="NMTOKEN" use="optional" />
+				<xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for NumberingParams ** -->
 	<xs:element name="NumberingParams" type="NumberingParams" substitutionGroup="ParameterType" />
@@ -3408,27 +3393,23 @@
 	</xs:element>
 
 	<!-- ** Complex type definition for PhaseTime ** -->
-	<xs:element name="PhaseTime">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-			</xs:sequence>
-			<xs:attribute name="StatusDetails" type="shortString" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="Status" type="EnumNodeStatus" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="Start" type="dateTime" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="End" type="dateTime" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="PhaseTime" type="PhaseTime" substitutionGroup="Audit" />
+	<xs:complexType name="PhaseTime">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
+				</xs:sequence>
+				<xs:attribute name="StatusDetails" type="shortString" use="optional" />
+				<xs:attribute name="Status" type="EnumNodeStatus" use="optional" />
+				<xs:attribute name="Start" type="dateTime" use="optional" />
+				<xs:attribute name="End" type="dateTime" use="optional" />
+				<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for PlaceHolderResource ** -->
 	<xs:element name="PlaceHolderResource" type="PlaceHolderResource" substitutionGroup="ResourceType" />
@@ -3447,26 +3428,22 @@
 	</xs:complexType>
 
 	<!-- ** Complex type definition for ProcessRun ** -->
-	<xs:element name="ProcessRun">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-			</xs:sequence>
-			<xs:attribute name="EndStatus" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="Duration" type="duration" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="SubmissionTime" type="dateTime" use="optional" />
-			<xs:attribute name="ReturnTime" type="dateTime" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="Start" type="dateTime" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="End" type="dateTime" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="ProcessRun" type="ProcessRun" substitutionGroup="Audit" />
+	<xs:complexType name="ProcessRun">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+				</xs:sequence>
+				<xs:attribute name="EndStatus" use="optional" />
+				<xs:attribute name="Duration" type="duration" use="optional" />
+				<xs:attribute name="SubmissionTime" type="dateTime" use="optional" />
+				<xs:attribute name="ReturnTime" type="dateTime" use="optional" />
+				<xs:attribute name="Start" type="dateTime" use="optional" />
+				<xs:attribute name="End" type="dateTime" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for ProofItem ** -->
 	<xs:element name="ProofItem" type="ProofItem" />
@@ -3525,24 +3502,20 @@
 	<xs:element name="Removed" />
 
 	<!-- ** Complex type definition for ResourceAudit ** -->
-	<xs:element name="ResourceAudit">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
-			</xs:sequence>
-			<xs:attribute name="Reason" use="optional" />
-			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional" />
-			<xs:attribute name="refID" type="IDREF" use="optional" />
-			<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="ContentsModified" type="boolean" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
+	<xs:element name="ResourceAudit" type="ResourceAudit" substitutionGroup="Audit" />
+	<xs:complexType name="ResourceAudit">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
+				</xs:sequence>
+				<xs:attribute name="Reason" use="optional" />
+				<xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional" />
+				<xs:attribute name="ContentsModified" type="boolean" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
 
 	<!-- ** Complex type definition for ResourceParam ** -->
 	<xs:element name="ResourceParam">
@@ -4078,7 +4051,7 @@
 	</xs:element>
 	<!--** abstract type for substitution only ** -->
 	<xs:element abstract="true" name="TermType" type="TermType" />
-	<xs:complexType name="TermType" />
+	<xs:complexType name="TermType" abstract="true" />
 
 	<!-- ** Complex type definition for DisplayGroup ** -->
 	<xs:element name="DisplayGroup">

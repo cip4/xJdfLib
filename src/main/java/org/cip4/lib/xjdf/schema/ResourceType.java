@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
     Device.class,
     Component.class
 })
-public class ResourceType implements Serializable
+public abstract class ResourceType implements Serializable
 {
 
 

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
     ParameterSet.class,
     ResourceSet.class
 })
-public class SetType implements Serializable
+public abstract class SetType implements Serializable
 {
 
 

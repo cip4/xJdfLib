@@ -33,7 +33,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
     ContentObject.class,
     MarkObject.class
 })
-public class PlacedObject implements Serializable
+public abstract class PlacedObject implements Serializable
 {
 
     @XmlAttribute(name = "CTM")

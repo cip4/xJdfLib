@@ -198,7 +198,7 @@ import javax.xml.bind.annotation.XmlType;
     ScanParams.class,
     TrappingDetails.class
 })
-public class ParameterType implements Serializable
+public abstract class ParameterType implements Serializable
 {
 
 
