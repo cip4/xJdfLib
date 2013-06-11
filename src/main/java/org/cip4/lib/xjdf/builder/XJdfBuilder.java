@@ -14,7 +14,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.Audit;
+import org.cip4.lib.xjdf.schema.AuditPool;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Parameter;
@@ -122,9 +127,36 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		Comment obj = xJdfNodeFactory.createComment(comment);
 		getNode().getComment().add(obj);
 	}
+	
+	
+	/**
+	 * Append Audit node to XJDF Document.
+	 * @param audit Audit object to append.
+	 */
+	public void addAudit(Audit audit) {
+		
+		if(audit == null) 
+			return;
+		
+		// get audit name
+		String paramName = audit.getClass().getSimpleName();
+
+		// create audit element
+		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
+		JAXBElement obj = new JAXBElement(qname, audit.getClass(), null, audit);
+		
+		// if necessary, create AuditPool
+		if(getXJdf().getAuditPool() == null) {
+			AuditPool auditPool = xJdfNodeFactory.createAuditPool();
+			getXJdf().setAuditPool(auditPool);
+		}
+		
+		// append Audit object
+		getXJdf().getAuditPool().getAudit().add(obj);
+	}
 
 	/**
-	 * Append GeneralID node to xJdf Document.
+	 * Append GeneralID node to XJDF Document.
 	 * @param generalId GeneralID object to append.
 	 * @return The current XJdfBuilder instance.
 	 */

@@ -24,6 +24,7 @@ import org.cip4.lib.xjdf.schema.ColorIntent;
 import org.cip4.lib.xjdf.schema.ColorantControl;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.ContentObject;
+import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.EnumOrientation;
 import org.cip4.lib.xjdf.schema.FileSpec;
@@ -69,7 +70,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	public XJdfNodeFactory() {
 		// no action
 	}
-
+	
 	/**
 	 * Create a new Parameter node from ParameterType and Part
 	 * @param parameterType The ParameterType Node
@@ -378,6 +379,27 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return object
 		return layoutIntent;
+	}
+	
+	/**
+	 * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
+	 * @param agentName Value for AgentName attribute.
+	 * @param agentVersion Value for AgentVersion attribute.
+	 * @param timestamp Value for TimeStamp attribute.
+	 * @return Created Node which already contains defined attributes.
+	 */
+	public Created createCreated(String agentName, String agentVersion, DateTime timestamp) {
+		
+		// create node
+		Created created = super.createCreated();
+		
+		// set attributes
+		created.setAgentName(agentName);
+		created.setAgentVersion(agentVersion);
+		created.setTimeStamp(timestamp);
+		
+		// return object
+		return created;
 	}
 
 	/**

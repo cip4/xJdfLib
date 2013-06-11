@@ -242,9 +242,9 @@ public class XJDF
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
-     * {@link JAXBElement }{@code <}{@link SetType }{@code >}
      * {@link JAXBElement }{@code <}{@link ParameterSet }{@code >}
+     * {@link JAXBElement }{@code <}{@link SetType }{@code >}
+     * {@link JAXBElement }{@code <}{@link ResourceSet }{@code >}
      * 
      * 
      */

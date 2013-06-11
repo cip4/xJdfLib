@@ -46,7 +46,7 @@ import javax.xml.bind.annotation.XmlType;
     InsertingIntent.class,
     ShapeCuttingIntent.class
 })
-public class IntentType implements Serializable
+public abstract class IntentType implements Serializable
 {
 
 

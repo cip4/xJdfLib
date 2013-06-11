@@ -8,30 +8,31 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
 /**
- * <p>Java class for anonymous complex type.
+ * <p>Java class for Audit complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType>
+ * &lt;complexType name="Audit">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Employee" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
- *       &lt;attribute name="DeviceStatus" type="{http://www.CIP4.org/JDFSchema_2_0}EnumDeviceStatus" />
- *       &lt;attribute name="StatusDetails" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
- *       &lt;attribute name="CombinedProcessIndex" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerList" />
- *       &lt;attribute name="ModuleType" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
- *       &lt;attribute name="ModuleID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
- *       &lt;attribute name="ModuleIndex" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerRangeList" />
+ *       &lt;attribute name="AgentName" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="AgentVersion" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="ID" type="{http://www.CIP4.org/JDFSchema_2_0}ID" />
+ *       &lt;attribute name="QueueEntryID" type="{http://www.CIP4.org/JDFSchema_2_0}shortString" />
+ *       &lt;attribute name="refID" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
+ *       &lt;attribute name="TimeStamp" type="{http://www.CIP4.org/JDFSchema_2_0}dateTime" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -40,30 +41,39 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
+@XmlType(name = "Audit", propOrder = {
     "employee"
 })
-@XmlRootElement(name = "ModuleStatus")
-public class ModuleStatus
-    implements Serializable
+@XmlSeeAlso({
+    Notification.class,
+    ProcessRun.class,
+    ResourceAudit.class,
+    PhaseTime.class,
+    Modified.class,
+    Deleted.class,
+    Created.class
+})
+public abstract class Audit implements Serializable
 {
 
     @XmlElement(name = "Employee")
     protected List<Employee> employee;
-    @XmlAttribute(name = "DeviceStatus")
-    protected EnumDeviceStatus deviceStatus;
-    @XmlAttribute(name = "StatusDetails")
-    protected String statusDetails;
-    @XmlAttribute(name = "CombinedProcessIndex")
-    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IntegerList.class)
-    protected org.cip4.lib.xjdf.type.IntegerList combinedProcessIndex;
-    @XmlAttribute(name = "ModuleType")
+    @XmlAttribute(name = "AgentName")
+    protected String agentName;
+    @XmlAttribute(name = "AgentVersion")
+    protected String agentVersion;
+    @XmlAttribute(name = "ID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String moduleType;
-    @XmlAttribute(name = "ModuleID")
-    protected String moduleID;
-    @XmlAttribute(name = "ModuleIndex")
-    protected Integer moduleIndex;
+    @XmlID
+    protected String id;
+    @XmlAttribute(name = "QueueEntryID")
+    protected String queueEntryID;
+    @XmlAttribute
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
+    protected org.cip4.lib.xjdf.type.IDREF refID;
+    @XmlAttribute(name = "TimeStamp")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
+    protected org.cip4.lib.xjdf.type.DateTime timeStamp;
 
     /**
      * Gets the value of the employee property.
@@ -95,147 +105,147 @@ public class ModuleStatus
     }
 
     /**
-     * Gets the value of the deviceStatus property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link EnumDeviceStatus }
-     *     
-     */
-    public EnumDeviceStatus getDeviceStatus() {
-        return deviceStatus;
-    }
-
-    /**
-     * Sets the value of the deviceStatus property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link EnumDeviceStatus }
-     *     
-     */
-    public void setDeviceStatus(EnumDeviceStatus value) {
-        this.deviceStatus = value;
-    }
-
-    /**
-     * Gets the value of the statusDetails property.
+     * Gets the value of the agentName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getStatusDetails() {
-        return statusDetails;
+    public String getAgentName() {
+        return agentName;
     }
 
     /**
-     * Sets the value of the statusDetails property.
+     * Sets the value of the agentName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setStatusDetails(String value) {
-        this.statusDetails = value;
+    public void setAgentName(String value) {
+        this.agentName = value;
     }
 
     /**
-     * Gets the value of the combinedProcessIndex property.
+     * Gets the value of the agentVersion property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public org.cip4.lib.xjdf.type.IntegerList getCombinedProcessIndex() {
-        return combinedProcessIndex;
+    public String getAgentVersion() {
+        return agentVersion;
     }
 
     /**
-     * Sets the value of the combinedProcessIndex property.
+     * Sets the value of the agentVersion property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setCombinedProcessIndex(org.cip4.lib.xjdf.type.IntegerList value) {
-        this.combinedProcessIndex = value;
+    public void setAgentVersion(String value) {
+        this.agentVersion = value;
     }
 
     /**
-     * Gets the value of the moduleType property.
+     * Gets the value of the id property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getModuleType() {
-        return moduleType;
+    public String getID() {
+        return id;
     }
 
     /**
-     * Sets the value of the moduleType property.
+     * Sets the value of the id property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setModuleType(String value) {
-        this.moduleType = value;
+    public void setID(String value) {
+        this.id = value;
     }
 
     /**
-     * Gets the value of the moduleID property.
+     * Gets the value of the queueEntryID property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getModuleID() {
-        return moduleID;
+    public String getQueueEntryID() {
+        return queueEntryID;
     }
 
     /**
-     * Sets the value of the moduleID property.
+     * Sets the value of the queueEntryID property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setModuleID(String value) {
-        this.moduleID = value;
+    public void setQueueEntryID(String value) {
+        this.queueEntryID = value;
     }
 
     /**
-     * Gets the value of the moduleIndex property.
+     * Gets the value of the refID property.
      * 
      * @return
      *     possible object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public Integer getModuleIndex() {
-        return moduleIndex;
+    public org.cip4.lib.xjdf.type.IDREF getRefID() {
+        return refID;
     }
 
     /**
-     * Sets the value of the moduleIndex property.
+     * Sets the value of the refID property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Integer }
+     *     {@link String }
      *     
      */
-    public void setModuleIndex(Integer value) {
-        this.moduleIndex = value;
+    public void setRefID(org.cip4.lib.xjdf.type.IDREF value) {
+        this.refID = value;
+    }
+
+    /**
+     * Gets the value of the timeStamp property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.DateTime getTimeStamp() {
+        return timeStamp;
+    }
+
+    /**
+     * Sets the value of the timeStamp property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setTimeStamp(org.cip4.lib.xjdf.type.DateTime value) {
+        this.timeStamp = value;
     }
 
 }

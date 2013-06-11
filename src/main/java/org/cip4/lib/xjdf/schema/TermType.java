@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlType;
     Not.class,
     IsPresentEvaluation.class
 })
-public class TermType implements Serializable
+public abstract class TermType implements Serializable
 {
 
 
