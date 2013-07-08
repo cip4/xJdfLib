@@ -259,8 +259,11 @@ public class XmlNavigator {
 	 */
 	public boolean evaluateBoolean(String xPath) throws XPathExpressionException {
 
-		// evaluate and return result.
-		return (Boolean) evaluate(xPath, XPathConstants.BOOLEAN);
+		// get value as String
+		String value = evaluateString(xPath);
+
+		// convert to boolean.
+		return Boolean.getBoolean(value);
 	}
 
 	/**
