@@ -263,7 +263,7 @@ public class XmlNavigator {
 		String value = evaluateString(xPath);
 
 		// convert to boolean.
-		return Boolean.getBoolean(value);
+		return Boolean.parseBoolean(value);
 	}
 
 	/**
