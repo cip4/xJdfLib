@@ -127,30 +127,29 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		Comment obj = xJdfNodeFactory.createComment(comment);
 		getNode().getComment().add(obj);
 	}
-	
-	
+
 	/**
 	 * Append Audit node to XJDF Document.
 	 * @param audit Audit object to append.
 	 */
 	public void addAudit(Audit audit) {
-		
-		if(audit == null) 
+
+		if (audit == null)
 			return;
-		
+
 		// get audit name
 		String paramName = audit.getClass().getSimpleName();
 
 		// create audit element
 		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
 		JAXBElement obj = new JAXBElement(qname, audit.getClass(), null, audit);
-		
+
 		// if necessary, create AuditPool
-		if(getXJdf().getAuditPool() == null) {
+		if (getXJdf().getAuditPool() == null) {
 			AuditPool auditPool = xJdfNodeFactory.createAuditPool();
 			getXJdf().setAuditPool(auditPool);
 		}
-		
+
 		// append Audit object
 		getXJdf().getAuditPool().getAudit().add(obj);
 	}

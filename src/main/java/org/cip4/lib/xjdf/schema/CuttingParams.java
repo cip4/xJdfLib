@@ -24,6 +24,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}CutBlock" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Cut" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}FileSpec" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="NUpSeparation" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
  *     &lt;/extension>
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CuttingParams", propOrder = {
     "cutBlock",
-    "cut"
+    "cut",
+    "fileSpec"
 })
 public class CuttingParams
     extends ParameterType
@@ -47,6 +49,8 @@ public class CuttingParams
     protected List<CutBlock> cutBlock;
     @XmlElement(name = "Cut")
     protected List<Cut> cut;
+    @XmlElement(name = "FileSpec")
+    protected FileSpec fileSpec;
     @XmlAttribute(name = "NUpSeparation")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair nUpSeparation;
@@ -107,6 +111,30 @@ public class CuttingParams
             cut = new ArrayList<Cut>();
         }
         return this.cut;
+    }
+
+    /**
+     * Gets the value of the fileSpec property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link FileSpec }
+     *     
+     */
+    public FileSpec getFileSpec() {
+        return fileSpec;
+    }
+
+    /**
+     * Sets the value of the fileSpec property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link FileSpec }
+     *     
+     */
+    public void setFileSpec(FileSpec value) {
+        this.fileSpec = value;
     }
 
     /**
