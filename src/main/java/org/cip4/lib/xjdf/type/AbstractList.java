@@ -77,6 +77,15 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 	}
 
 	/**
+	 * Returns the element on position i.
+	 * @param i Position.
+	 * @return Element on position i.
+	 */
+	public T get(int i) {
+		return getList().get(i);
+	}
+
+	/**
 	 * Getter for list attribute.
 	 * @return the list
 	 */
@@ -131,7 +140,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 	 */
 	@Override
 	public AbstractList<T> unmarshal(String v) throws Exception {
-		return (AbstractList<T>) getClass().getConstructor(String.class).newInstance(v);
+		return getClass().getConstructor(String.class).newInstance(v);
 	}
 
 }

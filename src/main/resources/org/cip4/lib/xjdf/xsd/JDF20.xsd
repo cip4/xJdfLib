@@ -2427,6 +2427,7 @@
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="CutBlock" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Cut" />
+					<xs:element minOccurs="0" maxOccurs="1" ref="FileSpec" />
 				</xs:sequence>
 				<xs:attribute name="NUpSeparation" type="XYPair" use="optional" />
 			</xs:extension>
