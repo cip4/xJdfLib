@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.xml.internal;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -25,6 +24,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -36,6 +36,8 @@ import org.w3c.dom.NodeList;
 public abstract class AbstractXmlPackager {
 
 	private CompressionLevel compressionLevel;
+
+	private final String rootPath;
 
 	private final Map<String, File> fileMap;
 
@@ -50,7 +52,10 @@ public abstract class AbstractXmlPackager {
 	 */
 	public enum CompressionLevel {
 
-		BEST_SPEED(Deflater.BEST_SPEED), BEST_COMPRESSION(Deflater.BEST_COMPRESSION), DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION), NO_COMPRESSION(Deflater.NO_COMPRESSION);
+		BEST_SPEED(Deflater.BEST_SPEED),
+		BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
+		DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION),
+		NO_COMPRESSION(Deflater.NO_COMPRESSION);
 
 		private final int level;
 
@@ -64,21 +69,44 @@ public abstract class AbstractXmlPackager {
 	}
 
 	/**
+	 * Custom constructor. Accepting an XJDF Path for initializing.
+	 * @param xjdfPath Path to XJDF Document.
+	 * @throws Exception
+	 */
+	public AbstractXmlPackager(String xmlPath) throws Exception {
+
+		// load XJDF
+		InputStream is = new FileInputStream(xmlPath);
+		byte[] bytes = IOUtils.toByteArray(is);
+		is.close();
+
+		// extract root path
+		String rootPath = FilenameUtils.getFullPath(xmlPath);
+
+		// init instance varialbes
+		this.xPathNav = new XmlNavigator(bytes);
+		this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
+		this.fileMap = new HashMap<String, File>();
+		this.xmlDoc = bytes;
+		this.rootPath = FilenameUtils.getFullPath(rootPath);
+	}
+
+	/**
 	 * Custom constructor. Accepting an XML Document for initializing.
 	 * @param obj XML Document for parsing and packaging.
 	 * @param docName The Main Documents name.
 	 * @throws Exception
 	 */
-	public AbstractXmlPackager(byte[] xmlDoc) throws Exception {
+	public AbstractXmlPackager(byte[] xmlDoc, String rootPath) throws Exception {
 
 		// new navigator
-		InputStream isXml = new ByteArrayInputStream(xmlDoc);
-		this.xPathNav = new XmlNavigator(isXml);
+		this.xPathNav = new XmlNavigator(xmlDoc);
 
 		// init instance variables
-		compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
+		this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
 		this.fileMap = new HashMap<String, File>();
 		this.xmlDoc = xmlDoc;
+		this.rootPath = FilenameUtils.getFullPath(rootPath);
 	}
 
 	/**
@@ -150,12 +178,27 @@ public abstract class AbstractXmlPackager {
 
 		for (int i = 0; i < nodeList.getLength(); i++) {
 
+			File file = null;
 			Node node = nodeList.item(i);
 
-			// check url
-			File file = new File(node.getTextContent());
+			// check path
+			String path = node.getTextContent();
 
-			if (file.isFile()) {
+			if (new File(path).exists()) { // absolute path
+				file = new File(path);
+
+			} else if (!StringUtils.isEmpty(rootPath)) { // relative path
+
+				path = FilenameUtils.concat(rootPath, path);
+
+				if (new File(path).exists()) {
+					file = new File(path);
+				}
+
+			}
+
+			// register for packaging
+			if (file != null) {
 
 				// update filename
 				String fileName = FilenameUtils.concat(targetDir, file.getName());
@@ -167,5 +210,4 @@ public abstract class AbstractXmlPackager {
 			}
 		}
 	}
-
 }
