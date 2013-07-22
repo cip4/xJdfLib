@@ -12,6 +12,8 @@ package org.cip4.lib.xjdf.xml;
 
 import java.io.OutputStream;
 
+import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 
@@ -23,14 +25,31 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 public class XJdfPackager extends AbstractXmlPackager {
 
 	/**
+	 * Custom constructor. Accepting an XJDF Path for initializing.
+	 * @param xjdfPath Path to XJDF Document.
+	 * @throws Exception
+	 */
+	public XJdfPackager(String xjdfPath) throws Exception {
+		super(xjdfPath);
+	}
+
+	/**
 	 * Custom constructor. Accepting an XJDF Document for initializing.
 	 * @param xJdf XJDF Document byte array for packaging.
 	 * @throws Exception
 	 */
 	public XJdfPackager(byte[] xjdf) throws Exception {
+		this(xjdf, null);
+	}
 
-		super(xjdf);
-
+	/**
+	 * Custom constructor. Accepting an XJDF Document for initializing.
+	 * @param xJdf XJDF Document byte array for packaging.
+	 * @param rootPath The root path of the document.
+	 * @throws Exception
+	 */
+	public XJdfPackager(byte[] xjdf, String rootPath) throws Exception {
+		super(xjdf, rootPath);
 	}
 
 	/**
@@ -84,6 +103,9 @@ public class XJdfPackager extends AbstractXmlPackager {
 		// create main doc Name
 		if (docName == null || docName.equals("")) {
 			docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+
+		} else if (StringUtils.isEmpty(FilenameUtils.getExtension(docName))) {
+			docName = docName + ".ptk";
 		}
 
 		// package xml

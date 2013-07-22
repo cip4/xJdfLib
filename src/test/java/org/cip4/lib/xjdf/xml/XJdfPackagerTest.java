@@ -49,6 +49,8 @@ public class XJdfPackagerTest {
 
 	private final static String RES_JDF = "/org/cip4/lib/xjdf/layout.jdf";
 
+	private final static String RES_XJDF = "/org/cip4/lib/xjdf/relative.xjdf";
+
 	/**
 	 * Setup unit test.
 	 * @throws java.lang.Exception
@@ -70,7 +72,7 @@ public class XJdfPackagerTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testPackageXJdf() throws Exception {
+	public void testPackageXJdfAbsolutePath() throws Exception {
 
 		// arrange
 		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
@@ -118,6 +120,112 @@ public class XJdfPackagerTest {
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+
+		FileUtils.deleteDirectory(new File(dir));
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testPackageXJdfRelativePath() throws Exception {
+
+		// arrange
+		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
+		String resXml = XJdfPackagerTest.class.getResource(RES_XML).getFile();
+		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).getFile();
+
+		String rootPath = FilenameUtils.getFullPath(resJdf);
+
+		resPdf = "./" + FilenameUtils.getName(resPdf);
+		resXml = "./" + FilenameUtils.getName(resXml);
+
+		XJdfNodeFactory nf = new XJdfNodeFactory();
+
+		ProductBuilder productBuilder = new ProductBuilder(1000);
+		Product product = productBuilder.build();
+
+		XJdfBuilder xJdfBuilder = new XJdfBuilder("MyJobId");
+		xJdfBuilder.addProduct(product);
+		xJdfBuilder.addParameter(nf.createRunList(resPdf));
+		xJdfBuilder.addParameter(nf.createRunList(resXml));
+		XJDF xjdf = xJdfBuilder.build();
+		xjdf.setCommentURL(resJdf);
+
+		XJdfParser parser = new XJdfParser();
+		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
+		parser.parseXJdf(xjdf, bosXJdf);
+		bosXJdf.close();
+
+		// act
+		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
+
+		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray(), rootPath);
+		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
+		packager.packageXJdf(bosResult, "MyFile.xjdf");
+
+		bosResult.close();
+
+		// assert
+		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
+
+		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
+
+		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
+		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+
+		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
+		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+
+		Assert.assertTrue("PDF File does not exist.", pdf.exists());
+		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+
+		FileUtils.deleteDirectory(new File(dir));
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
+	 * @throws Exception
+	 */
+	@Test
+	public void testPackageXJdfRelativePathFile() throws Exception {
+
+		// arrange
+		String pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).getFile();
+
+		// act
+		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
+		XJdfPackager packager = new XJdfPackager(pathXJdf);
+		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
+		packager.packageXJdf(bosResult, "MyFile.xjdf");
+
+		bosResult.close();
+
+		// assert
+		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
+
+		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
+		File pdf2 = new File(FilenameUtils.concat(dir, "artwork/test2.pdf"));
+
+		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
+		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+
+		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
+
+		String pdfPath = ptkNav.readAttribute("(//FileSpec/@URL)[1]");
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		String pdfPath2 = ptkNav.readAttribute("(//FileSpec/@URL)[2]");
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test2.pdf", pdfPath2);
+
+		Assert.assertTrue("PDF File does not exist.", pdf.exists());
+		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+
+		Assert.assertTrue("PDF File 2 does not exist.", pdf2.exists());
+		Assert.assertTrue("PDF File 2 size is 0.", pdf2.length() > 0);
 
 		FileUtils.deleteDirectory(new File(dir));
 	}
