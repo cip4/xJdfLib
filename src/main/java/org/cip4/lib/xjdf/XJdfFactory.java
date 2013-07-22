@@ -74,6 +74,8 @@ public class XJdfFactory implements Runnable {
 		tmp = XJdfConstants.NAMESPACE_JDF20;
 		tmp = XJdfConstants.XJDF_LIB_VERSION;
 		tmp = XJdfConstants.XJDF_LIB_BUILD_DATE;
+
+		byte[] bytes = XJdfConstants.XJDF_XSD_BYTES;
 	}
 
 	/**

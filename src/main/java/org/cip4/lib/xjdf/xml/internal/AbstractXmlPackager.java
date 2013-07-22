@@ -201,11 +201,12 @@ public abstract class AbstractXmlPackager {
 			if (file != null) {
 
 				// update filename
-				String fileName = FilenameUtils.concat(targetDir, file.getName());
+				String fileName = "./" + FilenameUtils.concat(targetDir, file.getName());
 				fileName = FilenameUtils.separatorsToUnix(fileName);
 				node.setNodeValue(fileName);
 
 				// register
+				fileName = fileName.substring(2);
 				fileMap.put(fileName, file);
 			}
 		}
