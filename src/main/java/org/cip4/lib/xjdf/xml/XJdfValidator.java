@@ -26,7 +26,7 @@ public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
 	 * Custom constructor. Accepting a XJDF Stream for initializing.
 	 */
 	public XJdfValidator(InputStream xJdfStream) throws IOException {
-		super(XJdfConstants.RES_JDF20_XSD, xJdfStream);
+		super(XJdfConstants.XJDF_XSD_BYTES, xJdfStream, null);
 	}
 
 }

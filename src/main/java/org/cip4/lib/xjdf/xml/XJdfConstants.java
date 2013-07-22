@@ -18,6 +18,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.xml.sax.InputSource;
 
@@ -43,13 +44,35 @@ public class XJdfConstants {
 
 	public static final String JMF_ICS_VERSION = "JMF_L1-2.0";
 
+	public static final byte[] XJDF_XSD_BYTES = loadXJdfByteArray();
+
 	public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
 
 	public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
 
 	private static final String RES_BUILD_PROPS = "/org/cip4/lib/xjdf/build.properties";
 
-	static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
+	private static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
+
+	/**
+	 * Load XJDF XSD as byte array.
+	 * @return XJDF Schema as byte array.
+	 */
+	private static byte[] loadXJdfByteArray() {
+
+		// load xsd
+		byte[] bytes = null;
+
+		try {
+			InputStream is = XJdfConstants.class.getResourceAsStream(RES_JDF20_XSD);
+			bytes = IOUtils.toByteArray(is);
+			is.close();
+		} catch (Exception ex) {
+		}
+
+		// return
+		return bytes;
+	}
 
 	/**
 	 * Load the JDF20 Namespace from schema file.

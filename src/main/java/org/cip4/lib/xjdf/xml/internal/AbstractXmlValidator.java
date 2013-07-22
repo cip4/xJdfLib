@@ -11,11 +11,11 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,9 +26,6 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.DOMImplementationLS;
 import org.w3c.dom.ls.LSInput;
@@ -48,9 +45,9 @@ public abstract class AbstractXmlValidator<T> {
 
 	private final byte[] xsdFile;
 
-	private final String xsdResPath;
-
 	private final InputStream fileStream;
+
+	private final Map<String, byte[]> xsdDependencies;
 
 	private Boolean documentIsValid;
 
@@ -58,24 +55,22 @@ public abstract class AbstractXmlValidator<T> {
 	 * Custom constructor. Accepting a XML Schema file as byte array.
 	 * @throws IOException
 	 */
-	public AbstractXmlValidator(String xsdResPath, InputStream fileStream) throws IOException {
+	private AbstractXmlValidator(byte[] xsd, InputStream fileStream) throws IOException {
+		this(xsd, fileStream, null);
+	}
 
-		// load xsd file
-		InputStream is = XJdfValidator.class.getResourceAsStream(xsdResPath);
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		IOUtils.copy(is, bos);
-		bos.close();
-
-		is.close();
+	/**
+	 * Custom constructor. Accepting a XML Schema file as byte array.
+	 * @throws IOException
+	 */
+	public AbstractXmlValidator(byte[] xsd, InputStream fileStream, Map<String, byte[]> xsdDependencies) throws IOException {
 
 		// initialize instance variables
 		this.messages = new ArrayList<String>();
-		this.xsdFile = bos.toByteArray();
+		this.xsdFile = xsd;
 		this.fileStream = fileStream;
 		this.documentIsValid = null;
-		this.xsdResPath = xsdResPath;
-
+		this.xsdDependencies = xsdDependencies;
 	}
 
 	/**
@@ -203,6 +198,7 @@ public abstract class AbstractXmlValidator<T> {
 		/**
 		 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
 		 */
+		@Override
 		public void warning(SAXParseException exception) throws SAXException {
 
 			// add warning
@@ -213,6 +209,7 @@ public abstract class AbstractXmlValidator<T> {
 		/**
 		 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
 		 */
+		@Override
 		public void error(SAXParseException exception) throws SAXException {
 
 			// add error
@@ -223,6 +220,7 @@ public abstract class AbstractXmlValidator<T> {
 		/**
 		 * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
 		 */
+		@Override
 		public void fatalError(SAXParseException exception) throws SAXException {
 
 			// add fatal error
@@ -238,7 +236,7 @@ public abstract class AbstractXmlValidator<T> {
 	 */
 	private class ResourceResolver implements LSResourceResolver {
 
-		private DOMImplementationLS domImplementationLS;
+		private final DOMImplementationLS domImplementationLS;
 
 		/**
 		 * Default constructor.
@@ -258,9 +256,14 @@ public abstract class AbstractXmlValidator<T> {
 		@Override
 		public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
 			LSInput lsInput = domImplementationLS.createLSInput();
-			InputStream is = getClass().getResourceAsStream(FilenameUtils.getFullPath(xsdResPath) + systemId);
-			lsInput.setByteStream(is);
-			lsInput.setSystemId(systemId);
+
+			if (xsdDependencies != null && xsdDependencies.containsKey(systemId)) {
+				byte[] xsdBytes = xsdDependencies.get(systemId);
+
+				lsInput.setByteStream(new ByteArrayInputStream(xsdBytes));
+				lsInput.setSystemId(systemId);
+			}
+
 			return lsInput;
 		}
 
