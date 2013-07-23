@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -28,6 +29,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.io.output.XmlStreamWriter;
 import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -315,14 +317,30 @@ public class XmlNavigator {
 	public byte[] getXmlBytes() throws Exception {
 
 		// save the result
-		Transformer xformer = TransformerFactory.newInstance().newTransformer();
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer transformer = tf.newTransformer();
+		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		xformer.transform(new DOMSource(xmlDocument), new StreamResult(bos));
+		XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
+		transformer.transform(new DOMSource(xmlDocument), new StreamResult(xmlWriter));
 		bos.close();
 
-		// return bytes
-		return bos.toByteArray();
-	}
+		// format
+		String xml = new String(bos.toByteArray());
 
+		StringBuilder b = new StringBuilder(xml);
+
+		if (b.indexOf("?>") != -1)
+			b.insert(b.indexOf("?>") + 2, "\r\n");
+
+		if (b.indexOf("--><") != -1)
+			b.insert(b.indexOf("--><") + 3, "\r\n");
+
+		xml = b.toString();
+
+		// return bytes
+		return xml.getBytes();
+	}
 }
