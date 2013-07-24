@@ -10,6 +10,7 @@
  */
 package org.cip4.lib.xjdf.builder;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +27,7 @@ import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Assert;
@@ -38,6 +40,8 @@ import org.junit.Test;
  * @date 29.02.2012
  */
 public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
+	
+	private final String RES_XJDF_GANGJOB = "/org/cip4/lib/xjdf/GangJob.xjdf";
 
 	private XJdfBuilder xJdfBuilder;
 
@@ -288,6 +292,20 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[3]/xjdf:RunList/xjdf:FileSpec/@URL");
 		Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_2, actual);
 
+	}
+	
+	public void testXJDFCustomConstructor() throws Exception {
+		
+		// arrange
+		InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_GANGJOB);
+		
+		XJdfParser parser = new XJdfParser();
+		XJDF xjdf = parser.parseStream(is);
+		
+		// act
+		XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
+		
+		// assert
 	}
 
 }

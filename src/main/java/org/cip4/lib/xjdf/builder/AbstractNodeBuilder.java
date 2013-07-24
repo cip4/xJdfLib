@@ -33,7 +33,7 @@ public abstract class AbstractNodeBuilder<T> {
 		// initialize node
 		this.node = node;
 	}
-
+	
 	/**
 	 * Custom constructor. Accepting a Node object for initializing. !! THIS NODE MUST BE NAMESPACE AWARE !!
 	 * @param node Namespace aware node object.
