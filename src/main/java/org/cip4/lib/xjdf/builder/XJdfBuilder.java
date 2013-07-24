@@ -110,6 +110,21 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	}
 
 	/**
+	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains an XJDF Document.
+	 * @param xjdf XJDF Document for modify.
+	 */
+	public XJdfBuilder(XJDF xjdf) {
+
+		// initialize objects
+		super(xjdf);
+		mapParameterSets = new HashMap<String, ParameterSet>(20);
+		xJdfNodeFactory = new XJdfNodeFactory();
+		
+		// TODO init map ParameterSets
+		
+	}
+
+	/**
 	 * Getter for xJdf attribute.
 	 * @return the xJdf
 	 */
