@@ -173,8 +173,8 @@ public class Layout
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
      * {@link JAXBElement }{@code <}{@link ContentObject }{@code >}
+     * {@link JAXBElement }{@code <}{@link MarkObject }{@code >}
      * {@link JAXBElement }{@code <}{@link PlacedObject }{@code >}
      * 
      * 

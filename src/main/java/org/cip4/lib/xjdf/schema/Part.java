@@ -45,7 +45,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="WebName" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="Location" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="Separation" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
- *       &lt;attribute name="BinderySignatureName" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
+ *       &lt;attribute name="AssemblyID" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="DeliveryUnit5" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="DeliveryUnit4" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="EditionVersion" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
@@ -154,9 +154,9 @@ public class Part
     protected String location;
     @XmlAttribute(name = "Separation")
     protected String separation;
-    @XmlAttribute(name = "BinderySignatureName")
+    @XmlAttribute(name = "AssemblyID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
-    protected String binderySignatureName;
+    protected String assemblyID;
     @XmlAttribute(name = "DeliveryUnit5")
     protected String deliveryUnit5;
     @XmlAttribute(name = "DeliveryUnit4")
@@ -797,27 +797,27 @@ public class Part
     }
 
     /**
-     * Gets the value of the binderySignatureName property.
+     * Gets the value of the assemblyID property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getBinderySignatureName() {
-        return binderySignatureName;
+    public String getAssemblyID() {
+        return assemblyID;
     }
 
     /**
-     * Sets the value of the binderySignatureName property.
+     * Sets the value of the assemblyID property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setBinderySignatureName(String value) {
-        this.binderySignatureName = value;
+    public void setAssemblyID(String value) {
+        this.assemblyID = value;
     }
 
     /**

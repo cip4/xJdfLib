@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlType;
  * <pre>
  * &lt;simpleType name="EnumPartIDKeys">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="BinderySignatureName"/>
+ *     &lt;enumeration value="AssemblyID"/>
  *     &lt;enumeration value="BlockName"/>
  *     &lt;enumeration value="BundleItemIndex"/>
  *     &lt;enumeration value="CellIndex"/>
@@ -89,8 +89,8 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum EnumPartIDKeys {
 
-    @XmlEnumValue("BinderySignatureName")
-    BINDERY_SIGNATURE_NAME("BinderySignatureName"),
+    @XmlEnumValue("AssemblyID")
+    ASSEMBLY_ID("AssemblyID"),
     @XmlEnumValue("BlockName")
     BLOCK_NAME("BlockName"),
     @XmlEnumValue("BundleItemIndex")

@@ -26,7 +26,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Fold" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}SignatureCell" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Position" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
+ *       &lt;attribute name="AssemblyID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="BindingEdge" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="BindingOrientation" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="JogEdge" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="AlignmentReferenceWeb" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="OutsideGutter" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
  *       &lt;attribute name="NumberUp" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
+ *       &lt;attribute name="ProductID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="StaggerColumns" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="DieLayoutRef" type="{http://www.CIP4.org/JDFSchema_2_0}IDREF" />
  *     &lt;/extension>
@@ -51,7 +54,8 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BinderySignature", propOrder = {
     "fold",
-    "signatureCell"
+    "signatureCell",
+    "position"
 })
 public class BinderySignature
     extends ParameterType
@@ -62,6 +66,10 @@ public class BinderySignature
     protected List<Fold> fold;
     @XmlElement(name = "SignatureCell")
     protected List<SignatureCell> signatureCell;
+    @XmlElement(name = "Position")
+    protected List<Position> position;
+    @XmlAttribute(name = "AssemblyID")
+    protected String assemblyID;
     @XmlAttribute(name = "BindingEdge")
     @XmlSchemaType(name = "anySimpleType")
     protected String bindingEdge;
@@ -94,6 +102,8 @@ public class BinderySignature
     @XmlAttribute(name = "NumberUp")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair numberUp;
+    @XmlAttribute(name = "ProductID")
+    protected String productID;
     @XmlAttribute(name = "StaggerColumns")
     protected String staggerColumns;
     @XmlAttribute(name = "DieLayoutRef")
@@ -156,6 +166,59 @@ public class BinderySignature
             signatureCell = new ArrayList<SignatureCell>();
         }
         return this.signatureCell;
+    }
+
+    /**
+     * Gets the value of the position property.
+     * 
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the position property.
+     * 
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPosition().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link Position }
+     * 
+     * 
+     */
+    public List<Position> getPosition() {
+        if (position == null) {
+            position = new ArrayList<Position>();
+        }
+        return this.position;
+    }
+
+    /**
+     * Gets the value of the assemblyID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAssemblyID() {
+        return assemblyID;
+    }
+
+    /**
+     * Sets the value of the assemblyID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAssemblyID(String value) {
+        this.assemblyID = value;
     }
 
     /**
@@ -444,6 +507,30 @@ public class BinderySignature
      */
     public void setNumberUp(org.cip4.lib.xjdf.type.XYPair value) {
         this.numberUp = value;
+    }
+
+    /**
+     * Gets the value of the productID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getProductID() {
+        return productID;
+    }
+
+    /**
+     * Sets the value of the productID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setProductID(String value) {
+        this.productID = value;
     }
 
     /**

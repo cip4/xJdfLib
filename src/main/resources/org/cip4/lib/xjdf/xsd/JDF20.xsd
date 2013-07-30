@@ -437,7 +437,7 @@
 
 	<xs:simpleType name="EnumPartIDKeys">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="BinderySignatureName" />
+			<xs:enumeration value="AssemblyID" />
 			<xs:enumeration value="BlockName" />
 			<xs:enumeration value="BundleItemIndex" />
 			<xs:enumeration value="CellIndex" />
@@ -3288,7 +3288,7 @@
 			<xs:attribute name="WebName" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Location" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Separation" type="string" use="optional" />
-			<xs:attribute name="BinderySignatureName" type="NMTOKEN" use="optional" />
+			<xs:attribute name="AssemblyID" type="NMTOKEN" use="optional" />
 			<xs:attribute name="DeliveryUnit5" type="Any" use="optional" />
 			<xs:attribute name="DeliveryUnit4" type="Any" use="optional" />
 			<xs:attribute name="EditionVersion" type="NMTOKEN" use="optional" />
@@ -5412,7 +5412,9 @@
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
 				</xs:sequence>
+				<xs:attribute name="AssemblyID" type="string" use="optional" />
 				<xs:attribute name="BindingEdge" use="optional" />
 				<xs:attribute name="BindingOrientation" use="optional" />
 				<xs:attribute name="JogEdge" use="optional" />
@@ -5425,6 +5427,7 @@
 				<xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional" />
 				<xs:attribute name="OutsideGutter" type="boolean" use="optional" />
 				<xs:attribute name="NumberUp" type="XYPair" use="optional" />
+				<xs:attribute name="ProductID" type="string" use="optional" />
 				<xs:attribute name="StaggerColumns" type="string" use="optional" />
 				<xs:attribute name="DieLayoutRef" type="IDREF" use="optional" />
 			</xs:extension>
