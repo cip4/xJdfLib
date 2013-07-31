@@ -34,6 +34,7 @@ import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MarkObject;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.MediaIntent;
+import org.cip4.lib.xjdf.schema.Modified;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Parameter;
@@ -70,7 +71,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	public XJdfNodeFactory() {
 		// no action
 	}
-	
+
 	/**
 	 * Create a new Parameter node from ParameterType and Part
 	 * @param parameterType The ParameterType Node
@@ -380,7 +381,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 		// return object
 		return layoutIntent;
 	}
-	
+
 	/**
 	 * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
 	 * @param agentName Value for AgentName attribute.
@@ -389,17 +390,38 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @return Created Node which already contains defined attributes.
 	 */
 	public Created createCreated(String agentName, String agentVersion, DateTime timestamp) {
-		
+
 		// create node
 		Created created = super.createCreated();
-		
+
 		// set attributes
 		created.setAgentName(agentName);
 		created.setAgentVersion(agentVersion);
 		created.setTimeStamp(timestamp);
-		
+
 		// return object
 		return created;
+	}
+
+	/**
+	 * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
+	 * @param agentName Value for AgentName attribute.
+	 * @param agentVersion Value for AgentVersion attribute.
+	 * @param timestamp Value for TimeStamp attribute.
+	 * @return Created Node which already contains defined attributes.
+	 */
+	public Modified createModified(String agentName, String agentVersion, DateTime timestamp) {
+
+		// create node
+		Modified modified = super.createModified();
+
+		// set attributes
+		modified.setAgentName(agentName);
+		modified.setAgentVersion(agentVersion);
+		modified.setTimeStamp(timestamp);
+
+		// return object
+		return modified;
 	}
 
 	/**
