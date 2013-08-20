@@ -454,6 +454,7 @@
 			<xs:enumeration value="PageNumber" />
 			<xs:enumeration value="PartVersion" />
 			<xs:enumeration value="PreflightRule" />
+			<xs:enumeration value="ProductPart" />
 			<xs:enumeration value="PreviewType" />
 			<xs:enumeration value="RibbonName" />
 			<xs:enumeration value="Run" />
