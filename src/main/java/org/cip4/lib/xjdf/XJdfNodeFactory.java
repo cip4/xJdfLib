@@ -73,6 +73,16 @@ public class XJdfNodeFactory extends ObjectFactory {
 	}
 
 	/**
+	 * Create a new Parameter node from ParameterType
+	 * @param parameterType The ParameterType Node
+	 * @return New Parameter node from ParametType node.
+	 */
+	public Parameter createParameter(ParameterType parameterType) {
+
+		return createParameter(parameterType, null);
+	}
+
+	/**
 	 * Create a new Parameter node from ParameterType and Part
 	 * @param parameterType The ParameterType Node
 	 * @param part The Part Node
@@ -212,6 +222,23 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// set attributes
 		nodeInfo.setTotalDuration(totalDuration);
+
+		// return object
+		return nodeInfo;
+	}
+
+	/**
+	 * Create a new NodeInfo Node which already contains values for attributes JobPriority.
+	 * @param end Value for End attribute.
+	 * @return NodeInfo Node which already contains defined attributes.
+	 */
+	public NodeInfo createNodeInfo(Integer jobPriority) {
+
+		// create node
+		NodeInfo nodeInfo = super.createNodeInfo();
+
+		// set attributes
+		nodeInfo.setJobPriority(jobPriority);
 
 		// return object
 		return nodeInfo;
