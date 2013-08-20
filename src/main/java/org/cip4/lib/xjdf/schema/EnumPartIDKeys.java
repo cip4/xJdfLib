@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;enumeration value="PageNumber"/>
  *     &lt;enumeration value="PartVersion"/>
  *     &lt;enumeration value="PreflightRule"/>
+ *     &lt;enumeration value="ProductPart"/>
  *     &lt;enumeration value="PreviewType"/>
  *     &lt;enumeration value="RibbonName"/>
  *     &lt;enumeration value="Run"/>
@@ -123,6 +124,8 @@ public enum EnumPartIDKeys {
     PART_VERSION("PartVersion"),
     @XmlEnumValue("PreflightRule")
     PREFLIGHT_RULE("PreflightRule"),
+    @XmlEnumValue("ProductPart")
+    PRODUCT_PART("ProductPart"),
     @XmlEnumValue("PreviewType")
     PREVIEW_TYPE("PreviewType"),
     @XmlEnumValue("RibbonName")
