@@ -34,17 +34,17 @@ public class XJdfConstants {
 	 */
 	public static final String NAMESPACE_JDF20 = loadNamespaceJdf20();
 
-	public static final String XJDF_LIB_VERSION = loadLibraryVersion();
-
-	public static final String XJDF_LIB_BUILD_DATE = loadLibraryBuildDate();
-
 	public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
 	public static final String XJDF_CURRENT_VERSION = "2.0";
 
+	public static final String XJDF_LIB_VERSION = loadLibraryVersion();
+
+	public static final String XJDF_LIB_BUILD_DATE = loadLibraryBuildDate();
+
 	public static final String JMF_ICS_VERSION = "JMF_L1-2.0";
 
-	public static final byte[] XJDF_XSD_BYTES = loadXJdfByteArray();
+	public static final byte[] XJDF_XSD_BYTES = loadXJdfXsdByteArray();
 
 	public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
 
@@ -58,7 +58,7 @@ public class XJdfConstants {
 	 * Load XJDF XSD as byte array.
 	 * @return XJDF Schema as byte array.
 	 */
-	private static byte[] loadXJdfByteArray() {
+	private static byte[] loadXJdfXsdByteArray() {
 
 		// load xsd
 		byte[] bytes = null;
