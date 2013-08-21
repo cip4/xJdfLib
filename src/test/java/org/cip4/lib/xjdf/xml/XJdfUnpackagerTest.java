@@ -11,6 +11,7 @@
 package org.cip4.lib.xjdf.xml;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.apache.commons.io.FileUtils;
@@ -59,14 +60,14 @@ public class XJdfUnpackagerTest {
 		String targetDir = FilenameUtils.concat(tmpDir, "XJdfLib_UnpackageTest_" + System.currentTimeMillis());
 
 		// assert
-		XJdfUnpackager unpackager = new XJdfUnpackager();
-		unpackager.unpackageXJdf(pathZip, targetDir);
+		XJdfUnpackager unpackager = new XJdfUnpackager(pathZip);
+		unpackager.unpackageXJdf(targetDir);
 
 		// act
 		File targetFile = new File(targetDir);
 		Assert.assertTrue("Target destination does not exist.", targetFile.exists());
 
-		String pathPtk = FilenameUtils.concat(targetDir, "testPackage.ptk");
+		String pathPtk = FilenameUtils.concat(targetDir, "testPackage.xjdf");
 		Assert.assertTrue("File does not exist.", new File(pathPtk).exists());
 
 		String pathArtwork = FilenameUtils.concat(targetDir, "artwork/testArtwork.pdf");
@@ -90,14 +91,14 @@ public class XJdfUnpackagerTest {
 		String pathZip = XJdfUnpackagerTest.class.getResource(RES_PGK).getFile();
 
 		// assert
-		XJdfUnpackager unpackager = new XJdfUnpackager();
-		String targetDir = unpackager.unpackageXJdf(pathZip);
+		XJdfUnpackager unpackager = new XJdfUnpackager(pathZip);
+		String targetDir = unpackager.unpackageXJdf();
 
 		// act
 		File targetFile = new File(targetDir);
 		Assert.assertTrue("Target destination does not exist.", targetFile.exists());
 
-		String pathPtk = FilenameUtils.concat(targetDir, "testPackage.ptk");
+		String pathPtk = FilenameUtils.concat(targetDir, "testPackage.xjdf");
 		Assert.assertTrue("File does not exist.", new File(pathPtk).exists());
 
 		String pathArtwork = FilenameUtils.concat(targetDir, "artwork/testArtwork.pdf");
@@ -108,5 +109,27 @@ public class XJdfUnpackagerTest {
 
 		FileUtils.deleteDirectory(targetFile); // clean up
 		Assert.assertFalse("Target destination was not removed.", targetFile.exists());
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackageManager#getXJdfDocument()}.
+	 * @throws FileNotFoundException
+	 */
+	@Test
+	public void testGetXJdfDocument() throws Exception {
+
+		// arrange
+		String path = XJdfUnpackagerTest.class.getResource(RES_PGK).getFile();
+		XJdfUnpackager unpackager = new XJdfUnpackager(path);
+
+		// act
+		XJdfNavigator nav = unpackager.getXJdfDocument();
+
+		String pathPreview = nav.evaluateString("/XJDF/ParameterSet[@Name='Preview']/Parameter/Preview/@URL");
+		byte[] bytes = unpackager.extractFile(pathPreview);
+
+		// assert
+		Assert.assertEquals("XJDF ID is wrong.", "95733854-01", nav.evaluateString(XJdfNavigator.JOB_ID));
+		Assert.assertNotEquals("Preview is null.", 0, bytes.length);
 	}
 }
