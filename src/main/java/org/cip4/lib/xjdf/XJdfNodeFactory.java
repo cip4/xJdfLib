@@ -71,7 +71,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	public XJdfNodeFactory() {
 		// no action
 	}
-
+	
 	/**
 	 * Create a new Parameter node from ParameterType
 	 * @param parameterType The ParameterType Node

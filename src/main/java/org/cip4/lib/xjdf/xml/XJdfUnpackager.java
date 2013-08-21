@@ -22,15 +22,38 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager;
 public class XJdfUnpackager extends AbstractXmlUnpackager {
 
 	/**
+	 * Custom constructor. Accepting a XJDF Package Path for initializing.
+	 * @param pathPackage Path to XJDF Package.
+	 * @throws IOException
+	 */
+	public XJdfUnpackager(String pathPackage) throws IOException {
+		super(pathPackage);
+	}
+
+	/**
+	 * Returns the XJDF Document covered by the XJDFNavigator.
+	 * @return XJDF Document coverd by the XJDFNavigator.
+	 * @throws Exception
+	 */
+	public XJdfNavigator getXJdfDocument() throws Exception {
+
+		// find XJDF master document
+		byte[] bytes = super.findMasterDocument("xjdf");
+
+		// return as navigator
+		return new XJdfNavigator(bytes);
+	}
+
+	/**
 	 * Unpackage an XJDF Package to a temporary directory.
 	 * @param pathPackage XJDF Package to be unpackaged.
 	 * @return The target directory.
 	 * @throws IOException
 	 */
-	public String unpackageXJdf(String pathPackage) throws IOException {
+	public String unpackageXJdf() throws IOException {
 
 		// call super method
-		return super.unpackageZip(pathPackage);
+		return super.unpackageZip();
 	}
 
 	/**
@@ -40,9 +63,9 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	 * @return The target directory.
 	 * @throws IOException
 	 */
-	public String unpackageXJdf(String pathPackage, String targetDir) throws IOException {
+	public String unpackageXJdf(String targetDir) throws IOException {
 
 		// call super method
-		return super.unpackageZip(pathPackage, targetDir);
+		return super.unpackageZip(targetDir);
 	}
 }
