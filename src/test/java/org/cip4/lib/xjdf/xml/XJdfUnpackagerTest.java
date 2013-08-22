@@ -92,7 +92,7 @@ public class XJdfUnpackagerTest {
 
 		// assert
 		XJdfUnpackager unpackager = new XJdfUnpackager(pathZip);
-		String targetDir = unpackager.unpackageXJdf();
+		String targetDir = FilenameUtils.getFullPath(unpackager.unpackageXJdf());
 
 		// act
 		File targetFile = new File(targetDir);
