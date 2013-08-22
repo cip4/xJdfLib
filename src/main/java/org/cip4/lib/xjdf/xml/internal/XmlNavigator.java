@@ -16,9 +16,11 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -232,7 +234,7 @@ public class XmlNavigator {
 	/**
 	 * Evaluates an XPath expression on XML Document and returns a Node object as result.
 	 * @param xPath XPath expression to execute to.
-	 * @return Expression result as node object.
+	 * @return Expression result as node.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
 	public Node evaluateNode(String xPath) throws XPathExpressionException {
@@ -242,15 +244,81 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Evaluates an XPath expression on XML Document and returns a Node object as result.
+	 * Evaluates an XPath expression on XML Document and returns a NodeList object as result.
 	 * @param xPath XPath expression to execute to.
-	 * @return Expression result as list of node object.
+	 * @return Expression result as node list.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
 	public NodeList evaluateNodeList(String xPath) throws XPathExpressionException {
 
 		// evaluate and return result.
 		return (NodeList) evaluate(xPath, XPathConstants.NODESET);
+	}
+
+	/**
+	 * Evaluates an XPath expression on XML Document and returns the result as XJDF DataType.
+	 * @param xPath XPath expression to execute to.
+	 * @param xJdfType The desired result data type.
+	 * @return Result as desired data type.
+	 */
+	public AbstractXJdfType evaluate(String xPath, Class xJdfType) throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException,
+			IllegalArgumentException, InvocationTargetException {
+
+		// evaluate string
+		String value = evaluateString(xPath);
+
+		// convert to data type
+		Constructor ctor = xJdfType.getDeclaredConstructor(String.class);
+		AbstractXJdfType obj = (AbstractXJdfType) ctor.newInstance(value);
+
+		// return result
+		return obj;
+	}
+
+	/**
+	 * Extract an XML Node from XML Document and return parsed result.
+	 * @param xPath XPath expression in order to locate the node.
+	 * @return Expression result as parsed XML Node object.
+	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+	 * @throws JAXBException
+	 */
+	protected Object extractNode(String xPath, AbstractXmlParser parser) throws XPathExpressionException, JAXBException {
+
+		// evaluate and return result.
+		Node node = evaluateNode(xPath);
+
+		// parse node
+		Object obj = parser.parseNode(node);
+
+		// return node object
+		return obj;
+	}
+
+	/**
+	 * Replace a node in XML Document located by the XPath expression.
+	 * @param xPath Location of the node to be replaced.
+	 * @param replacement The new node.
+	 * @param parser XML Parser.
+	 */
+	public void replaceNode(String xPath, Object replacement, AbstractXmlParser parser) throws XPathExpressionException, JAXBException, ParserConfigurationException {
+
+		// new temporarily xml document
+		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		dbf.setNamespaceAware(true);
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.newDocument();
+
+		// parse new node
+		parser.parseNode(replacement, doc);
+		Node newNode = getXmlDocument().adoptNode(doc.getFirstChild());
+
+		// load old node for removal
+		Node node = (Node) evaluate(xPath, XPathConstants.NODE);
+
+		// replace
+		Node parentNode = node.getParentNode();
+		parentNode.removeChild(node);
+		parentNode.appendChild(newNode);
 	}
 
 	/**

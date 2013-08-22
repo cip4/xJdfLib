@@ -11,10 +11,14 @@
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
 import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.Shape;
 import org.junit.After;
 import org.junit.Assert;
@@ -33,6 +37,8 @@ public class XJdfNavigatorTest {
 	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
 
 	private final String RES_TEST_JDF = "/org/cip4/lib/xjdf/layout.jdf";
+
+	private final String RES_TEST_JOB_1 = "/org/cip4/lib/xjdf/JOB_1.xjdf";
 
 	/**
 	 * Set up unit test.
@@ -352,6 +358,36 @@ public class XJdfNavigatorTest {
 		// assert
 		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
 		Assert.assertEquals("Node-Name is wrong.", "http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI());
+	}
+
+	@Test
+	public void testXJdfNodeModification() throws Exception {
+
+		// arrange
+		File testBefore = new File(XJdfNavigatorTest.class.getResource(RES_TEST_JOB_1).getFile());
+		File fileAfter = File.createTempFile("cip4-test", ".xjdf");
+		fileAfter.deleteOnExit();
+
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(new FileInputStream(testBefore), true);
+
+		// act
+		Product product = (Product) xJdfNavigator.extractNode("//xjdf:XJDF/xjdf:ProductList/xjdf:Product");
+		product.getIntent().remove(0);
+		xJdfNavigator.replaceNode("//xjdf:XJDF/xjdf:ProductList/xjdf:Product", product);
+
+		FileOutputStream fos = new FileOutputStream(fileAfter);
+		IOUtils.write(xJdfNavigator.getXmlBytes(), fos);
+		fos.close();
+
+		// assert
+		XJdfNavigator navBefore = new XJdfNavigator(testBefore);
+		int cntItemsBefore = navBefore.evaluateInt("count(//XJDF/ProductList/Product/*[local-name()='Intent'])");
+
+		XJdfNavigator navAfter = new XJdfNavigator(fileAfter);
+		int cntItemsAfter = navAfter.evaluateInt("count(//XJDF/ProductList/Product/*[local-name()='Intent'])");
+
+		Assert.assertEquals("Number of Intents before is wrong.", 3, cntItemsBefore);
+		Assert.assertEquals("Number of Intents after is wrong.", 2, cntItemsAfter);
 	}
 
 	@Test

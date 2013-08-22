@@ -29,7 +29,7 @@ import org.apache.commons.lang.StringUtils;
  * @author s.meissner
  * @date 12.08.2013
  */
-public class AbstractXmlUnpackager {
+public abstract class AbstractXmlUnpackager {
 
 	private final String pathPackage;
 
@@ -62,7 +62,7 @@ public class AbstractXmlUnpackager {
 	/**
 	 * Unpackages a ZIP Package.
 	 * @param pathPgk Path to ZIP Package.
-	 * @return Root directory of package.
+	 * @return Path to master file.
 	 * @throws IOException
 	 */
 	protected String unpackageZip() throws IOException {
@@ -80,7 +80,7 @@ public class AbstractXmlUnpackager {
 	 * Unpackages a ZIP Package.
 	 * @param pathPgk Path to ZIP Package.
 	 * @param targetDir Target destionation.
-	 * @return Root directory of package.
+	 * @return Path to master file.
 	 * @throws IOException
 	 */
 	protected String unpackageZip(String targetDir) throws IOException {
@@ -106,17 +106,23 @@ public class AbstractXmlUnpackager {
 		zis.closeEntry();
 		zis.close();
 
+		// create absolute master path
+		String relativePath = findMasterDocumentPath();
+		relativePath = FilenameUtils.normalize(relativePath);
+
+		targetDir = FilenameUtils.normalize(targetDir);
+
 		// return root directory
-		return targetDir;
+		return FilenameUtils.concat(targetDir, relativePath);
 	}
 
 	/**
-	 * Find the master document in package file.
+	 * Find the master document path in package file.
 	 * @param extension Filename extension of the master file.
 	 * @return The master document as byte array.
 	 * @throws IOException Is thrown in case an IOExcetion occurs.
 	 */
-	protected byte[] findMasterDocument(String extension) throws IOException {
+	protected String findMasterDocumentPath() throws IOException {
 
 		// find master document by extension (first match)
 		String masterPath = null;
@@ -127,19 +133,35 @@ public class AbstractXmlUnpackager {
 			String p = lstFilename.get(i);
 
 			// check
-			if (FilenameUtils.getExtension(p).equals(extension)) {
-				masterPath = p;
+			for (int n = 0; n < getMasterExtension().length && masterPath == null; n++) {
+				if (FilenameUtils.getExtension(p).equals(getMasterExtension()[n])) {
+					masterPath = p;
+				}
 			}
 		}
 
-		// get return value
+		// extract file
+		return masterPath;
+	}
+
+	/**
+	 * Find the master document in package file.
+	 * @param extension Filename extension of the master file.
+	 * @return The master document as byte array.
+	 * @throws IOException Is thrown in case an IOExcetion occurs.
+	 */
+	protected byte[] findMasterDocument() throws IOException {
+
 		byte[] bytes = null;
+
+		// find master document by extension
+		String masterPath = findMasterDocumentPath();
 
 		if (!StringUtils.isEmpty(masterPath)) {
 			bytes = extractFile(masterPath);
 		}
 
-		// extract file
+		// return file as byte array
 		return bytes;
 	}
 
@@ -174,6 +196,11 @@ public class AbstractXmlUnpackager {
 
 		// extract file
 		return bytes;
-
 	}
+
+	/**
+	 * Defines the file extension of the master file.
+	 * @return Array of master file extensions.
+	 */
+	protected abstract String[] getMasterExtension();
 }

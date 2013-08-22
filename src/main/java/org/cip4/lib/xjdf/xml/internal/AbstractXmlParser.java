@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Constructor;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
@@ -24,6 +25,7 @@ import javax.xml.bind.ValidationException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.XmlStreamWriter;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.w3c.dom.Node;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 
@@ -43,6 +45,34 @@ public abstract class AbstractXmlParser<T> {
 
 		// init instance varialbes
 		this.jaxbContext = jaxbContext;
+	}
+
+	/**
+	 * Parse a W3C Node to a XML Node.
+	 * @param w3cNode The W3C Node to be parsed.
+	 * @return The XML Node as object.
+	 * @throws JAXBException
+	 */
+	protected Object parseNode(Node w3cNode) throws JAXBException {
+		// unmarshall XJDF stream
+		Unmarshaller u = jaxbContext.createUnmarshaller();
+		Object dom = u.unmarshal(w3cNode);
+
+		// return result
+		return dom;
+	}
+
+	/**
+	 * Parse an XML Node to a W3C Node
+	 * @param xmlNode The XML Node to be parsed.
+	 * @param w3cNode The W3C Result node.
+	 * @throws JAXBException
+	 */
+	protected void parseNode(Object xmlNode, Node w3cNode) throws JAXBException {
+
+		// unmarshall XJDF stream
+		Marshaller m = createMarshaller();
+		m.marshal(xmlNode, w3cNode);
 	}
 
 	/**
@@ -97,10 +127,7 @@ public abstract class AbstractXmlParser<T> {
 	protected void parseXml(T obj, OutputStream os, boolean skipValidation, Class abstractValidatorClass) throws Exception {
 
 		// marshall XJDF object to output stream
-		Marshaller m = jaxbContext.createMarshaller();
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-		m.setProperty("com.sun.xml.bind.namespacePrefixMapper", getNamespacePrefixMapper());
+		Marshaller m = createMarshaller();
 		m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -183,5 +210,22 @@ public abstract class AbstractXmlParser<T> {
 
 		// return header
 		return header;
+	}
+
+	/**
+	 * Creates and returns a new marshaller object.
+	 * @return New Marshaller object.
+	 * @throws JAXBException
+	 */
+	private Marshaller createMarshaller() throws JAXBException {
+
+		// create marshaller
+		Marshaller m = jaxbContext.createMarshaller();
+		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+		m.setProperty("com.sun.xml.bind.namespacePrefixMapper", getNamespacePrefixMapper());
+
+		// return marshaller
+		return m;
 	}
 }

@@ -38,7 +38,7 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	public XJdfNavigator getXJdfDocument() throws Exception {
 
 		// find XJDF master document
-		byte[] bytes = super.findMasterDocument("xjdf");
+		byte[] bytes = super.findMasterDocument();
 
 		// return as navigator
 		return new XJdfNavigator(bytes);
@@ -47,7 +47,7 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
 	 * @param pathPackage XJDF Package to be unpackaged.
-	 * @return The target directory.
+	 * @return The path of the master document.
 	 * @throws IOException
 	 */
 	public String unpackageXJdf() throws IOException {
@@ -60,12 +60,20 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	 * Unpackage an XJDF Package to a target directory.
 	 * @param pathPackage XJDF Package to be unpackaged.
 	 * @param targetDir Target directory for unpackaging.
-	 * @return The target directory.
+	 * @return The path of the master document.
 	 * @throws IOException
 	 */
 	public String unpackageXJdf(String targetDir) throws IOException {
 
 		// call super method
 		return super.unpackageZip(targetDir);
+	}
+
+	/**
+	 * @see org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager#getMasterExtension()
+	 */
+	@Override
+	protected String[] getMasterExtension() {
+		return new String[] { "xjdf" };
 	}
 }
