@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-
 /**
  * Coordinate transformation matrices are widely used throughout the whole printing Process, especially in Layout Resources. They represent two dimensional
  * transformations as defined by [PS] and [PDF1.6]. For more information, refer to the respective reference manuals, and look for “Coordinate Systems and
@@ -57,6 +56,20 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
 		this.b = b;
 		this.c = c;
 		this.d = d;
+		this.tx = tx;
+		this.ty = ty;
+	}
+
+	/**
+	 * Custom constructor, accepting several values for initializing.
+	 */
+	public Matrix(double tx, double ty) {
+
+		// init class
+		this.a = 1d;
+		this.b = 0d;
+		this.c = 0d;
+		this.d = 1d;
 		this.tx = tx;
 		this.ty = ty;
 	}
