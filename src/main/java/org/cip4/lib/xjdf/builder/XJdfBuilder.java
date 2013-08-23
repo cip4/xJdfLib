@@ -27,6 +27,7 @@ import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.SetType;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -110,7 +111,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	}
 
 	/**
-	 * Custom Constructor. Creates a new instance of XJdfBuilder which already contains an XJDF Document.
+	 * Custom Constructor. Creates a new instance of XJdfBuilder based on a existing XJDF Document.
 	 * @param xjdf XJDF Document for modify.
 	 */
 	public XJdfBuilder(XJDF xjdf) {
@@ -119,9 +120,17 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		super(xjdf);
 		mapParameterSets = new HashMap<String, ParameterSet>(20);
 		xJdfNodeFactory = new XJdfNodeFactory();
-		
-		// TODO init map ParameterSets
-		
+
+		// map items
+		for (JAXBElement<? extends SetType> setType : xjdf.getSetType()) {
+
+			// parameter set
+			if (setType.getValue() instanceof ParameterSet) {
+				ParameterSet parameterSet = (ParameterSet) setType.getValue();
+				mapParameterSets.put(parameterSet.getName(), parameterSet);
+			}
+		}
+
 	}
 
 	/**

@@ -276,7 +276,8 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Extract an XML Node from XML Document and return parsed result.
+	 * Extract an XML Node from XML Document and return parsed result. <br />
+	 * !! WORKS ONLY IF NAVIGATOR IS NAMESPACE AWARE !!
 	 * @param xPath XPath expression in order to locate the node.
 	 * @return Expression result as parsed XML Node object.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
@@ -295,7 +296,24 @@ public class XmlNavigator {
 	}
 
 	/**
-	 * Replace a node in XML Document located by the XPath expression.
+	 * Remove a node from XML Document locaed by the XPath expression.
+	 * @param xPath Location of the node to be removed.
+	 * @throws ParserConfigurationException
+	 * @throws XPathExpressionException
+	 */
+	public void removeNode(String xPath) throws ParserConfigurationException, XPathExpressionException {
+
+		// load old node for removal
+		Node node = (Node) evaluate(xPath, XPathConstants.NODE);
+
+		// remove
+		Node parentNode = node.getParentNode();
+		parentNode.removeChild(node);
+	}
+
+	/**
+	 * Replace a node in XML Document located by the XPath expression. <br />
+	 * !! WORKS ONLY IF NAVIGATOR IS NAMESPACE AWARE !!
 	 * @param xPath Location of the node to be replaced.
 	 * @param replacement The new node.
 	 * @param parser XML Parser.

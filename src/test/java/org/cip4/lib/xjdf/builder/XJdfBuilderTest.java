@@ -40,7 +40,7 @@ import org.junit.Test;
  * @date 29.02.2012
  */
 public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
-	
+
 	private final String RES_XJDF_GANGJOB = "/org/cip4/lib/xjdf/GangJob.xjdf";
 
 	private XJdfBuilder xJdfBuilder;
@@ -71,33 +71,33 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 	 */
 	@Test
 	public void testAddAudit() throws Exception {
-		
+
 		// arrange
 		final String AGENT_NAME = "XJDF Agent";
 		final String AGENT_VERSION = "2.0.4";
 		final DateTime TIMESTAMP = new DateTime("2013-06-11T23:27:26+02:00");
-		
+
 		// act
 		Created created = new XJdfNodeFactory().createCreated(AGENT_NAME, AGENT_VERSION, TIMESTAMP);
 		xJdfBuilder.addAudit(created);
-		
+
 		PhaseTime phaseTime = new XJdfNodeFactory().createPhaseTime();
 		phaseTime.setStart(new DateTime());
 		xJdfBuilder.addAudit(phaseTime);
-		
+
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
-		
+
 		String actualAgentName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentName");
 		Assert.assertEquals("AgentName in Created is wrong.", AGENT_NAME, actualAgentName);
 
-		String actualAgentVersion= getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentVersion");
+		String actualAgentVersion = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentVersion");
 		Assert.assertEquals("AgentVersion in Created is wrong.", AGENT_VERSION, actualAgentVersion);
-		
-		String actualTimeStamp= getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@TimeStamp");
+
+		String actualTimeStamp = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@TimeStamp");
 		Assert.assertEquals("TimeStamp in Created is wrong.", TIMESTAMP, new DateTime(actualTimeStamp));
 	}
-	
+
 	/**
 	 * Add one GeneralID Parameter to XJDF document.
 	 * @throws Exception
@@ -293,19 +293,35 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_2, actual);
 
 	}
-	
-	public void testXJDFCustomConstructor() throws Exception {
-		
+
+	/**
+	 * Test of the initializing with an XJDF Document.
+	 * @throws Exception
+	 */
+	@Test
+	public void testXJDFConstructor() throws Exception {
+
 		// arrange
 		InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_GANGJOB);
-		
+		XJdfNodeFactory nf = new XJdfNodeFactory();
+
+		final String CUSTOMER_ID = "myCustomerID";
+
 		XJdfParser parser = new XJdfParser();
 		XJDF xjdf = parser.parseStream(is);
-		
+
 		// act
 		XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-		
+		xJdfBuilder.addParameter(nf.createCustomerInfo(CUSTOMER_ID));
+
 		// assert
+		int actual;
+
+		byte[] bytes = marsahlResult(xJdfBuilder);
+
+		actual = Integer.parseInt(getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet[@Name='CustomerInfo'][1]/xjdf:Parameter)"));
+		Assert.assertEquals("Number of Parameter Nodes is wrong.", 2, actual);
+
 	}
 
 }
