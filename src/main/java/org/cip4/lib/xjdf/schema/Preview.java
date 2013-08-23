@@ -20,7 +20,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *   &lt;complexContent>
  *     &lt;extension base="{http://www.CIP4.org/JDFSchema_2_0}ParameterType">
  *       &lt;attribute name="Directory" type="{http://www.CIP4.org/JDFSchema_2_0}URL" />
- *       &lt;attribute name="PreviewUsage" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="CTM" type="{http://www.CIP4.org/JDFSchema_2_0}matrix" />
  *       &lt;attribute name="MimeTypeDetails" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="URL" type="{http://www.CIP4.org/JDFSchema_2_0}URL" />
@@ -42,9 +41,6 @@ public class Preview
 
     @XmlAttribute(name = "Directory")
     protected String directory;
-    @XmlAttribute(name = "PreviewUsage")
-    @XmlSchemaType(name = "anySimpleType")
-    protected String previewUsage;
     @XmlAttribute(name = "CTM")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.Matrix.class)
     protected org.cip4.lib.xjdf.type.Matrix ctm;
@@ -81,30 +77,6 @@ public class Preview
      */
     public void setDirectory(String value) {
         this.directory = value;
-    }
-
-    /**
-     * Gets the value of the previewUsage property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getPreviewUsage() {
-        return previewUsage;
-    }
-
-    /**
-     * Sets the value of the previewUsage property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setPreviewUsage(String value) {
-        this.previewUsage = value;
     }
 
     /**

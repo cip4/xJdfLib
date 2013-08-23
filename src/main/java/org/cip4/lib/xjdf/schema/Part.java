@@ -81,7 +81,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="PageNumber" type="{http://www.CIP4.org/JDFSchema_2_0}IntegerRangeList" />
  *       &lt;attribute name="RunSet" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="StationName" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
- *       &lt;attribute name="PreviewType" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
+ *       &lt;attribute name="PreviewType" type="{http://www.CIP4.org/JDFSchema_2_0}EnumPreviewUsages" />
  *       &lt;attribute name="RunPageRange" type="{http://www.CIP4.org/JDFSchema_2_0}Any" />
  *       &lt;attribute name="WebSetup" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *       &lt;attribute name="Side" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
@@ -236,8 +236,7 @@ public class Part
     @XmlAttribute(name = "StationName")
     protected String stationName;
     @XmlAttribute(name = "PreviewType")
-    @XmlSchemaType(name = "anySimpleType")
-    protected String previewType;
+    protected EnumPreviewUsages previewType;
     @XmlAttribute(name = "RunPageRange")
     protected String runPageRange;
     @XmlAttribute(name = "WebSetup")
@@ -1670,10 +1669,10 @@ public class Part
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link EnumPreviewUsages }
      *     
      */
-    public String getPreviewType() {
+    public EnumPreviewUsages getPreviewType() {
         return previewType;
     }
 
@@ -1682,10 +1681,10 @@ public class Part
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link EnumPreviewUsages }
      *     
      */
-    public void setPreviewType(String value) {
+    public void setPreviewType(EnumPreviewUsages value) {
         this.previewType = value;
     }
 

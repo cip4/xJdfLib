@@ -103,9 +103,7 @@ public class XJdfNavigator extends XmlNavigator {
 	 * @param xJdfStream The XJDF Input Stream.
 	 */
 	public XJdfNavigator(InputStream xJdfStream) throws Exception {
-
-		// call super class
-		super(xJdfStream);
+		this(xJdfStream, false);
 	}
 
 	/**

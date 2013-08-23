@@ -26,6 +26,7 @@ import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.ContentObject;
 import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
+import org.cip4.lib.xjdf.schema.CuttingParams;
 import org.cip4.lib.xjdf.schema.EnumOrientation;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
@@ -71,7 +72,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	public XJdfNodeFactory() {
 		// no action
 	}
-	
+
 	/**
 	 * Create a new Parameter node from ParameterType
 	 * @param parameterType The ParameterType Node
@@ -145,6 +146,25 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return runList
 		return runList;
+	}
+
+	/**
+	 * Create a new CuttingParams Node which already contains a FileSpec URL definition.
+	 * @param fileSpecUrl URL attribute in sub element FileSpec.
+	 * @return CuttingParams Node which already contains a FileSpec URL definition.
+	 */
+	public CuttingParams createCuttingParams(String fileSpecUrl) {
+
+		// create CuttingParams Node
+		CuttingParams cuttingParams = super.createCuttingParams();
+
+		// extend by FileSpec element
+		FileSpec fileSpec = createFileSpec();
+		fileSpec.setURL(fileSpecUrl);
+		cuttingParams.setFileSpec(fileSpec);
+
+		// return cuttingParams
+		return cuttingParams;
 	}
 
 	/**
@@ -289,7 +309,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public Preview createPreview(String URL) {
 
-		return createPreview(URL, null, null);
+		return createPreview(URL, null);
 	}
 
 	/**
@@ -299,13 +319,12 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param previewFileType Value for PreviewFileType attribute.
 	 * @return Preview Node which already contains defined attributes.
 	 */
-	public Preview createPreview(String URL, String previewUsage, String previewFileType) {
+	public Preview createPreview(String URL, String previewFileType) {
 
 		// create node
 		Preview preview = super.createPreview();
 
 		// set attributes
-		preview.setPreviewUsage(previewUsage);
 		preview.setURL(URL);
 		preview.setPreviewFileType(previewFileType);
 

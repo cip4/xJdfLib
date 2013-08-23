@@ -128,6 +128,8 @@ public abstract class AbstractXmlParser<T> {
 
 		// marshall XJDF object to output stream
 		Marshaller m = createMarshaller();
+		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+		m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 		m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -221,8 +223,6 @@ public abstract class AbstractXmlParser<T> {
 
 		// create marshaller
 		Marshaller m = jaxbContext.createMarshaller();
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-		m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 		m.setProperty("com.sun.xml.bind.namespacePrefixMapper", getNamespacePrefixMapper());
 
 		// return marshaller
