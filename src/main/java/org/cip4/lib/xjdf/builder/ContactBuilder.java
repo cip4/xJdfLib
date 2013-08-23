@@ -61,6 +61,19 @@ public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 	}
 
 	/**
+	 * Custom Constructor. Creates a new instance of ContactBuilder based on a existing Contact Node.
+	 * @param contact Contact node for initializing.
+	 */
+	public ContactBuilder(Contact contact) {
+
+		// call super class
+		super(contact);
+
+		// init
+		xJdfNodeFactory = new XJdfNodeFactory();
+	}
+
+	/**
 	 * Add contact type to contact node.
 	 * @param contactType ContactType attribute to add.
 	 * @return The current contact builder instance.

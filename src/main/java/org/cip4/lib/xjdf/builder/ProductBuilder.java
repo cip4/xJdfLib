@@ -98,6 +98,19 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 	}
 
 	/**
+	 * Custom Constructor. Creates a new instance of ProductBuilder based on a existing Product Node.
+	 * @param product Product node for initializing.
+	 */
+	public ProductBuilder(Product product) {
+
+		// call super class
+		super(product);
+
+		// init
+		xJdfNodeFactory = new XJdfNodeFactory();
+	}
+
+	/**
 	 * Getter for product attribute.
 	 * @return the product
 	 */
