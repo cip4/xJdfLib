@@ -61,14 +61,14 @@ public class AuditPool
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link JAXBElement }{@code <}{@link Audit }{@code >}
      * {@link JAXBElement }{@code <}{@link Deleted }{@code >}
-     * {@link JAXBElement }{@code <}{@link PhaseTime }{@code >}
-     * {@link JAXBElement }{@code <}{@link Modified }{@code >}
+     * {@link JAXBElement }{@code <}{@link ProcessRun }{@code >}
      * {@link JAXBElement }{@code <}{@link Created }{@code >}
      * {@link JAXBElement }{@code <}{@link Notification }{@code >}
+     * {@link JAXBElement }{@code <}{@link Audit }{@code >}
      * {@link JAXBElement }{@code <}{@link ResourceAudit }{@code >}
-     * {@link JAXBElement }{@code <}{@link ProcessRun }{@code >}
+     * {@link JAXBElement }{@code <}{@link Modified }{@code >}
+     * {@link JAXBElement }{@code <}{@link PhaseTime }{@code >}
      * 
      * 
      */

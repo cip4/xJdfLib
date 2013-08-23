@@ -80,7 +80,7 @@ public class QueueFilter
     @XmlAttribute(name = "JobID")
     protected String jobID;
     @XmlAttribute(name = "PreviewUsages")
-    protected List<String> previewUsages;
+    protected List<EnumPreviewUsages> previewUsages;
     @XmlAttribute(name = "NewerThan")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.DateTime.class)
     protected org.cip4.lib.xjdf.type.DateTime newerThan;
@@ -291,13 +291,13 @@ public class QueueFilter
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
+     * {@link EnumPreviewUsages }
      * 
      * 
      */
-    public List<String> getPreviewUsages() {
+    public List<EnumPreviewUsages> getPreviewUsages() {
         if (previewUsages == null) {
-            previewUsages = new ArrayList<String>();
+            previewUsages = new ArrayList<EnumPreviewUsages>();
         }
         return this.previewUsages;
     }

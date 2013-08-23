@@ -537,8 +537,9 @@
 
 	<xs:simpleType name="EnumPreviewUsages">
 		<xs:restriction base="xs:string">
-			<xs:enumeration value="3D" />
+			<xs:enumeration value="Static3D" />
 			<xs:enumeration value="Animation" />
+			<xs:enumeration value="Identification" />
 			<xs:enumeration value="Separation" />
 			<xs:enumeration value="SeparationRaw" />
 			<xs:enumeration value="SeparatedThumbNail" />
@@ -3325,7 +3326,7 @@
 			<xs:attribute name="PageNumber" type="IntegerRangeList" use="optional" />
 			<xs:attribute name="RunSet" type="NMTOKEN" use="optional" />
 			<xs:attribute name="StationName" type="Any" use="optional" />
-			<xs:attribute name="PreviewType" use="optional" />
+			<xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional" />
 			<xs:attribute name="RunPageRange" type="Any" use="optional" />
 			<xs:attribute name="WebSetup" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Side" use="optional" />
@@ -7322,7 +7323,6 @@
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
 				<xs:attribute name="Directory" type="URL" use="optional" />
-				<xs:attribute name="PreviewUsage" use="optional" />
 				<xs:attribute name="CTM" type="matrix" use="optional" />
 				<xs:attribute name="MimeTypeDetails" type="string" use="optional" />
 				<xs:attribute name="URL" type="URL" use="optional" />

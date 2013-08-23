@@ -10,9 +10,11 @@
  */
 package org.cip4.lib.xjdf.xml.internal;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -26,6 +28,7 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
@@ -318,7 +321,7 @@ public class XmlNavigator {
 	 * @param replacement The new node.
 	 * @param parser XML Parser.
 	 */
-	public void replaceNode(String xPath, Object replacement, AbstractXmlParser parser) throws XPathExpressionException, JAXBException, ParserConfigurationException {
+	protected void replaceNode(String xPath, Object replacement, AbstractXmlParser parser) throws XPathExpressionException, JAXBException, ParserConfigurationException {
 
 		// new temporarily xml document
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -402,24 +405,49 @@ public class XmlNavigator {
 	 */
 	public byte[] getXmlBytes() throws Exception {
 
-		// save the result
+		ByteArrayOutputStream bos;
+
+		// new transformer
 		TransformerFactory tf = TransformerFactory.newInstance();
 		Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 		transformer.setOutputProperty(OutputKeys.STANDALONE, "yes");
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
-		transformer.transform(new DOMSource(xmlDocument), new StreamResult(xmlWriter));
-		bos.close();
+		// transform document to string
+		{
+			bos = new ByteArrayOutputStream();
+			XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
+			transformer.transform(new DOMSource(xmlDocument), new StreamResult(xmlWriter));
+			bos.close();
+		}
 
-		// format
+		byte[] strResult = bos.toByteArray();
+
+		// make only line XML (reset formatting)
+		BufferedReader br = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(strResult)));
+		String line;
+		StringBuilder sb = new StringBuilder();
+
+		while ((line = br.readLine()) != null) {
+			sb.append(line.trim());
+		}
+
+		// final formatting
+		byte[] onlyLineResult = sb.toString().getBytes();
+
+		{
+			// new format
+			bos = new ByteArrayOutputStream();
+			XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
+			transformer.transform(new StreamSource(new ByteArrayInputStream(onlyLineResult)), new StreamResult(xmlWriter));
+			bos.close();
+		}
+
+		// add linebreake after comment
 		String xml = new String(bos.toByteArray());
-
 		StringBuilder b = new StringBuilder(xml);
-
-		if (b.indexOf("?>") != -1)
-			b.insert(b.indexOf("?>") + 2, "\r\n");
 
 		if (b.indexOf("--><") != -1)
 			b.insert(b.indexOf("--><") + 3, "\r\n");
