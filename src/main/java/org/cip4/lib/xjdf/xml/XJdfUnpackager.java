@@ -50,10 +50,22 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	 * @return The path of the master document.
 	 * @throws IOException
 	 */
-	public String unpackageXJdf() throws IOException {
+	public String unpackageXJdfTemp(String appName) throws IOException {
 
 		// call super method
-		return super.unpackageZip();
+		return super.unpackageZipTemp(appName);
+	}
+
+	/**
+	 * Unpackage an XJDF Package to a temporary directory.
+	 * @param pathPackage XJDF Package to be unpackaged.
+	 * @return The path of the master document.
+	 * @throws IOException
+	 */
+	public String unpackageXJdfTemp() throws IOException {
+
+		// call super method
+		return super.unpackageZipTemp();
 	}
 
 	/**
