@@ -60,16 +60,26 @@ public abstract class AbstractXmlUnpackager {
 	}
 
 	/**
-	 * Unpackages a ZIP Package.
-	 * @param pathPgk Path to ZIP Package.
+	 * Unpackages a ZIP Package to a temporarily directory..
 	 * @return Path to master file.
 	 * @throws IOException
 	 */
-	protected String unpackageZip() throws IOException {
+	protected String unpackageZipTemp() throws IOException {
+
+		return unpackageZipTemp("cip4");
+	}
+
+	/**
+	 * Unpackages a ZIP Package to a temporarily directory.
+	 * @param Application name.
+	 * @return Path to master file.
+	 * @throws IOException
+	 */
+	protected String unpackageZipTemp(String appName) throws IOException {
 
 		// create temp root dir
 		String tempDir = FileUtils.getTempDirectoryPath();
-		String rootName = String.format("cip4_unpackage_%s", System.currentTimeMillis());
+		String rootName = String.format("%s_unpackage_%s", appName, System.currentTimeMillis());
 		String targetDir = FilenameUtils.concat(tempDir, rootName);
 
 		// unpackge and return root dir
