@@ -10,7 +10,6 @@
  */
 package org.cip4.lib.xjdf.type;
 
-
 /**
  * XML Attributes of type shape are used to describe a three dimensional box. A shape is represented as an array of three (positive or zero) numbers — x y z —
  * specifying the Width x, height y and depth z coordinates of the shape, in that order.
@@ -67,9 +66,23 @@ public class Shape extends AbstractXJdfType<String, Shape> {
 		String[] s = expression.split(" ");
 
 		// extract values
-		this.x = Double.valueOf(s[0]);
-		this.y = Double.valueOf(s[1]);
-		this.z = Double.valueOf(s[2]);
+		if (s.length >= 1) {
+			this.x = Double.valueOf(s[0]);
+		} else {
+			this.x = 0;
+		}
+
+		if (s.length >= 2) {
+			this.y = Double.valueOf(s[1]);
+		} else {
+			this.y = 0;
+		}
+
+		if (s.length >= 3) {
+			this.z = Double.valueOf(s[2]);
+		} else {
+			this.z = 0;
+		}
 	}
 
 	/**
