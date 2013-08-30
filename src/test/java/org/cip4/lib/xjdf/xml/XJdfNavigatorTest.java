@@ -277,6 +277,34 @@ public class XJdfNavigatorTest {
 	}
 
 	@Test
+	public void testEvaluateIntNull() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		Integer val = xJdfNavigator.evaluateInt("/XJDF/ParameterSet[@Name='xxx']/Parameter/ApprovalParams/@MinApprovals");
+
+		// assert
+		Assert.assertNull("Integer Value is not null.", val);
+	}
+
+	@Test
+	public void testEvaluateIntString() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		Integer val = xJdfNavigator.evaluateInt("/XJDF/@Category");
+
+		// assert
+		Assert.assertNull("Integer Value is not null.", val);
+	}
+
+	@Test
 	public void testEvaluateString() throws Exception {
 
 		// arrange

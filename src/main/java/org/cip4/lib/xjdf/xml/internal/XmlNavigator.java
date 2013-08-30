@@ -35,6 +35,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.output.XmlStreamWriter;
+import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
@@ -206,16 +207,16 @@ public class XmlNavigator {
 	 * @return Expression result as integer.
 	 * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
 	 */
-	public int evaluateInt(String xPath) throws XPathExpressionException {
+	public Integer evaluateInt(String xPath) throws XPathExpressionException {
 
 		// evaluate expression.
 		String s = (String) evaluate(xPath, XPathConstants.STRING);
 
 		// convert to integer
-		int result = 0;
+		Integer result = null;
 
-		if (s != null && !s.equals("")) {
-			result = Integer.parseInt(s);
+		if (!StringUtils.isEmpty(s) && StringUtils.isNumeric(s)) {
+			result = new Integer(s);
 		}
 
 		// return result
