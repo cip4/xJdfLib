@@ -26,13 +26,13 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;sequence>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Fold" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}SignatureCell" maxOccurs="unbounded" minOccurs="0"/>
- *         &lt;element ref="{http://www.CIP4.org/JDFSchema_2_0}Position" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *       &lt;attribute name="AssemblyID" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
  *       &lt;attribute name="BindingEdge" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="BindingOrientation" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="JogEdge" type="{http://www.w3.org/2001/XMLSchema}anySimpleType" />
  *       &lt;attribute name="FoldCatalog" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
+ *       &lt;attribute name="BinderySignatureSize" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
  *       &lt;attribute name="WebCellAlignment" type="{http://www.CIP4.org/JDFSchema_2_0}XYPair" />
  *       &lt;attribute name="StaggerContinuous" type="{http://www.CIP4.org/JDFSchema_2_0}boolean" />
  *       &lt;attribute name="StaggerRows" type="{http://www.CIP4.org/JDFSchema_2_0}string" />
@@ -54,8 +54,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BinderySignature", propOrder = {
     "fold",
-    "signatureCell",
-    "position"
+    "signatureCell"
 })
 public class BinderySignature
     extends ParameterType
@@ -66,8 +65,6 @@ public class BinderySignature
     protected List<Fold> fold;
     @XmlElement(name = "SignatureCell")
     protected List<SignatureCell> signatureCell;
-    @XmlElement(name = "Position")
-    protected List<Position> position;
     @XmlAttribute(name = "AssemblyID")
     protected String assemblyID;
     @XmlAttribute(name = "BindingEdge")
@@ -81,6 +78,9 @@ public class BinderySignature
     protected String jogEdge;
     @XmlAttribute(name = "FoldCatalog")
     protected String foldCatalog;
+    @XmlAttribute(name = "BinderySignatureSize")
+    @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
+    protected org.cip4.lib.xjdf.type.XYPair binderySignatureSize;
     @XmlAttribute(name = "WebCellAlignment")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.XYPair.class)
     protected org.cip4.lib.xjdf.type.XYPair webCellAlignment;
@@ -166,35 +166,6 @@ public class BinderySignature
             signatureCell = new ArrayList<SignatureCell>();
         }
         return this.signatureCell;
-    }
-
-    /**
-     * Gets the value of the position property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the position property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getPosition().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link Position }
-     * 
-     * 
-     */
-    public List<Position> getPosition() {
-        if (position == null) {
-            position = new ArrayList<Position>();
-        }
-        return this.position;
     }
 
     /**
@@ -315,6 +286,30 @@ public class BinderySignature
      */
     public void setFoldCatalog(String value) {
         this.foldCatalog = value;
+    }
+
+    /**
+     * Gets the value of the binderySignatureSize property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public org.cip4.lib.xjdf.type.XYPair getBinderySignatureSize() {
+        return binderySignatureSize;
+    }
+
+    /**
+     * Sets the value of the binderySignatureSize property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setBinderySignatureSize(org.cip4.lib.xjdf.type.XYPair value) {
+        this.binderySignatureSize = value;
     }
 
     /**

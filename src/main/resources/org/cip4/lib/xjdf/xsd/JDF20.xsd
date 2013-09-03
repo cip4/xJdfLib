@@ -5414,13 +5414,13 @@
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell" />
-					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
 				</xs:sequence>
 				<xs:attribute name="AssemblyID" type="string" use="optional" />
 				<xs:attribute name="BindingEdge" use="optional" />
 				<xs:attribute name="BindingOrientation" use="optional" />
 				<xs:attribute name="JogEdge" use="optional" />
 				<xs:attribute name="FoldCatalog" type="string" use="optional" />
+				<xs:attribute name="BinderySignatureSize" type="XYPair" use="optional" />
 				<xs:attribute name="WebCellAlignment" type="XYPair" use="optional" />
 				<xs:attribute name="StaggerContinuous" type="boolean" use="optional" />
 				<xs:attribute name="StaggerRows" type="string" use="optional" />
@@ -7224,6 +7224,7 @@
 			<xs:attribute name="RelativeBox" type="rectangle" use="optional" />
 			<xs:attribute name="AbsoluteBox" type="rectangle" use="optional" />
 			<xs:attribute name="Orientation" type="EnumOrientation" use="optional" />
+			<xs:attribute name="AssemblyID" type="NMTOKEN" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
