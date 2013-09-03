@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.CollapsedStringAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  *       &lt;attribute name="RelativeBox" type="{http://www.CIP4.org/JDFSchema_2_0}rectangle" />
  *       &lt;attribute name="AbsoluteBox" type="{http://www.CIP4.org/JDFSchema_2_0}rectangle" />
  *       &lt;attribute name="Orientation" type="{http://www.CIP4.org/JDFSchema_2_0}EnumOrientation" />
+ *       &lt;attribute name="AssemblyID" type="{http://www.CIP4.org/JDFSchema_2_0}NMTOKEN" />
  *     &lt;/restriction>
  *   &lt;/complexContent>
  * &lt;/complexType>
@@ -56,6 +58,9 @@ public class Position
     protected org.cip4.lib.xjdf.type.Rectangle absoluteBox;
     @XmlAttribute(name = "Orientation")
     protected EnumOrientation orientation;
+    @XmlAttribute(name = "AssemblyID")
+    @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
+    protected String assemblyID;
 
     /**
      * Gets the value of the marginBottom property.
@@ -223,6 +228,30 @@ public class Position
      */
     public void setOrientation(EnumOrientation value) {
         this.orientation = value;
+    }
+
+    /**
+     * Gets the value of the assemblyID property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getAssemblyID() {
+        return assemblyID;
+    }
+
+    /**
+     * Sets the value of the assemblyID property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setAssemblyID(String value) {
+        this.assemblyID = value;
     }
 
 }
