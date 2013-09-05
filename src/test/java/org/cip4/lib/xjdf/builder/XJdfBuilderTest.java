@@ -251,7 +251,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		// assert
 		byte[] bytes = marsahlResult(xJdfBuilder);
 
-		String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
+		String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/@Name");
 		Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
 
 	}
@@ -439,7 +439,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Parameter)");
 		Assert.assertEquals("Number of Parameter Nodes is wrong.", "1", actual);
 
-		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[3]/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL");
+		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL");
 		Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
 	}
 }
