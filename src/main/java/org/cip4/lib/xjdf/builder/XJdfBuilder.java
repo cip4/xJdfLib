@@ -10,6 +10,7 @@
  */
 package org.cip4.lib.xjdf.builder;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.comparator.SetTypeComparator;
 import org.cip4.lib.xjdf.schema.Audit;
 import org.cip4.lib.xjdf.schema.AuditPool;
 import org.cip4.lib.xjdf.schema.Comment;
@@ -138,6 +140,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 				mapParameterSets.put(key, parameterSet);
 			}
 		}
+
+		// sort parameterset elements by name
+		Collections.sort(getXJdf().getSetType(), new SetTypeComparator());
 
 	}
 
@@ -334,6 +339,10 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 			// append element to lists
 			getXJdf().getSetType().add(xJdfNodeFactory.createParameterSet(parameterSet));
 			mapParameterSets.put(key, parameterSet);
+
+			// sort parameterset elements by name
+			Collections.sort(getXJdf().getSetType(), new SetTypeComparator());
+
 		}
 
 		// append parameter to parameterSet
