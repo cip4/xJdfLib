@@ -17,6 +17,7 @@ import java.util.Map;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
+import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Audit;
 import org.cip4.lib.xjdf.schema.AuditPool;
@@ -127,7 +128,14 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 			// parameter set
 			if (setType.getValue() instanceof ParameterSet) {
 				ParameterSet parameterSet = (ParameterSet) setType.getValue();
-				mapParameterSets.put(parameterSet.getName(), parameterSet);
+
+				String key = parameterSet.getName();
+
+				if (parameterSet.getProcessUsage() != null) {
+					key += "_" + parameterSet.getProcessUsage();
+				}
+
+				mapParameterSets.put(key, parameterSet);
 			}
 		}
 
@@ -144,7 +152,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	/**
 	 * Append Comment to XJDF Document.
 	 * @param comment Comment to append to.
-	 * @return The current XJdfBuilder instance.
 	 */
 	public void addComment(String comment) {
 
@@ -181,7 +188,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	/**
 	 * Append GeneralID node to XJDF Document.
 	 * @param generalId GeneralID object to append.
-	 * @return The current XJdfBuilder instance.
 	 */
 	public void addGeneralID(GeneralID generalId) {
 
@@ -195,7 +201,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	/**
 	 * Append Product node to xJdf Document.
 	 * @param product Product object to append.
-	 * @return The current XJdfBuilder instance.
 	 */
 	public void addProduct(Product product) {
 
@@ -214,24 +219,44 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	/**
 	 * Append Parameter node to xJdf Document.
 	 * @param parameterType Parameter object to append.
-	 * @return The current XJdfBuilder instance.
 	 */
 	public void addParameter(ParameterType parameterType) {
 
 		// call default implementation
-		addParameter(parameterType, null);
+		addParameter(parameterType, null, null);
+	}
+
+	/**
+	 * Append Parameter node to xJdf Document.
+	 * @param parameterType Parameter object to append.
+	 * @param processUsage ProcessUsage of parameter.
+	 */
+	public void addParameter(ParameterType parameterType, String processUsage) {
+
+		// call default implementation
+		addParameter(parameterType, null, processUsage);
+	}
+
+	/**
+	 * Append Parameter list to xJdf Document.
+	 * @param parameter Parameter object to append.
+	 */
+	public void addParameter(List<ParameterType> parameterTypes) {
+
+		// add all parameters
+		addParameter(parameterTypes, null);
 	}
 
 	/**
 	 * Append Parameter List to xJdf Document.
 	 * @param parameter Parameter object to append.
-	 * @return The current XJdfBuilder instance.
+	 * @param processUsage ProcessUsage of parameter.
 	 */
-	public void addParameter(List<ParameterType> parameterTypes) {
+	public void addParameter(List<ParameterType> parameterTypes, String processUsage) {
 
 		// add all parameters
 		for (ParameterType parameter : parameterTypes) {
-			addParameter(parameter, null);
+			addParameter(parameter, null, processUsage);
 		}
 	}
 
@@ -242,6 +267,18 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 */
 	public void addParameter(ParameterType parameterType, Part part) {
 
+		// add parameter
+		addParameter(parameterType, part, null);
+	}
+
+	/**
+	 * Append Parameter node to xJdf Document.
+	 * @param parameterType Parameter object to append.
+	 * @param part Partitioning definitions.
+	 * @param processUsage ProcessUsage of parameter.
+	 */
+	public void addParameter(ParameterType parameterType, Part part, String processUsage) {
+
 		if (parameterType == null)
 			return;
 
@@ -249,8 +286,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		Parameter parameter = xJdfNodeFactory.createParameter(parameterType, part);
 
 		// add parameter
-		addParameter(parameter);
-
+		addParameter(parameter, processUsage);
 	}
 
 	/**
@@ -259,23 +295,45 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 */
 	public void addParameter(Parameter parameter) {
 
+		// add parameter
+		addParameter(parameter, null);
+	}
+
+	/**
+	 * Append Parameter node to xJdf Document.
+	 * @param parameter Parameter node to append to.
+	 * @param processUsage ProcessUsage of parameter.
+	 */
+	public void addParameter(Parameter parameter, String processUsage) {
+
+		// get parameter name
 		String paramName = parameter.getParameterType().getName().getLocalPart();
+
+		// set key
+		String key = paramName;
+
+		if (!StringUtils.isEmpty(processUsage)) {
+			key += "_" + processUsage;
+		} else {
+			processUsage = null;
+		}
 
 		// get ParameterSet according to parameter
 		ParameterSet parameterSet;
 
-		if (mapParameterSets.containsKey(paramName)) {
+		if (mapParameterSets.containsKey(key)) {
 			// get ParameterSet object
-			parameterSet = mapParameterSets.get(paramName);
+			parameterSet = mapParameterSets.get(key);
 
 		} else {
 			// create ParameterSet object
 			parameterSet = xJdfNodeFactory.createParameterSet();
 			parameterSet.setName(paramName);
+			parameterSet.setProcessUsage(processUsage);
 
 			// append element to lists
 			getXJdf().getSetType().add(xJdfNodeFactory.createParameterSet(parameterSet));
-			mapParameterSets.put(paramName, parameterSet);
+			mapParameterSets.put(key, parameterSet);
 		}
 
 		// append parameter to parameterSet
