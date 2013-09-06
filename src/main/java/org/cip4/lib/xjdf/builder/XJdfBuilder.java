@@ -342,7 +342,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 			// sort parameterset elements by name
 			Collections.sort(getXJdf().getSetType(), new SetTypeComparator());
-
 		}
 
 		// append parameter to parameterSet
