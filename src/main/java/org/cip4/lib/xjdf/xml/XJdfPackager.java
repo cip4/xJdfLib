@@ -95,9 +95,11 @@ public class XJdfPackager extends AbstractXmlPackager {
 		if (withoutHierarchy) {
 			registerFiles("//FileSpec/@URL", "");
 			registerFiles("//Preview/@URL", "");
+			registerFiles("//XJDF/@CommentURL", "");
 		} else {
 			registerFiles("//FileSpec/@URL", "artwork");
 			registerFiles("//Preview/@URL", "preview");
+			registerFiles("//XJDF/@CommentURL", "docs");
 		}
 
 		// create main doc Name
