@@ -38,7 +38,7 @@ public class Created
 
     @XmlAttribute(name = "XPath")
     protected String xPath;
-    @XmlAttribute
+    @XmlAttribute(name = "ref")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF ref;
     @XmlAttribute(name = "TemplateVersion")
