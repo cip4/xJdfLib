@@ -68,7 +68,7 @@ public abstract class Audit implements Serializable
     protected String id;
     @XmlAttribute(name = "QueueEntryID")
     protected String queueEntryID;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlJavaTypeAdapter(org.cip4.lib.xjdf.type.IDREF.class)
     protected org.cip4.lib.xjdf.type.IDREF refID;
     @XmlAttribute(name = "TimeStamp")

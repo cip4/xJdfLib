@@ -71,7 +71,7 @@ public class Response
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     @XmlID
     protected String id;
-    @XmlAttribute
+    @XmlAttribute(name = "refID")
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     protected String refID;
     @XmlAttribute(name = "Time")
