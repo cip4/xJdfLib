@@ -1,7 +1,9 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 
@@ -23,11 +25,14 @@ public class AbstractXmlPackagerTest {
 	private byte[] minimalXml = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 		+ "<XJDF xmlns=\"http://www.CIP4.org/JDFSchema_2_0\" Version=\"2.0\"></XJDF>").getBytes();
 
+	@Rule
+	public TemporaryFolder temp = new TemporaryFolder();
+
 	@Test
 	public void testRegisterFile() throws Exception {
 		AbstractXmlPackager packager = new MinimalXmlPackager(
 			minimalXml,
-			"file:/C:/baz/"
+			temp.getRoot().getAbsolutePath()
 		);
 		File targetFile = packager.registerFile("foo.zip", "bar");
 		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
@@ -49,7 +54,8 @@ public class AbstractXmlPackagerTest {
 			minimalXml,
 			null
 		);
-		File targetFile = packager.registerFile("C:\\foo.zip", "bar");
+
+		File targetFile = packager.registerFile(temp.newFile("foo.zip").getAbsolutePath(), "bar");
 		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
 	}
 
@@ -59,7 +65,7 @@ public class AbstractXmlPackagerTest {
 			minimalXml,
 			null
 		);
-		File targetFile = packager.registerFile("file:/C:/foo.zip", "bar");
+		File targetFile = packager.registerFile(temp.newFile("foo.zip").toURI().toString(), "bar");
 		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
 	}
 }
