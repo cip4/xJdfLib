@@ -116,7 +116,7 @@ public class XJdfPackagerTest {
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "./artwork/test.pdf", pdfPath);
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
@@ -178,7 +178,7 @@ public class XJdfPackagerTest {
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "./artwork/test.pdf", pdfPath);
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
@@ -217,9 +217,9 @@ public class XJdfPackagerTest {
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 
 		String pdfPath = ptkNav.readAttribute("(//FileSpec/@URL)[1]");
-		Assert.assertEquals("URL attribute is wrong.", "./artwork/test.pdf", pdfPath);
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 		String pdfPath2 = ptkNav.readAttribute("(//FileSpec/@URL)[2]");
-		Assert.assertEquals("URL attribute is wrong.", "./artwork/test2.pdf", pdfPath2);
+		Assert.assertEquals("URL attribute is wrong.", "artwork/test2.pdf", pdfPath2);
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
@@ -279,7 +279,7 @@ public class XJdfPackagerTest {
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "./test.pdf", pdfPath);
+		Assert.assertEquals("URL attribute is wrong.", "test.pdf", pdfPath);
 
 		Assert.assertTrue("PDF File does not exist.", pdf.exists());
 		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
