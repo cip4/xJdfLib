@@ -150,7 +150,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	 * Getter for xJdf attribute.
 	 * @return the xJdf
 	 */
-	protected XJDF getXJdf() {
+	public XJDF getXJdf() {
 		return getNode();
 	}
 
