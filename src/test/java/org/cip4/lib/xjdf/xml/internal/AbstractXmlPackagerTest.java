@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import org.apache.commons.io.FilenameUtils;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -35,7 +36,8 @@ public class AbstractXmlPackagerTest {
 			temp.getRoot().getAbsolutePath()
 		);
 		File targetFile = packager.registerFile("foo.zip", "bar");
-		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
+
+		Assert.assertEquals("bar/foo.zip", FilenameUtils.separatorsToUnix(targetFile.getPath()));
 	}
 
 	@Test(expected = PackagerException.class)
@@ -44,8 +46,7 @@ public class AbstractXmlPackagerTest {
 			minimalXml,
 			null
 		);
-		File targetFile = packager.registerFile("foo.zip", "bar");
-		Assert.assertEquals("bar/foo.zip", targetFile.getPath());
+		packager.registerFile("foo.zip", "bar");
 	}
 
 	@Test
@@ -56,7 +57,7 @@ public class AbstractXmlPackagerTest {
 		);
 
 		File targetFile = packager.registerFile(temp.newFile("foo.zip").getAbsolutePath(), "bar");
-		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
+		Assert.assertEquals("bar/foo.zip", FilenameUtils.separatorsToUnix(targetFile.getPath()));
 	}
 
 	@Test
@@ -66,6 +67,6 @@ public class AbstractXmlPackagerTest {
 			null
 		);
 		File targetFile = packager.registerFile(temp.newFile("foo.zip").toURI().toString(), "bar");
-		Assert.assertEquals("bar\\foo.zip", targetFile.getPath());
+		Assert.assertEquals("bar/foo.zip", FilenameUtils.separatorsToUnix(targetFile.getPath()));
 	}
 }
