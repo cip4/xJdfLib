@@ -10,39 +10,17 @@
  */
 package org.cip4.lib.xjdf;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import junit.framework.Assert;
-
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ChildProduct;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.ContentObject;
-import org.cip4.lib.xjdf.schema.CustomerInfo;
-import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MarkObject;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.ProductionIntent;
-import org.cip4.lib.xjdf.schema.ProofingIntent;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.type.DateTime;
-import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.IDREF;
-import org.cip4.lib.xjdf.type.IntegerList;
-import org.cip4.lib.xjdf.type.Matrix;
-import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.type.*;
 import org.cip4.lib.xjdf.type.Shape;
-import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * JUnit test case for XJdfNodeFactory.
@@ -275,6 +253,25 @@ public class XJdfNodeFactoryTest {
 		// assert
 		Assert.assertEquals("BindingType is wrong", BINDING_TYPE, bindingIntent.getBindingType());
 	}
+
+    @Test
+    public void testCreateBindingIntent_2() {
+
+        // arrange
+        final String BINDING_TYPE = UUID.randomUUID().toString();
+        final String BINDING_SIDE = UUID.randomUUID().toString();
+        final String BINDING_ORDER = UUID.randomUUID().toString();
+
+
+        // act
+        BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE, BINDING_SIDE, BINDING_ORDER);
+
+        // assert
+        Assert.assertEquals("BindingType is wrong", BINDING_TYPE, bindingIntent.getBindingType());
+        Assert.assertEquals("BindingType is wrong", BINDING_SIDE, bindingIntent.getBindingSide());
+        Assert.assertEquals("BindingType is wrong", BINDING_ORDER, bindingIntent.getBindingOrder());
+
+    }
 
 	@Test
 	public void testCreateFoldingIntent() {

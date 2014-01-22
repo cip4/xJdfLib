@@ -513,15 +513,30 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public BindingIntent createBindingIntent(String bindingType) {
 
-		// create node
-		BindingIntent bindingIntent = super.createBindingIntent();
-
-		// set attributes
-		bindingIntent.setBindingType(bindingType);
-
 		// return object
-		return bindingIntent;
+		return createBindingIntent(bindingType, null, null);
 	}
+
+    /**
+     * Create new BindingIntent Node which already contains values for attribute BindingType.
+     * @param bindingType Value for BindingType attribute.
+     * @param bindingSide Value for BindingSide attribute.
+     * @param bindingOrder Value for BindingOrder attribute.
+     * @return BindingIntent Node which already contains defined attributes.
+     */
+    public BindingIntent createBindingIntent(String bindingType, String bindingSide, String bindingOrder) {
+
+        // create node
+        BindingIntent bindingIntent = super.createBindingIntent();
+
+        // set attributes
+        bindingIntent.setBindingType(bindingType);
+        bindingIntent.setBindingSide(bindingSide);
+        bindingIntent.setBindingOrder(bindingOrder);
+
+        // return object
+        return bindingIntent;
+    }
 
 	/**
 	 * Create new FoldingIntent Node which already contains values for attribute FoldingCatalog.
@@ -647,18 +662,30 @@ public class XJdfNodeFactory extends ObjectFactory {
 		return media;
 	}
 
+    /**
+     * Create a new BinderySignature Node which already contains defined attributes.
+     * @param foldCatalog Value of FoldCatalog attribute as String.
+     * @return BinderySignature Node which already contains defined attributes.
+     */
+    public BinderySignature createBinderySignature(String foldCatalog) {
+
+        return createBinderySignature(foldCatalog, null, null);
+    }
+
 	/**
 	 * Create a new BinderySignature Node which already contains defined attributes.
 	 * @param foldCatalog Value of FoldCatalog attribute as String.
 	 * @return BinderySignature Node which already contains defined attributes.
 	 */
-	public BinderySignature createBinderySignature(String foldCatalog) {
+	public BinderySignature createBinderySignature(String foldCatalog, XYPair size, String assemblyID) {
 
 		// create BinderySignature Node
 		BinderySignature binderySignature = super.createBinderySignature();
 
 		// set attributes
 		binderySignature.setFoldCatalog(foldCatalog);
+        binderySignature.setBinderySignatureSize(size);
+        binderySignature.setAssemblyID(assemblyID);
 
 		// return node
 		return binderySignature;
@@ -698,16 +725,29 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation) {
 
-		// create Position Node
-		Position position = super.createPosition();
-
-		// set attributes
-		position.setAbsoluteBox(absoluteBox);
-		position.setOrientation(orientation);
-
-		// return node
-		return position;
+		return createPosition(absoluteBox, orientation);
 	}
+
+    /**
+     * Create a new Position Node which already contains defined attributes.
+     * @param absoluteBox AbsoluteBox attribute as Rectangle.
+     * @param orientation Orientation attribute as EnumOrientation.
+     * @param assemblyID Orientation attribute as AssemblyID.
+     * @return Position Node which already contains defined attributes.
+     */
+    public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation, String assemblyID) {
+
+        // create Position Node
+        Position position = super.createPosition();
+
+        // set attributes
+        position.setAbsoluteBox(absoluteBox);
+        position.setOrientation(orientation);
+        position.setAssemblyID(assemblyID);
+
+        // return node
+        return position;
+    }
 
 	/**
 	 * Create a new AmountPool Node which already contains a PartAmount Subelement with attribute amount.
