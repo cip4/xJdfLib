@@ -10,14 +10,15 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.ValidationException;
-
+import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
+
+import javax.xml.bind.ValidationException;
 
 /**
  * DataType for IDRefs
@@ -73,7 +74,8 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 	}
 
 	public IDREF(Product product) throws ValidationException {
-		this(product, IDGeneratorUtil.generateID("PRD"));
+
+		this(product, generateId(product));
 	}
 
 	public IDREF(Product product, String id) throws ValidationException {
@@ -128,4 +130,19 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 		return marshal(this);
 	}
 
+    /**
+     * If necessary, generate a ID for a product
+     * @param product
+     * @return ID for a product.
+     */
+    private static String generateId(Product product) {
+
+        String productId = product.getID();
+
+        if(StringUtils.isEmpty(productId)) {
+            productId = IDGeneratorUtil.generateID("PRD");
+        }
+
+        return productId;
+    }
 }
