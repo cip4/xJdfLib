@@ -58,10 +58,10 @@ public class XJdfUnpackagerTest {
      * @throws IOException
      */
     @Test
-    public void testUnpackageZip() throws IOException {
+    public void testUnpackageZip() throws IOException, URISyntaxException {
 
         // arrange
-        String pathZip = XJdfUnpackagerTest.class.getResource(RES_PGK).getFile();
+        String pathZip = XJdfUnpackagerTest.class.getResource(RES_PGK).toURI().getPath();
 
         String tmpDir = FileUtils.getTempDirectoryPath();
         String targetDir = FilenameUtils.concat(tmpDir, "XJdfLib_UnpackageTest_" + System.currentTimeMillis());
@@ -124,10 +124,10 @@ public class XJdfUnpackagerTest {
      * @throws IOException
      */
     @Test
-    public void testUnpackageZipTempDir() throws IOException {
+    public void testUnpackageZipTempDir() throws IOException, URISyntaxException {
 
         // arrange
-        String pathZip = XJdfUnpackagerTest.class.getResource(RES_PGK).getFile();
+        String pathZip = XJdfUnpackagerTest.class.getResource(RES_PGK).toURI().getPath();
 
         // assert
         XJdfUnpackager unpackager = new XJdfUnpackager(pathZip);
@@ -159,7 +159,7 @@ public class XJdfUnpackagerTest {
     public void testGetXJdfDocument() throws Exception {
 
         // arrange
-        String path = XJdfUnpackagerTest.class.getResource(RES_PGK).getFile();
+        String path = XJdfUnpackagerTest.class.getResource(RES_PGK).toURI().getPath();
         XJdfUnpackager unpackager = new XJdfUnpackager(path);
 
         // act
