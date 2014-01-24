@@ -725,7 +725,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 */
 	public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation) {
 
-		return createPosition(absoluteBox, orientation);
+		return createPosition(absoluteBox, orientation, null);
 	}
 
     /**
