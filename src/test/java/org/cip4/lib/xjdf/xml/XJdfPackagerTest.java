@@ -75,9 +75,9 @@ public class XJdfPackagerTest {
 	public void testPackageXJdfAbsolutePath() throws Exception {
 
 		// arrange
-		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
-		String resXml = XJdfPackagerTest.class.getResource(RES_XML).getFile();
-		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).getFile();
+		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).toURI().getPath();
+		String resXml = XJdfPackagerTest.class.getResource(RES_XML).toURI().getPath();
+		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).toURI().getPath();
 
 		XJdfNodeFactory nf = new XJdfNodeFactory();
 
@@ -132,9 +132,9 @@ public class XJdfPackagerTest {
 	public void testPackageXJdfRelativePath() throws Exception {
 
 		// arrange
-		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
-		String resXml = XJdfPackagerTest.class.getResource(RES_XML).getFile();
-		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).getFile();
+		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).toURI().getPath();
+		String resXml = XJdfPackagerTest.class.getResource(RES_XML).toURI().getPath();
+		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).toURI().getPath();
 
 		String rootPath = FilenameUtils.getFullPath(resJdf);
 
@@ -194,7 +194,7 @@ public class XJdfPackagerTest {
 	public void testPackageXJdfRelativePathFile() throws Exception {
 
 		// arrange
-		String pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).getFile();
+		String pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).toURI().getPath();
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
@@ -238,9 +238,9 @@ public class XJdfPackagerTest {
 	public void testPackageXJdfWithoutHierarchy() throws Exception {
 
 		// arrange
-		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).getFile();
-		String resXml = XJdfPackagerTest.class.getResource(RES_XML).getFile();
-		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).getFile();
+		String resPdf = XJdfPackagerTest.class.getResource(RES_PDF).toURI().getPath();
+		String resXml = XJdfPackagerTest.class.getResource(RES_XML).toURI().getPath();
+		String resJdf = XJdfPackagerTest.class.getResource(RES_JDF).toURI().getPath();
 
 		XJdfNodeFactory nf = new XJdfNodeFactory();
 

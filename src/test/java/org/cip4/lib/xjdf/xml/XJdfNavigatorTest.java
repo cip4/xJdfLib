@@ -420,7 +420,7 @@ public class XJdfNavigatorTest {
 	public void testXJdfNodeModification() throws Exception {
 
 		// arrange
-		File testBefore = new File(XJdfNavigatorTest.class.getResource(RES_TEST_JOB_1).getFile());
+		File testBefore = new File(XJdfNavigatorTest.class.getResource(RES_TEST_JOB_1).toURI());
 		File fileAfter = File.createTempFile("cip4-test", ".xjdf");
 		fileAfter.deleteOnExit();
 
@@ -450,7 +450,7 @@ public class XJdfNavigatorTest {
 	public void testXJdfNodeRemoval() throws Exception {
 
 		// arrange
-		File testBefore = new File(XJdfNavigatorTest.class.getResource(RES_TEST_JOB_1).getFile());
+		File testBefore = new File(XJdfNavigatorTest.class.getResource(RES_TEST_JOB_1).toURI());
 		File fileAfter = File.createTempFile("cip4-test", ".xjdf");
 		fileAfter.deleteOnExit();
 
