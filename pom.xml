@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cip4.lib.xjdf</groupId>
 	<artifactId>xJdfLib</artifactId>
-	<version>0.5-SNAPSHOT</version>
+	<version>0.5</version>
 	<packaging>jar</packaging>
 	<name>CIP4 xJdfLib</name>
 	<description>CIP4 XJDF Java Library</description>
@@ -19,9 +18,9 @@
         <buildDirectory>${project.basedir}/target</buildDirectory>
 	</properties>
 	<scm>
-		<url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
-		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
-		<connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
+		<url>http://svn.cip4.org/svnroot/tags/xJdfLib-0.5</url>
+		<developerConnection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.5</developerConnection>
+		<connection>scm:svn:http://svn.cip4.org/svnroot/tags/xJdfLib-0.5</connection>
 	</scm>
 	<ciManagement>
 		<system>continuum</system>
@@ -150,14 +149,12 @@
 								<!-- Remove old classes -->
 								<echo message="Remove old classes..." />
 								<delete>
-									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema"
-										includes="**/*.java" />
+									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema" includes="**/*.java" />
 								</delete>
 								<!-- Copy new classes to target location -->
 								<echo message="Copy new classes to target location..." />
 								<copy todir="src/main/java/org/cip4/lib/xjdf/schema">
-									<fileset
-										dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
+									<fileset dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
 								</copy>
 								<!-- clean up -->
 								<echo message="Clean up" />
