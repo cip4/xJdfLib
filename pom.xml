@@ -8,11 +8,11 @@
 	<name>CIP4 xJdfLib</name>
 	<description>CIP4 XJDF Java Library</description>
 	<url>http://www.cip4.org</url>
-	<parent>
-		<groupId>org.cip4.tools</groupId>
-		<artifactId>xCIP4Master</artifactId>
-		<version>1.0</version>
-	</parent>
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 	<properties>
 		<timestamp>${maven.build.timestamp}</timestamp>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
@@ -38,15 +38,6 @@
 		<system>JIRA</system>
 		<url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
 	</issueManagement>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9.1</version>
-			</plugin>
-		</plugins>
-	</reporting>
 	<developers>
 		<developer>
 			<id>r.prosi</id>
@@ -115,35 +106,6 @@
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 						</manifest>
 					</archive>
-				</configuration>
-			</plugin>
-			<!-- doc book generation -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>com.agilejava.docbkx</groupId>
-				<artifactId>docbkx-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>${maven-assembly-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>zip documentation</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>single</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<finalName>${project.artifactId}-${project.version}</finalName>
-					<appendAssemblyId>false</appendAssemblyId>
-					<descriptors>
-						<descriptor>${workDirectory}/assembly/userguide-zip.xml</descriptor>
-					</descriptors>
 				</configuration>
 			</plugin>
 			<!-- Ant Script: Update XSD -->
