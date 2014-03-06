@@ -201,6 +201,21 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+    <xs:simpleType name="EnumVarnishArea">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Full" />
+            <xs:enumeration value="Spot" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumVarnishMethod">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Blanket" />
+            <xs:enumeration value="Plate" />
+            <xs:enumeration value="Independent" />
+        </xs:restriction>
+    </xs:simpleType>
+
 	<xs:simpleType name="EnumPrintPreference">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="Balanced" />
@@ -3812,10 +3827,10 @@
 	<xs:complexType name="VarnishingParams">
 		<xs:complexContent>
 			<xs:extension base="ParameterType">
-				<xs:attribute name="Anchor" type="EnumAnchor" use="optional" />
-				<xs:attribute name="VarnishMethod" use="optional" />
-				<xs:attribute name="AbsoluteWidth" type="NMTOKEN" use="optional" />
-				<xs:attribute name="ModuleIndex" type="integer" use="optional" />
+                <xs:attribute name="ModuleIndex" type="integer" use="optional" />
+                <xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional" />
+                <xs:attribute name="VarnishArea" type="EnumVarnishArea" use="optional" />
+                <xs:attribute name="VarnishMethod" type="EnumVarnishMethod" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
