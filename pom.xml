@@ -140,8 +140,13 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <args>
+                        <arg>-no-header</arg>
+                    </args>
+                    <extension>true</extension>
                     <readOnly>true</readOnly>
                     <markGenerated>true</markGenerated>
+                    <episode>true</episode>
                 </configuration>
             </plugin>
 		</plugins>
