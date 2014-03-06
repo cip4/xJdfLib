@@ -32,6 +32,13 @@
 					<developers>true</developers>
 				</configuration>
 			</notifier>
+			<notifier>
+				<configuration>
+					<address>m.hartmann@flyeralarm.de</address>
+					<committers>true</committers>
+					<developers>true</developers>
+				</configuration>
+			</notifier>
 		</notifiers>
 	</ciManagement>
 	<issueManagement>
@@ -53,6 +60,13 @@
 			<organizationUrl>http://www.flyeralarm.com</organizationUrl>
 			<email>s.meissner@flyeralarm.de</email>
 		</developer>
+        <developer>
+            <id>m.hartmann</id>
+            <name>Michel Hartmann</name>
+            <organization>flyeralarm GmbH</organization>
+            <organizationUrl>http://www.flyeralarm.com</organizationUrl>
+            <email>m.hartmann@flyeralarm.de</email>
+        </developer>
 	</developers>
 	<build>
         <directory>${buildDirectory}</directory>
@@ -125,6 +139,10 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <readOnly>true</readOnly>
+                    <markGenerated>true</markGenerated>
+                </configuration>
             </plugin>
 		</plugins>
 		<pluginManagement>
