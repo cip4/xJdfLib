@@ -26,7 +26,7 @@ import org.junit.Test;
  */
 public class XJdfConstantsTest {
 
-	private static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
+	private static final String RES_JDF20_XSD = "/JDF20.xsd";
 
 	/**
 	 * JUnit test

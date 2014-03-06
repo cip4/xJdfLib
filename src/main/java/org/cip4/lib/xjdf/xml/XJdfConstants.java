@@ -52,7 +52,7 @@ public class XJdfConstants {
 
 	private static final String RES_BUILD_PROPS = "/org/cip4/lib/xjdf/build.properties";
 
-	private static final String RES_JDF20_XSD = "/org/cip4/lib/xjdf/xsd/JDF20.xsd";
+	private static final String RES_JDF20_XSD = "/JDF20.xsd";
 
 	/**
 	 * Load XJDF XSD as byte array.

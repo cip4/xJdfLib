@@ -1628,10 +1628,9 @@ XJdfFactory.init(true);</programlisting>
       <title>Update XJDF Schema</title>
 
       <para>Generating new sources after the XJDF Schema has changed is a very
-      common task. The XSD is located at
-      “src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd”. In order to update
-      sources, just overwrite the schema file and run the “updateXJdfXSD.bat”
-      batch script. All files located in the java package
+      common task. The XSD is located at “src/main/resources/JDF20.xsd”. In order to update
+      sources, just overwrite the schema file and run the “mvn generate-sources”
+      script. All files located in the java package
       “org.cip4.lib.xjdf.schema.jdf” are automatically replaced.</para>
     </section>
   </chapter>

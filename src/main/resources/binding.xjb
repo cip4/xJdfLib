@@ -3,7 +3,7 @@
 	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
 	xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
 
-	<jxb:bindings schemaLocation="xsd/JDF20.xsd" node="/xs:schema">
+	<jxb:bindings schemaLocation="JDF20.xsd" node="/xs:schema">
 		<jxb:globalBindings>
 			<!-- <xjc:simple /> -->
 			<xjc:serializable />

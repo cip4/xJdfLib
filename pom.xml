@@ -114,56 +114,18 @@
 					</archive>
 				</configuration>
 			</plugin>
-			<!-- Ant Script: Update XSD -->
-			<plugin>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.7</version>
-				<executions>
-					<execution>
-						<id>default-cli</id>
-						<configuration>
-							<target>
-								<!-- Prepare -->
-								<property environment="env" />
-								<property name="jdk.dir" value="${env.JAVA_HOME}" />
-								<echo message="JDK Directory: ${jdk.dir}" />
-								<echo message="" />
-								<echo message="Remove old directory" />
-								<delete dir="target/generated-sources/jaxb" />
-								<mkdir dir="target/generated-sources/jaxb" />
-								<!-- Generate java classes from XSD -->
-								<echo message="Generate classes..." />
-								<exec executable="${jdk.dir}/bin/xjc.exe">
-									<!-- binding file -->
-									<arg value="-b" />
-									<arg value="src/main/resources/org/cip4/lib/xjdf/binding.xjb" />
-									<!-- further arguments -->
-									<arg value="-no-header" />
-									<arg value="-extension" />
-									<!-- target directory -->
-									<arg value="-d" />
-									<arg value="target/generated-sources/jaxb" />
-									<!-- XSD -->
-									<arg value="src/main/resources/org/cip4/lib/xjdf/xsd/JDF20.xsd" />
-								</exec>
-								<!-- Remove old classes -->
-								<echo message="Remove old classes..." />
-								<delete>
-									<fileset dir="src/main/java/org/cip4/lib/xjdf/schema" includes="**/*.java" />
-								</delete>
-								<!-- Copy new classes to target location -->
-								<echo message="Copy new classes to target location..." />
-								<copy todir="src/main/java/org/cip4/lib/xjdf/schema">
-									<fileset dir="target/generated-sources/jaxb/org/cip4/lib/xjdf/schema" />
-								</copy>
-								<!-- clean up -->
-								<echo message="Clean up" />
-								<delete dir="target\generated-sources\jaxb" />
-							</target>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.8.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
