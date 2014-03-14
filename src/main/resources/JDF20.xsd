@@ -201,6 +201,14 @@
 		</xs:restriction>
 	</xs:simpleType>
 
+    <xs:simpleType name="EnumSurface">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Front" />
+            <xs:enumeration value="Back" />
+            <xs:enumeration value="Both" />
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumVarnishArea">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Full" />
@@ -5029,6 +5037,7 @@
 	<xs:complexType name="LaminatingIntent">
 		<xs:complexContent>
 			<xs:extension base="IntentType">
+                <xs:attribute name="Surface" type="EnumSurface" use="optional" />
 				<xs:attribute name="Temperature" use="optional" />
 				<xs:attribute name="Thickness" type="double" use="optional" />
 				<xs:attribute name="Texture" type="NMTOKEN" use="optional" />
