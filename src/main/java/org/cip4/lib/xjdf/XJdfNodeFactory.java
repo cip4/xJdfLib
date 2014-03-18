@@ -15,40 +15,7 @@ import java.util.List;
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
-import org.cip4.lib.xjdf.schema.AmountPool;
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.BinderySignature;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ChildProduct;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.ColorantControl;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.ContentObject;
-import org.cip4.lib.xjdf.schema.Created;
-import org.cip4.lib.xjdf.schema.CustomerInfo;
-import org.cip4.lib.xjdf.schema.CuttingParams;
-import org.cip4.lib.xjdf.schema.EnumOrientation;
-import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MarkObject;
-import org.cip4.lib.xjdf.schema.Media;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.Modified;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.ObjectFactory;
-import org.cip4.lib.xjdf.schema.Parameter;
-import org.cip4.lib.xjdf.schema.ParameterType;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.PartAmount;
-import org.cip4.lib.xjdf.schema.Position;
-import org.cip4.lib.xjdf.schema.Preview;
-import org.cip4.lib.xjdf.schema.ProductionIntent;
-import org.cip4.lib.xjdf.schema.ProofItem;
-import org.cip4.lib.xjdf.schema.ProofingIntent;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.SignatureCell;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.IDREF;
@@ -110,6 +77,35 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// return node
 		return parameter;
+	}
+
+	/**
+	 * Create a new Resource node from ResourceType and Part
+	 * @param resourceType The ResourceType Node
+	 * @param part The Part Node
+	 * @return New Resource node from ResourceType and Part node.
+	 */
+	public Resource createResource(ResourceType resourceType, Part part) {
+
+		if (resourceType == null)
+			return null;
+
+		// get resource name
+		String paramName = resourceType.getClass().getSimpleName();
+
+		// create resource
+		Resource resource = super.createResource();
+
+		QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
+		JAXBElement obj = new JAXBElement(qname, resourceType.getClass(), null, resourceType);
+		resource.setResourceType(obj);
+
+		if (part != null) {
+            resource.setPart(part);
+		}
+
+		// return node
+		return resource;
 	}
 
 	/**
@@ -249,7 +245,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 	/**
 	 * Create a new NodeInfo Node which already contains values for attributes JobPriority.
-	 * @param end Value for End attribute.
 	 * @return NodeInfo Node which already contains defined attributes.
 	 */
 	public NodeInfo createNodeInfo(Integer jobPriority) {
@@ -315,7 +310,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 	/**
 	 * Create a new Preview Node which already contains values for attributes PreviewUsage, URL and PreviewFileType.
 	 * @param URL Value for URL attribute.
-	 * @param previewUsage Value for previewUsage attribute.
 	 * @param previewFileType Value for PreviewFileType attribute.
 	 * @return Preview Node which already contains defined attributes.
 	 */
@@ -334,7 +328,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 	/**
 	 * Create new ChildProduct Node which already contains values for attribute Childref.
-	 * @param childref Value for Childref attribute.
+	 * @param idRef Value for Childref attribute.
 	 * @return ChildProduct Node which already contains defined attributes.
 	 */
 	public ChildProduct createChildProduct(IDREF idRef) {
@@ -363,7 +357,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	/**
 	 * Create new MediaIntent Node which already contains values for attributes MediaQuality, StockBrand and Weight.
 	 * @param mediaQuality Value for MediaQuality attribute.
-	 * @param stockBrand Value for StockBrand attribute.
+	 * @param brand Value for StockBrand attribute.
 	 * @param weight Value for Weight attribute.
 	 * @return MediaIntent Node which already contains defined attributes.
 	 */

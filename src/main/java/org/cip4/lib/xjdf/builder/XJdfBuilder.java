@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -21,17 +22,7 @@ import javax.xml.namespace.QName;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.comparator.SetTypeComparator;
-import org.cip4.lib.xjdf.schema.Audit;
-import org.cip4.lib.xjdf.schema.AuditPool;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.Parameter;
-import org.cip4.lib.xjdf.schema.ParameterSet;
-import org.cip4.lib.xjdf.schema.ParameterType;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.SetType;
-import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
@@ -45,6 +36,8 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 	private final XJdfNodeFactory xJdfNodeFactory;
 
 	private final Map<String, ParameterSet> mapParameterSets;
+
+	private final Map<String, ResourceSet> mapResourceSets;
 
 	/**
 	 * Default constructor.
@@ -99,7 +92,8 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// initialize objects
 		super(new XJdfNodeFactory().createXJDF());
-		mapParameterSets = new HashMap<String, ParameterSet>(20);
+		mapParameterSets = new HashMap<>();
+		mapResourceSets = new HashMap<>();
 		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// preconfiguration
@@ -121,7 +115,8 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// initialize objects
 		super(xjdf);
-		mapParameterSets = new HashMap<String, ParameterSet>(20);
+		mapParameterSets = new HashMap<>();
+		mapResourceSets = new HashMap<>();
 		xJdfNodeFactory = new XJdfNodeFactory();
 
 		// map items
@@ -244,7 +239,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 	/**
 	 * Append Parameter list to xJdf Document.
-	 * @param parameter Parameter object to append.
+	 * @param parameterTypes Parameter objects to append.
 	 */
 	public void addParameter(List<ParameterType> parameterTypes) {
 
@@ -254,7 +249,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 	/**
 	 * Append Parameter List to xJdf Document.
-	 * @param parameter Parameter object to append.
+	 * @param parameterTypes Parameter objects to append.
 	 * @param processUsage ProcessUsage of parameter.
 	 */
 	public void addParameter(List<ParameterType> parameterTypes, String processUsage) {
@@ -346,5 +341,76 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
 		// append parameter to parameterSet
 		parameterSet.getParameter().add(parameter);
+	}
+
+    /**
+     * Append Resource node to xJdf Document.
+     * @param resourceType Resource object to append.
+     * @param part Partitioning definitions.
+     */
+    public Resource addResource(ResourceType resourceType, Part part) {
+        return addResource(resourceType, part, null);
+    }
+
+    /**
+     * Append Resource node to xJdf Document.
+     * @param resourceType Resource object to append.
+     * @param part Partitioning definitions.
+     * @param processUsage ProcessUsage of resource.
+     */
+    public Resource addResource(ResourceType resourceType, Part part, String processUsage) {
+        if (resourceType == null) {
+            throw new IllegalArgumentException("Resource may not be null.");
+        }
+
+        Resource resource = xJdfNodeFactory.createResource(resourceType, part);
+
+        resource.setID(resource.getResourceType().getName().getLocalPart() + "_" + UUID.randomUUID().toString());
+
+        addResource(resource, processUsage);
+        return resource;
+    }
+
+    /**
+	 * Append Resource node to xJdf Document.
+	 * @param resource Resource node to append to.
+	 * @param processUsage ProcessUsage of resource.
+	 */
+	public void addResource(final Resource resource, String processUsage) {
+
+		// get parameter name
+		String resourceName = resource.getResourceType().getName().getLocalPart();
+
+		// set key
+		String key = resourceName;
+
+		if (!StringUtils.isEmpty(processUsage)) {
+			key += "_" + processUsage;
+		} else {
+			processUsage = null;
+		}
+
+		// get ResourceSet according to parameter
+		ResourceSet resourceSet;
+
+		if (mapParameterSets.containsKey(key)) {
+			// get ResourceSet object
+			resourceSet = mapResourceSets.get(key);
+		} else {
+			// create ResourceSet object
+			resourceSet = xJdfNodeFactory.createResourceSet();
+			resourceSet.setName(resourceName);
+			resourceSet.setProcessUsage(processUsage);
+
+			// append element to lists
+			getXJdf().getSetType().add(xJdfNodeFactory.createResourceSet(resourceSet));
+            mapResourceSets.put(key, resourceSet);
+
+			// sort parameterset elements by name
+			Collections.sort(getXJdf().getSetType(), new SetTypeComparator());
+		}
+
+		// append parameter to parameterSet
+		resourceSet.getResource().add(resource);
 	}
 }
