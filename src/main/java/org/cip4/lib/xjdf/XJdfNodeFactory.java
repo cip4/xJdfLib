@@ -419,7 +419,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 		LayoutIntent layoutIntent = super.createLayoutIntent();
 
 		// set attributes
-		layoutIntent.setPages(pages);
+		layoutIntent.setPrintedPages(pages);
 		layoutIntent.setSides(sides);
 		layoutIntent.setFinishedDimensions(finishedDimensions);
 		layoutIntent.setDimensions(dimensions);

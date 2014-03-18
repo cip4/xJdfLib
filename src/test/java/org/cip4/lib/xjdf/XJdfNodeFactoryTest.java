@@ -191,7 +191,7 @@ public class XJdfNodeFactoryTest {
 		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions, dimensions);
 
 		// assert
-		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPages());
+		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
 		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
 		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
 		Assert.assertEquals("Dimensions is wrong", dimensions, layoutIntent.getDimensions());
@@ -209,7 +209,7 @@ public class XJdfNodeFactoryTest {
 		LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions);
 
 		// assert
-		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPages());
+		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
 		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
 		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
 		Assert.assertEquals("Dimensions is wrong", null, layoutIntent.getDimensions());
