@@ -5056,7 +5056,7 @@
 				<xs:attribute name="Sides" use="optional" />
 				<xs:attribute name="LayoutRef" type="IDREF" use="optional" />
 				<xs:attribute name="SizePolicy" use="optional" />
-				<xs:attribute name="Pages" type="integer" use="optional" />
+				<xs:attribute name="PrintedPages" type="integer" use="optional" />
 				<xs:attribute name="PageVariance" type="integer" use="optional" />
 				<xs:attribute name="FinishedDimensions" type="shape" use="optional" />
 				<xs:attribute name="Dimensions" type="XYPair" use="optional" />
