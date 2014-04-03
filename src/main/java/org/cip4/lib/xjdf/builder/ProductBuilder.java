@@ -144,11 +144,10 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
 	/**
 	 * Append another product as child.
-	 * @param intent Intent object to append to.
-	 * @throws ValidationException
+     *
+	 * @param childRef Reference to the cild product to append.
 	 */
-	public void addChildProduct(IDREF childRef) throws ValidationException {
-
+	public final void addChildProduct(final IDREF childRef)  {
 		// create child product
 		ChildProduct childProduct = xJdfNodeFactory.createChildProduct();
 		childProduct.setChildRef(childRef);
