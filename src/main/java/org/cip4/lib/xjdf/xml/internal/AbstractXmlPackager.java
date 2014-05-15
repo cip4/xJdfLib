@@ -163,8 +163,7 @@ public abstract class AbstractXmlPackager {
 		for (File key : fileMap.keySet()) {
 			InputStream fis = fileMap.get(key).toURL().openStream();
 
-			ZipEntry zipEntryFile = new ZipEntry(key.getPath());
-			zout.putNextEntry(zipEntryFile);
+			zout.putNextEntry(new ZipEntry(key.getPath().replace("\\", "/")));
 			IOUtils.copy(fis, zout);
 			fis.close();
 		}

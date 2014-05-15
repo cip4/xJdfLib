@@ -6,7 +6,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * Unit-Test for AbstractXmlPackager
@@ -69,4 +73,21 @@ public class AbstractXmlPackagerTest {
 		File targetFile = packager.registerFile(temp.newFile("foo.zip").toURI().toString(), "bar");
 		Assert.assertEquals("bar/foo.zip", FilenameUtils.separatorsToUnix(targetFile.getPath()));
 	}
+
+    @Test
+    public void testPackageXmlWithBackslash() throws Exception {
+        AbstractXmlPackager packager = new MinimalXmlPackager(
+            minimalXml,
+            null
+        );
+        packager.registerFile(temp.newFile().getPath(), "foo\\bar\\baz");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        packager.packageXml(bos, "document.xml");
+
+        ZipInputStream zipIn = new ZipInputStream(new ByteArrayInputStream(bos.toByteArray()));
+        ZipEntry zipEntry;
+        while (null != (zipEntry = zipIn.getNextEntry())) {
+            Assert.assertFalse("ZipEntry may not contain '\'.", zipEntry.getName().contains("\\"));
+        }
+    }
 }
