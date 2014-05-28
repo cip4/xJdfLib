@@ -554,41 +554,22 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param numColors Value for NumColors attribute.
 	 * @return ColorIntent Node which already contains defined attributes.
 	 */
-	public ColorIntent createColorIntent(IntegerList numColors) {
+	public final ColorIntent createColorIntent(final IntegerList numColors) {
+        ColorIntent colorIntent = super.createColorIntent();
 
-		// return object
-		return createColorIntent(numColors, null, null, null, null);
-	}
+        SurfaceColor frontColor = new SurfaceColor();
+        frontColor.setSurface(EnumSurface.FRONT);
+        frontColor.setNumColors(numColors.get(0));
 
-	/**
-	 * Create new ColorIntent Node which already contains values for attributes NumColors, ColorsUsed and Coatings.
-	 * @param numColors Value for NumColors attribute.
-	 * @param colorsUsed Value for ColorsUsed attribute.
-	 * @param coatings Value for Coatings attribute.
-	 * @return ColorIntent Node which already contains defined attributes.
-	 */
-	public ColorIntent createColorIntent(IntegerList numColors, List<String> colorsUsed, List<String> colorsUsedBack, String coatings, String coatingsBack) {
+        SurfaceColor backColor = new SurfaceColor();
+        backColor.setSurface(EnumSurface.BACK);
+        backColor.setNumColors(numColors.get(1));
 
-		// create node
-		ColorIntent colorIntent = super.createColorIntent();
+        colorIntent.getSurfaceColor().add(frontColor);
+        colorIntent.getSurfaceColor().add(backColor);
 
-		// TODO ColorUsedBack
-		// TODO CoatingsBack
-		// set attributes
-
-		colorIntent.setNumColors(numColors);
-
-		if (colorsUsed != null)
-			colorIntent.getColorsUsed().addAll(colorsUsed);
-
-		if (colorsUsedBack != null)
-			colorIntent.getColorsUsedBack().addAll(colorsUsedBack);
-
-		colorIntent.setCoatings(coatings);
-		colorIntent.setCoatingsBack(coatingsBack);
-
-		// return object
-		return colorIntent;
+        // return object
+        return colorIntent;
 	}
 
 	/**

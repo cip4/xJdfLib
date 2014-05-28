@@ -140,8 +140,18 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
 		String actual;
 
-		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/@NumColors");
-		Assert.assertEquals("NomColors is wrong.", "4 5", actual);
+		actual = getXPathValue(
+            bytes,
+            "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
+                + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
+        );
+		Assert.assertEquals("NomColors is wrong for front.", "4", actual);
+		actual = getXPathValue(
+            bytes,
+            "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
+                + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
+        );
+		Assert.assertEquals("NomColors is wrong for back.", "5", actual);
 	}
 
 	/**
@@ -185,8 +195,18 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
 		String actual;
 
-		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/@NumColors");
-		Assert.assertEquals("NumColors is wrong.", "4 5", actual);
+		actual = getXPathValue(
+            bytes,
+            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
+                + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
+        );
+		Assert.assertEquals("NumColors is wrong for front.", "4", actual);
+		actual = getXPathValue(
+            bytes,
+            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
+                + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
+        );
+		Assert.assertEquals("NumColors is wrong for back.", "5", actual);
 
 		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[1]/@IsRoot");
 		Assert.assertEquals("IsRoot is wrong.", "true", actual);

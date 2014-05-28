@@ -4946,15 +4946,9 @@
 	<xs:complexType name="ColorIntent">
 		<xs:complexContent>
 			<xs:extension base="IntentType">
-				<xs:attribute name="NumColors" type="IntegerList" use="optional" />
-				<xs:attribute name="ColorRef" type="IDREF" use="optional" />
-				<xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional" />
-				<xs:attribute name="ColorsUsedBack" type="NMTOKENS" use="optional" />
-				<xs:attribute name="Coverage" type="double" use="optional" />
-				<xs:attribute name="ColorStandard" type="NMTOKEN" use="optional" />
-				<xs:attribute name="ColorICCStandard" type="string" use="optional" />
-				<xs:attribute name="Coatings" type="string" use="optional" />
-				<xs:attribute name="CoatingsBack" type="string" use="optional" />
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SurfaceColor" />
+                </xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -8066,6 +8060,21 @@
 			<xs:attribute name="Side" use="optional" />
 		</xs:complexType>
 	</xs:element>
+
+
+    <!-- ** Complex type definition for ColorIntent ** -->
+    <xs:element name="SurfaceColor" type="SurfaceColor" />
+    <xs:complexType name="SurfaceColor">
+        <xs:complexContent>
+            <xs:extension base="IntentType">
+                <xs:attribute name="Surface" type="EnumSurface" use="optional" />
+                <xs:attribute name="NumColors" type="integer" use="optional" />
+                <xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional" />
+                <xs:attribute name="Coverage" type="double" use="optional" />
+                <xs:attribute name="Coatings" type="NMTOKENS" use="optional" />
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 	<!-- ** Complex type definition for Fold ** -->
 	<xs:element name="Fold" type="Fold" substitutionGroup="ParameterType" />

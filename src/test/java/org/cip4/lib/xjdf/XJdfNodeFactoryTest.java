@@ -287,34 +287,6 @@ public class XJdfNodeFactoryTest {
 	}
 
 	@Test
-	public void testCreateColorIntent() {
-
-		// arrange
-		final IntegerList NUM_COLORS = new IntegerList(2, 4);
-
-		final List<String> COLORS_USED = new ArrayList<String>();
-		COLORS_USED.add(UUID.randomUUID().toString());
-		COLORS_USED.add(UUID.randomUUID().toString());
-
-		final List<String> COLORS_USED_BACK = new ArrayList<String>();
-		COLORS_USED_BACK.add(UUID.randomUUID().toString());
-		COLORS_USED_BACK.add(UUID.randomUUID().toString());
-
-		final String COATINGS = UUID.randomUUID().toString();
-		final String COATINGS_BACK = UUID.randomUUID().toString();
-
-		// act
-		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS, COLORS_USED, COLORS_USED_BACK, COATINGS, COATINGS_BACK);
-
-		// assert
-		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
-		Assert.assertEquals("ColorsUsed is wrong", COLORS_USED, colorIntent.getColorsUsed());
-		Assert.assertEquals("ColorsUsedBack is wrong", COLORS_USED_BACK, colorIntent.getColorsUsedBack());
-		Assert.assertEquals("Coatings is wrong", COATINGS, colorIntent.getCoatings());
-		Assert.assertEquals("CoatingsBack is wrong", COATINGS_BACK, colorIntent.getCoatingsBack());
-	}
-
-	@Test
 	public void testCreateColorIntentLight() {
 
 		// arrange
@@ -324,9 +296,29 @@ public class XJdfNodeFactoryTest {
 		ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS);
 
 		// assert
-		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS, colorIntent.getNumColors());
-		Assert.assertEquals("ColorsUsed is wrong", 0, colorIntent.getColorsUsed().size());
-		Assert.assertEquals("Coatings is wrong", null, colorIntent.getCoatings());
+        List<SurfaceColor> surfaceColors = colorIntent.getSurfaceColor();
+        Assert.assertEquals("Number of surface colors is wrong.", 2, surfaceColors.size());
+
+        SurfaceColor colorFront = null;
+        SurfaceColor colorBack = null;
+        for (SurfaceColor surfaceColor : surfaceColors) {
+            if (EnumSurface.FRONT == surfaceColor.getSurface()) {
+                colorFront = surfaceColor;
+            } else if (EnumSurface.BACK == surfaceColor.getSurface()) {
+                colorBack = surfaceColor;
+            } else {
+                Assert.fail("Surface of SurfaceColor is wrong.");
+            }
+        }
+        Assert.assertNotNull(colorFront);
+        Assert.assertNotNull(colorBack);
+
+		Assert.assertEquals("NumColors is wrong for front", NUM_COLORS.get(0), colorFront.getNumColors());
+		Assert.assertEquals("FoldingCatalog is wrong", NUM_COLORS.get(1), colorBack.getNumColors());
+		Assert.assertEquals("ColorsUsed is wrong for front", 0, colorFront.getColorsUsed().size());
+		Assert.assertEquals("Coatings is wrong for front", 0, colorFront.getCoatings().size());
+        Assert.assertEquals("ColorsUsed is wrong for back", 0, colorBack.getColorsUsed().size());
+		Assert.assertEquals("Coatings is wrong for back", 0, colorBack.getCoatings().size());
 	}
 
 	@Test
