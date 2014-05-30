@@ -1,51 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jxb:bindings version="1.0" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" 
-	xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-	xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
+<bindings version="2.1"
+              xmlns="http://java.sun.com/xml/ns/jaxb"
+              xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+              xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
 
-	<jxb:bindings schemaLocation="JDF20.xsd" node="/xs:schema">
-		<jxb:globalBindings>
-			<!-- <xjc:simple /> -->
-			<xjc:serializable />
+    <bindings schemaLocation="JDF20.xsd">
+        <globalBindings>
+            <xjc:serializable/>
+		</globalBindings>
+		<schemaBindings>
+			<package name="org.cip4.lib.xjdf.schema" />
+		</schemaBindings>
+        <bindings scd="/~xjdf:matrix">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Matrix" adapter="org.cip4.lib.xjdf.type.Matrix" />
+        </bindings>
+        <bindings scd="/~xjdf:rectangle">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Rectangle" adapter="org.cip4.lib.xjdf.type.Rectangle" />
+        </bindings>
+        <bindings scd="/~xjdf:shape">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Shape" adapter="org.cip4.lib.xjdf.type.Shape" />
+        </bindings>
+        <bindings scd="/~xjdf:XYPair">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair" adapter="org.cip4.lib.xjdf.type.XYPair" />
+        </bindings>
+        <bindings scd="/~xjdf:dateTime">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime" adapter="org.cip4.lib.xjdf.type.DateTime"/>
+        </bindings>
+        <bindings scd="/~xjdf:IntegerList">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList" adapter="org.cip4.lib.xjdf.type.IntegerList" />
+        </bindings>
+        <bindings scd="/~xjdf:duration">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
+        </bindings>
+        <bindings scd="/~xjdf:IDREF">
+            <xjc:javaType name="org.cip4.lib.xjdf.type.IDREF" adapter="org.cip4.lib.xjdf.type.IDREF" />
+        </bindings>
+	</bindings>
 
-			<xjc:javaType name="org.cip4.lib.xjdf.type.Matrix"
-                       xmlType="xjdf:matrix"
-                       adapter="org.cip4.lib.xjdf.type.Matrix" />
-
-			<xjc:javaType name="org.cip4.lib.xjdf.type.Rectangle"
-                       xmlType="xjdf:rectangle"
-                       adapter="org.cip4.lib.xjdf.type.Rectangle" />
-                       
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Shape"
-                       xmlType="xjdf:shape"
-                       adapter="org.cip4.lib.xjdf.type.Shape" />
-                       
-            <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair"
-                       xmlType="xjdf:XYPair"
-                       adapter="org.cip4.lib.xjdf.type.XYPair" />
-                       
-            <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime"
-                       xmlType="xjdf:dateTime"
-                       adapter="org.cip4.lib.xjdf.type.DateTime" />
-                       
-           	<xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList"
-                       xmlType="xjdf:IntegerList"
-                       adapter="org.cip4.lib.xjdf.type.IntegerList" />
-                       
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Duration"
-                       xmlType="xjdf:duration"
-                       adapter="org.cip4.lib.xjdf.type.Duration" />
-                       
-             <xjc:javaType name="org.cip4.lib.xjdf.type.IDREF"
-                       xmlType="xjdf:IDREF"
-                       adapter="org.cip4.lib.xjdf.type.IDREF" />
-                       
-		</jxb:globalBindings>
-		<jxb:schemaBindings>
-			<jxb:package name="org.cip4.lib.xjdf.schema" />
-		</jxb:schemaBindings>
-	</jxb:bindings>
-	
-</jxb:bindings>
+</bindings>
 
 	
