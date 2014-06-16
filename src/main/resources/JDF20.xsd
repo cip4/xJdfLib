@@ -6864,10 +6864,10 @@
 	</xs:complexType>
 
 	<!-- ** Complex type definition for Media ** -->
-	<xs:element name="Media" type="Media" substitutionGroup="ParameterType" />
+	<xs:element name="Media" type="Media" substitutionGroup="ResourceType" />
 	<xs:complexType name="Media">
 		<xs:complexContent>
-			<xs:extension base="ParameterType">
+			<xs:extension base="ResourceType">
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
