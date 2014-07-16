@@ -821,37 +821,10 @@
 	<xs:element name="Intent">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="IntentType" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
+				<xs:element minOccurs="0" maxOccurs="1" ref="IntentType" />
 			</xs:sequence>
-			<xs:attribute name="Locked" type="boolean" use="optional" />
-			<xs:attribute name="PipeURL" type="URL" use="optional" />
 			<xs:attribute name="Name" type="NMTOKEN" use="required" />
-			<xs:attribute name="Class" use="optional" />
-			<xs:attribute name="PartIDKeys" use="optional">
-				<xs:simpleType>
-					<xs:list itemType="EnumPartIDKeys" />
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional" />
-			<xs:attribute name="Status" type="EnumResStatus" use="optional" />
-			<xs:attribute name="PipeID" type="string" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
 			<xs:attribute name="ID" type="ID" use="optional" />
-			<xs:attribute name="PartUsage" use="optional" />
-			<xs:attribute name="ProductID" type="string" use="optional" />
-			<xs:attribute name="Author" type="string" use="optional" />
-			<xs:attribute name="PipePartIDKeys" use="optional">
-				<xs:simpleType>
-					<xs:list itemType="EnumPartIDKeys" />
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="QualityControlResultRef" type="IDREF" use="optional" />
-			<xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional" />
-			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -5043,18 +5016,16 @@
 	<xs:element name="LayoutIntent" type="LayoutIntent" substitutionGroup="IntentType" />
 	<xs:complexType name="LayoutIntent">
 		<xs:complexContent>
-			<xs:extension base="IntentType">
-				<xs:attribute name="RotatePolicy" use="optional" />
-				<xs:attribute name="FolioCount" use="optional" />
-				<xs:attribute name="NumberUp" type="XYPair" use="optional" />
-				<xs:attribute name="Sides" use="optional" />
-				<xs:attribute name="LayoutRef" type="IDREF" use="optional" />
-				<xs:attribute name="SizePolicy" use="optional" />
-				<xs:attribute name="PrintedPages" type="integer" use="optional" />
-				<xs:attribute name="PageVariance" type="integer" use="optional" />
-				<xs:attribute name="FinishedDimensions" type="shape" use="optional" />
-				<xs:attribute name="Dimensions" type="XYPair" use="optional" />
-				<xs:attribute name="FinishedGrainDirection" use="optional" />
+            <xs:extension base="IntentType">
+                <xs:attribute name="Bleed" type="double" use="optional" />
+                <xs:attribute name="Dimensions" type="XYPair" use="optional" />
+                <xs:attribute name="FinishedDimensions" type="shape" use="optional" />
+                <xs:attribute name="NamedDimensions" type="string" use="optional" />
+                <xs:attribute name="NumberUp" type="XYPair" use="optional" />
+                <xs:attribute name="PrintedPages" type="integer" use="optional" />
+                <xs:attribute name="PageVariance" type="integer" use="optional" />
+                <xs:attribute name="Sides" use="optional" />
+                <xs:attribute name="LayoutRef" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5428,23 +5399,30 @@
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell" />
 				</xs:sequence>
+                <xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional" />
 				<xs:attribute name="AssemblyID" type="string" use="optional" />
+                <xs:attribute name="BinderySignatureSize" type="XYPair" use="optional" />
+                <xs:attribute name="BinderySignatureType" use="optional" />
 				<xs:attribute name="BindingEdge" use="optional" />
 				<xs:attribute name="BindingOrientation" use="optional" />
-				<xs:attribute name="JogEdge" use="optional" />
-				<xs:attribute name="FoldCatalog" type="string" use="optional" />
-				<xs:attribute name="BinderySignatureSize" type="XYPair" use="optional" />
-				<xs:attribute name="WebCellAlignment" type="XYPair" use="optional" />
-				<xs:attribute name="StaggerContinuous" type="boolean" use="optional" />
-				<xs:attribute name="StaggerRows" type="string" use="optional" />
-				<xs:attribute name="BinderySignatureType" use="optional" />
-				<xs:attribute name="FoldLay" use="optional" />
-				<xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional" />
-				<xs:attribute name="OutsideGutter" type="boolean" use="optional" />
-				<xs:attribute name="NumberUp" type="XYPair" use="optional" />
-				<xs:attribute name="ProductID" type="string" use="optional" />
-				<xs:attribute name="StaggerColumns" type="string" use="optional" />
-				<xs:attribute name="DieLayoutRef" type="IDREF" use="optional" />
+                <xs:attribute name="BleedBottom" type="double" use="optional" />
+                <xs:attribute name="BleedLeft" type="double" use="optional" />
+                <xs:attribute name="BleedRight" type="double" use="optional" />
+                <xs:attribute name="BleedTop" type="double" use="optional" />
+                <xs:attribute name="DieLayoutRef" type="IDREF" use="optional" />
+                <xs:attribute name="FoldCatalog" type="string" use="optional" />
+                <xs:attribute name="FoldLay" use="optional" />
+                <xs:attribute name="JogEdge" use="optional" />
+                <xs:attribute name="NumberUp" type="XYPair" use="optional" />
+                <xs:attribute name="OutsideGutter" type="boolean" use="optional" />
+                <xs:attribute name="StaggerColumns" type="string" use="optional" />
+                <xs:attribute name="StaggerContinuous" type="boolean" use="optional" />
+                <xs:attribute name="StaggerRows" type="string" use="optional" />
+                <xs:attribute name="TrimBottom" type="double" use="optional" />
+                <xs:attribute name="TrimLeft" type="double" use="optional" />
+                <xs:attribute name="TrimRight" type="double" use="optional" />
+                <xs:attribute name="TrimTop" type="double" use="optional" />
+                <xs:attribute name="WebCellAlignment" type="XYPair" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
