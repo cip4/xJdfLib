@@ -8,11 +8,6 @@
     <name>CIP4 xJdfLib</name>
     <description>CIP4 XJDF Java Library</description>
     <url>http://www.cip4.org</url>
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
