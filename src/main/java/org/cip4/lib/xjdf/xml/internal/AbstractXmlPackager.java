@@ -31,202 +31,212 @@ import org.w3c.dom.NodeList;
 
 /**
  * Packaging logic for XML Documents. Package an XML with all references in a ZIP Package.
+ *
  * @author stefan.meissner
- * @date 27.01.2013
+ * @author michel hartmann
  */
 public abstract class AbstractXmlPackager {
 
-	private CompressionLevel compressionLevel;
+    private CompressionLevel compressionLevel;
 
-	private final URI rootUri;
+    private final URI rootUri;
 
-	private final Map<File, URI> fileMap;
+    private final Map<File, URI> fileMap;
 
-	private final XmlNavigator xPathNav;
+    private final XmlNavigator xPathNav;
 
-	private final byte[] xmlDoc;
+    private final byte[] xmlDoc;
 
-	/**
-	 * ZIP Compression Level
-	 * @author stefan.meissner
-	 * @date 26.01.2013
-	 */
-	public enum CompressionLevel {
+    /**
+     * ZIP Compression Level
+     *
+     * @author stefan.meissner
+     * @date 26.01.2013
+     */
+    public enum CompressionLevel {
 
-		BEST_SPEED(Deflater.BEST_SPEED),
-		BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
-		DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION),
-		NO_COMPRESSION(Deflater.NO_COMPRESSION);
+        BEST_SPEED(Deflater.BEST_SPEED),
+        BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
+        DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION),
+        NO_COMPRESSION(Deflater.NO_COMPRESSION);
 
-		private final int level;
+        private final int level;
 
-		CompressionLevel(int level) {
-			this.level = level;
-		}
+        CompressionLevel(int level) {
+            this.level = level;
+        }
 
-		public int getLevel() {
-			return level;
-		}
-	}
+        public int getLevel() {
+            return level;
+        }
+    }
 
-	/**
-	 * Custom constructor. Accepting an XJDF Path for initializing.
-	 *
-	 * @param xmlPath Path to XJDF Document.
-	 * @throws Exception
-	 */
-	public AbstractXmlPackager(String xmlPath) throws Exception {
+    /**
+     * Custom constructor. Accepting an XJDF Path for initializing.
+     *
+     * @param xmlPath Path to XJDF Document.
+     *
+     * @throws Exception
+     */
+    public AbstractXmlPackager(String xmlPath) throws Exception {
 
-		// load XJDF
-		InputStream is = new FileInputStream(xmlPath);
-		byte[] bytes = IOUtils.toByteArray(is);
-		is.close();
+        // load XJDF
+        byte[] bytes;
+        try (InputStream is = new FileInputStream(xmlPath)) {
+            bytes = IOUtils.toByteArray(is);
+        }
 
-		// extract root path
-		String rootPath = FilenameUtils.getFullPath(xmlPath);
+        // extract root path
+        String rootPath = FilenameUtils.getFullPath(xmlPath);
 
-		// init instance varialbes
-		this.xPathNav = new XmlNavigator(bytes);
-		this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
-		this.fileMap = new HashMap<>();
-		this.xmlDoc = bytes;
-		this.rootUri = new File(rootPath).toURI();
-	}
+        // init instance varialbes
+        this.xPathNav = new XmlNavigator(bytes);
+        this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
+        this.fileMap = new HashMap<>();
+        this.xmlDoc = bytes;
+        this.rootUri = new File(rootPath).toURI();
+    }
 
-	/**
-	 * Custom constructor. Accepting an XML Document for initializing.
-	 *
-	 * @param xmlDoc XML Document for parsing and packaging.
-	 * @param rootPath Root path of the files.
-	 * @throws Exception
-	 */
-	public AbstractXmlPackager(byte[] xmlDoc, String rootPath) throws Exception {
+    /**
+     * Custom constructor. Accepting an XML Document for initializing.
+     *
+     * @param xmlDoc XML Document for parsing and packaging.
+     * @param rootPath Root path of the files.
+     *
+     * @throws Exception
+     */
+    public AbstractXmlPackager(byte[] xmlDoc, String rootPath) throws Exception {
 
-		// new navigator
-		this.xPathNav = new XmlNavigator(xmlDoc);
+        // new navigator
+        this.xPathNav = new XmlNavigator(xmlDoc);
 
-		// init instance variables
-		this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
-		this.fileMap = new HashMap<>();
-		this.xmlDoc = xmlDoc;
-		if (null != rootPath) {
-			this.rootUri = new File(rootPath).toURI();
-		} else {
-			this.rootUri = null;
-		}
-	}
+        // init instance variables
+        this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
+        this.fileMap = new HashMap<>();
+        this.xmlDoc = xmlDoc;
+        if (null != rootPath) {
+            this.rootUri = new File(rootPath).toURI();
+        } else {
+            this.rootUri = null;
+        }
+    }
 
-	/**
-	 * Getter for xmlDoc attribute.
-	 * @return the xmlDoc
-	 */
-	protected byte[] getXmlDoc() {
-		return xmlDoc;
-	}
+    /**
+     * Getter for xmlDoc attribute.
+     *
+     * @return the xmlDoc
+     */
+    protected byte[] getXmlDoc() {
+        return xmlDoc;
+    }
 
-	/**
-	 * Getter for compressionLevel attribute.
-	 * @return the compressionLevel
-	 */
-	public CompressionLevel getCompressionLevel() {
-		return compressionLevel;
-	}
+    /**
+     * Getter for compressionLevel attribute.
+     *
+     * @return the compressionLevel
+     */
+    public CompressionLevel getCompressionLevel() {
+        return compressionLevel;
+    }
 
-	/**
-	 * Setter for compressionLevel attribute.
-	 * @param compressionLevel the compressionLevel to set
-	 */
-	public void setCompressionLevel(CompressionLevel compressionLevel) {
-		this.compressionLevel = compressionLevel;
-	}
+    /**
+     * Setter for compressionLevel attribute.
+     *
+     * @param compressionLevel the compressionLevel to set
+     */
+    public void setCompressionLevel(CompressionLevel compressionLevel) {
+        this.compressionLevel = compressionLevel;
+    }
 
-	/**
-	 * Packages an XJDF Document to a zipped binary output stream.
-	 * @param os Target OutputStream where XJdfDocument is being packaged.
-	 * @throws Exception
-	 */
-	protected void packageXml(OutputStream os, String docName) throws Exception {
+    /**
+     * Packages an XJDF Document to a zipped binary output stream.
+     *
+     * @param os Target OutputStream where XJdfDocument is being packaged.
+     *
+     * @throws Exception
+     */
+    protected void packageXml(OutputStream os, String docName) throws Exception {
 
-		// create zip
-		ZipOutputStream zout = new ZipOutputStream(os);
-		zout.setLevel(compressionLevel.getLevel());
+        // create zip
+        ZipOutputStream zout = new ZipOutputStream(os);
+        zout.setLevel(compressionLevel.getLevel());
 
-		// put XML to archive
-		ZipEntry zipEntryXml = new ZipEntry(docName);
-		zout.putNextEntry(zipEntryXml);
+        // put XML to archive
+        ZipEntry zipEntryXml = new ZipEntry(docName);
+        zout.putNextEntry(zipEntryXml);
 
-		InputStream isXJdf = xPathNav.getXmlStream();
-		IOUtils.copy(isXJdf, zout);
-		isXJdf.close();
+        try (InputStream isXJdf = xPathNav.getXmlStream()) {
+            IOUtils.copy(isXJdf, zout);
+        }
 
-		// put all files to archive
-		for (File key : fileMap.keySet()) {
-			InputStream fis = fileMap.get(key).toURL().openStream();
+        // put all files to archive
+        for (File key : fileMap.keySet()) {
+            try (InputStream fis = fileMap.get(key).toURL().openStream()) {
+                zout.putNextEntry(new ZipEntry(key.getPath().replace("\\", "/")));
+                IOUtils.copy(fis, zout);
+            }
+        }
 
-			zout.putNextEntry(new ZipEntry(key.getPath().replace("\\", "/")));
-			IOUtils.copy(fis, zout);
-			fis.close();
-		}
+        // flush
+        zout.finish();
+    }
 
-		// flush
-		zout.finish();
-	}
+    /**
+     * Check all attributes, defined by an xpath expression, for file URLs and update and register in fileMap.
+     *
+     * @param xPathAttribute XPath expression which defins a set of Attributes in XJDF Document.
+     *
+     * @throws PackagerException if files can not be read from the xJdf.
+     */
+    protected void registerFiles(String xPathAttribute, String targetDir) throws PackagerException {
 
-	/**
-	 * Check all attributes, defined by an xpath expression, for file URLs and update and register in fileMap.
-	 *
-	 * @param xPathAttribute XPath expression which defins a set of Attributes in XJDF Document.
-	 * @throws PackagerException if files can not be read from the xJdf.
-	 */
-	protected void registerFiles(String xPathAttribute, String targetDir) throws PackagerException {
+        // iterate over all attributes
+        NodeList nodeList;
+        try {
+            nodeList = xPathNav.evaluateNodeList(xPathAttribute);
+        } catch (XPathExpressionException e) {
+            throw new PackagerException("NodeList could not be retrieved from xJdf.", e);
+        }
 
-		// iterate over all attributes
-		NodeList nodeList;
-		try {
-			nodeList = xPathNav.evaluateNodeList(xPathAttribute);
-		} catch (XPathExpressionException e) {
-			throw new PackagerException("NodeList could not be retrieved from xJdf.", e);
-		}
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
 
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
+            String filePath = node.getTextContent();
+            File targetFile = registerFile(filePath, targetDir);
+            // update filename
+            node.setNodeValue(FilenameUtils.separatorsToUnix(targetFile.getPath()));
+        }
+    }
 
-			String filePath = node.getTextContent();
-			File targetFile = registerFile(filePath, targetDir);
-			// update filename
-			node.setNodeValue(FilenameUtils.separatorsToUnix(targetFile.getPath()));
-		}
-	}
+    protected File registerFile(final String srcPath, final String targetDir) throws PackagerException {
+        URI srcUri;
 
-	protected File registerFile(final String srcPath, final String targetDir) throws PackagerException {
-		URI srcUri;
+        try {
+            srcUri = new URI(srcPath);
+        } catch (URISyntaxException e) {
+            srcUri = null;
+        }
 
-		try {
-			srcUri = new URI(srcPath);
-		} catch (URISyntaxException e) {
-			srcUri = null;
-		}
+        if (srcUri == null || !srcUri.isAbsolute()) {
+            File file = new File(srcPath);
+            if (!file.isAbsolute()) {
+                if (rootUri == null) {
+                    throw new PackagerException(
+                        String.format(
+                            "Can not resolve relative path '%s' because no rootPath was provided.",
+                            srcPath
+                        )
+                    );
+                }
 
-		if (srcUri == null || !srcUri.isAbsolute()) {
-			File file = new File(srcPath);
-			if (!file.isAbsolute()) {
-				if (rootUri == null) {
-					throw new PackagerException(
-						String.format(
-							"Can not resolve relative path '%s' because no rootPath was provided.",
-							srcPath
-						)
-					);
-				}
+                file = new File(rootUri.resolve(FilenameUtils.separatorsToUnix(file.getPath())));
+            }
+            srcUri = file.toURI();
+        }
 
-				file = new File(rootUri.resolve(FilenameUtils.separatorsToUnix(file.getPath())));
-			}
-			srcUri = file.toURI();
-		}
-
-		// register for packaging
-		File targetFile = new File(FilenameUtils.concat(targetDir, FilenameUtils.getName(srcUri.getPath())));
-		fileMap.put(targetFile, srcUri);
-		return targetFile;
-	}
+        // register for packaging
+        File targetFile = new File(FilenameUtils.concat(targetDir, FilenameUtils.getName(srcUri.getPath())));
+        fileMap.put(targetFile, srcUri);
+        return targetFile;
+    }
 }
