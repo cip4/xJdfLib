@@ -16,36 +16,26 @@
     <properties>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-        <buildDirectory>${project.basedir}/target</buildDirectory>
     </properties>
     <scm>
-        <url>http://svn.cip4.org/svnroot/trunk/xJdfLib</url>
-        <developerConnection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</developerConnection>
-        <connection>scm:svn:http://svn.cip4.org/svnroot/trunk/xJdfLib</connection>
+        <url>https://stash.cip4.org/scm/lib/xjdflib.git</url>
+        <developerConnection>scm:git:https://stash.cip4.org/scm/lib/xjdflib.git</developerConnection>
+        <connection>scm:svn:https://stash.cip4.org/scm/lib/xjdflib.git</connection>
     </scm>
-    <ciManagement>
-        <system>continuum</system>
-        <notifiers>
-            <notifier>
-                <configuration>
-                    <address>stefanmeissner@hotmail.com</address>
-                    <committers>true</committers>
-                    <developers>true</developers>
-                </configuration>
-            </notifier>
-            <notifier>
-                <configuration>
-                    <address>m.hartmann@flyeralarm.de</address>
-                    <committers>true</committers>
-                    <developers>true</developers>
-                </configuration>
-            </notifier>
-        </notifiers>
-    </ciManagement>
     <issueManagement>
         <system>JIRA</system>
-        <url>http://jira.cip4.org/jira/browse/XJDFLIB</url>
+        <url>https://jira.cip4.org/browse/XJDFLIB</url>
     </issueManagement>
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
     <developers>
         <developer>
             <id>r.prosi</id>
@@ -70,7 +60,6 @@
         </developer>
     </developers>
     <build>
-        <directory>${buildDirectory}</directory>
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -171,49 +160,6 @@
                 </configuration>
             </plugin>
         </plugins>
-        <pluginManagement>
-            <plugins>
-                <!--This plugin's configuration is used to store Eclipse m2e settings
-                    only. It has no influence on the Maven build itself. -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>com.agilejava.docbkx</groupId>
-                                        <artifactId>docbkx-maven-plugin</artifactId>
-                                        <versionRange>[2.0.13,)</versionRange>
-                                        <goals>
-                                            <goal>generate-pdf</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore/>
-                                    </action>
-                                </pluginExecution>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.apache.maven.plugins</groupId>
-                                        <artifactId>maven-dependency-plugin</artifactId>
-                                        <versionRange>[2.1,)</versionRange>
-                                        <goals>
-                                            <goal>unpack</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore/>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
     </build>
     <dependencies>
         <!-- Apache Tools -->
