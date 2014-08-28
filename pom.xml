@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.xjdf</groupId>
     <artifactId>xJdfLib</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <version>0.6</version>
     <packaging>jar</packaging>
     <name>CIP4 xJdfLib</name>
     <description>CIP4 XJDF Java Library</description>
@@ -17,7 +16,8 @@
         <url>https://stash.cip4.org/scm/lib/xjdflib.git</url>
         <developerConnection>scm:git:https://stash.cip4.org/scm/lib/xjdflib.git</developerConnection>
         <connection>scm:svn:https://stash.cip4.org/scm/lib/xjdflib.git</connection>
-    </scm>
+      <tag>v</tag>
+  </scm>
     <issueManagement>
         <system>JIRA</system>
         <url>https://jira.cip4.org/browse/XJDFLIB</url>
