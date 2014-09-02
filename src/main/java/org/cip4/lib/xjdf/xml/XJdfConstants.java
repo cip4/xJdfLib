@@ -51,6 +51,16 @@ public class XJdfConstants {
 
     public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
 
+    /**
+     * Media type for XJDF documents.
+     */
+    public static final String MEDIA_TYPE_XJDF = "application/vnd.cip4-xjdf+xml";
+
+    /**
+     * Media type for XJDF packages.
+     */
+    public static final String MEDIA_TYPE_XJDF_ZIP = "application/vnd.cip4-xjdf+zip";
+
     private static final String RES_BUILD_PROPS = "/org/cip4/lib/xjdf/build.properties";
 
     private static final String RES_JDF20_XSD = "/JDF20.xsd";
