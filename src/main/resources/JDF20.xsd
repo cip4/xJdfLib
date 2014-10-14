@@ -5143,19 +5143,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<!-- ** Complex type definition for ScreeningIntent ** -->
-	<xs:element name="ScreeningIntent" type="ScreeningIntent" substitutionGroup="IntentType" />
-	<xs:complexType name="ScreeningIntent">
-		<xs:complexContent>
-			<xs:extension base="IntentType">
-				<xs:attribute name="DotSize" type="double" use="optional" />
-				<xs:attribute name="ScreeningType" use="optional" />
-				<xs:attribute name="Frequency" type="double" use="optional" />
-				<xs:attribute name="FrequencySelection" use="optional" />
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<!-- ** Complex type definition for ShapeCut ** -->
 	<xs:element name="ShapeCut">
 		<xs:complexType>
