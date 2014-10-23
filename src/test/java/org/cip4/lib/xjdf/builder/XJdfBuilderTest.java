@@ -19,11 +19,14 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.PhaseTime;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.Resource;
+import org.cip4.lib.xjdf.schema.ResourceType;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
@@ -31,6 +34,7 @@ import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -442,4 +446,27 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 		actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL");
 		Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
 	}
+
+    @Test
+    public void testAddResourceMultiple() throws Exception {
+        Media media1 = new Media().withMediaQuality("media1");
+        Media media2 = new Media().withMediaQuality("media2");
+        xJdfBuilder.addResource(media1, null);
+        xJdfBuilder.addResource(media2, null);
+
+        byte[] bytes = marsahlResult(xJdfBuilder);
+        assertEquals("1", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
+        assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet/xjdf:Resource)"));
+    }
+
+    @Test
+    public void testAddResourceMultipleWithDifferentProcessUsage() throws Exception {
+        Media media1 = new Media().withMediaQuality("media1");
+        Media media2 = new Media().withMediaQuality("media2");
+        xJdfBuilder.addResource(media1, null, "a");
+        xJdfBuilder.addResource(media2, null, "b");
+
+        byte[] bytes = marsahlResult(xJdfBuilder);
+        assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
+    }
 }

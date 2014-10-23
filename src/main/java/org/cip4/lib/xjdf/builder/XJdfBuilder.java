@@ -393,7 +393,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 		// get ResourceSet according to parameter
 		ResourceSet resourceSet;
 
-		if (mapParameterSets.containsKey(key)) {
+		if (mapResourceSets.containsKey(key)) {
 			// get ResourceSet object
 			resourceSet = mapResourceSets.get(key);
 		} else {
