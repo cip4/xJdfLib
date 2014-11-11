@@ -168,5 +168,11 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        <!-- JetBrains Annotations -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>13.0</version>
+        </dependency>
     </dependencies>
 </project>
