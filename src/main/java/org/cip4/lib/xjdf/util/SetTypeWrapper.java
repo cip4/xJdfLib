@@ -20,7 +20,72 @@ public class SetTypeWrapper implements List<SetType> {
     /**
      * List that is wrapped.
      */
-    private List<JAXBElement<? extends SetType>> wrappedList;
+    private final List<JAXBElement<? extends SetType>> wrappedList;
+
+    /**
+     * Implementation of ListIterator for wrapped list.
+     */
+    private class ListIter implements ListIterator<SetType> {
+
+        /**
+         * Wrapped list iterator.
+         */
+        private final ListIterator<JAXBElement<? extends SetType>> wrappedListIterator;
+
+        /**
+         * Constructor.
+         *
+         * @param wrappedListIterator LitIterator that should be wrapped.
+         */
+        ListIter(final ListIterator<JAXBElement<? extends SetType>> wrappedListIterator) {
+            this.wrappedListIterator = wrappedListIterator;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return wrappedListIterator.hasNext();
+        }
+
+        @Override
+        public SetType next() {
+            return wrappedListIterator.next().getValue();
+        }
+
+        @Override
+        public boolean hasPrevious() {
+            return wrappedListIterator.hasPrevious();
+        }
+
+        @Override
+        public SetType previous() {
+            return wrappedListIterator.previous().getValue();
+        }
+
+        @Override
+        public int nextIndex() {
+            return wrappedListIterator.nextIndex();
+        }
+
+        @Override
+        public int previousIndex() {
+            return wrappedListIterator.previousIndex();
+        }
+
+        @Override
+        public void remove() {
+            wrappedListIterator.remove();
+        }
+
+        @Override
+        public void set(final SetType setType) {
+            wrappedListIterator.set(wrapEntry(setType));
+        }
+
+        @Override
+        public void add(final SetType setType) {
+            wrappedListIterator.add(wrapEntry(setType));
+        }
+    }
 
     /**
      * Constructor.
@@ -71,7 +136,12 @@ public class SetTypeWrapper implements List<SetType> {
     @NotNull
     @Override
     public final Object[] toArray() {
-        throw new RuntimeException("Method not implemented.");
+        Object[] result = new Object[size()];
+        int i = 0;
+        for (SetType setType : this) {
+            result[i++] = setType;
+        }
+        return result;
     }
 
     @NotNull
@@ -153,13 +223,13 @@ public class SetTypeWrapper implements List<SetType> {
     @NotNull
     @Override
     public final ListIterator<SetType> listIterator() {
-        throw new RuntimeException("Method not implemented.");
+        return new ListIter(wrappedList.listIterator());
     }
 
     @NotNull
     @Override
     public final ListIterator<SetType> listIterator(final int index) {
-        throw new RuntimeException("Method not implemented.");
+        return new ListIter(wrappedList.listIterator(index));
     }
 
     @NotNull

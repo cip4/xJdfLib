@@ -1,10 +1,12 @@
 package org.cip4.lib.xjdf.util;
 
+import org.cip4.lib.xjdf.comparator.SetTypeComparator;
 import org.cip4.lib.xjdf.schema.SetType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.ListIterator;
 
 /**
  * This class provides simple access to asset sets.
@@ -20,6 +22,11 @@ public abstract class Assets<S extends SetType, A> {
     private final List<SetType> assetSets;
 
     /**
+     * Comparator to use for ordering asset sets.
+     */
+    private final SetTypeComparator setTypeComparator = new SetTypeComparator();
+
+    /**
      * Constructor.
      *
      * @param assetSets List of sets of assets to operate on.
@@ -30,7 +37,9 @@ public abstract class Assets<S extends SetType, A> {
 
     /**
      * Add an asset to the corresponding asset set.
-     * This will add a new set to the end of the list if no matching set exsists.
+     * If the corresponding assetSet does not exist it will be created. New assetsSets are added in lexicographic order
+     * of their attribute "name" while adding new entries after existing entries with the same "name".
+     * This method assumes that the assetSets are already ordered in lexicographic order of their "name"-attributes.
      *
      * @param asset Asset to add
      * @param processUsage Process usage of the asset
@@ -43,7 +52,7 @@ public abstract class Assets<S extends SetType, A> {
         if (null == assetSet) {
             assetSet = createSet();
             assetSet.withName(assetName).withProcessUsage(processUsage);
-            assetSets.add(assetSet);
+            addAssetSet(assetSet);
         }
         addAssets(assetSet, asset);
     }
@@ -94,6 +103,27 @@ public abstract class Assets<S extends SetType, A> {
             }
         }
         return null;
+    }
+
+    /**
+     * Add an asset set to the known assets.
+     * This method will insert the assets in lexicographic order while adding new sets with the same name
+     * after existing elements with the same name.
+     *
+     * @param assetSet Set of assets to add.
+     */
+    final void addAssetSet(final S assetSet) {
+        ListIterator<SetType> listIterator = assetSets.listIterator();
+        while (listIterator.hasNext()) {
+            SetType currentSet = listIterator.next();
+            if (setTypeComparator.compare(currentSet, assetSet) > 0) {
+                if (listIterator.hasPrevious()) {
+                    listIterator.previous();
+                }
+                break;
+            }
+        }
+        listIterator.add(assetSet);
     }
 
 }

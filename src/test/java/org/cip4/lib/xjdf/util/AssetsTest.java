@@ -160,4 +160,46 @@ public class AssetsTest {
         assertSame(set1, assets.findAssetSet("Asset", "ProcessUsage"));
         assertNotSame(set2, assets.findAssetSet("Asset", "ProcessUsage"));
     }
+
+    @Test
+    public void testAddAssetSetLexicographic1() throws Exception {
+        List<SetType> assetSets = new ArrayList<>();
+        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+
+        ParameterSet a = new ParameterSet().withName("A");
+        ParameterSet b = new ParameterSet().withName("B");
+        assets.addAssetSet(b);
+        assets.addAssetSet(a);
+
+        assertEquals(a, assetSets.get(0));
+        assertEquals(b, assetSets.get(1));
+    }
+
+    @Test
+    public void testAddAssetSetLexicographic2() throws Exception {
+        List<SetType> assetSets = new ArrayList<>();
+        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+
+        ParameterSet a = new ParameterSet().withName("A");
+        ParameterSet b = new ParameterSet().withName("B");
+        assets.addAssetSet(a);
+        assets.addAssetSet(b);
+
+        assertEquals(a, assetSets.get(0));
+        assertEquals(b, assetSets.get(1));
+    }
+
+    @Test
+    public void testAddAssetSetSameName() throws Exception {
+        List<SetType> assetSets = new ArrayList<>();
+        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+
+        ParameterSet a1 = new ParameterSet().withName("A");
+        ParameterSet a2 = new ParameterSet().withName("A");
+        assets.addAssetSet(a1);
+        assets.addAssetSet(a2);
+
+        assertEquals(a1, assetSets.get(0));
+        assertEquals(a2, assetSets.get(1));
+    }
 }

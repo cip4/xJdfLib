@@ -133,7 +133,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
         xJdfNodeFactory = new XJdfNodeFactory();
 
         // sort parameterset elements by name
-        Collections.sort(getXJdf().getSetType(), new SetTypeComparator());
+        Collections.sort(setTypeWrapper, new SetTypeComparator());
     }
 
     /**

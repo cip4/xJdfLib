@@ -267,27 +267,27 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marsahlResult(xJdfBuilder);
 
         Assert.assertEquals(
-            "ParameterSet for RunList must be first ParameterSet since it was added first.",
-            "RunList",
+            "ParameterSet for NodeInfo must be first ParameterSet since it is lexicographically smaller than RunList.",
+            "NodeInfo",
             getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/@Name")
         );
 
         Assert.assertEquals(
-            "ParameterSet for NodeInfo must be second ParameterSet since it was added after RunList.",
-            "NodeInfo",
+            "ParameterSet for RunList must be second ParameterSet.",
+            "RunList",
             getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/@Name")
         );
 
         Assert.assertEquals(
             "RunList for Cover must be first entry since it was added first.",
             urlCover,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/xjdf:Parameter[1]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/xjdf:Parameter[1]//xjdf:FileSpec/@URL")
         );
 
         Assert.assertEquals(
             "RunList for Content must be second entry since it was added after cover.",
             urlContent,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/xjdf:Parameter[2]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/xjdf:Parameter[2]//xjdf:FileSpec/@URL")
         );
     }
 
