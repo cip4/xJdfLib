@@ -277,7 +277,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * @param part Partitioning definitions.
      * @param processUsage ProcessUsage of parameter.
      */
-    public final void addParameter(final ParameterType parameterType, final Part part, final String processUsage) {
+    public void addParameter(final ParameterType parameterType, final Part part, final String processUsage) {
         if (parameterType == null) {
             return;
         }
@@ -294,7 +294,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      *
      * @param parameter Parameter node to append to.
      */
-    public final void addParameter(final Parameter parameter) {
+    public void addParameter(final Parameter parameter) {
         // add parameter
         addParameter(parameter, null);
     }
@@ -349,7 +349,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * @param resource Resource node to append to.
      * @param processUsage ProcessUsage of resource.
      */
-    public final void addResource(final Resource resource, final String processUsage) {
+    public void addResource(final Resource resource, final String processUsage) {
         resourceSets.addAsset(resource, processUsage);
     }
 }
