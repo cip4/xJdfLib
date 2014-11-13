@@ -14,10 +14,12 @@ import org.cip4.lib.xjdf.schema.AuditPool;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Parameter;
+import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.Resource;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ResourceType;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
@@ -141,7 +143,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      *
      * @return the xJdf
      */
-    public final XJDF getXJdf() {
+    public XJDF getXJdf() {
         return getNode();
     }
 
@@ -310,6 +312,16 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     }
 
     /**
+     * Add a parameterSet to the underlying xjdf.
+     * TODO: Merge added sets with matching existing sets.
+     *
+     * @param parameterSet ParameterSet to add to the xjdf.
+     */
+    public final void addParameterSet(final ParameterSet parameterSet) {
+        parameterSets.addAssetSet(parameterSet);
+    }
+
+    /**
      * Append Resource node to xJdf Document.
      *
      * @param resourceType Resource object to append.
@@ -351,5 +363,15 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      */
     public void addResource(final Resource resource, final String processUsage) {
         resourceSets.addAsset(resource, processUsage);
+    }
+
+    /**
+     * Add a resourceSet to the underlying xjdf.
+     * TODO: Merge added sets with matching existing sets.
+     *
+     * @param resourceSet ParameterSet to add to the xjdf.
+     */
+    public final void addResourceSet(final ResourceSet resourceSet) {
+        resourceSets.addAssetSet(resourceSet);
     }
 }
