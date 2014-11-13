@@ -167,7 +167,10 @@ public class SetTypeWrapper implements List<SetType> {
 
     @Override
     public final boolean addAll(@NotNull final Collection<? extends SetType> c) {
-        throw new RuntimeException("Method not implemented.");
+        for (SetType setType : c) {
+            add(setType);
+        }
+        return c.size() > 0;
     }
 
     @Override
