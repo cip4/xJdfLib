@@ -19,7 +19,7 @@ public abstract class Assets<S extends SetType, A> {
     /**
      * List of sets of assets to operate on.
      */
-    private final List<SetType> assetSets;
+    private final List<? extends SetType> assetSets;
 
     /**
      * Comparator to use for ordering asset sets.
@@ -31,7 +31,7 @@ public abstract class Assets<S extends SetType, A> {
      *
      * @param assetSets List of sets of assets to operate on.
      */
-    public Assets(@NotNull final List<SetType> assetSets) {
+    public Assets(@NotNull final List<? extends SetType> assetSets) {
         this.assetSets = assetSets;
     }
 
@@ -112,8 +112,8 @@ public abstract class Assets<S extends SetType, A> {
      *
      * @param assetSet Set of assets to add.
      */
-    final void addAssetSet(final S assetSet) {
-        ListIterator<SetType> listIterator = assetSets.listIterator();
+    public final void addAssetSet(final S assetSet) {
+        ListIterator<? extends SetType> listIterator = assetSets.listIterator();
         while (listIterator.hasNext()) {
             SetType currentSet = listIterator.next();
             if (setTypeComparator.compare(currentSet, assetSet) > 0) {
@@ -123,7 +123,7 @@ public abstract class Assets<S extends SetType, A> {
                 break;
             }
         }
-        listIterator.add(assetSet);
+        ((ListIterator<SetType>) listIterator).add(assetSet);
     }
 
 }

@@ -17,7 +17,7 @@ public class Parameters extends Assets<ParameterSet, Parameter> {
      *
      * @param assetSets List of sets of assets to operate on.
      */
-    public Parameters(@NotNull final List<SetType> assetSets) {
+    public Parameters(@NotNull final List<? extends SetType> assetSets) {
         super(assetSets);
     }
 

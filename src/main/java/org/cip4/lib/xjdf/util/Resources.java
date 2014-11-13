@@ -17,7 +17,7 @@ public class Resources extends Assets<ResourceSet, Resource> {
      *
      * @param assetSets List of sets of assets to operate on.
      */
-    public Resources(final List<SetType> assetSets) {
+    public Resources(final List<? extends SetType> assetSets) {
         super(assetSets);
     }
 
