@@ -2,8 +2,11 @@ package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterSet;
+import org.cip4.lib.xjdf.schema.ParameterType;
+import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.SetType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.mockito.Mockito;
 
@@ -14,7 +17,7 @@ import static org.junit.Assert.*;
 
 public class AssetsTest {
 
-    private class SimpleAssets extends Assets<ParameterSet, Parameter> {
+    private class SimpleAssets extends Assets<ParameterSet, Parameter, ParameterType> {
         /**
          * Constructor.
          *
@@ -22,6 +25,14 @@ public class AssetsTest {
          */
         public SimpleAssets(@NotNull final List<SetType> assetSets) {
             super(assetSets);
+        }
+
+        @NotNull
+        @Override
+        <V extends ParameterType> Parameter createAsset(
+            @NotNull final V assetType, @Nullable final Part partition
+        ) {
+            return getNodeFactory().createParameter(assetType, partition);
         }
 
         @Override
@@ -44,7 +55,7 @@ public class AssetsTest {
     @Test
     public void testAddAsset() throws Exception {
         List<SetType> assetSets = new ArrayList<>();
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
         Parameter parameter = Mockito.mock(Parameter.class);
         assets.addAsset(parameter, "Testing");
         assertEquals(1, assetSets.size());
@@ -64,7 +75,7 @@ public class AssetsTest {
         ParameterSet set = new ParameterSet().withProcessUsage("Testing").withName(parameter.getClass().getSimpleName());
         assertEquals(0, set.getParameter().size());
         assetSets.add(set);
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assets.addAsset(parameter, "Testing");
         assertEquals(1, assetSets.size());
@@ -83,7 +94,7 @@ public class AssetsTest {
         Mockito.when(set.getProcessUsage()).thenReturn("ProcessUsage");
         assetSets.add(set);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertNull(assets.findAssetSet("Asset2", "ProcessUsage"));
     }
@@ -96,7 +107,7 @@ public class AssetsTest {
         Mockito.when(set.getProcessUsage()).thenReturn("ProcessUsage1");
         assetSets.add(set);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertNull(assets.findAssetSet("Asset", "ProcessUsage2"));
     }
@@ -109,7 +120,7 @@ public class AssetsTest {
         Mockito.when(set1.getProcessUsage()).thenReturn("ProcessUsage1");
         assetSets.add(set1);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertSame(set1, assets.findAssetSet("Asset1", "ProcessUsage1"));
     }
@@ -123,7 +134,7 @@ public class AssetsTest {
         Mockito.when(set.getProcessUsage()).thenReturn("ProcessUsage2");
         assetSets.add(set);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertSame(set, assets.findAssetSet("Asset", "ProcessUsage2"));
     }
@@ -137,7 +148,7 @@ public class AssetsTest {
         Mockito.when(set.getProcessUsage()).thenReturn("ProcessUsage1");
         assetSets.add(set);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertSame(set, assets.findAssetSet("Asset2", "ProcessUsage1"));
     }
@@ -155,7 +166,7 @@ public class AssetsTest {
         Mockito.when(set2.getProcessUsage()).thenReturn("ProcessUsage");
         assetSets.add(set2);
 
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         assertSame(set1, assets.findAssetSet("Asset", "ProcessUsage"));
         assertNotSame(set2, assets.findAssetSet("Asset", "ProcessUsage"));
@@ -164,7 +175,7 @@ public class AssetsTest {
     @Test
     public void testAddAssetSetLexicographic1() throws Exception {
         List<SetType> assetSets = new ArrayList<>();
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         ParameterSet a = new ParameterSet().withName("A");
         ParameterSet b = new ParameterSet().withName("B");
@@ -178,7 +189,7 @@ public class AssetsTest {
     @Test
     public void testAddAssetSetLexicographic2() throws Exception {
         List<SetType> assetSets = new ArrayList<>();
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         ParameterSet a = new ParameterSet().withName("A");
         ParameterSet b = new ParameterSet().withName("B");
@@ -192,7 +203,7 @@ public class AssetsTest {
     @Test
     public void testAddAssetSetSameName() throws Exception {
         List<SetType> assetSets = new ArrayList<>();
-        Assets<ParameterSet, Parameter> assets = new SimpleAssets(assetSets);
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
 
         ParameterSet a1 = new ParameterSet().withName("A");
         ParameterSet a2 = new ParameterSet().withName("A");
@@ -201,5 +212,25 @@ public class AssetsTest {
 
         assertEquals(a1, assetSets.get(0));
         assertEquals(a2, assetSets.get(1));
+    }
+
+    @Test
+    public void addAsset() throws Exception {
+        List<SetType> assetSets = new ArrayList<>();
+        Assets<ParameterSet, Parameter, ParameterType> assets = new SimpleAssets(assetSets);
+
+        ParameterType assetType = Mockito.mock(ParameterType.class);
+        Part part = Mockito.mock(Part.class);
+        String processUsage = "Testing";
+
+        assets.addAsset(assetType, part, processUsage);
+
+        assertEquals(1, assetSets.size());
+        ParameterSet assetSet = (ParameterSet) assetSets.get(0);
+        assertSame(processUsage, assetSet.getProcessUsage());
+        assertEquals(1, assetSet.getParameter().size());
+        Parameter parameter = assetSet.getParameter().get(0);
+        assertSame(part, parameter.getPart().get(0));
+        assertSame(assetType, parameter.getParameterType().getValue());
     }
 }

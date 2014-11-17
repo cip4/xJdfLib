@@ -2,15 +2,18 @@ package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterSet;
+import org.cip4.lib.xjdf.schema.ParameterType;
+import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.SetType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 /**
  * This class provides access to Parameters within ParameterSets.
  */
-public class Parameters extends Assets<ParameterSet, Parameter> {
+public class Parameters extends Assets<ParameterSet, Parameter, ParameterType> {
 
     /**
      * Constructor.
@@ -19,6 +22,14 @@ public class Parameters extends Assets<ParameterSet, Parameter> {
      */
     public Parameters(@NotNull final List<? extends SetType> assetSets) {
         super(assetSets);
+    }
+
+    @NotNull
+    @Override
+    <V extends ParameterType> Parameter createAsset(
+        @NotNull final V parameterType, @Nullable final Part partition
+    ) {
+        return getNodeFactory().createParameter(parameterType, partition);
     }
 
     @Override

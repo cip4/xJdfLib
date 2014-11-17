@@ -1,6 +1,8 @@
 package org.cip4.lib.xjdf.util;
 
+import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.comparator.SetTypeComparator;
+import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.SetType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -11,10 +13,11 @@ import java.util.ListIterator;
 /**
  * This class provides simple access to asset sets.
  *
- * @param <S> the type of the sets
- * @param <A> the type of the assets
+ * @param <S> the type of the sets (e.g. ParameterSet)
+ * @param <T> the type of the asset container (e.g. Parameter)
+ * @param <U> the type of the asset (e.g. ParameterType)
  */
-public abstract class Assets<S extends SetType, A> {
+public abstract class Assets<S extends SetType, T, U> {
 
     /**
      * List of sets of assets to operate on.
@@ -25,6 +28,11 @@ public abstract class Assets<S extends SetType, A> {
      * Comparator to use for ordering asset sets.
      */
     private final SetTypeComparator setTypeComparator = new SetTypeComparator();
+
+    /**
+     * Factory to use for creating xjdf nodes.
+     */
+    private final XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
 
     /**
      * Constructor.
@@ -44,7 +52,7 @@ public abstract class Assets<S extends SetType, A> {
      * @param asset Asset to add
      * @param processUsage Process usage of the asset
      */
-    public final void addAsset(@NotNull final A asset, @Nullable final String processUsage) {
+    public final void addAsset(@NotNull final T asset, @Nullable final String processUsage) {
         // get parameter name
         String assetName = getAssetName(asset);
 
@@ -58,13 +66,40 @@ public abstract class Assets<S extends SetType, A> {
     }
 
     /**
+     * Add an asset to the corresponding asset set.
+     *
+     * @param assetType Asset to add
+     * @param part Partition to add the asset to
+     * @param processUsage Process usage of the asset
+     * @param <V> Type of the added asset
+     */
+    public final <V extends U> void addAsset(
+        @NotNull final V assetType, @Nullable final Part part, @Nullable final String processUsage
+    ) {
+        addAsset(createAsset(assetType, part), processUsage);
+    }
+
+    /**
+     * Wrap an asset type within its asset.
+     * (e.g. wrap Media in Resource)
+     *
+     * @param assetType Asset to wrap
+     * @param partition Partition of the asset.
+     * @param <V> Type of the asset
+     *
+     * @return wrapped asset
+     */
+    @NotNull
+    abstract <V extends U> T createAsset(@NotNull final V assetType, @Nullable final Part partition);
+
+    /**
      * Get the name of an asset.
      *
      * @param asset Asset to get the name of
      *
      * @return Name of the asset
      */
-    abstract String getAssetName(@NotNull A asset);
+    abstract String getAssetName(@NotNull T asset);
 
     /**
      * Create a new asset set.
@@ -80,7 +115,7 @@ public abstract class Assets<S extends SetType, A> {
      * @param assetSet Set to add the asset to
      * @param asset Asset to add
      */
-    abstract void addAssets(@NotNull final S assetSet, @NotNull final A asset);
+    abstract void addAssets(@NotNull final S assetSet, @NotNull final T asset);
 
     /**
      * Find the first assetSet with a given name and processUsage.
@@ -124,6 +159,16 @@ public abstract class Assets<S extends SetType, A> {
             }
         }
         ((ListIterator<SetType>) listIterator).add(assetSet);
+    }
+
+    /**
+     * Getter for the factory for xjdf nodes.
+     *
+     * @return Factory for creating xjdf nodes.
+     */
+    @NotNull
+    protected final XJdfNodeFactory getNodeFactory() {
+        return nodeFactory;
     }
 
 }
