@@ -44,6 +44,20 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 		return new XJdfNavigator(bytes);
 	}
 
+    /**
+     * Returns the XJDF Document covered by the XJDFNavigator.
+     *
+     * @param namespaceAware Flag whether or not the navigator should be aware of the namespaces.
+     *
+     * @return XJDF document covered by the XJDFNavigator.
+     *
+     * @throws Exception
+     */
+    public final XJdfNavigator getXJdfDocument(boolean namespaceAware) throws Exception {
+        byte[] bytes = super.findMasterDocument();
+        return new XJdfNavigator(bytes, namespaceAware);
+    }
+
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
 	 * @param pathPackage XJDF Package to be unpackaged.

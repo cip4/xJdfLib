@@ -172,4 +172,18 @@ public class XJdfUnpackagerTest {
         Assert.assertEquals("XJDF ID is wrong.", "95733854-01", nav.evaluateString(XJdfNavigator.JOB_ID));
         Assert.assertNotEquals("Preview is null.", 0, bytes.length);
     }
+
+    @Test
+    public void getXjdfDocumentIsNamespaceAware() throws Exception{
+
+        // arrange
+        String path = XJdfUnpackagerTest.class.getResource(RES_PGK).toURI().getPath();
+        XJdfUnpackager unpackager = new XJdfUnpackager(path);
+
+        // act
+        XJdfNavigator nav = unpackager.getXJdfDocument(true);
+
+        Assert.assertTrue(nav != null);
+        Assert.assertTrue(nav.extractNode("//xjdf:XJDF") != null);
+    }
 }
