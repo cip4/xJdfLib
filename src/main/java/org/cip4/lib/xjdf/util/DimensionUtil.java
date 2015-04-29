@@ -46,8 +46,26 @@ public class DimensionUtil {
 	}
 
 	/**
+	 * Convert Millimeter to DTP-Points.
+	 * @param millimeter Millimeter as double value.
+	 * @return Millimeter value in DTP-Points.
+	 */
+	public static float mm2Dtp(float millimeter) {
+		return millimeter / 25.4f * 72f;
+	}
+
+	/**
+	 * Convert DTP-Points to Millimeter.
+	 * @param dtp DTP-Points as value.
+	 * @return DTP-Points value in Millimeter.
+	 */
+	public static float dtp2Mm(float dtp) {
+		return dtp / 72f * 25.4f;
+	}
+
+	/**
 	 * Convert DTP-Points String to Millimeter.
-	 * @param dtp DTP-Points as String.
+	 * @param strDtp DTP-Points as String.
 	 * @return DTP-Points value in Millimeter.
 	 */
 	public static double dtp2MmS(String strDtp) {
