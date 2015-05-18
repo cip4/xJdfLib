@@ -724,6 +724,13 @@
 			<xs:enumeration value="SmoothShades" />
 		</xs:restriction>
 	</xs:simpleType>
+	
+	<xs:simpleType name="EnumCutDepth">
+		<xs:restriction base="NMTOKEN">
+			<xs:enumeration value="Full"/>
+			<xs:enumeration value="Partial"/>
+		</xs:restriction>
+	</xs:simpleType>
 
 	<!-- ** Complex type definition for Resource ** -->
 	<xs:complexType name="telem">
@@ -2574,6 +2581,8 @@
 			<xs:attribute name="FoilColorDetails" type="string" use="optional" />
 			<xs:attribute name="FoilColor" type="EnumNamedColor" use="optional" />
 			<xs:attribute name="Level" use="optional" />
+			<xs:attribute name="Separation" type="NMTOKEN" use="optional" />
+			<xs:attribute name="ShapeName" type="string" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -5166,7 +5175,7 @@
 			<xs:attribute name="Material" type="string" use="optional" />
 			<xs:attribute name="CutType" use="optional" />
 			<xs:attribute name="TeethPerDimension" type="double" use="optional" />
-			<xs:attribute name="ShapeDepth" type="double" use="optional" />
+			<xs:attribute name="CutDepth" type="EnumCutDepth" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
