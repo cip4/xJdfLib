@@ -248,6 +248,30 @@ public class XmlNavigator {
     }
 
     /**
+     * Evaluates an XPath expression on XML Document and returns an Long value as result.
+     *
+     * @param xPath XPath expression to execute to.
+     *
+     * @return Expression result as long.
+     * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+     */
+    public Long evaluateLong(String xPath) throws XPathExpressionException {
+
+        // evaluate expression.
+        String s = (String) evaluate(xPath, XPathConstants.STRING);
+
+        // convert to integer
+        Long result = null;
+
+        if (!StringUtils.isEmpty(s) && StringUtils.isNumeric(s)) {
+            result = new Long(s);
+        }
+
+        // return result
+        return result;
+    }
+
+    /**
      * Evaluates an XPath expression on XML Document and returns a String object as result.
      *
      * @param xPath XPath expression to execute to.

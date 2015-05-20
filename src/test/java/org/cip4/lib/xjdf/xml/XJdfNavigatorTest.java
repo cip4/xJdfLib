@@ -277,6 +277,20 @@ public class XJdfNavigatorTest {
 	}
 
 	@Test
+	public void testEvaluateLong() throws Exception {
+
+		// arrange
+		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+
+		// act
+		long val = xJdfNavigator.evaluateLong("/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals");
+
+		// assert
+		Assert.assertEquals("Value is wrong.", 1, val);
+	}
+
+	@Test
 	public void testEvaluateIntNull() throws Exception {
 
 		// arrange
