@@ -318,10 +318,11 @@ public class XmlNavigator {
      *
      * @param xPath XPath expression to execute to.
      * @param xJdfType The desired result data type.
+     * @param <T> Type of the desired value object.
      *
      * @return Result as desired data type.
      */
-    public AbstractXJdfType evaluate(String xPath, Class xJdfType)
+    public final <T extends AbstractXJdfType> T evaluate(final String xPath, final Class<T> xJdfType)
         throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException,
                IllegalAccessException,
                IllegalArgumentException, InvocationTargetException {
@@ -331,10 +332,7 @@ public class XmlNavigator {
 
         // convert to data type
         Constructor ctor = xJdfType.getDeclaredConstructor(String.class);
-        AbstractXJdfType obj = (AbstractXJdfType) ctor.newInstance(value);
-
-        // return result
-        return obj;
+        return xJdfType.cast(ctor.newInstance(value));
     }
 
     /**
