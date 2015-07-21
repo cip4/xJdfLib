@@ -706,6 +706,87 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumPrintPreference">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Balanced"/>
+            <xs:enumeration value="CostEffective"/>
+            <xs:enumeration value="Fastest"/>
+            <xs:enumeration value="HighestQuality"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPreflightLevel">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="Extended"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumColorType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Monochrome"/>
+            <xs:enumeration value="BasicColor"/>
+            <xs:enumeration value="MatchedColor"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="EnumCutDepth">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Full"/>
+            <xs:enumeration value="Partial"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCutType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Cut"/>
+            <xs:enumeration value="Perforate"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumShapeType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Line"/>
+            <xs:enumeration value="Path"/>
+            <xs:enumeration value="Rectangular"/>
+            <xs:enumeration value="Round"/>
+            <xs:enumeration value="RoundedRectangle"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumApprovalRole">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Approvinator"/>
+            <xs:enumeration value="Group"/>
+            <xs:enumeration value="Informative"/>
+            <xs:enumeration value="Obligated"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumApprovalState">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Approved"/>
+            <xs:enumeration value="ApprovedWithComment"/>
+            <xs:enumeration value="Rejected"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumAssemblyOrder">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Collecting"/>
+            <xs:enumeration value="Gathering"/>
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="List"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumAssetPolicy">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="Available"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -759,15 +840,6 @@
             <xs:enumeration value="Blanket"/>
             <xs:enumeration value="Plate"/>
             <xs:enumeration value="Independent"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumPrintPreference">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Balanced"/>
-            <xs:enumeration value="CostEffective"/>
-            <xs:enumeration value="Fastest"/>
-            <xs:enumeration value="HightestQuality"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3938,7 +4010,7 @@
         <xs:attribute name="Amount" type="integer" use="optional"/>
         <xs:attribute name="HalfTone" type="boolean" use="optional"/>
         <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-        <xs:attribute name="ColorType" use="optional"/>
+        <xs:attribute name="ColorType" type="EnumColorType" use="optional"/>
         <xs:attribute name="ImageStrategy" use="optional"/>
         <xs:attribute name="BrandName" type="string" use="optional"/>
         <xs:attribute name="Technology" type="NMTOKEN" use="optional"/>
@@ -5614,6 +5686,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ProofItem"/>
                 </xs:sequence>
+                <xs:attribute name="Level" type="EnumPreflightLevel" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5636,15 +5709,14 @@
     <!-- ** Complex type definition for ShapeCut ** -->
     <xs:element name="ShapeCut">
         <xs:complexType>
+            <xs:attribute name="CutBox" type="rectangle" use="optional"/>
+            <xs:attribute name="CutDepth" type="EnumCutDepth" use="optional"/>
             <xs:attribute name="CutOut" type="boolean" use="optional"/>
             <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="CutType" type="EnumCutType" use="optional"/>
+            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:attribute name="Pages" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="CutBox" type="rectangle" use="optional"/>
-            <xs:attribute name="ShapeType" use="optional"/>
-            <xs:attribute name="Material" type="string" use="optional"/>
-            <xs:attribute name="CutType" use="optional"/>
-            <xs:attribute name="TeethPerDimension" type="double" use="optional"/>
-            <xs:attribute name="ShapeDepth" type="double" use="optional"/>
+            <xs:attribute name="ShapeType" type="EnumShapeType" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5714,11 +5786,11 @@
     <xs:element name="ApprovalDetails">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
             </xs:sequence>
-            <xs:attribute name="ApprovalState" use="optional"/>
+            <xs:attribute name="ApprovalState" type="EnumApprovalState" use="optional"/>
             <xs:attribute name="ApprovalStateDetails" type="string" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5736,11 +5808,9 @@
     <!-- ** Complex type definition for ApprovalPerson ** -->
     <xs:element name="ApprovalPerson">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-            </xs:sequence>
-            <xs:attribute name="ApprovalRole" use="optional"/>
+            <xs:attribute name="ApprovalRole" type="EnumApprovalRole" use="optional"/>
             <xs:attribute name="ApprovalRoleDetails" type="string" use="optional"/>
+            <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5773,15 +5843,12 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList"/>
                 </xs:sequence>
-                <xs:attribute name="JobID" type="string" use="optional"/>
-                <xs:attribute name="PhysicalSection" type="IntegerList" use="optional"/>
                 <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="BindingSide" use="optional"/>
-                <xs:attribute name="JogSide" use="optional"/>
-                <xs:attribute name="Order" use="optional"/>
+                <xs:attribute name="JobID" type="string" use="optional"/>
+                <xs:attribute name="Order" type="EnumAssemblyOrder" use="optional"/>
                 <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -5883,29 +5950,32 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell"/>
                 </xs:sequence>
                 <xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="AssemblyID" type="string" use="optional"/>
+                <xs:attribute name="AssemblyID" type="ID" use="optional"/>
                 <xs:attribute name="BinderySignatureSize" type="XYPair" use="optional"/>
-                <xs:attribute name="BinderySignatureType" use="optional"/>
-                <xs:attribute name="BindingEdge" use="optional"/>
-                <xs:attribute name="BindingOrientation" use="optional"/>
+                <xs:attribute name="BinderySignatureType" type="EnumBinderySignatureType" use="optional"/>
+                <xs:attribute name="BindingEdge" type="EnumBindingEdge" use="optional"/>
+                <xs:attribute name="BindingOrientation" type="Orientation" use="optional"/>
+                <xs:attribute name="BindingSide" type="EnumBindingSide" use="optional"/>
                 <xs:attribute name="BleedBottom" type="double" use="optional"/>
                 <xs:attribute name="BleedLeft" type="double" use="optional"/>
                 <xs:attribute name="BleedRight" type="double" use="optional"/>
                 <xs:attribute name="BleedTop" type="double" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="FoldCatalog" type="string" use="optional"/>
-                <xs:attribute name="FoldLay" use="optional"/>
-                <xs:attribute name="JogEdge" use="optional"/>
+                <xs:attribute name="FoldLay" type="Orientation" use="optional"/>
+                <xs:attribute name="JogEdge" type="EnumBindingEdge" use="optional"/>
+                <xs:attribute name="JogSide" type="EnumBindingEdge" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="OutsideGutter" type="boolean" use="optional"/>
-                <xs:attribute name="StaggerColumns" type="string" use="optional"/>
+                <xs:attribute name="StaggerColumns" type="DoubleList" use="optional"/>
                 <xs:attribute name="StaggerContinuous" type="boolean" use="optional"/>
-                <xs:attribute name="StaggerRows" type="string" use="optional"/>
+                <xs:attribute name="StaggerRows" type="DoubleList" use="optional"/>
                 <xs:attribute name="TrimBottom" type="double" use="optional"/>
                 <xs:attribute name="TrimLeft" type="double" use="optional"/>
                 <xs:attribute name="TrimRight" type="double" use="optional"/>
                 <xs:attribute name="TrimTop" type="double" use="optional"/>
                 <xs:attribute name="WebCellAlignment" type="XYPair" use="optional"/>
+
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -8911,9 +8981,11 @@
     <xs:complexType name="AssetListCreationParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="AssetTypes" type="Any" use="optional"/>
-                <xs:attribute name="ListPolicy" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FileSpec"/>
+                </xs:sequence>
+                <xs:attribute name="AssetTypes" type="RegExp" use="optional"/>
+                <xs:attribute name="ListPolicy" type="EnumAssetPolicy" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
