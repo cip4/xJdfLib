@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayInputStream;
@@ -264,7 +254,7 @@ public class XJdfParserTest {
     }
 
     /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
+     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseStream(java.io.InputStream)}.
      */
     @Test
     public void testParseXmlStream() throws Exception {
@@ -281,81 +271,44 @@ public class XJdfParserTest {
     }
 
     /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
+     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseStream(java.io.InputStream)}.
      */
     @Test
-    public void parseStreamXjdfAddChildProductsInvalidChildId() throws Exception {
+    public void parseStreamWithChildProductsInvalidChildId() throws Exception {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_CHILD_PRODUCTS);
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct = xjdf.getProductList().getProduct().get(6);
         assertEquals(1, mainProduct.getChildProduct().size());
-        final Product childProduct = mainProduct.getChildProduct().get(0).getChildRef().getProduct();
+        final Product childProduct = mainProduct.getChildProduct().get(0).getChildRef();
         assertNull(childProduct);
     }
 
     /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
+     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseStream(java.io.InputStream)}.
      */
     @Test
-    public void parseStreamXjdfAddChildProducts() throws Exception {
+    public void parseStreamWithChildProducts() throws Exception {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_CHILD_PRODUCTS);
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct1 = xjdf.getProductList().getProduct().get(3);
         assertEquals(2, mainProduct1.getChildProduct().size());
-        final Product childProduct11 = mainProduct1.getChildProduct().get(0).getChildRef().getProduct();
+        final Product childProduct11 = mainProduct1.getChildProduct().get(0).getChildRef();
         assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
         assertEquals(11000, (int) childProduct11.getAmount());
-        final Product childProduct12 = mainProduct1.getChildProduct().get(1).getChildRef().getProduct();
+        final Product childProduct12 = mainProduct1.getChildProduct().get(1).getChildRef();
         assertEquals("PRD_MAIN01_SUB02", childProduct12.getID());
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
         assertEquals(1, mainProduct2.getChildProduct().size());
-        final Product childProduct21 = mainProduct2.getChildProduct().get(0).getChildRef().getProduct();
+        final Product childProduct21 = mainProduct2.getChildProduct().get(0).getChildRef();
         assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
         assertEquals(0, mainProduct3.getChildProduct().size());
-    }
-
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
-     */
-    @Test
-    public void parseXjdfGetProductByProductId() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_CHILD_PRODUCTS);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        final String productId1 = "PRD_MAIN01";
-        final Product product1  = xJdfParser.getProductByProductId(productId1, xjdf);
-        assertEquals(productId1, product1.getID());
-        assertEquals(1, (int) product1.getAmount());
-
-        final String productId2 = "PRD_MAIN03";
-        final Product product2 = xJdfParser.getProductByProductId(productId2, xjdf);
-        assertEquals(productId2, product2.getID());
-        assertEquals(3, (int) product2.getAmount());
-
-        final String productId3 = "PRD_MAIN02_SUB01";
-        final Product product3 = xJdfParser.getProductByProductId(productId3, xjdf);
-        assertEquals(productId3, product3.getID());
-        assertEquals(21000, (int) product3.getAmount());
-    }
-
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXmlStream(java.io.InputStream)}.
-     */
-    @Test
-    public void parseXjdfGetProductByProductIdInvalidId() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_CHILD_PRODUCTS);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        final String productId = "blabla";
-        final Product product  = xJdfParser.getProductByProductId(productId, xjdf);
-        assertNull(product);
     }
 
 }

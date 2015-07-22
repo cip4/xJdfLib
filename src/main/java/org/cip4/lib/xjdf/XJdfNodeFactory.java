@@ -1,16 +1,4 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf;
-
-import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -18,7 +6,6 @@ import javax.xml.namespace.QName;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.IDREF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
@@ -328,10 +315,10 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 	/**
 	 * Create new ChildProduct Node which already contains values for attribute Childref.
-	 * @param idRef Value for Childref attribute.
+	 * @param idRef Value for Product attribute.
 	 * @return ChildProduct Node which already contains defined attributes.
 	 */
-	public ChildProduct createChildProduct(IDREF idRef) {
+	public ChildProduct createChildProduct(Product idRef) {
 
 		// create node
 		ChildProduct childProduct = super.createChildProduct();
