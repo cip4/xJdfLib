@@ -153,11 +153,12 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      */
     @Test
     public void addChildProduct() throws Exception {
-        ProductBuilder rootProduct = new ProductBuilder();
-        ProductBuilder childProduct = new ProductBuilder();
-        childProduct.getProduct().setID("abc");
-        rootProduct.addChildProduct(childProduct.build());
-        final Product childRef = rootProduct.getProduct().getChildProduct().get(0).getChildRef();
+        Product childProduct = new Product();
+        childProduct.setID("abc");
+        ProductBuilder rootProductBuilder = new ProductBuilder();
+        rootProductBuilder.addChildProduct(childProduct);
+
+        final Product childRef = rootProductBuilder.getProduct().getChildProduct().get(0).getChildRef();
         Assert.assertEquals("abc", childRef.getID());
     }
 
@@ -167,9 +168,9 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      */
     @Test(expected = IllegalArgumentException.class)
     public void addChildProductWithoutId() throws Exception {
-        ProductBuilder rootProduct = new ProductBuilder();
-        ProductBuilder childProduct = new ProductBuilder();
-        rootProduct.addChildProduct(childProduct.build());
+        Product childProduct = new Product();
+        ProductBuilder rootProductBuilder = new ProductBuilder();
+        rootProductBuilder.addChildProduct(childProduct);
     }
 
     /**
@@ -178,10 +179,10 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      */
     @Test(expected = IllegalArgumentException.class)
     public void addChildProductWithIdBlank() throws Exception {
-        ProductBuilder rootProduct = new ProductBuilder();
-        ProductBuilder childProduct = new ProductBuilder();
-        childProduct.getProduct().setID("");
-        rootProduct.addChildProduct(childProduct.build());
+        Product childProduct = new Product();
+        childProduct.setID("");
+        ProductBuilder rootProductBuilder = new ProductBuilder();
+        rootProductBuilder.addChildProduct(childProduct);
     }
 
     /**
@@ -190,10 +191,20 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      */
     @Test(expected = IllegalArgumentException.class)
     public void addChildProductWithIdNull() throws Exception {
-        ProductBuilder rootProduct = new ProductBuilder();
-        ProductBuilder childProduct = new ProductBuilder();
-        childProduct.getProduct().setID(null);
-        rootProduct.addChildProduct(childProduct.build());
+        Product childProduct = new Product();
+        childProduct.setID(null);
+        ProductBuilder rootProductBuilder = new ProductBuilder();
+        rootProductBuilder.addChildProduct(childProduct);
+    }
+
+    /**
+     * Create product with without id.
+     * @throws Exception
+     */
+    @Test
+    public void newProductIdIsNull() throws Exception {
+        Product product = new Product();
+        Assert.assertNull("Product ID is not null.", product.getID());
     }
 
     /**
