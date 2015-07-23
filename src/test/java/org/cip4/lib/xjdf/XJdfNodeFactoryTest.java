@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf;
 
 import junit.framework.Assert;
@@ -18,7 +8,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -135,15 +124,11 @@ public class XJdfNodeFactoryTest {
 
 	@Test
 	public void testCreateChildProduct() {
-
-		// arrange
-		final IDREF CHILDREF = new IDREF(UUID.randomUUID().toString());
-
-		// act
-		ChildProduct childProduct = xJdfNodeFactory.createChildProduct(CHILDREF);
-
-		// assert
-		Assert.assertEquals("Childref is wrong", CHILDREF, childProduct.getChildRef());
+		final String uuid = UUID.randomUUID().toString();
+		Product childRefProduct = new Product();
+		childRefProduct.setID(uuid);
+		ChildProduct childProduct = xJdfNodeFactory.createChildProduct(childRefProduct);
+		Assert.assertEquals("Childref is wrong", uuid, childProduct.getChildRef().getID());
 	}
 
 	@Test
