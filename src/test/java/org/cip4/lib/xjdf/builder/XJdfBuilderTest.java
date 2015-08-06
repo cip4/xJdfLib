@@ -85,7 +85,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // arrange
         final String AGENT_NAME = "XJDF Agent";
         final String AGENT_VERSION = "2.0.4";
-        final DateTime TIMESTAMP = new DateTime("2013-06-11T23:27:26+02:00");
+        final DateTime TIMESTAMP = new DateTime("2013-06-11T21:27:26Z");
 
         // act
         Created created = new XJdfNodeFactory().createCreated(AGENT_NAME, AGENT_VERSION, TIMESTAMP);
