@@ -102,4 +102,16 @@ public class DateTimeTest {
 		assertEquals("TimeZone is wrong.", 0, cal.get(Calendar.ZONE_OFFSET));
 	}
 
+    @Test
+    public void createDateTimeNoUTCFormat() throws Exception {
+        final String dateTimeString = "2015-08-06T12:00:00+02:00";
+        final String expectedDateTimeStringUTC = "2015-08-06T10:00:00Z";
+
+        final DateTime dateTime = new DateTime(dateTimeString);
+
+        assertEquals("Date format is wrong.", dateTimeString, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")));
+        assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")));
+        assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString());
+    }
+
 }
