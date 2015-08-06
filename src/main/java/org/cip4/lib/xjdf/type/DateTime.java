@@ -78,14 +78,18 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * Custom constructor. Creates a XJDF DateTime instance by a String expression object.
+     * Creates a XJDF DateTime instance by a String expression object.
      *
-     * @param dateTime XJDF DateTime String expression.
+     * @param dateTime XJDF DateTime String expression. Should match the format yyyy-MM-dd'T'HH:mm:ss'Z'.
      *
      * @throws ParseException if the passed expression
      */
     public DateTime(final String dateTime) throws ParseException {
-        calendar.setTime(DATE_FORMAT_UTC.parse(dateTime));
+        try {
+            calendar.setTime(DATE_FORMAT_UTC.parse(dateTime));
+        } catch (ParseException e) {
+            calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE.parse(dateTime));
+        }
     }
 
     /**
