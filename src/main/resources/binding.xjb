@@ -38,6 +38,13 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>
         </bindings>
+
+        <bindings node="//xs:complexType[@name='LayoutIntent']//xs:attribute[@name='LayoutRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
+            </property>
+        </bindings>
+
     </bindings>
 
 </bindings>

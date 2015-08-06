@@ -14,8 +14,11 @@ import javax.xml.xpath.XPathFactory;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
@@ -36,6 +39,7 @@ public class XJdfParserTest {
 
     private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
     private final String RES_CHILD_PRODUCTS = "/org/cip4/lib/xjdf/child_products.xjdf";
+    private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser xJdfParser;
 
@@ -309,6 +313,24 @@ public class XJdfParserTest {
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
         assertEquals(0, mainProduct3.getChildProduct().size());
+    }
+
+    @Test
+    public void parseStreamWithMediaRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        LayoutIntent layoutIntent0 =
+            (LayoutIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(0).getIntentType().getValue();
+        LayoutIntent layoutIntent1 =
+            (LayoutIntent) xjdf.getProductList().getProduct().get(1).getIntent().get(0).getIntentType().getValue();
+        Media media0 = (Media) layoutIntent0.getLayoutRef().getResourceType().getValue();
+        Media media1 = (Media) layoutIntent1.getLayoutRef().getResourceType().getValue();
+
+        assertEquals("LAYOUT_INTENT_REF_0", layoutIntent0.getLayoutRef().getID());
+        assertEquals("LAYOUT_INTENT_REF_1", layoutIntent1.getLayoutRef().getID());
+        assertEquals(new XYPair(0, 0), media0.getDimension());
+        assertEquals(new XYPair(1, 1), media1.getDimension());
     }
 
 }
