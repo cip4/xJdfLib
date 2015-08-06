@@ -23,9 +23,20 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     private static final DateFormat DATE_FORMAT_UTC = createUTCDateFormat();
 
     /**
-     * time zone specific date format.
+     * RFC 822 date format.
      */
-    private static final DateFormat DATE_FORMAT_WITH_TIME_ZONE = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+    private static final DateFormat DATE_FORMAT_WITH_TIME_ZONE_RFC_822 = new SimpleDateFormat(
+        "yyyy-MM-dd'T'HH:mm:ssZ"
+    );
+
+    /**
+     * ISO 8601 date format.
+     */
+    private static final DateFormat DATE_FORMAT_WITH_TIME_ZONE_ISO_8601 = new SimpleDateFormat(
+        "yyyy-MM-dd'T'HH:mm:ssXXX"
+    );
+
+
 
     /**
      * Calendar which holds the date information.
@@ -88,8 +99,12 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     public DateTime(final String dateTime) throws ParseException {
         try {
             calendar.setTime(DATE_FORMAT_UTC.parse(dateTime));
-        } catch (ParseException e) {
-            calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE.parse(dateTime));
+        } catch (ParseException e1) {
+            try {
+                calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE_RFC_822.parse(dateTime));
+            } catch (ParseException e2) {
+                calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.parse(dateTime));
+            }
         }
     }
 
@@ -164,9 +179,9 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
             throw new IllegalArgumentException("time zone has not been specified");
         }
 
-        DATE_FORMAT_WITH_TIME_ZONE.setTimeZone(timeZone);
+        DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.setTimeZone(timeZone);
 
-        return DATE_FORMAT_WITH_TIME_ZONE.format(calendar.getTime());
+        return DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.format(calendar.getTime());
     }
 
 }
