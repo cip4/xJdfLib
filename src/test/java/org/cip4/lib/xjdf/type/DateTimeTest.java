@@ -87,7 +87,7 @@ public class DateTimeTest {
 	}
 
 	@Test
-	public void createDateTime() throws Exception {
+	public void createDateTimeUTC() throws Exception {
 		final String dateTimeString = "2012-03-04T13:20:40Z";
 
         final DateTime dateTime = new DateTime(dateTimeString);
@@ -103,7 +103,7 @@ public class DateTimeTest {
 	}
 
     @Test
-    public void createDateTimeNoUTCFormat() throws Exception {
+    public void createDateTimeWithTimeZoneISO8601() throws Exception {
         final String dateTimeString = "2015-08-06T12:00:00+02:00";
         final String expectedDateTimeStringUTC = "2015-08-06T10:00:00Z";
 
@@ -113,5 +113,18 @@ public class DateTimeTest {
         assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")));
         assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString());
     }
+
+	@Test
+	public void createDateTimeWithTimeZoneRFC822() throws Exception {
+		final String dateTimeString = "2015-08-06T12:00:00+0200";
+        final String dateTimeStringISO8601 = "2015-08-06T12:00:00+02:00";
+		final String expectedDateTimeStringUTC = "2015-08-06T10:00:00Z";
+
+		final DateTime dateTime = new DateTime(dateTimeString);
+
+		assertEquals("Date format is wrong.", dateTimeStringISO8601, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")));
+		assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")));
+		assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString());
+	}
 
 }
