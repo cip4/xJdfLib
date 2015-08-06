@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
@@ -90,6 +91,15 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
         } catch (ParseException e) {
             calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE.parse(dateTime));
         }
+    }
+
+    /**
+     * Creates a XJDF DateTime instance by a Date object.
+     *
+     * @param date Date object.
+     */
+    public DateTime(final Date date) {
+        calendar.setTime(date);
     }
 
     /**
