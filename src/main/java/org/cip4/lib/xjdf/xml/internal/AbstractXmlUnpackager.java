@@ -116,8 +116,10 @@ public abstract class AbstractXmlUnpackager {
                 File td = new File(FilenameUtils.getFullPath(targetPath));
                 td.mkdirs();
 
-                try (FileOutputStream fos = new FileOutputStream(targetFile)) {
-                    IOUtils.copy(zis, fos);
+                if(!entry.isDirectory()) {
+                    try (FileOutputStream fos = new FileOutputStream(targetFile)) {
+                        IOUtils.copy(zis, fos);
+                    }
                 }
 
                 entry = zis.getNextEntry();

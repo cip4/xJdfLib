@@ -201,6 +201,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumCartonType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Roll"/>
+            <xs:enumeration value="Carton"/>
+            <xs:enumeration value="Envelope"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumUsage">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Input"/>
@@ -3119,6 +3127,8 @@
             <xs:attribute name="FoilColorDetails" type="string" use="optional"/>
             <xs:attribute name="FoilColor" type="EnumNamedColor" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossingLevel" use="optional"/>
+			<xs:attribute name="Separation" type="NMTOKEN" use="optional" />
+			<xs:attribute name="ShapeName" type="string" use="optional" />
         </xs:complexType>
     </xs:element>
 
@@ -5656,21 +5666,24 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:attribute name="BoxedQuantity" type="integer" use="optional"/>
-                <xs:attribute name="WrappingMaterial" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PalletType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PalletCornerBoards" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PalletSize" type="XYPair" use="optional"/>
+                <xs:attribute name="BoxName" type="string" use="optional"/>
+                <xs:attribute name="BoxShape" type="shape" use="optional"/>
                 <xs:attribute name="CartonMaxWeight" type="double" use="optional"/>
-                <xs:attribute name="PalletWrapping" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CartonQuantity" type="integer" use="optional"/>
                 <xs:attribute name="CartonShape" type="shape" use="optional"/>
-                <xs:attribute name="PalletMaxHeight" type="double" use="optional"/>
                 <xs:attribute name="CartonStrength" type="double" use="optional"/>
-                <xs:attribute name="WrappedQuantity" type="integer" use="optional"/>
+                <xs:attribute name="CartonType" type="EnumCartonType" use="optional" />
+                <xs:attribute name="CartonTypeDetails" type="string" use="optional" />
+                <xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional" />
+                <xs:attribute name="PalletCornerBoards" type="NMTOKEN" use="optional" />
+                <xs:attribute name="PalletMaxHeight" type="double" use="optional"/>
                 <xs:attribute name="PalletMaxWeight" type="double" use="optional"/>
                 <xs:attribute name="PalletQuantity" type="integer" use="optional"/>
-                <xs:attribute name="BoxShape" type="shape" use="optional"/>
-                <xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PalletSize" type="XYPair" use="optional"/>
+                <xs:attribute name="PalletType" type="NMTOKEN" use="optional" />
+                <xs:attribute name="PalletWrapping" type="NMTOKEN" use="optional" />
+                <xs:attribute name="WrappedQuantity" type="integer" use="optional" />
+                <xs:attribute name="WrappingMaterial" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

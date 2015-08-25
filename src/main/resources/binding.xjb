@@ -2,6 +2,7 @@
 <bindings version="2.1"
               xmlns="http://java.sun.com/xml/ns/jaxb"
               xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema"
               xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
 
     <bindings schemaLocation="JDF20.xsd">
@@ -32,10 +33,12 @@
         <bindings scd="/~xjdf:duration">
             <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
         </bindings>
-        <bindings scd="/~xjdf:IDREF">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.IDREF" adapter="org.cip4.lib.xjdf.type.IDREF" />
+        <bindings node="//xs:element[@name='ChildProduct']//xs:attribute[@name='ChildRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Product" />
+            </property>
         </bindings>
-	</bindings>
+    </bindings>
 
 </bindings>
 

@@ -74,6 +74,40 @@ public class DimensionUtilTest {
 	}
 
 	/**
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
+	 */
+	@Test
+	public void testMm2DtpFloat() {
+
+		// arrange
+		final float mm = 10f;
+		final float expected = 28.346457f;
+
+		// act
+		float actual = DimensionUtil.mm2Dtp(mm);
+
+		// assert
+		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
+	}
+
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
+	 */
+	@Test
+	public void testDtp2MmFloat() {
+
+		// arrange
+		final float dtp = 28.346457f;
+		final float expected = 10f;
+
+		// act
+		float actual = DimensionUtil.dtp2Mm(dtp);
+
+		// assert
+		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+	}
+
+	/**
 	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2MmS(java.lang.String)}.
 	 */
 	@Test
