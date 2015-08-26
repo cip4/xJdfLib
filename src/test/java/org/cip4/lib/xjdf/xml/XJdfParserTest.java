@@ -36,6 +36,9 @@ public class XJdfParserTest {
     private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
     private final String RES_CHILD_PRODUCTS = "/org/cip4/lib/xjdf/child_products.xjdf";
     private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
+    private final String RES_IDREF_PROOF_ITEM = "/org/cip4/lib/xjdf/idref_proof_item.xjdf";
+    private final String RES_IDREF_APPROVAL_DETAILS = "/org/cip4/lib/xjdf/idref_approval_details.xjdf";
+    private final String RES_IDREF_LOCATION = "/org/cip4/lib/xjdf/idref_location.xjdf";
 
     private XJdfParser xJdfParser;
 
@@ -405,4 +408,46 @@ public class XJdfParserTest {
         assertEquals(new XYPair(2, 2), media.getDimension());
         assertEquals("IPG_400", media.getMediaQuality());
     }
+
+    @Test
+    public void idrefProofItemApprovalParamsRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_PROOF_ITEM);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ProofingIntent proofingIntent = (ProofingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(0).getIntentType().getValue();
+        Parameter parameter = proofingIntent.getProofItem().get(0).getApprovalParamsRef();
+        ApprovalParams approvalParams = (ApprovalParams) parameter.getParameterType().getValue();
+
+        assertEquals("APPROVAL_PARAMS_REF01", parameter.getID());
+        assertEquals(100, approvalParams.getMinApprovals(), 0);
+    }
+
+    @Test
+    public void idrefApprovalDetailsContactRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_APPROVAL_DETAILS);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(0).getValue();
+        ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
+        Parameter parameter = approvalSuccess.getApprovalDetails().get(0).getContactRef();
+        Contact contact = (Contact) parameter.getParameterType().getValue();
+
+
+        assertEquals("CONTACT_REF01", parameter.getID());
+        assertEquals("Meier", contact.getPerson().get(0).getFamilyName());
+    }
+
+    @Test
+    public void idrefLocationAddressRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_LOCATION);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
+        Location location = resourceSet.getResource().get(0).getLocation().get(0);
+        Address address = (Address) location.getAddressRef().getParameterType().getValue();
+
+        assertEquals("WUE", location.getLocationName());
+        assertEquals("Würzburg", address.getCity());
+    }
+
 }

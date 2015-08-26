@@ -3012,6 +3012,7 @@
 			</xs:sequence>
 			<xs:attribute name="LocationName" type="string" use="optional" />
 			<xs:attribute name="LocID" type="shortString" use="optional" />
+			<xs:attribute name="AddressRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -5238,6 +5239,7 @@
 			</xs:sequence>
 			<xs:attribute name="ApprovalState" use="optional" />
 			<xs:attribute name="ApprovalStateDetails" type="string" use="optional" />
+			<xs:attribute name="ContactRef" type="IDREF" use="optional" />
 			<xs:attribute name="FileSpecRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>

@@ -64,6 +64,23 @@
             </property>
         </bindings>
 
+
+        <bindings node="//xs:complexType[@name='ProofItem']//xs:attribute[@name='ApprovalParamsRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='ApprovalDetails']//xs:attribute[@name='ContactRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='Location']//xs:attribute[@name='AddressRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+
     </bindings>
 
 </bindings>
