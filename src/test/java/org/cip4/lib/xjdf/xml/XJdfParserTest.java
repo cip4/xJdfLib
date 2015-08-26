@@ -13,11 +13,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.Media;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
@@ -316,21 +312,97 @@ public class XJdfParserTest {
     }
 
     @Test
-    public void parseStreamWithMediaRef() throws Exception {
+    public void parseStreamResourceWithContactRef() throws Exception {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        LayoutIntent layoutIntent0 =
-            (LayoutIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(0).getIntentType().getValue();
-        LayoutIntent layoutIntent1 =
-            (LayoutIntent) xjdf.getProductList().getProduct().get(1).getIntent().get(0).getIntentType().getValue();
-        Media media0 = (Media) layoutIntent0.getLayoutRef().getResourceType().getValue();
-        Media media1 = (Media) layoutIntent1.getLayoutRef().getResourceType().getValue();
-
-        assertEquals("LAYOUT_INTENT_REF_0", layoutIntent0.getLayoutRef().getID());
-        assertEquals("LAYOUT_INTENT_REF_1", layoutIntent1.getLayoutRef().getID());
-        assertEquals(new XYPair(0, 0), media0.getDimension());
-        assertEquals(new XYPair(1, 1), media1.getDimension());
+        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
+        Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getParameterType().getValue();
+        assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
     }
 
+    @Test
+    public void parseStreamAuditWithAuditRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        Notification notification = (Notification) xjdf.getAuditPool().getAudit().get(1).getValue();
+        Created created = (Created) notification.getRefID();
+        assertEquals("Notification_B", notification.getID());
+        assertEquals("Created_A", created.getID());
+        assertEquals("agent A", created.getAgentName());
+    }
+
+    @Test
+    public void parseStreamPhaseTimeWithPhaseTimeRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(3).getValue();
+        PhaseTime phaseTimeA = (PhaseTime) phaseTimeB.getRefID();
+        assertEquals("PhaseTime_B", phaseTimeB.getID());
+        assertEquals("PhaseTime_A", phaseTimeA.getID());
+        assertEquals("agent A", phaseTimeA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamProcessRunWithProcessRunRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(5).getValue();
+        ProcessRun processRunA = (ProcessRun) processRunB.getRefID();
+        assertEquals("ProcessRun_B", processRunB.getID());
+        assertEquals("ProcessRun_A", processRunA.getID());
+        assertEquals("agent A", processRunA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamResourceAuditWithResourceAuditRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(7).getValue();
+        ResourceAudit resourceAuditA = (ResourceAudit) resourceAuditB.getRefID();
+        assertEquals("ResourceAudit_B", resourceAuditB.getID());
+        assertEquals("ResourceAudit_A", resourceAuditA.getID());
+        assertEquals("agent A", resourceAuditA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamWithColorRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ColorIntent colorIntent = (ColorIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(1).getIntentType().getValue();
+        Parameter parameter = colorIntent.getColorRef();
+        assertEquals("COLOR_REF_1", parameter.getID());
+        assertEquals("Color Reference 1", parameter.getDescriptiveName());
+    }
+
+    @Test
+    public void parseStreamWithDropItemRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(3).getValue();
+        DeliveryParams deliveryParams = (DeliveryParams) parameterSet.getParameter().get(0).getParameterType().getValue();
+        Product product = deliveryParams.getDrop().get(0).getDropItem().get(0).getDropItemRef();
+        assertEquals("PRD_MAIN01", product.getID());
+        assertEquals(1, product.getAmount(), 0);
+    }
+
+    @Test
+    public void parseStreamShapeCutWithMediaRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ShapeCuttingIntent shapeCuttingIntent =
+            (ShapeCuttingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(3).getIntentType().getValue();
+        Media media = (Media) shapeCuttingIntent.getShapeCut().get(0).getMediaRef().getResourceType().getValue();
+
+        assertEquals(new XYPair(2, 2), media.getDimension());
+        assertEquals("IPG_400", media.getMediaQuality());
+    }
 }

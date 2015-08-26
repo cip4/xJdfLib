@@ -38,8 +38,27 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>
         </bindings>
-
-        <bindings node="//xs:complexType[@name='LayoutIntent']//xs:attribute[@name='LayoutRef']" >
+        <bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='Audit']//xs:attribute[@name='refID']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Audit" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='ColorIntent']//xs:attribute[@name='ColorRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='DropItem']//xs:attribute[@name='DropItemRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Product" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Resource" />
             </property>

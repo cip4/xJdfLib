@@ -747,7 +747,6 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 			</xs:sequence>
 			<xs:attribute name="AmountProduced" type="double" use="optional" />
 			<xs:attribute name="Locked" type="boolean" use="optional" />
@@ -788,6 +787,7 @@
 			<xs:attribute name="AmountGood" type="double" use="optional" />
 			<xs:attribute name="AmountWaste" type="double" use="optional" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
+			<xs:attribute name="ContactRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1341,9 +1341,11 @@
 	<!-- ** Complex type definition for DeviceFilter ** -->
 	<xs:element name="DeviceFilter">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Device" />
+			</xs:sequence>
 			<xs:attribute name="Localization" type="languages" use="optional" />
 			<xs:attribute name="DeviceDetails" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1354,6 +1356,7 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobPhase" />
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Device" />
 			</xs:sequence>
 			<xs:attribute name="DeviceCondition" use="optional" />
 			<xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional" />
@@ -1367,7 +1370,6 @@
 			<xs:attribute name="TotalProductionCounter" type="double" use="optional" />
 			<xs:attribute name="ProductionCounter" type="double" use="optional" />
 			<xs:attribute name="DeviceID" type="string" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1433,6 +1435,9 @@
 	<!-- ** Complex type definition for IDInfo ** -->
 	<xs:element name="IDInfo">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Device" />
+			</xs:sequence>
 			<xs:attribute name="ParentJobID" type="string" use="optional" />
 			<xs:attribute name="ParentJobPartID" type="string" use="optional" />
 			<xs:attribute name="JobPartID" type="shortString" use="optional" />
@@ -1440,7 +1445,6 @@
 			<xs:attribute name="Category" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Type" type="NMTOKEN" use="optional" />
 			<xs:attribute name="Types" type="NMTOKENS" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1633,21 +1637,6 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- ** Complex type definition for Occupation ** -->
-	<xs:element name="Occupation">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-			</xs:sequence>
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="JobID" type="shortString" use="optional" />
-			<xs:attribute name="JobPartID" type="shortString" use="optional" />
-			<xs:attribute name="Busy" type="double" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
-		</xs:complexType>
-	</xs:element>
-
 	<!-- ** Complex type definition for PipeParams ** -->
 	<xs:element name="PipeParams">
 		<xs:complexType>
@@ -1697,7 +1686,6 @@
 			<xs:attribute name="DeviceID" type="shortString" use="optional" />
 			<xs:attribute name="QueueSize" type="integer" use="optional" />
 			<xs:attribute name="Status" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -2423,7 +2411,6 @@
 		<xs:complexContent>
 			<xs:extension base="Audit">
 				<xs:attribute name="XPath" type="XPath" use="optional" />
-				<xs:attribute name="ref" type="IDREF" use="optional" />
 				<xs:attribute name="TemplateVersion" type="string" use="optional" />
 				<xs:attribute name="TemplateID" type="shortString" use="optional" />
 			</xs:extension>
@@ -4945,6 +4932,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="SurfaceColor" />
                 </xs:sequence>
+				<xs:attribute name="ColorRef" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5176,6 +5164,7 @@
 			<xs:attribute name="CutType" use="optional" />
 			<xs:attribute name="TeethPerDimension" type="double" use="optional" />
 			<xs:attribute name="CutDepth" type="EnumCutDepth" use="optional" />
+			<xs:attribute name="MediaRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -6321,6 +6310,7 @@
 			<xs:attribute name="ToolRef" type="IDREF" use="optional" />
 			<xs:attribute name="ExposedMediaRef" type="IDREF" use="optional" />
 			<xs:attribute name="ComponentRef" type="IDREF" use="optional" />
+			<xs:attribute name="DropItemRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
