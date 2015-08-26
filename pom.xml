@@ -44,15 +44,22 @@
             <id>s.meissner</id>
             <name>Stefan Meissner</name>
             <organization>flyeralarm GmbH</organization>
-            <organizationUrl>http://www.flyeralarm.com</organizationUrl>
-            <email>s.meissner@flyeralarm.de</email>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>stefan.meissner@flyeralarm.com</email>
         </developer>
         <developer>
             <id>m.hartmann</id>
             <name>Michel Hartmann</name>
             <organization>flyeralarm GmbH</organization>
-            <organizationUrl>http://www.flyeralarm.com</organizationUrl>
-            <email>m.hartmann@flyeralarm.de</email>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>michel.hartmann@flyeralarm.com</email>
+        </developer>
+        <developer>
+            <id>j.hammett</id>
+            <name>Jeffrey Hammett</name>
+            <organization>flyeralarm GmbH</organization>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>jeffrey.hammett@flyeralarm.com</email>
         </developer>
     </developers>
     <build>
