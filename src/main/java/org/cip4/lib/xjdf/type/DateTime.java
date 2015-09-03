@@ -20,19 +20,19 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     /**
      * UTC date format.
      */
-    private static final DateFormat DATE_FORMAT_UTC = createUTCDateFormat();
+    private final DateFormat DATE_FORMAT_UTC = createUTCDateFormat();
 
     /**
      * RFC 822 date format.
      */
-    private static final DateFormat DATE_FORMAT_WITH_TIME_ZONE_RFC_822 = new SimpleDateFormat(
+    private final DateFormat DATE_FORMAT_WITH_TIME_ZONE_RFC_822 = new SimpleDateFormat(
         "yyyy-MM-dd'T'HH:mm:ssZ"
     );
 
     /**
      * ISO 8601 date format.
      */
-    private static final DateFormat DATE_FORMAT_WITH_TIME_ZONE_ISO_8601 = new SimpleDateFormat(
+    private final DateFormat DATE_FORMAT_WITH_TIME_ZONE_ISO_8601 = new SimpleDateFormat(
         "yyyy-MM-dd'T'HH:mm:ssXXX"
     );
 
