@@ -100,6 +100,10 @@
         <xs:restriction base="xs:double"/>
     </xs:simpleType>
 
+    <xs:simpleType name="DoubleList">
+        <xs:list itemType="double"/>
+    </xs:simpleType>
+
     <xs:simpleType name="NumberList">
         <xs:list itemType="double"/>
     </xs:simpleType>
@@ -795,6 +799,88 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumBinderySignatureType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Fold"/>
+            <xs:enumeration value="Grid"/>
+            <xs:enumeration value="Die"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumBindingEdge">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Top"/>
+            <xs:enumeration value="Bottom"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumBindingSide">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Top"/>
+            <xs:enumeration value="Bottom"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumBottleAxis">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="FaceFront"/>
+            <xs:enumeration value="FaceHead"/>
+            <xs:enumeration value="SpineFoot"/>
+            <xs:enumeration value="SpineHead"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMask">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="TrimBox"/>
+            <xs:enumeration value="BleedBox"/>
+            <xs:enumeration value="SourceTrimBox"/>
+            <xs:enumeration value="SourceBleedBox"/>
+            <xs:enumeration value="PDL"/>
+            <xs:enumeration value="DieCut"/>
+            <xs:enumeration value="DieBleed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCellOrientation">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Down"/>
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Up"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCellSides">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="OneSided"/>
+            <xs:enumeration value="TwoSidedHeadToHead"/>
+            <xs:enumeration value="TwoSidedHeadToFoot"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumBoxFoldingType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Type00"/>
+            <xs:enumeration value="Type01"/>
+            <xs:enumeration value="Type02"/>
+            <xs:enumeration value="Type03"/>
+            <xs:enumeration value="Type04"/>
+            <xs:enumeration value="Type10"/>
+            <xs:enumeration value="Type11"/>
+            <xs:enumeration value="Type12"/>
+            <xs:enumeration value="Type13"/>
+            <xs:enumeration value="Type15"/>
+            <xs:enumeration value="Type20"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -963,7 +1049,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumOrientation">
+    <xs:simpleType name="Orientation">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Flip0"/>
             <xs:enumeration value="Flip90"/>
@@ -2770,9 +2856,9 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterRibbon"/>
                 </xs:sequence>
-                <xs:attribute name="Rounding" type="double" use="optional"/>
                 <xs:attribute name="Backing" type="double" use="optional"/>
-                <xs:attribute name="TightBacking" use="optional"/>
+                <xs:attribute name="Rounding" type="double" use="optional"/>
+                <xs:attribute name="TightBacking" type="EnumTightBacking" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2830,7 +2916,7 @@
     <xs:element name="BundleItem">
         <xs:complexType>
             <xs:attribute name="ItemName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Orientation" type="EnumOrientation" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="Amount" type="integer" use="optional"/>
             <xs:attribute name="Transformation" type="matrix" use="optional"/>
             <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
@@ -4839,7 +4925,7 @@
                 <xs:attribute name="RotateMod" type="double" use="optional"/>
                 <xs:attribute name="Shift" type="NumberList" use="optional"/>
                 <xs:attribute name="Tolerance" type="XYPair" use="optional"/>
-                <xs:attribute name="Transforms" type="EnumOrientation" use="optional"/>
+                <xs:attribute name="Transforms" type="Orientation" use="optional"/>
                 <xs:attribute name="XPath" type="XPath" use="required"/>
                 <xs:attribute name="XPathRoot" type="XPath" use="optional"/>
             </xs:extension>
@@ -4862,7 +4948,7 @@
             <xs:attribute name="MaxOccurs" type="unbounded" use="optional"/>
             <xs:attribute name="CurrentValue" type="matrix" use="optional"/>
             <xs:attribute name="AllowedRotateMod" type="double" use="optional"/>
-            <xs:attribute name="AllowedTransforms" type="EnumOrientation" use="optional"/>
+            <xs:attribute name="AllowedTransforms" type="Orientation" use="optional"/>
             <xs:attribute name="AllowedShift" type="NumberList" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="DevNS" type="URI" use="optional"/>
@@ -5875,7 +5961,6 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
             </xs:sequence>
             <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="Order" use="optional"/>
             <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -5988,7 +6073,6 @@
                 <xs:attribute name="TrimRight" type="double" use="optional"/>
                 <xs:attribute name="TrimTop" type="double" use="optional"/>
                 <xs:attribute name="WebCellAlignment" type="XYPair" use="optional"/>
-
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6029,11 +6113,8 @@
     <!-- ** Complex type definition for BoxFoldAction ** -->
     <xs:element name="BoxFoldAction">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
-            </xs:sequence>
-            <xs:attribute name="FoldIndex" type="XYPair" use="optional"/>
-            <xs:attribute name="Action" use="optional"/>
+            <xs:attribute name="FoldIndex" type="XYPair" use="required"/>
+            <xs:attribute name="Action" type="EnumAction" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -6046,9 +6127,9 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="BoxFoldAction"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
                 </xs:sequence>
-                <xs:attribute name="BlankDimensionsY" type="string" use="optional"/>
-                <xs:attribute name="BoxFoldingType" use="optional"/>
-                <xs:attribute name="BlankDimensionsX" type="string" use="optional"/>
+                <xs:attribute name="BlankDimensionsX" type="DoubleList" use="optional"/>
+                <xs:attribute name="BlankDimensionsY" type="DoubleList" use="optional"/>
+                <xs:attribute name="BoxFoldingType" type="EnumBoxFoldingType" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6117,7 +6198,7 @@
         <xs:complexType>
             <xs:attribute name="BundleDepth" type="integer" use="optional"/>
             <xs:attribute name="TransformationContext" use="optional"/>
-            <xs:attribute name="Orientation" type="EnumOrientation" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="Amount" type="integer" use="optional"/>
             <xs:attribute name="Transformation" type="matrix" use="optional"/>
             <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
@@ -7783,7 +7864,7 @@
             <xs:attribute name="MarginLeft" type="double" use="optional"/>
             <xs:attribute name="MarginRight" type="double" use="optional"/>
             <xs:attribute name="MarginTop" type="double" use="optional"/>
-            <xs:attribute name="Orientation" type="EnumOrientation" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="RelativeBox" type="rectangle" use="optional"/>
             <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
@@ -8290,33 +8371,34 @@
     <!-- ** Complex type definition for SignatureCell ** -->
     <xs:element name="SignatureCell">
         <xs:complexType>
-            <xs:attribute name="StationName" type="string" use="optional"/>
-            <xs:attribute name="BottleAxis" use="optional"/>
-            <xs:attribute name="FrontPages" type="IntegerList" use="optional"/>
-            <xs:attribute name="BackPages" type="IntegerList" use="optional"/>
-            <xs:attribute name="SectionIndex" type="integer" use="optional"/>
-            <xs:attribute name="FaceCells" type="IntegerList" use="optional"/>
-            <xs:attribute name="BottleAngle" type="double" use="optional"/>
-            <xs:attribute name="Orientation" type="EnumOrientation" use="optional"/>
-            <xs:attribute name="MaskSeparation" type="string" use="optional"/>
-            <xs:attribute name="CutWidthFoot" type="double" use="optional"/>
-            <xs:attribute name="TrimFoot" type="double" use="optional"/>
-            <xs:attribute name="FrontOverfold" type="double" use="optional"/>
-            <xs:attribute name="BleedFoot" type="double" use="optional"/>
-            <xs:attribute name="Spine" type="double" use="optional"/>
-            <xs:attribute name="Mask" use="optional"/>
-            <xs:attribute name="BleedHead" type="double" use="optional"/>
-            <xs:attribute name="BleedFace" type="double" use="optional"/>
-            <xs:attribute name="TrimHead" type="double" use="optional"/>
-            <xs:attribute name="TrimFace" type="double" use="optional"/>
-            <xs:attribute name="MillingDepth" type="double" use="optional"/>
-            <xs:attribute name="CutWidthHead" type="double" use="optional"/>
             <xs:attribute name="BackOverfold" type="double" use="optional"/>
-            <xs:attribute name="Creep" type="XYPair" use="optional"/>
-            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-            <xs:attribute name="MaskBleed" type="double" use="optional"/>
-            <xs:attribute name="Sides" use="optional"/>
+            <xs:attribute name="BackPages" type="IntegerList" use="optional"/>
+            <xs:attribute name="BackSpread" type="IntegerList" use="optional"/>
+            <xs:attribute name="BleedFace" type="double" use="optional"/>
+            <xs:attribute name="BleedFoot" type="double" use="optional"/>
+            <xs:attribute name="BleedHead" type="double" use="optional"/>
             <xs:attribute name="BleedSpine" type="double" use="optional"/>
+            <xs:attribute name="BottleAngle" type="double" use="optional"/>
+            <xs:attribute name="BottleAxis" type="EnumBottleAxis" use="optional"/>
+            <xs:attribute name="Creep" type="XYPair" use="optional"/>
+            <xs:attribute name="CutWidthFoot" type="double" use="optional"/>
+            <xs:attribute name="CutWidthHead" type="double" use="optional"/>
+            <xs:attribute name="FaceCells" type="IntegerList" use="optional"/>
+            <xs:attribute name="FrontOverfold" type="double" use="optional"/>
+            <xs:attribute name="FrontPages" type="IntegerList" use="optional"/>
+            <xs:attribute name="FrontSpread" type="IntegerList" use="optional"/>
+            <xs:attribute name="Mask" type="EnumMask" use="optional"/>
+            <xs:attribute name="MaskBleed" type="double" use="optional"/>
+            <xs:attribute name="MaskSeparation" type="string" use="optional"/>
+            <xs:attribute name="MillingDepth" type="double" use="optional"/>
+            <xs:attribute name="Orientation" type="EnumCellOrientation" use="optional"/>
+            <xs:attribute name="Sides" type="EnumCellSides" use="optional"/>
+            <xs:attribute name="Spine" type="double" use="optional"/>
+            <xs:attribute name="StationName" type="string" use="optional"/>
+            <xs:attribute name="TrimFace" type="double" use="optional"/>
+            <xs:attribute name="TrimFoot" type="double" use="optional"/>
+            <xs:attribute name="TrimHead" type="double" use="optional"/>
+            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -8366,7 +8448,7 @@
             <xs:attribute name="RelativeWidth" type="double" use="optional"/>
             <xs:attribute name="HorizontalFitPolicy" use="optional"/>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
-            <xs:attribute name="Orientation" type="EnumOrientation" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="StripMarkDetails" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
