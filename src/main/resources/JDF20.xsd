@@ -2388,6 +2388,16 @@
 		</xs:complexContent>
 	</xs:complexType>
 
+	<!-- ** Complex type definition for Modified ** -->
+	<xs:element name="Modified" type="Modified" substitutionGroup="Audit" />
+	<xs:complexType name="Modified">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:attribute name="XPath" type="XPath" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
 	<!-- ** Complex type definition for CreditCard ** -->
 	<xs:element name="CreditCard" />
 
