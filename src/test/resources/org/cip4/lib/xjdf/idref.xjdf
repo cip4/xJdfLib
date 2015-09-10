@@ -4,15 +4,15 @@
 
     <xjdf:AuditPool>
         <xjdf:Created ID="Created_A" AgentName="agent A" />
-        <xjdf:Notification ID="Notification_B" AgentName="agent B" refID="Created_A" />
+        <xjdf:Notification ID="Notification_A" AgentName="agent A" />
+        <xjdf:Notification ID="Notification_B" AgentName="agent B" NotificationRef="Notification_A" />
         <xjdf:PhaseTime ID="PhaseTime_A" AgentName="agent A" />
-        <xjdf:PhaseTime ID="PhaseTime_B" AgentName="agent B" refID="PhaseTime_A" />
+        <xjdf:PhaseTime ID="PhaseTime_B" AgentName="agent B" PhaseTimeRef="PhaseTime_A" />
         <xjdf:ProcessRun ID="ProcessRun_A" AgentName="agent A" />
-        <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
+        <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" ProcessRunRef="ProcessRun_A" />
         <xjdf:ResourceAudit ID="ResourceAudit_A" AgentName="agent A" />
-        <xjdf:ResourceAudit ID="ResourceAudit_B" AgentName="agent B" refID="ResourceAudit_A" />
+        <xjdf:ResourceAudit ID="ResourceAudit_B" AgentName="agent B" ResourceAuditRef="ResourceAudit_A" />
     </xjdf:AuditPool>
-
 
     <xjdf:ProductList>
         <xjdf:Product ID="PRD_MAIN01" IsRoot="true" Amount="1">
@@ -20,13 +20,10 @@
                 <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided" LayoutRef="LAYOUT_INTENT_REF_0"/>
             </xjdf:Intent>
             <xjdf:Intent Name="ColorIntent">
-                <xjdf:ColorIntent ColorRef="COLOR_REF_1">
+                <xjdf:ColorIntent>
                     <xjdf:SurfaceColor Surface="Front" NumColors="4"/>
                     <xjdf:SurfaceColor Surface="Back" NumColors="0"/>
                 </xjdf:ColorIntent>
-            </xjdf:Intent>
-            <xjdf:Intent Name="PublishingIntent">
-                <xjdf:PublishingIntent IssueName="Publishing_PRD_MAIN01" />
             </xjdf:Intent>
             <xjdf:Intent Name="ShapeCuttingIntent">
                 <xjdf:ShapeCuttingIntent>

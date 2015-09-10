@@ -48,11 +48,6 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Audit" />
             </property>
         </bindings>
-        <bindings node="//xs:complexType[@name='ColorIntent']//xs:attribute[@name='ColorRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
-            </property>
-        </bindings>
         <bindings node="//xs:element[@name='DropItem']//xs:attribute[@name='DropItemRef']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
@@ -64,20 +59,24 @@
             </property>
         </bindings>
 
-
-        <bindings node="//xs:complexType[@name='ProofItem']//xs:attribute[@name='ApprovalParamsRef']" >
+        <bindings node="//xs:complexType[@name='PhaseTime']//xs:attribute[@name='PhaseTimeRef']" >
             <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+                <baseType name="org.cip4.lib.xjdf.schema.PhaseTime" />
             </property>
         </bindings>
-        <bindings node="//xs:element[@name='ApprovalDetails']//xs:attribute[@name='ContactRef']" >
+        <bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='ProcessRunRef']" >
             <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+                <baseType name="org.cip4.lib.xjdf.schema.ProcessRun" />
             </property>
         </bindings>
-        <bindings node="//xs:element[@name='Location']//xs:attribute[@name='AddressRef']" >
+        <bindings node="//xs:complexType[@name='ResourceAudit']//xs:attribute[@name='ResourceAuditRef']" >
             <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+                <baseType name="org.cip4.lib.xjdf.schema.ResourceAudit" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='Notification']//xs:attribute[@name='NotificationRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Notification" />
             </property>
         </bindings>
 

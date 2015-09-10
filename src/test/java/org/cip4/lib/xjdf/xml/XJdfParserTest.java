@@ -330,11 +330,11 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        Notification notification = (Notification) xjdf.getAuditPool().getAudit().get(1).getValue();
-        Created created = (Created) notification.getRefID();
-        assertEquals("Notification_B", notification.getID());
-        assertEquals("Created_A", created.getID());
-        assertEquals("agent A", created.getAgentName());
+        Notification notificationB = (Notification) xjdf.getAuditPool().getAudit().get(2).getValue();
+        Notification notificationA = notificationB.getNotificationRef();
+        assertEquals("Notification_B", notificationB.getID());
+        assertEquals("Notification_A", notificationA.getID());
+        assertEquals("agent A", notificationA.getAgentName());
     }
 
     @Test
@@ -342,8 +342,8 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(3).getValue();
-        PhaseTime phaseTimeA = (PhaseTime) phaseTimeB.getRefID();
+        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(4).getValue();
+        PhaseTime phaseTimeA = phaseTimeB.getPhaseTimeRef();
         assertEquals("PhaseTime_B", phaseTimeB.getID());
         assertEquals("PhaseTime_A", phaseTimeA.getID());
         assertEquals("agent A", phaseTimeA.getAgentName());
@@ -354,8 +354,8 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(5).getValue();
-        ProcessRun processRunA = (ProcessRun) processRunB.getRefID();
+        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(6).getValue();
+        ProcessRun processRunA = processRunB.getProcessRunRef();
         assertEquals("ProcessRun_B", processRunB.getID());
         assertEquals("ProcessRun_A", processRunA.getID());
         assertEquals("agent A", processRunA.getAgentName());
@@ -366,22 +366,11 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(7).getValue();
-        ResourceAudit resourceAuditA = (ResourceAudit) resourceAuditB.getRefID();
+        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(8).getValue();
+        ResourceAudit resourceAuditA = resourceAuditB.getResourceAuditRef();
         assertEquals("ResourceAudit_B", resourceAuditB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA.getID());
         assertEquals("agent A", resourceAuditA.getAgentName());
-    }
-
-    @Test
-    public void parseStreamWithColorRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        ColorIntent colorIntent = (ColorIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(1).getIntentType().getValue();
-        Parameter parameter = colorIntent.getColorRef();
-        assertEquals("COLOR_REF_1", parameter.getID());
-        assertEquals("Color Reference 1", parameter.getDescriptiveName());
     }
 
     @Test
@@ -402,52 +391,11 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ShapeCuttingIntent shapeCuttingIntent =
-            (ShapeCuttingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(3).getIntentType().getValue();
+            (ShapeCuttingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(2).getIntentType().getValue();
         Media media = (Media) shapeCuttingIntent.getShapeCut().get(0).getMediaRef().getResourceType().getValue();
 
         assertEquals(new XYPair(2, 2), media.getDimension());
         assertEquals("IPG_400", media.getMediaQuality());
-    }
-
-    @Test
-    public void idrefProofItemApprovalParamsRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_PROOF_ITEM);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        ProofingIntent proofingIntent = (ProofingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(0).getIntentType().getValue();
-        Parameter parameter = proofingIntent.getProofItem().get(0).getApprovalParamsRef();
-        ApprovalParams approvalParams = (ApprovalParams) parameter.getParameterType().getValue();
-
-        assertEquals("APPROVAL_PARAMS_REF01", parameter.getID());
-        assertEquals(100, approvalParams.getMinApprovals(), 0);
-    }
-
-    @Test
-    public void idrefApprovalDetailsContactRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_APPROVAL_DETAILS);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(0).getValue();
-        ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
-        Parameter parameter = approvalSuccess.getApprovalDetails().get(0).getContactRef();
-        Contact contact = (Contact) parameter.getParameterType().getValue();
-
-
-        assertEquals("CONTACT_REF01", parameter.getID());
-        assertEquals("Meier", contact.getPerson().get(0).getFamilyName());
-    }
-
-    @Test
-    public void idrefLocationAddressRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF_LOCATION);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
-        Location location = resourceSet.getResource().get(0).getLocation().get(0);
-        Address address = (Address) location.getAddressRef().getParameterType().getValue();
-
-        assertEquals("WUE", location.getLocationName());
-        assertEquals("Würzburg", address.getCity());
     }
 
 }
