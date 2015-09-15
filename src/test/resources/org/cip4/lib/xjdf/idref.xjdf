@@ -5,13 +5,15 @@
     <xjdf:AuditPool>
         <xjdf:Created ID="Created_A" AgentName="agent A" />
         <xjdf:Notification ID="Notification_A" AgentName="agent A" />
-        <xjdf:Notification ID="Notification_B" AgentName="agent B" NotificationRef="Notification_A" />
-        <xjdf:PhaseTime ID="PhaseTime_A" AgentName="agent A" />
-        <xjdf:PhaseTime ID="PhaseTime_B" AgentName="agent B" PhaseTimeRef="PhaseTime_A" />
+        <xjdf:Notification ID="Notification_B" AgentName="agent B" refID="Notification_A" />
+        <xjdf:PhaseTime ID="PhaseTime_A" AgentName="agent A">
+            <xjdf:PhaseAmount rRef="PhaseAmount_Ref_01" />
+        </xjdf:PhaseTime>
+        <xjdf:PhaseTime ID="PhaseTime_B" AgentName="agent B" refID="PhaseTime_A" />
         <xjdf:ProcessRun ID="ProcessRun_A" AgentName="agent A" />
-        <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" ProcessRunRef="ProcessRun_A" />
+        <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
         <xjdf:ResourceAudit ID="ResourceAudit_A" AgentName="agent A" />
-        <xjdf:ResourceAudit ID="ResourceAudit_B" AgentName="agent B" ResourceAuditRef="ResourceAudit_A" />
+        <xjdf:ResourceAudit ID="ResourceAudit_B" AgentName="agent B" refID="ResourceAudit_A" />
     </xjdf:AuditPool>
 
     <xjdf:ProductList>
@@ -57,6 +59,10 @@
             <xjdf:Media Dimension="2 2" MediaQuality="IPG_400"/>
             <xjdf:Part SheetName="SHEET-1"/>
         </xjdf:Resource>
+        <xjdf:Resource ID="PhaseAmount_Ref_01">
+            <xjdf:Media Dimension="3 3" MediaQuality="IPG_500"/>
+            <xjdf:Part SheetName="SHEET-1"/>
+        </xjdf:Resource>
     </xjdf:ResourceSet>
 
     <xjdf:ParameterSet Name="Contact">
@@ -71,16 +77,6 @@
 
     <xjdf:ParameterSet Name="Color">
         <xjdf:Parameter ID="COLOR_REF_1" DescriptiveName="Color Reference 1" />
-    </xjdf:ParameterSet>
-
-    <xjdf:ParameterSet Name="Delivery">
-        <xjdf:Parameter>
-            <xjdf:DeliveryParams>
-                <xjdf:Drop>
-                    <xjdf:DropItem DropItemRef="PRD_MAIN01" />
-                </xjdf:Drop>
-            </xjdf:DeliveryParams>
-        </xjdf:Parameter>
     </xjdf:ParameterSet>
 
     <xjdf:ParameterSet Name="CustomerInfo" ProcessUsage="Customer">

@@ -2126,7 +2126,6 @@
 		<xs:attribute name="AgentVersion" type="string" use="optional" />
 		<xs:attribute name="ID" type="ID" use="optional" />
 		<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-		<xs:attribute name="refID" type="IDREF" use="optional" />
 		<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
 	</xs:complexType>
 
@@ -3108,7 +3107,7 @@
 				<xs:attribute name="ModuleID" type="string" use="optional" />
 				<xs:attribute name="Type" type="NMTOKEN" use="optional" />
 				<xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional" />
-				<xs:attribute name="NotificationRef" type="IDREF" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3375,6 +3374,7 @@
 			<xs:extension base="Audit">
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PhaseAmount" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
 				</xs:sequence>
@@ -3383,9 +3383,18 @@
 				<xs:attribute name="Start" type="dateTime" use="optional" />
 				<xs:attribute name="End" type="dateTime" use="optional" />
 				<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
-				<xs:attribute name="PhaseTimeRef" type="IDREF" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ** Complex type definition for PhaseAmount ** -->
+	<xs:element name="PhaseAmount" type="PhaseAmount" />
+	<xs:complexType name="PhaseAmount">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" ref="AmountPool" />
+		</xs:sequence>
+		<xs:attribute name="rRef" type="IDREF" use="optional" />
 	</xs:complexType>
 
 	<!-- ** Complex type definition for PlaceHolderResource ** -->
@@ -3418,7 +3427,7 @@
 				<xs:attribute name="ReturnTime" type="dateTime" use="optional" />
 				<xs:attribute name="Start" type="dateTime" use="optional" />
 				<xs:attribute name="End" type="dateTime" use="optional" />
-				<xs:attribute name="ProcessRunRef" type="IDREF" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3490,7 +3499,7 @@
 				<xs:attribute name="Reason" use="optional" />
 				<xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional" />
 				<xs:attribute name="ContentsModified" type="boolean" use="optional" />
-				<xs:attribute name="ResourceAuditRef" type="IDREF" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5135,7 +5144,6 @@
 	<xs:element name="ApprovalDetails">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 				<xs:element minOccurs="0" maxOccurs="1" ref="ApprovalPerson" />
 			</xs:sequence>
 			<xs:attribute name="ApprovalState" use="optional" />
@@ -6212,7 +6220,6 @@
 			<xs:attribute name="ToolRef" type="IDREF" use="optional" />
 			<xs:attribute name="ExposedMediaRef" type="IDREF" use="optional" />
 			<xs:attribute name="ComponentRef" type="IDREF" use="optional" />
-			<xs:attribute name="DropItemRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
