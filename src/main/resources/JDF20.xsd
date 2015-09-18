@@ -747,7 +747,6 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Location" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
 			</xs:sequence>
 			<xs:attribute name="AmountProduced" type="double" use="optional" />
 			<xs:attribute name="Locked" type="boolean" use="optional" />
@@ -782,12 +781,11 @@
 				</xs:simpleType>
 			</xs:attribute>
 			<xs:attribute name="Brand" type="string" use="optional" />
-			<xs:attribute name="QualityControlResultRef" type="IDREF" use="optional" />
 			<xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional" />
-			<xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional" />
 			<xs:attribute name="AmountGood" type="double" use="optional" />
 			<xs:attribute name="AmountWaste" type="double" use="optional" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
+			<xs:attribute name="ContactRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -828,7 +826,6 @@
 					<xs:list itemType="EnumPartIDKeys" />
 				</xs:simpleType>
 			</xs:attribute>
-			<xs:attribute name="QualityControlResultRef" type="IDREF" use="optional" />
 			<xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional" />
 			<xs:attribute name="DescriptiveName" type="string" use="optional" />
 		</xs:complexType>
@@ -1341,9 +1338,11 @@
 	<!-- ** Complex type definition for DeviceFilter ** -->
 	<xs:element name="DeviceFilter">
 		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Device" />
+			</xs:sequence>
 			<xs:attribute name="Localization" type="languages" use="optional" />
 			<xs:attribute name="DeviceDetails" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1354,6 +1353,7 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus" />
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="JobPhase" />
+				<xs:element minOccurs="0" maxOccurs="1" ref="Device" />
 			</xs:sequence>
 			<xs:attribute name="DeviceCondition" use="optional" />
 			<xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional" />
@@ -1367,7 +1367,6 @@
 			<xs:attribute name="TotalProductionCounter" type="double" use="optional" />
 			<xs:attribute name="ProductionCounter" type="double" use="optional" />
 			<xs:attribute name="DeviceID" type="string" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1427,20 +1426,6 @@
 	<xs:element name="GangQuFilter">
 		<xs:complexType>
 			<xs:attribute name="GangNames" type="NMTOKENS" use="optional" />
-		</xs:complexType>
-	</xs:element>
-
-	<!-- ** Complex type definition for IDInfo ** -->
-	<xs:element name="IDInfo">
-		<xs:complexType>
-			<xs:attribute name="ParentJobID" type="string" use="optional" />
-			<xs:attribute name="ParentJobPartID" type="string" use="optional" />
-			<xs:attribute name="JobPartID" type="shortString" use="optional" />
-			<xs:attribute name="JobID" type="shortString" use="optional" />
-			<xs:attribute name="Category" type="NMTOKEN" use="optional" />
-			<xs:attribute name="Type" type="NMTOKEN" use="optional" />
-			<xs:attribute name="Types" type="NMTOKENS" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1592,16 +1577,6 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- ** Complex type definition for NewJDFCmdParams ** -->
-	<xs:element name="NewJDFCmdParams">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="IDInfo" />
-			</xs:sequence>
-			<xs:attribute name="JDFDetails" type="string" use="optional" />
-		</xs:complexType>
-	</xs:element>
-
 	<!-- ** Complex type definition for NewJDFQuParams ** -->
 	<xs:element name="NewJDFQuParams">
 		<xs:complexType>
@@ -1630,21 +1605,6 @@
 					<xs:list itemType="EnumClasses" />
 				</xs:simpleType>
 			</xs:attribute>
-		</xs:complexType>
-	</xs:element>
-
-	<!-- ** Complex type definition for Occupation ** -->
-	<xs:element name="Occupation">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee" />
-			</xs:sequence>
-			<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-			<xs:attribute name="JobID" type="shortString" use="optional" />
-			<xs:attribute name="JobPartID" type="shortString" use="optional" />
-			<xs:attribute name="Busy" type="double" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -1697,7 +1657,6 @@
 			<xs:attribute name="DeviceID" type="shortString" use="optional" />
 			<xs:attribute name="QueueSize" type="integer" use="optional" />
 			<xs:attribute name="Status" use="optional" />
-			<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -2167,7 +2126,6 @@
 		<xs:attribute name="AgentVersion" type="string" use="optional" />
 		<xs:attribute name="ID" type="ID" use="optional" />
 		<xs:attribute name="QueueEntryID" type="shortString" use="optional" />
-		<xs:attribute name="refID" type="IDREF" use="optional" />
 		<xs:attribute name="TimeStamp" type="dateTime" use="optional" />
 	</xs:complexType>
 
@@ -2423,9 +2381,18 @@
 		<xs:complexContent>
 			<xs:extension base="Audit">
 				<xs:attribute name="XPath" type="XPath" use="optional" />
-				<xs:attribute name="ref" type="IDREF" use="optional" />
 				<xs:attribute name="TemplateVersion" type="string" use="optional" />
 				<xs:attribute name="TemplateID" type="shortString" use="optional" />
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ** Complex type definition for Modified ** -->
+	<xs:element name="Modified" type="Modified" substitutionGroup="Audit" />
+	<xs:complexType name="Modified">
+		<xs:complexContent>
+			<xs:extension base="Audit">
+				<xs:attribute name="XPath" type="XPath" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3021,7 +2988,7 @@
 	<xs:element name="Location">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Address" />
+				<xs:element minOccurs="0" maxOccurs="1" ref="Address" />
 			</xs:sequence>
 			<xs:attribute name="LocationName" type="string" use="optional" />
 			<xs:attribute name="LocID" type="shortString" use="optional" />
@@ -3085,16 +3052,6 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- ** Complex type definition for Modified ** -->
-	<xs:element name="Modified" type="Modified" substitutionGroup="Audit" />
-	<xs:complexType name="Modified">
-		<xs:complexContent>
-			<xs:extension base="Audit">
-				<xs:attribute name="XPath" type="XPath" use="optional" />
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<!-- ** Complex type definition for ModulePhase ** -->
 	<xs:element name="ModulePhase">
 		<xs:complexType>
@@ -3150,6 +3107,7 @@
 				<xs:attribute name="ModuleID" type="string" use="optional" />
 				<xs:attribute name="Type" type="NMTOKEN" use="optional" />
 				<xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3416,6 +3374,7 @@
 			<xs:extension base="Audit">
 				<xs:sequence>
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="Part" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" ref="PhaseAmount" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase" />
 					<xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails" />
 				</xs:sequence>
@@ -3424,8 +3383,18 @@
 				<xs:attribute name="Start" type="dateTime" use="optional" />
 				<xs:attribute name="End" type="dateTime" use="optional" />
 				<xs:attribute name="DeviceRef" type="IDREF" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
+	</xs:complexType>
+
+	<!-- ** Complex type definition for PhaseAmount ** -->
+	<xs:element name="PhaseAmount" type="PhaseAmount" />
+	<xs:complexType name="PhaseAmount">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="1" ref="AmountPool" />
+		</xs:sequence>
+		<xs:attribute name="rRef" type="IDREF" use="optional" />
 	</xs:complexType>
 
 	<!-- ** Complex type definition for PlaceHolderResource ** -->
@@ -3458,6 +3427,7 @@
 				<xs:attribute name="ReturnTime" type="dateTime" use="optional" />
 				<xs:attribute name="Start" type="dateTime" use="optional" />
 				<xs:attribute name="End" type="dateTime" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3469,7 +3439,6 @@
 		<xs:attribute name="PageIndex" type="IntegerRangeList" use="optional" />
 		<xs:attribute name="ProofTarget" type="URL" use="optional" />
 		<xs:attribute name="ProofName" type="string" use="optional" />
-		<xs:attribute name="ApprovalParamsRef" type="IDREF" use="optional" />
 		<xs:attribute name="ProofType" use="optional" />
 		<xs:attribute name="Amount" type="integer" use="optional" />
 		<xs:attribute name="HalfTone" type="boolean" use="optional" />
@@ -3530,6 +3499,7 @@
 				<xs:attribute name="Reason" use="optional" />
 				<xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional" />
 				<xs:attribute name="ContentsModified" type="boolean" use="optional" />
+				<xs:attribute name="refID" type="IDREF" use="optional" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -4839,63 +4809,6 @@
 		</xs:complexType>
 	</xs:element>
 
-	<!-- ** Complex type definition for ArtDelivery ** -->
-	<xs:element name="ArtDelivery">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="DigitalMedia" />
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-			</xs:sequence>
-			<xs:attribute name="HasBleeds" type="boolean" use="optional" />
-			<xs:attribute name="ArtDeliveryType" type="NMTOKEN" use="optional" />
-			<xs:attribute name="IsTrapped" type="boolean" use="optional" />
-			<xs:attribute name="PreflightOutput" type="URL" use="optional" />
-			<xs:attribute name="PreflightStatus" use="optional" />
-			<xs:attribute name="PageList" type="IntegerRangeList" use="optional" />
-			<xs:attribute name="Amount" type="integer" use="optional" />
-			<xs:attribute name="ToolRef" type="IDREF" use="optional" />
-			<xs:attribute name="ScanParamsRef" type="IDREF" use="optional" />
-			<xs:attribute name="ExposedMediaRef" type="IDREF" use="optional" />
-			<xs:attribute name="RunListRef" type="IDREF" use="optional" />
-			<xs:attribute name="ComponentRef" type="IDREF" use="optional" />
-			<xs:attribute name="ReturnMethod" type="NMTOKEN" use="optional" />
-			<xs:attribute name="Method" type="NMTOKEN" use="optional" />
-			<xs:attribute name="ArtDeliveryDate" type="dateTime" use="optional" />
-			<xs:attribute name="Transfer" use="optional" />
-			<xs:attribute name="DeliveryCharge" use="optional" />
-			<xs:attribute name="ArtHandling" use="optional" />
-			<xs:attribute name="ServiceLevel" type="string" use="optional" />
-			<xs:attribute name="ArtDeliveryDuration" type="duration" use="optional" />
-		</xs:complexType>
-	</xs:element>
-
-	<!-- ** Complex type definition for ArtDeliveryType ** -->
-	<xs:element name="ArtDeliveryType">
-		<xs:complexType>
-			<xs:attribute name="Locked" type="boolean" use="optional" />
-			<xs:attribute name="PipeURL" type="URL" use="optional" />
-			<xs:attribute name="Class" use="optional" />
-			<xs:attribute name="PartIDKeys" use="optional">
-				<xs:simpleType>
-					<xs:list itemType="EnumPartIDKeys" />
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional" />
-			<xs:attribute name="PipeID" type="string" use="optional" />
-			<xs:attribute name="AgentName" type="string" use="optional" />
-			<xs:attribute name="AgentVersion" type="string" use="optional" />
-			<xs:attribute name="ProductID" type="string" use="optional" />
-			<xs:attribute name="Author" type="string" use="optional" />
-			<xs:attribute name="PipePartIDKeys" use="optional">
-				<xs:simpleType>
-					<xs:list itemType="EnumPartIDKeys" />
-				</xs:simpleType>
-			</xs:attribute>
-			<xs:attribute name="QualityControlResultRef" type="IDREF" use="optional" />
-			<xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional" />
-		</xs:complexType>
-	</xs:element>
-
 	<!-- ** Complex type definition for BindingIntent ** -->
 	<xs:element name="BindingIntent" type="BindingIntent" substitutionGroup="IntentType" />
 	<xs:complexType name="BindingIntent">
@@ -5150,21 +5063,6 @@
 		</xs:complexContent>
 	</xs:complexType>
 
-	<!-- ** Complex type definition for PublishingIntent ** -->
-	<xs:element name="PublishingIntent" type="PublishingIntent" substitutionGroup="IntentType" />
-	<xs:complexType name="PublishingIntent">
-		<xs:complexContent>
-			<xs:extension base="IntentType">
-				<xs:attribute name="ContentDataRefs" type="IDREFS" use="optional" />
-				<xs:attribute name="ContentListRef" type="IDREF" use="optional" />
-				<xs:attribute name="IssueType" type="NMTOKEN" use="optional" />
-				<xs:attribute name="IssueDate" type="dateTime" use="optional" />
-				<xs:attribute name="IssueName" type="string" use="optional" />
-				<xs:attribute name="Circulation" type="integer" use="optional" />
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-
 	<!-- ** Complex type definition for ShapeCut ** -->
 	<xs:element name="ShapeCut">
 		<xs:complexType>
@@ -5177,6 +5075,7 @@
 			<xs:attribute name="CutType" use="optional" />
 			<xs:attribute name="TeethPerDimension" type="double" use="optional" />
 			<xs:attribute name="CutDepth" type="EnumCutDepth" use="optional" />
+			<xs:attribute name="MediaRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
@@ -5246,7 +5145,7 @@
 	<xs:element name="ApprovalDetails">
 		<xs:complexType>
 			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
+				<xs:element minOccurs="0" maxOccurs="1" ref="ApprovalPerson" />
 			</xs:sequence>
 			<xs:attribute name="ApprovalState" use="optional" />
 			<xs:attribute name="ApprovalStateDetails" type="string" use="optional" />
@@ -5268,11 +5167,9 @@
 	<!-- ** Complex type definition for ApprovalPerson ** -->
 	<xs:element name="ApprovalPerson">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-			</xs:sequence>
 			<xs:attribute name="ApprovalRole" use="optional" />
 			<xs:attribute name="ApprovalRoleDetails" type="string" use="optional" />
+			<xs:attribute name="ContactRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 
