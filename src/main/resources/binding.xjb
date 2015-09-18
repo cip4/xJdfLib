@@ -43,6 +43,11 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
             </property>
         </bindings>
+        <bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
         <bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Resource" />

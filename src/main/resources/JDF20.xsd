@@ -5167,11 +5167,9 @@
 	<!-- ** Complex type definition for ApprovalPerson ** -->
 	<xs:element name="ApprovalPerson">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact" />
-			</xs:sequence>
 			<xs:attribute name="ApprovalRole" use="optional" />
 			<xs:attribute name="ApprovalRoleDetails" type="string" use="optional" />
+			<xs:attribute name="ContactRef" type="IDREF" use="optional" />
 		</xs:complexType>
 	</xs:element>
 

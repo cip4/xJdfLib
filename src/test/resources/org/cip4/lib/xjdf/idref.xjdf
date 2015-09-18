@@ -98,4 +98,15 @@
             </xjdf:RunList>
         </xjdf:Parameter>
     </xjdf:ParameterSet>
+
+    <xjdf:ParameterSet Name="ApprovalSuccess">
+        <xjdf:Parameter>
+            <xjdf:ApprovalSuccess>
+                <xjdf:ApprovalDetails>
+                    <xjdf:ApprovalPerson ContactRef="CONTACT_REF_1" />
+                </xjdf:ApprovalDetails>
+            </xjdf:ApprovalSuccess>
+        </xjdf:Parameter>
+    </xjdf:ParameterSet>
+
 </xjdf:XJDF>

@@ -308,6 +308,20 @@ public class XJdfParserTest {
     }
 
     @Test
+    public void parseStreamApprovalPersonWithContactRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(6).getValue();
+        ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
+        ApprovalPerson approvalPerson = approvalSuccess.getApprovalDetails().get(0).getApprovalPerson();
+        Contact contact = (Contact) approvalPerson.getContactRef().getParameterType().getValue();
+
+        assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+    }
+
+    @Test
     public void parseStreamAuditWithAuditRef() throws Exception {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
