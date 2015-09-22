@@ -5071,6 +5071,7 @@
 			<xs:attribute name="Pages" type="IntegerRangeList" use="optional" />
 			<xs:attribute name="CutBox" type="rectangle" use="optional" />
 			<xs:attribute name="ShapeType" use="optional" />
+			<xs:attribute name="ShapeTypeDetails" use="optional" />
 			<xs:attribute name="Material" type="string" use="optional" />
 			<xs:attribute name="CutType" use="optional" />
 			<xs:attribute name="TeethPerDimension" type="double" use="optional" />
