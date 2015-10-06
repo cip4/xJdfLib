@@ -30,4 +30,10 @@ public class ProductUtilTest {
 
         assertNull(ProductUtil.getIntent(product, LayoutIntent.class));
     }
+
+    @Test
+    public void normalize() {
+        String str = ProductUtil.normalize("ABCabc0123{³²!!§$.zip");
+        assertEquals("ABCabc0123_______.zip", str);
+    }
 }
