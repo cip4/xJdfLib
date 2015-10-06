@@ -26,6 +26,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.util.ProductUtil;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -235,7 +236,16 @@ public abstract class AbstractXmlPackager {
         }
 
         // register for packaging
-        File targetFile = new File(FilenameUtils.concat(targetDir, FilenameUtils.getName(srcUri.getPath())));
+        File targetFile = new File(
+            FilenameUtils.concat(
+                targetDir,
+                ProductUtil.normalize(
+                    FilenameUtils.getName(
+                        srcUri.getPath()
+                    )
+                )
+            )
+        );
         fileMap.put(targetFile, srcUri);
         return targetFile;
     }
