@@ -257,6 +257,6 @@ public abstract class AbstractXmlPackager {
      * @return Normalized file name.
      */
     final String normalizeFileName(final String fileName) {
-        return fileName.replaceAll("[^-_a-zA-Z0-9.a-z0-9]+", "_");
+        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
     }
 }
