@@ -32,8 +32,4 @@ public final class ProductUtil {
         }
         return null;
     }
-
-    public static String normalize(final String string) {
-        return string.replaceAll("[^a-zA-Z0-9\\.(a-z)+]", "_");
-    }
 }
