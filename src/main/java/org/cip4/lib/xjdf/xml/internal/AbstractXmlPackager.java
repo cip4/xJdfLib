@@ -26,7 +26,6 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.util.ProductUtil;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -239,7 +238,7 @@ public abstract class AbstractXmlPackager {
         File targetFile = new File(
             FilenameUtils.concat(
                 targetDir,
-                ProductUtil.normalize(
+                normalizeFileName(
                     FilenameUtils.getName(
                         srcUri.getPath()
                     )
@@ -248,5 +247,16 @@ public abstract class AbstractXmlPackager {
         );
         fileMap.put(targetFile, srcUri);
         return targetFile;
+    }
+
+    /**
+     * Normalizes a file name by replacing any non alphanumeric character (except '.' and '-') with an underscore.
+     *
+     * @param fileName The file name to normalize.
+     *
+     * @return Normalized file name.
+     */
+    final String normalizeFileName(final String fileName) {
+        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
     }
 }
