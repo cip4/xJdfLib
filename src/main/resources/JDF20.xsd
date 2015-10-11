@@ -745,6 +745,23 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumPreflightAction">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Abort"/>
+            <xs:enumeration value="Continue"/>
+            <xs:enumeration value="Repair"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPreflightSeverity">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Fatal"/>
+            <xs:enumeration value="Error"/>
+            <xs:enumeration value="Warning"/>
+            <xs:enumeration value="Information"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumColorType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Monochrome"/>
@@ -7961,38 +7978,28 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightReportRulePool"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PRItem"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightCheck"/>
                 </xs:sequence>
-                <xs:attribute name="WarningCount" type="integer" use="optional"/>
-                <xs:attribute name="ErrorState" use="optional"/>
                 <xs:attribute name="ErrorCount" type="integer" use="optional"/>
-                <xs:attribute name="PreflightParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+                <xs:attribute name="WarningCount" type="integer" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PreflightReportRulePool ** -->
-    <xs:element name="PreflightReportRulePool" type="PreflightReportRulePool" substitutionGroup="ParameterType"/>
-    <xs:complexType name="PreflightReportRulePool">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRuleAttr"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRule"/>
-                </xs:sequence>
-                <xs:attribute name="MaxOccurrences" type="integer" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for PRError ** -->
-    <xs:element name="PRError">
+    <!-- ** Complex type definition for PreflightCheck ** -->
+    <xs:element name="PreflightCheck">
         <xs:complexType>
-            <xs:attribute name="Value" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ErrorType" use="optional"/>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="Comment"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
+            </xs:sequence>
+            <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
+            <xs:attribute name="Count" type="integer" use="optional"/>
+            <xs:attribute name="Pages" type="IntegerList" use="optional"/>
+            <xs:attribute name="Severity" type="EnumPreflightSeverity"/>
+            <xs:attribute name="TestID" type="string" use="optional"/>
+            <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -8046,18 +8053,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PRItem ** -->
-    <xs:element name="PRItem">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="PRError"/>
-            </xs:sequence>
-            <xs:attribute name="PageSet" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Occurrences" type="integer" use="optional"/>
-            <xs:attribute name="ActionRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ProductionPath ** -->
     <xs:element name="ProductionPath" type="ProductionPath" substitutionGroup="ParameterType"/>
     <xs:complexType name="ProductionPath">
@@ -8088,27 +8083,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PRRule ** -->
-    <xs:element name="PRRule">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="PRRuleAttr"/>
-            </xs:sequence>
-            <xs:attribute name="ActionRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for PRRuleAttr ** -->
-    <xs:element name="PRRuleAttr">
-        <xs:complexType>
-            <xs:attribute name="GroupBy" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="LogErrors" type="integer" use="optional"/>
-            <xs:attribute name="ReportAttr" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="MaxPerGroup" type="integer" use="optional"/>
-            <xs:attribute name="MaxGroups" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for QualityControlParams ** -->
     <xs:element name="QualityControlParams" type="QualityControlParams" substitutionGroup="ParameterType"/>
