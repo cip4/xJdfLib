@@ -3930,75 +3930,76 @@
     <!-- ** Complex type definition for Part ** -->
     <xs:element name="Part">
         <xs:complexType>
-            <xs:attribute name="Metadata1" type="NameRangeList" use="optional"/>
+            <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="BinderySignaturePaginationIndex" type="Any" use="optional"/>
+            <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="CellIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="Condition" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit0" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit1" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit2" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit3" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit4" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit5" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit6" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit7" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit8" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit9" type="Any" use="optional"/>
+            <xs:attribute name="DocCopies" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DocIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DocSheetIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DocTags" type="Any" use="optional"/>
+            <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Edition" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="EditionVersion" type="NMTOKEN" use="optional"/>
             <xs:attribute name="FountainNumber" type="integer" use="optional"/>
-            <xs:attribute name="PageTags" type="Any" use="optional"/>
-            <xs:attribute name="Metadata2" type="NameRangeList" use="optional"/>
+            <xs:attribute name="ItemNames" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="LayerIDs" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Metadata0" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Metadata1" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Metadata2" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Metadata3" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Metadata4" type="NameRangeList" use="optional"/>
             <xs:attribute name="Metadata5" type="NameRangeList" use="optional"/>
             <xs:attribute name="Metadata6" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata3" type="NameRangeList" use="optional"/>
-            <xs:attribute name="CellIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Metadata4" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata9" type="NameRangeList" use="optional"/>
             <xs:attribute name="Metadata7" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Edition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Metadata8" type="NameRangeList" use="optional"/>
-            <xs:attribute name="ItemNames" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="LayerIDs" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="WebProduct" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Separation" type="string" use="optional"/>
-            <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit5" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit4" type="Any" use="optional"/>
-            <xs:attribute name="EditionVersion" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit7" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit6" type="Any" use="optional"/>
-            <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DeliveryUnit1" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit0" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit3" type="Any" use="optional"/>
-            <xs:attribute name="PreflightRule" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SheetName" type="string" use="optional"/>
-            <xs:attribute name="SubRun" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit2" type="Any" use="optional"/>
-            <xs:attribute name="SetTags" type="Any" use="optional"/>
-            <xs:attribute name="SetSheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="RunPage" type="integer" use="optional"/>
+            <xs:attribute name="Metadata9" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="PageNumber" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="PageTags" type="Any" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="SetRunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SignatureName" type="string" use="optional"/>
-            <xs:attribute name="TileID" type="XYPair" use="optional"/>
-            <xs:attribute name="DocCopies" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DocTags" type="Any" use="optional"/>
-            <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit9" type="Any" use="optional"/>
-            <xs:attribute name="DocSheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DeliveryUnit8" type="Any" use="optional"/>
+            <xs:attribute name="PlateLayout" type="Any" use="optional"/>
+            <xs:attribute name="PreflightRule" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
+            <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RibbonName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="RunPage" type="integer" use="optional"/>
+            <xs:attribute name="RunPageRange" type="Any" use="optional"/>
+            <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RunTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="SectionIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="Separation" type="string" use="optional"/>
             <xs:attribute name="SetDocIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="PlateLayout" type="Any" use="optional"/>
-            <xs:attribute name="RibbonName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PageNumber" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="StationName" type="Any" use="optional"/>
-            <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
-            <xs:attribute name="RunPageRange" type="Any" use="optional"/>
-            <xs:attribute name="WebSetup" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Side" type="EnumSide" use="optional"/>
+            <xs:attribute name="SetRunIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="SetSheetIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="SetTags" type="Any" use="optional"/>
             <xs:attribute name="SheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DocIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SectionIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="RunTags" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BinderySignaturePaginationIndex" type="Any" use="optional"/>
-            <xs:attribute name="Condition" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SheetName" type="string" use="optional"/>
+            <xs:attribute name="Side" type="EnumSide" use="optional"/>
+            <xs:attribute name="SignatureName" type="string" use="optional"/>
+            <xs:attribute name="StationName" type="Any" use="optional"/>
+            <xs:attribute name="SubRun" type="Any" use="optional"/>
+            <xs:attribute name="TileID" type="XYPair" use="optional"/>
+            <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="WebProduct" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="WebSetup" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
