@@ -899,6 +899,26 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumAction">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="LongFoldLeftToRight"/>
+            <xs:enumeration value="LongFoldRightToLeft"/>
+            <xs:enumeration value="LongPreFoldLeftToRight"/>
+            <xs:enumeration value="LongPreFoldRightToLeft"/>
+            <xs:enumeration value="FrontFoldComplete"/>
+            <xs:enumeration value="FrontFoldDiagonal"/>
+            <xs:enumeration value="FrontFoldCompleteDiagonal"/>
+            <xs:enumeration value="BackFoldComplete"/>
+            <xs:enumeration value="BackFoldDiagonal"/>
+            <xs:enumeration value="BackFoldCompleteDiagonal"/>
+            <xs:enumeration value="ReverseFold"/>
+            <xs:enumeration value="Milling"/>
+            <xs:enumeration value="Rotate90"/>
+            <xs:enumeration value="Rotate180"/>
+            <xs:enumeration value="Rotate270"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
