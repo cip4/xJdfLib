@@ -543,6 +543,17 @@
         </xs:restriction>
     </xs:simpleType>
     
+    <xs:simpleType name="EnumPosition">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Top"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Bottom"/>
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="Back"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
     <xs:simpleType name="EnumBindingType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="ChannelBinding"/>
@@ -3189,16 +3200,15 @@
 	<!-- ** Complex type definition for EmbossingItem ** -->
 	<xs:element name="EmbossingItem">
 		<xs:complexType>
-			<xs:sequence>
-				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
-			</xs:sequence>
 			<xs:attribute name="Direction" type="EnumDirection" use="optional" />
 			<xs:attribute name="EmbossingType" type="string" use="optional" />
-			<xs:attribute name="Height" type="double" use="optional" />
-			<xs:attribute name="ImageSize" type="XYPair" use="optional" />
-			<xs:attribute name="FoilColorDetails" type="string" use="optional" />
-			<xs:attribute name="FoilColor" type="EnumNamedColor" use="optional" />
+            <xs:attribute name="FoilColor" type="EnumNamedColor" use="optional" />
+            <xs:attribute name="FoilColorDetails" type="string" use="optional" />
+            <xs:attribute name="Height" type="double" use="optional" />
+            <xs:attribute name="ImageSize" type="XYPair" use="optional" />
 			<xs:attribute name="Level" type="EnumEmbossingLevel" use="optional" />
+			<xs:attribute name="Location" type="EnumPosition" use="optional" />
+			<xs:attribute name="Position" type="XYPair" use="optional" />
 			<xs:attribute name="Separation" type="NMTOKEN" use="optional" />
 			<xs:attribute name="ShapeName" type="string" use="optional" />
         </xs:complexType>
