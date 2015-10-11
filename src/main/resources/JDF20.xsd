@@ -2573,13 +2573,11 @@
 				<xs:element minOccurs="0" maxOccurs="unbounded" ref="Position" />
 			</xs:sequence>
 			<xs:attribute name="Direction" use="optional" />
-			<xs:attribute name="EdgeShape" use="optional" />
-			<xs:attribute name="EdgeAngle" type="double" use="optional" />
 			<xs:attribute name="EmbossingType" type="string" use="optional" />
+			<xs:attribute name="FoilColor" type="EnumNamedColor" use="optional" />
+			<xs:attribute name="FoilColorDetails" type="string" use="optional" />
 			<xs:attribute name="Height" type="double" use="optional" />
 			<xs:attribute name="ImageSize" type="XYPair" use="optional" />
-			<xs:attribute name="FoilColorDetails" type="string" use="optional" />
-			<xs:attribute name="FoilColor" type="EnumNamedColor" use="optional" />
 			<xs:attribute name="Level" use="optional" />
 			<xs:attribute name="Separation" type="NMTOKEN" use="optional" />
 			<xs:attribute name="ShapeName" type="string" use="optional" />
