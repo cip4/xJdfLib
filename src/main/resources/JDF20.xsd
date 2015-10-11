@@ -1554,7 +1554,16 @@
     <!-- ** Complex type definition for PartAmount ** -->
     <xs:element name="PartAmount">
         <xs:complexType>
-            <xs:attribute name="Amount" type="integer" use="optional"/>
+            <xs:sequence>
+                <xs:element minOccurs="1" maxOccurs="unbounded" ref="Part"/>
+            </xs:sequence>
+            <xs:attribute name="ActualAmount" type="double" use="optional"/>
+            <xs:attribute name="Amount" type="double" use="optional"/>
+            <xs:attribute name="MaxAmount" type="double" use="optional"/>
+            <xs:attribute name="MinAmount" type="double" use="optional"/>
+            <xs:attribute name="ModuleIDs" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Waste" type="double" use="optional"/>
+            <xs:attribute name="WasteDetails" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3935,7 +3944,6 @@
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="CellIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Condition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit0" type="Any" use="optional"/>
             <xs:attribute name="DeliveryUnit1" type="Any" use="optional"/>
             <xs:attribute name="DeliveryUnit2" type="Any" use="optional"/>
