@@ -8244,49 +8244,48 @@
                     <xs:element minOccurs="0" ref="InterpretedPDLData"/>
                     <xs:element minOccurs="0" ref="Dependencies"/>
                 </xs:sequence>
+                <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
+                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="ContentListRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
-                <xs:attribute name="Sets" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="SetCopies" type="integer" use="optional"/>
-                <xs:attribute name="SheetSides" use="optional"/>
+                <xs:attribute name="DocNames" type="NameRangeList" use="optional"/>
+                <xs:attribute name="Docs" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="ElementColorParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ElementType" use="optional"/>
+                <xs:attribute name="EndOfBundleItem" type="boolean" use="optional"/>
+                <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
+                <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
+                <xs:attribute name="FirstPage" type="integer" use="optional"/>
+                <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
+                <xs:attribute name="IgnorePDLCopies" type="boolean" use="optional"/>
+                <xs:attribute name="IgnorePDLImposition" type="boolean" use="optional"/>
+                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="IsBlank" type="boolean" use="optional"/>
+                <xs:attribute name="IsPage" type="boolean" use="optional"/>
+                <xs:attribute name="IsPrintable" type="boolean" use="optional"/>
+                <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
                 <xs:attribute name="LogicalPage" type="integer" use="optional"/>
                 <xs:attribute name="NPage" type="integer" use="optional"/>
-                <xs:attribute name="IgnoreContext" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="Sorted" type="boolean" use="optional"/>
-                <xs:attribute name="Docs" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
-                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="Pages" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="PageCopies" type="integer" use="optional"/>
-                <xs:attribute name="FirstPage" type="integer" use="optional"/>
-                <xs:attribute name="SkipPage" type="integer" use="optional"/>
-                <xs:attribute name="DocNames" type="NameRangeList" use="optional"/>
-                <xs:attribute name="RunTag" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="EndOfBundleItem" type="boolean" use="optional"/>
-                <xs:attribute name="IsPage" type="boolean" use="optional"/>
-                <xs:attribute name="SetNames" type="NameRangeList" use="optional"/>
-                <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
-                <xs:attribute name="PageNames" type="NameRangeList" use="optional"/>
+                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IsBlank" type="boolean" use="optional"/>
-                <xs:attribute name="IgnorePDLCopies" type="boolean" use="optional"/>
-                <xs:attribute name="SetLevel" type="XPath" use="optional"/>
-                <xs:attribute name="SourceTrimBox" type="rectangle" use="optional"/>
-                <xs:attribute name="SourceMediaBox" type="rectangle" use="optional"/>
-                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="IgnorePDLImposition" type="boolean" use="optional"/>
-                <xs:attribute name="ElementType" use="optional"/>
-                <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
-                <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
-                <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
-                <xs:attribute name="IsPrintable" type="boolean" use="optional"/>
-                <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
-                <xs:attribute name="ElementColorParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ContentListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PageNames" type="NameRangeList" use="optional"/>
+                <xs:attribute name="Pages" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="RunTag" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="SetCopies" type="integer" use="optional"/>
+                <xs:attribute name="SetLevel" type="XPath" use="optional"/>
+                <xs:attribute name="SetNames" type="NameRangeList" use="optional"/>
+                <xs:attribute name="Sets" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="SheetSides" use="optional"/>
+                <xs:attribute name="SkipPage" type="integer" use="optional"/>
+                <xs:attribute name="Sorted" type="boolean" use="optional"/>
+                <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
+                <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
+                <xs:attribute name="SourceMediaBox" type="rectangle" use="optional"/>
+                <xs:attribute name="SourceTrimBox" type="rectangle" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
