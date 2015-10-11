@@ -1434,7 +1434,6 @@
             <xs:attribute name="MinStatus" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="AlternateBrand" type="string" use="optional"/>
             <xs:attribute name="Manufacturer" type="string" use="optional"/>
-            <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PartUsage" use="optional"/>
             <xs:attribute name="BatchID" type="string" use="optional"/>
             <xs:attribute name="ProductID" type="string" use="optional"/>
@@ -1669,6 +1668,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource"/>
                 </xs:sequence>
+                <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5996,7 +5996,6 @@
             <xs:extension base="ParameterType">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList"/>
                 </xs:sequence>
                 <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="JobID" type="string" use="optional"/>
@@ -6010,7 +6009,6 @@
     <xs:element name="AssemblySection">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageAssignedList"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
             </xs:sequence>
             <xs:attribute name="JobID" type="string" use="optional"/>
@@ -7754,16 +7752,6 @@
             <xs:extension base="ParameterType"/>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PageAssignedList ** -->
-    <xs:element name="PageAssignedList">
-        <xs:complexType>
-            <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="BroadsheetNumber" type="integer" use="optional"/>
-            <xs:attribute name="PagePlacementName" type="string" use="optional"/>
-            <xs:attribute name="LogicalPrinterSection" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for PageAssignParams ** -->
     <xs:element name="PageAssignParams">
