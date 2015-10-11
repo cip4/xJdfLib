@@ -919,6 +919,13 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumBandOrdering">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="BandMajor"/>
+            <xs:enumeration value="ColorMajor"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -2865,11 +2872,9 @@
     <!-- ** Complex type definition for Band ** -->
     <xs:element name="Band">
         <xs:complexType>
-            <xs:attribute name="Mask" type="URL" use="optional"/>
-            <xs:attribute name="Width" type="integer" use="optional"/>
             <xs:attribute name="Height" type="integer" use="optional"/>
             <xs:attribute name="WasMarked" type="boolean" use="optional"/>
-            <xs:attribute name="Data" type="URL" use="optional"/>
+            <xs:attribute name="Width" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6199,19 +6204,17 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PixelColorant"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Band"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="Band"/>
                 </xs:sequence>
-                <xs:attribute name="BandOrdering" use="optional"/>
-                <xs:attribute name="ElementType" use="optional"/>
-                <xs:attribute name="Halftoned" type="boolean" use="optional"/>
-                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-                <xs:attribute name="FrameWidth" type="integer" use="optional"/>
-                <xs:attribute name="Interleaved" type="boolean" use="optional"/>
+                <xs:attribute name="BandOrdering" type="EnumBandOrdering" use="optional"/>
                 <xs:attribute name="FrameHeight" type="integer" use="optional"/>
+                <xs:attribute name="FrameWidth" type="integer" use="optional"/>
+                <xs:attribute name="Halftoned" type="boolean" use="optional"/>
+                <xs:attribute name="Interleaved" type="boolean" use="optional"/>
+                <xs:attribute name="PixelColorants" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="PixelDepth" type="integer" use="optional"/>
                 <xs:attribute name="PixelSkip" type="integer" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7879,14 +7882,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PixelColorant ** -->
-    <xs:element name="PixelColorant">
-        <xs:complexType>
-            <xs:attribute name="PixelDepth" type="integer" use="optional"/>
-            <xs:attribute name="ColorantName" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for PlateCopyParams ** -->
     <xs:element name="PlateCopyParams" type="PlateCopyParams" substitutionGroup="ParameterType"/>
