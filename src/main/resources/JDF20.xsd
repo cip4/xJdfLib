@@ -880,6 +880,13 @@
             <xs:enumeration value="Type20"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="EnumWireCombShape">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Single"/>
+            <xs:enumeration value="Twin"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- unchecked -->
 
@@ -2815,18 +2822,6 @@
     <!-- ** Complex type definition for StatusPool ** -->
     <xs:element name="StatusPool"/>
 
-    <!-- ** Complex type definition for AdhesiveBindingParams ** -->
-    <xs:element name="AdhesiveBindingParams" type="AdhesiveBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="AdhesiveBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="CoverApplicationParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="SpineTapingParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="SpinePreparationParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Band ** -->
     <xs:element name="Band">
         <xs:complexType>
@@ -2967,21 +2962,14 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CoilBindingParams ** -->
-    <xs:element name="CoilBindingParams" type="CoilBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="CoilBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="Tucked" type="boolean" use="optional"/>
-                <xs:attribute name="Color" type="string" use="optional"/>
-                <xs:attribute name="Diameter" type="double" use="optional"/>
-                <xs:attribute name="Thickness" type="double" use="optional"/>
-                <xs:attribute name="Material" use="optional"/>
-                <xs:attribute name="HoleMakingParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+	<!-- ** Complex type definition for CoilBindingDetails ** -->
+    <xs:element name="CoilBindingDetails">
+        <xs:complexType>
+            <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="Thickness" type="double" use="optional"/>
+            <xs:attribute name="Tucked" type="boolean" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ColorMeasurementConditions ** -->
     <xs:element name="ColorMeasurementConditions" type="ColorMeasurementConditions" substitutionGroup="ParameterType"/>
@@ -5574,6 +5562,34 @@
         <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
         <xs:attribute name="WireCombShape" type="NMTOKEN" use="optional"/>
     </xs:complexType>
+
+    <!-- ** Complex type definition for LooseBindingParams ** -->
+    <xs:element name="LooseBindingParams" type="LooseBindingParams" substitutionGroup="ParameterType"/>
+    <xs:complexType name="LooseBindingParams">
+        <xs:complexContent>
+            <xs:extension base="ParameterType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="ChannelBindingDetails"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="CoilBindingDetails"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="CombBindingDetails"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="RingBindingDetails"/>
+                </xs:sequence>
+                <xs:attribute name="BinderBrand" type="string" use="optional"/>
+                <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="CoverColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
+                <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
+                <xs:attribute name="HoleType" type="string" use="optional"/>
+                <xs:attribute name="Length" type="double" use="optional"/>
+                <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
+                <xs:attribute name="SpineColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="SpineColorDetails" type="string" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
 
     <!-- ** Complex type definition for BookCase ** -->
     <xs:element name="BookCase"/>
@@ -8613,19 +8629,14 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ChannelBindingParams ** -->
-    <xs:element name="ChannelBindingParams" type="ChannelBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="ChannelBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="ClampSize" type="shape" use="optional"/>
-                <xs:attribute name="ClampColor" type="string" use="optional"/>
-                <xs:attribute name="ClampSystem" type="boolean" use="optional"/>
-                <xs:attribute name="ClampColorDetails" type="string" use="optional"/>
-                <xs:attribute name="ClampD" type="double" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+	<!-- ** Complex type definition for ChannelBindingDetails ** -->
+    <xs:element name="ChannelBindingDetails">
+        <xs:complexType>
+            <xs:attribute name="ClampD" type="double" use="optional"/>
+            <xs:attribute name="ClampSize" type="shape" use="optional"/>
+            <xs:attribute name="Cover" type="boolean" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for CoilBinding ** -->
     <xs:element name="CoilBinding">
@@ -8830,19 +8841,14 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for PlasticCombBindingParams ** -->
-    <xs:element name="PlasticCombBindingParams" type="PlasticCombBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="PlasticCombBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="Color" type="string" use="optional"/>
-                <xs:attribute name="Diameter" type="double" use="optional"/>
-                <xs:attribute name="Thickness" type="double" use="optional"/>
-                <xs:attribute name="HoleMakingParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <!-- ** Complex type definition for CombBindingDetails ** -->
+    <xs:element name="CombBindingDetails">
+        <xs:complexType>
+            <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="Thickness" type="double" use="optional"/>
+            <xs:attribute name="WireCombShape" type="EnumWireCombShape" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for RingBinding ** -->
     <xs:element name="RingBinding">
@@ -8858,27 +8864,17 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RingBindingParams ** -->
-    <xs:element name="RingBindingParams" type="RingBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="RingBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="BinderColor" type="string" use="optional"/>
-                <xs:attribute name="SpineColor" type="string" use="optional"/>
-                <xs:attribute name="SpineColorDetails" type="string" use="optional"/>
-                <xs:attribute name="BinderColorDetails" type="string" use="optional"/>
-                <xs:attribute name="RingDiameter" type="double" use="optional"/>
-                <xs:attribute name="BinderName" type="string" use="optional"/>
-                <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
-                <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
-                <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SpineWidth" type="double" use="optional"/>
-                <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="HoleMakingParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <!-- ** Complex type definition for RingBindingDetails ** -->
+    <xs:element name="RingBindingDetails">
+        <xs:complexType>
+            <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
+            <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
+            <xs:attribute name="SpineWidth" type="double" use="optional"/>
+            <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for SaddleStitching ** -->
     <xs:element name="SaddleStitching">
@@ -8936,19 +8932,6 @@
                 <xs:attribute name="StitchType" use="optional"/>
                 <xs:attribute name="Offset" type="double" use="optional"/>
                 <xs:attribute name="WireBrand" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for StripBindingParams ** -->
-    <xs:element name="StripBindingParams" type="StripBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="StripBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="LengthJDF" type="double" use="optional"/>
-                <xs:attribute name="StripColorDetails" type="string" use="optional"/>
-                <xs:attribute name="StripColor" type="string" use="optional"/>
-                <xs:attribute name="HoleMakingParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -9040,34 +9023,17 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for WireCombBinding ** -->
-    <xs:element name="WireCombBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
-            </xs:sequence>
-            <xs:attribute name="WireCombMaterial" use="optional"/>
-            <xs:attribute name="WireCombBrand" type="string" use="optional"/>
-            <xs:attribute name="WireCombShape" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for WireCombBindingParams ** -->
-    <xs:element name="WireCombBindingParams" type="WireCombBindingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="WireCombBindingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
-                <xs:attribute name="Shape" use="optional"/>
-                <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="Color" type="string" use="optional"/>
-                <xs:attribute name="Diameter" type="double" use="optional"/>
-                <xs:attribute name="Thickness" type="double" use="optional"/>
-                <xs:attribute name="Material" use="optional"/>
-                <xs:attribute name="HoleMakingParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+	<!-- ** Complex type definition for WireCombBinding ** -->
+	<xs:element name="WireCombBinding">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList" />
+			</xs:sequence>
+			<xs:attribute name="WireCombMaterial" use="optional" />
+			<xs:attribute name="WireCombBrand" type="string" use="optional" />
+			<xs:attribute name="WireCombShape" use="optional" />
+		</xs:complexType>
+	</xs:element>
 
     <!-- ** Complex type definition for AssetListCreationParams ** -->
     <xs:element name="AssetListCreationParams" type="AssetListCreationParams" substitutionGroup="ParameterType"/>
