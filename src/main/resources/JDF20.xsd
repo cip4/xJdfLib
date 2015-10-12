@@ -3965,7 +3965,7 @@
                 <xs:attribute name="IsPrintable" type="boolean" use="optional"/>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
                 <xs:attribute name="ElementColorParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ContentListRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
@@ -4971,21 +4971,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PublishingIntent ** -->
-    <xs:element name="PublishingIntent" type="PublishingIntent" substitutionGroup="IntentType"/>
-    <xs:complexType name="PublishingIntent">
-        <xs:complexContent>
-            <xs:extension base="IntentType">
-                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="ContentListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IssueType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="IssueDate" type="dateTime" use="optional"/>
-                <xs:attribute name="IssueName" type="string" use="optional"/>
-                <xs:attribute name="Circulation" type="integer" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for ShapeCut ** -->
     <xs:element name="ShapeCut">
         <xs:complexType>
@@ -5595,35 +5580,30 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ContentData ** -->
-    <xs:element name="ContentData">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentMetaData"/>
-            </xs:sequence>
-            <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
-            <xs:attribute name="ContentType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="IsBlank" type="boolean" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="CatalogDetails" type="string" use="optional"/>
-            <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
-            <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="CatalogID" type="string" use="optional"/>
-            <xs:attribute name="ElementColorParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ContentList ** -->
-    <xs:element name="ContentList" type="ContentList" substitutionGroup="ParameterType"/>
-    <xs:complexType name="ContentList">
+    <!-- ** Complex type definition for Content ** -->
+    <xs:element name="Content" type="Content" substitutionGroup="ParameterType"/>
+    <xs:complexType name="Content">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="ContentDataRef" type="IDREF" use="optional"/>
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="ContentMetaData"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="ElementColorParams"/>
+                    <xs:element minOccurs="0" maxOccurs="unbound" ref="PositionObj"/>
+                </xs:sequence>
+                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ContentStatus" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ContentType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
+                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="IsBlank" type="boolean" use="optional"/>
+                <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
+                <xs:attribute name="PageIndex" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="PageLabel" type="string" use="optional"/>
+                <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
+                <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
+                <xs:attribute name="SourceTrimBox" type="rectangle" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6908,7 +6888,7 @@
     <xs:element name="PageElement">
         <xs:complexType>
             <xs:attribute name="ContentType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
+            <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="RelativeBox" type="rectangle" use="optional"/>
             <xs:attribute name="ElementPages" type="IntegerRangeList" use="optional"/>
         </xs:complexType>
@@ -7276,8 +7256,7 @@
                 </xs:sequence>
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="ContentListRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
                 <xs:attribute name="DocNames" type="NameRangeList" use="optional"/>
                 <xs:attribute name="Docs" type="IntegerRangeList" use="optional"/>
