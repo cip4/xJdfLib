@@ -183,6 +183,13 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
+    <xs:simpleType name="sRGBColor">
+        <xs:restriction base="DoubleList">
+            <xs:minLength value="3"/>
+            <xs:maxLength value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- Enums -->
     <xs:simpleType name="EnumActivation">
         <xs:restriction base="xs:NMTOKEN">
@@ -437,7 +444,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumShutDownType">
-        <xs:restriction base="EnumShutDownType">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="StandBy"/>
             <xs:enumeration value="Full"/>
         </xs:restriction>
@@ -947,6 +954,48 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="BandMajor"/>
             <xs:enumeration value="ColorMajor"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumColorantType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="DieLine"/>
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Transparent"/>
+            <xs:enumeration value="Opaque"/>
+            <xs:enumeration value="OpaqueIgnore"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumColorMapping">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="UsePDLValues"/>
+            <xs:enumeration value="UseLocalPrinterValues"/>
+            <xs:enumeration value="UseProcessColorValues"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMirrorAround">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="FeedDirection"/>
+            <xs:enumeration value="MediaWidth"/>
+            <xs:enumeration value="Both"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPolarity">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Positive"/>
+            <xs:enumeration value="Negative"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPrintQuality">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="High"/>
+            <xs:enumeration value="Normal"/>
+            <xs:enumeration value="Draft"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1885,9 +1934,6 @@
 
     <!-- ** Complex type definition for RectangleRangeList ** -->
     <xs:element name="RectangleRangeList"/>
-
-    <!-- ** Complex type definition for RGBColor ** -->
-    <xs:element name="RGBColor"/>
 
     <!-- ** Complex type definition for Shape ** -->
     <xs:element name="Shape" type="Shape" substitutionGroup="ParameterType"/>
@@ -3540,22 +3586,31 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FitPolicy"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="InterpretingDetails"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="PDFInterpretingParams"/>
                 </xs:sequence>
-                <xs:attribute name="Scaling" type="XYPair" use="optional"/>
-                <xs:attribute name="Polarity" use="optional"/>
-                <xs:attribute name="ScalingOrigin" type="XYPair" use="optional"/>
-                <xs:attribute name="MirrorAround" use="optional"/>
-                <xs:attribute name="PrintQuality" use="optional"/>
                 <xs:attribute name="Center" type="boolean" use="optional"/>
-                <xs:attribute name="PosterOverlap" type="XYPair" use="optional"/>
-                <xs:attribute name="Poster" type="XYPair" use="optional"/>
-                <xs:attribute name="PDFInterpretingParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+                <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
+                <xs:attribute name="MirrorAround" type="EnumMirrorAround" use="optional"/>
+                <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="PrintQuality" type="EnumPrintQuality" use="optional"/>
+                <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Scaling" type="XYPair" use="optional"/>
+                <xs:attribute name="ScalingOrigin" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <!-- ** Complex type definition for InterpretingDetails ** -->
+    <xs:element name="InterpretingDetails">
+        <xs:complexType>
+            <xs:attribute name="MinLineWidth" type="double" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for JacketingParams ** -->
     <xs:element name="JacketingParams" type="JacketingParams" substitutionGroup="ParameterType"/>
@@ -5314,30 +5369,29 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PrintConditionColor"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNColor"/>
+                    <xs:element minOccurs="0" maxOccurs="2" ref="FileSpec"/>
                 </xs:sequence>
-                <xs:attribute name="Lab" type="LabColor" use="optional"/>
-                <xs:attribute name="RawName" type="hexBinary" use="optional"/>
-                <xs:attribute name="NeutralDensity" type="double" use="optional"/>
-                <xs:attribute name="MappingSelection" use="optional"/>
-                <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="Name" type="string" use="optional"/>
-                <xs:attribute name="Gray" type="double" use="optional"/>
-                <xs:attribute name="Density" type="double" use="optional"/>
-                <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
-                <xs:attribute name="ColorBookPrefix" type="string" use="optional"/>
                 <xs:attribute name="ActualColorName" type="string" use="optional"/>
+                <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
                 <xs:attribute name="ColorBook" type="string" use="optional"/>
                 <xs:attribute name="ColorBookEntry" type="string" use="optional"/>
+                <xs:attribute name="ColorBookPrefix" type="string" use="optional"/>
                 <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
-                <xs:attribute name="ColorType" use="optional"/>
-                <xs:attribute name="ColorName" type="string" use="optional"/>
-                <xs:attribute name="MediaType" type="string" use="optional"/>
-                <xs:attribute name="sRGB" type="string" use="optional"/>
+                <xs:attribute name="ColorDetails" type="string" use="optional"/>
                 <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ColorName" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="ColorType" type="EnumColorantType" use="optional"/>
+                <xs:attribute name="ColorTypeDetails" type="string" use="optional"/>
+                <xs:attribute name="Density" type="double" use="optional"/>
+                <xs:attribute name="Gray" type="double" use="optional"/>
+                <xs:attribute name="Lab" type="LabColor" use="optional"/>
+                <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
+                <xs:attribute name="MediaType" type="string" use="optional"/>
+                <xs:attribute name="NeutralDensity" type="double" use="optional"/>
+                <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="RawName" type="hexBinary" use="optional"/>
+                <xs:attribute name="sRGB" type="sRGBColor" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5361,7 +5415,6 @@
             <xs:extension base="ParameterType">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorSpaceSubstitute"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias"/>
                 </xs:sequence>
                 <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
@@ -5847,9 +5900,9 @@
     <!-- ** Complex type definition for DeviceNColor ** -->
     <xs:element name="DeviceNColor">
         <xs:complexType>
-            <xs:attribute name="N" type="integer" use="optional"/>
-            <xs:attribute name="ColorList" type="string" use="optional"/>
-            <xs:attribute name="Name" type="string" use="optional"/>
+            <xs:attribute name="ColorList" type="DoubleList"/>
+            <xs:attribute name="N" type="integer"/>
+            <xs:attribute name="Name" type="string"/>
         </xs:complexType>
     </xs:element>
 
@@ -5858,9 +5911,9 @@
     <xs:complexType name="DeviceNSpace">
         <xs:complexContent>
             <xs:extension base="ParameterType">
+                <xs:attribute name="N" type="integer"/>
                 <xs:attribute name="Name" type="string" use="optional"/>
-                <xs:attribute name="N" type="integer" use="optional"/>
-                <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7045,30 +7098,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PrintConditionColor ** -->
-    <xs:element name="PrintConditionColor">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNColor"/>
-            </xs:sequence>
-            <xs:attribute name="Lab" type="LabColor" use="optional"/>
-            <xs:attribute name="ColorBookPrefix" type="string" use="optional"/>
-            <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
-            <xs:attribute name="NeutralDensity" type="double" use="optional"/>
-            <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
-            <xs:attribute name="ColorBookEntry" type="string" use="optional"/>
-            <xs:attribute name="ColorBook" type="string" use="optional"/>
-            <xs:attribute name="MappingSelection" use="optional"/>
-            <xs:attribute name="MediaSide" use="optional"/>
-            <xs:attribute name="Density" type="double" use="optional"/>
-            <xs:attribute name="PrintConditionName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="sRGB" type="string" use="optional"/>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for PrintRollingParams ** -->
     <xs:element name="PrintRollingParams" type="PrintRollingParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="PrintRollingParams">
@@ -8143,16 +8172,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for ColorSpaceSubstitute ** -->
-    <xs:element name="ColorSpaceSubstitute">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="PDLResourceAlias"/>
-            </xs:sequence>
-            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for DigitalDeliveryParams ** -->
     <xs:element name="DigitalDeliveryParams" type="DigitalDeliveryParams" substitutionGroup="ParameterType"/>
