@@ -144,7 +144,7 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-		Assert.assertEquals("Brand is wrong", BRAND, mediaIntent.getBrand());
+		Assert.assertEquals("Brand is wrong", BRAND, mediaIntent.getStockBrand());
 		Assert.assertEquals("Weight is wrong", WEIGHT, mediaIntent.getWeight());
 	}
 
@@ -159,7 +159,7 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-		Assert.assertNull("Brand is wrong", mediaIntent.getBrand());
+		Assert.assertNull("Brand is wrong", mediaIntent.getStockBrand());
 		Assert.assertNull("Weight is wrong", mediaIntent.getWeight());
 	}
 
@@ -168,7 +168,7 @@ public class XJdfNodeFactoryTest {
 
 		// arrange
 		final Integer pages = 23;
-		final String sides = UUID.randomUUID().toString();
+		final String sides = "OneSided";
 		final Shape finishedDimensions = new Shape(4.4, 6.6);
 		final XYPair dimensions = new XYPair(5.5, 7.7);
 
@@ -177,7 +177,7 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
+		Assert.assertEquals("Sides is wrong", EnumSides.ONE_SIDED, layoutIntent.getSides());
 		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
 		Assert.assertEquals("Dimensions is wrong", dimensions, layoutIntent.getDimensions());
 	}
@@ -187,7 +187,7 @@ public class XJdfNodeFactoryTest {
 
 		// arrange
 		final Integer pages = 23;
-		final String sides = UUID.randomUUID().toString();
+		final String sides = "OneSided";
 		final Shape finishedDimensions = new Shape(4.4, 6.6);
 
 		// act
@@ -195,7 +195,7 @@ public class XJdfNodeFactoryTest {
 
 		// assert
 		Assert.assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-		Assert.assertEquals("Sides is wrong", sides, layoutIntent.getSides());
+		Assert.assertEquals("Sides is wrong", EnumSides.ONE_SIDED, layoutIntent.getSides());
 		Assert.assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
 		Assert.assertEquals("Dimensions is wrong", null, layoutIntent.getDimensions());
 	}
@@ -243,9 +243,9 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        final String BINDING_TYPE = UUID.randomUUID().toString();
-        final String BINDING_SIDE = UUID.randomUUID().toString();
-        final String BINDING_ORDER = UUID.randomUUID().toString();
+        final String BINDING_TYPE = "Some Binding Type";
+        final String BINDING_SIDE = "Bottom";
+        final String BINDING_ORDER = "Gathering";
 
 
         // act
@@ -253,8 +253,8 @@ public class XJdfNodeFactoryTest {
 
         // assert
         Assert.assertEquals("BindingType is wrong", BINDING_TYPE, bindingIntent.getBindingType());
-        Assert.assertEquals("BindingType is wrong", BINDING_SIDE, bindingIntent.getBindingSide());
-        Assert.assertEquals("BindingType is wrong", BINDING_ORDER, bindingIntent.getBindingOrder());
+        Assert.assertEquals("BindingType is wrong", EnumEdge.BOTTOM, bindingIntent.getBindingSide());
+        Assert.assertEquals("BindingType is wrong", EnumBindingOrder.GATHERING, bindingIntent.getBindingOrder());
 
     }
 

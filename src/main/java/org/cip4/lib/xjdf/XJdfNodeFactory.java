@@ -344,18 +344,18 @@ public class XJdfNodeFactory extends ObjectFactory {
 	/**
 	 * Create new MediaIntent Node which already contains values for attributes MediaQuality, StockBrand and Weight.
 	 * @param mediaQuality Value for MediaQuality attribute.
-	 * @param brand Value for StockBrand attribute.
+	 * @param stockBrand Value for StockBrand attribute.
 	 * @param weight Value for Weight attribute.
 	 * @return MediaIntent Node which already contains defined attributes.
 	 */
-	public MediaIntent createMediaIntent(String mediaQuality, String brand, Double weight) {
+	public MediaIntent createMediaIntent(String mediaQuality, String stockBrand, Double weight) {
 
 		// create node
 		MediaIntent mediaIntent = super.createMediaIntent();
 
 		// set attributes
 		mediaIntent.setMediaQuality(mediaQuality);
-		mediaIntent.setBrand(brand);
+		mediaIntent.setStockBrand(stockBrand);
 		mediaIntent.setWeight(weight);
 
 		// return object
@@ -401,7 +401,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// set attributes
 		layoutIntent.setPrintedPages(pages);
-		layoutIntent.setSides(sides);
+		layoutIntent.setSides(EnumSides.fromValue(sides));
 		layoutIntent.setFinishedDimensions(finishedDimensions);
 		layoutIntent.setDimensions(dimensions);
 
@@ -512,8 +512,12 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // set attributes
         bindingIntent.setBindingType(bindingType);
-        bindingIntent.setBindingSide(bindingSide);
-        bindingIntent.setBindingOrder(bindingOrder);
+        if (bindingSide != null) {
+			bindingIntent.setBindingSide(EnumEdge.fromValue(bindingSide));
+		}
+		if (bindingOrder != null) {
+			bindingIntent.setBindingOrder(EnumBindingOrder.fromValue(bindingOrder));
+		}
 
         // return object
         return bindingIntent;
@@ -685,7 +689,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param orientation Orientation attribute as EnumOrientation.
 	 * @return Position Node which already contains defined attributes.
 	 */
-	public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation) {
+	public Position createPosition(Rectangle absoluteBox, Orientation orientation) {
 
 		return createPosition(absoluteBox, orientation, null);
 	}
@@ -697,7 +701,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @param assemblyID Orientation attribute as AssemblyID.
      * @return Position Node which already contains defined attributes.
      */
-    public Position createPosition(Rectangle absoluteBox, EnumOrientation orientation, String assemblyID) {
+    public Position createPosition(Rectangle absoluteBox, Orientation orientation, String assemblyID) {
 
         // create Position Node
         Position position = super.createPosition();
@@ -715,6 +719,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * Create a new AmountPool Node which already contains a PartAmount Subelement with attribute amount.
 	 * @param amount Amount attribute of Subnode PartAmount.
 	 * @return AmountPool Node which already contains a PartAmount Subelement with attribute amount.
+	 * @deprecated Since amount is of type double you should not use this method.
 	 */
 	public AmountPool createAmountPool(Integer amount) {
 
@@ -723,7 +728,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// set attributes
 		PartAmount partAmount = super.createPartAmount();
-		partAmount.setAmount(amount);
+		partAmount.setAmount((double) amount);
 		amountPool.getPartAmount().add(partAmount);
 
 		// return node

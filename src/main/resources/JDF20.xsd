@@ -539,7 +539,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumEdge">
-        <xs:restriction base="EnumReferenceEdge">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Top"/>
             <xs:enumeration value="Right"/>
             <xs:enumeration value="Bottom"/>
@@ -699,7 +699,7 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="OneSided"/>
             <xs:enumeration value="OneSidedBack"/>
-            <xs:enumeration value="TowSidedHeadToHead"/>
+            <xs:enumeration value="TwoSidedHeadToHead"/>
             <xs:enumeration value="TwoSidedHeadToFoot"/>
         </xs:restriction>
     </xs:simpleType>
