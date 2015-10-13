@@ -704,6 +704,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumSides2">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="OneSidedFront"/>
+            <xs:enumeration value="OneSidedBack"/>
+            <xs:enumeration value="TwoSided"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumFluteDirection">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="LongEdge"/>
@@ -1038,6 +1046,57 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Exact"/>
             <xs:enumeration value="Free"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumDrying">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="UV"/>
+            <xs:enumeration value="Heatset"/>
+            <xs:enumeration value="IR"/>
+            <xs:enumeration value="On"/>
+            <xs:enumeration value="Off"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumFirstSurface">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="Back"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumFountainSolution">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="On"/>
+            <xs:enumeration value="Off"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumSheetLay">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+            <xs:enumeration value="Center"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCollate">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Sheet"/>
+            <xs:enumeration value="SheetAndSet"/>
+            <xs:enumeration value="SheetSetAndJob"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPageDelivery">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="FanFold"/>
+            <xs:enumeration value="SameOrderFaceUp"/>
+            <xs:enumeration value="SameOrderFaceDown"/>
+            <xs:enumeration value="ReverseOrderFaceUp"/>
+            <xs:enumeration value="ReverseOrderFaceDown"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -5661,24 +5720,19 @@
     <xs:complexType name="ConventionalPrintingParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="WorkStyle" type="EnumWorkStyle" use="optional"/>
-                <xs:attribute name="ModuleDrying" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="ApprovalParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
+                <xs:attribute name="FirstSurface" type="EnumFirstSurface" use="optional"/>
+                <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
                 <xs:attribute name="MediaLocation" type="string" use="optional"/>
-                <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
-                <xs:attribute name="Speed" type="double" use="optional"/>
-                <xs:attribute name="DirectProof" type="boolean" use="optional"/>
-                <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
-                <xs:attribute name="Drying" use="optional"/>
-                <xs:attribute name="SheetLay" use="optional"/>
-                <xs:attribute name="PrintingTechnology" use="optional"/>
+                <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="PerfectingModule" type="integer" use="optional"/>
-                <xs:attribute name="FountainSolution" use="optional"/>
-                <xs:attribute name="PrintingType" use="optional"/>
-                <xs:attribute name="NonPrintableMarginBottom" type="double" use="optional"/>
-                <xs:attribute name="FirstSurface" use="optional"/>
                 <xs:attribute name="Powder" type="double" use="optional"/>
-                <xs:attribute name="ApprovalParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="SheetLay" type="EnumSheetLay" use="optional"/>
+                <xs:attribute name="Speed" type="double" use="optional"/>
+                <xs:attribute name="WorkStyle" type="EnumWorkStyle" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5966,21 +6020,16 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing"/>
                 </xs:sequence>
-                <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
-                <xs:attribute name="DirectProofAmount" type="integer" use="optional"/>
-                <xs:attribute name="SheetLay" use="optional"/>
-                <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
-                <xs:attribute name="Collate" use="optional"/>
-                <xs:attribute name="PageDelivery" use="optional"/>
-                <xs:attribute name="OutputBin" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PrintingType" use="optional"/>
-                <xs:attribute name="NonPrintableMarginBottom" type="double" use="optional"/>
-                <xs:attribute name="Sides" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ApprovalParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Collate" type="EnumCollate" use="optional"/>
                 <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
+                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+                <xs:attribute name="OutputBin" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="PageDelivery" type="EnumPageDelivery" use="optional"/>
+                <xs:attribute name="SheetLay" type="EnumSheetLay" use="optional"/>
+                <xs:attribute name="Sides" type="EnumSides2" use="optional"/>
+                <xs:attribute name="StackAmount" type="integer" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6010,14 +6059,6 @@
             <xs:attribute name="DispositionAction" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for DividingParams ** -->
-    <xs:element name="DividingParams" type="DividingParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="DividingParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType"/>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for DocumentResultsPool ** -->
     <xs:element name="DocumentResultsPool">
