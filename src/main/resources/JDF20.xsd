@@ -4024,20 +4024,21 @@
     <xs:element name="Part">
         <xs:complexType>
             <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BinderySignaturePaginationIndex" type="Any" use="optional"/>
+            <xs:attribute name="BinderySignatureName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="BinderySignaturePaginationIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="CellIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DeliveryUnit0" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit1" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit2" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit3" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit4" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit5" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit6" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit7" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit8" type="Any" use="optional"/>
-            <xs:attribute name="DeliveryUnit9" type="Any" use="optional"/>
+            <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit1" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit2" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit3" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit4" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit5" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit6" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit7" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit8" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeliveryUnit9" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DocCopies" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
@@ -4062,17 +4063,17 @@
             <xs:attribute name="Metadata9" type="NameRangeList" use="optional"/>
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PageNumber" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="PageTags" type="Any" use="optional"/>
+            <xs:attribute name="PageTags" type="RegExp" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="PlateLayout" type="Any" use="optional"/>
             <xs:attribute name="PreflightRule" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
             <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RibbonName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="RunPage" type="integer" use="optional"/>
-            <xs:attribute name="RunPageRange" type="Any" use="optional"/>
+            <xs:attribute name="RunPageRange" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="SectionIndex" type="IntegerRangeList" use="optional"/>
@@ -4081,13 +4082,13 @@
             <xs:attribute name="SetIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SetRunIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SetSheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SetTags" type="Any" use="optional"/>
+            <xs:attribute name="SetTags" type="RegExp" use="optional"/>
             <xs:attribute name="SheetIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SheetName" type="string" use="optional"/>
             <xs:attribute name="Side" type="EnumSide" use="optional"/>
             <xs:attribute name="SignatureName" type="string" use="optional"/>
-            <xs:attribute name="StationName" type="Any" use="optional"/>
-            <xs:attribute name="SubRun" type="Any" use="optional"/>
+            <xs:attribute name="StationName" type="string" use="optional"/>
+            <xs:attribute name="SubRun" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TileID" type="XYPair" use="optional"/>
             <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="WebProduct" type="NMTOKEN" use="optional"/>
@@ -5242,14 +5243,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for BindingQualityMeasurement ** -->
-    <xs:element name="BindingQualityMeasurement">
-        <xs:complexType>
-            <xs:attribute name="PullOutValue" type="double" use="optional"/>
-            <xs:attribute name="FlexValue" type="double" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for BindingQualityParams ** -->
     <xs:element name="BindingQualityParams">
@@ -7095,28 +7088,16 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="QualityMeasurement"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
                 </xs:sequence>
+                <xs:attribute name="Condition" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="End" type="dateTime" use="optional"/>
                 <xs:attribute name="Failed" type="integer" use="optional"/>
                 <xs:attribute name="Passed" type="integer" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-                <xs:attribute name="BindingQualityParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Start" type="dateTime" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for QualityMeasurement ** -->
-    <xs:element name="QualityMeasurement">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="BindingQualityMeasurement"/>
-            </xs:sequence>
-            <xs:attribute name="Failed" type="integer" use="optional"/>
-            <xs:attribute name="Passed" type="integer" use="optional"/>
-            <xs:attribute name="Start" type="dateTime" use="optional"/>
-            <xs:attribute name="End" type="dateTime" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for ReferenceXObjParams ** -->
     <xs:element name="ReferenceXObjParams">
