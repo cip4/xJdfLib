@@ -1115,6 +1115,17 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumOverwritePolicy">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Overwrite"/>
+            <xs:enumeration value="RenameNew"/>
+            <xs:enumeration value="RenameOld"/>
+            <xs:enumeration value="NewVersion"/>
+            <xs:enumeration value="OperatorIntervention"/>
+            <xs:enumeration value="Abort"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -6187,49 +6198,30 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for FileAlias ** -->
-    <xs:element name="FileAlias">
-        <xs:complexType>
-            <xs:attribute name="RawAlias" type="hexBinary" use="optional"/>
-            <xs:attribute name="Alias" type="string" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for FileSpec ** -->
     <xs:element name="FileSpec" type="FileSpec" substitutionGroup="ParameterType"/>
     <xs:complexType name="FileSpec">
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Container"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FileAlias"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="Disposition"/>
                 </xs:sequence>
-                <xs:attribute name="DocumentNaturalLang" type="language" use="optional"/>
-                <xs:attribute name="Compression" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ResourceUsage" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="URL" type="URL" use="optional"/>
-                <xs:attribute name="FileVersion" type="string" use="optional"/>
-                <xs:attribute name="Password" type="string" use="optional"/>
-                <xs:attribute name="MimeType" type="string" use="optional"/>
-                <xs:attribute name="AppOS" type="string" use="optional"/>
-                <xs:attribute name="Encoding" type="string" use="optional"/>
-                <xs:attribute name="SearchDepth" type="integer" use="optional"/>
                 <xs:attribute name="CheckSum" type="hexBinary" use="optional"/>
-                <xs:attribute name="Application" type="string" use="optional"/>
-                <xs:attribute name="UID" type="string" use="optional"/>
+                <xs:attribute name="ContainerRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Encoding" type="string" use="optional"/>
                 <xs:attribute name="FileFormat" type="string" use="optional"/>
-                <xs:attribute name="RequestQuality" type="double" use="optional"/>
-                <xs:attribute name="FileTemplate" type="string" use="optional"/>
                 <xs:attribute name="FileSize" type="integer" use="optional"/>
+                <xs:attribute name="FileTemplate" type="string" use="optional"/>
+                <xs:attribute name="FileVersion" type="string" use="optional"/>
+                <xs:attribute name="MimeType" type="string" use="optional"/>
                 <xs:attribute name="MimeTypeVersion" type="string" use="optional"/>
-                <xs:attribute name="AppVersion" type="string" use="optional"/>
+                <xs:attribute name="OverwritePolicy" type="EnumOverwritePolicy" use="optional"/>
+                <xs:attribute name="Password" type="string" use="optional"/>
+                <xs:attribute name="ResourceUsage" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="SearchDepth" type="integer" use="optional"/>
+                <xs:attribute name="UID" type="string" use="optional"/>
+                <xs:attribute name="URL" type="URL" use="optional"/>
                 <xs:attribute name="UserFileName" type="string" use="optional"/>
-                <xs:attribute name="PageOrder" use="optional"/>
-                <xs:attribute name="FileTargetDeviceModel" type="string" use="optional"/>
-                <xs:attribute name="OSVersion" type="string" use="optional"/>
-                <xs:attribute name="OverwritePolicy" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
