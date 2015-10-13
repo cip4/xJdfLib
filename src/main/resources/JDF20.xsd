@@ -3287,16 +3287,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DBSchema ** -->
-    <xs:element name="DBSchema" type="DBSchema" substitutionGroup="ParameterType"/>
-    <xs:complexType name="DBSchema">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="DBSchemaType" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Deleted ** -->
     <xs:element name="Deleted" type="Deleted" substitutionGroup="Audit"/>
     <xs:complexType name="Deleted">
@@ -4084,12 +4074,11 @@
     <!-- ** Complex type definition for Part ** -->
     <xs:element name="Part">
         <xs:complexType>
-            <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="BinderySignatureName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BinderySignaturePaginationIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="CellIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit1" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit2" type="NMTOKEN" use="optional"/>
@@ -4100,18 +4089,15 @@
             <xs:attribute name="DeliveryUnit7" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit8" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit9" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DocCopies" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocSheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DocTags" type="Any" use="optional"/>
+            <xs:attribute name="DocTags" type="RegExp" use="optional"/>
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Edition" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="EditionVersion" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="FountainNumber" type="integer" use="optional"/>
             <xs:attribute name="ItemNames" type="NMTOKENS" use="optional"/>
             <xs:attribute name="LayerIDs" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Metadata0" type="NameRangeList" use="optional"/>
             <xs:attribute name="Metadata1" type="NameRangeList" use="optional"/>
             <xs:attribute name="Metadata2" type="NameRangeList" use="optional"/>
@@ -4126,19 +4112,19 @@
             <xs:attribute name="PageNumber" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="PageTags" type="RegExp" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="PreflightRule" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
+            <xs:attribute name="PrintCondition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ProcessType" type="NMTOKENS" use="optional"/>
             <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RibbonName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="RunPage" type="integer" use="optional"/>
             <xs:attribute name="RunPageRange" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RunTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="RunTags" type="RegExp" use="optional"/>
             <xs:attribute name="SectionIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Separation" type="string" use="optional"/>
+            <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="SetDocIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SetIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SetRunIndex" type="IntegerRangeList" use="optional"/>
@@ -4147,13 +4133,11 @@
             <xs:attribute name="SheetIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="SheetName" type="string" use="optional"/>
             <xs:attribute name="Side" type="EnumSide" use="optional"/>
-            <xs:attribute name="SignatureName" type="string" use="optional"/>
             <xs:attribute name="StationName" type="string" use="optional"/>
             <xs:attribute name="SubRun" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TileID" type="XYPair" use="optional"/>
+            <xs:attribute name="TransferCurveName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="WebProduct" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="WebSetup" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5792,74 +5776,6 @@
                 <xs:attribute name="BlockSize" type="XYPair" use="optional"/>
                 <xs:attribute name="BlockTrf" type="matrix" use="optional"/>
                 <xs:attribute name="BlockElementType" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for CylinderLayout ** -->
-    <xs:element name="CylinderLayout" type="CylinderLayout" substitutionGroup="ParameterType"/>
-    <xs:complexType name="CylinderLayout">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CylinderPosition"/>
-                </xs:sequence>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for CylinderLayoutPreparationParams ** -->
-    <xs:element name="CylinderLayoutPreparationParams" type="CylinderLayoutPreparationParams"
-                substitutionGroup="ParameterType"/>
-    <xs:complexType name="CylinderLayoutPreparationParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ProductionPath"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for CylinderPosition ** -->
-    <xs:element name="CylinderPosition">
-        <xs:complexType>
-            <xs:attribute name="PlatePosition" type="XYPairRangeList" use="optional"/>
-            <xs:attribute name="PlateUsage" use="optional"/>
-            <xs:attribute name="PlateType" use="optional"/>
-            <xs:attribute name="DeviceModuleIndex" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for DBMergeParams ** -->
-    <xs:element name="DBMergeParams" type="DBMergeParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="DBMergeParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="SplitDocuments" type="integer" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for DBRules ** -->
-    <xs:element name="DBRules" type="DBRules" substitutionGroup="ParameterType"/>
-    <xs:complexType name="DBRules">
-        <xs:complexContent>
-            <xs:extension base="ParameterType"/>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for DBSelection ** -->
-    <xs:element name="DBSelection" type="DBSelection" substitutionGroup="ParameterType"/>
-    <xs:complexType name="DBSelection">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="Select" type="string" use="optional"/>
-                <xs:attribute name="Records" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="DataBase" type="URL" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
