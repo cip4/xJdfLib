@@ -1,0 +1,84 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'org.cip4.lib.xjdf'
+version = '0.6-SNAPSHOT'
+
+description = """CIP4 xJdfLib"""
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
+
+configurations {
+    xjc
+}
+repositories {
+    maven { url "https://repository.apache.org/content/groups/public/" }
+    maven { url "https://repository.jboss.org/nexus/content/groups/public-jboss/" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.2.11'
+    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.9.1'
+    compile group: 'org.jetbrains', name: 'annotations', version: '13.0'
+
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.mockito', name: 'mockito-all', version: '1.9.5'
+
+    xjc 'com.sun.xml.bind:jaxb-core:2.2.11'
+    xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.11'
+    xjc group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.2.11'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.9.5'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.9.5'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
+}
+
+task createBuildInfoFile(dependsOn: processResources) << {
+    def buildInfoFile = new File("$buildDir/resources/main/build.properties")
+    Properties props = new Properties()
+    props.setProperty('version', project.version.toString())
+    props.setProperty('vcs_revision', System.env.VCS_REVISION ?: 'none')
+    props.store(buildInfoFile.newWriter(), null)
+}
+
+classes {
+    dependsOn createBuildInfoFile
+}
+
+task xjc() {
+    inputs.source('src/main/resources/JDF20.xsd', 'src/main/resources/binding.xjb')
+    outputs.dir("$buildDir/generated-sources")
+    doLast {
+        file("$buildDir/generated-sources").mkdirs()
+        ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
+        ant.xjc(
+                destdir: "$buildDir/generated-sources",
+                schema: 'src/main/resources/JDF20.xsd',
+                binding: 'src/main/resources/binding.xjb',
+                readonly: true,
+                header: false,
+                removeOldOutput: true,
+                extension: true,
+        ) {
+            arg(line: "-Xfluent-api -Xequals -XhashCode")
+        }
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "${buildDir}/generated-sources"
+        }
+        resources {
+            srcDirs += "${buildDir}/resources"
+        }
+    }
+}
+
+compileJava {
+    dependsOn(xjc)
+}

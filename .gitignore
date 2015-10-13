@@ -2,3 +2,6 @@
 /target
 /atlassian-ide-plugin.xml
 /xJdfLib.iml
+/build
+/.gradle
+/gradle
