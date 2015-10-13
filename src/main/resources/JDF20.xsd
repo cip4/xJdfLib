@@ -1100,6 +1100,21 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumHoleShape">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Elliptic"/>
+            <xs:enumeration value="Round"/>
+            <xs:enumeration value="Rectangular"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCenterReference">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="TrailingEdge"/>
+            <xs:enumeration value="RegistrationMark"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -3572,19 +3587,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for HoleLine ** -->
-    <xs:element name="HoleLine" type="HoleLine" substitutionGroup="ParameterType"/>
-    <xs:complexType name="HoleLine">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
-                </xs:sequence>
-                <xs:attribute name="Pitch" type="double" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Icon ** -->
     <xs:element name="Icon">
         <xs:complexType>
@@ -4546,15 +4548,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for StripBinding ** -->
-    <xs:element name="StripBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for SystemTimeSet ** -->
     <xs:element name="SystemTimeSet">
         <xs:complexType>
@@ -4783,24 +4776,25 @@
     </xs:complexType>
 
     <!-- ** Complex type defintion for LooseBinding ** -->
-    <xs:element name="LooseBinding" type="LooseBinding"/>
-    <xs:complexType name="LooseBinding">
-        <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="1" ref="Hole"/>
-        </xs:sequence>
-        <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="BoardThickness" type="double" use="optional"/>
-        <xs:attribute name="Brand" type="string" use="optional"/>
-        <xs:attribute name="ChannelCover" type="boolean" use="optional"/>
-        <xs:attribute name="Diameter" type="double" use="optional"/>
-        <xs:attribute name="HoleType" type="string" use="optional"/>
-        <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
-        <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
-        <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
-        <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="WireCombShape" type="NMTOKEN" use="optional"/>
-    </xs:complexType>
+    <xs:element name="LooseBinding">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="HolePattern"/>
+            </xs:sequence>
+            <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="BoardThickness" type="double" use="optional"/>
+            <xs:attribute name="Brand" type="string" use="optional"/>
+            <xs:attribute name="ChannelCover" type="boolean" use="optional"/>
+            <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="HoleType" type="string" use="optional"/>
+            <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
+            <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
+            <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
+            <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="WireCombShape" type="NMTOKEN" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for LooseBindingParams ** -->
     <xs:element name="LooseBindingParams" type="LooseBindingParams" substitutionGroup="ParameterType"/>
@@ -4808,7 +4802,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                     <xs:element minOccurs="0" maxOccurs="1" ref="ChannelBindingDetails"/>
                     <xs:element minOccurs="0" maxOccurs="1" ref="CoilBindingDetails"/>
                     <xs:element minOccurs="0" maxOccurs="1" ref="CombBindingDetails"/>
@@ -4887,7 +4881,7 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                 </xs:sequence>
                 <xs:attribute name="Extent" type="XYPair" use="optional"/>
                 <xs:attribute name="HoleReferenceEdge" type="EnumReferenceEdge" use="optional"/>
@@ -6660,7 +6654,7 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="TabDimensions"/>
                 </xs:sequence>
                 <xs:attribute name="GrainDirection" use="optional"/>
@@ -7647,17 +7641,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CoilBinding ** -->
-    <xs:element name="CoilBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
-            </xs:sequence>
-            <xs:attribute name="CoilMaterial" use="optional"/>
-            <xs:attribute name="CoilBrand" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Crease ** -->
     <xs:element name="Crease">
         <xs:complexType>
@@ -7790,30 +7773,19 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Hole ** -->
-    <xs:element name="Hole" type="Hole" substitutionGroup="ParameterType"/>
-    <xs:complexType name="Hole">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="Extent" type="XYPair" use="optional"/>
-                <xs:attribute name="Shape" use="optional"/>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for HoleList ** -->
-    <xs:element name="HoleList" type="HoleList" substitutionGroup="ParameterType"/>
-    <xs:complexType name="HoleList">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleLine"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <!-- ** Complex type definition for HolePatter ** -->
+    <xs:element name="HolePattern">
+        <xs:complexType>
+            <xs:attribute name="Center" type="XYPair" use="optional"/>
+            <xs:attribute name="CenterReference" type="EnumCenterReference" use="optional"/>
+            <xs:attribute name="Extent" type="XYPair" use="optional"/>
+            <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
+            <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Pitch" type="XYPair" use="optional"/>
+            <xs:attribute name="Shape" type="EnumHoleShape" use="optional"/>
+            <xs:attribute name="ReferenceEdge" type="EnumReferenceEdge" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for HoleMakingParams ** -->
     <xs:element name="HoleMakingParams" type="HoleMakingParams" substitutionGroup="ParameterType"/>
@@ -7821,34 +7793,12 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Hole"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                 </xs:sequence>
-                <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
-                <xs:attribute name="Extent" type="XYPair" use="optional"/>
-                <xs:attribute name="Shape" use="optional"/>
-                <xs:attribute name="CenterReference" use="optional"/>
                 <xs:attribute name="Center" type="XYPair" use="optional"/>
-                <xs:attribute name="HoleType" use="optional">
-                    <xs:simpleType>
-                        <xs:list itemType="EnumHoleType"/>
-                    </xs:simpleType>
-                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PlasticCombBinding ** -->
-    <xs:element name="PlasticCombBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
-            </xs:sequence>
-            <xs:attribute name="CombBrand" type="string" use="optional"/>
-            <xs:attribute name="PlasticCombType" type="NMTOKEN" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for CombBindingDetails ** -->
     <xs:element name="CombBindingDetails">
@@ -8031,18 +7981,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for WireCombBinding ** -->
-    <xs:element name="WireCombBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="HoleList"/>
-            </xs:sequence>
-            <xs:attribute name="WireCombMaterial" use="optional"/>
-            <xs:attribute name="WireCombBrand" type="string" use="optional"/>
-            <xs:attribute name="WireCombShape" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for AssetListCreationParams ** -->
     <xs:element name="AssetListCreationParams" type="AssetListCreationParams" substitutionGroup="ParameterType"/>
