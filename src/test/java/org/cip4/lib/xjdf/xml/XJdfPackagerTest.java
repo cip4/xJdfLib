@@ -1,26 +1,4 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -35,6 +13,19 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 /**
  * JUnit test case for XjdfPackager
@@ -67,10 +58,6 @@ public class XJdfPackagerTest {
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfAbsolutePath() throws Exception {
 
@@ -91,19 +78,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray());
+		XJdfPackager packager = new XJdfPackager(bosResult, null);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -124,10 +103,6 @@ public class XJdfPackagerTest {
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfRelativePath() throws Exception {
 
@@ -153,19 +128,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray(), rootPath);
+		XJdfPackager packager = new XJdfPackager(bosResult, new File(rootPath).toURI());
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -186,23 +153,17 @@ public class XJdfPackagerTest {
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfRelativePathFile() throws Exception {
 
 		// arrange
-		String pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).toURI().getPath();
+		URI pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).toURI();
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(pathXJdf);
+		XJdfPackager packager = new XJdfPackager(bosResult, pathXJdf.resolve("."));
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(pathXJdf.getPath()), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -230,10 +191,6 @@ public class XJdfPackagerTest {
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfWithoutHierarchy() throws Exception {
 
@@ -254,19 +211,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray());
+		XJdfPackager packager = new XJdfPackager(bosResult, null);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf", true);
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf", true);
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -290,7 +239,7 @@ public class XJdfPackagerTest {
 	/**
 	 * Private helper method for unpackaging zip stream.
 	 * @param inputStream ZipStream as InputStream.
-	 * @param dir Target directory.
+	 * @return Target directory.
 	 * @throws IOException
 	 */
 	private String unzipStream(InputStream inputStream) throws IOException {
