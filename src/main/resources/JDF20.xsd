@@ -6129,7 +6129,6 @@
                 <xs:attribute name="FileFormat" type="string" use="optional"/>
                 <xs:attribute name="FileSize" type="integer" use="optional"/>
                 <xs:attribute name="FileTemplate" type="string" use="optional"/>
-                <xs:attribute name="FileVersion" type="string" use="optional"/>
                 <xs:attribute name="MimeType" type="string" use="optional"/>
                 <xs:attribute name="MimeTypeVersion" type="string" use="optional"/>
                 <xs:attribute name="OverwritePolicy" type="EnumOverwritePolicy" use="optional"/>
