@@ -401,7 +401,9 @@ public class XJdfNodeFactory extends ObjectFactory {
 
 		// set attributes
 		layoutIntent.setPrintedPages(pages);
-		layoutIntent.setSides(EnumSides.fromValue(sides));
+		if (sides != null) {
+			layoutIntent.setSides(EnumSides.fromValue(sides));
+		}
 		layoutIntent.setFinishedDimensions(finishedDimensions);
 		layoutIntent.setDimensions(dimensions);
 
