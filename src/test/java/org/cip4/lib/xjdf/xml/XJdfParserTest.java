@@ -13,9 +13,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
@@ -36,6 +35,7 @@ public class XJdfParserTest {
 
     private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
     private final String RES_CHILD_PRODUCTS = "/org/cip4/lib/xjdf/child_products.xjdf";
+    private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser xJdfParser;
 
@@ -70,9 +70,6 @@ public class XJdfParserTest {
         xJdfParser = null;
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
-     */
     @Test
     public void testParseXJdfSkipValidation() throws Exception {
 
@@ -107,9 +104,6 @@ public class XJdfParserTest {
         Assert.assertEquals("Expected value is wrong.", VALUE, actual);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
-     */
     @Test
     public void testParseXJdfSkipValidationByteArray() throws Exception {
 
@@ -142,9 +136,6 @@ public class XJdfParserTest {
         Assert.assertEquals("Expected value is wrong.", VALUE, actual);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
-     */
     @Test(expected = ValidationException.class)
     public void testParseXJdfInvalid() throws Exception {
 
@@ -169,9 +160,6 @@ public class XJdfParserTest {
         // exception expected
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
-     */
     @Test
     public void testParseXJdfValid() throws Exception {
 
@@ -212,9 +200,6 @@ public class XJdfParserTest {
         Assert.assertEquals("Expected value is wrong.", VALUE, actual);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfParser#parseXJdf(org.cip4.lib.xjdf.schema.jdf.XJDF, java.io.OutputStream)}.
-     */
     @Test
     public void testParseXJdfValidByteArray() throws Exception {
 
@@ -309,6 +294,105 @@ public class XJdfParserTest {
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
         assertEquals(0, mainProduct3.getChildProduct().size());
+    }
+
+    @Test
+    public void parseStreamResourceWithContactRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
+        Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getParameterType().getValue();
+        assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+    }
+
+    @Test
+    public void parseStreamApprovalPersonWithContactRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(6).getValue();
+        ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
+        ApprovalPerson approvalPerson = approvalSuccess.getApprovalDetails().get(0).getApprovalPerson();
+        Contact contact = (Contact) approvalPerson.getContactRef().getParameterType().getValue();
+
+        assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+    }
+
+    @Test
+    public void parseStreamAuditWithAuditRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        Notification notificationB = (Notification) xjdf.getAuditPool().getAudit().get(2).getValue();
+        Notification notificationA = notificationB.getRefID();
+        assertEquals("Notification_B", notificationB.getID());
+        assertEquals("Notification_A", notificationA.getID());
+        assertEquals("agent A", notificationA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamPhaseTimeWithPhaseTimeRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(4).getValue();
+        PhaseTime phaseTimeA = phaseTimeB.getRefID();
+        assertEquals("PhaseTime_B", phaseTimeB.getID());
+        assertEquals("PhaseTime_A", phaseTimeA.getID());
+        assertEquals("agent A", phaseTimeA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamProcessRunWithProcessRunRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(6).getValue();
+        ProcessRun processRunA = processRunB.getRefID();
+        assertEquals("ProcessRun_B", processRunB.getID());
+        assertEquals("ProcessRun_A", processRunA.getID());
+        assertEquals("agent A", processRunA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamResourceAuditWithResourceAuditRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(8).getValue();
+        ResourceAudit resourceAuditA = resourceAuditB.getRefID();
+        assertEquals("ResourceAudit_B", resourceAuditB.getID());
+        assertEquals("ResourceAudit_A", resourceAuditA.getID());
+        assertEquals("agent A", resourceAuditA.getAgentName());
+    }
+
+    @Test
+    public void parseStreamShapeCutWithMediaRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        ShapeCuttingIntent shapeCuttingIntent =
+            (ShapeCuttingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(2).getIntentType().getValue();
+        Media media = (Media) shapeCuttingIntent.getShapeCut().get(0).getMediaRef().getResourceType().getValue();
+
+        assertEquals(new XYPair(2, 2), media.getDimension());
+        assertEquals("IPG_400", media.getMediaQuality());
+    }
+
+    @Test
+    public void parseStreamPhaseTimeWithPhaseAmountRef() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        PhaseTime phaseTime = (PhaseTime) xjdf.getAuditPool().getAudit().get(3).getValue();
+        PhaseAmount phaseAmount = phaseTime.getPhaseAmount().get(0);
+        Media media = (Media) phaseAmount.getRRef().getResourceType().getValue();
+
+        assertEquals(new XYPair(3, 3), media.getDimension());
+        assertEquals("IPG_500", media.getMediaQuality());
     }
 
 }

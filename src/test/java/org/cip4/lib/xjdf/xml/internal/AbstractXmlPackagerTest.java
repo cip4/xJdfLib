@@ -12,6 +12,8 @@ import java.io.File;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static org.junit.Assert.assertEquals;
+
 /**
  * Unit-Test for AbstractXmlPackager
  */
@@ -89,5 +91,12 @@ public class AbstractXmlPackagerTest {
         while (null != (zipEntry = zipIn.getNextEntry())) {
             Assert.assertFalse("ZipEntry may not contain '\'.", zipEntry.getName().contains("\\"));
         }
+    }
+
+    @Test
+    public void normalizeFileName() throws Exception {
+        AbstractXmlPackager packager = new MinimalXmlPackager(minimalXml, null);
+        String str = packager.normalizeFileName("25.88.Eililu!$%_----__AbC.de.fG01239-->>>--___.987zipEqr234=)(/Arc");
+        assertEquals("25.88.Eililu__----__AbC.de.fG01239--_--___.987zipEqr234_Arc", str);
     }
 }

@@ -38,6 +38,48 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>
         </bindings>
+        <bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Parameter" />
+            </property>
+        </bindings>
+        <bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
+            </property>
+        </bindings>
+
+        <bindings node="//xs:complexType[@name='PhaseTime']//xs:attribute[@name='refID']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.PhaseTime" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='refID']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.ProcessRun" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='ResourceAudit']//xs:attribute[@name='refID']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.ResourceAudit" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='Notification']//xs:attribute[@name='refID']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Notification" />
+            </property>
+        </bindings>
+        <bindings node="//xs:complexType[@name='PhaseAmount']//xs:attribute[@name='rRef']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
+            </property>
+        </bindings>
+
     </bindings>
 
 </bindings>

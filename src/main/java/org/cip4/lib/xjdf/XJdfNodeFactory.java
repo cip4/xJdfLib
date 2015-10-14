@@ -431,27 +431,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 	}
 
 	/**
-	 * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
-	 * @param agentName Value for AgentName attribute.
-	 * @param agentVersion Value for AgentVersion attribute.
-	 * @param timestamp Value for TimeStamp attribute.
-	 * @return Created Node which already contains defined attributes.
-	 */
-	public Modified createModified(String agentName, String agentVersion, DateTime timestamp) {
-
-		// create node
-		Modified modified = super.createModified();
-
-		// set attributes
-		modified.setAgentName(agentName);
-		modified.setAgentVersion(agentVersion);
-		modified.setTimeStamp(timestamp);
-
-		// return object
-		return modified;
-	}
-
-	/**
 	 * Create new ProductionIntent Node which already contains values for attribute PrintProcess.
 	 * @param printProcess Value for PrintProcess attribute.
 	 * @return ProductionIntent Node which already contains defined attributes.
@@ -751,4 +730,26 @@ public class XJdfNodeFactory extends ObjectFactory {
 		// return node
 		return colorantControl;
 	}
+
+	/**
+	 * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
+	 * @param agentName Value for AgentName attribute.
+	 * @param agentVersion Value for AgentVersion attribute.
+	 * @param timestamp Value for TimeStamp attribute.
+	 * @return Created Node which already contains defined attributes.
+	 */
+	public Modified createModified(String agentName, String agentVersion, DateTime timestamp) {
+
+		// create node
+		Modified modified = super.createModified();
+
+		// set attributes
+		modified.setAgentName(agentName);
+		modified.setAgentVersion(agentVersion);
+		modified.setTimeStamp(timestamp);
+
+		// return object
+		return modified;
+	}
+
 }

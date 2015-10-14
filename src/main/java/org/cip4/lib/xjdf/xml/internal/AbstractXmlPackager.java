@@ -235,8 +235,28 @@ public abstract class AbstractXmlPackager {
         }
 
         // register for packaging
-        File targetFile = new File(FilenameUtils.concat(targetDir, FilenameUtils.getName(srcUri.getPath())));
+        File targetFile = new File(
+            FilenameUtils.concat(
+                targetDir,
+                normalizeFileName(
+                    FilenameUtils.getName(
+                        srcUri.getPath()
+                    )
+                )
+            )
+        );
         fileMap.put(targetFile, srcUri);
         return targetFile;
+    }
+
+    /**
+     * Normalizes a file name by replacing any non alphanumeric character (except '.' and '-') with an underscore.
+     *
+     * @param fileName The file name to normalize.
+     *
+     * @return Normalized file name.
+     */
+    final String normalizeFileName(final String fileName) {
+        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
     }
 }

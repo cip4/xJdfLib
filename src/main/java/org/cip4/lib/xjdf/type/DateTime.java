@@ -1,181 +1,187 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.TimeZone;
 
 /**
  * Implementation of the XJDF DateTime data type.
- * @author stefan.meissner
- * @date 05.01.2013
  */
 public class DateTime extends AbstractXJdfType<String, DateTime> {
 
-	private static final String PATTERN_UTC = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+    /**
+     * UTC time zone.
+     */
+    private static final TimeZone TIME_ZONE_UTC = TimeZone.getTimeZone("UTC");
 
-	private static final String PATTERN_GLOBAL = "yyyy-MM-dd'T'HH:mm:ssZ";
+    /**
+     * UTC date format.
+     */
+    private final DateFormat DATE_FORMAT_UTC = createUTCDateFormat();
 
-	// not supported in 1.6
-	// private static final String PATTERN_GLOBAL = "yyyy-MM-dd'T'HH:mm:ssXXX";
+    /**
+     * RFC 822 date format.
+     */
+    private final DateFormat DATE_FORMAT_WITH_TIME_ZONE_RFC_822 = new SimpleDateFormat(
+        "yyyy-MM-dd'T'HH:mm:ssZ"
+    );
 
-	private final Calendar calendar;
+    /**
+     * ISO 8601 date format.
+     */
+    private final DateFormat DATE_FORMAT_WITH_TIME_ZONE_ISO_8601 = new SimpleDateFormat(
+        "yyyy-MM-dd'T'HH:mm:ssXXX"
+    );
 
-	/**
-	 * Default constructor.
-	 */
-	public DateTime() {
-		this.calendar = Calendar.getInstance();
-	}
 
-	/**
-	 * Custom constructor. Accepting values for initializing.
-	 * @param year The value used to set the YEAR.
-	 * @param month The value used to set the MONTH in year. January is "1".
-	 * @param day The value used to set the DAY in month.
-	 */
-	public DateTime(int year, int month, int day) {
 
-		this(year, month, day, 23, 59);
-	}
+    /**
+     * Calendar which holds the date information.
+     */
+    private final Calendar calendar = Calendar.getInstance(TIME_ZONE_UTC);
 
-	/**
-	 * Custom constructor. Accepting values for initializing.
-	 * @param year The value used to set the YEAR.
-	 * @param month The value used to set the MONTH in year. January is "1".
-	 * @param day The value used to set the DAY in month.
-	 * @param hour The value used to set the HOUR of day.
-	 * @param minute The value used to set the MINUTE in of.
-	 */
-	public DateTime(int year, int month, int day, int hour, int minute) {
+    /**
+     * Default constructor.
+     */
+    public DateTime() {
+        super();
+    }
 
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month - 1, day, hour, minute, 0);
+    /**
+     * Custom constructor. Accepting values for initializing.
+     *
+     * @param year  The value used to set the YEAR.
+     * @param month The value used to set the MONTH in year. January is "0".
+     * @param day   The value used to set the DAY in month.
+     */
+    public DateTime(final int year, final int month, final int day) {
+        this(year, month, day, 0, 0);
+    }
 
-		// initialize instance variable
-		this.calendar = cal;
-	}
+    /**
+     * Custom constructor. Accepting values for initializing.
+     *
+     * @param year   The value used to set the YEAR.
+     * @param month  The value used to set the MONTH in year. January is "0".
+     * @param day    The value used to set the DAY in month.
+     * @param hour   The value used to set the HOUR of day.
+     * @param minute The value used to set the MINUTE in of.
+     */
+    public DateTime(final int year, final int month, final int day, final int hour, final int minute) {
+        this(year, month, day, hour, minute, 0);
+    }
 
-	/**
-	 * Custom constructor. Accepting a Calendar object for initializing.
-	 * @param calendar Calendar object for initializing.
-	 */
-	public DateTime(Calendar calendar) {
-		this.calendar = calendar;
-	}
+    /**
+     * Custom constructor. Accepting values for initializing.
+     *
+     * @param year   The value used to set the YEAR.
+     * @param month  The value used to set the MONTH in year. January is "0".
+     * @param day    The value used to set the DAY in month.
+     * @param hour   The value used to set the HOUR of day.
+     * @param minute The value used to set the MINUTE.
+     * @param second The value used to set the SECOND.
+     */
+    public DateTime(final int year, final int month, final int day,
+                    final int hour, final int minute, final int second) {
+        calendar.set(year, month, day, hour, minute, second);
+    }
 
-	/**
-	 * Custom constructor. Creates a XJDF DateTime instance by a String expression object.
-	 * @param expression XJDF DateTime String expression.
-	 * @return XJDF DateTime data type object.
-	 * @throws ParseException
-	 */
-	public DateTime(String expression) throws ParseException {
+    /**
+     * Creates a XJDF DateTime instance by a String expression object.
+     *
+     * @param dateTime XJDF DateTime String expression. Should match the format yyyy-MM-dd'T'HH:mm:ss'Z'.
+     *
+     * @throws ParseException if the passed expression
+     */
+    public DateTime(final String dateTime) throws ParseException {
+        try {
+            calendar.setTime(DATE_FORMAT_UTC.parse(dateTime));
+        } catch (ParseException e1) {
+            try {
+                calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE_RFC_822.parse(dateTime));
+            } catch (ParseException e2) {
+                calendar.setTime(DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.parse(dateTime));
+            }
+        }
+    }
 
-		// // timezone
-		// int offset = 0;
-		//
-		// int posPlus = expression.lastIndexOf("+");
-		// int posMinus = expression.lastIndexOf("-");
-		//
-		// if (posPlus > -1) {
-		// offset = Integer.valueOf(expression.substring(posPlus + 1, posPlus + 3));
-		//
-		// } else if (posMinus > -1) {
-		// offset = Integer.valueOf(expression.substring(posMinus, posMinus + 3));
-		//
-		// }
-		//
-		// String[] ids = TimeZone.getAvailableIDs(offset * 3600 * 1000);
-		// this.calendar.setTimeZone(TimeZone.getTimeZone(ids[0]));
+    /**
+     * Creates a XJDF DateTime instance by a Date object.
+     *
+     * @param date Date object.
+     */
+    public DateTime(final Date date) {
+        calendar.setTime(date);
+    }
 
-		// prepare expression
-		if (expression.endsWith(":00")) {
-			expression = expression.substring(0, expression.length() - 3) + "00";
-		} else if (expression.endsWith("Z")) {
-			expression = expression.replaceFirst("Z", "+0000");
-		}
+    /**
+     * Clones the underlying calendar and returns it.
+     *
+     * @return the cloned calendar
+     */
+    public final Calendar getCalendar() {
+        return (Calendar) this.calendar.clone();
+    }
 
-		// parse
-		DateFormat dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
-		dateFormat.parse(expression);
-		this.calendar = dateFormat.getCalendar();
+    /**
+     * Creates a DateFormat with the pattern <b>yyyy-MM-dd'T'HH:mm:ss'Z'</b> and the time zone set to UTC.
+     *
+     * @return The DateFormat.
+     */
+    private static DateFormat createUTCDateFormat() {
+        final DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        dateFormat.setLenient(false);
+        dateFormat.setTimeZone(TIME_ZONE_UTC);
 
-		// only java 1.7
-		String[] ids = TimeZone.getAvailableIDs(this.calendar.get(Calendar.ZONE_OFFSET));
-		this.calendar.setTimeZone(TimeZone.getTimeZone(ids[0]));
-	}
+        return dateFormat;
+    }
 
-	/**
-	 * Getter for calendar attribute.
-	 * @return the calendar
-	 */
-	public Calendar getCalendar() {
-		return this.calendar;
-	}
+    /**
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     */
+    @Override
+    public final String marshal(final DateTime dateTime) {
+        if (dateTime == null) {
+            return null;
+        }
 
-	/**
-	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
-	 */
-	@Override
-	public String marshal(DateTime dateTime) {
+        return dateTime.toString();
+    }
 
-		String result;
+    /**
+     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     */
+    @Override
+    public final DateTime unmarshal(final String dateTime) throws Exception {
+        return new DateTime(dateTime);
+    }
 
-		if (dateTime == null)
-			return null;
+    /**
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public final String toString() {
+        return DATE_FORMAT_UTC.format(calendar.getTime());
+    }
 
-		TimeZone timeZone = dateTime.getCalendar().getTimeZone();
+    /**
+     * Formats this DateTime object using the passed time zone.
+     *
+     * @param timeZone The time zone to use.
+     *
+     * @return String representation based for the passed time zone.
+     */
+    public final String toString(final TimeZone timeZone) {
+        if (timeZone == null) {
+            throw new IllegalArgumentException("time zone has not been specified");
+        }
 
-		// check time zone
-		if (timeZone.getRawOffset() == 0) {
+        DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.setTimeZone(timeZone);
 
-			// UTC
-			DateFormat dateFormat = new SimpleDateFormat(PATTERN_UTC);
-			dateFormat.setTimeZone(timeZone);
-			result = dateFormat.format(dateTime.getCalendar().getTime());
-
-		} else {
-
-			// different TimeZone
-			DateFormat dateFormat = new SimpleDateFormat(PATTERN_GLOBAL);
-			dateFormat.setTimeZone(timeZone);
-			result = dateFormat.format(dateTime.getCalendar().getTime());
-
-			// extend result by a ":"
-			result = result.substring(0, result.length() - 2) + ":" + result.substring(result.length() - 2);
-
-		}
-
-		// return result
-		return result;
-	}
-
-	/**
-	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
-	 */
-	@Override
-	public DateTime unmarshal(String dateTime) throws Exception {
-		return new DateTime(dateTime);
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return marshal(this);
-	}
+        return DATE_FORMAT_WITH_TIME_ZONE_ISO_8601.format(calendar.getTime());
+    }
 
 }
