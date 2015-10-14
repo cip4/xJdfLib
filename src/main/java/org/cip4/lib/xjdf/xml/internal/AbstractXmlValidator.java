@@ -1,18 +1,9 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +12,10 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Source;
-import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
-import org.w3c.dom.ls.DOMImplementationLS;
+import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
@@ -36,237 +24,143 @@ import org.xml.sax.SAXParseException;
 
 /**
  * Abstract Validation of XML Documents based on XSD schema file.
- * @author s.meissner
- * @date 11.04.2012
+ *
+ * @param <T> Document type that will be validated.
  */
 public abstract class AbstractXmlValidator<T> {
 
-	private final List<String> messages;
+    /**
+     * XJdf Error Handler Implementation for Validation.
+     */
+    class XJdfErrorHandler implements ErrorHandler {
 
-	private final byte[] xsdFile;
+        /**
+         * List of found messages.
+         */
+        private final List<String> messages = new ArrayList<>();
 
-	private final InputStream fileStream;
+        /**
+         * Getter for messages attribute.
+         *
+         * @return the messages
+         */
+        public List<String> getMessages() {
+            return messages;
+        }
 
-	private final Map<String, byte[]> xsdDependencies;
+        @Override
+        public void warning(final SAXParseException exception) {
+            String msg =
+                "WARNING in XJDF Doc at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber()
+                    + ": " + exception.getMessage();
+            messages.add(msg);
+        }
 
-	private Boolean documentIsValid;
+        @Override
+        public void error(final SAXParseException exception) {
+            String msg =
+                "ERROR in XJDF Doc at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber()
+                    + ": " + exception.getMessage();
+            messages.add(msg);
+        }
 
-	/**
-	 * Custom constructor. Accepting a XML Schema file as byte array.
-	 * @throws IOException
-	 */
-	private AbstractXmlValidator(byte[] xsd, InputStream fileStream) throws IOException {
-		this(xsd, fileStream, null);
-	}
+        @Override
+        public void fatalError(final SAXParseException exception) {
+            // add fatal error
+            String msg = "FATAL in XJDF Doc ERROR at line " + exception.getLineNumber() + ", column "
+                + exception.getColumnNumber() + ": " + exception.getMessage();
+            messages.add(msg);
+        }
+    }
 
-	/**
-	 * Custom constructor. Accepting a XML Schema file as byte array.
-	 * @throws IOException
-	 */
-	public AbstractXmlValidator(byte[] xsd, InputStream fileStream, Map<String, byte[]> xsdDependencies) throws IOException {
+    /**
+     * Resolver class for resolving XSD Imports.
+     *
+     * @author s.meissner
+     */
+    private class ResourceResolver implements LSResourceResolver {
 
-		// initialize instance variables
-		this.messages = new ArrayList<String>();
-		this.xsdFile = xsd;
-		this.fileStream = fileStream;
-		this.documentIsValid = null;
-		this.xsdDependencies = xsdDependencies;
-	}
+        @Override
+        public final LSInput resolveResource(
+            final String type, final String namespaceURI, final String publicId, final String systemId,
+            final String baseURI
+        ) {
+            LSInput lsInput = new DOMInputImpl(publicId, systemId, null);
 
-	/**
-	 * Getter for messages attribute.
-	 * @return the messages
-	 */
-	public List<String> getMessages() {
-		return messages;
-	}
+            if (xsdDependencies != null && xsdDependencies.containsKey(systemId)) {
+                lsInput.setByteStream(new ByteArrayInputStream(xsdDependencies.get(systemId)));
+                lsInput.setSystemId(systemId);
+            }
 
-	/**
-	 * Getter for messages as single text.
-	 * @return the messages
-	 */
-	public String getMessagesText() {
+            return lsInput;
+        }
+    }
 
-		String result = null;
+    /**
+     * Map of dependent XSD files.
+     */
+    private final Map<String, byte[]> xsdDependencies;
 
-		if (!documentIsValid) {
-			StringBuilder builder = new StringBuilder();
-			builder.append("XJDF Document is invalid:");
+    /**
+     * Custom constructor.
+     *
+     * @param xsdDependencies Dependencies for the XSD.
+     */
+    public AbstractXmlValidator(final Map<String, byte[]> xsdDependencies) {
+        this.xsdDependencies = xsdDependencies;
+    }
 
-			for (String msg : messages) {
-				builder.append("\n");
-				builder.append(msg);
-			}
+    /**
+     * Validation of XJDF Document based on XJDF Schema.
+     *
+     * @param documentStream Stream to read document from.
+     *
+     * @return Result of the validation.
+     */
+    protected final ValidationResult validate(final InputStream documentStream)
+        throws SAXException, ParserConfigurationException, IOException {
+        // create a SchemaFactory and a Schema
+        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+        schemaFactory.setResourceResolver(new ResourceResolver());
+        Schema schema = schemaFactory.newSchema(getSchema());
 
-			result = builder.toString();
-		}
+        // new error handler
+        XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
-		// return result
-		return result;
-	}
+        // validate
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        dbf.setSchema(schema);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        db.setErrorHandler(errorHandler);
+        db.parse(documentStream);
 
-	/**
-	 * Validation of XJDF Document based on XJDF Schema.
-	 * @throws SAXException
-	 * @throws ParserConfigurationException
-	 * @throws IOException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws ClassNotFoundException
-	 */
-	private T validate() throws SAXException, ParserConfigurationException, IOException, ClassNotFoundException, IllegalAccessException, InstantiationException {
+        // get result
+        if (errorHandler.getMessages() != null) {
+            return new ValidationResult(errorHandler.getMessages());
+        }
 
-		// load XJDF schema
-		InputStream isSchema = new ByteArrayInputStream(xsdFile);
+        // return current instance
+        return new ValidationResult();
+    }
 
-		// create a SchemaFactory and a Schema
-		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-		schemaFactory.setResourceResolver(new ResourceResolver());
-		Source schemaSource = new StreamSource(isSchema);
-		Schema schema = schemaFactory.newSchema(schemaSource);
+    /**
+     * Returns whether or not checked XJDF Document is valid.
+     *
+     * @param documentStream Stream to read document from.
+     *
+     * @return True in case XJDF Document is valid. Other wise false.
+     */
+    public final boolean isValid(final InputStream documentStream)
+        throws SAXException, ParserConfigurationException, IOException {
+        return validate(documentStream).isValid();
+    }
 
-		// new error handler
-		XJdfErrorHandler errorHandler = new XJdfErrorHandler();
-
-		// validate
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		dbf.setNamespaceAware(true);
-		dbf.setSchema(schema);
-		DocumentBuilder db = dbf.newDocumentBuilder();
-		db.setErrorHandler(errorHandler);
-		db.parse(fileStream);
-
-		// get result
-		if (errorHandler.getMessages() != null)
-			messages.addAll(errorHandler.getMessages());
-
-		// return current instance
-		return (T) this;
-	}
-
-	/**
-	 * Returns whether or not checked XJDF Document is valid.
-	 * @return True in case XJDF Document is valid. Other wise false.
-	 * @throws IOException
-	 * @throws ParserConfigurationException
-	 * @throws SAXException
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
-	 * @throws ClassNotFoundException
-	 */
-	public boolean isValid() throws ClassNotFoundException, IllegalAccessException, InstantiationException, SAXException, ParserConfigurationException, IOException {
-
-		// check whether document already is validated.
-		if (documentIsValid == null) {
-
-			// validate
-			validate();
-
-			// analyze result
-			documentIsValid = messages.size() == 0;
-		}
-
-		// return result
-		return documentIsValid.booleanValue();
-	}
-
-	/**
-	 * XJdf Error Handler Implementation for Validation.
-	 * @author s.meissner
-	 * @date 11.04.2012
-	 */
-	class XJdfErrorHandler implements ErrorHandler {
-
-		private final List<String> messages;
-
-		/**
-		 * Default constructor.
-		 */
-		private XJdfErrorHandler() {
-			// initialize messages
-			messages = new ArrayList<String>();
-		}
-
-		/**
-		 * Getter for messages attribute.
-		 * @return the messages
-		 */
-		public List<String> getMessages() {
-			return messages;
-		}
-
-		/**
-		 * @see org.xml.sax.ErrorHandler#warning(org.xml.sax.SAXParseException)
-		 */
-		@Override
-		public void warning(SAXParseException exception) throws SAXException {
-
-			// add warning
-			String msg = "WARNING in XJDF Doc at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber() + ": " + exception.getMessage();
-			messages.add(msg);
-		}
-
-		/**
-		 * @see org.xml.sax.ErrorHandler#error(org.xml.sax.SAXParseException)
-		 */
-		@Override
-		public void error(SAXParseException exception) throws SAXException {
-
-			// add error
-			String msg = "ERROR in XJDF Doc at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber() + ": " + exception.getMessage();
-			messages.add(msg);
-		}
-
-		/**
-		 * @see org.xml.sax.ErrorHandler#fatalError(org.xml.sax.SAXParseException)
-		 */
-		@Override
-		public void fatalError(SAXParseException exception) throws SAXException {
-
-			// add fatal error
-			String msg = "FATAL in XJDF Doc ERROR at line " + exception.getLineNumber() + ", column " + exception.getColumnNumber() + ": " + exception.getMessage();
-			messages.add(msg);
-		}
-	}
-
-	/**
-	 * Resolver class for resolving XSD Imports.
-	 * @author s.meissner
-	 * @date 04.07.2012
-	 */
-	private class ResourceResolver implements LSResourceResolver {
-
-		private final DOMImplementationLS domImplementationLS;
-
-		/**
-		 * Default constructor.
-		 * @throws ClassNotFoundException
-		 * @throws IllegalAccessException
-		 * @throws InstantiationException
-		 */
-		private ResourceResolver() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-			// System.setProperty(DOMImplementationRegistry.PROPERTY, "org.apache.xerces.dom.DOMImplementationSourceImpl");
-			DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
-			domImplementationLS = (DOMImplementationLS) registry.getDOMImplementation("LS");
-		}
-
-		/**
-		 * @see org.w3c.dom.ls.LSResourceResolver#resolveResource(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-		 */
-		@Override
-		public LSInput resolveResource(String type, String namespaceURI, String publicId, String systemId, String baseURI) {
-			LSInput lsInput = domImplementationLS.createLSInput();
-
-			if (xsdDependencies != null && xsdDependencies.containsKey(systemId)) {
-				byte[] xsdBytes = xsdDependencies.get(systemId);
-
-				lsInput.setByteStream(new ByteArrayInputStream(xsdBytes));
-				lsInput.setSystemId(systemId);
-			}
-
-			return lsInput;
-		}
-
-	}
+    /**
+     * Get the URL of the schema to validate against.
+     *
+     * @return Internal URL to of the schema.
+     */
+    protected abstract URL getSchema();
 
 }

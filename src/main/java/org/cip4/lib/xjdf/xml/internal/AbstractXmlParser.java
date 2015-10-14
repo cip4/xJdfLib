@@ -11,19 +11,19 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.XmlStreamWriter;
 import org.w3c.dom.Node;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import org.xml.sax.SAXException;
 
 /**
  * Parsing logic for building a XML Document from DOM-Tree and the way around.
  *
  * @param <T> Object type that will be parsed.
- *
- * @author s.meissner
  */
 public abstract class AbstractXmlParser<T> {
 
@@ -73,9 +73,9 @@ public abstract class AbstractXmlParser<T> {
      * @param obj Object tree for parsing.
      *
      * @return XML-representation of the document as array of bytes.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    protected final byte[] parseXml(final T obj) throws Exception {
+    protected final byte[] parseXml(final T obj)
+        throws ParserConfigurationException, JAXBException, SAXException, IOException {
         return parseXml(obj, false);
     }
 
@@ -86,9 +86,9 @@ public abstract class AbstractXmlParser<T> {
      * @param os OutputStream the write the document to.
      *
      * @throws ValidationException Is thrown in case document is not valid and validation process is not being skipped.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    protected final void parseXml(final T obj, final OutputStream os) throws Exception {
+    protected final void parseXml(final T obj, final OutputStream os)
+        throws IOException, ParserConfigurationException, SAXException, JAXBException {
         parseXml(obj, os, false);
     }
 
@@ -99,9 +99,9 @@ public abstract class AbstractXmlParser<T> {
      * @param skipValidation Skip validation.
      *
      * @return Document as Byte Array.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    protected final byte[] parseXml(final T obj, final boolean skipValidation) throws Exception {
+    protected final byte[] parseXml(final T obj, final boolean skipValidation)
+        throws IOException, ParserConfigurationException, SAXException, JAXBException {
         // parse object tree
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         parseXml(obj, bos, skipValidation);
@@ -120,9 +120,9 @@ public abstract class AbstractXmlParser<T> {
      *
      * @throws ValidationException Is thrown in case the document is not valid and validation process is not being
      * skipped.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation) throws Exception {
+    protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation)
+        throws JAXBException, IOException, ParserConfigurationException, SAXException {
         Marshaller m = createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
@@ -135,12 +135,11 @@ public abstract class AbstractXmlParser<T> {
         byte[] doc = bos.toByteArray();
 
         if (!skipValidation) {
+            AbstractXmlValidator validator = createValidator();
             InputStream is = new ByteArrayInputStream(doc);
-            AbstractXmlValidator validator = createValidator(is);
-
-            if (!validator.isValid()) {
-                String err = validator.getMessagesText();
-                throw new ValidationException(err);
+            ValidationResult validationResult = validator.validate(is);
+            if (!validationResult.isValid()) {
+                throw new ValidationException(validationResult.getMessagesText());
             }
         }
 
@@ -155,10 +154,9 @@ public abstract class AbstractXmlParser<T> {
      * @param is Binary document input stream for parsing.
      *
      * @return Object tree parsed from binary input stream.
-     * @throws Exception Is thrown in case an exception occurs.
      */
     @SuppressWarnings("unchecked")
-    public final T parseStream(final InputStream is) throws Exception {
+    public final T parseStream(final InputStream is) throws JAXBException {
         Unmarshaller u = jaxbContext.createUnmarshaller();
         return (T) u.unmarshal(is);
     }
@@ -193,13 +191,10 @@ public abstract class AbstractXmlParser<T> {
     }
 
     /**
-     * Create validator for validating the data from an input stream.
-     *
-     * @param is Input stream to read data from
+     * Create validator for validating documents.
      *
      * @return Validator
-     * @throws IOException if creating validator fails.
      */
-    protected abstract AbstractXmlValidator<T> createValidator(InputStream is) throws IOException;
+    protected abstract AbstractXmlValidator<T> createValidator();
 
 }

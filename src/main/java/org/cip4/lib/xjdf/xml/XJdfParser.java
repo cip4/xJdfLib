@@ -1,10 +1,10 @@
 package org.cip4.lib.xjdf.xml;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -12,11 +12,10 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
+import org.xml.sax.SAXException;
 
 /**
  * Parsing logic for building a XML Document from XJDF DOM-Tree and the way around.
- *
- * @author s.meissner
  */
 public class XJdfParser extends AbstractXmlParser<XJDF> {
 
@@ -34,11 +33,9 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      *
      * @param xJdf XJDF Object Tree for parsing.
      * @param os Target OutputStream where XJdfDocument is being parsed.
-     *
-     * @throws Exception Is thrown in case XJDF is not valid and validation process is not being skipped.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    public final void parseXJdf(final XJDF xJdf, final OutputStream os) throws Exception {
+    public final void parseXJdf(final XJDF xJdf, final OutputStream os)
+        throws ParserConfigurationException, JAXBException, SAXException, IOException {
         parseXml(xJdf, os);
     }
 
@@ -48,11 +45,9 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param xJdf XJDF Object Tree for parsing.
      * @param os Target OutputStream where XJdfDocument is being parsed.
      * @param skipValidation Skip validation.
-     *
-     * @throws Exception Is thrown in case XJDF is not valid and validation process is not being skipped.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    public final void parseXJdf(final XJDF xJdf, final OutputStream os, final boolean skipValidation) throws Exception {
+    public final void parseXJdf(final XJDF xJdf, final OutputStream os, final boolean skipValidation)
+        throws IOException, ParserConfigurationException, SAXException, JAXBException {
         parseXml(xJdf, os, skipValidation);
     }
 
@@ -62,9 +57,9 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param xJdf XJDF Object Tree for parsing.
      *
      * @return XJDF as byte array.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    public final byte[] parseXJdf(final XJDF xJdf) throws Exception {
+    public final byte[] parseXJdf(final XJDF xJdf)
+        throws ParserConfigurationException, IOException, SAXException, JAXBException {
         return parseXml(xJdf);
     }
 
@@ -75,9 +70,9 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param skipValidation Skip validation.
      *
      * @return XJDF as byte array.
-     * @throws Exception Is thrown in case an exception occurs.
      */
-    public final byte[] parseXJdf(final XJDF xJdf, final boolean skipValidation) throws Exception {
+    public final byte[] parseXJdf(final XJDF xJdf, final boolean skipValidation)
+        throws ParserConfigurationException, JAXBException, SAXException, IOException {
         return parseXml(xJdf, skipValidation);
     }
 
@@ -94,8 +89,8 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
     }
 
     @Override
-    protected final AbstractXmlValidator<XJDF> createValidator(final InputStream is) throws IOException {
-        return new XJdfValidator(is);
+    protected final AbstractXmlValidator<XJDF> createValidator() {
+        return new XJdfValidator();
     }
 
 }
