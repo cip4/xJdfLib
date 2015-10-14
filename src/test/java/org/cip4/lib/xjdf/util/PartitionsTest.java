@@ -15,7 +15,7 @@ public class PartitionsTest {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
-                new Part().withAssemblyID("foo")
+                new Part().withAssemblyIDs("foo")
             )
         );
     }
@@ -24,7 +24,7 @@ public class PartitionsTest {
     public void hasMismatchingAttributesWillReturnTrueForEmptyPart2() throws Exception {
         assertFalse(
             Partitions.hasMismatchingAttributes(
-                new Part().withAssemblyID("foo"),
+                new Part().withAssemblyIDs("foo"),
                 new Part()
             )
         );
@@ -65,7 +65,7 @@ public class PartitionsTest {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
-                new Part().withCellIndex("1", "2")
+                new Part().withProductPart("part2")
             )
         );
     }
