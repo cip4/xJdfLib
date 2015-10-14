@@ -120,25 +120,27 @@ public abstract class AbstractXmlPackager {
      * @throws Exception If the XML document could not be packaged.
      */
     protected void packageXml(XmlNavigator xmlNavigator, String docName, final boolean withoutHierarchy) throws Exception {
+        final XmlNavigator _xmlNavigator = new XmlNavigator(xmlNavigator);
+
         // set compression level
         zout.setLevel(compressionLevel.getLevel());
 
         // put all files to archive
         try {
             writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//FileSpec/@URL"),
+                _xmlNavigator.evaluateNodeList("//FileSpec/@URL"),
                 withoutHierarchy
                     ? ""
                     : "artwork"
             );
             writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//Preview/@URL"),
+                _xmlNavigator.evaluateNodeList("//Preview/@URL"),
                 withoutHierarchy
                     ? ""
                     : "preview"
             );
             writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//XJDF/@CommentURL"),
+                _xmlNavigator.evaluateNodeList("//XJDF/@CommentURL"),
                 withoutHierarchy
                     ? ""
                     : "docs"
@@ -150,7 +152,7 @@ public abstract class AbstractXmlPackager {
         // put XML to archive
         ZipEntry zipEntryXml = new ZipEntry(docName);
         zout.putNextEntry(zipEntryXml);
-        zout.write(xmlNavigator.getXmlBytes());
+        zout.write(_xmlNavigator.getXmlBytes());
 
         // flush
         zout.finish();
