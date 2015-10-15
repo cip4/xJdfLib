@@ -251,16 +251,28 @@ public abstract class AbstractXmlPackager {
      * @return The ZipEntry for the given URI.
      */
     protected ZipEntry createZipEntry(String targetDir, URI fileUri) {
-        ZipEntry zipEntry = new ZipEntry(
-            FilenameUtils.separatorsToUnix(
-                FilenameUtils.concat(
-                    targetDir,
+        final String zipEntryName = FilenameUtils.separatorsToUnix(
+            FilenameUtils.concat(
+                targetDir,
+                normalizeFileName(
                     fileUri.resolve(".").relativize(fileUri).getPath()
                 )
             )
         );
+        ZipEntry zipEntry = new ZipEntry(zipEntryName);
 
         return zipEntry;
+    }
+
+    /**
+     * Normalizes a file name by replacing any non alphanumeric character (except '.' and '-') with an underscore.
+     *
+     * @param fileName The file name to normalize.
+     *
+     * @return Normalized file name.
+     */
+    final String normalizeFileName(final String fileName) {
+        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
     }
 
 }

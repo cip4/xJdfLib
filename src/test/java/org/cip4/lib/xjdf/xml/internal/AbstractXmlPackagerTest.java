@@ -92,10 +92,14 @@ public class AbstractXmlPackagerTest {
         }
     }
 
-//    @Test
-//    public void normalizeFileName() throws Exception {
-//        AbstractXmlPackager packager = new MinimalXmlPackager(minimalXml, null);
-//        String str = packager.normalizeFileName("25.88.Eililu!$%_----__AbC.de.fG01239-->>>--___.987zipEqr234=)(/Arc");
-//        assertEquals("25.88.Eililu__----__AbC.de.fG01239--_--___.987zipEqr234_Arc", str);
-//    }
+    @Test
+    public void normalizeFileName() throws Exception {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        AbstractXmlPackager packager = new MinimalXmlPackager(
+            bos,
+            temp.getRoot().toURI()
+        );
+        final String str = packager.normalizeFileName("25.88.Eililu!$%_----__AbC.de.fG01239-->>>--___.987zipEqr234=)(/Arc");
+        Assert.assertEquals("25.88.Eililu__----__AbC.de.fG01239--_--___.987zipEqr234_Arc", str);
+    }
 }
