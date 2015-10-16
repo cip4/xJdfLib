@@ -61,7 +61,7 @@ public abstract class AbstractXmlPackager {
          *
          * @return Compression level.
          */
-        public int getLevel() {
+        int getLevel() {
             return level;
         }
     }
@@ -70,11 +70,6 @@ public abstract class AbstractXmlPackager {
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
-
-    /**
-     * The level of compression to use while writing.
-     */
-    private CompressionLevel compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
 
     /**
      * The root URI to use when dealing with relative URIs.
@@ -93,21 +88,12 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Getter for compressionLevel attribute.
-     *
-     * @return The compressionLevel.
-     */
-    public CompressionLevel getCompressionLevel() {
-        return compressionLevel;
-    }
-
-    /**
      * Setter for compressionLevel attribute.
      *
      * @param compressionLevel the compressionLevel to set
      */
     public void setCompressionLevel(final CompressionLevel compressionLevel) {
-        this.compressionLevel = compressionLevel;
+        zout.setLevel(compressionLevel.level);
     }
 
     /**
@@ -121,9 +107,6 @@ public abstract class AbstractXmlPackager {
      */
     protected void packageXml(final XmlNavigator xmlNavigator, final String docName, final boolean withoutHierarchy) throws Exception {
         final XmlNavigator _xmlNavigator = new XmlNavigator(xmlNavigator);
-
-        // set compression level
-        zout.setLevel(compressionLevel.getLevel());
 
         // put all files to archive
         try {
