@@ -87,7 +87,7 @@ public abstract class AbstractXmlPackager {
      * @param out The underlying OutputStream to write the package to.
      * @param rootUri The root URI to use when dealign with relative URIs.
      */
-    public AbstractXmlPackager(OutputStream out, URI rootUri) {
+    public AbstractXmlPackager(final OutputStream out, final URI rootUri) {
         zout = new ZipOutputStream(out);
         this.rootUri = rootUri;
     }
@@ -106,7 +106,7 @@ public abstract class AbstractXmlPackager {
      *
      * @param compressionLevel the compressionLevel to set
      */
-    public void setCompressionLevel(CompressionLevel compressionLevel) {
+    public void setCompressionLevel(final CompressionLevel compressionLevel) {
         this.compressionLevel = compressionLevel;
     }
 
@@ -119,7 +119,7 @@ public abstract class AbstractXmlPackager {
      *
      * @throws Exception If the XML document could not be packaged.
      */
-    protected void packageXml(XmlNavigator xmlNavigator, String docName, final boolean withoutHierarchy) throws Exception {
+    protected void packageXml(final XmlNavigator xmlNavigator, final String docName, final boolean withoutHierarchy) throws Exception {
         final XmlNavigator _xmlNavigator = new XmlNavigator(xmlNavigator);
 
         // set compression level
@@ -167,7 +167,7 @@ public abstract class AbstractXmlPackager {
      * @throws PackagerException If files can not be resolved.
      * @throws IOException If files can not be read.
      */
-    final void writeReferencedFiles(NodeList nodeList, String targetDir) throws IOException, PackagerException {
+    final void writeReferencedFiles(final NodeList nodeList, final String targetDir) throws IOException, PackagerException {
         for (int i = 0; i < nodeList.getLength(); i++) {
             Node node = nodeList.item(i);
 
@@ -190,8 +190,8 @@ public abstract class AbstractXmlPackager {
      * @throws PackagerException If the passed source path could not be resolved.
      */
     final ZipEntry writeReferencedFile(
-        String sourceFile,
-        String targetDir
+        final String sourceFile,
+        final String targetDir
     ) throws IOException, PackagerException {
         URI sourceUri = createSourceURI(sourceFile);
         ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
@@ -213,7 +213,7 @@ public abstract class AbstractXmlPackager {
      *
      * @throws PackagerException If the passed source path could not be resolved.
      */
-    protected URI createSourceURI(String srcPath) throws PackagerException {
+    protected URI createSourceURI(final String srcPath) throws PackagerException {
         URI srcUri;
 
         try {
@@ -250,7 +250,7 @@ public abstract class AbstractXmlPackager {
      *
      * @return The ZipEntry for the given URI.
      */
-    protected ZipEntry createZipEntry(String targetDir, URI fileUri) {
+    protected ZipEntry createZipEntry(final String targetDir, final URI fileUri) {
         final String zipEntryName = FilenameUtils.separatorsToUnix(
             FilenameUtils.concat(
                 targetDir,

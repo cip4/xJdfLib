@@ -19,7 +19,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      * @param out     The underlying OutputStream to write the package to.
      * @param rootUri The root URI to use when dealing with relative URIs.
      */
-    public XJdfPackager(OutputStream out, URI rootUri) {
+    public XJdfPackager(final OutputStream out, final URI rootUri) {
         super(out, rootUri);
     }
 
@@ -30,7 +30,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      *
      * @throws Exception If the XML document could not be packaged.
      */
-    public void packageXJdf(XJdfNavigator xJdfNavigator) throws Exception {
+    public void packageXJdf(final XJdfNavigator xJdfNavigator) throws Exception {
         String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
         if (jobId != null) {
             jobId += ".xjdf";
@@ -47,7 +47,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      *
 	 * @throws Exception If the XML document could not be packaged.
 	 */
-	public void packageXJdf(XJdfNavigator xJdfNavigator, String docName) throws Exception {
+	public void packageXJdf(final XJdfNavigator xJdfNavigator, final String docName) throws Exception {
         packageXJdf(xJdfNavigator, docName, false);
 	}
 
@@ -60,13 +60,13 @@ public class XJdfPackager extends AbstractXmlPackager {
      *
      * @throws Exception If the XML document could not be packaged.
      */
-    public void packageXJdf(XJdfNavigator xJdfNavigator, String docName, boolean withoutHierarchy) throws Exception {
-        if (StringUtils.isNotBlank(docName)) {
+    public void packageXJdf(final XJdfNavigator xJdfNavigator, String docName, final boolean withoutHierarchy) throws Exception {
+        if (StringUtils.isBlank(docName)) {
+            docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+        } else {
             if (StringUtils.isBlank(FilenameUtils.getExtension(docName))) {
                 docName += ".xjdf";
             }
-        } else {
-            docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
         }
 
         packageXml(xJdfNavigator, docName, withoutHierarchy);
