@@ -10,16 +10,17 @@
  */
 package org.cip4.lib.xjdf.xml;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
+import org.xml.sax.SAXException;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Navigator class which simplify XPath handling using XJdf Documents.
@@ -103,8 +104,13 @@ public class XJdfNavigator extends XmlNavigator {
      * Custom constructor. Accepting a XJdf InputStream for initializing.
      *
      * @param xJdfStream The XJDF Input Stream.
+     *
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(InputStream xJdfStream) throws Exception {
+    public XJdfNavigator(final InputStream xJdfStream) throws ParserConfigurationException, SAXException, IOException {
         this(xJdfStream, false);
     }
 
@@ -113,8 +119,16 @@ public class XJdfNavigator extends XmlNavigator {
      *
      * @param xJdfStream The XJDF Input Stream.
      * @param namespaceAware True if navigator should be XML Namespace aware.
+     *
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(InputStream xJdfStream, boolean namespaceAware) throws Exception {
+    public XJdfNavigator(
+        final InputStream xJdfStream,
+        final boolean namespaceAware
+    ) throws IOException, SAXException, ParserConfigurationException {
 
         // call super class
         super(xJdfStream, namespaceAware);
@@ -128,9 +142,12 @@ public class XJdfNavigator extends XmlNavigator {
      *
      * @param xjdfPath The path to the XJDF Document.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(String xjdfPath) throws Exception {
+    public XJdfNavigator(final String xjdfPath) throws IOException, SAXException, ParserConfigurationException {
         this(new FileInputStream(xjdfPath));
     }
 
@@ -140,32 +157,47 @@ public class XJdfNavigator extends XmlNavigator {
      * @param xjdfPath The path to the XJDF Document.
      * @param namespaceAware True if navigator should be XML Namespace aware.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(String xjdfPath, boolean namespaceAware) throws Exception {
+    public XJdfNavigator(
+        final String xjdfPath,
+        final boolean namespaceAware
+    ) throws IOException, ParserConfigurationException, SAXException {
         this(new FileInputStream(xjdfPath), namespaceAware);
     }
 
     /**
      * Custom constructor. Accepting a file for initializing.
      *
-     * @param xjdfPath The file of the XJDF Document.
+     * @param xjdfFile The file of the XJDF Document.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(File xjdfFile) throws Exception {
+    public XJdfNavigator(final File xjdfFile) throws IOException, SAXException, ParserConfigurationException {
         this(new FileInputStream(xjdfFile));
     }
 
     /**
      * Custom constructor. Accepting a file for initializing.
      *
-     * @param xjdfPath The file of the XJDF Document.
+     * @param xjdfFile The file of the XJDF Document.
      * @param namespaceAware True if navigator should be XML Namespace aware.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(File xjdfFile, boolean namespaceAware) throws Exception {
+    public XJdfNavigator(
+        final File xjdfFile,
+        final boolean namespaceAware
+    ) throws IOException, ParserConfigurationException, SAXException {
         this(new FileInputStream(xjdfFile), namespaceAware);
     }
 
@@ -174,9 +206,12 @@ public class XJdfNavigator extends XmlNavigator {
      *
      * @param xJdfBytes The XJDF as byte array.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(byte[] xJdfBytes) throws Exception {
+    public XJdfNavigator(final byte[] xJdfBytes) throws IOException, SAXException, ParserConfigurationException {
         this(new ByteArrayInputStream(xJdfBytes));
     }
 
@@ -186,9 +221,15 @@ public class XJdfNavigator extends XmlNavigator {
      * @param xJdfBytes The XJDF as byte array.
      * @param namespaceAware True if navigator should be XML Namespace aware.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XJdfNavigator(byte[] xJdfBytes, boolean namespaceAware) throws Exception {
+    public XJdfNavigator(
+        final byte[] xJdfBytes,
+        final boolean namespaceAware
+    ) throws ParserConfigurationException, SAXException, IOException {
         this(new ByteArrayInputStream(xJdfBytes), namespaceAware);
     }
 
