@@ -68,7 +68,7 @@ public class XmlNavigator {
      * @throws SAXException - If any parse errors occur.
      * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(byte[] xmlBytes) throws ParserConfigurationException, SAXException, IOException {
+    public XmlNavigator(final byte[] xmlBytes) throws ParserConfigurationException, SAXException, IOException {
 
         // chained constructor call
         this(xmlBytes, false);
@@ -104,7 +104,7 @@ public class XmlNavigator {
      * @throws SAXException - If any parse errors occur.
      * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(InputStream xmlStream) throws IOException, SAXException, ParserConfigurationException {
+    public XmlNavigator(final InputStream xmlStream) throws IOException, SAXException, ParserConfigurationException {
 
         // chained constructor call
         this(xmlStream, false);
