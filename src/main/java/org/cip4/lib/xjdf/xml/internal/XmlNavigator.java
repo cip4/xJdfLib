@@ -10,30 +10,6 @@
  */
 package org.cip4.lib.xjdf.xml.internal;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 import org.apache.commons.io.output.XmlStreamWriter;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.type.AbstractXJdfType;
@@ -42,6 +18,31 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Constructor;
 
 /**
  * Navigator class which simplify XPath handling using XML Documents.
@@ -62,9 +63,12 @@ public class XmlNavigator {
      *
      * @param xmlBytes XML Document as Byte Array.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(byte[] xmlBytes) throws Exception {
+    public XmlNavigator(final byte[] xmlBytes) throws ParserConfigurationException, SAXException, IOException {
 
         // chained constructor call
         this(xmlBytes, false);
@@ -76,9 +80,15 @@ public class XmlNavigator {
      * @param xmlBytes XML Document as Byte Array.
      * @param namespaceAware True if navigator should be XML Namespace aware.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(byte[] xmlBytes, boolean namespaceAware) throws Exception {
+    public XmlNavigator(
+        final byte[] xmlBytes,
+        final boolean namespaceAware
+    ) throws IOException, SAXException, ParserConfigurationException {
 
         // chained constructor call
         this(new ByteArrayInputStream(xmlBytes), namespaceAware);
@@ -89,9 +99,12 @@ public class XmlNavigator {
      *
      * @param xmlStream XML Document as Input Stream.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(InputStream xmlStream) throws Exception {
+    public XmlNavigator(final InputStream xmlStream) throws IOException, SAXException, ParserConfigurationException {
 
         // chained constructor call
         this(xmlStream, false);
@@ -103,9 +116,15 @@ public class XmlNavigator {
      * @param xmlStream XML Document as Input Stream.
      * @param namespaceAware True if navigator should be XML Namespace aware.
      *
-     * @throws Exception
+     * @throws ParserConfigurationException if a DocumentBuilder cannot be created
+     * which satisfies the configuration requested.
+     * @throws SAXException - If any parse errors occur.
+     * @throws IOException - If any IO errors occur.
      */
-    public XmlNavigator(InputStream xmlStream, boolean namespaceAware) throws Exception {
+    public XmlNavigator(
+        final InputStream xmlStream,
+        final boolean namespaceAware
+    ) throws ParserConfigurationException, IOException, SAXException {
 
         // init namespace manager
         nsManager = new NamespaceManager();
@@ -167,19 +186,14 @@ public class XmlNavigator {
      * @param xJdfType Target JDF Data Type of attribute.
      *
      * @return Value as JDF Data Type.
-     * @throws XPathExpressionException
-     * @throws SecurityException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalArgumentException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
+     *
+     * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+     * @throws ReflectiveOperationException Is thrown in case reflection fails.
      */
-    public Object readAttribute(String xPath, Class xJdfType)
-        throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException,
-               IllegalAccessException,
-               IllegalArgumentException, InvocationTargetException {
-
+    public Object readAttribute(
+        final String xPath,
+        final Class xJdfType
+    ) throws XPathExpressionException, ReflectiveOperationException {
         // evaluate as String
         String value = evaluateString(xPath);
 
@@ -321,11 +335,14 @@ public class XmlNavigator {
      * @param <T> Type of the desired value object.
      *
      * @return Result as desired data type.
+     *
+     * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
+     * @throws ReflectiveOperationException Is thrown in case reflection fails.
      */
-    public final <T extends AbstractXJdfType> T evaluate(final String xPath, final Class<T> xJdfType)
-        throws XPathExpressionException, NoSuchMethodException, SecurityException, InstantiationException,
-               IllegalAccessException,
-               IllegalArgumentException, InvocationTargetException {
+    public final <T extends AbstractXJdfType> T evaluate(
+        final String xPath,
+        final Class<T> xJdfType
+    ) throws XPathExpressionException, ReflectiveOperationException {
 
         // evaluate string
         String value = evaluateString(xPath);
@@ -427,11 +444,11 @@ public class XmlNavigator {
      * Update attribute in XML Document.
      *
      * @param xPath XPath expression of attribute to read.
+     * @param value New value of attribute defined by xPath.
      *
-     * @throws Exception Is being thrown in case an exception occurs.
-     * @value value New value of attribute defined by xPath.
+     * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
      */
-    public void updateAttribute(String xPath, AbstractXJdfType value) throws Exception {
+    public void updateAttribute(String xPath, AbstractXJdfType value) throws XPathExpressionException {
 
         // update
         updateAttribute(xPath, value.toString());
@@ -441,11 +458,11 @@ public class XmlNavigator {
      * Update attribute in XML Document.
      *
      * @param xPath XPath expression of attribute to read.
+     * @param value New value of attribute defined by xPath.
      *
-     * @throws Exception Is being thrown in case an exception occurs.
-     * @value value New value of attribute defined by xPath.
+     * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
      */
-    public void updateAttribute(String xPath, String value) throws Exception {
+    public void updateAttribute(String xPath, String value) throws XPathExpressionException {
 
         // finalize XPath expression
         String exprString = xPath;
@@ -459,8 +476,11 @@ public class XmlNavigator {
      * Return the XML Document as input stream.
      *
      * @return XML document as input stream.
+     *
+     * @throws TransformerException If this document could not be transformed.
+     * @throws IOException If any IO errors occur.
      */
-    public InputStream getXmlStream() throws Exception {
+    public InputStream getXmlStream() throws TransformerException, IOException {
 
         // get bytes
         InputStream resultStream = new ByteArrayInputStream(getXmlBytes());
@@ -473,9 +493,11 @@ public class XmlNavigator {
      * Return the XML Document as Byte Array.
      *
      * @return XML Document as Byte Array.
-     * @throws Exception Is thrown in case an Exception occurs.
+     *
+     * @throws TransformerException If this document could not be transformed.
+     * @throws IOException - If any IO errors occur.
      */
-    public byte[] getXmlBytes() throws Exception {
+    public byte[] getXmlBytes() throws TransformerException, IOException {
 
         ByteArrayOutputStream bos;
 
