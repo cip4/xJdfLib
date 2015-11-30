@@ -18,7 +18,7 @@ public class AbsoluteURIPathResolver extends AbstractURIResolver {
     }
 
     @Override
-    protected URI resolve(final String uriString) throws URISyntaxException {
+    public URI resolve(final String uriString) throws URISyntaxException {
         final URI tmpUri = new URI(uriString);
         final URI baseUri = getBaseUri();
 
@@ -26,7 +26,7 @@ public class AbsoluteURIPathResolver extends AbstractURIResolver {
     }
 
     @Override
-    protected String toString(final URI uri) throws URISyntaxException {
+    public String toString(final URI uri) throws URISyntaxException {
         return uri.getPath();
     }
 }

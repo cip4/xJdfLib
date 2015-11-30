@@ -19,14 +19,14 @@ public class AuthorityURIResolver extends AbstractURIResolver {
     }
 
     @Override
-    protected URI resolve(final String uriString) throws URISyntaxException {
+    public URI resolve(final String uriString) throws URISyntaxException {
         final URI tmpUri = new URI(uriString);
 
         return new URI(getBaseUri().getScheme(), tmpUri.getAuthority(), tmpUri.getPath(), null, null);
     }
 
     @Override
-    protected String toString(final URI uri) throws URISyntaxException {
+    public String toString(final URI uri) throws URISyntaxException {
         return String.format(
             "//%s%s",
             uri.getAuthority(),

@@ -31,7 +31,7 @@ public abstract class AbstractURIResolver {
      *
      * @throws URISyntaxException If the string could not be resolved.
      */
-    protected abstract URI resolve(final String uriString) throws URISyntaxException;
+    public abstract URI resolve(final String uriString) throws URISyntaxException;
 
     /**
      * Relativize the given uri against the base uri.
@@ -42,7 +42,7 @@ public abstract class AbstractURIResolver {
      *
      * @throws URISyntaxException If the uri could not be relativized.
      */
-    protected abstract String toString(final URI uri) throws URISyntaxException;
+    public abstract String toString(final URI uri) throws URISyntaxException;
 
     /**
      * Returns the base uri.
@@ -61,7 +61,7 @@ public abstract class AbstractURIResolver {
      *
      * @return The most suitable AbstractURIResolver.
      */
-    static AbstractURIResolver create(final URI baseUri, final String uriString) {
+    public static AbstractURIResolver create(final URI baseUri, final String uriString) {
         // Pattern 1
         if (uriString.matches("^[a-z]+:\\p{ASCII}*")) {
             return new AbsoluteURIResolver();

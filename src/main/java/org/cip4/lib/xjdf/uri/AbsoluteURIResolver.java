@@ -16,12 +16,12 @@ public class AbsoluteURIResolver extends AbstractURIResolver {
     }
 
     @Override
-    protected String toString(final URI uri) throws URISyntaxException {
+    public String toString(final URI uri) throws URISyntaxException {
         return uri.toString();
     }
 
     @Override
-    protected URI resolve(final String uriString) throws URISyntaxException {
+    public URI resolve(final String uriString) throws URISyntaxException {
         return new URI(uriString);
     }
 

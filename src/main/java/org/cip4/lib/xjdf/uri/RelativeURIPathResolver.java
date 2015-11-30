@@ -18,12 +18,12 @@ public class RelativeURIPathResolver extends AbstractURIResolver {
     }
 
     @Override
-    protected URI resolve(final String uriString) throws URISyntaxException {
+    public URI resolve(final String uriString) throws URISyntaxException {
         return getBaseUri().resolve(uriString).normalize();
     }
 
     @Override
-    protected String toString(final URI uri) throws URISyntaxException {
+    public String toString(final URI uri) throws URISyntaxException {
         String uriPath = getBaseUri().relativize(uri).normalize().getPath();
         if (uriPath.startsWith("/")) {
             uriPath = uriPath.substring(1);
