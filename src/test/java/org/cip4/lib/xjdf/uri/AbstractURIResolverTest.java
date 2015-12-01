@@ -17,7 +17,7 @@ public class AbstractURIResolverTest {
         assertSame(
             AbsoluteURIResolver.class,
             AbstractURIResolver.create(
-                TEMP_DIR_URI,
+                null,
                 "file:///C:/Documents%20and%20Settings/cip4/xJdfSpec.pdf"
             ).getClass()
         );
@@ -28,7 +28,7 @@ public class AbstractURIResolverTest {
         assertSame(
             AbsoluteURIResolver.class,
             AbstractURIResolver.create(
-                LOCALHOST_URI,
+                null,
                 "https://confluence.cip4.org/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2"
             ).getClass()
         );
