@@ -43,7 +43,7 @@ public abstract class AbstractURIResolver {
      *
      * @throws URISyntaxException If the uri could not be relativized.
      */
-    public abstract String toString(final URI uri) throws URISyntaxException;
+    public abstract String relativize(final URI uri) throws URISyntaxException;
 
     /**
      * Gets the base uri.

@@ -33,7 +33,7 @@ public class AbsoluteURIResolverTest {
 
     @Test
     public void toStringAbsoluteURIResolver_LocalFileSystem() throws Exception {
-        final String relativizedUriString = new AbsoluteURIResolver().toString(
+        final String relativizedUriString = new AbsoluteURIResolver().relativize(
             new URI(
                 "file:///C:/Documents%20and%20Settings/cip4/xJdfSpec.pdf"
             )
@@ -44,7 +44,7 @@ public class AbsoluteURIResolverTest {
 
     @Test
     public void toStringAbsoluteURIResolver_Http() throws Exception {
-        final String relativizedUriString = new AbsoluteURIResolver().toString(
+        final String relativizedUriString = new AbsoluteURIResolver().relativize(
             new URI(
                 "https://confluence.cip4.org/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2"
             )

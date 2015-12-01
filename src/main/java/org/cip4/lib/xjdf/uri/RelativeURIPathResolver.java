@@ -24,7 +24,7 @@ public class RelativeURIPathResolver extends AbstractURIResolver {
     }
 
     @Override
-    public String toString(final URI uri) throws URISyntaxException {
+    public String relativize(final URI uri) throws URISyntaxException {
         String uriPath = getBaseUri().relativize(uri).normalize().getPath();
         if (uriPath.startsWith("/")) {
             uriPath = uriPath.substring(1);

@@ -16,7 +16,7 @@ public class AbsoluteURIResolver extends AbstractURIResolver {
     }
 
     @Override
-    public String toString(final URI uri) throws URISyntaxException {
+    public String relativize(final URI uri) throws URISyntaxException {
         return uri.toString();
     }
 

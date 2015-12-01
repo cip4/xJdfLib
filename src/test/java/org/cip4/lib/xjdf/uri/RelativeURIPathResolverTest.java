@@ -39,7 +39,7 @@ public class RelativeURIPathResolverTest {
 
     @Test
     public void toStringRelativeURIPathResolver_LocalFileSystem() throws Exception {
-        final String resolvedUriString = new RelativeURIPathResolver(HOME_DIR_URI).toString(
+        final String resolvedUriString = new RelativeURIPathResolver(HOME_DIR_URI).relativize(
             new URI(
                 "pub/document-archives/xJdfSpec.pdf"
             )
@@ -50,7 +50,7 @@ public class RelativeURIPathResolverTest {
 
     @Test
     public void toStringRelativeURIPathResolver_Http() throws Exception {
-        final String resolvedUriString = new RelativeURIPathResolver(LOCALHOST_URI).toString(
+        final String resolvedUriString = new RelativeURIPathResolver(LOCALHOST_URI).relativize(
             new URI(
                 "pub/document-archives/xJdfSpec.pdf"
             )

@@ -34,7 +34,7 @@ public class AbsoluteURIPathResolverTest {
 
     @Test
     public void toStringAbsoluteURIPathResolver_LocalFileSystem() throws Exception {
-        final String relativizedUriString = new AbsoluteURIPathResolver(TEMP_DIR_URI).toString(
+        final String relativizedUriString = new AbsoluteURIPathResolver(TEMP_DIR_URI).relativize(
             new URI(
                 "file:/pub/document-archives/xJdfSpec.pdf"
             )
@@ -45,7 +45,7 @@ public class AbsoluteURIPathResolverTest {
 
     @Test
     public void toStringAbsoluteURIPathResolver_Http() throws Exception {
-        final String relativizedUriString = new AbsoluteURIPathResolver(LOCALHOST_URI).toString(
+        final String relativizedUriString = new AbsoluteURIPathResolver(LOCALHOST_URI).relativize(
             new URI(
                 "http://localhost:8080/pub/document-archives/xJdfSpec.pdf"
             )

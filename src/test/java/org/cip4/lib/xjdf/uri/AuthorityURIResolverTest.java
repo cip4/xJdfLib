@@ -22,7 +22,7 @@ public class AuthorityURIResolverTest {
 
     @Test
     public void toStringAuthorityURIResolver_Http() throws Exception {
-        final String relativizedUriString = new AuthorityURIResolver(LOCALHOST_URI).toString(
+        final String relativizedUriString = new AuthorityURIResolver(LOCALHOST_URI).relativize(
             new URI(
                 "//www.cip4.org/download/xJDF-2.0-Spec.pdf"
             )
