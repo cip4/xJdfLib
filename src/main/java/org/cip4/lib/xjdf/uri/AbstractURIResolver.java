@@ -4,17 +4,17 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Base class for all concrete classes which are used to resolve an uri.
+ * Base class for classes resolving an uri.
  */
 public abstract class AbstractURIResolver {
 
     /**
-     * The base uri to resolve against.
+     * The base uri.
      */
     private final URI baseUri;
 
     /**
-     * Base constructor for implementations.
+     * Constructor.
      *
      * @param baseUri The base uri.
      */
@@ -24,6 +24,7 @@ public abstract class AbstractURIResolver {
 
     /**
      * Resolves the given string against the base uri.
+     * This method should always return an absolute uri.
      *
      * @param uriString The string to resolve.
      *
@@ -45,7 +46,7 @@ public abstract class AbstractURIResolver {
     public abstract String toString(final URI uri) throws URISyntaxException;
 
     /**
-     * Returns the base uri.
+     * Gets the base uri.
      *
      * @return The base uri.
      */
@@ -54,12 +55,16 @@ public abstract class AbstractURIResolver {
     }
 
     /**
-     * Autodetect the most suitable implementation of AbstractURIResolver and return a new instance.
+     * Creates the most suitable implementation of an AbstractURIResolver.
+     *
+     * See the xJDF specification
+     *  <i>Appendix: Resolving RunList/@Directory and FileSpec/@URL URI References</i>
+     * for further details.
      *
      * @param baseUri The base uri used to resolve against.
      * @param uriString The uri used for resolving.
      *
-     * @return The most suitable AbstractURIResolver.
+     * @return The created AbstractURIResolver.
      */
     public static AbstractURIResolver create(final URI baseUri, final String uriString) {
         // Pattern 1
