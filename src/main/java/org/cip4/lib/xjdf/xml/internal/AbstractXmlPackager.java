@@ -1,12 +1,12 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.uri.AbstractURIResolver;
+import org.cip4.lib.xjdf.uri.RelativeURIPathResolver;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import javax.xml.xpath.XPathExpressionException;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -52,17 +52,8 @@ public abstract class AbstractXmlPackager {
          *
          * @param level The compression level.
          */
-        CompressionLevel(int level) {
+        CompressionLevel(final int level) {
             this.level = level;
-        }
-
-        /**
-         * Get the compression level.
-         *
-         * @return Compression level.
-         */
-        int getLevel() {
-            return level;
         }
     }
 
@@ -72,19 +63,19 @@ public abstract class AbstractXmlPackager {
     private final ZipOutputStream zout;
 
     /**
-     * The root URI to use when dealing with relative URIs.
+     * The uri resolver to use when resolving a file reference.
      */
-    private final URI rootUri;
+    private final AbstractURIResolver uriResolver;
 
     /**
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
-     * @param rootUri The root URI to use when dealign with relative URIs.
+     * @param uriResolver The uri resolver to use when resolving a file reference.
      */
-    public AbstractXmlPackager(final OutputStream out, final URI rootUri) {
+    public AbstractXmlPackager(final OutputStream out, final AbstractURIResolver uriResolver) {
         zout = new ZipOutputStream(out);
-        this.rootUri = rootUri;
+        this.uriResolver = uriResolver;
     }
 
     /**
@@ -92,7 +83,7 @@ public abstract class AbstractXmlPackager {
      *
      * @param compressionLevel the compressionLevel to set
      */
-    public void setCompressionLevel(final CompressionLevel compressionLevel) {
+    public final void setCompressionLevel(final CompressionLevel compressionLevel) {
         zout.setLevel(compressionLevel.level);
     }
 
@@ -105,28 +96,32 @@ public abstract class AbstractXmlPackager {
      *
      * @throws Exception If the XML document could not be packaged.
      */
-    protected void packageXml(final XmlNavigator xmlNavigator, final String docName, final boolean withoutHierarchy) throws Exception {
-        final XmlNavigator _xmlNavigator = new XmlNavigator(xmlNavigator);
+    protected final void packageXml(
+        final XmlNavigator xmlNavigator,
+        final String docName,
+        final boolean withoutHierarchy
+    ) throws Exception {
+        final XmlNavigator tmpXmlNavigator = new XmlNavigator(xmlNavigator);
 
         // put all files to archive
         try {
             writeReferencedFiles(
-                _xmlNavigator.evaluateNodeList("//FileSpec/@URL"),
+                tmpXmlNavigator.evaluateNodeList("//FileSpec/@URL"),
                 withoutHierarchy
                     ? ""
-                    : "artwork"
+                    : "artwork/"
             );
             writeReferencedFiles(
-                _xmlNavigator.evaluateNodeList("//Preview/@URL"),
+                tmpXmlNavigator.evaluateNodeList("//Preview/@URL"),
                 withoutHierarchy
                     ? ""
-                    : "preview"
+                    : "preview/"
             );
             writeReferencedFiles(
-                _xmlNavigator.evaluateNodeList("//XJDF/@CommentURL"),
+                tmpXmlNavigator.evaluateNodeList("//XJDF/@CommentURL"),
                 withoutHierarchy
                     ? ""
-                    : "docs"
+                    : "docs/"
             );
         } catch (XPathExpressionException e) {
             throw new PackagerException("NodeList could not be retrieved from xml.", e);
@@ -135,10 +130,10 @@ public abstract class AbstractXmlPackager {
         // put XML to archive
         ZipEntry zipEntryXml = new ZipEntry(docName);
         zout.putNextEntry(zipEntryXml);
-        zout.write(_xmlNavigator.getXmlBytes());
+        zout.write(tmpXmlNavigator.getXmlBytes());
 
         // flush
-        zout.finish();
+        zout.finish(); // TODO finish here?
     }
 
     /**
@@ -147,14 +142,18 @@ public abstract class AbstractXmlPackager {
      * @param nodeList NodeList which contains a set of nodes with the URIs.
      * @param targetDir String which defines the target directory inside the ZIP package.
      *
-     * @throws PackagerException If files can not be resolved.
+     * @throws URISyntaxException If files can not be resolved.
      * @throws IOException If files can not be read.
      */
-    final void writeReferencedFiles(final NodeList nodeList, final String targetDir) throws IOException, PackagerException {
+    final void writeReferencedFiles(
+        final NodeList nodeList,
+        final String targetDir
+    ) throws IOException, URISyntaxException {
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
+            final Node node = nodeList.item(i);
 
-            ZipEntry zipEntry = writeReferencedFile(node.getTextContent(), targetDir);
+            final URI sourceUri = uriResolver.resolve(node.getTextContent());
+            final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 
             // update filename
             node.setNodeValue(zipEntry.getName());
@@ -164,21 +163,24 @@ public abstract class AbstractXmlPackager {
     /**
      * Write the given URI to the ZIP package.
      *
-     * @param sourceFile The source file to write to the package.
+     * @param sourceUri The source URI to write to the package.
      * @param targetDir The target directory to write to.
      *
      * @return The ZipEntry that was written to the ZIP package.
      *
      * @throws IOException If the URI could not be written to the ZIP package.
-     * @throws PackagerException If the passed source path could not be resolved.
+     * @throws URISyntaxException If the passed source path could not be resolved.
      */
     final ZipEntry writeReferencedFile(
-        final String sourceFile,
+        final URI sourceUri,
         final String targetDir
-    ) throws IOException, PackagerException {
-        URI sourceUri = createSourceURI(sourceFile);
-        ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
+    ) throws IOException, URISyntaxException {
+        String tmpTargetDir = targetDir;
+        if (!tmpTargetDir.endsWith("/")) {
+            tmpTargetDir += "/";
+        }
 
+        final ZipEntry zipEntry = createZipEntry(tmpTargetDir, sourceUri);
         try (final InputStream in = sourceUri.toURL().openStream()) {
             zout.putNextEntry(zipEntry);
             IOUtils.copy(in, zout);
@@ -188,74 +190,22 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Creates a URI based on the given String.
-     *
-     * @param srcPath The String representation of the URI.
-     *
-     * @return URI respresentation.
-     *
-     * @throws PackagerException If the passed source path could not be resolved.
-     */
-    protected URI createSourceURI(final String srcPath) throws PackagerException {
-        URI srcUri;
-
-        try {
-            srcUri = new URI(srcPath);
-        } catch (URISyntaxException e) {
-            srcUri = null;
-        }
-
-        if (srcUri == null || !srcUri.isAbsolute()) {
-            File file = new File(srcPath);
-            if (!file.isAbsolute()) {
-                if (rootUri == null) {
-                    throw new PackagerException(
-                        String.format(
-                            "Can not resolve relative path '%s' because no rootPath was provided.",
-                            srcPath
-                        )
-                    );
-                }
-
-                file = new File(rootUri.resolve(FilenameUtils.separatorsToUnix(file.getPath())));
-            }
-            srcUri = file.toURI();
-        }
-
-        return srcUri;
-    }
-
-    /**
      * Creates a ZipEntry for the given URI.
      *
      * @param targetDir The target directory inside the ZIP package.
      * @param fileUri The URI to write to the package.
      *
      * @return The ZipEntry for the given URI.
-     */
-    protected ZipEntry createZipEntry(final String targetDir, final URI fileUri) {
-        final String zipEntryName = FilenameUtils.separatorsToUnix(
-            FilenameUtils.concat(
-                targetDir,
-                normalizeFileName(
-                    fileUri.resolve(".").relativize(fileUri).getPath()
-                )
-            )
-        );
-        ZipEntry zipEntry = new ZipEntry(zipEntryName);
-
-        return zipEntry;
-    }
-
-    /**
-     * Normalizes a file name by replacing any non alphanumeric character (except '.' and '-') with an underscore.
      *
-     * @param fileName The file name to normalize.
-     *
-     * @return Normalized file name.
+     * @throws URISyntaxException If the passed source path could not be resolved.
      */
-    final String normalizeFileName(final String fileName) {
-        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
-    }
+    final ZipEntry createZipEntry(final String targetDir, final URI fileUri) throws URISyntaxException {
+        final String fileUriPath = fileUri.getPath();
+        final String uriFileName = fileUriPath.substring(fileUriPath.lastIndexOf('/') + 1);
 
+        final RelativeURIPathResolver tmpUriResolver = new RelativeURIPathResolver(fileUri.resolve("."));
+        final String zipEntryName = tmpUriResolver.relativize(tmpUriResolver.resolve(targetDir).resolve(uriFileName));
+
+        return new ZipEntry(zipEntryName);
+    }
 }

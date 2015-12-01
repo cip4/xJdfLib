@@ -8,6 +8,7 @@ import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.uri.RelativeURIPathResolver;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager.CompressionLevel;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.file.Paths;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -80,7 +82,10 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, null);
+		XJdfPackager packager = new XJdfPackager(
+			bosResult,
+			new RelativeURIPathResolver(Paths.get(".").toAbsolutePath().toUri())
+		);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
 		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
@@ -130,7 +135,10 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, new File(rootPath).toURI());
+		XJdfPackager packager = new XJdfPackager(
+			bosResult,
+			new RelativeURIPathResolver(new File(rootPath).toURI())
+		);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
 		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
@@ -161,7 +169,10 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, pathXJdf.resolve("."));
+		XJdfPackager packager = new XJdfPackager(
+			bosResult,
+			new RelativeURIPathResolver(pathXJdf.resolve("."))
+		);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
 		packager.packageXJdf(new XJdfNavigator(pathXJdf.getPath()), "MyFile.xjdf");
 
@@ -213,7 +224,10 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, null);
+		XJdfPackager packager = new XJdfPackager(
+			bosResult,
+			new RelativeURIPathResolver(Paths.get(".").toAbsolutePath().toUri())
+		);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
 		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf", true);
 
