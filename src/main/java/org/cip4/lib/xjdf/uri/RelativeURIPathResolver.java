@@ -20,7 +20,7 @@ public class RelativeURIPathResolver extends AbstractURIResolver {
 
     @Override
     public URI resolve(final String uriString) throws URISyntaxException {
-        return getBaseUri().resolve(uriString).normalize();
+        return getBaseUri().resolve(new URI(uriString)).normalize();
     }
 
     @Override
