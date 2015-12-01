@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.uri;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 /**
  * Resolver class which is responsible for resolving uris with an relative path.
@@ -14,7 +15,7 @@ public class RelativeURIPathResolver extends AbstractURIResolver {
      * @param baseUri The base uri.
      */
     public RelativeURIPathResolver(final URI baseUri) {
-        super(baseUri);
+        super(Objects.requireNonNull(baseUri, "baseUri must not be null."));
     }
 
     @Override

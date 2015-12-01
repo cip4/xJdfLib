@@ -15,7 +15,7 @@ public class AuthorityURIResolver extends AbstractURIResolver {
      * @param baseUri The base uri.
      */
     public AuthorityURIResolver(final URI baseUri) {
-        super(baseUri);
+        super(Objects.requireNonNull(baseUri, "baseUri must not be null."));
     }
 
     @Override
