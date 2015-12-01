@@ -145,6 +145,17 @@ public class XmlNavigator {
     }
 
     /**
+     * Creates a copy of the passed XmlNavigator with no support for XML namespaces.
+     *
+     * @param xmlNavigator The XmlNavigator to copy.
+     *
+     * @throws Exception
+     */
+    XmlNavigator(XmlNavigator xmlNavigator) throws Exception {
+        this(xmlNavigator.getXmlBytes(), false);
+    }
+
+    /**
      * Getter for xmlDocument attribute.
      *
      * @return the xmlDocument
