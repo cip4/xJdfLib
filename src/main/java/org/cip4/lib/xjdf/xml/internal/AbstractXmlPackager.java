@@ -152,7 +152,7 @@ public abstract class AbstractXmlPackager {
         for (int i = 0; i < nodeList.getLength(); i++) {
             final Node node = nodeList.item(i);
 
-            final URI sourceUri = uriResolver.resolve(node.getTextContent());
+            final URI sourceUri = uriResolver.resolve(node.getNodeValue());
             final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 
             // update filename
