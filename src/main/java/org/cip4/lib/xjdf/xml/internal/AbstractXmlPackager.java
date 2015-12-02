@@ -153,10 +153,12 @@ public abstract class AbstractXmlPackager {
             final Node node = nodeList.item(i);
 
             final URI sourceUri = uriResolver.resolve(node.getNodeValue());
-            final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
+            if (sourceUri.getHost() == null) {
+                final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 
-            // update filename
-            node.setNodeValue(zipEntry.getName());
+                // update filename
+                node.setNodeValue(zipEntry.getName());
+            }
         }
     }
 
