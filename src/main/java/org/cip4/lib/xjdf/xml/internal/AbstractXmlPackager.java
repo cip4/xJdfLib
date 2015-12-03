@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.uri.AbstractURIResolver;
-import org.cip4.lib.xjdf.uri.RelativeURIPathResolver;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -63,19 +62,19 @@ public abstract class AbstractXmlPackager {
     private final ZipOutputStream zout;
 
     /**
-     * The uri resolver to use when resolving a file reference.
+     * The root URI to use when dealing with relative URIs.
      */
-    private final AbstractURIResolver uriResolver;
+    private final URI rootUri;
 
     /**
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
-     * @param uriResolver The uri resolver to use when resolving a file reference.
+     * @param rootUri The root URI to use when dealign with relative URIs.
      */
-    public AbstractXmlPackager(final OutputStream out, final AbstractURIResolver uriResolver) {
+    public AbstractXmlPackager(final OutputStream out, final URI rootUri) {
         zout = new ZipOutputStream(out);
-        this.uriResolver = uriResolver;
+        this.rootUri = rootUri;
     }
 
     /**
@@ -133,7 +132,7 @@ public abstract class AbstractXmlPackager {
         zout.write(tmpXmlNavigator.getXmlBytes());
 
         // flush
-        zout.finish(); // TODO finish here?
+        zout.finish();
     }
 
     /**
@@ -152,7 +151,8 @@ public abstract class AbstractXmlPackager {
         for (int i = 0; i < nodeList.getLength(); i++) {
             final Node node = nodeList.item(i);
 
-            final URI sourceUri = uriResolver.resolve(node.getNodeValue());
+            final String uriString = node.getNodeValue();
+            final URI sourceUri = AbstractURIResolver.create(rootUri, uriString).resolve(uriString);
             if (sourceUri.getHost() == null) {
                 final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 
@@ -177,12 +177,7 @@ public abstract class AbstractXmlPackager {
         final URI sourceUri,
         final String targetDir
     ) throws IOException, URISyntaxException {
-        String tmpTargetDir = targetDir;
-        if (!tmpTargetDir.endsWith("/")) {
-            tmpTargetDir += "/";
-        }
-
-        final ZipEntry zipEntry = createZipEntry(tmpTargetDir, sourceUri);
+        final ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
         try (final InputStream in = sourceUri.toURL().openStream()) {
             zout.putNextEntry(zipEntry);
             IOUtils.copy(in, zout);
@@ -202,12 +197,14 @@ public abstract class AbstractXmlPackager {
      * @throws URISyntaxException If the passed source path could not be resolved.
      */
     final ZipEntry createZipEntry(final String targetDir, final URI fileUri) throws URISyntaxException {
+        String tmpTargetDir = new URI(targetDir).getPath(); // validate target dir
+        if (tmpTargetDir.matches("\\p{ASCII}+[^/]")) {
+            tmpTargetDir += "/";
+        }
+
         final String fileUriPath = fileUri.getPath();
         final String uriFileName = fileUriPath.substring(fileUriPath.lastIndexOf('/') + 1);
 
-        final RelativeURIPathResolver tmpUriResolver = new RelativeURIPathResolver(fileUri.resolve("."));
-        final String zipEntryName = tmpUriResolver.relativize(tmpUriResolver.resolve(targetDir).resolve(uriFileName));
-
-        return new ZipEntry(zipEntryName);
+        return new ZipEntry(new URI(tmpTargetDir).resolve(uriFileName).getPath());
     }
 }

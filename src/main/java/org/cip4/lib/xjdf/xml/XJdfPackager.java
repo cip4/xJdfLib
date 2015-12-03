@@ -2,11 +2,11 @@ package org.cip4.lib.xjdf.xml;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
-import org.cip4.lib.xjdf.uri.AbstractURIResolver;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 
 import java.io.OutputStream;
+import java.net.URI;
 
 /**
  * Packaging logic for XJDF Documents. Package an XJDF with all references in a ZIP Package.
@@ -17,10 +17,10 @@ public class XJdfPackager extends AbstractXmlPackager {
      * Create a new XJdfPackager.
      *
      * @param out     The underlying OutputStream to write the package to.
-     * @param uriResolver The uri resolver to use when resolving a file reference.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      */
-    public XJdfPackager(final OutputStream out, final AbstractURIResolver uriResolver) {
-        super(out, uriResolver);
+    public XJdfPackager(final OutputStream out, final URI rootUri) {
+        super(out, rootUri);
     }
 
     /**
@@ -62,7 +62,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      */
     public final void packageXJdf(
         final XJdfNavigator xJdfNavigator,
-        String docName,
+        final String docName,
         final boolean withoutHierarchy
     ) throws Exception {
         String tmpDocName = docName;
