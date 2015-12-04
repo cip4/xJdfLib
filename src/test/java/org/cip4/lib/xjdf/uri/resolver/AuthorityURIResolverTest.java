@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.uri;
+package org.cip4.lib.xjdf.uri.resolver;
 
 import org.junit.Test;
 
@@ -12,7 +12,8 @@ public class AuthorityURIResolverTest {
 
     @Test
     public void createAuthorityURIResolver_Http() throws Exception {
-        final URI resolvedUri = new AuthorityURIResolver(LOCALHOST_URI).resolve(
+        final URI resolvedUri = new AuthorityURIResolver().resolve(
+            LOCALHOST_URI,
             "//www.cip4.org/download/xJDF-2.0-Spec.pdf"
         );
 
@@ -21,14 +22,7 @@ public class AuthorityURIResolverTest {
     }
 
     @Test
-    public void toStringAuthorityURIResolver_Http() throws Exception {
-        final String relativizedUriString = new AuthorityURIResolver(LOCALHOST_URI).relativize(
-            new URI(
-                "//www.cip4.org/download/xJDF-2.0-Spec.pdf"
-            )
-        );
-
-        assertEquals("//www.cip4.org/download/xJDF-2.0-Spec.pdf", relativizedUriString);
+    public void canResolve() throws Exception {
+        assertTrue(new AuthorityURIResolver().canResolve("//cip4@localhost:8080/pub/document-archives/xJdfSpec.pdf"));
     }
-
 }

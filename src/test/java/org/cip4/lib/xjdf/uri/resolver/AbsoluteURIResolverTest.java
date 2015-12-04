@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.uri;
+package org.cip4.lib.xjdf.uri.resolver;
 
 import org.junit.Test;
 
@@ -11,6 +11,7 @@ public class AbsoluteURIResolverTest {
     @Test
     public void createAbsoluteURIResolver_LocalFileSystem() throws Exception {
         final URI resolvedUri = new AbsoluteURIResolver().resolve(
+            null,
             "file:///C:/Documents%20and%20Settings/cip4/xJdfSpec.pdf"
         );
 
@@ -21,6 +22,7 @@ public class AbsoluteURIResolverTest {
     @Test
     public void createAbsoluteURIResolver_Http() throws Exception {
         final URI resolvedUri = new AbsoluteURIResolver().resolve(
+            null,
             "https://confluence.cip4.org/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2"
         );
 
@@ -32,27 +34,7 @@ public class AbsoluteURIResolverTest {
     }
 
     @Test
-    public void toStringAbsoluteURIResolver_LocalFileSystem() throws Exception {
-        final String relativizedUriString = new AbsoluteURIResolver().relativize(
-            new URI(
-                "file:///C:/Documents%20and%20Settings/cip4/xJdfSpec.pdf"
-            )
-        );
-
-        assertEquals("file:///C:/Documents%20and%20Settings/cip4/xJdfSpec.pdf", relativizedUriString);
-    }
-
-    @Test
-    public void toStringAbsoluteURIResolver_Http() throws Exception {
-        final String relativizedUriString = new AbsoluteURIResolver().relativize(
-            new URI(
-                "https://confluence.cip4.org/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2"
-            )
-        );
-
-        assertEquals(
-            "https://confluence.cip4.org/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2",
-            relativizedUriString
-        );
+    public void canResolve() throws Exception {
+        assertTrue(new AbsoluteURIResolver().canResolve("http://localhost:8080/pub/document-archives/xJdfSpec.pdf"));
     }
 }

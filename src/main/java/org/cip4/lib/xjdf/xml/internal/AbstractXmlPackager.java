@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.uri.AbstractURIResolver;
+import org.cip4.lib.xjdf.uri.resolver.URIResolver;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -152,7 +152,7 @@ public abstract class AbstractXmlPackager {
             final Node node = nodeList.item(i);
 
             final String uriString = node.getNodeValue();
-            final URI sourceUri = AbstractURIResolver.create(rootUri, uriString).resolve(uriString);
+            final URI sourceUri = URIResolver.resolve(rootUri, uriString);
             if (sourceUri.getHost() == null) {
                 final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 

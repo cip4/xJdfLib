@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.uri;
+package org.cip4.lib.xjdf.uri.resolver;
 
 import org.junit.Test;
 
@@ -13,7 +13,8 @@ public class RelativeURIPathResolverTest {
 
     @Test
     public void createRelativeURIPathResolver_LocalFileSystem() throws Exception {
-        final URI resolvedUri = new RelativeURIPathResolver(HOME_DIR_URI).resolve(
+        final URI resolvedUri = new RelativeURIPathResolver().resolve(
+            HOME_DIR_URI,
             "pub/document-archives/xJdfSpec.pdf"
         );
 
@@ -26,7 +27,8 @@ public class RelativeURIPathResolverTest {
 
     @Test
     public void createRelativeURIPathResolver_Http() throws Exception {
-        final URI resolvedUri = new RelativeURIPathResolver(LOCALHOST_URI).resolve(
+        final URI resolvedUri = new RelativeURIPathResolver().resolve(
+            LOCALHOST_URI,
             "pub/document-archives/xJdfSpec.pdf"
         );
 
@@ -38,25 +40,7 @@ public class RelativeURIPathResolverTest {
     }
 
     @Test
-    public void toStringRelativeURIPathResolver_LocalFileSystem() throws Exception {
-        final String resolvedUriString = new RelativeURIPathResolver(HOME_DIR_URI).relativize(
-            new URI(
-                "pub/document-archives/xJdfSpec.pdf"
-            )
-        );
-
-        assertEquals("pub/document-archives/xJdfSpec.pdf", resolvedUriString);
+    public void canResolve() throws Exception {
+        assertTrue(new RelativeURIPathResolver().canResolve("pub/document-archives/xJdfSpec.pdf"));
     }
-
-    @Test
-    public void toStringRelativeURIPathResolver_Http() throws Exception {
-        final String resolvedUriString = new RelativeURIPathResolver(LOCALHOST_URI).relativize(
-            new URI(
-                "pub/document-archives/xJdfSpec.pdf"
-            )
-        );
-
-        assertEquals("pub/document-archives/xJdfSpec.pdf", resolvedUriString);
-    }
-
 }
