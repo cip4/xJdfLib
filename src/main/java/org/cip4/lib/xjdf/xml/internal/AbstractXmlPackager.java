@@ -70,7 +70,7 @@ public abstract class AbstractXmlPackager {
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
-     * @param rootUri The root URI to use when dealign with relative URIs.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      */
     public AbstractXmlPackager(final OutputStream out, final URI rootUri) {
         zout = new ZipOutputStream(out);
