@@ -1,26 +1,4 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.UUID;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -32,9 +10,24 @@ import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager.CompressionLevel;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
+import static org.junit.Assert.*;
 
 /**
  * JUnit test case for XjdfPackager
@@ -67,10 +60,6 @@ public class XJdfPackagerTest {
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfAbsolutePath() throws Exception {
 
@@ -91,19 +80,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray());
+		XJdfPackager packager = new XJdfPackager(bosResult, Paths.get(".").toAbsolutePath().toUri());
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -111,23 +92,19 @@ public class XJdfPackagerTest {
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
 		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
 
-		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
-		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+		assertTrue("XJDF File does not exist.", xJdf.exists());
+		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 
-		Assert.assertTrue("PDF File does not exist.", pdf.exists());
-		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+		assertTrue("PDF File does not exist.", pdf.exists());
+		assertTrue("PDF File size is 0.", pdf.length() > 0);
 
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfRelativePath() throws Exception {
 
@@ -153,19 +130,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray(), rootPath);
+		XJdfPackager packager = new XJdfPackager(bosResult, new File(rootPath).toURI());
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -173,36 +142,30 @@ public class XJdfPackagerTest {
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
 		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
 
-		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
-		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+		assertTrue("XJDF File does not exist.", xJdf.exists());
+		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 
-		Assert.assertTrue("PDF File does not exist.", pdf.exists());
-		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+		assertTrue("PDF File does not exist.", pdf.exists());
+		assertTrue("PDF File size is 0.", pdf.length() > 0);
 
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfRelativePathFile() throws Exception {
 
 		// arrange
-		String pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).toURI().getPath();
+		URI pathXJdf = XJdfPackagerTest.class.getResource(RES_XJDF).toURI();
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(pathXJdf);
+		XJdfPackager packager = new XJdfPackager(bosResult, pathXJdf.resolve("."));
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf");
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(pathXJdf.getPath()), "MyFile.xjdf");
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -211,29 +174,25 @@ public class XJdfPackagerTest {
 		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
 		File pdf2 = new File(FilenameUtils.concat(dir, "artwork/test2.pdf"));
 
-		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
-		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+		assertTrue("XJDF File does not exist.", xJdf.exists());
+		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 
 		String pdfPath = ptkNav.readAttribute("(//FileSpec/@URL)[1]");
-		Assert.assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
 		String pdfPath2 = ptkNav.readAttribute("(//FileSpec/@URL)[2]");
-		Assert.assertEquals("URL attribute is wrong.", "artwork/test2.pdf", pdfPath2);
+		assertEquals("URL attribute is wrong.", "artwork/test2.pdf", pdfPath2);
 
-		Assert.assertTrue("PDF File does not exist.", pdf.exists());
-		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+		assertTrue("PDF File does not exist.", pdf.exists());
+		assertTrue("PDF File size is 0.", pdf.length() > 0);
 
-		Assert.assertTrue("PDF File 2 does not exist.", pdf2.exists());
-		Assert.assertTrue("PDF File 2 size is 0.", pdf2.length() > 0);
+		assertTrue("PDF File 2 does not exist.", pdf2.exists());
+		assertTrue("PDF File 2 size is 0.", pdf2.length() > 0);
 
 		FileUtils.deleteDirectory(new File(dir));
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackager#packageXJdf(org.cip4.lib.xjdf.schema.XJDF, java.io.OutputStream)}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testPackageXJdfWithoutHierarchy() throws Exception {
 
@@ -254,19 +213,11 @@ public class XJdfPackagerTest {
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
-		XJdfParser parser = new XJdfParser();
-		ByteArrayOutputStream bosXJdf = new ByteArrayOutputStream();
-		parser.parseXJdf(xjdf, bosXJdf);
-		bosXJdf.close();
-
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-
-		XJdfPackager packager = new XJdfPackager(bosXJdf.toByteArray());
+		XJdfPackager packager = new XJdfPackager(bosResult, Paths.get(".").toAbsolutePath().toUri());
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(bosResult, "MyFile.xjdf", true);
-
-		bosResult.close();
+		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf)), "MyFile.xjdf", true);
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -274,15 +225,15 @@ public class XJdfPackagerTest {
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
 		File pdf = new File(FilenameUtils.concat(dir, "test.pdf"));
 
-		Assert.assertTrue("XJDF File does not exist.", xJdf.exists());
-		Assert.assertTrue("XJDF File size is 0.", xJdf.length() > 0);
+		assertTrue("XJDF File does not exist.", xJdf.exists());
+		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		Assert.assertEquals("URL attribute is wrong.", "test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "test.pdf", pdfPath);
 
-		Assert.assertTrue("PDF File does not exist.", pdf.exists());
-		Assert.assertTrue("PDF File size is 0.", pdf.length() > 0);
+		assertTrue("PDF File does not exist.", pdf.exists());
+		assertTrue("PDF File size is 0.", pdf.length() > 0);
 
 		FileUtils.deleteDirectory(new File(dir));
 	}
@@ -290,7 +241,7 @@ public class XJdfPackagerTest {
 	/**
 	 * Private helper method for unpackaging zip stream.
 	 * @param inputStream ZipStream as InputStream.
-	 * @param dir Target directory.
+	 * @return Target directory.
 	 * @throws IOException
 	 */
 	private String unzipStream(InputStream inputStream) throws IOException {
