@@ -5976,6 +5976,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Drop"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="Required" type="dateTime" use="optional"/>
                 <xs:attribute name="Transfer" use="optional"/>
