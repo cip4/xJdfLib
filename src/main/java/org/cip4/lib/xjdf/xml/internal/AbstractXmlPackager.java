@@ -100,24 +100,22 @@ public abstract class AbstractXmlPackager {
         final String docName,
         final boolean withoutHierarchy
     ) throws Exception {
-        final XmlNavigator tmpXmlNavigator = new XmlNavigator(xmlNavigator);
-
         // put all files to archive
         try {
             writeReferencedFiles(
-                tmpXmlNavigator.evaluateNodeList("//FileSpec/@URL"),
+                xmlNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"),
                 withoutHierarchy
                     ? ""
                     : "artwork/"
             );
             writeReferencedFiles(
-                tmpXmlNavigator.evaluateNodeList("//Preview/@URL"),
+                xmlNavigator.evaluateNodeList("//xjdf:Preview/@URL"),
                 withoutHierarchy
                     ? ""
                     : "preview/"
             );
             writeReferencedFiles(
-                tmpXmlNavigator.evaluateNodeList("//XJDF/@CommentURL"),
+                xmlNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"),
                 withoutHierarchy
                     ? ""
                     : "docs/"
@@ -129,7 +127,7 @@ public abstract class AbstractXmlPackager {
         // put XML to archive
         ZipEntry zipEntryXml = new ZipEntry(docName);
         zout.putNextEntry(zipEntryXml);
-        zout.write(tmpXmlNavigator.getXmlBytes());
+        zout.write(xmlNavigator.getXmlBytes());
 
         // flush
         zout.finish();
