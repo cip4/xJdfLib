@@ -26,6 +26,6 @@ class AuthorityURIResolver implements URIResolverInterface {
 
     @Override
     public boolean canResolve(final String uriString) {
-        return uriString.startsWith("//");
+        return uriString.matches("^/{2}\\p{ASCII}+");
     }
 }

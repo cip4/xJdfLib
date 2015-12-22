@@ -26,6 +26,6 @@ class AbsoluteURIPathResolver implements URIResolverInterface {
 
     @Override
     public boolean canResolve(final String uriString) {
-        return uriString.startsWith("/");
+        return uriString.matches("^/{1}[\\p{ASCII}&&[^/]]{1}\\p{ASCII}+");
     }
 }
