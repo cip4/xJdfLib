@@ -25,4 +25,23 @@ public class AuthorityURIResolverTest {
     public void canResolve() throws Exception {
         assertTrue(new AuthorityURIResolver().canResolve("//cip4@localhost:8080/pub/document-archives/xJdfSpec.pdf"));
     }
+
+    @Test
+    public void canNotResolve_AbsoluteURI() throws Exception {
+        assertFalse(
+            new AuthorityURIResolver().canResolve("http://localhost:8080/pub/document-archives/xJdfSpec.pdf")
+        );
+    }
+
+    @Test
+    public void canNotResolve_AbsoluteURIPath() throws Exception {
+        assertFalse(
+            new AuthorityURIResolver().canResolve("/pub/document-archives/xJdfSpec.pdf")
+        );
+    }
+
+    @Test
+    public void canNotResolve_RelativeURI() throws Exception {
+        assertFalse(new AuthorityURIResolver().canResolve("pub/document-archives/xJdfSpec.pdf"));
+    }
 }
