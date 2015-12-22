@@ -64,4 +64,9 @@ public class URIResolverTest {
         final URI resolvedURI = URIResolver.resolve(LOCALHOST_URI, "cip4/xJdfSpec.pdf");
         assertEquals(URI.create("http://localhost:8080/cip4/xJdfSpec.pdf"), resolvedURI);
     }
+
+    @Test(expected = NullPointerException.class)
+    public void resolveURI_Null() throws Exception {
+        URIResolver.resolve(null, null);
+    }
 }

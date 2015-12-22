@@ -4,6 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Base class for classes resolving a uri.
@@ -33,6 +34,8 @@ public final class URIResolver {
      * @return The resolved uri.
      */
     public static URI resolve(final URI baseUri, final String uriString) throws URISyntaxException {
+        Objects.requireNonNull(uriString, "Parameter uriString must not be null");
+
         for (final URIResolverInterface uriResolver : URI_RESOLVER_LIST) {
             if (uriResolver.canResolve(uriString)) {
                 return uriResolver.resolve(baseUri, uriString);
