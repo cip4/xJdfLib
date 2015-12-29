@@ -62,12 +62,19 @@ public abstract class AbstractXmlPackager {
     private final ZipOutputStream zout;
 
     /**
+     * Tells whether all files should be put into the zip root.
+     */
+    private final boolean withoutHierarchy;
+
+    /**
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
+     * @param withoutHierarchy Put all files into the zip root.
      */
-    public AbstractXmlPackager(final OutputStream out) {
-        zout = new ZipOutputStream(out);
+    public AbstractXmlPackager(final OutputStream out, final boolean withoutHierarchy) {
+        this.zout = new ZipOutputStream(out);
+        this.withoutHierarchy = withoutHierarchy;
     }
 
     /**
@@ -85,15 +92,13 @@ public abstract class AbstractXmlPackager {
      * @param xmlNavigator XML Navigator which is being packaged.
      * @param docName File name of the document in the zip package.
      * @param rootUri The root URI to use when dealing with relative URIs.
-     * @param withoutHierarchy Put all files into the ZIP Root.
      *
      * @throws Exception If the XML document could not be packaged.
      */
     protected final void packageXml(
         final XmlNavigator xmlNavigator,
         final String docName,
-        final URI rootUri,
-        final boolean withoutHierarchy
+        final URI rootUri
     ) throws Exception {
         // put all files to archive
         try {
