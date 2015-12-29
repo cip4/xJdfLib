@@ -62,19 +62,12 @@ public abstract class AbstractXmlPackager {
     private final ZipOutputStream zout;
 
     /**
-     * The root URI to use when dealing with relative URIs.
-     */
-    private final URI rootUri;
-
-    /**
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
-     * @param rootUri The root URI to use when dealing with relative URIs.
      */
-    public AbstractXmlPackager(final OutputStream out, final URI rootUri) {
+    public AbstractXmlPackager(final OutputStream out) {
         zout = new ZipOutputStream(out);
-        this.rootUri = rootUri;
     }
 
     /**
@@ -91,6 +84,7 @@ public abstract class AbstractXmlPackager {
      *
      * @param xmlNavigator XML Navigator which is being packaged.
      * @param docName File name of the document in the zip package.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      * @param withoutHierarchy Put all files into the ZIP Root.
      *
      * @throws Exception If the XML document could not be packaged.
@@ -98,24 +92,28 @@ public abstract class AbstractXmlPackager {
     protected final void packageXml(
         final XmlNavigator xmlNavigator,
         final String docName,
+        final URI rootUri,
         final boolean withoutHierarchy
     ) throws Exception {
         // put all files to archive
         try {
             writeReferencedFiles(
                 xmlNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"),
+                rootUri,
                 withoutHierarchy
                     ? ""
                     : "artwork/"
             );
             writeReferencedFiles(
                 xmlNavigator.evaluateNodeList("//xjdf:Preview/@URL"),
+                rootUri,
                 withoutHierarchy
                     ? ""
                     : "preview/"
             );
             writeReferencedFiles(
                 xmlNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"),
+                rootUri,
                 withoutHierarchy
                     ? ""
                     : "docs/"
@@ -137,6 +135,7 @@ public abstract class AbstractXmlPackager {
      * Write the content of the passed NodeList to the ZIP package.
      *
      * @param nodeList NodeList which contains a set of nodes with the URIs.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      * @param targetDir String which defines the target directory inside the ZIP package.
      *
      * @throws URISyntaxException If files can not be resolved.
@@ -144,6 +143,7 @@ public abstract class AbstractXmlPackager {
      */
     final void writeReferencedFiles(
         final NodeList nodeList,
+        final URI rootUri,
         final String targetDir
     ) throws IOException, URISyntaxException {
         for (int i = 0; i < nodeList.getLength(); i++) {

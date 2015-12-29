@@ -82,9 +82,13 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, Paths.get(".").toAbsolutePath().toUri());
+		XJdfPackager packager = new XJdfPackager(bosResult);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true), "MyFile.xjdf");
+		packager.packageXJdf(
+			new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
+            "MyFile.xjdf",
+            Paths.get(".").toUri()
+        );
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -132,9 +136,13 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, new File(rootPath).toURI());
+		XJdfPackager packager = new XJdfPackager(bosResult);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true), "MyFile.xjdf");
+		packager.packageXJdf(
+            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
+            "MyFile.xjdf",
+            new File(rootPath).toURI()
+        );
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -163,9 +171,9 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, pathXJdf.resolve("."));
+		XJdfPackager packager = new XJdfPackager(bosResult);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(new XJdfNavigator(pathXJdf.getPath(), true), "MyFile.xjdf");
+		packager.packageXJdf(new XJdfNavigator(pathXJdf.getPath(), true), "MyFile.xjdf", pathXJdf.resolve("."));
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
@@ -215,9 +223,14 @@ public class XJdfPackagerTest {
 
 		// act
 		ByteArrayOutputStream bosResult = new ByteArrayOutputStream();
-		XJdfPackager packager = new XJdfPackager(bosResult, Paths.get(".").toAbsolutePath().toUri());
+		XJdfPackager packager = new XJdfPackager(bosResult);
 		packager.setCompressionLevel(CompressionLevel.BEST_SPEED);
-		packager.packageXJdf(new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true), "MyFile.xjdf", true);
+		packager.packageXJdf(
+            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
+            "MyFile.xjdf",
+            Paths.get(".").toUri(),
+            true
+        );
 
 		// assert
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));

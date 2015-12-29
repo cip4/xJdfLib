@@ -19,8 +19,8 @@ import static org.junit.Assert.*;
 public class AbstractXmlPackagerTest {
 
 	private class MinimalXmlPackager extends AbstractXmlPackager {
-		public MinimalXmlPackager(final OutputStream out, final URI rootPath) throws Exception {
-            super(out, rootPath);
+		public MinimalXmlPackager(final OutputStream out) throws Exception {
+            super(out);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class AbstractXmlPackagerTest {
 
 	@Test
 	public void testWriteReferencedFile() throws Exception {
-		AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), temp.getRoot().toURI());
+		AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
         ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar/");
 
         assertEquals("bar/foo.zip", zipEntry.getName());
@@ -40,13 +40,13 @@ public class AbstractXmlPackagerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testWriteReferencedFileThrowsExceptionIfRootPathNotProvidedForRelativePath() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), null);
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
 		packager.writeReferencedFile(new URI("foo.zip"), "bar");
 	}
 
     @Test
     public void testWriteReferencedFileIfRootPathNotProvidedForAbsolutePath() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), temp.getRoot().toURI());
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
 
         ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar");
         assertEquals("bar/foo.zip", zipEntry.getName());
@@ -54,18 +54,15 @@ public class AbstractXmlPackagerTest {
 
     @Test
     public void testWriteReferencedFileIfRootPathNotProvidedForAbsoluteUrl() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(
-            new ByteArrayOutputStream(),
-            Paths.get(".").toAbsolutePath().toUri()
-        );
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
         ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar");
         assertEquals("bar/foo.zip", zipEntry.getName());
     }
 
     @Test(expected = URISyntaxException.class)
     public void testPackageXmlWithBackslash() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), temp.getRoot().toURI());
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
         packager.writeReferencedFile(temp.newFile().toURI(), "foo\\bar\\baz");
-        packager.packageXml(new XmlNavigator(minimalXml), "document.xml", false);
+        packager.packageXml(new XmlNavigator(minimalXml), "document.xml", temp.getRoot().toURI(), false);
     }
 }

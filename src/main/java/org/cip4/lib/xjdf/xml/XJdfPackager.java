@@ -17,26 +17,26 @@ public class XJdfPackager extends AbstractXmlPackager {
      * Create a new XJdfPackager.
      *
      * @param out     The underlying OutputStream to write the package to.
-     * @param rootUri The root URI to use when dealing with relative URIs.
      */
-    public XJdfPackager(final OutputStream out, final URI rootUri) {
-        super(out, rootUri);
+    public XJdfPackager(final OutputStream out) {
+        super(out);
     }
 
     /**
      * Packages an XJDF Document to a zipped binary output stream.
      *
      * @param xJdfNavigator The XjdfNavigator containing the data.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
      * @throws Exception If the XML document could not be packaged.
      */
-    public final void packageXJdf(final XJdfNavigator xJdfNavigator) throws Exception {
+    public final void packageXJdf(final XJdfNavigator xJdfNavigator, final URI rootUri) throws Exception {
         String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
         if (jobId != null) {
             jobId += ".xjdf";
         }
 
-        packageXJdf(xJdfNavigator, jobId);
+        packageXJdf(xJdfNavigator, jobId, rootUri);
     }
 
 	/**
@@ -44,11 +44,16 @@ public class XJdfPackager extends AbstractXmlPackager {
      *
 	 * @param xJdfNavigator The XjdfNavigator containing the data.
 	 * @param docName Documents name in ZIP Package.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
 	 * @throws Exception If the XML document could not be packaged.
 	 */
-	public final void packageXJdf(final XJdfNavigator xJdfNavigator, final String docName) throws Exception {
-        packageXJdf(xJdfNavigator, docName, false);
+	public final void packageXJdf(
+        final XJdfNavigator xJdfNavigator,
+        final String docName,
+        final URI rootUri
+    ) throws Exception {
+        packageXJdf(xJdfNavigator, docName, rootUri, false);
 	}
 
     /**
@@ -56,6 +61,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      *
      * @param xJdfNavigator The XjdfNavigator containing the data.
      * @param docName Documents name in ZIP Package.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      * @param withoutHierarchy Put all files into the ZIP Root.
      *
      * @throws Exception If the XML document could not be packaged.
@@ -63,6 +69,7 @@ public class XJdfPackager extends AbstractXmlPackager {
     public final void packageXJdf(
         final XJdfNavigator xJdfNavigator,
         final String docName,
+        final URI rootUri,
         final boolean withoutHierarchy
     ) throws Exception {
         String tmpDocName = docName;
@@ -74,7 +81,7 @@ public class XJdfPackager extends AbstractXmlPackager {
             }
         }
 
-        packageXml(xJdfNavigator, tmpDocName, withoutHierarchy);
+        packageXml(xJdfNavigator, tmpDocName, rootUri, withoutHierarchy);
     }
 
 }
