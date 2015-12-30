@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.uri.resolver.URIResolver;
+import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -100,6 +101,9 @@ public abstract class AbstractXmlPackager {
         final String docName,
         final URI rootUri
     ) throws Exception {
+        // put XML to archive
+        writeXmlDocument(new ZipEntry(docName), xmlNavigator);
+
         // put all files to archive
         try {
             writeReferencedFiles(
@@ -127,13 +131,67 @@ public abstract class AbstractXmlPackager {
             throw new PackagerException("NodeList could not be retrieved from xml.", e);
         }
 
-        // put XML to archive
-        ZipEntry zipEntryXml = new ZipEntry(docName);
-        zout.putNextEntry(zipEntryXml);
-        zout.write(xmlNavigator.getXmlBytes());
-
-        // flush
         zout.finish();
+    }
+
+    /**
+     * Writes the document wrapped by the passed XmlNavigator to the given zip entry.
+     *
+     * @param zipEntry The zip entry to write to.
+     * @param nav The XmlNavigator with the wrapped document.
+     *
+     * @throws IOException If the document could not be written to zip entry.
+     * @throws Exception If the document could not be prepared for writing.
+     */
+    final void writeXmlDocument(final ZipEntry zipEntry, final XmlNavigator nav) throws IOException, Exception {
+        final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
+
+        {
+            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                final Node node = nodeList.item(i);
+
+                final String uriString = node.getNodeValue();
+                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                node.setNodeValue(
+                    withoutHierarchy
+                        ? uriFileName
+                        : "artwork/" + uriFileName
+                );
+            }
+        }
+
+        {
+            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                final Node node = nodeList.item(i);
+
+                final String uriString = node.getNodeValue();
+                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                node.setNodeValue(
+                    withoutHierarchy
+                        ? uriFileName
+                        : "preview/" + uriFileName
+                );
+            }
+        }
+
+        {
+            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL");
+            for (int i = 0; i < nodeList.getLength(); i++) {
+                final Node node = nodeList.item(i);
+
+                final String uriString = node.getNodeValue();
+                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                node.setNodeValue(
+                    withoutHierarchy
+                        ? uriFileName
+                        : "docs/" + uriFileName
+                );
+            }
+        }
+
+        writeZipEntry(zipEntry, xJdfNavigator.getXmlStream());
     }
 
     /**
@@ -180,13 +238,25 @@ public abstract class AbstractXmlPackager {
         final URI sourceUri,
         final String targetDir
     ) throws IOException, URISyntaxException {
-        final ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
         try (final InputStream in = sourceUri.toURL().openStream()) {
-            zout.putNextEntry(zipEntry);
-            IOUtils.copy(in, zout);
-        }
+            final ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
+            writeZipEntry(zipEntry, in);
 
-        return zipEntry;
+            return zipEntry;
+        }
+    }
+
+    /**
+     * Writes the content of the passed input stream to the given zip entry.
+     *
+     * @param zipEntry The zip entry to write to.
+     * @param inputStream The input stream to read content from.
+     *
+     * @throws IOException If the content could not be read or written.
+     */
+    private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
+        zout.putNextEntry(zipEntry);
+        IOUtils.copy(inputStream, zout);
     }
 
     /**
