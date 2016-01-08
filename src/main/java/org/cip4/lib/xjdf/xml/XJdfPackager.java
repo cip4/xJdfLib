@@ -41,11 +41,7 @@ public class XJdfPackager extends AbstractXmlPackager {
      * @throws Exception If the XML document could not be packaged.
      */
     public final void packageXJdf(final XJdfNavigator xJdfNavigator, final URI rootUri) throws Exception {
-        String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
-        if (jobId != null) {
-            jobId += ".xjdf";
-        }
-
+        final String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
         packageXJdf(xJdfNavigator, jobId, rootUri);
     }
 
