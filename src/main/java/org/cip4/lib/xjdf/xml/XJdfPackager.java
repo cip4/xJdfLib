@@ -17,6 +17,15 @@ public class XJdfPackager extends AbstractXmlPackager {
      * Create a new XJdfPackager.
      *
      * @param out     The underlying OutputStream to write the package to.
+     */
+    public XJdfPackager(final OutputStream out) {
+        super(out, false);
+    }
+
+    /**
+     * Create a new XJdfPackager.
+     *
+     * @param out     The underlying OutputStream to write the package to.
      * @param withoutHierarchy Put all files into the zip root.
      */
     public XJdfPackager(final OutputStream out, final boolean withoutHierarchy) {

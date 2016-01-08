@@ -71,6 +71,15 @@ public abstract class AbstractXmlPackager {
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
+     */
+    public AbstractXmlPackager(final OutputStream out) {
+        this(out, false);
+    }
+
+    /**
+     * Create a new AbstractXmlPackager.
+     *
+     * @param out The underlying OutputStream to write the package to.
      * @param withoutHierarchy Put all files into the zip root.
      */
     public AbstractXmlPackager(final OutputStream out, final boolean withoutHierarchy) {
