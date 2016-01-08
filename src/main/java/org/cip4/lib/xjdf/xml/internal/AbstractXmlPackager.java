@@ -144,6 +144,17 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
+     * Returns the base name of the path.
+     *
+     * @param path The path to get the base name from.
+     *
+     * @return The base name.
+     */
+    private String extractBaseName(final String path) {
+        return path.substring(path.lastIndexOf('/') + 1);
+    }
+
+    /**
      * Writes the document wrapped by the passed XmlNavigator to the given zip entry.
      *
      * @param zipEntry The zip entry to write to.
@@ -161,7 +172,7 @@ public abstract class AbstractXmlPackager {
                 final Node node = nodeList.item(i);
 
                 final String uriString = node.getNodeValue();
-                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                final String uriFileName = extractBaseName(uriString);
                 node.setNodeValue(
                     withoutHierarchy
                         ? uriFileName
@@ -176,7 +187,7 @@ public abstract class AbstractXmlPackager {
                 final Node node = nodeList.item(i);
 
                 final String uriString = node.getNodeValue();
-                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                final String uriFileName = extractBaseName(uriString);
                 node.setNodeValue(
                     withoutHierarchy
                         ? uriFileName
@@ -191,7 +202,7 @@ public abstract class AbstractXmlPackager {
                 final Node node = nodeList.item(i);
 
                 final String uriString = node.getNodeValue();
-                final String uriFileName = uriString.substring(uriString.lastIndexOf('/') + 1);
+                final String uriFileName = extractBaseName(uriString);
                 node.setNodeValue(
                     withoutHierarchy
                         ? uriFileName
@@ -285,7 +296,7 @@ public abstract class AbstractXmlPackager {
         }
 
         final String fileUriPath = fileUri.getPath();
-        final String uriFileName = fileUriPath.substring(fileUriPath.lastIndexOf('/') + 1);
+        final String uriFileName = extractBaseName(fileUriPath);
 
         return new ZipEntry(new URI(tmpTargetDir).resolve(uriFileName).getPath());
     }
