@@ -230,15 +230,11 @@ public abstract class AbstractXmlPackager {
         final String targetDir
     ) throws IOException, URISyntaxException {
         for (int i = 0; i < nodeList.getLength(); i++) {
-            final Node node = nodeList.item(i);
-
-            final String uriString = node.getNodeValue();
+            final String uriString = nodeList.item(i).getNodeValue();
             final URI sourceUri = URIResolver.resolve(rootUri, uriString);
-            if (sourceUri.getHost() == null) {
-                final ZipEntry zipEntry = writeReferencedFile(sourceUri, targetDir);
 
-                // update filename
-                node.setNodeValue(zipEntry.getName());
+            if (sourceUri.getHost() == null) {
+                writeReferencedFile(sourceUri, targetDir);
             }
         }
     }
