@@ -11,6 +11,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -27,48 +29,6 @@ public class AbstractXmlPackagerTest {
 		}
 	}
 
-	private byte[] minimalXml = ("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
-		+ "<XJDF xmlns=\"http://www.CIP4.org/JDFSchema_2_0\" Version=\"2.0\"></XJDF>").getBytes();
-
-	@Rule
-	public TemporaryFolder temp = new TemporaryFolder();
-
-	@Test
-	public void testWriteReferencedFile() throws Exception {
-		AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), false);
-        ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar/");
-
-        assertEquals("bar/foo.zip", zipEntry.getName());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testWriteReferencedFileThrowsExceptionIfRootPathNotProvidedForRelativePath() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), false);
-		packager.writeReferencedFile(new URI("foo.zip"), "bar");
-	}
-
-    @Test
-    public void testWriteReferencedFileIfRootPathNotProvidedForAbsolutePath() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), false);
-
-        ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar");
-        assertEquals("bar/foo.zip", zipEntry.getName());
-    }
-
-    @Test
-    public void testWriteReferencedFileIfRootPathNotProvidedForAbsoluteUrl() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), false);
-        ZipEntry zipEntry = packager.writeReferencedFile(temp.newFile("foo.zip").toURI(), "bar");
-        assertEquals("bar/foo.zip", zipEntry.getName());
-    }
-
-    @Test(expected = URISyntaxException.class)
-    public void testPackageXmlWithBackslash() throws Exception {
-        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream(), false);
-        packager.writeReferencedFile(temp.newFile().toURI(), "foo\\bar\\baz");
-        packager.packageXml(new XmlNavigator(minimalXml), "document.xml", temp.getRoot().toURI());
-    }
-
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -82,5 +42,26 @@ public class AbstractXmlPackagerTest {
         assertEquals("document.xml", zin.getNextEntry().getName());
         assertEquals("artwork/test.pdf", zin.getNextEntry().getName());
         assertEquals("artwork/test2.pdf", zin.getNextEntry().getName());
+    }
+
+    @Test
+    public void prepareForPackaging() throws Exception {
+        final OutputStream out = new ByteArrayOutputStream();
+        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
+
+        final URI xjdfUri = AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI();
+        final byte[] bytes = IOUtils.toByteArray(xjdfUri);
+        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
+            new XJdfNavigator(bytes, true)
+        );
+
+        assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@ID"));
+
+        final Map<String, String> expectedFileRefs = new HashMap<>();
+        expectedFileRefs.put("./test.pdf", "artwork/test.pdf");
+        expectedFileRefs.put("subfolder/test2.pdf", "artwork/test2.pdf");
+        expectedFileRefs.put("./layout.jdf", "docs/layout.jdf");
+
+        assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
 }

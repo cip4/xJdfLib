@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
@@ -25,17 +24,17 @@ public abstract class AbstractXmlPackager {
     /**
      * A simple class for storing the prepared packaging data.
      */
-    private final class PreparedPackagingData {
+    final class PreparedPackagingData {
 
         /**
          * The prepared XmlNavigator.
          */
-        private final XmlNavigator nav;
+        final XmlNavigator nav;
 
         /**
          * The map that stores referenced files used in the prepared XmlNavigator.
          */
-        private final Map<String, String> fileRefs = new HashMap<>();
+        final Map<String, String> fileRefs = new HashMap<>();
 
         /**
          * Constructor.
@@ -43,7 +42,7 @@ public abstract class AbstractXmlPackager {
          * @param xJdfNavigator The prepared XmlNavigator.
          * @param fileRefs The map containing the referenced files.
          */
-        private PreparedPackagingData(final XJdfNavigator xJdfNavigator, final Map<String, String>... fileRefs) {
+        PreparedPackagingData(final XJdfNavigator xJdfNavigator, final Map<String, String>... fileRefs) {
             this.nav = xJdfNavigator;
             for (final Map<String, String> fileRefMap : fileRefs) {
                 for (final Map.Entry<String, String> entry : fileRefMap.entrySet()) {
@@ -183,7 +182,7 @@ public abstract class AbstractXmlPackager {
      * @return The prepared data used for packaging.
      * @throws Exception If the mlNavigator could not be evaluated.
      */
-    private PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws Exception {
+    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws Exception {
         final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
 
         return new PreparedPackagingData(
@@ -223,54 +222,6 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Write the content of the passed NodeList to the ZIP package.
-     *
-     * @param nodeList NodeList which contains a set of nodes with the URIs.
-     * @param rootUri The root URI to use when dealing with relative URIs.
-     * @param targetDir String which defines the target directory inside the ZIP package.
-     *
-     * @throws URISyntaxException If files can not be resolved.
-     * @throws IOException If files can not be read.
-     */
-    final void writeReferencedFiles(
-        final NodeList nodeList,
-        final URI rootUri,
-        final String targetDir
-    ) throws IOException, URISyntaxException {
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            final String uriString = nodeList.item(i).getNodeValue();
-            final URI sourceUri = URIResolver.resolve(rootUri, uriString);
-
-            if (sourceUri.getHost() == null) {
-                writeReferencedFile(sourceUri, targetDir);
-            }
-        }
-    }
-
-    /**
-     * Write the given URI to the ZIP package.
-     *
-     * @param sourceUri The source URI to write to the package.
-     * @param targetDir The target directory to write to.
-     *
-     * @return The ZipEntry that was written to the ZIP package.
-     *
-     * @throws IOException If the URI could not be written to the ZIP package.
-     * @throws URISyntaxException If the passed source path could not be resolved.
-     */
-    final ZipEntry writeReferencedFile(
-        final URI sourceUri,
-        final String targetDir
-    ) throws IOException, URISyntaxException {
-        try (final InputStream in = sourceUri.toURL().openStream()) {
-            final ZipEntry zipEntry = createZipEntry(targetDir, sourceUri);
-            writeZipEntry(zipEntry, in);
-
-            return zipEntry;
-        }
-    }
-
-    /**
      * Writes the content of the passed input stream to the given zip entry.
      *
      * @param zipEntry The zip entry to write to.
@@ -281,27 +232,5 @@ public abstract class AbstractXmlPackager {
     private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
         zout.putNextEntry(zipEntry);
         IOUtils.copy(inputStream, zout);
-    }
-
-    /**
-     * Creates a ZipEntry for the given URI.
-     *
-     * @param targetDir The target directory inside the ZIP package.
-     * @param fileUri The URI to write to the package.
-     *
-     * @return The ZipEntry for the given URI.
-     *
-     * @throws URISyntaxException If the passed source path could not be resolved.
-     */
-    final ZipEntry createZipEntry(final String targetDir, final URI fileUri) throws URISyntaxException {
-        String tmpTargetDir = new URI(targetDir).getPath(); // validate target dir
-        if (tmpTargetDir.matches("\\p{ASCII}+[^/]")) {
-            tmpTargetDir += "/";
-        }
-
-        final String fileUriPath = fileUri.getPath();
-        final String uriFileName = extractBaseName(fileUriPath);
-
-        return new ZipEntry(new URI(tmpTargetDir).resolve(uriFileName).getPath());
     }
 }
