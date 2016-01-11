@@ -6,12 +6,13 @@ import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -20,6 +21,37 @@ import java.util.zip.ZipOutputStream;
  * Packaging logic for XML Documents. Package an XML with all references in a ZIP Package.
  */
 public abstract class AbstractXmlPackager {
+
+    /**
+     * A simple class for storing the prepared packaging data.
+     */
+    private final class PreparedPackagingData {
+
+        /**
+         * The prepared XmlNavigator.
+         */
+        private final XmlNavigator nav;
+
+        /**
+         * The map that stores referenced files used in the prepared XmlNavigator.
+         */
+        private final Map<String, String> fileRefs = new HashMap<>();
+
+        /**
+         * Constructor.
+         *
+         * @param xJdfNavigator The prepared XmlNavigator.
+         * @param fileRefs The map containing the referenced files.
+         */
+        private PreparedPackagingData(final XJdfNavigator xJdfNavigator, final Map<String, String>... fileRefs) {
+            this.nav = xJdfNavigator;
+            for (final Map<String, String> fileRefMap : fileRefs) {
+                for (final Map.Entry<String, String> entry : fileRefMap.entrySet()) {
+                    this.fileRefs.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
 
     /**
      * ZIP Compression Level.
@@ -110,34 +142,23 @@ public abstract class AbstractXmlPackager {
         final String docName,
         final URI rootUri
     ) throws Exception {
+        final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
+
         // put XML to archive
-        writeXmlDocument(new ZipEntry(docName), xmlNavigator);
+        writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
 
         // put all files to archive
-        try {
-            writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"),
-                rootUri,
-                withoutHierarchy
-                    ? ""
-                    : "artwork/"
-            );
-            writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//xjdf:Preview/@URL"),
-                rootUri,
-                withoutHierarchy
-                    ? ""
-                    : "preview/"
-            );
-            writeReferencedFiles(
-                xmlNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"),
-                rootUri,
-                withoutHierarchy
-                    ? ""
-                    : "docs/"
-            );
-        } catch (XPathExpressionException e) {
-            throw new PackagerException("NodeList could not be retrieved from xml.", e);
+        for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
+            final URI uri = URIResolver.resolve(rootUri, entry.getKey());
+
+            // only write local uri to zip
+            if (uri.getHost() == null) {
+                final String targetPath = entry.getValue();
+
+                try (final InputStream is = uri.toURL().openStream()) {
+                    writeZipEntry(new ZipEntry(targetPath), is);
+                }
+            }
         }
 
         zout.finish();
@@ -155,63 +176,50 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Writes the document wrapped by the passed XmlNavigator to the given zip entry.
+     * Prepares the given XmlNavigator for packaging.
      *
-     * @param zipEntry The zip entry to write to.
-     * @param nav The XmlNavigator with the wrapped document.
+     * @param nav The XmlNavigator to be prepared.
      *
-     * @throws IOException If the document could not be written to zip entry.
-     * @throws Exception If the document could not be prepared for writing.
+     * @return The prepared data used for packaging.
+     * @throws Exception If the mlNavigator could not be evaluated.
      */
-    final void writeXmlDocument(final ZipEntry zipEntry, final XmlNavigator nav) throws IOException, Exception {
+    private PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws Exception {
         final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
 
-        {
-            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                final Node node = nodeList.item(i);
+        return new PreparedPackagingData(
+            xJdfNavigator,
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), "artwork/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL"), "preview/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), "docs/")
+        );
+    }
 
-                final String uriString = node.getNodeValue();
-                final String uriFileName = extractBaseName(uriString);
-                node.setNodeValue(
-                    withoutHierarchy
-                        ? uriFileName
-                        : "artwork/" + uriFileName
-                );
-            }
+    /**
+     * Relativizes the file references in the passed node list.
+     *
+     * @param nodeList The file references to relativize.
+     * @param targetDir The target directory where the file references should be created.
+     *
+     * @return A map containing the mapping between the source and the target file.
+     */
+    private Map<String, String> relativizeNodeList(final NodeList nodeList, final String targetDir) {
+        final Map<String, String> referencedFiles = new HashMap<>();
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            final Node node = nodeList.item(i);
+
+            final String uriString = node.getNodeValue();
+            final String baseName = extractBaseName(uriString);
+            final String uriFileName = withoutHierarchy
+                ? baseName
+                : targetDir + baseName;
+
+            node.setNodeValue(uriFileName);
+
+            referencedFiles.put(uriString, uriFileName);
         }
 
-        {
-            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                final Node node = nodeList.item(i);
-
-                final String uriString = node.getNodeValue();
-                final String uriFileName = extractBaseName(uriString);
-                node.setNodeValue(
-                    withoutHierarchy
-                        ? uriFileName
-                        : "preview/" + uriFileName
-                );
-            }
-        }
-
-        {
-            final NodeList nodeList = xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL");
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                final Node node = nodeList.item(i);
-
-                final String uriString = node.getNodeValue();
-                final String uriFileName = extractBaseName(uriString);
-                node.setNodeValue(
-                    withoutHierarchy
-                        ? uriFileName
-                        : "docs/" + uriFileName
-                );
-            }
-        }
-
-        writeZipEntry(zipEntry, xJdfNavigator.getXmlStream());
+        return referencedFiles;
     }
 
     /**
