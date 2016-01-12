@@ -135,33 +135,37 @@ public abstract class AbstractXmlPackager {
      * @param docName File name of the document in the zip package.
      * @param rootUri The root URI to use when dealing with relative URIs.
      *
-     * @throws Exception If the XML document could not be packaged.
+     * @throws PackagerException If the XML document could not be packaged.
      */
     protected final void packageXml(
         final XmlNavigator xmlNavigator,
         final String docName,
         final URI rootUri
-    ) throws Exception {
-        final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
+    ) throws PackagerException {
+        try {
+            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
 
-        // put XML to archive
-        writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
+            // put XML to archive
+            writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
 
-        // put all files to archive
-        for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
-            final URI uri = URIResolver.resolve(rootUri, entry.getKey());
+            // put all files to archive
+            for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
+                final URI uri = URIResolver.resolve(rootUri, entry.getKey());
 
-            // only write local uri to zip
-            if (uri.getHost() == null) {
-                final String targetPath = entry.getValue();
+                // only write local uri to zip
+                if (uri.getHost() == null) {
+                    final String targetPath = entry.getValue();
 
-                try (final InputStream is = uri.toURL().openStream()) {
-                    writeZipEntry(new ZipEntry(targetPath), is);
+                    try (final InputStream is = uri.toURL().openStream()) {
+                        writeZipEntry(new ZipEntry(targetPath), is);
+                    }
                 }
             }
-        }
 
-        zout.finish();
+            zout.finish();
+        } catch (Exception e) {
+            throw new PackagerException("Error while packaging XML document.", e);
+        }
     }
 
     /**

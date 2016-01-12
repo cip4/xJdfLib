@@ -4,7 +4,9 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
+import org.cip4.lib.xjdf.xml.internal.PackagerException;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.io.OutputStream;
 import java.net.URI;
 
@@ -38,9 +40,13 @@ public class XJdfPackager extends AbstractXmlPackager {
      * @param xJdfNavigator The XjdfNavigator containing the data.
      * @param rootUri The root URI to use when dealing with relative URIs.
      *
-     * @throws Exception If the XML document could not be packaged.
+     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
      */
-    public final void packageXJdf(final XJdfNavigator xJdfNavigator, final URI rootUri) throws Exception {
+    public final void packageXJdf(
+        final XJdfNavigator xJdfNavigator,
+        final URI rootUri
+    ) throws PackagerException, XPathExpressionException {
         final String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
         packageXJdf(xJdfNavigator, jobId, rootUri);
     }
@@ -52,13 +58,13 @@ public class XJdfPackager extends AbstractXmlPackager {
 	 * @param docName Documents name in ZIP Package.
      * @param rootUri The root URI to use when dealing with relative URIs.
      *
-	 * @throws Exception If the XML document could not be packaged.
+	 * @throws PackagerException If the XJDF could not be packaged.
 	 */
 	public final void packageXJdf(
         final XJdfNavigator xJdfNavigator,
         final String docName,
         final URI rootUri
-    ) throws Exception {
+    ) throws PackagerException {
         String tmpDocName = docName;
         if (StringUtils.isBlank(tmpDocName)) {
             tmpDocName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
