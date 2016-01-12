@@ -10,6 +10,7 @@ import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.Test;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
@@ -29,7 +30,15 @@ public class AbstractXmlPackagerTest {
 		public MinimalXmlPackager(final OutputStream out, final boolean withoutHierarchy) throws Exception {
             super(out, withoutHierarchy);
 		}
-	}
+
+        @Override
+        public void packageXml(
+            final XmlNavigator nav,
+            final URI rootUri
+        ) throws PackagerException, XPathExpressionException {
+            throw new RuntimeException("not implemented");
+        }
+    }
 
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {

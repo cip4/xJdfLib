@@ -6,6 +6,7 @@ import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -127,6 +128,20 @@ public abstract class AbstractXmlPackager {
     public final void setCompressionLevel(final CompressionLevel compressionLevel) {
         zout.setLevel(compressionLevel.level);
     }
+
+    /**
+     * Packages an XML Document to a zipped binary output stream.
+     *
+     * @param xmlNavigator The XmlNavigator containing the data.
+     * @param rootUri The root URI to use when dealing with relative URIs.
+     *
+     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
+     */
+    public abstract void packageXml(
+        final XmlNavigator xmlNavigator,
+        final URI rootUri
+    ) throws PackagerException, XPathExpressionException;
 
     /**
      * Packages an XML document to a zipped binary output stream.
