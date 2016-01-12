@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
@@ -164,14 +165,20 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Returns the base name of the path.
+     * Returns the URI encoded base name of the path.
      *
-     * @param path The path to get the base name from.
+     * @param path The path to encode the base name from.
      *
-     * @return The base name.
+     * @return The encoded base name.
+     * @throws URISyntaxException If the given path could not be encoded.
      */
-    private String extractBaseName(final String path) {
-        return path.substring(path.lastIndexOf('/') + 1);
+    private String encodeURIBaseName(final String path) throws URISyntaxException {
+        return new URI(
+            null,
+            null,
+            path.substring(path.lastIndexOf('/') + 1),
+            null
+        ).toASCIIString();
     }
 
     /**
@@ -180,9 +187,10 @@ public abstract class AbstractXmlPackager {
      * @param nav The XmlNavigator to be prepared.
      *
      * @return The prepared data used for packaging.
-     * @throws Exception If the mlNavigator could not be evaluated.
+     * @throws URISyntaxException If a file reference could not be encoded.
+     * @throws Exception If the XmlNavigator could not be evaluated.
      */
-    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws Exception {
+    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws URISyntaxException, Exception {
         final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
 
         return new PreparedPackagingData(
@@ -200,15 +208,19 @@ public abstract class AbstractXmlPackager {
      * @param targetDir The target directory where the file references should be created.
      *
      * @return A map containing the mapping between the source and the target file.
+     * @throws URISyntaxException If a file reference could not be encoded.
      */
-    private Map<String, String> relativizeNodeList(final NodeList nodeList, final String targetDir) {
+    private Map<String, String> relativizeNodeList(
+        final NodeList nodeList,
+        final String targetDir
+    ) throws URISyntaxException {
         final Map<String, String> referencedFiles = new HashMap<>();
 
         for (int i = 0; i < nodeList.getLength(); i++) {
             final Node node = nodeList.item(i);
 
             final String uriString = node.getNodeValue();
-            final String baseName = extractBaseName(uriString);
+            final String baseName = encodeURIBaseName(uriString);
             final String uriFileName = withoutHierarchy
                 ? baseName
                 : targetDir + baseName;
