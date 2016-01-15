@@ -813,6 +813,7 @@
             <xs:enumeration value="Rectangular"/>
             <xs:enumeration value="Round"/>
             <xs:enumeration value="RoundedRectangle"/>
+            <xs:enumeration value="Custom"/>
         </xs:restriction>
     </xs:simpleType>
 
