@@ -984,7 +984,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumMirrorAround">
+    <xs:simpleType name="EnumDeviceAxis">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
             <xs:enumeration value="FeedDirection"/>
@@ -1124,6 +1124,13 @@
             <xs:enumeration value="NewVersion"/>
             <xs:enumeration value="OperatorIntervention"/>
             <xs:enumeration value="Abort"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="EnumPlateType">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Exposed"/>
+            <xs:enumeration value="Dummy"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3647,7 +3654,7 @@
                 </xs:sequence>
                 <xs:attribute name="Center" type="boolean" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
-                <xs:attribute name="MirrorAround" type="EnumMirrorAround" use="optional"/>
+                <xs:attribute name="MirrorAround" type="EnumDeviceAxis" use="optional"/>
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
@@ -5817,24 +5824,13 @@
     <xs:complexType name="ExposedMedia">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
+                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PlateType" type="EnumPlateType" use="optional"/>
                 <xs:attribute name="Polarity" type="boolean" use="optional"/>
                 <xs:attribute name="PunchType" type="string" use="optional"/>
-                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="ProofName" type="string" use="optional"/>
                 <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-                <xs:attribute name="ProofQuality" use="optional"/>
-                <xs:attribute name="PlateType" use="optional"/>
-                <xs:attribute name="ProofType" use="optional"/>
-                <xs:attribute name="ColorType" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-                <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6050,25 +6046,18 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FitPolicy"/>
                 </xs:sequence>
-                <xs:attribute name="TransferCurve" type="TransferFunction" use="optional"/>
-                <xs:attribute name="Polarity" use="optional"/>
-                <xs:attribute name="CenterAcross" use="optional"/>
-                <xs:attribute name="CutMedia" type="boolean" use="optional"/>
-                <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
-                <xs:attribute name="MirrorAround" use="optional"/>
-                <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
                 <xs:attribute name="AdvanceDistance" type="double" use="optional"/>
-                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-                <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
-                <xs:attribute name="RollCut" type="double" use="optional"/>
-                <xs:attribute name="SourceWorkStyle" type="EnumWorkStyle" use="optional"/>
-                <xs:attribute name="NonPrintableMarginBottom" type="double" use="optional"/>
-                <xs:attribute name="Sides" use="optional"/>
                 <xs:attribute name="BurnOutArea" type="XYPair" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+                <xs:attribute name="CenterAcross" type="EnumDeviceAxis" use="optional"/>
+                <xs:attribute name="CutMedia" type="boolean" use="optional"/>
+                <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
+                <xs:attribute name="MirrorAround" type="EnumDeviceAxis" use="optional"/>
+                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
+                <xs:attribute name="RollCut" type="double" use="optional"/>
+                <xs:attribute name="TransferCurve" type="TransferFunction" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
