@@ -1133,6 +1133,86 @@
             <xs:enumeration value="Dummy"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="EnumColorModel">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Basic"/>
+            <xs:enumeration value="Enhanced"/>
+            <xs:enumeration value="Explicit"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumProcessColorModel">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="DeviceCMY"/>
+            <xs:enumeration value="DeviceCMYK"/>
+            <xs:enumeration value="DeviceGray"/>
+            <xs:enumeration value="DeviceN"/>
+            <xs:enumeration value="DeviceRGB"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCSConversionOperation">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Convert"/>
+            <xs:enumeration value="Tag"/>
+            <xs:enumeration value="Untag"/>
+            <xs:enumeration value="Retag"/>
+            <xs:enumeration value="ConvertIgnore"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumRenderingIntent">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Saturation"/>
+            <xs:enumeration value="Perceptual"/>
+            <xs:enumeration value="RelativeColorimetric"/>
+            <xs:enumeration value="AbsoluteColorimetric"/>
+            <xs:enumeration value="ColorSpaceDependent"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumSourceCS">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="CalGray"/>
+            <xs:enumeration value="Calibrated"/>
+            <xs:enumeration value="CalRGB"/>
+            <xs:enumeration value="CIEBased"/>
+            <xs:enumeration value="CMYK"/>
+            <xs:enumeration value="DeviceCMYK"/>
+            <xs:enumeration value="DeviceGray"/>
+            <xs:enumeration value="DeviceN"/>
+            <xs:enumeration value="DeviceRGB"/>
+            <xs:enumeration value="DevIndep"/>
+            <xs:enumeration value="Gray"/>
+            <xs:enumeration value="ICCBased"/>
+            <xs:enumeration value="ICCCMYK"/>
+            <xs:enumeration value="ICCGray"/>
+            <xs:enumeration value="ICCLAB"/>
+            <xs:enumeration value="ICCRGB"/>
+            <xs:enumeration value="Lab"/>
+            <xs:enumeration value="RGB"/>
+            <xs:enumeration value="Separtation"/>
+            <xs:enumeration value="YUV"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumShapeDefFluteDirection">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="XDirection"/>
+            <xs:enumeration value="YDirection"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumShapeDefGrainDirection">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="XDirection"/>
+            <xs:enumeration value="YDirection"/>
+            <xs:enumeration value="Both"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- unchecked -->
 
@@ -1526,29 +1606,6 @@
             <xs:enumeration value="FinalProduct"/>
             <xs:enumeration value="PartialProduct"/>
             <xs:enumeration value="Proof"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumSourceCSs">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="CalGray"/>
-            <xs:enumeration value="CalRGB"/>
-            <xs:enumeration value="Calibrated"/>
-            <xs:enumeration value="CIEBased"/>
-            <xs:enumeration value="CMYK"/>
-            <xs:enumeration value="DeviceN"/>
-            <xs:enumeration value="DevIndep"/>
-            <xs:enumeration value="RGB"/>
-            <xs:enumeration value="Gray"/>
-            <xs:enumeration value="ICCBased"/>
-            <xs:enumeration value="ICCCMYK"/>
-            <xs:enumeration value="ICCGray"/>
-            <xs:enumeration value="ICCLAB"/>
-            <xs:enumeration value="ICCRGB"/>
-            <xs:enumeration value="Lab"/>
-            <xs:enumeration value="Separtation"/>
-            <xs:enumeration value="YUV"/>
-            <xs:enumeration value="All"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3456,19 +3513,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for FormatConversionParams ** -->
-    <xs:element name="FormatConversionParams" type="FormatConversionParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="FormatConversionParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="TIFFFormatParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for GatheringParams ** -->
     <xs:element name="GatheringParams" type="GatheringParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="GatheringParams">
@@ -3738,48 +3782,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for LayoutPreparationParams ** -->
-    <xs:element name="LayoutPreparationParams" type="LayoutPreparationParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="LayoutPreparationParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCell"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ImageShift"/>
-                </xs:sequence>
-                <xs:attribute name="FinishingOrder" use="optional"/>
-                <xs:attribute name="ImplicitGutterMinimumLimit" type="XYPair" use="optional"/>
-                <xs:attribute name="GutterMinimumLimit" type="XYPair" use="optional"/>
-                <xs:attribute name="HorizontalCreep" type="IntegerList" use="optional"/>
-                <xs:attribute name="PresentationDirection" type="Any" use="optional"/>
-                <xs:attribute name="Rotate" use="optional"/>
-                <xs:attribute name="ImplicitGutter" type="XYPair" use="optional"/>
-                <xs:attribute name="StackDepth" type="integer" use="optional"/>
-                <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
-                <xs:attribute name="Gutter" type="XYPair" use="optional"/>
-                <xs:attribute name="StepRepeat" type="string" use="optional"/>
-                <xs:attribute name="StepDocs" type="XYPair" use="optional"/>
-                <xs:attribute name="BindingEdge" use="optional"/>
-                <xs:attribute name="FoldCatalogOrientation" use="optional"/>
-                <xs:attribute name="FoldCatalog" type="string" use="optional"/>
-                <xs:attribute name="BackMarkList" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
-                <xs:attribute name="PageOrder" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FrontMarkList" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="VerticalCreep" type="IntegerList" use="optional"/>
-                <xs:attribute name="CreepValue" type="XYPair" use="optional"/>
-                <xs:attribute name="Sides" use="optional"/>
-                <xs:attribute name="PageDistributionScheme" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ExternalImpositionTemplateRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Location ** -->
     <xs:element name="Location">
         <xs:complexType>
@@ -3938,23 +3940,6 @@
     <xs:element name="ObservationTarget">
         <xs:complexType>
             <xs:attribute name="ObservationPath" type="XPath" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for PageCell ** -->
-    <xs:element name="PageCell">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="FitPolicy"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ImageShift"/>
-            </xs:sequence>
-            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-            <xs:attribute name="Rotate" use="optional"/>
-            <xs:attribute name="Border" type="double" use="optional"/>
-            <xs:attribute name="MarkList" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-            <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -4796,21 +4781,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for NumberingIntent ** -->
-    <xs:element name="NumberingIntent" type="NumberingIntent" substitutionGroup="IntentType"/>
-    <xs:complexType name="NumberingIntent">
-        <xs:complexContent>
-            <xs:extension base="IntentType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="NumberItem"/>
-                </xs:sequence>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorName" type="EnumNamedColor" use="optional"/>
-                <xs:attribute name="ColorNameDetails" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for PackingIntent ** -->
     <xs:element name="PackingIntent" type="PackingIntent" substitutionGroup="IntentType"/>
     <xs:complexType name="PackingIntent">
@@ -5277,16 +5247,17 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace"/>
                 </xs:sequence>
-                <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="ProcessColorModel" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ForceSeparations" type="boolean" use="optional"/>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
-                <xs:attribute name="DeviceColorantOrder" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="DeviceColorantOrder" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ForceSeparations" type="boolean" use="optional"/>
+                <xs:attribute name="InternalColorModel" type="EnumColorModel" use="optional"/>
+                <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
+                <xs:attribute name="ProcessColorModel" type="EnumProcessColorModel" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5541,7 +5512,7 @@
             <xs:attribute name="QuantTable" type="string" use="optional"/>
             <xs:attribute name="SourceCSs" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumSourceCSs"/>
+                    <xs:list itemType="EnumSourceCS"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="HuffTable" type="string" use="optional"/>
@@ -6286,7 +6257,6 @@
                 <xs:attribute name="OutsideGain" type="double" use="optional"/>
                 <xs:attribute name="ReliefThickness" type="double" use="optional"/>
                 <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -6892,17 +6862,19 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Shape"/>
                 </xs:sequence>
-                <xs:attribute name="GrainDirection" use="optional"/>
-                <xs:attribute name="Dimensions" type="shape" use="optional"/>
-                <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
-                <xs:attribute name="FluteDirection" use="optional"/>
-                <xs:attribute name="MediaSide" use="optional"/>
                 <xs:attribute name="Area" type="double" use="optional"/>
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
+                <xs:attribute name="Dimensions" type="shape" use="optional"/>
+                <xs:attribute name="FlatDimensions" type="shape" use="optional"/>
+                <xs:attribute name="FluteDirection" type="EnumShapeDefFluteDirection" use="optional"/>
+                <xs:attribute name="GrainDirection" type="EnumShapeDefGrainDirection" use="optional"/>
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+                <xs:attribute name="MediaSide" type="EnumSide" use="optional"/>
+                <xs:attribute name="ResourceWeight" type="double" use="optional"/>
+                <xs:attribute name="CutLines" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7544,23 +7516,24 @@
     <xs:element name="ColorSpaceConversionOp">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="DeviceNSpace"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="FileSpec"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="ScreenSelector"/>
             </xs:sequence>
-            <xs:attribute name="RenderingIntent" use="optional"/>
             <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Operation" type="EnumCSConversionOperation" use="optional"/>
+            <xs:attribute name="PreserveBlack" type="boolean" use="optional"/>
+            <xs:attribute name="RenderingIntent" type="EnumRenderingIntent" use="optional"/>
+            <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
+            <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
+            <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="SourceCS" type="EnumSourceCS" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="SourceRenderingIntent" use="optional"/>
-            <xs:attribute name="PreserveBlack" type="boolean" use="optional"/>
-            <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
-            <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
-            <xs:attribute name="SourceCS" use="optional"/>
-            <xs:attribute name="Operation" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="SourceRenderingIntent" type="EnumRenderingIntent" use="optional"/>
         </xs:complexType>
     </xs:element>
 
