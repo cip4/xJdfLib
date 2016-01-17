@@ -1214,6 +1214,28 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumCompensation">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Nonde"/>
+            <xs:enumeration value="Film"/>
+            <xs:enumeration value="Plate"/>
+            <xs:enumeration value="Press"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPreviewUsage">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="Animation"/>
+            <xs:enumeration value="Identification"/>
+            <xs:enumeration value="SeparatedThumbNail"/>
+            <xs:enumeration value="Separation"/>
+            <xs:enumeration value="SeparationRaw"/>
+            <xs:enumeration value="Static3D"/>
+            <xs:enumeration value="ThumbNail"/>
+            <xs:enumeration value="Viewable"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -6603,12 +6625,13 @@
     <xs:complexType name="Preview">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="Directory" type="URL" use="optional"/>
+                <xs:sequence>
+                    <xs:element minOccurs="1" maxOccurs="1" ref="FileSpec"/>
+                </xs:sequence>
+                <xs:attribute name="Compensation" type="EnumCompensation" use="optional"/>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="MimeTypeDetails" type="string" use="optional"/>
-                <xs:attribute name="URL" type="URL" use="optional"/>
-                <xs:attribute name="PreviewFileType" use="optional"/>
-                <xs:attribute name="Compensation" use="optional"/>
+                <xs:attribute name="PreviewFileType" type="string" use="optional"/>
+                <xs:attribute name="PreviewUsage" type="EnumPreviewUsage" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
