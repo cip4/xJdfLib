@@ -681,6 +681,16 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumGlueTypeDetailed">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ColdGlue"/>
+            <xs:enumeration value="Hotmelt"/>
+            <xs:enumeration value="Permanent"/>
+            <xs:enumeration value="PUR"/>
+            <xs:enumeration value="Removable"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumInsertingMethod">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="BindIn"/>
@@ -1233,6 +1243,14 @@
             <xs:enumeration value="Static3D"/>
             <xs:enumeration value="ThumbNail"/>
             <xs:enumeration value="Viewable"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumGluingTechnique">
+        <xs:restriction base="NMTOKEN">
+            <xs:enumeration value="SpineGluing"/>
+            <xs:enumeration value="SideGlunigFront"/>
+            <xs:enumeration value="SideGlunigBack"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3181,7 +3199,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="TopFoldIn" type="double" use="optional"/>
                 <xs:attribute name="FrontFoldIn" type="double" use="optional"/>
@@ -3201,9 +3219,11 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="CaseRadius" type="double" use="optional"/>
+                <xs:attribute name="CoverBoardWidth" type="double" use="optional"/>
+                <xs:attribute name="SpineBoardWidth" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3276,7 +3296,7 @@
             <xs:extension base="ParameterType">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Score"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -3595,7 +3615,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="BottomColor" type="string" use="optional"/>
                 <xs:attribute name="BottomColorDetails" type="string" use="optional"/>
@@ -3673,7 +3693,7 @@
     <xs:element name="Insert">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
             </xs:sequence>
             <xs:attribute name="WrapPages" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="Folio" type="IntegerRangeList" use="optional"/>
@@ -3689,7 +3709,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="InsertLocation" use="optional"/>
                 <xs:attribute name="FinishedPage" type="integer" use="optional"/>
@@ -4365,16 +4385,16 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="HorizontalExcess" type="double" use="optional"/>
-                <xs:attribute name="TopExcess" type="double" use="optional"/>
                 <xs:attribute name="HorizontalExcessBack" type="double" use="optional"/>
-                <xs:attribute name="StripColorDetails" type="string" use="optional"/>
-                <xs:attribute name="StripMaterial" use="optional"/>
-                <xs:attribute name="StripLength" type="double" use="optional"/>
                 <xs:attribute name="StripBrand" type="string" use="optional"/>
-                <xs:attribute name="StripColor" type="string" use="optional"/>
+                <xs:attribute name="StripColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="StripColorDetails" type="string" use="optional"/>
+                <xs:attribute name="StripLength" type="double" use="optional"/>
+                <xs:attribute name="StripMaterial" use="optional"/>
+                <xs:attribute name="TopExcess" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4721,7 +4741,7 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="Folio" type="IntegerRangeList" use="required"/>
                 <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
@@ -5139,7 +5159,7 @@
             <xs:extension base="ParameterType">
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="BoxFoldAction"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="BlankDimensionsX" type="DoubleList" use="optional"/>
                 <xs:attribute name="BlankDimensionsY" type="DoubleList" use="optional"/>
@@ -6288,7 +6308,7 @@
     <xs:element name="MediaLayers">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
             </xs:sequence>
             <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
         </xs:complexType>
@@ -7223,7 +7243,7 @@
     <xs:element name="EndSheet">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
             </xs:sequence>
             <xs:attribute name="Side" use="optional"/>
         </xs:complexType>
@@ -7267,48 +7287,23 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Glue ** -->
+    <!-- ** Complex type definition for GlueLine ** -->
     <xs:element name="Glue">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueApplication"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
-            </xs:sequence>
-            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="AreaGlue" type="boolean" use="optional"/>
+            <xs:attribute name="GlueLineWidth" type="double" use="optional"/>
+            <xs:attribute name="GlueRef" type="IDREF" use="optional"/>
+            <xs:attribute name="GlueType" type="EnumGlueTypeDetailed" use="optional"/>
+            <xs:attribute name="GluingPattern" type="NumberList" use="optional"/>
+            <xs:attribute name="GluingTechnique" type="EnumGluingTechnique" use="optional"/>
+            <xs:attribute name="MeltingTemperature" type="integer" use="optional"/>
+            <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
+            <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
+            <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
+            <xs:attribute name="WorkingDirection" type="EnumPosition" use="optional"/>
+            <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for GlueApplication ** -->
-    <xs:element name="GlueApplication" type="GlueApplication" substitutionGroup="ParameterType"/>
-    <xs:complexType name="GlueApplication">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
-                </xs:sequence>
-                <xs:attribute name="GluingTechnique" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for GlueLine ** -->
-    <xs:element name="GlueLine" type="GlueLine" substitutionGroup="ParameterType"/>
-    <xs:complexType name="GlueLine">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="GlueBrand" type="string" use="optional"/>
-                <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
-                <xs:attribute name="MeltingTemperature" type="integer" use="optional"/>
-                <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
-                <xs:attribute name="GlueType" use="optional"/>
-                <xs:attribute name="GlueLineWidth" type="double" use="optional"/>
-                <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
-                <xs:attribute name="AreaGlue" type="boolean" use="optional"/>
-                <xs:attribute name="GluingPattern" type="XYPair" use="optional"/>
-                <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for HolePatter ** -->
     <xs:element name="HolePattern">
@@ -7445,7 +7440,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="GlueLine"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="ThreadBrand" type="string" use="optional"/>
                 <xs:attribute name="Sealing" type="boolean" use="optional"/>
