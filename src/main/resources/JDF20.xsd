@@ -1371,44 +1371,11 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumPartIDKeys">
+    <xs:simpleType name="EnumPartIDKey">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AssemblyID"/>
+            <xs:enumeration value="AssemblyIDs"/>
             <xs:enumeration value="BlockName"/>
             <xs:enumeration value="BundleItemIndex"/>
-            <xs:enumeration value="CellIndex"/>
-            <xs:enumeration value="Condition"/>
-            <xs:enumeration value="DocCopies"/>
-            <xs:enumeration value="DocIndex"/>
-            <xs:enumeration value="DocRunIndex"/>
-            <xs:enumeration value="DocSheetIndex"/>
-            <xs:enumeration value="FountainNumber"/>
-            <xs:enumeration value="ItemNames"/>
-            <xs:enumeration value="LayerIDs"/>
-            <xs:enumeration value="Location"/>
-            <xs:enumeration value="Option"/>
-            <xs:enumeration value="PageNumber"/>
-            <xs:enumeration value="PartVersion"/>
-            <xs:enumeration value="PreflightRule"/>
-            <xs:enumeration value="ProductPart"/>
-            <xs:enumeration value="PreviewType"/>
-            <xs:enumeration value="RibbonName"/>
-            <xs:enumeration value="Run"/>
-            <xs:enumeration value="RunIndex"/>
-            <xs:enumeration value="RunTags"/>
-            <xs:enumeration value="RunPage"/>
-            <xs:enumeration value="Separation"/>
-            <xs:enumeration value="SectionIndex"/>
-            <xs:enumeration value="SetDocIndex"/>
-            <xs:enumeration value="SetSheetIndex"/>
-            <xs:enumeration value="SetIndex"/>
-            <xs:enumeration value="SetRunIndex"/>
-            <xs:enumeration value="SheetIndex"/>
-            <xs:enumeration value="SheetName"/>
-            <xs:enumeration value="Side"/>
-            <xs:enumeration value="SignatureName"/>
-            <xs:enumeration value="TileID"/>
-            <xs:enumeration value="WebName"/>
             <xs:enumeration value="DeliveryUnit0"/>
             <xs:enumeration value="DeliveryUnit1"/>
             <xs:enumeration value="DeliveryUnit2"/>
@@ -1419,17 +1386,15 @@
             <xs:enumeration value="DeliveryUnit7"/>
             <xs:enumeration value="DeliveryUnit8"/>
             <xs:enumeration value="DeliveryUnit9"/>
-            <xs:enumeration value="Edition"/>
-            <xs:enumeration value="EditionVersion"/>
-            <xs:enumeration value="PageTags"/>
-            <xs:enumeration value="PlateLayout"/>
-            <xs:enumeration value="RunSet"/>
+            <xs:enumeration value="DocIndex"/>
+            <xs:enumeration value="DocRunIndex"/>
+            <xs:enumeration value="DocSheetIndex"/>
             <xs:enumeration value="DocTags"/>
-            <xs:enumeration value="SetTags"/>
-            <xs:enumeration value="SubRun"/>
-            <xs:enumeration value="WebProduct"/>
-            <xs:enumeration value="StationName"/>
-            <xs:enumeration value="WebSetup"/>
+            <xs:enumeration value="DropID"/>
+            <xs:enumeration value="ItemNames"/>
+            <xs:enumeration value="LayerIDs"/>
+            <xs:enumeration value="Location"/>
+            <xs:enumeration value="LotID"/>
             <xs:enumeration value="Metadata0"/>
             <xs:enumeration value="Metadata1"/>
             <xs:enumeration value="Metadata2"/>
@@ -1440,6 +1405,36 @@
             <xs:enumeration value="Metadata7"/>
             <xs:enumeration value="Metadata8"/>
             <xs:enumeration value="Metadata9"/>
+            <xs:enumeration value="Option"/>
+            <xs:enumeration value="PageNumber"/>
+            <xs:enumeration value="PageTags"/>
+            <xs:enumeration value="PartVersion"/>
+            <xs:enumeration value="PreviewType"/>
+            <xs:enumeration value="PrintCondition"/>
+            <xs:enumeration value="ProcessType"/>
+            <xs:enumeration value="ProductPart"/>
+            <xs:enumeration value="QualityMeasurement"/>
+            <xs:enumeration value="Run"/>
+            <xs:enumeration value="RunIndex"/>
+            <xs:enumeration value="RunPage"/>
+            <xs:enumeration value="RunPageRange"/>
+            <xs:enumeration value="RunSet"/>
+            <xs:enumeration value="RunTags"/>
+            <xs:enumeration value="SectionIndex"/>
+            <xs:enumeration value="Separation"/>
+            <xs:enumeration value="SetDocIndex"/>
+            <xs:enumeration value="SetIndex"/>
+            <xs:enumeration value="SetRunIndex"/>
+            <xs:enumeration value="SetSheetIndex"/>
+            <xs:enumeration value="SetTags"/>
+            <xs:enumeration value="SheetIndex"/>
+            <xs:enumeration value="SheetName"/>
+            <xs:enumeration value="Side"/>
+            <xs:enumeration value="StationName"/>
+            <xs:enumeration value="SubRun"/>
+            <xs:enumeration value="TileID"/>
+            <xs:enumeration value="TransferCurveName"/>
+            <xs:enumeration value="WebName"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1621,11 +1616,6 @@
             <xs:attribute name="Locked" type="boolean" use="optional"/>
             <xs:attribute name="PipeURL" type="URL" use="optional"/>
             <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Status" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="ResourceWeight" type="double" use="optional"/>
@@ -1646,11 +1636,6 @@
             <xs:attribute name="BatchID" type="string" use="optional"/>
             <xs:attribute name="ProductID" type="string" use="optional"/>
             <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="Brand" type="string" use="optional"/>
             <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="AmountGood" type="double" use="optional"/>
@@ -1677,11 +1662,6 @@
             <xs:attribute name="Locked" type="boolean" use="optional"/>
             <xs:attribute name="PipeURL" type="URL" use="optional"/>
             <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Status" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="PipeID" type="string" use="optional"/>
@@ -1694,11 +1674,6 @@
             <xs:attribute name="PartUsage" use="optional"/>
             <xs:attribute name="ProductID" type="string" use="optional"/>
             <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
         </xs:complexType>
@@ -1831,9 +1806,15 @@
     <!-- ** Complex type definition for Dependent ** -->
     <xs:element name="Dependent">
         <xs:complexType>
+            <xs:attribute name="JMFURL" type="URL" use="optional"/>
             <xs:attribute name="JobID" type="string" use="required"/>
             <xs:attribute name="JobPartID" type="string" use="required"/>
-            <xs:attribute name="JMFURL" type="URL" use="optional"/>
+            <xs:attribute name="PipeID" type="string" use="optional"/>
+            <xs:attribute name="PipePartPartIDKeys" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="EnumPartIDKey"/>
+                </xs:simpleType>
+            </xs:attribute>
         </xs:complexType>
     </xs:element>
 
@@ -3709,33 +3690,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for JobSheet ** -->
-    <xs:element name="JobSheet">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for LabelingParams ** -->
     <xs:element name="LabelingParams" type="LabelingParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="LabelingParams">
@@ -4046,8 +4000,6 @@
     <xs:element name="Part">
         <xs:complexType>
             <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="BinderySignatureName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BinderySignaturePaginationIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
@@ -4358,55 +4310,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Signature ** -->
-    <xs:element name="Signature">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentObject"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCondition"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerList"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkObject"/>
-            </xs:sequence>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SheetCountReset" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="OrdsConsumed" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="BaseOrdReset" use="optional"/>
-            <xs:attribute name="SheetNameFormat" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
-            <xs:attribute name="StackDepth" type="integer" use="optional"/>
-            <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
-            <xs:attribute name="OrdReset" use="optional"/>
-            <xs:attribute name="SheetNameTemplate" type="string" use="optional"/>
-            <xs:attribute name="Automated" type="boolean" use="optional"/>
-            <xs:attribute name="MaxCollect" type="integer" use="optional"/>
-            <xs:attribute name="SourceWorkStyle" type="EnumWorkStyle" use="optional"/>
-            <xs:attribute name="MinCollect" type="integer" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for SoftCoverBinding ** -->
     <xs:element name="SoftCoverBinding">
         <xs:complexType>
@@ -4538,9 +4441,6 @@
             <xs:attribute name="TabBrand" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for Tape ** -->
-    <xs:element name="Tape"/>
 
     <!-- ** Complex type definition for ThreadSealingParams ** -->
     <xs:element name="ThreadSealingParams" type="ThreadSealingParams" substitutionGroup="ParameterType"/>
@@ -5411,33 +5311,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorsResultsPool ** -->
-    <xs:element name="ColorsResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ComChannel ** -->
     <xs:element name="ComChannel" type="ComChannel" substitutionGroup="ParameterType"/>
     <xs:complexType name="ComChannel">
@@ -5499,33 +5372,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for ConstraintValue ** -->
-    <xs:element name="ConstraintValue">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for Contact ** -->
     <xs:element name="Contact" type="Contact" substitutionGroup="ParameterType"/>
@@ -5662,33 +5508,6 @@
         <xs:complexType>
             <xs:attribute name="CostCenterID" type="string" use="optional"/>
             <xs:attribute name="Name" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Cover ** -->
-    <xs:element name="Cover">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5896,33 +5715,6 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="DispositionUsage" use="optional"/>
             <xs:attribute name="DispositionAction" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for DocumentResultsPool ** -->
-    <xs:element name="DocumentResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6279,33 +6071,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for ImagesResultsPool ** -->
-    <xs:element name="ImagesResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for InsertSheet ** -->
     <xs:element name="InsertSheet" type="InsertSheet" substitutionGroup="ParameterType"/>
@@ -7118,33 +6883,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Sealing ** -->
-    <xs:element name="Sealing">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for SeparationControlParams ** -->
     <xs:element name="SeparationControlParams" type="SeparationControlParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="SeparationControlParams">
@@ -7446,17 +7184,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ChannelBinding ** -->
-    <xs:element name="ChannelBinding">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Cover"/>
-            </xs:sequence>
-            <xs:attribute name="ChannelBrand" type="string" use="optional"/>
-            <xs:attribute name="Thickness" type="double" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ChannelBindingDetails ** -->
     <xs:element name="ChannelBindingDetails">
         <xs:complexType>
@@ -7720,15 +7447,10 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ThreadSealing ** -->
-    <xs:element name="ThreadSealing"/>
-
     <!-- ** Complex type definition for ThreadSewing ** -->
     <xs:element name="ThreadSewing">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Sealing"/>
-            </xs:sequence>
+            <xs:attribute name="Sealing" type="boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -7767,33 +7489,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for VeloBinding ** -->
-    <xs:element name="VeloBinding">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for WebInlineFinishingParams ** -->
     <xs:element name="WebInlineFinishingParams" type="WebInlineFinishingParams" substitutionGroup="ParameterType"/>
@@ -7909,60 +7604,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for FileTypeResultsPool ** -->
-    <xs:element name="FileTypeResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for FontsResultsPool ** -->
-    <xs:element name="FontsResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Ink ** -->
     <xs:element name="Ink" type="Ink" substitutionGroup="ResourceType"/>
     <xs:complexType name="Ink">
@@ -8010,33 +7651,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PagesResultsPool ** -->
-    <xs:element name="PagesResultsPool">
-        <xs:complexType>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="PipePartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPartIDKeys"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="QualityControlResultRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for PDFToPSConversionParams ** -->
     <xs:element name="PDFToPSConversionParams" type="PDFToPSConversionParams" substitutionGroup="ParameterType"/>
@@ -8094,19 +7708,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for PreflightConstraint ** -->
-    <xs:element name="PreflightConstraint">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ConstraintValue"/>
-            </xs:sequence>
-            <xs:attribute name="AttemptFixupWarnings" type="boolean" use="optional"/>
-            <xs:attribute name="Constraint" type="string" use="optional"/>
-            <xs:attribute name="AttemptFixupErrors" type="boolean" use="optional"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for PreviewGenerationParams ** -->
     <xs:element name="PreviewGenerationParams" type="PreviewGenerationParams" substitutionGroup="ParameterType"/>
