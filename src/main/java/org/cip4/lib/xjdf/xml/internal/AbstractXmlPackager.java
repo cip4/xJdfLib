@@ -1,17 +1,13 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
-import java.io.File;
-import java.io.FileInputStream;
+import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.uri.resolver.URIResolver;
+import org.cip4.lib.xjdf.xml.XJdfNavigator;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.xpath.XPathExpressionException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
@@ -22,121 +18,106 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.xml.xpath.XPathExpressionException;
-
-import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.io.IOUtils;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 /**
  * Packaging logic for XML Documents. Package an XML with all references in a ZIP Package.
- *
- * @author stefan.meissner
- * @author michel hartmann
  */
 public abstract class AbstractXmlPackager {
 
-    private CompressionLevel compressionLevel;
+    /**
+     * A simple class for storing the prepared packaging data.
+     */
+    final class PreparedPackagingData {
 
-    private final URI rootUri;
+        /**
+         * The prepared XmlNavigator.
+         */
+        final XmlNavigator nav;
 
-    private final Map<File, URI> fileMap;
+        /**
+         * The map that stores referenced files used in the prepared XmlNavigator.
+         */
+        final Map<String, String> fileRefs = new HashMap<>();
 
-    private final XmlNavigator xPathNav;
-
-    private final byte[] xmlDoc;
+        /**
+         * Constructor.
+         *
+         * @param xJdfNavigator The prepared XmlNavigator.
+         * @param fileRefs The map containing the referenced files.
+         */
+        PreparedPackagingData(final XJdfNavigator xJdfNavigator, final Map<String, String>... fileRefs) {
+            this.nav = xJdfNavigator;
+            for (final Map<String, String> fileRefMap : fileRefs) {
+                for (final Map.Entry<String, String> entry : fileRefMap.entrySet()) {
+                    this.fileRefs.put(entry.getKey(), entry.getValue());
+                }
+            }
+        }
+    }
 
     /**
-     * ZIP Compression Level
-     *
-     * @author stefan.meissner
-     * @date 26.01.2013
+     * ZIP Compression Level.
      */
     public enum CompressionLevel {
-
+        /**
+         * Best speed.
+         */
         BEST_SPEED(Deflater.BEST_SPEED),
+        /**
+         * Best compression.
+         */
         BEST_COMPRESSION(Deflater.BEST_COMPRESSION),
+        /**
+         * Default compression.
+         */
         DEFAULT_COMPRESSION(Deflater.DEFAULT_COMPRESSION),
+        /**
+         * No compression.
+         */
         NO_COMPRESSION(Deflater.NO_COMPRESSION);
 
+        /**
+         * The compression level.
+         */
         private final int level;
 
-        CompressionLevel(int level) {
+        /**
+         * Constructor.
+         *
+         * @param level The compression level.
+         */
+        CompressionLevel(final int level) {
             this.level = level;
         }
-
-        public int getLevel() {
-            return level;
-        }
     }
 
     /**
-     * Custom constructor. Accepting an XJDF Path for initializing.
-     *
-     * @param xmlPath Path to XJDF Document.
-     *
-     * @throws Exception
+     * The ZipOutputStream to write to.
      */
-    public AbstractXmlPackager(String xmlPath) throws Exception {
+    private final ZipOutputStream zout;
 
-        // load XJDF
-        byte[] bytes;
-        try (InputStream is = new FileInputStream(xmlPath)) {
-            bytes = IOUtils.toByteArray(is);
-        }
+    /**
+     * Tells whether all files should be put into the zip root.
+     */
+    private final boolean withoutHierarchy;
 
-        // extract root path
-        String rootPath = FilenameUtils.getFullPath(xmlPath);
-
-        // init instance varialbes
-        this.xPathNav = new XmlNavigator(bytes);
-        this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
-        this.fileMap = new HashMap<>();
-        this.xmlDoc = bytes;
-        this.rootUri = new File(rootPath).toURI();
+    /**
+     * Create a new AbstractXmlPackager.
+     *
+     * @param out The underlying OutputStream to write the package to.
+     */
+    public AbstractXmlPackager(final OutputStream out) {
+        this(out, false);
     }
 
     /**
-     * Custom constructor. Accepting an XML Document for initializing.
+     * Create a new AbstractXmlPackager.
      *
-     * @param xmlDoc XML Document for parsing and packaging.
-     * @param rootPath Root path of the files.
-     *
-     * @throws Exception
+     * @param out The underlying OutputStream to write the package to.
+     * @param withoutHierarchy Put all files into the zip root.
      */
-    public AbstractXmlPackager(byte[] xmlDoc, String rootPath) throws Exception {
-
-        // new navigator
-        this.xPathNav = new XmlNavigator(xmlDoc);
-
-        // init instance variables
-        this.compressionLevel = CompressionLevel.DEFAULT_COMPRESSION;
-        this.fileMap = new HashMap<>();
-        this.xmlDoc = xmlDoc;
-        if (null != rootPath) {
-            this.rootUri = new File(rootPath).toURI();
-        } else {
-            this.rootUri = null;
-        }
-    }
-
-    /**
-     * Getter for xmlDoc attribute.
-     *
-     * @return the xmlDoc
-     */
-    protected byte[] getXmlDoc() {
-        return xmlDoc;
-    }
-
-    /**
-     * Getter for compressionLevel attribute.
-     *
-     * @return the compressionLevel
-     */
-    public CompressionLevel getCompressionLevel() {
-        return compressionLevel;
+    public AbstractXmlPackager(final OutputStream out, final boolean withoutHierarchy) {
+        this.zout = new ZipOutputStream(out);
+        this.withoutHierarchy = withoutHierarchy;
     }
 
     /**
@@ -144,119 +125,143 @@ public abstract class AbstractXmlPackager {
      *
      * @param compressionLevel the compressionLevel to set
      */
-    public void setCompressionLevel(CompressionLevel compressionLevel) {
-        this.compressionLevel = compressionLevel;
+    public final void setCompressionLevel(final CompressionLevel compressionLevel) {
+        zout.setLevel(compressionLevel.level);
     }
 
     /**
-     * Packages an XJDF Document to a zipped binary output stream.
+     * Packages an XML Document to a zipped binary output stream.
      *
-     * @param os Target OutputStream where XJdfDocument is being packaged.
+     * @param xmlNavigator The XmlNavigator containing the data.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
-     * @throws Exception
+     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
      */
-    protected void packageXml(OutputStream os, String docName) throws Exception {
-
-        // create zip
-        ZipOutputStream zout = new ZipOutputStream(os);
-        zout.setLevel(compressionLevel.getLevel());
-
-        // put XML to archive
-        ZipEntry zipEntryXml = new ZipEntry(docName);
-        zout.putNextEntry(zipEntryXml);
-
-        try (InputStream isXJdf = xPathNav.getXmlStream()) {
-            IOUtils.copy(isXJdf, zout);
-        }
-
-        // put all files to archive
-        for (File key : fileMap.keySet()) {
-            try (InputStream fis = fileMap.get(key).toURL().openStream()) {
-                zout.putNextEntry(new ZipEntry(key.getPath().replace("\\", "/")));
-                IOUtils.copy(fis, zout);
-            }
-        }
-
-        // flush
-        zout.finish();
-    }
+    public abstract void packageXml(
+        final XmlNavigator xmlNavigator,
+        final URI rootUri
+    ) throws PackagerException, XPathExpressionException;
 
     /**
-     * Check all attributes, defined by an xpath expression, for file URLs and update and register in fileMap.
+     * Packages an XML document to a zipped binary output stream.
      *
-     * @param xPathAttribute XPath expression which defins a set of Attributes in XJDF Document.
+     * @param xmlNavigator XML Navigator which is being packaged.
+     * @param docName File name of the document in the zip package.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
-     * @throws PackagerException if files can not be read from the xJdf.
+     * @throws PackagerException If the XML document could not be packaged.
      */
-    protected void registerFiles(String xPathAttribute, String targetDir) throws PackagerException {
-
-        // iterate over all attributes
-        NodeList nodeList;
+    protected final void packageXml(
+        final XmlNavigator xmlNavigator,
+        final String docName,
+        final URI rootUri
+    ) throws PackagerException {
         try {
-            nodeList = xPathNav.evaluateNodeList(xPathAttribute);
-        } catch (XPathExpressionException e) {
-            throw new PackagerException("NodeList could not be retrieved from xJdf.", e);
+            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
+
+            // put XML to archive
+            writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
+
+            // put all files to archive
+            for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
+                final URI uri = URIResolver.resolve(rootUri, entry.getKey());
+
+                // only write local uri to zip
+                if (uri.getHost() == null) {
+                    final String targetPath = entry.getValue();
+
+                    try (final InputStream is = uri.toURL().openStream()) {
+                        writeZipEntry(new ZipEntry(targetPath), is);
+                    }
+                }
+            }
+
+            zout.finish();
+        } catch (Exception e) {
+            throw new PackagerException("Error while packaging XML document.", e);
         }
+    }
+
+    /**
+     * Returns the URI encoded base name of the path.
+     *
+     * @param path The path to encode the base name from.
+     *
+     * @return The encoded base name.
+     * @throws URISyntaxException If the given path could not be encoded.
+     */
+    private String encodeURIBaseName(final String path) throws URISyntaxException {
+        return new URI(
+            null,
+            null,
+            path.substring(path.lastIndexOf('/') + 1),
+            null
+        ).toASCIIString();
+    }
+
+    /**
+     * Prepares the given XmlNavigator for packaging.
+     *
+     * @param nav The XmlNavigator to be prepared.
+     *
+     * @return The prepared data used for packaging.
+     * @throws URISyntaxException If a file reference could not be encoded.
+     * @throws Exception If the XmlNavigator could not be evaluated.
+     */
+    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws URISyntaxException, Exception {
+        final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
+
+        return new PreparedPackagingData(
+            xJdfNavigator,
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), "artwork/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL"), "preview/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), "docs/")
+        );
+    }
+
+    /**
+     * Relativizes the file references in the passed node list.
+     *
+     * @param nodeList The file references to relativize.
+     * @param targetDir The target directory where the file references should be created.
+     *
+     * @return A map containing the mapping between the source and the target file.
+     * @throws URISyntaxException If a file reference could not be encoded.
+     */
+    private Map<String, String> relativizeNodeList(
+        final NodeList nodeList,
+        final String targetDir
+    ) throws URISyntaxException {
+        final Map<String, String> referencedFiles = new HashMap<>();
 
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Node node = nodeList.item(i);
+            final Node node = nodeList.item(i);
 
-            String filePath = node.getTextContent();
-            File targetFile = registerFile(filePath, targetDir);
-            // update filename
-            node.setNodeValue(FilenameUtils.separatorsToUnix(targetFile.getPath()));
-        }
-    }
+            final String uriString = node.getNodeValue();
+            final String baseName = encodeURIBaseName(uriString);
+            final String uriFileName = withoutHierarchy
+                ? baseName
+                : targetDir + baseName;
 
-    protected File registerFile(final String srcPath, final String targetDir) throws PackagerException {
-        URI srcUri;
+            node.setNodeValue(uriFileName);
 
-        try {
-            srcUri = new URI(srcPath);
-        } catch (URISyntaxException e) {
-            srcUri = null;
+            referencedFiles.put(uriString, uriFileName);
         }
 
-        if (srcUri == null || !srcUri.isAbsolute()) {
-            File file = new File(srcPath);
-            if (!file.isAbsolute()) {
-                if (rootUri == null) {
-                    throw new PackagerException(
-                        String.format(
-                            "Can not resolve relative path '%s' because no rootPath was provided.",
-                            srcPath
-                        )
-                    );
-                }
-
-                file = new File(rootUri.resolve(FilenameUtils.separatorsToUnix(file.getPath())));
-            }
-            srcUri = file.toURI();
-        }
-
-        // register for packaging
-        File targetFile = new File(
-            FilenameUtils.concat(
-                targetDir,
-                normalizeFileName(
-                    FilenameUtils.getName(
-                        srcUri.getPath()
-                    )
-                )
-            )
-        );
-        fileMap.put(targetFile, srcUri);
-        return targetFile;
+        return referencedFiles;
     }
 
     /**
-     * Normalizes a file name by replacing any non alphanumeric character (except '.' and '-') with an underscore.
+     * Writes the content of the passed input stream to the given zip entry.
      *
-     * @param fileName The file name to normalize.
+     * @param zipEntry The zip entry to write to.
+     * @param inputStream The input stream to read content from.
      *
-     * @return Normalized file name.
+     * @throws IOException If the content could not be read or written.
      */
-    final String normalizeFileName(final String fileName) {
-        return fileName.replaceAll("[^-_a-zA-Z0-9.]+", "_");
+    private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
+        zout.putNextEntry(zipEntry);
+        IOUtils.copy(inputStream, zout);
     }
 }

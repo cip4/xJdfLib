@@ -1,117 +1,88 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
-
-import java.io.OutputStream;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
+import org.cip4.lib.xjdf.xml.internal.PackagerException;
+import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
+
+import javax.xml.xpath.XPathExpressionException;
+import java.io.OutputStream;
+import java.net.URI;
 
 /**
  * Packaging logic for XJDF Documents. Package an XJDF with all references in a ZIP Package.
- * @author s.meissner
- * @date 26.01.2013
  */
 public class XJdfPackager extends AbstractXmlPackager {
 
-	/**
-	 * Custom constructor. Accepting an XJDF Path for initializing.
-	 * @param xjdfPath Path to XJDF Document.
-	 * @throws Exception
-	 */
-	public XJdfPackager(String xjdfPath) throws Exception {
-		super(xjdfPath);
-	}
+    /**
+     * Create a new XJdfPackager.
+     *
+     * @param out     The underlying OutputStream to write the package to.
+     */
+    public XJdfPackager(final OutputStream out) {
+        super(out, false);
+    }
 
-	/**
-	 * Custom constructor. Accepting an XJDF Document for initializing.
-	 * @param xJdf XJDF Document byte array for packaging.
-	 * @throws Exception
-	 */
-	public XJdfPackager(byte[] xjdf) throws Exception {
-		this(xjdf, null);
-	}
+    /**
+     * Create a new XJdfPackager.
+     *
+     * @param out     The underlying OutputStream to write the package to.
+     * @param withoutHierarchy Put all files into the zip root.
+     */
+    public XJdfPackager(final OutputStream out, final boolean withoutHierarchy) {
+        super(out, withoutHierarchy);
+    }
 
-	/**
-	 * Custom constructor. Accepting an XJDF Document for initializing.
-	 * @param xJdf XJDF Document byte array for packaging.
-	 * @param rootPath The root path of the document.
-	 * @throws Exception
-	 */
-	public XJdfPackager(byte[] xjdf, String rootPath) throws Exception {
-		super(xjdf, rootPath);
-	}
+    @Override
+    public final void packageXml(
+        final XmlNavigator xJdfNavigator,
+        final URI rootUri
+    ) throws PackagerException, XPathExpressionException {
+        packageXJdf((XJdfNavigator) xJdfNavigator, rootUri);
+    }
 
-	/**
-	 * Packages an XJDF Document to a zipped binary output stream.
-	 * @param os Target OutputStream where XJdfDocument is being packaged.
-	 * @throws Exception
-	 */
-	public void packageXJdf(OutputStream os) throws Exception {
-
-		XJdfNavigator nav = new XJdfNavigator(getXmlDoc());
-
-		// get document name
-		String jobId = nav.readAttribute(XJdfNavigator.JOB_ID);
-
-		if (jobId != null) {
-			jobId += ".xjdf";
-		}
-
-		// package
-		packageXJdf(os, jobId);
-	}
+    /**
+     * Packages an XJDF Document to a zipped binary output stream.
+     *
+     * @param xJdfNavigator The XjdfNavigator containing the data.
+     * @param rootUri The root URI to use when dealing with relative URIs.
+     *
+     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
+     */
+    public final void packageXJdf(
+        final XJdfNavigator xJdfNavigator,
+        final URI rootUri
+    ) throws PackagerException, XPathExpressionException {
+        final String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
+        packageXJdf(xJdfNavigator, jobId, rootUri);
+    }
 
 	/**
 	 * Packages an XJDF Document to a zipped binary output stream.
-	 * @param os Target OutputStream where XJdfDocument is being packaged.
+     *
+	 * @param xJdfNavigator The XjdfNavigator containing the data.
 	 * @param docName Documents name in ZIP Package.
-	 * @throws Exception
+     * @param rootUri The root URI to use when dealing with relative URIs.
+     *
+	 * @throws PackagerException If the XJDF could not be packaged.
 	 */
-	public void packageXJdf(OutputStream os, String docName) throws Exception {
-		packageXJdf(os, docName, false);
+	public final void packageXJdf(
+        final XJdfNavigator xJdfNavigator,
+        final String docName,
+        final URI rootUri
+    ) throws PackagerException {
+        String tmpDocName = docName;
+        if (StringUtils.isBlank(tmpDocName)) {
+            tmpDocName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+        } else {
+            if (StringUtils.isBlank(FilenameUtils.getExtension(tmpDocName))) {
+                tmpDocName += ".xjdf";
+            }
+        }
+
+        packageXml(xJdfNavigator, tmpDocName, rootUri);
 	}
-
-	/**
-	 * Packages an XJDF Document to a zipped binary output stream.
-	 * @param os Target OutputStream where XJdfDocument is being packaged.
-	 * @param docName Documents name in ZIP Package.
-	 * @param withoutHierarchy Put all files into the ZIP Root.
-	 * @throws Exception
-	 */
-	public void packageXJdf(OutputStream os, String docName, boolean withoutHierarchy) throws Exception {
-
-		// register files
-		if (withoutHierarchy) {
-			registerFiles("//FileSpec/@URL", "");
-			registerFiles("//Preview/@URL", "");
-			registerFiles("//XJDF/@CommentURL", "");
-		} else {
-			registerFiles("//FileSpec/@URL", "artwork");
-			registerFiles("//Preview/@URL", "preview");
-			registerFiles("//XJDF/@CommentURL", "docs");
-		}
-
-		// create main doc Name
-		if (docName == null || docName.equals("")) {
-			docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
-
-		} else if (StringUtils.isEmpty(FilenameUtils.getExtension(docName))) {
-			docName = docName + ".ptk";
-		}
-
-		// package xml
-		packageXml(os, docName);
-	}
-
 }
