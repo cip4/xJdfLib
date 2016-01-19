@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.xml.internal;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.EnumPreviewUsages;
+import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -82,7 +83,7 @@ public class AbstractXmlPackagerTest {
         xJdfBuilder
             .addParameter(
                 new Preview()
-                    .withURL("directory/[XJDF_PSQ131S2].pdf"),
+                    .withFileSpec(new FileSpec().withURL("directory/[XJDF_PSQ131S2].pdf")),
                 new Part()
                     .withProductPart("XJDF_PSQ131S2")
                     .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
@@ -99,7 +100,7 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "preview/%5BXJDF_PSQ131S2%5D.pdf");
+        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "artwork/%5BXJDF_PSQ131S2%5D.pdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
