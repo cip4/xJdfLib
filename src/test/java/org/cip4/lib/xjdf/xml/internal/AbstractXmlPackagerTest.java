@@ -52,8 +52,8 @@ public class AbstractXmlPackagerTest {
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
-        assertEquals("artwork/test.pdf", zin.getNextEntry().getName());
-        assertEquals("artwork/test2.pdf", zin.getNextEntry().getName());
+        assertEquals("assets/test.pdf", zin.getNextEntry().getName());
+        assertEquals("assets/test2.pdf", zin.getNextEntry().getName());
     }
 
     @Test
@@ -70,8 +70,8 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@ID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("./test.pdf", "artwork/test.pdf");
-        expectedFileRefs.put("subfolder/test2.pdf", "artwork/test2.pdf");
+        expectedFileRefs.put("./test.pdf", "assets/test.pdf");
+        expectedFileRefs.put("subfolder/test2.pdf", "assets/test2.pdf");
         expectedFileRefs.put("./layout.jdf", "docs/layout.jdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
@@ -100,7 +100,7 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "artwork/%5BXJDF_PSQ131S2%5D.pdf");
+        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "assets/%5BXJDF_PSQ131S2%5D.pdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }

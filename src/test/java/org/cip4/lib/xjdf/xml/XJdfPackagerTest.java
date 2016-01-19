@@ -93,14 +93,14 @@ public class XJdfPackagerTest {
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
 
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
-		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "assets/test.pdf"));
 
 		assertTrue("XJDF File does not exist.", xJdf.exists());
 		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "assets/test.pdf", pdfPath);
 
 		assertTrue("PDF File does not exist.", pdf.exists());
 		assertTrue("PDF File size is 0.", pdf.length() > 0);
@@ -147,14 +147,14 @@ public class XJdfPackagerTest {
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
 
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
-		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "assets/test.pdf"));
 
 		assertTrue("XJDF File does not exist.", xJdf.exists());
 		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
 
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 		String pdfPath = ptkNav.readAttribute("//FileSpec/@URL");
-		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "assets/test.pdf", pdfPath);
 
 		assertTrue("PDF File does not exist.", pdf.exists());
 		assertTrue("PDF File size is 0.", pdf.length() > 0);
@@ -178,8 +178,8 @@ public class XJdfPackagerTest {
 		String dir = unzipStream(new ByteArrayInputStream(bosResult.toByteArray()));
 
 		File xJdf = new File(FilenameUtils.concat(dir, "MyFile.xjdf"));
-		File pdf = new File(FilenameUtils.concat(dir, "artwork/test.pdf"));
-		File pdf2 = new File(FilenameUtils.concat(dir, "artwork/test2.pdf"));
+		File pdf = new File(FilenameUtils.concat(dir, "assets/test.pdf"));
+		File pdf2 = new File(FilenameUtils.concat(dir, "assets/test2.pdf"));
 
 		assertTrue("XJDF File does not exist.", xJdf.exists());
 		assertTrue("XJDF File size is 0.", xJdf.length() > 0);
@@ -187,9 +187,9 @@ public class XJdfPackagerTest {
 		XJdfNavigator ptkNav = new XJdfNavigator(new FileInputStream(xJdf));
 
 		String pdfPath = ptkNav.readAttribute("(//FileSpec/@URL)[1]");
-		assertEquals("URL attribute is wrong.", "artwork/test.pdf", pdfPath);
+		assertEquals("URL attribute is wrong.", "assets/test.pdf", pdfPath);
 		String pdfPath2 = ptkNav.readAttribute("(//FileSpec/@URL)[2]");
-		assertEquals("URL attribute is wrong.", "artwork/test2.pdf", pdfPath2);
+		assertEquals("URL attribute is wrong.", "assets/test2.pdf", pdfPath2);
 
 		assertTrue("PDF File does not exist.", pdf.exists());
 		assertTrue("PDF File size is 0.", pdf.length() > 0);
