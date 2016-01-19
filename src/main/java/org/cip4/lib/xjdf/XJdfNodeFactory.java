@@ -721,7 +721,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 	 * @param processColorModel ProcessColorModel attribute as String.
 	 * @return ColorantControl Node which already contains defined attributes.
 	 */
-	public ColorantControl createColorantControl(String processColorModel) {
+	public ColorantControl createColorantControl(final EnumProcessColorModel processColorModel) {
 
 		// create node
 		ColorantControl colorantControl = super.createColorantControl();
