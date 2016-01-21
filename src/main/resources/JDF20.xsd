@@ -4840,7 +4840,6 @@
                 <xs:attribute name="NamedDimensions" type="string" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="PrintedPages" type="integer" use="optional"/>
-                <xs:attribute name="PageVariance" type="integer" use="optional"/>
                 <xs:attribute name="Sides" type="EnumSides" use="optional"/>
                 <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
             </xs:extension>
