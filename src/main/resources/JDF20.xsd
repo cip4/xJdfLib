@@ -5055,7 +5055,6 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
                 </xs:sequence>
                 <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="JobID" type="string" use="optional"/>
                 <xs:attribute name="Order" type="EnumAssemblyOrder" use="optional"/>
                 <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
             </xs:extension>
@@ -5068,7 +5067,6 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
             </xs:sequence>
-            <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
