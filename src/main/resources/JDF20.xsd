@@ -1138,14 +1138,14 @@
     </xs:simpleType>
     
     <xs:simpleType name="EnumPlateType">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Exposed"/>
             <xs:enumeration value="Dummy"/>
         </xs:restriction>
     </xs:simpleType>
     
     <xs:simpleType name="EnumColorModel">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Basic"/>
             <xs:enumeration value="Enhanced"/>
             <xs:enumeration value="Explicit"/>
@@ -1153,7 +1153,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumProcessColorModel">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="DeviceCMY"/>
             <xs:enumeration value="DeviceCMYK"/>
             <xs:enumeration value="DeviceGray"/>
@@ -1164,7 +1164,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumCSConversionOperation">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Convert"/>
             <xs:enumeration value="Tag"/>
             <xs:enumeration value="Untag"/>
@@ -1174,7 +1174,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumRenderingIntent">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Saturation"/>
             <xs:enumeration value="Perceptual"/>
             <xs:enumeration value="RelativeColorimetric"/>
@@ -1184,7 +1184,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumSourceCS">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="All"/>
             <xs:enumeration value="CalGray"/>
             <xs:enumeration value="Calibrated"/>
@@ -1210,14 +1210,14 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumShapeDefFluteDirection">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="XDirection"/>
             <xs:enumeration value="YDirection"/>
         </xs:restriction>
     </xs:simpleType>
 
     <xs:simpleType name="EnumShapeDefGrainDirection">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="XDirection"/>
             <xs:enumeration value="YDirection"/>
             <xs:enumeration value="Both"/>
@@ -1225,7 +1225,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumCompensation">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Nonde"/>
             <xs:enumeration value="Film"/>
             <xs:enumeration value="Plate"/>
@@ -1234,7 +1234,7 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumPreviewUsage">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Animation"/>
             <xs:enumeration value="Identification"/>
             <xs:enumeration value="SeparatedThumbNail"/>
@@ -1247,10 +1247,66 @@
     </xs:simpleType>
 
     <xs:simpleType name="EnumGluingTechnique">
-        <xs:restriction base="NMTOKEN">
+        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="SpineGluing"/>
-            <xs:enumeration value="SideGlunigFront"/>
-            <xs:enumeration value="SideGlunigBack"/>
+            <xs:enumeration value="SideGluingFront"/>
+            <xs:enumeration value="SideGluingBack"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumOrdPolicy">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="PagePool"/>
+            <xs:enumeration value="PagePoolList"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumTemplateType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ConditionalSheets"/>
+            <xs:enumeration value="Normal"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumCountReset">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Continue"/>
+            <xs:enumeration value="PagePool"/>
+            <xs:enumeration value="PagePoolList"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumStackRestriction">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="WithinImposedSheetSet"/>
+            <xs:enumeration value="WithinLogicalStack"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumStackSequence">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="SheetIndex"/>
+            <xs:enumeration value="DescendingSheetIndex"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumSheetCondition">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Begin"/>
+            <xs:enumeration value="End"/>
+            <xs:enumeration value="BeginSet"/>
+            <xs:enumeration value="EndSet"/>
+            <xs:enumeration value="PagePoolBegin"/>
+            <xs:enumeration value="PagePoolEnd"/>
+            <xs:enumeration value="PagePoolListBegin"/>
+            <xs:enumeration value="PagePoolListEnd"/>
+            <xs:enumeration value="LogicalStackBegin"/>
+            <xs:enumeration value="LogicalStackEnd"/>
+            <xs:enumeration value="LogicalStackSetBegin"/>
+            <xs:enumeration value="LogicalStackSetEnd"/>
+            <xs:enumeration value="ImposedSheetSetBegin"/>
+            <xs:enumeration value="ImposedSheetSetEnd"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -5697,7 +5753,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="ApprovalParams"/>
                 </xs:sequence>
                 <xs:attribute name="ApprovalParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Collate" type="EnumCollate" use="optional"/>
@@ -6125,42 +6181,61 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PlacedObject"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ContentObject"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="LogicalStackParams"/>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkObject"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="PageCondition"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerList"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Position"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="StripMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="BinderySignature"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="SheetCondition"/>
                 </xs:sequence>
-                <xs:attribute name="SheetCountReset" use="optional"/>
-                <xs:attribute name="OrdsConsumed" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="BaseOrdReset" use="optional"/>
-                <xs:attribute name="SheetNameFormat" type="string" use="optional"/>
-                <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
-                <xs:attribute name="StackDepth" type="integer" use="optional"/>
-                <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
-                <xs:attribute name="OrdReset" use="optional"/>
-                <xs:attribute name="SheetNameTemplate" type="string" use="optional"/>
                 <xs:attribute name="Automated" type="boolean" use="optional"/>
+                <xs:attribute name="BaseOrdReset" type="EnumOrdPolicy" use="optional"/>
+                <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
+                <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
                 <xs:attribute name="MaxCollect" type="integer" use="optional"/>
-                <xs:attribute name="SourceWorkStyle" type="EnumWorkStyle" use="optional"/>
                 <xs:attribute name="MinCollect" type="integer" use="optional"/>
-                <xs:attribute name="WorkStyle" type="EnumWorkStyle" use="optional"/>
-                <xs:attribute name="JobID" type="string" use="optional"/>
-                <xs:attribute name="SectionList" type="IntegerList" use="optional"/>
-                <xs:attribute name="InnermostShingling" type="double" use="optional"/>
-                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="AssemblyID" type="string" use="optional"/>
-                <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="OutermostShingling" type="double" use="optional"/>
-                <xs:attribute name="ExternalImpositionTemplateRef" type="IDREF" use="optional"/>
+                <xs:attribute name="NonPrintableMarginBottom" type="double" use="optional"/>
+                <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
+                <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
+                <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
+                <xs:attribute name="OrdsConsumed" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="SheetCountReset" type="EnumCountReset" use="optional"/>
+                <xs:attribute name="SheetNameFormat" type="string" use="optional"/>
+                <xs:attribute name="SheetNameTemplate" type="string" use="optional"/>
+                <xs:attribute name="SourceWorkStyle" type="EnumWorkStyle" use="optional"/>
+                <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
+                <xs:attribute name="TemplateType" type="EnumTemplateType" use="optional"/>
+                <xs:attribute name="TransferCurveRefs" type="IDREFS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="LogicalStackParams">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Stack" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="MaxStackDepth" type="integer" use="optional"/>
+            <xs:attribute name="LogicalStackParams" type="EnumStackRestriction" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Stack">
+        <xs:complexType>
+            <xs:attribute name="LogicalStackOrd" type="integer" use="required"/>
+            <xs:attribute name="LogicalStackSequence" type="EnumStackSequence" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SheetCondition">
+        <xs:complexType>
+            <xs:attribute name="Condition" type="EnumSheetCondition" use="required"/>
+            <xs:attribute name="RunListRef" type="IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for LayoutElementProductionParams ** -->
     <xs:element name="LayoutElementProductionParams" type="LayoutElementProductionParams"
