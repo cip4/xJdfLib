@@ -3522,7 +3522,7 @@
     <xs:element name="EmbossingItem">
         <xs:complexType>
             <xs:attribute name="Direction" type="EnumDirection" use="optional"/>
-            <xs:attribute name="EmbossingType" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="EmbossingTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="FoilColor" type="EnumNamedColor" use="optional"/>
             <xs:attribute name="FoilColorDetails" type="string" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
