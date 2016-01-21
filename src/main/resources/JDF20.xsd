@@ -5158,7 +5158,6 @@
                 <xs:attribute name="BinderySignatureType" type="EnumBinderySignatureType" use="optional"/>
                 <xs:attribute name="BindingEdge" type="EnumBindingEdge" use="optional"/>
                 <xs:attribute name="BindingOrientation" type="Orientation" use="optional"/>
-                <xs:attribute name="BindingSide" type="EnumBindingSide" use="optional"/>
                 <xs:attribute name="BleedBottom" type="double" use="optional"/>
                 <xs:attribute name="BleedLeft" type="double" use="optional"/>
                 <xs:attribute name="BleedRight" type="double" use="optional"/>
