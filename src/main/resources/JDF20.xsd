@@ -572,15 +572,15 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="ChannelBinding"/>
             <xs:enumeration value="CoilBinding"/>
-            <xs:enumeration value="CornerStich"/>
+            <xs:enumeration value="CornerStitch"/>
             <xs:enumeration value="EdgeGluing"/>
             <xs:enumeration value="HardCover"/>
             <xs:enumeration value="LooseBinding"/>
             <xs:enumeration value="None"/>
             <xs:enumeration value="PlasticComb"/>
             <xs:enumeration value="Ring"/>
-            <xs:enumeration value="SaddleStich"/>
-            <xs:enumeration value="SideStich"/>
+            <xs:enumeration value="SaddleStitch"/>
+            <xs:enumeration value="SideStitch"/>
             <xs:enumeration value="SoftCover"/>
             <xs:enumeration value="StripBind"/>
             <xs:enumeration value="Tape"/>
@@ -4597,14 +4597,14 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="EdgeGluing"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HardCoverBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="LooseBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SaddleStitching"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SideStitching"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SoftCoverBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Tabs"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ThreadSewing"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="EdgeGluing"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="HardCoverBinding"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="LooseBinding"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="SaddleStitching"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="SideStitching"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="SoftCoverBinding"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="Tabs"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="ThreadSewing"/>
                 </xs:sequence>
                 <xs:attribute name="BackCoverColor" type="EnumNamedColor" use="optional"/>
                 <xs:attribute name="BackCoverColorDetails" type="string" use="optional"/>
@@ -4612,7 +4612,7 @@
                 <xs:attribute name="BindingColorDetails" type="string" use="optional"/>
                 <xs:attribute name="BindingOrder" type="EnumBindingOrder" use="optional"/>
                 <xs:attribute name="BindingSide" type="EnumEdge" use="optional"/>
-                <xs:attribute name="BindingType" use="optional"/>
+                <xs:attribute name="BindingType" type="EnumBindingType" use="optional"/>
                 <xs:attribute name="CoverColor" type="EnumNamedColor" use="optional"/>
                 <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
             </xs:extension>
