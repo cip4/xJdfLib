@@ -230,7 +230,7 @@ public class XJdfNodeFactoryTest {
 	public void testCreateBindingIntent() {
 
 		// arrange
-		final String BINDING_TYPE = UUID.randomUUID().toString();
+		final EnumBindingType BINDING_TYPE = EnumBindingType.CORNER_STITCH;
 
 		// act
 		BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE);
@@ -243,7 +243,7 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        final String BINDING_TYPE = "Some Binding Type";
+        final EnumBindingType BINDING_TYPE = EnumBindingType.LOOSE_BINDING;
         final String BINDING_SIDE = "Bottom";
         final String BINDING_ORDER = "Gathering";
 

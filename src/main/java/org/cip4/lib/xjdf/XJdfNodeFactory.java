@@ -467,25 +467,31 @@ public class XJdfNodeFactory extends ObjectFactory {
 		return proofingIntent;
 	}
 
-	/**
-	 * Create new BindingIntent Node which already contains values for attribute BindingType.
-	 * @param bindingType Value for BindingType attribute.
-	 * @return BindingIntent Node which already contains defined attributes.
-	 */
-	public BindingIntent createBindingIntent(String bindingType) {
+    /**
+     * Create new BindingIntent Node which already contains values for attribute BindingType.
+     *
+     * @param bindingType Value for BindingType attribute.
+     *
+     * @return BindingIntent Node which already contains defined attributes.
+     */
+    public BindingIntent createBindingIntent(final EnumBindingType bindingType) {
 
-		// return object
-		return createBindingIntent(bindingType, null, null);
-	}
+        // return object
+        return createBindingIntent(bindingType, null, null);
+    }
 
     /**
      * Create new BindingIntent Node which already contains values for attribute BindingType.
+     *
      * @param bindingType Value for BindingType attribute.
      * @param bindingSide Value for BindingSide attribute.
      * @param bindingOrder Value for BindingOrder attribute.
+     *
      * @return BindingIntent Node which already contains defined attributes.
      */
-    public BindingIntent createBindingIntent(String bindingType, String bindingSide, String bindingOrder) {
+    public BindingIntent createBindingIntent(
+        final EnumBindingType bindingType, final String bindingSide, final String bindingOrder
+    ) {
 
         // create node
         BindingIntent bindingIntent = super.createBindingIntent();
@@ -493,11 +499,11 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         bindingIntent.setBindingType(bindingType);
         if (bindingSide != null) {
-			bindingIntent.setBindingSide(EnumEdge.fromValue(bindingSide));
-		}
-		if (bindingOrder != null) {
-			bindingIntent.setBindingOrder(EnumBindingOrder.fromValue(bindingOrder));
-		}
+            bindingIntent.setBindingSide(EnumEdge.fromValue(bindingSide));
+        }
+        if (bindingOrder != null) {
+            bindingIntent.setBindingOrder(EnumBindingOrder.fromValue(bindingOrder));
+        }
 
         // return object
         return bindingIntent;
