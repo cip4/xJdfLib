@@ -1310,6 +1310,23 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumBoxType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Box"/>
+            <xs:enumeration value="Carton"/>
+            <xs:enumeration value="Envelope"/>
+            <xs:enumeration value="Roll"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumComponentOrientation">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="XY"/>
+            <xs:enumeration value="XZ"/>
+            <xs:enumeration value="YZ"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -3194,17 +3211,19 @@
     <xs:complexType name="BoxPackingParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
+                <xs:attribute name="BoxType" type="EnumBoxType" use="optional"/>
+                <xs:attribute name="BoxTypeDetails" type="string" use="optional"/>
+                <xs:attribute name="ComponentsPerRow" type="integer" use="optional"/>
+                <xs:attribute name="Columns" type="integer" use="optional"/>
+                <xs:attribute name="ComponentOrientation" type="EnumComponentOrientation" use="optional"/>
+                <xs:attribute name="Copies" type="integer" use="optional"/>
+                <xs:attribute name="FillMaterial" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Layers" type="integer" use="optional"/>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
                 <xs:attribute name="Pattern" type="string" use="optional"/>
-                <xs:attribute name="Layers" type="integer" use="optional"/>
-                <xs:attribute name="Ties" type="IntegerList" use="optional"/>
-                <xs:attribute name="FillMaterial" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
-                <xs:attribute name="ComponentsPerRow" type="integer" use="optional"/>
-                <xs:attribute name="ComponentOrientation" use="optional"/>
-                <xs:attribute name="Copies" type="integer" use="optional"/>
                 <xs:attribute name="Rows" type="integer" use="optional"/>
-                <xs:attribute name="Columns" type="integer" use="optional"/>
+                <xs:attribute name="Ties" type="IntegerList" use="optional"/>
+                <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
