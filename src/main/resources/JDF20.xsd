@@ -1392,10 +1392,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <!--
-                <xs:attribute name="IncludeType3Fonts" type="EnumIncludeFonts" use="optional"/>
-            <xs:attribute name="OutputType" type="EnumPSType" use="optional"/>-->
-
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -2604,12 +2600,6 @@
     <!-- ** Complex type definition for KnownMsgQuParams ** -->
     <xs:element name="KnownMsgQuParams">
         <xs:complexType>
-            <xs:attribute name="Persistent" type="boolean" use="optional"/>
-            <xs:attribute name="ListSignals" type="boolean" use="optional"/>
-            <xs:attribute name="ListQueries" type="boolean" use="optional"/>
-            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
-            <xs:attribute name="ListRegistrations" type="boolean" use="optional"/>
-            <xs:attribute name="ListCommands" type="boolean" use="optional"/>
             <xs:attribute name="Exact" type="boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -2635,21 +2625,12 @@
     <xs:element name="MessageService">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePool"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TestPool"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ActionPool"/>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Persistent" type="boolean" use="optional"/>
-            <xs:attribute name="ChannelMode" use="optional"/>
-            <xs:attribute name="GenericAttributes" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Acknowledge" type="boolean" use="optional"/>
-            <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
             <xs:attribute name="JMFRole" type="EnumJmfRole" use="optional"/>
-            <xs:attribute name="Query" type="boolean" use="optional"/>
             <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Signal" type="boolean" use="optional"/>
-            <xs:attribute name="Registration" type="boolean" use="optional"/>
-            <xs:attribute name="Command" type="boolean" use="optional"/>
+            <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
 
