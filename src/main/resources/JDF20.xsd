@@ -1327,6 +1327,75 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumAutoRotate">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="PageByPage"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumLeftRight">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="Right"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumRenderingIntent2">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Perceptual"/>
+            <xs:enumeration value="Saturation"/>
+            <xs:enumeration value="RelativeColorimetric"/>
+            <xs:enumeration value="AbsoluteColorimetric"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumTernary">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Unknown"/>
+            <xs:enumeration value="false"/>
+            <xs:enumeration value="true"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumTransferFunction">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Preserve"/>
+            <xs:enumeration value="Remove"/>
+            <xs:enumeration value="Apply"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumUCRandBG">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Preserve"/>
+            <xs:enumeration value="Remove"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EnumIncludeResources">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="IncludeNever"/>
+            <xs:enumeration value="IncludeOncePerDoc"/>
+            <xs:enumeration value="IncludeOncePerPage"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EnumIncludeType3Fonts">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="IncludeOncePerPage"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="EnumPSType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="PostScript"/>
+            <xs:enumeration value="EPS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!--
+                <xs:attribute name="IncludeType3Fonts" type="EnumIncludeFonts" use="optional"/>
+            <xs:attribute name="OutputType" type="EnumPSType" use="optional"/>-->
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -4998,23 +5067,23 @@
     <!-- ** Complex type definition for AdvancedParams ** -->
     <xs:element name="AdvancedParams">
         <xs:complexType>
-            <xs:attribute name="PreserveOPIComments" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveCopyPage" type="boolean" use="optional"/>
-            <xs:attribute name="UsePrologue" type="boolean" use="optional"/>
+            <xs:attribute name="AllowPSXObjects" type="boolean" use="optional"/>
             <xs:attribute name="AllowTransparency" type="boolean" use="optional"/>
+            <xs:attribute name="AutoPositionEPSInfo" type="boolean" use="optional"/>
+            <xs:attribute name="EmbedJobOptions" type="boolean" use="optional"/>
             <xs:attribute name="EmitDSCWarnings" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveOverprintSettings" type="boolean" use="optional"/>
-            <xs:attribute name="UCRandBGInfo" use="optional"/>
+            <xs:attribute name="LockDistillerParams" type="boolean" use="optional"/>
+            <xs:attribute name="ParseDSCCommentsForDocInfo" type="boolean" use="optional"/>
             <xs:attribute name="ParseDSCComments" type="boolean" use="optional"/>
             <xs:attribute name="PassThroughJPEGImages" type="boolean" use="optional"/>
-            <xs:attribute name="LockDistillerParams" type="boolean" use="optional"/>
-            <xs:attribute name="AllowPSXObjects" type="boolean" use="optional"/>
-            <xs:attribute name="EmbedJobOptions" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveHalftoneInfo" type="boolean" use="optional"/>
+            <xs:attribute name="PreserveCopyPage" type="boolean" use="optional"/>
             <xs:attribute name="PreserveEPSInfo" type="boolean" use="optional"/>
-            <xs:attribute name="TransferFunctionInfo" use="optional"/>
-            <xs:attribute name="AutoPositionEPSInfo" type="boolean" use="optional"/>
-            <xs:attribute name="ParseDSCCommentsForDocInfo" type="boolean" use="optional"/>
+            <xs:attribute name="PreserveHalftoneInfo" type="boolean" use="optional"/>
+            <xs:attribute name="PreserveOPIComments" type="boolean" use="optional"/>
+            <xs:attribute name="PreserveOverprintSettings" type="boolean" use="optional"/>
+            <xs:attribute name="TransferFunctionInfo" type="EnumTransferFunction" use="optional"/>
+            <xs:attribute name="UCRandBGInfo" type="EnumUCRandBG" use="optional"/>
+            <xs:attribute name="UsePrologue" type="boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6564,17 +6633,16 @@
     <!-- ** Complex type definition for PDFXParams ** -->
     <xs:element name="PDFXParams">
         <xs:complexType>
-            <xs:attribute name="PDFXNoTrimBoxError" type="boolean" use="optional"/>
-            <xs:attribute name="PDFXOutputCondition" type="string" use="optional"/>
-            <xs:attribute name="PDFXRegistryName" type="URL" use="optional"/>
-            <xs:attribute name="PDFXCompliantPDFOnly" type="boolean" use="optional"/>
-            <xs:attribute name="PDFXTrimBoxToMediaBoxOffset" type="rectangle" use="optional"/>
-            <xs:attribute name="PDFX3Check" type="boolean" use="optional"/>
-            <xs:attribute name="PDFXSetBleedBoxToMediaBox" type="boolean" use="optional"/>
-            <xs:attribute name="PDFXTrapped" use="optional"/>
-            <xs:attribute name="PDFXOutputIntentProfile" type="string" use="optional"/>
-            <xs:attribute name="PDFX1aCheck" type="boolean" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="PDFXBleedBoxToTrimBoxOffset" type="rectangle" use="optional"/>
+            <xs:attribute name="PDFXCheck" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="PDFXCompliantPDFOnly" type="boolean" use="optional"/>
+            <xs:attribute name="PDFXNoTrimBoxError" type="boolean" use="optional"/>
+            <xs:attribute name="PDFXSetBleedBoxToMediaBox" type="boolean" use="optional"/>
+            <xs:attribute name="PDFXTrapped" type="EnumTernary" use="optional"/>
+            <xs:attribute name="PDFXTrimBoxToMediaBoxOffset" type="rectangle" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6583,9 +6651,11 @@
     <xs:complexType name="PDLCreationParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
+                <xs:sequence>
+                    <xs:element ref="PDFCreationDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="PSCreationDetails" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="MimeType" type="string" use="optional"/>
-                <xs:attribute name="PDFToPSConversionParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="PSToPDFConversionParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7723,50 +7793,46 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PDFToPSConversionParams ** -->
-    <xs:element name="PDFToPSConversionParams" type="PDFToPSConversionParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="PDFToPSConversionParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="IncludeProcSets" use="optional"/>
-                <xs:attribute name="IgnoreTTFontsFirst" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreTransfers" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreColorSeps" type="boolean" use="optional"/>
-                <xs:attribute name="ShrinkToFit" type="boolean" use="optional"/>
-                <xs:attribute name="SuppressRotate" type="boolean" use="optional"/>
-                <xs:attribute name="OutputType" use="optional"/>
-                <xs:attribute name="UseFontAliasNames" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreSeparableImagesOnly" type="boolean" use="optional"/>
-                <xs:attribute name="SetPageSize" type="boolean" use="optional"/>
-                <xs:attribute name="PSLevel" type="integer" use="optional"/>
-                <xs:attribute name="IncludeOtherResources" use="optional"/>
-                <xs:attribute name="IgnoreOverprint" type="boolean" use="optional"/>
-                <xs:attribute name="IncludeTrueTypeFonts" use="optional"/>
-                <xs:attribute name="GeneratePageStreams" type="boolean" use="optional"/>
-                <xs:attribute name="IncludeType1Fonts" use="optional"/>
-                <xs:attribute name="CenterCropBox" type="boolean" use="optional"/>
-                <xs:attribute name="IncludeType3Fonts" use="optional"/>
-                <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
-                <xs:attribute name="TTasT42" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreBG" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreHalftones" type="boolean" use="optional"/>
-                <xs:attribute name="SuppressCenter" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreExternStreamRef" type="boolean" use="optional"/>
-                <xs:attribute name="Scale" type="double" use="optional"/>
-                <xs:attribute name="IncludeBaseFonts" use="optional"/>
-                <xs:attribute name="IncludeCIDFonts" use="optional"/>
-                <xs:attribute name="IncludeEmbeddedFonts" use="optional"/>
-                <xs:attribute name="IgnoreDSC" type="boolean" use="optional"/>
-                <xs:attribute name="SetupProcsets" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreAnnotForms" type="boolean" use="optional"/>
-                <xs:attribute name="BinaryOK" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreShowPage" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreRawData" type="boolean" use="optional"/>
-                <xs:attribute name="IgnoreUCR" type="boolean" use="optional"/>
-                <xs:attribute name="IgnorePageRotation" type="boolean" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="PSCreationDetails">
+        <xs:complexType>
+            <xs:attribute name="BinaryOK" type="boolean" use="optional"/>
+            <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
+            <xs:attribute name="CenterCropBox" type="boolean" use="optional"/>
+            <xs:attribute name="GeneratePageStreams" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreAnnotForms" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreBG" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreColorSeps" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreDSC" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreExternStreamRef" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreHalftones" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreOverprint" type="boolean" use="optional"/>
+            <xs:attribute name="IgnorePageRotation" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreRawData" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreSeparableImagesOnly" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreShowPage" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreTransfers" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreTTFontsFirst" type="boolean" use="optional"/>
+            <xs:attribute name="IgnoreUCR" type="boolean" use="optional"/>
+            <xs:attribute name="IncludeBaseFonts" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeCIDFonts" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeEmbeddedFonts" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeOtherResources" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeProcSets" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeTrueTypeFonts" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeType1Fonts" type="EnumIncludeResources" use="optional"/>
+            <xs:attribute name="IncludeType3Fonts" type="EnumIncludeType3Fonts" use="optional"/>
+            <xs:attribute name="OutputType" type="EnumPSType" use="optional"/>
+            <xs:attribute name="PSLevel" type="integer" use="optional"/>
+            <xs:attribute name="Scale" type="double" use="optional"/>
+            <xs:attribute name="SetPageSize" type="boolean" use="optional"/>
+            <xs:attribute name="SetupProcsets" type="boolean" use="optional"/>
+            <xs:attribute name="ShrinkToFit" type="boolean" use="optional"/>
+            <xs:attribute name="SuppressCenter" type="boolean" use="optional"/>
+            <xs:attribute name="SuppressRotate" type="boolean" use="optional"/>
+            <xs:attribute name="TTasT42" type="boolean" use="optional"/>
+            <xs:attribute name="UseFontAliasNames" type="boolean" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for PDLResourceAlias ** -->
     <xs:element name="PDLResourceAlias" type="PDLResourceAlias" substitutionGroup="ParameterType"/>
@@ -7796,29 +7862,28 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PSToPDFConversionParams ** -->
-    <xs:element name="PSToPDFConversionParams" type="PSToPDFConversionParams" substitutionGroup="ParameterType"/>
-    <xs:complexType name="PSToPDFConversionParams">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:attribute name="DetectBlend" type="boolean" use="optional"/>
-                <xs:attribute name="CompressPages" type="boolean" use="optional"/>
-                <xs:attribute name="PDFVersion" type="double" use="optional"/>
-                <xs:attribute name="DefaultRenderingIntent" use="optional"/>
-                <xs:attribute name="Binding" use="optional"/>
-                <xs:attribute name="InitialResolution" type="XYPair" use="optional"/>
-                <xs:attribute name="Optimize" type="boolean" use="optional"/>
-                <xs:attribute name="AutoRotatePages" use="optional"/>
-                <xs:attribute name="InitialPageSize" type="XYPair" use="optional"/>
-                <xs:attribute name="ASCII85EncodePages" type="boolean" use="optional"/>
-                <xs:attribute name="DoThumbnails" type="boolean" use="optional"/>
-                <xs:attribute name="OverPrintMode" type="integer" use="optional"/>
-                <xs:attribute name="ThinPDFParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="AdvancedParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="PDFXParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="PDFCreationDetails">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="AdvancedParams" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="PDFXParams" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ThinPDFParams" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="AllowJBIG2Globals" type="boolean" use="optional"/>
+            <xs:attribute name="ASCII85EncodePages" type="boolean" use="optional"/>
+            <xs:attribute name="AutoRotatePages" type="EnumAutoRotate" use="optional"/>
+            <xs:attribute name="Binding" type="EnumLeftRight" use="optional"/>
+            <xs:attribute name="CompressPages" type="boolean" use="optional"/>
+            <xs:attribute name="DefaultRenderingIntent" type="EnumRenderingIntent2" use="optional"/>
+            <xs:attribute name="DetectBlend" type="boolean" use="optional"/>
+            <xs:attribute name="DoThumbnails" type="boolean" use="optional"/>
+            <xs:attribute name="InitialPageSize" type="XYPair" use="optional"/>
+            <xs:attribute name="InitialResolution" type="XYPair" use="optional"/>
+            <xs:attribute name="Optimize" type="boolean" use="optional"/>
+            <xs:attribute name="OverPrintMode" type="integer" use="optional"/>
+            <xs:attribute name="PDFVersion" type="double" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for RenderingParams ** -->
     <xs:element name="RenderingParams" type="RenderingParams" substitutionGroup="ParameterType"/>
