@@ -165,7 +165,7 @@ public abstract class AbstractXmlPackager {
         final URI rootUri
     ) throws PackagerException {
         try {
-            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
+            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator, rootUri);
 
             // put XML to archive
             writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
@@ -195,31 +195,44 @@ public abstract class AbstractXmlPackager {
      * @throws URISyntaxException If the given path could not be encoded.
      */
     private String encodeURIBaseName(final String path) throws URISyntaxException {
-        return new URI(
-            null,
-            null,
-            path.substring(path.lastIndexOf('/') + 1),
-            null
-        ).toASCIIString();
+        return encodeURIPath(path.substring(path.lastIndexOf('/') + 1));
     }
+
+    /**
+     * Returns the URI encoded path.
+     *
+     * @param path The path to encode.
+     *
+     * @return The encoded path.
+     * @throws URISyntaxException If the given path could not be encoded.
+     */
+    private String encodeURIPath(final String path) throws URISyntaxException {
+        return new URI(null, null, path, null).toASCIIString();
+    }
+
+
 
     /**
      * Prepares the given XmlNavigator for packaging.
      *
      * @param nav The XmlNavigator to be prepared.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
      * @return The prepared data used for packaging.
      * @throws URISyntaxException If a file reference could not be encoded.
      * @throws Exception If the XmlNavigator could not be evaluated.
      */
-    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws URISyntaxException, Exception {
+    final PreparedPackagingData prepareForPackaging(
+        final XmlNavigator nav,
+        final URI rootUri
+    ) throws URISyntaxException, Exception {
         final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
 
         return new PreparedPackagingData(
             xJdfNavigator,
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), "artwork/"),
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL"), "preview/"),
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), "docs/")
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:Preview/@URL"), rootUri, "preview/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), rootUri, "artwork/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), rootUri, "docs/")
         );
     }
 
@@ -227,6 +240,7 @@ public abstract class AbstractXmlPackager {
      * Relativizes the file references in the passed node list.
      *
      * @param nodeList The file references to relativize.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      * @param targetDir The target directory where the file references should be created.
      *
      * @return A map containing the mapping between the source and the target file.
@@ -234,6 +248,7 @@ public abstract class AbstractXmlPackager {
      */
     private Map<String, String> relativizeNodeList(
         final NodeList nodeList,
+        final URI rootUri,
         final String targetDir
     ) throws URISyntaxException {
         final Map<String, String> referencedFiles = new HashMap<>();
@@ -243,7 +258,7 @@ public abstract class AbstractXmlPackager {
 
             final String uriString = node.getNodeValue();
 
-            if (shouldPackageFileReference(URIResolver.resolve(null, uriString))) {
+            if (shouldPackageFileReference(URIResolver.resolve(rootUri, encodeURIPath(uriString)))) {
                 final String baseName = encodeURIBaseName(uriString);
                 final String uriFileName = withoutHierarchy
                     ? baseName

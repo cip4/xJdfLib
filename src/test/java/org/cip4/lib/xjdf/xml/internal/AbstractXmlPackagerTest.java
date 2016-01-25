@@ -45,6 +45,8 @@ public class AbstractXmlPackagerTest {
 
     private static final AbsoluteURIRelativizer URI_RELATIVIZER = new AbsoluteURIRelativizer();
 
+    private static final URI CURRENT_DIR_URI = Paths.get(".").toUri();
+
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -68,7 +70,8 @@ public class AbstractXmlPackagerTest {
         final URI xjdfUri = AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI();
         final byte[] bytes = IOUtils.toByteArray(xjdfUri);
         final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(bytes, true)
+            new XJdfNavigator(bytes, true),
+            CURRENT_DIR_URI
         );
 
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@ID"));
@@ -98,7 +101,8 @@ public class AbstractXmlPackagerTest {
         final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
 
         final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true)
+            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
+            CURRENT_DIR_URI
         );
 
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
@@ -114,7 +118,10 @@ public class AbstractXmlPackagerTest {
         final String urlUriString = "https://" +
             "confluence.cip4.org" +
             "/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2";
-        final String fileUriString = URI_RELATIVIZER.relativize(null, Paths.get("directory/XJDF_PSQ131S2.pdf").toUri());
+        final String fileUriString = URI_RELATIVIZER.relativize(
+            CURRENT_DIR_URI,
+            Paths.get("directory/XJDF_PSQ131S2.pdf").toUri()
+        );
 
         final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
         xJdfBuilder
@@ -138,7 +145,8 @@ public class AbstractXmlPackagerTest {
         final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
 
         final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true)
+            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
+            CURRENT_DIR_URI
         );
 
         assertEquals("preview/XJDF_PSQ131S2.pdf", packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:Preview/@URL"));
