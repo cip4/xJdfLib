@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
@@ -91,6 +93,11 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
+     * A collection containing the schemes that will not be included in the zip.
+     */
+    private static final Collection<String> SCHEME_BLACKLIST = Arrays.asList("http", "https");
+
+    /**
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
@@ -167,13 +174,9 @@ public abstract class AbstractXmlPackager {
             for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
                 final URI uri = URIResolver.resolve(rootUri, entry.getKey());
 
-                // only write local uri to zip
-                if (uri.getHost() == null) {
-                    final String targetPath = entry.getValue();
-
-                    try (final InputStream is = uri.toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(targetPath), is);
-                    }
+                final String targetPath = entry.getValue();
+                try (final InputStream is = uri.toURL().openStream()) {
+                    writeZipEntry(new ZipEntry(targetPath), is);
                 }
             }
 
@@ -239,17 +242,31 @@ public abstract class AbstractXmlPackager {
             final Node node = nodeList.item(i);
 
             final String uriString = node.getNodeValue();
-            final String baseName = encodeURIBaseName(uriString);
-            final String uriFileName = withoutHierarchy
-                ? baseName
-                : targetDir + baseName;
 
-            node.setNodeValue(uriFileName);
+            if (shouldPackageFileReference(URIResolver.resolve(null, uriString))) {
+                final String baseName = encodeURIBaseName(uriString);
+                final String uriFileName = withoutHierarchy
+                    ? baseName
+                    : targetDir + baseName;
 
-            referencedFiles.put(uriString, uriFileName);
+                node.setNodeValue(uriFileName);
+
+                referencedFiles.put(uriString, uriFileName);
+            }
         }
 
         return referencedFiles;
+    }
+
+    /**
+     * Determines whether to include the passed URI in the ZIP.
+     *
+     * @param uri The URI to test.
+     *
+     * @return true If the file reference should be in the zip, false otherwise
+     */
+    private boolean shouldPackageFileReference(final URI uri) {
+        return !SCHEME_BLACKLIST.contains(uri.getScheme().toLowerCase());
     }
 
     /**

@@ -3,9 +3,11 @@ package org.cip4.lib.xjdf.xml.internal;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.EnumPreviewUsages;
+import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.uri.relativizer.AbsoluteURIRelativizer;
 import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.Test;
@@ -15,6 +17,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.URI;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.ZipInputStream;
@@ -39,6 +42,8 @@ public class AbstractXmlPackagerTest {
             throw new RuntimeException("not implemented");
         }
     }
+
+    private static final AbsoluteURIRelativizer URI_RELATIVIZER = new AbsoluteURIRelativizer();
 
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {
@@ -101,6 +106,46 @@ public class AbstractXmlPackagerTest {
         final Map<String, String> expectedFileRefs = new HashMap<>();
         expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "preview/%5BXJDF_PSQ131S2%5D.pdf");
 
+        assertEquals(expectedFileRefs, packagingData.fileRefs);
+    }
+
+    @Test
+    public void prepareForPackagingSkipsHttps() throws Exception {
+        final String urlUriString = "https://" +
+            "confluence.cip4.org" +
+            "/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2";
+        final String fileUriString = URI_RELATIVIZER.relativize(null, Paths.get("directory/XJDF_PSQ131S2.pdf").toUri());
+
+        final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
+        xJdfBuilder
+            .addParameter(
+                new Preview()
+                    .withURL(fileUriString),
+                new Part()
+                    .withProductPart("XJDF_PSQ131S2")
+                    .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
+            );
+        xJdfBuilder
+            .addParameter(
+                new FileSpec()
+                    .withURL(urlUriString),
+                new Part()
+                    .withProductPart("XJDF_PSQ131S2")
+            );
+        final XJDF xjdf = xJdfBuilder.build();
+
+        final OutputStream out = new ByteArrayOutputStream();
+        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
+
+        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
+            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true)
+        );
+
+        assertEquals("preview/XJDF_PSQ131S2.pdf", packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:Preview/@URL"));
+        assertEquals(urlUriString, packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:FileSpec/@URL"));
+
+        final Map<String, String> expectedFileRefs = new HashMap<>();
+        expectedFileRefs.put(fileUriString, "preview/XJDF_PSQ131S2.pdf");
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
 }
