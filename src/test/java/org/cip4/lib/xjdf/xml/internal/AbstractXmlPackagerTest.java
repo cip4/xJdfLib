@@ -108,7 +108,7 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "preview/%5BXJDF_PSQ131S2%5D.pdf");
+        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "preview/_XJDF_PSQ131S2_.pdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
