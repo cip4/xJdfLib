@@ -258,7 +258,7 @@ public abstract class AbstractXmlPackager {
 
             final String uriString = node.getNodeValue();
 
-            if (shouldPackageFileReference(URIResolver.resolve(rootUri, encodeURIPath(uriString)))) {
+            if (shouldIncludeFileReference(URIResolver.resolve(rootUri, encodeURIPath(uriString)))) {
                 final String baseName = encodeURIBaseName(uriString);
                 final String uriFileName = withoutHierarchy
                     ? baseName
@@ -280,7 +280,7 @@ public abstract class AbstractXmlPackager {
      *
      * @return true If the file reference should be in the zip, false otherwise
      */
-    private boolean shouldPackageFileReference(final URI uri) {
+    private boolean shouldIncludeFileReference(final URI uri) {
         return !SCHEME_BLACKLIST.contains(uri.getScheme().toLowerCase());
     }
 
