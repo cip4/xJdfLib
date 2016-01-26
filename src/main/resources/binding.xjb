@@ -84,8 +84,8 @@
                 <baseType>
                     <javaType
                             name="java.lang.Double"
-                            parseMethod="org.cip4.lib.xjdf.type.DoubleFormatter.parseDouble"
-                            printMethod="org.cip4.lib.xjdf.type.DoubleFormatter.printDouble"/>
+                            parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.parseDouble"
+                            printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
                 </baseType>
             </property>
         </bindings>

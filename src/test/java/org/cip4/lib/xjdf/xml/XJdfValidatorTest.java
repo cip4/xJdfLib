@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.ValidationException;
 
 import static org.junit.Assert.*;
 
@@ -25,8 +26,6 @@ import org.junit.Test;
  */
 public class XJdfValidatorTest {
 
-    private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
-
     private XJdfValidator xJdfValidator;
 
     private XJdfNodeFactory xJdfNodeFactory;
@@ -44,22 +43,13 @@ public class XJdfValidatorTest {
         }
     }
 
-    /**
-     * Setup unit test.
-     * @throws java.lang.Exception
-     */
     @Before
     public void setUp() throws Exception {
-
         // init instance variables
         xJdfNodeFactory = new XJdfNodeFactory();
         xJdfBuilder = new XJdfBuilder();
     }
 
-    /**
-     * Tear down unit test.
-     * @throws java.lang.Exception
-     */
     @After
     public void tearDown() throws Exception {
         xJdfValidator = null;
@@ -67,13 +57,8 @@ public class XJdfValidatorTest {
         xJdfBuilder = null;
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-     * @throws Exception
-     */
-    @Test
-    public void testIntegrationInvalide() throws Exception {
-
+    @Test(expected = ValidationException.class)
+    public void integrationInvalid() throws Exception {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
         xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
@@ -83,18 +68,31 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
-
-        // assert
-        assertFalse("Validation result is wrong", isValid);
+        xJdfValidator.isValid(xJdfFileStream);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-     * @throws Exception
-     */
     @Test
-    public void testIntegrationValide() throws Exception {
+    public void integrationValid() throws Exception {
+
+        // arrange
+        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+        xJdfBuilder.addGeneralID(generalId);
+
+        xJdfBuilder.build().setID("MyId");
+        xJdfBuilder.build().getTypes().add("Web2Print");
+        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+
+        xJdfValidator = new XJdfValidator();
+        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
+
+        assertTrue("Validation result is wrong", isValid);
+    }
+
+    @Test
+    public void integrationValidSingleLineCall() throws Exception {
 
         // arrange
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
@@ -114,37 +112,8 @@ public class XJdfValidatorTest {
         assertTrue("Validation result is wrong", isValid);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-     * @throws Exception
-     */
-    @Test
-    public void testIntegrationValideSingleLineCall() throws Exception {
-
-        // arrange
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-        xJdfBuilder.addGeneralID(generalId);
-
-        xJdfBuilder.build().setID("MyId");
-        xJdfBuilder.build().getTypes().add("Web2Print");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-
-        // act
-        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-
-        xJdfValidator = new XJdfValidator();
-        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
-
-        // assert
-        assertTrue("Validation result is wrong", isValid);
-    }
-
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-     * @throws Exception
-     */
-    @Test
-    public void testIntegrationAnalyzeMessagesInvalid() throws Exception {
+    @Test(expected = ValidationException.class)
+    public void integrationAnalyzeMessagesInvalid() throws Exception {
 
         // arrange
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
@@ -156,18 +125,11 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        boolean valid = xJdfValidator.isValid(xJdfFileStream);
-
-        // assert
-        assertFalse("Validation result is wrong", valid);
+        xJdfValidator.isValid(xJdfFileStream);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-     * @throws Exception
-     */
     @Test
-    public void testIntegrationAnalyzeMessagesValid() throws Exception {
+    public void integrationAnalyzeMessagesValid() throws Exception {
 
         // arrange
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
@@ -183,27 +145,25 @@ public class XJdfValidatorTest {
         xJdfValidator = new XJdfValidator();
         boolean isValid = xJdfValidator.isValid(xJdfFileStream);
 
-        // assert
         assertTrue("Validation result is wrong", isValid);
     }
 
-    @Test
-    public void testCheck() throws Exception {
+    @Test(expected = ValidationException.class)
+    public void isValidXjdfIsInvalid() throws Exception {
         // arrange
-        InputStream is = XJdfValidatorTest.class.getResourceAsStream(RES_TEST_XJDF);
+        InputStream is = XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf");
 
         // act
         xJdfValidator = new XJdfValidator();
 
-        // assert
-        assertFalse(xJdfValidator.isValid(is));
+        xJdfValidator.isValid(is);
     }
 
     /**
      * Helper converting builder to input stream.
      * @param xJdfBuilder XJdfBuilder object to convert to.
      * @return XJDF as InputStream object.
-     * @throws Exception
+     * @throws Exception Is thrown in case of any errors.
      */
     private InputStream builder2InputStream(XJdfBuilder xJdfBuilder) throws Exception {
 
@@ -214,7 +174,6 @@ public class XJdfValidatorTest {
         xJdfParser.parseXJdf(xJdf, bos, true);
 
         return new ByteArrayInputStream(bos.toByteArray());
-
     }
 
     @Test

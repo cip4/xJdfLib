@@ -1,5 +1,20 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
+import org.apache.commons.lang.StringUtils;
+import org.w3c.dom.ls.LSInput;
+import org.w3c.dom.ls.LSResourceResolver;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+import javax.xml.XMLConstants;
+import javax.xml.bind.ValidationException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,20 +22,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.validation.Schema;
-import javax.xml.validation.SchemaFactory;
-
-import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
-import org.w3c.dom.ls.LSInput;
-import org.w3c.dom.ls.LSResourceResolver;
-import org.xml.sax.ErrorHandler;
-import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * Abstract Validation of XML Documents based on XSD schema file.
@@ -32,7 +33,7 @@ public abstract class AbstractXmlValidator<T> {
     /**
      * XJdf Error Handler Implementation for Validation.
      */
-    class XJdfErrorHandler implements ErrorHandler {
+    private class XJdfErrorHandler implements ErrorHandler {
 
         /**
          * List of found messages.
@@ -117,31 +118,40 @@ public abstract class AbstractXmlValidator<T> {
      *
      * @return Result of the validation.
      */
-    protected final ValidationResult validate(final InputStream documentStream)
-        throws SAXException, ParserConfigurationException, IOException {
-        // create a SchemaFactory and a Schema
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        schemaFactory.setResourceResolver(new ResourceResolver());
-        Schema schema = schemaFactory.newSchema(getSchema());
+    protected final ValidationResult validate(final InputStream documentStream) throws ValidationException {
+        try {
+            // create a SchemaFactory and a Schema
+            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            schemaFactory.setResourceResolver(new ResourceResolver());
+            Schema schema = schemaFactory.newSchema(getSchema());
 
-        // new error handler
-        XJdfErrorHandler errorHandler = new XJdfErrorHandler();
+            // new error handler
+            XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
-        // validate
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        dbf.setNamespaceAware(true);
-        dbf.setSchema(schema);
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        db.setErrorHandler(errorHandler);
-        db.parse(documentStream);
+            // validate
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setNamespaceAware(true);
+            dbf.setSchema(schema);
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(errorHandler);
+            db.parse(documentStream);
 
-        // get result
-        if (errorHandler.getMessages() != null) {
-            return new ValidationResult(errorHandler.getMessages());
+            // get result
+            final List<String> messages = errorHandler.getMessages();
+            if (messages.size() > 0) {
+                throw new ValidationException(
+                    "Validation of an XJDF document failed due to following error messages: "
+                        + StringUtils.join(
+                        messages, System.lineSeparator()
+                    )
+                );
+            }
+
+            // return current instance
+            return new ValidationResult();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            throw new ValidationException("Bla");
         }
-
-        // return current instance
-        return new ValidationResult();
     }
 
     /**
@@ -150,9 +160,9 @@ public abstract class AbstractXmlValidator<T> {
      * @param documentStream Stream to read document from.
      *
      * @return True in case XJDF Document is valid. Other wise false.
+     * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
-    public final boolean isValid(final InputStream documentStream)
-        throws SAXException, ParserConfigurationException, IOException {
+    public final boolean isValid(final InputStream documentStream) throws ValidationException {
         return validate(documentStream).isValid();
     }
 

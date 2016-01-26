@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,7 +27,7 @@ class ValidationResult {
      * Constructor.
      */
     ValidationResult() {
-        messages = Collections.emptyList();
+        messages = new ArrayList<>();
     }
 
     /**
@@ -39,7 +40,7 @@ class ValidationResult {
             return null;
         } else {
             StringBuilder builder = new StringBuilder();
-            builder.append("XJDF Document is invalid:");
+            builder.append("Document is invalid:");
 
             for (String msg : messages) {
                 builder.append("\n");
