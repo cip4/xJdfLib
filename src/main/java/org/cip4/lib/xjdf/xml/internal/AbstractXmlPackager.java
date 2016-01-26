@@ -195,7 +195,8 @@ public abstract class AbstractXmlPackager {
      * @throws URISyntaxException If the given path could not be encoded.
      */
     private String encodeURIBaseName(final String path) throws URISyntaxException {
-        return encodeURIPath(path.substring(path.lastIndexOf('/') + 1));
+        final String baseName = path.substring(path.lastIndexOf('/') + 1);
+        return encodeURIPath(baseName.replaceAll("[^-_a-zA-Z0-9.]+", "_"));
     }
 
     /**
