@@ -650,7 +650,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumDirection">
+    <xs:simpleType name="EnumEmbossDirection">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Both"/>
             <xs:enumeration value="Depressed"/>
@@ -666,7 +666,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumEmbossingLevel">
+    <xs:simpleType name="EnumEmbossLevel">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="SingleLevel"/>
             <xs:enumeration value="MultiLevel"/>
@@ -1389,6 +1389,17 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="PostScript"/>
             <xs:enumeration value="EPS"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumEmbossType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="BlindEmbossing"/>
+            <xs:enumeration value="Braille"/>
+            <xs:enumeration value="EmbossedFinish"/>
+            <xs:enumeration value="FoilEmbossing"/>
+            <xs:enumeration value="FoilStamping"/>
+            <xs:enumeration value="RegisteredEmbossing"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3565,30 +3576,32 @@
     <!-- ** Complex type definition for Emboss ** -->
     <xs:element name="Emboss">
         <xs:complexType>
-            <xs:attribute name="Level" use="optional"/>
-            <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
-            <xs:attribute name="Direction" use="optional"/>
-            <xs:attribute name="Height" type="double" use="optional"/>
-            <xs:attribute name="EmbossingType" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="Tool" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="BrailleText" type="string" use="optional"/>
+            <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
             <xs:attribute name="EdgeAngle" type="double" use="optional"/>
-            <xs:attribute name="EdgeShape" use="optional"/>
+            <xs:attribute name="EdgeShape" type="EnumEdgeShape" use="optional"/>
+            <xs:attribute name="EmbossingType" type="EnumEmbossType" use="optional"/>
+            <xs:attribute name="Height" type="double" use="optional"/>
+            <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
+            <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ToolRef" type="IDREF" use="optional"/>
-            <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+            <xs:attribute name="Position" type="XYPair" use="optional"/>
         </xs:complexType>
     </xs:element>
 
     <!-- ** Complex type definition for EmbossingItem ** -->
     <xs:element name="EmbossingItem">
         <xs:complexType>
-            <xs:attribute name="Direction" type="EnumDirection" use="optional"/>
+            <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
             <xs:attribute name="EmbossingTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="FoilColor" type="EnumNamedColor" use="optional"/>
             <xs:attribute name="FoilColorDetails" type="string" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
-            <xs:attribute name="Level" type="EnumEmbossingLevel" use="optional"/>
+            <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Location" type="EnumPosition" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
