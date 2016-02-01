@@ -1848,11 +1848,12 @@
     <xs:element name="Resource">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="ResourceType"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="AmountPool"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="Location"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                <xs:element minOccurs="0" maxOccurs="1" ref="ResourceType"/>
             </xs:sequence>
             <xs:attribute name="AmountProduced" type="double" use="optional"/>
             <xs:attribute name="Locked" type="boolean" use="optional"/>
