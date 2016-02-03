@@ -1403,6 +1403,43 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumDeliveryCharge">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Printer"/>
+            <xs:enumeration value="Buyer"/>
+            <xs:enumeration value="Other"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <xs:simpleType name="EnumOwnership">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Origin"/>
+            <xs:enumeration value="Destination"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumSurplusHandling">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ReturnWithProduct"/>
+            <xs:enumeration value="Return"/>
+            <xs:enumeration value="Pickup"/>
+            <xs:enumeration value="Destroy"/>
+            <xs:enumeration value="PrinterOwns"/>
+            <xs:enumeration value="Store"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumDeliveryTransfer">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="BuyerToPrinterDeliver"/>
+            <xs:enumeration value="BuyerToPrinterPickup"/>
+            <xs:enumeration value="PrinterToBuyerDeliver"/>
+            <xs:enumeration value="PrinterToBuyerPickup"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -5685,15 +5722,23 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Drop"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element ref="DropItem" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="3"/>
                 </xs:sequence>
-                <xs:attribute name="Required" type="dateTime" use="optional"/>
-                <xs:attribute name="Transfer" use="optional"/>
+                <xs:attribute name="BuyerAccount" type="string" use="optional"/>
+                <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+                <xs:attribute name="DeliveryCharge"  type="EnumDeliveryCharge" use="optional"/>
+                <xs:attribute name="DeliveryID" type="string" use="optional"/>
+                <xs:attribute name="EarliestDuration" type="duration" use="optional"/>
+                <xs:attribute name="Method" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Ownership" type="EnumOwnership" use="optional"/>
+                <xs:attribute name="RequiredDuration" type="duration" use="optional"/>
+                <xs:attribute name="RemoteURLRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ReturnMethod" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ServiceLevel" type="string" use="optional"/>
-                <xs:attribute name="Earliest" type="dateTime" use="optional"/>
-                <xs:attribute name="Method" type="string" use="optional"/>
+                <xs:attribute name="SurplusHandling" type="EnumSurplusHandling" use="optional"/>
+                <xs:attribute name="TrackingID" type="string" use="optional"/>
+                <xs:attribute name="Transfer" type="EnumDeliveryTransfer" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5853,47 +5898,21 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Drop ** -->
-    <xs:element name="Drop">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DropItem"/>
-            </xs:sequence>
-            <xs:attribute name="TrackingID" type="string" use="optional"/>
-            <xs:attribute name="ServiceLevel" type="string" use="optional"/>
-            <xs:attribute name="Required" type="dateTime" use="optional"/>
-            <xs:attribute name="Earliest" type="dateTime" use="optional"/>
-            <xs:attribute name="Transfer" use="optional"/>
-            <xs:attribute name="Method" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for DropItem ** -->
     <xs:element name="DropItem">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterRibbon"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Pallet"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Strap"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Ink"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="RollStand"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DigitalMedia"/>
-            </xs:sequence>
+            <xs:attribute name="ActualAmount" type="integer" use="optional"/>
+            <xs:attribute name="ActualTotalAmount" type="integer" use="optional"/>
+            <xs:attribute name="Amount" type="integer" use="optional"/>
+            <xs:attribute name="OrderedAmount" type="integer" use="optional"/>
+            <xs:attribute name="Proof" type="string" use="optional"/>
+            <xs:attribute name="Parameter" type="IDREF" use="optional"/>
+            <xs:attribute name="Resource" type="IDREF" use="optional"/>
             <xs:attribute name="TotalAmount" type="integer" use="optional"/>
-            <xs:attribute name="TrackingID" type="string" use="optional"/>
+            <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
+            <xs:attribute name="TotalVolume" type="double" use="optional"/>
             <xs:attribute name="TotalWeight" type="double" use="optional"/>
             <xs:attribute name="Unit" type="string" use="optional"/>
-            <xs:attribute name="ActualAmount" type="integer" use="optional"/>
-            <xs:attribute name="TotalVolume" type="double" use="optional"/>
-            <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
-            <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="ActualTotalAmount" type="integer" use="optional"/>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ToolRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ExposedMediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
