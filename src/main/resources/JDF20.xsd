@@ -5252,7 +5252,7 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell"/>
                 </xs:sequence>
                 <xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="AssemblyID" type="ID" use="optional"/>
+                <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BinderySignatureSize" type="XYPair" use="optional"/>
                 <xs:attribute name="BinderySignatureType" type="EnumBinderySignatureType" use="optional"/>
                 <xs:attribute name="BindingEdge" type="EnumBindingEdge" use="optional"/>

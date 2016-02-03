@@ -637,7 +637,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 		// set attributes
 		binderySignature.setFoldCatalog(foldCatalog);
         binderySignature.setBinderySignatureSize(size);
-        binderySignature.setAssemblyID(assemblyID);
+        binderySignature.setBinderySignatureID(assemblyID);
 
 		// return node
 		return binderySignature;
