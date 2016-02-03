@@ -1859,43 +1859,31 @@
     <xs:element name="Resource">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="AmountPool"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="Location"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="ResourceType"/>
+                <xs:element ref="AmountPool" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ResourceType" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="AmountProduced" type="double" use="optional"/>
-            <xs:attribute name="Locked" type="boolean" use="optional"/>
-            <xs:attribute name="PipeURL" type="URL" use="optional"/>
-            <xs:attribute name="Class" use="optional"/>
-            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Status" type="EnumAssetStatus" use="optional"/>
-            <xs:attribute name="ResourceWeight" type="double" use="optional"/>
-            <xs:attribute name="GrossWeight" type="double" use="optional"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="LotControl" use="optional"/>
-            <xs:attribute name="Amount" type="double" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="AmountRequired" type="double" use="optional"/>
+            <xs:attribute name="Brand" type="string" use="optional"/>
+            <xs:attribute name="CommentURL" type="URL" use="optional"/>
+            <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="Duration" type="duration" use="optional"/>
+            <xs:attribute name="ExternalID" type="string" use="optional"/>
+            <xs:attribute name="GrossWeight" type="double" use="optional"/>
             <xs:attribute name="ID" type="ID" use="required"/>
             <xs:attribute name="MinLateStatus" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="MinStatus" type="EnumAssetStatus" use="optional"/>
-            <xs:attribute name="AlternateBrand" type="string" use="optional"/>
-            <xs:attribute name="Manufacturer" type="string" use="optional"/>
-            <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PartUsage" use="optional"/>
-            <xs:attribute name="BatchID" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="Brand" type="string" use="optional"/>
-            <xs:attribute name="SourceResourceRefs" type="IDREFS" use="optional"/>
-            <xs:attribute name="AmountGood" type="double" use="optional"/>
-            <xs:attribute name="AmountWaste" type="double" use="optional"/>
-            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
-            <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="ResourceWeight" type="double" use="optional"/>
+            <xs:attribute name="Start" type="dateTime" use="optional"/>
+            <xs:attribute name="StartOffset" type="duration" use="optional"/>
+            <xs:attribute name="Transformation" type="matrix" use="optional"/>
         </xs:complexType>
     </xs:element>
 
