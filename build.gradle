@@ -9,6 +9,9 @@ description = """CIP4 xJdfLib"""
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
+def generatedSources = "$buildDir/generated-sources/main"
+def generatedResources = "$buildDir/generated-resources/main"
+
 configurations {
     xjc
 }
@@ -50,12 +53,14 @@ classes {
 
 task xjc() {
     inputs.source('src/main/resources/JDF20.xsd', 'src/main/resources/binding.xjb')
-    outputs.dir("$buildDir/generated-sources")
+    outputs.dir(generatedSources)
+    outputs.dir(generatedResources)
     doLast {
-        file("$buildDir/generated-sources").mkdirs()
+        file(generatedSources).mkdirs()
+        file("$generatedResources/META-INF").mkdirs()
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
         ant.xjc(
-                destdir: "$buildDir/generated-sources",
+                destdir: generatedSources,
                 schema: 'src/main/resources/JDF20.xsd',
                 binding: 'src/main/resources/binding.xjb',
                 readonly: true,
@@ -63,19 +68,15 @@ task xjc() {
                 removeOldOutput: true,
                 extension: true,
         ) {
-            arg(line: "-Xfluent-api -Xequals -XhashCode")
+            arg(line: "-Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
     }
 }
 
 sourceSets {
     main {
-        java {
-            srcDirs += "${buildDir}/generated-sources"
-        }
-        resources {
-            srcDirs += "${buildDir}/resources"
-        }
+        java.srcDir("${buildDir}/generated-sources")
+        output.dir(generatedResources, builtBy: 'xjc')
     }
 }
 
