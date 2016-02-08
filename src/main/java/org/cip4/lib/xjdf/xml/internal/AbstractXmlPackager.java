@@ -12,6 +12,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.zip.Deflater;
@@ -91,6 +93,11 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
+     * A collection containing the schemes that will not be included in the zip.
+     */
+    private static final Collection<String> SCHEME_BLACKLIST = Arrays.asList("http", "https");
+
+    /**
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
@@ -158,7 +165,7 @@ public abstract class AbstractXmlPackager {
         final URI rootUri
     ) throws PackagerException {
         try {
-            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator);
+            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator, rootUri);
 
             // put XML to archive
             writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
@@ -167,13 +174,9 @@ public abstract class AbstractXmlPackager {
             for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
                 final URI uri = URIResolver.resolve(rootUri, entry.getKey());
 
-                // only write local uri to zip
-                if (uri.getHost() == null) {
-                    final String targetPath = entry.getValue();
-
-                    try (final InputStream is = uri.toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(targetPath), is);
-                    }
+                final String targetPath = entry.getValue();
+                try (final InputStream is = uri.toURL().openStream()) {
+                    writeZipEntry(new ZipEntry(targetPath), is);
                 }
             }
 
@@ -192,30 +195,44 @@ public abstract class AbstractXmlPackager {
      * @throws URISyntaxException If the given path could not be encoded.
      */
     private String encodeURIBaseName(final String path) throws URISyntaxException {
-        return new URI(
-            null,
-            null,
-            path.substring(path.lastIndexOf('/') + 1),
-            null
-        ).toASCIIString();
+        final String baseName = path.substring(path.lastIndexOf('/') + 1);
+        return encodeURIPath(baseName.replaceAll("[^-_a-zA-Z0-9.]+", "_"));
     }
+
+    /**
+     * Returns the URI encoded path.
+     *
+     * @param path The path to encode.
+     *
+     * @return The encoded path.
+     * @throws URISyntaxException If the given path could not be encoded.
+     */
+    private String encodeURIPath(final String path) throws URISyntaxException {
+        return new URI(null, null, path, null).toASCIIString();
+    }
+
+
 
     /**
      * Prepares the given XmlNavigator for packaging.
      *
      * @param nav The XmlNavigator to be prepared.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      *
      * @return The prepared data used for packaging.
      * @throws URISyntaxException If a file reference could not be encoded.
      * @throws Exception If the XmlNavigator could not be evaluated.
      */
-    final PreparedPackagingData prepareForPackaging(final XmlNavigator nav) throws URISyntaxException, Exception {
+    final PreparedPackagingData prepareForPackaging(
+        final XmlNavigator nav,
+        final URI rootUri
+    ) throws URISyntaxException, Exception {
         final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
 
         return new PreparedPackagingData(
             xJdfNavigator,
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), "assets/"),
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), "docs/")
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), rootUri, "assets/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), rootUri, "docs/")
         );
     }
 
@@ -223,6 +240,7 @@ public abstract class AbstractXmlPackager {
      * Relativizes the file references in the passed node list.
      *
      * @param nodeList The file references to relativize.
+     * @param rootUri The root URI to use when dealing with relative URIs.
      * @param targetDir The target directory where the file references should be created.
      *
      * @return A map containing the mapping between the source and the target file.
@@ -230,6 +248,7 @@ public abstract class AbstractXmlPackager {
      */
     private Map<String, String> relativizeNodeList(
         final NodeList nodeList,
+        final URI rootUri,
         final String targetDir
     ) throws URISyntaxException {
         final Map<String, String> referencedFiles = new HashMap<>();
@@ -238,17 +257,31 @@ public abstract class AbstractXmlPackager {
             final Node node = nodeList.item(i);
 
             final String uriString = node.getNodeValue();
-            final String baseName = encodeURIBaseName(uriString);
-            final String uriFileName = withoutHierarchy
-                ? baseName
-                : targetDir + baseName;
 
-            node.setNodeValue(uriFileName);
+            if (shouldIncludeFileReference(URIResolver.resolve(rootUri, encodeURIPath(uriString)))) {
+                final String baseName = encodeURIBaseName(uriString);
+                final String uriFileName = withoutHierarchy
+                    ? baseName
+                    : targetDir + baseName;
 
-            referencedFiles.put(uriString, uriFileName);
+                node.setNodeValue(uriFileName);
+
+                referencedFiles.put(uriString, uriFileName);
+            }
         }
 
         return referencedFiles;
+    }
+
+    /**
+     * Determines whether to include the passed URI in the ZIP.
+     *
+     * @param uri The URI to test.
+     *
+     * @return true If the file reference should be in the zip, false otherwise
+     */
+    private boolean shouldIncludeFileReference(final URI uri) {
+        return !SCHEME_BLACKLIST.contains(uri.getScheme().toLowerCase());
     }
 
     /**
