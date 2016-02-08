@@ -39,12 +39,14 @@ dependencies {
     xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
 }
 
-task createBuildInfoFile(dependsOn: processResources) << {
-    def buildInfoFile = new File("$buildDir/resources/main/build.properties")
-    Properties props = new Properties()
-    props.setProperty('version', project.version.toString())
-    props.setProperty('vcs_revision', System.env.VCS_REVISION ?: 'none')
-    props.store(buildInfoFile.newWriter(), null)
+task createBuildInfoFile(dependsOn: processResources) {
+    doLast {
+        def buildInfoFile = new File("$buildDir/resources/main/build.properties")
+        Properties props = new Properties()
+        props.setProperty('version', project.version.toString())
+        props.setProperty('vcs_revision', System.env.VCS_REVISION ?: 'none')
+        props.store(buildInfoFile.newWriter(), null)
+    }
 }
 
 classes {
