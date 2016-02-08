@@ -231,7 +231,7 @@ public abstract class AbstractXmlPackager {
 
         return new PreparedPackagingData(
             xJdfNavigator,
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), rootUri, "artwork/"),
+            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), rootUri, "assets/"),
             relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), rootUri, "docs/")
         );
     }
