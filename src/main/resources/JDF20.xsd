@@ -2581,26 +2581,22 @@
     <xs:element name="JDFService"/>
 
     <!-- ** Complex type definition for JMF ** -->
-    <xs:element name="JMF">
+    <xs:element name="XJMF">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Acknowledge"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Response"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Query"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Signal"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Registration"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Command"/>
+                <xs:element ref="Acknowledge" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Command" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Employee" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Query" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Registration" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Response" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Signal" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="MaxVersion" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
-            <xs:attribute name="ResponseURL" type="URL" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="SenderID" type="string" use="required"/>
+            <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
+            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="required"/>
         </xs:complexType>
     </xs:element>
 
