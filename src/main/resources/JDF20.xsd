@@ -2962,7 +2962,7 @@
             <xs:attribute name="DeviceID" type="string" use="optional"/>
             <xs:attribute name="Level" type="EnumLevel" use="optional"/>
             <xs:attribute name="Location" type="string" use="optional"/>
-            <xs:attribute name="ModuleID" type="string" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Orientation" use="optional"/>
             <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductID" type="string" use="optional"/>
@@ -3640,9 +3640,9 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Emboss"/>
+                    <xs:element ref="Emboss" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3961,7 +3961,7 @@
                 <xs:attribute name="LaminatingMethod" use="optional"/>
                 <xs:attribute name="NipWidth" type="double" use="optional"/>
                 <xs:attribute name="LaminatingBox" type="rectangle" use="optional"/>
-                <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="GapList" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4059,7 +4059,6 @@
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleID" type="string" use="optional"/>
             <xs:attribute name="DeviceID" type="string" use="optional"/>
-            <xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -4073,8 +4072,7 @@
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ModuleID" type="string" use="optional"/>
-            <xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -4099,9 +4097,8 @@
                 <xs:attribute name="JobPartID" type="string" use="optional"/>
                 <xs:attribute name="Class" use="optional"/>
                 <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleID" type="string" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleIndex" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="refID" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4478,7 +4475,7 @@
                 </xs:sequence>
                 <xs:attribute name="DeliveryMode" use="optional"/>
                 <xs:attribute name="SheetLay" use="optional"/>
-                <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4682,7 +4679,7 @@
     <xs:complexType name="VarnishingParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional"/>
                 <xs:attribute name="VarnishArea" type="EnumVarnishArea" use="optional"/>
                 <xs:attribute name="VarnishMethod" type="EnumVarnishMethod" use="optional"/>
@@ -4729,20 +4726,9 @@
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModelDescription" type="string" use="optional"/>
             <xs:attribute name="DeviceType" type="string" use="optional"/>
-            <xs:attribute name="ModuleID" type="string" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModelNumber" type="string" use="optional"/>
-            <xs:attribute name="SubModuleIndex" type="integer" use="optional"/>
             <xs:attribute name="ManufacturerURL" type="string" use="optional"/>
-            <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ModuleCap ** -->
-    <xs:element name="ModuleCap">
-        <xs:complexType>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="Availability" type="EnumAvailability" use="optional"/>
-            <xs:attribute name="ModuleIndex" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6089,7 +6075,7 @@
     <!-- ** Complex type definition for FolderProduction ** -->
     <xs:element name="FolderProduction">
         <xs:complexType>
-            <xs:attribute name="FolderModuleIndex" type="integer" use="optional"/>
+            <xs:attribute name="FolderModuleID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductionType" use="optional"/>
         </xs:complexType>
     </xs:element>
