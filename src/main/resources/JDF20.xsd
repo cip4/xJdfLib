@@ -3017,21 +3017,18 @@
     <xs:element name="Response">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification"/>
+                <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="Acknowledged" type="boolean" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ReturnCode" type="integer" use="optional"/>
-            <xs:attribute name="Subscribed" type="boolean" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
+            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ReturnCode" type="integer" use="optional"/>
+            <xs:attribute name="SenderID" type="string" use="optional"/>
+            <xs:attribute name="Subscribed" type="boolean" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3066,22 +3063,15 @@
     <!-- ** Complex type definition for Signal ** -->
     <xs:element name="Signal">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Trigger"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification"/>
-            </xs:sequence>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ChannelMode" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="LastRepeat" type="boolean" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
+            <xs:attribute name="LastRepeat" type="boolean" use="optional"/>
+            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SenderID" type="string" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3206,20 +3196,6 @@
             <xs:attribute name="QueueEntryID" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for Trigger ** -->
-    <xs:element name="Trigger" type="Trigger" substitutionGroup="ParameterType"/>
-    <xs:complexType name="Trigger">
-        <xs:complexContent>
-            <xs:extension base="ParameterType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ChangedPath"/>
-                </xs:sequence>
-                <xs:attribute name="RepeatTime" type="double" use="optional"/>
-                <xs:attribute name="RepeatStep" type="integer" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for WakeUpCmdParams ** -->
     <xs:element name="WakeUpCmdParams"/>
