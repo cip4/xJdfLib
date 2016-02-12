@@ -3,11 +3,41 @@
            xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
     <!-- TODO: Removed in XJDF 2.0, but references still exist. -->
-    <xs:element name="ModulePool"/>
     <xs:element name="Term"/>
-    <xs:element name="TestPool"/>
     <xs:element name="DeviceCap"/>
-    <xs:element name="ActionPool"/>
+    <!-- TODO: Fake references for elements that will be referenced again by future changes -->
+    <xs:complexType name="FakeReferences">
+        <xs:sequence>
+            <xs:element ref="DeviceFilter"/>
+            <xs:element ref="BarcodeProductionParams"/>
+            <!-- JMF stuff -->
+            <xs:element ref="FlushResourceParams"/>
+            <xs:element ref="GangCmdFilter"/>
+            <xs:element ref="GangInfo"/>
+            <xs:element ref="GangQuFilter"/>
+            <xs:element ref="KnownMsgQuParams"/>
+            <xs:element ref="Message"/>
+            <xs:element ref="MessageService"/>
+            <xs:element ref="NewJDFQuParams"/>
+            <xs:element ref="PipeParams"/>
+            <xs:element ref="Queue"/>
+            <xs:element ref="QueueStatus"/>
+            <xs:element ref="QueueSubmissionParams"/>
+            <xs:element ref="RequestQueueEntryParams"/>
+            <xs:element ref="ResourceCmdParams"/>
+            <xs:element ref="ResourceInfo"/>
+            <xs:element ref="ResourceQuParams"/>
+            <xs:element ref="ResubmissionParams"/>
+            <xs:element ref="ReturnQueueEntryParams"/>
+            <xs:element ref="ShutDownCmdParams"/>
+            <xs:element ref="StatusQuParams"/>
+            <xs:element ref="StopPersChParams"/>
+            <xs:element ref="SubscriptionFilter"/>
+            <xs:element ref="SubscriptionInfo"/>
+            <xs:element ref="Created"/>
+            <xs:element ref="DeviceList"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <xs:simpleType name="boolean">
         <xs:restriction base="xs:boolean"/>
@@ -1439,6 +1469,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumKnockoutSource">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ClipPath"/>
+            <xs:enumeration value="SourceClipPath"/>
+            <xs:enumeration value="TrimClipPath"/>
+            <xs:enumeration value="TrimBox"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- unchecked -->
 
@@ -1459,7 +1497,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumAnchor">
+    <xs:simpleType name="Anchor">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TopLeft"/>
             <xs:enumeration value="TopCenter"/>
@@ -1974,12 +2012,6 @@
     </xs:element>
 
     <!--** abstract type for substitution only ** -->
-    <xs:element abstract="true" name="PlacedObject" type="PlacedObject"/>
-    <xs:complexType name="PlacedObject" abstract="true">
-        <xs:attribute name="CTM" type="matrix" use="optional"/>
-    </xs:complexType>
-
-    <!--** abstract type for substitution only ** -->
     <xs:element abstract="true" name="IntentType" type="IntentType"/>
     <xs:complexType name="IntentType" abstract="true"/>
 
@@ -1997,9 +2029,6 @@
         <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
         <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
     </xs:complexType>
-
-    <!-- ** Complex type definition for IntentSet ** -->
-    <xs:element name="IntentSet"/>
 
     <!-- ** Complex type definition for AmountPool ** -->
     <xs:element name="AmountPool">
@@ -2071,17 +2100,6 @@
         <xs:restriction base="string"/>
     </xs:simpleType>
 
-    <!-- ** Complex type definition for ElementState ** -->
-    <xs:element name="ElementState">
-        <xs:complexType>
-            <xs:attribute name="XPath" type="XPath" use="required"/>
-            <xs:attribute name="XPathRoot" type="XPath" use="optional"/>
-            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
-            <xs:attribute name="MinOccurs" type="integer" use="optional"/>
-            <xs:attribute name="MaxOccurs" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Dependent ** -->
     <xs:element name="Dependent">
         <xs:complexType>
@@ -2105,7 +2123,8 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
                 <xs:element minOccurs="0" maxOccurs="1" ref="ProductList"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="SetType"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ParameterSet"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceSet"/>
             </xs:sequence>
             <xs:attribute name="ID" type="ID" use="required"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
@@ -2171,9 +2190,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Constants ** -->
-    <xs:element name="Constants"/>
-
     <!-- ** Complex type definition for CustomerInfo ** -->
     <xs:element name="CustomerInfo" type="CustomerInfo" substitutionGroup="ParameterType"/>
     <xs:complexType name="CustomerInfo">
@@ -2233,94 +2249,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Parser ** -->
-    <xs:element name="Parser"/>
-
-    <!-- ** Complex type definition for Versions ** -->
-    <xs:element name="Versions"/>
-
-    <!-- ** Complex type definition for BaseDataTypes ** -->
-    <xs:element name="BaseDataTypes"/>
-
-    <!-- ** Complex type definition for CMYKColor ** -->
-    <xs:element name="CMYKColor"/>
-
-    <!-- ** Complex type definition for DateTimeRange ** -->
-    <xs:element name="DateTimeRange"/>
-
-    <!-- ** Complex type definition for DateTimeRangeList ** -->
-    <xs:element name="DateTimeRangeList"/>
-
-    <!-- ** Complex type definition for DurationRange ** -->
-    <xs:element name="DurationRange"/>
-
-    <!-- ** Complex type definition for DurationRangeList ** -->
-    <xs:element name="DurationRangeList"/>
-
-    <!-- ** Complex type definition for IntegerList ** -->
-    <xs:element name="IntegerList"/>
-
-    <!-- ** Complex type definition for IntegerRange ** -->
-    <xs:element name="IntegerRange"/>
-
-    <!-- ** Complex type definition for IntegerRangeList ** -->
-    <xs:element name="IntegerRangeList"/>
-
-    <!-- ** Complex type definition for LabColor ** -->
-    <xs:element name="LabColor"/>
-
-    <!-- ** Complex type definition for Matrix ** -->
-    <xs:element name="Matrix"/>
-
-    <!-- ** Complex type definition for NameRange ** -->
-    <xs:element name="NameRange"/>
-
-    <!-- ** Complex type definition for NameRangeList ** -->
-    <xs:element name="NameRangeList"/>
-
-    <!-- ** Complex type definition for NumberList ** -->
-    <xs:element name="NumberList"/>
-
-    <!-- ** Complex type definition for NumberRange ** -->
-    <xs:element name="NumberRange"/>
-
-    <!-- ** Complex type definition for NumberRangeList ** -->
-    <xs:element name="NumberRangeList"/>
-
-    <!-- ** Complex type definition for NumList ** -->
-    <xs:element name="NumList"/>
-
-    <!-- ** Complex type definition for Path ** -->
-    <xs:element name="Path"/>
-
-    <!-- ** Complex type definition for Range ** -->
-    <xs:element name="Range">
-        <xs:complexType>
-            <xs:attribute name="Language" type="language" use="optional"/>
-            <xs:attribute name="Attribute" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
-            <xs:attribute name="Path" type="PDFPath" use="optional"/>
-            <xs:attribute name="Box" type="rectangle" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for RangeList ** -->
-    <xs:element name="RangeList"/>
-
-    <!-- ** Complex type definition for Rectangle ** -->
-    <xs:element name="Rectangle"/>
-
-    <!-- ** Complex type definition for RectangleRange ** -->
-    <xs:element name="RectangleRange"/>
-
-    <!-- ** Complex type definition for RectangleRangeList ** -->
-    <xs:element name="RectangleRangeList"/>
-
     <!-- ** Complex type definition for Shape ** -->
     <xs:element name="Shape" type="Shape" substitutionGroup="ParameterType"/>
     <xs:complexType name="Shape">
@@ -2342,27 +2270,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for ShapeRange ** -->
-    <xs:element name="ShapeRange"/>
-
-    <!-- ** Complex type definition for ShapeRangeList ** -->
-    <xs:element name="ShapeRangeList"/>
-
-    <!-- ** Complex type definition for TransferFunction ** -->
-    <xs:element name="TransferFunction"/>
-
-    <!-- ** Complex type definition for XYPair ** -->
-    <xs:element name="XYPair"/>
-
-    <!-- ** Complex type definition for XYPairRange ** -->
-    <xs:element name="XYPairRange"/>
-
-    <!-- ** Complex type definition for XYPairRangeList ** -->
-    <xs:element name="XYPairRangeList"/>
-
-    <!-- ** Complex type definition for EnumXYRelation ** -->
-    <xs:element name="EnumXYRelation"/>
 
     <!-- ** Complex type definition for Acknowledge ** -->
     <xs:element name="Acknowledge">
@@ -2386,53 +2293,6 @@
             <xs:attribute name="ReturnCode" type="integer" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Added ** -->
-    <xs:element name="Added"/>
-
-    <!-- ** Complex type definition for AuthenticationCmdParams ** -->
-    <xs:element name="AuthenticationCmdParams">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Certificate"/>
-            </xs:sequence>
-            <xs:attribute name="Reason" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="ReasonDetails" type="string" use="optional"/>
-            <xs:attribute name="AuthenticationType" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for AuthenticationQuParams ** -->
-    <xs:element name="AuthenticationQuParams">
-        <xs:complexType>
-            <xs:attribute name="AuthenticationType" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for AuthenticationResp ** -->
-    <xs:element name="AuthenticationResp">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Certificate"/>
-            </xs:sequence>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Certificate ** -->
-    <xs:element name="Certificate"/>
-
-    <!-- ** Complex type definition for ChangedPath ** -->
-    <xs:element name="ChangedPath">
-        <xs:complexType>
-            <xs:attribute name="Path" type="XPath" use="optional"/>
-            <xs:attribute name="Modification" use="optional"/>
-            <xs:attribute name="OldValue" type="string" use="optional"/>
-            <xs:attribute name="NewValue" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2460,18 +2320,6 @@
             <xs:attribute name="AcknowledgeURL" type="URL" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ControllerFilter ** -->
-    <xs:element name="ControllerFilter">
-        <xs:complexType>
-            <xs:attribute name="URLTypes" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumURLTypes"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="ControllerID" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2509,34 +2357,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for EmployeeDef ** -->
-    <xs:element name="EmployeeDef">
-        <xs:complexType>
-            <xs:attribute name="PersonalID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for FlushedResources ** -->
-    <xs:element name="FlushedResources"/>
-
-    <!-- ** Complex type definition for FlushQueueInfo ** -->
-    <xs:element name="FlushQueueInfo">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for FlushQueueParams ** -->
-    <xs:element name="FlushQueueParams">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for FlushResourceParams ** -->
     <xs:element name="FlushResourceParams">
         <xs:complexType>
@@ -2567,18 +2387,6 @@
             <xs:attribute name="GangNames" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for JDFController ** -->
-    <xs:element name="JDFController">
-        <xs:complexType>
-            <xs:attribute name="URLType" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="ControllerID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for JDFService ** -->
-    <xs:element name="JDFService"/>
 
     <!-- ** Complex type definition for JMF ** -->
     <xs:element name="XJMF">
@@ -2667,64 +2475,12 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ModifyNodeCmdParams ** -->
-    <xs:element name="ModifyNodeCmdParams">
-        <xs:complexType>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="Activation" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for MsgFilter ** -->
-    <xs:element name="MsgFilter">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="MessageType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Family" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="MessageRefID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="MessageID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="After" type="dateTime" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="Before" type="dateTime" use="optional"/>
-            <xs:attribute name="ReceiverURL" type="URL" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
-            <xs:attribute name="Count" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for NewJDFQuParams ** -->
     <xs:element name="NewJDFQuParams">
         <xs:complexType>
             <xs:attribute name="QueueEntryID" type="string" use="optional"/>
             <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="JobPartID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for NodeInfoCmdParams ** -->
-    <xs:element name="NodeInfoCmdParams"/>
-
-    <!-- ** Complex type definition for NodeInfoQuParams ** -->
-    <xs:element name="NodeInfoQuParams"/>
-
-    <!-- ** Complex type definition for NodeInfoResp ** -->
-    <xs:element name="NodeInfoResp"/>
-
-    <!-- ** Complex type definition for NotificationDef ** -->
-    <xs:element name="NotificationDef">
-        <xs:complexType>
-            <xs:attribute name="SignalType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Classes" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumClasses"/>
-                </xs:simpleType>
-            </xs:attribute>
         </xs:complexType>
     </xs:element>
 
@@ -2803,31 +2559,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for QueueEntryDef ** -->
-    <xs:element name="QueueEntryDef">
-        <xs:complexType>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for QueueEntryPosParams ** -->
-    <xs:element name="QueueEntryPosParams">
-        <xs:complexType>
-            <xs:attribute name="PrevQueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="Position" type="integer" use="optional"/>
-            <xs:attribute name="NextQueueEntryID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for QueueEntryPriParams ** -->
-    <xs:element name="QueueEntryPriParams">
-        <xs:complexType>
-            <xs:attribute name="Priority" type="integer" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <xs:element name="QueueFilter">
         <xs:complexType>
             <xs:sequence>
@@ -2897,14 +2628,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RemoveLink ** -->
-    <xs:element name="RemoveLink">
-        <xs:complexType>
-            <xs:attribute name="ParentJobID" type="string" use="optional"/>
-            <xs:attribute name="ParentJobPartID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for RequestQueueEntryParams ** -->
     <xs:element name="RequestQueueEntryParams">
         <xs:complexType>
@@ -2967,28 +2690,6 @@
             <xs:attribute name="Status" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="Unit" type="string" use="optional"/>
             <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ResourcePullParams ** -->
-    <xs:element name="ResourcePullParams">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
-            </xs:sequence>
-            <xs:attribute name="ReturnURL" type="URL" use="optional"/>
-            <xs:attribute name="WatchURL" type="URL" use="optional"/>
-            <xs:attribute name="PrevQueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="NextQueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="Priority" type="integer" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="RepeatPolicy" use="optional"/>
-            <xs:attribute name="ResourceID" type="string" use="optional"/>
-            <xs:attribute name="Amount" type="double" use="optional"/>
-            <xs:attribute name="Hold" type="boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3106,18 +2807,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SubmissionMethods ** -->
-    <xs:element name="SubmissionMethods">
-        <xs:complexType>
-            <xs:attribute name="Packaging" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumPackaging"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Subscription ** -->
     <xs:element name="Subscription">
         <xs:complexType>
@@ -3168,43 +2857,15 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for TrackFilter ** -->
-    <xs:element name="TrackFilter">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="ProjectID" type="string" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for TrackResult ** -->
-    <xs:element name="TrackResult">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="ProjectID" type="string" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="IsDevice" type="boolean" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for WakeUpCmdParams ** -->
-    <xs:element name="WakeUpCmdParams"/>
-
     <!-- ** Complex type definition for AuditPool ** -->
     <xs:element name="AuditPool">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Audit"/>
+                <xs:element ref="Created" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Notification" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="PhaseTime" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ProcessRun" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ResourceAudit" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -3237,9 +2898,6 @@
             <xs:attribute name="Code" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for BindList ** -->
-    <xs:element name="BindList"/>
 
     <!-- ** Complex type definition for BlockPreparationParams ** -->
     <xs:element name="BlockPreparationParams" type="BlockPreparationParams" substitutionGroup="ParameterType"/>
@@ -3353,17 +3011,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ChangedAttribute ** -->
-    <xs:element name="ChangedAttribute">
-        <xs:complexType>
-            <xs:attribute name="OldValue" type="string" use="optional"/>
-            <xs:attribute name="AttributeName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="NewValue" type="string" use="optional"/>
-            <xs:attribute name="ElementType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ElementID" type="NMTOKEN" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for CoilBindingDetails ** -->
     <xs:element name="CoilBindingDetails">
         <xs:complexType>
@@ -3451,19 +3098,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Modified ** -->
-    <xs:element name="Modified" type="Modified" substitutionGroup="Audit"/>
-    <xs:complexType name="Modified">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:attribute name="XPath" type="XPath" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for CreditCard ** -->
-    <xs:element name="CreditCard"/>
-
     <!-- ** Complex type definition for CuttingParams ** -->
     <xs:element name="CuttingParams" type="CuttingParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="CuttingParams">
@@ -3475,16 +3109,6 @@
                     <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="NUpSeparation" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for Deleted ** -->
-    <xs:element name="Deleted" type="Deleted" substitutionGroup="Audit"/>
-    <xs:complexType name="Deleted">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:attribute name="XPath" type="XPath" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3552,7 +3176,7 @@
     <xs:complexType name="DeviceMark">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
+                <xs:attribute name="Anchor" type="Anchor" use="optional"/>
                 <xs:attribute name="MarkOrientation" use="optional"/>
                 <xs:attribute name="HorizontalFitPolicy" use="optional"/>
                 <xs:attribute name="Font" type="NMTOKEN" use="optional"/>
@@ -3784,49 +3408,28 @@
     <!-- ** Complex type definition for ImageCompression ** -->
     <xs:element name="ImageCompression">
         <xs:complexType>
-            <xs:attribute name="ImageDownsampleType" use="optional"/>
-            <xs:attribute name="ConvertImagesToIndexed" type="boolean" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="CCITTFaxParams" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="DCTParams" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="FlateParams" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="JBIG2Params" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="JPEG2000Params" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="LZWParams" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="AntiAliasImages" type="boolean" use="optional"/>
+            <xs:attribute name="AutoFilterImages" type="boolean" use="optional"/>
+            <xs:attribute name="ConvertImagesToIndexed" type="boolean" use="optional"/>
+            <xs:attribute name="DCTQuality" type="double" use="optional"/>
+            <xs:attribute name="DownsampleImages" type="boolean" use="optional"/>
+            <xs:attribute name="EncodeImages" type="boolean" use="optional"/>
+            <xs:attribute name="ImageAutoFilterStrategy" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ImageDepth" type="integer" use="optional"/>
             <xs:attribute name="ImageDownsampleThreshold" type="double" use="optional"/>
+            <xs:attribute name="ImageDownsampleType" use="optional"/>
             <xs:attribute name="ImageFilter" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ImageResolution" type="double" use="optional"/>
-            <xs:attribute name="ImageAutoFilterStrategy" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DownsampleImages" type="boolean" use="optional"/>
-            <xs:attribute name="AutoFilterImages" type="boolean" use="optional"/>
-            <xs:attribute name="JPXQuality" type="integer" use="optional"/>
-            <xs:attribute name="EncodeImages" type="boolean" use="optional"/>
-            <xs:attribute name="DCTQuality" type="double" use="optional"/>
-            <xs:attribute name="ImageDepth" type="integer" use="optional"/>
             <xs:attribute name="ImageType" use="optional"/>
-            <xs:attribute name="JBIG2ParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="DCTParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="CCITTFaxParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="LZWParamsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="JPEG2000ParamsRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ImageShift ** -->
-    <xs:element name="ImageShift">
-        <xs:complexType>
-            <xs:attribute name="PositionX" use="optional"/>
-            <xs:attribute name="ShiftBack" type="XYPair" use="optional"/>
-            <xs:attribute name="ShiftFront" type="XYPair" use="optional"/>
-            <xs:attribute name="PositionY" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Insert ** -->
-    <xs:element name="Insert">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
-            </xs:sequence>
-            <xs:attribute name="WrapPages" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Folio" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="Transformation" type="matrix" use="optional"/>
-            <xs:attribute name="GlueType" use="optional"/>
-            <xs:attribute name="Method" use="optional"/>
+            <xs:attribute name="JPXQuality" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3844,15 +3447,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for InsertList ** -->
-    <xs:element name="InsertList">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Insert"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for InterpretingParams ** -->
     <xs:element name="InterpretingParams" type="InterpretingParams" substitutionGroup="ParameterType"/>
@@ -3939,18 +3533,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LayerDetails ** -->
-    <xs:element name="LayerDetails"/>
-
-    <!-- ** Complex type definition for LayerList ** -->
-    <xs:element name="LayerList">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="LayerDetails"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Location ** -->
     <xs:element name="Location">
         <xs:complexType>
@@ -3971,45 +3553,61 @@
     </xs:element>
 
     <!-- ** Complex type definition for MarkObject ** -->
-    <xs:element name="MarkObject" substitutionGroup="PlacedObject" type="MarkObject"/>
-    <xs:complexType name="MarkObject">
-        <xs:complexContent>
-            <xs:extension base="PlacedObject">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ScavengerArea"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DensityMeasuringField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CIELABMeasuringField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorControlStrip"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="RegisterMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DynamicField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CutMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceMark"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MarkActivation"/>
-                </xs:sequence>
-                <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
-                <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-                <xs:attribute name="OrdID" type="integer" use="optional"/>
-                <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
-                <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
-                <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-                <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
-                <xs:attribute name="LayerID" type="integer" use="optional"/>
-                <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
-                <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="ContentRef" type="IDREF" use="optional"/>
-                <xs:attribute name="Ord" type="integer" use="optional"/>
-                <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-                <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
-                <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="MarkObject">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CIELABMeasuringField" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ColorControlStrip" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="CutMark" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="DensityMeasuringField" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="DeviceMark" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="DynamicField" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="FillMark" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="JobField" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="MarkActivation" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="RefAnchor" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="RegisterMark" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ScavengerArea" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
+            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
+            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
+            <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
+            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
+            <xs:attribute name="ContentRef" type="IDREF" use="optional"/>
+            <xs:attribute name="CTM" type="matrix" use="optional"/>
+            <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
+            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
+            <xs:attribute name="Ord" type="integer" use="optional"/>
+            <xs:attribute name="OrdID" type="integer" use="optional"/>
+            <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
+            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
+    <xs:element name="FillMark">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MarkColor" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="KnockoutBleed" type="double" use="optional"/>
+            <xs:attribute name="KnockoutRefs" type="IDREFS" use="optional"/>
+            <xs:attribute name="KnockoutSource" type="EnumKnockoutSource" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="MarkColor">
+        <xs:complexType>
+            <xs:attribute name="Name" type="string" use="optional"/>
+            <xs:attribute name="Tint" type="double" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for Milestone ** -->
     <xs:element name="Milestone">
@@ -4087,20 +3685,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for NumberItem ** -->
-    <xs:element name="NumberItem">
-        <xs:complexType>
-            <xs:attribute name="Step" type="integer" use="optional"/>
-            <xs:attribute name="StartValue" type="string" use="optional"/>
-            <xs:attribute name="ColorNameDetails" type="string" use="optional"/>
-            <xs:attribute name="YPosition" type="double" use="optional"/>
-            <xs:attribute name="Orientation" type="double" use="optional"/>
-            <xs:attribute name="XPosition" type="double" use="optional"/>
-            <xs:attribute name="ColorName" type="EnumNamedColor" use="optional"/>
-            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for ObservationTarget ** -->
     <xs:element name="ObservationTarget">
@@ -4222,14 +3806,12 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Payment ** -->
-    <xs:element name="Payment"/>
-
     <!-- ** Complex type definition for PDFInterpretingParams ** -->
     <xs:element name="PDFInterpretingParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="OCGControl"/>
+                <xs:element ref="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ReferenceXObjParams" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="OCGProcess" use="optional"/>
             <xs:attribute name="OCGDefault" use="optional"/>
@@ -4259,23 +3841,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for Performance ** -->
-    <xs:element name="Performance">
-        <xs:complexType>
-            <xs:attribute name="MaxCleanup" type="duration" use="optional"/>
-            <xs:attribute name="MaxAmount" type="double" use="optional"/>
-            <xs:attribute name="AverageCleanup" type="duration" use="optional"/>
-            <xs:attribute name="DevCapsRef" type="IDREF" use="optional"/>
-            <xs:attribute name="MinCleanup" type="duration" use="optional"/>
-            <xs:attribute name="AverageAmount" type="double" use="optional"/>
-            <xs:attribute name="MaxSetup" type="duration" use="optional"/>
-            <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="MinSetup" type="duration" use="optional"/>
-            <xs:attribute name="MinAmount" type="double" use="optional"/>
-            <xs:attribute name="AverageSetup" type="duration" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for PhaseTime ** -->
     <xs:element name="PhaseTime" type="PhaseTime" substitutionGroup="Audit"/>
@@ -4359,15 +3924,12 @@
         <xs:attribute name="Technology" type="NMTOKEN" use="optional"/>
     </xs:complexType>
 
-    <!-- ** Complex type definition for QueueEntryDefList ** -->
-    <xs:element name="QueueEntryDefList"/>
-
     <!-- ** Complex type definition for RefAnchor ** -->
     <xs:element name="RefAnchor" type="RefAnchor" substitutionGroup="ParameterType"/>
     <xs:complexType name="RefAnchor">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
+                <xs:attribute name="Anchor" type="Anchor" use="optional"/>
                 <xs:attribute name="rRef" type="IDREF" use="optional"/>
                 <xs:attribute name="AnchorType" use="optional"/>
             </xs:extension>
@@ -4393,9 +3955,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for Removed ** -->
-    <xs:element name="Removed"/>
 
     <!-- ** Complex type definition for ResourceAudit ** -->
     <xs:element name="ResourceAudit" type="ResourceAudit" substitutionGroup="Audit"/>
@@ -4452,9 +4011,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for ShapeElement ** -->
-    <xs:element name="ShapeElement"/>
 
     <!-- ** Complex type definition for ShrinkingParams ** -->
     <xs:element name="ShrinkingParams" type="ShrinkingParams" substitutionGroup="ParameterType"/>
@@ -4643,9 +4199,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Value ** -->
-    <xs:element name="Value"/>
-
     <!-- ** Complex type definition for VarnishingParams ** -->
     <xs:element name="VarnishingParams" type="VarnishingParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="VarnishingParams">
@@ -4681,9 +4234,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for AbstractState ** -->
-    <xs:element name="AbstractState"/>
 
     <!-- ** Complex type definition for Module ** -->
     <xs:element name="Module">
@@ -4779,10 +4329,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-
-    <!-- ** Complex type definition for BookCase ** -->
-    <xs:element name="BookCase"/>
 
     <!-- ** Complex type definition for ColorIntent ** -->
     <xs:element name="ColorIntent" type="ColorIntent" substitutionGroup="IntentType"/>
@@ -4962,9 +4508,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for Pricing ** -->
-    <xs:element name="Pricing"/>
 
     <!-- ** Complex type definition for ProofingIntent ** -->
     <xs:element name="ProofingIntent" type="ProofingIntent" substitutionGroup="IntentType"/>
@@ -5246,13 +4789,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for BoxApplication ** -->
-    <xs:element name="BoxApplication">
-        <xs:complexType>
-            <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for BoxFoldAction ** -->
     <xs:element name="BoxFoldAction">
         <xs:complexType>
@@ -5519,13 +5055,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Container ** -->
-    <xs:element name="Container">
-        <xs:complexType>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Content ** -->
     <xs:element name="Content" type="Content" substitutionGroup="ParameterType"/>
     <xs:complexType name="Content">
@@ -5569,32 +5098,32 @@
     </xs:element>
 
     <!-- ** Complex type definition for ContentObject ** -->
-    <xs:element name="ContentObject" substitutionGroup="PlacedObject" type="ContentObject"/>
-    <xs:complexType name="ContentObject">
-        <xs:complexContent>
-            <xs:extension base="PlacedObject">
-                <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
-                <xs:attribute name="OrdExpression" type="string" use="optional"/>
-                <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-                <xs:attribute name="OrdID" type="integer" use="optional"/>
-                <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
-                <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
-                <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-                <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
-                <xs:attribute name="LayerID" type="integer" use="optional"/>
-                <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
-                <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="SetOrd" type="integer" use="optional"/>
-                <xs:attribute name="Ord" type="integer" use="optional"/>
-                <xs:attribute name="DocOrd" type="integer" use="optional"/>
-                <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-                <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
-                <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ContentObject">
+        <xs:complexType>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
+            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
+            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
+            <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
+            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
+            <xs:attribute name="CTM" type="matrix" use="optional"/>
+            <xs:attribute name="DocOrd" type="integer" use="optional"/>
+            <xs:attribute name="FitPolicyRef" type="IDREF" use="optional"/>
+            <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
+            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
+            <xs:attribute name="Ord" type="integer" use="optional"/>
+            <xs:attribute name="OrdExpression" type="string" use="optional"/>
+            <xs:attribute name="OrdID" type="integer" use="optional"/>
+            <xs:attribute name="SetOrd" type="integer" use="optional"/>
+            <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
+            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
 
     <!-- ** Complex type definition for ConventionalPrintingParams ** -->
@@ -5723,15 +5252,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Dependencies ** -->
-    <xs:element name="Dependencies">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="RunList"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for DeviceNColor ** -->
     <xs:element name="DeviceNColor">
         <xs:complexType>
@@ -5779,12 +5299,12 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="RepeatDesc"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ConvertingConfig"/>
+                    <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="ConvertingConfig" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="RepeatDesc" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="Position" use="optional"/>
                 <xs:attribute name="Estimate" type="boolean" use="optional"/>
+                <xs:attribute name="Position" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5887,9 +5407,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DynamicInput ** -->
-    <xs:element name="DynamicInput"/>
-
     <!-- ** Complex type definition for ElementColorParams ** -->
     <xs:element name="ElementColorParams" type="ElementColorParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="ElementColorParams">
@@ -5972,15 +5489,16 @@
     <!-- ** Complex type definition for Feeder ** -->
     <xs:element name="Feeder">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FeederQualityParams" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="Position" type="integer" use="optional"/>
             <xs:attribute name="Opening" use="optional"/>
             <xs:attribute name="FeederType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="AlternatePositions" type="IntegerList" use="optional"/>
             <xs:attribute name="FeederSynchronization" use="optional"/>
             <xs:attribute name="Loading" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
-            <xs:attribute name="FeederQualityParamsRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6101,18 +5619,23 @@
     <xs:complexType name="IdentificationField">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="Purpose" use="optional"/>
-                <xs:attribute name="Position" use="optional"/>
-                <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="BarcodeDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ExtraValues" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
                 <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
-                <xs:attribute name="ValueFormat" type="string" use="optional"/>
+                <xs:attribute name="Encoding" use="optional"/>
+                <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Format" type="Any" use="optional"/>
                 <xs:attribute name="Orientation" type="matrix" use="optional"/>
+                <xs:attribute name="Page" type="integer" use="optional"/>
+                <xs:attribute name="Position" use="optional"/>
+                <xs:attribute name="Purpose" use="optional"/>
                 <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Value" type="string" use="optional"/>
-                <xs:attribute name="Page" type="integer" use="optional"/>
+                <xs:attribute name="ValueFormat" type="string" use="optional"/>
                 <xs:attribute name="ValueTemplate" type="string" use="optional"/>
-                <xs:attribute name="Encoding" use="optional"/>
-                <xs:attribute name="Format" type="Any" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6299,12 +5822,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for LongFold ** -->
-    <xs:element name="LongFold"/>
-
-    <!-- ** Complex type definition for LongGlue ** -->
-    <xs:element name="LongGlue"/>
-
     <!-- ** Complex type definition for LongitudinalRibbonOperationParams ** -->
     <xs:element name="LongitudinalRibbonOperationParams" type="LongitudinalRibbonOperationParams"
                 substitutionGroup="ParameterType"/>
@@ -6313,22 +5830,6 @@
             <xs:extension base="ParameterType"/>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for LongPerforate ** -->
-    <xs:element name="LongPerforate"/>
-
-    <!-- ** Complex type definition for LongSlit ** -->
-    <xs:element name="LongSlit"/>
-
-    <!-- ** Complex type definition for Lot ** -->
-    <xs:element name="Lot">
-        <xs:complexType>
-            <xs:attribute name="LotID" type="string" use="optional"/>
-            <xs:attribute name="ActualAmount" type="double" use="optional"/>
-            <xs:attribute name="Consumption" use="optional"/>
-            <xs:attribute name="Amount" type="double" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for LZWParams ** -->
     <xs:element name="LZWParams">
@@ -6558,29 +6059,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PageAssignParams ** -->
-    <xs:element name="PageAssignParams">
-        <xs:complexType>
-            <xs:attribute name="PreserveOPIComments" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveCopyPage" type="boolean" use="optional"/>
-            <xs:attribute name="UsePrologue" type="boolean" use="optional"/>
-            <xs:attribute name="AllowTransparency" type="boolean" use="optional"/>
-            <xs:attribute name="EmitDSCWarnings" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveOverprintSettings" type="boolean" use="optional"/>
-            <xs:attribute name="UCRandBGInfo" use="optional"/>
-            <xs:attribute name="ParseDSCComments" type="boolean" use="optional"/>
-            <xs:attribute name="PassThroughJPEGImages" type="boolean" use="optional"/>
-            <xs:attribute name="LockDistillerParams" type="boolean" use="optional"/>
-            <xs:attribute name="AllowPSXObjects" type="boolean" use="optional"/>
-            <xs:attribute name="EmbedJobOptions" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveHalftoneInfo" type="boolean" use="optional"/>
-            <xs:attribute name="PreserveEPSInfo" type="boolean" use="optional"/>
-            <xs:attribute name="TransferFunctionInfo" use="optional"/>
-            <xs:attribute name="AutoPositionEPSInfo" type="boolean" use="optional"/>
-            <xs:attribute name="ParseDSCCommentsForDocInfo" type="boolean" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for PDFXParams ** -->
     <xs:element name="PDFXParams">
         <xs:complexType>
@@ -6673,7 +6151,7 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="1" ref="RefAnchor"/>
             </xs:sequence>
-            <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
             <xs:attribute name="CTM" type="matrix" use="optional"/>
             <xs:attribute name="PageRange" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="PositionPolicy" type="EnumPositionPolicy" use="optional"/>
@@ -6681,14 +6159,6 @@
             <xs:attribute name="RotationPolicy" type="EnumPositionPolicy" use="optional"/>
             <xs:attribute name="Size" type="XYPair" use="optional"/>
             <xs:attribute name="SizePolicy" type="EnumPositionPolicy" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for PreflightAction ** -->
-    <xs:element name="PreflightAction">
-        <xs:complexType>
-            <xs:attribute name="SetRef" type="IDREF" use="optional"/>
-            <xs:attribute name="SetSplitBy" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6814,9 +6284,11 @@
     <xs:complexType name="QualityControlParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
+                <xs:sequence>
+                    <xs:element ref="BindingQualityParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="SampleInterval" type="integer" use="optional"/>
                 <xs:attribute name="TimeInterval" type="duration" use="optional"/>
-                <xs:attribute name="BindingQualityParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7098,9 +6570,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for SourceResource ** -->
-    <xs:element name="SourceResource"/>
-
     <!-- ** Complex type definition for Station ** -->
     <xs:element name="Station">
         <xs:complexType>
@@ -7113,29 +6582,20 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for StringListValue ** -->
-    <xs:element name="StringListValue">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Value"/>
-            </xs:sequence>
-            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for StripMark ** -->
     <xs:element name="StripMark">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Position"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="RefAnchor"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="JobField"/>
+                <xs:element ref="BinderySignature" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ExternalImpositionTemplate" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="StripMark" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="MarkContext" use="optional"/>
             <xs:attribute name="AbsoluteHeight" type="double" use="optional"/>
             <xs:attribute name="MarkName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Anchor" type="EnumAnchor" use="optional"/>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
             <xs:attribute name="RelativeHeight" type="double" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="VerticalFitPolicy" use="optional"/>
@@ -7285,9 +6745,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for AdhesiveBinding ** -->
-    <xs:element name="AdhesiveBinding"/>
 
     <!-- ** Complex type definition for BundlingParams ** -->
     <xs:element name="BundlingParams" type="BundlingParams" substitutionGroup="ParameterType"/>
@@ -7452,20 +6909,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for RingBinding ** -->
-    <xs:element name="RingBinding">
-        <xs:complexType>
-            <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
-            <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RingDiameter" type="double" use="optional"/>
-            <xs:attribute name="HoleType" use="optional"/>
-            <xs:attribute name="BinderBrand" type="string" use="optional"/>
-            <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
-            <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for RingBindingDetails ** -->
     <xs:element name="RingBindingDetails">
         <xs:complexType>
@@ -7500,9 +6943,6 @@
             <xs:attribute name="Side" use="optional"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for SideSewing ** -->
-    <xs:element name="SideSewing"/>
 
     <!-- ** Complex type definition for SideSewingParams ** -->
     <xs:element name="SideSewingParams" type="SideSewingParams" substitutionGroup="ParameterType"/>
@@ -7842,15 +7282,16 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution"/>
+                    <xs:element ref="AutomatedOverPrintParams" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ObjectResolution" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="TIFFFormatParams" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="BandWidth" type="integer" use="optional"/>
                 <xs:attribute name="BandHeight" type="integer" use="optional"/>
-                <xs:attribute name="ColorantDepth" type="integer" use="optional"/>
                 <xs:attribute name="BandOrdering" use="optional"/>
+                <xs:attribute name="BandWidth" type="integer" use="optional"/>
+                <xs:attribute name="ColorantDepth" type="integer" use="optional"/>
                 <xs:attribute name="Interleaved" type="boolean" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="MimeType" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7952,9 +7393,4 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Date ** -->
-    <xs:element name="Date"/>
-
-    <!-- ** Complex type definition for Duration ** -->
-    <xs:element name="Duration"/>
 </xs:schema>
