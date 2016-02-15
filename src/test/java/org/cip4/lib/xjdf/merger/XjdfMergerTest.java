@@ -1,7 +1,8 @@
 package org.cip4.lib.xjdf.merger;
 
+import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.ProductList;
-import org.cip4.lib.xjdf.schema.SetType;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.junit.Test;
 
@@ -13,8 +14,9 @@ public class XjdfMergerTest {
     @Test
     public void testMergeMultiple() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
-        JAXBElementMerger<SetType> assetSetMerger = mock(JAXBElementMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, assetSetMerger);
+        BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
+        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
 
         XJDF resultingXJDf = merger.merge(new XJDF());
         assertNotNull(resultingXJDf);
@@ -23,8 +25,9 @@ public class XjdfMergerTest {
     @Test
     public void testMergeMinimalXjdf() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
-        JAXBElementMerger<SetType> assetSetMerger = mock(JAXBElementMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, assetSetMerger);
+        BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
+        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
         XJDF baseXjdf = new XJDF();
         merger.merge(baseXjdf, new XJDF());
         assertNull(baseXjdf.getProductList());
@@ -33,8 +36,9 @@ public class XjdfMergerTest {
     @Test
     public void testMergeProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
-        JAXBElementMerger<SetType> assetSetMerger = mock(JAXBElementMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, assetSetMerger);
+        BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
+        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
         XJDF baseXjdf = new XJDF();
         baseXjdf.setProductList(new ProductList());
         merger.merge(baseXjdf, new XJDF().withProductList(new ProductList()));
@@ -44,8 +48,9 @@ public class XjdfMergerTest {
     @Test
     public void testMergeNoProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
-        JAXBElementMerger<SetType> assetSetMerger = mock(JAXBElementMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, assetSetMerger);
+        BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
+        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
         XJDF baseXjdf = new XJDF();
         merger.merge(baseXjdf, new XJDF());
         assertNull(baseXjdf.getProductList());
@@ -54,8 +59,9 @@ public class XjdfMergerTest {
     @Test
     public void testMergeSingleProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
-        JAXBElementMerger<SetType> assetSetMerger = mock(JAXBElementMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, assetSetMerger);
+        BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
+        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
         XJDF baseXjdf = new XJDF();
         ProductList productList = new ProductList();
         merger.merge(baseXjdf, new XJDF().withProductList(productList));

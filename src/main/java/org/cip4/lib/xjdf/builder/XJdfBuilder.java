@@ -4,13 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.comparator.SetTypeComparator;
-import org.cip4.lib.xjdf.schema.Audit;
-import org.cip4.lib.xjdf.schema.AuditPool;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Parameter;
@@ -23,16 +18,12 @@ import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ResourceType;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
-import org.cip4.lib.xjdf.util.SetTypeWrapper;
 import org.cip4.lib.xjdf.util.Parameters;
 import org.cip4.lib.xjdf.util.Resources;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
  * Implementation of a XJdf builder class.
- *
- * @author s.meissner
- * @author m.hartmann
  */
 public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
@@ -105,9 +96,8 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     ) {
         // initialize objects
         super(new XJdfNodeFactory().createXJDF());
-        SetTypeWrapper setTypeWrapper = new SetTypeWrapper(getNode().getSetType());
-        parameterSets = new Parameters(setTypeWrapper);
-        resourceSets = new Resources(setTypeWrapper);
+        parameterSets = new Parameters(getNode().getParameterSet());
+        resourceSets = new Resources(getNode().getResourceSet());
         xJdfNodeFactory = new XJdfNodeFactory();
 
         // preconfiguration
@@ -129,13 +119,13 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     public XJdfBuilder(final XJDF xjdf) {
         // initialize objects
         super(xjdf);
-        SetTypeWrapper setTypeWrapper = new SetTypeWrapper(getNode().getSetType());
-        parameterSets = new Parameters(setTypeWrapper);
-        resourceSets = new Resources(setTypeWrapper);
+        parameterSets = new Parameters(getNode().getParameterSet());
+        resourceSets = new Resources(getNode().getResourceSet());
         xJdfNodeFactory = new XJdfNodeFactory();
 
-        // sort parameterset elements by name
-        Collections.sort(setTypeWrapper, new SetTypeComparator());
+        // sort parameterset and resourceset elements by name
+        Collections.sort(getNode().getParameterSet(), new SetTypeComparator());
+        Collections.sort(getNode().getResourceSet(), new SetTypeComparator());
     }
 
     /**
@@ -155,33 +145,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     public final void addComment(final String comment) {
         Comment obj = xJdfNodeFactory.createComment(comment);
         getNode().getComment().add(obj);
-    }
-
-    /**
-     * Append Audit node to XJDF Document.
-     *
-     * @param audit Audit object to append.
-     */
-    public final void addAudit(final Audit audit) {
-        if (audit == null) {
-            return;
-        }
-
-        // get audit name
-        String paramName = audit.getClass().getSimpleName();
-
-        // create audit element
-        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement obj = new JAXBElement(qname, audit.getClass(), null, audit);
-
-        // if necessary, create AuditPool
-        if (getXJdf().getAuditPool() == null) {
-            AuditPool auditPool = xJdfNodeFactory.createAuditPool();
-            getXJdf().setAuditPool(auditPool);
-        }
-
-        // append Audit object
-        getXJdf().getAuditPool().getAudit().add(obj);
     }
 
     /**

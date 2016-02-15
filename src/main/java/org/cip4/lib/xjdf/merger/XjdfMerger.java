@@ -1,12 +1,11 @@
 package org.cip4.lib.xjdf.merger;
 
+import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.ProductList;
-import org.cip4.lib.xjdf.schema.SetType;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Class for merging xjdf documents recursively.
@@ -19,33 +18,38 @@ public class XjdfMerger extends BaseMerger<XJDF> {
     private final BaseMerger<ProductList> productListMerger;
 
     /**
-     * Merger to use for merging asset sets.
+     * Merger to use for merging resource sets.
      */
-    private final JAXBElementMerger<? extends SetType> assetSetMerger;
+    private final BaseMerger<ResourceSet> resourceSetMerger;
+
+    /**
+     * Merger to use for merging parameter sets.
+     */
+    private final BaseMerger<ParameterSet> parameterSetMerger;
 
     /**
      * Internal constructor for testing purposes.
-     *
      * @param productListMerger Merger tu use for merging product lists.
-     * @param assetSetMerger Merger to use for merging asset sets.
+     * @param resourceSetMerger Merger to use for merging reseourcesets.
+     * @param parameterSetMerger Merger to use for merging parametersets.
      */
     XjdfMerger(
-        final BaseMerger<ProductList> productListMerger, final JAXBElementMerger<? extends SetType> assetSetMerger
+        final BaseMerger<ProductList> productListMerger,
+        final BaseMerger<ResourceSet> resourceSetMerger,
+        final BaseMerger<ParameterSet> parameterSetMerger
     ) {
         this.productListMerger = productListMerger;
-        this.assetSetMerger = assetSetMerger;
+        this.resourceSetMerger = resourceSetMerger;
+        this.parameterSetMerger = parameterSetMerger;
     }
 
     /**
      * Default constructor.
      */
     public XjdfMerger() {
-        this.productListMerger = new ProductListMerger(new ProductMerger());
-        List<BaseMerger<? extends SetType>> assetSetMergers = new ArrayList<>(2);
-        assetSetMergers.add(new ParameterSetMerger());
-        assetSetMergers.add(new ResourceSetMerger());
-        CombinedMerger<? extends SetType> internalAssetSetMerger = new CombinedMerger<>(assetSetMergers);
-        assetSetMerger = new JAXBElementMerger<>(internalAssetSetMerger);
+        productListMerger = new ProductListMerger(new ProductMerger());
+        parameterSetMerger = new ParameterSetMerger();
+        resourceSetMerger = new ResourceSetMerger();
     }
 
     /**
@@ -77,6 +81,7 @@ public class XjdfMerger extends BaseMerger<XJDF> {
             }
         }
         baseObject.getGeneralID().addAll(mergeObject.getGeneralID());
-        assetSetMerger.merge((Collection) baseObject.getSetType(), (Collection) mergeObject.getSetType());
+        parameterSetMerger.merge((Collection) baseObject.getParameterSet(), (Collection) mergeObject.getParameterSet());
+        resourceSetMerger.merge((Collection) baseObject.getResourceSet(), (Collection) mergeObject.getResourceSet());
     }
 }

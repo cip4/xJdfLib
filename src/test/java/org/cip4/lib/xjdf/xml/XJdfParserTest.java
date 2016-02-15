@@ -5,7 +5,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.ValidationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
@@ -15,7 +14,6 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.XYPair;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -28,8 +26,6 @@ import static org.junit.Assert.assertNull;
 
 /**
  * JUnit test case for XmlParser class.
- * @author s.meissner
- * @date 06.03.2012
  */
 public class XJdfParserTest {
 
@@ -38,17 +34,6 @@ public class XJdfParserTest {
     private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser xJdfParser;
-
-    /**
-     * Default constructor.
-     */
-    public XJdfParserTest() {
-        try {
-            JAXBContextFactory.init();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Set up unit test.
@@ -301,7 +286,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
+        ResourceSet resourceSet = xjdf.getResourceSet().get(0);
         Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getParameterType().getValue();
         assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
         assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
@@ -312,7 +297,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(6).getValue();
+        ParameterSet parameterSet = xjdf.getParameterSet().get(5);
         ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
         ApprovalPerson approvalPerson = approvalSuccess.getApprovalDetails().get(0).getApprovalPerson();
         Contact contact = (Contact) approvalPerson.getContactRef().getParameterType().getValue();
@@ -326,7 +311,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        Notification notificationB = (Notification) xjdf.getAuditPool().getAudit().get(2).getValue();
+        Notification notificationB = xjdf.getAuditPool().getNotification().get(1);
         Notification notificationA = notificationB.getRefID();
         assertEquals("Notification_B", notificationB.getID());
         assertEquals("Notification_A", notificationA.getID());
@@ -338,7 +323,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(4).getValue();
+        PhaseTime phaseTimeB = xjdf.getAuditPool().getPhaseTime().get(1);
         PhaseTime phaseTimeA = phaseTimeB.getRefID();
         assertEquals("PhaseTime_B", phaseTimeB.getID());
         assertEquals("PhaseTime_A", phaseTimeA.getID());
@@ -350,7 +335,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(6).getValue();
+        ProcessRun processRunB = xjdf.getAuditPool().getProcessRun().get(1);
         ProcessRun processRunA = processRunB.getRefID();
         assertEquals("ProcessRun_B", processRunB.getID());
         assertEquals("ProcessRun_A", processRunA.getID());
@@ -362,7 +347,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(8).getValue();
+        ResourceAudit resourceAuditB = xjdf.getAuditPool().getResourceAudit().get(1);
         ResourceAudit resourceAuditA = resourceAuditB.getRefID();
         assertEquals("ResourceAudit_B", resourceAuditB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA.getID());
@@ -387,7 +372,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTime = (PhaseTime) xjdf.getAuditPool().getAudit().get(3).getValue();
+        PhaseTime phaseTime = xjdf.getAuditPool().getPhaseTime().get(0);
         PhaseAmount phaseAmount = phaseTime.getPhaseAmount().get(0);
         Media media = (Media) phaseAmount.getRRef().getResourceType().getValue();
 
