@@ -85,35 +85,6 @@ public class AbstractXmlPackagerTest {
     }
 
     @Test
-    public void prepareForPackagingWithSpecialCharacters() throws Exception {
-        final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
-        xJdfBuilder
-            .addParameter(
-                new Preview()
-                    .withURL("directory/[XJDF_PSQ131S2].pdf"),
-                new Part()
-                    .withProductPart("XJDF_PSQ131S2")
-                    .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
-            );
-        final XJDF xjdf = xJdfBuilder.build();
-
-        final OutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
-
-        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
-            CURRENT_DIR_URI
-        );
-
-        assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
-
-        final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "preview/_XJDF_PSQ131S2_.pdf");
-
-        assertEquals(expectedFileRefs, packagingData.fileRefs);
-    }
-
-    @Test
     public void prepareForPackagingSkipsHttps() throws Exception {
         final String urlUriString = "https://" +
             "confluence.cip4.org" +
