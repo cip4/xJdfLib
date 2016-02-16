@@ -68,7 +68,7 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        xJdfValidator.isValid(xJdfFileStream);
+        xJdfValidator.validate(xJdfFileStream);
     }
 
     @Test
@@ -86,9 +86,7 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
-
-        assertTrue("Validation result is wrong", isValid);
+        xJdfValidator.validate(xJdfFileStream);
     }
 
     @Test
@@ -106,10 +104,7 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
-
-        // assert
-        assertTrue("Validation result is wrong", isValid);
+        xJdfValidator.validate(xJdfFileStream);
     }
 
     @Test(expected = ValidationException.class)
@@ -125,7 +120,7 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        xJdfValidator.isValid(xJdfFileStream);
+        xJdfValidator.validate(xJdfFileStream);
     }
 
     @Test
@@ -143,9 +138,7 @@ public class XJdfValidatorTest {
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        boolean isValid = xJdfValidator.isValid(xJdfFileStream);
-
-        assertTrue("Validation result is wrong", isValid);
+        xJdfValidator.validate(xJdfFileStream);
     }
 
     @Test(expected = ValidationException.class)
@@ -156,7 +149,7 @@ public class XJdfValidatorTest {
         // act
         xJdfValidator = new XJdfValidator();
 
-        xJdfValidator.isValid(is);
+        xJdfValidator.validate(is);
     }
 
     /**

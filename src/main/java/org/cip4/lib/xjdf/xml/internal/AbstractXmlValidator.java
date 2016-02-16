@@ -116,9 +116,9 @@ public abstract class AbstractXmlValidator<T> {
      *
      * @param documentStream Stream to read document from.
      *
-     * @return Result of the validation.
+     * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
-    protected final ValidationResult validate(final InputStream documentStream) throws ValidationException {
+    public final void validate(final InputStream documentStream) throws ValidationException {
         try {
             // create a SchemaFactory and a Schema
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -140,30 +140,14 @@ public abstract class AbstractXmlValidator<T> {
             final List<String> messages = errorHandler.getMessages();
             if (messages.size() > 0) {
                 throw new ValidationException(
-                    "Validation of an XJDF document failed due to following error messages: "
-                        + StringUtils.join(
-                        messages, System.lineSeparator()
-                    )
+                    "Validation of an XJDF/PrintTalk document failed due to following error messages: "
+                        + StringUtils.join(messages, System.lineSeparator())
                 );
             }
 
-            // return current instance
-            return new ValidationResult();
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            throw new ValidationException("Bla");
+            throw new ValidationException(e.getMessage(), e);
         }
-    }
-
-    /**
-     * Returns whether or not checked XJDF Document is valid.
-     *
-     * @param documentStream Stream to read document from.
-     *
-     * @return True in case XJDF Document is valid. Other wise false.
-     * @throws ValidationException Is thrown in case the underlying document is invalid.
-     */
-    public final boolean isValid(final InputStream documentStream) throws ValidationException {
-        return validate(documentStream).isValid();
     }
 
     /**

@@ -148,10 +148,7 @@ public abstract class AbstractXmlParser<T> {
         if (!skipValidation) {
             AbstractXmlValidator validator = createValidator();
             InputStream is = new ByteArrayInputStream(doc);
-            ValidationResult validationResult = validator.validate(is);
-            if (!validationResult.isValid()) {
-                throw new ValidationException(validationResult.getMessagesText());
-            }
+            validator.validate(is);
         }
 
         InputStream is = new ByteArrayInputStream(doc);

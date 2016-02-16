@@ -6,6 +6,13 @@ package org.cip4.lib.xjdf.type;
 public class DoubleAdapter {
 
     /**
+     * Prevent instances.
+     */
+    private DoubleAdapter() {
+
+    }
+
+    /**
      * Converts a double to a String.
      *
      * @param value Double to convert.
@@ -29,7 +36,11 @@ public class DoubleAdapter {
      *
      * @return Parsed double.
      */
-    public static Double parseDouble(final String value) {
-        return Double.valueOf(value);
+    public static Double stringToDouble(final String value) {
+        if (value == null) {
+            return null;
+        } else {
+            return Double.valueOf(value);
+        }
     }
 }

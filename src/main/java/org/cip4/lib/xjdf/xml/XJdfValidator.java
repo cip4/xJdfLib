@@ -18,7 +18,7 @@ public class XJdfValidator extends AbstractXmlValidator<XJDF> {
     private static final URL SCHEMA = XJdfValidator.class.getResource("/JDF20.xsd");
 
     /**
-     * Custom constructor. Accepting a XJDF Stream for initializing.
+     * Custom constructor.
      */
     public XJdfValidator() {
         super(loadXsdDependencies());
