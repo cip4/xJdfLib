@@ -140,11 +140,11 @@ public abstract class AbstractXmlValidator<T> {
             final List<String> messages = errorHandler.getMessages();
             if (messages.size() > 0) {
                 throw new ValidationException(
-                    "Validation of an XJDF/PrintTalk document failed due to following error messages: "
+                    "Validation of the document failed due to following error messages: "
+                        + System.lineSeparator()
                         + StringUtils.join(messages, System.lineSeparator())
                 );
             }
-
         } catch (ParserConfigurationException | SAXException | IOException e) {
             throw new ValidationException(e.getMessage(), e);
         }

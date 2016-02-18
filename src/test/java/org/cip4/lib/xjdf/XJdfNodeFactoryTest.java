@@ -196,7 +196,7 @@ public class XJdfNodeFactoryTest {
 
         // arrange
         final Integer pages = 23;
-        final String sides = "OneSided";
+        final EnumSides sides = EnumSides.ONE_SIDED;
         final Shape finishedDimensions = new Shape(4.4, 6.6);
         final XYPair dimensions = new XYPair(5.5, 7.7);
 
@@ -215,7 +215,7 @@ public class XJdfNodeFactoryTest {
 
         // arrange
         final Integer pages = 23;
-        final String sides = "OneSided";
+        final EnumSides sides = EnumSides.ONE_SIDED;
         final Shape finishedDimensions = new Shape(4.4, 6.6);
 
         // act
@@ -271,16 +271,16 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        final String BINDING_TYPE = "Some Binding Type";
-        final String BINDING_SIDE = "Bottom";
-        final String BINDING_ORDER = "Gathering";
+        String bindingType = "Some Binding Type";
+        EnumEdge bindingEdge = EnumEdge.BOTTOM;
+        EnumBindingOrder bindingOrder = EnumBindingOrder.GATHERING;
 
 
         // act
-        BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE, BINDING_SIDE, BINDING_ORDER);
+        BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(bindingType, bindingEdge, bindingOrder);
 
         // assert
-        assertEquals("BindingType is wrong", BINDING_TYPE, bindingIntent.getBindingType());
+        assertEquals("BindingType is wrong", bindingType, bindingIntent.getBindingType());
         assertEquals("BindingType is wrong", EnumEdge.BOTTOM, bindingIntent.getBindingSide());
         assertEquals("BindingType is wrong", EnumBindingOrder.GATHERING, bindingIntent.getBindingOrder());
 

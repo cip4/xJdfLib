@@ -13,6 +13,7 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ContactBuilder;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.schema.EnumSides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
@@ -179,7 +180,7 @@ public class XJdfValidatorTest {
         productBuilder.addIntent(
             nf.createLayoutIntent(
                 32,
-                "TwoSidedHeadToHead",
+                EnumSides.TWO_SIDED_HEAD_TO_HEAD,
                 new Shape(595.27559055, 822.04724409)
             )
         );

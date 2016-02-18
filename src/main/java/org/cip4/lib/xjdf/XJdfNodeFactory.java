@@ -13,6 +13,7 @@ import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.CuttingParams;
 import org.cip4.lib.xjdf.schema.EnumBindingOrder;
+import org.cip4.lib.xjdf.schema.EnumBindingType;
 import org.cip4.lib.xjdf.schema.EnumEdge;
 import org.cip4.lib.xjdf.schema.EnumSides;
 import org.cip4.lib.xjdf.schema.EnumSurface;
@@ -467,7 +468,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      */
     public final LayoutIntent createLayoutIntent(
         final Integer pages,
-        final String sides,
+        final EnumSides sides,
         final Shape finishedDimensions
     ) {
 
@@ -488,7 +489,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      */
     public final LayoutIntent createLayoutIntent(
         final Integer pages,
-        final String sides,
+        final EnumSides sides,
         final Shape finishedDimensions,
         final XYPair dimensions
     ) {
@@ -499,7 +500,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         layoutIntent.setPrintedPages(pages);
         if (sides != null) {
-            layoutIntent.setSides(EnumSides.fromValue(sides));
+            layoutIntent.setSides(sides);
         }
         layoutIntent.setFinishedDimensions(finishedDimensions);
         layoutIntent.setDimensions(dimensions);
@@ -599,8 +600,8 @@ public class XJdfNodeFactory extends ObjectFactory {
      */
     public final BindingIntent createBindingIntent(
         final String bindingType,
-        final String bindingSide,
-        final String bindingOrder
+        final EnumEdge bindingSide,
+        final EnumBindingOrder bindingOrder
     ) {
 
         // create node
@@ -609,10 +610,10 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         bindingIntent.setBindingType(bindingType);
         if (bindingSide != null) {
-            bindingIntent.setBindingSide(EnumEdge.fromValue(bindingSide));
+            bindingIntent.setBindingSide(bindingSide);
         }
         if (bindingOrder != null) {
-            bindingIntent.setBindingOrder(EnumBindingOrder.fromValue(bindingOrder));
+            bindingIntent.setBindingOrder(bindingOrder);
         }
 
         // return object
@@ -862,16 +863,15 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @param amount Amount attribute of Subnode PartAmount.
      *
      * @return AmountPool Node which already contains a PartAmount Subelement with attribute amount.
-     * @deprecated Since amount is of type double you should not use this method.
      */
-    public final AmountPool createAmountPool(final Integer amount) {
+    public final AmountPool createAmountPool(final Double amount) {
 
         // create AmountPool Node
         AmountPool amountPool = super.createAmountPool();
 
         // set attributes
         PartAmount partAmount = super.createPartAmount();
-        partAmount.setAmount((double) amount);
+        partAmount.setAmount(amount);
         amountPool.getPartAmount().add(partAmount);
 
         // return node
