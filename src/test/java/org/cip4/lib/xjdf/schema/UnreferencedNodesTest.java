@@ -71,4 +71,42 @@ public class UnreferencedNodesTest {
             );
         }
     }
+
+    @Test
+    public void unusedSimpleElements() throws Exception {
+        NamespaceManager nsManager = new NamespaceManager();
+        nsManager.addNamespace("xs", XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
+        XPathFactory xPathFactory = XPathFactory.newInstance();
+        XPath xPath = xPathFactory.newXPath();
+        xPath.setNamespaceContext(nsManager);
+
+        NodeList elements = (NodeList) xPath.evaluate(
+            "/xs:schema/xs:simpleType",
+            XJDF_SCHEMA,
+            XPathConstants.NODESET
+        );
+
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node elementNode = elements.item(i);
+            String elementName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
+            NodeList attributeUsages = (NodeList) xPath.evaluate(
+                String.format(
+                    "//xs:attribute[@type='%s' or .//xs:list/@itemType='%s']",
+                    elementName,
+                    elementName
+                ), XJDF_SCHEMA, XPathConstants.NODESET
+            );
+            NodeList elementUsages = (NodeList) xPath.evaluate(
+                String.format(
+                    "//xs:element[@type='%s']",
+                    elementName
+                ), XJDF_SCHEMA, XPathConstants.NODESET
+            );
+            assertTrue(
+                String.format("SimpleType '%s' is defined but not referenced from an element.", elementName),
+                (attributeUsages.getLength() > 0) || (elementUsages.getLength() > 0)
+            );
+        }
+    }
 }

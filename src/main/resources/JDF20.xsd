@@ -36,6 +36,7 @@
             <xs:element ref="Created"/>
             <xs:element ref="DeviceList"/>
         </xs:sequence>
+        <xs:attribute name="IntegerRange" type="IntegerRange" />
     </xs:complexType>
 
     <xs:simpleType name="boolean">
@@ -44,10 +45,6 @@
 
     <xs:simpleType name="string">
         <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="gYearMonth">
-        <xs:restriction base="xs:gYearMonth"/>
     </xs:simpleType>
 
     <xs:simpleType name="NMTOKEN">
@@ -86,10 +83,6 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
-    <xs:simpleType name="DateTimeRangeList">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
     <xs:simpleType name="PDFPath">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
@@ -98,16 +91,8 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
-    <xs:simpleType name="DurationRangeList">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
     <xs:simpleType name="rectangle">
         <xs:list itemType="xs:double"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="RectangleRangeList">
-        <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
     <xs:simpleType name="integer">
@@ -144,15 +129,7 @@
         <xs:list itemType="double"/>
     </xs:simpleType>
 
-    <xs:simpleType name="NumberRangeList">
-        <xs:list itemType="double"/>
-    </xs:simpleType>
-
     <xs:simpleType name="shape">
-        <xs:restriction base="NumberList"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="ShapeRangeList">
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
@@ -176,10 +153,6 @@
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
-    <xs:simpleType name="XYPairRangeList">
-        <xs:restriction base="NumberList"/>
-    </xs:simpleType>
-
     <xs:simpleType name="matrix">
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
@@ -192,10 +165,6 @@
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
-    <xs:simpleType name="RGBColor">
-        <xs:restriction base="NumberList"/>
-    </xs:simpleType>
-
     <xs:simpleType name="CMYKColor">
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
@@ -205,10 +174,6 @@
     </xs:simpleType>
 
     <xs:simpleType name="NameRangeList">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
-    <xs:simpleType name="unbounded">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
@@ -326,41 +291,6 @@
             <xs:enumeration value="Stopped"/>
             <xs:enumeration value="Suspended"/>
             <xs:enumeration value="Waiting"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumAuditStatus">
-        <xs:restriction base="EnumNodeStatus">
-            <xs:enumeration value="Setup"/>
-            <xs:enumeration value="InProgress"/>
-            <xs:enumeration value="Cleanup"/>
-            <xs:enumeration value="Suspended"/>
-            <xs:enumeration value="Stopped"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumEndStatus">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Aborted"/>
-            <xs:enumeration value="Completed"/>
-            <xs:enumeration value="FailedTestRun"/>
-            <xs:enumeration value="Ready"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <!-- Union of EnumNodeStatus and EnumEndStatus -->
-    <xs:simpleType name="EnumResourceAuditNodeStatus">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Aborted"/>
-            <xs:enumeration value="Cleanup"/>
-            <xs:enumeration value="Completed"/>
-            <xs:enumeration value="InProgress"/>
-            <xs:enumeration value="Setup"/>
-            <xs:enumeration value="Stopped"/>
-            <xs:enumeration value="Suspended"/>
-            <xs:enumeration value="Waiting"/>
-            <xs:enumeration value="FailedTestRun"/>
-            <xs:enumeration value="Ready"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -547,13 +477,6 @@
             <xs:enumeration value="None"/>
             <xs:enumeration value="Brief"/>
             <xs:enumeration value="JobPhase"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumUpdateGranularity">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="All"/>
-            <xs:enumeration value="ChangesOnly"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -902,15 +825,6 @@
             <xs:enumeration value="Top"/>
             <xs:enumeration value="Bottom"/>
             <xs:enumeration value="None"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumBindingSide">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Left"/>
-            <xs:enumeration value="Right"/>
-            <xs:enumeration value="Top"/>
-            <xs:enumeration value="Bottom"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1491,17 +1405,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumXYRelation">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="gt"/>
-            <xs:enumeration value="ge"/>
-            <xs:enumeration value="ne"/>
-            <xs:enumeration value="eq"/>
-            <xs:enumeration value="lt"/>
-            <xs:enumeration value="le"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Anchor">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TopLeft"/>
@@ -1690,43 +1593,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumListType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="CompleteList"/>
-            <xs:enumeration value="CompleteOrderedList"/>
-            <xs:enumeration value="ContainedList"/>
-            <xs:enumeration value="List"/>
-            <xs:enumeration value="OrderedList"/>
-            <xs:enumeration value="OrderedRangeList"/>
-            <xs:enumeration value="Range"/>
-            <xs:enumeration value="RangeList"/>
-            <xs:enumeration value="SingleValue"/>
-            <xs:enumeration value="Span"/>
-            <xs:enumeration value="UniqueList"/>
-            <xs:enumeration value="UniqueRangeList"/>
-            <xs:enumeration value="UniqueOrderedList"/>
-            <xs:enumeration value="UniqueOrderedRangeList"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumAvailability">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="NotInstalled"/>
-            <xs:enumeration value="NotLicensed"/>
-            <xs:enumeration value="Disabled"/>
-            <xs:enumeration value="Installed"/>
-            <xs:enumeration value="Module"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumUserDisplay">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Display"/>
-            <xs:enumeration value="Hide"/>
-            <xs:enumeration value="Dependent"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumPartIDKey">
         <xs:restriction base="xs:string">
             <xs:enumeration value="AssemblyIDs"/>
@@ -1794,16 +1660,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumURLTypes">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="JDFError"/>
-            <xs:enumeration value="JDFInput"/>
-            <xs:enumeration value="JDFOutput"/>
-            <xs:enumeration value="JMF"/>
-            <xs:enumeration value="SecureJMF"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumStatusList">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Running"/>
@@ -1833,27 +1689,6 @@
             <xs:enumeration value="Running"/>
             <xs:enumeration value="Cleanup"/>
             <xs:enumeration value="Stopped"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumValueList">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="true"/>
-            <xs:enumeration value="false"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumPresentValueList">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="true"/>
-            <xs:enumeration value="false"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumAllowedValueList">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="true"/>
-            <xs:enumeration value="false"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1919,6 +1754,10 @@
             <xs:enumeration value="LineArt"/>
             <xs:enumeration value="SmoothShades"/>
         </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="textElement">
+        <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
     <!-- ** Complex type definition for Resource ** -->
@@ -2085,9 +1924,6 @@
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
-    <xs:simpleType name="TextElement">
-        <xs:restriction base="string"/>
-    </xs:simpleType>
 
     <!-- ** Complex type definition for Dependent ** -->
     <xs:element name="Dependent">
@@ -4505,7 +4341,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="ExtendedAddress" type="TextElement"/>
+                    <xs:element minOccurs="0" name="ExtendedAddress" type="textElement"/>
                 </xs:sequence>
                 <xs:attribute name="PostalCode" type="string" use="optional"/>
                 <xs:attribute name="City" type="string" use="optional"/>
@@ -4937,7 +4773,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="OrganizationalUnit" type="TextElement"/>
+                    <xs:element minOccurs="0" name="OrganizationalUnit" type="textElement"/>
                 </xs:sequence>
                 <xs:attribute name="OrganizationName" type="string" use="optional"/>
             </xs:extension>
