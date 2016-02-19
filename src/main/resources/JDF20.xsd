@@ -484,7 +484,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
             <xs:enumeration value="Brief"/>
-            <xs:enumeration value="Full"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2422,29 +2421,34 @@
     <xs:element name="JobPhase">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter"/>
+                <xs:element ref="Activity" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="PhaseAmount" type="double" use="optional"/>
-            <xs:attribute name="StatusDetails" type="string" use="optional"/>
-            <xs:attribute name="TotalAmount" type="double" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="PhaseStartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="Speed" type="double" use="optional"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
-            <xs:attribute name="Waste" type="double" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
             <xs:attribute name="Amount" type="double" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="StartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="PhaseWaste" type="double" use="optional"/>
+            <xs:attribute name="CostCenterID" type="string" use="optional"/>
             <xs:attribute name="DeadLine" type="EnumDeadline" use="optional"/>
+            <xs:attribute name="JobID" type="string" use="optional"/>
+            <xs:attribute name="JobPartID" type="string" use="optional"/>
             <xs:attribute name="PercentCompleted" type="double" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
             <xs:attribute name="RestTime" type="duration" use="optional"/>
-            <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
+            <xs:attribute name="SpawnID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Speed" type="double" use="optional"/>
+            <xs:attribute name="StartTime" type="dateTime" use="optional"/>
+            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
+            <xs:attribute name="StatusDetails" type="string" use="optional"/>
+            <xs:attribute name="Waste" type="double" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="Activity">
+        <xs:complexType>
+            <xs:attribute name="ActivityID" type="string" use="optional"/>
+            <xs:attribute name="ActivityName" type="string" use="optional"/>
+            <xs:attribute name="PersonalID" type="string" use="optional"/>
+            <xs:attribute name="StartTime" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6390,12 +6394,12 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ByteMap"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="Disposition"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ElementColorParams"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MetadataMap"/>
+                    <xs:element ref="ByteMap" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Disposition"  minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="ElementColorParams" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
