@@ -4,7 +4,6 @@
 
     <!-- TODO: Removed in XJDF 2.0, but references still exist. -->
     <xs:element name="Term"/>
-    <xs:element name="DeviceCap"/>
     <!-- TODO: Fake references for elements that will be referenced again by future changes -->
     <xs:complexType name="FakeReferences">
         <xs:sequence>
@@ -400,7 +399,6 @@
             <xs:enumeration value="Brief"/>
             <xs:enumeration value="Modules"/>
             <xs:enumeration value="Details"/>
-            <xs:enumeration value="Capability"/>
             <xs:enumeration value="Full"/>
         </xs:restriction>
     </xs:simpleType>
@@ -1796,14 +1794,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumAcknowledgeType">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Received"/>
-            <xs:enumeration value="Applied"/>
-            <xs:enumeration value="Completed"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumURLTypes">
         <xs:restriction base="xs:string">
             <xs:enumeration value="JDFError"/>
@@ -1829,8 +1819,8 @@
 
     <xs:simpleType name="EnumPackaging">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="MIME"/>
-            <xs:enumeration value="None"/>
+            <xs:enumeration value="ZIP"/>
+            <xs:enumeration value="XML"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2281,55 +2271,20 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Acknowledge ** -->
-    <xs:element name="Acknowledge">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Notification"/>
-            </xs:sequence>
-            <xs:attribute name="AcknowledgeType" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumAcknowledgeType"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ReturnCode" type="integer" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Command ** -->
     <xs:element name="Command">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
+                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="AcknowledgeType" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumAcknowledgeType"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="AcknowledgeFormat" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="TransactionID" type="string" use="optional"/>
-            <xs:attribute name="AcknowledgeTemplate" type="string" use="optional"/>
-            <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="AcknowledgeURL" type="URL" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="required"/>
+            <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="SenderID" type="string" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
+            <xs:attribute name="TransactionID" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2402,7 +2357,6 @@
     <xs:element name="XJMF">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Acknowledge" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Command" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Employee" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Query" minOccurs="0" maxOccurs="unbounded"/>
@@ -2519,25 +2473,15 @@
     <xs:element name="Query">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription"/>
+                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Subscription" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="AcknowledgeType" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumAcknowledgeType"/>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="AcknowledgeFormat" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="AcknowledgeTemplate" type="string" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="AcknowledgeURL" type="URL" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="required"/>
+            <xs:attribute name="SenderID" type="string" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2717,13 +2661,13 @@
     <xs:element name="Response">
         <xs:complexType>
             <xs:sequence>
+                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Acknowledged" type="boolean" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="required"/>
             <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ReturnCode" type="integer" use="optional"/>
             <xs:attribute name="SenderID" type="string" use="optional"/>
@@ -2779,7 +2723,7 @@
     <xs:element name="StatusQuParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="DeviceDetails" type="EnumDeviceDetails" use="optional"/>
             <xs:attribute name="EmployeeInfo" type="boolean" use="optional"/>
@@ -3132,31 +3076,38 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Module"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceCap"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="IconList"/>
+                    <xs:element ref="IconList" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Module" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
+                <xs:attribute name="CostCenterID" type="string" use="optional"/>
+                <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="DeviceID" type="string" use="optional"/>
+                <xs:attribute name="DeviceType" type="string" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
-                <xs:attribute name="ModelName" type="string" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="JDFErrorURL" type="URL" use="optional"/>
-                <xs:attribute name="JMFSenderID" type="string" use="optional"/>
-                <xs:attribute name="ModelURL" type="string" use="optional"/>
-                <xs:attribute name="JDFVersions" type="string" use="optional"/>
-                <xs:attribute name="ModelNumber" type="string" use="optional"/>
-                <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
                 <xs:attribute name="JDFInputURL" type="URL" use="optional"/>
-                <xs:attribute name="DeviceID" type="string" use="optional"/>
-                <xs:attribute name="JMFURL" type="URL" use="optional"/>
-                <xs:attribute name="ManufacturerURL" type="string" use="optional"/>
                 <xs:attribute name="JDFOutputURL" type="URL" use="optional"/>
-                <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
-                <xs:attribute name="UPC" type="string" use="optional"/>
-                <xs:attribute name="PresentationURL" type="string" use="optional"/>
-                <xs:attribute name="SerialNumber" type="string" use="optional"/>
+                <xs:attribute name="JDFVersions" use="optional">
+                    <xs:simpleType>
+                        <xs:list itemType="EnumJDFJMFVersion"/>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="JMFSenderID" type="string" use="optional"/>
+                <xs:attribute name="JMFURL" type="URL" use="optional"/>
+                <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
+                <xs:attribute name="Manufacturer" type="string" use="optional"/>
+                <xs:attribute name="ManufacturerURL" type="string" use="optional"/>
                 <xs:attribute name="ModelDescription" type="string" use="optional"/>
-                <xs:attribute name="DeviceType" type="string" use="optional"/>
+                <xs:attribute name="ModelName" type="string" use="optional"/>
+                <xs:attribute name="ModelNumber" type="string" use="optional"/>
+                <xs:attribute name="ModelURL" type="string" use="optional"/>
+                <xs:attribute name="Packaging" type="EnumPackaging" use="optional"/>
+                <xs:attribute name="PresentationURL" type="string" use="optional"/>
+                <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
+                <xs:attribute name="SerialNumber" type="string" use="optional"/>
+                <xs:attribute name="UPC" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
