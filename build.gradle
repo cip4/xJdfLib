@@ -86,3 +86,7 @@ sourceSets {
 compileJava {
     dependsOn(xjc)
 }
+
+test {
+    maxParallelForks = Runtime.runtime.availableProcessors()
+}
