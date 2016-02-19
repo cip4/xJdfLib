@@ -1441,7 +1441,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-
     <xs:simpleType name="EnumOwnership">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Origin"/>
@@ -1475,6 +1474,15 @@
             <xs:enumeration value="SourceClipPath"/>
             <xs:enumeration value="TrimClipPath"/>
             <xs:enumeration value="TrimBox"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPipeOperation">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Close"/>
+            <xs:enumeration value="Pause"/>
+            <xs:enumeration value="Pull"/>
+            <xs:enumeration value="Push"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2112,6 +2120,9 @@
                     <xs:list itemType="EnumPartIDKey"/>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="PipePause" type="double" use="optional"/>
+            <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="PipeResume" type="double" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2396,7 +2407,6 @@
                 <xs:element ref="Command" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Employee" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Query" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Registration" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Response" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Signal" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -2488,13 +2498,16 @@
     <xs:element name="PipeParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource"/>
+                <xs:element ref="AmountPool" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ParameterSet" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="UpdatedStatus" type="EnumAssetStatus" use="optional"/>
+            <xs:attribute name="JobID" type="string" use="required"/>
+            <xs:attribute name="Operation" type="EnumPipeOperation" use="required"/>
+            <xs:attribute name="PipeID" type="string" use="required"/>
             <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
+            <xs:attribute name="UpdatedStatus" type="EnumAssetStatus" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2607,24 +2620,6 @@
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="Hold" type="boolean" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Registration ** -->
-    <xs:element name="Registration">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription"/>
-            </xs:sequence>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
