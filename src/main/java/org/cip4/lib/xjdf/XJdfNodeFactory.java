@@ -342,25 +342,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new ChildProduct Node which already contains values for attribute Childref.
-     *
-     * @param idRef Value for Product attribute.
-     *
-     * @return ChildProduct Node which already contains defined attributes.
-     */
-    public ChildProduct createChildProduct(Product idRef) {
-
-        // create node
-        ChildProduct childProduct = super.createChildProduct();
-
-        // set attributes
-        childProduct.setChildRef(idRef);
-
-        // return object
-        return childProduct;
-    }
-
-    /**
      * Create new MediaIntent Node which already contains values for attribute MediaQuality.
      *
      * @param mediaQuality Value for MediaQuality attribute.

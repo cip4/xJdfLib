@@ -123,15 +123,6 @@ public class XJdfNodeFactoryTest {
 	}
 
 	@Test
-	public void testCreateChildProduct() {
-		final String uuid = UUID.randomUUID().toString();
-		Product childRefProduct = new Product();
-		childRefProduct.setID(uuid);
-		ChildProduct childProduct = xJdfNodeFactory.createChildProduct(childRefProduct);
-		Assert.assertEquals("Childref is wrong", uuid, childProduct.getChildRef().getID());
-	}
-
-	@Test
 	public void testCreateMediaIntent() {
 
 		// arrange

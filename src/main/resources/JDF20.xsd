@@ -2052,33 +2052,25 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ChildProduct ** -->
-    <xs:element name="ChildProduct">
-        <xs:complexType>
-            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
-            <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="ProductUsage" type="NMTOKEN" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Product ** -->
     <xs:element name="Product">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ChildProduct"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Intent"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Intent" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="Amount" type="integer" use="optional"/>
+            <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
+            <xs:attribute name="CommentURL" type="URL" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="IsRoot" type="boolean" use="optional"/>
-            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
-            <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
+            <xs:attribute name="MaxAmount" type="integer" use="optional"/>
+            <xs:attribute name="MinAmount" type="integer" use="optional"/>
+            <xs:attribute name="ExternalID" type="string" use="optional"/>
             <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
-            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
 

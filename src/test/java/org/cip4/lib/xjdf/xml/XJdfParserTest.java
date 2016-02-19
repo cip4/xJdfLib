@@ -22,7 +22,6 @@ import org.junit.Test;
 import org.xml.sax.InputSource;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 /**
  * JUnit test case for XmlParser class.
@@ -249,9 +248,7 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct = xjdf.getProductList().getProduct().get(6);
-        assertEquals(1, mainProduct.getChildProduct().size());
-        final Product childProduct = mainProduct.getChildProduct().get(0).getChildRef();
-        assertNull(childProduct);
+        assertEquals(0, mainProduct.getChildRefs().size());
     }
 
     /**
@@ -263,22 +260,22 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct1 = xjdf.getProductList().getProduct().get(3);
-        assertEquals(2, mainProduct1.getChildProduct().size());
-        final Product childProduct11 = mainProduct1.getChildProduct().get(0).getChildRef();
+        assertEquals(2, mainProduct1.getChildRefs().size());
+        final Product childProduct11 = mainProduct1.getChildRefs().get(0);
         assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
         assertEquals(11000, (int) childProduct11.getAmount());
-        final Product childProduct12 = mainProduct1.getChildProduct().get(1).getChildRef();
+        final Product childProduct12 = mainProduct1.getChildRefs().get(1);
         assertEquals("PRD_MAIN01_SUB02", childProduct12.getID());
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
-        assertEquals(1, mainProduct2.getChildProduct().size());
-        final Product childProduct21 = mainProduct2.getChildProduct().get(0).getChildRef();
+        assertEquals(1, mainProduct2.getChildRefs().size());
+        final Product childProduct21 = mainProduct2.getChildRefs().get(0);
         assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
-        assertEquals(0, mainProduct3.getChildProduct().size());
+        assertEquals(0, mainProduct3.getChildRefs().size());
     }
 
     @Test

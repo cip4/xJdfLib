@@ -159,7 +159,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         ProductBuilder rootProductBuilder = new ProductBuilder();
         rootProductBuilder.addChildProduct(childProduct);
 
-        final Product childRef = rootProductBuilder.getProduct().getChildProduct().get(0).getChildRef();
+        final Product childRef = rootProductBuilder.getProduct().getChildRefs().get(0);
         Assert.assertEquals("abc", childRef.getID());
     }
 

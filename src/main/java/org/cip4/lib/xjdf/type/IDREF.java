@@ -79,20 +79,12 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 	}
 
 	public IDREF(Product product, String id) throws ValidationException {
-
-		// generate ID
 		this.id = id;
-
-		// update id
 		product.setID(id);
-
-		// validation
-		if (product.getChildProduct().size() > 0) {
+		if (product.getChildRefs().size() > 0) {
 			throw new ValidationException("A Child Product cannot have children!");
 		}
-
 		this.element = product;
-
 	}
 
 	/**
