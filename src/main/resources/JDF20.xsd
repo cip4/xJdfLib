@@ -7,6 +7,7 @@
     <!-- TODO: Fake references for elements that will be referenced again by future changes -->
     <xs:complexType name="FakeReferences">
         <xs:sequence>
+            <xs:element type="FakeReferences" name="FakeReferences"/>
             <xs:element ref="DeviceFilter"/>
             <xs:element ref="BarcodeProductionParams"/>
             <!-- JMF stuff -->
@@ -1759,13 +1760,6 @@
     <xs:simpleType name="textElement">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
-
-    <!-- ** Complex type definition for Resource ** -->
-    <xs:complexType name="telem">
-        <xs:simpleContent>
-            <xs:extension base="string"/>
-        </xs:simpleContent>
-    </xs:complexType>
 
     <xs:element name="Resource">
         <xs:complexType>
