@@ -39,12 +39,13 @@ dependencies {
 }
 
 task createBuildInfoFile(dependsOn: processResources) {
-    outputs.file("$buildDir/resources/main/build.properties")
+    def buildInfoFile = new File("$buildDir/resources/main/org/cip4/lib/xjdf/build.properties")
+    outputs.file(buildInfoFile)
     doLast {
-        def buildInfoFile = new File("$buildDir/resources/main/build.properties")
+        def date = new Date()
         Properties props = new Properties()
         props.setProperty('version', project.version.toString())
-        props.setProperty('vcs_revision', System.env.VCS_REVISION ?: 'none')
+        props.setProperty('build.date', date.format('yyyy-MM-dd HH:mm:ss'))
         props.store(buildInfoFile.newWriter(), null)
     }
 }
@@ -70,7 +71,7 @@ task xjc() {
                 removeOldOutput: true,
                 extension: true,
         ) {
-            arg(line: "-Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
+            arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
     }
 }
@@ -93,11 +94,12 @@ test {
 jar {
     manifest {
         attributes(
-            "Implementation-Title": project.name,
+            "Implementation-Title": project.description,
             "Implementation-Version": project.version,
             "Implementation-Vendor-Id": project.group,
-            "Specification-Title": project.name,
+            "Specification-Title": project.description,
             "Specification-Version": project.version,
+            "Build-Jdk": JavaVersion.current(),
         )
     }
 }
