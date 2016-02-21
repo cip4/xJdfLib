@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'idea'
 
 group = 'org.cip4.lib.xjdf'
 version = '0.6-SNAPSHOT'
@@ -8,8 +9,8 @@ description = """CIP4 xJdfLib"""
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def generatedSources = "$buildDir/generated-sources/main"
-def generatedResources = "$buildDir/generated-resources/main"
+def generatedSources = file("src/generated/java")
+def generatedResources = file("src/generated/resources")
 
 configurations {
     xjc
@@ -55,17 +56,19 @@ classes {
 }
 
 task xjc() {
-    inputs.source('src/main/resources/JDF20.xsd', 'src/main/resources/binding.xjb')
+    def schema = file('src/main/resources/JDF20.xsd')
+    def bindings = file('src/main/resources/binding.xjb')
+    inputs.source(schema, bindings)
     outputs.dir(generatedSources)
     outputs.dir(generatedResources)
     doLast {
-        file(generatedSources).mkdirs()
+        generatedSources.mkdirs()
         file("$generatedResources/META-INF").mkdirs()
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
         ant.xjc(
                 destdir: generatedSources,
-                schema: 'src/main/resources/JDF20.xsd',
-                binding: 'src/main/resources/binding.xjb',
+                schema: schema,
+                binding: bindings,
                 readonly: true,
                 header: false,
                 removeOldOutput: true,
@@ -78,7 +81,7 @@ task xjc() {
 
 sourceSets {
     main {
-        java.srcDir("${buildDir}/generated-sources")
+        java.srcDir(generatedSources)
         output.dir(generatedResources, builtBy: 'xjc')
     }
 }
@@ -101,5 +104,13 @@ jar {
             "Specification-Version": project.version,
             "Build-Jdk": JavaVersion.current(),
         )
+    }
+}
+
+idea {
+    module {
+        generatedSourceDirs += file(generatedSources)
+        downloadJavadoc = true
+        downloadSources = true
     }
 }
