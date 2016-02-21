@@ -10,8 +10,9 @@ description = """CIP4 xJdfLib"""
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
-def generatedSources = file("src/generated/java")
-def generatedResources = file("src/generated/resources")
+def generatedFiles = file("src/generated")
+def generatedSources = file("${generatedFiles}/java")
+def generatedResources = file("${generatedFiles}/resources")
 
 configurations {
     xjc
@@ -78,6 +79,10 @@ task xjc() {
             arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
     }
+}
+
+clean.doFirst {
+    delete generatedFiles
 }
 
 sourceSets {
