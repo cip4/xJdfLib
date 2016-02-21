@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.xml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 import javax.xml.bind.ValidationException;
@@ -21,7 +22,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 /**
  * JUnit test case for XmlParser class.
@@ -175,8 +176,6 @@ public class XJdfParserTest {
         XPath xPath = xPathFactory.newXPath();
         xPath.setNamespaceContext(nsManager);
 
-        System.out.println(new String(bos.toByteArray()));
-
         XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
         InputStream is = new ByteArrayInputStream(bos.toByteArray());
         String actual = xPathExpression.evaluate(new InputSource(is));
@@ -212,8 +211,6 @@ public class XJdfParserTest {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();
         xPath.setNamespaceContext(nsManager);
-
-        System.out.println(new String(bytes));
 
         XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
         InputStream is = new ByteArrayInputStream(bytes);
@@ -377,4 +374,42 @@ public class XJdfParserTest {
         assertEquals("IPG_500", media.getMediaQuality());
     }
 
+    @Test
+    public void parseXmlReadsUTF8Chars() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream("/org/cip4/lib/xjdf/utf8.xjdf");
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        Comment comment = xjdf.getComment().get(0);
+
+        assertEquals("aÄoÖuÜsß", comment.getValue());
+    }
+
+    @Test
+    public void parseXjdfWritesUtf8Chars() throws Exception {
+        final String utf8String = "aÄoÖuÜsß";
+        XJDF xjdf = new XJDF();
+        xjdf.setID("foo");
+        xjdf.setVersion("2.0");
+        xjdf.withComment(new Comment().withValue(utf8String));
+
+        byte[] bytes = xJdfParser.parseXJdf(xjdf);
+        String xjdfString = new String(bytes, StandardCharsets.UTF_8);
+        assertTrue(xjdfString.contains("<xjdf:Comment>aÄoÖuÜsß</xjdf:Comment>"));
+    }
+
+    @Test(expected = ValidationException.class)
+    public void parseXjdfValidatesDocument() throws Exception {
+        xJdfParser.parseXJdf(getInvalidXjdfDocument());
+    }
+
+    @Test
+    public void parseXjdfAllowsGeneratingInvalidXml() throws Exception {
+        byte[] bytes = xJdfParser.parseXJdf(getInvalidXjdfDocument(), true);
+        assertNotNull(bytes);
+    }
+
+    private XJDF getInvalidXjdfDocument() {
+        // xjdf is invalid, because version is not defined.
+        return new XJDF();
+    }
 }

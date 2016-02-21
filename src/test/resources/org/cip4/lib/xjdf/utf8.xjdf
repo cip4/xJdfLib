@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XJDF ID="foo" xmlns="http://www.CIP4.org/JDFSchema_2_0" Version="2.0">
+	<Comment>aÄoÖuÜsß</Comment>
+</XJDF>

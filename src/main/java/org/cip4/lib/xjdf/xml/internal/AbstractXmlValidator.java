@@ -12,10 +12,14 @@ import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 
 import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
+import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
@@ -114,10 +118,33 @@ public abstract class AbstractXmlValidator<T> {
      * Validation of XJDF Document based on XJDF Schema.
      *
      * @param documentStream Stream to read document from.
-     *
      * @return Result of the validation.
      */
     protected final ValidationResult validate(final InputStream documentStream)
+        throws SAXException, ParserConfigurationException, IOException {
+
+        XJdfErrorHandler errorHandler = new XJdfErrorHandler();
+
+        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+        dbf.setNamespaceAware(true);
+        DocumentBuilder db = dbf.newDocumentBuilder();
+        db.setErrorHandler(errorHandler);
+        Document doc = db.parse(documentStream);
+
+        if (!errorHandler.getMessages().isEmpty()) {
+            return new ValidationResult(errorHandler.getMessages());
+        }
+
+        return validate(new DOMSource(doc));
+    }
+
+    /**
+     * Validation of XJDF Document based on XJDF Schema.
+     *
+     * @param source XML source to validate
+     * @return Result of the validation.
+     */
+    protected final ValidationResult validate(final Source source)
         throws SAXException, ParserConfigurationException, IOException {
         // create a SchemaFactory and a Schema
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -128,27 +155,18 @@ public abstract class AbstractXmlValidator<T> {
         XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
         // validate
-        DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-        dbf.setNamespaceAware(true);
-        dbf.setSchema(schema);
-        DocumentBuilder db = dbf.newDocumentBuilder();
-        db.setErrorHandler(errorHandler);
-        db.parse(documentStream);
+        Validator validator = schema.newValidator();
+        validator.setErrorHandler(errorHandler);
+        validator.validate(source);
 
         // get result
-        if (errorHandler.getMessages() != null) {
-            return new ValidationResult(errorHandler.getMessages());
-        }
-
-        // return current instance
-        return new ValidationResult();
+        return new ValidationResult(errorHandler.getMessages());
     }
 
     /**
      * Returns whether or not checked XJDF Document is valid.
      *
      * @param documentStream Stream to read document from.
-     *
      * @return True in case XJDF Document is valid. Other wise false.
      */
     public final boolean isValid(final InputStream documentStream)

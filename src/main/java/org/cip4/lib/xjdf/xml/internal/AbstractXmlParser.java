@@ -1,20 +1,22 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
+import javax.xml.bind.util.JAXBSource;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.XmlStreamWriter;
 import org.w3c.dom.Node;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
@@ -31,6 +33,11 @@ public abstract class AbstractXmlParser<T> {
      * Context for JAXB-handling.
      */
     private final JAXBContext jaxbContext;
+
+    /**
+     * Character encoding for xml files.
+     */
+    private static final Charset CHARSET = StandardCharsets.UTF_8;
 
     /**
      * Custom constructor. Accepting a JAXBContextFactory for initializing.
@@ -123,29 +130,22 @@ public abstract class AbstractXmlParser<T> {
      */
     protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation)
         throws JAXBException, IOException, ParserConfigurationException, SAXException {
-        Marshaller m = createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
-        m.marshal(obj, xmlWriter);
-
-        byte[] doc = bos.toByteArray();
-
         if (!skipValidation) {
             AbstractXmlValidator validator = createValidator();
-            InputStream is = new ByteArrayInputStream(doc);
-            ValidationResult validationResult = validator.validate(is);
+            Source xmlSource = new JAXBSource(jaxbContext, obj);
+            ValidationResult validationResult = validator.validate(xmlSource);
             if (!validationResult.isValid()) {
                 throw new ValidationException(validationResult.getMessagesText());
             }
         }
 
-        InputStream is = new ByteArrayInputStream(doc);
-        IOUtils.copy(is, os);
-        is.close();
+        Marshaller m = createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
+        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
+
+        OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
+        m.marshal(obj, writer);
     }
 
     /**
