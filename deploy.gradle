@@ -1,0 +1,91 @@
+apply plugin: 'maven'
+apply plugin: 'signing'
+
+// javadoc.jar generation
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+// sources.jar generation
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+signing {
+    sign configurations.archives
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "file:/${project.projectDir}/artifacts")
+            /*
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+            */
+
+            pom.project {
+                name project.name
+                packaging 'jar'
+                // optionally artifactId can be defined here
+                description project.description
+                url 'http://www.cip4.org'
+
+                scm {
+                    url 'https://stash.cip4.org/scm/lib/xjdflib.git'
+                    connection 'scm:git:https://stash.cip4.org/scm/lib/xjdflib.git'
+                    developerConnection 'scm:git:https://stash.cip4.org/scm/lib/xjdflib.git'
+                }
+
+                issueManagement {
+                    system 'JIRA'
+                    url 'https://jira.cip4.org/browse/XJDFLIB'
+                }
+
+                developers {
+                    developer {
+                        id 'r.prosi'
+                        name 'Dr. Rainer Prosi'
+                        organization 'Heidelberger Druckmaschinen AG'
+                        organizationUrl 'http://www.heidelberg.com'
+                        email 'rainer.prosi@heidelberg.com'
+                    }
+                    developer {
+                        id 's.meissner'
+                        name 'Stefan Meissner'
+                        organization 'flyeralarm GmbH'
+                        organizationUrl 'https://www.flyeralarm.com'
+                        email 'stefan.meissner@flyeralarm.com'
+                    }
+                    developer {
+                        id 'm.hartmann'
+                        name 'Michel Hartmann'
+                        organization 'flyeralarm GmbH'
+                        organizationUrl 'https://www.flyeralarm.com'
+                        email 'michel.hartmann@flyeralarm.com'
+                    }
+                    developer {
+                        id 'j.hammett'
+                        name 'Jeffrey Hammett'
+                        organization 'flyeralarm GmbH'
+                        organizationUrl 'https://www.flyeralarm.com'
+                        email 'jeffrey.hammett@flyeralarm.com'
+                    }
+                }
+            }
+        }
+    }
+}
