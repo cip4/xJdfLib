@@ -1078,14 +1078,14 @@
             <xs:enumeration value="Abort"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="EnumPlateType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Exposed"/>
             <xs:enumeration value="Dummy"/>
         </xs:restriction>
     </xs:simpleType>
-    
+
     <xs:simpleType name="EnumColorModel">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Basic"/>
@@ -2218,7 +2218,7 @@
             <xs:attribute name="Waste" type="double" use="optional"/>
         </xs:complexType>
     </xs:element>
-    
+
     <xs:element name="Activity">
         <xs:complexType>
             <xs:attribute name="ActivityID" type="string" use="optional"/>

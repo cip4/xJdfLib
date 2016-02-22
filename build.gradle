@@ -1,16 +1,18 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
+apply from: 'deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
 version = '0.6-SNAPSHOT'
 description = """CIP4 xJdfLib"""
 
 sourceCompatibility = 1.7
-targetCompatibility = 1.7
+targetCompatibility = sourceCompatibility
 
-def generatedSources = file("src/generated/java")
-def generatedResources = file("src/generated/resources")
+def generatedFiles = file("src/generated")
+def generatedSources = file("${generatedFiles}/java")
+def generatedResources = file("${generatedFiles}/resources")
 
 configurations {
     xjc
@@ -79,6 +81,10 @@ task xjc() {
     }
 }
 
+clean.doFirst {
+    delete generatedFiles
+}
+
 sourceSets {
     main {
         java.srcDir(generatedSources)
@@ -112,5 +118,8 @@ idea {
         generatedSourceDirs += file(generatedSources)
         downloadJavadoc = true
         downloadSources = true
+    }
+    project {
+        languageLevel = targetCompatibility
     }
 }

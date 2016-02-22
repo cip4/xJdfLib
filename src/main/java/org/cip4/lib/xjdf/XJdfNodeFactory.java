@@ -1,8 +1,5 @@
 package org.cip4.lib.xjdf;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
-
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
@@ -13,42 +10,39 @@ import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
 /**
  * Static Factory Class which is managing the creation of XJdfNodes.
  */
 public class XJdfNodeFactory extends ObjectFactory {
 
     /**
-     * Default constructor.
-     */
-    public XJdfNodeFactory() {
-        // no action
-    }
-
-    /**
-     * Create a new Parameter node from ParameterType
+     * Create a new Parameter node from ParameterType.
      *
      * @param parameterType The ParameterType Node
      *
      * @return New Parameter node from ParametType node.
      */
-    public Parameter createParameter(ParameterType parameterType) {
+    public final Parameter createParameter(final ParameterType parameterType) {
 
         return createParameter(parameterType, null);
     }
 
     /**
-     * Create a new Parameter node from ParameterType and Part
+     * Create a new Parameter node from ParameterType and Part.
      *
      * @param parameterType The ParameterType Node
      * @param part The Part Node
      *
      * @return New Parameter node from ParametType and Part node.
      */
-    public Parameter createParameter(ParameterType parameterType, Part part) {
+    public final Parameter createParameter(final ParameterType parameterType, final Part part) {
 
-        if (parameterType == null)
+        if (parameterType == null) {
             return null;
+        }
 
         // get parameter name
         String paramName = parameterType.getClass().getSimpleName();
@@ -69,17 +63,18 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new Resource node from ResourceType and Part
+     * Create a new Resource node from ResourceType and Part.
      *
      * @param resourceType The ResourceType Node
      * @param part The Part Node
      *
      * @return New Resource node from ResourceType and Part node.
      */
-    public Resource createResource(ResourceType resourceType, Part part) {
+    public final Resource createResource(final ResourceType resourceType, final Part part) {
 
-        if (resourceType == null)
+        if (resourceType == null) {
             return null;
+        }
 
         // get resource name
         String paramName = resourceType.getClass().getSimpleName();
@@ -107,7 +102,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Pre-filled GeneralID object.
      */
-    public GeneralID createGeneralID(String idUsage, String idValue) {
+    public final GeneralID createGeneralID(final String idUsage, final String idValue) {
 
         // create new GeneralID object
         GeneralID generalId = createGeneralID();
@@ -125,7 +120,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return RunList Node which already contains a FileSpec URL definition.
      */
-    public RunList createRunList(String fileSpecUrl) {
+    public final RunList createRunList(final String fileSpecUrl) {
 
         // create RunList Node
         RunList runList = super.createRunList();
@@ -146,7 +141,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return CuttingParams Node which already contains a FileSpec URL definition.
      */
-    public CuttingParams createCuttingParams(String fileSpecUrl) {
+    public final CuttingParams createCuttingParams(final String fileSpecUrl) {
 
         // create CuttingParams Node
         CuttingParams cuttingParams = super.createCuttingParams();
@@ -167,7 +162,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Comment Node which already contains a comment string as text.
      */
-    public Comment createComment(String comment) {
+    public final Comment createComment(final String comment) {
 
         // create Comment Node
         Comment obj = super.createComment();
@@ -180,13 +175,13 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new ApprovalParams Node which already contains values for attributes MinApprovals
+     * Create a new ApprovalParams Node which already contains values for attributes MinApprovals.
      *
      * @param minApprovals Value for MinApprovals attribute.
      *
      * @return ApprovalParams Node which already contains defined attributes.
      */
-    public ApprovalParams createApprovalParams(int minApprovals) {
+    public final ApprovalParams createApprovalParams(final int minApprovals) {
 
         // create node
         ApprovalParams approvalParams = super.createApprovalParams();
@@ -199,26 +194,26 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new CustomerInfo Node which already contains values for attribute CustomerID
+     * Create a new CustomerInfo Node which already contains values for attribute CustomerID.
      *
      * @param customerID Value for CustomerID attribute.
      *
      * @return CustomerInfo Node which already contains defined attributes.
      */
-    public CustomerInfo createCustomerInfo(String customerID) {
+    public final CustomerInfo createCustomerInfo(final String customerID) {
 
         return createCustomerInfo(customerID, null);
     }
 
     /**
-     * Create a new CustomerInfo Node which already contains values for attribute CustomerID
+     * Create a new CustomerInfo Node which already contains values for attribute CustomerID.
      *
      * @param customerID Value for CustomerID attribute.
      * @param customerOrderID Value for CustomerOrderID attribute.
      *
      * @return CustomerInfo Node which already contains defined attributes.
      */
-    public CustomerInfo createCustomerInfo(String customerID, String customerOrderID) {
+    public final CustomerInfo createCustomerInfo(final String customerID, final String customerOrderID) {
 
         // create node
         CustomerInfo customerInfo = super.createCustomerInfo();
@@ -238,7 +233,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return NodeInfo Node which already contains defined attributes.
      */
-    public NodeInfo createNodeInfo(Duration totalDuration) {
+    public final NodeInfo createNodeInfo(final Duration totalDuration) {
 
         // create node
         NodeInfo nodeInfo = super.createNodeInfo();
@@ -253,9 +248,11 @@ public class XJdfNodeFactory extends ObjectFactory {
     /**
      * Create a new NodeInfo Node which already contains values for attributes JobPriority.
      *
+     * @param jobPriority Priority of the job.
+     *
      * @return NodeInfo Node which already contains defined attributes.
      */
-    public NodeInfo createNodeInfo(Integer jobPriority) {
+    public final NodeInfo createNodeInfo(final Integer jobPriority) {
 
         // create node
         NodeInfo nodeInfo = super.createNodeInfo();
@@ -274,7 +271,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return NodeInfo Node which already contains defined attributes.
      */
-    public NodeInfo createNodeInfo(DateTime end) {
+    public final NodeInfo createNodeInfo(final DateTime end) {
 
         // create node
         NodeInfo nodeInfo = super.createNodeInfo();
@@ -295,7 +292,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return NodeInfo Node which already contains defined attributes.
      */
-    public NodeInfo createNodeInfo(Duration totalDuration, DateTime end, String naturalLang) {
+    public final NodeInfo createNodeInfo(
+        final Duration totalDuration,
+        final DateTime end,
+        final String naturalLang
+    ) {
 
         // create node
         NodeInfo nodeInfo = super.createNodeInfo();
@@ -312,13 +313,13 @@ public class XJdfNodeFactory extends ObjectFactory {
     /**
      * Create a new Preview Node which already contains a value for attribute URL.
      *
-     * @param URL Value for URL attribute.
+     * @param url Value for URL attribute.
      *
      * @return Preview Node which already contains defined attributes.
      */
-    public Preview createPreview(String URL) {
+    public final Preview createPreview(final String url) {
 
-        return createPreview(URL, null);
+        return createPreview(url, null);
     }
 
     /**
@@ -329,7 +330,9 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Preview Node which already contains defined attributes.
      */
-    public Preview createPreview(final String url, final String previewFileType) {
+    public final Preview createPreview(final String url, final String previewFileType) {
+
+        // create node
         Preview preview = super.createPreview();
 
         preview.setFileSpec(
@@ -338,6 +341,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         );
         preview.setPreviewFileType(previewFileType);
 
+        // return object
         return preview;
     }
 
@@ -348,7 +352,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return MediaIntent Node which already contains defined attributes.
      */
-    public MediaIntent createMediaIntent(String mediaQuality) {
+    public final MediaIntent createMediaIntent(final String mediaQuality) {
 
         // return object
         return createMediaIntent(mediaQuality, null, null);
@@ -363,7 +367,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return MediaIntent Node which already contains defined attributes.
      */
-    public MediaIntent createMediaIntent(String mediaQuality, String stockBrand, Double weight) {
+    public final MediaIntent createMediaIntent(
+        final String mediaQuality,
+        final String stockBrand,
+        final Double weight
+    ) {
 
         // create node
         MediaIntent mediaIntent = super.createMediaIntent();
@@ -384,7 +392,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return LayoutIntent Node which already contains defined attributes.
      */
-    public LayoutIntent createLayoutIntent(Integer pages) {
+    public final LayoutIntent createLayoutIntent(final Integer pages) {
 
         // return object
         return createLayoutIntent(pages, null, null, null);
@@ -400,7 +408,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return LayoutIntent Node which already contains defined attributes.
      */
-    public LayoutIntent createLayoutIntent(Integer pages, String sides, Shape finishedDimensions) {
+    public final LayoutIntent createLayoutIntent(
+        final Integer pages,
+        final EnumSides sides,
+        final Shape finishedDimensions
+    ) {
 
         // return object
         return createLayoutIntent(pages, sides, finishedDimensions, null);
@@ -417,16 +429,19 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return LayoutIntent Node which already contains defined attributes.
      */
-    public LayoutIntent createLayoutIntent(Integer pages, String sides, Shape finishedDimensions, XYPair dimensions) {
+    public final LayoutIntent createLayoutIntent(
+        final Integer pages,
+        final EnumSides sides,
+        final Shape finishedDimensions,
+        final XYPair dimensions
+    ) {
 
         // create node
         LayoutIntent layoutIntent = super.createLayoutIntent();
 
         // set attributes
         layoutIntent.setPrintedPages(pages);
-        if (sides != null) {
-            layoutIntent.setSides(EnumSides.fromValue(sides));
-        }
+        layoutIntent.setSides(sides);
         layoutIntent.setFinishedDimensions(finishedDimensions);
         layoutIntent.setDimensions(dimensions);
 
@@ -443,7 +458,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Created Node which already contains defined attributes.
      */
-    public Created createCreated(String agentName, String agentVersion, DateTime timestamp) {
+    public final Created createCreated(
+        final String agentName,
+        final String agentVersion,
+        final DateTime timestamp
+    ) {
 
         // create node
         Created created = super.createCreated();
@@ -464,7 +483,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ProductionIntent Node which already contains defined attributes.
      */
-    public ProductionIntent createProductionIntent(String printProcess) {
+    public final ProductionIntent createProductionIntent(final String printProcess) {
 
         // create node
         ProductionIntent productionIntent = super.createProductionIntent();
@@ -483,7 +502,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ProofingIntent Node which already contains a ProofItem Node with defined attributes.
      */
-    public ProofingIntent createProofingIntent(String brandName) {
+    public final ProofingIntent createProofingIntent(final String brandName) {
 
         // create nodes
         ProofingIntent proofingIntent = super.createProofingIntent();
@@ -504,7 +523,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return BindingIntent Node which already contains defined attributes.
      */
-    public BindingIntent createBindingIntent(final EnumBindingType bindingType) {
+    public final BindingIntent createBindingIntent(final EnumBindingType bindingType) {
 
         // return object
         return createBindingIntent(bindingType, null, null);
@@ -519,8 +538,10 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return BindingIntent Node which already contains defined attributes.
      */
-    public BindingIntent createBindingIntent(
-        final EnumBindingType bindingType, final String bindingSide, final String bindingOrder
+    public final BindingIntent createBindingIntent(
+        final EnumBindingType bindingType,
+        final EnumEdge bindingSide,
+        final EnumBindingOrder bindingOrder
     ) {
 
         // create node
@@ -528,12 +549,8 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // set attributes
         bindingIntent.setBindingType(bindingType);
-        if (bindingSide != null) {
-            bindingIntent.setBindingSide(EnumEdge.fromValue(bindingSide));
-        }
-        if (bindingOrder != null) {
-            bindingIntent.setBindingOrder(EnumBindingOrder.fromValue(bindingOrder));
-        }
+        bindingIntent.setBindingSide(bindingSide);
+        bindingIntent.setBindingOrder(bindingOrder);
 
         // return object
         return bindingIntent;
@@ -546,7 +563,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return FoldingIntent Node which already contains defined attributes.
      */
-    public FoldingIntent createFoldingIntent(String foldingCatalog) {
+    public final FoldingIntent createFoldingIntent(final String foldingCatalog) {
 
         // create node
         FoldingIntent foldingIntent = super.createFoldingIntent();
@@ -592,7 +609,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return MarkObject Node which already contains defined attributes.
      */
-    public MarkObject createMarkObject(Matrix ctm, Rectangle clipBox, Integer ord) {
+    public final MarkObject createMarkObject(
+        final Matrix ctm,
+        final Rectangle clipBox,
+        final Integer ord
+    ) {
 
         // create node
         MarkObject markObject = super.createMarkObject();
@@ -617,8 +638,12 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ContentObject Node which already contains defined attributes.
      */
-    public ContentObject createContentObject(
-        Matrix ctm, Rectangle clipBox, Integer ord, Matrix trimCtm, XYPair trimSize
+    public final ContentObject createContentObject(
+        final Matrix ctm,
+        final Rectangle clipBox,
+        final Integer ord,
+        final Matrix trimCtm,
+        final XYPair trimSize
     ) {
 
         // create node
@@ -643,7 +668,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Media Node which already contains defined attributes.
      */
-    public Media createMedia(XYPair dimensions, String mediaQuality) {
+    public final Media createMedia(final XYPair dimensions, final String mediaQuality) {
 
         // create Media Node
         Media media = super.createMedia();
@@ -663,7 +688,8 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return BinderySignature Node which already contains defined attributes.
      */
-    public BinderySignature createBinderySignature(String foldCatalog) {
+    public final BinderySignature createBinderySignature(final String foldCatalog) {
+
         return createBinderySignature(foldCatalog, null, null);
     }
 
@@ -671,10 +697,16 @@ public class XJdfNodeFactory extends ObjectFactory {
      * Create a new BinderySignature Node which already contains defined attributes.
      *
      * @param foldCatalog Value of FoldCatalog attribute as String.
+     * @param size Size of the bindery signature.
+     * @param binderySignatureID ID of the bindery signature.
      *
      * @return BinderySignature Node which already contains defined attributes.
      */
-    public BinderySignature createBinderySignature(String foldCatalog, XYPair size, String assemblyID) {
+    public final BinderySignature createBinderySignature(
+        final String foldCatalog,
+        final XYPair size,
+        final String binderySignatureID
+    ) {
 
         // create BinderySignature Node
         BinderySignature binderySignature = super.createBinderySignature();
@@ -682,7 +714,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         binderySignature.setFoldCatalog(foldCatalog);
         binderySignature.setBinderySignatureSize(size);
-        binderySignature.setBinderySignatureID(assemblyID);
+        binderySignature.setBinderySignatureID(binderySignatureID);
 
         // return node
         return binderySignature;
@@ -698,7 +730,12 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return SignatureCell Node which already contains defined attributes.
      */
-    public SignatureCell createSignatureCell(Double trim, XYPair trimBox, Double backOverfold, Double frontOverfold) {
+    public final SignatureCell createSignatureCell(
+        final Double trim,
+        final XYPair trimBox,
+        final Double backOverfold,
+        final Double frontOverfold
+    ) {
 
         // create SignatureCell Node
         SignatureCell signatureCell = super.createSignatureCell();
@@ -724,7 +761,8 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Position Node which already contains defined attributes.
      */
-    public Position createPosition(Rectangle absoluteBox, Orientation orientation) {
+    public final Position createPosition(final Rectangle absoluteBox, final Orientation orientation) {
+
         return createPosition(absoluteBox, orientation, null);
     }
 
@@ -737,7 +775,11 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Position Node which already contains defined attributes.
      */
-    public Position createPosition(Rectangle absoluteBox, Orientation orientation, String assemblyID) {
+    public final Position createPosition(
+        final Rectangle absoluteBox,
+        final Orientation orientation,
+        final String assemblyID
+    ) {
 
         // create Position Node
         Position position = super.createPosition();
@@ -757,16 +799,15 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @param amount Amount attribute of Subnode PartAmount.
      *
      * @return AmountPool Node which already contains a PartAmount Subelement with attribute amount.
-     * @deprecated Since amount is of type double you should not use this method.
      */
-    public AmountPool createAmountPool(Integer amount) {
+    public final AmountPool createAmountPool(final Double amount) {
 
         // create AmountPool Node
         AmountPool amountPool = super.createAmountPool();
 
         // set attributes
         PartAmount partAmount = super.createPartAmount();
-        partAmount.setAmount((double) amount);
+        partAmount.setAmount(amount);
         amountPool.getPartAmount().add(partAmount);
 
         // return node
@@ -780,7 +821,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ColorantControl Node which already contains defined attributes.
      */
-    public ColorantControl createColorantControl(final EnumProcessColorModel processColorModel) {
+    public final ColorantControl createColorantControl(final EnumProcessColorModel processColorModel) {
 
         // create node
         ColorantControl colorantControl = super.createColorantControl();

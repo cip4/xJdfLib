@@ -196,7 +196,9 @@ public abstract class AbstractXmlPackager {
      */
     private String encodeURIBaseName(final String path) throws URISyntaxException {
         final String baseName = path.substring(path.lastIndexOf('/') + 1);
-        return encodeURIPath(baseName.replaceAll("[^-_a-zA-Z0-9.]+", "_"));
+        final String parsedBaseName = new URI(baseName).getPath();
+
+        return encodeURIPath(parsedBaseName.replaceAll("[^-_a-zA-Z0-9.]+", "_"));
     }
 
     /**
@@ -210,8 +212,6 @@ public abstract class AbstractXmlPackager {
     private String encodeURIPath(final String path) throws URISyntaxException {
         return new URI(null, null, path, null).toASCIIString();
     }
-
-
 
     /**
      * Prepares the given XmlNavigator for packaging.
@@ -258,7 +258,7 @@ public abstract class AbstractXmlPackager {
 
             final String uriString = node.getNodeValue();
 
-            if (shouldIncludeFileReference(URIResolver.resolve(rootUri, encodeURIPath(uriString)))) {
+            if (shouldIncludeFileReference(URIResolver.resolve(rootUri, uriString))) {
                 final String baseName = encodeURIBaseName(uriString);
                 final String uriFileName = withoutHierarchy
                     ? baseName

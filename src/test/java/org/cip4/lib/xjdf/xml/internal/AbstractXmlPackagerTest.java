@@ -90,7 +90,7 @@ public class AbstractXmlPackagerTest {
         xJdfBuilder
             .addParameter(
                 new Preview()
-                    .withFileSpec(new FileSpec().withURL("directory/[XJDF_PSQ131S2].pdf")),
+                    .withFileSpec(new FileSpec().withURL("directory/%5BXJDF_PSQ131S2%5D.pdf")),
                 new Part()
                     .withProductPart("XJDF_PSQ131S2")
                     .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
@@ -108,7 +108,7 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/[XJDF_PSQ131S2].pdf", "assets/_XJDF_PSQ131S2_.pdf");
+        expectedFileRefs.put("directory/%5BXJDF_PSQ131S2%5D.pdf", "assets/_XJDF_PSQ131S2_.pdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }

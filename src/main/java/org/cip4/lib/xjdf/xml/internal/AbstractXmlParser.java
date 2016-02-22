@@ -133,10 +133,7 @@ public abstract class AbstractXmlParser<T> {
         if (!skipValidation) {
             AbstractXmlValidator validator = createValidator();
             Source xmlSource = new JAXBSource(jaxbContext, obj);
-            ValidationResult validationResult = validator.validate(xmlSource);
-            if (!validationResult.isValid()) {
-                throw new ValidationException(validationResult.getMessagesText());
-            }
+            validator.validate(xmlSource);
         }
 
         Marshaller m = createMarshaller();
