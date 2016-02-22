@@ -1,4 +1,5 @@
 /.idea
+!/.idea/codeStyleSettings.xml
 /target
 /atlassian-ide-plugin.xml
 /xJdfLib.iml

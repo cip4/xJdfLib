@@ -8,7 +8,7 @@ version = '0.6-SNAPSHOT'
 description = """CIP4 xJdfLib"""
 
 sourceCompatibility = 1.7
-targetCompatibility = 1.7
+targetCompatibility = sourceCompatibility
 
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
@@ -118,5 +118,8 @@ idea {
         generatedSourceDirs += file(generatedSources)
         downloadJavadoc = true
         downloadSources = true
+    }
+    project {
+        languageLevel = targetCompatibility
     }
 }
