@@ -79,6 +79,16 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Resource" />
             </property>
         </bindings>
+        <bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">
+            <property>
+                <baseType>
+                    <javaType
+                            name="java.lang.Double"
+                            parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.stringToDouble"
+                            printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
+                </baseType>
+            </property>
+        </bindings>
 
     </bindings>
 
