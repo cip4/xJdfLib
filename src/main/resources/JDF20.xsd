@@ -4143,10 +4143,11 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Crease"/>
+                    <xs:element ref="Crease" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="Fold" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
