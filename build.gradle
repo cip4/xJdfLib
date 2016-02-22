@@ -1,13 +1,18 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: 'idea'
+apply from: 'deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
 version = '0.6-SNAPSHOT'
-
 description = """CIP4 xJdfLib"""
 
 sourceCompatibility = 1.7
-targetCompatibility = 1.7
+targetCompatibility = sourceCompatibility
+
+def generatedFiles = file("src/generated")
+def generatedSources = file("${generatedFiles}/java")
+def generatedResources = file("${generatedFiles}/resources")
 
 configurations {
     xjc
@@ -36,12 +41,16 @@ dependencies {
     xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
 }
 
-task createBuildInfoFile(dependsOn: processResources) << {
-    def buildInfoFile = new File("$buildDir/resources/main/build.properties")
-    Properties props = new Properties()
-    props.setProperty('version', project.version.toString())
-    props.setProperty('vcs_revision', System.env.VCS_REVISION ?: 'none')
-    props.store(buildInfoFile.newWriter(), null)
+task createBuildInfoFile(dependsOn: processResources) {
+    def buildInfoFile = new File("$buildDir/resources/main/org/cip4/lib/xjdf/build.properties")
+    outputs.file(buildInfoFile)
+    doLast {
+        def date = new Date()
+        Properties props = new Properties()
+        props.setProperty('version', project.version.toString())
+        props.setProperty('build.date', date.format('yyyy-MM-dd HH:mm:ss'))
+        props.store(buildInfoFile.newWriter(), null)
+    }
 }
 
 classes {
@@ -49,36 +58,68 @@ classes {
 }
 
 task xjc() {
-    inputs.source('src/main/resources/JDF20.xsd', 'src/main/resources/binding.xjb')
-    outputs.dir("$buildDir/generated-sources")
+    def schema = file('src/main/resources/JDF20.xsd')
+    def bindings = file('src/main/resources/binding.xjb')
+    inputs.source(schema, bindings)
+    outputs.dir(generatedSources)
+    outputs.dir(generatedResources)
     doLast {
-        file("$buildDir/generated-sources").mkdirs()
+        generatedSources.mkdirs()
+        file("$generatedResources/META-INF").mkdirs()
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
         ant.xjc(
-                destdir: "$buildDir/generated-sources",
-                schema: 'src/main/resources/JDF20.xsd',
-                binding: 'src/main/resources/binding.xjb',
+                destdir: generatedSources,
+                schema: schema,
+                binding: bindings,
                 readonly: true,
                 header: false,
                 removeOldOutput: true,
                 extension: true,
         ) {
-            arg(line: "-Xfluent-api -Xequals -XhashCode")
+            arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
     }
 }
 
+clean.doFirst {
+    delete generatedFiles
+}
+
 sourceSets {
     main {
-        java {
-            srcDirs += "${buildDir}/generated-sources"
-        }
-        resources {
-            srcDirs += "${buildDir}/resources"
-        }
+        java.srcDir(generatedSources)
+        output.dir(generatedResources, builtBy: 'xjc')
     }
 }
 
 compileJava {
     dependsOn(xjc)
+}
+
+test {
+    maxParallelForks = Runtime.runtime.availableProcessors()
+}
+
+jar {
+    manifest {
+        attributes(
+            "Implementation-Title": project.description,
+            "Implementation-Version": project.version,
+            "Implementation-Vendor-Id": project.group,
+            "Specification-Title": project.description,
+            "Specification-Version": project.version,
+            "Build-Jdk": JavaVersion.current(),
+        )
+    }
+}
+
+idea {
+    module {
+        generatedSourceDirs += file(generatedSources)
+        downloadJavadoc = true
+        downloadSources = true
+    }
+    project {
+        languageLevel = targetCompatibility
+    }
 }

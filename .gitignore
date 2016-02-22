@@ -1,6 +1,8 @@
 /.idea
+!/.idea/codeStyleSettings.xml
 /target
 /atlassian-ide-plugin.xml
 /xJdfLib.iml
 /build
 /.gradle
+/src/generated
