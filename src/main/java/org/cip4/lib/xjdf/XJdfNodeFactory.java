@@ -13,7 +13,6 @@ import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.CustomerInfo;
 import org.cip4.lib.xjdf.schema.CuttingParams;
 import org.cip4.lib.xjdf.schema.EnumBindingOrder;
-import org.cip4.lib.xjdf.schema.EnumBindingType;
 import org.cip4.lib.xjdf.schema.EnumEdge;
 import org.cip4.lib.xjdf.schema.EnumSides;
 import org.cip4.lib.xjdf.schema.EnumSurface;
@@ -499,9 +498,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // set attributes
         layoutIntent.setPrintedPages(pages);
-        if (sides != null) {
-            layoutIntent.setSides(sides);
-        }
+        layoutIntent.setSides(sides);
         layoutIntent.setFinishedDimensions(finishedDimensions);
         layoutIntent.setDimensions(dimensions);
 
@@ -609,12 +606,8 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // set attributes
         bindingIntent.setBindingType(bindingType);
-        if (bindingSide != null) {
-            bindingIntent.setBindingSide(bindingSide);
-        }
-        if (bindingOrder != null) {
-            bindingIntent.setBindingOrder(bindingOrder);
-        }
+        bindingIntent.setBindingSide(bindingSide);
+        bindingIntent.setBindingOrder(bindingOrder);
 
         // return object
         return bindingIntent;
