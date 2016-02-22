@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.util;
 
+import org.cip4.lib.xjdf.schema.EnumSide;
 import org.cip4.lib.xjdf.schema.Part;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class PartitionsTest {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
-                new Part().withAssemblyID("foo")
+                new Part().withAssemblyIDs("foo")
             )
         );
     }
@@ -23,7 +24,7 @@ public class PartitionsTest {
     public void hasMismatchingAttributesWillReturnTrueForEmptyPart2() throws Exception {
         assertFalse(
             Partitions.hasMismatchingAttributes(
-                new Part().withAssemblyID("foo"),
+                new Part().withAssemblyIDs("foo"),
                 new Part()
             )
         );
@@ -33,7 +34,7 @@ public class PartitionsTest {
     public void hasMismatchingAttributesWillReturnTrueWhenPart1IsASubsetOfPart2() throws Exception {
         assertFalse(
             Partitions.hasMismatchingAttributes(
-                new Part().withProductPart("foo").withSide("Front"),
+                new Part().withProductPart("foo").withSide(EnumSide.FRONT),
                 new Part().withProductPart("foo")
             )
         );
@@ -44,7 +45,7 @@ public class PartitionsTest {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part().withProductPart("foo"),
-                new Part().withProductPart("foo").withSide("Front")
+                new Part().withProductPart("foo").withSide(EnumSide.FRONT)
             )
         );
     }
@@ -64,7 +65,7 @@ public class PartitionsTest {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
-                new Part().withCellIndex("1", "2")
+                new Part().withProductPart("part2")
             )
         );
     }

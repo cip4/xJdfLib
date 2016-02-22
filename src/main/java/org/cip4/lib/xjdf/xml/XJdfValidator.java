@@ -1,32 +1,43 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 
 /**
  * Validation of XJDF Documents based on XJDF schema file.
- * @author s.meissner
- * @date 11.04.2012
  */
-public class XJdfValidator extends AbstractXmlValidator<XJdfValidator> {
+public class XJdfValidator extends AbstractXmlValidator<XJDF> {
 
-	/**
-	 * Custom constructor. Accepting a XJDF Stream for initializing.
-	 */
-	public XJdfValidator(InputStream xJdfStream) throws IOException {
-		super(XJdfConstants.XJDF_XSD_BYTES, xJdfStream, null);
-	}
+    /**
+     * URL of the internal XJDF schema.
+     */
+    private static final URL SCHEMA = XJdfValidator.class.getResource("/JDF20.xsd");
 
+    /**
+     * Custom constructor.
+     */
+    public XJdfValidator() {
+        super(loadXsdDependencies());
+    }
+
+    @Override
+    protected final URL getSchema() {
+        return SCHEMA;
+    }
+
+    /**
+     * Private helper method for load XSD Dependencies.
+     *
+     * @return XSD Dependencies
+     */
+    private static Map<String, byte[]> loadXsdDependencies() {
+        Map<String, byte[]> map = new HashMap<>(2);
+        map.put("./JDF20.xsd", XJdfConstants.XJDF_XSD_BYTES);
+
+        return map;
+    }
 }

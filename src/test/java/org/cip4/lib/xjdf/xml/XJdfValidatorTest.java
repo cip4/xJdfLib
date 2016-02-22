@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayInputStream;
@@ -15,13 +5,15 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.ValidationException;
 
-import junit.framework.Assert;
+import static org.junit.Assert.*;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ContactBuilder;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.schema.EnumSides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
@@ -32,254 +24,200 @@ import org.junit.Test;
 
 /**
  * JUnit test case for XJdfValidator.
- * @author s.meissner
- * @date 11.04.2012
  */
 public class XJdfValidatorTest {
 
-	private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
+    private XJdfValidator xJdfValidator;
 
-	private XJdfValidator xJdfValidator;
+    private XJdfNodeFactory xJdfNodeFactory;
 
-	private XJdfNodeFactory xJdfNodeFactory;
+    private XJdfBuilder xJdfBuilder;
 
-	private XJdfBuilder xJdfBuilder;
+    /**
+     * Default constructor.
+     */
+    public XJdfValidatorTest() {
+        try {
+            JAXBContextFactory.init();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+    }
 
-	/**
-	 * Default constructor.
-	 */
-	public XJdfValidatorTest() {
-		try {
-			JAXBContextFactory.init();
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-	}
+    @Before
+    public void setUp() throws Exception {
+        // init instance variables
+        xJdfNodeFactory = new XJdfNodeFactory();
+        xJdfBuilder = new XJdfBuilder();
+    }
 
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
+    @After
+    public void tearDown() throws Exception {
+        xJdfValidator = null;
+        xJdfNodeFactory = null;
+        xJdfBuilder = null;
+    }
 
-		// init instance variables
-		xJdfNodeFactory = new XJdfNodeFactory();
-		xJdfBuilder = new XJdfBuilder();
-	}
+    @Test(expected = ValidationException.class)
+    public void integrationInvalid() throws Exception {
+        // arrange
+        XJdfBuilder xJdfBuilder = new XJdfBuilder();
+        xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
+        xJdfBuilder.build().setID(null);
 
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-		xJdfValidator = null;
-		xJdfNodeFactory = null;
-		xJdfBuilder = null;
-	}
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-	 * @throws Exception
-	 */
-	@Test
-	public void testIntegrationInvalide() throws Exception {
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(xJdfFileStream);
+    }
 
-		// arrange
-		XJdfBuilder xJdfBuilder = new XJdfBuilder();
-		xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
-		xJdfBuilder.build().setID(null);
+    @Test
+    public void integrationValid() throws Exception {
 
-		// act
-		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        // arrange
+        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+        xJdfBuilder.addGeneralID(generalId);
 
-		xJdfValidator = new XJdfValidator(xJdfFileStream);
-		boolean isValid = xJdfValidator.isValid();
+        xJdfBuilder.build().setID("MyId");
+        xJdfBuilder.build().getTypes().add("Web2Print");
+        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
-		// assert
-		Assert.assertFalse("Validation result is wrong", isValid);
-	}
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-	 * @throws Exception
-	 */
-	@Test
-	public void testIntegrationValide() throws Exception {
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(xJdfFileStream);
+    }
 
-		// arrange
-		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-		xJdfBuilder.addGeneralID(generalId);
+    @Test
+    public void integrationValidSingleLineCall() throws Exception {
 
-		xJdfBuilder.build().setID("MyId");
-		xJdfBuilder.build().getTypes().add("Web2Print");
-		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+        // arrange
+        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+        xJdfBuilder.addGeneralID(generalId);
 
-		// act
-		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        xJdfBuilder.build().setID("MyId");
+        xJdfBuilder.build().getTypes().add("Web2Print");
+        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
-		xJdfValidator = new XJdfValidator(xJdfFileStream);
-		boolean isValid = xJdfValidator.isValid();
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		// assert
-		Assert.assertTrue("Validation result is wrong", isValid);
-	}
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(xJdfFileStream);
+    }
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-	 * @throws Exception
-	 */
-	@Test
-	public void testIntegrationValideSingleLineCall() throws Exception {
+    @Test(expected = ValidationException.class)
+    public void integrationAnalyzeMessagesInvalid() throws Exception {
 
-		// arrange
-		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-		xJdfBuilder.addGeneralID(generalId);
+        // arrange
+        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+        xJdfBuilder.addGeneralID(generalId);
 
-		xJdfBuilder.build().setID("MyId");
-		xJdfBuilder.build().getTypes().add("Web2Print");
-		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+        xJdfBuilder.build().setID(null);
 
-		// act
-		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		xJdfValidator = new XJdfValidator(xJdfFileStream);
-		boolean isValid = xJdfValidator.isValid();
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(xJdfFileStream);
+    }
 
-		// assert
-		Assert.assertTrue("Validation result is wrong", isValid);
-	}
+    @Test
+    public void integrationAnalyzeMessagesValid() throws Exception {
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-	 * @throws Exception
-	 */
-	@Test
-	public void testIntegrationAnalyzeMessagesInvalid() throws Exception {
+        // arrange
+        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
+        xJdfBuilder.addGeneralID(generalId);
 
-		// arrange
-		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-		xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.build().setID("MyId");
+        xJdfBuilder.build().getTypes().add("Web2Print");
+        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
-		xJdfBuilder.build().setID(null);
+        // act
+        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
-		// act
-		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(xJdfFileStream);
+    }
 
-		xJdfValidator = new XJdfValidator(xJdfFileStream);
-		boolean isValid = xJdfValidator.isValid();
+    @Test(expected = ValidationException.class)
+    public void isValidXjdfIsInvalid() throws Exception {
+        // arrange
+        InputStream is = XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf");
 
-		// assert
-		int size = xJdfValidator.getMessages().size();
+        // act
+        xJdfValidator = new XJdfValidator();
 
-		Assert.assertEquals("Number messages is wrong.", 1, size);
-		Assert.assertFalse("Validation result is wrong", isValid);
-	}
+        xJdfValidator.validate(is);
+    }
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfValidator#validate(java.io.InputStream)}.
-	 * @throws Exception
-	 */
-	@Test
-	public void testIntegrationAnalyzeMessagesValid() throws Exception {
+    /**
+     * Helper converting builder to input stream.
+     * @param xJdfBuilder XJdfBuilder object to convert to.
+     * @return XJDF as InputStream object.
+     * @throws Exception Is thrown in case of any errors.
+     */
+    private InputStream builder2InputStream(XJdfBuilder xJdfBuilder) throws Exception {
 
-		// arrange
-		GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-		xJdfBuilder.addGeneralID(generalId);
+        XJDF xJdf = xJdfBuilder.build();
 
-		xJdfBuilder.build().setID("MyId");
-		xJdfBuilder.build().getTypes().add("Web2Print");
-		xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        XJdfParser xJdfParser = new XJdfParser();
+        xJdfParser.parseXJdf(xJdf, bos, true);
 
-		// act
-		InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        return new ByteArrayInputStream(bos.toByteArray());
+    }
 
-		xJdfValidator = new XJdfValidator(xJdfFileStream);
-		boolean isValid = xJdfValidator.isValid();
+    @Test
+    public void createTestXJDFDocument() throws Exception {
 
-		// assert
-		int size = xJdfValidator.getMessages().size();
+        XJdfNodeFactory nf = new XJdfNodeFactory();
 
-		Assert.assertEquals("Number messages is wrong.", 0, size);
-		Assert.assertTrue("Validation result is wrong", isValid);
-	}
+        // create product
+        ProductBuilder productBuilder = new ProductBuilder(1000, "Brochure", "4 Page Brochure");
+        productBuilder.addIntent(
+            nf.createLayoutIntent(
+                32,
+                EnumSides.TWO_SIDED_HEAD_TO_HEAD,
+                new Shape(595.27559055, 822.04724409)
+            )
+        );
+        productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
+        productBuilder.addIntent(nf.createProductionIntent("Lithography"));
+        productBuilder.addIntent(nf.createFoldingIntent("F6-1"));
+        // TODO productBuilder.addIntent(nf.createcol)
 
-	@Test
-	public void testCheck() throws Exception {
+        // create contact
+        ContactBuilder contactBuilder = new ContactBuilder();
+        contactBuilder.addPerson("Mustermann", "Max", "Dr.");
+        contactBuilder.addCompany("Firma Muster GmbH");
+        contactBuilder.addAddress("Musterstraße 12", "12345", "Stadt", "Deutschland", "de");
+        contactBuilder.addComChannel("Email", "mailto:info@muster.com");
+        contactBuilder.addComChannel("Phone", "tel:+49.173.1234.567");
 
-		// arrange
-		InputStream is = XJdfValidatorTest.class.getResourceAsStream(RES_TEST_XJDF);
+        // create XJDF
+        XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
+        xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
+        xJdfBuilder.addProduct(productBuilder.build());
+        xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
+        xJdfBuilder.addParameter(nf.createRunList("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf"));
+        xJdfBuilder.addParameter(nf.createApprovalParams(1));
+        // TODO xJdfBuilder.addParameter(nf.createNodeInfo());
+        // TODO ColorIntent
+        xJdfBuilder.addParameter(contactBuilder.build());
 
-		// act
-		xJdfValidator = new XJdfValidator(is);
-		boolean isValid = xJdfValidator.isValid();
+        XJDF xJdf = xJdfBuilder.build();
+        xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));
 
-		// assert
-		System.out.println(xJdfValidator.getMessagesText());
-		// TODO Assert.assertTrue("Validation result is wrong", isValid);
-	}
+        // parse
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        new XJdfParser().parseXJdf(xJdf, bos);
+        bos.close();
 
-	/**
-	 * Helper converting builder to input stream.
-	 * @param xJdfBuilder XJdfBuilder object to convert to.
-	 * @return XJDF as InputStream object.
-	 * @throws Exception
-	 */
-	private InputStream builder2InputStream(XJdfBuilder xJdfBuilder) throws Exception {
-
-		XJDF xJdf = xJdfBuilder.build();
-
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		XJdfParser xJdfParser = new XJdfParser();
-		xJdfParser.parseXJdf(xJdf, bos, true);
-
-		return new ByteArrayInputStream(bos.toByteArray());
-
-	}
-
-	@Test
-	public void createTestXJDFDocument() throws Exception {
-
-		XJdfNodeFactory nf = new XJdfNodeFactory();
-
-		// create product
-		ProductBuilder productBuilder = new ProductBuilder(1000, "Brochure", "4 Page Brochure");
-		productBuilder.addIntent(nf.createLayoutIntent(32, "TwoSidedHeadToHead", new Shape(595.27559055, 822.04724409)));
-		productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
-		productBuilder.addIntent(nf.createProductionIntent("Lithography"));
-		productBuilder.addIntent(nf.createFoldingIntent("F6-1"));
-		// TODO productBuilder.addIntent(nf.createcol)
-
-		// create contact
-		ContactBuilder contactBuilder = new ContactBuilder();
-		contactBuilder.addPerson("Mustermann", "Max", "Dr.");
-		contactBuilder.addCompany("Firma Muster GmbH");
-		contactBuilder.addAddress("Musterstraße 12", "12345", "Stadt", "Deutschland", "de");
-		contactBuilder.addComChannel("Email", "mailto:info@muster.com");
-		contactBuilder.addComChannel("Phone", "tel:+49.173.1234.567");
-
-		// create XJDF
-		XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
-		xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
-		xJdfBuilder.addProduct(productBuilder.build());
-		xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
-		xJdfBuilder.addParameter(nf.createRunList("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf"));
-		xJdfBuilder.addParameter(nf.createApprovalParams(1));
-		// TODO xJdfBuilder.addParameter(nf.createNodeInfo());
-		// TODO ColorIntent
-		xJdfBuilder.addParameter(contactBuilder.build());
-
-		XJDF xJdf = xJdfBuilder.build();
-		xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));
-
-		// parse
-		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		new XJdfParser().parseXJdf(xJdf, bos);
-		bos.close();
-
-		//
-		String doc = new String(bos.toByteArray());
-		System.out.println(doc);
-	}
+        //
+        String doc = new String(bos.toByteArray());
+        System.out.println(doc);
+    }
 }
