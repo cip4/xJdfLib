@@ -1398,6 +1398,21 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumCostType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Chargeable"/>
+            <xs:enumeration value="NonChargeable"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumWorkType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Original"/>
+            <xs:enumeration value="Alteration"/>
+            <xs:enumeration value="Rework"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -5736,10 +5751,10 @@
     <!-- ** Complex type definition for MISDetails ** -->
     <xs:element name="MISDetails">
         <xs:complexType>
+            <xs:attribute name="Complexity" type="double" use="optional"/>
+            <xs:attribute name="CostType" type="EnumCostType" use="optional"/>
+            <xs:attribute name="WorkType" type="EnumWorkType" use="optional"/>
             <xs:attribute name="WorkTypeDetails" type="string" use="optional"/>
-            <xs:attribute name="WorkType" use="optional"/>
-            <xs:attribute name="DeviceOperationMode" use="optional"/>
-            <xs:attribute name="CostType" use="optional"/>
         </xs:complexType>
     </xs:element>
 
