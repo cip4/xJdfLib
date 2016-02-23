@@ -202,7 +202,7 @@ public class XJdfNavigatorTest {
 
 		// arrange
 		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
-		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
+		XJdfNavigator xJdfNavigator = new XJdfNavigator(is, true);
 
 		String actual;
 

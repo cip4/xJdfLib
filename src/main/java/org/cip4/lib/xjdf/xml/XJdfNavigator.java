@@ -33,72 +33,72 @@ public class XJdfNavigator extends XmlNavigator {
     /**
      * XPath to attribute 'JobID' in XJDF Document.
      */
-    public static final String JOB_ID = "/XJDF/@JobID";
+    public static final String JOB_ID = "/xjdf:XJDF/@JobID";
 
     /**
      * XPath to attribute 'Category' in XJDF Document.
      */
-    public static final String CATEGORY = "/XJDF/@Category";
+    public static final String CATEGORY = "/xjdf:XJDF/@Category";
 
     /**
      * XPath to attribute 'IDValue' of GeneralID 'CatalogID' in XJDF Document.
      */
-    public static final String GENERAL_CATALOG_ID = "/XJDF/GeneralID[@IDUsage='CatalogID']/@IDValue";
+    public static final String GENERAL_CATALOG_ID = "/xjdf:XJDF/xjdf:GeneralID[@IDUsage='CatalogID']/@IDValue";
 
     /**
      * XPath to attribute 'IDValue' of GeneralID 'LineID' in XJDF Document.
      */
-    public static final String GENERAL_LINE_ID = "/XJDF/GeneralID[@IDUsage='LineID']/@IDValue";
+    public static final String GENERAL_LINE_ID = "/xjdf:XJDF/xjdf:GeneralID[@IDUsage='LineID']/@IDValue";
 
     /**
      * XPath to attribute 'URL' of a single RunList/FileSpec definition in XJDF Document.
      */
-    public static final String FILE_SPEC_URL = "/XJDF/ParameterSet[@Name='RunList']/Parameter/RunList/FileSpec/@URL";
+    public static final String FILE_SPEC_URL = "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL";
 
     /**
      * XPath to attribute 'MinApprovals' of ApprovalParams Node in XJDF Document.
      */
-    public static final String MIN_APPROVALS = "/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals";
+    public static final String MIN_APPROVALS = "/xjdf:XJDF/xjdf:ParameterSet[@Name='ApprovalParams']/xjdf:Parameter/xjdf:ApprovalParams/@MinApprovals";
 
     /**
      * XPath to attribute 'CustomerID' of CustomerInfo Node in XJDF Document.
      */
-    public static final String CUSTOMER_ID = "/XJDF/ParameterSet[@Name='CustomerInfo']/Parameter/CustomerInfo/@CustomerID";
+    public static final String CUSTOMER_ID = "/xjdf:XJDF/xjdf:ParameterSet[@Name='CustomerInfo']/xjdf:Parameter/xjdf:CustomerInfo/@CustomerID";
 
     /**
      * XPath to attribute 'Amount' of Product Node in XJDF Document.
      */
-    public static final String AMOUNT = "/XJDF/ProductList/Product/@Amount";
+    public static final String AMOUNT = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/@Amount";
 
     /**
      * XPath to attribute 'MediaQuality' of MediaIntent Node in XJDF Document.
      */
-    public static final String MEDIA_QUALITY = "/XJDF/ProductList/Product/Intent[@Name='MediaIntent']/MediaIntent/@MediaQuality";
+    public static final String MEDIA_QUALITY = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality";
 
     /**
      * XPath to attribute 'FinishedDimensions' of LayoutIntent Node in XJDF Document.
      */
-    public static final String LAYOUT_FINISHED_DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions";
+    public static final String LAYOUT_FINISHED_DIMENSIONS = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='LayoutIntent']/xjdf:LayoutIntent/@FinishedDimensions";
 
     /**
      * XPath to attribute 'Dimensions' of LayoutIntent Node in XJDF Document.
      */
-    public static final String LAYOUT_DIMENSIONS = "/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@Dimensions";
+    public static final String LAYOUT_DIMENSIONS = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='LayoutIntent']/xjdf:LayoutIntent/@Dimensions";
 
     /**
      * XPath to attribute 'PrintProcess' of ProductionIntent Node in XJDF Document.
      */
-    public static final String PRODUCTION_PRINT_PROCESS = "/XJDF/ProductList/Product/Intent[@Name='ProductionIntent']/ProductionIntent/@PrintProcess";
+    public static final String PRODUCTION_PRINT_PROCESS = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ProductionIntent']/xjdf:ProductionIntent/@PrintProcess";
 
     /**
      * XPath to attribute 'FoldingCatalog' of FoldingIntent Node in XJDF Document.
      */
-    public static final String FOLDING_CATALOG = "/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldingCatalog";
+    public static final String FOLDING_CATALOG = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='FoldingIntent']/xjdf:FoldingIntent/@FoldingCatalog";
 
     /**
      * XPath to attribute 'NumColors' of ColorIntent Node in XJDF Document.
      */
-    public static final String COLOR_NUM_COLORS = "/XJDF/ProductList/Product/Intent[@Name='ColorIntent']/ColorIntent/@NumColors";
+    public static final String COLOR_NUM_COLORS = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/@NumColors";
 
     /**
      * Custom constructor. Accepting a XJdf InputStream for initializing.
