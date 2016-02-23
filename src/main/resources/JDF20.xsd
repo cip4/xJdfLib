@@ -4717,13 +4717,12 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNSpace"/>
+                    <xs:element ref="ColorantAlias" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="DeviceNSpace" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="DeviceColorantOrder" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ForceSeparations" type="boolean" use="optional"/>
                 <xs:attribute name="InternalColorModel" type="EnumColorModel" use="optional"/>
                 <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
