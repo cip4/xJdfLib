@@ -1997,16 +1997,14 @@
         <xs:complexType>
             <xs:simpleContent>
                 <xs:extension base="string">
-                    <xs:attribute name="Language" type="language" use="optional"/>
-                    <xs:attribute name="Attribute" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="ID" type="ID" use="optional"/>
-                    <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
-                    <xs:attribute name="Path" type="PDFPath" use="optional"/>
-                    <xs:attribute name="Box" type="rectangle" use="optional"/>
-                    <xs:attribute name="Author" type="string" use="optional"/>
                     <xs:attribute name="AgentName" type="string" use="optional"/>
                     <xs:attribute name="AgentVersion" type="string" use="optional"/>
+                    <xs:attribute name="Author" type="string" use="optional"/>
+                    <xs:attribute name="ID" type="ID" use="optional"/>
+                    <xs:attribute name="Language" type="language" use="optional"/>
+                    <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
+                    <xs:attribute name="PersonalID" type="string" use="optional"/>
+                    <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                 </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
@@ -2238,17 +2236,14 @@
     <!-- ** Complex type definition for Message ** -->
     <xs:element name="Message">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-            </xs:sequence>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="Author" type="string" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="required"/>
+            <xs:attribute name="PersonalID" type="string" use="optional"/>
+            <xs:attribute name="SenderID" type="string" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
