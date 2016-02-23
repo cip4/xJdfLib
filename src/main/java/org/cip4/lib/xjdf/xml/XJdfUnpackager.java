@@ -41,7 +41,7 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 		byte[] bytes = super.findMasterDocument();
 
 		// return as navigator
-		return new XJdfNavigator(bytes);
+		return new XJdfNavigator(bytes, true);
 	}
 
     /**
