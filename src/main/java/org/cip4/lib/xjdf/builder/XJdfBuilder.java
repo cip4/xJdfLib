@@ -108,7 +108,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
         // default values
         getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-        getXJdf().setID(IDGeneratorUtil.generateID("XJDF"));
     }
 
     /**

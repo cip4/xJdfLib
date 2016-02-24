@@ -1956,29 +1956,24 @@
     <xs:element name="XJDF">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="AuditPool"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="ProductList"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ParameterSet"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceSet"/>
+                <xs:element ref="AuditPool" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ProductList" minOccurs="0" maxOccurs="1" />
+                <xs:element ref="ParameterSet" minOccurs="0" maxOccurs="unbounded" />
+                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded" />
             </xs:sequence>
-            <xs:attribute name="ID" type="ID" use="required"/>
-            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
-            <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="CommentURL" type="URL" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Category" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RelatedJobPartID" type="string" use="optional"/>
-            <xs:attribute name="ProjectID" type="string" use="optional"/>
-            <xs:attribute name="Version" use="required"/>
-            <xs:attribute name="MaxVersion" type="EnumJDFJMFVersion" use="optional"/>
+            <xs:attribute name="CommentURL" type="URL" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="TemplateVersion" type="string" use="optional"/>
-            <xs:attribute name="TemplateID" type="string" use="optional"/>
+            <xs:attribute name="ProjectID" type="string" use="optional"/>
             <xs:attribute name="RelatedJobID" type="string" use="optional"/>
-            <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
+            <xs:attribute name="RelatedJobPartID" type="string" use="optional"/>
+            <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="required"/>
         </xs:complexType>
     </xs:element>
 
