@@ -4989,7 +4989,7 @@
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="3"/>
                 </xs:sequence>
                 <xs:attribute name="BuyerAccount" type="string" use="optional"/>
-                <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContactRefs" type="IDREF" use="optional"/>
                 <xs:attribute name="DeliveryCharge"  type="EnumDeliveryCharge" use="optional"/>
                 <xs:attribute name="DeliveryID" type="string" use="optional"/>
                 <xs:attribute name="EarliestDuration" type="duration" use="optional"/>
