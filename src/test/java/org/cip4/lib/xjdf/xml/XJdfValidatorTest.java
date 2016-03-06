@@ -10,11 +10,15 @@ import javax.xml.bind.ValidationException;
 import static org.junit.Assert.*;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.builder.ContactBuilder;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.schema.Address;
+import org.cip4.lib.xjdf.schema.ComChannel;
+import org.cip4.lib.xjdf.schema.Company;
+import org.cip4.lib.xjdf.schema.Contact;
 import org.cip4.lib.xjdf.schema.EnumSides;
 import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.Person;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
@@ -151,7 +155,9 @@ public class XJdfValidatorTest {
 
     /**
      * Helper converting builder to input stream.
+     *
      * @param xJdfBuilder XJdfBuilder object to convert to.
+     *
      * @return XJDF as InputStream object.
      * @throws Exception Is thrown in case of any errors.
      */
@@ -186,12 +192,30 @@ public class XJdfValidatorTest {
         // TODO productBuilder.addIntent(nf.createcol)
 
         // create contact
-        ContactBuilder contactBuilder = new ContactBuilder();
-        contactBuilder.addPerson("Mustermann", "Max", "Dr.");
-        contactBuilder.addCompany("Firma Muster GmbH");
-        contactBuilder.addAddress("Musterstraße 12", "12345", "Stadt", "Deutschland", "de");
-        contactBuilder.addComChannel("Email", "mailto:info@muster.com");
-        contactBuilder.addComChannel("Phone", "tel:+49.173.1234.567");
+        Contact contact = new Contact()
+            .withPerson(
+                new Person()
+                    .withFamilyName("Mustermann")
+                    .withFirstName("Max")
+                    .withNamePrefix("Dr.")
+            ).withCompany(
+                new Company()
+                    .withOrganizationName("Firma Muster GmbH")
+            ).withAddress(
+                new Address()
+                    .withStreet("Musterstraße 12")
+                    .withPostalCode("12345")
+                    .withCity("Stadt")
+                    .withCountry("Deutschland")
+                    .withCountryCode("de")
+            ).withComChannel(
+                new ComChannel()
+                    .withChannelType("Email")
+                    .withLocator("mailto:info@muster.com"),
+                new ComChannel()
+                    .withChannelType("Phone")
+                    .withLocator("tel:+49.173.1234.567")
+            );
 
         // create XJDF
         XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
@@ -202,7 +226,7 @@ public class XJdfValidatorTest {
         xJdfBuilder.addParameter(nf.createApprovalParams(1));
         // TODO xJdfBuilder.addParameter(nf.createNodeInfo());
         // TODO ColorIntent
-        xJdfBuilder.addParameter(contactBuilder.build());
+        xJdfBuilder.addParameter(contact);
 
         XJDF xJdf = xJdfBuilder.build();
         xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));

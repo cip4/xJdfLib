@@ -282,6 +282,16 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumDeviceInfoStatus">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Idle"/>
+            <xs:enumeration value="Production"/>
+            <xs:enumeration value="Offline"/>
+            <xs:enumeration value="Stopped"/>
+            <xs:enumeration value="NonProductive"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumNodeStatus">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Aborted"/>
@@ -413,15 +423,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
             <xs:enumeration value="Brief"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumDeviceCondition">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="OK"/>
-            <xs:enumeration value="NeedsAttention"/>
-            <xs:enumeration value="Failure"/>
-            <xs:enumeration value="OffLine"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1413,6 +1414,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumDueLevel">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Trivial"/>
+            <xs:enumeration value="Penalty"/>
+            <xs:enumeration value="JobCancelled"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -2056,25 +2065,25 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="NotificationFilter"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
+                    <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="NotificationFilter" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="DueLevel" use="optional"/>
-                <xs:attribute name="LastStart" type="dateTime" use="optional"/>
-                <xs:attribute name="FirstEnd" type="dateTime" use="optional"/>
-                <xs:attribute name="TotalDuration" type="duration" use="optional"/>
-                <xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional"/>
-                <xs:attribute name="SetupDuration" type="duration" use="optional"/>
-                <xs:attribute name="JobPriority" type="integer" use="optional"/>
-                <xs:attribute name="WorkStepID" type="string" use="optional"/>
-                <xs:attribute name="NaturalLang" type="language" use="optional"/>
                 <xs:attribute name="CleanupDuration" type="duration" use="optional"/>
-                <xs:attribute name="FirstStart" type="dateTime" use="optional"/>
-                <xs:attribute name="Start" type="dateTime" use="optional"/>
+                <xs:attribute name="DueLevel" type="EnumDueLevel" use="optional"/>
                 <xs:attribute name="End" type="dateTime" use="optional"/>
-                <xs:attribute name="NodeStatusDetails" type="string" use="optional"/>
+                <xs:attribute name="FirstEnd" type="dateTime" use="optional"/>
+                <xs:attribute name="FirstStart" type="dateTime" use="optional"/>
+                <xs:attribute name="JobPriority" type="integer" use="optional"/>
                 <xs:attribute name="LastEnd" type="dateTime" use="optional"/>
+                <xs:attribute name="LastStart" type="dateTime" use="optional"/>
+                <xs:attribute name="NaturalLang" type="language" use="optional"/>
+                <xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional"/>
+                <xs:attribute name="NodeStatusDetails" type="string" use="optional"/>
+                <xs:attribute name="SetupDuration" type="duration" use="optional"/>
+                <xs:attribute name="Start" type="dateTime" use="optional"/>
+                <xs:attribute name="TotalDuration" type="duration" use="optional"/>
+                <xs:attribute name="WorkStepID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2133,20 +2142,20 @@
     <xs:element name="DeviceInfo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="Device"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="JobPhase"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModuleStatus"/>
+                <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="JobPhase" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="string" use="optional"/>
-            <xs:attribute name="DeviceCondition" type="EnumDeviceCondition" use="optional"/>
             <xs:attribute name="DeviceID" type="string" use="optional"/>
-            <xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
             <xs:attribute name="PowerOnTime" type="dateTime" use="optional"/>
             <xs:attribute name="ProductionCounter" type="double" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
+            <xs:attribute name="Status" type="EnumDeviceInfoStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="TotalProductionCounter" type="double" use="optional"/>
         </xs:complexType>
@@ -2188,7 +2197,6 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Command" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Employee" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Query" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Response" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Signal" minOccurs="0" maxOccurs="unbounded"/>
@@ -2643,9 +2651,6 @@
     <!--** abstract type for substitution only ** -->
     <xs:element abstract="true" name="Audit" type="Audit"/>
     <xs:complexType name="Audit" abstract="true">
-        <xs:sequence>
-            <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-        </xs:sequence>
         <xs:attribute name="AgentName" type="string" use="optional"/>
         <xs:attribute name="AgentVersion" type="string" use="optional"/>
         <xs:attribute name="ID" type="ID" use="optional"/>
@@ -2860,6 +2865,7 @@
     <xs:complexType name="Created">
         <xs:complexContent>
             <xs:extension base="Audit">
+                <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
                 <xs:attribute name="XPath" type="XPath" use="optional"/>
                 <xs:attribute name="TemplateVersion" type="string" use="optional"/>
                 <xs:attribute name="TemplateID" type="string" use="optional"/>
@@ -3396,9 +3402,6 @@
     <!-- ** Complex type definition for ModulePhase ** -->
     <xs:element name="ModulePhase">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-            </xs:sequence>
             <xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
@@ -3411,9 +3414,6 @@
     <!-- ** Complex type definition for ModuleStatus ** -->
     <xs:element name="ModuleStatus">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
-            </xs:sequence>
             <xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
@@ -3438,6 +3438,7 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Event"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Barcode"/>
                 </xs:sequence>
+                <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
                 <xs:attribute name="JobID" type="string" use="optional"/>
                 <xs:attribute name="JobPartID" type="string" use="optional"/>
@@ -3629,6 +3630,7 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
                 </xs:sequence>
+                <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="StatusDetails" type="string" use="optional"/>
                 <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
                 <xs:attribute name="Start" type="dateTime" use="optional"/>
@@ -3670,7 +3672,8 @@
         <xs:complexContent>
             <xs:extension base="Audit">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                    <xs:element ref="Contact" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="EndStatus" use="optional"/>
                 <xs:attribute name="Duration" type="duration" use="optional"/>
@@ -4820,13 +4823,15 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Person"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Company"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Address"/>
+                    <xs:element ref="Address" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ComChannel" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="Company" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Person" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="ContactTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="ContactTypes" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="CostCenterID" type="string" use="optional"/>
+                <xs:attribute name="UserID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4863,10 +4868,10 @@
     <xs:element name="ContentMetaData">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Employee"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
             </xs:sequence>
+            <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="Title" type="string" use="optional"/>
             <xs:attribute name="ISBN13" type="string" use="optional"/>
             <xs:attribute name="ISBN10" type="string" use="optional"/>
@@ -5198,22 +5203,6 @@
                 <xs:attribute name="ColorManagementSystem" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
                 <xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for Employee ** -->
-    <xs:element name="Employee" type="Employee" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Employee">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Person"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter"/>
-                </xs:sequence>
-                <xs:attribute name="Shift" type="string" use="optional"/>
-                <xs:attribute name="Roles" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="PersonalID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

@@ -281,7 +281,7 @@ public class XJdfParserTest {
         ResourceSet resourceSet = xjdf.getResourceSet().get(0);
         Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getParameterType().getValue();
         assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
-        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
     @Test
@@ -295,7 +295,7 @@ public class XJdfParserTest {
         Contact contact = (Contact) approvalPerson.getContactRef().getParameterType().getValue();
 
         assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
-        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
     @Test
