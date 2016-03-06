@@ -134,7 +134,6 @@ public class XJdfParserTest {
         xJdfBuilder.addGeneralID(generalId);
 
         XJDF xJdf = xJdfBuilder.build();
-        xJdf.setID(null);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -157,7 +156,6 @@ public class XJdfParserTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("MyType");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -195,7 +193,6 @@ public class XJdfParserTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("MyType");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -388,7 +385,6 @@ public class XJdfParserTest {
     public void parseXjdfWritesUtf8Chars() throws Exception {
         final String utf8String = "aÄoÖuÜsß";
         XJDF xjdf = new XJDF();
-        xjdf.setID("foo");
         xjdf.setVersion("2.0");
         xjdf.withComment(new Comment().withValue(utf8String));
 

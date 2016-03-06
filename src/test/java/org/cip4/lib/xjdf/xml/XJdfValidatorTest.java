@@ -63,7 +63,6 @@ public class XJdfValidatorTest {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
         xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
-        xJdfBuilder.build().setID(null);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -79,7 +78,6 @@ public class XJdfValidatorTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("Web2Print");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -97,7 +95,6 @@ public class XJdfValidatorTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("Web2Print");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -115,8 +112,6 @@ public class XJdfValidatorTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID(null);
-
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
@@ -131,7 +126,6 @@ public class XJdfValidatorTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("Web2Print");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
