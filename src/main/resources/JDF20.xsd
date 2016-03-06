@@ -2506,9 +2506,9 @@
     <!-- ** Complex type definition for ResubmissionParams ** -->
     <xs:element name="ResubmissionParams">
         <xs:complexType>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="string" use="required"/>
+            <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="required"/>
+            <xs:attribute name="URL" type="URL" use="required"/>
         </xs:complexType>
     </xs:element>
 
