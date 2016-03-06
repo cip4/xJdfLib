@@ -4927,9 +4927,11 @@
     <!-- ** Complex type definition for ConvertingConfig ** -->
     <xs:element name="ConvertingConfig">
         <xs:complexType>
-            <xs:attribute name="SheetHeight" type="string" use="optional"/>
+            <xs:attribute name="SheetHeightMax" type="double" use="optional"/>
+            <xs:attribute name="SheetHeightMin" type="double" use="optional"/>
             <xs:attribute name="MarginBottom" type="double" use="optional"/>
-            <xs:attribute name="SheetWidth" type="string" use="optional"/>
+            <xs:attribute name="SheetWidthMax" type="double" use="optional"/>
+            <xs:attribute name="SheetWidthMin" type="double" use="optional"/>
             <xs:attribute name="MarginLeft" type="double" use="optional"/>
             <xs:attribute name="MarginTop" type="double" use="optional"/>
             <xs:attribute name="MarginRight" type="double" use="optional"/>
@@ -6233,7 +6235,8 @@
             <xs:attribute name="ScreeningFamily" type="string" use="optional"/>
             <xs:attribute name="DotSize" type="double" use="optional"/>
             <xs:attribute name="Angle" type="double" use="optional"/>
-            <xs:attribute name="SourceFrequency" type="string" use="optional"/>
+            <xs:attribute name="SourceFrequencyMax" type="double" use="optional"/>
+            <xs:attribute name="SourceFrequencyMin" type="double" use="optional"/>
             <xs:attribute name="AngleMap" type="string" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
