@@ -6671,7 +6671,6 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                 </xs:sequence>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
