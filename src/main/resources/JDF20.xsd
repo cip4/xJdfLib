@@ -2388,21 +2388,16 @@
     <!-- ** Complex type definition for QueueSubmissionParams ** -->
     <xs:element name="QueueSubmissionParams">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disposition"/>
-            </xs:sequence>
             <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
-            <xs:attribute name="ReturnURL" type="URL" use="optional"/>
-            <xs:attribute name="WatchURL" type="URL" use="optional"/>
-            <xs:attribute name="PrevQueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
             <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ReturnJMF" type="URL" use="optional"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="NextQueueEntryID" type="string" use="optional"/>
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
-            <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="Hold" type="boolean" use="optional"/>
+            <xs:attribute name="NextQueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="PrevQueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="Priority" type="integer" use="optional"/>
+            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ReturnJMF" type="URL" use="optional"/>
+            <xs:attribute name="URL" type="URL"/>
         </xs:complexType>
     </xs:element>
 
@@ -6163,7 +6158,6 @@
             <xs:extension base="ParameterType">
                 <xs:sequence>
                     <xs:element ref="ByteMap" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="Disposition"  minOccurs="0" maxOccurs="1" />
                     <xs:element ref="ElementColorParams" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="unbounded" />
