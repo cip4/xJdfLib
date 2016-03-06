@@ -63,6 +63,7 @@ public class XJdfValidatorTest {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
         xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
+        xJdfBuilder.build().setVersion(null);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -111,6 +112,7 @@ public class XJdfValidatorTest {
         // arrange
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.build().setVersion(null);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
