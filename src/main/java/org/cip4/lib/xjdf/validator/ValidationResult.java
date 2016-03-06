@@ -50,4 +50,13 @@ public class ValidationResult {
     final void append(final ValidationResult validationResult) {
         violations.addAll(validationResult.violations);
     }
+
+    /**
+     * Append an violation to the report.
+     *
+     * @param violation Additional violation
+     */
+    final void append(final String violation) {
+        violations.add(violation);
+    }
 }
