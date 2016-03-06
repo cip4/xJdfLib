@@ -5961,7 +5961,7 @@
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TestID" type="string" use="optional"/>
-            <xs:attribute name="Severity" type="EnumPreflightSeverity"/>
+            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
             <xs:attribute name="WarningCount" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -5991,7 +5991,7 @@
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="Count" type="integer" use="optional"/>
             <xs:attribute name="Pages" type="IntegerList" use="optional"/>
-            <xs:attribute name="Severity" type="EnumPreflightSeverity"/>
+            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
             <xs:attribute name="TestID" type="string" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
         </xs:complexType>
