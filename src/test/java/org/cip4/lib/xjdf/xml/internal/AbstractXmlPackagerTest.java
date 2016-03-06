@@ -29,10 +29,10 @@ import static org.junit.Assert.*;
  */
 public class AbstractXmlPackagerTest {
 
-	private class MinimalXmlPackager extends AbstractXmlPackager {
-		public MinimalXmlPackager(final OutputStream out, final boolean withoutHierarchy) throws Exception {
+    private class MinimalXmlPackager extends AbstractXmlPackager {
+        public MinimalXmlPackager(final OutputStream out, final boolean withoutHierarchy) throws Exception {
             super(out, withoutHierarchy);
-		}
+        }
 
         @Override
         public void packageXml(
@@ -58,8 +58,8 @@ public class AbstractXmlPackagerTest {
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
-        assertEquals("artwork/test.pdf", zin.getNextEntry().getName());
-        assertEquals("artwork/test2.pdf", zin.getNextEntry().getName());
+        assertEquals("assets/test.pdf", zin.getNextEntry().getName());
+        assertEquals("assets/test2.pdf", zin.getNextEntry().getName());
     }
 
     @Test
@@ -77,8 +77,8 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@ID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("./test.pdf", "artwork/test.pdf");
-        expectedFileRefs.put("subfolder/test2.pdf", "artwork/test2.pdf");
+        expectedFileRefs.put("./test.pdf", "assets/test.pdf");
+        expectedFileRefs.put("subfolder/test2.pdf", "assets/test2.pdf");
         expectedFileRefs.put("./layout.jdf", "docs/layout.jdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
@@ -90,7 +90,7 @@ public class AbstractXmlPackagerTest {
         xJdfBuilder
             .addParameter(
                 new Preview()
-                    .withURL("directory/%5BXJDF_PSQ131S2%5D.pdf"),
+                    .withFileSpec(new FileSpec().withURL("directory/%5BXJDF_PSQ131S2%5D.pdf")),
                 new Part()
                     .withProductPart("XJDF_PSQ131S2")
                     .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
@@ -108,7 +108,7 @@ public class AbstractXmlPackagerTest {
         assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/%5BXJDF_PSQ131S2%5D.pdf", "preview/_XJDF_PSQ131S2_.pdf");
+        expectedFileRefs.put("directory/%5BXJDF_PSQ131S2%5D.pdf", "assets/_XJDF_PSQ131S2_.pdf");
 
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
@@ -127,7 +127,7 @@ public class AbstractXmlPackagerTest {
         xJdfBuilder
             .addParameter(
                 new Preview()
-                    .withURL(fileUriString),
+                    .withFileSpec(new FileSpec().withURL(fileUriString)),
                 new Part()
                     .withProductPart("XJDF_PSQ131S2")
                     .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
@@ -149,11 +149,14 @@ public class AbstractXmlPackagerTest {
             CURRENT_DIR_URI
         );
 
-        assertEquals("preview/XJDF_PSQ131S2.pdf", packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:Preview/@URL"));
+        assertEquals(
+            "assets/XJDF_PSQ131S2.pdf",
+            packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:Preview/xjdf:FileSpec/@URL")
+        );
         assertEquals(urlUriString, packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:FileSpec/@URL"));
 
         final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put(fileUriString, "preview/XJDF_PSQ131S2.pdf");
+        expectedFileRefs.put(fileUriString, "assets/XJDF_PSQ131S2.pdf");
         assertEquals(expectedFileRefs, packagingData.fileRefs);
     }
 }

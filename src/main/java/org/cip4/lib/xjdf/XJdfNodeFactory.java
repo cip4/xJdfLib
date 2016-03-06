@@ -1,47 +1,6 @@
 package org.cip4.lib.xjdf;
 
-import org.cip4.lib.xjdf.schema.AmountPool;
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.BinderySignature;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ChildProduct;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.ColorantControl;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.ContentObject;
-import org.cip4.lib.xjdf.schema.Created;
-import org.cip4.lib.xjdf.schema.CustomerInfo;
-import org.cip4.lib.xjdf.schema.CuttingParams;
-import org.cip4.lib.xjdf.schema.EnumBindingOrder;
-import org.cip4.lib.xjdf.schema.EnumEdge;
-import org.cip4.lib.xjdf.schema.EnumSides;
-import org.cip4.lib.xjdf.schema.EnumSurface;
-import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MarkObject;
-import org.cip4.lib.xjdf.schema.Media;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.Modified;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.ObjectFactory;
-import org.cip4.lib.xjdf.schema.Orientation;
-import org.cip4.lib.xjdf.schema.Parameter;
-import org.cip4.lib.xjdf.schema.ParameterType;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.PartAmount;
-import org.cip4.lib.xjdf.schema.Position;
-import org.cip4.lib.xjdf.schema.Preview;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.ProductionIntent;
-import org.cip4.lib.xjdf.schema.ProofItem;
-import org.cip4.lib.xjdf.schema.ProofingIntent;
-import org.cip4.lib.xjdf.schema.Resource;
-import org.cip4.lib.xjdf.schema.ResourceType;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.SignatureCell;
-import org.cip4.lib.xjdf.schema.SurfaceColor;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.IntegerList;
@@ -58,6 +17,7 @@ import javax.xml.namespace.QName;
  * Static Factory Class which is managing the creation of XJdfNodes.
  */
 public class XJdfNodeFactory extends ObjectFactory {
+
     /**
      * Create a new Parameter node from ParameterType.
      *
@@ -127,7 +87,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         resource.setResourceType(obj);
 
         if (part != null) {
-            resource.setPart(part);
+            resource.withPart(part);
         }
 
         // return node
@@ -375,31 +335,14 @@ public class XJdfNodeFactory extends ObjectFactory {
         // create node
         Preview preview = super.createPreview();
 
-        // set attributes
-        preview.setURL(url);
+        preview.setFileSpec(
+            new FileSpec()
+                .withURL(url)
+        );
         preview.setPreviewFileType(previewFileType);
 
         // return object
         return preview;
-    }
-
-    /**
-     * Create new ChildProduct Node which already contains values for attribute Childref.
-     *
-     * @param idRef Value for Product attribute.
-     *
-     * @return ChildProduct Node which already contains defined attributes.
-     */
-    public final ChildProduct createChildProduct(final Product idRef) {
-
-        // create node
-        ChildProduct childProduct = super.createChildProduct();
-
-        // set attributes
-        childProduct.setChildRef(idRef);
-
-        // return object
-        return childProduct;
     }
 
     /**
@@ -580,7 +523,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return BindingIntent Node which already contains defined attributes.
      */
-    public final BindingIntent createBindingIntent(final String bindingType) {
+    public final BindingIntent createBindingIntent(final EnumBindingType bindingType) {
 
         // return object
         return createBindingIntent(bindingType, null, null);
@@ -596,7 +539,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @return BindingIntent Node which already contains defined attributes.
      */
     public final BindingIntent createBindingIntent(
-        final String bindingType,
+        final EnumBindingType bindingType,
         final EnumEdge bindingSide,
         final EnumBindingOrder bindingOrder
     ) {
@@ -755,14 +698,14 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @param foldCatalog Value of FoldCatalog attribute as String.
      * @param size Size of the bindery signature.
-     * @param assemblyID Assembly id.
+     * @param binderySignatureID ID of the bindery signature.
      *
      * @return BinderySignature Node which already contains defined attributes.
      */
     public final BinderySignature createBinderySignature(
         final String foldCatalog,
         final XYPair size,
-        final String assemblyID
+        final String binderySignatureID
     ) {
 
         // create BinderySignature Node
@@ -771,7 +714,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         binderySignature.setFoldCatalog(foldCatalog);
         binderySignature.setBinderySignatureSize(size);
-        binderySignature.setAssemblyID(assemblyID);
+        binderySignature.setBinderySignatureID(binderySignatureID);
 
         // return node
         return binderySignature;
@@ -878,7 +821,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ColorantControl Node which already contains defined attributes.
      */
-    public final ColorantControl createColorantControl(final String processColorModel) {
+    public final ColorantControl createColorantControl(final EnumProcessColorModel processColorModel) {
 
         // create node
         ColorantControl colorantControl = super.createColorantControl();
@@ -888,33 +831,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // return node
         return colorantControl;
-    }
-
-    /**
-     * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
-     *
-     * @param agentName Value for AgentName attribute.
-     * @param agentVersion Value for AgentVersion attribute.
-     * @param timestamp Value for TimeStamp attribute.
-     *
-     * @return Created Node which already contains defined attributes.
-     */
-    public final Modified createModified(
-        final String agentName,
-        final String agentVersion,
-        final DateTime timestamp
-    ) {
-
-        // create node
-        Modified modified = super.createModified();
-
-        // set attributes
-        modified.setAgentName(agentName);
-        modified.setAgentVersion(agentVersion);
-        modified.setTimeStamp(timestamp);
-
-        // return object
-        return modified;
     }
 
 }

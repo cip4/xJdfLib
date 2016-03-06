@@ -75,40 +75,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     }
 
     /**
-     * Add one Audit Parameter to XJDF Document.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testAddAudit() throws Exception {
-
-        // arrange
-        final String AGENT_NAME = "XJDF Agent";
-        final String AGENT_VERSION = "2.0.4";
-        final DateTime TIMESTAMP = new DateTime("2013-06-11T21:27:26Z");
-
-        // act
-        Created created = new XJdfNodeFactory().createCreated(AGENT_NAME, AGENT_VERSION, TIMESTAMP);
-        xJdfBuilder.addAudit(created);
-
-        PhaseTime phaseTime = new XJdfNodeFactory().createPhaseTime();
-        phaseTime.setStart(new DateTime());
-        xJdfBuilder.addAudit(phaseTime);
-
-        // assert
-        byte[] bytes = marsahlResult(xJdfBuilder);
-
-        String actualAgentName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentName");
-        Assert.assertEquals("AgentName in Created is wrong.", AGENT_NAME, actualAgentName);
-
-        String actualAgentVersion = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentVersion");
-        Assert.assertEquals("AgentVersion in Created is wrong.", AGENT_VERSION, actualAgentVersion);
-
-        String actualTimeStamp = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@TimeStamp");
-        Assert.assertEquals("TimeStamp in Created is wrong.", TIMESTAMP, new DateTime(actualTimeStamp));
-    }
-
-    /**
      * Add one GeneralID Parameter to XJDF document.
      *
      * @throws Exception

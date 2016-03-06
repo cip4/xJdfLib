@@ -1,27 +1,6 @@
 package org.cip4.lib.xjdf;
 
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ChildProduct;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.ContentObject;
-import org.cip4.lib.xjdf.schema.CustomerInfo;
-import org.cip4.lib.xjdf.schema.EnumBindingOrder;
-import org.cip4.lib.xjdf.schema.EnumEdge;
-import org.cip4.lib.xjdf.schema.EnumSides;
-import org.cip4.lib.xjdf.schema.EnumSurface;
-import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MarkObject;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.ProductionIntent;
-import org.cip4.lib.xjdf.schema.ProofingIntent;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.SurfaceColor;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.IntegerList;
@@ -149,18 +128,8 @@ public class XJdfNodeFactoryTest {
         assertEquals("NaturalLang is wrong", NATURAL_LANG, nodeInfo.getNaturalLang());
     }
 
-    @Test
-    public void testCreateChildProduct() {
-        final String uuid = UUID.randomUUID().toString();
-        Product childRefProduct = new Product();
-        childRefProduct.setID(uuid);
-        ChildProduct childProduct = xJdfNodeFactory.createChildProduct(childRefProduct);
-
-        assertEquals("Childref is wrong", uuid, childProduct.getChildRef().getID());
-    }
-
-    @Test
-    public void testCreateMediaIntent() {
+	@Test
+	public void testCreateMediaIntent() {
 
         // arrange
         final String MEDIA_QUALITY = UUID.randomUUID().toString();
@@ -257,8 +226,8 @@ public class XJdfNodeFactoryTest {
     @Test
     public void testCreateBindingIntent() {
 
-        // arrange
-        final String BINDING_TYPE = UUID.randomUUID().toString();
+		// arrange
+		final EnumBindingType BINDING_TYPE = EnumBindingType.CORNER_STITCH;
 
         // act
         BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE);
@@ -271,7 +240,7 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        String bindingType = "Some Binding Type";
+        final EnumBindingType bindingType = EnumBindingType.LOOSE_BINDING;
         EnumEdge bindingEdge = EnumEdge.BOTTOM;
         EnumBindingOrder bindingOrder = EnumBindingOrder.GATHERING;
 

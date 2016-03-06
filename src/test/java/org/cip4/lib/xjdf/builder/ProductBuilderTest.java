@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.BindingIntent;
+import org.cip4.lib.xjdf.schema.EnumBindingType;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.Product;
@@ -80,7 +81,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         LayoutIntent layoutIntent = new XJdfNodeFactory().createLayoutIntent();
         layoutIntent.setFinishedDimensions(new Shape(595.27559055d, 822.04724409d));
         BindingIntent bindingIntent = new XJdfNodeFactory().createBindingIntent();
-        bindingIntent.setBindingType("SaddleStitch");
+        bindingIntent.setBindingType(EnumBindingType.SADDLE_STITCH);
 
         // act
         productBuilder.addIntent(mediaIntent);
@@ -158,7 +159,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         ProductBuilder rootProductBuilder = new ProductBuilder();
         rootProductBuilder.addChildProduct(childProduct);
 
-        final Product childRef = rootProductBuilder.getProduct().getChildProduct().get(0).getChildRef();
+        final Product childRef = rootProductBuilder.getProduct().getChildRefs().get(0);
         Assert.assertEquals("abc", childRef.getID());
     }
 
