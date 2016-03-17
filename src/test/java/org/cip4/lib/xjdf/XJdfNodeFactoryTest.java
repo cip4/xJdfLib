@@ -240,7 +240,7 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        final EnumBindingType bindingType = EnumBindingType.LOOSE_BINDING;
+        EnumBindingType bindingType = EnumBindingType.LOOSE_BINDING;
         EnumEdge bindingEdge = EnumEdge.BOTTOM;
         EnumBindingOrder bindingOrder = EnumBindingOrder.GATHERING;
 
