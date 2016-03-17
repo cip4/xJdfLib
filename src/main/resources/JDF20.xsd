@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0"
+           xmlns="http://www.CIP4.org/JDFSchema_2_0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
 
     <!-- TODO: Removed in XJDF 2.0, but references still exist. -->
     <xs:element name="Term"/>
@@ -431,14 +434,6 @@
             <xs:enumeration value="InTime"/>
             <xs:enumeration value="Warning"/>
             <xs:enumeration value="Late"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumSubmitPolicy">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Standard"/>
-            <xs:enumeration value="Late"/>
-            <xs:enumeration value="Force"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1422,6 +1417,13 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumEndStatus">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Aborted"/>
+            <xs:enumeration value="Completed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -1870,7 +1872,6 @@
     <xs:complexType name="IntentType" abstract="true"/>
 
     <!--** abstract type for substitution only ** -->
-    <xs:element abstract="true" name="SetType" type="SetType"/>
     <xs:complexType name="SetType" abstract="true">
         <xs:sequence>
             <xs:element minOccurs="0" maxOccurs="unbounded" ref="Dependent"/>
@@ -1987,7 +1988,7 @@
     </xs:element>
 
     <!-- ** Complex type definition for ResourceSet ** -->
-    <xs:element name="ResourceSet" type="ResourceSet" substitutionGroup="SetType"/>
+    <xs:element name="ResourceSet" type="ResourceSet"/>
     <xs:complexType name="ResourceSet">
         <xs:complexContent>
             <xs:extension base="SetType">
@@ -2000,7 +2001,7 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ParameterSet ** -->
-    <xs:element name="ParameterSet" type="ParameterSet" substitutionGroup="SetType"/>
+    <xs:element name="ParameterSet" type="ParameterSet"/>
     <xs:complexType name="ParameterSet">
         <xs:complexContent>
             <xs:extension base="SetType">
@@ -2410,8 +2411,7 @@
             <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
             <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="QueueURL" type="URL" use="optional"/>
-            <xs:attribute name="SubmitPolicy" type="EnumSubmitPolicy" use="optional"/>
+            <xs:attribute name="QueueURL" type="URL" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2641,14 +2641,7 @@
     </xs:element>
 
     <!--** abstract type for substitution only ** -->
-    <xs:element abstract="true" name="Audit" type="Audit"/>
-    <xs:complexType name="Audit" abstract="true">
-        <xs:attribute name="AgentName" type="string" use="optional"/>
-        <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        <xs:attribute name="ID" type="ID" use="optional"/>
-        <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-        <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
-    </xs:complexType>
+    <xs:complexType name="Audit" abstract="true" />
 
     <!-- ** Complex type definition for Band ** -->
     <xs:element name="Band">
@@ -2656,13 +2649,6 @@
             <xs:attribute name="Height" type="integer" use="optional"/>
             <xs:attribute name="WasMarked" type="boolean" use="optional"/>
             <xs:attribute name="Width" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Barcode ** -->
-    <xs:element name="Barcode">
-        <xs:complexType>
-            <xs:attribute name="Code" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2819,14 +2805,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for CounterReset ** -->
-    <xs:element name="CounterReset">
-        <xs:complexType>
-            <xs:attribute name="LastCount" type="integer" use="optional"/>
-            <xs:attribute name="CounterID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for CoverApplicationParams ** -->
     <xs:element name="CoverApplicationParams" type="CoverApplicationParams" substitutionGroup="ParameterType"/>
     <xs:complexType name="CoverApplicationParams">
@@ -2853,14 +2831,15 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Created ** -->
-    <xs:element name="Created" type="Created" substitutionGroup="Audit"/>
+    <xs:element name="Created" type="Created"/>
     <xs:complexType name="Created">
         <xs:complexContent>
             <xs:extension base="Audit">
+                <xs:attribute name="AgentName" type="string" use="optional"/>
+                <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+                <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
                 <xs:attribute name="XPath" type="XPath" use="optional"/>
-                <xs:attribute name="TemplateVersion" type="string" use="optional"/>
-                <xs:attribute name="TemplateID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3056,13 +3035,6 @@
         <xs:complexType>
             <xs:attribute name="EventID" type="string" use="optional"/>
             <xs:attribute name="EventValue" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for FCNKey ** -->
-    <xs:element name="FCNKey">
-        <xs:complexType>
-            <xs:attribute name="Key" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3415,30 +3387,23 @@
     </xs:element>
 
     <!-- ** Complex type definition for Notification ** -->
-    <xs:element name="Notification" type="Notification" substitutionGroup="Audit"/>
+    <xs:element name="Notification" type="Notification"/>
     <xs:complexType name="Notification">
         <xs:complexContent>
             <xs:extension base="Audit">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CostCenter"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CounterReset"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Milestone"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FCNKey"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Error"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SystemTimeSet"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Event"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Barcode"/>
+                    <xs:element ref="Error" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="Event" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="Milestone" minOccurs="0" maxOccurs="1" />
+                    <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
+                <xs:attribute name="AgentName" type="string" use="optional"/>
+                <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
-                <xs:attribute name="JobID" type="string" use="optional"/>
-                <xs:attribute name="JobPartID" type="string" use="optional"/>
-                <xs:attribute name="Class" use="optional"/>
-                <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="optional"/>
+                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
                 <xs:attribute name="refID" type="IDREF" use="optional"/>
+                <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3612,7 +3577,7 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for PhaseTime ** -->
-    <xs:element name="PhaseTime" type="PhaseTime" substitutionGroup="Audit"/>
+    <xs:element name="PhaseTime" type="PhaseTime"/>
     <xs:complexType name="PhaseTime">
         <xs:complexContent>
             <xs:extension base="Audit">
@@ -3622,13 +3587,18 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ModulePhase"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
                 </xs:sequence>
-                <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="StatusDetails" type="string" use="optional"/>
-                <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
-                <xs:attribute name="Start" type="dateTime" use="optional"/>
-                <xs:attribute name="End" type="dateTime" use="optional"/>
-                <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
+                <xs:attribute name="AgentName" type="string" use="optional"/>
+                <xs:attribute name="AgentVersion" type="string" use="optional"/>
+                <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
+                <xs:attribute name="DeviceID" type="string" use="optional"/>
+                <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="required"/>
+                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
                 <xs:attribute name="refID" type="IDREF" use="optional"/>
+                <xs:attribute name="Start" type="dateTime" use="optional"/>
+                <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
+                <xs:attribute name="StatusDetails" type="string" use="optional"/>
+                <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3659,7 +3629,7 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ProcessRun ** -->
-    <xs:element name="ProcessRun" type="ProcessRun" substitutionGroup="Audit"/>
+    <xs:element name="ProcessRun" type="ProcessRun"/>
     <xs:complexType name="ProcessRun">
         <xs:complexContent>
             <xs:extension base="Audit">
@@ -3667,13 +3637,18 @@
                     <xs:element ref="Contact" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="EndStatus" use="optional"/>
+                <xs:attribute name="AgentName" type="string" use="optional"/>
+                <xs:attribute name="AgentVersion" type="string" use="optional"/>
+                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+                <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                 <xs:attribute name="Duration" type="duration" use="optional"/>
-                <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
-                <xs:attribute name="ReturnTime" type="dateTime" use="optional"/>
-                <xs:attribute name="Start" type="dateTime" use="optional"/>
-                <xs:attribute name="End" type="dateTime" use="optional"/>
+                <xs:attribute name="End" type="dateTime" use="required"/>
+                <xs:attribute name="EndStatus" type="EnumEndStatus" use="required"/>
+                <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="refID" type="IDREF" use="optional"/>
+                <xs:attribute name="ReturnTime" type="dateTime" use="optional"/>
+                <xs:attribute name="Start" type="dateTime" use="required"/>
+                <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3728,7 +3703,7 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ResourceAudit ** -->
-    <xs:element name="ResourceAudit" type="ResourceAudit" substitutionGroup="Audit"/>
+    <xs:element name="ResourceAudit" type="ResourceAudit"/>
     <xs:complexType name="ResourceAudit">
         <xs:complexContent>
             <xs:extension base="Audit">
@@ -3736,6 +3711,11 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
                 </xs:sequence>
+                <xs:attribute name="AgentName" type="string" use="optional"/>
+                <xs:attribute name="AgentVersion" type="string" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="optional"/>
+                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+                <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                 <xs:attribute name="Consumption" type="EnumConsumption" use="optional"/>
                 <xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional"/>
                 <xs:attribute name="Reason" type="EnumReason" use="optional"/>
@@ -3902,14 +3882,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for SystemTimeSet ** -->
-    <xs:element name="SystemTimeSet">
-        <xs:complexType>
-            <xs:attribute name="OldTime" type="dateTime" use="optional"/>
-            <xs:attribute name="NewTime" type="dateTime" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for Tabs ** -->
     <xs:element name="Tabs">
@@ -4933,14 +4905,6 @@
             <xs:attribute name="MarginTop" type="double" use="optional"/>
             <xs:attribute name="MarginRight" type="double" use="optional"/>
             <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for CostCenter ** -->
-    <xs:element name="CostCenter">
-        <xs:complexType>
-            <xs:attribute name="CostCenterID" type="string" use="optional"/>
-            <xs:attribute name="Name" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 

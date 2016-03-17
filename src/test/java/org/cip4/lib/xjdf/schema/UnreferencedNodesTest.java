@@ -120,7 +120,7 @@ public class UnreferencedNodesTest {
         xPath.setNamespaceContext(nsManager);
 
         NodeList elements = (NodeList) xPath.evaluate(
-            "/xs:schema/xs:complexType",
+            "/xs:schema/xs:complexType[@Name!='SetType']",
             XJDF_SCHEMA,
             XPathConstants.NODESET
         );

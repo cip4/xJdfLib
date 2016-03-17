@@ -77,18 +77,6 @@ public class DateTimeTest {
 	}
 
 	@Test
-	@Ignore("time zone incompatibilities between JRE 7 and JRE 8")
-	public void dateTimeToStringVladivostok() throws Exception {
-        final String expected = "2015-08-06T18:55:00+10:00";
-
-        final String actual = new DateTime(2015, Calendar.AUGUST, 6, 8, 55, 0)
-            .toString(TimeZone.getTimeZone("Asia/Vladivostok"));
-
-		System.out.println("Result TimeZone 'Asia/Vladivostok': " + actual);
-		assertEquals("Date format is wrong.", expected, actual);
-	}
-
-	@Test
 	public void createDateTimeUTC() throws Exception {
 		final String dateTimeString = "2012-03-04T13:20:40Z";
 
