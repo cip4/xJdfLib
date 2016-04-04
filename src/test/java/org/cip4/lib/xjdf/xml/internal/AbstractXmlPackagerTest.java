@@ -1,159 +1,112 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
-import org.cip4.lib.xjdf.schema.EnumPreviewUsages;
 import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.uri.relativizer.AbsoluteURIRelativizer;
-import org.cip4.lib.xjdf.xml.XJdfNavigator;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.Test;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathConstants;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Collection;
+import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit-Test for AbstractXmlPackager
  */
 public class AbstractXmlPackagerTest {
 
-	private class MinimalXmlPackager extends AbstractXmlPackager {
-		public MinimalXmlPackager(final OutputStream out, final boolean withoutHierarchy) throws Exception {
-            super(out, withoutHierarchy);
-		}
-
-        @Override
-        public void packageXml(
-            final XmlNavigator nav,
-            final URI rootUri
-        ) throws PackagerException, XPathExpressionException {
-            throw new RuntimeException("not implemented");
+    private class MinimalXmlPackager extends AbstractXmlPackager {
+        MinimalXmlPackager(final OutputStream out) throws Exception {
+            super(out);
         }
     }
-
-    private static final AbsoluteURIRelativizer URI_RELATIVIZER = new AbsoluteURIRelativizer();
-
-    private static final URI CURRENT_DIR_URI = Paths.get(".").toUri();
 
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
+        final AbstractXmlPackager packager = new MinimalXmlPackager(out);
 
-        final URI xjdfUri = AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI();
-        final byte[] bytes = IOUtils.toByteArray(xjdfUri);
-        packager.packageXml(new XJdfNavigator(bytes, true), "document.xml", xjdfUri.resolve("."));
+        final InputStream xjdfInputStream = AbstractXmlPackagerTest.class.getResourceAsStream("../../relative.xjdf");
+        packager.packageXml(new XJdfParser().parseStream(xjdfInputStream), "document.xml");
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
-        assertEquals("artwork/test.pdf", zin.getNextEntry().getName());
-        assertEquals("artwork/test2.pdf", zin.getNextEntry().getName());
     }
 
     @Test
-    public void prepareForPackaging() throws Exception {
-        final OutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
-
-        final URI xjdfUri = AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI();
-        final byte[] bytes = IOUtils.toByteArray(xjdfUri);
-        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(bytes, true),
-            CURRENT_DIR_URI
+    public void packageXmlWritesAssets() throws Exception {
+        XJdfBuilder builder = new XJdfBuilder();
+        XJdfNodeFactory factory = new XJdfNodeFactory();
+        final String destination = "runList" + File.separator + "file.xjdf";
+        builder.addParameter(
+            factory.createRunList(
+                new URI(
+                    AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI(),
+                    Paths.get(destination)
+                )
+            )
         );
 
-        assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@ID"));
-
-        final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("./test.pdf", "artwork/test.pdf");
-        expectedFileRefs.put("subfolder/test2.pdf", "artwork/test2.pdf");
-        expectedFileRefs.put("./layout.jdf", "docs/layout.jdf");
-
-        assertEquals(expectedFileRefs, packagingData.fileRefs);
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final AbstractXmlPackager packager = new MinimalXmlPackager(out);
+        XJDF xjdf = builder.build();
+        packager.packageXml(
+            xjdf,
+            "document.xml"
+        );
+        final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
+        assertEquals("document.xml", zin.getNextEntry().getName());
+        assertEquals(destination, zin.getNextEntry().getName());
     }
 
     @Test
-    public void prepareForPackagingWithSpecialCharacters() throws Exception {
-        final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
-        xJdfBuilder
-            .addParameter(
-                new Preview()
-                    .withURL("directory/%5BXJDF_PSQ131S2%5D.pdf"),
-                new Part()
-                    .withProductPart("XJDF_PSQ131S2")
-                    .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
-            );
-        final XJDF xjdf = xJdfBuilder.build();
-
-        final OutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
-
-        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
-            CURRENT_DIR_URI
+    public void extract() throws Exception {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        AbstractXmlPackager packager = new MinimalXmlPackager(out);
+        XJdfBuilder builder = new XJdfBuilder();
+        XJdfNodeFactory factory = new XJdfNodeFactory();
+        final String destination = "runList" + File.separator + "file.xjdf";
+        builder.addParameter(
+            factory.createRunList(
+                new URI(
+                    AbstractXmlPackagerTest.class.getResource("../../relative.xjdf").toURI(),
+                    Paths.get(destination)
+                )
+            )
         );
-
-        assertEquals("XJDF_PSQ131S2", packagingData.nav.evaluateString("//xjdf:XJDF/@JobID"));
-
-        final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put("directory/%5BXJDF_PSQ131S2%5D.pdf", "preview/_XJDF_PSQ131S2_.pdf");
-
-        assertEquals(expectedFileRefs, packagingData.fileRefs);
+        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
+        final Collection<URI> uriCollection = packager.collectReferences(
+            (NodeList) jaxbNavigator.evaluate("//xjdf:FileSpec", XPathConstants.NODESET),
+            new AbstractXmlPackager.URIExtractor() {
+                @Override
+                public URI extract(final Node node) {
+                    return ((FileSpec) jaxbNavigator.getJAXBNode(node)).getURL();
+                }
+            }
+        );
+        assertEquals(1, uriCollection.size());
     }
 
     @Test
-    public void prepareForPackagingSkipsHttps() throws Exception {
-        final String urlUriString = "https://" +
-            "confluence.cip4.org" +
-            "/download/attachments/688513/XJDF-2.0-DRAFT-2015-10-16-BLD19.pdf?api=v2";
-        final String fileUriString = URI_RELATIVIZER.relativize(
-            CURRENT_DIR_URI,
-            Paths.get("directory/XJDF_PSQ131S2.pdf").toUri()
-        );
-
-        final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
-        xJdfBuilder
-            .addParameter(
-                new Preview()
-                    .withURL(fileUriString),
-                new Part()
-                    .withProductPart("XJDF_PSQ131S2")
-                    .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
-            );
-        xJdfBuilder
-            .addParameter(
-                new FileSpec()
-                    .withURL(urlUriString),
-                new Part()
-                    .withProductPart("XJDF_PSQ131S2")
-            );
-        final XJDF xjdf = xJdfBuilder.build();
-
-        final OutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out, false);
-
-        final AbstractXmlPackager.PreparedPackagingData packagingData = packager.prepareForPackaging(
-            new XJdfNavigator(new XJdfParser().parseXJdf(xjdf), true),
-            CURRENT_DIR_URI
-        );
-
-        assertEquals("preview/XJDF_PSQ131S2.pdf", packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:Preview/@URL"));
-        assertEquals(urlUriString, packagingData.nav.evaluateString("//xjdf:XJDF//xjdf:FileSpec/@URL"));
-
-        final Map<String, String> expectedFileRefs = new HashMap<>();
-        expectedFileRefs.put(fileUriString, "preview/XJDF_PSQ131S2.pdf");
-        assertEquals(expectedFileRefs, packagingData.fileRefs);
+    public void writeZipEntry() throws Exception {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        AbstractXmlPackager packager = new MinimalXmlPackager(outputStream);
+        final byte[] buf = {};
+        packager.writeZipEntry(new ZipEntry("Zippi"), new ByteArrayInputStream(buf));
+        ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(outputStream.toByteArray()));
+        assertEquals("Zippi", zipInputStream.getNextEntry().getName());
     }
 }
