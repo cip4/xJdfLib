@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * Adapter for the file references within XJDF context.
@@ -74,7 +75,12 @@ public class URI extends AbstractXJdfType<String, URI> {
 
     @Override
     public final URI unmarshal(final String v) throws Exception {
-        return new URI(new java.net.URI(v));
+        final java.net.URI source = new java.net.URI(v);
+        if (source.isAbsolute()) {
+            return new URI(source);
+        } else {
+            return new URI(source, Paths.get(source.getPath()));
+        }
     }
 
     @Override

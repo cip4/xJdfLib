@@ -37,9 +37,18 @@ public class URITest {
     }
 
     @Test
-    public void unmarshal() throws Exception {
+    public void unmarshalAbsoulteUri() throws Exception {
         URI uri = new URI();
-        assertNotNull(uri.unmarshal("MyParam"));
+        final URI result = uri.unmarshal(URITest.class.getResource("../test.xjdf").toURI().toASCIIString());
+        assertTrue(result.getSourceUri().isAbsolute());
+    }
+
+    @Test
+    public void unmarshalUri() throws Exception {
+        URI uri = new URI();
+        final URI result = uri.unmarshal("MyUri");
+        assertFalse(result.getSourceUri().isAbsolute());
+        assertEquals("MyUri", result.getDestinationPath().toString());
     }
 
     @Test(expected = URISyntaxException.class)

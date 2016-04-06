@@ -45,21 +45,28 @@
             <name>Stefan Meissner</name>
             <organization>flyeralarm GmbH</organization>
             <organizationUrl>https://www.flyeralarm.com</organizationUrl>
-            <email>stefan.meissner@flyeralarm.com</email>
+            <email>s.meissner@flyeralarm.com</email>
         </developer>
         <developer>
             <id>m.hartmann</id>
             <name>Michel Hartmann</name>
             <organization>flyeralarm GmbH</organization>
             <organizationUrl>https://www.flyeralarm.com</organizationUrl>
-            <email>michel.hartmann@flyeralarm.com</email>
+            <email>m.hartmann@flyeralarm.com</email>
         </developer>
         <developer>
             <id>j.hammett</id>
             <name>Jeffrey Hammett</name>
             <organization>flyeralarm GmbH</organization>
             <organizationUrl>https://www.flyeralarm.com</organizationUrl>
-            <email>jeffrey.hammett@flyeralarm.com</email>
+            <email>j.hammett@flyeralarm.com</email>
+        </developer>
+        <developer>
+            <id>a.eirich</id>
+            <name>Arthur Eirich</name>
+            <organization>flyeralarm GmbH</organization>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>a.eirich@flyeralarm.com</email>
         </developer>
     </developers>
     <build>
@@ -146,6 +153,12 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
         <!-- Apache Tools -->
         <dependency>
             <groupId>commons-io</groupId>
