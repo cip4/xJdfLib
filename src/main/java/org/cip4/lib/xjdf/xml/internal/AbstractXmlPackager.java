@@ -5,11 +5,11 @@ import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.xpath.XPathConstants;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,19 +33,19 @@ public abstract class AbstractXmlPackager {
     public static final Logger LOGGER = LoggerFactory.getLogger(AbstractXmlPackager.class);
 
     /**
-     * Interface for the extraction of file reference out of a node.
+     * Interface for the extraction of a file reference.
      *
      * @param <T> Object to extract the reference from.
      */
     interface URIExtractor<T> {
         /**
-         * Extracts the file reference out of a node.
+         * Extracts the file reference.
          *
-         * @param type Object to extract the reference from.
+         * @param xjdfElement XJDF Element to extract the reference from.
          *
          * @return Extracted reference.
          */
-        org.cip4.lib.xjdf.type.URI extract(T type);
+        org.cip4.lib.xjdf.type.URI extract(T xjdfElement);
     }
 
     /**
@@ -108,12 +108,12 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Packages an XJDF document to a zipped binary output stream.
+     * Packages an XML document to a zipped binary output stream.
      *
      * @param xjdf XJDF document to package.
      * @param docName File name of the document in the zip package.
      *
-     * @throws PackagerException If the XJDF document could not be packaged.
+     * @throws PackagerException If the XML document could not be packaged.
      */
     protected final void packageXml(
         final XJDF xjdf,
@@ -121,7 +121,8 @@ public abstract class AbstractXmlPackager {
     ) throws PackagerException {
         try {
             final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(xjdf);
-            Collection<org.cip4.lib.xjdf.type.URI> assetReferences = new LinkedList<>();
+            jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+            Collection<URI> assetReferences = new LinkedList<>();
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<Preview>() {
@@ -130,7 +131,7 @@ public abstract class AbstractXmlPackager {
                         return preview.getURL();
                     }
                 },
-                ((Object[]) jaxbNavigator.evaluate("//xjdf:Preview", XPathConstants.NODESET))
+                ((Object[]) jaxbNavigator.evaluateNodeList("//xjdf:Preview"))
                 )
             );
 
@@ -141,7 +142,7 @@ public abstract class AbstractXmlPackager {
                         return fileSpec.getURL();
                     }
                 },
-                ((Object[]) jaxbNavigator.evaluate("//xjdf:FileSpec", XPathConstants.NODESET))
+                ((Object[]) jaxbNavigator.evaluateNodeList("//xjdf:FileSpec"))
                 )
             );
 
@@ -152,14 +153,9 @@ public abstract class AbstractXmlPackager {
 
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(new XJdfParser().parseXJdf(xjdf)));
 
-            for (org.cip4.lib.xjdf.type.URI uri : assetReferences) {
+            for (URI uri : assetReferences) {
                 final Path destPath = uri.getDestinationPath();
-                LOGGER.debug(
-                    String.format(
-                        "Start writing the uri '%s'.",
-                        uri
-                    )
-                );
+                LOGGER.debug(String.format("Start processing uri '%s'.", uri));
                 if (destPath != null) {
                     try (InputStream inputStream = uri.getSourceUri().toURL().openStream()) {
                         writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
@@ -174,9 +170,9 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Collects uri references of a node list.
+     * Collects uri references.
      *
-     * @param extractor Extracts the references.
+     * @param extractor Object that extracts the references.
      * @param refs References to extract.
      *
      * @return Collected uri references.
@@ -199,7 +195,7 @@ public abstract class AbstractXmlPackager {
      *
      * @throws IOException If the content could not be read or written.
      */
-    final void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
+    private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
         zout.putNextEntry(zipEntry);
         IOUtils.copy(inputStream, zout);
     }

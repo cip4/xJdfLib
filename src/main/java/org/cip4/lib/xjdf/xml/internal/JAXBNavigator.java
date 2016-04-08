@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -8,15 +7,15 @@ import org.w3c.dom.NodeList;
 import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 /**
- * Navigator between java and xml representations of an entity.
+ * Navigator class which simplify XPath handling using any JAXB object.
  *
  * @param <T> Entity type.
  */
@@ -38,47 +37,62 @@ public class JAXBNavigator<T> {
     private final Binder<Node> binder;
 
     /**
-     * Constructor.
+     * Constructor. Performs all necessary steps to bind the jaxb object so xpath can be used to navigate within this
+     * jaxb object.
      *
-     * @param jaxbType The type to be bound.
+     * @param jaxbObj The jaxb object to be bound.
      *
      * @throws JAXBException If binding fails.
+     * @throws ParserConfigurationException If binding fails.
      */
-    public JAXBNavigator(final T jaxbType) throws JAXBException {
-        xPath = initXpath();
+    public JAXBNavigator(final T jaxbObj) throws JAXBException, ParserConfigurationException {
+        xPath = createXPath();
         document = createDocument();
-        binder = initBinder((Class<T>) jaxbType.getClass());
-        binder.marshal(jaxbType, document);
+        binder = createBinder((Class<T>) jaxbObj.getClass());
+        binder.marshal(jaxbObj, document);
     }
 
     /**
-     * Evaluates an XPath expression. This method works only for xml elements. Xml attributes are <b>not</b> supported.
+     * Evaluates an XPath expression. This method works only for xml nodes.
      *
      * @param xPathExpression The expression to evaluate.
-     * @param returnType The QName of the return type.
      *
      * @return Evaluation result
      * @throws XPathExpressionException If an error occurs in the XPath expression.
      */
-    public final Object evaluate(final String xPathExpression, final QName returnType) throws XPathExpressionException {
-        final Object evaluation = xPath.evaluate(xPathExpression, document, returnType);
-        if (evaluation instanceof Node) {
-            return binder.getJAXBNode((Node) evaluation);
-        } else if (evaluation instanceof NodeList) {
-            final NodeList nodeList = (NodeList) evaluation;
-            Object[] collection = new Object[nodeList.getLength()];
-            for (int i = 0; i < nodeList.getLength(); i++) {
-                final Object jaxbNode = binder.getJAXBNode(nodeList.item(i));
-                collection[i] = jaxbNode;
-            }
-            return collection;
+    public final Object evaluateNode(final String xPathExpression) throws XPathExpressionException {
+        final Node node = (Node) xPath.evaluate(xPathExpression, document, XPathConstants.NODE);
+        return binder.getJAXBNode(node);
+    }
+
+    /**
+     * Evaluates an XPath expression. This method works only for xml node lists.
+     *
+     * @param xPathExpression The expression to evaluate.
+     *
+     * @return Evaluation result
+     * @throws XPathExpressionException If an error occurs in the XPath expression.
+     */
+    public final Object evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
+        final NodeList nodeList = (NodeList) xPath.evaluate(xPathExpression, document, XPathConstants.NODESET);
+        Object[] collection = new Object[nodeList.getLength()];
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            final Object jaxbNode = binder.getJAXBNode(nodeList.item(i));
+            collection[i] = jaxbNode;
         }
-        throw new IllegalArgumentException(
-            String.format(
-                "JAXBNavigator only supports node and nodeset as return type. Current type is '%s'",
-                returnType
-            )
-        );
+        return collection;
+    }
+
+    /**
+     * Adds a namespace to the xpath.
+     *
+     * @param prefix Namespace prefix.
+     * @param namespaceUri URI of the namespace.
+     */
+    public final void addNamespace(final String prefix, final String namespaceUri) {
+        final NamespaceManager namespaceManager = new NamespaceManager();
+        namespaceManager.addNamespace(prefix, namespaceUri);
+        xPath.setNamespaceContext(namespaceManager);
     }
 
     /**
@@ -88,7 +102,7 @@ public class JAXBNavigator<T> {
      *
      * @return The binder.
      */
-    private Binder<Node> initBinder(final Class<T> jaxbType) {
+    private Binder<Node> createBinder(final Class<T> jaxbType) {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(jaxbType);
             return jaxbContext.createBinder();
@@ -101,15 +115,12 @@ public class JAXBNavigator<T> {
      * Creates an empty W3C document.
      *
      * @return The W3C document
+     * @throws ParserConfigurationException - If creating a W3C document fails.
      */
-    private Document createDocument() {
-        try {
-            final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-            documentBuilderFactory.setNamespaceAware(true);
-            return documentBuilderFactory.newDocumentBuilder().newDocument();
-        } catch (ParserConfigurationException e) {
-            throw new IllegalArgumentException("Could not initialize the document.", e);
-        }
+    private Document createDocument() throws ParserConfigurationException {
+        final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        documentBuilderFactory.setNamespaceAware(true);
+        return documentBuilderFactory.newDocumentBuilder().newDocument();
     }
 
     /**
@@ -117,12 +128,9 @@ public class JAXBNavigator<T> {
      *
      * @return The XPath
      */
-    private static XPath initXpath() {
+
+    private static XPath createXPath() {
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
-        final NamespaceManager namespaceManager = new NamespaceManager();
-        namespaceManager.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-        xPath.setNamespaceContext(namespaceManager);
-        return xPath;
+        return xPathFactory.newXPath();
     }
 }

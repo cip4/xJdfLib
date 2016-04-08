@@ -5,6 +5,7 @@ import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.Test;
 
 import javax.xml.xpath.XPathConstants;
@@ -88,6 +89,7 @@ public class AbstractXmlPackagerTest {
         XJdfNodeFactory factory = new XJdfNodeFactory();
         builder.addParameter(factory.createRunList(new URI(new java.net.URI("MyUri"))));
         final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
+        jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Collection<URI> uriCollection = packager.collectReferences(
             new AbstractXmlPackager.URIExtractor<FileSpec>() {
                 @Override
@@ -95,18 +97,8 @@ public class AbstractXmlPackagerTest {
                     return fileSpec.getURL();
                 }
             },
-            new Object[]{jaxbNavigator.evaluate("//xjdf:FileSpec", XPathConstants.NODE)}
+            new Object[]{jaxbNavigator.evaluateNode("//xjdf:FileSpec")}
         );
         assertEquals(1, uriCollection.size());
-    }
-
-    @Test
-    public void writeZipEntry() throws Exception {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        AbstractXmlPackager packager = new MinimalXmlPackager(outputStream);
-        final byte[] buf = {};
-        packager.writeZipEntry(new ZipEntry("Zippi"), new ByteArrayInputStream(buf));
-        ZipInputStream zipInputStream = new ZipInputStream(new ByteArrayInputStream(outputStream.toByteArray()));
-        assertEquals("Zippi", zipInputStream.getNextEntry().getName());
     }
 }

@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- * Adapter for the file references within XJDF context.
+ * Implementation of the XJDF URI data type.
  */
 public class URI extends AbstractXJdfType<String, URI> {
 
@@ -26,19 +26,19 @@ public class URI extends AbstractXJdfType<String, URI> {
     }
 
     /**
-     * Constructor.
+     * Constructor. Using this constructor will prevent packaging the file.
      *
-     * @param sourceUri Source uri.
+     * @param sourceUri Source uri of the file.
      */
     public URI(final java.net.URI sourceUri) {
         this(sourceUri, null);
     }
 
     /**
-     * Constructor.
+     * Constructor. Using this constructor the file will be packaged into given destination path.
      *
      * @param sourceUri Source uri.
-     * @param destPath Destination path.
+     * @param destPath Destination path. Should be given in case the file has to be packaged.
      */
     public URI(final java.net.URI sourceUri, final Path destPath) {
         this.sourceUri = sourceUri;
