@@ -15,7 +15,7 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 /**
- * Navigator class which simplify XPath handling using any JAXB object.
+ * Navigator class which simplifies XPath handling using any JAXB object.
  *
  * @param <T> Entity type.
  */
@@ -37,8 +37,12 @@ public class JAXBNavigator<T> {
     private final Binder<Node> binder;
 
     /**
-     * Constructor. Performs all necessary steps to bind the jaxb object so xpath can be used to navigate within this
-     * jaxb object.
+     * Namespace manager.
+     */
+    private NamespaceManager namespaceManager = new NamespaceManager();
+
+    /**
+     * Constructor performing the setup for simplifying XPath handling using any JAXB object.
      *
      * @param jaxbObj The jaxb object to be bound.
      *
@@ -73,7 +77,7 @@ public class JAXBNavigator<T> {
      * @return Evaluation result
      * @throws XPathExpressionException If an error occurs in the XPath expression.
      */
-    public final Object evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
+    public final Object[] evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
         final NodeList nodeList = (NodeList) xPath.evaluate(xPathExpression, document, XPathConstants.NODESET);
         Object[] collection = new Object[nodeList.getLength()];
         for (int i = 0; i < nodeList.getLength(); i++) {
@@ -90,7 +94,6 @@ public class JAXBNavigator<T> {
      * @param namespaceUri URI of the namespace.
      */
     public final void addNamespace(final String prefix, final String namespaceUri) {
-        final NamespaceManager namespaceManager = new NamespaceManager();
         namespaceManager.addNamespace(prefix, namespaceUri);
         xPath.setNamespaceContext(namespaceManager);
     }

@@ -26,7 +26,7 @@ public class URI extends AbstractXJdfType<String, URI> {
     }
 
     /**
-     * Constructor. Using this constructor will prevent packaging the file.
+     * Constructor. Using this constructor will not package the file.
      *
      * @param sourceUri Source uri of the file.
      */

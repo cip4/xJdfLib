@@ -25,16 +25,6 @@ public class XJdfPackager extends AbstractXmlPackager {
     }
 
     /**
-     * Create a new XJdfPackager.
-     *
-     * @param out The underlying OutputStream to write the package to.
-     * @param withoutHierarchy Put all files into the zip root.
-     */
-    public XJdfPackager(final OutputStream out, final boolean withoutHierarchy) {
-        super(out);
-    }
-
-    /**
      * Packages an XML Document to a zipped binary output stream.
      *
      * @param xjdf The XJDF document to package.
@@ -70,5 +60,10 @@ public class XJdfPackager extends AbstractXmlPackager {
         }
 
         packageXml(xjdf, docName);
+    }
+
+    @Override
+    protected final byte[] parseDocument(final Object document) throws Exception {
+        return new XJdfParser().parseXJdf((XJDF) document);
     }
 }

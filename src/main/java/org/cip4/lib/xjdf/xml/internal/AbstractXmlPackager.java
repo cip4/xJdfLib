@@ -6,7 +6,6 @@ import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,8 +23,10 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * Packaging logic for XML Documents. Package an XML with all references in a ZIP Package.
+ *
+ * @param <T> Object type to create the abstract xml packager for.
  */
-public abstract class AbstractXmlPackager {
+public abstract class AbstractXmlPackager<T> {
 
     /**
      * Logger.
@@ -110,18 +111,19 @@ public abstract class AbstractXmlPackager {
     /**
      * Packages an XML document to a zipped binary output stream.
      *
-     * @param xjdf XJDF document to package.
+     * @param document Document to package.
      * @param docName File name of the document in the zip package.
      *
      * @throws PackagerException If the XML document could not be packaged.
      */
     protected final void packageXml(
-        final XJDF xjdf,
+        final T document,
         final String docName
     ) throws PackagerException {
         try {
-            final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(xjdf);
+            final JAXBNavigator<T> jaxbNavigator = new JAXBNavigator<>(document);
             jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+            jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
             Collection<URI> assetReferences = new LinkedList<>();
 
             assetReferences.addAll(collectReferences(
@@ -131,7 +133,7 @@ public abstract class AbstractXmlPackager {
                         return preview.getURL();
                     }
                 },
-                ((Object[]) jaxbNavigator.evaluateNodeList("//xjdf:Preview"))
+                jaxbNavigator.evaluateNodeList("//xjdf:Preview")
                 )
             );
 
@@ -142,23 +144,29 @@ public abstract class AbstractXmlPackager {
                         return fileSpec.getURL();
                     }
                 },
-                ((Object[]) jaxbNavigator.evaluateNodeList("//xjdf:FileSpec"))
+                jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
                 )
             );
 
-            final URI commentURL = xjdf.getCommentURL();
-            if (commentURL != null) {
-                assetReferences.add(commentURL);
-            }
+            assetReferences.addAll(collectReferences(
+                new URIExtractor<XJDF>() {
+                    @Override
+                    public org.cip4.lib.xjdf.type.URI extract(final XJDF xjdf) {
+                        return xjdf.getCommentURL();
+                    }
+                },
+                new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
+                )
+            );
 
-            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(new XJdfParser().parseXJdf(xjdf)));
+            writeZipEntry(new ZipEntry(docName), parseDocument(document));
 
             for (URI uri : assetReferences) {
                 final Path destPath = uri.getDestinationPath();
                 LOGGER.debug(String.format("Start processing uri '%s'.", uri));
                 if (destPath != null) {
                     try (InputStream inputStream = uri.getSourceUri().toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
+                        writeZipEntry(new ZipEntry(destPath.toString()), IOUtils.toByteArray(inputStream));
                     }
                 }
             }
@@ -191,12 +199,22 @@ public abstract class AbstractXmlPackager {
      * Writes the content of the passed input stream to the given zip entry.
      *
      * @param zipEntry The zip entry to write to.
-     * @param inputStream The input stream to read content from.
+     * @param bytes Bytes to write to the zip entry.
      *
      * @throws IOException If the content could not be read or written.
      */
-    private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
+    private void writeZipEntry(final ZipEntry zipEntry, final byte[] bytes) throws IOException {
         zout.putNextEntry(zipEntry);
-        IOUtils.copy(inputStream, zout);
+        IOUtils.copy(new ByteArrayInputStream(bytes), zout);
     }
+
+    /**
+     * Parses an XML document into a byte array.
+     *
+     * @param document XML document to parse.
+     *
+     * @return Parsed document as byte array.
+     * @throws Exception If parsing fails.
+     */
+    protected abstract byte[] parseDocument(final T document) throws Exception;
 }
