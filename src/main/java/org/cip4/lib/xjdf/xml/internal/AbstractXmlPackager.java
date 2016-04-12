@@ -159,14 +159,14 @@ public abstract class AbstractXmlPackager<T> {
                 )
             );
 
-            writeZipEntry(new ZipEntry(docName), parseDocument(document));
+            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
             for (URI uri : assetReferences) {
                 final Path destPath = uri.getDestinationPath();
                 LOGGER.debug(String.format("Start processing uri '%s'.", uri));
                 if (destPath != null) {
                     try (InputStream inputStream = uri.getSourceUri().toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(destPath.toString()), IOUtils.toByteArray(inputStream));
+                        writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
                     }
                 }
             }
@@ -199,13 +199,13 @@ public abstract class AbstractXmlPackager<T> {
      * Writes the content of the passed input stream to the given zip entry.
      *
      * @param zipEntry The zip entry to write to.
-     * @param bytes Bytes to write to the zip entry.
+     * @param inputStream Input stream to write to the zip entry.
      *
      * @throws IOException If the content could not be read or written.
      */
-    private void writeZipEntry(final ZipEntry zipEntry, final byte[] bytes) throws IOException {
+    private void writeZipEntry(final ZipEntry zipEntry, final InputStream inputStream) throws IOException {
         zout.putNextEntry(zipEntry);
-        IOUtils.copy(new ByteArrayInputStream(bytes), zout);
+        IOUtils.copy(inputStream, zout);
     }
 
     /**
