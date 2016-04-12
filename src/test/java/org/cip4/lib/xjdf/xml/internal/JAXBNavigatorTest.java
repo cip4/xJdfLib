@@ -12,9 +12,19 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class JAXBNavigatorTest {
+
+    @Test
+    public void getRoot() throws Exception {
+
+        XJdfBuilder builder = new XJdfBuilder();
+        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+
+        assertNotNull(navigator.getRoot());
+    }
 
     @Test
     public void evaluateNode() throws Exception {
@@ -72,7 +82,7 @@ public class JAXBNavigatorTest {
         assertEquals(fileSpecUrl, ((FileSpec) navigator.evaluateNode("//xjdf:FileSpec")).getURL());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = XPathExpressionException.class)
     public void addNamespaceOmitted() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final URI fileSpecUrl = new URI(new java.net.URI("MyUri"));

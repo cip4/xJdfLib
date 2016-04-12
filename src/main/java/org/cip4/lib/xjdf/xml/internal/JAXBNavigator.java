@@ -22,6 +22,11 @@ import javax.xml.xpath.XPathFactory;
 public class JAXBNavigator<T> {
 
     /**
+     * JAXB object to bind.
+     */
+    private T jaxbObj;
+
+    /**
      * XPath.
      */
     private final XPath xPath;
@@ -35,7 +40,6 @@ public class JAXBNavigator<T> {
      * Binder for the node.
      */
     private final Binder<Node> binder;
-
     /**
      * Namespace manager.
      */
@@ -50,6 +54,7 @@ public class JAXBNavigator<T> {
      * @throws ParserConfigurationException If binding fails.
      */
     public JAXBNavigator(final T jaxbObj) throws JAXBException, ParserConfigurationException {
+        this.jaxbObj = jaxbObj;
         xPath = createXPath();
         document = createDocument();
         binder = createBinder((Class<T>) jaxbObj.getClass());
@@ -95,7 +100,15 @@ public class JAXBNavigator<T> {
      */
     public final void addNamespace(final String prefix, final String namespaceUri) {
         namespaceManager.addNamespace(prefix, namespaceUri);
-        xPath.setNamespaceContext(namespaceManager);
+    }
+
+    /**
+     * Get the JAXB object.
+     *
+     * @return JAXB object.
+     */
+    public final T getRoot() {
+        return jaxbObj;
     }
 
     /**
@@ -131,9 +144,10 @@ public class JAXBNavigator<T> {
      *
      * @return The XPath
      */
-
-    private static XPath createXPath() {
+    private XPath createXPath() {
         XPathFactory xPathFactory = XPathFactory.newInstance();
-        return xPathFactory.newXPath();
+        final XPath result = xPathFactory.newXPath();
+        result.setNamespaceContext(namespaceManager);
+        return result;
     }
 }
