@@ -40,6 +40,7 @@ public class JAXBNavigator<T> {
      * Binder for the node.
      */
     private final Binder<Node> binder;
+
     /**
      * Namespace manager.
      */
