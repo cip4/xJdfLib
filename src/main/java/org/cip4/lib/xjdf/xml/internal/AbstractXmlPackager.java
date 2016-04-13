@@ -190,7 +190,9 @@ public abstract class AbstractXmlPackager<T> {
     ) {
         Collection<org.cip4.lib.xjdf.type.URI> result = new ArrayList<>();
         for (Object ref : refs) {
-            result.add(extractor.extract(ref));
+            if (ref != null) {
+                result.add(extractor.extract(ref));
+            }
         }
         return result;
     }

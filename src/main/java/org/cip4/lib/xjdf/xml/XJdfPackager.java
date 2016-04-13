@@ -41,7 +41,7 @@ public class XJdfPackager extends AbstractXmlPackager {
     /**
      * Packages an XML Document to a zipped binary output stream.
      *
-     * @param xjdf The XJDF document to package.
+     * @param xjdf The XJDF to package.
      * @param docName Document's name in the zipped package.
      *
      * @throws PackagerException If the XML document could not be packaged.
