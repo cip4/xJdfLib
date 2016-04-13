@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.xml.internal;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -20,6 +21,7 @@ import java.util.zip.ZipInputStream;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class AbstractXmlPackagerTest {
 
@@ -108,6 +110,54 @@ public class AbstractXmlPackagerTest {
         assertEquals(preview, Paths.get(zin.getNextEntry().getName()));
         assertEquals(fileSpec, Paths.get(zin.getNextEntry().getName()));
         assertEquals(doc, Paths.get(zin.getNextEntry().getName()));
+    }
+
+    @Test
+    public void collectReferences() throws Exception {
+        final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
+        final Path preview = Paths.get("preview" + File.separator + "datei.pdf");
+        XJdfBuilder builder = new XJdfBuilder();
+        builder.addParameter(
+            new XJdfNodeFactory().createPreview(
+                new URI(
+                    sourceUri,
+                    preview
+                )
+            )
+        );
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
+
+        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
+        jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+        assertEquals(
+            1,
+            packager.collectReferences(
+                new AbstractXmlPackager.URIExtractor<Preview>() {
+                    @Override
+                    public URI extract(final Preview previewParam) {
+                        return previewParam.getURL();
+                    }
+
+                },
+                new Object[]{jaxbNavigator.evaluateNode("//xjdf:Preview")}
+            ).size()
+        );
+    }
+
+    @Test
+    public void collectReferencesRefIsNull() throws Exception {
+        AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
+        assertTrue(packager.collectReferences(
+                new AbstractXmlPackager.URIExtractor<Preview>() {
+                    @Override
+                    public URI extract(final Preview previewParam) {
+                        return previewParam.getURL();
+                    }
+
+                },
+                new Object[]{null}
+            ).isEmpty()
+        );
     }
 
     @Test
