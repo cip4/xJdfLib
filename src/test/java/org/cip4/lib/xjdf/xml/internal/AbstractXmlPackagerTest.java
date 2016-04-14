@@ -113,7 +113,7 @@ public class AbstractXmlPackagerTest {
     }
 
     @Test
-    public void collectReferences() throws Exception {
+    public void collectReferencesExtractedValueExists() throws Exception {
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final Path preview = Paths.get("preview" + File.separator + "datei.pdf");
         XJdfBuilder builder = new XJdfBuilder();
@@ -145,17 +145,18 @@ public class AbstractXmlPackagerTest {
     }
 
     @Test
-    public void collectReferencesRefIsNull() throws Exception {
+    public void collectReferencesExtractedValueIsNull() throws Exception {
         AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
+        XJdfBuilder builder = new XJdfBuilder();
         assertTrue(packager.collectReferences(
-                new AbstractXmlPackager.URIExtractor<Preview>() {
+                new AbstractXmlPackager.URIExtractor<XJDF>() {
                     @Override
-                    public URI extract(final Preview previewParam) {
-                        return previewParam.getURL();
+                    public URI extract(final XJDF xjdf) {
+                        return xjdf.getCommentURL();
                     }
 
                 },
-                new Object[]{null}
+                new Object[]{builder.build()}
             ).isEmpty()
         );
     }
