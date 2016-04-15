@@ -2,7 +2,7 @@ package org.cip4.lib.xjdf.comparator;
 
 import java.util.Comparator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.schema.SetType;
 
 /**

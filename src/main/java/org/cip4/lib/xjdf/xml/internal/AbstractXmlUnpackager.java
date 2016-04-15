@@ -22,7 +22,7 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Unpackaging logic for packages.
@@ -78,7 +78,7 @@ public abstract class AbstractXmlUnpackager {
     /**
      * Unpackages a ZIP Package to a temporarily directory.
      *
-     * @param Application name.
+     * @param appName Application name.
      *
      * @return Path to master file.
      * @throws IOException
@@ -97,7 +97,6 @@ public abstract class AbstractXmlUnpackager {
     /**
      * Unpackages a ZIP Package.
      *
-     * @param pathPgk Path to ZIP Package.
      * @param targetDir Target destionation.
      *
      * @return Path to master file.
@@ -140,8 +139,6 @@ public abstract class AbstractXmlUnpackager {
     /**
      * Find the master document path in package file.
      *
-     * @param extension Filename extension of the master file.
-     *
      * @return The master document as byte array.
      * @throws IOException Is thrown in case an IOExcetion occurs.
      */
@@ -169,8 +166,6 @@ public abstract class AbstractXmlUnpackager {
 
     /**
      * Find the master document in package file.
-     *
-     * @param extension Filename extension of the master file.
      *
      * @return The master document as byte array.
      * @throws IOException Is thrown in case an IOExcetion occurs.
