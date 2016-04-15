@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -7,12 +8,16 @@ import org.w3c.dom.NodeList;
 import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
+import java.lang.reflect.Field;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Navigator class which simplifies XPath handling using any JAXB object.
@@ -20,6 +25,11 @@ import javax.xml.xpath.XPathFactory;
  * @param <T> Entity type.
  */
 public class JAXBNavigator<T> {
+
+    /**
+     * Regex to identify xpath expressions with attribute.
+     */
+    private static final Pattern XPATH_WITH_ATTR_PATTERN = Pattern.compile("^(.+)(/@[a-zA-Z0-9_-]+)$");
 
     /**
      * JAXB object to bind.
@@ -34,7 +44,7 @@ public class JAXBNavigator<T> {
     /**
      * W3C Document.
      */
-    private final Document document;
+    private Document document;
 
     /**
      * Binder for the node.
@@ -57,13 +67,96 @@ public class JAXBNavigator<T> {
     public JAXBNavigator(final T jaxbObj) throws JAXBException, ParserConfigurationException {
         this.jaxbObj = jaxbObj;
         xPath = createXPath();
-        document = createDocument();
         binder = createBinder((Class<T>) jaxbObj.getClass());
-        binder.marshal(jaxbObj, document);
+        sync();
+
     }
 
     /**
-     * Evaluates an XPath expression. This method works only for xml nodes.
+     * Evaluates an XPath expression.
+     *
+     * @param xPathExpression The expression to evaluate.
+     *
+     * @return Evaluation result
+     * @throws XPathExpressionException If an error occurs in the XPath expression.
+     */
+    private Object evaluate(final String xPathExpression) throws XPathExpressionException {
+        final Matcher matcher = XPATH_WITH_ATTR_PATTERN.matcher(xPathExpression);
+
+        if (matcher.matches()) {
+            final Node node = (Node) xPath.evaluate(matcher.group(1), document, XPathConstants.NODE);
+            if (node != null) {
+                final Object ownerObj = binder.getJAXBNode(node);
+
+                if (ownerObj != null) {
+                    final String fieldName = matcher.group(2).substring(2);
+
+                    final Field[] fields = FieldUtils.getFieldsWithAnnotation(ownerObj.getClass(), XmlAttribute.class);
+                    for (final Field field : fields) {
+                        final XmlAttribute xmlAttribute = field.getAnnotation(XmlAttribute.class);
+                        if (fieldName.equals(xmlAttribute.name())) {
+                            try {
+                                return FieldUtils.readField(field, ownerObj, true);
+                            } catch (IllegalAccessException e) {
+                                throw new RuntimeException(
+                                    String.format("Could not get value from field '%s'.", field.getName()),
+                                    e
+                                );
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        final Node node = (Node) xPath.evaluate(xPathExpression, document, XPathConstants.NODE);
+        if (node == null) {
+            return null;
+        }
+
+        return binder.getJAXBNode(node);
+    }
+
+    /**
+     * Evaluates an XPath expression and returns an Integer value as result.
+     *
+     * @param xPathExpression The expression to evaluate.
+     *
+     * @return Evaluation result as Integer
+     * @throws XPathExpressionException If an error occurs in the XPath expression.
+     */
+    public final Integer evaluateInt(final String xPathExpression) throws XPathExpressionException {
+        return (Integer) evaluate(xPathExpression);
+    }
+
+    /**
+     * Evaluates an XPath expression and returns an Double value as result.
+     *
+     * @param xPathExpression The expression to evaluate.
+     *
+     * @return Evaluation result as Double
+     * @throws XPathExpressionException If an error occurs in the XPath expression.
+     */
+    public final Double evaluateDouble(final String xPathExpression) throws XPathExpressionException {
+        return (Double) evaluate(xPathExpression);
+    }
+
+    /**
+     * Evaluates an XPath expression and returns an String value as result.
+     *
+     * @param xPathExpression The expression to evaluate.
+     *
+     * @return Evaluation result as String
+     * @throws XPathExpressionException If an error occurs in the XPath expression.
+     */
+    public final String evaluateString(final String xPathExpression) throws XPathExpressionException {
+        return (String) evaluate(xPathExpression);
+    }
+
+    /**
+     * Evaluates an XPath expression and returns the Object.
      *
      * @param xPathExpression The expression to evaluate.
      *
@@ -71,8 +164,7 @@ public class JAXBNavigator<T> {
      * @throws XPathExpressionException If an error occurs in the XPath expression.
      */
     public final Object evaluateNode(final String xPathExpression) throws XPathExpressionException {
-        final Node node = (Node) xPath.evaluate(xPathExpression, document, XPathConstants.NODE);
-        return binder.getJAXBNode(node);
+        return evaluate(xPathExpression);
     }
 
     /**
@@ -98,9 +190,12 @@ public class JAXBNavigator<T> {
      *
      * @param prefix Namespace prefix.
      * @param namespaceUri URI of the namespace.
+     *
+     * @return this JAXBNavigator
      */
-    public final void addNamespace(final String prefix, final String namespaceUri) {
+    public final JAXBNavigator<T> addNamespace(final String prefix, final String namespaceUri) {
         namespaceManager.addNamespace(prefix, namespaceUri);
+        return this;
     }
 
     /**
@@ -150,5 +245,19 @@ public class JAXBNavigator<T> {
         final XPath result = xPathFactory.newXPath();
         result.setNamespaceContext(namespaceManager);
         return result;
+    }
+
+    /**
+     * Sync changes made on the object graph.
+     *
+     * @return this JAXBNavigator
+     * @throws JAXBException If any unexpected problem occurs during the marshalling.
+     * @throws ParserConfigurationException If creating a W3C document fails.
+     */
+    public final JAXBNavigator<T> sync() throws JAXBException, ParserConfigurationException {
+        document = createDocument();
+        binder.marshal(jaxbObj, document);
+
+        return this;
     }
 }
