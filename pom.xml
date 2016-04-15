@@ -68,6 +68,13 @@
             <organizationUrl>https://www.flyeralarm.com</organizationUrl>
             <email>jeffrey.hammett@flyeralarm.com</email>
         </developer>
+        <developer>
+            <id>a.eirich</id>
+            <name>Arthur Eirich</name>
+            <organization>flyeralarm GmbH</organization>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>arthur.eirich@flyeralarm.com</email>
+        </developer>
     </developers>
     <build>
         <resources>
@@ -166,6 +173,12 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
         <!-- Apache Tools -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -173,9 +186,9 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
         <!-- JAXB -->
         <dependency>

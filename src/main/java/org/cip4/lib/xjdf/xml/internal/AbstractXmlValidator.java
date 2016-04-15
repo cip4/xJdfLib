@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;

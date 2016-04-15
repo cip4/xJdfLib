@@ -1,15 +1,14 @@
 package org.cip4.lib.xjdf.xml;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 import org.cip4.lib.xjdf.xml.internal.PackagerException;
-import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.OutputStream;
-import java.net.URI;
 
 /**
  * Packaging logic for XJDF Documents. Package an XJDF with all references in a ZIP Package.
@@ -19,70 +18,52 @@ public class XJdfPackager extends AbstractXmlPackager {
     /**
      * Create a new XJdfPackager.
      *
-     * @param out     The underlying OutputStream to write the package to.
+     * @param out The underlying OutputStream to write the package to.
      */
     public XJdfPackager(final OutputStream out) {
-        super(out, false);
+        super(out);
     }
 
     /**
-     * Create a new XJdfPackager.
+     * Packages an XML Document to a zipped binary output stream.
      *
-     * @param out     The underlying OutputStream to write the package to.
-     * @param withoutHierarchy Put all files into the zip root.
-     */
-    public XJdfPackager(final OutputStream out, final boolean withoutHierarchy) {
-        super(out, withoutHierarchy);
-    }
-
-    @Override
-    public final void packageXml(
-        final XmlNavigator xJdfNavigator,
-        final URI rootUri
-    ) throws PackagerException, XPathExpressionException {
-        packageXJdf((XJdfNavigator) xJdfNavigator, rootUri);
-    }
-
-    /**
-     * Packages an XJDF Document to a zipped binary output stream.
-     *
-     * @param xJdfNavigator The XjdfNavigator containing the data.
-     * @param rootUri The root URI to use when dealing with relative URIs.
+     * @param xjdf The XJDF document to package.
      *
      * @throws PackagerException If the XML document could not be packaged.
      * @throws XPathExpressionException If the JobId of the XJDF could not be read.
      */
-    public final void packageXJdf(
-        final XJdfNavigator xJdfNavigator,
-        final URI rootUri
+    public final void packageXjdf(
+        final XJDF xjdf
     ) throws PackagerException, XPathExpressionException {
-        final String jobId = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
-        packageXJdf(xJdfNavigator, jobId, rootUri);
+        packageXjdf(xjdf, xjdf.getJobID());
     }
 
-	/**
-	 * Packages an XJDF Document to a zipped binary output stream.
+    /**
+     * Packages an XML Document to a zipped binary output stream.
      *
-	 * @param xJdfNavigator The XjdfNavigator containing the data.
-	 * @param docName Documents name in ZIP Package.
-     * @param rootUri The root URI to use when dealing with relative URIs.
+     * @param xjdf The XJDF to package.
+     * @param docName Document's name in the zipped package.
      *
-	 * @throws PackagerException If the XJDF could not be packaged.
-	 */
-	public final void packageXJdf(
-        final XJdfNavigator xJdfNavigator,
-        final String docName,
-        final URI rootUri
-    ) throws PackagerException {
-        String tmpDocName = docName;
-        if (StringUtils.isBlank(tmpDocName)) {
-            tmpDocName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
+     */
+    public final void packageXjdf(
+        final XJDF xjdf,
+        String docName
+    ) throws PackagerException, XPathExpressionException {
+        if (StringUtils.isBlank(docName)) {
+            docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
         } else {
-            if (StringUtils.isBlank(FilenameUtils.getExtension(tmpDocName))) {
-                tmpDocName += ".xjdf";
+            if (StringUtils.isBlank(FilenameUtils.getExtension(docName))) {
+                docName += ".xjdf";
             }
         }
 
-        packageXml(xJdfNavigator, tmpDocName, rootUri);
-	}
+        packageXml(xjdf, docName);
+    }
+
+    @Override
+    protected final byte[] parseDocument(final Object document) throws Exception {
+        return new XJdfParser().parseXJdf((XJDF) document);
+    }
 }

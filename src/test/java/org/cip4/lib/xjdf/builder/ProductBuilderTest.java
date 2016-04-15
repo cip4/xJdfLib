@@ -19,11 +19,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
 
-/**
- * JUnit test case for Product Builder class.
- * @author s.meissner
- * @date 05.03.2012
- */
 public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     private final static String RES_XJDF = "/org/cip4/lib/xjdf/JOB_1.xjdf";
@@ -48,9 +43,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         productBuilder = null;
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.builder.ProductBuilder#initAttributes(java.lang.Integer)}.
-     */
     @Test
     public void testInitAttributes() throws Exception {
         // arrange
@@ -60,16 +52,12 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         productBuilder = new ProductBuilder(AMOUNT);
 
         // arrange
-        byte[] bytes = marsahlResult(productBuilder);
+        byte[] bytes = marshalResult(productBuilder);
 
         String actual = getXPathValue(bytes, "/xjdf:Product/@Amount");
         Assert.assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.builder.ProductBuilder#addIntent(org.cip4.lib.xjdf.schema.jdf.IntentType)}.
-     * @throws Exception
-     */
     @Test
     public void testAddIntent() throws Exception {
 
@@ -88,7 +76,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         productBuilder.addIntent(bindingIntent);
 
         // arrange
-        byte[] bytes = marsahlResult(productBuilder);
+        byte[] bytes = marshalResult(productBuilder);
         String actual;
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:MediaIntent/@Weight");

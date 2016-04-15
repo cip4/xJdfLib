@@ -1,33 +1,13 @@
 package org.cip4.lib.xjdf;
 
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ChildProduct;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.ContentObject;
-import org.cip4.lib.xjdf.schema.CustomerInfo;
-import org.cip4.lib.xjdf.schema.EnumBindingOrder;
-import org.cip4.lib.xjdf.schema.EnumEdge;
-import org.cip4.lib.xjdf.schema.EnumSides;
-import org.cip4.lib.xjdf.schema.EnumSurface;
-import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MarkObject;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.ProductionIntent;
-import org.cip4.lib.xjdf.schema.ProofingIntent;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.SurfaceColor;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
 import org.junit.Before;
@@ -36,7 +16,10 @@ import org.junit.Test;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test case for XJdfNodeFactory.
@@ -81,16 +64,21 @@ public class XJdfNodeFactoryTest {
     }
 
     @Test
-    public void testCreateRunListString() {
+    public void testCreateRunList() throws Exception {
 
         // arrange
         final String FILE_SPEC_URL = UUID.randomUUID().toString();
 
         // act
-        RunList runList = xJdfNodeFactory.createRunList(FILE_SPEC_URL);
+        final URI fileSpecUri = new URI(new java.net.URI(FILE_SPEC_URL));
+        RunList runList = xJdfNodeFactory.createRunList(fileSpecUri);
 
         // assert
-        assertEquals("Attribute URL in Node FileSpec is wrong", FILE_SPEC_URL, runList.getFileSpec().getURL());
+        assertEquals(
+            "Attribute URL in Node FileSpec is wrong",
+            fileSpecUri,
+            runList.getFileSpec().getURL()
+        );
     }
 
     @Test

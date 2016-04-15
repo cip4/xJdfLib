@@ -48,6 +48,7 @@ import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
@@ -160,7 +161,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return RunList Node which already contains a FileSpec URL definition.
      */
-    public final RunList createRunList(final String fileSpecUrl) {
+    public final RunList createRunList(final URI fileSpecUrl) {
 
         // create RunList Node
         RunList runList = super.createRunList();
@@ -181,7 +182,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return CuttingParams Node which already contains a FileSpec URL definition.
      */
-    public final CuttingParams createCuttingParams(final String fileSpecUrl) {
+    public final CuttingParams createCuttingParams(final URI fileSpecUrl) {
 
         // create CuttingParams Node
         CuttingParams cuttingParams = super.createCuttingParams();
@@ -357,7 +358,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Preview Node which already contains defined attributes.
      */
-    public final Preview createPreview(final String url) {
+    public final Preview createPreview(final URI url) {
 
         return createPreview(url, null);
     }
@@ -370,7 +371,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Preview Node which already contains defined attributes.
      */
-    public final Preview createPreview(final String url, final String previewFileType) {
+    public final Preview createPreview(final URI url, final String previewFileType) {
 
         // create node
         Preview preview = super.createPreview();
