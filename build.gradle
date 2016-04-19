@@ -1,9 +1,10 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
+apply from: 'gradle/deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
-version = '0.6-SNAPSHOT'
+version = '0.8-SNAPSHOT'
 description = """CIP4 xJdfLib"""
 
 sourceCompatibility = 1.7
