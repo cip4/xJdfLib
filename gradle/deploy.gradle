@@ -6,6 +6,11 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
+
+javadoc {
+    failOnError = false
+}
+
 // sources.jar generation
 task sourcesJar(type: Jar) {
     classifier = 'sources'
