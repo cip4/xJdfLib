@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.xjdf</groupId>
     <artifactId>xJdfLib</artifactId>
-    <version>0.8-SNAPSHOT</version>
+    <version>0.8</version>
     <packaging>jar</packaging>
     <name>CIP4 xJdfLib</name>
     <description>CIP4 XJDF Java Library</description>
@@ -16,7 +16,7 @@
         <url>https://bitbucket.cip4.org/scm/lib/xjdflib.git</url>
         <developerConnection>scm:git:https://bitbucket.cip4.org/scm/lib/xjdflib.git</developerConnection>
         <connection>scm:svn:https://bitbucket.cip4.org/scm/lib/xjdflib.git</connection>
-      <tag>xJdfLib-0.7</tag>
+      <tag>xJdfLib-0.8</tag>
     </scm>
     <issueManagement>
         <system>JIRA</system>
