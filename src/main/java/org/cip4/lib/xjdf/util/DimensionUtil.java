@@ -13,7 +13,6 @@ package org.cip4.lib.xjdf.util;
 /**
  * Static helper class which provides dimension conversion functionality.
  * @author s.meissner
- * @date 28.06.2012
  */
 public class DimensionUtil {
 

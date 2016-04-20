@@ -17,7 +17,6 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager;
 /**
  * Unpackaging logic for XJDF Packages.
  * @author s.meissner
- * @date 12.08.2013
  */
 public class XJdfUnpackager extends AbstractXmlUnpackager {
 

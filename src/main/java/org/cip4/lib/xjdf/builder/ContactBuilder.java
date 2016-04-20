@@ -23,7 +23,6 @@ import org.w3c.dom.Node;
 /**
  * Builder class for simplify creating default XJDF Contact Nodes.
  * @author s.meissner
- * @date 28.03.2012
  */
 public class ContactBuilder extends AbstractNodeBuilder<Contact> {
 

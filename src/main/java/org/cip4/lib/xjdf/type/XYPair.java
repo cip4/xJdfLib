@@ -16,7 +16,6 @@ package org.cip4.lib.xjdf.type;
  * numbers that describe lengths are defined in points. XYPair Attributes are primitive data types and are encoded as a string of two numbers, separated by
  * whitespace: "x y"
  * @author stefan.meissner
- * @date 18.12.2012
  */
 public class XYPair extends AbstractXJdfType<String, XYPair> {
 

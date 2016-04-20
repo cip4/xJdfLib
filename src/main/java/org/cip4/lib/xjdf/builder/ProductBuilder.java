@@ -16,7 +16,6 @@ import org.w3c.dom.Node;
 /**
  * Implementation of a Product builder class.
  * @author s.meissner
- * @date 05.03.2012
  */
 public class ProductBuilder extends AbstractNodeBuilder<Product> {
 

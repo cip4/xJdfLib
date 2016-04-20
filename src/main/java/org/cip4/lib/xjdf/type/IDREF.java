@@ -23,7 +23,6 @@ import javax.xml.bind.ValidationException;
 /**
  * DataType for IDRefs
  * @author s.meissner
- * @date 08.04.2013
  */
 public class IDREF extends AbstractXJdfType<String, IDREF> {
 

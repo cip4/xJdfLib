@@ -18,7 +18,6 @@ package org.cip4.lib.xjdf.type;
  * data types and are encoded as a list of six numbers (as doubles), separated by whitespace: “a b c d Tx Ty”. The variables Tx and Ty describe distances and
  * are defined in points.
  * @author stefan.meissner
- * @date 18.12.2012
  */
 public class Matrix extends AbstractXJdfType<String, Matrix> {
 

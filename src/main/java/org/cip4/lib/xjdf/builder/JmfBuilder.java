@@ -19,7 +19,6 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
 /**
  * Implementation of a JMF Builder.
  * @author s.meissner
- * @date 07.12.2012
  */
 public class JmfBuilder extends AbstractNodeBuilder<JMF> {
 

@@ -18,7 +18,6 @@ import org.cip4.lib.xjdf.schema.XJDF;
 /**
  * Static Factory Class which is managing a JAXB2 Marshaller instance.
  * @author s.meissner
- * @date 29.02.2012
  */
 public class JAXBContextFactory {
 

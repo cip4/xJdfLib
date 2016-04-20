@@ -20,7 +20,6 @@ import org.w3c.dom.Node;
 /**
  * Abstract Builder implementation where all builders are derived from.
  * @author s.meissner
- * @date 05.03.2012
  */
 public abstract class AbstractNodeBuilder<T> {
 

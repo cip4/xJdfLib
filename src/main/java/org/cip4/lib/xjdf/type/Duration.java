@@ -15,7 +15,6 @@ package org.cip4.lib.xjdf.type;
  * Durations are a component of time intervals and define the amount of intervening time in a time interval. Durations are represented by the format
  * P[n]Y[n]M[n]DT[n]H[n]M[n]S
  * @author s.meissner
- * @date 11.01.2013
  */
 public class Duration extends AbstractXJdfType<String, Duration> {
 

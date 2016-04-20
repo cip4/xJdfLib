@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * NMTOKENS is an enumerated set of NMTOKEN, which is expressed as a list of space separated values.
  * @author s.meissner
- * @date 11.01.2013
  */
 public class NMTokens extends AbstractList<String> {
 

@@ -13,7 +13,6 @@ package org.cip4.lib.xjdf.util;
 /**
  * Static helper class for generating IDs.
  * @author s.meissner
- * @date 09.01.2013
  */
 public class IDGeneratorUtil {
 
