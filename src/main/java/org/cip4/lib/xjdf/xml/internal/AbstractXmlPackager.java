@@ -13,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,6 +88,11 @@ public abstract class AbstractXmlPackager<T> {
     }
 
     /**
+     * A reference to an already existing archive that should be enhanced.
+     */
+    private final Path zipPath;
+
+    /**
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
@@ -96,6 +103,17 @@ public abstract class AbstractXmlPackager<T> {
      * @param out The underlying OutputStream to write the package to.
      */
     public AbstractXmlPackager(final OutputStream out) {
+        this(null, out);
+    }
+
+    /**
+     * Create a new AbstractXmlPackager.
+     *
+     * @param zipPath The path to an existing zip archive.
+     * @param out The underlying OutputStream to write the package to.
+     */
+    public AbstractXmlPackager(final Path zipPath, final OutputStream out) {
+        this.zipPath = zipPath;
         this.zout = new ZipOutputStream(out);
     }
 
@@ -161,12 +179,25 @@ public abstract class AbstractXmlPackager<T> {
 
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
-            for (URI uri : assetReferences) {
-                final Path destPath = uri.getDestinationPath();
-                LOGGER.debug(String.format("Start processing uri '%s'.", uri));
-                if (destPath != null) {
-                    try (InputStream inputStream = uri.getSourceUri().toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
+            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
+                final Path zipRootPath = zipfs != null
+                    ? zipfs.getPath("/")
+                    : null;
+
+                for (URI uri : assetReferences) {
+                    final Path destPath = uri.getDestinationPath();
+                    LOGGER.debug(String.format("Start processing uri '%s'.", uri));
+                    if (destPath != null) {
+                        final java.net.URI sourceURI;
+                        if (!uri.getSourceUri().isAbsolute() && zipRootPath != null) {
+                            sourceURI = zipRootPath.resolve(uri.getSourceUri().getPath()).toUri();
+                        } else {
+                            sourceURI = uri.getSourceUri();
+                        }
+
+                        try (InputStream inputStream = sourceURI.toURL().openStream()) {
+                            writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
+                        }
                     }
                 }
             }
