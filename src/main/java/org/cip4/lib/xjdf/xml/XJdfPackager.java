@@ -26,7 +26,7 @@ public class XJdfPackager extends AbstractXmlPackager {
     }
 
     /**
-     * Create a new AbstractXmlPackager.
+     * Create a new XJdfPackager.
      *
      * This constructor should be used if an existing archive should be enhanced.
      *

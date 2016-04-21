@@ -3,8 +3,6 @@ package org.cip4.lib.xjdf.type;
 import org.junit.Test;
 
 import java.net.URISyntaxException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.junit.Assert.*;
 
@@ -26,7 +24,7 @@ public class URITest {
     @Test
     public void marshalDestinationExists() throws Exception {
         URI uri = new URI();
-        URI uriToBeConverted = new URI(new java.net.URI("MyUri"), Paths.get("Destination"));
+        URI uriToBeConverted = new URI(new java.net.URI("MyUri"), "Destination");
         assertEquals("Destination", uri.marshal(uriToBeConverted));
     }
 
@@ -48,7 +46,7 @@ public class URITest {
         URI uri = new URI();
         final URI result = uri.unmarshal("MyUri");
         assertFalse(result.getSourceUri().isAbsolute());
-        assertEquals("MyUri", result.getDestinationPath().toString());
+        assertEquals("MyUri", result.getDestinationPath());
     }
 
     @Test(expected = URISyntaxException.class)
@@ -61,13 +59,13 @@ public class URITest {
     public void getSourceUri() throws Exception {
         final java.net.URI sourceUri = new java.net.URI("MyUri");
         URI uri = new URI(sourceUri);
-        assertSame(sourceUri, uri.getSourceUri());
+        assertEquals(sourceUri, uri.getSourceUri());
     }
 
     @Test
     public void getDestinationPath() throws Exception {
-        final Path destination = Paths.get("Destination");
+        final String destination = "Destination";
         URI uri = new URI(new java.net.URI("MyUri"), destination);
-        assertSame(destination, uri.getDestinationPath());
+        assertEquals(destination, uri.getDestinationPath());
     }
 }

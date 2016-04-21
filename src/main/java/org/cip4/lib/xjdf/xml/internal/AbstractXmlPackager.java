@@ -15,6 +15,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -180,23 +181,20 @@ public abstract class AbstractXmlPackager<T> {
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
             try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
-                final Path zipRootPath = zipfs != null
-                    ? zipfs.getPath("/")
-                    : null;
-
                 for (URI uri : assetReferences) {
-                    final Path destPath = uri.getDestinationPath();
                     LOGGER.debug(String.format("Start processing uri '%s'.", uri));
-                    if (destPath != null) {
-                        final java.net.URI sourceURI;
-                        if (!uri.getSourceUri().isAbsolute() && zipRootPath != null) {
-                            sourceURI = zipRootPath.resolve(uri.getSourceUri().getPath()).toUri();
-                        } else {
-                            sourceURI = uri.getSourceUri();
-                        }
 
-                        try (InputStream inputStream = sourceURI.toURL().openStream()) {
-                            writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
+                    final String destPath = uri.getDestinationPath();
+                    if (destPath != null) {
+                        final java.net.URI srcUri = uri.getSourceUri();
+                        if (!srcUri.isAbsolute()) {
+                            try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        } else {
+                            try (InputStream is = srcUri.toURL().openStream()) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
                         }
                     }
                 }
