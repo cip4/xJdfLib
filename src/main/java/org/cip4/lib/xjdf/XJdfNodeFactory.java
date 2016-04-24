@@ -128,7 +128,7 @@ public class XJdfNodeFactory extends ObjectFactory {
         resource.setResourceType(obj);
 
         if (part != null) {
-            resource.setPart(part);
+            resource.getPart().add(part);
         }
 
         // return node
