@@ -91,7 +91,7 @@ public abstract class AbstractXmlPackager<T> {
     /**
      * A reference to an already existing archive that should be enhanced.
      */
-    private final Path zipPath;
+    private Path zipPath;
 
     /**
      * The ZipOutputStream to write to.
@@ -116,6 +116,18 @@ public abstract class AbstractXmlPackager<T> {
     public AbstractXmlPackager(final Path zipPath, final OutputStream out) {
         this.zipPath = zipPath;
         this.zout = new ZipOutputStream(out);
+    }
+
+    /**
+     * Sets a reference to an already existing archive.
+     *
+     * @param zipPath The path to existing archive
+     *
+     * @return This AbstractXmlPackager
+     */
+    public final AbstractXmlPackager<T> withZipPath(final Path zipPath) {
+        this.zipPath = zipPath;
+        return this;
     }
 
     /**
