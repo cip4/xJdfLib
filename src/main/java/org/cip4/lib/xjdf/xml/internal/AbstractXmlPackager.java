@@ -165,8 +165,7 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 jaxbNavigator.evaluateNodeList("//xjdf:Preview")
-                )
-            );
+            ));
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<FileSpec>() {
@@ -176,8 +175,7 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
-                )
-            );
+            ));
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<XJDF>() {
@@ -187,8 +185,7 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
-                )
-            );
+            ));
 
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
