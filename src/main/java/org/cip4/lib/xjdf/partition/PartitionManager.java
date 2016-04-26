@@ -1,15 +1,6 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.partition;
 
+import org.apache.commons.lang3.reflect.FieldUtils;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
@@ -20,8 +11,6 @@ import java.util.Set;
 
 /**
  * Manager class containing all the partitioning logic.
- *
- * @author Stefan Meissner.
  */
 public class PartitionManager {
 
@@ -91,12 +80,9 @@ public class PartitionManager {
     private boolean comparePartKeyValues(final String fieldName, final Part resourcePart, final Part givenPart)
         throws NoSuchFieldException, IllegalAccessException {
 
-        Field field = Part.class.getDeclaredField(fieldName);
-        field.setAccessible(true);
-
-        Object resValue = field.get(resourcePart);
-        Object givenValue = field.get(givenPart);
-
+        Field field = FieldUtils.getDeclaredField(Part.class, fieldName, true);
+        Object resValue = FieldUtils.readField(field, resourcePart);
+        Object givenValue = FieldUtils.readField(field, givenPart);
 
         return resValue.equals(givenValue);
     }
@@ -113,11 +99,10 @@ public class PartitionManager {
         Set<String> partKeys = new HashSet<>();
 
         if (part != null) {
-            Field[] fields = Part.class.getDeclaredFields();
+            Field[] fields = FieldUtils.getAllFields(Part.class);
 
             for (Field field : fields) {
-                field.setAccessible(true);
-                if (field.get(part) != null) {
+                if (FieldUtils.readField(field, part, true) != null) {
                     partKeys.add(field.getName());
                 }
             }
