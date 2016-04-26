@@ -16,13 +16,19 @@ public class URI extends AbstractXJdfType<String, URI> {
     /**
      * Destination path.
      */
-    private final String destinationPath;
+    private String destinationPath;
+
+    /**
+     * The stashed destination path.
+     */
+    private final String stashedDestinationPath;
 
     /**
      * Constructor.
      */
     public URI() {
-        this(null);
+        this.sourceUri = null;
+        this.stashedDestinationPath = null;
     }
 
     /**
@@ -31,8 +37,8 @@ public class URI extends AbstractXJdfType<String, URI> {
      * @param sourceUri Source uri of the file.
      */
     public URI(final java.net.URI sourceUri) {
-        this.sourceUri = sourceUri;
-        this.destinationPath = null;
+        this.sourceUri = sourceUri.normalize();
+        this.stashedDestinationPath = null;
     }
 
     /**
@@ -43,8 +49,8 @@ public class URI extends AbstractXJdfType<String, URI> {
      */
     public URI(final java.net.URI sourceUri, final String destPath) throws URISyntaxException {
         Objects.requireNonNull(destPath, "destPath must not be null");
-        this.sourceUri = sourceUri;
-        this.destinationPath = new java.net.URI(null, null, destPath, null).normalize().getPath();
+        this.sourceUri = sourceUri.normalize();
+        this.stashedDestinationPath = new java.net.URI(null, null, destPath, null).normalize().getPath();
     }
 
     /**
@@ -63,6 +69,16 @@ public class URI extends AbstractXJdfType<String, URI> {
      */
     public final String getDestinationPath() {
         return destinationPath;
+    }
+
+    /**
+     * Completes this URI in order to marshal the correct file reference.
+     *
+     * @return This URI
+     */
+    public final URI complete() {
+        this.destinationPath = stashedDestinationPath;
+        return this;
     }
 
     @Override

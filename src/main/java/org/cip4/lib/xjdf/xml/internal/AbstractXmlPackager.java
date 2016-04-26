@@ -230,7 +230,7 @@ public abstract class AbstractXmlPackager<T> {
         for (Object ref : refs) {
             final URI uri = extractor.extract(ref);
             if (uri != null) {
-                result.add(uri);
+                result.add(uri.complete());
             }
         }
         return result;

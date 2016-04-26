@@ -10,48 +10,47 @@ public class URITest {
 
     @Test
     public void marshalNullParam() throws Exception {
-        URI uri = new URI();
+        final URI uri = new URI();
         assertNull(uri.marshal(null));
     }
 
     @Test
     public void marshalDestinationMissing() throws Exception {
-        URI uri = new URI();
         URI uriToBeConverted = new URI(new java.net.URI("MyUri"));
-        assertEquals("MyUri", uri.marshal(uriToBeConverted));
+        assertEquals("MyUri", uriToBeConverted.marshal(uriToBeConverted));
     }
 
     @Test
     public void marshalDestinationExists() throws Exception {
-        URI uri = new URI();
-        URI uriToBeConverted = new URI(new java.net.URI("MyUri"), "Destination");
-        assertEquals("Destination", uri.marshal(uriToBeConverted));
+        URI uriToBeConverted = new URI(new java.net.URI("MyUri"), "Destination").complete();
+        assertEquals("Destination", uriToBeConverted.marshal(uriToBeConverted));
     }
 
     @Test(expected = NullPointerException.class)
     public void marshallEmptyUri() throws Exception {
-        URI uri = new URI();
-        assertNotNull(uri.marshal(new URI()));
+        final URI uri = new URI();
+        assertNotNull(uri.marshal(uri));
     }
 
     @Test
     public void unmarshalAbsoulteUri() throws Exception {
-        URI uri = new URI();
+        final URI uri = new URI();
         final URI result = uri.unmarshal(URITest.class.getResource("../test.xjdf").toURI().toASCIIString());
         assertTrue(result.getSourceUri().isAbsolute());
     }
 
     @Test
-    public void unmarshalUri() throws Exception {
-        URI uri = new URI();
+    public void unmarshalCompletedUri() throws Exception {
+        final URI uri = new URI();
         final URI result = uri.unmarshal("MyUri");
+        result.complete();
         assertFalse(result.getSourceUri().isAbsolute());
         assertEquals("MyUri", result.getDestinationPath());
     }
 
     @Test(expected = URISyntaxException.class)
     public void unmarshallFails() throws Exception {
-        URI uri = new URI();
+        final URI uri = new URI();
         uri.unmarshal("[]");
     }
 
@@ -63,9 +62,19 @@ public class URITest {
     }
 
     @Test
-    public void getDestinationPath() throws Exception {
+    public void getDestinationPathFromCompletedURI() throws Exception {
         final String destination = "Destination";
         URI uri = new URI(new java.net.URI("MyUri"), destination);
+        uri.complete();
+        assertEquals(destination, uri.getDestinationPath());
+    }
+
+    @Test
+    public void complete() throws Exception {
+        final String destination = "Destination";
+        URI uri = new URI(new java.net.URI("MyUri"), destination);
+        assertNull(uri.getDestinationPath());
+        assertSame(uri, uri.complete());
         assertEquals(destination, uri.getDestinationPath());
     }
 }

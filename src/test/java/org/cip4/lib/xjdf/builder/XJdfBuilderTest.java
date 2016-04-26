@@ -446,7 +446,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
         XJdfNodeFactory nf = new XJdfNodeFactory();
 
-        final String FILE_NAME = "./myTestFile.pdf";
+        final String FILE_NAME = "myTestFile.pdf";
 
         XJdfParser parser = new XJdfParser();
         XJDF xjdf = parser.parseStream(is);
@@ -484,7 +484,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
         XJdfNodeFactory nf = new XJdfNodeFactory();
 
-        final String FILE_NAME = "./myTestFile.pdf";
+        final String FILE_NAME = "myTestFile.pdf";
 
         XJdfParser parser = new XJdfParser();
         XJDF xjdf = parser.parseStream(is);
