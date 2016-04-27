@@ -14,7 +14,7 @@ import java.nio.file.Path;
 /**
  * Packaging logic for XJDF Documents. Package an XJDF with all references in a ZIP Package.
  */
-public class XJdfPackager extends AbstractXmlPackager {
+public class XJdfPackager extends AbstractXmlPackager<XJDF> {
 
     /**
      * Create a new XJdfPackager.
@@ -76,7 +76,7 @@ public class XJdfPackager extends AbstractXmlPackager {
     }
 
     @Override
-    protected final byte[] parseDocument(final Object document) throws Exception {
-        return new XJdfParser().parseXJdf((XJDF) document);
+    protected final byte[] parseDocument(final XJDF xjdf) throws Exception {
+        return new XJdfParser().parseXJdf(xjdf);
     }
 }

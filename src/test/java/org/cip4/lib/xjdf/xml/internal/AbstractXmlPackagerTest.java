@@ -29,14 +29,14 @@ import static org.junit.Assert.assertTrue;
 
 public class AbstractXmlPackagerTest {
 
-    private class MinimalXmlPackager extends AbstractXmlPackager {
+    private class MinimalXmlPackager extends AbstractXmlPackager<XJDF> {
         MinimalXmlPackager(final OutputStream out) throws Exception {
             super(out);
         }
 
         @Override
-        protected byte[] parseDocument(final Object document) throws Exception {
-            return new XJdfParser().parseXJdf((XJDF) document);
+        protected byte[] parseDocument(final XJDF xjdf) throws Exception {
+            return new XJdfParser().parseXJdf(xjdf);
         }
     }
 
