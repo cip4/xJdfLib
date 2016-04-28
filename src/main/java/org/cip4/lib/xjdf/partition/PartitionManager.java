@@ -80,9 +80,8 @@ public class PartitionManager {
     private boolean comparePartKeyValues(final String fieldName, final Part resourcePart, final Part givenPart)
         throws NoSuchFieldException, IllegalAccessException {
 
-        Field field = FieldUtils.getDeclaredField(Part.class, fieldName, true);
-        Object resValue = FieldUtils.readField(field, resourcePart);
-        Object givenValue = FieldUtils.readField(field, givenPart);
+        Object resValue = FieldUtils.readField(resourcePart, fieldName, true);
+        Object givenValue = FieldUtils.readField(givenPart, fieldName, true);
 
         return resValue.equals(givenValue);
     }
