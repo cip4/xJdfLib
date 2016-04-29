@@ -2612,16 +2612,11 @@
     <xs:element name="SubscriptionInfo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Subscription"/>
+                <xs:element ref="Subscription" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="MessageType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Family" type="EnumChannelFamily" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="ChannelID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="MessageType" type="NMTOKEN" use="required"/>
         </xs:complexType>
     </xs:element>
 
