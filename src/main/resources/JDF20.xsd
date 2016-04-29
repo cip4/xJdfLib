@@ -354,13 +354,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumChannelFamily">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Signal"/>
-            <xs:enumeration value="Command"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumFlushPolicy">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Complete"/>

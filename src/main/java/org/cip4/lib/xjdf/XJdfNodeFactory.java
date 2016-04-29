@@ -496,27 +496,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new ProofingIntent Node which already contains a ProofItem Node with an attribute BrandName.
-     *
-     * @param brandName Value for ProofItem BrandName attribute.
-     *
-     * @return ProofingIntent Node which already contains a ProofItem Node with defined attributes.
-     */
-    public final ProofingIntent createProofingIntent(final String brandName) {
-
-        // create nodes
-        ProofingIntent proofingIntent = super.createProofingIntent();
-        ProofItem proofItem = super.createProofItem();
-
-        // set attributes
-        proofItem.setBrandName(brandName);
-        proofingIntent.getProofItem().add(proofItem);
-
-        // return object
-        return proofingIntent;
-    }
-
-    /**
      * Create new BindingIntent Node which already contains values for attribute BindingType.
      *
      * @param bindingType Value for BindingType attribute.

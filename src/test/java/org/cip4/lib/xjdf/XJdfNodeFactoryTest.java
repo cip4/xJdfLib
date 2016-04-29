@@ -211,19 +211,6 @@ public class XJdfNodeFactoryTest {
     }
 
     @Test
-    public void testCreateProofingIntent() {
-
-        // arrange
-        final String BRAND_NAME = UUID.randomUUID().toString();
-
-        // act
-        ProofingIntent proofingIntent = xJdfNodeFactory.createProofingIntent(BRAND_NAME);
-
-        // assert
-        assertEquals("BrandName is wrong", BRAND_NAME, proofingIntent.getProofItem().get(0).getBrandName());
-    }
-
-    @Test
     public void testCreateBindingIntent() {
 
 		// arrange
