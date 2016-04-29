@@ -1726,8 +1726,6 @@
             <xs:enumeration value="Ribbon"/>
             <xs:enumeration value="Sheet"/>
             <xs:enumeration value="Web"/>
-            <xs:enumeration value="FinalProduct"/>
-            <xs:enumeration value="PartialProduct"/>
             <xs:enumeration value="Proof"/>
         </xs:restriction>
     </xs:simpleType>
@@ -3656,18 +3654,13 @@
     <!-- ** Complex type definition for ProofItem ** -->
     <xs:element name="ProofItem" type="ProofItem"/>
     <xs:complexType name="ProofItem">
-        <xs:attribute name="Contract" type="boolean" use="optional"/>
-        <xs:attribute name="PageIndex" type="IntegerRangeList" use="optional"/>
-        <xs:attribute name="ProofTarget" type="URL" use="optional"/>
-        <xs:attribute name="ProofName" type="string" use="optional"/>
-        <xs:attribute name="ProofType" use="optional"/>
         <xs:attribute name="Amount" type="integer" use="optional"/>
-        <xs:attribute name="HalfTone" type="boolean" use="optional"/>
-        <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
         <xs:attribute name="ColorType" type="EnumColorType" use="optional"/>
-        <xs:attribute name="ImageStrategy" use="optional"/>
-        <xs:attribute name="BrandName" type="string" use="optional"/>
-        <xs:attribute name="Technology" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="Contract" type="boolean" use="optional"/>
+        <xs:attribute name="HalfTone" type="boolean" use="optional"/>
+        <xs:attribute name="PageIndex" type="IntegerRangeList" use="optional"/>
+        <xs:attribute name="ProofName" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="ProofTarget" type="URL" use="optional"/>
     </xs:complexType>
 
     <!-- ** Complex type definition for RefAnchor ** -->
@@ -4395,11 +4388,10 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
+                    <xs:element ref="AssemblySection" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Order" type="EnumAssemblyOrder" use="optional"/>
-                <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4751,32 +4743,28 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
+                    <xs:element ref="Bundle" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Disjointing" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="Overfold" type="double" use="optional"/>
-                <xs:attribute name="ComponentType" use="optional">
-                    <xs:simpleType>
-                        <xs:list itemType="EnumComponentType"/>
-                    </xs:simpleType>
-                </xs:attribute>
-                <xs:attribute name="SpineThickness" type="double" use="optional"/>
-                <xs:attribute name="OverfoldSide" use="optional"/>
-                <xs:attribute name="SheetPart" type="rectangle" use="optional"/>
-                <xs:attribute name="Dimensions" type="shape" use="optional"/>
-                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="SurfaceCount" type="integer" use="optional"/>
+                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
-                <xs:attribute name="MaxHeat" type="double" use="optional"/>
-                <xs:attribute name="ReaderPageCount" type="integer" use="optional"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Columns" type="integer" use="optional"/>
+                <xs:attribute name="ComponentType" type="EnumComponentType" use="optional"/>
+                <xs:attribute name="Dimension" type="shape" use="optional"/>
+                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
+                <xs:attribute name="MaxHeat" type="double" use="optional"/>
+                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Overfold" type="double" use="optional"/>
+                <xs:attribute name="OverfoldSide" type="EnumSide" use="optional"/>
+                <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
+                <xs:attribute name="ReaderPageCount" type="integer" use="optional"/>
+                <xs:attribute name="SheetPart" type="rectangle" use="optional"/>
+                <xs:attribute name="SpineThickness" type="double" use="optional"/>
+                <xs:attribute name="SurfaceCount" type="integer" use="optional"/>
+                <xs:attribute name="WindingResult" type="integer" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5168,12 +5156,11 @@
     <xs:complexType name="ExposedMedia">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="PageListIndex" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="PageListRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="MediaRef" type="IDREF" use="required"/>
                 <xs:attribute name="PlateType" type="EnumPlateType" use="optional"/>
                 <xs:attribute name="Polarity" type="boolean" use="optional"/>
-                <xs:attribute name="PunchType" type="string" use="optional"/>
+                <xs:attribute name="PunchType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Resolution" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
