@@ -1417,6 +1417,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumWrappingKind">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Band"/>
+            <xs:enumeration value="LooseWrap"/>
+            <xs:enumeration value="ShrinkWrap"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="EnumJDFJMFVersion">
@@ -3954,7 +3962,8 @@
     <xs:complexType name="WrappingParams">
         <xs:complexContent>
             <xs:extension base="ParameterType">
-                <xs:attribute name="WrappingKind" use="optional"/>
+                <xs:attribute name="WrappingKind" type="EnumWrappingKind" use="optional"/>
+                <xs:attribute name="WrappingKindDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
