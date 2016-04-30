@@ -1935,11 +1935,8 @@
     <xs:element name="ProductList">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Product"/>
+                <xs:element ref="Product" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -4817,13 +4814,13 @@
     <xs:element name="ContentMetaData">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
-            <xs:attribute name="Title" type="string" use="optional"/>
-            <xs:attribute name="ISBN13" type="string" use="optional"/>
-            <xs:attribute name="ISBN10" type="string" use="optional"/>
+            <xs:attribute name="ISBN10" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ISBN13" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Title" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5315,9 +5312,9 @@
     <!-- ** Complex type definition for GeneralID ** -->
     <xs:element name="GeneralID">
         <xs:complexType>
-            <xs:attribute name="IDValue" type="string" use="optional"/>
             <xs:attribute name="DataType" type="EnumDataType" use="optional"/>
-            <xs:attribute name="IDUsage" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="IDUsage" type="NMTOKEN" use="required"/>
+            <xs:attribute name="IDValue" type="string" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -5886,7 +5883,7 @@
     <xs:element name="PreflightTest">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
@@ -5916,8 +5913,8 @@
     <xs:element name="PreflightCheck">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="Comment"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="GeneralID"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="Count" type="integer" use="optional"/>
@@ -6228,10 +6225,20 @@
     <!-- ** Complex type definition for ShapeTemplate ** -->
     <xs:element name="ShapeTemplate">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ShapeDimension" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="InnerDimensions" type="shape" use="optional"/>
-            <xs:attribute name="Standard" type="string" use="optional"/>
             <xs:attribute name="Name" type="string" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:attribute name="Standard" type="NMTOKEN" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="ShapeDimension">
+        <xs:complexType>
+            <xs:attribute name="Usage" type="string" use="required"/>
+            <xs:attribute name="Value" type="double" use="required"/>
         </xs:complexType>
     </xs:element>
 

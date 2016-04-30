@@ -24,9 +24,6 @@ class ProductListMerger extends BaseMerger<ProductList> {
 
     @Override
     void merge(final ProductList baseProductList, final ProductList productList) throws MergeConflictException {
-        baseProductList.getComment().addAll(productList.getComment());
-        baseProductList.getGeneralID().addAll(productList.getGeneralID());
-        baseProductList.setDescriptiveName(productList.getDescriptiveName());
         productMerger.merge(baseProductList.getProduct(), productList.getProduct());
     }
 
