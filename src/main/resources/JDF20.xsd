@@ -993,13 +993,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumFirstSurface">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Front"/>
-            <xs:enumeration value="Back"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumFountainSolution">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="On"/>
@@ -1443,7 +1436,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="Front"/>
             <xs:enumeration value="Back"/>
-            <xs:enumeration value="Both"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -4031,7 +4023,7 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SurfaceColor"/>
+                    <xs:element minOccurs="0" maxOccurs="2" ref="SurfaceColor"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -4827,7 +4819,7 @@
                     <xs:element ref="ApprovalParams" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
-                <xs:attribute name="FirstSurface" type="EnumFirstSurface" use="optional"/>
+                <xs:attribute name="FirstSurface" type="EnumSurface" use="optional"/>
                 <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
                 <xs:attribute name="MediaLocation" type="string" use="optional"/>
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>

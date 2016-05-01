@@ -740,24 +740,9 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Position Node which already contains defined attributes.
      */
-    public final Position createPosition(final Rectangle absoluteBox, final Orientation orientation) {
-
-        return createPosition(absoluteBox, orientation, null);
-    }
-
-    /**
-     * Create a new Position Node which already contains defined attributes.
-     *
-     * @param absoluteBox AbsoluteBox attribute as Rectangle.
-     * @param orientation Orientation attribute as EnumOrientation.
-     * @param assemblyID Orientation attribute as AssemblyID.
-     *
-     * @return Position Node which already contains defined attributes.
-     */
     public final Position createPosition(
         final Rectangle absoluteBox,
-        final Orientation orientation,
-        final String assemblyID
+        final Orientation orientation
     ) {
 
         // create Position Node
@@ -766,7 +751,6 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         position.setAbsoluteBox(absoluteBox);
         position.setOrientation(orientation);
-        position.setAssemblyID(assemblyID);
 
         // return node
         return position;
