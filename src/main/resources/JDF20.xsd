@@ -4359,9 +4359,9 @@
     <xs:element name="AssemblySection">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="AssemblySection"/>
+                <xs:element ref="AssemblySection" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -4757,7 +4757,7 @@
                     <xs:element minOccurs="0" maxOccurs="1" ref="ElementColorParams"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="PositionObj"/>
                 </xs:sequence>
-                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ContentStatus" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ContentType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
@@ -4861,7 +4861,7 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:attribute name="BlockSubdivision" type="XYPair" use="optional"/>
-                <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="BlockType" use="optional"/>
                 <xs:attribute name="BlockElementSize" type="XYPair" use="optional"/>
                 <xs:attribute name="CutWidth" type="double" use="optional"/>
@@ -5803,7 +5803,6 @@
             <xs:attribute name="MarginTop" type="double" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="RelativeBox" type="rectangle" use="optional"/>
-            <xs:attribute name="AssemblyID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6042,12 +6041,8 @@
     <!-- ** Complex type definition for RuleLength ** -->
     <xs:element name="RuleLength">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeDef"/>
-            </xs:sequence>
-            <xs:attribute name="StationName" type="string" use="optional"/>
-            <xs:attribute name="StationAmount" type="integer" use="optional"/>
-            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="DDESCutType" type="integer" use="required"/>
+            <xs:attribute name="Length" type="double" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -6246,11 +6241,11 @@
     <xs:element name="Station">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeDef"/>
+                <xs:element ref="ShapeDef" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="StationName" type="string" use="optional"/>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="StationAmount" type="integer" use="optional"/>
-            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="StationName" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
