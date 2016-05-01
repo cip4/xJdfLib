@@ -6483,7 +6483,6 @@
         <xs:attribute name="Coatings" type="NMTOKENS" use="optional"/>
         <xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional"/>
         <xs:attribute name="Coverage" type="double" use="optional"/>
-        <xs:attribute name="NumColors" type="integer" use="optional"/>
         <xs:attribute name="Surface" type="EnumSurface" use="optional"/>
     </xs:complexType>
 
