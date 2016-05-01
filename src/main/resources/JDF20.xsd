@@ -21,7 +21,6 @@
             <xs:element ref="KnownMsgQuParams"/>
             <xs:element ref="Message"/>
             <xs:element ref="MessageService"/>
-            <xs:element ref="NewJDFQuParams"/>
             <xs:element ref="PipeParams"/>
             <xs:element ref="Queue"/>
             <xs:element ref="QueueStatus"/>
@@ -2265,15 +2264,6 @@
             <xs:attribute name="JMFRole" type="EnumJmfRole" use="optional"/>
             <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
             <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for NewJDFQuParams ** -->
-    <xs:element name="NewJDFQuParams">
-        <xs:complexType>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
