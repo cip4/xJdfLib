@@ -2564,17 +2564,10 @@
     <!-- ** Complex type definition for SubscriptionFilter ** -->
     <xs:element name="SubscriptionFilter">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
+            <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MessageTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
-            <xs:attribute name="Families" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5654,19 +5647,12 @@
     <!-- ** Complex type definition for NotificationFilter ** -->
     <xs:element name="NotificationFilter">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="SignalTypes" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="MileStoneTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Classes" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumClasses"/>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="MileStoneTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
