@@ -4212,15 +4212,15 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ProofingIntent ** -->
-    <xs:element name="ProofingIntent" type="ProofingIntent" substitutionGroup="IntentType"/>
-    <xs:complexType name="ProofingIntent">
+    <!-- ** Complex type definition for ContentCheckIntent ** -->
+    <xs:element name="ContentCheckIntent" type="ContentCheckIntent" substitutionGroup="IntentType"/>
+    <xs:complexType name="ContentCheckIntent">
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ProofItem"/>
+                    <xs:element ref="ProofItem" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="Level" type="EnumPreflightLevel" use="optional"/>
+                <xs:attribute name="PreflightLevel" type="EnumPreflightLevel" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
