@@ -197,13 +197,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumResourceCmdParamsActivation">
-        <xs:restriction base="EnumActivation">
-            <xs:enumeration value="Held"/>
-            <xs:enumeration value="Active"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumDataType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="string"/>
@@ -2415,22 +2408,11 @@
     <xs:element name="ResourceCmdParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Resource"/>
+                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Activation" type="EnumResourceCmdParamsActivation" use="optional"/>
-            <xs:attribute name="Exact" type="boolean" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="ProductionAmount" type="double" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ResourceName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Status" type="EnumAssetStatus" use="optional"/>
             <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="optional"/>
-            <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
         </xs:complexType>
     </xs:element>
 
