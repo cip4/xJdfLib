@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -12,7 +11,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
@@ -253,41 +251,6 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("FoldingCatalog is wrong", FOLDING_CATALOG, foldingIntent.getFoldingCatalog());
-    }
-
-    @Test
-    public void testCreateColorIntentLight() {
-
-        // arrange
-        final IntegerList NUM_COLORS = new IntegerList(2, 4);
-
-        // act
-        ColorIntent colorIntent = xJdfNodeFactory.createColorIntent(NUM_COLORS);
-
-        // assert
-        List<SurfaceColor> surfaceColors = colorIntent.getSurfaceColor();
-        assertEquals("Number of surface colors is wrong.", 2, surfaceColors.size());
-
-        SurfaceColor colorFront = null;
-        SurfaceColor colorBack = null;
-        for (SurfaceColor surfaceColor : surfaceColors) {
-            if (EnumSurface.FRONT == surfaceColor.getSurface()) {
-                colorFront = surfaceColor;
-            } else if (EnumSurface.BACK == surfaceColor.getSurface()) {
-                colorBack = surfaceColor;
-            } else {
-                fail("Surface of SurfaceColor is wrong.");
-            }
-        }
-        assertNotNull(colorFront);
-        assertNotNull(colorBack);
-
-        assertEquals("NumColors is wrong for front", NUM_COLORS.get(0), colorFront.getNumColors());
-        assertEquals("FoldingCatalog is wrong", NUM_COLORS.get(1), colorBack.getNumColors());
-        assertEquals("ColorsUsed is wrong for front", 0, colorFront.getColorsUsed().size());
-        assertEquals("Coatings is wrong for front", 0, colorFront.getCoatings().size());
-        assertEquals("ColorsUsed is wrong for back", 0, colorBack.getColorsUsed().size());
-        assertEquals("Coatings is wrong for back", 0, colorBack.getCoatings().size());
     }
 
     @Test

@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -552,31 +551,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // return object
         return foldingIntent;
-    }
-
-    /**
-     * Create new ColorIntent Node which already contains values for attribute NumColors.
-     *
-     * @param numColors Value for NumColors attribute.
-     *
-     * @return ColorIntent Node which already contains defined attributes.
-     */
-    public final ColorIntent createColorIntent(final IntegerList numColors) {
-        ColorIntent colorIntent = super.createColorIntent();
-
-        SurfaceColor frontColor = new SurfaceColor();
-        frontColor.setSurface(EnumSurface.FRONT);
-        frontColor.setNumColors(numColors.get(0));
-
-        SurfaceColor backColor = new SurfaceColor();
-        backColor.setSurface(EnumSurface.BACK);
-        backColor.setNumColors(numColors.get(1));
-
-        colorIntent.getSurfaceColor().add(frontColor);
-        colorIntent.getSurfaceColor().add(backColor);
-
-        // return object
-        return colorIntent;
     }
 
     /**
