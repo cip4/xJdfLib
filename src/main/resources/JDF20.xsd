@@ -2798,11 +2798,11 @@
         <xs:complexContent>
             <xs:extension base="ParameterType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CutBlock"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Cut"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element ref="Cut" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="CutBlock" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="NUpSeparation" type="XYPair" use="optional"/>
+                <xs:attribute name="SheetLay" type="EnumLeftRight" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
