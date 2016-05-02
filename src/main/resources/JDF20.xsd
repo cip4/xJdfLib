@@ -3976,17 +3976,13 @@
                 <xs:element minOccurs="0" maxOccurs="1" ref="HolePattern"/>
             </xs:sequence>
             <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BoardThickness" type="double" use="optional"/>
             <xs:attribute name="Brand" type="string" use="optional"/>
-            <xs:attribute name="ChannelCover" type="boolean" use="optional"/>
+            <xs:attribute name="CombShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Diameter" type="double" use="optional"/>
-            <xs:attribute name="HoleType" type="string" use="optional"/>
             <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
-            <xs:attribute name="RingMechanic" type="boolean" use="optional"/>
             <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
             <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="WireCombShape" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
