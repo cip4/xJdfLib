@@ -9,11 +9,12 @@ import org.cip4.lib.xjdf.xml.internal.PackagerException;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.io.OutputStream;
+import java.nio.file.Path;
 
 /**
  * Packaging logic for XJDF Documents. Package an XJDF with all references in a ZIP Package.
  */
-public class XJdfPackager extends AbstractXmlPackager {
+public class XJdfPackager extends AbstractXmlPackager<XJDF> {
 
     /**
      * Create a new XJdfPackager.
@@ -22,6 +23,18 @@ public class XJdfPackager extends AbstractXmlPackager {
      */
     public XJdfPackager(final OutputStream out) {
         super(out);
+    }
+
+    /**
+     * Create a new XJdfPackager.
+     *
+     * This constructor should be used if an existing archive should be enhanced.
+     *
+     * @param zipPath The path to an existing archive.
+     * @param out The underlying OutputStream to write the package to.
+     */
+    public XJdfPackager(final Path zipPath, final OutputStream out) {
+        super(zipPath, out);
     }
 
     /**
@@ -63,7 +76,7 @@ public class XJdfPackager extends AbstractXmlPackager {
     }
 
     @Override
-    protected final byte[] parseDocument(final Object document) throws Exception {
-        return new XJdfParser().parseXJdf((XJDF) document);
+    protected final byte[] parseDocument(final XJDF xjdf) throws Exception {
+        return new XJdfParser().parseXJdf(xjdf);
     }
 }

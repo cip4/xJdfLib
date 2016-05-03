@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.net.URISyntaxException;
+import java.util.Objects;
 
 /**
  * Implementation of the XJDF URI data type.
@@ -16,13 +16,19 @@ public class URI extends AbstractXJdfType<String, URI> {
     /**
      * Destination path.
      */
-    private final Path destinationPath;
+    private String destinationPath;
+
+    /**
+     * The stashed destination path.
+     */
+    private final String stashedDestinationPath;
 
     /**
      * Constructor.
      */
     public URI() {
-        this(null);
+        this.sourceUri = null;
+        this.stashedDestinationPath = null;
     }
 
     /**
@@ -31,7 +37,8 @@ public class URI extends AbstractXJdfType<String, URI> {
      * @param sourceUri Source uri of the file.
      */
     public URI(final java.net.URI sourceUri) {
-        this(sourceUri, null);
+        this.sourceUri = sourceUri.normalize();
+        this.stashedDestinationPath = null;
     }
 
     /**
@@ -40,9 +47,10 @@ public class URI extends AbstractXJdfType<String, URI> {
      * @param sourceUri Source uri.
      * @param destPath Destination path. Should be given in case the file has to be packaged.
      */
-    public URI(final java.net.URI sourceUri, final Path destPath) {
-        this.sourceUri = sourceUri;
-        this.destinationPath = destPath;
+    public URI(final java.net.URI sourceUri, final String destPath) throws URISyntaxException {
+        Objects.requireNonNull(destPath, "destPath must not be null");
+        this.sourceUri = sourceUri.normalize();
+        this.stashedDestinationPath = new java.net.URI(null, null, destPath, null).normalize().getPath();
     }
 
     /**
@@ -59,8 +67,18 @@ public class URI extends AbstractXJdfType<String, URI> {
      *
      * @return Destination path
      */
-    public final Path getDestinationPath() {
+    public final String getDestinationPath() {
         return destinationPath;
+    }
+
+    /**
+     * Completes this URI in order to marshal the correct file reference.
+     *
+     * @return This URI
+     */
+    public final URI complete() {
+        this.destinationPath = stashedDestinationPath;
+        return this;
     }
 
     @Override
@@ -70,7 +88,7 @@ public class URI extends AbstractXJdfType<String, URI> {
         }
         return v.destinationPath == null
             ? v.sourceUri.toString()
-            : v.destinationPath.toString();
+            : v.destinationPath;
     }
 
     @Override
@@ -79,7 +97,7 @@ public class URI extends AbstractXJdfType<String, URI> {
         if (source.isAbsolute()) {
             return new URI(source);
         } else {
-            return new URI(source, Paths.get(source.getPath()));
+            return new URI(source, source.getPath());
         }
     }
 

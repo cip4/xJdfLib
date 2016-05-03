@@ -13,6 +13,9 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -86,6 +89,11 @@ public abstract class AbstractXmlPackager<T> {
     }
 
     /**
+     * A reference to an already existing archive that should be enhanced.
+     */
+    private Path zipPath;
+
+    /**
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
@@ -96,7 +104,30 @@ public abstract class AbstractXmlPackager<T> {
      * @param out The underlying OutputStream to write the package to.
      */
     public AbstractXmlPackager(final OutputStream out) {
+        this(null, out);
+    }
+
+    /**
+     * Create a new AbstractXmlPackager.
+     *
+     * @param zipPath The path to an existing zip archive.
+     * @param out The underlying OutputStream to write the package to.
+     */
+    public AbstractXmlPackager(final Path zipPath, final OutputStream out) {
+        this.zipPath = zipPath;
         this.zout = new ZipOutputStream(out);
+    }
+
+    /**
+     * Sets a reference to an already existing archive.
+     *
+     * @param zipPath The path to existing archive
+     *
+     * @return This AbstractXmlPackager
+     */
+    public final AbstractXmlPackager<T> withZipPath(final Path zipPath) {
+        this.zipPath = zipPath;
+        return this;
     }
 
     /**
@@ -134,8 +165,7 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 jaxbNavigator.evaluateNodeList("//xjdf:Preview")
-                )
-            );
+            ));
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<FileSpec>() {
@@ -145,8 +175,7 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
-                )
-            );
+            ));
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<XJDF>() {
@@ -156,17 +185,26 @@ public abstract class AbstractXmlPackager<T> {
                     }
                 },
                 new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
-                )
-            );
+            ));
 
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
-            for (URI uri : assetReferences) {
-                final Path destPath = uri.getDestinationPath();
-                LOGGER.debug(String.format("Start processing uri '%s'.", uri));
-                if (destPath != null) {
-                    try (InputStream inputStream = uri.getSourceUri().toURL().openStream()) {
-                        writeZipEntry(new ZipEntry(destPath.toString()), inputStream);
+            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
+                for (URI uri : assetReferences) {
+                    LOGGER.debug(String.format("Start processing uri '%s'.", uri));
+
+                    final String destPath = uri.getDestinationPath();
+                    if (destPath != null) {
+                        final java.net.URI srcUri = uri.getSourceUri();
+                        if (!srcUri.isAbsolute()) {
+                            try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        } else {
+                            try (InputStream is = srcUri.toURL().openStream()) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        }
                     }
                 }
             }
@@ -192,7 +230,7 @@ public abstract class AbstractXmlPackager<T> {
         for (Object ref : refs) {
             final URI uri = extractor.extract(ref);
             if (uri != null) {
-                result.add(uri);
+                result.add(uri.complete());
             }
         }
         return result;

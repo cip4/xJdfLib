@@ -7,13 +7,17 @@ import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.xml.XJdfPackager;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collection;
@@ -25,14 +29,14 @@ import static org.junit.Assert.assertTrue;
 
 public class AbstractXmlPackagerTest {
 
-    private class MinimalXmlPackager extends AbstractXmlPackager {
+    private class MinimalXmlPackager extends AbstractXmlPackager<XJDF> {
         MinimalXmlPackager(final OutputStream out) throws Exception {
             super(out);
         }
 
         @Override
-        protected byte[] parseDocument(final Object document) throws Exception {
-            return new XJdfParser().parseXJdf((XJDF) document);
+        protected byte[] parseDocument(final XJDF xjdf) throws Exception {
+            return new XJdfParser().parseXJdf(xjdf);
         }
     }
 
@@ -43,8 +47,8 @@ public class AbstractXmlPackagerTest {
 
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
-        final Path preview = Paths.get("preview" + File.separator + "datei.pdf");
-        final Path fileSpec = Paths.get("filespec" + File.separator + "datei.pdf");
+        final String preview = "preview/datei.pdf";
+        final String fileSpec = "filespec/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
         builder.addParameter(
             xJdfNodeFactory.createRunList(
@@ -64,13 +68,13 @@ public class AbstractXmlPackagerTest {
         );
         final XJDF xjdf = builder.build();
 
-        xjdf.setCommentURL(new URI(sourceUri, null));
+        xjdf.setCommentURL(new URI(sourceUri));
         packager.packageXml(xjdf, "document.xml");
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
-        assertEquals(preview, Paths.get(zin.getNextEntry().getName()));
-        assertEquals(fileSpec, Paths.get(zin.getNextEntry().getName()));
+        assertEquals(preview, zin.getNextEntry().getName());
+        assertEquals(fileSpec, zin.getNextEntry().getName());
         assertNull(zin.getNextEntry());
     }
 
@@ -81,9 +85,9 @@ public class AbstractXmlPackagerTest {
 
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
-        final Path preview = Paths.get("preview" + File.separator + "datei.pdf");
-        final Path fileSpec = Paths.get("filespec" + File.separator + "datei.pdf");
-        final Path doc = Paths.get("doc" + File.separator + "datei.pdf");
+        final String preview = "preview/datei.pdf";
+        final String fileSpec = "filespec/datei.pdf";
+        final String doc = "doc/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
         builder.addParameter(
             xJdfNodeFactory.createRunList(
@@ -107,15 +111,15 @@ public class AbstractXmlPackagerTest {
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
-        assertEquals(preview, Paths.get(zin.getNextEntry().getName()));
-        assertEquals(fileSpec, Paths.get(zin.getNextEntry().getName()));
-        assertEquals(doc, Paths.get(zin.getNextEntry().getName()));
+        assertEquals(preview, zin.getNextEntry().getName());
+        assertEquals(fileSpec, zin.getNextEntry().getName());
+        assertEquals(doc, zin.getNextEntry().getName());
     }
 
     @Test
     public void collectReferencesExtractedValueExists() throws Exception {
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
-        final Path preview = Paths.get("preview" + File.separator + "datei.pdf");
+        final String preview = "preview/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
         builder.addParameter(
             new XJdfNodeFactory().createPreview(
@@ -180,5 +184,69 @@ public class AbstractXmlPackagerTest {
             new Object[]{jaxbNavigator.evaluateNode("//xjdf:FileSpec")}
         );
         assertEquals(1, uriCollection.size());
+    }
+
+    @Test
+    public void packageExistingArchive() throws Exception {
+        final XJDF xjdf;
+        final Path zipPath = Paths.get(AbstractXmlPackagerTest.class.getResource("../../testPackage.zip").toURI());
+        try (final FileSystem fs = FileSystems.newFileSystem(zipPath, null)) {
+            final Path xjdfDocumentPath = fs.getPath("/", "testPackage.xjdf");
+            try (final InputStream is = Files.newInputStream(xjdfDocumentPath)) {
+                xjdf = new XJdfParser().parseStream(is);
+
+                final XJdfNodeFactory nf = new XJdfNodeFactory();
+                xjdf.withSetType(
+                    nf.createParameterSet(
+                        nf.createParameterSet()
+                            .withName("RunList")
+                            .withParameter(
+                                nf.createParameter(
+                                    nf.createRunList()
+                                        .withFileSpec(
+                                            nf.createFileSpec()
+                                                .withURL(
+                                                    new URI(
+                                                        AbstractXmlPackagerTest.class.getResource("../../test.pdf")
+                                                            .toURI(),
+                                                        "artwork/another_artwork.pdf"
+                                                    )
+                                                )
+                                        )
+                                )
+                            )
+                    )
+                );
+            }
+        }
+
+        final Path tmpXjdfArchive = Files.createTempFile("XJDF_", ".zip");
+        try {
+            try (final OutputStream os = Files.newOutputStream(tmpXjdfArchive)) {
+                final XJdfPackager packager = new XJdfPackager(zipPath, os);
+                packager.packageXjdf(xjdf, "testPackage.xjdf");
+            }
+
+            try (final FileSystem zipfs = FileSystems.newFileSystem(tmpXjdfArchive, null)) {
+                assertTrue(
+                    "/testPackage.xjdf was not added to archive",
+                    Files.isReadable(zipfs.getPath("/", "testPackage.xjdf"))
+                );
+                assertTrue(
+                    "/artwork/testArtwork.pdf was not added to archive",
+                    Files.isReadable(zipfs.getPath("/", "artwork", "testArtwork.pdf"))
+                );
+                assertTrue(
+                    "/artwork/another_artwork.pdf was not added to archive",
+                    Files.isReadable(zipfs.getPath("/", "artwork", "another_artwork.pdf"))
+                );
+                assertTrue(
+                    "/preview/testPrevierw.pdf was not added to archive",
+                    Files.isReadable(zipfs.getPath("/", "preview", "testPreview.pdf"))
+                );
+            }
+        } finally {
+            Files.delete(tmpXjdfArchive);
+        }
     }
 }
