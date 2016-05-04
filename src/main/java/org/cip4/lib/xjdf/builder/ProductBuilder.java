@@ -1,21 +1,19 @@
 package org.cip4.lib.xjdf.builder;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
-
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.ChildProduct;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.w3c.dom.Node;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
+
 /**
  * Implementation of a Product builder class.
- * @author s.meissner
  */
 public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
@@ -138,7 +136,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
     /**
      * Append another product as child.
      *
-     * @param childRef Reference to the cild product to append.
+     * @param childRef Reference to the child product to append.
      * @throws IllegalArgumentException
      */
     public final void addChildProduct(final Product childRef) throws IllegalArgumentException {
@@ -146,10 +144,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
             throw new IllegalArgumentException("'ID' must not be null or blank.");
         }
 
-        // create child product
-        ChildProduct childProduct = xJdfNodeFactory.createChildProduct();
-        childProduct.setChildRef(childRef);
-        getProduct().getChildProduct().add(childProduct);
+        getProduct().withChildRefs(childRef);
 
         // set root flag
         getProduct().setIsRoot(true);

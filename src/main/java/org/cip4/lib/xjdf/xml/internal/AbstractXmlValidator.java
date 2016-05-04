@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import com.sun.org.apache.xerces.internal.dom.DOMInputImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
 import org.xml.sax.ErrorHandler;
@@ -13,8 +14,11 @@ import javax.xml.bind.ValidationException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Source;
+import javax.xml.transform.dom.DOMSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import javax.xml.validation.Validator;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -119,6 +123,37 @@ public abstract class AbstractXmlValidator<T> {
      * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
     public final void validate(final InputStream documentStream) throws ValidationException {
+        XJdfErrorHandler errorHandler = new XJdfErrorHandler();
+
+        try {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            dbf.setNamespaceAware(true);
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            db.setErrorHandler(errorHandler);
+            Document doc = db.parse(documentStream);
+
+            if (!errorHandler.getMessages().isEmpty()) {
+                final List<String> messages = errorHandler.getMessages();
+                throw new ValidationException(
+                    "Validation of the document failed due to following error messages: "
+                        + System.lineSeparator()
+                        + StringUtils.join(messages, System.lineSeparator())
+                );
+            }
+            validate(new DOMSource(doc));
+        } catch (ParserConfigurationException | SAXException | IOException e) {
+            throw new ValidationException(e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Validation of XJDF Document based on XJDF Schema.
+     *
+     * @param source XML source to validate
+     *
+     * @throws ValidationException Is thrown in case the underlying document is invalid.
+     */
+    protected final void validate(final Source source) throws ValidationException {
         try {
             // create a SchemaFactory and a Schema
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -129,12 +164,9 @@ public abstract class AbstractXmlValidator<T> {
             XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
             // validate
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            dbf.setNamespaceAware(true);
-            dbf.setSchema(schema);
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            db.setErrorHandler(errorHandler);
-            db.parse(documentStream);
+            Validator validator = schema.newValidator();
+            validator.setErrorHandler(errorHandler);
+            validator.validate(source);
 
             // get result
             final List<String> messages = errorHandler.getMessages();
@@ -145,7 +177,7 @@ public abstract class AbstractXmlValidator<T> {
                         + StringUtils.join(messages, System.lineSeparator())
                 );
             }
-        } catch (ParserConfigurationException | SAXException | IOException e) {
+        } catch (SAXException | IOException e) {
             throw new ValidationException(e.getMessage(), e);
         }
     }

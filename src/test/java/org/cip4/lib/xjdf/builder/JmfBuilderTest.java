@@ -1,23 +1,17 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
-import org.cip4.lib.xjdf.schema.JMF;
+
+import org.cip4.lib.xjdf.schema.XJMF;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class JmfBuilderTest extends AbstractBuilderTest<JMF> {
+/**
+ * JUnit Test Case for JmfBuilder
+ */
+public class JmfBuilderTest extends AbstractBuilderTest<XJMF> {
 
 	private JmfBuilder jmfBuilder;
 
@@ -41,30 +35,10 @@ public class JmfBuilderTest extends AbstractBuilderTest<JMF> {
 		jmfBuilder = null;
 	}
 
-	@Test
-	public void testInitAttributes() throws Exception {
-
-		// arrange
-		final String SENDER_ID = "SenderID";
-		final String DEVICE_ID = "DeviceID";
-		final String VERSION = "2.0";
-
-		// act
-		jmfBuilder = new JmfBuilder(SENDER_ID, DEVICE_ID);
-
-		// arrange
-		byte[] bytes = marshalResult(jmfBuilder);
-
-		String actualSenderID = getXPathValue(bytes, "/xjdf:JMF/@SenderID");
-		assertEquals("SenderID is wrong.", SENDER_ID, actualSenderID);
-
-		String actualDeviceID = getXPathValue(bytes, "/xjdf:JMF/@DeviceID");
-		assertEquals("DeviceID is wrong.", DEVICE_ID, actualDeviceID);
-
-		String actualVersion = getXPathValue(bytes, "/xjdf:JMF/@Version");
-		assertEquals("Version is wrong.", VERSION, actualVersion);
-	}
-
+	/**
+	 * Test method for {@link org.cip4.lib.xjdf.builder.JmfBuilder#newInstance(java.lang.String)}.
+	 * @throws Exception
+	 */
 	@Test
 	public void testInitAttributes2() throws Exception {
 
@@ -77,11 +51,10 @@ public class JmfBuilderTest extends AbstractBuilderTest<JMF> {
 		// arrange
 		byte[] bytes = marshalResult(jmfBuilder);
 
-		String actualSenderID = getXPathValue(bytes, "/xjdf:JMF/@SenderID");
+		String actualSenderID = getXPathValue(bytes, "/xjdf:XJMF/@SenderID");
 		assertEquals("SenderID is wrong.", SENDER_ID, actualSenderID);
 
-		String actualDeviceID = getXPathValue(bytes, "/xjdf:JMF/@DeviceID");
+		String actualDeviceID = getXPathValue(bytes, "/xjdf:XJMF/@DeviceID");
 		assertNotNull("DeviceID is wrong.", actualDeviceID);
 	}
-
 }

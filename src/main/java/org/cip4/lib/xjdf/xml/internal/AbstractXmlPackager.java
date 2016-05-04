@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -156,16 +155,6 @@ public abstract class AbstractXmlPackager<T> {
             jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
             jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
             Collection<URI> assetReferences = new LinkedList<>();
-
-            assetReferences.addAll(collectReferences(
-                new URIExtractor<Preview>() {
-                    @Override
-                    public org.cip4.lib.xjdf.type.URI extract(final Preview preview) {
-                        return preview.getURL();
-                    }
-                },
-                jaxbNavigator.evaluateNodeList("//xjdf:Preview")
-            ));
 
             assetReferences.addAll(collectReferences(
                 new URIExtractor<FileSpec>() {

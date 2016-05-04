@@ -1,22 +1,26 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.XmlStreamWriter;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationException;
+import javax.xml.bind.util.JAXBSource;
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import javax.xml.transform.Source;
+
+import org.w3c.dom.Node;
+
+import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import org.xml.sax.SAXException;
 
 /**
  * Parsing logic for building a XML Document from DOM-Tree and the way around.
@@ -29,6 +33,11 @@ public abstract class AbstractXmlParser<T> {
      * Context for JAXB-handling.
      */
     private final JAXBContext jaxbContext;
+
+    /**
+     * Character encoding for xml files.
+     */
+    private static final Charset CHARSET = StandardCharsets.UTF_8;
 
     /**
      * Custom constructor. Accepting a JAXBContextFactory for initializing.
@@ -45,7 +54,7 @@ public abstract class AbstractXmlParser<T> {
      * @param w3cNode The W3C Node to be parsed.
      *
      * @return The XML Node as object.
-     * @throws JAXBException Is thrown in case parsing a node fails.
+     * @throws JAXBException
      */
     protected final Object parseNode(final Node w3cNode) throws JAXBException {
         Unmarshaller u = jaxbContext.createUnmarshaller();
@@ -58,7 +67,7 @@ public abstract class AbstractXmlParser<T> {
      * @param xmlNode The XML Node to be parsed.
      * @param w3cNode The W3C Result node.
      *
-     * @throws JAXBException Is thrown in case parsing a node fails.
+     * @throws JAXBException
      */
     protected final void parseNode(final Object xmlNode, final Node w3cNode) throws JAXBException {
         Marshaller m = createMarshaller();
@@ -71,10 +80,6 @@ public abstract class AbstractXmlParser<T> {
      * @param obj Object tree for parsing.
      *
      * @return XML-representation of the document as array of bytes.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
      */
     protected final byte[] parseXml(final T obj)
         throws ParserConfigurationException, JAXBException, SAXException, IOException {
@@ -87,10 +92,7 @@ public abstract class AbstractXmlParser<T> {
      * @param obj Object tree for parsing.
      * @param os OutputStream the write the document to.
      *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
+     * @throws ValidationException Is thrown in case document is not valid and validation process is not being skipped.
      */
     protected final void parseXml(final T obj, final OutputStream os)
         throws IOException, ParserConfigurationException, SAXException, JAXBException {
@@ -104,10 +106,6 @@ public abstract class AbstractXmlParser<T> {
      * @param skipValidation Skip validation.
      *
      * @return Document as Byte Array.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
      */
     protected final byte[] parseXml(final T obj, final boolean skipValidation)
         throws IOException, ParserConfigurationException, SAXException, JAXBException {
@@ -127,33 +125,24 @@ public abstract class AbstractXmlParser<T> {
      * @param os Target OutputStream where document is being parsed.
      * @param skipValidation Indicates whether or not validation has to be skipped.
      *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
+     * @throws ValidationException Is thrown in case the document is not valid and validation process is not being
+     * skipped.
      */
     protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation)
         throws JAXBException, IOException, ParserConfigurationException, SAXException {
-        Marshaller m = createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        XmlStreamWriter xmlWriter = new XmlStreamWriter(bos, "UTF-8");
-        m.marshal(obj, xmlWriter);
-
-        byte[] doc = bos.toByteArray();
-
         if (!skipValidation) {
             AbstractXmlValidator validator = createValidator();
-            InputStream is = new ByteArrayInputStream(doc);
-            validator.validate(is);
+            Source xmlSource = new JAXBSource(jaxbContext, obj);
+            validator.validate(xmlSource);
         }
 
-        InputStream is = new ByteArrayInputStream(doc);
-        IOUtils.copy(is, os);
-        is.close();
+        Marshaller m = createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
+        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
+
+        OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
+        m.marshal(obj, writer);
     }
 
     /**
@@ -162,7 +151,6 @@ public abstract class AbstractXmlParser<T> {
      * @param is Binary document input stream for parsing.
      *
      * @return Object tree parsed from binary input stream.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     @SuppressWarnings("unchecked")
     public final T parseStream(final InputStream is) throws JAXBException {
@@ -188,7 +176,7 @@ public abstract class AbstractXmlParser<T> {
      * Creates and returns a new marshaller object.
      *
      * @return New Marshaller object.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
+     * @throws JAXBException
      */
     private Marshaller createMarshaller() throws JAXBException {
         // create marshaller

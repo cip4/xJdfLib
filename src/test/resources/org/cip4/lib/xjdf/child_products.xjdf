@@ -17,9 +17,7 @@
                 <xjdf:MediaIntent MediaQuality="IPM_170"/>
             </xjdf:Intent>
         </xjdf:Product>
-        <xjdf:Product ID="PRD_MAIN01" IsRoot="true" Amount="1">
-            <xjdf:ChildProduct ChildRef="PRD_MAIN01_SUB01"/>
-            <xjdf:ChildProduct ChildRef="PRD_MAIN01_SUB02"/>
+        <xjdf:Product ID="PRD_MAIN01" IsRoot="true" Amount="1" ChildRefs="PRD_MAIN01_SUB01 PRD_MAIN01_SUB02">
             <xjdf:Intent Name="LayoutIntent">
                 <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided"/>
             </xjdf:Intent>
@@ -30,8 +28,7 @@
                 </xjdf:ColorIntent>
             </xjdf:Intent>
         </xjdf:Product>
-		<xjdf:Product ID="PRD_MAIN02" IsRoot="true" Amount="2">
-            <xjdf:ChildProduct ChildRef="PRD_MAIN02_SUB01"/>
+		<xjdf:Product ID="PRD_MAIN02" IsRoot="true" Amount="2" ChildRefs="PRD_MAIN02_SUB01">
             <xjdf:Intent Name="LayoutIntent">
                 <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided"/>
             </xjdf:Intent>
@@ -53,8 +50,7 @@
                 </xjdf:ColorIntent>
             </xjdf:Intent>
         </xjdf:Product>
-		<xjdf:Product ID="PRD_MAIN04" IsRoot="true" Amount="3">
-		    <xjdf:ChildProduct ChildRef="PRD_MAIN04_NOT_FOUND"/>
+		<xjdf:Product ID="PRD_MAIN04" IsRoot="true" Amount="3" ChildRefs="PRD_MAIN04_NOT_FOUND">
             <xjdf:Intent Name="LayoutIntent">
                 <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided"/>
             </xjdf:Intent>

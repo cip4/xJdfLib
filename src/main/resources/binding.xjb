@@ -36,7 +36,7 @@
         <bindings scd="/~xjdf:duration">
             <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
         </bindings>
-        <bindings node="//xs:element[@name='ChildProduct']//xs:attribute[@name='ChildRef']" >
+        <bindings node="//xs:element[@name='Product']//xs:attribute[@name='ChildRefs']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>

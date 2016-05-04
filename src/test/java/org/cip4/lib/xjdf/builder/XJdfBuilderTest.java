@@ -1,29 +1,12 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.PhaseTime;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -33,17 +16,18 @@ import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Assert;
-
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * JUnit test case for XJdfBuilder.
- *
- * @author s.meissner
- * @author m.hartmann
  */
 public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
@@ -73,40 +57,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     @After
     public void tearDown() throws Exception {
         xJdfBuilder = null;
-    }
-
-    /**
-     * Add one Audit Parameter to XJDF Document.
-     *
-     * @throws Exception
-     */
-    @Test
-    public void testAddAudit() throws Exception {
-
-        // arrange
-        final String AGENT_NAME = "XJDF Agent";
-        final String AGENT_VERSION = "2.0.4";
-        final DateTime TIMESTAMP = new DateTime("2013-06-11T21:27:26Z");
-
-        // act
-        Created created = new XJdfNodeFactory().createCreated(AGENT_NAME, AGENT_VERSION, TIMESTAMP);
-        xJdfBuilder.addAudit(created);
-
-        PhaseTime phaseTime = new XJdfNodeFactory().createPhaseTime();
-        phaseTime.setStart(new DateTime());
-        xJdfBuilder.addAudit(phaseTime);
-
-        // assert
-        byte[] bytes = marshalResult(xJdfBuilder);
-
-        String actualAgentName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentName");
-        Assert.assertEquals("AgentName in Created is wrong.", AGENT_NAME, actualAgentName);
-
-        String actualAgentVersion = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@AgentVersion");
-        Assert.assertEquals("AgentVersion in Created is wrong.", AGENT_VERSION, actualAgentVersion);
-
-        String actualTimeStamp = getXPathValue(bytes, "/xjdf:XJDF/xjdf:AuditPool/xjdf:Created/@TimeStamp");
-        Assert.assertEquals("TimeStamp in Created is wrong.", TIMESTAMP, new DateTime(actualTimeStamp));
     }
 
     /**

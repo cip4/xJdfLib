@@ -47,6 +47,7 @@ public class ResourcesTest {
         ResourceType resourceType = Mockito.mock(ResourceType.class);
         Part part = Mockito.mock(Part.class);
         Resource resource = resources.createAsset(resourceType, part);
+        assertEquals(1, resource.getPart().size());
         assertSame(part, resource.getPart().get(0));
         assertSame(resourceType, resource.getResourceType().getValue());
     }

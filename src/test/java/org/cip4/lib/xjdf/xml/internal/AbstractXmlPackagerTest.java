@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf.xml.internal;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -136,14 +135,14 @@ public class AbstractXmlPackagerTest {
         assertEquals(
             1,
             packager.collectReferences(
-                new AbstractXmlPackager.URIExtractor<Preview>() {
+                new AbstractXmlPackager.URIExtractor<FileSpec>() {
                     @Override
-                    public URI extract(final Preview previewParam) {
-                        return previewParam.getURL();
+                    public URI extract(final FileSpec fileSpec) {
+                        return fileSpec.getURL();
                     }
 
                 },
-                new Object[]{jaxbNavigator.evaluateNode("//xjdf:Preview")}
+                new Object[]{jaxbNavigator.evaluateNode("//xjdf:Preview/xjdf:FileSpec")}
             ).size()
         );
     }
@@ -196,26 +195,24 @@ public class AbstractXmlPackagerTest {
                 xjdf = new XJdfParser().parseStream(is);
 
                 final XJdfNodeFactory nf = new XJdfNodeFactory();
-                xjdf.withSetType(
-                    nf.createParameterSet(
-                        nf.createParameterSet()
-                            .withName("RunList")
-                            .withParameter(
-                                nf.createParameter(
-                                    nf.createRunList()
-                                        .withFileSpec(
-                                            nf.createFileSpec()
-                                                .withURL(
-                                                    new URI(
-                                                        AbstractXmlPackagerTest.class.getResource("../../test.pdf")
-                                                            .toURI(),
-                                                        "artwork/another_artwork.pdf"
-                                                    )
+                xjdf.withParameterSet(
+                    nf.createParameterSet()
+                        .withName("RunList")
+                        .withParameter(
+                            nf.createParameter(
+                                nf.createRunList()
+                                    .withFileSpec(
+                                        nf.createFileSpec()
+                                            .withURL(
+                                                new URI(
+                                                    AbstractXmlPackagerTest.class.getResource("../../test.pdf")
+                                                        .toURI(),
+                                                    "artwork/another_artwork.pdf"
                                                 )
-                                        )
-                                )
+                                            )
+                                    )
                             )
-                    )
+                        )
                 );
             }
         }

@@ -3,9 +3,9 @@ package org.cip4.lib.xjdf.xml;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.ValidationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
@@ -15,7 +15,6 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.XYPair;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -23,13 +22,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 /**
  * JUnit test case for XmlParser class.
- * @author s.meissner
- * @date 06.03.2012
  */
 public class XJdfParserTest {
 
@@ -38,17 +34,6 @@ public class XJdfParserTest {
     private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser xJdfParser;
-
-    /**
-     * Default constructor.
-     */
-    public XJdfParserTest() {
-        try {
-            JAXBContextFactory.init();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Set up unit test.
@@ -149,7 +134,7 @@ public class XJdfParserTest {
         xJdfBuilder.addGeneralID(generalId);
 
         XJDF xJdf = xJdfBuilder.build();
-        xJdf.setID(null);
+        xJdf.setVersion(null);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -172,7 +157,6 @@ public class XJdfParserTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("MyType");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -190,8 +174,6 @@ public class XJdfParserTest {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();
         xPath.setNamespaceContext(nsManager);
-
-        System.out.println(new String(bos.toByteArray()));
 
         XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
         InputStream is = new ByteArrayInputStream(bos.toByteArray());
@@ -212,7 +194,6 @@ public class XJdfParserTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
 
-        xJdfBuilder.build().setID("MyId");
         xJdfBuilder.build().getTypes().add("MyType");
         xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
@@ -228,8 +209,6 @@ public class XJdfParserTest {
         XPathFactory xPathFactory = XPathFactory.newInstance();
         XPath xPath = xPathFactory.newXPath();
         xPath.setNamespaceContext(nsManager);
-
-        System.out.println(new String(bytes));
 
         XPathExpression xPathExpression = xPath.compile("/ns:XJDF/ns:GeneralID/@IDValue");
         InputStream is = new ByteArrayInputStream(bytes);
@@ -264,9 +243,7 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct = xjdf.getProductList().getProduct().get(6);
-        assertEquals(1, mainProduct.getChildProduct().size());
-        final Product childProduct = mainProduct.getChildProduct().get(0).getChildRef();
-        assertNull(childProduct);
+        assertEquals(0, mainProduct.getChildRefs().size());
     }
 
     /**
@@ -278,22 +255,22 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct1 = xjdf.getProductList().getProduct().get(3);
-        assertEquals(2, mainProduct1.getChildProduct().size());
-        final Product childProduct11 = mainProduct1.getChildProduct().get(0).getChildRef();
+        assertEquals(2, mainProduct1.getChildRefs().size());
+        final Product childProduct11 = mainProduct1.getChildRefs().get(0);
         assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
         assertEquals(11000, (int) childProduct11.getAmount());
-        final Product childProduct12 = mainProduct1.getChildProduct().get(1).getChildRef();
+        final Product childProduct12 = mainProduct1.getChildRefs().get(1);
         assertEquals("PRD_MAIN01_SUB02", childProduct12.getID());
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
-        assertEquals(1, mainProduct2.getChildProduct().size());
-        final Product childProduct21 = mainProduct2.getChildProduct().get(0).getChildRef();
+        assertEquals(1, mainProduct2.getChildRefs().size());
+        final Product childProduct21 = mainProduct2.getChildRefs().get(0);
         assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
-        assertEquals(0, mainProduct3.getChildProduct().size());
+        assertEquals(0, mainProduct3.getChildRefs().size());
     }
 
     @Test
@@ -301,10 +278,10 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceSet resourceSet = (ResourceSet) xjdf.getSetType().get(0).getValue();
+        ResourceSet resourceSet = xjdf.getResourceSet().get(0);
         Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getParameterType().getValue();
         assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
-        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
     @Test
@@ -312,13 +289,13 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ParameterSet parameterSet = (ParameterSet) xjdf.getSetType().get(6).getValue();
+        ParameterSet parameterSet = xjdf.getParameterSet().get(5);
         ApprovalSuccess approvalSuccess = (ApprovalSuccess) parameterSet.getParameter().get(0).getParameterType().getValue();
         ApprovalPerson approvalPerson = approvalSuccess.getApprovalDetails().get(0).getApprovalPerson();
         Contact contact = (Contact) approvalPerson.getContactRef().getParameterType().getValue();
 
         assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
-        assertEquals("FLYERALARM GmbH", contact.getCompany().get(0).getOrganizationName());
+        assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
     @Test
@@ -326,7 +303,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        Notification notificationB = (Notification) xjdf.getAuditPool().getAudit().get(2).getValue();
+        Notification notificationB = xjdf.getAuditPool().getNotification().get(1);
         Notification notificationA = notificationB.getRefID();
         assertEquals("Notification_B", notificationB.getID());
         assertEquals("Notification_A", notificationA.getID());
@@ -338,7 +315,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTimeB = (PhaseTime) xjdf.getAuditPool().getAudit().get(4).getValue();
+        PhaseTime phaseTimeB = xjdf.getAuditPool().getPhaseTime().get(1);
         PhaseTime phaseTimeA = phaseTimeB.getRefID();
         assertEquals("PhaseTime_B", phaseTimeB.getID());
         assertEquals("PhaseTime_A", phaseTimeA.getID());
@@ -350,7 +327,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudit().get(6).getValue();
+        ProcessRun processRunB = xjdf.getAuditPool().getProcessRun().get(1);
         ProcessRun processRunA = processRunB.getRefID();
         assertEquals("ProcessRun_B", processRunB.getID());
         assertEquals("ProcessRun_A", processRunA.getID());
@@ -362,7 +339,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceAudit resourceAuditB = (ResourceAudit) xjdf.getAuditPool().getAudit().get(8).getValue();
+        ResourceAudit resourceAuditB = xjdf.getAuditPool().getResourceAudit().get(1);
         ResourceAudit resourceAuditA = resourceAuditB.getRefID();
         assertEquals("ResourceAudit_B", resourceAuditB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA.getID());
@@ -387,7 +364,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTime = (PhaseTime) xjdf.getAuditPool().getAudit().get(3).getValue();
+        PhaseTime phaseTime = xjdf.getAuditPool().getPhaseTime().get(0);
         PhaseAmount phaseAmount = phaseTime.getPhaseAmount().get(0);
         Media media = (Media) phaseAmount.getRRef().getResourceType().getValue();
 
@@ -395,4 +372,41 @@ public class XJdfParserTest {
         assertEquals("IPG_500", media.getMediaQuality());
     }
 
+    @Test
+    public void parseXmlReadsUTF8Chars() throws Exception {
+        InputStream is = XJdfParserTest.class.getResourceAsStream("/org/cip4/lib/xjdf/utf8.xjdf");
+        XJDF xjdf = xJdfParser.parseStream(is);
+
+        Comment comment = xjdf.getComment().get(0);
+
+        assertEquals("aÄoÖuÜsß", comment.getValue());
+    }
+
+    @Test
+    public void parseXjdfWritesUtf8Chars() throws Exception {
+        final String utf8String = "aÄoÖuÜsß";
+        XJDF xjdf = new XJDF();
+        xjdf.setVersion("2.0");
+        xjdf.withComment(new Comment().withValue(utf8String));
+
+        byte[] bytes = xJdfParser.parseXJdf(xjdf);
+        String xjdfString = new String(bytes, StandardCharsets.UTF_8);
+        assertTrue(xjdfString.contains("<xjdf:Comment>aÄoÖuÜsß</xjdf:Comment>"));
+    }
+
+    @Test(expected = ValidationException.class)
+    public void parseXjdfValidatesDocument() throws Exception {
+        xJdfParser.parseXJdf(getInvalidXjdfDocument());
+    }
+
+    @Test
+    public void parseXjdfAllowsGeneratingInvalidXml() throws Exception {
+        byte[] bytes = xJdfParser.parseXJdf(getInvalidXjdfDocument(), true);
+        assertNotNull(bytes);
+    }
+
+    private XJDF getInvalidXjdfDocument() {
+        // xjdf is invalid, because version is not defined.
+        return new XJDF();
+    }
 }

@@ -137,18 +137,8 @@ public class XJdfNodeFactoryTest {
         assertEquals("NaturalLang is wrong", NATURAL_LANG, nodeInfo.getNaturalLang());
     }
 
-    @Test
-    public void testCreateChildProduct() {
-        final String uuid = UUID.randomUUID().toString();
-        Product childRefProduct = new Product();
-        childRefProduct.setID(uuid);
-        ChildProduct childProduct = xJdfNodeFactory.createChildProduct(childRefProduct);
-
-        assertEquals("Childref is wrong", uuid, childProduct.getChildRef().getID());
-    }
-
-    @Test
-    public void testCreateMediaIntent() {
+	@Test
+	public void testCreateMediaIntent() {
 
         // arrange
         final String MEDIA_QUALITY = UUID.randomUUID().toString();
@@ -245,8 +235,8 @@ public class XJdfNodeFactoryTest {
     @Test
     public void testCreateBindingIntent() {
 
-        // arrange
-        final String BINDING_TYPE = UUID.randomUUID().toString();
+		// arrange
+		final EnumBindingType BINDING_TYPE = EnumBindingType.CORNER_STITCH;
 
         // act
         BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE);
@@ -259,7 +249,7 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        String bindingType = "Some Binding Type";
+        EnumBindingType bindingType = EnumBindingType.LOOSE_BINDING;
         EnumEdge bindingEdge = EnumEdge.BOTTOM;
         EnumBindingOrder bindingOrder = EnumBindingOrder.GATHERING;
 
