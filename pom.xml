@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.cip4.lib.xjdf</groupId>
     <artifactId>xJdfLib</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <version>0.9-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>CIP4 xJdfLib</name>
     <description>CIP4 XJDF Java Library</description>
@@ -13,11 +13,11 @@
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
     </properties>
     <scm>
-        <url>https://stash.cip4.org/scm/lib/xjdflib.git</url>
-        <developerConnection>scm:git:https://stash.cip4.org/scm/lib/xjdflib.git</developerConnection>
-        <connection>scm:svn:https://stash.cip4.org/scm/lib/xjdflib.git</connection>
-      <tag>HEAD</tag>
-  </scm>
+        <url>https://bitbucket.cip4.org/scm/lib/xjdflib.git</url>
+        <developerConnection>scm:git:https://bitbucket.cip4.org/scm/lib/xjdflib.git</developerConnection>
+        <connection>scm:svn:https://bitbucket.cip4.org/scm/lib/xjdflib.git</connection>
+      <tag>xJdfLib-0.7</tag>
+    </scm>
     <issueManagement>
         <system>JIRA</system>
         <url>https://jira.cip4.org/browse/XJDFLIB</url>
@@ -32,6 +32,13 @@
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>
     </distributionManagement>
+    <licenses>
+        <license>
+            <name>CIP4 Software License</name>
+            <url>https://confluence.cip4.org/display/PUB/CIP4+Software+License</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <developers>
         <developer>
             <id>r.prosi</id>
@@ -61,6 +68,13 @@
             <organizationUrl>https://www.flyeralarm.com</organizationUrl>
             <email>jeffrey.hammett@flyeralarm.com</email>
         </developer>
+        <developer>
+            <id>a.eirich</id>
+            <name>Arthur Eirich</name>
+            <organization>flyeralarm GmbH</organization>
+            <organizationUrl>https://www.flyeralarm.com</organizationUrl>
+            <email>arthur.eirich@flyeralarm.com</email>
+        </developer>
     </developers>
     <build>
         <resources>
@@ -70,6 +84,17 @@
             </resource>
         </resources>
         <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.5</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -84,8 +109,10 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5</version>
                 <configuration>
-                    <mavenExecutorId>forked-path</mavenExecutorId>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
                     <useReleaseProfile>false</useReleaseProfile>
+                    <releaseProfiles>release</releaseProfiles>
+					<goals>deploy</goals>
                 </configuration>
             </plugin>
             <plugin>
@@ -146,6 +173,12 @@
         </plugins>
     </build>
     <dependencies>
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.7.7</version>
+        </dependency>
         <!-- Apache Tools -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -153,9 +186,9 @@
             <version>2.4</version>
         </dependency>
         <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.4</version>
         </dependency>
         <!-- JAXB -->
         <dependency>
@@ -194,4 +227,50 @@
             <version>13.0</version>
         </dependency>
     </dependencies>
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-sources</id>
+								<goals>
+									<goal>jar-no-fork</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-javadocs</id>
+								<goals>
+									<goal>jar</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

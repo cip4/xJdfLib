@@ -15,7 +15,6 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
 /**
  * Abstract XJdf Data Type.
  * @author stefan.meissner
- * @date 19.02.2013
  */
 public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
 

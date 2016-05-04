@@ -1,48 +1,33 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.Created;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.PhaseTime;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Assert;
-
-import static org.junit.Assert.*;
-
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+
 /**
  * JUnit test case for XJdfBuilder.
- *
- * @author s.meissner
- * @author m.hartmann
  */
 public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
@@ -90,7 +75,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addGeneralID(generalId);
 
         // assert
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualIDUsage = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID/@IDUsage");
         Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE, actualIDUsage);
@@ -121,7 +106,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addGeneralID(new XJdfNodeFactory().createGeneralID(ID_USAGE_2, ID_VALUE_2));
 
         // assert
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualIDUsage_1 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[1]/@IDUsage");
         Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE_1, actualIDUsage_1);
@@ -155,7 +140,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addProduct(product);
 
         // assert
-        marsahlResult(xJdfBuilder);
+        marshalResult(xJdfBuilder);
     }
 
     /**
@@ -170,7 +155,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String URL = "http://www.example.org/w2p/Cover.pdf";
 
         FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
-        fileSpec.setURL(URL);
+        fileSpec.setURL(new URI(new java.net.URI(URL)));
 
         RunList runList = new XJdfNodeFactory().createRunList();
         runList.setFileSpec(fileSpec);
@@ -185,7 +170,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addParameter(runList, partCover);
 
         // assert
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
         Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
@@ -212,8 +197,8 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String urlContent = "http://www.example.org/w2p/Content.pdf";
         final String urlCover = "http://www.example.org/w2p/Cover.pdf";
 
-        RunList runListCover = new XJdfNodeFactory().createRunList(urlCover);
-        RunList runListContent = new XJdfNodeFactory().createRunList(urlContent);
+        RunList runListCover = new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover)));
+        RunList runListContent = new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent)));
 
         Part partCover = new XJdfNodeFactory().createPart();
         partCover.setRun("Cover");
@@ -230,7 +215,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addParameter(runListContent, partContent);
 
         // assert
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         Assert.assertEquals(
             "ParameterSet for NodeInfo must be first ParameterSet since it is lexicographically smaller than RunList.",
@@ -272,9 +257,9 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         List<ParameterType> runLists = new ArrayList<>();
 
-        runLists.add(new XJdfNodeFactory().createRunList(urlCover));
-        runLists.add(new XJdfNodeFactory().createRunList(urlContent_1));
-        runLists.add(new XJdfNodeFactory().createRunList(urlContent_2));
+        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover))));
+        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_1))));
+        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_2))));
 
         // act
         xJdfBuilder.addParameter(runLists);
@@ -282,7 +267,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // assert
         String actual;
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet)");
         Assert.assertEquals("Number of ParameterSet nodes is wrong.", "1", actual);
@@ -333,11 +318,11 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         String processUsage_2 = "PROCESS_USAGE_2";
 
         List<ParameterType> runList_1 = new ArrayList<>();
-        runList_1.add(nf.createRunList(urlCover));
+        runList_1.add(nf.createRunList(new URI(new java.net.URI(urlCover))));
 
         List<ParameterType> runList_2 = new ArrayList<>();
-        runList_2.add(nf.createRunList(urlContent_1));
-        runList_2.add(nf.createRunList(urlContent_2));
+        runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_1))));
+        runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_2))));
 
         // act
         xJdfBuilder.addParameter(runList_1, processUsage_1);
@@ -346,7 +331,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // assert
         String actual;
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet)");
         Assert.assertEquals("Number of ParameterSet nodes is wrong.", "2", actual);
@@ -388,7 +373,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // assert
         int actual;
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = Integer.parseInt(
             getXPathValue(
@@ -411,18 +396,18 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
         XJdfNodeFactory nf = new XJdfNodeFactory();
 
-        final String FILE_NAME = "./myTestFile.pdf";
+        final String FILE_NAME = "myTestFile.pdf";
 
         XJdfParser parser = new XJdfParser();
         XJDF xjdf = parser.parseStream(is);
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addParameter(nf.createRunList(FILE_NAME), "PROCESS_USAGE_1");
+        xJdfBuilder.addParameter(nf.createRunList(new URI(new java.net.URI(FILE_NAME))), "PROCESS_USAGE_1");
 
         String actual;
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(
             bytes,
@@ -449,18 +434,18 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
         XJdfNodeFactory nf = new XJdfNodeFactory();
 
-        final String FILE_NAME = "./myTestFile.pdf";
+        final String FILE_NAME = "myTestFile.pdf";
 
         XJdfParser parser = new XJdfParser();
         XJDF xjdf = parser.parseStream(is);
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addParameter(nf.createRunList(FILE_NAME));
+        xJdfBuilder.addParameter(nf.createRunList(new URI(new java.net.URI(FILE_NAME))));
 
         String actual;
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(
             bytes,
@@ -482,7 +467,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addResource(media1, null);
         xJdfBuilder.addResource(media2, null);
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
         assertEquals("1", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
         assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet/xjdf:Resource)"));
     }
@@ -494,7 +479,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addResource(media1, null, "a");
         xJdfBuilder.addResource(media2, null, "b");
 
-        byte[] bytes = marsahlResult(xJdfBuilder);
+        byte[] bytes = marshalResult(xJdfBuilder);
         assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
     }
 }

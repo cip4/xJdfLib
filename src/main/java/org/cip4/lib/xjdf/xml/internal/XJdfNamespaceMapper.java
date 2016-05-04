@@ -17,7 +17,6 @@ import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 /**
  * XJDF Namespace Prefix Mapper for organizing namespace prefixes.
  * @author s.meissner
- * @date 01.03.2012
  */
 public class XJdfNamespaceMapper extends NamespacePrefixMapper {
 

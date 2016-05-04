@@ -11,7 +11,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.output.XmlStreamWriter;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.type.AbstractXJdfType;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;

@@ -16,39 +16,10 @@ import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
-import org.junit.After;
-import org.junit.Before;
+import org.cip4.lib.xjdf.type.URI;
 import org.junit.Test;
 
-/**
- * JUnit test case for XJdfBuilder.
- * @author s.meissner
- * @date 29.02.2012
- */
 public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
-
-	private XJdfBuilder xJdfBuilder;
-
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-		xJdfBuilder = new XJdfBuilder();
-
-		JAXBContextFactory.init();
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-		xJdfBuilder = null;
-	}
 
 	/**
 	 * Add Multiple Parameter o XJDF document.
@@ -75,7 +46,13 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 		// append Cover File (using the detailed way - for customization)
 		FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
-		fileSpec.setURL("http://www.example.org/xjdf/myCover.pdf");
+		fileSpec.setURL(
+            new URI(
+                new java.net.URI(
+                    "http://www.example.org/xjdf/myCover.pdf"
+                )
+            )
+		);
 		RunList runCover = new XJdfNodeFactory().createRunList();
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
@@ -83,16 +60,19 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addParameter(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-		RunList runContent = new XJdfNodeFactory().createRunList("http://www.example.org/xjdf/myContent.pdf");
+		RunList runContent = new XJdfNodeFactory().createRunList(
+            new URI(
+                new java.net.URI(
+                    "http://www.example.org/xjdf/myContent.pdf"
+                )
+            )
+        );
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
 		xJdfBuilder.addParameter(runContent, partContent);
 
-		// build document
-		XJDF xJdf = xJdfBuilder.build();
-
 		// console output
-		marsahlResult(xJdfBuilder);
+        marshalResult(xJdfBuilder);
 	}
 
 	/**
@@ -120,7 +100,13 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 		// append Cover File (using the detailed way - for customization)
 		FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
-		fileSpec.setURL("http://www.example.org/xjdf/myCover.pdf");
+        fileSpec.setURL(
+            new URI(
+                new java.net.URI(
+                    "http://www.example.org/xjdf/myCover.pdf"
+                )
+            )
+        );
 		RunList runCover = new XJdfNodeFactory().createRunList();
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
@@ -128,16 +114,19 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addParameter(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-		RunList runContent = new XJdfNodeFactory().createRunList("http://www.example.org/xjdf/myContent.pdf");
+        RunList runContent = new XJdfNodeFactory().createRunList(
+            new URI(
+                new java.net.URI(
+                    "http://www.example.org/xjdf/myContent.pdf"
+                )
+            )
+        );
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
 		xJdfBuilder.addParameter(runContent, partContent);
 
-		// build document
-		XJDF xJdf = xJdfBuilder.build();
-
 		// console output
-		marsahlResult(xJdfBuilder);
+		marshalResult(xJdfBuilder);
 	}
 
 }

@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * A list is an enumerated set of values, which is expressed as a list of space separated values.
  * @author s.meissner
- * @date 10.01.2013
  */
 public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractList<T>> {
 

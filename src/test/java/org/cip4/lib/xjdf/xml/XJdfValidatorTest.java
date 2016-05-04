@@ -1,14 +1,5 @@
 package org.cip4.lib.xjdf.xml;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.ValidationException;
-
-import static org.junit.Assert.*;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
@@ -21,10 +12,17 @@ import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.ValidationException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
 /**
  * JUnit test case for XJdfValidator.
@@ -222,7 +220,13 @@ public class XJdfValidatorTest {
         xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
         xJdfBuilder.addProduct(productBuilder.build());
         xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
-        xJdfBuilder.addParameter(nf.createRunList("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf"));
+        xJdfBuilder.addParameter(
+            nf.createRunList(
+                new URI(
+                    new java.net.URI("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf")
+                )
+            )
+        );
         xJdfBuilder.addParameter(nf.createApprovalParams(1));
         // TODO xJdfBuilder.addParameter(nf.createNodeInfo());
         // TODO ColorIntent

@@ -19,7 +19,6 @@ import javax.xml.namespace.NamespaceContext;
 /**
  * Implementation of the NamespaceContext.
  * @author s.meissner
- * @date 02.03.2012
  */
 public class NamespaceManager implements NamespaceContext {
 

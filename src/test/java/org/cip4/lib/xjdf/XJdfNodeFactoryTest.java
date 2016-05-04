@@ -7,6 +7,7 @@ import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
 import org.junit.Before;
@@ -15,7 +16,10 @@ import org.junit.Test;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.fail;
 
 /**
  * JUnit test case for XJdfNodeFactory.
@@ -60,16 +64,21 @@ public class XJdfNodeFactoryTest {
     }
 
     @Test
-    public void testCreateRunListString() {
+    public void testCreateRunList() throws Exception {
 
         // arrange
         final String FILE_SPEC_URL = UUID.randomUUID().toString();
 
         // act
-        RunList runList = xJdfNodeFactory.createRunList(FILE_SPEC_URL);
+        final URI fileSpecUri = new URI(new java.net.URI(FILE_SPEC_URL));
+        RunList runList = xJdfNodeFactory.createRunList(fileSpecUri);
 
         // assert
-        assertEquals("Attribute URL in Node FileSpec is wrong", FILE_SPEC_URL, runList.getFileSpec().getURL());
+        assertEquals(
+            "Attribute URL in Node FileSpec is wrong",
+            fileSpecUri,
+            runList.getFileSpec().getURL()
+        );
     }
 
     @Test

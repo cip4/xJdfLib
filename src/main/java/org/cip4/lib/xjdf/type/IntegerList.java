@@ -15,7 +15,6 @@ import java.util.List;
 /**
  * An IntegerList is an enumerated set of Integers, which is expressed as a list of space separated values.
  * @author s.meissner
- * @date 10.01.2013
  */
 public class IntegerList extends AbstractList<Integer> {
 

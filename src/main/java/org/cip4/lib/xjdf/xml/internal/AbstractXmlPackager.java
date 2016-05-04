@@ -1,59 +1,54 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.uri.resolver.URIResolver;
-import org.cip4.lib.xjdf.xml.XJdfNavigator;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.type.URI;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.xml.xpath.XPathExpressionException;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.Arrays;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
  * Packaging logic for XML Documents. Package an XML with all references in a ZIP Package.
+ *
+ * @param <T> Object type to create the abstract xml packager for.
  */
-public abstract class AbstractXmlPackager {
+public abstract class AbstractXmlPackager<T> {
 
     /**
-     * A simple class for storing the prepared packaging data.
+     * Logger.
      */
-    final class PreparedPackagingData {
+    public static final Logger LOGGER = LoggerFactory.getLogger(AbstractXmlPackager.class);
 
+    /**
+     * Interface for the extraction of a file reference.
+     *
+     * @param <T> Object to extract the reference from.
+     */
+    interface URIExtractor<T> {
         /**
-         * The prepared XmlNavigator.
-         */
-        final XmlNavigator nav;
-
-        /**
-         * The map that stores referenced files used in the prepared XmlNavigator.
-         */
-        final Map<String, String> fileRefs = new HashMap<>();
-
-        /**
-         * Constructor.
+         * Extracts the file reference.
          *
-         * @param xJdfNavigator The prepared XmlNavigator.
-         * @param fileRefs The map containing the referenced files.
+         * @param xjdfElement XJDF Element to extract the reference from.
+         *
+         * @return Extracted reference.
          */
-        PreparedPackagingData(final XJdfNavigator xJdfNavigator, final Map<String, String>... fileRefs) {
-            this.nav = xJdfNavigator;
-            for (final Map<String, String> fileRefMap : fileRefs) {
-                for (final Map.Entry<String, String> entry : fileRefMap.entrySet()) {
-                    this.fileRefs.put(entry.getKey(), entry.getValue());
-                }
-            }
-        }
+        org.cip4.lib.xjdf.type.URI extract(T xjdfElement);
     }
 
     /**
@@ -93,9 +88,9 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * A collection containing the schemes that will not be included in the zip.
+     * A reference to an already existing archive that should be enhanced.
      */
-    private static final Collection<String> SCHEME_BLACKLIST = Arrays.asList("http", "https");
+    private Path zipPath;
 
     /**
      * The ZipOutputStream to write to.
@@ -103,28 +98,35 @@ public abstract class AbstractXmlPackager {
     private final ZipOutputStream zout;
 
     /**
-     * Tells whether all files should be put into the zip root.
-     */
-    private final boolean withoutHierarchy;
-
-    /**
      * Create a new AbstractXmlPackager.
      *
      * @param out The underlying OutputStream to write the package to.
      */
     public AbstractXmlPackager(final OutputStream out) {
-        this(out, false);
+        this(null, out);
     }
 
     /**
      * Create a new AbstractXmlPackager.
      *
+     * @param zipPath The path to an existing zip archive.
      * @param out The underlying OutputStream to write the package to.
-     * @param withoutHierarchy Put all files into the zip root.
      */
-    public AbstractXmlPackager(final OutputStream out, final boolean withoutHierarchy) {
+    public AbstractXmlPackager(final Path zipPath, final OutputStream out) {
+        this.zipPath = zipPath;
         this.zout = new ZipOutputStream(out);
-        this.withoutHierarchy = withoutHierarchy;
+    }
+
+    /**
+     * Sets a reference to an already existing archive.
+     *
+     * @param zipPath The path to existing archive
+     *
+     * @return This AbstractXmlPackager
+     */
+    public final AbstractXmlPackager<T> withZipPath(final Path zipPath) {
+        this.zipPath = zipPath;
+        return this;
     }
 
     /**
@@ -137,46 +139,62 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Packages an XML Document to a zipped binary output stream.
-     *
-     * @param xmlNavigator The XmlNavigator containing the data.
-     * @param rootUri The root URI to use when dealing with relative URIs.
-     *
-     * @throws PackagerException If the XML document could not be packaged.
-     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
-     */
-    public abstract void packageXml(
-        final XmlNavigator xmlNavigator,
-        final URI rootUri
-    ) throws PackagerException, XPathExpressionException;
-
-    /**
      * Packages an XML document to a zipped binary output stream.
      *
-     * @param xmlNavigator XML Navigator which is being packaged.
+     * @param document Document to package.
      * @param docName File name of the document in the zip package.
-     * @param rootUri The root URI to use when dealing with relative URIs.
      *
      * @throws PackagerException If the XML document could not be packaged.
      */
     protected final void packageXml(
-        final XmlNavigator xmlNavigator,
-        final String docName,
-        final URI rootUri
+        final T document,
+        final String docName
     ) throws PackagerException {
         try {
-            final PreparedPackagingData packagingData = prepareForPackaging(xmlNavigator, rootUri);
+            final JAXBNavigator<T> jaxbNavigator = new JAXBNavigator<>(document);
+            jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+            jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
+            Collection<URI> assetReferences = new LinkedList<>();
 
-            // put XML to archive
-            writeZipEntry(new ZipEntry(docName), packagingData.nav.getXmlStream());
+            assetReferences.addAll(collectReferences(
+                new URIExtractor<FileSpec>() {
+                    @Override
+                    public org.cip4.lib.xjdf.type.URI extract(final FileSpec fileSpec) {
+                        return fileSpec.getURL();
+                    }
+                },
+                jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
+            ));
 
-            // put all files to archive
-            for (final Map.Entry<String, String> entry : packagingData.fileRefs.entrySet()) {
-                final URI uri = URIResolver.resolve(rootUri, entry.getKey());
+            assetReferences.addAll(collectReferences(
+                new URIExtractor<XJDF>() {
+                    @Override
+                    public org.cip4.lib.xjdf.type.URI extract(final XJDF xjdf) {
+                        return xjdf.getCommentURL();
+                    }
+                },
+                new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
+            ));
 
-                final String targetPath = entry.getValue();
-                try (final InputStream is = uri.toURL().openStream()) {
-                    writeZipEntry(new ZipEntry(targetPath), is);
+            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
+
+            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
+                for (URI uri : assetReferences) {
+                    LOGGER.debug(String.format("Start processing uri '%s'.", uri));
+
+                    final String destPath = uri.getDestinationPath();
+                    if (destPath != null) {
+                        final java.net.URI srcUri = uri.getSourceUri();
+                        if (!srcUri.isAbsolute()) {
+                            try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        } else {
+                            try (InputStream is = srcUri.toURL().openStream()) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        }
+                    }
                 }
             }
 
@@ -187,108 +205,31 @@ public abstract class AbstractXmlPackager {
     }
 
     /**
-     * Returns the URI encoded base name of the path.
+     * Collects uri references.
      *
-     * @param path The path to encode the base name from.
+     * @param extractor Object that extracts the references.
+     * @param refs References to extract.
      *
-     * @return The encoded base name.
-     * @throws URISyntaxException If the given path could not be encoded.
+     * @return Collected uri references.
      */
-    private String encodeURIBaseName(final String path) throws URISyntaxException {
-        final String baseName = path.substring(path.lastIndexOf('/') + 1);
-        final String parsedBaseName = new URI(baseName).getPath();
-
-        return encodeURIPath(parsedBaseName.replaceAll("[^-_a-zA-Z0-9.]+", "_"));
-    }
-
-    /**
-     * Returns the URI encoded path.
-     *
-     * @param path The path to encode.
-     *
-     * @return The encoded path.
-     * @throws URISyntaxException If the given path could not be encoded.
-     */
-    private String encodeURIPath(final String path) throws URISyntaxException {
-        return new URI(null, null, path, null).toASCIIString();
-    }
-
-    /**
-     * Prepares the given XmlNavigator for packaging.
-     *
-     * @param nav The XmlNavigator to be prepared.
-     * @param rootUri The root URI to use when dealing with relative URIs.
-     *
-     * @return The prepared data used for packaging.
-     * @throws URISyntaxException If a file reference could not be encoded.
-     * @throws Exception If the XmlNavigator could not be evaluated.
-     */
-    final PreparedPackagingData prepareForPackaging(
-        final XmlNavigator nav,
-        final URI rootUri
-    ) throws URISyntaxException, Exception {
-        final XJdfNavigator xJdfNavigator = new XJdfNavigator(nav.getXmlBytes(), true);
-
-        return new PreparedPackagingData(
-            xJdfNavigator,
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:FileSpec/@URL"), rootUri, "assets/"),
-            relativizeNodeList(xJdfNavigator.evaluateNodeList("//xjdf:XJDF/@CommentURL"), rootUri, "docs/")
-        );
-    }
-
-    /**
-     * Relativizes the file references in the passed node list.
-     *
-     * @param nodeList The file references to relativize.
-     * @param rootUri The root URI to use when dealing with relative URIs.
-     * @param targetDir The target directory where the file references should be created.
-     *
-     * @return A map containing the mapping between the source and the target file.
-     * @throws URISyntaxException If a file reference could not be encoded.
-     */
-    private Map<String, String> relativizeNodeList(
-        final NodeList nodeList,
-        final URI rootUri,
-        final String targetDir
-    ) throws URISyntaxException {
-        final Map<String, String> referencedFiles = new HashMap<>();
-
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            final Node node = nodeList.item(i);
-
-            final String uriString = node.getNodeValue();
-
-            if (shouldIncludeFileReference(URIResolver.resolve(rootUri, uriString))) {
-                final String baseName = encodeURIBaseName(uriString);
-                final String uriFileName = withoutHierarchy
-                    ? baseName
-                    : targetDir + baseName;
-
-                node.setNodeValue(uriFileName);
-
-                referencedFiles.put(uriString, uriFileName);
+    final Collection<org.cip4.lib.xjdf.type.URI> collectReferences(
+        final URIExtractor extractor, final Object[] refs
+    ) {
+        Collection<org.cip4.lib.xjdf.type.URI> result = new ArrayList<>();
+        for (Object ref : refs) {
+            final URI uri = extractor.extract(ref);
+            if (uri != null) {
+                result.add(uri.complete());
             }
         }
-
-        return referencedFiles;
-    }
-
-    /**
-     * Determines whether to include the passed URI in the ZIP.
-     *
-     * @param uri The URI to test.
-     *
-     * @return true If the file reference should be in the zip, false otherwise
-     */
-    private boolean shouldIncludeFileReference(final URI uri) {
-        return !SCHEME_BLACKLIST.contains(uri.getScheme().toLowerCase());
+        return result;
     }
 
     /**
      * Writes the content of the passed input stream to the given zip entry.
      *
      * @param zipEntry The zip entry to write to.
-     * @param inputStream The input stream to read content from.
+     * @param inputStream Input stream to write to the zip entry.
      *
      * @throws IOException If the content could not be read or written.
      */
@@ -296,4 +237,14 @@ public abstract class AbstractXmlPackager {
         zout.putNextEntry(zipEntry);
         IOUtils.copy(inputStream, zout);
     }
+
+    /**
+     * Parses an XML document into a byte array.
+     *
+     * @param document XML document to parse.
+     *
+     * @return Parsed document as byte array.
+     * @throws Exception If parsing fails.
+     */
+    protected abstract byte[] parseDocument(final T document) throws Exception;
 }

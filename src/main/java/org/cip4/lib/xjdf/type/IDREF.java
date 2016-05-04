@@ -1,16 +1,6 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.ParameterType;
@@ -22,8 +12,6 @@ import javax.xml.bind.ValidationException;
 
 /**
  * DataType for IDRefs
- * @author s.meissner
- * @date 08.04.2013
  */
 public class IDREF extends AbstractXJdfType<String, IDREF> {
 
@@ -131,7 +119,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 
         String productId = product.getID();
 
-        if(StringUtils.isEmpty(productId)) {
+        if (StringUtils.isEmpty(productId)) {
             productId = IDGeneratorUtil.generateID("PRD");
         }
 

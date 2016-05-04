@@ -16,9 +16,8 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 
 /**
- * Factory class for global library initialization.
+ * Factory class for global library initialization. :-)
  * @author stefan.meissner
- * @date 23.04.2012
  */
 public class XJdfFactory implements Runnable {
 

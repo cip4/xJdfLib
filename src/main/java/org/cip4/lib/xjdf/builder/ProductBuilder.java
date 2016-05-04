@@ -1,16 +1,16 @@
 package org.cip4.lib.xjdf.builder;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.namespace.QName;
-
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.w3c.dom.Node;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 
 /**
  * Implementation of a Product builder class.

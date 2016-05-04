@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.validator;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 
 /**

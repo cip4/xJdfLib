@@ -13,7 +13,6 @@ package org.cip4.lib.xjdf.builder.jmf.query;
 /**
  * TODO Please insert comment!
  * @author s.meissner
- * @date 07.12.2012
  */
 public class KnownMessageQueryBuilder {
 
