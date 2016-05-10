@@ -4915,11 +4915,11 @@
             <xs:extension base="ParameterType">
                 <xs:attribute name="BlockSubdivision" type="XYPair" use="optional"/>
                 <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="Box" type="rectangle" use="optional"/>
+                <xs:attribute name="BlockName" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="BlockType" use="optional"/>
                 <xs:attribute name="BlockElementSize" type="XYPair" use="optional"/>
                 <xs:attribute name="CutWidth" type="double" use="optional"/>
-                <xs:attribute name="BlockSize" type="XYPair" use="optional"/>
-                <xs:attribute name="BlockTrf" type="matrix" use="optional"/>
                 <xs:attribute name="BlockElementType" use="optional"/>
             </xs:extension>
         </xs:complexContent>
