@@ -225,6 +225,24 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumClass">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Event"/>
+            <xs:enumeration value="Information"/>
+            <xs:enumeration value="Warning"/>
+            <xs:enumeration value="Error"/>
+            <xs:enumeration value="Fatal"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Error"/>
+            <xs:enumeration value="Event"/>
+            <xs:enumeration value="Milestone"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumUsage">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Input"/>
@@ -3392,6 +3410,7 @@
         <xs:complexContent>
             <xs:extension base="Audit">
                 <xs:sequence>
+                    <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded" />
                     <xs:element ref="Error" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="Event" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="Milestone" minOccurs="0" maxOccurs="1" />
@@ -3399,11 +3418,17 @@
                 </xs:sequence>
                 <xs:attribute name="AgentName" type="string" use="optional"/>
                 <xs:attribute name="AgentVersion" type="string" use="optional"/>
+                <xs:attribute name="Class" type="EnumClass" use="required"/>
                 <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="ID" type="ID" use="optional"/>
-                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+                <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="refID" type="IDREF" use="optional"/>
                 <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
+                <xs:attribute name="Type" type="EnumType" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
