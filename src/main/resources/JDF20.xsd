@@ -4916,7 +4916,7 @@
                 <xs:attribute name="BlockSubdivision" type="XYPair" use="optional"/>
                 <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Box" type="rectangle" use="optional"/>
-                <xs:attribute name="BlockName" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="BlockName" type="NMTOKENS" use="required"/>
                 <xs:attribute name="BlockType" use="optional"/>
                 <xs:attribute name="BlockElementSize" type="XYPair" use="optional"/>
                 <xs:attribute name="CutWidth" type="double" use="optional"/>
@@ -5857,7 +5857,7 @@
     <xs:element name="Position">
         <xs:complexType>
             <xs:attribute name="AbsoluteBox" type="rectangle" use="optional"/>
-            <xs:attribute name="BlockName" type="NMTOKEN" use="required"/>
+            <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MarginBottom" type="double" use="optional"/>
             <xs:attribute name="MarginLeft" type="double" use="optional"/>
             <xs:attribute name="MarginRight" type="double" use="optional"/>
