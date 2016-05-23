@@ -1,21 +1,21 @@
-Index: target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java
-===================================================================
---- target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java
-+++ target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java
-@@ -265,6 +265,16 @@
-     }
-
-     /**
-+     * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
-+     *
-+     * @see Product#getChildRefs()
-+     *
-+     */
-+    public final List<org.cip4.lib.xjdf.schema.Product> getRawChildRefs() {
-+        return childRefs;
-+    }
-+
-+    /**
-      * Ruft den Wert der commentURL-Eigenschaft ab.
-      *
-      * @return
+*** target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java	2016-05-23 14:42:19.603809172 +0200
+--- target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java	2016-05-23 14:47:43.461647820 +0200
+***************
+*** 264,269 ****
+--- 264,279 ----
+          return this.childRefs;
+      }
+  
++     /*
++      * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
++      *
++      * @see Product#getChildRefs()
++      *
++      */
++     public final List<org.cip4.lib.xjdf.schema.Product> getRawChildRefs() {
++         return childRefs;
++     }
++ 
+      /**
+       * Gets the value of the commentURL property.
+       * 
