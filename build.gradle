@@ -81,8 +81,8 @@ task xjc() {
         }
 
         ant.patch(
-                patchfile: 'src/main/patches/product-rawchildrefs.patch',
-                originalfile: 'src/generated/java/org/cip4/lib/xjdf/schema/Product.java'
+                failonerror: true,
+                patchfile: 'src/main/patches/product-rawchildrefs.patch'
         )
     }
 }
