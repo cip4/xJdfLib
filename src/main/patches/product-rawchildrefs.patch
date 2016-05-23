@@ -12,7 +12,7 @@ Index: target/generated-sources/xjc/org/cip4/lib/xjdf/schema/Product.java
 +     *
 +     */
 +    public final List<org.cip4.lib.xjdf.schema.Product> getRawChildRefs() {
-+        return this.childRefs;
++        return childRefs;
 +    }
 +
 +    /**
