@@ -1,8 +1,5 @@
 package org.cip4.lib.xjdf.builder;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.EnumBindingType;
@@ -15,10 +12,14 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import static org.junit.Assert.*;
 
 public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
@@ -56,7 +57,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         byte[] bytes = marshalResult(productBuilder);
 
         String actual = getXPathValue(bytes, "/xjdf:Product/@Amount");
-        Assert.assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
+        assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
     }
 
     @Test
@@ -81,13 +82,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         String actual;
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:MediaIntent/@Weight");
-        Assert.assertEquals("Attribute Weight in Node MediaIntent is wrong.", "135.0", actual);
+        assertEquals("Attribute Weight in Node MediaIntent is wrong.", "135.0", actual);
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/@Name");
-        Assert.assertEquals("Attribute Name in Node Intent is wrong.", "MediaIntent", actual);
+        assertEquals("Attribute Name in Node Intent is wrong.", "MediaIntent", actual);
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:LayoutIntent/@FinishedDimensions");
-        Assert.assertEquals(
+        assertEquals(
             "Attribute FinishedDimensions in Node LayoutIntent is wrong.",
             "595.27559055 822.04724409 0.0",
             actual
@@ -127,13 +128,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
             "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
                 + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
         );
-        Assert.assertEquals("NomColors is wrong for front.", "4", actual);
+        assertEquals("NomColors is wrong for front.", "4", actual);
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
                 + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
         );
-        Assert.assertEquals("NomColors is wrong for back.", "5", actual);
+        assertEquals("NomColors is wrong for back.", "5", actual);
     }
 
     /**
@@ -148,7 +149,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         rootProductBuilder.addChildProduct(childProduct);
 
         final Product childRef = rootProductBuilder.getProduct().getChildRefs().get(0);
-        Assert.assertEquals("abc", childRef.getID());
+        assertEquals("abc", childRef.getID());
     }
 
     /**
@@ -193,7 +194,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     @Test
     public void newProductIdIsNull() throws Exception {
         Product product = new Product();
-        Assert.assertNull("Product ID is not null.", product.getID());
+        assertNull("Product ID is not null.", product.getID());
+    }
+
+    @Test
+    public void productGetRawChildRefs() throws Exception {
+        Product product = new Product();
+        assertNull(product.getRawChildRefs());
     }
 
     /**
@@ -238,34 +245,34 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
             "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
                 + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
         );
-        Assert.assertEquals("NumColors is wrong for front.", "4", actual);
+        assertEquals("NumColors is wrong for front.", "4", actual);
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
                 + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
         );
-        Assert.assertEquals("NumColors is wrong for back.", "5", actual);
+        assertEquals("NumColors is wrong for back.", "5", actual);
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[1]/@IsRoot");
-        Assert.assertEquals("IsRoot is wrong.", "true", actual);
+        assertEquals("IsRoot is wrong.", "true", actual);
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/@IsRoot");
-        Assert.assertEquals("IsRoot is wrong.", "", actual);
+        assertEquals("IsRoot is wrong.", "", actual);
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality"
         );
-        Assert.assertEquals("MediaQuality is wrong.", "IPG_135", actual);
+        assertEquals("MediaQuality is wrong.", "IPG_135", actual);
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/@ID");
-        Assert.assertFalse("ProductID is wrong.", "".equals(actual));
+        assertFalse("ProductID is wrong.", "".equals(actual));
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[3]/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality"
         );
-        Assert.assertEquals("MediaQuality is wrong.", "IPG_90", actual);
+        assertEquals("MediaQuality is wrong.", "IPG_90", actual);
     }
 
     /**
@@ -288,7 +295,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         // assert
         Product product = builder.build();
 
-        Assert.assertNotNull("Amount is null.", product.getAmount());
-        Assert.assertEquals("Amount is wrong.", 15000, product.getAmount().intValue());
+        assertNotNull("Amount is null.", product.getAmount());
+        assertEquals("Amount is wrong.", 15000, product.getAmount().intValue());
     }
 }
