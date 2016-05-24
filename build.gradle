@@ -79,6 +79,12 @@ task xjc() {
         ) {
             arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
+
+        ant.patch(
+                failonerror: true,
+                patchfile: 'src/main/patches/product-rawchildrefs.patch',
+                originalfile: 'src/generated/java/org/cip4/lib/xjdf/schema/Product.java'
+        )
     }
 }
 
