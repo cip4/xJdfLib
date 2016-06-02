@@ -18,47 +18,15 @@ import javax.xml.namespace.QName;
 public class XJdfNodeFactory extends ObjectFactory {
 
     /**
-     * Create a new Parameter node from ParameterType.
+     * Create a new Resource node from ResourceType.
      *
-     * @param parameterType The ParameterType Node
+     * @param resourceType The ResourceType Node
      *
-     * @return New Parameter node from ParametType node.
+     * @return New Resource node from ResourceType node.
      */
-    public final Parameter createParameter(final ParameterType parameterType) {
+    public final Resource createResource(final ResourceType resourceType) {
 
-        return createParameter(parameterType, null);
-    }
-
-    /**
-     * Create a new Parameter node from ParameterType and Part.
-     *
-     * @param parameterType The ParameterType Node
-     * @param part The Part Node
-     *
-     * @return New Parameter node from ParametType and Part node.
-     */
-    public final Parameter createParameter(final ParameterType parameterType, final Part part) {
-
-        if (parameterType == null) {
-            return null;
-        }
-
-        // get parameter name
-        String paramName = parameterType.getClass().getSimpleName();
-
-        // create parameter
-        Parameter parameter = super.createParameter();
-
-        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement obj = new JAXBElement(qname, parameterType.getClass(), null, parameterType);
-        parameter.setParameterType(obj);
-
-        if (part != null) {
-            parameter.getPart().add(part);
-        }
-
-        // return node
-        return parameter;
+        return createResource(resourceType, null);
     }
 
     /**

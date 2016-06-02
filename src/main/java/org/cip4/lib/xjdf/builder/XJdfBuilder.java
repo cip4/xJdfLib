@@ -5,20 +5,15 @@ import java.util.List;
 import java.util.UUID;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.comparator.SetTypeComparator;
+import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.Parameter;
-import org.cip4.lib.xjdf.schema.ParameterSet;
-import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ResourceType;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.util.IDGeneratorUtil;
-import org.cip4.lib.xjdf.util.Parameters;
 import org.cip4.lib.xjdf.util.Resources;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
@@ -31,11 +26,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * Factory for creating xjdf nodes.
      */
     private final XJdfNodeFactory xJdfNodeFactory;
-
-    /**
-     * Accessor for parameters.
-     */
-    private final Parameters parameterSets;
 
     /**
      * Accessor for resources.
@@ -96,7 +86,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     ) {
         // initialize objects
         super(new XJdfNodeFactory().createXJDF());
-        parameterSets = new Parameters(getNode().getParameterSet());
         resourceSets = new Resources(getNode().getResourceSet());
         xJdfNodeFactory = new XJdfNodeFactory();
 
@@ -116,15 +105,11 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * @param xjdf XJDF Document for modify.
      */
     public XJdfBuilder(final XJDF xjdf) {
-        // initialize objects
         super(xjdf);
-        parameterSets = new Parameters(getNode().getParameterSet());
         resourceSets = new Resources(getNode().getResourceSet());
         xJdfNodeFactory = new XJdfNodeFactory();
 
-        // sort parameterset and resourceset elements by name
-        Collections.sort(getNode().getParameterSet(), new SetTypeComparator());
-        Collections.sort(getNode().getResourceSet(), new SetTypeComparator());
+        Collections.sort(getNode().getResourceSet(), new ResourceSetComparator());
     }
 
     /**
@@ -180,107 +165,43 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     }
 
     /**
-     * Append Parameter node to xJdf Document.
+     * Append Resource node to xJdf Document.
      *
-     * @param parameterType Parameter object to append.
+     * @param resourceType Resource object to append.
      */
-    public final void addParameter(final ParameterType parameterType) {
-        // call default implementation
-        addParameter(parameterType, null, null);
+    public final void addResource(final ResourceType resourceType) {
+        addResource(resourceType, null, null);
     }
 
     /**
-     * Append Parameter node to xJdf Document.
+     * Append Resource node to xJdf Document.
      *
-     * @param parameterType Parameter object to append.
-     * @param processUsage ProcessUsage of parameter.
+     * @param resourceType Resource object to append.
+     * @param processUsage ProcessUsage of resource.
      */
-    public final void addParameter(final ParameterType parameterType, final String processUsage) {
-        // call default implementation
-        addParameter(parameterType, null, processUsage);
+    public final void addResource(final ResourceType resourceType, final String processUsage) {
+        addResource(resourceType, null, processUsage);
     }
 
     /**
-     * Append Parameter list to xJdf Document.
+     * Append Resource list to xJdf Document.
      *
-     * @param parameterTypes Parameter objects to append.
+     * @param resourceTypes Resource objects to append.
      */
-    public final void addParameter(final List<ParameterType> parameterTypes) {
-        // add all parameters
-        addParameter(parameterTypes, null);
+    public final void addResource(final List<ResourceType> resourceTypes) {
+        addResource(resourceTypes, null);
     }
 
     /**
-     * Append Parameter List to xJdf Document.
+     * Append Resource List to xJdf Document.
      *
-     * @param parameterTypes Parameter objects to append.
-     * @param processUsage ProcessUsage of parameter.
+     * @param resourceTypes Resource objects to append.
+     * @param processUsage ProcessUsage of resource.
      */
-    public final void addParameter(final List<ParameterType> parameterTypes, final String processUsage) {
-        // add all parameters
-        for (ParameterType parameter : parameterTypes) {
-            addParameter(parameter, null, processUsage);
+    public final void addResource(final List<ResourceType> resourceTypes, final String processUsage) {
+        for (ResourceType resourceType : resourceTypes) {
+            addResource(resourceType, null, processUsage);
         }
-    }
-
-    /**
-     * Append Parameter node to xJdf Document.
-     *
-     * @param parameterType Parameter object to append.
-     * @param part Partitioning definitions.
-     */
-    public final void addParameter(final ParameterType parameterType, final Part part) {
-        // add parameter
-        addParameter(parameterType, part, null);
-    }
-
-    /**
-     * Append Parameter node to xJdf Document.
-     *
-     * @param parameterType Parameter object to append.
-     * @param part Partitioning definitions.
-     * @param processUsage ProcessUsage of parameter.
-     */
-    public void addParameter(final ParameterType parameterType, final Part part, final String processUsage) {
-        if (parameterType == null) {
-            return;
-        }
-
-        // create parameter
-        Parameter parameter = xJdfNodeFactory.createParameter(parameterType, part);
-
-        // add parameter
-        addParameter(parameter, processUsage);
-    }
-
-    /**
-     * Append Parameter node to xJdf Document.
-     *
-     * @param parameter Parameter node to append to.
-     */
-    public void addParameter(final Parameter parameter) {
-        // add parameter
-        addParameter(parameter, null);
-    }
-
-    /**
-     * Append Parameter node to xJdf Document.
-     *
-     * @param parameter Parameter node to append to.
-     * @param processUsage ProcessUsage of parameter.
-     */
-    public final void addParameter(final Parameter parameter, final String processUsage) {
-        parameterSets.addAsset(parameter, processUsage);
-    }
-
-    /**
-     * Add a parameterSet to the underlying xjdf.
-     * TODO: Merge added sets with matching existing sets.
-     *
-     * @param parameterSet ParameterSet to add to the xjdf.
-     */
-    public final void addParameterSet(final ParameterSet parameterSet) {
-        parameterSets.addAssetSet(parameterSet);
     }
 
     /**
@@ -324,16 +245,16 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * @param processUsage ProcessUsage of resource.
      */
     public void addResource(final Resource resource, final String processUsage) {
-        resourceSets.addAsset(resource, processUsage);
+        resourceSets.addResource(resource, processUsage);
     }
 
     /**
      * Add a resourceSet to the underlying xjdf.
      * TODO: Merge added sets with matching existing sets.
      *
-     * @param resourceSet ParameterSet to add to the xjdf.
+     * @param resourceSet ResourceSet to add to the xjdf.
      */
     public final void addResourceSet(final ResourceSet resourceSet) {
-        resourceSets.addAssetSet(resourceSet);
+        resourceSets.addResourceSet(resourceSet);
     }
 }

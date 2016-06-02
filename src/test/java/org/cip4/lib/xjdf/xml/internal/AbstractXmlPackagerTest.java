@@ -88,7 +88,7 @@ public class AbstractXmlPackagerTest {
     public void prepareForPackagingWithSpecialCharacters() throws Exception {
         final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
         xJdfBuilder
-            .addParameter(
+            .addResource(
                 new Preview()
                     .withFileSpec(new FileSpec().withURL("directory/%5BXJDF_PSQ131S2%5D.pdf")),
                 new Part()
@@ -125,7 +125,7 @@ public class AbstractXmlPackagerTest {
 
         final XJdfBuilder xJdfBuilder = new XJdfBuilder("XJDF_PSQ131S2");
         xJdfBuilder
-            .addParameter(
+            .addResource(
                 new Preview()
                     .withFileSpec(new FileSpec().withURL(fileUriString)),
                 new Part()
@@ -133,7 +133,7 @@ public class AbstractXmlPackagerTest {
                     .withPreviewType(EnumPreviewUsages.IDENTIFICATION)
             );
         xJdfBuilder
-            .addParameter(
+            .addResource(
                 new FileSpec()
                     .withURL(urlUriString),
                 new Part()

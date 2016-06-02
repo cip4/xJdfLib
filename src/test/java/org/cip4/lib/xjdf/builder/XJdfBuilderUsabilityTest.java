@@ -24,7 +24,6 @@ import org.junit.Test;
 /**
  * JUnit test case for XJdfBuilder.
  * @author s.meissner
- * @date 29.02.2012
  */
 public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
@@ -51,7 +50,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 	}
 
 	/**
-	 * Add Multiple Parameter o XJDF document.
+	 * Add Multiple Resource o XJDF document.
 	 * @throws Exception
 	 */
 	@Test
@@ -80,13 +79,13 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
-		xJdfBuilder.addParameter(runCover, partCover);
+		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
 		RunList runContent = new XJdfNodeFactory().createRunList("http://www.example.org/xjdf/myContent.pdf");
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
-		xJdfBuilder.addParameter(runContent, partContent);
+		xJdfBuilder.addResource(runContent, partContent);
 
 		// build document
 		XJDF xJdf = xJdfBuilder.build();
@@ -96,7 +95,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 	}
 
 	/**
-	 * Add Multiple Parameter o XJDF document.
+	 * Add Multiple Resource o XJDF document.
 	 * @throws Exception
 	 */
 	@Test
@@ -125,13 +124,13 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
-		xJdfBuilder.addParameter(runCover, partCover);
+		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
 		RunList runContent = new XJdfNodeFactory().createRunList("http://www.example.org/xjdf/myContent.pdf");
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
-		xJdfBuilder.addParameter(runContent, partContent);
+		xJdfBuilder.addResource(runContent, partContent);
 
 		// build document
 		XJDF xJdf = xJdfBuilder.build();

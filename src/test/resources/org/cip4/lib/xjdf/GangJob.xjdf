@@ -64,34 +64,34 @@
 			</xjdf:Intent>
 		</xjdf:Product>
 	</xjdf:ProductList>
-	<xjdf:ParameterSet Name="Media">
-		<xjdf:Parameter ID="MEDIA_1">
+	<xjdf:ResourceSet Name="Media">
+		<xjdf:Resource ID="MEDIA_1">
 			<xjdf:Part SheetName="SHEET_1" />
 			<xjdf:Media Dimension="1746.14173228 1309.60629921"
 				MediaQuality="IPG_170" />
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="Layout">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="Layout">
+		<xjdf:Resource ID="Layout_1">
 			<xjdf:Part SheetName="SHEET_1" />
 			<xjdf:Layout SurfaceContentsBox="0.0 0.0 1746.14173228 1309.60629921"
 				MediaRef="MEDIA_1" />
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Layout_2">
 			<xjdf:Part BinderySignatureName="JOB_1" SheetName="SHEET-1" />
 			<xjdf:Layout AssemblyID="ASSEMBLY_1">
 				<xjdf:Position AbsoluteBox="28.34645669 657.63779528 870.23622047 1252.91338583"
 					Orientation="Rotate0" />
 			</xjdf:Layout>
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Layout_3">
 			<xjdf:Part BinderySignatureName="ASSEMBLY_2" SheetName="SHEET-1" />
 			<xjdf:Layout AssemblyID="ASSEMBLY_2">
 				<xjdf:Position AbsoluteBox="28.34645669 56.69291339 870.23622047 651.96850394"
 					Orientation="Rotate90" />
 			</xjdf:Layout>
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Layout_4">
 			<xjdf:Part BinderySignatureName="ASSEMBLY_3" SheetName="SHEET-1" />
 			<xjdf:Layout AssemblyID="ASSEMBLY_3">
 				<xjdf:Position AbsoluteBox="875.90551181 56.69291339 1717.79527559 651.96850394"
@@ -100,36 +100,36 @@
 					AbsoluteBox="875.90551181 657.63779528 1717.79527559 1252.91338583"
 					Orientation="Rotate180" />
 			</xjdf:Layout>
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="RunList">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="RunList">
+		<xjdf:Resource ID="RunList_1">
 			<xjdf:Part SheetName="SHEET_1" />
 			<xjdf:RunList>
 				<xjdf:FileSpec URL="http://www.cip4.org/artworks/SIG-001.pdf" />
 			</xjdf:RunList>
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="NodeInfo">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="NodeInfo">
+		<xjdf:Resource ID="NodeInfo_1">
 			<xjdf:NodeInfo End="2013-10-15T23:59:00+02:00" />
 			<xjdf:AmountPool>
 				<xjdf:PartAmount Amount="2630" />
 			</xjdf:AmountPool>
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="ColorantControl">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="ColorantControl">
+		<xjdf:Resource ID="ColortantControl_1">
 			<xjdf:ColorantControl ProcessColorModel="DeviceCMYK" />
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="CustomerInfo">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="CustomerInfo">
+		<xjdf:Resource ID="CustomerInfo_1">
 			<xjdf:CustomerInfo CustomerID="FA_CORE" />
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
-	<xjdf:ParameterSet Name="Contact">
-		<xjdf:Parameter>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
+	<xjdf:ResourceSet Name="Contact">
+		<xjdf:Resource ID="Contact_1">
 			<xjdf:Part SheetName="SHEET_1" />
 			<xjdf:Contact ContactTypes="Customer">
 				<xjdf:Person FamilyName="FamilyName_FA" FirstName="FirstName_FA" />
@@ -139,8 +139,8 @@
 				<xjdf:Address PostalCode="PostalCode_FA" City="City_FA"
 					Street="Street_FA" />
 			</xjdf:Contact>
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Contact_2">
 			<xjdf:Part ProductPart="PROJECT_1" />
 			<xjdf:Contact ContactTypes="Delivery">
 				<xjdf:Person FamilyName="FamilyName_1" FirstName="FirstName_1" />
@@ -148,8 +148,8 @@
 				<xjdf:Address PostalCode="PostalCode_1" City="City_1"
 					Street="Street_1" />
 			</xjdf:Contact>
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Contact_3">
 			<xjdf:Part ProductPart="PROJECT_2" />
 			<xjdf:Contact ContactTypes="Delivery">
 				<xjdf:Person FamilyName="FamilyName_2" FirstName="FirstName_2" />
@@ -157,8 +157,8 @@
 				<xjdf:Address PostalCode="PostalCode_2" City="City_2"
 					Street="Street_2" />
 			</xjdf:Contact>
-		</xjdf:Parameter>
-		<xjdf:Parameter>
+		</xjdf:Resource>
+		<xjdf:Resource ID="Contact_4">
 			<xjdf:Part ProductPart="PRODUCT_3" />
 			<xjdf:Contact ContactTypes="Delivery">
 				<xjdf:Person FamilyName="FamilyName_3" FirstName="FirstName_3" />
@@ -166,7 +166,7 @@
 				<xjdf:Address PostalCode="PostalCode_3" City="City_3"
 					Street="Street_3" />
 			</xjdf:Contact>
-		</xjdf:Parameter>
-	</xjdf:ParameterSet>
+		</xjdf:Resource>
+	</xjdf:ResourceSet>
 </xjdf:XJDF>
             

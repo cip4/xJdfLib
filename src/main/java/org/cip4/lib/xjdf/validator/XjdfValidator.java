@@ -2,8 +2,8 @@ package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.Intent;
-import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 
 /**
@@ -17,28 +17,28 @@ public class XjdfValidator implements Validator<XJDF> {
     private final Validator<FoldingIntent> foldingIntentValidator;
 
     /**
-     * Validator for element ParameterSet.
+     * Validator for element ResourceSet.
      */
-    private final Validator<ParameterSet> parameterSetValidator;
+    private final Validator<ResourceSet> resourceSetValidator;
 
     /**
      * Constructor.
      */
     public XjdfValidator() {
-        this(new FoldingIntentValidator(), new ParameterSetValidator());
+        this(new FoldingIntentValidator(), new ResourceSetValidator());
     }
 
     /**
      * Constructor.
      *
      * @param foldingIntentValidator Validator for element FoldingIntent.
-     * @param parameterSetValidator Validator for element ParameterSet.
+     * @param resourceSetValidator Validator for element ResourceSet.
      */
     public XjdfValidator(
-        final Validator<FoldingIntent> foldingIntentValidator, final Validator<ParameterSet> parameterSetValidator
+        final Validator<FoldingIntent> foldingIntentValidator, final Validator<ResourceSet> resourceSetValidator
     ) {
         this.foldingIntentValidator = foldingIntentValidator;
-        this.parameterSetValidator = parameterSetValidator;
+        this.resourceSetValidator = resourceSetValidator;
     }
 
     @Override
@@ -55,8 +55,8 @@ public class XjdfValidator implements Validator<XJDF> {
                 }
             }
         }
-        for (ParameterSet parameterSet : xjdf.getParameterSet()) {
-            result.append(parameterSetValidator.validate(parameterSet));
+        for (ResourceSet resourceSet : xjdf.getResourceSet()) {
+            result.append(resourceSetValidator.validate(resourceSet));
         }
         return result;
     }

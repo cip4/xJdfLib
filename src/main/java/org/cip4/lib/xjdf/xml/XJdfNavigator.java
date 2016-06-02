@@ -53,17 +53,17 @@ public class XJdfNavigator extends XmlNavigator {
     /**
      * XPath to attribute 'URL' of a single RunList/FileSpec definition in XJDF Document.
      */
-    public static final String FILE_SPEC_URL = "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL";
+    public static final String FILE_SPEC_URL = "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource/xjdf:RunList/xjdf:FileSpec/@URL";
 
     /**
      * XPath to attribute 'MinApprovals' of ApprovalParams Node in XJDF Document.
      */
-    public static final String MIN_APPROVALS = "/xjdf:XJDF/xjdf:ParameterSet[@Name='ApprovalParams']/xjdf:Parameter/xjdf:ApprovalParams/@MinApprovals";
+    public static final String MIN_APPROVALS = "/xjdf:XJDF/xjdf:ResourceSet[@Name='ApprovalParams']/xjdf:Resource/xjdf:ApprovalParams/@MinApprovals";
 
     /**
      * XPath to attribute 'CustomerID' of CustomerInfo Node in XJDF Document.
      */
-    public static final String CUSTOMER_ID = "/xjdf:XJDF/xjdf:ParameterSet[@Name='CustomerInfo']/xjdf:Parameter/xjdf:CustomerInfo/@CustomerID";
+    public static final String CUSTOMER_ID = "/xjdf:XJDF/xjdf:ResourceSet[@Name='CustomerInfo']/xjdf:Resource/xjdf:CustomerInfo/@CustomerID";
 
     /**
      * XPath to attribute 'Amount' of Product Node in XJDF Document.

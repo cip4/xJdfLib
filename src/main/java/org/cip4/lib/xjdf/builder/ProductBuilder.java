@@ -118,7 +118,6 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
         if (intent == null)
             return;
 
-        // get parameter name
         String intentName = intent.getClass().getSimpleName();
 
         // create intent node

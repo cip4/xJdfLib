@@ -19,7 +19,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
@@ -28,12 +27,8 @@ import org.xml.sax.InputSource;
 
 /**
  * Abstract JUnit test case for all Builder classes.
- * @author s.meissner
- * @date 05.03.2012
  */
 public abstract class AbstractBuilderTest<T> {
-
-	protected final boolean outputConsole = true;
 
 	/**
 	 * Default constructor.
@@ -49,7 +44,7 @@ public abstract class AbstractBuilderTest<T> {
 
 	/**
 	 * Get XJDF Document as byte stream.
-	 * @param xJdfBuilder
+	 * @param builder
 	 * @return
 	 * @throws Exception
 	 */
@@ -60,22 +55,6 @@ public abstract class AbstractBuilderTest<T> {
 
 		// return bytes
 		return marshall(obj);
-	}
-
-	/**
-	 * Embed XJDF Parameter in XJDF Document an return as byte stream.
-	 * @param xJdfBuilder
-	 * @return
-	 * @throws Exception
-	 */
-	protected byte[] marsahlResultParameter(AbstractNodeBuilder<T> builder) throws Exception {
-
-		// get XJDF Node
-		XJdfBuilder xjdfBuilder = new XJdfBuilder();
-		xjdfBuilder.addParameter((ParameterType) builder.build());
-
-		// return bytes
-		return marshall(xjdfBuilder.build());
 	}
 
 	/**
@@ -97,25 +76,13 @@ public abstract class AbstractBuilderTest<T> {
 		bos.flush();
 		bos.close();
 
-		byte[] bytes = bos.toByteArray();
-
-		// output console
-		if (outputConsole) {
-			String doc = new String(bytes);
-			System.out.println("------------------------------------------------------------------------");
-			System.out.println("");
-			System.out.print(doc);
-			System.out.println("");
-		}
-
-		// return bytes
-		return bytes;
+		return bos.toByteArray();
 	}
 
 	/**
 	 * Helper method for analyzing JAXB output by xpath.
 	 * @param bytes Current XJdf Document as byte array.
-	 * @param xPath XPath to validate.
+	 * @param xPathExpr XPath to validate.
 	 * @return Value as String.
 	 */
 	protected String getXPathValue(byte[] bytes, String xPathExpr) throws Exception {
@@ -133,9 +100,6 @@ public abstract class AbstractBuilderTest<T> {
 		// execute xPath query
 		InputStream is = new ByteArrayInputStream(bytes);
 
-		String result = xPathExpression.evaluate(new InputSource(is));
-
-		// return result
-		return result;
+		return xPathExpression.evaluate(new InputSource(is));
 	}
 }

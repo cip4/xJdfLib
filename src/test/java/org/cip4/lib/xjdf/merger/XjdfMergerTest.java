@@ -1,8 +1,7 @@
 package org.cip4.lib.xjdf.merger;
 
-import org.cip4.lib.xjdf.schema.ParameterSet;
-import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.ResourceSet;
+import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.junit.Test;
 
@@ -15,8 +14,7 @@ public class XjdfMergerTest {
     public void testMergeMultiple() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
         BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
-        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger);
 
         XJDF resultingXJDf = merger.merge(new XJDF());
         assertNotNull(resultingXJDf);
@@ -26,8 +24,7 @@ public class XjdfMergerTest {
     public void testMergeMinimalXjdf() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
         BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
-        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger);
         XJDF baseXjdf = new XJDF();
         merger.merge(baseXjdf, new XJDF());
         assertNull(baseXjdf.getProductList());
@@ -37,8 +34,7 @@ public class XjdfMergerTest {
     public void testMergeProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
         BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
-        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger);
         XJDF baseXjdf = new XJDF();
         baseXjdf.setProductList(new ProductList());
         merger.merge(baseXjdf, new XJDF().withProductList(new ProductList()));
@@ -49,8 +45,7 @@ public class XjdfMergerTest {
     public void testMergeNoProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
         BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
-        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger);
         XJDF baseXjdf = new XJDF();
         merger.merge(baseXjdf, new XJDF());
         assertNull(baseXjdf.getProductList());
@@ -60,8 +55,7 @@ public class XjdfMergerTest {
     public void testMergeSingleProductList() throws Exception {
         BaseMerger<ProductList> productListMerger = mock(BaseMerger.class);
         BaseMerger<ResourceSet> resourceSetMerger = mock(BaseMerger.class);
-        BaseMerger<ParameterSet> parameterSetMerger = mock(BaseMerger.class);
-        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger, parameterSetMerger);
+        XjdfMerger merger = new XjdfMerger(productListMerger, resourceSetMerger);
         XJDF baseXjdf = new XJDF();
         ProductList productList = new ProductList();
         merger.merge(baseXjdf, new XJDF().withProductList(productList));
@@ -73,5 +67,43 @@ public class XjdfMergerTest {
         XjdfMerger merger = new XjdfMerger();
         XJDF result = merger.merge(new XJDF());
         assertNotNull(result);
+    }
+
+    @Test
+    public void testIsMergeableNoIds() throws Exception {
+        ResourceSetMerger merger = new ResourceSetMerger();
+        ResourceSet baseSet = new ResourceSet();
+        baseSet.setName("ColorantControl");
+        ResourceSet mergerSet = new ResourceSet();
+        mergerSet.setName("ColorantControl");
+        assertTrue(merger.isMergeable(baseSet, mergerSet));
+    }
+
+    @Test
+    public void testIsMergeableBaseWithoutName() throws Exception {
+        ResourceSetMerger merger = new ResourceSetMerger();
+        ResourceSet baseSet = new ResourceSet();
+        ResourceSet mergerSet = new ResourceSet();
+        mergerSet.setName("ColorantControl");
+        assertFalse(merger.isMergeable(baseSet, mergerSet));
+    }
+
+    @Test
+    public void testIsMergeableMergeWithoutName() throws Exception {
+        ResourceSetMerger merger = new ResourceSetMerger();
+        ResourceSet baseSet = new ResourceSet();
+        baseSet.setName("ColorantControl");
+        ResourceSet mergerSet = new ResourceSet();
+        assertFalse(merger.isMergeable(baseSet, mergerSet));
+    }
+
+    @Test
+    public void testIsMergeableDifferentClasses() throws Exception {
+        ResourceSetMerger merger = new ResourceSetMerger();
+        ResourceSet baseSet = new ResourceSet();
+        baseSet.setName("ColorantControl");
+        ResourceSet mergerSet = new ResourceSet();
+        baseSet.setName("ColorantControl");
+        assertFalse(merger.isMergeable(baseSet, mergerSet));
     }
 }

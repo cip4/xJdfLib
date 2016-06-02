@@ -65,48 +65,48 @@
         </xjdf:Resource>
     </xjdf:ResourceSet>
 
-    <xjdf:ParameterSet Name="Contact">
-        <xjdf:Parameter ID="CONTACT_REF_1">
+    <xjdf:ResourceSet Name="Contact">
+        <xjdf:Resource ID="CONTACT_REF_1">
             <xjdf:Contact ContactTypes="Customer">
                 <xjdf:Company OrganizationName="FLYERALARM GmbH"/>
                 <xjdf:ComChannel ChannelType="Email" Locator="mailto:info@flyeralarm.com"/>
                 <xjdf:Address City="Würzburg" Country="GERMANY" CountryCode="de" PostalCode="97080" Street="Alfred-Nobel-Straße 18"/>
             </xjdf:Contact>
-        </xjdf:Parameter>
-    </xjdf:ParameterSet>
+        </xjdf:Resource>
+    </xjdf:ResourceSet>
 
-    <xjdf:ParameterSet Name="Color">
-        <xjdf:Parameter ID="COLOR_REF_1" DescriptiveName="Color Reference 1" />
-    </xjdf:ParameterSet>
+    <xjdf:ResourceSet Name="Color">
+        <xjdf:Resource ID="COLOR_REF_1" DescriptiveName="Color Reference 1" />
+    </xjdf:ResourceSet>
 
-    <xjdf:ParameterSet Name="CustomerInfo" ProcessUsage="Customer">
-        <xjdf:Parameter>
+    <xjdf:ResourceSet Name="CustomerInfo" ProcessUsage="Customer">
+        <xjdf:Resource ID="CustomerInfo_1">
             <xjdf:Part ProductPart="PRD_MAIN01"/>
             <xjdf:CustomerInfo CustomerID="214425" CustomerOrderID="DE151609945X01"/>
-        </xjdf:Parameter>
-    </xjdf:ParameterSet>
-    <xjdf:ParameterSet Name="NodeInfo" ProcessUsage="Customer">
-        <xjdf:Parameter>
+        </xjdf:Resource>
+    </xjdf:ResourceSet>
+    <xjdf:ResourceSet Name="NodeInfo" ProcessUsage="Customer">
+        <xjdf:Resource ID="NodeInfo_1">
             <xjdf:Part ProductPart="PRD_MAIN01"/>
             <xjdf:NodeInfo JobPriority="25" End="2015-07-02T17:00:00+02:00"/>
-        </xjdf:Parameter>
-    </xjdf:ParameterSet>
-    <xjdf:ParameterSet Name="RunList">
-        <xjdf:Parameter>
+        </xjdf:Resource>
+    </xjdf:ResourceSet>
+    <xjdf:ResourceSet Name="RunList">
+        <xjdf:Resource ID="RunList_1">
             <xjdf:RunList>
                 <xjdf:FileSpec URL="\\path\to\pdf\file.pdf"/>
             </xjdf:RunList>
-        </xjdf:Parameter>
-    </xjdf:ParameterSet>
+        </xjdf:Resource>
+    </xjdf:ResourceSet>
 
-    <xjdf:ParameterSet Name="ApprovalSuccess">
-        <xjdf:Parameter>
+    <xjdf:ResourceSet Name="ApprovalSuccess">
+        <xjdf:Resource ID="ApprovalSuccess_1">
             <xjdf:ApprovalSuccess>
                 <xjdf:ApprovalDetails>
                     <xjdf:ApprovalPerson ContactRef="CONTACT_REF_1" />
                 </xjdf:ApprovalDetails>
             </xjdf:ApprovalSuccess>
-        </xjdf:Parameter>
-    </xjdf:ParameterSet>
+        </xjdf:Resource>
+    </xjdf:ResourceSet>
 
 </xjdf:XJDF>

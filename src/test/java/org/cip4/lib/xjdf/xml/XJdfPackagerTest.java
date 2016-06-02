@@ -74,8 +74,8 @@ public class XJdfPackagerTest {
 
 		XJdfBuilder xJdfBuilder = new XJdfBuilder("MyJobId");
 		xJdfBuilder.addProduct(product);
-		xJdfBuilder.addParameter(nf.createRunList(resPdf));
-		xJdfBuilder.addParameter(nf.createRunList(resXml));
+		xJdfBuilder.addResource(nf.createRunList(resPdf));
+		xJdfBuilder.addResource(nf.createRunList(resXml));
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
@@ -128,8 +128,8 @@ public class XJdfPackagerTest {
 
 		XJdfBuilder xJdfBuilder = new XJdfBuilder("MyJobId");
 		xJdfBuilder.addProduct(product);
-		xJdfBuilder.addParameter(nf.createRunList(resPdf));
-		xJdfBuilder.addParameter(nf.createRunList(resXml));
+		xJdfBuilder.addResource(nf.createRunList(resPdf));
+		xJdfBuilder.addResource(nf.createRunList(resXml));
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 
@@ -215,8 +215,8 @@ public class XJdfPackagerTest {
 
 		XJdfBuilder xJdfBuilder = new XJdfBuilder("MyJobId");
 		xJdfBuilder.addProduct(product);
-		xJdfBuilder.addParameter(nf.createRunList(resPdf));
-		xJdfBuilder.addParameter(nf.createRunList(resXml));
+		xJdfBuilder.addResource(nf.createRunList(resPdf));
+		xJdfBuilder.addResource(nf.createRunList(resXml));
 		XJDF xjdf = xJdfBuilder.build();
 		xjdf.setCommentURL(resJdf);
 

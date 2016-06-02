@@ -2,7 +2,7 @@ package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
-import org.cip4.lib.xjdf.schema.ParameterSet;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.junit.Before;
@@ -57,19 +57,19 @@ public class XjdfValidatorTest {
     }
 
     @Test
-    public void validateExecutesParameterSetValidator() throws Exception {
-        Validator<ParameterSet> parameterSetValidator = Mockito.mock(Validator.class);
-        Mockito.when(parameterSetValidator.validate(Mockito.any(ParameterSet.class))).thenReturn(
+    public void validateExecutesResourceSetValidator() throws Exception {
+        Validator<ResourceSet> parameterSetValidator = Mockito.mock(Validator.class);
+        Mockito.when(parameterSetValidator.validate(Mockito.any(ResourceSet.class))).thenReturn(
             new ValidationResult(
                 "foo"
             )
         );
         XjdfValidator validator = new XjdfValidator(Mockito.mock(Validator.class), parameterSetValidator);
         XJDF xjdf = new XJDF();
-        xjdf.withParameterSet(new ParameterSet());
+        xjdf.withResourceSet(new ResourceSet());
 
         ValidationResult result = validator.validate(xjdf);
-        Mockito.verify(parameterSetValidator, Mockito.times(1)).validate(Mockito.any(ParameterSet.class));
+        Mockito.verify(parameterSetValidator, Mockito.times(1)).validate(Mockito.any(ResourceSet.class));
         assertEquals(1, result.getViolations().size());
         assertEquals("foo", result.getViolations().get(0));
     }

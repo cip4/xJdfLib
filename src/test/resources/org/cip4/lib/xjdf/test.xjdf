@@ -24,30 +24,30 @@
 			</Intent>
 		</Product>
 	</ProductList>
-	<ParameterSet Name="CustomerInfo">
-		<Parameter>
+	<ResourceSet Name="CustomerInfo">
+		<Resource ID="CustomerInfo_1">
 			<CustomerInfo CustomerID="FA-WEB-DE" CustomerOrderID="Web2Print System JobID" />
-		</Parameter>
-	</ParameterSet>
-	<ParameterSet Name="RunList">
-		<Parameter>
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="RunList">
+		<Resource ID="RunList_1">
 			<RunList>
 				<FileSpec URL="http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf" />
 			</RunList>
-		</Parameter>
-	</ParameterSet>
-	<ParameterSet Name="ApprovalParams">
-		<Parameter>
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="ApprovalParams">
+		<Resource ID="ApprovalParams_1">
 			<ApprovalParams MinApprovals="1" />
-		</Parameter>
-	</ParameterSet>
-	<ParameterSet Name="NodeInfo">
-		<Parameter>
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="NodeInfo">
+		<Resource ID="NodeInfo_2">
 			<NodeInfo End="1286557458599" />
-		</Parameter>
-	</ParameterSet>
-	<ParameterSet Name="Contact">
-		<Parameter>
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="Contact">
+		<Resource ID="Contact_1">
 			<Contact ContactTypes="Customer Delivery DeliveryCharge">
 				<Person FamilyName="Mustermann" FirstName="Max" NamePrefix="Dr." />
 				<Company OrganizationName="Firma Muster GmbH" />
@@ -57,6 +57,6 @@
 				<ComChannel ChannelType="Phone" Locator="tel:+49.173.5678.901" />
 				<ComChannel ChannelType="Phone" Locator="tel:+0123.456.789" />
 			</Contact>
-		</Parameter>
-	</ParameterSet>
+		</Resource>
+	</ResourceSet>
 </XJDF>

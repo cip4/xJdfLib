@@ -165,7 +165,7 @@ public class XJdfUnpackagerTest {
         // act
         XJdfNavigator nav = unpackager.getXJdfDocument();
 
-        String pathPreview = nav.evaluateString("/xjdf:XJDF/xjdf:ParameterSet[@Name='Preview']/xjdf:Parameter/xjdf:Preview/@URL");
+        String pathPreview = nav.evaluateString("/xjdf:XJDF/xjdf:ResourceSet[@Name='Preview']/xjdf:Resource/xjdf:Preview/@URL");
         byte[] bytes = unpackager.extractFile(pathPreview);
 
         // assert
