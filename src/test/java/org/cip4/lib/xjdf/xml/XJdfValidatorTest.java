@@ -219,18 +219,18 @@ public class XJdfValidatorTest {
         XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
         xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
         xJdfBuilder.addProduct(productBuilder.build());
-        xJdfBuilder.addParameter(nf.createCustomerInfo("FA-WEB-DE"));
-        xJdfBuilder.addParameter(
+        xJdfBuilder.addResource(nf.createCustomerInfo("FA-WEB-DE"));
+        xJdfBuilder.addResource(
             nf.createRunList(
                 new URI(
                     new java.net.URI("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf")
                 )
             )
         );
-        xJdfBuilder.addParameter(nf.createApprovalParams(1));
-        // TODO xJdfBuilder.addParameter(nf.createNodeInfo());
+        xJdfBuilder.addResource(nf.createApprovalParams(1));
+        // TODO xJdfBuilder.addResource(nf.createNodeInfo());
         // TODO ColorIntent
-        xJdfBuilder.addParameter(contact);
+        xJdfBuilder.addResource(contact);
 
         XJDF xJdf = xJdfBuilder.build();
         xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));

@@ -4,9 +4,9 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.AmountPool;
 import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.Parameter;
 import org.cip4.lib.xjdf.schema.PartAmount;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -33,7 +33,7 @@ public class JAXBNavigatorTest {
     @Test
     public void evaluateNode() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
-        builder.addParameter(new XJdfNodeFactory().createRunList(new URI(new java.net.URI("MyUri"))));
+        builder.addResource(new XJdfNodeFactory().createRunList(new URI(new java.net.URI("MyUri"))));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Object object = navigator.evaluateNode("//xjdf:FileSpec");
@@ -43,7 +43,7 @@ public class JAXBNavigatorTest {
     @Test(expected = XPathExpressionException.class)
     public void evaluateNodeFails() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
-        builder.addParameter(new XJdfNodeFactory().createRunList(new URI(new java.net.URI("MyUri"))));
+        builder.addResource(new XJdfNodeFactory().createRunList(new URI(new java.net.URI("MyUri"))));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.evaluateNode("//xjdf:FileSpec/[]");
     }
@@ -52,8 +52,8 @@ public class JAXBNavigatorTest {
     public void evaluateNodeSet() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
-        builder.addParameter(xJdfNodeFactory.createRunList(new URI(new java.net.URI("FirstUri"))));
-        builder.addParameter(xJdfNodeFactory.createRunList(new URI(new java.net.URI("SecondUri"))));
+        builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("FirstUri"))));
+        builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("SecondUri"))));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Object object = navigator.evaluateNodeList("//xjdf:FileSpec");
@@ -66,8 +66,8 @@ public class JAXBNavigatorTest {
     public void evaluateNodeSetFails() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
-        builder.addParameter(xJdfNodeFactory.createRunList(new URI(new java.net.URI("FirstUri"))));
-        builder.addParameter(xJdfNodeFactory.createRunList(new URI(new java.net.URI("SecondUri"))));
+        builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("FirstUri"))));
+        builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("SecondUri"))));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.evaluateNodeList("//xjdf:FileSpec/[]");
     }
@@ -102,9 +102,9 @@ public class JAXBNavigatorTest {
     @Test
     public void evaluateDouble() throws Exception {
         XJdfBuilder builder = new XJdfBuilder();
-        builder.addParameterSet(
-            new XJdfNodeFactory().createParameterSet().withParameter(
-                new Parameter().withAmountPool(
+        builder.addResourceSet(
+            new XJdfNodeFactory().createResourceSet().withResource(
+                new Resource().withAmountPool(
                     new AmountPool().withPartAmount(
                         new PartAmount().withAmount(
                             100.5
@@ -167,7 +167,7 @@ public class JAXBNavigatorTest {
     public void addNamespace() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final URI fileSpecUrl = new URI(new java.net.URI("MyUri"));
-        builder.addParameter(new XJdfNodeFactory().createRunList(fileSpecUrl));
+        builder.addResource(new XJdfNodeFactory().createRunList(fileSpecUrl));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
 
@@ -178,7 +178,7 @@ public class JAXBNavigatorTest {
     public void addNamespaceOmitted() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final URI fileSpecUrl = new URI(new java.net.URI("MyUri"));
-        builder.addParameter(new XJdfNodeFactory().createRunList(fileSpecUrl));
+        builder.addResource(new XJdfNodeFactory().createRunList(fileSpecUrl));
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.evaluateNode("//xjdf:FileSpec");
     }

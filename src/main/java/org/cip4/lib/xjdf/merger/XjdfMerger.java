@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.merger;
 
-import org.cip4.lib.xjdf.schema.ParameterSet;
 import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -23,24 +22,16 @@ public class XjdfMerger extends BaseMerger<XJDF> {
     private final BaseMerger<ResourceSet> resourceSetMerger;
 
     /**
-     * Merger to use for merging parameter sets.
-     */
-    private final BaseMerger<ParameterSet> parameterSetMerger;
-
-    /**
      * Internal constructor for testing purposes.
      * @param productListMerger Merger tu use for merging product lists.
      * @param resourceSetMerger Merger to use for merging reseourcesets.
-     * @param parameterSetMerger Merger to use for merging parametersets.
      */
     XjdfMerger(
         final BaseMerger<ProductList> productListMerger,
-        final BaseMerger<ResourceSet> resourceSetMerger,
-        final BaseMerger<ParameterSet> parameterSetMerger
+        final BaseMerger<ResourceSet> resourceSetMerger
     ) {
         this.productListMerger = productListMerger;
         this.resourceSetMerger = resourceSetMerger;
-        this.parameterSetMerger = parameterSetMerger;
     }
 
     /**
@@ -48,7 +39,6 @@ public class XjdfMerger extends BaseMerger<XJDF> {
      */
     public XjdfMerger() {
         productListMerger = new ProductListMerger(new ProductMerger());
-        parameterSetMerger = new ParameterSetMerger();
         resourceSetMerger = new ResourceSetMerger();
     }
 
@@ -81,7 +71,6 @@ public class XjdfMerger extends BaseMerger<XJDF> {
             }
         }
         baseObject.getGeneralID().addAll(mergeObject.getGeneralID());
-        parameterSetMerger.merge((Collection) baseObject.getParameterSet(), (Collection) mergeObject.getParameterSet());
         resourceSetMerger.merge((Collection) baseObject.getResourceSet(), (Collection) mergeObject.getResourceSet());
     }
 }

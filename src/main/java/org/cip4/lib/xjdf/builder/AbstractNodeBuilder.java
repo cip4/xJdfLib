@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
 import javax.xml.bind.JAXBElement;
@@ -19,7 +9,6 @@ import org.w3c.dom.Node;
 
 /**
  * Abstract Builder implementation where all builders are derived from.
- * @author s.meissner
  */
 public abstract class AbstractNodeBuilder<T> {
 
@@ -38,10 +27,10 @@ public abstract class AbstractNodeBuilder<T> {
 	 * @param node Namespace aware node object.
 	 * @throws JAXBException Is thrown in case an exception.
 	 */
-	protected AbstractNodeBuilder(Node node, Class<T> typeParameterClass) throws JAXBException {
+	protected AbstractNodeBuilder(Node node, Class<T> typeResourceClass) throws JAXBException {
 
 		Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
-		JAXBElement<T> element = u.unmarshal(node, typeParameterClass);
+		JAXBElement<T> element = u.unmarshal(node, typeResourceClass);
 		T obj = element.getValue();
 		this.node = obj;
 	}

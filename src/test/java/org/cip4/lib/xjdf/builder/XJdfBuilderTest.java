@@ -5,9 +5,9 @@ import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.ParameterType;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.ResourceType;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
@@ -60,7 +60,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     }
 
     /**
-     * Add one GeneralID Parameter to XJDF document.
+     * Add one GeneralID Resource to XJDF document.
      *
      * @throws Exception
      */
@@ -86,7 +86,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     }
 
     /**
-     * Add Multiple GeneralID Parameter to XJDF document.
+     * Add Multiple GeneralID Resource to XJDF document.
      *
      * @throws Exception
      */
@@ -126,7 +126,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     }
 
     /**
-     * Add Parameter "Product" to XJDF document.
+     * Add Resource "Product" to XJDF document.
      *
      * @throws Exception
      */
@@ -144,12 +144,12 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     }
 
     /**
-     * Add Parameter "RunList" to XJDF document.
+     * Add Resource "RunList" to XJDF document.
      *
      * @throws Exception
      */
     @Test
-    public void testAddParameterRunList() throws Exception {
+    public void testAddResourceRunList() throws Exception {
 
         // arrange
         final String URL = "http://www.example.org/w2p/Cover.pdf";
@@ -167,31 +167,31 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         partContent.setRun("Content");
 
         // act
-        xJdfBuilder.addParameter(runList, partCover);
+        xJdfBuilder.addResource(runList, partCover);
 
         // assert
         byte[] bytes = marshalResult(xJdfBuilder);
 
-        String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
-        Assert.assertEquals("Name in ParameterSet is wrong.", "RunList", actualName);
+        String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@Name");
+        Assert.assertEquals("Name in ResourceSet is wrong.", "RunList", actualName);
 
-        String actualPartRun = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/xjdf:Parameter/xjdf:Part/@Run");
+        String actualPartRun = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource/xjdf:Part/@Run");
         Assert.assertEquals("RunTag in RunList is wrong.", "Cover", actualPartRun);
 
         String actualUrl = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("RunTag in RunList is wrong.", URL, actualUrl);
     }
 
     /**
-     * Add Multiple Parameter o XJDF document.
+     * Add Multiple Resource o XJDF document.
      *
      * @throws Exception
      */
     @Test
-    public void testAddParameterMultiple() throws Exception {
+    public void testAddResourceMultiple() throws Exception {
 
         // arrange
         final String urlContent = "http://www.example.org/w2p/Content.pdf";
@@ -210,103 +210,103 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         nodeInfo.setEnd(new DateTime());
 
         // act
-        xJdfBuilder.addParameter(runListCover, partCover);
-        xJdfBuilder.addParameter(nodeInfo);
-        xJdfBuilder.addParameter(runListContent, partContent);
+        xJdfBuilder.addResource(runListCover, partCover);
+        xJdfBuilder.addResource(nodeInfo);
+        xJdfBuilder.addResource(runListContent, partContent);
 
         // assert
         byte[] bytes = marshalResult(xJdfBuilder);
 
         Assert.assertEquals(
-            "ParameterSet for NodeInfo must be first ParameterSet since it is lexicographically smaller than RunList.",
+            "ResourceSet for NodeInfo must be first ResourceSet since it is lexicographically smaller than RunList.",
             "NodeInfo",
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/@Name")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[1]/@Name")
         );
 
         Assert.assertEquals(
-            "ParameterSet for RunList must be second ParameterSet.",
+            "ResourceSet for RunList must be second ResourceSet.",
             "RunList",
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/@Name")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/@Name")
         );
 
         Assert.assertEquals(
             "RunList for Cover must be first entry since it was added first.",
             urlCover,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/xjdf:Parameter[1]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[1]//xjdf:FileSpec/@URL")
         );
 
         Assert.assertEquals(
             "RunList for Content must be second entry since it was added after cover.",
             urlContent,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/xjdf:Parameter[2]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[2]//xjdf:FileSpec/@URL")
         );
     }
 
     /**
-     * Add Multiple Parameter o XJDF document.
+     * Add Multiple Resource o XJDF document.
      *
      * @throws Exception
      */
     @Test
-    public void testAddParameterList() throws Exception {
+    public void testAddResourceList() throws Exception {
 
         // arrange
         final String urlCover = "http://www.example.org/w2p/Cover.pdf";
         final String urlContent_1 = "http://www.example.org/w2p/Content_1.pdf";
         final String urlContent_2 = "http://www.example.org/w2p/Content_2.pdf";
 
-        List<ParameterType> runLists = new ArrayList<>();
+        List<ResourceType> runLists = new ArrayList<>();
 
         runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover))));
         runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_1))));
         runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_2))));
 
         // act
-        xJdfBuilder.addParameter(runLists);
+        xJdfBuilder.addResource(runLists);
 
         // assert
         String actual;
 
         byte[] bytes = marshalResult(xJdfBuilder);
 
-        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet)");
-        Assert.assertEquals("Number of ParameterSet nodes is wrong.", "1", actual);
+        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet)");
+        Assert.assertEquals("Number of ResourceSet nodes is wrong.", "1", actual);
 
-        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet/xjdf:Parameter)");
+        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource)");
         Assert.assertEquals("Number of RunList parameters is wrong.", "3", actual);
 
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@ProcessUsage");
+        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@ProcessUsage");
         Assert.assertEquals("Value Process Usage is wrong.", "", actual);
 
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet/@Name");
-        Assert.assertEquals("Attribute Name in ParameterSet is wrong.", "RunList", actual);
+        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@Name");
+        Assert.assertEquals("Attribute Name in ResourceSet is wrong.", "RunList", actual);
 
         actual = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[1]/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[1]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("Attribute FileSpec URL is wrong.", urlCover, actual);
 
         actual = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[2]/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[2]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_1, actual);
 
         actual = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList']/xjdf:Parameter[3]/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[3]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_2, actual);
     }
 
     /**
-     * Add Multiple Parameter o XJDF document.
+     * Add Multiple Resource o XJDF document.
      *
      * @throws Exception
      */
     @Test
-    public void testAddParameterListProcessUsage() throws Exception {
+    public void testAddResourceListProcessUsage() throws Exception {
 
         // arrange
         XJdfNodeFactory nf = new XJdfNodeFactory();
@@ -317,35 +317,35 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         String processUsage_1 = "PROCESS_USAGE_1";
         String processUsage_2 = "PROCESS_USAGE_2";
 
-        List<ParameterType> runList_1 = new ArrayList<>();
+        List<ResourceType> runList_1 = new ArrayList<>();
         runList_1.add(nf.createRunList(new URI(new java.net.URI(urlCover))));
 
-        List<ParameterType> runList_2 = new ArrayList<>();
+        List<ResourceType> runList_2 = new ArrayList<>();
         runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_1))));
         runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_2))));
 
         // act
-        xJdfBuilder.addParameter(runList_1, processUsage_1);
-        xJdfBuilder.addParameter(runList_2, processUsage_2);
+        xJdfBuilder.addResource(runList_1, processUsage_1);
+        xJdfBuilder.addResource(runList_2, processUsage_2);
 
         // assert
         String actual;
 
         byte[] bytes = marshalResult(xJdfBuilder);
 
-        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet)");
-        Assert.assertEquals("Number of ParameterSet nodes is wrong.", "2", actual);
+        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet)");
+        Assert.assertEquals("Number of ResourceSet nodes is wrong.", "2", actual);
 
-        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet[1]/xjdf:Parameter)");
+        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet[1]/xjdf:Resource)");
         Assert.assertEquals("Number of RunList parameters is wrong.", "1", actual);
 
-        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ParameterSet[2]/xjdf:Parameter)");
+        actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource)");
         Assert.assertEquals("Number of RunList parameters is wrong.", "2", actual);
 
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[1]/@ProcessUsage");
+        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[1]/@ProcessUsage");
         Assert.assertEquals("Value Process Usage is wrong.", processUsage_1, actual);
 
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ParameterSet[2]/@ProcessUsage");
+        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/@ProcessUsage");
         Assert.assertEquals("Value Process Usage is wrong.", processUsage_2, actual);
     }
 
@@ -368,7 +368,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addParameter(nf.createCustomerInfo(CUSTOMER_ID));
+        xJdfBuilder.addResource(nf.createCustomerInfo(CUSTOMER_ID));
 
         // assert
         int actual;
@@ -378,10 +378,10 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         actual = Integer.parseInt(
             getXPathValue(
                 bytes,
-                "count(/xjdf:XJDF/xjdf:ParameterSet[@Name='CustomerInfo'][1]/xjdf:Parameter)"
+                "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='CustomerInfo'][1]/xjdf:Resource)"
             )
         );
-        Assert.assertEquals("Number of Parameter Nodes is wrong.", 2, actual);
+        Assert.assertEquals("Number of Resource Nodes is wrong.", 2, actual);
     }
 
     /**
@@ -403,7 +403,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addParameter(nf.createRunList(new URI(new java.net.URI(FILE_NAME))), "PROCESS_USAGE_1");
+        xJdfBuilder.addResource(nf.createRunList(new URI(new java.net.URI(FILE_NAME))), "PROCESS_USAGE_1");
 
         String actual;
 
@@ -411,13 +411,13 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         actual = getXPathValue(
             bytes,
-            "count(/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Parameter)"
+            "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource)"
         );
-        Assert.assertEquals("Number of Parameter Nodes is wrong.", "2", actual);
+        Assert.assertEquals("Number of Resource Nodes is wrong.", "2", actual);
 
         actual = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Parameter[2]/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource[2]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
     }
@@ -441,7 +441,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addParameter(nf.createRunList(new URI(new java.net.URI(FILE_NAME))));
+        xJdfBuilder.addResource(nf.createRunList(new URI(new java.net.URI(FILE_NAME))));
 
         String actual;
 
@@ -449,23 +449,23 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         actual = getXPathValue(
             bytes,
-            "count(/xjdf:XJDF/xjdf:ParameterSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Parameter)"
+            "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource)"
         );
-        Assert.assertEquals("Number of Parameter Nodes is wrong.", "1", actual);
+        Assert.assertEquals("Number of Resource Nodes is wrong.", "1", actual);
 
         actual = getXPathValue(
             bytes,
-            "/xjdf:XJDF/xjdf:ParameterSet[not(@ProcessUsage)]/xjdf:Parameter/xjdf:RunList/xjdf:FileSpec/@URL"
+            "/xjdf:XJDF/xjdf:ResourceSet[not(@ProcessUsage)]/xjdf:Resource/xjdf:RunList/xjdf:FileSpec/@URL"
         );
         Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
     }
 
     @Test
-    public void testAddResourceMultiple() throws Exception {
+    public void testAddResourceMultiple2() throws Exception {
         Media media1 = new Media().withMediaQuality("media1");
         Media media2 = new Media().withMediaQuality("media2");
-        xJdfBuilder.addResource(media1, null);
-        xJdfBuilder.addResource(media2, null);
+        xJdfBuilder.addResource(media1);
+        xJdfBuilder.addResource(media2);
 
         byte[] bytes = marshalResult(xJdfBuilder);
         assertEquals("1", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));

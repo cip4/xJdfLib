@@ -10,29 +10,30 @@
  */
 package org.cip4.lib.xjdf.builder;
 
-import org.cip4.lib.xjdf.schema.ParameterType;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+
+import javax.xml.bind.Marshaller;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
 import org.xml.sax.InputSource;
 
-import javax.xml.bind.Marshaller;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-
+/**
+ * Abstract JUnit test case for all Builder classes.
+ */
 public abstract class AbstractBuilderTest<T> {
 
-    protected final boolean outputConsole = true;
-
-    /**
-     * Default constructor.
-     */
-    public AbstractBuilderTest() {
+	/**
+	 * Default constructor.
+	 */
+	public AbstractBuilderTest() {
 
         try {
             JAXBContextFactory.init();
@@ -57,29 +58,12 @@ public abstract class AbstractBuilderTest<T> {
         return marshall(obj);
     }
 
-    /**
-     * Marshals XJDF Parameter.
-     * @param builder Builder for XJDF parameter.
-     *
-     * @return Marshaled XJDF parameter.
-     * @throws Exception If the marshalling process fails.
-     */
-    protected byte[] marshalResultParameter(AbstractNodeBuilder<T> builder) throws Exception {
-
-        // get XJDF Node
-        XJdfBuilder xjdfBuilder = new XJdfBuilder();
-        xjdfBuilder.addParameter((ParameterType) builder.build());
-
-        // return bytes
-        return marshall(xjdfBuilder.build());
-    }
-
-    /**
-     * Marshall a builder
-     * @return Document as byte array.
-     * @throws Exception
-     */
-    private byte[] marshall(Object obj) throws Exception {
+	/**
+	 * Marshall a builder
+	 * @return Document as byte array.
+	 * @throws Exception
+	 */
+	private byte[] marshall(Object obj) throws Exception {
 
         // marshall XJDF document
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -93,28 +77,16 @@ public abstract class AbstractBuilderTest<T> {
         bos.flush();
         bos.close();
 
-        byte[] bytes = bos.toByteArray();
+		return bos.toByteArray();
+	}
 
-        // output console
-        if (outputConsole) {
-            String doc = new String(bytes);
-            System.out.println("------------------------------------------------------------------------");
-            System.out.println("");
-            System.out.print(doc);
-            System.out.println("");
-        }
-
-        // return bytes
-        return bytes;
-    }
-
-    /**
-     * Helper method for analyzing JAXB output by xpath.
-     * @param bytes Current XJdf Document as byte array.
-     * @param xPathExpr XPath expression.
-     * @return Value as String.
-     */
-    protected String getXPathValue(byte[] bytes, String xPathExpr) throws Exception {
+	/**
+	 * Helper method for analyzing JAXB output by xpath.
+	 * @param bytes Current XJdf Document as byte array.
+	 * @param xPathExpr XPath to validate.
+	 * @return Value as String.
+	 */
+	protected String getXPathValue(byte[] bytes, String xPathExpr) throws Exception {
 
         // create XPath query
         NamespaceManager nsManager = new NamespaceManager();
@@ -129,7 +101,6 @@ public abstract class AbstractBuilderTest<T> {
         // execute xPath query
         InputStream is = new ByteArrayInputStream(bytes);
 
-        // return result
-        return xPathExpression.evaluate(new InputSource(is));
-    }
+		return xPathExpression.evaluate(new InputSource(is));
+	}
 }

@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
@@ -18,7 +8,6 @@ import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
  * Implementation of a JMF Builder.
- * @author s.meissner
  */
 public class JmfBuilder extends AbstractNodeBuilder<XJMF> {
 
@@ -50,8 +39,6 @@ public class JmfBuilder extends AbstractNodeBuilder<XJMF> {
 	 * @return The current JmfBuilder Message.
 	 */
 	public void setMessage(Message message) {
-
-		// get parameter name
 		String messageName = message.getClass().getSimpleName();
 
 		// create message node

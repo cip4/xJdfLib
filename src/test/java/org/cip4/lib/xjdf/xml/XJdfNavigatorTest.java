@@ -270,7 +270,7 @@ public class XJdfNavigatorTest {
 		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
 
 		// act
-		int val = xJdfNavigator.evaluateInt("/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals");
+		int val = xJdfNavigator.evaluateInt("/XJDF/ResourceSet[@Name='ApprovalParams']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
 		Assert.assertEquals("Value is wrong.", 1, val);
@@ -284,7 +284,7 @@ public class XJdfNavigatorTest {
 		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
 
 		// act
-		long val = xJdfNavigator.evaluateLong("/XJDF/ParameterSet[@Name='ApprovalParams']/Parameter/ApprovalParams/@MinApprovals");
+		long val = xJdfNavigator.evaluateLong("/XJDF/ResourceSet[@Name='ApprovalParams']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
 		Assert.assertEquals("Value is wrong.", 1, val);
@@ -298,7 +298,7 @@ public class XJdfNavigatorTest {
 		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
 
 		// act
-		Integer val = xJdfNavigator.evaluateInt("/XJDF/ParameterSet[@Name='xxx']/Parameter/ApprovalParams/@MinApprovals");
+		Integer val = xJdfNavigator.evaluateInt("/XJDF/ResourceSet[@Name='xxx']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
 		Assert.assertNull("Integer Value is not null.", val);

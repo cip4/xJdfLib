@@ -22,7 +22,7 @@ import org.junit.Test;
 public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 	/**
-	 * Add Multiple Parameter o XJDF document.
+	 * Add Multiple Resource o XJDF document.
 	 * @throws Exception
 	 */
 	@Test
@@ -57,7 +57,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
-		xJdfBuilder.addParameter(runCover, partCover);
+		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
 		RunList runContent = new XJdfNodeFactory().createRunList(
@@ -69,14 +69,14 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
         );
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
-		xJdfBuilder.addParameter(runContent, partContent);
+		xJdfBuilder.addResource(runContent, partContent);
 
 		// console output
         marshalResult(xJdfBuilder);
 	}
 
 	/**
-	 * Add Multiple Parameter o XJDF document.
+	 * Add Multiple Resource o XJDF document.
 	 * @throws Exception
 	 */
 	@Test
@@ -111,7 +111,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		runCover.setFileSpec(fileSpec);
 		Part partCover = new XJdfNodeFactory().createPart();
 		partCover.setRun("Cover");
-		xJdfBuilder.addParameter(runCover, partCover);
+		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
         RunList runContent = new XJdfNodeFactory().createRunList(
@@ -123,7 +123,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
         );
 		Part partContent = new XJdfNodeFactory().createPart();
 		partContent.setRun("Content");
-		xJdfBuilder.addParameter(runContent, partContent);
+		xJdfBuilder.addResource(runContent, partContent);
 
 		// console output
 		marshalResult(xJdfBuilder);

@@ -47,7 +47,7 @@ public class UnreferencedNodesTest {
         xPath.setNamespaceContext(nsManager);
 
         NodeList elements = (NodeList) xPath.evaluate(
-            "/xs:schema/xs:element[not(@substitutionGroup='ParameterType') and not(@substitutionGroup='ResourceType') and not(@substitutionGroup='IntentType')]",
+            "/xs:schema/xs:element[not(@substitutionGroup='ResourceType') and not(@substitutionGroup='ResourceType') and not(@substitutionGroup='IntentType')]",
             XJDF_SCHEMA,
             XPathConstants.NODESET
         );

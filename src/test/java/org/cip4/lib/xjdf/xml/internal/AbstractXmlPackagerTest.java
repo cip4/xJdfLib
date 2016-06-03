@@ -49,7 +49,7 @@ public class AbstractXmlPackagerTest {
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
-        builder.addParameter(
+        builder.addResource(
             xJdfNodeFactory.createRunList(
                 new URI(
                     sourceUri,
@@ -57,7 +57,7 @@ public class AbstractXmlPackagerTest {
                 )
             )
         );
-        builder.addParameter(
+        builder.addResource(
             xJdfNodeFactory.createPreview(
                 new URI(
                     sourceUri,
@@ -88,7 +88,7 @@ public class AbstractXmlPackagerTest {
         final String fileSpec = "filespec/datei.pdf";
         final String doc = "doc/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
-        builder.addParameter(
+        builder.addResource(
             xJdfNodeFactory.createRunList(
                 new URI(
                     sourceUri,
@@ -96,7 +96,7 @@ public class AbstractXmlPackagerTest {
                 )
             )
         );
-        builder.addParameter(
+        builder.addResource(
             xJdfNodeFactory.createPreview(
                 new URI(
                     sourceUri,
@@ -120,7 +120,7 @@ public class AbstractXmlPackagerTest {
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final String preview = "preview/datei.pdf";
         XJdfBuilder builder = new XJdfBuilder();
-        builder.addParameter(
+        builder.addResource(
             new XJdfNodeFactory().createPreview(
                 new URI(
                     sourceUri,
@@ -170,7 +170,7 @@ public class AbstractXmlPackagerTest {
         AbstractXmlPackager packager = new MinimalXmlPackager(out);
         XJdfBuilder builder = new XJdfBuilder();
         XJdfNodeFactory factory = new XJdfNodeFactory();
-        builder.addParameter(factory.createRunList(new URI(new java.net.URI("MyUri"))));
+        builder.addResource(factory.createRunList(new URI(new java.net.URI("MyUri"))));
         final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
         jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Collection uriCollection = packager.collectReferences(
@@ -195,11 +195,11 @@ public class AbstractXmlPackagerTest {
                 xjdf = new XJdfParser().parseStream(is);
 
                 final XJdfNodeFactory nf = new XJdfNodeFactory();
-                xjdf.withParameterSet(
-                    nf.createParameterSet()
+                xjdf.withResourceSet(
+                    nf.createResourceSet()
                         .withName("RunList")
-                        .withParameter(
-                            nf.createParameter(
+                        .withResource(
+                            nf.createResource(
                                 nf.createRunList()
                                     .withFileSpec(
                                         nf.createFileSpec()
@@ -211,7 +211,7 @@ public class AbstractXmlPackagerTest {
                                                 )
                                             )
                                     )
-                            )
+                            ).withID("Artwork")
                         )
                 );
             }

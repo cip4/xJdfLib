@@ -3,21 +3,21 @@ package org.cip4.lib.xjdf.comparator;
 import java.util.Comparator;
 
 import org.apache.commons.lang3.StringUtils;
-import org.cip4.lib.xjdf.schema.SetType;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 
 /**
- * Comparator of elements derived from SetType elements.
+ * Comparator of elements derived from ResourceSet elements.
  *
  * @author s.meissner
  * @author m.hartmann
  */
-public class SetTypeComparator implements Comparator<SetType> {
+public class ResourceSetComparator implements Comparator<ResourceSet> {
 
     /**
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
      */
     @Override
-    public final int compare(final SetType o1, final SetType o2) {
+    public final int compare(final ResourceSet o1, final ResourceSet o2) {
         // get name attributes
         String exprOne = o1.getName();
         String exprTwo = o2.getName();

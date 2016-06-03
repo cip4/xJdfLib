@@ -2,15 +2,15 @@ package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.BindingIntent;
+import org.cip4.lib.xjdf.schema.ColorIntent;
 import org.cip4.lib.xjdf.schema.EnumBindingType;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.type.IntegerList;
+import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfNavigator;
-import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +21,9 @@ import java.io.InputStream;
 
 import static org.junit.Assert.*;
 
+/**
+ * JUnit test case for Product Builder class.
+ */
 public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     private final static String RES_XJDF = "/org/cip4/lib/xjdf/JOB_1.xjdf";
@@ -103,38 +106,17 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     public void testWithoutChildren() throws Exception {
 
         // arrange
-        XJdfNodeFactory nf = new XJdfNodeFactory();
-
         ProductBuilder dbRoot = new ProductBuilder(1000);
-        dbRoot.addIntent(nf.createColorIntent(new IntegerList(4, 5)));
+        dbRoot.addIntent(new ColorIntent());
+        Product product = dbRoot.build();
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
-        xJdfBuilder.addProduct(dbRoot.build());
+        xJdfBuilder.addProduct(product);
 
         // assert
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        new XJdfParser().parseXJdf(xJdfBuilder.build(), bos);
-        bos.close();
-
-        byte[] bytes = bos.toByteArray();
-
-        System.out.println(new String(bytes));
-
-        String actual;
-
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
-                + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
-        );
-        assertEquals("NomColors is wrong for front.", "4", actual);
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList//xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
-                + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
-        );
-        assertEquals("NomColors is wrong for back.", "5", actual);
+        XJDF xjdf = xJdfBuilder.build();
+        assertSame(product, xjdf.getProductList().getProduct().get(0));
     }
 
     /**
@@ -214,65 +196,33 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         XJdfNodeFactory nf = new XJdfNodeFactory();
 
         ProductBuilder pbRoot = new ProductBuilder(1000);
-        pbRoot.addIntent(nf.createColorIntent(new IntegerList(4, 5)));
+        pbRoot.addIntent(new ColorIntent());
+        Product productRoot = pbRoot.build();
 
         ProductBuilder pbChild_1 = new ProductBuilder();
         pbChild_1.getProduct().setID("a");
         pbChild_1.addIntent(nf.createMediaIntent("IPG_135"));
+        Product productChild1 = pbChild_1.build();
 
         ProductBuilder pbChild_2 = new ProductBuilder();
         pbChild_2.getProduct().setID("b");
         pbChild_2.addIntent(nf.createMediaIntent("IPG_90"));
+        Product productChild2 = pbChild_2.build();
 
         // act
         pbRoot.addChildProduct(pbChild_1.build());
         pbRoot.addChildProduct(pbChild_2.build());
 
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
-        xJdfBuilder.addProduct(pbRoot.build());
-        xJdfBuilder.addProduct(pbChild_1.getProduct());
-        xJdfBuilder.addProduct(pbChild_2.getProduct());
+        xJdfBuilder.addProduct(productRoot);
+        xJdfBuilder.addProduct(productChild1);
+        xJdfBuilder.addProduct(productChild2);
 
         // assert
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        new XJdfParser().parseXJdf(xJdfBuilder.build(), bos);
-        bos.close();
-
-        byte[] bytes = bos.toByteArray();
-        String actual;
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
-                + "xjdf:SurfaceColor[@Surface='Front']/@NumColors"
-        );
-        assertEquals("NumColors is wrong for front.", "4", actual);
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ColorIntent']/xjdf:ColorIntent/"
-                + "xjdf:SurfaceColor[@Surface='Back']/@NumColors"
-        );
-        assertEquals("NumColors is wrong for back.", "5", actual);
-
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[1]/@IsRoot");
-        assertEquals("IsRoot is wrong.", "true", actual);
-
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/@IsRoot");
-        assertEquals("IsRoot is wrong.", "", actual);
-
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality"
-        );
-        assertEquals("MediaQuality is wrong.", "IPG_135", actual);
-
-        actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[2]/@ID");
-        assertFalse("ProductID is wrong.", "".equals(actual));
-
-        actual = getXPathValue(
-            bytes,
-            "/xjdf:XJDF/xjdf:ProductList/xjdf:Product[3]/xjdf:Intent[@Name='MediaIntent']/xjdf:MediaIntent/@MediaQuality"
-        );
-        assertEquals("MediaQuality is wrong.", "IPG_90", actual);
+        XJDF xjdf = xJdfBuilder.build();
+        assertSame(productRoot, xjdf.getProductList().getProduct().get(0));
+        assertSame(productChild1, xjdf.getProductList().getProduct().get(1));
+        assertSame(productChild2, xjdf.getProductList().getProduct().get(2));
     }
 
     /**

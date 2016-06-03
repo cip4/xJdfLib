@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.Shape;
@@ -20,47 +19,15 @@ import javax.xml.namespace.QName;
 public class XJdfNodeFactory extends ObjectFactory {
 
     /**
-     * Create a new Parameter node from ParameterType.
+     * Create a new Resource node from ResourceType.
      *
-     * @param parameterType The ParameterType Node
+     * @param resourceType The ResourceType Node
      *
-     * @return New Parameter node from ParametType node.
+     * @return New Resource node from ResourceType node.
      */
-    public final Parameter createParameter(final ParameterType parameterType) {
+    public final Resource createResource(final ResourceType resourceType) {
 
-        return createParameter(parameterType, null);
-    }
-
-    /**
-     * Create a new Parameter node from ParameterType and Part.
-     *
-     * @param parameterType The ParameterType Node
-     * @param part The Part Node
-     *
-     * @return New Parameter node from ParametType and Part node.
-     */
-    public final Parameter createParameter(final ParameterType parameterType, final Part part) {
-
-        if (parameterType == null) {
-            return null;
-        }
-
-        // get parameter name
-        String paramName = parameterType.getClass().getSimpleName();
-
-        // create parameter
-        Parameter parameter = super.createParameter();
-
-        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement obj = new JAXBElement(qname, parameterType.getClass(), null, parameterType);
-        parameter.setParameterType(obj);
-
-        if (part != null) {
-            parameter.getPart().add(part);
-        }
-
-        // return node
-        return parameter;
+        return createResource(resourceType, null);
     }
 
     /**
@@ -497,27 +464,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new ProofingIntent Node which already contains a ProofItem Node with an attribute BrandName.
-     *
-     * @param brandName Value for ProofItem BrandName attribute.
-     *
-     * @return ProofingIntent Node which already contains a ProofItem Node with defined attributes.
-     */
-    public final ProofingIntent createProofingIntent(final String brandName) {
-
-        // create nodes
-        ProofingIntent proofingIntent = super.createProofingIntent();
-        ProofItem proofItem = super.createProofItem();
-
-        // set attributes
-        proofItem.setBrandName(brandName);
-        proofingIntent.getProofItem().add(proofItem);
-
-        // return object
-        return proofingIntent;
-    }
-
-    /**
      * Create new BindingIntent Node which already contains values for attribute BindingType.
      *
      * @param bindingType Value for BindingType attribute.
@@ -574,31 +520,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // return object
         return foldingIntent;
-    }
-
-    /**
-     * Create new ColorIntent Node which already contains values for attribute NumColors.
-     *
-     * @param numColors Value for NumColors attribute.
-     *
-     * @return ColorIntent Node which already contains defined attributes.
-     */
-    public final ColorIntent createColorIntent(final IntegerList numColors) {
-        ColorIntent colorIntent = super.createColorIntent();
-
-        SurfaceColor frontColor = new SurfaceColor();
-        frontColor.setSurface(EnumSurface.FRONT);
-        frontColor.setNumColors(numColors.get(0));
-
-        SurfaceColor backColor = new SurfaceColor();
-        backColor.setSurface(EnumSurface.BACK);
-        backColor.setNumColors(numColors.get(1));
-
-        colorIntent.getSurfaceColor().add(frontColor);
-        colorIntent.getSurfaceColor().add(backColor);
-
-        // return object
-        return colorIntent;
     }
 
     /**
@@ -762,24 +683,9 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return Position Node which already contains defined attributes.
      */
-    public final Position createPosition(final Rectangle absoluteBox, final Orientation orientation) {
-
-        return createPosition(absoluteBox, orientation, null);
-    }
-
-    /**
-     * Create a new Position Node which already contains defined attributes.
-     *
-     * @param absoluteBox AbsoluteBox attribute as Rectangle.
-     * @param orientation Orientation attribute as EnumOrientation.
-     * @param assemblyID Orientation attribute as AssemblyID.
-     *
-     * @return Position Node which already contains defined attributes.
-     */
     public final Position createPosition(
         final Rectangle absoluteBox,
-        final Orientation orientation,
-        final String assemblyID
+        final Orientation orientation
     ) {
 
         // create Position Node
@@ -788,7 +694,6 @@ public class XJdfNodeFactory extends ObjectFactory {
         // set attributes
         position.setAbsoluteBox(absoluteBox);
         position.setOrientation(orientation);
-        position.setAssemblyID(assemblyID);
 
         // return node
         return position;
