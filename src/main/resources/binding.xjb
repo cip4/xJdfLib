@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bindings version="2.1"
-              xmlns="http://java.sun.com/xml/ns/jaxb"
-              xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-              xmlns:xs="http://www.w3.org/2001/XMLSchema"
-              xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
+          xmlns="http://java.sun.com/xml/ns/jaxb"
+          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+          xmlns:xs="http://www.w3.org/2001/XMLSchema"
+          xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector">
 
     <bindings schemaLocation="JDF20.xsd">
         <globalBindings>
@@ -35,6 +36,20 @@
         </bindings>
         <bindings scd="/~xjdf:duration">
             <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
+        </bindings>
+        <bindings node="//xs:element[@name='Product']/xs:complexType[1]">
+            <ci:code><![CDATA[
+     /*
+      * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
+      *
+      * @see Product#getChildRefs()
+      *
+      */
+     public final List<Product> getRawChildRefs() {
+         return childRefs;
+     }
+                ]]>
+            </ci:code>
         </bindings>
         <bindings node="//xs:element[@name='Product']//xs:attribute[@name='ChildRefs']" >
             <property>
