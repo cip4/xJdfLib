@@ -372,13 +372,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumContext">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Job"/>
-            <xs:enumeration value="Global"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumResourceDetails">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Brief"/>
@@ -1805,7 +1798,7 @@
             <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="Duration" type="duration" use="optional"/>
-            <xs:attribute name="ExternalID" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GrossWeight" type="double" use="optional"/>
             <xs:attribute name="ID" type="ID" use="required"/>
             <xs:attribute name="MinLateStatus" type="EnumResourceStatus" use="optional"/>
@@ -1878,7 +1871,7 @@
             <xs:attribute name="IsRoot" type="boolean" use="optional"/>
             <xs:attribute name="MaxAmount" type="integer" use="optional"/>
             <xs:attribute name="MinAmount" type="integer" use="optional"/>
-            <xs:attribute name="ExternalID" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
         </xs:complexType>
@@ -2363,26 +2356,15 @@
     <xs:element name="ResourceInfo">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="MISDetails"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ResourceSet"/>
+                <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-
-            <xs:attribute name="ActualAmount" type="double" use="optional"/>
-            <xs:attribute name="Amount" type="double" use="optional"/>
-            <xs:attribute name="AvailableAmount" type="double" use="optional"/>
             <xs:attribute name="CommandResult" type="EnumCommandResult" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Level" type="EnumLevel" use="optional"/>
-            <xs:attribute name="Location" type="string" use="optional"/>
-            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Orientation" use="optional"/>
-            <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="ResourceName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Scope" type="EnumScope" use="optional"/>
-            <xs:attribute name="Status" type="EnumResourceStatus" use="optional"/>
-            <xs:attribute name="Unit" type="string" use="optional"/>
             <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -2390,21 +2372,13 @@
     <!-- ** Complex type definition for ResourceQuParams ** -->
     <xs:element name="ResourceQuParams">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="Context" type="EnumContext" use="optional"/>
-            <xs:attribute name="Exact" type="boolean" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="Location" type="string" use="optional"/>
-            <xs:attribute name="ProcessUsage" type="string" use="optional"/>
-            <xs:attribute name="ProductID" type="string" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ResourceDetails" type="EnumResourceDetails" use="optional"/>
             <xs:attribute name="ResourceName" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Scope" type="EnumScope" use="optional"/>
-            <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -6158,6 +6132,46 @@
         <xs:complexType>
             <xs:attribute name="Usage" type="string" use="required"/>
             <xs:attribute name="Value" type="double" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:element name="SheetOptimizingParams" type="SheetOptimizingParams" substitutionGroup="ResourceType"/>
+    <xs:complexType name="SheetOptimizingParams">
+        <xs:complexContent>
+            <xs:extension base="ResourceType">
+                <xs:sequence>
+                    <xs:element ref="ConvertingConfig" minOccurs="1" maxOccurs="unbounded"/>
+                    <xs:element ref="GangElement" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    
+    <xs:element name="GangElement">
+        <xs:complexType>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="CollapseBleeds" type="boolean" use="optional"/>
+            <xs:attribute name="Dimension" type="XYPair" use="optional"/>
+            <xs:attribute name="DueDate" type="dateTime" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="FillPriority" type="integer" use="optional"/>
+            <xs:attribute name="GangElementID" type="ID" use="required"/>
+            <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
+            <xs:attribute name="GroupCode" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
+            <xs:attribute name="MaxQuantity" type="integer" use="optional"/>
+            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
+            <xs:attribute name="MinQuantity" type="integer" use="optional"/>
+            <xs:attribute name="NPage" type="integer" use="optional"/>
+            <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
+            <xs:attribute name="NumColors" type="XYPair" use="optional"/>
+            <xs:attribute name="OneSheet" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="OrderQuantity" type="integer" use="optional"/>
+            <xs:attribute name="PageDimension" type="XYPair" use="optional"/>
+            <xs:attribute name="Priority" type="integer" use="optional"/>
+            <xs:attribute name="RotationPolicy" type="EnumPositionPolicy" use="optional"/>
+            <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 

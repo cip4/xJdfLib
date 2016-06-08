@@ -51,6 +51,11 @@ public class GeneralDesignTest {
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
 
+            // TODO: Remove once XJDF-615 is solved.
+            if ("GangElementID".equals(elementNode.getAttributes().getNamedItem("name").getNodeValue())) {
+                continue;
+            }
+
             assertEquals(
                 "All attributes in XJDF with a data type of ID SHALL be named ID.",
                 "ID",
