@@ -5831,7 +5831,7 @@
                 </xs:sequence>
                 <xs:attribute name="Compensation" type="EnumCompensation" use="optional"/>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="PreviewFileType" type="string" use="optional"/>
+                <xs:attribute name="PreviewFileType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="PreviewUsage" type="EnumPreviewUsage" use="optional"/>
             </xs:extension>
         </xs:complexContent>
