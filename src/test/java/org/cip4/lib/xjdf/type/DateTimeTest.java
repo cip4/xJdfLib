@@ -19,7 +19,6 @@ public class DateTimeTest {
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45).toString();
 
-		System.out.println("Result UTC: " + actual);
 		assertEquals("DateTime format is wrong.", expected, actual);
 	}
 
@@ -39,7 +38,6 @@ public class DateTimeTest {
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45)
             .toString(TimeZone.getTimeZone("UTC"));
 
-		System.out.println("Result UTC: " + actual);
 		assertEquals("DateTime format is wrong.", expected, actual);
 	}
 
@@ -50,7 +48,6 @@ public class DateTimeTest {
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 12, 20, 40)
             .toString(TimeZone.getTimeZone("Europe/Berlin"));
 
-		System.out.println("Result TimeZone 'Europe/Berlin': " + actual);
 		assertEquals("Date format is wrong.", expected, actual);
 	}
 
@@ -61,7 +58,6 @@ public class DateTimeTest {
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 14, 20, 40)
             .toString(TimeZone.getTimeZone("US/Pacific"));
 
-		System.out.println("Result TimeZone 'US/Pacific': " + actual);
 		assertEquals("Date format is wrong.", expected, actual);
 	}
 
@@ -72,7 +68,6 @@ public class DateTimeTest {
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 40)
             .toString(TimeZone.getTimeZone("US/Hawaii"));
 
-		System.out.println("Result TimeZone 'US/Hawaii': " + actual);
 		assertEquals("Date format is wrong.", expected, actual);
 	}
 

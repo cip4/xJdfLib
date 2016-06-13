@@ -188,12 +188,6 @@ public class XJdfNavigatorTest {
 		long readSecondFinished = System.currentTimeMillis();
 
 		// assert
-		System.out.println("Result XPathNavigator Speed Test:");
-		System.out.println("---------------------------------");
-		System.out.println("Time first read: " + (readFirstFinished - startTime));
-		System.out.println("Time update: " + (updateFinished - readFirstFinished));
-		System.out.println("Time second read: " + (readSecondFinished - updateFinished));
-
 		Assert.assertEquals("New value is wrong.", NEW_VALUE, actual);
 	}
 
