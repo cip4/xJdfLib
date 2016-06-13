@@ -1654,7 +1654,6 @@
             <xs:enumeration value="PartVersion"/>
             <xs:enumeration value="PreviewType"/>
             <xs:enumeration value="PrintCondition"/>
-            <xs:enumeration value="ProcessType"/>
             <xs:enumeration value="ProductPart"/>
             <xs:enumeration value="QualityMeasurement"/>
             <xs:enumeration value="Run"/>
@@ -3420,7 +3419,6 @@
             <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
             <xs:attribute name="PrintCondition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProcessType" type="NMTOKENS" use="optional"/>
             <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
