@@ -2345,8 +2345,8 @@
             <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
             <xs:attribute name="Hold" type="boolean" use="optional"/>
-            <xs:attribute name="NextQueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="PrevQueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="PrevQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ReturnJMF" type="URL" use="optional"/>
