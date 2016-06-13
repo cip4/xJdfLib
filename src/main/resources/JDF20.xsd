@@ -6795,13 +6795,14 @@
     <xs:complexType name="InkZoneCalculationParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
+                <xs:sequence>
+                    <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="PrintableArea" type="rectangle" use="optional"/>
+                <xs:attribute name="ZoneHeight" type="double" use="optional"/>
+                <xs:attribute name="Zones" type="integer" use="optional"/>
                 <xs:attribute name="ZoneWidth" type="double" use="optional"/>
                 <xs:attribute name="ZonesY" type="integer" use="optional"/>
-                <xs:attribute name="FountainPositions" type="string" use="optional"/>
-                <xs:attribute name="Zones" type="integer" use="optional"/>
-                <xs:attribute name="ZoneHeight" type="double" use="optional"/>
-                <xs:attribute name="PrintableArea" type="rectangle" use="optional"/>
-                <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
