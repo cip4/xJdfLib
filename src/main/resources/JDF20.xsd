@@ -351,8 +351,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
             <xs:enumeration value="Brief"/>
-            <xs:enumeration value="Modules"/>
-            <xs:enumeration value="Details"/>
             <xs:enumeration value="Full"/>
         </xs:restriction>
     </xs:simpleType>
