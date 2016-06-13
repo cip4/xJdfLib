@@ -3279,11 +3279,8 @@
     <!-- ** Complex type definition for ModuleStatus ** -->
     <xs:element name="ModuleStatus">
         <xs:complexType>
-            <xs:attribute name="DeviceStatus" type="EnumDeviceStatus" use="optional"/>
-            <xs:attribute name="StatusDetails" type="string" use="optional"/>
-            <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
-            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
