@@ -151,6 +151,7 @@
                         <arg>-Xfluent-api</arg>
                         <arg>-Xequals</arg>
                         <arg>-XhashCode</arg>
+                        <arg>-Xinject-code</arg>
                     </args>
                     <extension>true</extension>
                     <readOnly>true</readOnly>
@@ -169,26 +170,6 @@
                         </plugin>
                     </plugins>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-patch-plugin</artifactId>
-                <version>1.2</version>
-                <configuration>
-                    <patches>
-                        <patch>product-rawchildrefs.patch</patch>
-                    </patches>
-                    <targetDirectory>${basedir}</targetDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>patch</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>apply</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
