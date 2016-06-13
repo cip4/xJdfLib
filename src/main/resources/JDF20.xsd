@@ -19,7 +19,6 @@
             <xs:element ref="GangInfo"/>
             <xs:element ref="GangQuFilter"/>
             <xs:element ref="KnownMsgQuParams"/>
-            <xs:element ref="Message"/>
             <xs:element ref="MessageService"/>
             <xs:element ref="PipeParams"/>
             <xs:element ref="Queue"/>
@@ -36,7 +35,6 @@
             <xs:element ref="StopPersChParams"/>
             <xs:element ref="SubscriptionFilter"/>
             <xs:element ref="SubscriptionInfo"/>
-            <xs:element ref="Created"/>
             <xs:element ref="DeviceList"/>
         </xs:sequence>
         <xs:attribute name="IntegerRange" type="IntegerRange" />
@@ -1421,7 +1419,7 @@
 
     <!-- unchecked -->
 
-    <xs:simpleType name="EnumJDFJMFVersion">
+    <xs:simpleType name="JDFJMFVersion">
         <xs:restriction base="xs:string">
             <xs:enumeration value="2.0"/>
         </xs:restriction>
@@ -1940,7 +1938,7 @@
             <xs:attribute name="RelatedJobID" type="string" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="string" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="required"/>
+            <xs:attribute name="Version" type="JDFJMFVersion" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -1974,7 +1972,7 @@
                     <xs:attribute name="ID" type="ID" use="optional"/>
                     <xs:attribute name="Language" type="language" use="optional"/>
                     <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="PersonalID" type="string" use="optional"/>
+                    <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                 </xs:extension>
             </xs:simpleContent>
@@ -2062,23 +2060,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Command ** -->
-    <xs:element name="Command">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="required"/>
-            <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-            <xs:attribute name="TransactionID" type="string" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for DeviceFilter ** -->
     <xs:element name="DeviceFilter">
         <xs:complexType>
@@ -2101,7 +2082,7 @@
                 <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
             <xs:attribute name="PowerOnTime" type="dateTime" use="optional"/>
@@ -2148,16 +2129,13 @@
     <xs:element name="XJMF">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Command" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Query" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Response" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Signal" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Message" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="required"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
-            <xs:attribute name="Version" type="EnumJDFJMFVersion" use="required"/>
+            <xs:attribute name="Version" type="JDFJMFVersion" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2191,7 +2169,7 @@
         <xs:complexType>
             <xs:attribute name="ActivityID" type="string" use="optional"/>
             <xs:attribute name="ActivityName" type="string" use="optional"/>
-            <xs:attribute name="PersonalID" type="string" use="optional"/>
+            <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -2204,18 +2182,67 @@
     </xs:element>
 
     <!-- ** Complex type definition for Message ** -->
-    <xs:element name="Message">
-        <xs:complexType>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="Author" type="string" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="required"/>
-            <xs:attribute name="PersonalID" type="string" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-        </xs:complexType>
-    </xs:element>
+    <xs:element name="Message" type="Message" abstract="true"/>
+    <xs:complexType name="Message">
+        <xs:attribute name="AgentName" type="string" use="optional"/>
+        <xs:attribute name="AgentVersion" type="string" use="optional"/>
+        <xs:attribute name="Author" type="string" use="optional"/>
+        <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+        <xs:attribute name="ID" type="ID" use="required"/>
+        <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="Time" type="dateTime" use="optional"/>
+    </xs:complexType>
+
+
+    <!-- ** Complex type definition for Command ** -->
+    <xs:element name="Command" type="Command" substitutionGroup="Message" abstract="true"/>
+    <xs:complexType name="Command">
+        <xs:complexContent>
+            <xs:extension base="Message">
+                <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="TransactionID" type="NMTOKEN" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ** Complex type definition for Query ** -->
+    <xs:element name="Query" type="Query" substitutionGroup="Message" abstract="true"/>
+    <xs:complexType name="Query">
+        <xs:complexContent>
+            <xs:extension base="Message">
+                <xs:sequence>
+                    <xs:element ref="Subscription" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ** Complex type definition for Response ** -->
+    <xs:element name="Response" type="Response" substitutionGroup="Message" abstract="true"/>
+    <xs:complexType name="Response">
+        <xs:complexContent>
+            <xs:extension base="Message">
+                <xs:sequence>
+                    <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ReturnCode" type="integer" use="optional"/>
+                <xs:attribute name="Subscribed" type="boolean" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ** Complex type definition for Signal ** -->
+    <xs:element name="Signal" type="Signal" substitutionGroup="Message"/>
+    <xs:complexType name="Signal">
+        <xs:complexContent>
+            <xs:extension base="Message">
+                <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
+                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- ** Complex type definition for MessageService ** -->
     <xs:element name="MessageService">
@@ -2246,29 +2273,13 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Query ** -->
-    <xs:element name="Query">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Subscription" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="required"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Queue ** -->
     <xs:element name="Queue">
         <xs:complexType>
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueEntry"/>
             </xs:sequence>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
             <xs:attribute name="Status" type="EnumQueueStatus" use="optional"/>
         </xs:complexType>
@@ -2282,7 +2293,7 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Preview"/>
             </xs:sequence>
             <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="EndTime" type="dateTime" use="optional"/>
             <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
@@ -2321,7 +2332,7 @@
     <!-- ** Complex type defintion for QueueStatus ** -->
     <xs:element name="QueueStatus">
         <xs:complexType>
-            <xs:attribute name="DeviceID" type="string" use="required"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
             <xs:attribute name="Status" type="EnumQueueStatus" use="required"/>
         </xs:complexType>
@@ -2398,25 +2409,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for Response ** -->
-    <xs:element name="Response">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="required"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ReturnCode" type="integer" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Subscribed" type="boolean" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ResubmissionParams ** -->
     <xs:element name="ResubmissionParams">
         <xs:complexType>
@@ -2439,21 +2431,6 @@
         <xs:complexType>
             <xs:attribute name="ShutDownType" type="EnumShutDownType" use="optional"/>
             <xs:attribute name="FlushQueueParamsRef" type="IDREF" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for Signal ** -->
-    <xs:element name="Signal">
-        <xs:complexType>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
-            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="LastRepeat" type="boolean" use="optional"/>
-            <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SenderID" type="string" use="optional"/>
-            <xs:attribute name="Time" type="dateTime" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2484,7 +2461,7 @@
             <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2785,7 +2762,7 @@
                 </xs:sequence>
                 <xs:attribute name="CostCenterID" type="string" use="optional"/>
                 <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="DeviceID" type="string" use="optional"/>
+                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DeviceType" type="string" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
@@ -2794,7 +2771,7 @@
                 <xs:attribute name="JDFOutputURL" type="URL" use="optional"/>
                 <xs:attribute name="JDFVersions" use="optional">
                     <xs:simpleType>
-                        <xs:list itemType="EnumJDFJMFVersion"/>
+                        <xs:list itemType="JDFJMFVersion"/>
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="JMFSenderID" type="string" use="optional"/>
@@ -3271,7 +3248,7 @@
             <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleID" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3494,7 +3471,7 @@
                 <xs:attribute name="AgentName" type="string" use="optional"/>
                 <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
-                <xs:attribute name="DeviceID" type="string" use="optional"/>
+                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="QueueEntryID" type="string" use="optional"/>
@@ -7050,5 +7027,40 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="CommandModifyQueueEntry" type="CommandModifyQueueEntry" substitutionGroup="Command"/>
+    <xs:complexType name="CommandModifyQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="ModifyQueueEntryParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseModifyQueueEntry" type="ResponseModifyQueueEntry" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseModifyQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="QueueEntry" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ModifyQueueEntryParams">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QueueFilter" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Operation" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Position" type="integer" use="optional"/>
+            <xs:attribute name="PrevQueueEntryID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Priority" type="integer" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>
