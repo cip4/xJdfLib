@@ -4611,8 +4611,9 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" name="OrganizationalUnit" type="textElement"/>
+                    <xs:element name="OrganizationalUnit" type="textElement" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
+                <xs:attribute name="CompanyID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="OrganizationName" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
