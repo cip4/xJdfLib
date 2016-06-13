@@ -6074,8 +6074,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Shape"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Shape" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="Area" type="double" use="optional"/>
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
