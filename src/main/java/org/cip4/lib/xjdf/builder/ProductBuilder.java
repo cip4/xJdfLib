@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.builder;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.EnumIntentName;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
@@ -122,7 +123,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
         // create intent node
         Intent it = xJdfNodeFactory.createIntent();
-        it.setName(intentName);
+        it.setName(EnumIntentName.fromValue(intentName));
 
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
         JAXBElement<IntentType> obj = new JAXBElement(qname, intent.getClass(), intent);
