@@ -2469,9 +2469,9 @@
             <xs:attribute name="DeviceDetails" type="EnumDeviceDetails" use="optional"/>
             <xs:attribute name="EmployeeInfo" type="boolean" use="optional"/>
             <xs:attribute name="JobDetails" type="EnumJobDetails" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
