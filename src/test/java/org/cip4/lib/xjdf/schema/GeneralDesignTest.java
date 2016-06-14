@@ -121,4 +121,42 @@ public class GeneralDesignTest {
             );
         }
     }
+
+    @Test
+    public void allFieldsOfWithNameJobIDShouldHaveTypeNMTOKEN() throws Exception {
+        NodeList elements = (NodeList) xPath.evaluate(
+            "//xs:attribute[@name='JobID']",
+            XJDF_SCHEMA,
+            XPathConstants.NODESET
+        );
+
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node elementNode = elements.item(i);
+
+            assertEquals(
+                "All attributes in XJDF with a name 'JobID' SHALL be have type NMTOKEN.",
+                "NMTOKEN",
+                elementNode.getAttributes().getNamedItem("type").getNodeValue()
+            );
+        }
+    }
+
+    @Test
+    public void allFieldsOfWithNameJobPartIDShouldHaveTypeNMTOKEN() throws Exception {
+        NodeList elements = (NodeList) xPath.evaluate(
+            "//xs:attribute[@name='JobPartID']",
+            XJDF_SCHEMA,
+            XPathConstants.NODESET
+        );
+
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node elementNode = elements.item(i);
+
+            assertEquals(
+                "All attributes in XJDF with a name 'JobPartID' SHALL be have type NMTOKEN.",
+                "NMTOKEN",
+                elementNode.getAttributes().getNamedItem("type").getNodeValue()
+            );
+        }
+    }
 }

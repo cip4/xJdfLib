@@ -11,31 +11,7 @@
     <xs:complexType name="FakeReferences">
         <xs:sequence>
             <xs:element type="FakeReferences" name="FakeReferences"/>
-            <xs:element ref="DeviceFilter"/>
             <xs:element ref="BarcodeProductionParams"/>
-            <!-- JMF stuff -->
-            <xs:element ref="FlushResourceParams"/>
-            <xs:element ref="GangCmdFilter"/>
-            <xs:element ref="GangInfo"/>
-            <xs:element ref="GangQuFilter"/>
-            <xs:element ref="KnownMsgQuParams"/>
-            <xs:element ref="MessageService"/>
-            <xs:element ref="PipeParams"/>
-            <xs:element ref="Queue"/>
-            <xs:element ref="QueueStatus"/>
-            <xs:element ref="QueueSubmissionParams"/>
-            <xs:element ref="RequestQueueEntryParams"/>
-            <xs:element ref="ResourceCmdParams"/>
-            <xs:element ref="ResourceInfo"/>
-            <xs:element ref="ResourceQuParams"/>
-            <xs:element ref="ResubmissionParams"/>
-            <xs:element ref="ReturnQueueEntryParams"/>
-            <xs:element ref="ShutDownCmdParams"/>
-            <xs:element ref="StatusQuParams"/>
-            <xs:element ref="StopPersChParams"/>
-            <xs:element ref="SubscriptionFilter"/>
-            <xs:element ref="SubscriptionInfo"/>
-            <xs:element ref="DeviceList"/>
         </xs:sequence>
         <xs:attribute name="IntegerRange" type="IntegerRange" />
     </xs:complexType>
@@ -134,12 +110,8 @@
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
-    <xs:simpleType name="URI">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
     <xs:simpleType name="URL">
-        <xs:restriction base="URI"/>
+        <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
     <xs:simpleType name="XPath">
@@ -357,14 +329,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Receiver"/>
             <xs:enumeration value="Sender"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumFlushPolicy">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Complete"/>
-            <xs:enumeration value="QueueEntry"/>
-            <xs:enumeration value="Intermediate"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1416,6 +1380,13 @@
             <xs:enumeration value="ShrinkWrap"/>
         </xs:restriction>
     </xs:simpleType>
+    
+    <xs:simpleType name="EnumUpdateGranularity">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="ChangesOnly"/>
+        </xs:restriction>
+    </xs:simpleType>
 
     <!-- unchecked -->
 
@@ -1904,8 +1875,8 @@
     <xs:element name="Dependent">
         <xs:complexType>
             <xs:attribute name="JMFURL" type="URL" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="required"/>
-            <xs:attribute name="JobPartID" type="string" use="required"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
             <xs:attribute name="PipeID" type="string" use="optional"/>
             <xs:attribute name="PipePartPartIDKeys" use="optional">
                 <xs:simpleType>
@@ -1932,8 +1903,8 @@
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProjectID" type="string" use="optional"/>
             <xs:attribute name="RelatedJobID" type="string" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="string" use="optional"/>
@@ -2063,10 +2034,6 @@
     <!-- ** Complex type definition for DeviceFilter ** -->
     <xs:element name="DeviceFilter">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Device"/>
-            </xs:sequence>
-            <xs:attribute name="Localization" type="languages" use="optional"/>
             <xs:attribute name="DeviceDetails" type="EnumDeviceDetails" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -2075,13 +2042,14 @@
     <xs:element name="DeviceInfo">
         <xs:complexType>
             <xs:sequence>
+                <xs:element ref="Activity" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="JobPhase" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="CounterUnit" type="string" use="optional"/>
+            <xs:attribute name="CounterUnit" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
@@ -2091,16 +2059,6 @@
             <xs:attribute name="Status" type="EnumDeviceInfoStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="TotalProductionCounter" type="double" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for FlushResourceParams ** -->
-    <xs:element name="FlushResourceParams">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueFilter"/>
-            </xs:sequence>
-            <xs:attribute name="FlushPolicy" type="EnumFlushPolicy" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2114,7 +2072,7 @@
     <!-- ** Complex type definition for GangInfo ** -->
     <xs:element name="GangInfo">
         <xs:complexType>
-            <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="GangName" type="NMTOKEN" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2151,8 +2109,8 @@
             <xs:attribute name="Amount" type="double" use="optional"/>
             <xs:attribute name="CostCenterID" type="string" use="optional"/>
             <xs:attribute name="DeadLine" type="EnumDeadline" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PercentCompleted" type="double" use="optional"/>
             <xs:attribute name="QueueEntryID" type="string" use="optional"/>
             <xs:attribute name="RestTime" type="duration" use="optional"/>
@@ -2167,7 +2125,7 @@
 
     <xs:element name="Activity">
         <xs:complexType>
-            <xs:attribute name="ActivityID" type="string" use="optional"/>
+            <xs:attribute name="ActivityID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ActivityName" type="string" use="optional"/>
             <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
@@ -2252,7 +2210,7 @@
             </xs:sequence>
             <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
             <xs:attribute name="JMFRole" type="EnumJmfRole" use="optional"/>
-            <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Type" type="NMTOKEN" use="required"/>
             <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -2265,9 +2223,9 @@
                 <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="JobID" type="string" use="required"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="Operation" type="EnumPipeOperation" use="required"/>
-            <xs:attribute name="PipeID" type="string" use="required"/>
+            <xs:attribute name="PipeID" type="NMTOKEN" use="required"/>
             <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
             <xs:attribute name="UpdatedStatus" type="EnumResourceStatus" use="optional"/>
         </xs:complexType>
@@ -2297,8 +2255,8 @@
             <xs:attribute name="EndTime" type="dateTime" use="optional"/>
             <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="QueueEntryID" type="string" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
@@ -2314,8 +2272,8 @@
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
             </xs:sequence>
             <xs:attribute name="GangNames" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MaxEntries" type="integer" use="optional"/>
             <xs:attribute name="OlderThan" type="dateTime" use="optional"/>
             <xs:attribute name="NewerThan" type="dateTime" use="optional"/>
@@ -2326,15 +2284,6 @@
                     <xs:list itemType="EnumStatusList"/>
                 </xs:simpleType>
             </xs:attribute>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type defintion for QueueStatus ** -->
-    <xs:element name="QueueStatus">
-        <xs:complexType>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="QueueSize" type="integer" use="optional"/>
-            <xs:attribute name="Status" type="EnumQueueStatus" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2358,11 +2307,11 @@
     <xs:element name="RequestQueueEntryParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Activation" type="EnumActivation" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueURL" type="URL" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -2412,7 +2361,7 @@
     <!-- ** Complex type definition for ResubmissionParams ** -->
     <xs:element name="ResubmissionParams">
         <xs:complexType>
-            <xs:attribute name="QueueEntryID" type="string" use="required"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="required"/>
             <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="required"/>
             <xs:attribute name="URL" type="URL" use="required"/>
         </xs:complexType>
@@ -2430,7 +2379,6 @@
     <xs:element name="ShutDownCmdParams">
         <xs:complexType>
             <xs:attribute name="ShutDownType" type="EnumShutDownType" use="optional"/>
-            <xs:attribute name="FlushQueueParamsRef" type="IDREF" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2452,16 +2400,10 @@
     <!-- ** Complex type definition for StopPersChParams ** -->
     <xs:element name="StopPersChParams">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
-            </xs:sequence>
-            <xs:attribute name="MessageType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="URL" type="URL" use="optional"/>
-            <xs:attribute name="JobPartID" type="string" use="optional"/>
-            <xs:attribute name="JobID" type="string" use="optional"/>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="MessageType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="URL" type="URL" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2888,29 +2830,14 @@
     <!-- ** Complex type definition for Error ** -->
     <xs:element name="Error">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ErrorData"/>
-            </xs:sequence>
             <xs:attribute name="ErrorID" type="string" use="optional"/>
-            <xs:attribute name="Resend" use="optional"/>
-            <xs:attribute name="ReturnCode" type="integer" use="optional"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ErrorData ** -->
-    <xs:element name="ErrorData">
-        <xs:complexType>
-            <xs:attribute name="Path" type="XPath" use="optional"/>
-            <xs:attribute name="FixExpression" type="Any" use="optional"/>
-            <xs:attribute name="ErrorURL" type="URI" use="optional"/>
-            <xs:attribute name="ErrorType" use="optional"/>
         </xs:complexType>
     </xs:element>
 
     <!-- ** Complex type definition for Event ** -->
     <xs:element name="Event">
         <xs:complexType>
-            <xs:attribute name="EventID" type="string" use="optional"/>
+            <xs:attribute name="EventID" type="string" use="required"/>
             <xs:attribute name="EventValue" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -3235,8 +3162,8 @@
     <!-- ** Complex type definition for Milestone ** -->
     <xs:element name="Milestone">
         <xs:complexType>
+            <xs:attribute name="MilestoneType" type="NMTOKEN" use="required"/>
             <xs:attribute name="TypeAmount" type="integer" use="optional"/>
-            <xs:attribute name="MilestoneType" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5581,7 +5508,7 @@
                     <xs:list itemType="EnumClasses"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="MileStoneTypes" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="MileStoneTypes" type="NMTOKENS" use="required"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -7064,5 +6991,461 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
         </xs:complexType>
     </xs:element>
+
+    <xs:element name="CommandForceGang" type="CommandForceGang" substitutionGroup="Command"/>
+    <xs:complexType name="CommandForceGang">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="GangCmdFilter" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseForceGang" type="ResponseForceGang" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseForceGang">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandGangStatus" type="CommandGangStatus" substitutionGroup="Command"/>
+    <xs:complexType name="CommandGangStatus">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="GangQuFilter" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseGangStatus" type="ResponseGangStatus" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseGangStatus">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="GangInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryKnownDevices" type="QueryKnownDevices" substitutionGroup="Query"/>
+    <xs:complexType name="QueryKnownDevices">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="DeviceFilter" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseKnownDevices" type="ResponseKnownDevices" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseKnownDevices">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="DeviceList" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalKnownDevices" type="SignalKnownDevices" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalKnownDevices">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="DeviceList" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryKnownMessages" type="QueryKnownMessages" substitutionGroup="Query"/>
+    <xs:complexType name="QueryKnownMessages">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="KnownMsgQuParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseKnownMessages" type="ResponseKnownMessages" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseKnownMessages">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="MessageService" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalKnownMessages" type="SignalKnownMessages" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalKnownMessages">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="MessageService" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryKnownSubscriptions" type="QueryKnownSubscriptions" substitutionGroup="Query"/>
+    <xs:complexType name="QueryKnownSubscriptions">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="SubscriptionFilter" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseKnownSubscriptions" type="ResponseKnownSubscriptions" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseKnownSubscriptions">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="SubscriptionInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalKnownSubscriptions" type="SignalKnownSubscriptions" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalKnownSubscriptions">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="SubscriptionInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryNotification" type="QueryNotification" substitutionGroup="Query"/>
+    <xs:complexType name="QueryNotification">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="NotificationFilter" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseNotification" type="ResponseNotification" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseNotification">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalNotification" type="SignalNotification" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalNotification">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="Notification" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandPipeControl" type="CommandPipeControl" substitutionGroup="Command"/>
+    <xs:complexType name="CommandPipeControl">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="PipeParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponsePipeControl" type="ResponsePipeControl" substitutionGroup="Response"/>
+    <xs:complexType name="ResponsePipeControl">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryQueueStatus" type="QueryQueueStatus" substitutionGroup="Query"/>
+    <xs:complexType name="QueryQueueStatus">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="QueueStatusParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueueStatusParams">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="QueueFilter" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="PreviewUsage" type="EnumPreviewUsage" use="optional"/>
+            <xs:attribute name="UpdateGranularity" type="EnumUpdateGranularity" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="ResponseQueueStatus" type="ResponseQueueStatus" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseQueueStatus">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="Queue" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalQueueStatus" type="SignalQueueStatus" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalQueueStatus">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="Queue" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandRequestQueueEntry" type="CommandRequestQueueEntry" substitutionGroup="Command"/>
+    <xs:complexType name="CommandRequestQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="RequestQueueEntryParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseRequestQueueEntry" type="ResponseRequestQueueEntry" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseRequestQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandResource" type="CommandResource" substitutionGroup="Command"/>
+    <xs:complexType name="CommandResource">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="ResourceCmdParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryResource" type="QueryResource" substitutionGroup="Query"/>
+    <xs:complexType name="QueryResource">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="ResourceQuParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseResource" type="ResponseResource" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseResource">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="ResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalResource" type="SignalResource" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalResource">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="ResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandResubmitQueueEntry" type="CommandResubmitQueueEntry" substitutionGroup="Command"/>
+    <xs:complexType name="CommandResubmitQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="ResubmissionParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseResubmitQueueEntry" type="ResponseResubmitQueueEntry" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseResubmitQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandReturnQueueEntry" type="CommandReturnQueueEntry" substitutionGroup="Command"/>
+    <xs:complexType name="CommandReturnQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="ReturnQueueEntryParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseReturnQueueEntry" type="ResponseReturnQueueEntry" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseReturnQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Response">
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandShutDown" type="CommandShutDown" substitutionGroup="Command"/>
+    <xs:complexType name="CommandShutDown">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="ShutDownCmdParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseShutDown" type="ResponseShutDown" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseShutDown">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="DeviceInfo" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="QueryStatus" type="QueryStatus" substitutionGroup="Query"/>
+    <xs:complexType name="QueryStatus">
+        <xs:complexContent>
+            <xs:extension base="Query">
+                <xs:sequence>
+                    <xs:element ref="StatusQuParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseStatus" type="ResponseStatus" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseStatus">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="DeviceInfo" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="SignalStatus" type="SignalStatus" substitutionGroup="Signal"/>
+    <xs:complexType name="SignalStatus">
+        <xs:complexContent>
+            <xs:extension base="Signal">
+                <xs:sequence>
+                    <xs:element ref="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandStopPersistentChannel" type="CommandStopPersistentChannel" substitutionGroup="Command"/>
+    <xs:complexType name="CommandStopPersistentChannel">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="StopPersChParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseStopPersistentChannel" type="ResponseStopPersistentChannel" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseStopPersistentChannel">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="SubscriptionInfo" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandSubmitQueueEntry" type="CommandSubmitQueueEntry" substitutionGroup="Command"/>
+    <xs:complexType name="CommandSubmitQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="QueueSubmissionParams" minOccurs="1" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ResponseSubmitQueueEntry" type="ResponseSubmitQueueEntry" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseSubmitQueueEntry">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="QueueEntry" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="CommandWakeUp" type="CommandWakeUp" substitutionGroup="Command"/>
+    <xs:complexType name="CommandWakeUp">
+        <xs:complexContent>
+            <xs:extension base="Command">
+                <xs:sequence>
+                    <xs:element ref="WakeUpCmdParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="WakeUpCmdParams"/>
+
+    <xs:element name="ResponseWakeUp" type="ResponseWakeUp" substitutionGroup="Response"/>
+    <xs:complexType name="ResponseWakeUp">
+        <xs:complexContent>
+            <xs:extension base="Response">
+                <xs:sequence>
+                    <xs:element ref="DeviceInfo" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
 </xs:schema>

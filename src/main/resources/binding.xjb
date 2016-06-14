@@ -28,7 +28,7 @@
         <bindings scd="/~xjdf:dateTime">
             <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime" adapter="org.cip4.lib.xjdf.type.DateTime"/>
         </bindings>
-        <bindings scd="/~xjdf:URI">
+        <bindings scd="/~xjdf:URL">
             <xjc:javaType name="org.cip4.lib.xjdf.type.URI" adapter="org.cip4.lib.xjdf.type.URI"/>
         </bindings>
         <bindings scd="/~xjdf:IntegerList">
