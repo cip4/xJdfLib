@@ -87,11 +87,6 @@
                 <baseType name="org.cip4.lib.xjdf.schema.ProcessRun" />
             </property>
         </bindings>
-        <bindings node="//xs:complexType[@name='ResourceAudit']//xs:attribute[@name='refID']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.ResourceAudit" />
-            </property>
-        </bindings>
         <bindings node="//xs:complexType[@name='Notification']//xs:attribute[@name='refID']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Notification" />

@@ -340,10 +340,10 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ResourceAudit resourceAuditB = xjdf.getAuditPool().getResourceAudit().get(1);
-        ResourceAudit resourceAuditA = resourceAuditB.getRefID();
+        String resourceAuditA = resourceAuditB.getRefID();
         assertEquals("ResourceAudit_B", resourceAuditB.getID());
-        assertEquals("ResourceAudit_A", resourceAuditA.getID());
-        assertEquals("agent A", resourceAuditA.getAgentName());
+        assertEquals("ResourceAudit_A", resourceAuditA);
+        assertEquals("agent B", resourceAuditB.getAgentName());
     }
 
     @Test
