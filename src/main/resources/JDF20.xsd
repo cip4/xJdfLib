@@ -4095,8 +4095,9 @@
     <xs:element name="ApprovalDetails">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="ApprovalPerson"/>
-                <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                <xs:element ref="ApprovalPerson" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="ApprovalState" type="EnumApprovalState" use="optional"/>
             <xs:attribute name="ApprovalStateDetails" type="string" use="optional"/>
