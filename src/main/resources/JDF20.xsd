@@ -2689,9 +2689,6 @@
                 <xs:attribute name="DeviceType" type="string" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="JDFErrorURL" type="URL" use="optional"/>
-                <xs:attribute name="JDFInputURL" type="URL" use="optional"/>
-                <xs:attribute name="JDFOutputURL" type="URL" use="optional"/>
                 <xs:attribute name="JDFVersions" use="optional">
                     <xs:simpleType>
                         <xs:list itemType="JDFJMFVersion"/>
