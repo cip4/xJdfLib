@@ -2711,6 +2711,7 @@
                 <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
                 <xs:attribute name="UPC" type="string" use="optional"/>
+                <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
