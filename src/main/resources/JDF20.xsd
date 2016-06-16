@@ -3876,11 +3876,8 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
+                    <xs:element ref="HolePattern" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="Extent" type="XYPair" use="optional"/>
-                <xs:attribute name="HoleReferenceEdge" type="EnumReferenceEdge" use="optional"/>
-                <xs:attribute name="HoleType" type="string"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
