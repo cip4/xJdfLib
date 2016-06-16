@@ -1357,14 +1357,15 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCutBlockElementType">
+
+    <xs:simpleType name="EnumBlockElementType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="CutElement"/>
             <xs:enumeration value="PunchElement"/>
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCutBlockType">
+    <xs:simpleType name="EnumBlockType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="CutBlock"/>
             <xs:enumeration value="SaveBlock"/>
@@ -4658,9 +4659,9 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="BlockElementType" type="EnumCutBlockElementType" use="optional"/>
+                <xs:attribute name="BlockElementType" type="EnumBlockElementType" use="optional"/>
                 <xs:attribute name="BlockName" type="NMTOKEN" use="required"/>
-                <xs:attribute name="BlockType" type="EnumCutBlockType" use="optional"/>
+                <xs:attribute name="BlockType" type="EnumBlockType" use="required"/>
                 <xs:attribute name="Box" type="rectangle" use="optional"/>
                 <xs:attribute name="CutWidth" type="double" use="optional"/>
             </xs:extension>
