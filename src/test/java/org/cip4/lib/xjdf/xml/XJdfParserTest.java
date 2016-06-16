@@ -315,11 +315,11 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        PhaseTime phaseTimeB = xjdf.getAuditPool().getPhaseTime().get(1);
-        PhaseTime phaseTimeA = phaseTimeB.getRefID();
-        assertEquals("PhaseTime_B", phaseTimeB.getID());
-        assertEquals("PhaseTime_A", phaseTimeA.getID());
-        assertEquals("agent A", phaseTimeA.getAgentName());
+        AuditStatus auditStatusA = xjdf.getAuditPool().getAuditStatus().get(1);
+        String auditStatusB = auditStatusA.getRefID();
+        assertEquals("PhaseTime_B", auditStatusA.getID());
+        assertEquals("PhaseTime_A", auditStatusB);
+        assertEquals("agent B", auditStatusA.getAgentName());
     }
 
     @Test
@@ -357,19 +357,6 @@ public class XJdfParserTest {
 
         assertEquals(new XYPair(2, 2), media.getDimension());
         assertEquals("IPG_400", media.getMediaQuality());
-    }
-
-    @Test
-    public void parseStreamPhaseTimeWithPhaseAmountRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        PhaseTime phaseTime = xjdf.getAuditPool().getPhaseTime().get(0);
-        PhaseAmount phaseAmount = phaseTime.getPhaseAmount().get(0);
-        Media media = (Media) phaseAmount.getRRef().getResourceType().getValue();
-
-        assertEquals(new XYPair(3, 3), media.getDimension());
-        assertEquals("IPG_500", media.getMediaQuality());
     }
 
     @Test

@@ -77,9 +77,9 @@
             </property>
         </bindings>
 
-        <bindings node="//xs:complexType[@name='PhaseTime']//xs:attribute[@name='refID']" >
+        <bindings node="//xs:complexType[@name='AuditStatus']//xs:attribute[@name='refID']" >
             <property>
-                <baseType name="org.cip4.lib.xjdf.schema.PhaseTime" />
+                <baseType name="org.cip4.lib.xjdf.schema.AuditStatus" />
             </property>
         </bindings>
         <bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='refID']" >
@@ -90,11 +90,6 @@
         <bindings node="//xs:complexType[@name='Notification']//xs:attribute[@name='refID']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Notification" />
-            </property>
-        </bindings>
-        <bindings node="//xs:complexType[@name='PhaseAmount']//xs:attribute[@name='rRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
             </property>
         </bindings>
         <bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">

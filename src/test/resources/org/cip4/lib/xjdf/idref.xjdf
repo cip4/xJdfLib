@@ -6,10 +6,10 @@
         <xjdf:Created ID="Created_A" AgentName="agent A" />
         <xjdf:Notification ID="Notification_A" AgentName="agent A" />
         <xjdf:Notification ID="Notification_B" AgentName="agent B" refID="Notification_A" />
-        <xjdf:PhaseTime ID="PhaseTime_A" AgentName="agent A">
+        <xjdf:AuditStatus ID="PhaseTime_A" AgentName="agent A">
             <xjdf:PhaseAmount rRef="PhaseAmount_Ref_01" />
-        </xjdf:PhaseTime>
-        <xjdf:PhaseTime ID="PhaseTime_B" AgentName="agent B" refID="PhaseTime_A" />
+        </xjdf:AuditStatus>
+        <xjdf:AuditStatus ID="PhaseTime_B" AgentName="agent B" refID="PhaseTime_A" />
         <xjdf:ProcessRun ID="ProcessRun_A" AgentName="agent A" />
         <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
         <xjdf:ResourceAudit ID="ResourceAudit_A" AgentName="agent A" />

@@ -6,10 +6,10 @@ import org.w3c.dom.Node;
 
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 
-public class ResourceAuditTest {
+public class AuditStatusTest {
 
     private XsdReader xsdReader;
 
@@ -19,9 +19,9 @@ public class ResourceAuditTest {
     }
 
     @Test
-    public void signalResourceAndResourceAuditAreAligned() throws Exception {
-        Set<Node> signalResourceProperties = xsdReader.complexTypeProperties("SignalResource");
-        Set<Node> auditResourceProperties = xsdReader.complexTypeProperties("ResourceAudit");
+    public void signalStatusAndAuditStatusAreAligned() throws Exception {
+        Set<Node> signalResourceProperties = xsdReader.complexTypeProperties("SignalStatus");
+        Set<Node> auditResourceProperties = xsdReader.complexTypeProperties("AuditStatus");
 
         assertTrue(signalResourceProperties.size() > 0);
         Assert.assertNodeCollectionEquals(signalResourceProperties, auditResourceProperties);
