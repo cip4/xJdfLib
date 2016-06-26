@@ -146,10 +146,6 @@
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
-    <xs:simpleType name="NameRangeList">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
     <xs:simpleType name="sRGBColor">
         <xs:restriction base="DoubleList">
             <xs:minLength value="3"/>
@@ -1576,7 +1572,6 @@
             <xs:enumeration value="DocSheetIndex"/>
             <xs:enumeration value="DocTags"/>
             <xs:enumeration value="DropID"/>
-            <xs:enumeration value="ItemNames"/>
             <xs:enumeration value="LayerIDs"/>
             <xs:enumeration value="Location"/>
             <xs:enumeration value="LotID"/>
@@ -1600,11 +1595,9 @@
             <xs:enumeration value="QualityMeasurement"/>
             <xs:enumeration value="Run"/>
             <xs:enumeration value="RunIndex"/>
-            <xs:enumeration value="RunPage"/>
             <xs:enumeration value="RunPageRange"/>
             <xs:enumeration value="RunSet"/>
             <xs:enumeration value="RunTags"/>
-            <xs:enumeration value="SectionIndex"/>
             <xs:enumeration value="Separation"/>
             <xs:enumeration value="SetDocIndex"/>
             <xs:enumeration value="SetIndex"/>
@@ -1615,7 +1608,6 @@
             <xs:enumeration value="SheetName"/>
             <xs:enumeration value="Side"/>
             <xs:enumeration value="StationName"/>
-            <xs:enumeration value="SubRun"/>
             <xs:enumeration value="TileID"/>
             <xs:enumeration value="TransferCurveName"/>
             <xs:enumeration value="WebName"/>
@@ -3248,6 +3240,7 @@
             <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit1" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit2" type="NMTOKEN" use="optional"/>
@@ -3262,47 +3255,42 @@
             <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocSheetIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="DocTags" type="RegExp" use="optional"/>
-            <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ItemNames" type="NMTOKENS" use="optional"/>
             <xs:attribute name="LayerIDs" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Metadata0" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata1" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata2" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata3" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata4" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata5" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata6" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata7" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata8" type="NameRangeList" use="optional"/>
-            <xs:attribute name="Metadata9" type="NameRangeList" use="optional"/>
+            <xs:attribute name="Metadata0" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata1" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata2" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata3" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata4" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata5" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata6" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata7" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata8" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata9" type="RegExp" use="optional"/>
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PageNumber" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="PageNumber" type="IntegerRange" use="optional"/>
             <xs:attribute name="PageTags" type="RegExp" use="optional"/>
-            <xs:attribute name="PartVersion" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="PartVersion" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
             <xs:attribute name="PrintCondition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="RunPage" type="integer" use="optional"/>
-            <xs:attribute name="RunPageRange" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="RunIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="RunPageRange" type="IntegerRange" use="optional"/>
             <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunTags" type="RegExp" use="optional"/>
-            <xs:attribute name="SectionIndex" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SetDocIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SetRunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SetSheetIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="SetDocIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="SetIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="SetRunIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="SetSheetIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="SetTags" type="RegExp" use="optional"/>
-            <xs:attribute name="SheetIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="SheetName" type="string" use="optional"/>
+            <xs:attribute name="SheetIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="SheetName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Side" type="EnumSide" use="optional"/>
-            <xs:attribute name="StationName" type="string" use="optional"/>
-            <xs:attribute name="SubRun" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TileID" type="XYPair" use="optional"/>
             <xs:attribute name="TransferCurveName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>

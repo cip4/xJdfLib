@@ -271,7 +271,7 @@ public class PartitionManagerTest {
         Part part = NF.createPart();
         part.setSeparation(separation);
         part.setSide(side);
-        part.getPartVersion().add(partVersion);
+        part.withPartVersion(partVersion);
 
         // add to referenced resource
         addPartToResource(resourceId, part);
