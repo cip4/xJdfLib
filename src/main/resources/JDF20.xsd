@@ -4491,7 +4491,7 @@
     <xs:complexType name="ComChannel">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="ChannelType" use="optional"/>
+                <xs:attribute name="ChannelType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ChannelTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ChannelUsage" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Locator" type="string" use="optional"/>
