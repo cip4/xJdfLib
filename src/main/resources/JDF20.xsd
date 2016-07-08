@@ -4438,7 +4438,7 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="ColorantAlias" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element ref="DeviceNSpace" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="DeviceNSpace" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional"/>
@@ -4750,9 +4750,8 @@
     <!-- ** Complex type definition for DeviceNColor ** -->
     <xs:element name="DeviceNColor">
         <xs:complexType>
-            <xs:attribute name="ColorList" type="DoubleList"/>
-            <xs:attribute name="N" type="integer"/>
-            <xs:attribute name="Name" type="NMTOKEN"/>
+            <xs:attribute name="ColorList" type="DoubleList" use="required"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
         </xs:complexType>
     </xs:element>
 
