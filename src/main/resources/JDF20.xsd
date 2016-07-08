@@ -2021,7 +2021,6 @@
                 <xs:attribute name="TeethPerDimension" type="double" use="optional"/>
                 <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
                 <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
-                <xs:attribute name="Material" type="string" use="optional"/>
                 <xs:attribute name="ShapeType" use="optional"/>
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
             </xs:extension>
