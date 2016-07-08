@@ -349,14 +349,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumLevel">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Empty"/>
-            <xs:enumeration value="Low"/>
-            <xs:enumeration value="OK"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumShutDownType">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="StandBy"/>
