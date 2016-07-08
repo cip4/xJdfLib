@@ -7,14 +7,6 @@
 
     <!-- TODO: Removed in XJDF 2.0, but references still exist. -->
     <xs:element name="Term"/>
-    <!-- TODO: Fake references for elements that will be referenced again by future changes -->
-    <xs:complexType name="FakeReferences">
-        <xs:sequence>
-            <xs:element type="FakeReferences" name="FakeReferences"/>
-            <xs:element ref="BarcodeProductionParams"/>
-        </xs:sequence>
-        <xs:attribute name="IntegerRange" type="IntegerRange" />
-    </xs:complexType>
 
     <xs:simpleType name="boolean">
         <xs:restriction base="xs:boolean"/>
@@ -4571,9 +4563,11 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ContentMetaData"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ElementColorParams"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PositionObj"/>
+                    <xs:element ref="BarcodeProductionParams" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ContentMetaData" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="PositionObj" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ContentStatus" type="NMTOKENS" use="optional"/>
@@ -4582,7 +4576,6 @@
                 <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="IsBlank" type="boolean" use="optional"/>
                 <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
-                <xs:attribute name="PageIndex" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="PageLabel" type="string" use="optional"/>
                 <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>

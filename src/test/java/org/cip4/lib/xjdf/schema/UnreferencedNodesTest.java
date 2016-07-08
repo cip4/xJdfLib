@@ -153,35 +153,4 @@ public class UnreferencedNodesTest {
         }
     }
 
-    @Test
-    public void fakeReferencesAreUnique() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "/xs:schema/xs:complexType[@name='FakeReferences']//xs:element/@ref",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
-
-        for (int i = 0; i < elements.getLength(); ++i) {
-            Node node = elements.item(i);
-            String referencedElementName = node.getNodeValue();
-
-            NodeList matches = (NodeList) xPath.evaluate(
-                String.format(
-                    "//xs:element[(@ref='%s' or @substitutionGroup='%s') and not(../../@name='FakeReferences')]",
-                    referencedElementName,
-                    referencedElementName
-                ), XJDF_SCHEMA, XPathConstants.NODESET
-            );
-
-            assertEquals(
-                String.format(
-                    "Type '%s' should not be referenced from 'FakeReferences'.",
-                    referencedElementName
-                ),
-                0,
-                matches.getLength()
-            );
-        }
-
-    }
 }
