@@ -1890,7 +1890,7 @@
             <xs:attribute name="JMFURL" type="URL" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="PipeID" type="string" use="optional"/>
+            <xs:attribute name="PipeID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PipePartPartIDKeys" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumPartIDKey"/>
@@ -1918,9 +1918,9 @@
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProjectID" type="string" use="optional"/>
-            <xs:attribute name="RelatedJobID" type="string" use="optional"/>
-            <xs:attribute name="RelatedJobPartID" type="string" use="optional"/>
+            <xs:attribute name="ProjectID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedJobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedJobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Version" type="JDFJMFVersion" use="required"/>
         </xs:complexType>
@@ -1974,7 +1974,7 @@
                 </xs:sequence>
                 <xs:attribute name="CustomerProjectID" type="string" use="optional"/>
                 <xs:attribute name="BillingCode" type="string" use="optional"/>
-                <xs:attribute name="CustomerID" type="string" use="optional"/>
+                <xs:attribute name="CustomerID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CustomerOrderID" type="string" use="optional"/>
                 <xs:attribute name="CustomerJobName" type="string" use="optional"/>
             </xs:extension>
@@ -2017,7 +2017,7 @@
                 <xs:attribute name="SetupDuration" type="duration" use="optional"/>
                 <xs:attribute name="Start" type="dateTime" use="optional"/>
                 <xs:attribute name="TotalDuration" type="duration" use="optional"/>
-                <xs:attribute name="WorkStepID" type="string" use="optional"/>
+                <xs:attribute name="WorkStepID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2125,7 +2125,7 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PercentCompleted" type="double" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RestTime" type="duration" use="optional"/>
             <xs:attribute name="SpawnID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
@@ -2271,7 +2271,7 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
-            <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
             <xs:attribute name="Status" type="EnumQueueEntryStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
@@ -2512,7 +2512,7 @@
                 <xs:attribute name="FillMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Layers" type="integer" use="optional"/>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
-                <xs:attribute name="Pattern" type="string" use="optional"/>
+                <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Rows" type="integer" use="optional"/>
                 <xs:attribute name="Ties" type="IntegerList" use="optional"/>
                 <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
@@ -2737,7 +2737,7 @@
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
                 <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
-                <xs:attribute name="UPC" type="URL" use="optional"/>
+                <xs:attribute name="UPC" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -2832,6 +2832,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="EndSheet"/>
                 </xs:sequence>
+                <xs:attribute name="GluingProductionID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3099,7 +3100,7 @@
                 <xs:element minOccurs="0" maxOccurs="1" ref="Address"/>
             </xs:sequence>
             <xs:attribute name="LocationName" type="string" use="optional"/>
-            <xs:attribute name="LocID" type="string" use="optional"/>
+            <xs:attribute name="LocID" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3426,7 +3427,7 @@
                 </xs:sequence>
                 <xs:attribute name="AgentName" type="string" use="optional"/>
                 <xs:attribute name="AgentVersion" type="string" use="optional"/>
-                <xs:attribute name="QueueEntryID" type="string" use="optional"/>
+                <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                 <xs:attribute name="Duration" type="duration" use="optional"/>
                 <xs:attribute name="End" type="dateTime" use="required"/>
@@ -3769,14 +3770,14 @@
             </xs:sequence>
             <xs:attribute name="ModelName" type="string" use="optional"/>
             <xs:attribute name="Manufacturer" type="string" use="optional"/>
-            <xs:attribute name="ModelURL" type="string" use="optional"/>
+            <xs:attribute name="ModelURL" type="URL" use="optional"/>
             <xs:attribute name="SerialNumber" type="string" use="optional"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModelDescription" type="string" use="optional"/>
             <xs:attribute name="DeviceType" type="string" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModelNumber" type="string" use="optional"/>
-            <xs:attribute name="ManufacturerURL" type="string" use="optional"/>
+            <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3960,7 +3961,7 @@
                 <xs:attribute name="Bleed" type="double" use="optional"/>
                 <xs:attribute name="Dimensions" type="XYPair" use="optional"/>
                 <xs:attribute name="FinishedDimensions" type="shape" use="optional"/>
-                <xs:attribute name="NamedDimensions" type="string" use="optional"/>
+                <xs:attribute name="NamedDimensions" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="PrintedPages" type="integer" use="optional"/>
                 <xs:attribute name="Sides" type="EnumSides" use="optional"/>
@@ -4257,7 +4258,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:attribute name="Bend" type="boolean" use="optional"/>
-                <xs:attribute name="PunchType" type="string" use="optional"/>
+                <xs:attribute name="PunchType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Punch" type="boolean" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4283,7 +4284,7 @@
                 <xs:attribute name="BleedRight" type="double" use="optional"/>
                 <xs:attribute name="BleedTop" type="double" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FoldCatalog" type="string" use="optional"/>
+                <xs:attribute name="FoldCatalog" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FoldLay" type="Orientation" use="optional"/>
                 <xs:attribute name="JogEdge" type="EnumBindingEdge" use="optional"/>
                 <xs:attribute name="JogSide" type="EnumBindingEdge" use="optional"/>
@@ -4427,7 +4428,7 @@
                 <xs:attribute name="Gray" type="double" use="optional"/>
                 <xs:attribute name="Lab" type="LabColor" use="optional"/>
                 <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
-                <xs:attribute name="MediaType" type="string" use="optional"/>
+                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NeutralDensity" type="double" use="optional"/>
                 <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="RawName" type="hexBinary" use="optional"/>
@@ -4471,7 +4472,7 @@
     <!-- ** Complex type definition for ColorantZoneDetails ** -->
     <xs:element name="ColorantZoneDetails">
         <xs:complexType>
-            <xs:attribute name="Colorant" type="string" use="optional"/>
+            <xs:attribute name="Colorant" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TrapColorScaling" type="double" use="optional"/>
             <xs:attribute name="StepLimit" type="double" use="optional"/>
         </xs:complexType>
@@ -4568,7 +4569,7 @@
                 </xs:sequence>
                 <xs:attribute name="ContactTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="ContactTypes" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="CostCenterID" type="string" use="optional"/>
+                <xs:attribute name="CostCenterID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="UserID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4656,7 +4657,7 @@
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="FirstSurface" type="EnumSide" use="optional"/>
                 <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
-                <xs:attribute name="MediaLocation" type="string" use="optional"/>
+                <xs:attribute name="MediaLocation" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="PerfectingModule" type="integer" use="optional"/>
                 <xs:attribute name="Powder" type="double" use="optional"/>
@@ -4726,7 +4727,7 @@
                 <xs:attribute name="BuyerAccount" type="string" use="optional"/>
                 <xs:attribute name="ContactRefs" type="IDREF" use="optional"/>
                 <xs:attribute name="DeliveryCharge"  type="EnumDeliveryCharge" use="optional"/>
-                <xs:attribute name="DeliveryID" type="string" use="optional"/>
+                <xs:attribute name="DeliveryID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="EarliestDuration" type="duration" use="optional"/>
                 <xs:attribute name="Method" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Ownership" type="EnumOwnership" use="optional"/>
@@ -4768,7 +4769,7 @@
         <xs:complexType>
             <xs:attribute name="ColorList" type="DoubleList"/>
             <xs:attribute name="N" type="integer"/>
-            <xs:attribute name="Name" type="string"/>
+            <xs:attribute name="Name" type="NMTOKEN"/>
         </xs:complexType>
     </xs:element>
 
@@ -4778,7 +4779,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:attribute name="N" type="integer"/>
-                <xs:attribute name="Name" type="string" use="optional"/>
+                <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4895,13 +4896,13 @@
             <xs:attribute name="ActualTotalAmount" type="integer" use="optional"/>
             <xs:attribute name="Amount" type="integer" use="optional"/>
             <xs:attribute name="OrderedAmount" type="integer" use="optional"/>
-            <xs:attribute name="Proof" type="string" use="optional"/>
+            <xs:attribute name="Proof" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Resource" type="IDREF" use="optional"/>
             <xs:attribute name="TotalAmount" type="integer" use="optional"/>
             <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
             <xs:attribute name="TotalVolume" type="double" use="optional"/>
             <xs:attribute name="TotalWeight" type="double" use="optional"/>
-            <xs:attribute name="Unit" type="string" use="optional"/>
+            <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5034,7 +5035,7 @@
                 </xs:sequence>
                 <xs:attribute name="CheckSum" type="hexBinary" use="optional"/>
                 <xs:attribute name="ContainerRef" type="IDREF" use="optional"/>
-                <xs:attribute name="Encoding" type="string" use="optional"/>
+                <xs:attribute name="Encoding" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FileFormat" type="string" use="optional"/>
                 <xs:attribute name="FileSize" type="integer" use="optional"/>
                 <xs:attribute name="FileTemplate" type="string" use="optional"/>
@@ -5044,7 +5045,7 @@
                 <xs:attribute name="Password" type="string" use="optional"/>
                 <xs:attribute name="ResourceUsage" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="SearchDepth" type="integer" use="optional"/>
-                <xs:attribute name="UID" type="string" use="optional"/>
+                <xs:attribute name="UID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="URL" type="URL" use="optional"/>
                 <xs:attribute name="UserFileName" type="string" use="optional"/>
             </xs:extension>
@@ -5677,7 +5678,7 @@
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="TestID" type="string" use="optional"/>
+            <xs:attribute name="TestID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
             <xs:attribute name="WarningCount" type="integer" use="optional"/>
         </xs:complexType>
@@ -5709,7 +5710,7 @@
             <xs:attribute name="Count" type="integer" use="optional"/>
             <xs:attribute name="Pages" type="IntegerList" use="optional"/>
             <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
-            <xs:attribute name="TestID" type="string" use="optional"/>
+            <xs:attribute name="TestID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
@@ -5746,19 +5747,9 @@
     <xs:complexType name="ProductionPath">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="PrintingUnitWebPath" type="ProductionSubPath"/>
-                    <xs:element minOccurs="0" name="FolderSuperStructureWebPath" type="ProductionSubPath"/>
-                    <xs:element minOccurs="0" name="PostPressComponentPath" type="ProductionSubPath"/>
-                </xs:sequence>
-                <xs:attribute name="ProductionPathID" type="string" use="optional"/>
+                <xs:attribute name="ProductionPathID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for ProductionSubPath ** -->
-    <xs:complexType name="ProductionSubPath">
-        <xs:attribute name="ProductionPathID" type="string" use="optional"/>
     </xs:complexType>
 
     <!-- ** Complex type definition for ProofingParams ** -->
@@ -6097,7 +6088,7 @@
             <xs:attribute name="FrontSpread" type="IntegerList" use="optional"/>
             <xs:attribute name="Mask" type="EnumMask" use="optional"/>
             <xs:attribute name="MaskBleed" type="double" use="optional"/>
-            <xs:attribute name="MaskSeparation" type="string" use="optional"/>
+            <xs:attribute name="MaskSeparation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MillingDepth" type="double" use="optional"/>
             <xs:attribute name="Orientation" type="EnumCellOrientation" use="optional"/>
             <xs:attribute name="Sides" type="EnumCellSides" use="optional"/>
@@ -6388,7 +6379,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold"/>
                 </xs:sequence>
-                <xs:attribute name="FoldCatalog" type="string" use="optional"/>
+                <xs:attribute name="FoldCatalog" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="SheetLay" use="optional"/>
             </xs:extension>
         </xs:complexContent>

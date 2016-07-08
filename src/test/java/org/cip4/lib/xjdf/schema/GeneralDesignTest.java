@@ -20,34 +20,17 @@ import static org.junit.Assert.*;
 
 public class GeneralDesignTest {
 
-    private static Document XJDF_SCHEMA;
-    private static XPath xPath;
+    private XsdReader xsdReader;
 
     @Before
     public void setUp() throws Exception {
-        DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
-        builderFactory.setNamespaceAware(true);
-        DocumentBuilder builder = builderFactory.newDocumentBuilder();
-
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/JDF20.xsd")) {
-            XJDF_SCHEMA = builder.parse(new InputSource(inputStream));
-        }
-
-        NamespaceManager nsManager = new NamespaceManager();
-        nsManager.addNamespace("xs", XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        xPath = xPathFactory.newXPath();
-        xPath.setNamespaceContext(nsManager);
+        xsdReader = new XsdReader();
     }
+
 
     @Test
     public void allFieldsOfTypeIDMustBeNamedID() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@type='ID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
+        NodeList elements = xsdReader.evaluate("//xs:attribute[@type='ID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
@@ -67,11 +50,7 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameExternalIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@name='ExternalID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
+        NodeList elements = xsdReader.evaluate("//xs:attribute[@name='ExternalID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
@@ -86,11 +65,7 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameDeviceIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@name='DeviceID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
+        NodeList elements = xsdReader.evaluate("//xs:attribute[@name='DeviceID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
@@ -103,60 +78,4 @@ public class GeneralDesignTest {
         }
     }
 
-    @Test
-    public void allFieldsOfWithNamePersonalIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@name='PersonalID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
-
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
-            assertEquals(
-                "All attributes in XJDF with a name 'PersonalID' SHALL be have type NMTOKEN.",
-                "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
-            );
-        }
-    }
-
-    @Test
-    public void allFieldsOfWithNameJobIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@name='JobID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
-
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
-            assertEquals(
-                "All attributes in XJDF with a name 'JobID' SHALL be have type NMTOKEN.",
-                "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
-            );
-        }
-    }
-
-    @Test
-    public void allFieldsOfWithNameJobPartIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = (NodeList) xPath.evaluate(
-            "//xs:attribute[@name='JobPartID']",
-            XJDF_SCHEMA,
-            XPathConstants.NODESET
-        );
-
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
-            assertEquals(
-                "All attributes in XJDF with a name 'JobPartID' SHALL be have type NMTOKEN.",
-                "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
-            );
-        }
-    }
 }

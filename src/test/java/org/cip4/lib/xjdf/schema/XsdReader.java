@@ -78,4 +78,12 @@ class XsdReader {
         }
         return nodes;
     }
+
+    public NodeList evaluate(final String xPathExpression) throws XPathExpressionException {
+        return (NodeList) xPath.evaluate(
+            xPathExpression,
+            schema,
+            XPathConstants.NODESET
+        );
+    }
 }
