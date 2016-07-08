@@ -1847,7 +1847,7 @@
             <xs:attribute name="Amount" type="double" use="optional"/>
             <xs:attribute name="MaxAmount" type="double" use="optional"/>
             <xs:attribute name="MinAmount" type="double" use="optional"/>
-            <xs:attribute name="ModuleIDs" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Waste" type="double" use="optional"/>
             <xs:attribute name="WasteDetails" type="NMTOKEN" use="optional"/>
         </xs:complexType>
