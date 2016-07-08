@@ -2711,7 +2711,6 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IconList" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="Module" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
@@ -2726,20 +2725,19 @@
                         <xs:list itemType="JDFJMFVersion"/>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="JMFSenderID" type="string" use="optional"/>
                 <xs:attribute name="JMFURL" type="URL" use="optional"/>
                 <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
                 <xs:attribute name="Manufacturer" type="string" use="optional"/>
-                <xs:attribute name="ManufacturerURL" type="string" use="optional"/>
+                <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
                 <xs:attribute name="ModelDescription" type="string" use="optional"/>
                 <xs:attribute name="ModelName" type="string" use="optional"/>
                 <xs:attribute name="ModelNumber" type="string" use="optional"/>
-                <xs:attribute name="ModelURL" type="string" use="optional"/>
+                <xs:attribute name="ModelURL" type="URL" use="optional"/>
                 <xs:attribute name="Packaging" type="EnumPackaging" use="optional"/>
-                <xs:attribute name="PresentationURL" type="string" use="optional"/>
+                <xs:attribute name="PresentationURL" type="URL" use="optional"/>
                 <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
-                <xs:attribute name="UPC" type="string" use="optional"/>
+                <xs:attribute name="UPC" type="URL" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
