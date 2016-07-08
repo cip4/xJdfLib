@@ -2351,10 +2351,8 @@
             <xs:attribute name="CommandResult" type="EnumCommandResult" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Level" type="EnumLevel" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Scope" type="EnumScope" use="optional"/>
-            <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
         </xs:complexType>
     </xs:element>
 
