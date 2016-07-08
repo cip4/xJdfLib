@@ -228,6 +228,23 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumSurface">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="Back"/>
+            <xs:enumeration value="Both"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumImagableSide">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="Back"/>
+            <xs:enumeration value="Both"/>
+            <xs:enumeration value="Neither"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumResourceStatus">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Incomplete"/>
@@ -609,19 +626,6 @@
             <xs:enumeration value="SameDirection"/>
             <xs:enumeration value="XDirection"/>
             <xs:enumeration value="YDirection"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumIsoPaperSubstrate">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="PS1"/>
-            <xs:enumeration value="PS2"/>
-            <xs:enumeration value="PS3"/>
-            <xs:enumeration value="PS4"/>
-            <xs:enumeration value="PS5"/>
-            <xs:enumeration value="PS6"/>
-            <xs:enumeration value="PS7"/>
-            <xs:enumeration value="PS8"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1374,6 +1378,41 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumISOPaperSubstrate">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="PS1"/>
+            <xs:enumeration value="PS2"/>
+            <xs:enumeration value="PS3"/>
+            <xs:enumeration value="PS4"/>
+            <xs:enumeration value="PS5"/>
+            <xs:enumeration value="PS6"/>
+            <xs:enumeration value="PS7"/>
+            <xs:enumeration value="PS8"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMediaUnit">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Continuous"/>
+            <xs:enumeration value="Roll"/>
+            <xs:enumeration value="Sheet"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPlateTechnology">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="FlexoAnalogSolvent"/>
+            <xs:enumeration value="FlexoAnalogThermal"/>
+            <xs:enumeration value="FlexoDigitalSolvent"/>
+            <xs:enumeration value="FlexoDigitalThermal"/>
+            <xs:enumeration value="FlexoDirectEngraving"/>
+            <xs:enumeration value="InkJet"/>
+            <xs:enumeration value="Thermal"/>
+            <xs:enumeration value="UV"/>
+            <xs:enumeration value="Visible"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -1393,13 +1432,6 @@
             <xs:enumeration value="BottomLeft"/>
             <xs:enumeration value="BottomCenter"/>
             <xs:enumeration value="BottomRight"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumSurface">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Front"/>
-            <xs:enumeration value="Back"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1560,7 +1592,6 @@
             <xs:enumeration value="Coated"/>
             <xs:enumeration value="Glossy"/>
             <xs:enumeration value="HighGloss"/>
-            <xs:enumeration value="InkJet"/>
             <xs:enumeration value="Matte"/>
             <xs:enumeration value="Polymer"/>
             <xs:enumeration value="Silver"/>
@@ -3953,8 +3984,8 @@
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="EnumFluteDirection" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
-                <xs:attribute name="ISOPaperSubstrate" type="EnumIsoPaperSubstrate" use="optional"/>
-                <xs:attribute name="ISOPaperSubstrateBack" type="EnumIsoPaperSubstrate" use="optional"/>
+                <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
+                <xs:attribute name="ISOPaperSubstrateBack" type="EnumISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="MediaColor" type="EnumNamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
@@ -4625,7 +4656,7 @@
                     <xs:element ref="ApprovalParams" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
-                <xs:attribute name="FirstSurface" type="EnumSurface" use="optional"/>
+                <xs:attribute name="FirstSurface" type="EnumSide" use="optional"/>
                 <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
                 <xs:attribute name="MediaLocation" type="string" use="optional"/>
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
@@ -5330,56 +5361,58 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="TabDimensions"/>
                 </xs:sequence>
-                <xs:attribute name="GrainDirection" use="optional"/>
-                <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
-                <xs:attribute name="StockType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Dimension" type="XYPair" use="optional"/>
-                <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
-                <xs:attribute name="SleeveInterlock" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="CIEWhiteness" type="double" use="optional"/>
-                <xs:attribute name="RollDiameter" type="double" use="optional"/>
-                <xs:attribute name="ShrinkIndex" type="XYPair" use="optional"/>
-                <xs:attribute name="Grade" type="integer" use="optional"/>
-                <xs:attribute name="OpacityLevel" type="double" use="optional"/>
-                <xs:attribute name="InsideLoss" type="double" use="optional"/>
-                <xs:attribute name="Thickness" type="double" use="optional"/>
-                <xs:attribute name="MediaQuality" type="string" use="optional"/>
-                <xs:attribute name="CIETint" type="double" use="optional"/>
-                <xs:attribute name="ImagableSide" use="optional"/>
-                <xs:attribute name="PrePrinted" type="boolean" use="optional"/>
-                <xs:attribute name="WrapperWeight" type="double" use="optional"/>
-                <xs:attribute name="PlateTechnology" use="optional"/>
-                <xs:attribute name="MediaUnit" use="optional"/>
+                <xs:attribute name="BackBrightness" type="double" use="optional"/>
                 <xs:attribute name="BackCoatingDetail" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
-                <xs:attribute name="FrontCoatingDetail" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Polarity" use="optional"/>
-                <xs:attribute name="MediaSetCount" type="integer" use="optional"/>
-                <xs:attribute name="MediaColorName" type="string" use="optional"/>
-                <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
-                <xs:attribute name="Opacity" use="optional"/>
-                <xs:attribute name="OuterCoreDiameter" type="double" use="optional"/>
-                <xs:attribute name="Brightness" type="double" use="optional"/>
-                <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BackGlossValue" type="double" use="optional"/>
-                <xs:attribute name="RecycledPercentage" type="double" use="optional"/>
+                <xs:attribute name="BackGrade" type="integer" use="optional"/>
+                <xs:attribute name="BackISOPaperSubstrate" type="integer" use="optional"/>
+                <xs:attribute name="Brightness" type="double" use="optional"/>
+                <xs:attribute name="CIETint" type="double" use="optional"/>
+                <xs:attribute name="CIEWhiteness" type="double" use="optional"/>
                 <xs:attribute name="CoreWeight" type="double" use="optional"/>
-                <xs:attribute name="Weight" type="double" use="optional"/>
-                <xs:attribute name="LabColorValue" type="LabColor" use="optional"/>
-                <xs:attribute name="Texture" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FluteDirection" use="optional"/>
+                <xs:attribute name="Dimension" type="XYPair" use="optional"/>
+                <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FluteDirection" type="EnumFluteDirection" use="optional"/>
+                <xs:attribute name="FrontCoatingDetail" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
+                <xs:attribute name="Grade" type="integer" use="optional"/>
+                <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
                 <xs:attribute name="HoleType" use="optional">
                     <xs:simpleType>
                         <xs:list itemType="EnumHoleType"/>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="MediaType" use="optional"/>
+                <xs:attribute name="ImagableSide" type="EnumImagableSide" use="optional"/>
+                <xs:attribute name="InnerCoreDiameter" type="double" use="optional"/>
+                <xs:attribute name="InsideLoss" type="double" use="optional"/>
+                <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
+                <xs:attribute name="LabColorValue" type="LabColor" use="optional"/>
+                <xs:attribute name="MediaColorName" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
+                <xs:attribute name="MediaQuality" type="string" use="optional"/>
+                <xs:attribute name="MediaSetCount" type="integer" use="optional"/>
+                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaUnit" type="EnumMediaUnit" use="optional"/>
+                <xs:attribute name="Opacity" type="EnumOpacity" use="optional"/>
+                <xs:attribute name="OpacityLevel" type="double" use="optional"/>
+                <xs:attribute name="OuterCoreDiameter" type="double" use="optional"/>
                 <xs:attribute name="OutsideGain" type="double" use="optional"/>
+                <xs:attribute name="PlateTechnology" type="EnumPlateTechnology" use="optional"/>
+                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="RecycledPercentage" type="double" use="optional"/>
                 <xs:attribute name="ReliefThickness" type="double" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
+                <xs:attribute name="RollDiameter" type="double" use="optional"/>
+                <xs:attribute name="ShrinkIndex" type="XYPair" use="optional"/>
+                <xs:attribute name="SleeveInterlock" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="StockType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Texture" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Thickness" type="double" use="optional"/>
+                <xs:attribute name="Weight" type="double" use="optional"/>
+                <xs:attribute name="WrapperWeight" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6333,7 +6366,7 @@
         <xs:attribute name="Coatings" type="NMTOKENS" use="optional"/>
         <xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional"/>
         <xs:attribute name="Coverage" type="double" use="optional"/>
-        <xs:attribute name="Surface" type="EnumSurface" use="optional"/>
+        <xs:attribute name="Surface" type="EnumSide" use="optional"/>
     </xs:complexType>
 
     <!-- ** Complex type definition for Fold ** -->
