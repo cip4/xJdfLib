@@ -1952,30 +1952,15 @@
     <xs:complexType name="CustomerInfo">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CustomerMessage"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
-                <xs:attribute name="CustomerProjectID" type="string" use="optional"/>
                 <xs:attribute name="BillingCode" type="string" use="optional"/>
+                <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="CustomerID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="CustomerOrderID" type="string" use="optional"/>
                 <xs:attribute name="CustomerJobName" type="string" use="optional"/>
+                <xs:attribute name="CustomerOrderID" type="string" use="optional"/>
+                <xs:attribute name="CustomerProjectID" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for CustomerMessage ** -->
-    <xs:element name="CustomerMessage">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel"/>
-            </xs:sequence>
-            <xs:attribute name="MessageEvents" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Language" type="language" use="optional"/>
-            <xs:attribute name="ShowList" type="NMTOKENS" use="optional"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for NodeInfo ** -->
     <xs:element name="NodeInfo" type="NodeInfo" substitutionGroup="ResourceType"/>
