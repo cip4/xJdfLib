@@ -1397,6 +1397,22 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumBearerBars">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="TopBottom"/>
+            <xs:enumeration value="Box"/>
+            <xs:enumeration value="BoxHMarks"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMasking">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="WhiteBox"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -4206,14 +4222,16 @@
     <xs:complexType name="BarcodeReproParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="Magnification" type="double" use="optional"/>
-                <xs:attribute name="ModuleHeight" type="double" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="BarcodeCompParams" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+                <xs:attribute name="BearerBars" type="EnumBearerBars" use="optional"/>
                 <xs:attribute name="Height" type="double" use="optional"/>
-                <xs:attribute name="Masking" use="optional"/>
+                <xs:attribute name="Magnification" type="double" use="optional"/>
+                <xs:attribute name="Masking" type="EnumMasking" use="optional"/>
+                <xs:attribute name="ModuleHeight" type="double" use="optional"/>
                 <xs:attribute name="ModuleWidth" type="double" use="optional"/>
                 <xs:attribute name="Ratio" type="double" use="optional"/>
-                <xs:attribute name="BearerBars" use="optional"/>
-                <xs:attribute name="BarcodeCompParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
