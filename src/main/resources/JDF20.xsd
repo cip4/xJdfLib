@@ -2144,7 +2144,6 @@
         <xs:attribute name="Author" type="string" use="optional"/>
         <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
         <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-        <xs:attribute name="ID" type="ID" use="required"/>
         <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
         <xs:attribute name="Time" type="dateTime" use="optional"/>
     </xs:complexType>
@@ -2155,6 +2154,7 @@
     <xs:complexType name="Command">
         <xs:complexContent>
             <xs:extension base="Message">
+                <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="RelatedCommands" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="TransactionID" type="NMTOKEN" use="optional"/>
             </xs:extension>
@@ -2169,6 +2169,7 @@
                 <xs:sequence>
                     <xs:element ref="Subscription" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
+                <xs:attribute name="ID" type="ID" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -2181,6 +2182,7 @@
                 <xs:sequence>
                     <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
+                <xs:attribute name="ID" type="ID" use="optional"/>
                 <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ReturnCode" type="integer" use="optional"/>
                 <xs:attribute name="Subscribed" type="boolean" use="optional"/>
@@ -2194,6 +2196,7 @@
         <xs:complexContent>
             <xs:extension base="Message">
                 <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
