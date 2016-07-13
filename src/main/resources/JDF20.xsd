@@ -3116,8 +3116,9 @@
                 <xs:element ref="DensityMeasuringField" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="DeviceMark" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="DynamicField" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="FillMark" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="JobField" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MarkActivation" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="RefAnchor" minOccurs="0" maxOccurs="1"/>
@@ -3137,7 +3138,6 @@
             <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
             <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="OrdID" type="integer" use="optional"/>
             <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
