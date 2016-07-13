@@ -4645,7 +4645,6 @@
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="FirstSurface" type="EnumSide" use="optional"/>
                 <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
-                <xs:attribute name="MediaLocation" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="PerfectingModule" type="integer" use="optional"/>
                 <xs:attribute name="Powder" type="double" use="optional"/>
