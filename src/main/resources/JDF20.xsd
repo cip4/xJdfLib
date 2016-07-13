@@ -2963,7 +2963,7 @@
     <xs:element name="ImageCompression">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="CCITTFaxParams" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="CCITTFaxParams" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="DCTParams" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="FlateParams" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="JBIG2Params" minOccurs="0" maxOccurs="1"/>
