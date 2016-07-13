@@ -371,30 +371,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumQueueStatus">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Blocked"/>
-            <xs:enumeration value="Closed"/>
-            <xs:enumeration value="Full"/>
-            <xs:enumeration value="Running"/>
-            <xs:enumeration value="Waiting"/>
-            <xs:enumeration value="Held"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumQueueEntryStatus">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Running"/>
-            <xs:enumeration value="Waiting"/>
-            <xs:enumeration value="Held"/>
-            <xs:enumeration value="Removed"/>
-            <xs:enumeration value="Suspended"/>
-            <xs:enumeration value="PendingReturn"/>
-            <xs:enumeration value="Completed"/>
-            <xs:enumeration value="Aborted"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumQueueEntryDetails">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
@@ -2248,7 +2224,6 @@
             </xs:sequence>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
-            <xs:attribute name="Status" type="EnumQueueStatus" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2269,7 +2244,7 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="Status" type="EnumQueueEntryStatus" use="required"/>
+            <xs:attribute name="Status" type="EnumNodeStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
         </xs:complexType>
