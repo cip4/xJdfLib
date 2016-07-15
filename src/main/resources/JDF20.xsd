@@ -3892,7 +3892,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
-                <xs:attribute name="Folio" type="IntegerRangeList" use="required"/>
+                <xs:attribute name="Folio" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
                 <xs:attribute name="Method" type="EnumInsertingMethod" use="optional"/>
                 <xs:attribute name="Transformation" type="matrix" use="optional"/>
