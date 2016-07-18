@@ -1774,6 +1774,7 @@
                 <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ResourceType" minOccurs="0" maxOccurs="1"/>
+                <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
@@ -1811,7 +1812,11 @@
 
     <!--** abstract type for substitution only ** -->
     <xs:element abstract="true" name="IntentType" type="IntentType"/>
-    <xs:complexType name="IntentType" abstract="true"/>
+    <xs:complexType name="IntentType" abstract="true">
+        <xs:sequence>
+            <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
 
     <!-- ** Complex type definition for AmountPool ** -->
     <xs:element name="AmountPool">
@@ -3165,6 +3170,7 @@
                     <xs:element ref="Event" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="Milestone" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="AgentName" type="string" use="optional"/>
                 <xs:attribute name="AgentVersion" type="string" use="optional"/>
