@@ -5431,7 +5431,8 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                 </xs:sequence>
-                <xs:attribute name="ConsumableType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="TypeDetails" type="string" use="optional"/>
                 <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
