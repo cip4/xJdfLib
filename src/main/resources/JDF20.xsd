@@ -173,14 +173,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCartonType">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Roll"/>
-            <xs:enumeration value="Carton"/>
-            <xs:enumeration value="Envelope"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumClass">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Event"/>
@@ -1656,7 +1648,6 @@
             <xs:enumeration value="LaminatingIntent"/>
             <xs:enumeration value="LayoutIntent"/>
             <xs:enumeration value="MediaIntent"/>
-            <xs:enumeration value="PackingIntent"/>
             <xs:enumeration value="ProductionIntent"/>
             <xs:enumeration value="ShapeCuttingIntent"/>
             <xs:enumeration value="SizeIntent"/>
@@ -3969,34 +3960,6 @@
                 <xs:attribute name="Texture" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Thickness" type="double" use="optional"/>
                 <xs:attribute name="Weight" type="double" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for PackingIntent ** -->
-    <xs:element name="PackingIntent" type="PackingIntent" substitutionGroup="IntentType"/>
-    <xs:complexType name="PackingIntent">
-        <xs:complexContent>
-            <xs:extension base="IntentType">
-                <xs:attribute name="BoxedQuantity" type="integer" use="optional"/>
-                <xs:attribute name="BoxName" type="string" use="optional"/>
-                <xs:attribute name="BoxShape" type="shape" use="optional"/>
-                <xs:attribute name="CartonMaxWeight" type="double" use="optional"/>
-                <xs:attribute name="CartonQuantity" type="integer" use="optional"/>
-                <xs:attribute name="CartonShape" type="shape" use="optional"/>
-                <xs:attribute name="CartonStrength" type="double" use="optional"/>
-                <xs:attribute name="CartonType" type="EnumCartonType" use="optional"/>
-                <xs:attribute name="CartonTypeDetails" type="string" use="optional"/>
-                <xs:attribute name="FoldingCatalog" type="FoldCatalog" use="optional"/>
-                <xs:attribute name="PalletCornerBoards" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PalletMaxHeight" type="double" use="optional"/>
-                <xs:attribute name="PalletMaxWeight" type="double" use="optional"/>
-                <xs:attribute name="PalletQuantity" type="integer" use="optional"/>
-                <xs:attribute name="PalletSize" type="XYPair" use="optional"/>
-                <xs:attribute name="PalletType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PalletWrapping" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="WrappedQuantity" type="integer" use="optional"/>
-                <xs:attribute name="WrappingMaterial" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
