@@ -68,14 +68,6 @@
         <xs:restriction base="xs:int"/>
     </xs:simpleType>
 
-    <xs:simpleType name="IntegerRangeList">
-        <xs:list>
-            <xs:simpleType>
-                <xs:union memberTypes="IntegerRange integer"/>
-            </xs:simpleType>
-        </xs:list>
-    </xs:simpleType>
-
     <xs:simpleType name="IntegerRange">
         <xs:restriction base="xs:string">
             <xs:pattern value="-?[0-9]+ *~ *-?[0-9]+"/>
@@ -1593,7 +1585,6 @@
             <xs:enumeration value="DocSheetIndex"/>
             <xs:enumeration value="DocTags"/>
             <xs:enumeration value="DropID"/>
-            <xs:enumeration value="LayerIDs"/>
             <xs:enumeration value="Location"/>
             <xs:enumeration value="LotID"/>
             <xs:enumeration value="Metadata0"/>
@@ -3069,7 +3060,7 @@
     <xs:element name="MarkActivation">
         <xs:complexType>
             <xs:attribute name="Context" use="optional"/>
-            <xs:attribute name="Index" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="Index" type="IntegerRange" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3246,7 +3237,7 @@
         <xs:complexType>
             <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BundleItemIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="BundleItemIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit1" type="NMTOKEN" use="optional"/>
@@ -3258,11 +3249,10 @@
             <xs:attribute name="DeliveryUnit7" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit8" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeliveryUnit9" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DocIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DocRunIndex" type="IntegerRangeList" use="optional"/>
-            <xs:attribute name="DocSheetIndex" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="DocIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="DocRunIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="DocSheetIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="DocTags" type="RegExp" use="optional"/>
-            <xs:attribute name="LayerIDs" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Metadata0" type="RegExp" use="optional"/>
@@ -3410,7 +3400,7 @@
         <xs:attribute name="ColorType" type="EnumColorType" use="optional"/>
         <xs:attribute name="Contract" type="boolean" use="optional"/>
         <xs:attribute name="HalfTone" type="boolean" use="optional"/>
-        <xs:attribute name="PageIndex" type="IntegerRangeList" use="optional"/>
+        <xs:attribute name="PageIndex" type="IntegerRange" use="optional"/>
         <xs:attribute name="ProofName" type="NMTOKEN" use="optional"/>
         <xs:attribute name="ProofTarget" type="URL" use="optional"/>
     </xs:complexType>
@@ -3705,9 +3695,6 @@
     <xs:complexType name="VerificationParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="InsertError" type="string" use="optional"/>
-                <xs:attribute name="FieldRange" type="IntegerRangeList" use="optional"/>
-                <xs:attribute name="InsertOK" type="string" use="optional"/>
                 <xs:attribute name="Tolerance" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -3885,11 +3872,11 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
                 </xs:sequence>
-                <xs:attribute name="Folio" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="Folio" type="IntegerRange" use="optional"/>
                 <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
                 <xs:attribute name="Method" type="EnumInsertingMethod" use="optional"/>
                 <xs:attribute name="Transformation" type="matrix" use="optional"/>
-                <xs:attribute name="WrapPages" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="WrapPages" type="IntegerRange" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3986,9 +3973,7 @@
             <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
             <xs:attribute name="CutType" type="EnumCutType" use="optional"/>
             <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-            <xs:attribute name="Pages" type="IntegerRangeList" use="optional"/>
             <xs:attribute name="ShapeType" type="EnumShapeType" use="optional"/>
-            <xs:attribute name="ShapeTypeDetails" type="string" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5182,7 +5167,6 @@
                 <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
                 <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
                 <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
-                <xs:attribute name="OrdsConsumed" type="IntegerRangeList" use="optional"/>
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
@@ -5576,7 +5560,7 @@
             </xs:sequence>
             <xs:attribute name="Anchor" type="Anchor" use="optional"/>
             <xs:attribute name="CTM" type="matrix" use="optional"/>
-            <xs:attribute name="PageRange" type="IntegerRangeList" use="optional"/>
+            <xs:attribute name="PageRange" type="IntegerRange" use="optional"/>
             <xs:attribute name="PositionPolicy" type="EnumPositionPolicy" use="optional"/>
             <xs:attribute name="RelativeSize" type="XYPair" use="optional"/>
             <xs:attribute name="RotationPolicy" type="EnumPositionPolicy" use="optional"/>
@@ -5837,7 +5821,7 @@
                 <xs:attribute name="NPage" type="integer" use="optional"/>
                 <xs:attribute name="PageCopies" type="integer" use="optional"/>
                 <xs:attribute name="PageNames" type="RegExp" use="optional"/>
-                <xs:attribute name="Pages" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="Pages" type="IntegerRange" use="optional"/>
                 <xs:attribute name="RunListRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="RunTag" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
@@ -5845,7 +5829,7 @@
                 <xs:attribute name="SetCopies" type="integer" use="optional"/>
                 <xs:attribute name="SetLevel" type="XPath" use="optional"/>
                 <xs:attribute name="SetNames" type="RegExp" use="optional"/>
-                <xs:attribute name="Sets" type="IntegerRangeList" use="optional"/>
+                <xs:attribute name="Sets" type="IntegerRange" use="optional"/>
                 <xs:attribute name="SheetSides" type="EnumSheetSide" use="optional"/>
                 <xs:attribute name="SkipPage" type="integer" use="optional"/>
                 <xs:attribute name="Sorted" type="boolean" use="optional"/>
