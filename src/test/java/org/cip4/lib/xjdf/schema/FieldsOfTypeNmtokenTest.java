@@ -23,7 +23,6 @@ public class FieldsOfTypeNmtokenTest {
         return Arrays.asList(
             new Object[]{"DeviceID"},
             new Object[]{"ExternalID"},
-            new Object[]{"FoldCatalog"},
             new Object[]{"JobID"},
             new Object[]{"JobPartID"},
             new Object[]{"ModuleID"},

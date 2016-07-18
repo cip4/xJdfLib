@@ -145,6 +145,12 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="FoldCatalog">
+        <xs:restriction base="NMTOKEN">
+            <xs:pattern value="F[0-9]+-([0-9]+|X)"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- Enums -->
     <xs:simpleType name="EnumActivation">
         <xs:restriction base="xs:NMTOKEN">
@@ -701,16 +707,6 @@
             <xs:enumeration value="Fold"/>
             <xs:enumeration value="Grid"/>
             <xs:enumeration value="Die"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumBindingEdge">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Left"/>
-            <xs:enumeration value="Right"/>
-            <xs:enumeration value="Top"/>
-            <xs:enumeration value="Bottom"/>
-            <xs:enumeration value="None"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3872,7 +3868,7 @@
                     <xs:element ref="Crease" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Fold" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FoldingCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -3991,7 +3987,7 @@
                 <xs:attribute name="CartonStrength" type="double" use="optional"/>
                 <xs:attribute name="CartonType" type="EnumCartonType" use="optional"/>
                 <xs:attribute name="CartonTypeDetails" type="string" use="optional"/>
-                <xs:attribute name="FoldingCatalog" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FoldingCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="PalletCornerBoards" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="PalletMaxHeight" type="double" use="optional"/>
                 <xs:attribute name="PalletMaxWeight" type="double" use="optional"/>
@@ -4247,24 +4243,18 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="SignatureCell"/>
+                    <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="AlignmentReferenceWeb" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BinderySignatureSize" type="XYPair" use="optional"/>
                 <xs:attribute name="BinderySignatureType" type="EnumBinderySignatureType" use="optional"/>
-                <xs:attribute name="BindingEdge" type="EnumBindingEdge" use="optional"/>
                 <xs:attribute name="BindingOrientation" type="Orientation" use="optional"/>
                 <xs:attribute name="BleedBottom" type="double" use="optional"/>
                 <xs:attribute name="BleedLeft" type="double" use="optional"/>
                 <xs:attribute name="BleedRight" type="double" use="optional"/>
                 <xs:attribute name="BleedTop" type="double" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FoldCatalog" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FoldLay" type="Orientation" use="optional"/>
-                <xs:attribute name="JogEdge" type="EnumBindingEdge" use="optional"/>
-                <xs:attribute name="JogSide" type="EnumBindingEdge" use="optional"/>
+                <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="OutsideGutter" type="boolean" use="optional"/>
                 <xs:attribute name="StaggerColumns" type="DoubleList" use="optional"/>
@@ -4274,7 +4264,6 @@
                 <xs:attribute name="TrimLeft" type="double" use="optional"/>
                 <xs:attribute name="TrimRight" type="double" use="optional"/>
                 <xs:attribute name="TrimTop" type="double" use="optional"/>
-                <xs:attribute name="WebCellAlignment" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6344,7 +6333,7 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold"/>
                 </xs:sequence>
-                <xs:attribute name="FoldCatalog" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="SheetLay" use="optional"/>
             </xs:extension>
         </xs:complexContent>
