@@ -4832,23 +4832,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for ElementColorParams ** -->
-    <xs:element name="ElementColorParams" type="ElementColorParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ElementColorParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorSpaceConversionOp"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorantAlias"/>
-                </xs:sequence>
-                <xs:attribute name="ICCOutputProfileUsage" use="optional"/>
-                <xs:attribute name="ColorManagementSystem" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-                <xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for ExposedMedia ** -->
     <xs:element name="ExposedMedia" type="ExposedMedia" substitutionGroup="ResourceType"/>
     <xs:complexType name="ExposedMedia">
@@ -5790,7 +5773,6 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="ByteMap" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="ElementColorParams" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1" />
                     <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="unbounded" />
                     <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded" />
