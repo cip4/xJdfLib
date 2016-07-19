@@ -3845,6 +3845,7 @@
                 <xs:sequence>
                     <xs:element ref="Crease" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Fold" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="Perforate" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="FoldingCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
