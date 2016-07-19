@@ -26,6 +26,14 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
+    public void validateAllowsCurrentSchemaFileSpec() throws Exception {
+        DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("CurrentSchema"));
+        DeviceInfoValidator validator = new DeviceInfoValidator();
+
+        assertTrue(validator.validate(deviceInfo).isValid());
+    }
+
+    @Test
     public void validateDisallowsEmptyResourceUsage() throws Exception {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage(""));
         DeviceInfoValidator validator = new DeviceInfoValidator();

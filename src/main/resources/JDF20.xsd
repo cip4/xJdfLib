@@ -307,9 +307,10 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumScope">
+    <xs:simpleType name="Scope">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Allowed"/>
+            <xs:enumeration value="Job"/>
             <xs:enumeration value="Present"/>
         </xs:restriction>
     </xs:simpleType>
@@ -2010,7 +2011,7 @@
                 <xs:element ref="Activity" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="2"/>
                 <xs:element ref="JobPhase" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
@@ -2306,7 +2307,7 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Scope" type="EnumScope" use="optional"/>
+            <xs:attribute name="Scope" type="Scope" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -2319,7 +2320,7 @@
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ResourceDetails" type="EnumResourceDetails" use="optional"/>
             <xs:attribute name="ResourceName" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Scope" type="EnumScope" use="optional"/>
+            <xs:attribute name="Scope" type="Scope" use="optional"/>
         </xs:complexType>
     </xs:element>
 

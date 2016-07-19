@@ -3,6 +3,8 @@ package org.cip4.lib.xjdf.validator;
 import org.cip4.lib.xjdf.schema.DeviceInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
 
+import java.util.List;
+
 /**
  * Extended validation for element //FoldingIntent.
  */
@@ -41,13 +43,15 @@ public class DeviceInfoValidator implements Validator<DeviceInfo> {
      * @param validationResult Container validations will be reported to.
      */
     private void validateFileSpec(final DeviceInfo deviceInfo, final ValidationResult validationResult) {
-        FileSpec fileSpec = deviceInfo.getFileSpec();
-        if (null != fileSpec && !"Schema".equals(fileSpec.getResourceUsage())) {
-            validationResult.append(String.format(
-                "Element DeviceInfo may only contain FileSpec with @ResourceUsage='Schema', but @ResourceUsage='%s' "
-                    + "was given",
-                fileSpec.getResourceUsage()
-            ));
+        List<FileSpec> fileSpecs = deviceInfo.getFileSpec();
+        for (FileSpec fileSpec : fileSpecs) {
+            if (!"Schema".equals(fileSpec.getResourceUsage()) && !"CurrentSchema".equals(fileSpec.getResourceUsage())) {
+                validationResult.append(String.format(
+                    "Element DeviceInfo may only contain FileSpec with @ResourceUsage='Schema', but @ResourceUsage='%s' "
+                        + "was given",
+                    fileSpec.getResourceUsage()
+                ));
+            }
         }
     }
 
