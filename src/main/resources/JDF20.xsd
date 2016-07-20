@@ -2742,7 +2742,6 @@
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
         </xs:complexType>
     </xs:element>
