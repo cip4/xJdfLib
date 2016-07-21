@@ -1852,11 +1852,11 @@
             <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="IsRoot" type="boolean" use="optional"/>
             <xs:attribute name="MaxAmount" type="integer" use="optional"/>
             <xs:attribute name="MinAmount" type="integer" use="optional"/>
-            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
         </xs:complexType>
