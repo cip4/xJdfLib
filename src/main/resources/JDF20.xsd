@@ -1653,7 +1653,7 @@
             <xs:enumeration value="EmbossingIntent"/>
             <xs:enumeration value="FoldingIntent"/>
             <xs:enumeration value="HoleMakingIntent"/>
-            <xs:enumeration value="InsertingIntent"/>
+            <xs:enumeration value="AssemblingIntent"/>
             <xs:enumeration value="IntentResource"/>
             <xs:enumeration value="LaminatingIntent"/>
             <xs:enumeration value="LayoutIntent"/>
@@ -3883,13 +3883,16 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for InsertingIntent ** -->
-    <xs:element name="InsertingIntent" type="InsertingIntent" substitutionGroup="IntentType"/>
-    <xs:complexType name="InsertingIntent">
+    <!-- ** Complex type definition for AssemblingIntent ** -->
+    <xs:element name="AssemblingIntent" type="AssemblingIntent" substitutionGroup="IntentType"/>
+    <xs:complexType name="AssemblingIntent">
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
+                    <xs:element ref="AssemblyItem" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="BindIn" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="BlowIn" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="StickOn" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="Folio" type="IntegerRange" use="optional"/>
                 <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
@@ -3899,6 +3902,49 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="AssemblyItem">
+        <xs:complexType>
+            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BindIn">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="Folio" type="integer" use="optional"/>
+            <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="BlowIn">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="FolioFrom" type="integer" use="optional"/>
+            <xs:attribute name="FolioTo" type="integer" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="StickOn">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="Folio" type="integer" use="optional"/>
+            <xs:attribute name="Location" type="EnumPosition" use="optional"/>
+            <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for IntentResource ** -->
     <xs:element name="IntentResource" type="IntentResource" substitutionGroup="IntentType"/>
