@@ -1379,6 +1379,24 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumAspectRatio">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="CenterMax"/>
+            <xs:enumeration value="CenterMin"/>
+            <xs:enumeration value="Crop"/>
+            <xs:enumeration value="Expand"/>
+            <xs:enumeration value="Ignore"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPreviewFileType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="PNG"/>
+            <xs:enumeration value="CIP3Multiple"/>
+            <xs:enumeration value="CIP3Single"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -4641,7 +4659,7 @@
                 </xs:sequence>
                 <xs:attribute name="BuyerAccount" type="string" use="optional"/>
                 <xs:attribute name="ContactRefs" type="IDREF" use="optional"/>
-                <xs:attribute name="DeliveryCharge"  type="EnumDeliveryCharge" use="optional"/>
+                <xs:attribute name="DeliveryCharge" type="EnumDeliveryCharge" use="optional"/>
                 <xs:attribute name="DeliveryID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="EarliestDuration" type="duration" use="optional"/>
                 <xs:attribute name="Method" type="NMTOKEN" use="optional"/>
@@ -5618,12 +5636,11 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="1" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element ref="FileSpec" minOccurs="1" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Compensation" type="EnumCompensation" use="optional"/>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
                 <xs:attribute name="PreviewFileType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PreviewUsage" type="EnumPreviewUsage" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6559,10 +6576,9 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                 </xs:sequence>
-                <xs:attribute name="Family" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="SpecificYield" type="double" use="optional"/>
+                <xs:attribute name="InkType" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="InkName" type="string" use="optional"/>
-                <xs:attribute name="SpecialInk" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ColorName" type="string" use="optional"/>
                 <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
@@ -6657,13 +6673,11 @@
     <xs:complexType name="PreviewGenerationParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="PreviewUsage" use="optional"/>
+                <xs:attribute name="AspectRatio" type="EnumAspectRatio" use="optional"/>
+                <xs:attribute name="Compensation" type="EnumCompensation" use="optional"/>
+                <xs:attribute name="PreviewFileType" type="EnumPreviewFileType" use="optional"/>
                 <xs:attribute name="Resolution" type="XYPair" use="optional"/>
                 <xs:attribute name="Size" type="XYPair" use="optional"/>
-                <xs:attribute name="AspectRatio" use="optional"/>
-                <xs:attribute name="PreviewFileType" use="optional"/>
-                <xs:attribute name="Compensation" use="optional"/>
-                <xs:attribute name="ImageSetterParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
