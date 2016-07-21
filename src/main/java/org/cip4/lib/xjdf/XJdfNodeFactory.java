@@ -378,7 +378,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      */
     public final LayoutIntent createLayoutIntent(
         final Integer pages,
-        final EnumSides sides,
+        final Sides sides,
         final Shape finishedDimensions
     ) {
 
@@ -399,7 +399,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      */
     public final LayoutIntent createLayoutIntent(
         final Integer pages,
-        final EnumSides sides,
+        final Sides sides,
         final Shape finishedDimensions,
         final XYPair dimensions
     ) {

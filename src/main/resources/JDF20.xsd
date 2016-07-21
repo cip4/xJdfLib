@@ -545,7 +545,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumSides">
+    <xs:simpleType name="Sides">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="OneSided"/>
             <xs:enumeration value="OneSidedBack"/>
@@ -723,14 +723,6 @@
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Right"/>
             <xs:enumeration value="Up"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumCellSides">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="OneSided"/>
-            <xs:enumeration value="TwoSidedHeadToHead"/>
-            <xs:enumeration value="TwoSidedHeadToFoot"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3978,7 +3970,7 @@
                 <xs:attribute name="NamedDimensions" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="PrintedPages" type="integer" use="optional"/>
-                <xs:attribute name="Sides" type="EnumSides" use="optional"/>
+                <xs:attribute name="Sides" type="Sides" use="optional"/>
                 <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -6047,7 +6039,7 @@
             <xs:attribute name="MaskSeparation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MillingDepth" type="double" use="optional"/>
             <xs:attribute name="Orientation" type="EnumCellOrientation" use="optional"/>
-            <xs:attribute name="Sides" type="EnumCellSides" use="optional"/>
+            <xs:attribute name="Sides" type="Sides" use="optional"/>
             <xs:attribute name="Spine" type="double" use="optional"/>
             <xs:attribute name="StationName" type="string" use="optional"/>
             <xs:attribute name="TrimFace" type="double" use="optional"/>

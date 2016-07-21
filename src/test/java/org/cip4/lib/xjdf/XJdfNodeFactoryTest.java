@@ -172,7 +172,7 @@ public class XJdfNodeFactoryTest {
 
         // arrange
         final Integer pages = 23;
-        final EnumSides sides = EnumSides.ONE_SIDED;
+        final Sides sides = Sides.ONE_SIDED;
         final Shape finishedDimensions = new Shape(4.4, 6.6);
         final XYPair dimensions = new XYPair(5.5, 7.7);
 
@@ -181,7 +181,7 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-        assertEquals("Sides is wrong", EnumSides.ONE_SIDED, layoutIntent.getSides());
+        assertEquals("Sides is wrong", Sides.ONE_SIDED, layoutIntent.getSides());
         assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
         assertEquals("Dimensions is wrong", dimensions, layoutIntent.getDimensions());
     }
@@ -191,7 +191,7 @@ public class XJdfNodeFactoryTest {
 
         // arrange
         final Integer pages = 23;
-        final EnumSides sides = EnumSides.ONE_SIDED;
+        final Sides sides = Sides.ONE_SIDED;
         final Shape finishedDimensions = new Shape(4.4, 6.6);
 
         // act
@@ -199,7 +199,7 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-        assertEquals("Sides is wrong", EnumSides.ONE_SIDED, layoutIntent.getSides());
+        assertEquals("Sides is wrong", Sides.ONE_SIDED, layoutIntent.getSides());
         assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
         assertEquals("Dimensions is wrong", null, layoutIntent.getDimensions());
     }

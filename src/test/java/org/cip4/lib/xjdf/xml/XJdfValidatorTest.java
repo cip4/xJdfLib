@@ -7,7 +7,7 @@ import org.cip4.lib.xjdf.schema.Address;
 import org.cip4.lib.xjdf.schema.ComChannel;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
-import org.cip4.lib.xjdf.schema.EnumSides;
+import org.cip4.lib.xjdf.schema.Sides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -180,7 +180,7 @@ public class XJdfValidatorTest {
         productBuilder.addIntent(
             nf.createLayoutIntent(
                 32,
-                EnumSides.TWO_SIDED_HEAD_TO_HEAD,
+                Sides.TWO_SIDED_HEAD_TO_HEAD,
                 new Shape(595.27559055, 822.04724409)
             )
         );
