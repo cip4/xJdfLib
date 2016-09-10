@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'idea'
+apply plugin: "jacoco"
 apply from: 'gradle/deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
@@ -129,5 +130,3 @@ idea {
         languageLevel = targetCompatibility
     }
 }
-
-apply from: 'gradle/clover.gradle'
