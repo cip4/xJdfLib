@@ -5,7 +5,7 @@ apply plugin: "jacoco"
 apply from: 'gradle/deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
-version = '0.8-SNAPSHOT'
+version = file('version.properties').text
 description = """CIP4 xJdfLib"""
 
 sourceCompatibility = 1.7
