@@ -61,7 +61,7 @@ classes {
 task xjc() {
     def schema = file('src/main/resources/JDF20.xsd')
     def bindings = file('src/main/resources/binding.xjb')
-    inputs.source(schema, bindings)
+    inputs.files(schema, bindings)
     outputs.dir(generatedSources)
     outputs.dir(generatedResources)
     doLast {
