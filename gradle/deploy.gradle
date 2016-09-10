@@ -92,3 +92,15 @@ uploadArchives {
         }
     }
 }
+
+task tagRelease {
+    description = 'Tags the current head with the project\'s version.'
+    String gitCommand = 'git'
+
+    doLast {
+        exec { commandLine gitCommand, 'add', 'version.properties' }
+        exec { commandLine gitCommand, 'commit', '-m', "'Prepare for release of ${version}'" }
+        exec { commandLine gitCommand, 'tag', '-m', "Release of ${version}",  "xJdfLib-${version}" }
+        exec { commandLine gitCommand, 'push' }
+    }
+}
