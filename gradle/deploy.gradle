@@ -8,7 +8,7 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
 }
 
 javadoc {
-    failOnError = false
+    failOnError = true
 }
 
 // sources.jar generation
@@ -93,7 +93,7 @@ uploadArchives {
     }
 }
 
-task tagRelease {
+task tagRelease (dependsOn: [test, javadoc, ]) {
     description = 'Tags the current head with the project\'s version.'
     String gitCommand = 'git'
 
