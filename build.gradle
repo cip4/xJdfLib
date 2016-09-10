@@ -58,10 +58,6 @@ task createBuildInfoFile(dependsOn: processResources) {
     }
 }
 
-classes {
-    dependsOn createBuildInfoFile
-}
-
 task xjc() {
     def schema = file('src/main/resources/JDF20.xsd')
     def bindings = file('src/main/resources/binding.xjb')
@@ -110,6 +106,7 @@ test {
 }
 
 jar {
+    dependsOn createBuildInfoFile
     manifest {
         attributes(
             "Implementation-Title": project.description,
