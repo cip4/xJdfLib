@@ -12,10 +12,10 @@ package org.cip4.lib.xjdf.type;
 
 /**
  * Coordinate transformation matrices are widely used throughout the whole printing Process, especially in Layout Resources. They represent two dimensional
- * transformations as defined by [PS] and [PDF1.6]. For more information, refer to the respective reference manuals, and look for “Coordinate Systems and
- * Transformations.” The “identity matrix”, which is “1 0 0 1 0 0”, is often used as a default throughout this specification. When another matrix is factored
+ * transformations as defined by [PS] and [PDF1.6]. For more information, refer to the respective reference manuals, and look for "Coordinate Systems and
+ * Transformations." The "identity matrix", which is "1 0 0 1 0 0", is often used as a default throughout this specification. When another matrix is factored
  * against a matrix with the identity matrix value, the result is that the original matrix remains unchanged. Coordinate transformation matrices are primitive
- * data types and are encoded as a list of six numbers (as doubles), separated by whitespace: “a b c d Tx Ty”. The variables Tx and Ty describe distances and
+ * data types and are encoded as a list of six numbers (as doubles), separated by whitespace: "a b c d Tx Ty". The variables Tx and Ty describe distances and
  * are defined in points.
  * @author stefan.meissner
  */
