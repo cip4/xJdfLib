@@ -96,6 +96,7 @@ sourceSets {
 
 compileJava {
     dependsOn(xjc)
+    options.encoding = 'UTF-8'
 }
 
 test {
