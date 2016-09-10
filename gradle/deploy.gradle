@@ -93,7 +93,7 @@ uploadArchives {
     }
 }
 
-task tagRelease (dependsOn: [test, javadoc]) {
+task createRelease (dependsOn: [test, javadoc]) {
     description = 'Tags the current head with the project\'s version.'
 
     outputs.file('version.properties')
