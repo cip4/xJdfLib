@@ -30,7 +30,7 @@ public class XJdfNamespaceMapper extends NamespacePrefixMapper {
 	}
 
 	/**
-	 * Custom constructor. <br/>
+	 * Custom constructor. <br>
 	 * Accepting a String object as place holder for default namespace. This place holder later can be replaced by empty string.
 	 */
 	public XJdfNamespaceMapper(String nsDefaultNamespace) {

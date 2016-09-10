@@ -23,7 +23,7 @@ public class IDGeneratorUtil {
 	private final static int ID_LENGTH = 8;
 
 	/**
-	 * Private constructor.<br/>
+	 * Private constructor.<br>
 	 * This class cannot be instantiated.
 	 */
 	private IDGeneratorUtil() {

@@ -353,7 +353,7 @@ public class XmlNavigator {
     }
 
     /**
-     * Extract an XML Node from XML Document and return parsed result. <br />
+     * Extract an XML Node from XML Document and return parsed result. <br>
      * !! WORKS ONLY IF NAVIGATOR IS NAMESPACE AWARE !!
      *
      * @param xPath XPath expression in order to locate the node.
@@ -394,7 +394,7 @@ public class XmlNavigator {
     }
 
     /**
-     * Replace a node in XML Document located by the XPath expression. <br />
+     * Replace a node in XML Document located by the XPath expression. <br>
      * !! WORKS ONLY IF NAVIGATOR IS NAMESPACE AWARE !!
      *
      * @param xPath Location of the node to be replaced.

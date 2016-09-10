@@ -15,7 +15,7 @@ import java.util.Set;
 public class PartitionManager {
 
     /**
-     * Identifies and returns a Resource within a ResourceSet using parition keys. <br />
+     * Identifies and returns a Resource within a ResourceSet using parition keys. <br>
      * This is the official CIP4 reference implementation of the XJDF partitioning algorithm.
      *
      * @param resourceSet The ResourceSet containing a set of partitioned Resources.

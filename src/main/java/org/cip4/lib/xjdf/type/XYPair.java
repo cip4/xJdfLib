@@ -44,7 +44,6 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
 	/**
 	 * Custom Constructor. Creates a new XYPair instance by a String expression.
 	 * @param expression XYPair as String expression.
-	 * @return New XYPair instance.
 	 */
 	public XYPair(String expression) {
 

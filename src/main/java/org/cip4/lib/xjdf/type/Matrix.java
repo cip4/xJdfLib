@@ -76,7 +76,6 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
 	/**
 	 * Custom constructor, accepting a String expression for initializing.
 	 * @param expression Matrix as String expression.
-	 * @return New Matrix instance.
 	 */
 	public Matrix(String expression) {
 

@@ -59,7 +59,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
-	 * @param pathPackage XJDF Package to be unpackaged.
 	 * @return The path of the master document.
 	 * @throws IOException
 	 */
@@ -71,7 +70,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
-	 * @param pathPackage XJDF Package to be unpackaged.
 	 * @return The path of the master document.
 	 * @throws IOException
 	 */
@@ -83,7 +81,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 
 	/**
 	 * Unpackage an XJDF Package to a target directory.
-	 * @param pathPackage XJDF Package to be unpackaged.
 	 * @param targetDir Target directory for unpackaging.
 	 * @return The path of the master document.
 	 * @throws IOException

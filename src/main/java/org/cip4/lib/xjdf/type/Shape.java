@@ -57,7 +57,6 @@ public class Shape extends AbstractXJdfType<String, Shape> {
 	/**
 	 * Custom Constructor. Creates a new Shape instance by a String expression.
 	 * @param expression Shape as String expression.
-	 * @return New Shape instance.
 	 */
 	public Shape(String expression) {
 

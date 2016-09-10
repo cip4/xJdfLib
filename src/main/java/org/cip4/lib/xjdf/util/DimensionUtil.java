@@ -17,7 +17,7 @@ package org.cip4.lib.xjdf.util;
 public class DimensionUtil {
 
 	/**
-	 * Private constructor.<br/>
+	 * Private constructor.<br>
 	 * This class cannot be instantiated.
 	 */
 	private DimensionUtil() {

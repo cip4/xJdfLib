@@ -50,8 +50,6 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * Custom Constructor. Creates a new Rectangle instance by a String expression.
      *
      * @param expression Rectangle as String expression.
-     *
-     * @return New Rectangle instance.
      */
     public Rectangle(String expression) {
 
