@@ -14,6 +14,10 @@ def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 configurations {
     xjc
 }
@@ -99,7 +103,6 @@ sourceSets {
 
 compileJava {
     dependsOn(xjc)
-    options.encoding = 'UTF-8'
 }
 
 test {
