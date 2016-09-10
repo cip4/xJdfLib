@@ -106,7 +106,7 @@ task createRelease (dependsOn: [test, javadoc]) {
         exec { commandLine gitCommand, 'add', 'version.properties' }
         exec { commandLine gitCommand, 'commit', '-m', "'Prepare for release of ${version}'" }
         exec { commandLine gitCommand, 'tag', '-m', "Release of ${version}",  "xJdfLib-${version}" }
-        exec { commandLine gitCommand, 'push' }
+        exec { commandLine gitCommand, 'push', 'origin' }
     }
 }
 
@@ -120,6 +120,6 @@ task updateVersion {
         file('version.properties').text = project.projectVersion
         exec { commandLine gitCommand, 'add', 'version.properties' }
         exec { commandLine gitCommand, 'commit', '-m', "'Incremented version number to ${project.projectVersion}'" }
-        exec { commandLine gitCommand, 'push' }
+        exec { commandLine gitCommand, 'push', 'origin' }
     }
 }
