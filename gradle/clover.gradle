@@ -1,0 +1,69 @@
+if (!project.hasProperty("withClover")) {
+    logger.info("No clover coverage is created. If you want to create coverage use the -PwithClover switch.")
+    return
+}
+
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+
+    dependencies {
+        classpath 'com.atlassian.clover:clover:4.1.1'
+    }
+}
+
+sourceSets {
+    clover {
+        java {
+            srcDir "$buildDir/sources-instr"
+        }
+    }
+}
+
+dependencies {
+    cloverCompile 'com.atlassian.clover:clover:4.1.1'
+}
+
+configurations {
+    cloverRuntime
+    cloverRuntime.extendsFrom cloverCompile
+}
+
+task cloverInstr() {
+    inputs.files sourceSets.main.allJava
+    outputs.dir "$buildDir/sources-instr"
+
+    doFirst {
+        def argsList = ["--initstring", "${buildDir}/clover/clover.db",
+                        "-d", "${buildDir}/sources-instr"]
+        argsList.addAll(inputs.files.files.collect({ file ->
+            file.absolutePath
+        }))
+        String[] args = argsList.toArray()
+
+        com.atlassian.clover.CloverInstr.mainImpl(args)
+    }
+}
+
+cloverClasses.dependsOn cloverInstr
+
+test {
+    def cloverClasspath = configurations.testRuntime + configurations.cloverRuntime + sourceSets.test.output + sourceSets.clover.output
+    classpath = cloverClasspath
+}
+
+task cloverReport {
+    inputs.dir "${buildDir}/clover"
+    outputs.dir "${reportsDir}/clover"
+    onlyIf {
+        file("${buildDir}/clover/clover.db").exists()
+    }
+    doFirst {
+        def argsList = ["--initstring", "${buildDir}/clover/clover.db",
+                        "-o", "${reportsDir}/clover"]
+        String[] args = argsList.toArray()
+        com.atlassian.clover.reporters.html.HtmlReporter.runReport(args)
+    }
+}

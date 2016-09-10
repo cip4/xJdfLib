@@ -129,3 +129,5 @@ idea {
         languageLevel = targetCompatibility
     }
 }
+
+apply from: 'gradle/clover.gradle'
