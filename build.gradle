@@ -67,6 +67,8 @@ task xjc() {
     doLast {
         generatedSources.mkdirs()
         file("$generatedResources/META-INF").mkdirs()
+        Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US)
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
         ant.xjc(
                 destdir: generatedSources,
@@ -80,6 +82,7 @@ task xjc() {
             arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -Xinject-code" +
                     " -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
+        Locale.setDefault(defaultLocale)
     }
 }
 
