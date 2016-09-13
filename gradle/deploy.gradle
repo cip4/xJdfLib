@@ -97,11 +97,11 @@ task createRelease (dependsOn: [test, javadoc]) {
     description = 'Tags the current head with the project\'s version.'
 
     outputs.file('version.properties')
-    if (!project.hasProperty('projectVersion')) {
-        throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
-    }
     String gitCommand = 'git'
     doLast {
+        if (!project.hasProperty('projectVersion')) {
+            throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
+        }
         file('version.properties').text = project.projectVersion
         exec { commandLine gitCommand, 'add', 'version.properties' }
         exec { commandLine gitCommand, 'commit', '-m', "'Prepare for release of ${version}'" }
@@ -112,11 +112,11 @@ task createRelease (dependsOn: [test, javadoc]) {
 
 task updateVersion {
     outputs.file('version.properties')
-    if (!project.hasProperty('projectVersion')) {
-        throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
-    }
     String gitCommand = 'git'
     doLast {
+        if (!project.hasProperty('projectVersion')) {
+            throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
+        }
         file('version.properties').text = project.projectVersion
         exec { commandLine gitCommand, 'add', 'version.properties' }
         exec { commandLine gitCommand, 'commit', '-m', "'Incremented version number to ${project.projectVersion}'" }
