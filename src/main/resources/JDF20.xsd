@@ -3262,7 +3262,7 @@
     <!-- ** Complex type definition for Part ** -->
     <xs:element name="Part">
         <xs:complexType>
-            <xs:attribute name="AssemblyIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
@@ -4259,7 +4259,6 @@
                 <xs:sequence>
                     <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BinderySignatureSize" type="XYPair" use="optional"/>
                 <xs:attribute name="BinderySignatureType" type="EnumBinderySignatureType" use="optional"/>
                 <xs:attribute name="BindingOrientation" type="Orientation" use="optional"/>
