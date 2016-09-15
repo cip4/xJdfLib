@@ -1389,6 +1389,35 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumOffsetDirection">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Alternate"/>
+            <xs:enumeration value="Left"/>
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Right"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumSheetUsage">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Header"/>
+            <xs:enumeration value="Interleaved"/>
+            <xs:enumeration value="InterleavedBefore"/>
+            <xs:enumeration value="OnError"/>
+            <xs:enumeration value="Slip"/>
+            <xs:enumeration value="SlipCopy"/>
+            <xs:enumeration value="Trailer"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumPreStackMethod">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="First"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -2826,18 +2855,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for GatheringParams ** -->
-    <xs:element name="GatheringParams" type="GatheringParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="GatheringParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for GluingParams ** -->
     <xs:element name="GluingParams" type="GluingParams" substitutionGroup="ResourceType"/>
     <xs:complexType name="GluingParams">
@@ -3562,22 +3579,22 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Disjointing"/>
+                    <xs:element ref="Disjointing" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="MaxWeight" type="double" use="optional"/>
-                <xs:attribute name="MaxHeight" type="integer" use="optional"/>
-                <xs:attribute name="StandardAmount" type="integer" use="optional"/>
-                <xs:attribute name="LayerCompression" type="boolean" use="optional"/>
-                <xs:attribute name="Compensate" type="boolean" use="optional"/>
                 <xs:attribute name="BundleDepth" type="integer" use="optional"/>
-                <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
-                <xs:attribute name="MaxAmount" type="integer" use="optional"/>
-                <xs:attribute name="StackCompression" type="boolean" use="optional"/>
-                <xs:attribute name="LayerLift" type="boolean" use="optional"/>
-                <xs:attribute name="MinAmount" type="integer" use="optional"/>
-                <xs:attribute name="PreStackMethod" use="optional"/>
+                <xs:attribute name="Compensate" type="boolean" use="optional"/>
                 <xs:attribute name="LayerAmount" type="IntegerList" use="optional"/>
+                <xs:attribute name="LayerCompression" type="boolean" use="optional"/>
+                <xs:attribute name="LayerLift" type="boolean" use="optional"/>
+                <xs:attribute name="MaxAmount" type="integer" use="optional"/>
+                <xs:attribute name="MaxHeight" type="integer" use="optional"/>
+                <xs:attribute name="MaxWeight" type="double" use="optional"/>
+                <xs:attribute name="MinAmount" type="integer" use="optional"/>
                 <xs:attribute name="PreStackAmount" type="integer" use="optional"/>
+                <xs:attribute name="PreStackMethod" type="EnumPreStackMethod" use="optional"/>
+                <xs:attribute name="StackCompression" type="boolean" use="optional"/>
+                <xs:attribute name="StandardAmount" type="integer" use="optional"/>
+                <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4483,7 +4500,6 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="Bundle" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="Disjointing" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
@@ -4818,13 +4834,14 @@
     <xs:element name="Disjointing">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="InsertSheet"/>
+                <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="OffsetAmount" type="integer" use="optional"/>
-            <xs:attribute name="OffsetDirection" use="optional"/>
-            <xs:attribute name="Offset" type="XYPair" use="optional"/>
             <xs:attribute name="Number" type="integer" use="optional"/>
-            <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+            <xs:attribute name="Offset" type="XYPair" use="optional"/>
+            <xs:attribute name="OffsetAmount" type="integer" use="optional"/>
+            <xs:attribute name="OffsetDirection" type="EnumOffsetDirection" use="optional"/>
+            <xs:attribute name="OffsetUnits" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -5126,14 +5143,12 @@
     <xs:complexType name="InsertSheet">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="SheetType" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="RunList" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="IsWaste" type="boolean" use="optional"/>
-                <xs:attribute name="MarkList" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="SheetFormat" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SheetUsage" use="optional"/>
-                <xs:attribute name="IncludeInBundleItem" use="optional"/>
-                <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
-                <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
+                <xs:attribute name="SheetUsage" type="EnumSheetUsage" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5820,7 +5835,6 @@
                 <xs:sequence>
                     <xs:element ref="ByteMap" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1" />
-                    <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="unbounded" />
                     <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded" />
                 </xs:sequence>
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
