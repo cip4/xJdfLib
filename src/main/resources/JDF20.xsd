@@ -397,7 +397,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumPosition">
+    <xs:simpleType name="Face">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Top"/>
             <xs:enumeration value="Right"/>
@@ -1415,6 +1415,15 @@
             <xs:enumeration value="All"/>
             <xs:enumeration value="First"/>
             <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumEncoding">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="ASCII"/>
+            <xs:enumeration value="Barcode"/>
+            <xs:enumeration value="Braille"/>
+            <xs:enumeration value="RFID"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2769,17 +2778,18 @@
     <xs:element name="Emboss">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Tool" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="BrailleText" type="string" use="optional"/>
             <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
             <xs:attribute name="EdgeAngle" type="double" use="optional"/>
             <xs:attribute name="EdgeShape" type="EnumEdgeShape" use="optional"/>
             <xs:attribute name="EmbossingType" type="EnumEmbossType" use="optional"/>
+            <xs:attribute name="Face" type="Face" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="ToolRef" type="IDREF" use="required"/>
         </xs:complexType>
     </xs:element>
 
@@ -2793,7 +2803,7 @@
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
-            <xs:attribute name="Location" type="EnumPosition" use="optional"/>
+            <xs:attribute name="Face" type="Face" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ShapeName" type="string" use="optional"/>
@@ -3047,7 +3057,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="Position" use="optional"/>
+                <xs:attribute name="Face" type="Face" use="optional"/>
                 <xs:attribute name="Application" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -3930,7 +3940,7 @@
                 <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="Folio" type="integer" use="optional"/>
-            <xs:attribute name="Location" type="EnumPosition" use="optional"/>
+            <xs:attribute name="Face" type="Face" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="ChildRef" type="IDREF" use="required"/>
@@ -5074,13 +5084,13 @@
                     <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
-                <xs:attribute name="Encoding" use="optional"/>
+                <xs:attribute name="Encoding" type="EnumEncoding" use="optional"/>
                 <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Format" type="Any" use="optional"/>
+                <xs:attribute name="Format" type="RegExp" use="optional"/>
                 <xs:attribute name="Orientation" type="matrix" use="optional"/>
                 <xs:attribute name="Page" type="integer" use="optional"/>
                 <xs:attribute name="Position" use="optional"/>
-                <xs:attribute name="Purpose" use="optional"/>
+                <xs:attribute name="Purpose" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Value" type="string" use="optional"/>
                 <xs:attribute name="ValueFormat" type="string" use="optional"/>
@@ -6341,7 +6351,7 @@
             <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingDirection" type="EnumPosition" use="optional"/>
+            <xs:attribute name="WorkingDirection" type="Face" use="optional"/>
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
         </xs:complexType>
     </xs:element>
