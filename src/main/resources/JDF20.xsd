@@ -2121,7 +2121,7 @@
         <xs:attribute name="AgentName" type="string" use="optional"/>
         <xs:attribute name="AgentVersion" type="string" use="optional"/>
         <xs:attribute name="Author" type="string" use="optional"/>
-        <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
         <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
         <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
         <xs:attribute name="Time" type="dateTime" use="optional"/>
@@ -2424,13 +2424,13 @@
     <!-- ** Complex type definition for AuditPool ** -->
     <xs:element name="AuditPool">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Created" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Notification" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:choice maxOccurs="unbounded">
+                <xs:element ref="AuditNotification" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="AuditResource" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="AuditStatus" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Created" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ProcessRun" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="ResourceAudit" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
+            </xs:choice>
         </xs:complexType>
     </xs:element>
 
@@ -3148,34 +3148,26 @@
     </xs:element>
 
     <!-- ** Complex type definition for Notification ** -->
-    <xs:element name="Notification" type="Notification"/>
-    <xs:complexType name="Notification">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:sequence>
-                    <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded" />
-                    <xs:element ref="Error" minOccurs="0" maxOccurs="1" />
-                    <xs:element ref="Event" minOccurs="0" maxOccurs="1" />
-                    <xs:element ref="Milestone" minOccurs="0" maxOccurs="1" />
-                    <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded" />
-                    <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="AgentName" type="string" use="optional"/>
-                <xs:attribute name="AgentVersion" type="string" use="optional"/>
-                <xs:attribute name="Class" type="EnumClass" use="required"/>
-                <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="optional"/>
-                <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="refID" type="IDREF" use="optional"/>
-                <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
-                <xs:attribute name="Type" type="EnumType" use="required"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="Notification">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Comment" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Error" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Event" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Milestone" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Class" type="EnumClass" use="required"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
+            <xs:attribute name="Type" type="EnumType" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for NumberingParams ** -->
     <xs:element name="NumberingParams" type="NumberingParams" substitutionGroup="ResourceType"/>
@@ -3348,12 +3340,8 @@
                 <xs:sequence>
                     <xs:element ref="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="AgentName" type="string" use="optional"/>
-                <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
@@ -3448,19 +3436,15 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ResourceAudit ** -->
-    <xs:element name="ResourceAudit" type="ResourceAudit"/>
-    <xs:complexType name="ResourceAudit">
+    <xs:element name="AuditResource" type="AuditResource"/>
+    <xs:complexType name="AuditResource">
         <xs:complexContent>
             <xs:extension base="Audit">
                 <xs:sequence>
                     <xs:element ref="ResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="AgentName" type="string" use="optional"/>
-                <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ID" type="ID" use="required"/>
                 <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
@@ -7055,6 +7039,23 @@
                 <xs:sequence>
                     <xs:element ref="Notification" minOccurs="1" maxOccurs="1"/>
                 </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="AuditNotification" type="AuditNotification"/>
+    <xs:complexType name="AuditNotification">
+        <xs:complexContent>
+            <xs:extension base="Audit">
+                <xs:sequence>
+                    <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="Author" type="string" use="optional"/>
+                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="required"/>
+                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Time" type="dateTime" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

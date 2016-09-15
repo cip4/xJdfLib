@@ -37,7 +37,6 @@ public class XJdfParserTest {
 
     /**
      * Set up unit test.
-     * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
@@ -47,7 +46,6 @@ public class XJdfParserTest {
 
     /**
      * Tear down unit test.
-     * @throws java.lang.Exception
      */
     @After
     public void tearDown() throws Exception {
@@ -299,27 +297,15 @@ public class XJdfParserTest {
     }
 
     @Test
-    public void parseStreamAuditWithAuditRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        Notification notificationB = xjdf.getAuditPool().getNotification().get(1);
-        Notification notificationA = notificationB.getRefID();
-        assertEquals("Notification_B", notificationB.getID());
-        assertEquals("Notification_A", notificationA.getID());
-        assertEquals("agent A", notificationA.getAgentName());
-    }
-
-    @Test
     public void parseStreamPhaseTimeWithPhaseTimeRef() throws Exception {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        AuditStatus auditStatusA = xjdf.getAuditPool().getAuditStatus().get(1);
-        String auditStatusB = auditStatusA.getRefID();
-        assertEquals("PhaseTime_B", auditStatusA.getID());
-        assertEquals("PhaseTime_A", auditStatusB);
-        assertEquals("agent B", auditStatusA.getAgentName());
+        AuditStatus auditStatusB = (AuditStatus) xjdf.getAuditPool().getAudits().get(4);
+        String auditStatusA = auditStatusB.getRefID();
+        assertEquals("PhaseTime_B", auditStatusB.getID());
+        assertEquals("PhaseTime_A", auditStatusA);
+        assertEquals("author B", auditStatusB.getAuthor());
     }
 
     @Test
@@ -327,7 +313,7 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ProcessRun processRunB = xjdf.getAuditPool().getProcessRun().get(1);
+        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudits().get(6);
         ProcessRun processRunA = processRunB.getRefID();
         assertEquals("ProcessRun_B", processRunB.getID());
         assertEquals("ProcessRun_A", processRunA.getID());
@@ -339,11 +325,11 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ResourceAudit resourceAuditB = xjdf.getAuditPool().getResourceAudit().get(1);
-        String resourceAuditA = resourceAuditB.getRefID();
-        assertEquals("ResourceAudit_B", resourceAuditB.getID());
+        AuditResource auditResourceB = (AuditResource) xjdf.getAuditPool().getAudits().get(8);
+        String resourceAuditA = auditResourceB.getRefID();
+        assertEquals("ResourceAudit_B", auditResourceB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA);
-        assertEquals("agent B", resourceAuditB.getAgentName());
+        assertEquals("author B", auditResourceB.getAuthor());
     }
 
     @Test

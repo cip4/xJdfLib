@@ -2,24 +2,36 @@ package org.cip4.lib.xjdf.schema;
 
 import org.junit.ComparisonFailure;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpressionException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class Assert {
 
     public static void assertNodeCollectionEquals(final Collection<Node> expected, final Collection<Node> actual) {
-        if (!isSubset(expected, actual) || !isSubset(actual, expected)) {
+        List<Node> expectedList = sortNodesByName(expected);
+        List<Node> actualList = sortNodesByName(actual);
+        if (!isSubset(expectedList, actualList) || !isSubset(actualList, expectedList)) {
             throw new ComparisonFailure(
                 null,
-                nodeCollectionToString(expected),
-                nodeCollectionToString(actual)
+                nodeCollectionToString(expectedList),
+                nodeCollectionToString(actualList)
             );
         }
+    }
+
+    private static List<Node> sortNodesByName(final Collection<Node> nodes) {
+        ArrayList<Node> nodeList = new ArrayList<>(nodes);
+        Collections.sort(nodeList, new Comparator<Node>() {
+            @Override
+            public int compare(final Node o1, final Node o2) {
+                return nodeToString(o1).compareTo(nodeToString(o2));
+            }
+        });
+        return nodeList;
     }
 
     private static boolean isSubset(final Collection<Node> subset, final Collection<Node> superSet) {
@@ -51,15 +63,18 @@ public class Assert {
     private static String nodeToString(Node node) {
         if ("attribute".equals(node.getLocalName())) {
             return String.format(
-                "[%s:%s]",
+                "[%s:%s%s]",
                 node.getLocalName(),
-                node.getAttributes().getNamedItem("name").getNodeValue()
+                node.getAttributes().getNamedItem("name").getNodeValue(),
+                "required".equals(node.getAttributes().getNamedItem("use").getNodeValue()) ? "" : "?"
             );
         } else if ("element".equals(node.getLocalName())) {
             return String.format(
-                "[%s:%s]",
+                "[%s:%s{%s,%s}]",
                 node.getLocalName(),
-                node.getAttributes().getNamedItem("ref").getNodeValue()
+                node.getAttributes().getNamedItem("ref").getNodeValue(),
+                node.getAttributes().getNamedItem("minOccurs").getNodeValue(),
+                node.getAttributes().getNamedItem("maxOccurs").getNodeValue()
             );
         } else {
             return node.toString();

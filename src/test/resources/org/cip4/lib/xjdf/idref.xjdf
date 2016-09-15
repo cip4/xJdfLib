@@ -4,16 +4,16 @@
 
     <xjdf:AuditPool>
         <xjdf:Created ID="Created_A" AgentName="agent A" />
-        <xjdf:Notification ID="Notification_A" AgentName="agent A" />
-        <xjdf:Notification ID="Notification_B" AgentName="agent B" refID="Notification_A" />
-        <xjdf:AuditStatus ID="PhaseTime_A" AgentName="agent A">
+        <xjdf:AuditNotification ID="Notification_A" Author="author A" />
+        <xjdf:AuditNotification ID="Notification_B" Author="author B" refID="Notification_A" />
+        <xjdf:AuditStatus ID="PhaseTime_A" Author="author A">
             <xjdf:PhaseAmount rRef="PhaseAmount_Ref_01" />
         </xjdf:AuditStatus>
-        <xjdf:AuditStatus ID="PhaseTime_B" AgentName="agent B" refID="PhaseTime_A" />
+        <xjdf:AuditStatus ID="PhaseTime_B" Author="author B" refID="PhaseTime_A" />
         <xjdf:ProcessRun ID="ProcessRun_A" AgentName="agent A" />
         <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
-        <xjdf:ResourceAudit ID="ResourceAudit_A" AgentName="agent A" />
-        <xjdf:ResourceAudit ID="ResourceAudit_B" AgentName="agent B" refID="ResourceAudit_A" />
+        <xjdf:AuditResource ID="ResourceAudit_A" Author="author A" />
+        <xjdf:AuditResource ID="ResourceAudit_B" Author="author B" refID="ResourceAudit_A" />
     </xjdf:AuditPool>
 
     <xjdf:ProductList>

@@ -42,7 +42,11 @@ class XsdReader {
     public Set<Node> complexTypeProperties(final String complexType) throws Exception {
         return typeProperties(
             (Node) xPath.evaluate(
-                String.format("//xs:complexType[@name='%s']", complexType),
+                String.format(
+                    "//xs:complexType[@name='%s'] | //xs:complexType[../@name='%s']",
+                    complexType,
+                    complexType
+                ),
                 schema,
                 XPathConstants.NODE
             )
