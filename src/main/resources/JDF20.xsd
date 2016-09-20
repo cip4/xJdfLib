@@ -4511,7 +4511,6 @@
                     <xs:element ref="Bundle" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
                 <xs:attribute name="Columns" type="integer" use="optional"/>
