@@ -611,34 +611,8 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @return BinderySignature Node which already contains defined attributes.
      */
     public final BinderySignature createBinderySignature(final String foldCatalog) {
-
-        return createBinderySignature(foldCatalog, null, null);
-    }
-
-    /**
-     * Create a new BinderySignature Node which already contains defined attributes.
-     *
-     * @param foldCatalog Value of FoldCatalog attribute as String.
-     * @param size Size of the bindery signature.
-     * @param binderySignatureID ID of the bindery signature.
-     *
-     * @return BinderySignature Node which already contains defined attributes.
-     */
-    public final BinderySignature createBinderySignature(
-        final String foldCatalog,
-        final XYPair size,
-        final String binderySignatureID
-    ) {
-
-        // create BinderySignature Node
         BinderySignature binderySignature = super.createBinderySignature();
-
-        // set attributes
         binderySignature.setFoldCatalog(foldCatalog);
-        binderySignature.setBinderySignatureSize(size);
-        binderySignature.setBinderySignatureID(binderySignatureID);
-
-        // return node
         return binderySignature;
     }
 
