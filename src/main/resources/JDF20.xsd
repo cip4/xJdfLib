@@ -5726,7 +5726,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element ref="FileSpec" minOccurs="1" maxOccurs="1"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Compensation" type="EnumCompensation" use="optional"/>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
