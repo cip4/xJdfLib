@@ -5,7 +5,6 @@ import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
-import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
@@ -15,9 +14,7 @@ import org.junit.Test;
 import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
 
 /**
  * JUnit test case for XJdfNodeFactory.
@@ -28,8 +25,6 @@ public class XJdfNodeFactoryTest {
 
     /**
      * Set up unit test.
-     *
-     * @throws java.lang.Exception
      */
     @Before
     public void setUp() throws Exception {
@@ -38,8 +33,6 @@ public class XJdfNodeFactoryTest {
 
     /**
      * Tear down unit test.
-     *
-     * @throws java.lang.Exception
      */
     @After
     public void tearDown() throws Exception {
@@ -165,43 +158,6 @@ public class XJdfNodeFactoryTest {
         assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
         assertNull("Brand is wrong", mediaIntent.getStockBrand());
         assertNull("Weight is wrong", mediaIntent.getWeight());
-    }
-
-    @Test
-    public void testCreateLayoutIntent() {
-
-        // arrange
-        final Integer pages = 23;
-        final Sides sides = Sides.ONE_SIDED;
-        final Shape finishedDimensions = new Shape(4.4, 6.6);
-        final XYPair dimensions = new XYPair(5.5, 7.7);
-
-        // act
-        LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions, dimensions);
-
-        // assert
-        assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-        assertEquals("Sides is wrong", Sides.ONE_SIDED, layoutIntent.getSides());
-        assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
-        assertEquals("Dimensions is wrong", dimensions, layoutIntent.getDimensions());
-    }
-
-    @Test
-    public void testCreateLayoutIntentLight() {
-
-        // arrange
-        final Integer pages = 23;
-        final Sides sides = Sides.ONE_SIDED;
-        final Shape finishedDimensions = new Shape(4.4, 6.6);
-
-        // act
-        LayoutIntent layoutIntent = xJdfNodeFactory.createLayoutIntent(pages, sides, finishedDimensions);
-
-        // assert
-        assertEquals("Pages is wrong", pages, layoutIntent.getPrintedPages());
-        assertEquals("Sides is wrong", Sides.ONE_SIDED, layoutIntent.getSides());
-        assertEquals("FinishedDimensions is wrong", finishedDimensions, layoutIntent.getFinishedDimensions());
-        assertEquals("Dimensions is wrong", null, layoutIntent.getDimensions());
     }
 
     @Test

@@ -5,7 +5,6 @@ import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
-import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -351,70 +350,6 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // return object
         return mediaIntent;
-    }
-
-    /**
-     * Create new LayoutIntent Node which already contains values for attribute Pages.
-     *
-     * @param pages Value for Pages attribute.
-     *
-     * @return LayoutIntent Node which already contains defined attributes.
-     */
-    public final LayoutIntent createLayoutIntent(final Integer pages) {
-
-        // return object
-        return createLayoutIntent(pages, null, null, null);
-    }
-
-    /**
-     * Create new LayoutIntent Node which already contains values for attributes Pages, Sides, FinishedDimensions and
-     * Dimensions.
-     *
-     * @param pages Value for Pages attribute.
-     * @param sides Value for Sides attribute.
-     * @param finishedDimensions Value for FinishedDimensions attribute.
-     *
-     * @return LayoutIntent Node which already contains defined attributes.
-     */
-    public final LayoutIntent createLayoutIntent(
-        final Integer pages,
-        final Sides sides,
-        final Shape finishedDimensions
-    ) {
-
-        // return object
-        return createLayoutIntent(pages, sides, finishedDimensions, null);
-    }
-
-    /**
-     * Create new LayoutIntent Node which already contains values for attributes Pages, Sides, FinishedDimensions and
-     * Dimensions.
-     *
-     * @param pages Value for Pages attribute.
-     * @param sides Value for Sides attribute.
-     * @param finishedDimensions Value for FinishedDimensions attribute.
-     * @param dimensions Value for Dimensions attribute.
-     *
-     * @return LayoutIntent Node which already contains defined attributes.
-     */
-    public final LayoutIntent createLayoutIntent(
-        final Integer pages,
-        final Sides sides,
-        final Shape finishedDimensions,
-        final XYPair dimensions
-    ) {
-
-        // create node
-        LayoutIntent layoutIntent = super.createLayoutIntent();
-
-        // set attributes
-        layoutIntent.setPrintedPages(pages);
-        layoutIntent.setSides(sides);
-        layoutIntent.setFinishedDimensions(finishedDimensions);
-        layoutIntent.setDimensions(dimensions);
-
-        // return object
-        return layoutIntent;
     }
 
     /**

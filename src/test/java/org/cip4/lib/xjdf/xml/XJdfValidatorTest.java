@@ -7,6 +7,7 @@ import org.cip4.lib.xjdf.schema.Address;
 import org.cip4.lib.xjdf.schema.ComChannel;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
+import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.Sides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
@@ -91,23 +92,6 @@ public class XJdfValidatorTest {
         xJdfValidator.validate(xJdfFileStream);
     }
 
-    @Test
-    public void integrationValidSingleLineCall() throws Exception {
-
-        // arrange
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-        xJdfBuilder.addGeneralID(generalId);
-
-        xJdfBuilder.build().getTypes().add("Web2Print");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
-
-        // act
-        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-
-        xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(xJdfFileStream);
-    }
-
     @Test(expected = ValidationException.class)
     public void integrationAnalyzeMessagesInvalid() throws Exception {
 
@@ -115,23 +99,6 @@ public class XJdfValidatorTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
         xJdfBuilder.build().setVersion(null);
-
-        // act
-        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
-
-        xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(xJdfFileStream);
-    }
-
-    @Test
-    public void integrationAnalyzeMessagesValid() throws Exception {
-
-        // arrange
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-        xJdfBuilder.addGeneralID(generalId);
-
-        xJdfBuilder.build().getTypes().add("Web2Print");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -178,11 +145,10 @@ public class XJdfValidatorTest {
         // create product
         ProductBuilder productBuilder = new ProductBuilder(1000, "Brochure", "4 Page Brochure");
         productBuilder.addIntent(
-            nf.createLayoutIntent(
-                32,
-                Sides.TWO_SIDED_HEAD_TO_HEAD,
-                new Shape(595.27559055, 822.04724409)
-            )
+            new LayoutIntent()
+                .withPages(32)
+                .withSides(Sides.TWO_SIDED_HEAD_TO_HEAD)
+                .withFinishedDimensions(new Shape(595.27559055, 822.04724409))
         );
         productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
         productBuilder.addIntent(nf.createProductionIntent("Lithography"));
