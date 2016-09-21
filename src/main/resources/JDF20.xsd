@@ -1427,6 +1427,23 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumVariableType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="OneLine"/>
+            <xs:enumeration value="AddressField"/>
+            <xs:enumeration value="IdentificationField"/>
+            <xs:enumeration value="Area"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumVariableQuality">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Simple"/>
+            <xs:enumeration value="Imprint"/>
+            <xs:enumeration value="Full"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -1616,7 +1633,7 @@
 
     <xs:simpleType name="EnumPartIDKey">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="AssemblyIDs"/>
+            <xs:enumeration value="BinderySignatureID"/>
             <xs:enumeration value="BlockName"/>
             <xs:enumeration value="BundleItemIndex"/>
             <xs:enumeration value="DeliveryUnit0"/>
@@ -1691,6 +1708,7 @@
             <xs:enumeration value="ProductionIntent"/>
             <xs:enumeration value="ShapeCuttingIntent"/>
             <xs:enumeration value="SizeIntent"/>
+            <xs:enumeration value="VariableIntent"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -4013,6 +4031,28 @@
                 <xs:attribute name="Texture" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Thickness" type="double" use="optional"/>
                 <xs:attribute name="Weight" type="double" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- ** Complex type definition for MediaIntent ** -->
+    <xs:element name="VariableIntent" type="VariableIntent" substitutionGroup="IntentType"/>
+    <xs:complexType name="VariableIntent">
+        <xs:complexContent>
+            <xs:extension base="IntentType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers"/>
+                </xs:sequence>
+                <xs:attribute name="Area" type="double" use="optional"/>
+                <xs:attribute name="AveragePages" type="integer" use="optional"/>
+                <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="ColorsUsedFront" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="ColorsUsedBack" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="MaxPages" type="integer" use="optional"/>
+                <xs:attribute name="MinPages" type="integer" use="optional"/>
+                <xs:attribute name="NumberOfCopies" type="integer" use="optional"/>
+                <xs:attribute name="VariableType" type="EnumVariableType" use="optional"/>
+                <xs:attribute name="VariableQuality" type="EnumVariableQuality" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
