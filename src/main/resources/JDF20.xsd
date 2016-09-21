@@ -6662,14 +6662,10 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                 </xs:sequence>
-                <xs:attribute name="SpecificYield" type="double" use="optional"/>
-                <xs:attribute name="InkType" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="InkName" type="string" use="optional"/>
-                <xs:attribute name="ColorName" type="string" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+                <xs:attribute name="InkType" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="SpecificYield" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
