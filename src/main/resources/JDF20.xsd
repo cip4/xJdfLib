@@ -5951,40 +5951,19 @@
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="Directory" type="URL" use="optional"/>
-                <xs:attribute name="DocCopies" type="integer" use="optional"/>
-                <xs:attribute name="DocNames" type="RegExp" use="optional"/>
                 <xs:attribute name="Docs" type="RegExp" use="optional"/>
-                <xs:attribute name="DocumentNaturalLang" type="language" use="optional"/>
                 <xs:attribute name="ElementType" type="EnumRunlistType" use="optional"/>
                 <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
                 <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
-                <xs:attribute name="FileTargetDeviceModel" type="string" use="optional"/>
                 <xs:attribute name="FinishedPages" type="integer" use="optional"/>
                 <xs:attribute name="FirstPage" type="integer" use="optional"/>
-                <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
-                <xs:attribute name="IgnorePDLCopies" type="boolean" use="optional"/>
-                <xs:attribute name="IgnorePDLImposition" type="boolean" use="optional"/>
-                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IsBlank" type="boolean" use="optional"/>
                 <xs:attribute name="IsPage" type="boolean" use="optional"/>
-                <xs:attribute name="IsPrintable" type="boolean" use="optional"/>
-                <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
                 <xs:attribute name="LogicalPage" type="integer" use="optional"/>
                 <xs:attribute name="NPage" type="integer" use="optional"/>
-                <xs:attribute name="PageCopies" type="integer" use="optional"/>
-                <xs:attribute name="PageNames" type="RegExp" use="optional"/>
                 <xs:attribute name="Pages" type="IntegerRange" use="optional"/>
-                <xs:attribute name="RunListRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="RunTag" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="SetCopies" type="integer" use="optional"/>
-                <xs:attribute name="SetLevel" type="XPath" use="optional"/>
-                <xs:attribute name="SetNames" type="RegExp" use="optional"/>
                 <xs:attribute name="Sets" type="IntegerRange" use="optional"/>
                 <xs:attribute name="SheetSides" type="EnumSheetSide" use="optional"/>
                 <xs:attribute name="SkipPage" type="integer" use="optional"/>
-                <xs:attribute name="Sorted" type="boolean" use="optional"/>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceMediaBox" type="rectangle" use="optional"/>
