@@ -5103,7 +5103,6 @@
                     <xs:element minOccurs="0" maxOccurs="1" ref="Disposition"/>
                 </xs:sequence>
                 <xs:attribute name="CheckSum" type="hexBinary" use="optional"/>
-                <xs:attribute name="ContainerRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Encoding" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FileFormat" type="string" use="optional"/>
                 <xs:attribute name="FileSize" type="integer" use="optional"/>
