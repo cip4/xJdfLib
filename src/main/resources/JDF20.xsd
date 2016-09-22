@@ -2467,7 +2467,7 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObservationTarget"/>
             </xs:sequence>
-            <xs:attribute name="URL" type="URL" use="optional"/>
+            <xs:attribute name="URL" type="URL" use="required"/>
             <xs:attribute name="RepeatStep" type="integer" use="optional"/>
             <xs:attribute name="RepeatTime" type="double" use="optional"/>
             <xs:attribute name="ChannelMode" use="optional"/>
