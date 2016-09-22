@@ -4806,7 +4806,6 @@
                 <xs:attribute name="BuyerAccount" type="string" use="optional"/>
                 <xs:attribute name="ContactRefs" type="IDREF" use="optional"/>
                 <xs:attribute name="DeliveryCharge" type="EnumDeliveryCharge" use="optional"/>
-                <xs:attribute name="DeliveryID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Earliest" type="dateTime" use="optional"/>
                 <xs:attribute name="EarliestDuration" type="duration" use="optional"/>
                 <xs:attribute name="Method" type="NMTOKEN" use="optional"/>
