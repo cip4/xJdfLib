@@ -120,56 +120,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     }
 
     /**
-     * Add child product with product ID.
-     * @throws Exception
-     */
-    @Test
-    public void addChildProduct() throws Exception {
-        Product childProduct = new Product();
-        childProduct.setID("abc");
-        ProductBuilder rootProductBuilder = new ProductBuilder();
-        rootProductBuilder.addChildProduct(childProduct);
-
-        final Product childRef = rootProductBuilder.getProduct().getChildRefs().get(0);
-        assertEquals("abc", childRef.getID());
-    }
-
-    /**
-     * Add child product without product ID.
-     * @throws Exception
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void addChildProductWithoutId() throws Exception {
-        Product childProduct = new Product();
-        ProductBuilder rootProductBuilder = new ProductBuilder();
-        rootProductBuilder.addChildProduct(childProduct);
-    }
-
-    /**
-     * Add child product with empty product ID.
-     * @throws Exception
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void addChildProductWithIdBlank() throws Exception {
-        Product childProduct = new Product();
-        childProduct.setID("");
-        ProductBuilder rootProductBuilder = new ProductBuilder();
-        rootProductBuilder.addChildProduct(childProduct);
-    }
-
-    /**
-     * Add child product with empty product ID.
-     * @throws Exception
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void addChildProductWithIdNull() throws Exception {
-        Product childProduct = new Product();
-        childProduct.setID(null);
-        ProductBuilder rootProductBuilder = new ProductBuilder();
-        rootProductBuilder.addChildProduct(childProduct);
-    }
-
-    /**
      * Create product with without id.
      * @throws Exception
      */
@@ -177,52 +127,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     public void newProductIdIsNull() throws Exception {
         Product product = new Product();
         assertNull("Product ID is not null.", product.getID());
-    }
-
-    @Test
-    public void productGetRawChildRefs() throws Exception {
-        Product product = new Product();
-        assertNull(product.getRawChildRefs());
-    }
-
-    /**
-     * Simple XJDF containing a product with childproducts.
-     * @throws Exception
-     */
-    @Test
-    public void testMultipleChildren() throws Exception {
-
-        // arrange
-        XJdfNodeFactory nf = new XJdfNodeFactory();
-
-        ProductBuilder pbRoot = new ProductBuilder(1000);
-        pbRoot.addIntent(new ColorIntent());
-        Product productRoot = pbRoot.build();
-
-        ProductBuilder pbChild_1 = new ProductBuilder();
-        pbChild_1.getProduct().setID("a");
-        pbChild_1.addIntent(nf.createMediaIntent("IPG_135"));
-        Product productChild1 = pbChild_1.build();
-
-        ProductBuilder pbChild_2 = new ProductBuilder();
-        pbChild_2.getProduct().setID("b");
-        pbChild_2.addIntent(nf.createMediaIntent("IPG_90"));
-        Product productChild2 = pbChild_2.build();
-
-        // act
-        pbRoot.addChildProduct(pbChild_1.build());
-        pbRoot.addChildProduct(pbChild_2.build());
-
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
-        xJdfBuilder.addProduct(productRoot);
-        xJdfBuilder.addProduct(productChild1);
-        xJdfBuilder.addProduct(productChild2);
-
-        // assert
-        XJDF xjdf = xJdfBuilder.build();
-        assertSame(productRoot, xjdf.getProductList().getProduct().get(0));
-        assertSame(productChild1, xjdf.getProductList().getProduct().get(1));
-        assertSame(productChild2, xjdf.getProductList().getProduct().get(2));
     }
 
     /**

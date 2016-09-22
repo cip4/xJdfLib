@@ -1480,7 +1480,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumNamedColor">
+    <xs:simpleType name="NamedColor">
         <xs:restriction base="xs:string">
             <xs:enumeration value="White"/>
             <xs:enumeration value="Black"/>
@@ -1894,7 +1894,6 @@
                 <xs:element ref="Intent" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
@@ -2816,7 +2815,7 @@
             <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
             <xs:attribute name="EmbossingType" type="EnumEmbossingType" use="optional"/>
             <xs:attribute name="Face" type="Face" use="optional"/>
-            <xs:attribute name="FoilColor" type="EnumNamedColor" use="optional"/>
+            <xs:attribute name="FoilColor" type="NamedColor" use="optional"/>
             <xs:attribute name="FoilColorDetails" type="string" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
@@ -2905,7 +2904,7 @@
             <xs:attribute name="CoverStyle" type="NMTOKEN" use="optional"/>
             <xs:attribute name="EndSheets" type="boolean" use="optional"/>
             <xs:attribute name="HeadBands" type="boolean" use="optional"/>
-            <xs:attribute name="HeadBandColor" type="EnumNamedColor" use="optional"/>
+            <xs:attribute name="HeadBandColor" type="NamedColor" use="optional"/>
             <xs:attribute name="HeadBandColorDetails" type="string" use="optional"/>
             <xs:attribute name="Jacket" type="EnumJacket" use="optional"/>
             <xs:attribute name="JacketFoldingWidth" type="double" use="optional"/>
@@ -3591,7 +3590,7 @@
                 <xs:attribute name="HorizontalExcess" type="double" use="optional"/>
                 <xs:attribute name="HorizontalExcessBack" type="double" use="optional"/>
                 <xs:attribute name="StripBrand" type="string" use="optional"/>
-                <xs:attribute name="StripColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="StripColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="StripColorDetails" type="string" use="optional"/>
                 <xs:attribute name="StripLength" type="double" use="optional"/>
                 <xs:attribute name="StripMaterial" use="optional"/>
@@ -3662,7 +3661,7 @@
             <xs:attribute name="TabExtensionDistance" type="double" use="optional"/>
             <xs:attribute name="TabBodyCopy" type="boolean" use="optional"/>
             <xs:attribute name="TabExtensionMylar" type="boolean" use="optional"/>
-            <xs:attribute name="TabMylarColor" type="EnumNamedColor" use="optional"/>
+            <xs:attribute name="TabMylarColor" type="NamedColor" use="optional"/>
             <xs:attribute name="TabMylarColorDetails" type="string" use="optional"/>
             <xs:attribute name="TabBindMylar" type="boolean" use="optional"/>
             <xs:attribute name="TabBrand" type="string" use="optional"/>
@@ -3772,23 +3771,24 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="EdgeGluing"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="HardCoverBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="LooseBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="SaddleStitching"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="SideStitching"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="SoftCoverBinding"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="Tabs"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ThreadSewing"/>
+                    <xs:element ref="EdgeGluing" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="HardCoverBinding" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="LooseBinding" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="SaddleStitching" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="SideStitching" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="SoftCoverBinding" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Tabs" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ThreadSewing" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="BackCoverColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="BackCoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="BackCoverColorDetails" type="string" use="optional"/>
-                <xs:attribute name="BindingColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="BindingColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="BindingColorDetails" type="string" use="optional"/>
                 <xs:attribute name="BindingOrder" type="EnumBindingOrder" use="optional"/>
                 <xs:attribute name="BindingSide" type="EnumEdge" use="optional"/>
                 <xs:attribute name="BindingType" type="EnumBindingType" use="optional"/>
-                <xs:attribute name="CoverColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="CoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -3825,14 +3825,14 @@
                 </xs:sequence>
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
                 <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="CoverColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="CoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
                 <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
                 <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
-                <xs:attribute name="SpineColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="SpineColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="SpineColorDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -4017,7 +4017,7 @@
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrateBack" type="EnumISOPaperSubstrate" use="optional"/>
-                <xs:attribute name="MediaColor" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
                 <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
@@ -4439,7 +4439,7 @@
                 <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
                 <xs:attribute name="ColorDetails" type="string" use="optional"/>
                 <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
-                <xs:attribute name="ColorName" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="ColorName" type="NamedColor" use="optional"/>
                 <xs:attribute name="ColorType" type="EnumColorantType" use="optional"/>
                 <xs:attribute name="ColorTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="Density" type="double" use="optional"/>
@@ -5392,7 +5392,7 @@
                 <xs:attribute name="InsideLoss" type="double" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="LabColorValue" type="LabColor" use="optional"/>
-                <xs:attribute name="MediaColorName" type="EnumNamedColor" use="optional"/>
+                <xs:attribute name="MediaColorName" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
                 <xs:attribute name="MediaSetCount" type="integer" use="optional"/>

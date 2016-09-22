@@ -133,21 +133,4 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
         getProduct().getIntent().add(it);
     }
 
-    /**
-     * Append another product as child.
-     *
-     * @param childRef Reference to the child product to append.
-     * @throws IllegalArgumentException
-     */
-    public final void addChildProduct(final Product childRef) throws IllegalArgumentException {
-        if (StringUtils.isEmpty(childRef.getID())) {
-            throw new IllegalArgumentException("'ID' must not be null or blank.");
-        }
-
-        getProduct().withChildRefs(childRef);
-
-        // set root flag
-        getProduct().setIsRoot(true);
-    }
-
 }

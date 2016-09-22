@@ -37,7 +37,7 @@
         <bindings scd="/~xjdf:duration">
             <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
         </bindings>
-        <bindings node="//xs:element[@name='Product']/xs:complexType[1]">
+        <bindings node="//xs:complexType[@name='BindingIntent']">
             <ci:code><![CDATA[
      /*
       * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
@@ -51,7 +51,7 @@
                 ]]>
             </ci:code>
         </bindings>
-        <bindings node="//xs:element[@name='Product']//xs:attribute[@name='ChildRefs']" >
+        <bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='ChildRefs']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>
