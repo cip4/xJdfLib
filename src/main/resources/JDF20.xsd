@@ -1978,7 +1978,7 @@
                     <xs:attribute name="Author" type="string" use="optional"/>
                     <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="Language" type="language" use="optional"/>
-                    <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
+                    <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
                     <xs:anyAttribute namespace="##other" processContents="lax"/>
