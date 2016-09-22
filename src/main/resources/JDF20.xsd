@@ -4606,18 +4606,16 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Company ** -->
-    <xs:element name="Company" type="Company" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Company">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element name="OrganizationalUnit" type="textElement" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="CompanyID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="OrganizationName" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="Company">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="OrganizationalUnit" type="textElement" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="CompanyID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="OrganizationName" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for Component ** -->
     <xs:element name="Component" type="Component" substitutionGroup="ResourceType"/>
@@ -4854,16 +4852,14 @@
     </xs:element>
 
     <!-- ** Complex type definition for DeviceNSpace ** -->
-    <xs:element name="DeviceNSpace" type="DeviceNSpace" substitutionGroup="ResourceType"/>
-    <xs:complexType name="DeviceNSpace">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="N" type="integer"/>
-                <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="DeviceNSpace">
+        <xs:complexType>
+            <xs:attribute name="N" type="integer" use="required"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
+            <xs:attribute name="Separations" type="NMTOKENS" use="required"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for DieLayout ** -->
     <xs:element name="DieLayout" type="DieLayout" substitutionGroup="ResourceType"/>
@@ -6426,19 +6422,17 @@
     </xs:element>
 
     <!-- ** Complex type definition for CutMark ** -->
-    <xs:element name="CutMark" type="CutMark" substitutionGroup="ResourceType"/>
-    <xs:complexType name="CutMark">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly"/>
-                </xs:sequence>
-                <xs:attribute name="Position" type="XYPair" use="optional"/>
-                <xs:attribute name="Blocks" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="MarkType" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="CutMark">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly"/>
+            </xs:sequence>
+            <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="Blocks" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="MarkType" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for EndSheet ** -->
     <xs:element name="EndSheet">
@@ -6464,17 +6458,15 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Fold ** -->
-    <xs:element name="Fold" type="Fold" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Fold">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="To" use="optional"/>
-                <xs:attribute name="From" use="optional"/>
-                <xs:attribute name="RelativeTravel" type="double" use="optional"/>
-                <xs:attribute name="Travel" type="double" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="Fold">
+        <xs:complexType>
+            <xs:attribute name="To" use="optional"/>
+            <xs:attribute name="From" use="optional"/>
+            <xs:attribute name="RelativeTravel" type="double" use="optional"/>
+            <xs:attribute name="Travel" type="double" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for FoldingParams ** -->
     <xs:element name="FoldingParams" type="FoldingParams" substitutionGroup="ResourceType"/>
