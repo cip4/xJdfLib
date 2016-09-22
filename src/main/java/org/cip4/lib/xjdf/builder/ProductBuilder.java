@@ -123,7 +123,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
         // create intent node
         Intent it = xJdfNodeFactory.createIntent();
-        it.setName(EnumIntentName.fromValue(intentName));
+        it.setName(intentName);
 
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
         JAXBElement<IntentType> obj = new JAXBElement(qname, intent.getClass(), intent);

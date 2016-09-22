@@ -1691,26 +1691,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumIntentName">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="BindingIntent"/>
-            <xs:enumeration value="ColorIntent"/>
-            <xs:enumeration value="ContentCheckIntent"/>
-            <xs:enumeration value="EmbossingIntent"/>
-            <xs:enumeration value="FoldingIntent"/>
-            <xs:enumeration value="HoleMakingIntent"/>
-            <xs:enumeration value="AssemblingIntent"/>
-            <xs:enumeration value="IntentResource"/>
-            <xs:enumeration value="LaminatingIntent"/>
-            <xs:enumeration value="LayoutIntent"/>
-            <xs:enumeration value="MediaIntent"/>
-            <xs:enumeration value="ProductionIntent"/>
-            <xs:enumeration value="ShapeCuttingIntent"/>
-            <xs:enumeration value="SizeIntent"/>
-            <xs:enumeration value="VariableIntent"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumStatusList">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Running"/>
@@ -1851,7 +1831,7 @@
             <xs:sequence>
                 <xs:element ref="IntentType" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Name" type="EnumIntentName" use="required"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
