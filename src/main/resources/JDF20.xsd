@@ -1443,6 +1443,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumOcgProcess">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Export"/>
+            <xs:enumeration value="Print"/>
+            <xs:enumeration value="View"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -3393,20 +3401,18 @@
                 <xs:element ref="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ReferenceXObjParams" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="OCGProcess" use="optional"/>
-            <xs:attribute name="OCGDefault" use="optional"/>
             <xs:attribute name="EmitPDFBG" type="boolean" use="optional"/>
-            <xs:attribute name="OCGIntent" type="NMTOKEN" use="optional"/>
             <xs:attribute name="EmitPDFHalftones" type="boolean" use="optional"/>
+            <xs:attribute name="EmitPDFTransfers" type="boolean" use="optional"/>
             <xs:attribute name="EmitPDFUCR" type="boolean" use="optional"/>
+            <xs:attribute name="HonorPDFOverprint" type="boolean" use="optional"/>
+            <xs:attribute name="ICCColorAsDeviceColor" type="boolean" use="optional"/>
+            <xs:attribute name="OCGIntent" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="OCGProcess" type="EnumOcgProcess" use="optional"/>
+            <xs:attribute name="OCGZoom" type="double" use="optional"/>
             <xs:attribute name="PrintPDFAnnotations" type="boolean" use="optional"/>
             <xs:attribute name="PrintTrapAnnotations" type="boolean" use="optional"/>
             <xs:attribute name="TransparencyRenderingQuality" type="double" use="optional"/>
-            <xs:attribute name="HonorPDFOverprint" type="boolean" use="optional"/>
-            <xs:attribute name="EmitPDFTransfers" type="boolean" use="optional"/>
-            <xs:attribute name="ICCColorAsDeviceColor" type="boolean" use="optional"/>
-            <xs:attribute name="OCGZoom" type="double" use="optional"/>
-            <xs:attribute name="ReferenceXObjParamsRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4710,28 +4716,9 @@
     <!-- ** Complex type definition for ContentObject ** -->
     <xs:element name="ContentObject">
         <xs:complexType>
-            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
-            <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
-            <xs:attribute name="CTM" type="matrix" use="optional"/>
             <xs:attribute name="DocOrd" type="integer" use="optional"/>
-            <xs:attribute name="FitPolicyRef" type="IDREF" use="optional"/>
-            <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
-            <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="OrdExpression" type="string" use="optional"/>
-            <xs:attribute name="OrdID" type="integer" use="optional"/>
             <xs:attribute name="SetOrd" type="integer" use="optional"/>
-            <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
-            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

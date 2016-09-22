@@ -485,39 +485,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new ContentObject Node which already contains defined attributes.
-     *
-     * @param ctm Value of CTM attribute as String.
-     * @param clipBox Value of ClipBox attribute as String.
-     * @param ord Value of Ord attribute as Integer
-     * @param trimCtm Value of TrimCTM as String
-     * @param trimSize Value of TrimSize as String
-     *
-     * @return ContentObject Node which already contains defined attributes.
-     */
-    public final ContentObject createContentObject(
-        final Matrix ctm,
-        final Rectangle clipBox,
-        final Integer ord,
-        final Matrix trimCtm,
-        final XYPair trimSize
-    ) {
-
-        // create node
-        ContentObject contentObject = super.createContentObject();
-
-        // set attributes
-        contentObject.setCTM(ctm);
-        contentObject.setClipBox(clipBox);
-        contentObject.setOrd(ord);
-        contentObject.setTrimCTM(trimCtm);
-        contentObject.setTrimSize(trimSize);
-
-        // return object
-        return contentObject;
-    }
-
-    /**
      * Create a new Media Node which already contains defined attributes.
      *
      * @param dimensions Value of Dimensions attribute as XYPair.

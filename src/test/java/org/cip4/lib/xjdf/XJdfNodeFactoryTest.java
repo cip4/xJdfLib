@@ -235,24 +235,4 @@ public class XJdfNodeFactoryTest {
         assertEquals("Ord is wrong.", new Integer(8), markObject.getOrd());
     }
 
-    @Test
-    public void testContentObject() {
-
-        // arrange
-        final Matrix ctm = new Matrix("1 0 0 1 0.0000 0.0000");
-        final Rectangle clipBox = new Rectangle("0.0000 0.0000 2976.3779527559 2125.9842519685");
-        final Integer ord = 8;
-        final Matrix trimCtm = new Matrix("1 0 0 1 36.8509397008 958.1102362205");
-        final XYPair trimSize = new XYPair("425.1968503937 813.5433070866");
-
-        // act
-        ContentObject contentObject = xJdfNodeFactory.createContentObject(ctm, clipBox, ord, trimCtm, trimSize);
-
-        // assert
-        assertEquals("CTM is wrong.", 1d, contentObject.getCTM().getD(), 0.0);
-        assertEquals("ClipBox is wrong.", 2976.3779527559d, contentObject.getClipBox().getUrx(), 0.0);
-        assertEquals("Ord is wrong.", new Integer(8), contentObject.getOrd());
-        assertEquals("TrimCTM is wrong.", 36.8509397008d, contentObject.getTrimCTM().getTx(), 0.0);
-        assertEquals("TrimSize is wrong.", 813.5433070866d, contentObject.getTrimSize().getY(), 0.0);
-    }
 }
