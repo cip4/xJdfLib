@@ -1,5 +1,0 @@
-1.) Node "Comment": The real comment as required attribute in node ? 
-
-2.) How multiplie Product Nodes does look like?
-
-3.) Only one ProductList node in Document (would be fine).
