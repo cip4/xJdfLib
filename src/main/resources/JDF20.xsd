@@ -5382,9 +5382,9 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="2" ref="FileSpec"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="2"/>
                 </xs:sequence>
-                <xs:attribute name="ContentRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="ShapeDefRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
