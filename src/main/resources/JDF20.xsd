@@ -1160,6 +1160,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumTransferFunctionSource">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Custom"/>
+            <xs:enumeration value="Device"/>
+            <xs:enumeration value="Document"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="EnumUCRandBG">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Preserve"/>
@@ -2804,20 +2812,18 @@
     </xs:element>
 
     <!-- ** Complex type definition for DeviceMark ** -->
-    <xs:element name="DeviceMark" type="DeviceMark" substitutionGroup="ResourceType"/>
-    <xs:complexType name="DeviceMark">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-                <xs:attribute name="MarkOrientation" use="optional"/>
-                <xs:attribute name="HorizontalFitPolicy" use="optional"/>
-                <xs:attribute name="Font" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="VerticalFitPolicy" use="optional"/>
-                <xs:attribute name="FontSize" type="double" use="optional"/>
-                <xs:attribute name="BarcodeReproParamsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="DeviceMark">
+        <xs:complexType>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="MarkOrientation" use="optional"/>
+            <xs:attribute name="HorizontalFitPolicy" use="optional"/>
+            <xs:attribute name="Font" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="VerticalFitPolicy" use="optional"/>
+            <xs:attribute name="FontSize" type="double" use="optional"/>
+            <xs:attribute name="BarcodeReproParamsRef" type="IDREF" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for EdgeGluing ** -->
     <xs:element name="EdgeGluing">
@@ -2909,18 +2915,16 @@
     </xs:element>
 
     <!-- ** Complex type definition for FitPolicy ** -->
-    <xs:element name="FitPolicy" type="FitPolicy" substitutionGroup="ResourceType"/>
-    <xs:complexType name="FitPolicy">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="GutterPolicy" use="optional"/>
-                <xs:attribute name="RotatePolicy" use="optional"/>
-                <xs:attribute name="SizePolicy" use="optional"/>
-                <xs:attribute name="ClipOffset" type="XYPair" use="optional"/>
-                <xs:attribute name="MinGutter" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="FitPolicy">
+        <xs:complexType>
+            <xs:attribute name="GutterPolicy" use="optional"/>
+            <xs:attribute name="RotatePolicy" use="optional"/>
+            <xs:attribute name="SizePolicy" use="optional"/>
+            <xs:attribute name="ClipOffset" type="XYPair" use="optional"/>
+            <xs:attribute name="MinGutter" type="XYPair" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for GluingParams ** -->
     <xs:element name="GluingParams" type="GluingParams" substitutionGroup="ResourceType"/>
@@ -3100,18 +3104,16 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for JobField ** -->
-    <xs:element name="JobField" type="JobField" substitutionGroup="ResourceType"/>
-    <xs:complexType name="JobField">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="ShowList" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="JobFormat" type="string" use="optional"/>
-                <xs:attribute name="JobTemplate" type="string" use="optional"/>
-                <xs:attribute name="OperatorText" type="string" use="optional"/>
-                <xs:attribute name="UserText" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="JobField">
+        <xs:complexType>
+            <xs:attribute name="ShowList" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="JobFormat" type="string" use="optional"/>
+            <xs:attribute name="JobTemplate" type="string" use="optional"/>
+            <xs:attribute name="OperatorText" type="string" use="optional"/>
+            <xs:attribute name="UserText" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for LabelingParams ** -->
     <xs:element name="LabelingParams" type="LabelingParams" substitutionGroup="ResourceType"/>
@@ -3502,36 +3504,32 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for RefAnchor ** -->
-    <xs:element name="RefAnchor" type="RefAnchor" substitutionGroup="ResourceType"/>
-    <xs:complexType name="RefAnchor">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-                <xs:attribute name="rRef" type="IDREF" use="optional"/>
-                <xs:attribute name="AnchorType" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="RefAnchor">
+        <xs:complexType>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="rRef" type="IDREF" use="optional"/>
+            <xs:attribute name="AnchorType" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for RegisterRibbon ** -->
-    <xs:element name="RegisterRibbon" type="RegisterRibbon" substitutionGroup="ResourceType"/>
-    <xs:complexType name="RegisterRibbon">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
-                <xs:attribute name="RibbonColorDetails" type="string" use="optional"/>
-                <xs:attribute name="VisibleLength" type="double" use="optional"/>
-                <xs:attribute name="LengthOverall" type="double" use="optional"/>
-                <xs:attribute name="RibbonColor" type="string" use="optional"/>
-                <xs:attribute name="RibbonEnd" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Material" type="string" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="RegisterRibbon">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
+            </xs:sequence>
+            <xs:attribute name="RibbonColorDetails" type="string" use="optional"/>
+            <xs:attribute name="VisibleLength" type="double" use="optional"/>
+            <xs:attribute name="LengthOverall" type="double" use="optional"/>
+            <xs:attribute name="RibbonColor" type="string" use="optional"/>
+            <xs:attribute name="RibbonEnd" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Material" type="string" use="optional"/>
+            <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ResourceAudit ** -->
     <xs:element name="AuditResource" type="AuditResource"/>
@@ -3764,10 +3762,8 @@
     <xs:complexType name="TransferFunctionControl">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurvePool"/>
-                </xs:sequence>
-                <xs:attribute name="TransferFunctionSource" use="optional"/>
+                <xs:attribute name="TransferCurveRefs" type="IDREFS" use="optional"/>
+                <xs:attribute name="TransferFunctionSource" type="EnumTransferFunctionSource" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4170,23 +4166,21 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Address ** -->
-    <xs:element name="Address" type="Address" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Address">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="ExtendedAddress" type="textElement"/>
-                </xs:sequence>
-                <xs:attribute name="PostalCode" type="string" use="optional"/>
-                <xs:attribute name="City" type="string" use="optional"/>
-                <xs:attribute name="PostBox" type="string" use="optional"/>
-                <xs:attribute name="Country" type="string" use="optional"/>
-                <xs:attribute name="CountryCode" type="string" use="optional"/>
-                <xs:attribute name="Region" type="string" use="optional"/>
-                <xs:attribute name="Street" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="Address">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" name="ExtendedAddress" type="textElement"/>
+            </xs:sequence>
+            <xs:attribute name="PostalCode" type="string" use="optional"/>
+            <xs:attribute name="City" type="string" use="optional"/>
+            <xs:attribute name="PostBox" type="string" use="optional"/>
+            <xs:attribute name="Country" type="string" use="optional"/>
+            <xs:attribute name="CountryCode" type="string" use="optional"/>
+            <xs:attribute name="Region" type="string" use="optional"/>
+            <xs:attribute name="Street" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for AdvancedParams ** -->
     <xs:element name="AdvancedParams">
@@ -4428,25 +4422,23 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ByteMap ** -->
-    <xs:element name="ByteMap" type="ByteMap" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ByteMap">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="Band"/>
-                </xs:sequence>
-                <xs:attribute name="BandOrdering" type="EnumBandOrdering" use="optional"/>
-                <xs:attribute name="FrameHeight" type="integer" use="optional"/>
-                <xs:attribute name="FrameWidth" type="integer" use="optional"/>
-                <xs:attribute name="Halftoned" type="boolean" use="optional"/>
-                <xs:attribute name="Interleaved" type="boolean" use="optional"/>
-                <xs:attribute name="PixelColorants" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="PixelDepth" type="integer" use="optional"/>
-                <xs:attribute name="PixelSkip" type="integer" use="optional"/>
-                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ByteMap">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="Band"/>
+            </xs:sequence>
+            <xs:attribute name="BandOrdering" type="EnumBandOrdering" use="optional"/>
+            <xs:attribute name="FrameHeight" type="integer" use="optional"/>
+            <xs:attribute name="FrameWidth" type="integer" use="optional"/>
+            <xs:attribute name="Halftoned" type="boolean" use="optional"/>
+            <xs:attribute name="Interleaved" type="boolean" use="optional"/>
+            <xs:attribute name="PixelColorants" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="PixelDepth" type="integer" use="optional"/>
+            <xs:attribute name="PixelSkip" type="integer" use="optional"/>
+            <xs:attribute name="Resolution" type="XYPair" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for CCITTFaxParams ** -->
     <xs:element name="CCITTFaxParams">
@@ -4461,10 +4453,8 @@
     </xs:element>
 
     <!-- ** Complex type definition for CIELABMeasuringField ** -->
-    <xs:element name="CIELABMeasuringField" type="CIELABMeasuringField" substitutionGroup="ResourceType"/>
-    <xs:complexType name="CIELABMeasuringField">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
+    <xs:element name="CIELABMeasuringField">
+    <xs:complexType>
                 <xs:attribute name="Percentages" type="string" use="optional"/>
                 <xs:attribute name="ScreenRuling" type="string" use="optional"/>
                 <xs:attribute name="ScreenShape" type="string" use="optional"/>
@@ -4473,9 +4463,9 @@
                 <xs:attribute name="CIELab" type="LabColor" use="optional"/>
                 <xs:attribute name="Tolerance" type="double" use="optional"/>
                 <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
+        <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for CollatingItem ** -->
     <xs:element name="CollatingItem">
@@ -4533,16 +4523,14 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ColorantAlias ** -->
-    <xs:element name="ColorantAlias" type="ColorantAlias" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ColorantAlias">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="RawNames" type="Any" use="optional"/>
-                <xs:attribute name="ReplacementColorantName" type="string" use="optional"/>
-                <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ColorantAlias">
+        <xs:complexType>
+            <xs:attribute name="RawNames" type="Any" use="optional"/>
+            <xs:attribute name="ReplacementColorantName" type="string" use="optional"/>
+            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ColorantControl ** -->
     <xs:element name="ColorantControl" type="ColorantControl" substitutionGroup="ResourceType"/>
@@ -4575,35 +4563,31 @@
     </xs:element>
 
     <!-- ** Complex type definition for ColorControlStrip ** -->
-    <xs:element name="ColorControlStrip" type="ColorControlStrip" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ColorControlStrip">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DensityMeasuringField"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="CIELABMeasuringField"/>
-                </xs:sequence>
-                <xs:attribute name="Rotation" type="double" use="optional"/>
-                <xs:attribute name="Size" type="XYPair" use="optional"/>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
-                <xs:attribute name="StripType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ColorControlStrip">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DensityMeasuringField"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="CIELABMeasuringField"/>
+            </xs:sequence>
+            <xs:attribute name="Rotation" type="double" use="optional"/>
+            <xs:attribute name="Size" type="XYPair" use="optional"/>
+            <xs:attribute name="Center" type="XYPair" use="optional"/>
+            <xs:attribute name="StripType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ComChannel ** -->
-    <xs:element name="ComChannel" type="ComChannel" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ComChannel">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="ChannelType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ChannelTypeDetails" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ChannelUsage" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="Locator" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ComChannel">
+        <xs:complexType>
+            <xs:attribute name="ChannelType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ChannelTypeDetails" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ChannelUsage" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Locator" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for Company ** -->
     <xs:element name="Company">
@@ -4760,19 +4744,17 @@
     </xs:element>
 
     <!-- ** Complex type definition for CutBlock ** -->
-    <xs:element name="CutBlock" type="CutBlock" substitutionGroup="ResourceType"/>
-    <xs:complexType name="CutBlock">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="BlockElementType" type="EnumBlockElementType" use="optional"/>
-                <xs:attribute name="BlockName" type="NMTOKEN" use="required"/>
-                <xs:attribute name="BlockType" type="EnumBlockType" use="required"/>
-                <xs:attribute name="Box" type="rectangle" use="optional"/>
-                <xs:attribute name="CutWidth" type="double" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="CutBlock">
+        <xs:complexType>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="BlockElementType" type="EnumBlockElementType" use="optional"/>
+            <xs:attribute name="BlockName" type="NMTOKEN" use="required"/>
+            <xs:attribute name="BlockType" type="EnumBlockType" use="required"/>
+            <xs:attribute name="Box" type="rectangle" use="optional"/>
+            <xs:attribute name="CutWidth" type="double" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for DCTParams ** -->
     <xs:element name="DCTParams">
@@ -4821,26 +4803,24 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for DensityMeasuringField ** -->
-    <xs:element name="DensityMeasuringField" type="DensityMeasuringField" substitutionGroup="ResourceType"/>
-    <xs:complexType name="DensityMeasuringField">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="ToleranceDotGain" type="XYPair" use="optional"/>
-                <xs:attribute name="Setup" type="string" use="optional"/>
-                <xs:attribute name="Density" type="string" use="optional"/>
-                <xs:attribute name="DotGain" type="double" use="optional"/>
-                <xs:attribute name="Percentage" type="double" use="optional"/>
-                <xs:attribute name="ToleranceCyan" type="XYPair" use="optional"/>
-                <xs:attribute name="ToleranceMagenta" type="XYPair" use="optional"/>
-                <xs:attribute name="ToleranceBlack" type="XYPair" use="optional"/>
-                <xs:attribute name="ToleranceYellow" type="XYPair" use="optional"/>
-                <xs:attribute name="Screen" type="string" use="optional"/>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
-                <xs:attribute name="Diameter" type="double" use="optional"/>
-                <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="DensityMeasuringField">
+        <xs:complexType>
+            <xs:attribute name="ToleranceDotGain" type="XYPair" use="optional"/>
+            <xs:attribute name="Setup" type="string" use="optional"/>
+            <xs:attribute name="Density" type="string" use="optional"/>
+            <xs:attribute name="DotGain" type="double" use="optional"/>
+            <xs:attribute name="Percentage" type="double" use="optional"/>
+            <xs:attribute name="ToleranceCyan" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceMagenta" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceBlack" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceYellow" type="XYPair" use="optional"/>
+            <xs:attribute name="Screen" type="string" use="optional"/>
+            <xs:attribute name="Center" type="XYPair" use="optional"/>
+            <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for DeviceNColor ** -->
     <xs:element name="DeviceNColor">
@@ -5029,14 +5009,12 @@
     </xs:element>
 
     <!-- ** Complex type definition for ExternalImpositionTemplate ** -->
-    <xs:element name="ExternalImpositionTemplate" type="ExternalImpositionTemplate" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ExternalImpositionTemplate">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ExternalImpositionTemplate">
+        <xs:complexType>
+            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ExtraValues ** -->
     <xs:element name="ExtraValues">
@@ -5255,19 +5233,17 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for InsertSheet ** -->
-    <xs:element name="InsertSheet" type="InsertSheet" substitutionGroup="ResourceType"/>
-    <xs:complexType name="InsertSheet">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element ref="RunList" minOccurs="0" maxOccurs="1"/>
-                </xs:sequence>
-                <xs:attribute name="IsWaste" type="boolean" use="optional"/>
-                <xs:attribute name="SheetFormat" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SheetUsage" type="EnumSheetUsage" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="InsertSheet">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RunList" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="IsWaste" type="boolean" use="optional"/>
+            <xs:attribute name="SheetFormat" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SheetUsage" type="EnumSheetUsage" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for InterpretedPDLData ** -->
     <xs:element name="InterpretedPDLData" type="InterpretedPDLData" substitutionGroup="ResourceType"/>
@@ -5596,21 +5572,19 @@
     </xs:element>
 
     <!-- ** Complex type definition for ObjectResolution ** -->
-    <xs:element name="ObjectResolution" type="ObjectResolution" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ObjectResolution">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="AntiAliasing" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SourceObjects" use="optional">
-                    <xs:simpleType>
-                        <xs:list itemType="EnumSourceObjects"/>
-                    </xs:simpleType>
-                </xs:attribute>
-                <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-                <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ObjectResolution">
+        <xs:complexType>
+            <xs:attribute name="AntiAliasing" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SourceObjects" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="EnumSourceObjects"/>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="Resolution" type="XYPair" use="optional"/>
+            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for OCGControl ** -->
     <xs:element name="OCGControl">
@@ -5687,24 +5661,22 @@
     </xs:element>
 
     <!-- ** Complex type definition for Person ** -->
-    <xs:element name="Person" type="Person" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Person">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Address"/>
-                </xs:sequence>
-                <xs:attribute name="JobTitle" type="string" use="optional"/>
-                <xs:attribute name="NamePrefix" type="string" use="optional"/>
-                <xs:attribute name="AdditionalNames" type="string" use="optional"/>
-                <xs:attribute name="Languages" type="languages" use="optional"/>
-                <xs:attribute name="FamilyName" type="string" use="optional"/>
-                <xs:attribute name="FirstName" type="string" use="optional"/>
-                <xs:attribute name="NameSuffix" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="Person">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Address"/>
+            </xs:sequence>
+            <xs:attribute name="JobTitle" type="string" use="optional"/>
+            <xs:attribute name="NamePrefix" type="string" use="optional"/>
+            <xs:attribute name="AdditionalNames" type="string" use="optional"/>
+            <xs:attribute name="Languages" type="languages" use="optional"/>
+            <xs:attribute name="FamilyName" type="string" use="optional"/>
+            <xs:attribute name="FirstName" type="string" use="optional"/>
+            <xs:attribute name="NameSuffix" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for PlateCopyParams ** -->
     <xs:element name="PlateCopyParams" type="PlateCopyParams" substitutionGroup="ResourceType"/>
@@ -6330,30 +6302,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <!-- ** Complex type definition for TransferCurvePool ** -->
-    <xs:element name="TransferCurvePool" type="TransferCurvePool" substitutionGroup="ResourceType"/>
-    <xs:complexType name="TransferCurvePool">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurveSet"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for TransferCurveSet ** -->
-    <xs:element name="TransferCurveSet">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferCurve"/>
-            </xs:sequence>
-            <xs:attribute name="CTM" type="matrix" use="optional"/>
-            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
 
     <!-- ** Complex type definition for UsageCounter ** -->
     <xs:element name="UsageCounter" type="UsageCounter" substitutionGroup="ResourceType"/>
