@@ -10,7 +10,7 @@ public class FoldingIntentValidator implements Validator<FoldingIntent> {
 
     @Override
     public final ValidationResult validate(final FoldingIntent foldingIntent) {
-        if (StringUtils.isEmpty(foldingIntent.getFoldingCatalog())
+        if (StringUtils.isEmpty(foldingIntent.getFoldCatalog())
             && StringUtils.isNotEmpty(foldingIntent.getFoldingDetails())) {
             return new ValidationResult("@FoldingDetails SHALL NOT be specified if @FoldCatalog is not present");
         }

@@ -2001,9 +2001,9 @@
                     <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
+                    <xs:anyAttribute namespace="##other" processContents="lax"/>
                 </xs:extension>
             </xs:simpleContent>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
@@ -3873,7 +3873,7 @@
     <xs:element name="LooseBinding">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="1" ref="HolePattern"/>
+                <xs:element ref="HolePattern" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Brand" type="string" use="optional"/>
@@ -3959,7 +3959,7 @@
                     <xs:element ref="Fold" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Perforate" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="FoldingCatalog" type="FoldCatalog" use="required"/>
+                <xs:attribute name="FoldCatalog" type="FoldCatalog" use="required"/>
                 <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             </xs:extension>

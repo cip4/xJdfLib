@@ -215,7 +215,7 @@ public class XJdfNodeFactoryTest {
         FoldingIntent foldingIntent = xJdfNodeFactory.createFoldingIntent(FOLDING_CATALOG);
 
         // assert
-        assertEquals("FoldingCatalog is wrong", FOLDING_CATALOG, foldingIntent.getFoldingCatalog());
+        assertEquals("FoldCatalog is wrong", FOLDING_CATALOG, foldingIntent.getFoldCatalog());
     }
 
     @Test

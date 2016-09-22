@@ -439,19 +439,19 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new FoldingIntent Node which already contains values for attribute FoldingCatalog.
+     * Create new FoldingIntent Node which already contains values for attribute FoldCatalog.
      *
-     * @param foldingCatalog Value for FoldingCatalog attribute.
+     * @param foldCatalog Value for FoldCatalog attribute.
      *
      * @return FoldingIntent Node which already contains defined attributes.
      */
-    public final FoldingIntent createFoldingIntent(final String foldingCatalog) {
+    public final FoldingIntent createFoldingIntent(final String foldCatalog) {
 
         // create node
         FoldingIntent foldingIntent = super.createFoldingIntent();
 
         // set attributes
-        foldingIntent.setFoldingCatalog(foldingCatalog);
+        foldingIntent.setFoldCatalog(foldCatalog);
 
         // return object
         return foldingIntent;

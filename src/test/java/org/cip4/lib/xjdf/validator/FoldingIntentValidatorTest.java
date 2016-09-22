@@ -8,31 +8,31 @@ import static org.junit.Assert.*;
 public class FoldingIntentValidatorTest {
 
     @Test
-    public void validateAllowsFoldingIntentWithoutFoldingCatalogOrFoldingDetails() throws Exception {
+    public void validateAllowsFoldingIntentWithoutFoldCatalogOrFoldingDetails() throws Exception {
         FoldingIntent foldingIntent = new FoldingIntent();
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
         assertTrue(validator.validate(foldingIntent).isValid());
     }
 
     @Test
-    public void validateAllowsFoldingIntentWithFoldingCatalogButNoFoldingDetails() throws Exception {
+    public void validateAllowsFoldingIntentWithFoldCatalogButNoFoldingDetails() throws Exception {
         FoldingIntent foldingIntent = new FoldingIntent();
-        foldingIntent.withFoldingCatalog("F4-1");
+        foldingIntent.withFoldCatalog("F4-1");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
         assertTrue(validator.validate(foldingIntent).isValid());
     }
 
     @Test
-    public void validateAllowsFoldingIntentWithFoldingCatalogAndFoldingDetails() throws Exception {
+    public void validateAllowsFoldingIntentWithFoldCatalogAndFoldingDetails() throws Exception {
         FoldingIntent foldingIntent = new FoldingIntent();
-        foldingIntent.withFoldingCatalog("F4-1");
+        foldingIntent.withFoldCatalog("F4-1");
         foldingIntent.withFoldingDetails("CustomFold4");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
         assertTrue(validator.validate(foldingIntent).isValid());
     }
 
     @Test
-    public void validateDoesNotAllowsFoldingIntentWithoutFoldingCatalogButFoldingDetails() throws Exception {
+    public void validateDoesNotAllowsFoldingIntentWithoutFoldCatalogButFoldingDetails() throws Exception {
         FoldingIntent foldingIntent = new FoldingIntent();
         foldingIntent.withFoldingDetails("CustomFold4");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();

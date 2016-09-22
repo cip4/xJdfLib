@@ -720,9 +720,9 @@ XJDF xJdf = xJdfParser.parseBytes(bytes);</programlisting>
                 </row>
 
                 <row>
-                  <entry>FOLDING_CATALOG</entry>
+                  <entry>FOLD_CATALOG</entry>
 
-                  <entry>/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldingCatalog</entry>
+                  <entry>/XJDF/ProductList/Product/Intent[@Name='FoldingIntent']/FoldingIntent/@FoldCatalog</entry>
                 </row>
 
                 <row>

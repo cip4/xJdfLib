@@ -17,7 +17,7 @@
 				<ProductionIntent PrintProcess="Lithography" />
 			</Intent>
 			<Intent Name="FoldingIntent">
-				<FoldingIntent FoldingCatalog="F6-1" />
+				<FoldingIntent FoldCatalog="F6-1" />
 			</Intent>
 			<Intent Name="ColorIntent">
 				<ColorIntent NumColors="4 4" />

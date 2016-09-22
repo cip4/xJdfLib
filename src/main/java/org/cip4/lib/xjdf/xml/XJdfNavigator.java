@@ -91,9 +91,9 @@ public class XJdfNavigator extends XmlNavigator {
     public static final String PRODUCTION_PRINT_PROCESS = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='ProductionIntent']/xjdf:ProductionIntent/@PrintProcess";
 
     /**
-     * XPath to attribute 'FoldingCatalog' of FoldingIntent Node in XJDF Document.
+     * XPath to attribute 'FoldCatalog' of FoldingIntent Node in XJDF Document.
      */
-    public static final String FOLDING_CATALOG = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='FoldingIntent']/xjdf:FoldingIntent/@FoldingCatalog";
+    public static final String FOLD_CATALOG = "/xjdf:XJDF/xjdf:ProductList/xjdf:Product/xjdf:Intent[@Name='FoldingIntent']/xjdf:FoldingIntent/@FoldCatalog";
 
     /**
      * XPath to attribute 'NumColors' of ColorIntent Node in XJDF Document.

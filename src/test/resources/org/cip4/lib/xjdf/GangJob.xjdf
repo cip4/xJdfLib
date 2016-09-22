@@ -19,7 +19,7 @@
 				<xjdf:ColorIntent NumColors="4 4" />
 			</xjdf:Intent>
 			<xjdf:Intent Name="FoldingIntent">
-				<xjdf:FoldingIntent FoldingCatalog="F4-1" />
+				<xjdf:FoldingIntent FoldCatalog="F4-1" />
 			</xjdf:Intent>
 			<xjdf:Intent Name="ProductionIntent">
 				<xjdf:ProductionIntent PrintProcess="Lithography" />
@@ -57,7 +57,7 @@
 				<xjdf:ColorIntent NumColors="4 4" />
 			</xjdf:Intent>
 			<xjdf:Intent Name="FoldingIntent">
-				<xjdf:FoldingIntent FoldingCatalog="F6-1" />
+				<xjdf:FoldingIntent FoldCatalog="F6-1" />
 			</xjdf:Intent>
 			<xjdf:Intent Name="ProductionIntent">
 				<xjdf:ProductionIntent PrintProcess="Lithography" />

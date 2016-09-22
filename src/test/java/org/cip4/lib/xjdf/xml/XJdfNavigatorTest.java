@@ -234,8 +234,8 @@ public class XJdfNavigatorTest {
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRODUCTION_PRINT_PROCESS);
 		Assert.assertEquals("Value 'PrintProcess' is wrong.", "Lithography", actual);
 
-		actual = xJdfNavigator.readAttribute(XJdfNavigator.FOLDING_CATALOG);
-		Assert.assertEquals("Value 'FoldingCatalog' is wrong.", "F6-1", actual);
+		actual = xJdfNavigator.readAttribute(XJdfNavigator.FOLD_CATALOG);
+		Assert.assertEquals("Value 'FoldCatalog' is wrong.", "F6-1", actual);
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.COLOR_NUM_COLORS);
 		Assert.assertEquals("Value 'NumColors' is wrong.", "4 4", actual);
