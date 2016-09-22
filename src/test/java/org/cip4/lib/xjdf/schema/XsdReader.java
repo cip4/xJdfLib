@@ -14,6 +14,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,27 +61,31 @@ class XsdReader {
         return properties;
     }
 
-    private Set<Node> typeProperties(Node complexType, String propertyType) throws XPathExpressionException {
-        NodeList nodeList = (NodeList) xPath.evaluate(
-            String.format(".//xs:%s", propertyType),
-            complexType,
-            XPathConstants.NODESET
-        );
-        Set<Node> nodes = new HashSet<>(nodeList.getLength());
-        for (int i = 0; i < nodeList.getLength(); ++i) {
-            nodes.add(nodeList.item(i));
-        }
-
-        String parentType =  xPath.evaluate(".//xs:extension/@base", complexType);
-        if (!"".equals(parentType)) {
-            Node parentComplexTypeNode = (Node) xPath.evaluate(
-                String.format("//xs:complexType[@name='%s']", parentType),
-                schema,
-                XPathConstants.NODE
+    public Collection<Node> typeProperties(Node complexType, String propertyType) {
+        try {
+            NodeList nodeList = (NodeList) xPath.evaluate(
+                String.format(".//xs:%s", propertyType),
+                complexType,
+                XPathConstants.NODESET
             );
-            nodes.addAll(typeProperties(parentComplexTypeNode, propertyType));
+            Set<Node> nodes = new HashSet<>(nodeList.getLength());
+            for (int i = 0; i < nodeList.getLength(); ++i) {
+                nodes.add(nodeList.item(i));
+            }
+
+            String parentType = xPath.evaluate(".//xs:extension/@base", complexType);
+            if (!"".equals(parentType) && !"string".equals(parentType)) {
+                Node parentComplexTypeNode = (Node) xPath.evaluate(
+                    String.format("//xs:complexType[@name='%s']", parentType),
+                    schema,
+                    XPathConstants.NODE
+                );
+                nodes.addAll(typeProperties(parentComplexTypeNode, propertyType));
+            }
+            return nodes;
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
         }
-        return nodes;
     }
 
     public NodeList evaluate(final String xPathExpression) throws XPathExpressionException {
@@ -90,4 +95,16 @@ class XsdReader {
             XPathConstants.NODESET
         );
     }
+
+    public String localNameOfComplexType(final Node complexTypeNode) {
+        try {
+            return xPath.evaluate(
+                "@name | ../@name",
+                complexTypeNode
+            );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
