@@ -1,8 +1,6 @@
 package org.cip4.lib.xjdf.builder;
 
-import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.EnumIntentName;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.IntentType;
 import org.cip4.lib.xjdf.schema.Product;
