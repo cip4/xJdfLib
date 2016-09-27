@@ -6317,14 +6317,11 @@
     <!-- ** Complex type definition for Crease ** -->
     <xs:element name="Crease">
         <xs:complexType>
-            <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
-            <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="Depth" type="double" use="optional"/>
-            <xs:attribute name="RelativeTravel" type="double" use="optional"/>
-            <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="Travel" type="double" use="optional"/>
+            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
