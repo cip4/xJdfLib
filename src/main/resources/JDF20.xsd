@@ -1445,6 +1445,14 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumBottling">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="All"/>
+            <xs:enumeration value="Last"/>
+            <xs:enumeration value="None"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -4337,6 +4345,7 @@
                 <xs:attribute name="BleedLeft" type="double" use="optional"/>
                 <xs:attribute name="BleedRight" type="double" use="optional"/>
                 <xs:attribute name="BleedTop" type="double" use="optional"/>
+                <xs:attribute name="Bottling" type="EnumBottling" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
@@ -6120,9 +6129,6 @@
             <xs:attribute name="BleedFoot" type="double" use="optional"/>
             <xs:attribute name="BleedHead" type="double" use="optional"/>
             <xs:attribute name="BleedSpine" type="double" use="optional"/>
-            <xs:attribute name="BottleAngle" type="double" use="optional"/>
-            <xs:attribute name="BottleAxis" type="EnumBottleAxis" use="optional"/>
-            <xs:attribute name="Creep" type="XYPair" use="optional"/>
             <xs:attribute name="CutWidthFoot" type="double" use="optional"/>
             <xs:attribute name="CutWidthHead" type="double" use="optional"/>
             <xs:attribute name="FaceCells" type="IntegerList" use="optional"/>
