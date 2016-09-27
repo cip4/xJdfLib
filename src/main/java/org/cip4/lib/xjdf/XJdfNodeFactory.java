@@ -458,33 +458,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new MarkObject Node which already contains defined attributes.
-     *
-     * @param ctm Value of CTM attribute as String.
-     * @param clipBox Value of ClipBox attribute as String.
-     * @param ord Value of Ord attribute as Integer.
-     *
-     * @return MarkObject Node which already contains defined attributes.
-     */
-    public final MarkObject createMarkObject(
-        final Matrix ctm,
-        final Rectangle clipBox,
-        final Integer ord
-    ) {
-
-        // create node
-        MarkObject markObject = super.createMarkObject();
-
-        // set attributes
-        markObject.setCTM(ctm);
-        markObject.setClipBox(clipBox);
-        markObject.setOrd(ord);
-
-        // return object
-        return markObject;
-    }
-
-    /**
      * Create a new Media Node which already contains defined attributes.
      *
      * @param dimensions Value of Dimensions attribute as XYPair.

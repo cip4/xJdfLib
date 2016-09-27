@@ -218,21 +218,4 @@ public class XJdfNodeFactoryTest {
         assertEquals("FoldCatalog is wrong", FOLDING_CATALOG, foldingIntent.getFoldCatalog());
     }
 
-    @Test
-    public void testMarkObject() {
-
-        // arrange
-        final Matrix ctm = new Matrix();
-        final Rectangle clipBox = new Rectangle("0.0000 0.0000 2976.3779527559 2125.9842519685");
-        final Integer ord = 8;
-
-        // act
-        MarkObject markObject = xJdfNodeFactory.createMarkObject(ctm, clipBox, ord);
-
-        // assert
-        assertEquals("CTM is wrong.", 1d, markObject.getCTM().getD(), 0.0);
-        assertEquals("ClipBox is wrong.", 2976.3779527559d, markObject.getClipBox().getUrx(), 0.0);
-        assertEquals("Ord is wrong.", new Integer(8), markObject.getOrd());
-    }
-
 }

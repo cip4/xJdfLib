@@ -3162,7 +3162,6 @@
                 <xs:element ref="DeviceMark" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="DynamicField" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="FillMark" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="JobField" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="MarkActivation" minOccurs="0" maxOccurs="unbounded"/>
@@ -3170,23 +3169,7 @@
                 <xs:element ref="RegisterMark" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="ScavengerArea" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
-            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
-            <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
             <xs:attribute name="ContentRef" type="IDREF" use="optional"/>
-            <xs:attribute name="CTM" type="matrix" use="optional"/>
-            <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
-            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
-            <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
-            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5262,11 +5245,10 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element ref="ContentObject" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="ExternalImpositionTemplate" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="LogicalStackParams" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="MarkObject" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="PageCondition" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="PlacedObject" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Position" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="SheetCondition" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="1"/>
@@ -5301,6 +5283,36 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="PlacedObject">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="1"/>
+                <xs:choice>
+                    <xs:element ref="ContentObject"/>
+                    <xs:element ref="MarkObject"/>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
+            <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
+            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
+            <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
+            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
+            <xs:attribute name="CTM" type="matrix" use="optional"/>
+            <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
+            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
+            <xs:attribute name="Ord" type="integer" use="optional"/>
+            <xs:attribute name="OrdExpression" type="string" use="optional"/>
+            <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
+            <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
+            <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="LogicalStackParams">
         <xs:complexType>
