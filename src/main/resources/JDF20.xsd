@@ -1616,6 +1616,92 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumDispositionAction">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Delete"/>
+            <xs:enumeration value="Archive"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumFeederSynchronization">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Alternate"/>
+            <xs:enumeration value="Backup"/>
+            <xs:enumeration value="Chain"/>
+            <xs:enumeration value="Primary"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumOpening">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Back"/>
+            <xs:enumeration value="Front"/>
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Sucker"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumFeedQuality">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="NotActive"/>
+            <xs:enumeration value="Check"/>
+            <xs:enumeration value="Waste"/>
+            <xs:enumeration value="StopNoWaste"/>
+            <xs:enumeration value="StopWaste"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumFolderProductionType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Collect"/>
+            <xs:enumeration value="NonCollect"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumProgressionOrder">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="LRCP"/>
+            <xs:enumeration value="RLCP"/>
+            <xs:enumeration value="RPCL"/>
+            <xs:enumeration value="PCRL"/>
+            <xs:enumeration value="CPRL"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMetadataContext">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Set"/>
+            <xs:enumeration value="Document"/>
+            <xs:enumeration value="SubDoc0"/>
+            <xs:enumeration value="SubDoc1"/>
+            <xs:enumeration value="SubDoc2"/>
+            <xs:enumeration value="SubDoc3"/>
+            <xs:enumeration value="SubDoc4"/>
+            <xs:enumeration value="SubDoc5"/>
+            <xs:enumeration value="SubDoc6"/>
+            <xs:enumeration value="SubDoc7"/>
+            <xs:enumeration value="SubDoc8"/>
+            <xs:enumeration value="SubDoc9"/>
+            <xs:enumeration value="PagePool"/>
+            <xs:enumeration value="Page"/>
+            <xs:enumeration value="Object"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMetadataType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="string"/>
+            <xs:enumeration value="integer"/>
+            <xs:enumeration value="double"/>
+            <xs:enumeration value="NMTOKEN"/>
+            <xs:enumeration value="boolean"/>
+            <xs:enumeration value="dateTime"/>
+            <xs:enumeration value="duration"/>
+            <xs:enumeration value="NamedFeature"/>
+            <xs:enumeration value="PartIDKeys"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -4923,12 +5009,11 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="ConvertingConfig" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element ref="RepeatDesc" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="RepeatDesc" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Estimate" type="boolean" use="optional"/>
-                <xs:attribute name="Position" use="optional"/>
+                <xs:attribute name="Position" type="Anchor" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4991,12 +5076,12 @@
     <!-- ** Complex type definition for Disposition ** -->
     <xs:element name="Disposition">
         <xs:complexType>
-            <xs:attribute name="Until" type="dateTime" use="optional"/>
-            <xs:attribute name="MinDuration" type="duration" use="optional"/>
+            <xs:attribute name="DispositionAction" type="EnumDispositionAction" use="optional"/>
+            <xs:attribute name="DispositionUsage" type="EnumUsage" use="optional"/>
             <xs:attribute name="ExtraDuration" type="duration" use="optional"/>
+            <xs:attribute name="MinDuration" type="duration" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
-            <xs:attribute name="DispositionUsage" use="optional"/>
-            <xs:attribute name="DispositionAction" use="optional"/>
+            <xs:attribute name="Until" type="dateTime" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5087,13 +5172,13 @@
             <xs:sequence>
                 <xs:element ref="FeederQualityParams" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Position" type="integer" use="optional"/>
-            <xs:attribute name="Opening" use="optional"/>
-            <xs:attribute name="FeederType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="AlternatePositions" type="IntegerList" use="optional"/>
-            <xs:attribute name="FeederSynchronization" use="optional"/>
-            <xs:attribute name="Loading" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
+            <xs:attribute name="FeederSynchronization" type="EnumFeederSynchronization" use="optional"/>
+            <xs:attribute name="FeederType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Loading" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Opening" type="EnumOpening" use="optional"/>
+            <xs:attribute name="Position" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5101,11 +5186,11 @@
     <!-- ** Complex type definition for FeederQualityParams ** -->
     <xs:element name="FeederQualityParams">
         <xs:complexType>
-            <xs:attribute name="DoubleFeeds" type="integer" use="optional"/>
-            <xs:attribute name="IncorrectComponentQuality" use="optional"/>
+            <xs:attribute name="BadFeedQuality" type="EnumFeedQuality" use="optional"/>
             <xs:attribute name="BadFeeds" type="integer" use="optional"/>
-            <xs:attribute name="BadFeedQuality" use="optional"/>
-            <xs:attribute name="DoubleFeedQuality" use="optional"/>
+            <xs:attribute name="DoubleFeedQuality" type="EnumFeedQuality" use="optional"/>
+            <xs:attribute name="DoubleFeeds" type="integer" use="optional"/>
+            <xs:attribute name="IncorrectComponentQuality" type="EnumFeedQuality" use="optional"/>
             <xs:attribute name="IncorrectComponents" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -5162,8 +5247,8 @@
     <!-- ** Complex type definition for FolderProduction ** -->
     <xs:element name="FolderProduction">
         <xs:complexType>
-            <xs:attribute name="FolderModuleID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ProductionType" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ProductionType" type="EnumFolderProductionType" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5173,21 +5258,6 @@
     <xs:complexType name="FoldOperation">
         <xs:complexContent>
             <xs:extension base="ResourceType"/>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for FontParams ** -->
-    <xs:element name="FontParams" type="FontParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="FontParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="SubsetFonts" type="boolean" use="optional"/>
-                <xs:attribute name="MaxSubsetPct" type="integer" use="optional"/>
-                <xs:attribute name="CannotEmbedFontPolicy" use="optional"/>
-                <xs:attribute name="NeverEmbed" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="EmbedAllFonts" type="boolean" use="optional"/>
-                <xs:attribute name="AlwaysEmbed" type="NMTOKENS" use="optional"/>
-            </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
@@ -5251,21 +5321,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ImageReplacementParams ** -->
-    <xs:element name="ImageReplacementParams" type="ImageReplacementParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ImageReplacementParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="MaxSearchRecursion" type="integer" use="optional"/>
-                <xs:attribute name="MinResolution" type="double" use="optional"/>
-                <xs:attribute name="IgnoreExtensions" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="ImageReplacementStrategy" use="optional"/>
-                <xs:attribute name="ImagePreScanStrategy" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for ImageSetterParams ** -->
     <xs:element name="ImageSetterParams" type="ImageSetterParams" substitutionGroup="ResourceType"/>
     <xs:complexType name="ImageSetterParams">
@@ -5320,12 +5375,12 @@
     <!-- ** Complex type definition for JPEG2000Params ** -->
     <xs:element name="JPEG2000Params">
         <xs:complexType>
-            <xs:attribute name="LayersPerTile" type="integer" use="optional"/>
-            <xs:attribute name="TileSize" type="XYPair" use="optional"/>
-            <xs:attribute name="LayerRates" type="string" use="optional"/>
-            <xs:attribute name="ProgressionOrder" use="optional"/>
             <xs:attribute name="CodeBlockSize" type="integer" use="optional"/>
+            <xs:attribute name="LayerRates" type="DoubleList" use="optional"/>
+            <xs:attribute name="LayersPerTile" type="integer" use="optional"/>
             <xs:attribute name="NumResolutions" type="integer" use="optional"/>
+            <xs:attribute name="ProgressionOrder" type="EnumProgressionOrder" use="optional"/>
+            <xs:attribute name="TileSize" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5584,11 +5639,11 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Expr"/>
             </xs:sequence>
-            <xs:attribute name="ValueFormat" type="string" use="optional"/>
-            <xs:attribute name="Context" use="optional"/>
-            <xs:attribute name="ValueTemplate" type="string" use="optional"/>
-            <xs:attribute name="DataType" use="optional"/>
+            <xs:attribute name="Context" type="EnumMetadataContext" use="optional"/>
+            <xs:attribute name="DataType" type="EnumMetadataType" use="optional"/>
             <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ValueFormat" type="string" use="optional"/>
+            <xs:attribute name="ValueTemplate" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
