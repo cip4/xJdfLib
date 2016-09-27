@@ -1444,6 +1444,16 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumTransferCurve">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Film"/>
+            <xs:enumeration value="Plate"/>
+            <xs:enumeration value="Press"/>
+            <xs:enumeration value="Substrate"/>
+            <xs:enumeration value="Proof"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -3358,7 +3368,7 @@
             <xs:attribute name="Side" type="EnumSide" use="optional"/>
             <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TileID" type="XYPair" use="optional"/>
-            <xs:attribute name="TransferCurveName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="TransferCurveName" type="EnumTransferCurve" use="optional"/>
             <xs:attribute name="WebName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3646,22 +3656,6 @@
                 <xs:attribute name="StackCompression" type="boolean" use="optional"/>
                 <xs:attribute name="StandardAmount" type="integer" use="optional"/>
                 <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for Strap ** -->
-    <xs:element name="Strap" type="Strap" substitutionGroup="ResourceType"/>
-    <xs:complexType name="Strap">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
-                <xs:attribute name="StrapColor" type="string" use="optional"/>
-                <xs:attribute name="Material" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
