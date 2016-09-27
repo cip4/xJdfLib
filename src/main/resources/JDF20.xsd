@@ -5138,7 +5138,7 @@
                 <xs:attribute name="Format" type="RegExp" use="optional"/>
                 <xs:attribute name="Orientation" type="matrix" use="optional"/>
                 <xs:attribute name="Page" type="integer" use="optional"/>
-                <xs:attribute name="Position" use="optional"/>
+                <xs:attribute name="Position" type="Face" use="optional"/>
                 <xs:attribute name="Purpose" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Value" type="string" use="optional"/>
