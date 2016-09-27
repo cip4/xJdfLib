@@ -56,6 +56,11 @@
                 <baseType name="org.cip4.lib.xjdf.schema.Product" />
             </property>
         </bindings>
+        <bindings node="//xs:complexType[@name='AssemblingIntent']//xs:attribute[@name='Container']" >
+            <property>
+                <baseType name="org.cip4.lib.xjdf.schema.Product" />
+            </property>
+        </bindings>
         <bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']" >
             <property>
                 <baseType name="org.cip4.lib.xjdf.schema.Resource" />

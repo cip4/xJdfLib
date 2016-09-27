@@ -516,25 +516,11 @@
 
     <xs:simpleType name="EnumGlueType">
         <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Permanent"/>
-            <xs:enumeration value="Removable"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumGlueTypeDetailed">
-        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="ColdGlue"/>
             <xs:enumeration value="Hotmelt"/>
             <xs:enumeration value="Permanent"/>
             <xs:enumeration value="PUR"/>
             <xs:enumeration value="Removable"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumInsertingMethod">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="BindIn"/>
-            <xs:enumeration value="BlowIn"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3971,11 +3957,7 @@
                     <xs:element ref="BlowIn" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="StickOn" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="Folio" type="IntegerRange" use="optional"/>
-                <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
-                <xs:attribute name="Method" type="EnumInsertingMethod" use="optional"/>
-                <xs:attribute name="Transformation" type="matrix" use="optional"/>
-                <xs:attribute name="WrapPages" type="IntegerRange" use="optional"/>
+                <xs:attribute name="Container" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6415,7 +6397,7 @@
             <xs:attribute name="AreaGlue" type="boolean" use="optional"/>
             <xs:attribute name="GlueLineWidth" type="double" use="optional"/>
             <xs:attribute name="GlueRef" type="IDREF" use="optional"/>
-            <xs:attribute name="GlueType" type="EnumGlueTypeDetailed" use="optional"/>
+            <xs:attribute name="GlueType" type="EnumGlueType" use="optional"/>
             <xs:attribute name="GluingPattern" type="NumberList" use="optional"/>
             <xs:attribute name="GluingTechnique" type="EnumGluingTechnique" use="optional"/>
             <xs:attribute name="MeltingTemperature" type="integer" use="optional"/>
