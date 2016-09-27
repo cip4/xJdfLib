@@ -7150,7 +7150,7 @@
         <xs:complexContent>
             <xs:extension base="Audit">
                 <xs:sequence>
-                    <xs:element ref="Notification" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Notification" minOccurs="1" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Author" type="string" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>

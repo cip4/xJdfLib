@@ -26,7 +26,6 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
-    @Ignore("Wait for fix in XJDF-300")
     public void signalNotificationAndAuditNotificationAreAligned() throws Exception {
         Collection<Node> signalProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalNotification")
