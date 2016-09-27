@@ -5783,17 +5783,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PrintRollingParams ** -->
-    <xs:element name="PrintRollingParams" type="PrintRollingParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="PrintRollingParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="MaxDiameter" type="double" use="optional"/>
-                <xs:attribute name="Copies" type="integer" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for ProductionPath ** -->
     <xs:element name="ProductionPath" type="ProductionPath" substitutionGroup="ResourceType"/>
     <xs:complexType name="ProductionPath">
@@ -5894,24 +5883,6 @@
                 </xs:sequence>
                 <xs:attribute name="DefaultPriority" use="optional"/>
                 <xs:attribute name="DefaultJDF" type="URL" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for RollStand ** -->
-    <xs:element name="RollStand" type="RollStand" substitutionGroup="ResourceType"/>
-    <xs:complexType name="RollStand">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
-                <xs:attribute name="MaxDiameter" type="double" use="optional"/>
-                <xs:attribute name="MaxWidth" type="double" use="optional"/>
-                <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
