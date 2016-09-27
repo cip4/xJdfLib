@@ -681,15 +681,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumBottleAxis">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="FaceFront"/>
-            <xs:enumeration value="FaceHead"/>
-            <xs:enumeration value="SpineFoot"/>
-            <xs:enumeration value="SpineHead"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumMask">
         <xs:restriction base="NMTOKEN">
             <xs:enumeration value="None"/>
