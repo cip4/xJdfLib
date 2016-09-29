@@ -114,6 +114,9 @@
     <bindings node="//xs:element[@name='TIFFFormatParams']//xs:attribute[@name='ByteOrder']/xs:simpleType">
         <typesafeEnumClass name="ByteOrder"/>
     </bindings>
+    <bindings node="//xs:complexType[@name='UsageCounter']//xs:attribute[@name='Scope']/xs:simpleType">
+        <typesafeEnumClass name="Scope"/>
+    </bindings>
 </bindings>
 
 	

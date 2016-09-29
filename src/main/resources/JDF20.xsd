@@ -6463,8 +6463,15 @@
                 </xs:sequence>
                 <xs:attribute name="CounterID" type="string" use="optional"/>
                 <xs:attribute name="CounterTypes" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="Scope" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Scope" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Lifetime"/>
+                            <xs:enumeration value="PowerOn"/>
+                            <xs:enumeration value="Job"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
