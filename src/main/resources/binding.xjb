@@ -4,41 +4,41 @@
           xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
           xmlns:xs="http://www.w3.org/2001/XMLSchema"
           xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
-          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector">
+          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+          schemaLocation="JDF20.xsd">
 
-    <bindings schemaLocation="JDF20.xsd">
-        <globalBindings>
-            <xjc:serializable/>
-		</globalBindings>
-		<schemaBindings>
-			<package name="org.cip4.lib.xjdf.schema" />
-		</schemaBindings>
-        <bindings scd="/~xjdf:matrix">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Matrix" adapter="org.cip4.lib.xjdf.type.Matrix" />
-        </bindings>
-        <bindings scd="/~xjdf:rectangle">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Rectangle" adapter="org.cip4.lib.xjdf.type.Rectangle" />
-        </bindings>
-        <bindings scd="/~xjdf:shape">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Shape" adapter="org.cip4.lib.xjdf.type.Shape" />
-        </bindings>
-        <bindings scd="/~xjdf:XYPair">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair" adapter="org.cip4.lib.xjdf.type.XYPair" />
-        </bindings>
-        <bindings scd="/~xjdf:dateTime">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime" adapter="org.cip4.lib.xjdf.type.DateTime"/>
-        </bindings>
-        <bindings scd="/~xjdf:URL">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.URI" adapter="org.cip4.lib.xjdf.type.URI"/>
-        </bindings>
-        <bindings scd="/~xjdf:IntegerList">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList" adapter="org.cip4.lib.xjdf.type.IntegerList" />
-        </bindings>
-        <bindings scd="/~xjdf:duration">
-            <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration" />
-        </bindings>
-        <bindings node="//xs:complexType[@name='BindingIntent']">
-            <ci:code><![CDATA[
+    <globalBindings typesafeEnumMemberName="generateError">
+        <xjc:serializable/>
+    </globalBindings>
+    <schemaBindings>
+        <package name="org.cip4.lib.xjdf.schema"/>
+    </schemaBindings>
+    <bindings scd="/~xjdf:matrix">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.Matrix" adapter="org.cip4.lib.xjdf.type.Matrix"/>
+    </bindings>
+    <bindings scd="/~xjdf:rectangle">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.Rectangle" adapter="org.cip4.lib.xjdf.type.Rectangle"/>
+    </bindings>
+    <bindings scd="/~xjdf:shape">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.Shape" adapter="org.cip4.lib.xjdf.type.Shape"/>
+    </bindings>
+    <bindings scd="/~xjdf:XYPair">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair" adapter="org.cip4.lib.xjdf.type.XYPair"/>
+    </bindings>
+    <bindings scd="/~xjdf:dateTime">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime" adapter="org.cip4.lib.xjdf.type.DateTime"/>
+    </bindings>
+    <bindings scd="/~xjdf:URL">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.URI" adapter="org.cip4.lib.xjdf.type.URI"/>
+    </bindings>
+    <bindings scd="/~xjdf:IntegerList">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList" adapter="org.cip4.lib.xjdf.type.IntegerList"/>
+    </bindings>
+    <bindings scd="/~xjdf:duration">
+        <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration"/>
+    </bindings>
+    <bindings node="//xs:complexType[@name='BindingIntent']">
+        <ci:code><![CDATA[
      /*
       * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
       *
@@ -49,60 +49,70 @@
          return childRefs;
      }
                 ]]>
-            </ci:code>
-        </bindings>
-        <bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='ChildRefs']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Product" />
-            </property>
-        </bindings>
-        <bindings node="//xs:complexType[@name='AssemblingIntent']//xs:attribute[@name='Container']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Product" />
-            </property>
-        </bindings>
-        <bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
-            </property>
-        </bindings>
-        <bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
-            </property>
-        </bindings>
-        <bindings node="//xs:complexType[@name='Created']//xs:attribute[@name='ContactRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
-            </property>
-        </bindings>
-        <bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']" >
-            <property>
-                <baseType name="org.cip4.lib.xjdf.schema.Resource" />
-            </property>
-        </bindings>
+        </ci:code>
+    </bindings>
+    <bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='ChildRefs']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Product"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:complexType[@name='AssemblingIntent']//xs:attribute[@name='Container']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Product"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:complexType[@name='Created']//xs:attribute[@name='ContactRef']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']">
+        <property>
+            <baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </property>
+    </bindings>
 
-        <bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
-            <property name="Audits">
-                <baseType name="org.cip4.lib.xjdf.schema.Audit" />
-            </property>
-        </bindings>
+    <bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
+        <property name="Audits">
+            <baseType name="org.cip4.lib.xjdf.schema.Audit"/>
+        </property>
+    </bindings>
 
-        <bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='refID']" >
-            <property collectionType="">
-                <baseType name="org.cip4.lib.xjdf.schema.ProcessRun" />
-            </property>
-        </bindings>
-        <bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">
-            <property>
-                <baseType>
-                    <javaType
-                            name="java.lang.Double"
-                            parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.stringToDouble"
-                            printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
-                </baseType>
-            </property>
-        </bindings>
+    <bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='refID']">
+        <property collectionType="">
+            <baseType name="org.cip4.lib.xjdf.schema.ProcessRun"/>
+        </property>
+    </bindings>
+    <bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">
+        <property>
+            <baseType>
+                <javaType
+                        name="java.lang.Double"
+                        parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.stringToDouble"
+                        printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
+            </baseType>
+        </property>
+    </bindings>
+
+    <bindings node="//xs:simpleType[@name='JDFJMFVersion']//xs:enumeration[@value='2.0']">
+        <typesafeEnumMember name="V_2_0"/>
+    </bindings>
+
+    <bindings node="//xs:element[@name='TIFFFormatParams']//xs:attribute[@name='Segmentation']/xs:simpleType">
+        <typesafeEnumClass name="Segmentation"/>
+    </bindings>
+    <bindings node="//xs:element[@name='TIFFFormatParams']//xs:attribute[@name='ByteOrder']/xs:simpleType">
+        <typesafeEnumClass name="ByteOrder"/>
     </bindings>
 </bindings>
 

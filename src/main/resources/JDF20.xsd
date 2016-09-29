@@ -1702,6 +1702,63 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="EnumTopBottom">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Top"/>
+            <xs:enumeration value="Bottom"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMarkType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Color"/>
+            <xs:enumeration value="PaperPath"/>
+            <xs:enumeration value="Tile"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumAllowedRotate">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="None"/>
+            <xs:enumeration value="Grain"/>
+            <xs:enumeration value="MinorGrain"/>
+            <xs:enumeration value="CrossGrain"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumScreeningType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Adaptive"/>
+            <xs:enumeration value="AM"/>
+            <xs:enumeration value="ErrorDiffusion"/>
+            <xs:enumeration value="FM"/>
+            <xs:enumeration value="HybridAM-FM"/>
+            <xs:enumeration value="HybridAMline-dot"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMarkContext">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="BinderySignature"/>
+            <xs:enumeration value="Cell"/>
+            <xs:enumeration value="CellPair"/>
+            <xs:enumeration value="Sheet"/>
+            <xs:enumeration value="Tab"/>
+            <xs:enumeration value="Tile"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="EnumMarkSide">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="BinderySignature"/>
+            <xs:enumeration value="Cell"/>
+            <xs:enumeration value="CellPair"/>
+            <xs:enumeration value="Sheet"/>
+            <xs:enumeration value="Tab"/>
+            <xs:enumeration value="Tile"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- unchecked -->
 
     <xs:simpleType name="JDFJMFVersion">
@@ -3061,7 +3118,7 @@
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Separation" type="string" use="optional"/>
             <xs:attribute name="ToolName" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -5795,7 +5852,7 @@
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="Depth" type="double" use="optional"/>
             <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="WorkingDirection" type="EnumTopBottom" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6001,11 +6058,11 @@
     <xs:complexType name="RegisterMark">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="Rotation" type="double" use="optional"/>
-                <xs:attribute name="MarkUsage" use="optional"/>
                 <xs:attribute name="Center" type="XYPair" use="optional"/>
                 <xs:attribute name="MarkType" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="MarkUsage" type="EnumMarkType" use="optional"/>
+                <xs:attribute name="Rotation" type="double" use="optional"/>
+                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6013,14 +6070,17 @@
     <!-- ** Complex type definition for RepeatDesc ** -->
     <xs:element name="RepeatDesc">
         <xs:complexType>
-            <xs:attribute name="OrdereQuantity" type="integer" use="optional"/>
-            <xs:attribute name="UseBleeds" type="boolean" use="optional"/>
-            <xs:attribute name="GutterY2" type="double" use="optional"/>
-            <xs:attribute name="AllowedRotate" use="optional"/>
-            <xs:attribute name="GutterX2" type="double" use="optional"/>
-            <xs:attribute name="LayoutStyle" type="NMTOKENS" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="ShapeDef" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="AllowedRotate" type="EnumAllowedRotate" use="optional"/>
             <xs:attribute name="GutterX" type="double" use="optional"/>
+            <xs:attribute name="GutterX2" type="double" use="optional"/>
             <xs:attribute name="GutterY" type="double" use="optional"/>
+            <xs:attribute name="GutterY2" type="double" use="optional"/>
+            <xs:attribute name="LayoutStyle" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="OrderQuantity" type="integer" use="optional"/>
+            <xs:attribute name="UseBleeds" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6072,22 +6132,22 @@
     <!-- ** Complex type definition for ScreenSelector ** -->
     <xs:element name="ScreenSelector">
         <xs:complexType>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Frequency" type="double" use="optional"/>
-            <xs:attribute name="ScreeningType" use="optional"/>
-            <xs:attribute name="ScreeningFamily" type="string" use="optional"/>
-            <xs:attribute name="DotSize" type="double" use="optional"/>
             <xs:attribute name="Angle" type="double" use="optional"/>
+            <xs:attribute name="AngleMap" type="string" use="optional"/>
+            <xs:attribute name="DotSize" type="double" use="optional"/>
+            <xs:attribute name="Frequency" type="double" use="optional"/>
+            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ScreeningFamily" type="string" use="optional"/>
+            <xs:attribute name="ScreeningType" type="EnumScreeningType" use="optional"/>
+            <xs:attribute name="Separation" type="string" use="optional"/>
             <xs:attribute name="SourceFrequencyMax" type="double" use="optional"/>
             <xs:attribute name="SourceFrequencyMin" type="double" use="optional"/>
-            <xs:attribute name="AngleMap" type="string" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="SpotFunction" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Separation" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6262,26 +6322,27 @@
     <xs:element name="StripMark">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="BinderySignature" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="ExternalImpositionTemplate" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="StripMark" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="MarkColor" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="JobField" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="RefAnchor" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="MarkContext" use="optional"/>
             <xs:attribute name="AbsoluteHeight" type="double" use="optional"/>
-            <xs:attribute name="MarkName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="RelativeHeight" type="double" use="optional"/>
-            <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="VerticalFitPolicy" use="optional"/>
-            <xs:attribute name="MarkSide" use="optional"/>
             <xs:attribute name="AbsoluteWidth" type="double" use="optional"/>
-            <xs:attribute name="RelativeWidth" type="double" use="optional"/>
-            <xs:attribute name="HorizontalFitPolicy" use="optional"/>
+            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
+            <xs:attribute name="Font" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="FontSize" type="double" use="optional"/>
+            <xs:attribute name="HorizontalFitPolicy" type="EnumFitPolicy" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
+            <xs:attribute name="MarkContext" type="EnumMarkContext" use="optional"/>
+            <xs:attribute name="MarkName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="MarkSide" type="EnumMarkSide" use="optional"/>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
+            <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
+            <xs:attribute name="RelativeHeight" type="double" use="optional"/>
+            <xs:attribute name="RelativeWidth" type="double" use="optional"/>
             <xs:attribute name="StripMarkDetails" type="string" use="optional"/>
+            <xs:attribute name="VerticalFitPolicy" type="EnumFitPolicy" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6289,11 +6350,11 @@
     <!-- ** Complex type definition for TabDimensions ** -->
     <xs:element name="TabDimensions">
         <xs:complexType>
-            <xs:attribute name="TabOffset" type="double" use="optional"/>
-            <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
+            <xs:attribute name="TabEdge" type="EnumEdge" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="double" use="optional"/>
+            <xs:attribute name="TabOffset" type="double" use="optional"/>
             <xs:attribute name="TabSetCollationOrder" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="TabEdge" use="optional"/>
+            <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabWidth" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6324,16 +6385,31 @@
     <xs:element name="TIFFFormatParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TIFFEmbeddedFile"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="TIFFtag"/>
+                <xs:element ref="TIFFEmbeddedFile" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="TIFFtag" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="WhiteIsZero" type="boolean" use="optional"/>
-            <xs:attribute name="Segmentation" use="optional"/>
-            <xs:attribute name="ByteOrder" use="optional"/>
-            <xs:attribute name="TileSize" type="XYPair" use="optional"/>
-            <xs:attribute name="RowsPerStrip" type="integer" use="optional"/>
+            <xs:attribute name="ByteOrder" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="II"/>
+                        <xs:enumeration value="MM"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Interleaving" type="integer" use="optional"/>
+            <xs:attribute name="RowsPerStrip" type="integer" use="optional"/>
+            <xs:attribute name="Segmentation" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:enumeration value="SingleStrip"/>
+                        <xs:enumeration value="Stripped"/>
+                        <xs:enumeration value="Tiled"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="SeparationNameTag" type="integer" use="optional"/>
+            <xs:attribute name="TileSize" type="XYPair" use="optional"/>
+            <xs:attribute name="WhiteIsZero" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
