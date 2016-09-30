@@ -38,7 +38,7 @@ public class XJdfConstants {
 
     public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
-    public static final JDFJMFVersion XJDF_CURRENT_VERSION = JDFJMFVersion.V_2_0;
+    public static final JDFJMFVersion XJDF_CURRENT_VERSION = JDFJMFVersion.V2_0;
 
     public static final String XJDF_LIB_VERSION = loadLibraryVersion();
 

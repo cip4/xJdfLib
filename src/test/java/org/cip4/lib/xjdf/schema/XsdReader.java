@@ -18,12 +18,12 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-class XsdReader {
+public class XsdReader {
 
     private Document schema;
     private XPath xPath;
 
-    XsdReader() throws Exception {
+    public XsdReader() throws Exception {
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         builderFactory.setNamespaceAware(true);
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
@@ -88,10 +88,19 @@ class XsdReader {
         }
     }
 
-    public NodeList evaluate(final String xPathExpression) throws XPathExpressionException {
+    public NodeList evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
         return (NodeList) xPath.evaluate(
             xPathExpression,
             schema,
+            XPathConstants.NODESET
+        );
+    }
+
+    public NodeList evaluateNodeList(final String xPathExpression, final Node parentNode)
+        throws XPathExpressionException {
+        return (NodeList) xPath.evaluate(
+            xPathExpression,
+            parentNode,
             XPathConstants.NODESET
         );
     }

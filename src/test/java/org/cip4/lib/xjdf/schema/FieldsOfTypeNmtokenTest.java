@@ -51,7 +51,7 @@ public class FieldsOfTypeNmtokenTest {
 
     @Test
     public void allFieldsOfWithNameJobPartIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluate(String.format("//xs:attribute[@name='%s']", fieldName));
+        NodeList elements = xsdReader.evaluateNodeList(String.format("//xs:attribute[@name='%s']", fieldName));
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);

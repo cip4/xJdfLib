@@ -1,20 +1,9 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.Before;
 import org.junit.Test;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
-
-import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathFactory;
-import java.io.InputStream;
 
 import static org.junit.Assert.*;
 
@@ -30,7 +19,7 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfTypeIDMustBeNamedID() throws Exception {
-        NodeList elements = xsdReader.evaluate("//xs:attribute[@type='ID']");
+        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@type='ID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
@@ -50,7 +39,7 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameExternalIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluate("//xs:attribute[@name='ExternalID']");
+        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='ExternalID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);
@@ -65,7 +54,7 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameDeviceIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluate("//xs:attribute[@name='DeviceID']");
+        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='DeviceID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
             Node elementNode = elements.item(i);

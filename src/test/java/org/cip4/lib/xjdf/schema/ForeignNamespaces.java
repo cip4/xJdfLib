@@ -26,7 +26,7 @@ public class ForeignNamespaces {
 
     @Test
     public void allowAttributesFromForeignNamespaceInAllElements() throws Exception {
-        NodeList complexTypes = xsdReader.evaluate("//xs:complexType");
+        NodeList complexTypes = xsdReader.evaluateNodeList("//xs:complexType");
 
         for (int i = 0; i < complexTypes.getLength(); ++i) {
             Node complexType = complexTypes.item(i);

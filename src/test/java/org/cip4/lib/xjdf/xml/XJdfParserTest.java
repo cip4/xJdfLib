@@ -363,7 +363,7 @@ public class XJdfParserTest {
     public void parseXjdfWritesUtf8Chars() throws Exception {
         final String utf8String = "aÄoÖuÜsß";
         XJDF xjdf = new XJDF();
-        xjdf.setVersion(JDFJMFVersion.V_2_0);
+        xjdf.setVersion(JDFJMFVersion.V2_0);
         xjdf.withComment(new Comment().withValue(utf8String));
 
         byte[] bytes = xJdfParser.parseXJdf(xjdf);
