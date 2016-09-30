@@ -214,7 +214,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="Front"/>
             <xs:enumeration value="Back"/>
-            <xs:enumeration value="Both"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -6503,7 +6502,7 @@
             <xs:attribute name="Depth" type="double" use="optional"/>
             <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="Travel" type="double" use="optional"/>
-            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="WorkingDirection" type="EnumTopBottom" use="optional"/>
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6516,7 +6515,7 @@
             <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingDirection" use="optional"/>
+            <xs:attribute name="WorkingDirection" type="EnumTopBottom" use="optional"/>
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6528,9 +6527,22 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Assembly"/>
             </xs:sequence>
+            <xs:attribute name="MarkType" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="CrossCutMark"/>
+                        <xs:enumeration value="TopVerticalCutMark"/>
+                        <xs:enumeration value="BottomVerticalCutMark"/>
+                        <xs:enumeration value="LeftHorizontalCutMark"/>
+                        <xs:enumeration value="RightHorizontalCutMark"/>
+                        <xs:enumeration value="LowerLeftCutMark"/>
+                        <xs:enumeration value="UpperLeftCutMark"/>
+                        <xs:enumeration value="LowerRightCutMark"/>
+                        <xs:enumeration value="UpperRightCutMark"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="Blocks" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="MarkType" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6541,7 +6553,7 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
             </xs:sequence>
-            <xs:attribute name="Side" use="optional"/>
+            <xs:attribute name="Side" type="EnumSurface" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6561,9 +6573,22 @@
     <!-- ** Complex type definition for Fold ** -->
     <xs:element name="Fold">
         <xs:complexType>
-            <xs:attribute name="To" use="optional"/>
-            <xs:attribute name="From" use="optional"/>
-            <xs:attribute name="RelativeTravel" type="double" use="optional"/>
+            <xs:attribute name="From" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Up"/>
+                        <xs:enumeration value="Down"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="To" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Front"/>
+                        <xs:enumeration value="Left"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Travel" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6578,7 +6603,15 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Fold"/>
                 </xs:sequence>
                 <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
-                <xs:attribute name="SheetLay" use="optional"/>
+                <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="SheetLay" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Left"/>
+                            <xs:enumeration value="Right"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6672,7 +6705,14 @@
     <xs:element name="Score">
         <xs:complexType>
             <xs:attribute name="Offset" type="double" use="optional"/>
-            <xs:attribute name="Side" use="optional"/>
+            <xs:attribute name="Side" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="FromInside"/>
+                        <xs:enumeration value="FromOutside"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6698,16 +6738,55 @@
     <xs:complexType name="StitchingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="NumberOfStitches" type="integer" use="optional"/>
-                <xs:attribute name="StitchPositions" type="string" use="optional"/>
-                <xs:attribute name="StitchWidth" type="double" use="optional"/>
-                <xs:attribute name="StitchOrigin" use="optional"/>
-                <xs:attribute name="WireGauge" type="double" use="optional"/>
-                <xs:attribute name="StapleShape" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="Angle" type="double" use="optional"/>
-                <xs:attribute name="StitchType" use="optional"/>
+                <xs:attribute name="NumberOfStitches" type="integer" use="optional"/>
                 <xs:attribute name="Offset" type="double" use="optional"/>
+                <xs:attribute name="StapleShape" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Crown"/>
+                            <xs:enumeration value="Overlap"/>
+                            <xs:enumeration value="Butted"/>
+                            <xs:enumeration value="ClinchOut"/>
+                            <xs:enumeration value="Eyelet"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StitchOrigin" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="TrimBoxCenter"/>
+                            <xs:enumeration value="TrimBoxJogSide"/>
+                            <xs:enumeration value="UntrimmedJogSide"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StitchPositions" type="DoubleList" use="optional"/>
+                <xs:attribute name="StitchType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Corner"/>
+                            <xs:enumeration value="Saddle"/>
+                            <xs:enumeration value="Side"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="StitchWidth" type="double" use="optional"/>
+                <xs:attribute name="TightBacking" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Round"/>
+                            <xs:enumeration value="RoundBacked"/>
+                            <xs:enumeration value="Flat"/>
+                            <xs:enumeration value="FlatBacked"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="WireBrand" type="string" use="optional"/>
+                <xs:attribute name="WireGauge" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6726,19 +6805,44 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
+                    <xs:element ref="Glue" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="ThreadBrand" type="string" use="optional"/>
-                <xs:attribute name="Sealing" type="boolean" use="optional"/>
-                <xs:attribute name="CastingMaterial" use="optional"/>
-                <xs:attribute name="CoreMaterial" use="optional"/>
-                <xs:attribute name="NumberOfNeedles" type="integer" use="optional"/>
                 <xs:attribute name="BlindStitch" type="boolean" use="optional"/>
-                <xs:attribute name="NeedlePositions" type="string" use="optional"/>
+                <xs:attribute name="CastingMaterial" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Cotton"/>
+                            <xs:enumeration value="Nylon"/>
+                            <xs:enumeration value="Polyester"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="CoreMaterial" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Cotton"/>
+                            <xs:enumeration value="Nylon"/>
+                            <xs:enumeration value="Polyester"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="GlueLineRefSheets" type="IntegerList" use="optional"/>
+                <xs:attribute name="NeedlePositions" type="DoubleList" use="optional"/>
+                <xs:attribute name="NumberOfNeedles" type="integer" use="optional"/>
                 <xs:attribute name="Offset" type="double" use="optional"/>
+                <xs:attribute name="Sealing" type="boolean" use="optional"/>
+                <xs:attribute name="SewingPattern" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Normal"/>
+                            <xs:enumeration value="Staggered"/>
+                            <xs:enumeration value="CombinedStaggered"/>
+                            <xs:enumeration value="Side"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="ThreadBrand" type="string" use="optional"/>
                 <xs:attribute name="ThreadThickness" type="double" use="optional"/>
-                <xs:attribute name="SewingPattern" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6748,10 +6852,19 @@
     <xs:complexType name="TrimmingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="TrimmingOffset" type="double" use="optional"/>
                 <xs:attribute name="Height" type="double" use="optional"/>
+                <xs:attribute name="TrimCover" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Back"/>
+                            <xs:enumeration value="Both"/>
+                            <xs:enumeration value="Front"/>
+                            <xs:enumeration value="Neither"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
+                <xs:attribute name="TrimmingOffset" type="double" use="optional"/>
                 <xs:attribute name="Width" type="double" use="optional"/>
-                <xs:attribute name="TrimCover" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6851,24 +6964,16 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorSpaceConversionOp"/>
                 </xs:sequence>
-                <xs:attribute name="ICCProfileUsage" use="optional"/>
+                <xs:attribute name="ICCProfileUsage" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="UsePDL"/>
+                            <xs:enumeration value="UseSupplied"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="ColorManagementSystem" type="string" use="optional"/>
                 <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for DigitalDeliveryParams ** -->
-    <xs:element name="DigitalDeliveryParams" type="DigitalDeliveryParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="DigitalDeliveryParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                </xs:sequence>
-                <xs:attribute name="DigitalDeliveryProtocol" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Method" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="DigitalDeliveryDirection" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7021,32 +7126,18 @@
                     <xs:element ref="TIFFFormatParams" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="BandHeight" type="integer" use="optional"/>
-                <xs:attribute name="BandOrdering" use="optional"/>
+                <xs:attribute name="BandOrdering" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="BandMajor"/>
+                            <xs:enumeration value="ColorMajor"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="BandWidth" type="integer" use="optional"/>
                 <xs:attribute name="ColorantDepth" type="integer" use="optional"/>
                 <xs:attribute name="Interleaved" type="boolean" use="optional"/>
                 <xs:attribute name="MimeType" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <!-- ** Complex type definition for ScanParams ** -->
-    <xs:element name="ScanParams" type="ScanParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ScanParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="Magnification" type="XYPair" use="optional"/>
-                <xs:attribute name="OutputResolution" type="XYPair" use="optional"/>
-                <xs:attribute name="BitDepth" type="integer" use="optional"/>
-                <xs:attribute name="Mounting" use="optional"/>
-                <xs:attribute name="InputBox" type="rectangle" use="optional"/>
-                <xs:attribute name="DCTQuality" type="double" use="optional"/>
-                <xs:attribute name="MountID" type="string" use="optional"/>
-                <xs:attribute name="SplitDocuments" type="integer" use="optional"/>
-                <xs:attribute name="OutputColorSpace" use="optional"/>
-                <xs:attribute name="CompressionFilter" use="optional"/>
-                <xs:attribute name="OutputSize" type="XYPair" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

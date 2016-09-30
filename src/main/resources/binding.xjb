@@ -117,6 +117,51 @@
     <xjb:bindings node="//xs:complexType[@name='UsageCounter']//xs:attribute[@name='Scope']/xs:simpleType">
         <xjb:typesafeEnumClass name="Scope"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='CutMark']//xs:attribute[@name='MarkType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="MarkType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Fold']//xs:attribute[@name='From']/xs:simpleType">
+        <xjb:typesafeEnumClass name="From"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Fold']//xs:attribute[@name='To']/xs:simpleType">
+        <xjb:typesafeEnumClass name="To"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='FoldingParams']//xs:attribute[@name='SheetLay']/xs:simpleType">
+        <xjb:typesafeEnumClass name="SheetLay"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Score']//xs:attribute[@name='Side']/xs:simpleType">
+        <xjb:typesafeEnumClass name="Side"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='StapleShape']/xs:simpleType">
+        <xjb:typesafeEnumClass name="StapleShape"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='StitchOrigin']/xs:simpleType">
+        <xjb:typesafeEnumClass name="StitchOrigin"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='StitchType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="StitchType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='TightBacking']/xs:simpleType">
+        <xjb:typesafeEnumClass name="TightBacking"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='CastingMaterial']/xs:simpleType">
+        <xjb:typesafeEnumClass name="CastingMaterial"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='CoreMaterial']/xs:simpleType">
+        <xjb:typesafeEnumClass name="CoreMaterial"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='SewingPattern']/xs:simpleType">
+        <xjb:typesafeEnumClass name="SewingPattern"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TrimmingParams']//xs:attribute[@name='TrimCover']/xs:simpleType">
+        <xjb:typesafeEnumClass name="TrimCover"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorSpaceConversionParams']//xs:attribute[@name='ICCProfileUsage']/xs:simpleType">
+        <xjb:typesafeEnumClass name="ICCProfileUsage"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RenderingParams']//xs:attribute[@name='BandOrdering']/xs:simpleType">
+        <xjb:typesafeEnumClass name="BandOrdering"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	

@@ -66,7 +66,12 @@ public class InlineEnumerations {
         }
 
         Set<EnumLocation> enumsInBindings = new HashSet<>();
-        NodeList bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");
+        NodeList bindings = null;
+        try {
+            bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
+        }
         for (int i = 0; i < bindings.getLength(); ++i) {
             Node bindingNode = bindings.item(i);
             String node = bindingNode.getAttributes().getNamedItem("node").getNodeValue();
@@ -76,6 +81,34 @@ public class InlineEnumerations {
         enumsInXsd.removeAll(enumsInBindings);
 
         assertEquals("Not all inline enumerations are bound to a classname.", Collections.EMPTY_SET, enumsInXsd);
+    }
+
+    @Test
+    public void attributeNameMatchesClassname() throws Exception {
+        NodeList bindings;
+        try {
+            bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException(e);
+        }
+        loopOverBindings:
+        for (int i = 0; i < bindings.getLength(); ++i) {
+            Node bindingNode = bindings.item(i);
+            String node = bindingNode.getAttributes().getNamedItem("node").getNodeValue();
+            EnumLocation enumLocation = extractEnumLocationFromXPath(node);
+            for (int j = 0; j < bindingNode.getChildNodes().getLength(); ++j) {
+                Node typesafeEnumClassNode = bindingNode.getChildNodes().item(j);
+                if ("typesafeEnumClass".equals(typesafeEnumClassNode.getLocalName())) {
+                    assertEquals(
+                        enumLocation.attributeName,
+                        typesafeEnumClassNode.getAttributes().getNamedItem("name").getNodeValue()
+                    );
+                    continue loopOverBindings;
+                }
+            }
+            fail(String.format("Element 'xjb:typesafeEnumClass' not found for '%s'", enumLocation));
+
+        }
     }
 
     private EnumLocation extractEnumLocationFromXPath(String xPath) {

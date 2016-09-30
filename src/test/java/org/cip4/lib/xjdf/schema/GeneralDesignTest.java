@@ -54,6 +54,12 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameDeviceIDShouldHaveTypeNMTOKEN() throws Exception {
+        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
+        assertEquals(0, elements.getLength());
+    }
+
+    @Test
+    public void allAttributesMustHaveAType() throws Exception {
         NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='DeviceID']");
 
         for (int i = 0; i < elements.getLength(); i++) {
