@@ -4654,14 +4654,13 @@
     <!-- ** Complex type definition for CIELABMeasuringField ** -->
     <xs:element name="CIELABMeasuringField">
     <xs:complexType>
-                <xs:attribute name="Percentages" type="string" use="optional"/>
-                <xs:attribute name="ScreenRuling" type="string" use="optional"/>
-                <xs:attribute name="ScreenShape" type="string" use="optional"/>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
+                <xs:attribute name="Center" type="XYPair" use="required"/>
+                <xs:attribute name="CIELab" type="LabColor" use="required"/>
                 <xs:attribute name="Diameter" type="double" use="optional"/>
-                <xs:attribute name="CIELab" type="LabColor" use="optional"/>
+                <xs:attribute name="Percentages" type="DoubleList" use="optional"/>
+                <xs:attribute name="ScreenRuling" type="DoubleList" use="optional"/>
+                <xs:attribute name="ScreenShape" type="string" use="optional"/>
                 <xs:attribute name="Tolerance" type="double" use="optional"/>
-                <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
     </xs:element>
@@ -4692,8 +4691,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceNColor"/>
-                    <xs:element minOccurs="0" maxOccurs="2" ref="FileSpec"/>
+                    <xs:element ref="DeviceNColor" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="2"/>
                 </xs:sequence>
                 <xs:attribute name="ActualColorName" type="string" use="optional"/>
                 <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
@@ -4702,7 +4701,6 @@
                 <xs:attribute name="ColorBookPrefix" type="string" use="optional"/>
                 <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
                 <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ColorName" type="NamedColor" use="optional"/>
                 <xs:attribute name="ColorType" type="EnumColorantType" use="optional"/>
                 <xs:attribute name="ColorTypeDetails" type="string" use="optional"/>
@@ -5002,19 +5000,19 @@
     <!-- ** Complex type definition for DensityMeasuringField ** -->
     <xs:element name="DensityMeasuringField">
         <xs:complexType>
-            <xs:attribute name="ToleranceDotGain" type="XYPair" use="optional"/>
+            <xs:attribute name="Center" type="XYPair" use="required"/>
+            <xs:attribute name="Density" type="DoubleList" use="required"/>
+            <xs:attribute name="Diameter" type="double" use="required"/>
+            <xs:attribute name="DotGain" type="double" use="required"/>
+            <xs:attribute name="Percentage" type="double" use="required"/>
+            <xs:attribute name="Screen" type="string" use="required"/>
+            <xs:attribute name="Separation" type="string" use="required"/>
             <xs:attribute name="Setup" type="string" use="optional"/>
-            <xs:attribute name="Density" type="string" use="optional"/>
-            <xs:attribute name="DotGain" type="double" use="optional"/>
-            <xs:attribute name="Percentage" type="double" use="optional"/>
-            <xs:attribute name="ToleranceCyan" type="XYPair" use="optional"/>
-            <xs:attribute name="ToleranceMagenta" type="XYPair" use="optional"/>
-            <xs:attribute name="ToleranceBlack" type="XYPair" use="optional"/>
-            <xs:attribute name="ToleranceYellow" type="XYPair" use="optional"/>
-            <xs:attribute name="Screen" type="string" use="optional"/>
-            <xs:attribute name="Center" type="XYPair" use="optional"/>
-            <xs:attribute name="Diameter" type="double" use="optional"/>
-            <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
+            <xs:attribute name="ToleranceBlack" type="XYPair" use="required"/>
+            <xs:attribute name="ToleranceCyan" type="XYPair" use="required"/>
+            <xs:attribute name="ToleranceDotGain" type="XYPair" use="required"/>
+            <xs:attribute name="ToleranceMagenta" type="XYPair" use="required"/>
+            <xs:attribute name="ToleranceYellow" type="XYPair" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -7197,7 +7195,6 @@
                 <xs:attribute name="Name" type="string" use="optional"/>
                 <xs:attribute name="Density" type="double" use="optional"/>
                 <xs:attribute name="AimCurve" type="TransferFunction" use="optional"/>
-                <xs:attribute name="ColorMeasurementConditionsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
                 <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             </xs:extension>
