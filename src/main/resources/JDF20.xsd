@@ -674,13 +674,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumAssetPolicy">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="All"/>
-            <xs:enumeration value="Available"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumBinderySignatureType">
         <xs:restriction base="NMTOKEN">
             <xs:enumeration value="Fold"/>
