@@ -6181,7 +6181,7 @@
             <xs:attribute name="DueDate" type="dateTime" use="optional"/>
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="FillPriority" type="integer" use="optional"/>
-            <xs:attribute name="GangElementID" type="ID" use="required"/>
+            <xs:attribute name="GangElementID" type="NMTOKEN" use="required"/>
             <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
             <xs:attribute name="GroupCode" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
