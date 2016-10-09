@@ -6026,7 +6026,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element ref="BindingQualityMeasurement" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Condition" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="End" type="dateTime" use="optional"/>
@@ -6036,6 +6037,14 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="BindingQualityMeasurement">
+        <xs:complexType>
+            <xs:attribute name="FlexValue" type="double" use="optional"/>
+            <xs:attribute name="PullOutValue" type="double" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ReferenceXObjParams ** -->
     <xs:element name="ReferenceXObjParams">
