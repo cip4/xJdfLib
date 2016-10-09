@@ -24,6 +24,7 @@ import javax.xml.bind.ValidationException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Collections;
 
 /**
  * JUnit test case for XJdfValidator.
@@ -66,7 +67,8 @@ public class XJdfValidatorTest {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
         xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
-        xJdfBuilder.build().setVersion(null);
+        // Empty list of types is invalid...
+        xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -83,7 +85,6 @@ public class XJdfValidatorTest {
         xJdfBuilder.addGeneralID(generalId);
 
         xJdfBuilder.build().getTypes().add("Web2Print");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
@@ -98,7 +99,8 @@ public class XJdfValidatorTest {
         // arrange
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
         xJdfBuilder.addGeneralID(generalId);
-        xJdfBuilder.build().setVersion(null);
+        // Empty list of types is invalid...
+        xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
         // act
         InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);

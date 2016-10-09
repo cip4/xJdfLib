@@ -2258,7 +2258,6 @@
             <xs:attribute name="RelatedJobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Version" type="JDFJMFVersion" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2429,7 +2428,6 @@
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
-            <xs:attribute name="Version" type="JDFJMFVersion" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

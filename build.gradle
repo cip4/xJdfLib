@@ -130,3 +130,12 @@ idea {
         languageLevel = targetCompatibility
     }
 }
+
+task zipTestPackage(type: Zip) {
+    from 'src/test/resources/org/cip4/lib/xjdf/testPackage'
+    include '*'
+    include '*/*'
+    archiveName 'testPackage.zip'
+    destinationDir(file("$buildDir/resources/test/org/cip4/lib/xjdf"))
+}
+processTestResources.dependsOn(zipTestPackage)

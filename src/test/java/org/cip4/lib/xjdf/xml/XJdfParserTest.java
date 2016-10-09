@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.UUID;
 
 import javax.xml.bind.ValidationException;
@@ -132,7 +133,8 @@ public class XJdfParserTest {
         xJdfBuilder.addGeneralID(generalId);
 
         XJDF xJdf = xJdfBuilder.build();
-        xJdf.setVersion(null);
+        // empty list of types is invalid
+        xJdf.withTypes(Collections.EMPTY_LIST);
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -156,7 +158,6 @@ public class XJdfParserTest {
         xJdfBuilder.addGeneralID(generalId);
 
         xJdfBuilder.build().getTypes().add("MyType");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
         XJDF xJdf = xJdfBuilder.build();
 
@@ -193,7 +194,6 @@ public class XJdfParserTest {
         xJdfBuilder.addGeneralID(generalId);
 
         xJdfBuilder.build().getTypes().add("MyType");
-        xJdfBuilder.build().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
 
         XJDF xJdf = xJdfBuilder.build();
 
@@ -363,7 +363,6 @@ public class XJdfParserTest {
     public void parseXjdfWritesUtf8Chars() throws Exception {
         final String utf8String = "aÄoÖuÜsß";
         XJDF xjdf = new XJDF();
-        xjdf.setVersion(JDFJMFVersion.V2_0);
         xjdf.withComment(new Comment().withValue(utf8String));
 
         byte[] bytes = xJdfParser.parseXJdf(xjdf);
@@ -383,7 +382,7 @@ public class XJdfParserTest {
     }
 
     private XJDF getInvalidXjdfDocument() {
-        // xjdf is invalid, because version is not defined.
-        return new XJDF();
+        // xjdf is invalid, because empty list of types is not allowed.
+        return new XJDF().withTypes(Collections.EMPTY_LIST);
     }
 }

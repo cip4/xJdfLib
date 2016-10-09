@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <xjdf:XJDF JobID="SIG-NSA"
            xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
-           xmlns:foo="http://www.foo.org/Schema"
-           Version="2.0">
+           xmlns:foo="http://www.foo.org/Schema">
     <xjdf:ProductList>
         <xjdf:Product foo:bar="apple"/>
     </xjdf:ProductList>

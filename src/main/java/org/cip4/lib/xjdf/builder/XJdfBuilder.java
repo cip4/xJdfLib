@@ -94,9 +94,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
         getXJdf().setCategory(category);
         getXJdf().setDescriptiveName(descriptiveName);
         getXJdf().setRelatedJobID(relatedJobID);
-
-        // default values
-        getXJdf().setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
     }
 
     /**
