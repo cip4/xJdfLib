@@ -3488,8 +3488,7 @@
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
-            <xs:attribute name="Type" type="EnumType" use="required"/>
+            <xs:attribute name="Type" type="EnumType" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
