@@ -5796,13 +5796,11 @@
     <!-- ** Complex type definition for Perforate ** -->
     <xs:element name="Perforate">
         <xs:complexType>
-            <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
-            <xs:attribute name="TeethPerDimension" type="double" use="optional"/>
-            <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="Depth" type="double" use="optional"/>
-            <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
+            <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
+            <xs:attribute name="TeethPerDimension" type="double" use="optional"/>
             <xs:attribute name="WorkingDirection" type="EnumTopBottom" use="optional"/>
+            <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6472,8 +6470,6 @@
     <xs:element name="Cut">
         <xs:complexType>
             <xs:attribute name="CutWidth" type="double" use="optional"/>
-            <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="WorkingDirection" type="EnumTopBottom" use="optional"/>
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
@@ -6536,16 +6532,16 @@
             <xs:attribute name="From" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="Up"/>
-                        <xs:enumeration value="Down"/>
+                        <xs:enumeration value="Front"/>
+                        <xs:enumeration value="Left"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="To" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="Front"/>
-                        <xs:enumeration value="Left"/>
+                        <xs:enumeration value="Up"/>
+                        <xs:enumeration value="Down"/>
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
@@ -6586,8 +6582,6 @@
             <xs:attribute name="GluingPattern" type="NumberList" use="optional"/>
             <xs:attribute name="GluingTechnique" type="EnumGluingTechnique" use="optional"/>
             <xs:attribute name="MeltingTemperature" type="integer" use="optional"/>
-            <xs:attribute name="RelativeStartPosition" type="XYPair" use="optional"/>
-            <xs:attribute name="RelativeWorkingPath" type="XYPair" use="optional"/>
             <xs:attribute name="StartPosition" type="XYPair" use="optional"/>
             <xs:attribute name="WorkingDirection" type="Face" use="optional"/>
             <xs:attribute name="WorkingPath" type="XYPair" use="optional"/>
