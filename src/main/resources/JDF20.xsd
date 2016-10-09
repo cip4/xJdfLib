@@ -1950,20 +1950,7 @@
             <xs:enumeration value="BinderySignatureID"/>
             <xs:enumeration value="BlockName"/>
             <xs:enumeration value="BundleItemIndex"/>
-            <xs:enumeration value="DeliveryUnit0"/>
-            <xs:enumeration value="DeliveryUnit1"/>
-            <xs:enumeration value="DeliveryUnit2"/>
-            <xs:enumeration value="DeliveryUnit3"/>
-            <xs:enumeration value="DeliveryUnit4"/>
-            <xs:enumeration value="DeliveryUnit5"/>
-            <xs:enumeration value="DeliveryUnit6"/>
-            <xs:enumeration value="DeliveryUnit7"/>
-            <xs:enumeration value="DeliveryUnit8"/>
-            <xs:enumeration value="DeliveryUnit9"/>
             <xs:enumeration value="DocIndex"/>
-            <xs:enumeration value="DocRunIndex"/>
-            <xs:enumeration value="DocSheetIndex"/>
-            <xs:enumeration value="DocTags"/>
             <xs:enumeration value="DropID"/>
             <xs:enumeration value="Location"/>
             <xs:enumeration value="LotID"/>
@@ -1979,7 +1966,6 @@
             <xs:enumeration value="Metadata9"/>
             <xs:enumeration value="Option"/>
             <xs:enumeration value="PageNumber"/>
-            <xs:enumeration value="PageTags"/>
             <xs:enumeration value="PartVersion"/>
             <xs:enumeration value="PreviewType"/>
             <xs:enumeration value="PrintCondition"/>
@@ -1987,15 +1973,8 @@
             <xs:enumeration value="QualityMeasurement"/>
             <xs:enumeration value="Run"/>
             <xs:enumeration value="RunIndex"/>
-            <xs:enumeration value="RunPageRange"/>
-            <xs:enumeration value="RunSet"/>
-            <xs:enumeration value="RunTags"/>
             <xs:enumeration value="Separation"/>
-            <xs:enumeration value="SetDocIndex"/>
             <xs:enumeration value="SetIndex"/>
-            <xs:enumeration value="SetRunIndex"/>
-            <xs:enumeration value="SetSheetIndex"/>
-            <xs:enumeration value="SetTags"/>
             <xs:enumeration value="SheetIndex"/>
             <xs:enumeration value="SheetName"/>
             <xs:enumeration value="Side"/>
@@ -3563,21 +3542,8 @@
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BundleItemIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit0" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit1" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit2" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit3" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit4" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit5" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit6" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit7" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit8" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeliveryUnit9" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DocIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="DocRunIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="DocSheetIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="DocTags" type="RegExp" use="optional"/>
+            <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Metadata0" type="RegExp" use="optional"/>
@@ -3592,7 +3558,6 @@
             <xs:attribute name="Metadata9" type="RegExp" use="optional"/>
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PageNumber" type="IntegerRange" use="optional"/>
-            <xs:attribute name="PageTags" type="RegExp" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PreviewType" type="EnumPreviewUsages" use="optional"/>
             <xs:attribute name="PrintCondition" type="NMTOKEN" use="optional"/>
@@ -3600,15 +3565,8 @@
             <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Run" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RunIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="RunPageRange" type="IntegerRange" use="optional"/>
-            <xs:attribute name="RunSet" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="RunTags" type="RegExp" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="SetDocIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="SetIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="SetRunIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="SetSheetIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="SetTags" type="RegExp" use="optional"/>
             <xs:attribute name="SheetIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="SheetName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Side" type="EnumSide" use="optional"/>
