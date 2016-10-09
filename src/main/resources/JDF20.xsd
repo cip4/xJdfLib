@@ -2529,7 +2529,6 @@
                 <xs:attribute name="ID" type="ID" use="optional"/>
                 <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ReturnCode" type="integer" use="optional"/>
-                <xs:attribute name="Subscribed" type="boolean" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
