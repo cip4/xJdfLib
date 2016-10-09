@@ -2427,7 +2427,7 @@
             <xs:attribute name="AgentName" type="string" use="optional"/>
             <xs:attribute name="AgentVersion" type="string" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
+            <xs:attribute name="Time" type="dateTime" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
