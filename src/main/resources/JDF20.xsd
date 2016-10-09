@@ -4080,6 +4080,7 @@
                     <xs:element minOccurs="0" maxOccurs="1" ref="RingBindingDetails"/>
                 </xs:sequence>
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
+                <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
                 <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
@@ -4087,7 +4088,6 @@
                 <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
-                <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
                 <xs:attribute name="SpineColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="SpineColorDetails" type="string" use="optional"/>
             </xs:extension>
@@ -5705,12 +5705,11 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                 </xs:sequence>
+                <xs:attribute name="Color" type="NamedColor" use="optional"/>
+                <xs:attribute name="ColorDetails" type="string" use="optional"/>
                 <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="TypeDetails" type="string" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
