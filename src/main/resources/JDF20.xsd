@@ -6841,20 +6841,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for AssetListCreationParams ** -->
-    <xs:element name="AssetListCreationParams" type="AssetListCreationParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="AssetListCreationParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="FileSpec"/>
-                </xs:sequence>
-                <xs:attribute name="AssetTypes" type="RegExp" use="optional"/>
-                <xs:attribute name="ListPolicy" type="EnumAssetPolicy" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for ColorCorrectionOp ** -->
     <xs:element name="ColorCorrectionOp">
         <xs:complexType>
