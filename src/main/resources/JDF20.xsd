@@ -1429,14 +1429,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumOcgProcess">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Export"/>
-            <xs:enumeration value="Print"/>
-            <xs:enumeration value="View"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumBottling">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="All"/>
@@ -3585,7 +3577,7 @@
             <xs:attribute name="HonorPDFOverprint" type="boolean" use="optional"/>
             <xs:attribute name="ICCColorAsDeviceColor" type="boolean" use="optional"/>
             <xs:attribute name="OCGIntent" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="OCGProcess" type="EnumOcgProcess" use="optional"/>
+            <xs:attribute name="OCGProcess" type="NMTOKEN" use="optional"/>
             <xs:attribute name="OCGZoom" type="double" use="optional"/>
             <xs:attribute name="PrintPDFAnnotations" type="boolean" use="optional"/>
             <xs:attribute name="PrintTrapAnnotations" type="boolean" use="optional"/>
