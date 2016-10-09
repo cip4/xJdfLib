@@ -5411,10 +5411,6 @@
                 <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
                 <xs:attribute name="MaxCollect" type="integer" use="optional"/>
                 <xs:attribute name="MinCollect" type="integer" use="optional"/>
-                <xs:attribute name="NonPrintableMarginBottom" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginLeft" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginRight" type="double" use="optional"/>
-                <xs:attribute name="NonPrintableMarginTop" type="double" use="optional"/>
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="OutermostShingling" type="double" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
