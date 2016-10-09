@@ -2444,7 +2444,7 @@
                 <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="Amount" type="double" use="optional"/>
-            <xs:attribute name="CostCenterID" type="string" use="optional"/>
+            <xs:attribute name="CostCenterID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeadLine" type="EnumDeadline" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
@@ -3026,7 +3026,7 @@
                     <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="Module" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="CostCenterID" type="string" use="optional"/>
+                <xs:attribute name="CostCenterID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DeviceType" type="string" use="optional"/>

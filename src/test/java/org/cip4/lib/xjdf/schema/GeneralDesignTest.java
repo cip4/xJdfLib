@@ -53,6 +53,21 @@ public class GeneralDesignTest {
     }
 
     @Test
+    public void allFieldsOfWithNameCostCenterIDShouldHaveTypeNMTOKEN() throws Exception {
+        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='CostCenterID']");
+
+        for (int i = 0; i < elements.getLength(); i++) {
+            Node elementNode = elements.item(i);
+
+            assertEquals(
+                "All attributes in XJDF with a name 'CostCenterID' SHALL be have type NMTOKEN.",
+                "NMTOKEN",
+                elementNode.getAttributes().getNamedItem("type").getNodeValue()
+            );
+        }
+    }
+
+    @Test
     public void allFieldsOfWithNameDeviceIDShouldHaveTypeNMTOKEN() throws Exception {
         NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
         assertEquals(0, elements.getLength());
