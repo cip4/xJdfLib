@@ -4068,7 +4068,7 @@
 
     <xs:element name="AssemblyItem">
         <xs:complexType>
-            <xs:attribute name="ChildRef" type="IDREF" use="optional"/>
+            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
