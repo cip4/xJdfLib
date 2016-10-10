@@ -5081,13 +5081,8 @@
     <!-- ** Complex type definition for DropItem ** -->
     <xs:element name="DropItem">
         <xs:complexType>
-            <xs:attribute name="ActualAmount" type="integer" use="optional"/>
-            <xs:attribute name="ActualTotalAmount" type="integer" use="optional"/>
-            <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="OrderedAmount" type="integer" use="optional"/>
+            <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
             <xs:attribute name="Proof" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Resource" type="IDREF" use="optional"/>
-            <xs:attribute name="TotalAmount" type="integer" use="optional"/>
             <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
             <xs:attribute name="TotalVolume" type="double" use="optional"/>
             <xs:attribute name="TotalWeight" type="double" use="optional"/>
