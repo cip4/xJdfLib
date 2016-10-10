@@ -717,13 +717,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumWireCombShape">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Single"/>
-            <xs:enumeration value="Twin"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumAction">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="LongFoldLeftToRight"/>
@@ -2853,9 +2846,15 @@
     <!-- ** Complex type definition for CoilBindingDetails ** -->
     <xs:element name="CoilBindingDetails">
         <xs:complexType>
+            <xs:attribute name="CoilShape" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Single"/>
+                        <xs:enumeration value="Twin"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Diameter" type="double" use="optional"/>
-            <xs:attribute name="Thickness" type="double" use="optional"/>
-            <xs:attribute name="Tucked" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3965,6 +3964,7 @@
                     <xs:element minOccurs="0" maxOccurs="1" ref="CoilBindingDetails"/>
                     <xs:element minOccurs="0" maxOccurs="1" ref="CombBindingDetails"/>
                     <xs:element minOccurs="0" maxOccurs="1" ref="RingBindingDetails"/>
+                    <xs:element minOccurs="0" maxOccurs="1" ref="StripBindingDetails"/>
                 </xs:sequence>
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
                 <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
@@ -6554,9 +6554,15 @@
     <!-- ** Complex type definition for CombBindingDetails ** -->
     <xs:element name="CombBindingDetails">
         <xs:complexType>
+            <xs:attribute name="CombShape" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Single"/>
+                        <xs:enumeration value="Twin"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Diameter" type="double" use="optional"/>
-            <xs:attribute name="Thickness" type="double" use="optional"/>
-            <xs:attribute name="WireCombShape" type="EnumWireCombShape" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6570,6 +6576,13 @@
             <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
             <xs:attribute name="SpineWidth" type="double" use="optional"/>
             <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="StripBindingDetails">
+        <xs:complexType>
+            <xs:attribute name="Length" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
