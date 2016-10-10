@@ -3651,7 +3651,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for AuditProcessRun ** -->
     <xs:element name="ProcessRun">
         <xs:complexType>
             <xs:sequence>
