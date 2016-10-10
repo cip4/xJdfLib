@@ -2101,7 +2101,7 @@
     <xs:element name="PartAmount">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="1" maxOccurs="unbounded" ref="Part"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="ActualAmount" type="double" use="optional"/>
             <xs:attribute name="Amount" type="double" use="optional"/>
