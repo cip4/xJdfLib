@@ -2481,9 +2481,10 @@
     <xs:element name="Queue">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="QueueEntry"/>
+                <xs:element ref="QueueEntry" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="MaxQueueSize" type="integer" use="optional"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
