@@ -5,9 +5,6 @@
            elementFormDefault="qualified"
            attributeFormDefault="unqualified">
 
-    <!-- TODO: Removed in XJDF 2.0, but references still exist. -->
-    <xs:element name="Term"/>
-
     <xs:simpleType name="boolean">
         <xs:restriction base="xs:boolean"/>
     </xs:simpleType>
@@ -1649,40 +1646,6 @@
             <xs:enumeration value="RPCL"/>
             <xs:enumeration value="PCRL"/>
             <xs:enumeration value="CPRL"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumMetadataContext">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Set"/>
-            <xs:enumeration value="Document"/>
-            <xs:enumeration value="SubDoc0"/>
-            <xs:enumeration value="SubDoc1"/>
-            <xs:enumeration value="SubDoc2"/>
-            <xs:enumeration value="SubDoc3"/>
-            <xs:enumeration value="SubDoc4"/>
-            <xs:enumeration value="SubDoc5"/>
-            <xs:enumeration value="SubDoc6"/>
-            <xs:enumeration value="SubDoc7"/>
-            <xs:enumeration value="SubDoc8"/>
-            <xs:enumeration value="SubDoc9"/>
-            <xs:enumeration value="PagePool"/>
-            <xs:enumeration value="Page"/>
-            <xs:enumeration value="Object"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumMetadataType">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="string"/>
-            <xs:enumeration value="integer"/>
-            <xs:enumeration value="double"/>
-            <xs:enumeration value="NMTOKEN"/>
-            <xs:enumeration value="boolean"/>
-            <xs:enumeration value="dateTime"/>
-            <xs:enumeration value="duration"/>
-            <xs:enumeration value="NamedFeature"/>
-            <xs:enumeration value="PartIDKeys"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -5126,12 +5089,9 @@
     <!-- ** Complex type definition for Expr ** -->
     <xs:element name="Expr">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Term"/>
-            </xs:sequence>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="Path" type="XPath" use="optional"/>
             <xs:attribute name="Value" type="string" use="optional"/>
-            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5620,11 +5580,9 @@
     <xs:element name="MetadataMap">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Expr"/>
+                <xs:element ref="Expr" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="Context" type="EnumMetadataContext" use="optional"/>
-            <xs:attribute name="DataType" type="EnumMetadataType" use="optional"/>
-            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="ValueFormat" type="string" use="optional"/>
             <xs:attribute name="ValueTemplate" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
