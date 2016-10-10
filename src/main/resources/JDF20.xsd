@@ -4972,9 +4972,6 @@
     <xs:complexType name="DigitalPrintingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element ref="ApprovalParams" minOccurs="0" maxOccurs="1"/>
-                </xs:sequence>
                 <xs:attribute name="Collate" type="EnumCollate" use="optional"/>
                 <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
                 <xs:attribute name="OutputBin" type="NMTOKENS" use="optional"/>
