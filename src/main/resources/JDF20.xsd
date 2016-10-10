@@ -2507,14 +2507,16 @@
     <xs:element name="QueueFilter">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="FirstEntry" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GangNames" type="NMTOKENS" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="LastEntry" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MaxEntries" type="integer" use="optional"/>
-            <xs:attribute name="OlderThan" type="dateTime" use="optional"/>
             <xs:attribute name="NewerThan" type="dateTime" use="optional"/>
+            <xs:attribute name="OlderThan" type="dateTime" use="optional"/>
             <xs:attribute name="QueueEntryDetails" type="EnumQueueEntryDetails" use="optional"/>
             <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="StatusList" use="optional">
@@ -7126,7 +7128,7 @@
     <xs:element name="ModifyQueueEntryParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element name="QueueFilter" minOccurs="1" maxOccurs="1"/>
+                <xs:element ref="QueueFilter" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Operation" type="NMTOKEN" use="optional"/>
