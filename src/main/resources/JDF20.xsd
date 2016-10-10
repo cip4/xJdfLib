@@ -6229,7 +6229,6 @@
             <xs:attribute name="MarkName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MarkSide" type="EnumMarkSide" use="optional"/>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
-            <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="RelativeHeight" type="double" use="optional"/>
             <xs:attribute name="RelativeWidth" type="double" use="optional"/>
