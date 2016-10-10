@@ -141,7 +141,7 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-        assertEquals("Brand is wrong", BRAND, mediaIntent.getStockBrand());
+        assertEquals("Brand is wrong", BRAND, mediaIntent.getBrand());
         assertEquals("Weight is wrong", WEIGHT, mediaIntent.getWeight());
     }
 
@@ -156,7 +156,7 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-        assertNull("Brand is wrong", mediaIntent.getStockBrand());
+        assertNull("Brand is wrong", mediaIntent.getBrand());
         assertNull("Weight is wrong", mediaIntent.getWeight());
     }
 

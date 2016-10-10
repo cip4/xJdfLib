@@ -329,14 +329,14 @@ public class XJdfNodeFactory extends ObjectFactory {
      * Create new MediaIntent Node which already contains values for attributes MediaQuality, StockBrand and Weight.
      *
      * @param mediaQuality Value for MediaQuality attribute.
-     * @param stockBrand Value for StockBrand attribute.
+     * @param brand Value for StockBrand attribute.
      * @param weight Value for Weight attribute.
      *
      * @return MediaIntent Node which already contains defined attributes.
      */
     public final MediaIntent createMediaIntent(
         final String mediaQuality,
-        final String stockBrand,
+        final String brand,
         final Double weight
     ) {
 
@@ -345,7 +345,7 @@ public class XJdfNodeFactory extends ObjectFactory {
 
         // set attributes
         mediaIntent.setMediaQuality(mediaQuality);
-        mediaIntent.setStockBrand(stockBrand);
+        mediaIntent.setBrand(brand);
         mediaIntent.setWeight(weight);
 
         // return object
