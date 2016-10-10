@@ -2781,6 +2781,12 @@
 
     <!--** abstract type for substitution only ** -->
     <xs:complexType name="Audit" abstract="true">
+        <xs:attribute name="Author" type="string" use="optional"/>
+        <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="ID" type="ID" use="required"/>
+        <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+        <xs:attribute name="Time" type="dateTime" use="optional"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
@@ -2935,19 +2941,14 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for AuditCreated ** -->
-    <xs:element name="AuditCreated" type="AuditCreated"/>
-    <xs:complexType name="AuditCreated">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Time" type="dateTime" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="AuditCreated">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Audit">
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for CuttingParams ** -->
     <xs:element name="CuttingParams" type="CuttingParams" substitutionGroup="ResourceType"/>
@@ -3600,22 +3601,17 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for AuditStatus ** -->
-    <xs:element name="AuditStatus" type="AuditStatus"/>
-    <xs:complexType name="AuditStatus">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:sequence>
-                    <xs:element ref="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Time" type="dateTime" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="AuditStatus">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Audit">
+                    <xs:sequence>
+                        <xs:element ref="DeviceInfo" minOccurs="1" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for PlaceHolderResource ** -->
     <xs:element name="PlaceHolderResource" type="PlaceHolderResource" substitutionGroup="ResourceType"/>
@@ -3640,12 +3636,6 @@
                     <xs:sequence>
                         <xs:element ref="ProcessRun" minOccurs="1" maxOccurs="1"/>
                     </xs:sequence>
-                    <xs:attribute name="Author" type="string" use="optional"/>
-                    <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="ID" type="ID" use="required"/>
-                    <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-                    <xs:attribute name="Time" type="dateTime" use="optional"/>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
@@ -3713,22 +3703,17 @@
     </xs:element>
 
     <!-- ** Complex type definition for ResourceAudit ** -->
-    <xs:element name="AuditResource" type="AuditResource"/>
-    <xs:complexType name="AuditResource">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:sequence>
-                    <xs:element ref="ResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Time" type="dateTime" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="AuditResource">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Audit">
+                    <xs:sequence>
+                        <xs:element ref="ResourceInfo" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ScavengerArea ** -->
     <xs:element name="ScavengerArea" type="ScavengerArea" substitutionGroup="ResourceType"/>
@@ -7355,22 +7340,17 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="AuditNotification" type="AuditNotification"/>
-    <xs:complexType name="AuditNotification">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:sequence>
-                    <xs:element ref="Notification" minOccurs="1" maxOccurs="1"/>
-                </xs:sequence>
-                <xs:attribute name="Author" type="string" use="optional"/>
-                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Time" type="dateTime" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="AuditNotification">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Audit">
+                    <xs:sequence>
+                        <xs:element ref="Notification" minOccurs="1" maxOccurs="1"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <xs:element name="CommandPipeControl" type="CommandPipeControl" substitutionGroup="Command"/>
     <xs:complexType name="CommandPipeControl">
