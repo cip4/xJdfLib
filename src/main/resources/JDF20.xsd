@@ -2233,7 +2233,6 @@
     <xs:complexType name="CustomerInfo">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="BillingCode" type="string" use="optional"/>
                 <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="CustomerID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CustomerJobName" type="string" use="optional"/>
