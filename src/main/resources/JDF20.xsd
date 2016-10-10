@@ -3017,16 +3017,16 @@
             <xs:sequence>
                 <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Direction" type="EnumEmbossDirection" use="optional"/>
+            <xs:attribute name="Direction" type="EnumEmbossDirection" use="required"/>
             <xs:attribute name="EdgeAngle" type="double" use="optional"/>
             <xs:attribute name="EdgeShape" type="EnumEdgeShape" use="optional"/>
-            <xs:attribute name="EmbossingType" type="EnumEmbossingType" use="optional"/>
+            <xs:attribute name="EmbossingType" type="EnumEmbossingType" use="required"/>
             <xs:attribute name="Face" type="Face" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="ToolRef" type="IDREF" use="required"/>
+            <xs:attribute name="ToolRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
