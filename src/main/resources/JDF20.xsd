@@ -4760,18 +4760,18 @@
                     <xs:element ref="BarcodeProductionParams" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="ContentMetaData" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="ImageCompression" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="OCGControl" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="PositionObj" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="ScreenSelector" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ContentStatus" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ContentType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="HasBleeds" type="boolean" use="optional"/>
-                <xs:attribute name="ImageCompressionParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="IsBlank" type="boolean" use="optional"/>
                 <xs:attribute name="IsTrapped" type="boolean" use="optional"/>
                 <xs:attribute name="PageLabel" type="string" use="optional"/>
-                <xs:attribute name="ScreeningParamsRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
