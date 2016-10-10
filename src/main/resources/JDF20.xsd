@@ -5890,8 +5890,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightCheck"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="PreflightCheck" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="ErrorCount" type="integer" use="optional"/>
                 <xs:attribute name="WarningCount" type="integer" use="optional"/>
