@@ -5766,6 +5766,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
+                    <xs:element ref="FontParams" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="PDFCreationDetails" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="PSCreationDetails" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
@@ -5773,6 +5774,16 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="FontParams">
+        <xs:complexType>
+            <xs:attribute name="AlwaysEmbed" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="EmbedAllFonts" type="boolean" use="optional"/>
+            <xs:attribute name="MaxSubsetPct" type="integer" use="optional"/>
+            <xs:attribute name="NeverEmbed" type="NMTOKENS" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for Perforate ** -->
     <xs:element name="Perforate">
