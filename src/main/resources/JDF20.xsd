@@ -3277,9 +3277,12 @@
     <xs:complexType name="LabelingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="Face" type="Face" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="Application" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Face" type="Face" use="optional"/>
+                <xs:attribute name="Offset" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
