@@ -317,11 +317,9 @@ public class XJdfParserTest {
         InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
         XJDF xjdf = xJdfParser.parseStream(is);
 
-        ProcessRun processRunB = (ProcessRun) xjdf.getAuditPool().getAudits().get(6);
-        ProcessRun processRunA = processRunB.getRefID();
+        AuditProcessRun processRunB = (AuditProcessRun) xjdf.getAuditPool().getAudits().get(6);
+        assertEquals("ProcessRun_A", processRunB.getRefID());
         assertEquals("ProcessRun_B", processRunB.getID());
-        assertEquals("ProcessRun_A", processRunA.getID());
-        assertEquals("agent A", processRunA.getAgentName());
     }
 
     @Test

@@ -71,11 +71,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='Created']//xs:attribute[@name='ContactRef']">
-        <xjb:property>
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']">
         <xjb:property>
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -85,12 +80,6 @@
     <xjb:bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
         <xjb:property name="Audits">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Audit"/>
-        </xjb:property>
-    </xjb:bindings>
-
-    <xjb:bindings node="//xs:complexType[@name='ProcessRun']//xs:attribute[@name='refID']">
-        <xjb:property collectionType="">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.ProcessRun"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">

@@ -353,33 +353,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new Created Node which already contains values for attributes AgentName, AgentVersion and TimeStamp.
-     *
-     * @param agentName Value for AgentName attribute.
-     * @param agentVersion Value for AgentVersion attribute.
-     * @param timestamp Value for TimeStamp attribute.
-     *
-     * @return Created Node which already contains defined attributes.
-     */
-    public final Created createCreated(
-        final String agentName,
-        final String agentVersion,
-        final DateTime timestamp
-    ) {
-
-        // create node
-        Created created = super.createCreated();
-
-        // set attributes
-        created.setAgentName(agentName);
-        created.setAgentVersion(agentVersion);
-        created.setTimeStamp(timestamp);
-
-        // return object
-        return created;
-    }
-
-    /**
      * Create new ProductionIntent Node which already contains values for attribute PrintProcess.
      *
      * @param printProcess Value for PrintProcess attribute.

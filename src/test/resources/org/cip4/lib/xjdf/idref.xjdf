@@ -3,15 +3,15 @@
 <xjdf:XJDF ID="id" JobID="jobid" Category="Web2Print" Version="2.0" xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
 
     <xjdf:AuditPool>
-        <xjdf:Created ID="Created_A" AgentName="agent A" />
+        <xjdf:AuditCreated ID="Created_A" AgentName="agent A" />
         <xjdf:AuditNotification ID="Notification_A" Author="author A" />
         <xjdf:AuditNotification ID="Notification_B" Author="author B" refID="Notification_A" />
         <xjdf:AuditStatus ID="PhaseTime_A" Author="author A">
             <xjdf:PhaseAmount rRef="PhaseAmount_Ref_01" />
         </xjdf:AuditStatus>
         <xjdf:AuditStatus ID="PhaseTime_B" Author="author B" refID="PhaseTime_A" />
-        <xjdf:ProcessRun ID="ProcessRun_A" AgentName="agent A" />
-        <xjdf:ProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
+        <xjdf:AuditProcessRun ID="ProcessRun_A" AgentName="agent A" />
+        <xjdf:AuditProcessRun ID="ProcessRun_B" AgentName="agent B" refID="ProcessRun_A" />
         <xjdf:AuditResource ID="ResourceAudit_A" Author="author A" />
         <xjdf:AuditResource ID="ResourceAudit_B" Author="author B" refID="ResourceAudit_A" />
     </xjdf:AuditPool>

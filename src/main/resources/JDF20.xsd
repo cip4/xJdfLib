@@ -2772,8 +2772,8 @@
                 <xs:element ref="AuditNotification" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="AuditResource" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="AuditStatus" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Created" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="ProcessRun" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="AuditCreated" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="AuditProcessRun" minOccurs="0" maxOccurs="unbounded"/>
             </xs:choice>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2934,16 +2934,17 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Created ** -->
-    <xs:element name="Created" type="Created"/>
-    <xs:complexType name="Created">
+    <!-- ** Complex type definition for AuditCreated ** -->
+    <xs:element name="AuditCreated" type="AuditCreated"/>
+    <xs:complexType name="AuditCreated">
         <xs:complexContent>
             <xs:extension base="Audit">
-                <xs:attribute name="AgentName" type="string" use="optional"/>
-                <xs:attribute name="AgentVersion" type="string" use="optional"/>
-                <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
-                <xs:attribute name="TimeStamp" type="dateTime" use="required"/>
-                <xs:attribute name="XPath" type="XPath" use="optional"/>
+                <xs:attribute name="Author" type="string" use="optional"/>
+                <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ID" type="ID" use="required"/>
+                <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="Time" type="dateTime" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3632,30 +3633,44 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ProcessRun ** -->
-    <xs:element name="ProcessRun" type="ProcessRun"/>
-    <xs:complexType name="ProcessRun">
-        <xs:complexContent>
-            <xs:extension base="Audit">
-                <xs:sequence>
-                    <xs:element ref="Contact" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="AgentName" type="string" use="optional"/>
-                <xs:attribute name="AgentVersion" type="string" use="optional"/>
-                <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="TimeStamp" type="dateTime" use="optional"/>
-                <xs:attribute name="Duration" type="duration" use="optional"/>
-                <xs:attribute name="End" type="dateTime" use="required"/>
-                <xs:attribute name="EndStatus" type="EnumEndStatus" use="required"/>
-                <xs:attribute name="ID" type="ID" use="required"/>
-                <xs:attribute name="refID" type="IDREF" use="optional"/>
-                <xs:attribute name="ReturnTime" type="dateTime" use="optional"/>
-                <xs:attribute name="Start" type="dateTime" use="required"/>
-                <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="AuditProcessRun">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="Audit">
+                    <xs:sequence>
+                        <xs:element ref="ProcessRun" minOccurs="1" maxOccurs="1"/>
+                    </xs:sequence>
+                    <xs:attribute name="Author" type="string" use="optional"/>
+                    <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+                    <xs:attribute name="ID" type="ID" use="required"/>
+                    <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+                    <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
+                    <xs:attribute name="Time" type="dateTime" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- ** Complex type definition for AuditProcessRun ** -->
+    <xs:element name="ProcessRun">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Author" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Duration" type="duration" use="optional"/>
+            <xs:attribute name="End" type="dateTime" use="required"/>
+            <xs:attribute name="EndStatus" type="EnumEndStatus" use="required"/>
+            <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ReturnTime" type="dateTime" use="optional"/>
+            <xs:attribute name="Start" type="dateTime" use="required"/>
+            <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ProofItem ** -->
     <xs:element name="ProofItem" type="ProofItem"/>
@@ -4748,7 +4763,7 @@
                 <xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
                 <xs:attribute name="Columns" type="integer" use="optional"/>
                 <xs:attribute name="ComponentType" type="EnumComponentType" use="optional"/>
-                <xs:attribute name="Dimension" type="shape" use="optional"/>
+                <xs:attribute name="Dimensions" type="shape" use="optional"/>
                 <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="MaxHeat" type="double" use="optional"/>
