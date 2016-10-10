@@ -7567,14 +7567,9 @@
     <xs:complexType name="CommandWakeUp">
         <xs:complexContent>
             <xs:extension base="Command">
-                <xs:sequence>
-                    <xs:element ref="WakeUpCmdParams" minOccurs="0" maxOccurs="1"/>
-                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:element name="WakeUpCmdParams"/>
 
     <xs:element name="ResponseWakeUp" type="ResponseWakeUp" substitutionGroup="Response"/>
     <xs:complexType name="ResponseWakeUp">
