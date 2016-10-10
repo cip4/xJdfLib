@@ -3752,8 +3752,6 @@
                 <xs:attribute name="HorizontalExcess" type="double" use="optional"/>
                 <xs:attribute name="HorizontalExcessBack" type="double" use="optional"/>
                 <xs:attribute name="StripBrand" type="string" use="optional"/>
-                <xs:attribute name="StripColor" type="NamedColor" use="optional"/>
-                <xs:attribute name="StripColorDetails" type="string" use="optional"/>
                 <xs:attribute name="StripLength" type="double" use="optional"/>
                 <xs:attribute name="StripMaterial" type="EnumStripMaterial" use="optional"/>
                 <xs:attribute name="TopExcess" type="double" use="optional"/>
@@ -3974,8 +3972,6 @@
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
                 <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
                 <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="CoverColor" type="NamedColor" use="optional"/>
-                <xs:attribute name="CoverColorDetails" type="string" use="optional"/>
                 <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
