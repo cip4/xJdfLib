@@ -745,16 +745,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumColorantType">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="DieLine"/>
-            <xs:enumeration value="Normal"/>
-            <xs:enumeration value="Transparent"/>
-            <xs:enumeration value="Opaque"/>
-            <xs:enumeration value="OpaqueIgnore"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumColorMapping">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="UsePDLValues"/>
@@ -4582,7 +4572,18 @@
                 <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
                 <xs:attribute name="ColorDetails" type="string" use="optional"/>
                 <xs:attribute name="ColorName" type="NamedColor" use="optional"/>
-                <xs:attribute name="ColorType" type="EnumColorantType" use="optional"/>
+                <xs:attribute name="ColorType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="DieLine"/>
+                            <xs:enumeration value="Normal"/>
+                            <xs:enumeration value="Opaque"/>
+                            <xs:enumeration value="OpaqueIgnore"/>
+                            <xs:enumeration value="Primer"/>
+                            <xs:enumeration value="Transparent"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="ColorTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="Density" type="double" use="optional"/>
                 <xs:attribute name="Gray" type="double" use="optional"/>

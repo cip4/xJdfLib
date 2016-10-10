@@ -148,6 +148,9 @@
     <xjb:bindings node="//xs:complexType[@name='ColorSpaceConversionParams']//xs:attribute[@name='ICCProfileUsage']/xs:simpleType">
         <xjb:typesafeEnumClass name="ICCProfileUsage"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Color']//xs:attribute[@name='ColorType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="ColorType"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RenderingParams']//xs:attribute[@name='BandOrdering']/xs:simpleType">
         <xjb:typesafeEnumClass name="BandOrdering"/>
     </xjb:bindings>
