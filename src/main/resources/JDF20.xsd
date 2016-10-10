@@ -4146,12 +4146,11 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers"/>
+                    <xs:element ref="Certification" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
                 <xs:attribute name="Brand" type="string" use="optional"/>
                 <xs:attribute name="BuyerSupplied" type="boolean" use="optional"/>
-                <xs:attribute name="Certification" type="string" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
@@ -4173,8 +4172,17 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+    
+    <xs:element name="Certification">
+        <xs:complexType>
+            <xs:attribute name="Claim" type="string" use="optional"/>
+            <xs:attribute name="Identifier" type="string" use="optional"/>
+            <xs:attribute name="Organization" type="NMTOKEN" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
-    <!-- ** Complex type definition for MediaIntent ** -->
+    <!-- ** Complex type definition for VariableIntent ** -->
     <xs:element name="VariableIntent" type="VariableIntent" substitutionGroup="IntentType"/>
     <xs:complexType name="VariableIntent">
         <xs:complexContent>
