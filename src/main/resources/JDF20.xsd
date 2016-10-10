@@ -3016,6 +3016,7 @@
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="ShapeName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Separation" type="string" use="optional"/>
             <xs:attribute name="ToolName" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
