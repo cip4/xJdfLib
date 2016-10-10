@@ -6136,6 +6136,8 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="RotationPolicy" type="EnumPositionPolicy" use="optional"/>
             <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
+            <xs:attribute name="SeparationListBack" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="SeparationListFront" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
