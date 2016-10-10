@@ -544,7 +544,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumFluteDirection">
+    <xs:simpleType name="MediaDirection">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="LongEdge"/>
             <xs:enumeration value="ShortEdge"/>
@@ -4170,10 +4170,13 @@
                 <xs:sequence>
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers"/>
                 </xs:sequence>
+                <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="Brand" type="string" use="optional"/>
                 <xs:attribute name="BuyerSupplied" type="boolean" use="optional"/>
                 <xs:attribute name="Certification" type="string" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FluteDirection" type="EnumFluteDirection" use="optional"/>
+                <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
+                <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrateBack" type="EnumISOPaperSubstrate" use="optional"/>
@@ -5514,7 +5517,7 @@
                 <xs:attribute name="CoreWeight" type="double" use="optional"/>
                 <xs:attribute name="Dimension" type="XYPair" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FluteDirection" type="EnumFluteDirection" use="optional"/>
+                <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="FrontCoatingDetail" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
                 <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
