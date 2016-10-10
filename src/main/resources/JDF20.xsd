@@ -66,8 +66,9 @@
     </xs:simpleType>
 
     <xs:simpleType name="IntegerRange">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="-?[0-9]+ *~ *-?[0-9]+"/>
+        <xs:restriction base="IntegerList">
+            <xs:minLength value="2"/>
+            <xs:maxLength value="2"/>
         </xs:restriction>
     </xs:simpleType>
 
