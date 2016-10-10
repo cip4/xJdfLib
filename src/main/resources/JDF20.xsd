@@ -3050,9 +3050,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="EndSheet"/>
+                    <xs:element ref="EndSheet" minOccurs="0" maxOccurs="2"/>
                 </xs:sequence>
-                <xs:attribute name="GluingProductionID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
