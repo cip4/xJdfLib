@@ -5231,30 +5231,36 @@
     </xs:element>
 
     <!-- ** Complex type definition for IdentificationField ** -->
-    <xs:element name="IdentificationField" type="IdentificationField" substitutionGroup="ResourceType"/>
-    <xs:complexType name="IdentificationField">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element ref="BarcodeDetails" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="ExtraValues" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded"/>
-                </xs:sequence>
-                <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
-                <xs:attribute name="Encoding" type="EnumEncoding" use="optional"/>
-                <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Format" type="RegExp" use="optional"/>
-                <xs:attribute name="Orientation" type="matrix" use="optional"/>
-                <xs:attribute name="Page" type="integer" use="optional"/>
-                <xs:attribute name="Position" type="Face" use="optional"/>
-                <xs:attribute name="Purpose" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="Value" type="string" use="optional"/>
-                <xs:attribute name="ValueFormat" type="string" use="optional"/>
-                <xs:attribute name="ValueTemplate" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="IdentificationField">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="BarcodeDetails" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ExtraValues" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="MetadataMap" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="BoundingBox" type="rectangle" use="optional"/>
+            <xs:attribute name="Encoding" type="EnumEncoding" use="optional"/>
+            <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Format" type="RegExp" use="optional"/>
+            <xs:attribute name="Orientation" type="matrix" use="optional"/>
+            <xs:attribute name="Page" type="integer" use="optional"/>
+            <xs:attribute name="Position" type="Face" use="optional"/>
+            <xs:attribute name="Purpose" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Label"/>
+                        <xs:enumeration value="Separation"/>
+                        <xs:enumeration value="Verification"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Value" type="string" use="optional"/>
+            <xs:attribute name="ValueFormat" type="string" use="optional"/>
+            <xs:attribute name="ValueTemplate" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ImageCompressionParams ** -->
     <xs:element name="ImageCompressionParams" type="ImageCompressionParams" substitutionGroup="ResourceType"/>
