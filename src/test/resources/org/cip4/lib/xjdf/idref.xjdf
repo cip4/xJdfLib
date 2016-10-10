@@ -99,13 +99,11 @@
         </xjdf:Resource>
     </xjdf:ResourceSet>
 
-    <xjdf:ResourceSet Name="ApprovalSuccess">
-        <xjdf:Resource ID="ApprovalSuccess_1">
-            <xjdf:ApprovalSuccess>
-                <xjdf:ApprovalDetails>
-                    <xjdf:ApprovalPerson ContactRef="CONTACT_REF_1" />
-                </xjdf:ApprovalDetails>
-            </xjdf:ApprovalSuccess>
+    <xjdf:ResourceSet Name="ApprovalDetails">
+        <xjdf:Resource ID="ApprovalDetails_1">
+            <xjdf:ApprovalDetails>
+                <xjdf:ApprovalPerson ContactRef="CONTACT_REF_1"/>
+            </xjdf:ApprovalDetails>
         </xjdf:Resource>
     </xjdf:ResourceSet>
 

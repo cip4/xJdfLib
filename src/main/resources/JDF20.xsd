@@ -3147,14 +3147,17 @@
     <!-- ** Complex type definition for Icon ** -->
     <xs:element name="Icon">
         <xs:complexType>
-            <xs:attribute name="Size" type="XYPair" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="BitDepth" type="integer" use="optional"/>
             <xs:attribute name="IconUsage" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumIconUsage"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Size" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3219,10 +3222,11 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FitPolicy"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="InterpretingDetails"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectResolution"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="PDFInterpretingParams"/>
+                    <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="InterpretingDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="ObjectResolution" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="PDFInterpretingParams" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="PDLResourceAlias" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Center" type="boolean" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
@@ -4291,19 +4295,21 @@
     </xs:element>
 
     <!-- ** Complex type definition for ApprovalDetails ** -->
-    <xs:element name="ApprovalDetails">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="ApprovalPerson" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="ApprovalState" type="EnumApprovalState" use="optional"/>
-            <xs:attribute name="ApprovalStateDetails" type="string" use="optional"/>
-            <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
+    <xs:element name="ApprovalDetails" type="ApprovalDetails" substitutionGroup="ResourceType"/>
+    <xs:complexType name="ApprovalDetails">
+        <xs:complexContent>
+            <xs:extension base="ResourceType">
+                <xs:sequence>
+                    <xs:element ref="ApprovalPerson" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="ApprovalState" type="EnumApprovalState" use="optional"/>
+                <xs:attribute name="ApprovalStateDetails" type="string" use="optional"/>
+                <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
 
     <!-- ** Complex type definition for ApprovalParams ** -->
     <xs:element name="ApprovalParams" type="ApprovalParams" substitutionGroup="ResourceType"/>
@@ -4325,19 +4331,6 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for ApprovalSuccess ** -->
-    <xs:element name="ApprovalSuccess" type="ApprovalSuccess" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ApprovalSuccess">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ApprovalDetails"/>
-                </xs:sequence>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for Assembly ** -->
     <xs:element name="Assembly" type="Assembly" substitutionGroup="ResourceType"/>
@@ -5085,7 +5078,9 @@
     <!-- ** Complex type definition for ExternalImpositionTemplate ** -->
     <xs:element name="ExternalImpositionTemplate">
         <xs:complexType>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5636,8 +5631,10 @@
     <!-- ** Complex type definition for ObjectModel ** -->
     <xs:element name="ObjectModel">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="Dimensions" type="shape" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5885,17 +5882,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ProofingParams ** -->
-    <xs:element name="ProofingParams" type="ProofingParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="ProofingParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for QualityControlParams ** -->
     <xs:element name="QualityControlParams" type="QualityControlParams" substitutionGroup="ResourceType"/>
     <xs:complexType name="QualityControlParams">
@@ -5939,8 +5925,10 @@
     <!-- ** Complex type definition for ReferenceXObjParams ** -->
     <xs:element name="ReferenceXObjParams">
         <xs:complexType>
-            <xs:attribute name="Mode" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="Mode" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6265,9 +6253,11 @@
     <!-- ** Complex type definition for TIFFEmbeddedFile ** -->
     <xs:element name="TIFFEmbeddedFile">
         <xs:complexType>
-            <xs:attribute name="TagNumber" type="integer" use="optional"/>
-            <xs:attribute name="TagType" type="integer" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="TagNumber" type="integer" use="required"/>
+            <xs:attribute name="TagType" type="integer" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6785,20 +6775,22 @@
     <!-- ** Complex type definition for ColorCorrectionOp ** -->
     <xs:element name="ColorCorrectionOp">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="2"/>
+            </xs:sequence>
             <xs:attribute name="AdjustContrast" type="double" use="optional"/>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="AdjustYellowBlue" type="double" use="optional"/>
+            <xs:attribute name="AdjustCyanRed" type="double" use="optional"/>
+            <xs:attribute name="AdjustHue" type="double" use="optional"/>
+            <xs:attribute name="AdjustLightness" type="double" use="optional"/>
+            <xs:attribute name="AdjustMagentaGreen" type="double" use="optional"/>
             <xs:attribute name="AdjustSaturation" type="double" use="optional"/>
+            <xs:attribute name="AdjustYellowBlue" type="double" use="optional"/>
+            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="AdjustHue" type="double" use="optional"/>
-            <xs:attribute name="AdjustLightness" type="double" use="optional"/>
-            <xs:attribute name="AdjustMagentaGreen" type="double" use="optional"/>
-            <xs:attribute name="AdjustCyanRed" type="double" use="optional"/>
-            <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6809,10 +6801,9 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorCorrectionOp"/>
+                    <xs:element ref="ColorCorrectionOp" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="ColorManagementSystem" type="string" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6849,7 +6840,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ColorSpaceConversionOp"/>
+                    <xs:element ref="ColorSpaceConversionOp" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="ICCProfileUsage" use="optional">
                     <xs:simpleType>
@@ -6859,8 +6851,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="ColorManagementSystem" type="string" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6953,16 +6943,16 @@
     </xs:element>
 
     <!-- ** Complex type definition for PDLResourceAlias ** -->
-    <xs:element name="PDLResourceAlias" type="PDLResourceAlias" substitutionGroup="ResourceType"/>
-    <xs:complexType name="PDLResourceAlias">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:attribute name="SourceName" type="string" use="optional"/>
-                <xs:attribute name="ResourceType" type="string" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="PDLResourceAlias">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="ResourceType" type="string" use="required"/>
+            <xs:attribute name="SourceName" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for PreviewGenerationParams ** -->
     <xs:element name="PreviewGenerationParams" type="PreviewGenerationParams" substitutionGroup="ResourceType"/>
@@ -7081,11 +7071,13 @@
     <xs:complexType name="PrintCondition">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="Name" type="string" use="optional"/>
-                <xs:attribute name="Density" type="double" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
                 <xs:attribute name="AimCurve" type="TransferFunction" use="optional"/>
-                <xs:attribute name="DeviceRef" type="IDREF" use="optional"/>
-                <xs:attribute name="FileSpecRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Density" type="double" use="optional"/>
+                <xs:attribute name="Name" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

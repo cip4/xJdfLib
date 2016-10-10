@@ -292,8 +292,8 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ResourceSet resourceSet = xjdf.getResourceSet().get(6);
-        ApprovalSuccess approvalSuccess = (ApprovalSuccess) resourceSet.getResource().get(0).getResourceType().getValue();
-        ApprovalPerson approvalPerson = approvalSuccess.getApprovalDetails().get(0).getApprovalPerson();
+        ApprovalDetails approvalDetails = (ApprovalDetails) resourceSet.getResource().get(0).getResourceType().getValue();
+        ApprovalPerson approvalPerson = approvalDetails.getApprovalPerson();
         Contact contact = (Contact) approvalPerson.getContactRef().getResourceType().getValue();
 
         assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
