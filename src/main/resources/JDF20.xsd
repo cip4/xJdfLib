@@ -3908,6 +3908,7 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
+                    <xs:element ref="AdhesiveNote" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="EdgeGluing" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="HardCoverBinding" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="LooseBinding" minOccurs="0" maxOccurs="1"/>
@@ -3930,6 +3931,15 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="AdhesiveNote">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type defintion for LooseBinding ** -->
     <xs:element name="LooseBinding">
