@@ -2201,7 +2201,7 @@
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="Name" type="string" use="required"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
@@ -3477,7 +3477,7 @@
                     <xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle"/>
                 </xs:sequence>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
-                <xs:attribute name="Pattern" type="string" use="optional"/>
+                <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="MaxHeight" type="double" use="optional"/>
                 <xs:attribute name="OverhangOffset" type="XYPair" use="optional"/>
                 <xs:attribute name="Overhang" type="XYPair" use="optional"/>
@@ -4081,7 +4081,7 @@
 
     <xs:element name="AssemblyItem">
         <xs:complexType>
-            <xs:attribute name="ChildRef" type="IDREF" use="required"/>
+            <xs:attribute name="ChildRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6112,10 +6112,10 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="ShapeDimension" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="ShapeDimension" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="InnerDimensions" type="shape" use="optional"/>
-            <xs:attribute name="Name" type="string" use="optional"/>
+            <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Standard" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6202,7 +6202,7 @@
             <xs:attribute name="Orientation" type="EnumCellOrientation" use="optional"/>
             <xs:attribute name="Sides" type="Sides" use="optional"/>
             <xs:attribute name="Spine" type="double" use="optional"/>
-            <xs:attribute name="StationName" type="string" use="optional"/>
+            <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TrimFace" type="double" use="optional"/>
             <xs:attribute name="TrimFoot" type="double" use="optional"/>
             <xs:attribute name="TrimHead" type="double" use="optional"/>
@@ -6219,7 +6219,7 @@
             </xs:sequence>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="StationAmount" type="integer" use="optional"/>
-            <xs:attribute name="StationName" type="string" use="optional"/>
+            <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
