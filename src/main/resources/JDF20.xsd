@@ -4133,6 +4133,7 @@
                 <xs:attribute name="FinishedDimensions" type="shape" use="optional"/>
                 <xs:attribute name="NamedDimensions" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
+                <xs:attribute name="Orientation" type="Orientation" use="optional"/>
                 <xs:attribute name="Pages" type="integer" use="optional"/>
                 <xs:attribute name="Sides" type="Sides" use="optional"/>
             </xs:extension>
