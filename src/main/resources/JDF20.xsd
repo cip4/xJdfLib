@@ -4421,8 +4421,10 @@
     <!-- ** Complex type definition for BarcodeProductionParams ** -->
     <xs:element name="BarcodeProductionParams">
         <xs:complexType>
-            <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
-            <xs:attribute name="BarcodeReproParamsRef" type="IDREF" use="optional"/>
+            <xs:sequence>
+                <xs:element ref="BarcodeReproParams" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="IdentificationField" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
