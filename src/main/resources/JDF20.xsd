@@ -1028,21 +1028,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumStackRestriction">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="None"/>
-            <xs:enumeration value="WithinImposedSheetSet"/>
-            <xs:enumeration value="WithinLogicalStack"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumStackSequence">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="SheetIndex"/>
-            <xs:enumeration value="DescendingSheetIndex"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumSheetCondition">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Begin"/>
@@ -5406,25 +5391,6 @@
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
             <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="LogicalStackParams">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Stack" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="MaxStackDepth" type="integer" use="optional"/>
-            <xs:attribute name="LogicalStackParams" type="EnumStackRestriction" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="Stack">
-        <xs:complexType>
-            <xs:attribute name="LogicalStackOrd" type="integer" use="required"/>
-            <xs:attribute name="LogicalStackSequence" type="EnumStackSequence" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
