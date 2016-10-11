@@ -2389,7 +2389,7 @@
                 <xs:sequence>
                     <xs:element ref="Subscription" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="ID" type="ID" use="required"/>
+                <xs:attribute name="ID" type="NMTOKEN" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
