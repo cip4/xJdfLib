@@ -3206,7 +3206,6 @@
                     <xs:element ref="InterpretingDetails" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="ObjectResolution" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="PDFInterpretingParams" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="PDLResourceAlias" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="Center" type="boolean" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
@@ -6929,18 +6928,6 @@
             <xs:attribute name="SuppressRotate" type="boolean" use="optional"/>
             <xs:attribute name="TTasT42" type="boolean" use="optional"/>
             <xs:attribute name="UseFontAliasNames" type="boolean" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for PDLResourceAlias ** -->
-    <xs:element name="PDLResourceAlias">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
-            </xs:sequence>
-            <xs:attribute name="ResourceType" type="string" use="required"/>
-            <xs:attribute name="SourceName" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
