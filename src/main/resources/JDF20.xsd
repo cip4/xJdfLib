@@ -2259,7 +2259,7 @@
                 <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
             <xs:attribute name="PowerOnTime" type="dateTime" use="optional"/>
@@ -2458,7 +2458,6 @@
             <xs:sequence>
                 <xs:element ref="QueueEntry" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="MaxQueueSize" type="integer" use="optional"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
