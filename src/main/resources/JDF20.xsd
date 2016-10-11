@@ -2884,6 +2884,8 @@
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="Audit">
+                    <xs:attribute name="AgentName" type="string" use="optional"/>
+                    <xs:attribute name="AgentVersion" type="string" use="optional"/>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
