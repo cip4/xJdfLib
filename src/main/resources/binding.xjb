@@ -71,11 +71,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='MediaRef']">
-        <xjb:property>
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
 
     <xjb:bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
         <xjb:property name="Audits">
@@ -162,6 +157,12 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='CombBindingDetails']//xs:attribute[@name='CombShape']/xs:simpleType">
         <xjb:typesafeEnumClass name="CombShape"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResourceInfo']//xs:attribute[@name='CommandResult']/xs:simpleType">
+        <xjb:typesafeEnumClass name="CommandResult"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='BundleItem']//xs:attribute[@name='BundleType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="BundleType"/>
     </xjb:bindings>
 </xjb:bindings>
 

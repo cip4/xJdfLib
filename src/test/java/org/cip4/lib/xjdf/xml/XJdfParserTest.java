@@ -15,7 +15,6 @@ import javax.xml.xpath.XPathFactory;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.After;
 import org.junit.Assert;
@@ -332,19 +331,6 @@ public class XJdfParserTest {
         assertEquals("ResourceAudit_B", auditResourceB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA);
         assertEquals("author B", auditResourceB.getAuthor());
-    }
-
-    @Test
-    public void parseStreamShapeCutWithMediaRef() throws Exception {
-        InputStream is = XJdfParserTest.class.getResourceAsStream(RES_IDREF);
-        XJDF xjdf = xJdfParser.parseStream(is);
-
-        ShapeCuttingIntent shapeCuttingIntent =
-            (ShapeCuttingIntent) xjdf.getProductList().getProduct().get(0).getIntent().get(2).getIntentType().getValue();
-        Media media = (Media) shapeCuttingIntent.getShapeCut().get(0).getMediaRef().getResourceType().getValue();
-
-        assertEquals(new XYPair(2, 2), media.getDimension());
-        assertEquals("IPG_400", media.getMediaQuality());
     }
 
     @Test

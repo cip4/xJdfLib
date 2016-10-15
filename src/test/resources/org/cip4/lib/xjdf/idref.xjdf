@@ -27,11 +27,6 @@
                     <xjdf:SurfaceColor Surface="Back" NumColors="0"/>
                 </xjdf:ColorIntent>
             </xjdf:Intent>
-            <xjdf:Intent Name="ShapeCuttingIntent">
-                <xjdf:ShapeCuttingIntent>
-                    <xjdf:ShapeCut MediaRef="MEDIA_REF_02" />
-                </xjdf:ShapeCuttingIntent>
-            </xjdf:Intent>
         </xjdf:Product>
         <xjdf:Product ID="PRD_MAIN02" IsRoot="true" Amount="1">
             <xjdf:Intent Name="LayoutIntent">
@@ -53,10 +48,6 @@
         </xjdf:Resource>
         <xjdf:Resource ID="LAYOUT_INTENT_REF_1">
             <xjdf:Media Dimension="1 1" MediaQuality="IPG_300"/>
-            <xjdf:Part SheetName="SHEET-1"/>
-        </xjdf:Resource>
-        <xjdf:Resource ID="MEDIA_REF_02">
-            <xjdf:Media Dimension="2 2" MediaQuality="IPG_400"/>
             <xjdf:Part SheetName="SHEET-1"/>
         </xjdf:Resource>
         <xjdf:Resource ID="PhaseAmount_Ref_01">

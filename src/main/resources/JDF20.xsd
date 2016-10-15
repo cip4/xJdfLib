@@ -3421,14 +3421,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ObservationTarget ** -->
-    <xs:element name="ObservationTarget">
-        <xs:complexType>
-            <xs:attribute name="ObservationPath" type="XPath" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for PageCondition ** -->
     <xs:element name="PageCondition">
         <xs:complexType>
@@ -3707,7 +3699,6 @@
     <!-- ** Complex type definition for SoftCoverBinding ** -->
     <xs:element name="SoftCoverBinding">
         <xs:complexType>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
             <xs:attribute name="BlockThreadSewing" type="boolean" use="optional"/>
             <xs:attribute name="EndSheets" type="boolean" use="optional"/>
             <xs:attribute name="FoldingWidth" type="double" use="optional"/>
@@ -3722,6 +3713,7 @@
             <xs:attribute name="SpineNotching" type="boolean" use="optional"/>
             <xs:attribute name="SpineSanding" type="boolean" use="optional"/>
             <xs:attribute name="SpineShredding" type="boolean" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
@@ -4231,6 +4223,7 @@
         <xs:complexType>
             <xs:attribute name="PageIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="PreflightLevel" type="EnumPreflightLevel" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
