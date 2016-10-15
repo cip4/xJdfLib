@@ -147,6 +147,8 @@
             <xs:enumeration value="Informative"/>
             <xs:enumeration value="Held"/>
             <xs:enumeration value="Active"/>
+            <xs:enumeration value="PendingReturn"/>
+            <xs:enumeration value="Removed"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -317,15 +319,6 @@
             <xs:enumeration value="Complete"/>
             <xs:enumeration value="Incremental"/>
             <xs:enumeration value="Remove"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumCommandResult">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Rejected"/>
-            <xs:enumeration value="Removed"/>
-            <xs:enumeration value="New"/>
-            <xs:enumeration value="Merged"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -584,6 +577,7 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Basic"/>
             <xs:enumeration value="Extended"/>
+            <xs:enumeration value="Premium"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -761,7 +755,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumPolarity">
+    <xs:simpleType name="Polarity">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Positive"/>
             <xs:enumeration value="Negative"/>
@@ -977,7 +971,7 @@
 
     <xs:simpleType name="EnumCompensation">
         <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Nonde"/>
+            <xs:enumeration value="None"/>
             <xs:enumeration value="Film"/>
             <xs:enumeration value="Plate"/>
             <xs:enumeration value="Press"/>
@@ -2500,7 +2494,7 @@
             <xs:attribute name="NewerThan" type="dateTime" use="optional"/>
             <xs:attribute name="OlderThan" type="dateTime" use="optional"/>
             <xs:attribute name="QueueEntryDetails" type="EnumQueueEntryDetails" use="optional"/>
-            <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="required"/>
             <xs:attribute name="StatusList" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumStatusList"/>
@@ -2522,7 +2516,7 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ReturnJMF" type="URL" use="optional"/>
-            <xs:attribute name="URL" type="URL"/>
+            <xs:attribute name="URL" type="URL" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2561,7 +2555,17 @@
                 <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="CommandResult" type="EnumCommandResult" use="optional"/>
+            <xs:attribute name="CommandResult" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Rejected"/>
+                        <xs:enumeration value="Removed"/>
+                        <xs:enumeration value="New"/>
+                        <xs:enumeration value="Merged"/>
+                        <xs:enumeration value="Replaced"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
@@ -3230,7 +3234,7 @@
                 <xs:attribute name="MirrorAround" type="EnumDeviceAxis" use="optional"/>
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
-                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="Polarity" type="Polarity" use="optional"/>
                 <xs:attribute name="PrintQuality" type="EnumPrintQuality" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Scaling" type="XYPair" use="optional"/>
@@ -3627,8 +3631,8 @@
     <xs:element name="RefAnchor">
         <xs:complexType>
             <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="rRef" type="IDREF" use="optional"/>
             <xs:attribute name="AnchorType" type="EnumAnchorType" use="optional"/>
+            <xs:attribute name="rRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3636,17 +3640,12 @@
     <!-- ** Complex type definition for RegisterRibbon ** -->
     <xs:element name="RegisterRibbon">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-            </xs:sequence>
-            <xs:attribute name="RibbonColorDetails" type="string" use="optional"/>
-            <xs:attribute name="VisibleLength" type="double" use="optional"/>
             <xs:attribute name="LengthOverall" type="double" use="optional"/>
-            <xs:attribute name="RibbonColor" type="string" use="optional"/>
-            <xs:attribute name="RibbonEnd" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Material" type="string" use="optional"/>
-            <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
+            <xs:attribute name="RibbonColor" type="NamedColor" use="optional"/>
+            <xs:attribute name="RibbonColorDetails" type="string" use="optional"/>
+            <xs:attribute name="RibbonEnd" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="VisibleLength" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3669,10 +3668,10 @@
     <xs:complexType name="ScavengerArea">
         <xs:complexContent>
             <xs:extension base="ResourceType">
+                <xs:attribute name="Center" type="XYPair" use="required"/>
                 <xs:attribute name="Rotation" type="double" use="optional"/>
+                <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Size" type="XYPair" use="optional"/>
-                <xs:attribute name="Center" type="XYPair" use="optional"/>
-                <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4221,12 +4220,19 @@
         <xs:complexContent>
             <xs:extension base="IntentType">
                 <xs:sequence>
+                    <xs:element ref="PreflightItem" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="ProofItem" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="PreflightLevel" type="EnumPreflightLevel" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="PreflightItem">
+        <xs:complexType>
+            <xs:attribute name="PageIndex" type="IntegerRange" use="optional"/>
+            <xs:attribute name="PreflightLevel" type="EnumPreflightLevel" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for ShapeCut ** -->
     <xs:element name="ShapeCut">
@@ -5286,7 +5292,7 @@
                 <xs:attribute name="CutMedia" type="boolean" use="optional"/>
                 <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
                 <xs:attribute name="MirrorAround" type="EnumDeviceAxis" use="optional"/>
-                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="Polarity" type="Polarity" use="optional"/>
                 <xs:attribute name="Resolution" type="XYPair" use="optional"/>
                 <xs:attribute name="RollCut" type="double" use="optional"/>
                 <xs:attribute name="TransferCurve" type="TransferFunction" use="optional"/>
@@ -5521,7 +5527,7 @@
                 <xs:attribute name="OuterCoreDiameter" type="double" use="optional"/>
                 <xs:attribute name="OutsideGain" type="double" use="optional"/>
                 <xs:attribute name="PlateTechnology" type="EnumPlateTechnology" use="optional"/>
-                <xs:attribute name="Polarity" type="EnumPolarity" use="optional"/>
+                <xs:attribute name="Polarity" type="Polarity" use="optional"/>
                 <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="RecycledPercentage" type="double" use="optional"/>
                 <xs:attribute name="ReliefThickness" type="double" use="optional"/>
@@ -5802,8 +5808,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="PreflightTest"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="FileSpec"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="PreflightTest" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -5817,10 +5823,9 @@
             </xs:sequence>
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
+            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TestID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
-            <xs:attribute name="WarningCount" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5940,7 +5945,11 @@
             <xs:extension base="ResourceType">
                 <xs:attribute name="Center" type="XYPair" use="optional"/>
                 <xs:attribute name="MarkType" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="MarkUsage" type="EnumMarkType" use="optional"/>
+                <xs:attribute name="MarkUsage" use="optional">
+                    <xs:simpleType>
+                        <xs:list itemType="EnumMarkType"/>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="Rotation" type="double" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
             </xs:extension>
@@ -5960,7 +5969,7 @@
             <xs:attribute name="GutterY2" type="double" use="optional"/>
             <xs:attribute name="LayoutStyle" type="NMTOKENS" use="optional"/>
             <xs:attribute name="OrderQuantity" type="integer" use="optional"/>
-            <xs:attribute name="UseBleeds" type="boolean" use="optional"/>
+            <xs:attribute name="UseBleed" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6037,7 +6046,9 @@
     <xs:complexType name="SeparationControlParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF" use="optional"/>
+                <xs:sequence>
+                    <xs:element ref="AutomatedOverPrintParams" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6591,7 +6602,7 @@
     <!-- ** Complex type definition for Score ** -->
     <xs:element name="Score">
         <xs:complexType>
-            <xs:attribute name="Offset" type="double" use="optional"/>
+            <xs:attribute name="Offset" type="double" use="required"/>
             <xs:attribute name="Side" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -6998,7 +7009,7 @@
                 <xs:attribute name="BandWidth" type="integer" use="optional"/>
                 <xs:attribute name="ColorantDepth" type="integer" use="optional"/>
                 <xs:attribute name="Interleaved" type="boolean" use="optional"/>
-                <xs:attribute name="MimeType" type="string" use="optional"/>
+                <xs:attribute name="MimeType" type="string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7056,17 +7067,16 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="AimCurve" type="TransferFunction" use="optional"/>
                 <xs:attribute name="Density" type="double" use="optional"/>
-                <xs:attribute name="Name" type="string" use="optional"/>
+                <xs:attribute name="Name" type="string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for PrintCondition ** -->
     <xs:element name="WindingParams" type="WindingParams" substitutionGroup="ResourceType"/>
     <xs:complexType name="WindingParams">
         <xs:complexContent>
@@ -7075,6 +7085,26 @@
                 <xs:attribute name="Diameter" type="double" use="optional"/>
                 <xs:attribute name="Fixation" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="RasterReadingParams" type="RasterReadingParams" substitutionGroup="ResourceType"/>
+    <xs:complexType name="RasterReadingParams">
+        <xs:complexContent>
+            <xs:extension base="ResourceType">
+                <xs:sequence>
+                    <xs:element ref="FitPolicy" minOccurs="0" maxOccurs="1"/>
+                </xs:sequence>
+                <xs:attribute name="Center" type="boolean" use="optional"/>
+                <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
+                <xs:attribute name="MirrorAround" type="EnumDeviceAxis" use="optional"/>
+                <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Polarity" type="Polarity" use="optional"/>
+                <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
+                <xs:attribute name="Scaling" type="XYPair" use="optional"/>
+                <xs:attribute name="ScalingOrigin" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -7332,7 +7362,11 @@
             <xs:sequence>
                 <xs:element ref="QueueFilter" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="PreviewUsage" type="EnumPreviewUsage" use="optional"/>
+            <xs:attribute name="PreviewUsage" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="EnumPreviewUsage"/>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="UpdateGranularity" type="EnumUpdateGranularity" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
