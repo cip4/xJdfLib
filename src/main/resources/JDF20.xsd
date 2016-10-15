@@ -448,7 +448,7 @@
             <xs:enumeration value="CrepePaper"/>
             <xs:enumeration value="Gauze"/>
             <xs:enumeration value="Paper"/>
-            <xs:enumeration value="PaperlineMules"/>
+            <xs:enumeration value="PaperlinedMules"/>
             <xs:enumeration value="Tape"/>
         </xs:restriction>
     </xs:simpleType>
@@ -473,7 +473,7 @@
     <xs:simpleType name="EnumGlueProcedure">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Spine"/>
-            <xs:enumeration value="SpineOnly"/>
+            <xs:enumeration value="SideOnly"/>
             <xs:enumeration value="SingleSide"/>
             <xs:enumeration value="SideSpine"/>
         </xs:restriction>
@@ -2232,7 +2232,7 @@
                 <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="DDESCutType" type="integer" use="optional"/>
                 <xs:attribute name="ShapeDepth" type="double" use="optional"/>
-                <xs:attribute name="ShapeType" type="EnumShapeType2" use="optional"/>
+                <xs:attribute name="ShapeType" type="EnumShapeType2" use="required"/>
                 <xs:attribute name="TeethPerDimension" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -2634,7 +2634,7 @@
         <xs:complexType>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MessageType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="URL" type="URL" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2643,13 +2643,11 @@
     <!-- ** Complex type definition for Subscription ** -->
     <xs:element name="Subscription">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObservationTarget"/>
-            </xs:sequence>
-            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
-            <xs:attribute name="Format" type="string" use="optional"/>
-            <xs:attribute name="MinDelayTime" type="duration" use="optional"/>
-            <xs:attribute name="RepeatStep" type="integer" use="optional"/>
+            <xs:attribute name="ChannelMode" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="EnumChannelMode"/>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="RepeatTime" type="double" use="optional"/>
             <xs:attribute name="RetryPolicy" type="EnumRetryPolicy" use="optional"/>
             <xs:attribute name="URL" type="URL" use="required"/>
@@ -2661,7 +2659,7 @@
     <xs:element name="SubscriptionFilter">
         <xs:complexType>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="MessageTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="URL" type="URL" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -3710,21 +3708,21 @@
     <!-- ** Complex type definition for SoftCoverBinding ** -->
     <xs:element name="SoftCoverBinding">
         <xs:complexType>
-            <xs:attribute name="Scoring" type="EnumScoring" use="optional"/>
-            <xs:attribute name="GlueProcedure" type="EnumGlueProcedure" use="optional"/>
-            <xs:attribute name="FoldingWidthBack" type="double" use="optional"/>
-            <xs:attribute name="SpineLevelling" type="boolean" use="optional"/>
-            <xs:attribute name="SpineSanding" type="boolean" use="optional"/>
-            <xs:attribute name="SpineFiberRoughing" type="boolean" use="optional"/>
-            <xs:attribute name="SpineNotching" type="boolean" use="optional"/>
-            <xs:attribute name="SpineBrushing" type="boolean" use="optional"/>
-            <xs:attribute name="EndSheets" type="boolean" use="optional"/>
-            <xs:attribute name="BlockThreadSewing" type="boolean" use="optional"/>
-            <xs:attribute name="FoldingWidth" type="double" use="optional"/>
-            <xs:attribute name="SpineGlue" type="EnumGlue" use="optional"/>
-            <xs:attribute name="SpineShredding" type="boolean" use="optional"/>
-            <xs:attribute name="SpineMilling" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
+            <xs:attribute name="BlockThreadSewing" type="boolean" use="optional"/>
+            <xs:attribute name="EndSheets" type="boolean" use="optional"/>
+            <xs:attribute name="FoldingWidth" type="double" use="optional"/>
+            <xs:attribute name="FoldingWidthBack" type="double" use="optional"/>
+            <xs:attribute name="GlueProcedure" type="EnumGlueProcedure" use="optional"/>
+            <xs:attribute name="Scoring" type="EnumScoring" use="optional"/>
+            <xs:attribute name="SpineBrushing" type="boolean" use="optional"/>
+            <xs:attribute name="SpineFiberRoughing" type="boolean" use="optional"/>
+            <xs:attribute name="SpineGlue" type="EnumGlue" use="optional"/>
+            <xs:attribute name="SpineLevelling" type="boolean" use="optional"/>
+            <xs:attribute name="SpineMilling" type="boolean" use="optional"/>
+            <xs:attribute name="SpineNotching" type="boolean" use="optional"/>
+            <xs:attribute name="SpineSanding" type="boolean" use="optional"/>
+            <xs:attribute name="SpineShredding" type="boolean" use="optional"/>
         </xs:complexType>
     </xs:element>
 
@@ -3733,12 +3731,12 @@
     <xs:complexType name="SpinePreparationParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="WorkingLength" type="double" use="optional"/>
                 <xs:attribute name="MillingDepth" type="double" use="optional"/>
-                <xs:attribute name="StartPosition" type="double" use="optional"/>
                 <xs:attribute name="NotchingDepth" type="double" use="optional"/>
                 <xs:attribute name="NotchingDistance" type="double" use="optional"/>
                 <xs:attribute name="Operations" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="StartPosition" type="double" use="optional"/>
+                <xs:attribute name="WorkingLength" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3806,6 +3804,7 @@
             <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="double" use="optional"/>
             <xs:attribute name="TabExtensionMylar" type="boolean" use="optional"/>
+            <xs:attribute name="TabBindMylar" type="boolean" use="optional"/>
             <xs:attribute name="TabBodyCopy" type="boolean" use="optional"/>
             <xs:attribute name="TabMylarColor" type="NamedColor" use="optional"/>
             <xs:attribute name="TabMylarColorDetails" type="string" use="optional"/>
@@ -4108,8 +4107,8 @@
             <xs:sequence>
                 <xs:element ref="Glue" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Folio" type="integer" use="optional"/>
             <xs:attribute name="Face" type="Face" use="optional"/>
+            <xs:attribute name="Folio" type="integer" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="ChildRef" type="IDREF" use="required"/>
@@ -4237,7 +4236,6 @@
             <xs:attribute name="CutOut" type="boolean" use="optional"/>
             <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
             <xs:attribute name="CutType" type="EnumCutType" use="optional"/>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:attribute name="ShapeType" type="EnumShapeType" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6039,9 +6037,6 @@
     <xs:complexType name="SeparationControlParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TransferFunctionControl"/>
-                </xs:sequence>
                 <xs:attribute name="AutomatedOverPrintParamsRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -6076,8 +6071,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ObjectModel"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="ShapeTemplate"/>
+                    <xs:element ref="ObjectModel" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="ShapeTemplate" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -6151,8 +6146,8 @@
     <!-- ** Complex type definition for ShiftPoint ** -->
     <xs:element name="ShiftPoint">
         <xs:complexType>
-            <xs:attribute name="CTM" type="matrix" use="optional"/>
-            <xs:attribute name="Position" type="XYPair" use="optional"/>
+            <xs:attribute name="CTM" type="matrix" use="required"/>
+            <xs:attribute name="Position" type="XYPair" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6196,7 +6191,6 @@
                 <xs:element ref="ShapeDef" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="StationAmount" type="integer" use="optional"/>
             <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6302,12 +6296,12 @@
     <!-- ** Complex type definition for TIFFtag ** -->
     <xs:element name="TIFFtag">
         <xs:complexType>
-            <xs:attribute name="TagNumber" type="integer" use="optional"/>
             <xs:attribute name="BinaryValue" type="hexBinary" use="optional"/>
-            <xs:attribute name="NumberValue" type="string" use="optional"/>
-            <xs:attribute name="TagType" type="integer" use="optional"/>
-            <xs:attribute name="StringValue" type="string" use="optional"/>
             <xs:attribute name="IntegerValue" type="IntegerList" use="optional"/>
+            <xs:attribute name="NumberValue" type="DoubleList" use="optional"/>
+            <xs:attribute name="StringValue" type="string" use="optional"/>
+            <xs:attribute name="TagNumber" type="integer" use="required"/>
+            <xs:attribute name="TagType" type="integer" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6448,7 +6442,7 @@
         <xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional"/>
         <xs:attribute name="Coverage" type="double" use="optional"/>
         <xs:attribute name="PrintCondition" type="string" use="optional"/>
-        <xs:attribute name="Surface" type="EnumSide" use="optional"/>
+        <xs:attribute name="Surface" type="EnumSide" use="required"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
