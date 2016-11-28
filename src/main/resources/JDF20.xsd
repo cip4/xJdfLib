@@ -112,10 +112,6 @@
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
-    <xs:simpleType name="Any">
-        <xs:restriction base="xs:string"/>
-    </xs:simpleType>
-
     <xs:simpleType name="LabColor">
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
@@ -996,47 +992,6 @@
             <xs:enumeration value="SpineGluing"/>
             <xs:enumeration value="SideGluingFront"/>
             <xs:enumeration value="SideGluingBack"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumOrdPolicy">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="PagePool"/>
-            <xs:enumeration value="PagePoolList"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumTemplateType">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="ConditionalSheets"/>
-            <xs:enumeration value="Normal"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumCountReset">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Continue"/>
-            <xs:enumeration value="PagePool"/>
-            <xs:enumeration value="PagePoolList"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumSheetCondition">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Begin"/>
-            <xs:enumeration value="End"/>
-            <xs:enumeration value="BeginSet"/>
-            <xs:enumeration value="EndSet"/>
-            <xs:enumeration value="PagePoolBegin"/>
-            <xs:enumeration value="PagePoolEnd"/>
-            <xs:enumeration value="PagePoolListBegin"/>
-            <xs:enumeration value="PagePoolListEnd"/>
-            <xs:enumeration value="LogicalStackBegin"/>
-            <xs:enumeration value="LogicalStackEnd"/>
-            <xs:enumeration value="LogicalStackSetBegin"/>
-            <xs:enumeration value="LogicalStackSetEnd"/>
-            <xs:enumeration value="ImposedSheetSetBegin"/>
-            <xs:enumeration value="ImposedSheetSetEnd"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2048,7 +2003,6 @@
             <xs:sequence>
                 <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="ActualAmount" type="double" use="optional"/>
             <xs:attribute name="Amount" type="double" use="optional"/>
             <xs:attribute name="MaxAmount" type="double" use="optional"/>
             <xs:attribute name="MinAmount" type="double" use="optional"/>
@@ -2420,7 +2374,11 @@
             <xs:sequence>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
+            <xs:attribute name="ChannelMode" use="optional">
+                <xs:simpleType>
+                    <xs:list itemType="EnumChannelMode"/>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="JMFRole" type="EnumJmfRole" use="optional"/>
             <xs:attribute name="Type" type="NMTOKEN" use="required"/>
             <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
@@ -3381,7 +3339,7 @@
     <!-- ** Complex type definition for ModuleStatus ** -->
     <xs:element name="ModuleStatus">
         <xs:complexType>
-            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="required"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3425,10 +3383,29 @@
     <xs:element name="PageCondition">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Part"/>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="Condition" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="PagePoolStart"/>
+                        <xs:enumeration value="PagePoolEnd"/>
+                        <xs:enumeration value="PagePoolListStart"/>
+                        <xs:enumeration value="PagePoolListEnd"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="RestrictedContentObjects" type="IntegerList" use="optional"/>
             <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PageActivation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3440,12 +3417,9 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
                 </xs:sequence>
-                <xs:attribute name="PalletType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PalletType" type="NMTOKEN" use="required"/>
                 <xs:attribute name="Size" type="XYPair" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3455,15 +3429,12 @@
     <xs:complexType name="PalletizingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Bundle"/>
-                </xs:sequence>
-                <xs:attribute name="MaxWeight" type="double" use="optional"/>
-                <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="MaxHeight" type="double" use="optional"/>
-                <xs:attribute name="OverhangOffset" type="XYPair" use="optional"/>
-                <xs:attribute name="Overhang" type="XYPair" use="optional"/>
                 <xs:attribute name="LayerAmount" type="IntegerList" use="optional"/>
+                <xs:attribute name="MaxHeight" type="double" use="optional"/>
+                <xs:attribute name="MaxWeight" type="double" use="optional"/>
+                <xs:attribute name="Overhang" type="XYPair" use="optional"/>
+                <xs:attribute name="OverhangOffset" type="XYPair" use="optional"/>
+                <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3886,16 +3857,16 @@
             <xs:sequence>
                 <xs:element minOccurs="0" maxOccurs="unbounded" ref="Module"/>
             </xs:sequence>
-            <xs:attribute name="ModelName" type="string" use="optional"/>
-            <xs:attribute name="Manufacturer" type="string" use="optional"/>
-            <xs:attribute name="ModelURL" type="URL" use="optional"/>
-            <xs:attribute name="SerialNumber" type="string" use="optional"/>
-            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ModelDescription" type="string" use="optional"/>
             <xs:attribute name="DeviceType" type="string" use="optional"/>
-            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ModelNumber" type="string" use="optional"/>
+            <xs:attribute name="Manufacturer" type="string" use="optional"/>
             <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
+            <xs:attribute name="ModelDescription" type="string" use="optional"/>
+            <xs:attribute name="ModelName" type="string" use="optional"/>
+            <xs:attribute name="ModelNumber" type="string" use="optional"/>
+            <xs:attribute name="ModelURL" type="URL" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SerialNumber" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4530,11 +4501,11 @@
     <!-- ** Complex type definition for CCITTFaxParams ** -->
     <xs:element name="CCITTFaxParams">
         <xs:complexType>
-            <xs:attribute name="K" type="integer" use="optional"/>
-            <xs:attribute name="Uncompressed" type="boolean" use="optional"/>
             <xs:attribute name="EncodedByteAlign" type="boolean" use="optional"/>
             <xs:attribute name="EndOfBlock" type="boolean" use="optional"/>
             <xs:attribute name="EndOfLine" type="boolean" use="optional"/>
+            <xs:attribute name="K" type="integer" use="optional"/>
+            <xs:attribute name="Uncompressed" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4620,9 +4591,9 @@
     <!-- ** Complex type definition for ColorantAlias ** -->
     <xs:element name="ColorantAlias">
         <xs:complexType>
-            <xs:attribute name="RawNames" type="Any" use="optional"/>
-            <xs:attribute name="ReplacementColorantName" type="string" use="optional"/>
-            <xs:attribute name="SeparationNames" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ColorantName" type="string" use="required"/>
+            <xs:attribute name="RawName" type="hexBinary" use="optional"/>
+            <xs:attribute name="ReplacementColorantName" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4633,6 +4604,7 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
+                    <xs:element ref="Certification" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="ColorantAlias" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="DeviceNSpace" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
@@ -4676,10 +4648,9 @@
     <!-- ** Complex type definition for ComChannel ** -->
     <xs:element name="ComChannel">
         <xs:complexType>
-            <xs:attribute name="ChannelType" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ChannelTypeDetails" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ChannelType" type="NMTOKEN" use="required"/>
             <xs:attribute name="ChannelUsage" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Locator" type="string" use="optional"/>
+            <xs:attribute name="Locator" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4691,7 +4662,7 @@
                 <xs:element name="OrganizationalUnit" type="textElement" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CompanyID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="OrganizationName" type="string" use="optional"/>
+            <xs:attribute name="OrganizationName" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4793,6 +4764,10 @@
     <!-- ** Complex type definition for ContentObject ** -->
     <xs:element name="ContentObject">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="PageActivation" minOccurs="0" maxOccurs="1"/>
+                <xs:element ref="PageCondition" minOccurs="0" maxOccurs="1"/>
+            </xs:sequence>
             <xs:attribute name="DocOrd" type="integer" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="SetOrd" type="integer" use="optional"/>
@@ -5342,19 +5317,14 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="ExternalImpositionTemplate" minOccurs="0" maxOccurs="1"/>
-                    <xs:element ref="PageCondition" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="PlacedObject" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Position" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element ref="FillMark" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element ref="SheetCondition" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="StripMark" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="Automated" type="boolean" use="optional"/>
-                <xs:attribute name="BaseOrdReset" type="EnumOrdPolicy" use="optional"/>
                 <xs:attribute name="DeviceRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
-                <xs:attribute name="GangElementID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="InnermostShingling" type="double" use="optional"/>
                 <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
@@ -5364,11 +5334,9 @@
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
-                <xs:attribute name="SheetCountReset" type="EnumCountReset" use="optional"/>
                 <xs:attribute name="SheetNameFormat" type="string" use="optional"/>
                 <xs:attribute name="SheetNameTemplate" type="string" use="optional"/>
                 <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
-                <xs:attribute name="TemplateType" type="EnumTemplateType" use="optional"/>
                 <xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -5400,14 +5368,6 @@
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
             <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <xs:element name="SheetCondition">
-        <xs:complexType>
-            <xs:attribute name="Condition" type="EnumSheetCondition" use="required"/>
-            <xs:attribute name="RunListRef" type="IDREF" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5473,12 +5433,11 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
+                    <xs:element ref="Certification" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="HolePattern" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="MediaLayers"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="TabDimensions"/>
+                    <xs:element ref="MediaLayers" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="TabDimensions" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="BackBrightness" type="double" use="optional"/>
                 <xs:attribute name="BackCoatingDetail" type="NMTOKEN" use="optional"/>
@@ -5540,9 +5499,9 @@
     <xs:element name="MediaLayers">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Glue"/>
+                <xs:element ref="Glue" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Media" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5606,7 +5565,7 @@
                     <xs:list itemType="EnumClasses"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="MileStoneTypes" type="NMTOKENS" use="required"/>
+            <xs:attribute name="MilestoneTypes" type="NMTOKENS" use="required"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -5639,13 +5598,13 @@
     <xs:element name="ObjectResolution">
         <xs:complexType>
             <xs:attribute name="AntiAliasing" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Resolution" type="XYPair" use="required"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="Resolution" type="XYPair" use="optional"/>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5654,7 +5613,7 @@
     <xs:element name="OCGControl">
         <xs:complexType>
             <xs:attribute name="IncludeOCG" type="boolean" use="optional"/>
-            <xs:attribute name="OCGName" type="string" use="optional"/>
+            <xs:attribute name="OCGName" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5685,7 +5644,7 @@
             <xs:sequence>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="PDFXBleedBoxToTrimBoxOffset" type="rectangle" use="optional"/>
+            <xs:attribute name="PDFXBleedBoxtoTrimBoxOffset" type="rectangle" use="optional"/>
             <xs:attribute name="PDFXCheck" type="NMTOKENS" use="optional"/>
             <xs:attribute name="PDFXCompliantPDFOnly" type="boolean" use="optional"/>
             <xs:attribute name="PDFXNoTrimBoxError" type="boolean" use="optional"/>
@@ -5706,7 +5665,7 @@
                     <xs:element ref="PDFCreationDetails" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="PSCreationDetails" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="MimeType" type="string" use="optional"/>
+                <xs:attribute name="MimeType" type="string" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5736,17 +5695,15 @@
     <!-- ** Complex type definition for Person ** -->
     <xs:element name="Person">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ComChannel"/>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Address"/>
-            </xs:sequence>
-            <xs:attribute name="JobTitle" type="string" use="optional"/>
-            <xs:attribute name="NamePrefix" type="string" use="optional"/>
             <xs:attribute name="AdditionalNames" type="string" use="optional"/>
-            <xs:attribute name="Languages" type="languages" use="optional"/>
             <xs:attribute name="FamilyName" type="string" use="optional"/>
             <xs:attribute name="FirstName" type="string" use="optional"/>
+            <xs:attribute name="JobTitle" type="string" use="optional"/>
+            <xs:attribute name="Languages" type="languages" use="optional"/>
+            <xs:attribute name="NamePrefix" type="string" use="optional"/>
             <xs:attribute name="NameSuffix" type="string" use="optional"/>
+            <xs:attribute name="PhoneticFirstName" type="string" use="optional"/>
+            <xs:attribute name="PhoneticLastName" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6362,8 +6319,8 @@
     <xs:complexType name="BundlingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="LengthJDF" type="double" use="optional"/>
                 <xs:attribute name="Copies" type="integer" use="optional"/>
+                <xs:attribute name="Length" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6823,7 +6780,7 @@
             <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
             <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="PageDistributionScheme" type="EnumSourceCS" use="optional"/>
+            <xs:attribute name="PageDistributionScheme" type="EnumSourceCS" use="required"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
@@ -7130,7 +7087,7 @@
                 <xs:element ref="QueueFilter" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Operation" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Operation" type="NMTOKEN" use="required"/>
             <xs:attribute name="Position" type="integer" use="optional"/>
             <xs:attribute name="PrevQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
@@ -7355,7 +7312,7 @@
             <xs:sequence>
                 <xs:element ref="QueueFilter" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="PreviewUsage" use="optional">
+            <xs:attribute name="PreviewUsages" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumPreviewUsage"/>
                 </xs:simpleType>
