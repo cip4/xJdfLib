@@ -164,6 +164,9 @@
     <xjb:bindings node="//xs:element[@name='BundleItem']//xs:attribute[@name='BundleType']/xs:simpleType">
         <xjb:typesafeEnumClass name="BundleType"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='DeviceFilter']//xs:attribute[@name='DeviceDetails']/xs:simpleType">
+        <xjb:typesafeEnumClass name="DeviceDetails"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	

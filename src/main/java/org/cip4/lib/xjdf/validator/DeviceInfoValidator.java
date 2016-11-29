@@ -14,7 +14,6 @@ public class DeviceInfoValidator implements Validator<DeviceInfo> {
     public final ValidationResult validate(final DeviceInfo deviceInfo) {
         ValidationResult result = new ValidationResult();
         validateFileSpec(deviceInfo, result);
-        validateDeviceID(deviceInfo, result);
         validateIdleStartTime(deviceInfo, result);
         return result;
     }
@@ -50,26 +49,6 @@ public class DeviceInfoValidator implements Validator<DeviceInfo> {
                     "Element DeviceInfo may only contain FileSpec with @ResourceUsage='Schema', but @ResourceUsage='%s' "
                         + "was given",
                     fileSpec.getResourceUsage()
-                ));
-            }
-        }
-    }
-
-    /**
-     * Validate that @DeviceID matches the Device within DeviceInfo.
-     *
-     * @param deviceInfo DeviceInfo element to validate
-     * @param validationResult Container to write messages to.
-     */
-    private void validateDeviceID(final DeviceInfo deviceInfo, final ValidationResult validationResult) {
-        if (null != deviceInfo.getDeviceID()) {
-            if (null != deviceInfo.getDevice()
-                && !deviceInfo.getDeviceID().equals(deviceInfo.getDevice().getDeviceID())) {
-                validationResult.append(String.format(
-                    "DeviceInfo/@DeviceID ('%s') SHALL match DeviceInfo/Device/@DeviceID ('%s') if Device is\n"
-                        + "specified in this DeviceInfo.",
-                    deviceInfo.getDeviceID(),
-                    deviceInfo.getDevice().getDeviceID()
                 ));
             }
         }

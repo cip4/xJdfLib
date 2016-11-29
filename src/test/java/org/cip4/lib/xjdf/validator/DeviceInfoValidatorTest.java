@@ -64,33 +64,4 @@ public class DeviceInfoValidatorTest {
 
         assertTrue(validator.validate(deviceInfo).isValid());
     }
-
-    @Test
-    public void validateAllowsDeviceIdToMatchDevice() throws Exception {
-        DeviceInfo deviceInfo = new DeviceInfo()
-            .withDeviceID("Foo")
-            .withDevice(new Device().withDeviceID("Foo"));
-        DeviceInfoValidator validator = new DeviceInfoValidator();
-
-        assertTrue(validator.validate(deviceInfo).isValid());
-    }
-
-    @Test
-    public void validateAllowsNoDeviceIdWhenDeviceIsPresent() throws Exception {
-        DeviceInfo deviceInfo = new DeviceInfo()
-            .withDevice(new Device().withDeviceID("Foo"));
-        DeviceInfoValidator validator = new DeviceInfoValidator();
-
-        assertTrue(validator.validate(deviceInfo).isValid());
-    }
-
-    @Test
-    public void validateDisallowsDeviceIdToMismatchDevice() throws Exception {
-        DeviceInfo deviceInfo = new DeviceInfo()
-            .withDeviceID("Bar")
-            .withDevice(new Device().withDeviceID("Foo"));
-        DeviceInfoValidator validator = new DeviceInfoValidator();
-
-        assertFalse(validator.validate(deviceInfo).isValid());
-    }
 }

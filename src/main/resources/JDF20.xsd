@@ -280,14 +280,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumDeviceDetails">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="None"/>
-            <xs:enumeration value="Brief"/>
-            <xs:enumeration value="Full"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumJmfRole">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Receiver"/>
@@ -322,13 +314,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="StandBy"/>
             <xs:enumeration value="Full"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumJobDetails">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="None"/>
-            <xs:enumeration value="Brief"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2190,7 +2175,15 @@
     <!-- ** Complex type definition for DeviceFilter ** -->
     <xs:element name="DeviceFilter">
         <xs:complexType>
-            <xs:attribute name="DeviceDetails" type="EnumDeviceDetails" use="optional"/>
+            <xs:attribute name="DeviceDetails" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Brief"/>
+                        <xs:enumeration value="Modules"/>
+                        <xs:enumeration value="Full"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2201,15 +2194,14 @@
             <xs:sequence>
                 <xs:element ref="Activity" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="Device" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="2"/>
                 <xs:element ref="JobPhase" minOccurs="0" maxOccurs="unbounded"/>
-                <xs:element ref="ModuleStatus" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
+            <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="PowerOnTime" type="dateTime" use="optional"/>
             <xs:attribute name="ProductionCounter" type="double" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
@@ -2579,14 +2571,6 @@
     <!-- ** Complex type definition for StatusQuParams ** -->
     <xs:element name="StatusQuParams">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-            <xs:attribute name="DeviceDetails" type="EnumDeviceDetails" use="optional"/>
-            <xs:attribute name="EmployeeInfo" type="boolean" use="optional"/>
-            <xs:attribute name="JobDetails" type="EnumJobDetails" use="optional"/>
-            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2928,7 +2912,7 @@
     <xs:element name="DeviceList">
         <xs:complexType>
             <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="DeviceInfo"/>
+                <xs:element ref="Device" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3843,17 +3827,10 @@
     <!-- ** Complex type definition for Module ** -->
     <xs:element name="Module">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element minOccurs="0" maxOccurs="unbounded" ref="Module"/>
-            </xs:sequence>
-            <xs:attribute name="DeviceType" type="string" use="optional"/>
+            <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="Manufacturer" type="string" use="optional"/>
             <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
-            <xs:attribute name="ModelDescription" type="string" use="optional"/>
-            <xs:attribute name="ModelName" type="string" use="optional"/>
-            <xs:attribute name="ModelNumber" type="string" use="optional"/>
-            <xs:attribute name="ModelURL" type="URL" use="optional"/>
-            <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ModuleID" type="NMTOKEN" use="required"/>
             <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="SerialNumber" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
