@@ -1405,14 +1405,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumTransformationContext">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="StackItem"/>
-            <xs:enumeration value="Component"/>
-            <xs:enumeration value="CollateItem"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumColorTransform">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
@@ -1735,7 +1727,6 @@
         <xs:restriction base="xs:string">
             <xs:enumeration value="BinderySignatureID"/>
             <xs:enumeration value="BlockName"/>
-            <xs:enumeration value="BundleItemIndex"/>
             <xs:enumeration value="DocIndex"/>
             <xs:enumeration value="DropID"/>
             <xs:enumeration value="Location"/>
@@ -2699,7 +2690,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
+            <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
             <xs:attribute name="TotalAmount" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3367,8 +3358,6 @@
         <xs:complexType>
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="BundleItemIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="DocIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
@@ -4467,11 +4456,19 @@
     <xs:element name="CollatingItem">
         <xs:complexType>
             <xs:attribute name="Amount" type="integer" use="optional"/>
-            <xs:attribute name="BundleDepth" type="integer" use="optional"/>
             <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="Transformation" type="matrix" use="optional"/>
-            <xs:attribute name="TransformationContext" type="EnumTransformationContext" use="optional"/>
+            <xs:attribute name="TransformationContext" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="StackItem"/>
+                        <xs:enumeration value="Component"/>
+                        <xs:enumeration value="CollateItem"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
