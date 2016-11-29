@@ -5180,6 +5180,7 @@
             <xs:attribute name="Operation" type="NMTOKEN" use="required"/>
             <xs:attribute name="OperationDetails" type="string" use="optional"/>
             <xs:attribute name="SourceObjects" type="SourceObjects" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
