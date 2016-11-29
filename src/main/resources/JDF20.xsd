@@ -1850,8 +1850,6 @@
                 <xs:element ref="ResourceType" minOccurs="0" maxOccurs="1"/>
                 <xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
             <xs:attribute name="Brand" type="string" use="optional"/>
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="ContactRef" type="IDREF" use="optional"/>
@@ -2022,8 +2020,6 @@
         <xs:complexType>
             <xs:simpleContent>
                 <xs:extension base="string">
-                    <xs:attribute name="AgentName" type="string" use="optional"/>
-                    <xs:attribute name="AgentVersion" type="string" use="optional"/>
                     <xs:attribute name="Author" type="string" use="optional"/>
                     <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
                     <xs:attribute name="Language" type="language" use="optional"/>
