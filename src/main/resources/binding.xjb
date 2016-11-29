@@ -167,6 +167,9 @@
     <xjb:bindings node="//xs:element[@name='DeviceFilter']//xs:attribute[@name='DeviceDetails']/xs:simpleType">
         <xjb:typesafeEnumClass name="DeviceDetails"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ProcessRun']//xs:attribute[@name='EndStatus']/xs:simpleType">
+        <xjb:typesafeEnumClass name="EndStatus"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	

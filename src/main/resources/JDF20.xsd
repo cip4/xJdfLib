@@ -253,7 +253,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumNodeStatus">
+    <xs:simpleType name="NodeStatus">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Aborted"/>
             <xs:enumeration value="Cleanup"/>
@@ -1143,13 +1143,6 @@
             <xs:enumeration value="Trivial"/>
             <xs:enumeration value="Penalty"/>
             <xs:enumeration value="JobCancelled"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumEndStatus">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Aborted"/>
-            <xs:enumeration value="Completed"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2146,7 +2139,7 @@
                 <xs:attribute name="LastEnd" type="dateTime" use="optional"/>
                 <xs:attribute name="LastStart" type="dateTime" use="optional"/>
                 <xs:attribute name="NaturalLang" type="language" use="optional"/>
-                <xs:attribute name="NodeStatus" type="EnumNodeStatus" use="optional"/>
+                <xs:attribute name="NodeStatus" type="NodeStatus" use="optional"/>
                 <xs:attribute name="NodeStatusDetails" type="string" use="optional"/>
                 <xs:attribute name="SetupDuration" type="duration" use="optional"/>
                 <xs:attribute name="Start" type="dateTime" use="optional"/>
@@ -2270,7 +2263,7 @@
             <xs:attribute name="SpawnID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
+            <xs:attribute name="Status" type="NodeStatus" use="optional"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="Waste" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -2390,7 +2383,7 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="Operation" type="EnumPipeOperation" use="required"/>
             <xs:attribute name="PipeID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="optional"/>
+            <xs:attribute name="Status" type="NodeStatus" use="optional"/>
             <xs:attribute name="UpdatedStatus" type="EnumResourceStatus" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2424,7 +2417,7 @@
             <xs:attribute name="Priority" type="integer" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="required"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="Status" type="EnumNodeStatus" use="required"/>
+            <xs:attribute name="Status" type="NodeStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="SubmissionTime" type="dateTime" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -3536,7 +3529,14 @@
             <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Duration" type="duration" use="optional"/>
             <xs:attribute name="End" type="dateTime" use="required"/>
-            <xs:attribute name="EndStatus" type="EnumEndStatus" use="required"/>
+            <xs:attribute name="EndStatus" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Aborted"/>
+                        <xs:enumeration value="Completed"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ReturnTime" type="dateTime" use="optional"/>
