@@ -2430,7 +2430,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="MISDetails" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ResourceSet" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="CommandResult" use="optional">
                 <xs:simpleType>
@@ -2445,6 +2445,15 @@
             </xs:attribute>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Level" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Empty"/>
+                        <xs:enumeration value="Low"/>
+                        <xs:enumeration value="OK"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Scope" type="Scope" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
