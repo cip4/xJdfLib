@@ -1226,15 +1226,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumOffsetDirection">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Alternate"/>
-            <xs:enumeration value="Left"/>
-            <xs:enumeration value="None"/>
-            <xs:enumeration value="Right"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumSheetUsage">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Header"/>
@@ -4941,14 +4932,21 @@
     <xs:element name="Disjointing">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="InsertSheet" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Number" type="integer" use="optional"/>
-            <xs:attribute name="Offset" type="XYPair" use="optional"/>
-            <xs:attribute name="OffsetAmount" type="integer" use="optional"/>
-            <xs:attribute name="OffsetDirection" type="EnumOffsetDirection" use="optional"/>
-            <xs:attribute name="OffsetUnits" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Amount" type="integer" use="optional"/>
+            <xs:attribute name="Direction" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Alternate"/>
+                        <xs:enumeration value="Left"/>
+                        <xs:enumeration value="None"/>
+                        <xs:enumeration value="Right"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:attribute>
+            <xs:attribute name="Units" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
