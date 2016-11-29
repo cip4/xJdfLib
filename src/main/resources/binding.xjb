@@ -151,9 +151,7 @@
     <xjb:bindings node="//xs:complexType[@name='RenderingParams']//xs:attribute[@name='BandOrdering']/xs:simpleType">
         <xjb:typesafeEnumClass name="BandOrdering"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ResourceInfo']//xs:attribute[@name='Level']/xs:simpleType">
-        <xjb:typesafeEnumClass name="Level"/>
-    </xjb:bindings>
+
     <xjb:bindings node="//xs:complexType[@name='VarnishingParams']//xs:attribute[@name='ModuleType']/xs:simpleType">
         <xjb:typesafeEnumClass name="ModuleType"/>
     </xjb:bindings>
@@ -168,6 +166,9 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ResourceInfo']//xs:attribute[@name='CommandResult']/xs:simpleType">
         <xjb:typesafeEnumClass name="CommandResult"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResourceInfo']//xs:attribute[@name='Level']/xs:simpleType">
+        <xjb:typesafeEnumClass name="Level"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='BundleItem']//xs:attribute[@name='BundleType']/xs:simpleType">
         <xjb:typesafeEnumClass name="BundleType"/>
