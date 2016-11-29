@@ -2097,6 +2097,7 @@
                 <xs:element ref="GeneralID" minOccurs="0" maxOccurs="unbounded"/>
                 <xs:element ref="Resource" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
+            <xs:attribute name="CombinedProcessIndex" type="IntegerList" use="optional"/>
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
