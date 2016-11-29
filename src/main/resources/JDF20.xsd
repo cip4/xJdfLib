@@ -4486,14 +4486,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for CollectingParams ** -->
-    <xs:element name="CollectingParams" type="CollectingParams" substitutionGroup="ResourceType"/>
-    <xs:complexType name="CollectingParams">
-        <xs:complexContent>
-            <xs:extension base="ResourceType"/>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for Color ** -->
     <xs:element name="Color" type="Color" substitutionGroup="ResourceType"/>
     <xs:complexType name="Color">
