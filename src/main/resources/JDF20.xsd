@@ -148,19 +148,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumDataType">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="string"/>
-            <xs:enumeration value="integer"/>
-            <xs:enumeration value="double"/>
-            <xs:enumeration value="NMTOKEN"/>
-            <xs:enumeration value="boolean"/>
-            <xs:enumeration value="dateTime"/>
-            <xs:enumeration value="duration"/>
-            <xs:enumeration value="NamedFeature"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumClass">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Event"/>
@@ -5164,7 +5151,20 @@
     <!-- ** Complex type definition for GeneralID ** -->
     <xs:element name="GeneralID">
         <xs:complexType>
-            <xs:attribute name="DataType" type="EnumDataType" use="optional"/>
+            <xs:attribute name="DataType" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="string"/>
+                        <xs:enumeration value="integer"/>
+                        <xs:enumeration value="double"/>
+                        <xs:enumeration value="NMTOKEN"/>
+                        <xs:enumeration value="boolean"/>
+                        <xs:enumeration value="dateTime"/>
+                        <xs:enumeration value="duration"/>
+                        <xs:enumeration value="NamedFeature"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="IDUsage" type="NMTOKEN" use="required"/>
             <xs:attribute name="IDValue" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>

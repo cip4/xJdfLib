@@ -170,6 +170,9 @@
     <xjb:bindings node="//xs:element[@name='ProcessRun']//xs:attribute[@name='EndStatus']/xs:simpleType">
         <xjb:typesafeEnumClass name="EndStatus"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='GeneralID']//xs:attribute[@name='DataType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="DataType"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	
