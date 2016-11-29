@@ -5073,30 +5073,27 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for FileSpec ** -->
-    <xs:element name="FileSpec" type="FileSpec" substitutionGroup="ResourceType"/>
-    <xs:complexType name="FileSpec">
-        <xs:complexContent>
-            <xs:extension base="ResourceType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="Disposition"/>
-                </xs:sequence>
-                <xs:attribute name="CheckSum" type="hexBinary" use="optional"/>
-                <xs:attribute name="Encoding" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FileFormat" type="string" use="optional"/>
-                <xs:attribute name="FileSize" type="integer" use="optional"/>
-                <xs:attribute name="FileTemplate" type="string" use="optional"/>
-                <xs:attribute name="MimeType" type="string" use="optional"/>
-                <xs:attribute name="MimeTypeVersion" type="string" use="optional"/>
-                <xs:attribute name="OverwritePolicy" type="EnumOverwritePolicy" use="optional"/>
-                <xs:attribute name="Password" type="string" use="optional"/>
-                <xs:attribute name="ResourceUsage" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SearchDepth" type="integer" use="optional"/>
-                <xs:attribute name="UID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="URL" type="URL" use="optional"/>
-                <xs:attribute name="UserFileName" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="FileSpec">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="1" ref="Disposition"/>
+            </xs:sequence>
+            <xs:attribute name="CheckSum" type="hexBinary" use="optional"/>
+            <xs:attribute name="Encoding" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="FileFormat" type="string" use="optional"/>
+            <xs:attribute name="FileSize" type="integer" use="optional"/>
+            <xs:attribute name="FileTemplate" type="string" use="optional"/>
+            <xs:attribute name="MimeType" type="string" use="optional"/>
+            <xs:attribute name="MimeTypeVersion" type="string" use="optional"/>
+            <xs:attribute name="OverwritePolicy" type="EnumOverwritePolicy" use="optional"/>
+            <xs:attribute name="Password" type="string" use="optional"/>
+            <xs:attribute name="ResourceUsage" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="SearchDepth" type="integer" use="optional"/>
+            <xs:attribute name="UID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="URL" type="URL" use="optional"/>
+            <xs:attribute name="UserFileName" type="string" use="optional"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for FlateParams ** -->
     <xs:element name="FlateParams">
