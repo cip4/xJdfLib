@@ -810,7 +810,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumSheetLay">
+    <xs:simpleType name="SheetLay">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Right"/>
@@ -2850,7 +2850,7 @@
                     <xs:element ref="CutBlock" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
-                <xs:attribute name="SheetLay" type="EnumLeftRight" use="optional"/>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3623,7 +3623,7 @@
                 <xs:attribute name="DeliveryMode" type="EnumDeliveryMode" use="optional"/>
                 <xs:attribute name="DieLayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SheetLay" type="EnumSheetLay" use="optional"/>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4756,7 +4756,7 @@
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="PerfectingModule" type="integer" use="optional"/>
                 <xs:attribute name="Powder" type="double" use="optional"/>
-                <xs:attribute name="SheetLay" type="EnumSheetLay" use="optional"/>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
                 <xs:attribute name="Speed" type="double" use="optional"/>
                 <xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
             </xs:extension>
@@ -4940,7 +4940,7 @@
                 <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
                 <xs:attribute name="OutputBin" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="PageDelivery" type="EnumPageDelivery" use="optional"/>
-                <xs:attribute name="SheetLay" type="EnumSheetLay" use="optional"/>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
                 <xs:attribute name="Sides" type="EnumSides2" use="optional"/>
                 <xs:attribute name="StackAmount" type="integer" use="optional"/>
             </xs:extension>
@@ -6418,14 +6418,7 @@
                 </xs:sequence>
                 <xs:attribute name="FoldCatalog" type="FoldCatalog" use="optional"/>
                 <xs:attribute name="FoldingDetails" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="SheetLay" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Left"/>
-                            <xs:enumeration value="Right"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
+                <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

@@ -110,9 +110,6 @@
     <xjb:bindings node="//xs:element[@name='Fold']//xs:attribute[@name='To']/xs:simpleType">
         <xjb:typesafeEnumClass name="To"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='FoldingParams']//xs:attribute[@name='SheetLay']/xs:simpleType">
-        <xjb:typesafeEnumClass name="SheetLay"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Score']//xs:attribute[@name='Side']/xs:simpleType">
         <xjb:typesafeEnumClass name="Side"/>
     </xjb:bindings>
