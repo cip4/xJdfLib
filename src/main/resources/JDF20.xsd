@@ -4758,7 +4758,6 @@
                 <xs:attribute name="FirstSurface" type="EnumSide" use="optional"/>
                 <xs:attribute name="FountainSolution" type="EnumFountainSolution" use="optional"/>
                 <xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
-                <xs:attribute name="PerfectingModule" type="integer" use="optional"/>
                 <xs:attribute name="Powder" type="double" use="optional"/>
                 <xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
                 <xs:attribute name="Speed" type="double" use="optional"/>
