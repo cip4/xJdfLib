@@ -5092,6 +5092,7 @@
             <xs:attribute name="UID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="URL" type="URL" use="optional"/>
             <xs:attribute name="UserFileName" type="string" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
