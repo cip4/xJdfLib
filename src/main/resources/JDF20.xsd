@@ -3207,11 +3207,8 @@
     <!-- ** Complex type definition for JobField ** -->
     <xs:element name="JobField">
         <xs:complexType>
-            <xs:attribute name="ShowList" type="NMTOKENS" use="optional"/>
             <xs:attribute name="JobFormat" type="string" use="optional"/>
             <xs:attribute name="JobTemplate" type="string" use="optional"/>
-            <xs:attribute name="OperatorText" type="string" use="optional"/>
-            <xs:attribute name="UserText" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
