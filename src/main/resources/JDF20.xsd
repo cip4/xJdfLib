@@ -3383,20 +3383,8 @@
     <xs:element name="PageCondition">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Part" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="Condition" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="PagePoolStart"/>
-                        <xs:enumeration value="PagePoolEnd"/>
-                        <xs:enumeration value="PagePoolListStart"/>
-                        <xs:enumeration value="PagePoolListEnd"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="RestrictedContentObjects" type="IntegerList" use="optional"/>
-            <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3404,7 +3392,7 @@
     <xs:element name="PageActivation">
         <xs:complexType>
             <xs:sequence>
-                <xs:element ref="Part" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Part" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -5319,6 +5307,7 @@
                     <xs:element ref="ExternalImpositionTemplate" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="PlacedObject" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Position" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="SheetActivation" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="SignatureCell" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="StripMark" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
@@ -5368,6 +5357,16 @@
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
             <xs:attribute name="TrimSize" type="XYPair" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="SheetActivation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Part" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
