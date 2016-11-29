@@ -852,32 +852,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumSourceCS">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="All"/>
-            <xs:enumeration value="CalGray"/>
-            <xs:enumeration value="Calibrated"/>
-            <xs:enumeration value="CalRGB"/>
-            <xs:enumeration value="CIEBased"/>
-            <xs:enumeration value="CMYK"/>
-            <xs:enumeration value="DeviceCMYK"/>
-            <xs:enumeration value="DeviceGray"/>
-            <xs:enumeration value="DeviceN"/>
-            <xs:enumeration value="DeviceRGB"/>
-            <xs:enumeration value="DevIndep"/>
-            <xs:enumeration value="Gray"/>
-            <xs:enumeration value="ICCBased"/>
-            <xs:enumeration value="ICCCMYK"/>
-            <xs:enumeration value="ICCGray"/>
-            <xs:enumeration value="ICCLAB"/>
-            <xs:enumeration value="ICCRGB"/>
-            <xs:enumeration value="Lab"/>
-            <xs:enumeration value="RGB"/>
-            <xs:enumeration value="Separtation"/>
-            <xs:enumeration value="YUV"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumShapeDefFluteDirection">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="XDirection"/>
@@ -4766,16 +4740,11 @@
     <!-- ** Complex type definition for DCTParams ** -->
     <xs:element name="DCTParams">
         <xs:complexType>
-            <xs:attribute name="QuantTable" type="string" use="optional"/>
-            <xs:attribute name="SourceCSs" use="optional">
-                <xs:simpleType>
-                    <xs:list itemType="EnumSourceCS"/>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="ColorTransform" type="EnumColorTransform" use="optional"/>
             <xs:attribute name="HSamples" type="IntegerList" use="optional"/>
             <xs:attribute name="HuffTable" type="string" use="optional"/>
             <xs:attribute name="QFactor" type="double" use="optional"/>
+            <xs:attribute name="QuantTable" type="string" use="optional"/>
             <xs:attribute name="VSamples" type="IntegerList" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6754,7 +6723,33 @@
             <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
             <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="SourceCS" type="EnumSourceCS" use="optional"/>
+            <xs:attribute name="SourceCS" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="All"/>
+                        <xs:enumeration value="CalGray"/>
+                        <xs:enumeration value="Calibrated"/>
+                        <xs:enumeration value="CalRGB"/>
+                        <xs:enumeration value="CIEBased"/>
+                        <xs:enumeration value="CMYK"/>
+                        <xs:enumeration value="DeviceCMYK"/>
+                        <xs:enumeration value="DeviceGray"/>
+                        <xs:enumeration value="DeviceN"/>
+                        <xs:enumeration value="DeviceRGB"/>
+                        <xs:enumeration value="DevIndep"/>
+                        <xs:enumeration value="Gray"/>
+                        <xs:enumeration value="ICCBased"/>
+                        <xs:enumeration value="ICCCMYK"/>
+                        <xs:enumeration value="ICCGray"/>
+                        <xs:enumeration value="ICCLAB"/>
+                        <xs:enumeration value="ICCRGB"/>
+                        <xs:enumeration value="Lab"/>
+                        <xs:enumeration value="RGB"/>
+                        <xs:enumeration value="Separtation"/>
+                        <xs:enumeration value="YUV"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>

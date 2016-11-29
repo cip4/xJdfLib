@@ -191,6 +191,9 @@
     <xjb:bindings node="//xs:element[@name='ColorSpaceConversionOp']//xs:attribute[@name='Operation']/xs:simpleType">
         <xjb:typesafeEnumClass name="Operation"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ColorSpaceConversionOp']//xs:attribute[@name='SourceCS']/xs:simpleType">
+        <xjb:typesafeEnumClass name="SourceCS"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='CollatingItem']//xs:attribute[@name='TransformationContext']/xs:simpleType">
         <xjb:typesafeEnumClass name="TransformationContext"/>
     </xjb:bindings>
