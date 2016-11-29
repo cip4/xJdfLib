@@ -581,24 +581,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCutType">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Cut"/>
-            <xs:enumeration value="Perforate"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumShapeType">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Line"/>
-            <xs:enumeration value="Path"/>
-            <xs:enumeration value="Rectangular"/>
-            <xs:enumeration value="Round"/>
-            <xs:enumeration value="RoundedRectangle"/>
-            <xs:enumeration value="Custom"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumShapeType2">
         <xs:restriction base="NMTOKEN">
             <xs:enumeration value="Path"/>
@@ -3358,6 +3340,7 @@
         <xs:complexType>
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="DocIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
@@ -4124,8 +4107,26 @@
             <xs:attribute name="CutDepth" type="EnumCutDepth" use="optional"/>
             <xs:attribute name="CutOut" type="boolean" use="optional"/>
             <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
-            <xs:attribute name="CutType" type="EnumCutType" use="optional"/>
-            <xs:attribute name="ShapeType" type="EnumShapeType" use="optional"/>
+            <xs:attribute name="CutType" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Cut"/>
+                        <xs:enumeration value="Perforate"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ShapeType" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Line"/>
+                        <xs:enumeration value="Path"/>
+                        <xs:enumeration value="Rectangular"/>
+                        <xs:enumeration value="Round"/>
+                        <xs:enumeration value="RoundedRectangle"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:attribute name="ShapeTypeDetails" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

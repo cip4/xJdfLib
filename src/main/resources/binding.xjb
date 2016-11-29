@@ -185,6 +185,12 @@
     <xjb:bindings node="//xs:element[@name='CollatingItem']//xs:attribute[@name='TransformationContext']/xs:simpleType">
         <xjb:typesafeEnumClass name="TransformationContext"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='ShapeType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="ShapeType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='CutType']/xs:simpleType">
+        <xjb:typesafeEnumClass name="CutType"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	
