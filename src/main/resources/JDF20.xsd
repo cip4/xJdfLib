@@ -842,7 +842,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumRenderingIntent">
+    <xs:simpleType name="RenderingIntent">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Saturation"/>
             <xs:enumeration value="Perceptual"/>
@@ -926,15 +926,6 @@
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Right"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumRenderingIntent2">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Perceptual"/>
-            <xs:enumeration value="Saturation"/>
-            <xs:enumeration value="RelativeColorimetric"/>
-            <xs:enumeration value="AbsoluteColorimetric"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -1793,7 +1784,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumSourceObjects">
+    <xs:simpleType name="SourceObjects">
         <xs:restriction base="xs:string">
             <xs:enumeration value="All"/>
             <xs:enumeration value="ImagePhotographic"/>
@@ -5172,6 +5163,26 @@
         </xs:complexContent>
     </xs:complexType>
 
+    <xs:element name="ImageEnhancementParams" type="ImageEnhancementParams" substitutionGroup="ResourceType"/>
+    <xs:complexType name="ImageEnhancementParams">
+        <xs:complexContent>
+            <xs:extension base="ResourceType">
+                <xs:sequence>
+                    <xs:element ref="ImageEnhancementOp" minOccurs="0" maxOccurs="unbounded"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="ImageEnhancementOp">
+        <xs:complexType>
+            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Operation" type="NMTOKEN" use="required"/>
+            <xs:attribute name="OperationDetails" type="string" use="optional"/>
+            <xs:attribute name="SourceObjects" type="SourceObjects" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+
     <!-- ** Complex type definition for ImageSetterParams ** -->
     <xs:element name="ImageSetterParams" type="ImageSetterParams" substitutionGroup="ResourceType"/>
     <xs:complexType name="ImageSetterParams">
@@ -5540,7 +5551,7 @@
             <xs:attribute name="Resolution" type="XYPair" use="required"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumSourceObjects"/>
+                    <xs:list itemType="SourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -5922,7 +5933,7 @@
             <xs:attribute name="SourceFrequencyMin" type="double" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumSourceObjects"/>
+                    <xs:list itemType="SourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="SpotFunction" type="NMTOKEN" use="optional"/>
@@ -6677,7 +6688,7 @@
             <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumSourceObjects"/>
+                    <xs:list itemType="SourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -6716,10 +6727,9 @@
                         <xs:enumeration value="ConvertIgnore"/>
                     </xs:restriction>
                 </xs:simpleType>
-
             </xs:attribute>
             <xs:attribute name="PreserveBlack" type="boolean" use="optional"/>
-            <xs:attribute name="RenderingIntent" type="EnumRenderingIntent" use="optional"/>
+            <xs:attribute name="RenderingIntent" type="RenderingIntent" use="optional"/>
             <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
             <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
@@ -6752,10 +6762,10 @@
             </xs:attribute>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumSourceObjects"/>
+                    <xs:list itemType="SourceObjects"/>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="SourceRenderingIntent" type="EnumRenderingIntent" use="optional"/>
+            <xs:attribute name="SourceRenderingIntent" type="RenderingIntent" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6894,7 +6904,7 @@
             <xs:attribute name="AutoRotatePages" type="EnumAutoRotate" use="optional"/>
             <xs:attribute name="Binding" type="EnumLeftRight" use="optional"/>
             <xs:attribute name="CompressPages" type="boolean" use="optional"/>
-            <xs:attribute name="DefaultRenderingIntent" type="EnumRenderingIntent2" use="optional"/>
+            <xs:attribute name="DefaultRenderingIntent" type="RenderingIntent" use="optional"/>
             <xs:attribute name="DetectBlend" type="boolean" use="optional"/>
             <xs:attribute name="DoThumbnails" type="boolean" use="optional"/>
             <xs:attribute name="InitialPageSize" type="XYPair" use="optional"/>
