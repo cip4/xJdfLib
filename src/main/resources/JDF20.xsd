@@ -541,14 +541,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumPreflightLevel">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Basic"/>
-            <xs:enumeration value="Extended"/>
-            <xs:enumeration value="Premium"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumPreflightAction">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Abort"/>
@@ -4105,7 +4097,16 @@
     <xs:element name="PreflightItem">
         <xs:complexType>
             <xs:attribute name="PageIndex" type="IntegerRange" use="optional"/>
-            <xs:attribute name="PreflightLevel" type="EnumPreflightLevel" use="optional"/>
+            <xs:attribute name="PreflightLevel" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Basic"/>
+                        <xs:enumeration value="Extended"/>
+                        <xs:enumeration value="Premium"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
