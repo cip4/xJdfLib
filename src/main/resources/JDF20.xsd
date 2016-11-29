@@ -88,7 +88,7 @@
         <xs:list itemType="double"/>
     </xs:simpleType>
 
-    <xs:simpleType name="Shape">
+    <xs:simpleType name="shape">
         <xs:restriction base="NumberList"/>
     </xs:simpleType>
 
@@ -605,14 +605,6 @@
             <xs:enumeration value="Rectangular"/>
             <xs:enumeration value="Round"/>
             <xs:enumeration value="RoundedRectangle"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumApprovalRole">
-        <xs:restriction base="NMTOKEN">
-            <xs:enumeration value="Approvinator"/>
-            <xs:enumeration value="Informative"/>
-            <xs:enumeration value="Obligated"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -4054,7 +4046,7 @@
             <xs:extension base="IntentType">
                 <xs:attribute name="Bleed" type="double" use="optional"/>
                 <xs:attribute name="Dimensions" type="XYPair" use="optional"/>
-                <xs:attribute name="FinishedDimensions" type="Shape" use="optional"/>
+                <xs:attribute name="FinishedDimensions" type="shape" use="optional"/>
                 <xs:attribute name="NamedDimensions" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
                 <xs:attribute name="Orientation" type="Orientation" use="optional"/>
@@ -4251,7 +4243,16 @@
     <!-- ** Complex type definition for ApprovalPerson ** -->
     <xs:element name="ApprovalPerson">
         <xs:complexType>
-            <xs:attribute name="ApprovalRole" type="EnumApprovalRole" use="optional"/>
+            <xs:attribute name="ApprovalRole" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="NMTOKEN">
+                        <xs:enumeration value="Approvinator"/>
+                        <xs:enumeration value="Informative"/>
+                        <xs:enumeration value="Obligated"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:attribute>
             <xs:attribute name="ApprovalRoleDetails" type="string" use="optional"/>
             <xs:attribute name="ContactRef" type="IDREF" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -4628,7 +4629,7 @@
                 <xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
                 <xs:attribute name="Columns" type="integer" use="optional"/>
                 <xs:attribute name="ComponentType" type="EnumComponentType" use="optional"/>
-                <xs:attribute name="Dimensions" type="Shape" use="optional"/>
+                <xs:attribute name="Dimensions" type="shape" use="optional"/>
                 <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
                 <xs:attribute name="MaxHeat" type="double" use="optional"/>
@@ -4970,7 +4971,7 @@
             <xs:attribute name="Amount" type="integer" use="required"/>
             <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
             <xs:attribute name="Proof" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="TotalDimensions" type="Shape" use="optional"/>
+            <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
             <xs:attribute name="TotalVolume" type="double" use="optional"/>
             <xs:attribute name="TotalWeight" type="double" use="optional"/>
             <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
@@ -5567,7 +5568,7 @@
             <xs:sequence>
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="Dimensions" type="Shape" use="optional"/>
+            <xs:attribute name="Dimensions" type="shape" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5992,8 +5993,8 @@
                 </xs:sequence>
                 <xs:attribute name="Area" type="double" use="optional"/>
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
-                <xs:attribute name="Dimensions" type="Shape" use="optional"/>
-                <xs:attribute name="FlatDimensions" type="Shape" use="optional"/>
+                <xs:attribute name="Dimensions" type="shape" use="optional"/>
+                <xs:attribute name="FlatDimensions" type="shape" use="optional"/>
                 <xs:attribute name="FluteDirection" type="EnumShapeDefFluteDirection" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumShapeDefGrainDirection" use="optional"/>
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
@@ -6024,7 +6025,7 @@
                 <xs:element ref="FileSpec" minOccurs="0" maxOccurs="1"/>
                 <xs:element ref="ShapeDimension" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-            <xs:attribute name="InnerDimensions" type="Shape" use="optional"/>
+            <xs:attribute name="InnerDimensions" type="shape" use="optional"/>
             <xs:attribute name="Name" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Standard" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -6307,7 +6308,7 @@
     <xs:element name="ChannelBindingDetails">
         <xs:complexType>
             <xs:attribute name="ClampD" type="double" use="optional"/>
-            <xs:attribute name="ClampSize" type="Shape" use="optional"/>
+            <xs:attribute name="ClampSize" type="shape" use="optional"/>
             <xs:attribute name="Cover" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>

@@ -176,6 +176,9 @@
     <xjb:bindings node="//xs:element[@name='Disjointing']//xs:attribute[@name='Direction']/xs:simpleType">
         <xjb:typesafeEnumClass name="Direction"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ApprovalRole']/xs:simpleType">
+        <xjb:typesafeEnumClass name="ApprovalRole"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	
