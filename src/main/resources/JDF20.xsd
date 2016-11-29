@@ -868,16 +868,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCSConversionOperation">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Convert"/>
-            <xs:enumeration value="Tag"/>
-            <xs:enumeration value="Untag"/>
-            <xs:enumeration value="Retag"/>
-            <xs:enumeration value="ConvertIgnore"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumRenderingIntent">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Saturation"/>
@@ -6734,11 +6724,22 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="DeviceNSpace" minOccurs="0" maxOccurs="1"/>
-                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="FileSpec" minOccurs="0" maxOccurs="4"/>
                 <xs:element ref="ScreenSelector" minOccurs="0" maxOccurs="1"/>
             </xs:sequence>
             <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Operation" type="EnumCSConversionOperation" use="optional"/>
+            <xs:attribute name="Operation" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Convert"/>
+                        <xs:enumeration value="Tag"/>
+                        <xs:enumeration value="Untag"/>
+                        <xs:enumeration value="Retag"/>
+                        <xs:enumeration value="ConvertIgnore"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
+            </xs:attribute>
             <xs:attribute name="PreserveBlack" type="boolean" use="optional"/>
             <xs:attribute name="RenderingIntent" type="EnumRenderingIntent" use="optional"/>
             <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
