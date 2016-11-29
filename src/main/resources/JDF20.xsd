@@ -5313,6 +5313,7 @@
             <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="OrdExpression" type="string" use="optional"/>
+            <xs:attribute name="PositionRef" type="IDREF" use="optional"/>
             <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimCTM" type="matrix" use="optional"/>
@@ -5681,6 +5682,7 @@
             <xs:attribute name="AbsoluteBox" type="rectangle" use="optional"/>
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="MarginBottom" type="double" use="optional"/>
             <xs:attribute name="MarginLeft" type="double" use="optional"/>
             <xs:attribute name="MarginRight" type="double" use="optional"/>

@@ -71,6 +71,11 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PlacedObject']//xs:attribute[@name='PositionRef']">
+        <xjb:property>
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Position"/>
+        </xjb:property>
+    </xjb:bindings>
 
     <xjb:bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
         <xjb:property name="Audits">
