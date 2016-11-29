@@ -2811,6 +2811,7 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IconList" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="Location" minOccurs="0" maxOccurs="1"/>
                     <xs:element ref="Module" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
@@ -4889,8 +4890,8 @@
             <xs:extension base="ResourceType">
                 <xs:sequence>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Location"/>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="Contact"/>
+                    <xs:element ref="Location" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="Contact" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
                 <xs:attribute name="Capacity" type="integer" use="optional"/>
                 <xs:attribute name="MediaTypeDetails" type="string" use="optional"/>
