@@ -3796,7 +3796,14 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="ModuleType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="PrintModule"/>
+                            <xs:enumeration value="CoatingModule"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="VarnishArea" type="EnumVarnishArea" use="optional"/>
                 <xs:attribute name="VarnishMethod" type="EnumVarnishMethod" use="optional"/>
             </xs:extension>
