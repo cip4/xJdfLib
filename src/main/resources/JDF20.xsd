@@ -6753,7 +6753,7 @@
             <xs:attribute name="RGBGray2Black" type="boolean" use="optional"/>
             <xs:attribute name="RGBGray2BlackThreshold" type="double" use="optional"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="PageDistributionScheme" type="EnumSourceCS" use="required"/>
+            <xs:attribute name="SourceCS" type="EnumSourceCS" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="EnumSourceObjects"/>
