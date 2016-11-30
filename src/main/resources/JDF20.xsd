@@ -3838,18 +3838,17 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element minOccurs="0" maxOccurs="unbounded" ref="HolePattern"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="ChannelBindingDetails"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="CoilBindingDetails"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="CombBindingDetails"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="RingBindingDetails"/>
-                    <xs:element minOccurs="0" maxOccurs="1" ref="StripBindingDetails"/>
+                    <xs:element ref="HolePattern" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element ref="ChannelBindingDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="CoilBindingDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="CombBindingDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="RingBindingDetails" minOccurs="0" maxOccurs="1"/>
+                    <xs:element ref="StripBindingDetails" minOccurs="0" maxOccurs="1"/>
                 </xs:sequence>
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
                 <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
                 <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
                 <xs:attribute name="SpineColor" type="NamedColor" use="optional"/>
@@ -6488,6 +6487,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:attribute name="FlipBackCover" type="boolean" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
