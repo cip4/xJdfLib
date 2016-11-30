@@ -3915,7 +3915,7 @@
                     <xs:element ref="BlowIn" minOccurs="0" maxOccurs="unbounded"/>
                     <xs:element ref="StickOn" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="Container" type="IDREF" use="optional"/>
+                <xs:attribute name="Container" type="IDREF" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
