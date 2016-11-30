@@ -209,17 +209,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumResourceStatus">
-        <xs:restriction base="xs:string">
-            <xs:enumeration value="Incomplete"/>
-            <xs:enumeration value="Rejected"/>
-            <xs:enumeration value="Unavailable"/>
-            <xs:enumeration value="InUse"/>
-            <xs:enumeration value="Draft"/>
-            <xs:enumeration value="Available"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumClasses">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Event"/>
@@ -2306,7 +2295,7 @@
             <xs:attribute name="Operation" type="EnumPipeOperation" use="required"/>
             <xs:attribute name="PipeID" type="NMTOKEN" use="required"/>
             <xs:attribute name="Status" type="NodeStatus" use="optional"/>
-            <xs:attribute name="UpdatedStatus" type="EnumResourceStatus" use="optional"/>
+            <xs:attribute name="UpdatedStatus" type="NodeStatus" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
