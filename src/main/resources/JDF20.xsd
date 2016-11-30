@@ -1054,14 +1054,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumWrappingKind">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Band"/>
-            <xs:enumeration value="LooseWrap"/>
-            <xs:enumeration value="ShrinkWrap"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumUpdateGranularity">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="All"/>
@@ -3760,7 +3752,15 @@
     <xs:complexType name="WrappingParams">
         <xs:complexContent>
             <xs:extension base="ResourceType">
-                <xs:attribute name="WrappingKind" type="EnumWrappingKind" use="optional"/>
+                <xs:attribute name="WrappingKind" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Band"/>
+                            <xs:enumeration value="LooseWrap"/>
+                            <xs:enumeration value="ShrinkWrap"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="WrappingKindDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>

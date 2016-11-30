@@ -151,6 +151,9 @@
     <xjb:bindings node="//xs:complexType[@name='RenderingParams']//xs:attribute[@name='BandOrdering']/xs:simpleType">
         <xjb:typesafeEnumClass name="BandOrdering"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='WrappingParams']//xs:attribute[@name='WrappingKind']/xs:simpleType">
+        <xjb:typesafeEnumClass name="WrappingKind"/>
+    </xjb:bindings>
 
     <xjb:bindings node="//xs:complexType[@name='VarnishingParams']//xs:attribute[@name='ModuleType']/xs:simpleType">
         <xjb:typesafeEnumClass name="ModuleType"/>
