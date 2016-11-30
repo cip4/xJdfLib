@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf.builder;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.EnumBindingType;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.Product;

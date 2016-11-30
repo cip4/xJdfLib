@@ -19,7 +19,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.schema.JDFJMFVersion;
+import org.cip4.lib.xjdf.schema.Device;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.xml.sax.InputSource;
 
@@ -38,7 +38,7 @@ public class XJdfConstants {
 
     public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
-    public static final JDFJMFVersion XJDF_CURRENT_VERSION = JDFJMFVersion.V2_0;
+    public static final Device.JDFVersions XJDF_CURRENT_VERSION = Device.JDFVersions.V2_0;
 
     public static final String XJDF_LIB_VERSION = loadLibraryVersion();
 
