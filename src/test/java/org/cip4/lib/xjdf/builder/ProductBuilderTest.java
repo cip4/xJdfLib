@@ -73,7 +73,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         LayoutIntent layoutIntent = new XJdfNodeFactory().createLayoutIntent();
         layoutIntent.setFinishedDimensions(new Shape(595.27559055d, 822.04724409d));
         BindingIntent bindingIntent = new XJdfNodeFactory().createBindingIntent();
-        bindingIntent.setBindingType(EnumBindingType.SADDLE_STITCH);
+        bindingIntent.setBindingType(BindingIntent.BindingType.SADDLE_STITCH);
 
         // act
         productBuilder.addIntent(mediaIntent);

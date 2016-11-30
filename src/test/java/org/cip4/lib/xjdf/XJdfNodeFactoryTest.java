@@ -177,7 +177,7 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent() {
 
 		// arrange
-		final EnumBindingType BINDING_TYPE = EnumBindingType.CORNER_STITCH;
+		final BindingIntent.BindingType BINDING_TYPE = BindingIntent.BindingType.CORNER_STITCH;
 
         // act
         BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE);
@@ -190,9 +190,9 @@ public class XJdfNodeFactoryTest {
     public void testCreateBindingIntent_2() {
 
         // arrange
-        EnumBindingType bindingType = EnumBindingType.LOOSE_BINDING;
+        BindingIntent.BindingType bindingType = BindingIntent.BindingType.LOOSE_BINDING;
         EnumEdge bindingEdge = EnumEdge.BOTTOM;
-        EnumBindingOrder bindingOrder = EnumBindingOrder.GATHERING;
+        BindingIntent.BindingOrder bindingOrder = BindingIntent.BindingOrder.GATHERING;
 
 
         // act
@@ -201,7 +201,7 @@ public class XJdfNodeFactoryTest {
         // assert
         assertEquals("BindingType is wrong", bindingType, bindingIntent.getBindingType());
         assertEquals("BindingType is wrong", EnumEdge.BOTTOM, bindingIntent.getBindingSide());
-        assertEquals("BindingType is wrong", EnumBindingOrder.GATHERING, bindingIntent.getBindingOrder());
+        assertEquals("BindingType is wrong", BindingIntent.BindingOrder.GATHERING, bindingIntent.getBindingOrder());
 
     }
 

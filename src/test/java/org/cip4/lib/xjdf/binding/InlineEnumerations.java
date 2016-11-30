@@ -132,7 +132,7 @@ public class InlineEnumerations {
     private EnumLocation extractEnumLocationFromXsdAttribute(Node attributeNode) {
         NodeList nameAttribute;
         try {
-            nameAttribute = xsdReader.evaluateNodeList("./../../@name | ./../../../@name", attributeNode);
+            nameAttribute = xsdReader.evaluateNodeList("./ancestor::*/@name", attributeNode);
         } catch (XPathExpressionException e) {
             throw new RuntimeException(e);
         }

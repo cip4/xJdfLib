@@ -378,7 +378,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return BindingIntent Node which already contains defined attributes.
      */
-    public final BindingIntent createBindingIntent(final EnumBindingType bindingType) {
+    public final BindingIntent createBindingIntent(final BindingIntent.BindingType bindingType) {
 
         // return object
         return createBindingIntent(bindingType, null, null);
@@ -394,9 +394,9 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @return BindingIntent Node which already contains defined attributes.
      */
     public final BindingIntent createBindingIntent(
-        final EnumBindingType bindingType,
+        final BindingIntent.BindingType bindingType,
         final EnumEdge bindingSide,
-        final EnumBindingOrder bindingOrder
+        final BindingIntent.BindingOrder bindingOrder
     ) {
 
         // create node
@@ -549,7 +549,7 @@ public class XJdfNodeFactory extends ObjectFactory {
      *
      * @return ColorantControl Node which already contains defined attributes.
      */
-    public final ColorantControl createColorantControl(final EnumProcessColorModel processColorModel) {
+    public final ColorantControl createColorantControl(final ColorantControl.ProcessColorModel processColorModel) {
 
         // create node
         ColorantControl colorantControl = super.createColorantControl();

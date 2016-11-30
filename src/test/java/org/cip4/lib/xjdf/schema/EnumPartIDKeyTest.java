@@ -48,7 +48,7 @@ public class EnumPartIDKeyTest {
         xPath.setNamespaceContext(nsManager);
 
         Set<String> enumValues = nodeListToString((NodeList) xPath.evaluate(
-                "//xs:simpleType[@name=\"EnumPartIDKey\"]//xs:enumeration/@value",
+                "//xs:attribute[@name=\"PipePartPartIDKeys\"]//xs:enumeration/@value",
                 XJDF_SCHEMA,
                 XPathConstants.NODESET
         ));

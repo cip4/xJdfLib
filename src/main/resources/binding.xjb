@@ -345,7 +345,7 @@
         </xjb:property>
     </xjb:bindings>
 
-    <xjb:bindings node="//xs:simpleType[@name='JDFJMFVersion']//xs:enumeration[@value='2.0']">
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.0']">
         <xjb:typesafeEnumMember name="V2_0"/>
     </xjb:bindings>
 
@@ -463,6 +463,363 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='NotificationFilter']//xs:attribute[@name='Classes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Class"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Class']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Class"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Type']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Type"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Part']//xs:attribute[@name='PreviewType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PreviewType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='ImagableSide']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ImagableSide"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='DeviceInfo']//xs:attribute[@name='Status']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Status"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Subscription']//xs:attribute[@name='RetryPolicy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="RetryPolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='JMFRole']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="JMFRole"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResourceQuParams']//xs:attribute[@name='ResourceDetails']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ResourceDetails"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ShutDownCmdParams']//xs:attribute[@name='ShutDownType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ShutDownType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='JobPhase']//xs:attribute[@name='DeadLine']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DeadLine"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='QueueFilter']//xs:attribute[@name='QueueEntryDetails']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="QueueEntryDetails"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='BindingOrder']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BindingOrder"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='HolePattern']//xs:attribute[@name='ReferenceEdge']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ReferenceEdge"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='BindingType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BindingType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='HardCoverBinding']//xs:attribute[@name='Jacket']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Jacket"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='SoftCoverBinding']//xs:attribute[@name='GlueProcedure']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="GlueProcedure"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='SoftCoverBinding']//xs:attribute[@name='Scoring']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Scoring"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Emboss']//xs:attribute[@name='EdgeShape']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="EdgeShape"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GlueType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="GlueType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LaminatingIntent']//xs:attribute[@name='Temperature']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Temperature"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DigitalPrintingParams']//xs:attribute[@name='Sides']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Sides"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ProductionIntent']//xs:attribute[@name='PrintPreference']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PrintPreference"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ProofItem']//xs:attribute[@name='ColorType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ColorType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='CutDepth']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="CutDepth"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Shape']//xs:attribute[@name='ShapeType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ShapeType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ApprovalDetails']//xs:attribute[@name='ApprovalState']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ApprovalState"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Assembly']//xs:attribute[@name='Order']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Order"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BinderySignature']//xs:attribute[@name='BinderySignatureType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BinderySignatureType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='SignatureCell']//xs:attribute[@name='Mask']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Mask"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='SignatureCell']//xs:attribute[@name='Orientation']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Orientation"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BoxFoldingParams']//xs:attribute[@name='BoxFoldingType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BoxFoldingType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='BoxFoldAction']//xs:attribute[@name='Action']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Action"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ByteMap']//xs:attribute[@name='BandOrdering']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BandOrdering"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='PrintQuality']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PrintQuality"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='SheetSides']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SheetSides"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='ElementType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ElementType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ConventionalPrintingParams']//xs:attribute[@name='FountainSolution']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="FountainSolution"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DigitalPrintingParams']//xs:attribute[@name='Collate']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Collate"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DigitalPrintingParams']//xs:attribute[@name='PageDelivery']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PageDelivery"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='HolePattern']//xs:attribute[@name='Shape']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Shape"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='HolePattern']//xs:attribute[@name='CenterReference']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="CenterReference"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FileSpec']//xs:attribute[@name='OverwritePolicy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="OverwritePolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ExposedMedia']//xs:attribute[@name='PlateType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PlateType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='InternalColorModel']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="InternalColorModel"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='ProcessColorModel']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ProcessColorModel"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='FluteDirection']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="FluteDirection"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='GrainDirection']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="GrainDirection"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='QueueStatusParams']//xs:attribute[@name='PreviewUsages']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PreviewUsages"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GluingTechnique']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="GluingTechnique"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BoxPackingParams']//xs:attribute[@name='BoxType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BoxType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BoxPackingParams']//xs:attribute[@name='ComponentOrientation']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ComponentOrientation"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PDFCreationDetails']//xs:attribute[@name='AutoRotatePages']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="AutoRotatePages"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PDFCreationDetails']//xs:attribute[@name='Binding']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Binding"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PDFXParams']//xs:attribute[@name='PDFXTrapped']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PDFXTrapped"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='AdvancedParams']//xs:attribute[@name='TransferFunctionInfo']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="TransferFunctionInfo"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TransferFunctionControl']//xs:attribute[@name='TransferFunctionSource']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="TransferFunctionSource"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='AdvancedParams']//xs:attribute[@name='UCRandBGInfo']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="UCRandBGInfo"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PSCreationDetails']//xs:attribute[@name='IncludeType3Fonts']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="IncludeType3Fonts"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PSCreationDetails']//xs:attribute[@name='OutputType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="OutputType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='DeliveryCharge']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DeliveryCharge"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='Ownership']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Ownership"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='SurplusHandling']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SurplusHandling"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='Transfer']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Transfer"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FillMark']//xs:attribute[@name='KnockoutSource']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="KnockoutSource"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='PipeParams']//xs:attribute[@name='Operation']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Operation"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MISDetails']//xs:attribute[@name='CostType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="CostType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MISDetails']//xs:attribute[@name='WorkType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="WorkType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='NodeInfo']//xs:attribute[@name='DueLevel']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DueLevel"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='QueueStatusParams']//xs:attribute[@name='UpdateGranularity']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="UpdateGranularity"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='MediaUnit']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MediaUnit"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='PlateTechnology']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PlateTechnology"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']//xs:attribute[@name='BearerBars']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="BearerBars"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']//xs:attribute[@name='Masking']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Masking"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TrappingParams']//xs:attribute[@name='ImageTrapPlacement']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ImageTrapPlacement"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PreviewGenerationParams']//xs:attribute[@name='AspectRatio']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="AspectRatio"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PreviewGenerationParams']//xs:attribute[@name='PreviewFileType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PreviewFileType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='InsertSheet']//xs:attribute[@name='SheetUsage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SheetUsage"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StackingParams']//xs:attribute[@name='PreStackMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PreStackMethod"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='IdentificationField']//xs:attribute[@name='Encoding']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Encoding"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VariableIntent']//xs:attribute[@name='VariableType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="VariableType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VariableIntent']//xs:attribute[@name='VariableQuality']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="VariableQuality"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BinderySignature']//xs:attribute[@name='Bottling']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Bottling"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Part']//xs:attribute[@name='TransferCurveName']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="TransferCurveName"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='RotatePolicy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="RotatePolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='SizePolicy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SizePolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='GutterPolicy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="GutterPolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ImageCompression']//xs:attribute[@name='ImageDownsampleType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ImageDownsampleType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ImageCompression']//xs:attribute[@name='ImageType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ImageType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InsertingParams']//xs:attribute[@name='InsertLocation']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="InsertLocation"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InsertingParams']//xs:attribute[@name='Method']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Method"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LaminatingParams']//xs:attribute[@name='LaminatingMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="LaminatingMethod"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='RefAnchor']//xs:attribute[@name='AnchorType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="AnchorType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeCuttingParams']//xs:attribute[@name='DeliveryMode']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DeliveryMode"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShrinkingParams']//xs:attribute[@name='ShrinkingMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ShrinkingMethod"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StrappingParams']//xs:attribute[@name='StrappingType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="StrappingType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSealingParams']//xs:attribute[@name='ThreadMaterial']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ThreadMaterial"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BarcodeCompParams']//xs:attribute[@name='CompensationProcess']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="CompensationProcess"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='DCTParams']//xs:attribute[@name='ColorTransform']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ColorTransform"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DieLayout']//xs:attribute[@name='DieSide']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DieSide"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DieLayout']//xs:attribute[@name='MediaSide']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MediaSide"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Disposition']//xs:attribute[@name='DispositionAction']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DispositionAction"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Feeder']//xs:attribute[@name='FeederSynchronization']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="FeederSynchronization"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Feeder']//xs:attribute[@name='Opening']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Opening"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FolderProduction']//xs:attribute[@name='ProductionType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ProductionType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='JPEG2000Params']//xs:attribute[@name='ProgressionOrder']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ProgressionOrder"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RegisterMark']//xs:attribute[@name='MarkUsage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MarkUsage"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='RepeatDesc']//xs:attribute[@name='AllowedRotate']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="AllowedRotate"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ScreenSelector']//xs:attribute[@name='ScreeningType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ScreeningType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='StripMark']//xs:attribute[@name='MarkContext']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MarkContext"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='StripMark']//xs:attribute[@name='MarkSide']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MarkSide"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Device']//xs:attribute[@name='JDFVersions']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="JDFVersions"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VarnishingParams']//xs:attribute[@name='VarnishArea']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="VarnishArea"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VarnishingParams']//xs:attribute[@name='VarnishMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="VarnishMethod"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Dependent']//xs:attribute[@name='PipePartPartIDKeys']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PipePartPartIDKeys"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='QueueFilter']//xs:attribute[@name='StatusList']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="StatusList"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Device']//xs:attribute[@name='Packaging']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Packaging"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Icon']//xs:attribute[@name='IconUsage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="IconUsage"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Component']//xs:attribute[@name='ComponentType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ComponentType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='HoleType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="HoleType"/>
     </xjb:bindings>
 </xjb:bindings>
 
