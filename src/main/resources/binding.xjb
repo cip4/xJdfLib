@@ -156,11 +156,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='LayoutRef']">
-        <xjb:property name="layout">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GlueRef']">
         <xjb:property name="glue">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>

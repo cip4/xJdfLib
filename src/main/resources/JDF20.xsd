@@ -6059,13 +6059,11 @@
             <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
             <xs:attribute name="GroupCode" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
             <xs:attribute name="MaxQuantity" type="integer" use="optional"/>
             <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
             <xs:attribute name="MinQuantity" type="integer" use="optional"/>
             <xs:attribute name="NPage" type="integer" use="optional"/>
             <xs:attribute name="NumberUp" type="XYPair" use="optional"/>
-            <xs:attribute name="NumColors" type="XYPair" use="optional"/>
             <xs:attribute name="OneSheet" type="NMTOKEN" use="optional"/>
             <xs:attribute name="OrderQuantity" type="integer" use="optional"/>
             <xs:attribute name="PageDimension" type="XYPair" use="optional"/>
