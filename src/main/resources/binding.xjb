@@ -40,42 +40,299 @@
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']">
         <ci:code><![CDATA[
      /*
-      * Gets the value of the childRefs property <b>WITHOUT</b> lazy initialization.
+      * Gets the value of the children property <b>WITHOUT</b> lazy initialization.
       *
-      * @see Product#getChildRefs()
+      * @see Product#getChildren()
       *
       */
-     public final List<Product> getRawChildRefs() {
-         return childRefs;
+     public final List<Product> getChildrenRaw() {
+         return children;
      }
                 ]]>
         </ci:code>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='ChildRefs']">
-        <xjb:property>
+        <xjb:property name="children">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Product"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='AssemblingIntent']//xs:attribute[@name='Container']">
-        <xjb:property>
+        <xjb:property name="container">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Product"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']">
-        <xjb:property>
+        <xjb:property name="contact">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']">
-        <xjb:property>
+        <xjb:property name="contact">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='PlacedObject']//xs:attribute[@name='PositionRef']">
-        <xjb:property>
+        <xjb:property name="position">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Position"/>
         </xjb:property>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ContentMetaData']//xs:attribute[@name='ContactRefs']">
+        <xjb:property name="contacts">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FillMark']//xs:attribute[@name='KnockoutRefs']">
+        <xjb:property name="knockouts">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Emboss']//xs:attribute[@name='ToolRef']">
+        <xjb:property name="tool">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='BundleItem']//xs:attribute[@name='ItemRef']">
+        <xjb:property name="item">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='SheetActivation']//xs:attribute[@name='RunListRef']">
+        <xjb:property name="runList">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='BindIn']//xs:attribute[@name='ChildRef']">
+        <xjb:property name="child">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='AssemblyItem']//xs:attribute[@name='ChildRef']">
+        <xjb:property name="child">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ConvertingConfig']//xs:attribute[@name='DeviceRef']">
+        <xjb:property name="device">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MarkObject']//xs:attribute[@name='ContentRef']">
+        <xjb:property name="content">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Feeder']//xs:attribute[@name='ComponentRef']">
+        <xjb:property name="component">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='RefAnchor']//xs:attribute[@name='rRef']">
+        <xjb:property name="rRef">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='RunListRef']">
+        <xjb:property name="runList">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='BlowIn']//xs:attribute[@name='ChildRef']">
+        <xjb:property name="child">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='StickOn']//xs:attribute[@name='ChildRef']">
+        <xjb:property name="child">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='DropItem']//xs:attribute[@name='ItemRef']">
+        <xjb:property name="item">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='LayoutRef']">
+        <xjb:property name="layout">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GlueRef']">
+        <xjb:property name="glue">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='CollatingItem']//xs:attribute[@name='ComponentRef']">
+        <xjb:property name="component">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+
+    <xjb:bindings node="//xs:complexType[@name='Component']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Component']//xs:attribute[@name='ContentRefs']">
+        <xjb:property name="contents">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ExposedMedia']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutElementProductionParams']//xs:attribute[@name='ContentRefs']">
+        <xjb:property name="contents">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutElementProductionParams']//xs:attribute[@name='ShapeDefRef']">
+        <xjb:property name="shapeDef">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TransferFunctionControl']//xs:attribute[@name='TransferCurveRefs']">
+        <xjb:property name="transferCurves">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='DeviceRefs']">
+        <xjb:property name="devices">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='ProofPaperRef']">
+        <xjb:property name="proofPaper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='FilmRef']">
+        <xjb:property name="film">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='PaperRef']">
+        <xjb:property name="paper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ApprovalParams']//xs:attribute[@name='ApprovalPersonRef']">
+        <xjb:property name="approvalPerson">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='PlateRef']">
+        <xjb:property name="plate">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='PaperRef']">
+        <xjb:property name="paper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='FilmRef']">
+        <xjb:property name="film">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='ProofPaperRef']">
+        <xjb:property name="proofPaper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DigitalMedia']//xs:attribute[@name='RunListRef']">
+        <xjb:property name="runList">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Tile']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']//xs:attribute[@name='ProofPaperRef']">
+        <xjb:property name="proofPaper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']//xs:attribute[@name='PlateRef']">
+        <xjb:property name="plate">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']//xs:attribute[@name='FilmRef']">
+        <xjb:property name="film">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']//xs:attribute[@name='PaperRef']">
+        <xjb:property name="paper">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='PlateRef']">
+        <xjb:property name="plate">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CustomerInfo']//xs:attribute[@name='ContactRefs']">
+        <xjb:property name="contacts">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeCuttingParams']//xs:attribute[@name='DieLayoutRef']">
+        <xjb:property name="dieLayout">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='MediaSource']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='MediaSource']//xs:attribute[@name='ComponentRef']">
+        <xjb:property name="component">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='ContentRefs']">
+        <xjb:property name="contents">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ApprovalDetails']//xs:attribute[@name='ContactRef']">
+        <xjb:property name="contact">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VariableIntent']//xs:attribute[@name='ChildRefs']">
+        <xjb:property name="children">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='ContactRefs']">
+        <xjb:property name="contacts">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BinderySignature']//xs:attribute[@name='DieLayoutRef']">
+        <xjb:property name="dieLayout">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+
 
     <xjb:bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
         <xjb:property name="Audits">

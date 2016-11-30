@@ -4624,8 +4624,7 @@
                 <xs:attribute name="Columns" type="integer" use="optional"/>
                 <xs:attribute name="ComponentType" type="EnumComponentType" use="optional"/>
                 <xs:attribute name="Dimensions" type="shape" use="optional"/>
-                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="LayoutRef" type="IDREF" use="optional"/>
+                <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="MaxHeat" type="double" use="optional"/>
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Overfold" type="double" use="optional"/>
@@ -4797,7 +4796,6 @@
                 <xs:attribute name="Ownership" type="EnumOwnership" use="optional"/>
                 <xs:attribute name="Required" type="dateTime" use="optional"/>
                 <xs:attribute name="RequiredDuration" type="duration" use="optional"/>
-                <xs:attribute name="RemoteURLRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ReturnMethod" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ServiceLevel" type="string" use="optional"/>
                 <xs:attribute name="SurplusHandling" type="EnumSurplusHandling" use="optional"/>
@@ -4897,7 +4895,6 @@
                 <xs:attribute name="MediaLabel" type="string" use="optional"/>
                 <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
-                <xs:attribute name="IdentificationFieldRef" type="IDREF" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -4990,7 +4987,6 @@
                 <xs:sequence>
                     <xs:element ref="IdentificationField" minOccurs="0" maxOccurs="unbounded"/>
                 </xs:sequence>
-                <xs:attribute name="ContentDataRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="MediaRef" type="IDREF" use="required"/>
                 <xs:attribute name="PlateType" type="EnumPlateType" use="optional"/>
                 <xs:attribute name="Polarity" type="boolean" use="optional"/>

@@ -9,15 +9,15 @@ import static org.junit.Assert.*;
 public class BindingIntentTest {
 
     @Test
-    public void productGetRawChildRefs() throws Exception {
+    public void productGetChildrenRaw() throws Exception {
         Product childProduct = new Product();
-        BindingIntent bindingIntent = new BindingIntent().withChildRefs(childProduct);
-        assertEquals(Collections.singletonList(childProduct), bindingIntent.getRawChildRefs());
+        BindingIntent bindingIntent = new BindingIntent().withChildren(childProduct);
+        assertEquals(Collections.singletonList(childProduct), bindingIntent.getChildrenRaw());
     }
 
     @Test
-    public void productGetRawChildRefsIsEmptyByDefault() throws Exception {
+    public void productGetChildrenRawIsEmptyByDefault() throws Exception {
         BindingIntent bindingIntent = new BindingIntent();
-        assertNull(bindingIntent.getRawChildRefs());
+        assertNull(bindingIntent.getChildrenRaw());
     }
 }

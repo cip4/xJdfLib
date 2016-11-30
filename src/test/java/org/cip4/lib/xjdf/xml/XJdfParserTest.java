@@ -241,7 +241,7 @@ public class XJdfParserTest {
 
         final Product mainProduct = xjdf.getProductList().getProduct().get(6);
         final BindingIntent bindingIntent = (BindingIntent) mainProduct.getIntent().get(2).getIntentType().getValue();
-        assertEquals(0, bindingIntent.getChildRefs().size());
+        assertEquals(0, bindingIntent.getChildren().size());
     }
 
     /**
@@ -254,24 +254,24 @@ public class XJdfParserTest {
 
         final Product mainProduct1 = xjdf.getProductList().getProduct().get(3);
         final BindingIntent bindingIntent1 = (BindingIntent) mainProduct1.getIntent().get(2).getIntentType().getValue();
-        assertEquals(2, bindingIntent1.getChildRefs().size());
-        final Product childProduct11 = bindingIntent1.getChildRefs().get(0);
+        assertEquals(2, bindingIntent1.getChildren().size());
+        final Product childProduct11 = bindingIntent1.getChildren().get(0);
         assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
         assertEquals(11000, (int) childProduct11.getAmount());
-        final Product childProduct12 = bindingIntent1.getChildRefs().get(1);
+        final Product childProduct12 = bindingIntent1.getChildren().get(1);
         assertEquals("PRD_MAIN01_SUB02", childProduct12.getID());
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
         final BindingIntent bindingIntent2 = (BindingIntent) mainProduct2.getIntent().get(2).getIntentType().getValue();
-        assertEquals(1, bindingIntent2.getChildRefs().size());
-        final Product childProduct21 = bindingIntent2.getChildRefs().get(0);
+        assertEquals(1, bindingIntent2.getChildren().size());
+        final Product childProduct21 = bindingIntent2.getChildren().get(0);
         assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
         final BindingIntent bindingIntent3 = (BindingIntent) mainProduct3.getIntent().get(2).getIntentType().getValue();
-        assertEquals(0, bindingIntent3.getChildRefs().size());
+        assertEquals(0, bindingIntent3.getChildren().size());
     }
 
     @Test
@@ -280,8 +280,8 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ResourceSet resourceSet = xjdf.getResourceSet().get(0);
-        Contact contact = (Contact) resourceSet.getResource().get(0).getContactRef().getResourceType().getValue();
-        assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContactRef().getID());
+        Contact contact = (Contact) resourceSet.getResource().get(0).getContact().getResourceType().getValue();
+        assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContact().getID());
         assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
@@ -293,9 +293,9 @@ public class XJdfParserTest {
         ResourceSet resourceSet = xjdf.getResourceSet().get(6);
         ApprovalDetails approvalDetails = (ApprovalDetails) resourceSet.getResource().get(0).getResourceType().getValue();
         ApprovalPerson approvalPerson = approvalDetails.getApprovalPerson();
-        Contact contact = (Contact) approvalPerson.getContactRef().getResourceType().getValue();
+        Contact contact = (Contact) approvalPerson.getContact().getResourceType().getValue();
 
-        assertEquals("CONTACT_REF_1", approvalPerson.getContactRef().getID());
+        assertEquals("CONTACT_REF_1", approvalPerson.getContact().getID());
         assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
 
