@@ -209,16 +209,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumClasses">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Event"/>
-            <xs:enumeration value="Information"/>
-            <xs:enumeration value="Warning"/>
-            <xs:enumeration value="Error"/>
-            <xs:enumeration value="Fatal"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumDeviceInfoStatus">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Idle"/>
@@ -5535,10 +5525,20 @@
         <xs:complexType>
             <xs:attribute name="Classes" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumClasses"/>
+                    <xs:list>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:NMTOKEN">
+                                <xs:enumeration value="Event"/>
+                                <xs:enumeration value="Information"/>
+                                <xs:enumeration value="Warning"/>
+                                <xs:enumeration value="Error"/>
+                                <xs:enumeration value="Fatal"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:list>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="MilestoneTypes" type="NMTOKENS" use="required"/>
+            <xs:attribute name="MilestoneTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>

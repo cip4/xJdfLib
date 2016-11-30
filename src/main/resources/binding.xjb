@@ -461,6 +461,9 @@
     <xjb:bindings node="//xs:element[@name='PreflightItem']//xs:attribute[@name='PreflightLevel']/xs:simpleType">
         <xjb:typesafeEnumClass name="PreflightLevel"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='NotificationFilter']//xs:attribute[@name='Classes']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Class"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	

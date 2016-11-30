@@ -100,7 +100,7 @@ public class InlineEnumerations {
                 Node typesafeEnumClassNode = bindingNode.getChildNodes().item(j);
                 if ("typesafeEnumClass".equals(typesafeEnumClassNode.getLocalName())) {
                     assertEquals(
-                        enumLocation.attributeName,
+                        translateAttributeNameToClassName(enumLocation.attributeName),
                         typesafeEnumClassNode.getAttributes().getNamedItem("name").getNodeValue()
                     );
                     continue loopOverBindings;
@@ -111,8 +111,17 @@ public class InlineEnumerations {
         }
     }
 
+    private String translateAttributeNameToClassName(String attributeName) {
+        switch (attributeName) {
+            case "Classes":
+                return "Class";
+            default:
+                return attributeName;
+        }
+    }
+
     private EnumLocation extractEnumLocationFromXPath(String xPath) {
-        Pattern xPathPattern = Pattern.compile(".+@name='([^']+)'\\]//xs:attribute\\[@name='([^']+)'\\]/xs:simpleType");
+        Pattern xPathPattern = Pattern.compile(".+@name='([^']+)'\\]//xs:attribute\\[@name='([^']+)'\\].*");
         Matcher matcher = xPathPattern.matcher(xPath);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(String.format("Unsupported xPath for binding: %s", xPath));
