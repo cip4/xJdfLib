@@ -308,7 +308,7 @@ public class XJdfParserTest {
         String auditStatusA = auditStatusB.getRefID();
         assertEquals("PhaseTime_B", auditStatusB.getID());
         assertEquals("PhaseTime_A", auditStatusA);
-        assertEquals("author B", auditStatusB.getAuthor());
+        assertEquals("author B", auditStatusB.getSender().getAuthor());
     }
 
     @Test
@@ -330,7 +330,7 @@ public class XJdfParserTest {
         String resourceAuditA = auditResourceB.getRefID();
         assertEquals("ResourceAudit_B", auditResourceB.getID());
         assertEquals("ResourceAudit_A", resourceAuditA);
-        assertEquals("author B", auditResourceB.getAuthor());
+        assertEquals("author B", auditResourceB.getSender().getAuthor());
     }
 
     @Test

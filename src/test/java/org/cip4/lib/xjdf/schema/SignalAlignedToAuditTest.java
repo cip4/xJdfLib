@@ -12,8 +12,6 @@ import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 
-
-@Ignore("Skip until XJDF-748 is fixed")
 public class SignalAlignedToAuditTest {
 
     private XsdReader xsdReader;

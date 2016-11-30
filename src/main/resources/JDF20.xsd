@@ -2574,12 +2574,11 @@
 
     <!--** abstract type for substitution only ** -->
     <xs:complexType name="Audit" abstract="true">
-        <xs:attribute name="Author" type="string" use="optional"/>
-        <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
+        <xs:sequence>
+            <xs:element ref="Sender" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
         <xs:attribute name="ID" type="ID" use="required"/>
-        <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
         <xs:attribute name="refID" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="Time" type="dateTime" use="optional"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
