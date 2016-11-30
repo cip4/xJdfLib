@@ -2786,7 +2786,6 @@
                 <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DeviceType" type="string" use="optional"/>
-                <xs:attribute name="Directory" type="URL" use="optional"/>
                 <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="JDFVersions" use="optional">
                     <xs:simpleType>
@@ -5921,7 +5920,6 @@
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="Directory" type="URL" use="optional"/>
                 <xs:attribute name="Docs" type="RegExp" use="optional"/>
                 <xs:attribute name="ElementType" type="EnumRunlistType" use="optional"/>
                 <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
