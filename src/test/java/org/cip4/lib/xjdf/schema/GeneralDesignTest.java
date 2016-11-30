@@ -24,11 +24,6 @@ public class GeneralDesignTest {
         List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[@type='ID']");
 
         for (Node elementNode : elements) {
-            // TODO: Remove once XJDF-615 is solved.
-            if ("GangElementID".equals(elementNode.getAttributes().getNamedItem("name").getNodeValue())) {
-                continue;
-            }
-
             assertEquals(
                 "All attributes in XJDF with a data type of ID SHALL be named ID.",
                 "ID",
