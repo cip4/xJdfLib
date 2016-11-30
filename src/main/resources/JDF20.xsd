@@ -5695,6 +5695,7 @@
             <xs:attribute name="AbsoluteBox" type="rectangle" use="optional"/>
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="BlockName" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="GangElementID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="MarginBottom" type="double" use="optional"/>
             <xs:attribute name="MarginLeft" type="double" use="optional"/>
