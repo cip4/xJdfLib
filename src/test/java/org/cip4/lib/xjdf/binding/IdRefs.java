@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.xpath.XPathExpressionException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -61,9 +62,9 @@ public class IdRefs {
     @Test
     public void attributesOfTypeIdrefAreBoundToDatatype() throws Exception {
         Set<AttributeLocation> attrsInXsd = new HashSet<>();
-        NodeList attributes = xsdReader.evaluateNodeList("//xs:attribute[@type='IDREF' or @type='IDREFS']");
-        for (int i = 0; i < attributes.getLength(); ++i) {
-            attrsInXsd.add(extractAttrLocationFromXsdAttribute(attributes.item(i)));
+        List<Node> attributes = xsdReader.evaluateNodeList("//xs:attribute[@type='IDREF' or @type='IDREFS']");
+        for (Node attributeNode : attributes) {
+            attrsInXsd.add(extractAttrLocationFromXsdAttribute(attributeNode));
         }
 
         Set<AttributeLocation> enumsInBindings = new HashSet<>();

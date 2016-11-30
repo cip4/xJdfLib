@@ -14,8 +14,10 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class XsdReader {
@@ -88,12 +90,12 @@ public class XsdReader {
         }
     }
 
-    public NodeList evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
-        return (NodeList) xPath.evaluate(
+    public List<Node> evaluateNodeList(final String xPathExpression) throws XPathExpressionException {
+        return nodeListToList((NodeList) xPath.evaluate(
             xPathExpression,
             schema,
             XPathConstants.NODESET
-        );
+        ));
     }
 
     public NodeList evaluateNodeList(final String xPathExpression, final Node parentNode)
@@ -116,4 +118,11 @@ public class XsdReader {
         }
     }
 
+    private List<Node> nodeListToList(NodeList nodeList) {
+        List<Node> result = new ArrayList<>(nodeList.getLength());
+        for (int i = 0; i < nodeList.getLength(); ++i) {
+            result.add(nodeList.item(i));
+        }
+        return result;
+    }
 }

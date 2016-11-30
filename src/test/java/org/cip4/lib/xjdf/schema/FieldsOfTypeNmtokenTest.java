@@ -5,10 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -51,11 +51,9 @@ public class FieldsOfTypeNmtokenTest {
 
     @Test
     public void allFieldsOfWithNameJobPartIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList(String.format("//xs:attribute[@name='%s']", fieldName));
+        List<Node> elements = xsdReader.evaluateNodeList(String.format("//xs:attribute[@name='%s']", fieldName));
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
+        for (Node elementNode : elements) {
             assertEquals(
                 String.format("All attributes in XJDF with a name '%s' SHALL be have type NMTOKEN.", fieldName),
                 "NMTOKEN",

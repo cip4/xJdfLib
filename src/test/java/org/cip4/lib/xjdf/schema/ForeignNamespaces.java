@@ -3,9 +3,10 @@ package org.cip4.lib.xjdf.schema;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.junit.*;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import java.util.Collection;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 
@@ -26,10 +27,9 @@ public class ForeignNamespaces {
 
     @Test
     public void allowAttributesFromForeignNamespaceInAllElements() throws Exception {
-        NodeList complexTypes = xsdReader.evaluateNodeList("//xs:complexType");
+        List<Node> complexTypes = xsdReader.evaluateNodeList("//xs:complexType");
 
-        for (int i = 0; i < complexTypes.getLength(); ++i) {
-            Node complexType = complexTypes.item(i);
+        for (Node complexType : complexTypes) {
             Collection<Node> anyAttributeNodes = xsdReader.typeProperties(complexType, "anyAttribute");
             assertEquals(
                 String.format(

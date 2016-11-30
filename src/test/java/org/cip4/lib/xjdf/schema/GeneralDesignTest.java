@@ -3,7 +3,9 @@ package org.cip4.lib.xjdf.schema;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -19,11 +21,9 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfTypeIDMustBeNamedID() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@type='ID']");
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[@type='ID']");
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
+        for (Node elementNode : elements) {
             // TODO: Remove once XJDF-615 is solved.
             if ("GangElementID".equals(elementNode.getAttributes().getNamedItem("name").getNodeValue())) {
                 continue;
@@ -39,11 +39,9 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameExternalIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='ExternalID']");
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[@name='ExternalID']");
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
+        for (Node elementNode : elements) {
             assertEquals(
                 "All attributes in XJDF with a name 'ExternalID' SHALL be have type NMTOKEN.",
                 "NMTOKEN",
@@ -54,11 +52,9 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameCostCenterIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='CostCenterID']");
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[@name='CostCenterID']");
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
-
+        for (Node elementNode : elements) {
             assertEquals(
                 "All attributes in XJDF with a name 'CostCenterID' SHALL be have type NMTOKEN.",
                 "NMTOKEN",
@@ -69,23 +65,30 @@ public class GeneralDesignTest {
 
     @Test
     public void allFieldsOfWithNameDeviceIDShouldHaveTypeNMTOKEN() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
-        assertEquals(0, elements.getLength());
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
+        assertEquals(Collections.EMPTY_LIST, elements);
     }
 
     @Test
     public void allAttributesMustHaveAType() throws Exception {
-        NodeList elements = xsdReader.evaluateNodeList("//xs:attribute[@name='DeviceID']");
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
 
-        for (int i = 0; i < elements.getLength(); i++) {
-            Node elementNode = elements.item(i);
+        assertEquals(
+            "All attributes in XJDF SHALL have a @type.",
+            Collections.EMPTY_LIST,
+            elements
+        );
+    }
 
-            assertEquals(
-                "All attributes in XJDF with a name 'DeviceID' SHALL be have type NMTOKEN.",
-                "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
-            );
-        }
+    @Test
+    public void allAttributesMustHaveAUse() throws Exception {
+        List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[not(@use)]");
+
+        assertEquals(
+            "All attributes in XJDF SHALL have a @use.",
+            Collections.EMPTY_LIST,
+            elements
+        );
     }
 
 }

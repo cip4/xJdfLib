@@ -9,6 +9,7 @@ import org.w3c.dom.NodeList;
 import javax.xml.xpath.XPathExpressionException;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -59,14 +60,13 @@ public class InlineEnumerations {
     @Test
     public void inlineEnumerationsAreAssignedAClassName() throws Exception {
         Set<EnumLocation> enumsInXsd = new HashSet<>();
-        NodeList inlineEnums = xsdReader.evaluateNodeList("//xs:attribute[.//xs:restriction/xs:enumeration]");
-        for (int i = 0; i < inlineEnums.getLength(); ++i) {
-            Node attributeNode = inlineEnums.item(i);
+        List<Node> inlineEnums = xsdReader.evaluateNodeList("//xs:attribute[.//xs:restriction/xs:enumeration]");
+        for (Node attributeNode : inlineEnums) {
             enumsInXsd.add(extractEnumLocationFromXsdAttribute(attributeNode));
         }
 
         Set<EnumLocation> enumsInBindings = new HashSet<>();
-        NodeList bindings = null;
+        NodeList bindings;
         try {
             bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");
         } catch (XPathExpressionException e) {
