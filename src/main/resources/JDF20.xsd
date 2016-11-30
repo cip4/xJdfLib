@@ -2159,11 +2159,8 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element ref="Message" minOccurs="1" maxOccurs="unbounded"/>
+                <xs:element ref="Sender" minOccurs="1" maxOccurs="1"/>
             </xs:sequence>
-            <xs:attribute name="AgentName" type="string" use="optional"/>
-            <xs:attribute name="AgentVersion" type="string" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="Time" type="dateTime" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2216,16 +2213,24 @@
     <!-- ** Complex type definition for Message ** -->
     <xs:element name="Message" type="Message" abstract="true"/>
     <xs:complexType name="Message">
-        <xs:attribute name="AgentName" type="string" use="optional"/>
-        <xs:attribute name="AgentVersion" type="string" use="optional"/>
-        <xs:attribute name="Author" type="string" use="optional"/>
-        <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
-        <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-        <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="Time" type="dateTime" use="optional"/>
+        <xs:sequence>
+            <xs:element ref="Sender" minOccurs="1" maxOccurs="1"/>
+        </xs:sequence>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
+    <xs:element name="Sender">
+        <xs:complexType>
+            <xs:attribute name="AgentName" type="string" use="optional"/>
+            <xs:attribute name="AgentVersion" type="string" use="optional"/>
+            <xs:attribute name="Author" type="string" use="optional"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="PersonalID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Time" type="dateTime" use="required"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for Command ** -->
     <xs:element name="Command" type="Command" substitutionGroup="Message" abstract="true"/>
