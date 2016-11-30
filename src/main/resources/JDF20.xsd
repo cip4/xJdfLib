@@ -1954,7 +1954,7 @@
     <!-- ** Complex type definition for Dependent ** -->
     <xs:element name="Dependent">
         <xs:complexType>
-            <xs:attribute name="JMFURL" type="URL" use="optional"/>
+            <xs:attribute name="XJMFURL" type="URL" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
             <xs:attribute name="PipeID" type="NMTOKEN" use="optional"/>
@@ -2155,7 +2155,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for JMF ** -->
     <xs:element name="XJMF">
         <xs:complexType>
             <xs:sequence>
@@ -2819,7 +2818,6 @@
                         <xs:list itemType="JDFJMFVersion"/>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="JMFURL" type="URL" use="optional"/>
                 <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
                 <xs:attribute name="Manufacturer" type="string" use="optional"/>
                 <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
@@ -2829,10 +2827,11 @@
                 <xs:attribute name="ModelURL" type="URL" use="optional"/>
                 <xs:attribute name="Packaging" type="EnumPackaging" use="optional"/>
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
-                <xs:attribute name="SecureJMFURL" type="URL" use="optional"/>
+                <xs:attribute name="SecureXJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
                 <xs:attribute name="UPC" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
+                <xs:attribute name="XJMFURL" type="URL" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
