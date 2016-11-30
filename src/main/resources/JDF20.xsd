@@ -472,8 +472,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <!-- unchecked -->
-
     <xs:simpleType name="Anchor">
         <xs:restriction base="xs:string">
             <xs:enumeration value="TopLeft"/>
