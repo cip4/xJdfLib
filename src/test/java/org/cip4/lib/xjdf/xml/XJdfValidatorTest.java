@@ -212,4 +212,11 @@ public class XJdfValidatorTest {
         String doc = new String(bos.toByteArray());
         System.out.println(doc);
     }
+
+    @Test
+    public void foreignNamespaceInResource() throws Exception {
+        InputStream is = XJdfValidatorTest.class.getResourceAsStream("../foreignNamespace.xjdf");
+        xJdfValidator = new XJdfValidator();
+        xJdfValidator.validate(is);
+    }
 }
