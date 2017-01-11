@@ -29,9 +29,9 @@ import static org.junit.Assert.*;
  */
 public class XJdfParserTest {
 
-    private final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
-    private final String RES_CHILD_PRODUCTS = "/org/cip4/lib/xjdf/child_products.xjdf";
-    private final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
+    private static final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
+    private static final String RES_CHILD_PRODUCTS = "/org/cip4/lib/xjdf/child_products.xjdf";
+    private static final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser xJdfParser;
 
@@ -305,10 +305,10 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         AuditStatus auditStatusB = (AuditStatus) xjdf.getAuditPool().getAudits().get(4);
-        String auditStatusA = auditStatusB.getRefID();
-        assertEquals("PhaseTime_B", auditStatusB.getID());
+        String auditStatusA = auditStatusB.getHeader().getRefID();
+        assertEquals("PhaseTime_B", auditStatusB.getHeader().getID());
         assertEquals("PhaseTime_A", auditStatusA);
-        assertEquals("author B", auditStatusB.getSender().getAuthor());
+        assertEquals("author B", auditStatusB.getHeader().getAuthor());
     }
 
     @Test
@@ -317,8 +317,8 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         AuditProcessRun processRunB = (AuditProcessRun) xjdf.getAuditPool().getAudits().get(6);
-        assertEquals("ProcessRun_A", processRunB.getRefID());
-        assertEquals("ProcessRun_B", processRunB.getID());
+        assertEquals("ProcessRun_A", processRunB.getHeader().getRefID());
+        assertEquals("ProcessRun_B", processRunB.getHeader().getID());
     }
 
     @Test
@@ -327,10 +327,10 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         AuditResource auditResourceB = (AuditResource) xjdf.getAuditPool().getAudits().get(8);
-        String resourceAuditA = auditResourceB.getRefID();
-        assertEquals("ResourceAudit_B", auditResourceB.getID());
+        String resourceAuditA = auditResourceB.getHeader().getRefID();
+        assertEquals("ResourceAudit_B", auditResourceB.getHeader().getID());
         assertEquals("ResourceAudit_A", resourceAuditA);
-        assertEquals("author B", auditResourceB.getSender().getAuthor());
+        assertEquals("author B", auditResourceB.getHeader().getAuthor());
     }
 
     @Test

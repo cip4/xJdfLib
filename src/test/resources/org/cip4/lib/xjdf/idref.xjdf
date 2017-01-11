@@ -3,54 +3,55 @@
 <xjdf:XJDF JobID="jobid" Category="Web2Print" xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0">
 
     <xjdf:AuditPool>
-        <xjdf:AuditCreated ID="Created_A" AgentName="agent A" />
-        <xjdf:AuditNotification ID="Notification_A">
-            <xjdf:Sender DeviceID="D01" Author="author A" Time=""/>
+        <xjdf:AuditCreated AgentName="agent A">
+            <xjdf:Header ID="Created_A" Time=""/>
+        </xjdf:AuditCreated>
+        <xjdf:AuditNotification >
+            <xjdf:Header ID="Notification_A" DeviceID="D01" Author="author A" Time=""/>
         </xjdf:AuditNotification>
-        <xjdf:AuditNotification ID="Notification_B" refID="Notification_A" >
-            <xjdf:Sender DeviceID="D01" Author="author B" Time=""/>
+        <xjdf:AuditNotification >
+            <xjdf:Header ID="Notification_B" refID="Notification_A" DeviceID="D01" Author="author B" Time=""/>
         </xjdf:AuditNotification>
-        <xjdf:AuditStatus ID="PhaseTime_A">
-            <xjdf:Sender DeviceID="D01" Author="author A" Time=""/>
-            <xjdf:PhaseAmount rRef="PhaseAmount_Ref_01" />
+        <xjdf:AuditStatus>
+            <xjdf:Header ID="PhaseTime_A" DeviceID="D01" Author="author A" Time=""/>
         </xjdf:AuditStatus>
-        <xjdf:AuditStatus ID="PhaseTime_B" refID="PhaseTime_A">
-            <xjdf:Sender DeviceID="D01" Author="author B" Time=""/>
+        <xjdf:AuditStatus>
+            <xjdf:Header ID="PhaseTime_B" refID="PhaseTime_A" DeviceID="D01" Author="author B" Time=""/>
         </xjdf:AuditStatus>
-        <xjdf:AuditProcessRun ID="ProcessRun_A">
-            <xjdf:Sender DeviceID="D01" AgentName="agent A" Time=""/>
+        <xjdf:AuditProcessRun>
+            <xjdf:Header ID="ProcessRun_A" DeviceID="D01" AgentName="agent A" Time=""/>
         </xjdf:AuditProcessRun>
-        <xjdf:AuditProcessRun ID="ProcessRun_B" refID="ProcessRun_A">
-            <xjdf:Sender DeviceID="D01" AgentName="agent B" Time=""/>
+        <xjdf:AuditProcessRun>
+            <xjdf:Header ID="ProcessRun_B" refID="ProcessRun_A" DeviceID="D01" AgentName="agent B" Time=""/>
         </xjdf:AuditProcessRun>
-        <xjdf:AuditResource ID="ResourceAudit_A">
-            <xjdf:Sender DeviceID="D01" Author="author A" Time=""/>
+        <xjdf:AuditResource>
+            <xjdf:Header ID="ResourceAudit_A" DeviceID="D01" Author="author A" Time=""/>
         </xjdf:AuditResource>
-        <xjdf:AuditResource ID="ResourceAudit_B" refID="ResourceAudit_A">
-            <xjdf:Sender DeviceID="D01" Author="author B" Time=""/>
+        <xjdf:AuditResource>
+            <xjdf:Header ID="ResourceAudit_B" refID="ResourceAudit_A" DeviceID="D01" Author="author B" Time=""/>
         </xjdf:AuditResource>
     </xjdf:AuditPool>
 
     <xjdf:ProductList>
         <xjdf:Product ID="PRD_MAIN01" IsRoot="true" Amount="1">
             <xjdf:Intent Name="LayoutIntent">
-                <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided" LayoutRef="LAYOUT_INTENT_REF_0"/>
+                <xjdf:LayoutIntent Pages="2" Sides="OneSided" LayoutRef="LAYOUT_INTENT_REF_0"/>
             </xjdf:Intent>
             <xjdf:Intent Name="ColorIntent">
                 <xjdf:ColorIntent>
-                    <xjdf:SurfaceColor Surface="Front" NumColors="4"/>
-                    <xjdf:SurfaceColor Surface="Back" NumColors="0"/>
+                    <xjdf:SurfaceColor Surface="Front" ColorsUsed="Cyan Magenta Yellow Black"/>
+                    <xjdf:SurfaceColor Surface="Back" ColorsUsed=""/>
                 </xjdf:ColorIntent>
             </xjdf:Intent>
         </xjdf:Product>
         <xjdf:Product ID="PRD_MAIN02" IsRoot="true" Amount="1">
             <xjdf:Intent Name="LayoutIntent">
-                <xjdf:LayoutIntent PrintedPages="1" Sides="OneSided" LayoutRef="LAYOUT_INTENT_REF_1"/>
+                <xjdf:LayoutIntent Pages="2" Sides="OneSided" LayoutRef="LAYOUT_INTENT_REF_1"/>
             </xjdf:Intent>
             <xjdf:Intent Name="ColorIntent">
                 <xjdf:ColorIntent>
-                    <xjdf:SurfaceColor Surface="Front" NumColors="4"/>
-                    <xjdf:SurfaceColor Surface="Back" NumColors="0"/>
+                    <xjdf:SurfaceColor Surface="Front" ColorsUsed="Cyan Magenta Yellow Black"/>
+                    <xjdf:SurfaceColor Surface="Back" ColorsUsed=""/>
                 </xjdf:ColorIntent>
             </xjdf:Intent>
         </xjdf:Product>
