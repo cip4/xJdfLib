@@ -815,6 +815,12 @@
     <xjb:bindings node="//xs:element[@name='Icon']//xs:attribute[@name='IconUsage']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="IconUsage"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='ResponseModes']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="ResponseModes"/>
+    </xjb:bindings>
+
+
+
     <xjb:bindings node="//xs:complexType[@name='Component']//xs:attribute[@name='ComponentType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ComponentType"/>
     </xjb:bindings>

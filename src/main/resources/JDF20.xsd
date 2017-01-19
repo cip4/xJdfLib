@@ -247,14 +247,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumResponseModes">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="FireAndForget"/>
-            <xs:enumeration value="Reliable"/>
-            <xs:enumeration value="Response"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Scope">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Allowed"/>
@@ -1280,7 +1272,16 @@
             </xs:sequence>
             <xs:attribute name="ResponseModes" use="optional">
                 <xs:simpleType>
-                    <xs:list itemType="EnumResponseModes"/>
+                    <xs:list>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:NMTOKEN">
+                                <xs:enumeration value="FireAndForget"/>
+                                <xs:enumeration value="Reliable"/>
+                                <xs:enumeration value="Response"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+
+                    </xs:list>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="JMFRole" use="optional">
