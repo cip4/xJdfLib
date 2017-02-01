@@ -7554,6 +7554,7 @@
             <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Copies" type="integer" use="required"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
