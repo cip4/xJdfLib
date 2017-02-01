@@ -1002,9 +1002,8 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="Contact"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangSource"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="MISDetails"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="NotificationFilter"/>
                 </xs:sequence>
                 <xs:attribute name="CleanupDuration" type="duration" use="optional"/>
                 <xs:attribute name="DueLevel" use="optional">
@@ -1340,8 +1339,8 @@
     <xs:element name="QueueEntry">
         <xs:complexType>
             <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangSource"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Preview"/>
             </xs:sequence>
             <xs:attribute name="Activation" type="Activation" use="optional"/>
             <xs:attribute name="EndTime" type="dateTime" use="optional"/>
@@ -7547,5 +7546,13 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
+
+    <xs:element name="GangSource">
+        <xs:complexType>
+            <xs:attribute name="BinderySignatureID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Copies" type="integer" use="required"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
+        </xs:complexType>
+    </xs:element>
 
 </xs:schema>
