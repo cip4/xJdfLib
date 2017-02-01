@@ -788,12 +788,6 @@
     <xjb:bindings node="//xs:element[@name='ScreenSelector']//xs:attribute[@name='ScreeningType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ScreeningType"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='StripMark']//xs:attribute[@name='MarkContext']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="MarkContext"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='StripMark']//xs:attribute[@name='MarkSide']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="MarkSide"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Device']//xs:attribute[@name='JDFVersions']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="JDFVersions"/>
     </xjb:bindings>
