@@ -4980,7 +4980,6 @@
                 <xs:attribute name="DeviceRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
                 <xs:attribute name="InnermostShingling" type="double" use="optional"/>
-                <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="LockOrigins" type="boolean" use="optional"/>
                 <xs:attribute name="MaxCollect" type="integer" use="optional"/>
                 <xs:attribute name="MinCollect" type="integer" use="optional"/>
@@ -4988,8 +4987,6 @@
                 <xs:attribute name="PaperRef" type="IDREF" use="optional"/>
                 <xs:attribute name="PlateRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ProofPaperRef" type="IDREF" use="optional"/>
-                <xs:attribute name="SheetNameFormat" type="string" use="optional"/>
-                <xs:attribute name="SheetNameTemplate" type="string" use="optional"/>
                 <xs:attribute name="SurfaceContentsBox" type="rectangle" use="optional"/>
                 <xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
             </xs:extension>
