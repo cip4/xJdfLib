@@ -299,32 +299,12 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumStripMaterial">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Calico"/>
-            <xs:enumeration value="Cardboard"/>
-            <xs:enumeration value="CrepePaper"/>
-            <xs:enumeration value="Gauze"/>
-            <xs:enumeration value="Paper"/>
-            <xs:enumeration value="PaperlinedMules"/>
-            <xs:enumeration value="Tape"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumTightBacking">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Flat"/>
             <xs:enumeration value="Round"/>
             <xs:enumeration value="FlatBacked"/>
             <xs:enumeration value="RoundBacked"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumBindingMaterial">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Steel"/>
-            <xs:enumeration value="ColorCoatedSteel"/>
-            <xs:enumeration value="Plastic"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -2091,7 +2071,6 @@
             <xs:attribute name="SpineNotching" type="boolean" use="optional"/>
             <xs:attribute name="SpineSanding" type="boolean" use="optional"/>
             <xs:attribute name="SpineShredding" type="boolean" use="optional"/>
-            <xs:attribute name="StripMaterial" type="EnumStripMaterial" use="optional"/>
             <xs:attribute name="Thickness" type="double" use="optional"/>
             <xs:attribute name="TightBacking" type="EnumTightBacking" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -2107,7 +2086,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="Length" type="double" use="optional"/>
-                <xs:attribute name="StripMaterial" type="EnumStripMaterial" use="optional"/>
                 <xs:attribute name="Width" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -2865,9 +2843,7 @@
                 </xs:sequence>
                 <xs:attribute name="HorizontalExcess" type="double" use="optional"/>
                 <xs:attribute name="HorizontalExcessBack" type="double" use="optional"/>
-                <xs:attribute name="StripBrand" type="string" use="optional"/>
                 <xs:attribute name="StripLength" type="double" use="optional"/>
-                <xs:attribute name="StripMaterial" type="EnumStripMaterial" use="optional"/>
                 <xs:attribute name="TopExcess" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -2950,15 +2926,6 @@
             <xs:extension base="SpecificResource">
                 <xs:attribute name="BlindStitch" type="boolean" use="optional"/>
                 <xs:attribute name="ThreadLength" type="double" use="optional"/>
-                <xs:attribute name="ThreadMaterial" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Cotton"/>
-                            <xs:enumeration value="Nylon"/>
-                            <xs:enumeration value="Polyester"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="ThreadPositions" type="DoubleList" use="optional"/>
                 <xs:attribute name="ThreadStitchWidth" type="double" use="optional"/>
                 <xs:attribute name="SealingTemperature" type="integer" use="optional"/>
@@ -3156,7 +3123,15 @@
             <xs:attribute name="Brand" type="string" use="optional"/>
             <xs:attribute name="CombShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Diameter" type="double" use="optional"/>
-            <xs:attribute name="Material" type="EnumBindingMaterial" use="optional"/>
+            <xs:attribute name="Material" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Steel"/>
+                        <xs:enumeration value="ColorCoatedSteel"/>
+                        <xs:enumeration value="Plastic"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
             <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>
@@ -3177,8 +3152,6 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="RingBindingDetails"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="StripBindingDetails"/>
                 </xs:sequence>
-                <xs:attribute name="BinderBrand" type="string" use="optional"/>
-                <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
                 <xs:attribute name="BindingType" use="required">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
@@ -3193,8 +3166,6 @@
                 <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
-                <xs:attribute name="SpineColor" type="NamedColor" use="optional"/>
-                <xs:attribute name="SpineColorDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -5278,8 +5249,8 @@
                 </xs:sequence>
                 <xs:attribute name="Color" type="NamedColor" use="optional"/>
                 <xs:attribute name="ColorDetails" type="string" use="optional"/>
-                <xs:attribute name="Type" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="TypeDetails" type="string" use="optional"/>
+                <xs:attribute name="Type" type="NMTOKEN" use="required"/>
+                <xs:attribute name="TypeDetails" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6508,7 +6479,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="WireBrand" type="string" use="optional"/>
                 <xs:attribute name="WireGauge" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -6531,24 +6501,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
                 <xs:attribute name="BlindStitch" type="boolean" use="optional"/>
-                <xs:attribute name="CastingMaterial" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Cotton"/>
-                            <xs:enumeration value="Nylon"/>
-                            <xs:enumeration value="Polyester"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
-                <xs:attribute name="CoreMaterial" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Cotton"/>
-                            <xs:enumeration value="Nylon"/>
-                            <xs:enumeration value="Polyester"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="GlueLineRefSheets" type="IntegerList" use="optional"/>
                 <xs:attribute name="NeedlePositions" type="DoubleList" use="optional"/>
                 <xs:attribute name="NumberOfNeedles" type="integer" use="optional"/>
@@ -6564,7 +6516,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="ThreadBrand" type="string" use="optional"/>
                 <xs:attribute name="ThreadThickness" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>

@@ -377,12 +377,6 @@
     <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='TightBacking']/xs:simpleType">
         <xjb:typesafeEnumClass name="TightBacking"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='CastingMaterial']/xs:simpleType">
-        <xjb:typesafeEnumClass name="CastingMaterial"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='CoreMaterial']/xs:simpleType">
-        <xjb:typesafeEnumClass name="CoreMaterial"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']//xs:attribute[@name='SewingPattern']/xs:simpleType">
         <xjb:typesafeEnumClass name="SewingPattern"/>
     </xjb:bindings>
@@ -741,9 +735,6 @@
     <xjb:bindings node="//xs:complexType[@name='StrappingParams']//xs:attribute[@name='StrappingType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="StrappingType"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ThreadSealingParams']//xs:attribute[@name='ThreadMaterial']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="ThreadMaterial"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BarcodeCompParams']//xs:attribute[@name='CompensationProcess']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="CompensationProcess"/>
     </xjb:bindings>
@@ -803,6 +794,9 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='ResponseModes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResponseModes"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='LooseBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Material"/>
     </xjb:bindings>
 
 
