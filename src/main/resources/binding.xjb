@@ -247,11 +247,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='Tile']//xs:attribute[@name='MediaRef']">
-        <xjb:property name="media">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']//xs:attribute[@name='ProofPaperRef']">
         <xjb:property name="proofPaper">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>

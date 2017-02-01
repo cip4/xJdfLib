@@ -4969,6 +4969,7 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ExternalImpositionTemplate"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="FitPolicy"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PlacedObject"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Position"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="SheetActivation"/>
@@ -5008,15 +5009,13 @@
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ClipBox" type="rectangle" use="optional"/>
             <xs:attribute name="ClipBoxFormat" type="string" use="optional"/>
-            <xs:attribute name="ClipBoxTemplate" type="string" use="optional"/>
+            <xs:attribute name="ClipBoxTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
-            <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
+            <xs:attribute name="CompensationCTMTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="CTM" type="matrix" use="required"/>
             <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
-            <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
-            <xs:attribute name="OrdExpression" type="string" use="optional"/>
             <xs:attribute name="PositionRef" type="IDREF" use="optional"/>
             <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="TrimClipPath" type="PDFPath" use="optional"/>
@@ -6124,22 +6123,6 @@
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
-
-    <!-- ** Complex type definition for Tile ** -->
-    <xs:element name="Tile" substitutionGroup="SpecificResource" type="Tile"/>
-    <xs:complexType name="Tile">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkObject"/>
-                </xs:sequence>
-                <xs:attribute name="ClipBox" type="rectangle" use="required"/>
-                <xs:attribute name="CTM" type="matrix" use="required"/>
-                <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="TrimBox" type="rectangle" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
 
     <!-- ** Complex type definition for TransferCurve ** -->
     <xs:element name="TransferCurve" substitutionGroup="SpecificResource" type="TransferCurve"/>
