@@ -151,7 +151,7 @@ public class XJdfParserTest {
         final String VALUE = UUID.randomUUID().toString();
 
         XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
+        XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
 
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
@@ -187,7 +187,7 @@ public class XJdfParserTest {
         final String VALUE = UUID.randomUUID().toString();
 
         XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
+        XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
 
         GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
         xJdfBuilder.addGeneralID(generalId);
@@ -347,7 +347,9 @@ public class XJdfParserTest {
     public void parseXjdfWritesUtf8Chars() throws Exception {
         final String utf8String = "aÄoÖuÜsß";
         XJDF xjdf = new XJDF();
-        xjdf.withComment(new Comment().withValue(utf8String));
+        xjdf.withJobID("Foo")
+            .withTypes("Foo")
+            .withComment(new Comment().withValue(utf8String));
 
         byte[] bytes = xJdfParser.parseXJdf(xjdf);
         String xjdfString = new String(bytes, StandardCharsets.UTF_8);

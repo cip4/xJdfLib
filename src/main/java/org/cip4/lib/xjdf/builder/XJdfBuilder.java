@@ -32,9 +32,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      */
     private final Resources resourceSets;
 
-    /**
-     * Default constructor.
-     */
     public XJdfBuilder() {
         this(null, null, null, null);
     }

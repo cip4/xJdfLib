@@ -42,13 +42,13 @@ public class AbstractXmlPackagerTest {
     @Test
     public void packageXmlWritesDocumentFirst() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out);
+        final AbstractXmlPackager<XJDF> packager = new MinimalXmlPackager(out);
 
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder();
+        XJdfBuilder builder = new XJdfBuilder("Foo");
         builder.addResource(
             xJdfNodeFactory.createRunList(
                 new URI(
@@ -66,7 +66,7 @@ public class AbstractXmlPackagerTest {
             )
         );
         final XJDF xjdf = builder.build();
-
+        xjdf.withTypes("Product");
         xjdf.setCommentURL(new URI(sourceUri));
         packager.packageXml(xjdf, "document.xml");
 
@@ -80,14 +80,14 @@ public class AbstractXmlPackagerTest {
     @Test
     public void packageXmlWritesAssets() throws Exception {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
-        final AbstractXmlPackager packager = new MinimalXmlPackager(out);
+        final AbstractXmlPackager<XJDF> packager = new MinimalXmlPackager(out);
 
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
         final String doc = "doc/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder();
+        XJdfBuilder builder = new XJdfBuilder("Foo");
         builder.addResource(
             xJdfNodeFactory.createRunList(
                 new URI(
@@ -105,6 +105,7 @@ public class AbstractXmlPackagerTest {
             )
         );
         final XJDF xjdf = builder.build();
+        xjdf.withTypes("Product");
         xjdf.setCommentURL(new URI(sourceUri, doc));
         packager.packageXml(xjdf, "document.xml");
 

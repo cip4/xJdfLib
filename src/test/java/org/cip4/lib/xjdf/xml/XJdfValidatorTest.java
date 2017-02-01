@@ -52,7 +52,7 @@ public class XJdfValidatorTest {
     public void setUp() throws Exception {
         // init instance variables
         xJdfNodeFactory = new XJdfNodeFactory();
-        xJdfBuilder = new XJdfBuilder();
+        xJdfBuilder = new XJdfBuilder(this.getClass().getCanonicalName());
     }
 
     @After
@@ -201,6 +201,7 @@ public class XJdfValidatorTest {
         xJdfBuilder.addResource(contact);
 
         XJDF xJdf = xJdfBuilder.build();
+        xJdf.withTypes("Product");
         xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));
 
         // parse
