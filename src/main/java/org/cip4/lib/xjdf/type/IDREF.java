@@ -5,7 +5,7 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.ResourceType;
+import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.util.IDGeneratorUtil;
 
 import javax.xml.bind.ValidationException;
@@ -43,18 +43,18 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 		return (Product) element;
 	}
 
-	public IDREF(ResourceType resourceType) {
-		this(resourceType, null, IDGeneratorUtil.generateID("PAR"));
+	public IDREF(SpecificResource specificResource) {
+		this(specificResource, null, IDGeneratorUtil.generateID("PAR"));
 	}
 
-	public IDREF(ResourceType resourceType, Part part, String id) {
+	public IDREF(SpecificResource specificResource, Part part, String id) {
 
 		// generate ID
 		this.id = id;
 
 		// create resource
 		XJdfNodeFactory nf = new XJdfNodeFactory();
-		Resource resource = nf.createResource(resourceType, part);
+		Resource resource = nf.createResource(specificResource, part);
 		resource.setID(this.id);
 
 		// set element

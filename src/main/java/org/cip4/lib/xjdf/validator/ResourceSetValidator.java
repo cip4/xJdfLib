@@ -40,7 +40,7 @@ public class ResourceSetValidator implements Validator<ResourceSet> {
         } else {
             String resourceSetName = resourceSet.getName();
             for (Resource resource : resourceSet.getResource()) {
-                String resourceName = resource.getResourceType().getName().getLocalPart();
+                String resourceName = resource.getSpecificResource().getName().getLocalPart();
                 if (!resourceName.equals(resourceSetName)) {
                     result.append(String.format(
                         "ResourceSet with @Name='%s' may only contain Resources of type '%s', but '%s' was found.",
@@ -54,7 +54,7 @@ public class ResourceSetValidator implements Validator<ResourceSet> {
                 case "DeliveryParams":
                     for (Resource resource : resourceSet.getResource()) {
                         result.append(
-                            deliveryParamsValidator.validate((DeliveryParams) resource.getResourceType().getValue())
+                            deliveryParamsValidator.validate((DeliveryParams) resource.getSpecificResource().getValue())
                         );
                     }
                     break;

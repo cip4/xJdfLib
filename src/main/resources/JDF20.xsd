@@ -757,7 +757,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="GeneralID"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="Location"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="ResourceType"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="SpecificResource"/>
                 <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
             </xs:sequence>
             <xs:attribute name="Brand" type="string" use="optional"/>
@@ -778,8 +778,8 @@
     </xs:element>
 
     <!--** abstract type for substitution only ** -->
-    <xs:element abstract="true" name="ResourceType" type="ResourceType"/>
-    <xs:complexType abstract="true" name="ResourceType">
+    <xs:element abstract="true" name="SpecificResource" type="SpecificResource"/>
+    <xs:complexType abstract="true" name="SpecificResource">
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 
@@ -983,10 +983,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for CustomerInfo ** -->
-    <xs:element name="CustomerInfo" substitutionGroup="ResourceType" type="CustomerInfo"/>
+    <xs:element name="CustomerInfo" substitutionGroup="SpecificResource" type="CustomerInfo"/>
     <xs:complexType name="CustomerInfo">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="CustomerID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="CustomerJobName" type="string" use="optional"/>
@@ -997,10 +997,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for NodeInfo ** -->
-    <xs:element name="NodeInfo" substitutionGroup="ResourceType" type="NodeInfo"/>
+    <xs:element name="NodeInfo" substitutionGroup="SpecificResource" type="NodeInfo"/>
     <xs:complexType name="NodeInfo">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Contact"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="MISDetails"/>
@@ -1034,10 +1034,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Shape ** -->
-    <xs:element name="Shape" substitutionGroup="ResourceType" type="Shape"/>
+    <xs:element name="Shape" substitutionGroup="SpecificResource" type="Shape"/>
     <xs:complexType name="Shape">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
                 <xs:attribute name="CutOut" type="boolean" use="optional"/>
                 <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
@@ -1638,10 +1638,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for BlockPreparationParams ** -->
-    <xs:element name="BlockPreparationParams" substitutionGroup="ResourceType" type="BlockPreparationParams"/>
+    <xs:element name="BlockPreparationParams" substitutionGroup="SpecificResource" type="BlockPreparationParams"/>
     <xs:complexType name="BlockPreparationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterRibbon"/>
                 </xs:sequence>
@@ -1653,10 +1653,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BoxPackingParams ** -->
-    <xs:element name="BoxPackingParams" substitutionGroup="ResourceType" type="BoxPackingParams"/>
+    <xs:element name="BoxPackingParams" substitutionGroup="SpecificResource" type="BoxPackingParams"/>
     <xs:complexType name="BoxPackingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="BoxType" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -1692,20 +1692,20 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BufferParams ** -->
-    <xs:element name="BufferParams" substitutionGroup="ResourceType" type="BufferParams"/>
+    <xs:element name="BufferParams" substitutionGroup="SpecificResource" type="BufferParams"/>
     <xs:complexType name="BufferParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="MinimumWait" type="duration" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for Bundle ** -->
-    <xs:element name="Bundle" substitutionGroup="ResourceType" type="Bundle"/>
+    <xs:element name="Bundle" substitutionGroup="SpecificResource" type="Bundle"/>
     <xs:complexType name="Bundle">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="BundleItem"/>
                 </xs:sequence>
@@ -1746,10 +1746,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for CaseMakingParams ** -->
-    <xs:element name="CaseMakingParams" substitutionGroup="ResourceType" type="CaseMakingParams"/>
+    <xs:element name="CaseMakingParams" substitutionGroup="SpecificResource" type="CaseMakingParams"/>
     <xs:complexType name="CaseMakingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -1766,10 +1766,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for CasingInParams ** -->
-    <xs:element name="CasingInParams" substitutionGroup="ResourceType" type="CasingInParams"/>
+    <xs:element name="CasingInParams" substitutionGroup="SpecificResource" type="CasingInParams"/>
     <xs:complexType name="CasingInParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -1797,10 +1797,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for CoverApplicationParams ** -->
-    <xs:element name="CoverApplicationParams" substitutionGroup="ResourceType" type="CoverApplicationParams"/>
+    <xs:element name="CoverApplicationParams" substitutionGroup="SpecificResource" type="CoverApplicationParams"/>
     <xs:complexType name="CoverApplicationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Score"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
@@ -1810,10 +1810,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for CreasingParams ** -->
-    <xs:element name="CreasingParams" substitutionGroup="ResourceType" type="CreasingParams"/>
+    <xs:element name="CreasingParams" substitutionGroup="SpecificResource" type="CreasingParams"/>
     <xs:complexType name="CreasingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Crease"/>
                 </xs:sequence>
@@ -1834,10 +1834,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for CuttingParams ** -->
-    <xs:element name="CuttingParams" substitutionGroup="ResourceType" type="CuttingParams"/>
+    <xs:element name="CuttingParams" substitutionGroup="SpecificResource" type="CuttingParams"/>
     <xs:complexType name="CuttingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Cut"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutBlock"/>
@@ -1849,10 +1849,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for DevelopingParams ** -->
-    <xs:element name="DevelopingParams" substitutionGroup="ResourceType" type="DevelopingParams"/>
+    <xs:element name="DevelopingParams" substitutionGroup="SpecificResource" type="DevelopingParams"/>
     <xs:complexType name="DevelopingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="PostBakeTime" type="duration" use="optional"/>
                 <xs:attribute name="PostExposeTime" type="duration" use="optional"/>
                 <xs:attribute name="PreHeatTime" type="duration" use="optional"/>
@@ -1863,10 +1863,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Device ** -->
-    <xs:element name="Device" substitutionGroup="ResourceType" type="Device"/>
+    <xs:element name="Device" substitutionGroup="SpecificResource" type="Device"/>
     <xs:complexType name="Device">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="IconList"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
@@ -1981,10 +1981,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for EmbossingParams ** -->
-    <xs:element name="EmbossingParams" substitutionGroup="ResourceType" type="EmbossingParams"/>
+    <xs:element name="EmbossingParams" substitutionGroup="SpecificResource" type="EmbossingParams"/>
     <xs:complexType name="EmbossingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Emboss"/>
                 </xs:sequence>
@@ -1994,10 +1994,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for EndSheetGluingParams ** -->
-    <xs:element name="EndSheetGluingParams" substitutionGroup="ResourceType" type="EndSheetGluingParams"/>
+    <xs:element name="EndSheetGluingParams" substitutionGroup="SpecificResource" type="EndSheetGluingParams"/>
     <xs:complexType name="EndSheetGluingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="2" minOccurs="0" ref="EndSheet"/>
                 </xs:sequence>
@@ -2061,10 +2061,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for GluingParams ** -->
-    <xs:element name="GluingParams" substitutionGroup="ResourceType" type="GluingParams"/>
+    <xs:element name="GluingParams" substitutionGroup="SpecificResource" type="GluingParams"/>
     <xs:complexType name="GluingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -2112,10 +2112,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for HeadBandApplicationParams ** -->
-    <xs:element name="HeadBandApplicationParams" substitutionGroup="ResourceType" type="HeadBandApplicationParams"/>
+    <xs:element name="HeadBandApplicationParams" substitutionGroup="SpecificResource" type="HeadBandApplicationParams"/>
     <xs:complexType name="HeadBandApplicationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -2213,10 +2213,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for InsertingParams ** -->
-    <xs:element name="InsertingParams" substitutionGroup="ResourceType" type="InsertingParams"/>
+    <xs:element name="InsertingParams" substitutionGroup="SpecificResource" type="InsertingParams"/>
     <xs:complexType name="InsertingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -2244,10 +2244,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for InterpretingParams ** -->
-    <xs:element name="InterpretingParams" substitutionGroup="ResourceType" type="InterpretingParams"/>
+    <xs:element name="InterpretingParams" substitutionGroup="SpecificResource" type="InterpretingParams"/>
     <xs:complexType name="InterpretingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FitPolicy"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="InterpretingDetails"/>
@@ -2285,10 +2285,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for JacketingParams ** -->
-    <xs:element name="JacketingParams" substitutionGroup="ResourceType" type="JacketingParams"/>
+    <xs:element name="JacketingParams" substitutionGroup="SpecificResource" type="JacketingParams"/>
     <xs:complexType name="JacketingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="FoldingWidth" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
@@ -2304,10 +2304,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for LabelingParams ** -->
-    <xs:element name="LabelingParams" substitutionGroup="ResourceType" type="LabelingParams"/>
+    <xs:element name="LabelingParams" substitutionGroup="SpecificResource" type="LabelingParams"/>
     <xs:complexType name="LabelingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
@@ -2319,10 +2319,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for LaminatingParams ** -->
-    <xs:element name="LaminatingParams" substitutionGroup="ResourceType" type="LaminatingParams"/>
+    <xs:element name="LaminatingParams" substitutionGroup="SpecificResource" type="LaminatingParams"/>
     <xs:complexType name="LaminatingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="AdhesiveType" type="string" use="optional"/>
                 <xs:attribute name="GapList" type="string" use="optional"/>
                 <xs:attribute name="HardenerType" type="string" use="optional"/>
@@ -2475,10 +2475,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for NumberingParams ** -->
-    <xs:element name="NumberingParams" substitutionGroup="ResourceType" type="NumberingParams"/>
+    <xs:element name="NumberingParams" substitutionGroup="SpecificResource" type="NumberingParams"/>
     <xs:complexType name="NumberingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="NumberingParam"/>
                 </xs:sequence>
@@ -2506,10 +2506,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Pallet ** -->
-    <xs:element name="Pallet" substitutionGroup="ResourceType" type="Pallet"/>
+    <xs:element name="Pallet" substitutionGroup="SpecificResource" type="Pallet"/>
     <xs:complexType name="Pallet">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
@@ -2520,10 +2520,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for PalletizingParams ** -->
-    <xs:element name="PalletizingParams" substitutionGroup="ResourceType" type="PalletizingParams"/>
+    <xs:element name="PalletizingParams" substitutionGroup="SpecificResource" type="PalletizingParams"/>
     <xs:complexType name="PalletizingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="LayerAmount" type="IntegerList" use="optional"/>
                 <xs:attribute name="MaxHeight" type="double" use="optional"/>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
@@ -2622,10 +2622,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PerforatingParams ** -->
-    <xs:element name="PerforatingParams" substitutionGroup="ResourceType" type="PerforatingParams"/>
+    <xs:element name="PerforatingParams" substitutionGroup="SpecificResource" type="PerforatingParams"/>
     <xs:complexType name="PerforatingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Perforate"/>
                 </xs:sequence>
@@ -2647,18 +2647,18 @@
     </xs:element>
 
     <!-- ** Complex type definition for PlaceHolderResource ** -->
-    <xs:element name="PlaceHolderResource" substitutionGroup="ResourceType" type="PlaceHolderResource"/>
+    <xs:element name="PlaceHolderResource" substitutionGroup="SpecificResource" type="PlaceHolderResource"/>
     <xs:complexType name="PlaceHolderResource">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for PreflightAnalysis ** -->
-    <xs:element name="PreflightAnalysis" substitutionGroup="ResourceType" type="PreflightAnalysis"/>
+    <xs:element name="PreflightAnalysis" substitutionGroup="SpecificResource" type="PreflightAnalysis"/>
     <xs:complexType name="PreflightAnalysis">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -2766,10 +2766,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ScavengerArea ** -->
-    <xs:element name="ScavengerArea" substitutionGroup="ResourceType" type="ScavengerArea"/>
+    <xs:element name="ScavengerArea" substitutionGroup="SpecificResource" type="ScavengerArea"/>
     <xs:complexType name="ScavengerArea">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Center" type="XYPair" use="required"/>
                 <xs:attribute name="Rotation" type="double" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
@@ -2779,10 +2779,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ShapeCuttingParams ** -->
-    <xs:element name="ShapeCuttingParams" substitutionGroup="ResourceType" type="ShapeCuttingParams"/>
+    <xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
     <xs:complexType name="ShapeCuttingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Shape"/>
                 </xs:sequence>
@@ -2803,10 +2803,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ShrinkingParams ** -->
-    <xs:element name="ShrinkingParams" substitutionGroup="ResourceType" type="ShrinkingParams"/>
+    <xs:element name="ShrinkingParams" substitutionGroup="SpecificResource" type="ShrinkingParams"/>
     <xs:complexType name="ShrinkingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Duration" type="duration" use="optional"/>
                 <xs:attribute name="ShrinkingMethod" use="optional">
                     <xs:simpleType>
@@ -2860,10 +2860,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for SpinePreparationParams ** -->
-    <xs:element name="SpinePreparationParams" substitutionGroup="ResourceType" type="SpinePreparationParams"/>
+    <xs:element name="SpinePreparationParams" substitutionGroup="SpecificResource" type="SpinePreparationParams"/>
     <xs:complexType name="SpinePreparationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="MillingDepth" type="double" use="optional"/>
                 <xs:attribute name="NotchingDepth" type="double" use="optional"/>
                 <xs:attribute name="NotchingDistance" type="double" use="optional"/>
@@ -2875,10 +2875,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for SpineTapingParams ** -->
-    <xs:element name="SpineTapingParams" substitutionGroup="ResourceType" type="SpineTapingParams"/>
+    <xs:element name="SpineTapingParams" substitutionGroup="SpecificResource" type="SpineTapingParams"/>
     <xs:complexType name="SpineTapingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -2893,10 +2893,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for StackingParams ** -->
-    <xs:element name="StackingParams" substitutionGroup="ResourceType" type="StackingParams"/>
+    <xs:element name="StackingParams" substitutionGroup="SpecificResource" type="StackingParams"/>
     <xs:complexType name="StackingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Disjointing"/>
                 </xs:sequence>
@@ -2927,10 +2927,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for StrappingParams ** -->
-    <xs:element name="StrappingParams" substitutionGroup="ResourceType" type="StrappingParams"/>
+    <xs:element name="StrappingParams" substitutionGroup="SpecificResource" type="StrappingParams"/>
     <xs:complexType name="StrappingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="StrappingType" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -2963,10 +2963,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ThreadSealingParams ** -->
-    <xs:element name="ThreadSealingParams" substitutionGroup="ResourceType" type="ThreadSealingParams"/>
+    <xs:element name="ThreadSealingParams" substitutionGroup="SpecificResource" type="ThreadSealingParams"/>
     <xs:complexType name="ThreadSealingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="BlindStitch" type="boolean" use="optional"/>
                 <xs:attribute name="ThreadLength" type="double" use="optional"/>
                 <xs:attribute name="ThreadMaterial" use="optional">
@@ -2986,10 +2986,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Tool ** -->
-    <xs:element name="Tool" substitutionGroup="ResourceType" type="Tool"/>
+    <xs:element name="Tool" substitutionGroup="SpecificResource" type="Tool"/>
     <xs:complexType name="Tool">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
@@ -2999,10 +2999,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for TransferFunctionControl ** -->
-    <xs:element name="TransferFunctionControl" substitutionGroup="ResourceType" type="TransferFunctionControl"/>
+    <xs:element name="TransferFunctionControl" substitutionGroup="SpecificResource" type="TransferFunctionControl"/>
     <xs:complexType name="TransferFunctionControl">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="TransferCurveRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="TransferFunctionSource" use="required">
                     <xs:simpleType>
@@ -3022,10 +3022,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for VarnishingParams ** -->
-    <xs:element name="VarnishingParams" substitutionGroup="ResourceType" type="VarnishingParams"/>
+    <xs:element name="VarnishingParams" substitutionGroup="SpecificResource" type="VarnishingParams"/>
     <xs:complexType name="VarnishingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ModuleType" use="optional">
                     <xs:simpleType>
@@ -3057,20 +3057,20 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for VerificationParams ** -->
-    <xs:element name="VerificationParams" substitutionGroup="ResourceType" type="VerificationParams"/>
+    <xs:element name="VerificationParams" substitutionGroup="SpecificResource" type="VerificationParams"/>
     <xs:complexType name="VerificationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Tolerance" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for WrappingParams ** -->
-    <xs:element name="WrappingParams" substitutionGroup="ResourceType" type="WrappingParams"/>
+    <xs:element name="WrappingParams" substitutionGroup="SpecificResource" type="WrappingParams"/>
     <xs:complexType name="WrappingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="WrappingKind" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3184,10 +3184,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for LooseBindingParams ** -->
-    <xs:element name="LooseBindingParams" substitutionGroup="ResourceType" type="LooseBindingParams"/>
+    <xs:element name="LooseBindingParams" substitutionGroup="SpecificResource" type="LooseBindingParams"/>
     <xs:complexType name="LooseBindingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ChannelBindingDetails"/>
@@ -3609,10 +3609,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ApprovalDetails ** -->
-    <xs:element name="ApprovalDetails" substitutionGroup="ResourceType" type="ApprovalDetails"/>
+    <xs:element name="ApprovalDetails" substitutionGroup="SpecificResource" type="ApprovalDetails"/>
     <xs:complexType name="ApprovalDetails">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ApprovalPerson"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Comment"/>
@@ -3634,10 +3634,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ApprovalParams ** -->
-    <xs:element name="ApprovalParams" substitutionGroup="ResourceType" type="ApprovalParams"/>
+    <xs:element name="ApprovalParams" substitutionGroup="SpecificResource" type="ApprovalParams"/>
     <xs:complexType name="ApprovalParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="MinApprovals" type="integer" use="optional"/>
                 <xs:attribute name="ApprovalPersonRef" type="IDREF" use="optional"/>
             </xs:extension>
@@ -3664,10 +3664,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Assembly ** -->
-    <xs:element name="Assembly" substitutionGroup="ResourceType" type="Assembly"/>
+    <xs:element name="Assembly" substitutionGroup="SpecificResource" type="Assembly"/>
     <xs:complexType name="Assembly">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="AssemblySection"/>
                 </xs:sequence>
@@ -3698,10 +3698,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for AutomatedOverPrintParams ** -->
-    <xs:element name="AutomatedOverPrintParams" substitutionGroup="ResourceType" type="AutomatedOverPrintParams"/>
+    <xs:element name="AutomatedOverPrintParams" substitutionGroup="SpecificResource" type="AutomatedOverPrintParams"/>
     <xs:complexType name="AutomatedOverPrintParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="KnockOutCMYKWhite" type="boolean" use="optional"/>
                 <xs:attribute name="OverPrintBlackLineArt" type="boolean" use="optional"/>
                 <xs:attribute name="LineArtBlackLevel" type="double" use="optional"/>
@@ -3713,10 +3713,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BarcodeCompParams ** -->
-    <xs:element name="BarcodeCompParams" substitutionGroup="ResourceType" type="BarcodeCompParams"/>
+    <xs:element name="BarcodeCompParams" substitutionGroup="SpecificResource" type="BarcodeCompParams"/>
     <xs:complexType name="BarcodeCompParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="CompensationProcess" use="required">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3753,10 +3753,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for BarcodeReproParams ** -->
-    <xs:element name="BarcodeReproParams" substitutionGroup="ResourceType" type="BarcodeReproParams"/>
+    <xs:element name="BarcodeReproParams" substitutionGroup="SpecificResource" type="BarcodeReproParams"/>
     <xs:complexType name="BarcodeReproParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BarcodeCompParams"/>
                 </xs:sequence>
@@ -3788,10 +3788,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BendingParams ** -->
-    <xs:element name="BendingParams" substitutionGroup="ResourceType" type="BendingParams"/>
+    <xs:element name="BendingParams" substitutionGroup="SpecificResource" type="BendingParams"/>
     <xs:complexType name="BendingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Bend" type="boolean" use="optional"/>
                 <xs:attribute name="Punch" type="boolean" use="optional"/>
                 <xs:attribute name="PunchType" type="NMTOKEN" use="optional"/>
@@ -3800,10 +3800,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BinderySignature ** -->
-    <xs:element name="BinderySignature" substitutionGroup="ResourceType" type="BinderySignature"/>
+    <xs:element name="BinderySignature" substitutionGroup="SpecificResource" type="BinderySignature"/>
     <xs:complexType name="BinderySignature">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="SignatureCell"/>
                 </xs:sequence>
@@ -3885,10 +3885,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for BoxFoldingParams ** -->
-    <xs:element name="BoxFoldingParams" substitutionGroup="ResourceType" type="BoxFoldingParams"/>
+    <xs:element name="BoxFoldingParams" substitutionGroup="SpecificResource" type="BoxFoldingParams"/>
     <xs:complexType name="BoxFoldingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BoxFoldAction"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
@@ -3990,10 +3990,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Color ** -->
-    <xs:element name="Color" substitutionGroup="ResourceType" type="Color"/>
+    <xs:element name="Color" substitutionGroup="SpecificResource" type="Color"/>
     <xs:complexType name="Color">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="DeviceNColor"/>
                     <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
@@ -4043,10 +4043,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ColorantControl ** -->
-    <xs:element name="ColorantControl" substitutionGroup="ResourceType" type="ColorantControl"/>
+    <xs:element name="ColorantControl" substitutionGroup="SpecificResource" type="ColorantControl"/>
     <xs:complexType name="ColorantControl">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorantAlias"/>
@@ -4131,10 +4131,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Component ** -->
-    <xs:element name="Component" substitutionGroup="ResourceType" type="Component"/>
+    <xs:element name="Component" substitutionGroup="SpecificResource" type="Component"/>
     <xs:complexType name="Component">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Bundle"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
@@ -4172,10 +4172,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Contact ** -->
-    <xs:element name="Contact" substitutionGroup="ResourceType" type="Contact"/>
+    <xs:element name="Contact" substitutionGroup="SpecificResource" type="Contact"/>
     <xs:complexType name="Contact">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Address"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ComChannel"/>
@@ -4191,10 +4191,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Content ** -->
-    <xs:element name="Content" substitutionGroup="ResourceType" type="Content"/>
+    <xs:element name="Content" substitutionGroup="SpecificResource" type="Content"/>
     <xs:complexType name="Content">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BarcodeProductionParams"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ContentMetaData"/>
@@ -4249,10 +4249,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ConventionalPrintingParams ** -->
-    <xs:element name="ConventionalPrintingParams" substitutionGroup="ResourceType" type="ConventionalPrintingParams"/>
+    <xs:element name="ConventionalPrintingParams" substitutionGroup="SpecificResource" type="ConventionalPrintingParams"/>
     <xs:complexType name="ConventionalPrintingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ApprovalParams"/>
                 </xs:sequence>
@@ -4324,10 +4324,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for DeliveryParams ** -->
-    <xs:element name="DeliveryParams" substitutionGroup="ResourceType" type="DeliveryParams"/>
+    <xs:element name="DeliveryParams" substitutionGroup="SpecificResource" type="DeliveryParams"/>
     <xs:complexType name="DeliveryParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="DropItem"/>
                     <xs:element maxOccurs="3" minOccurs="0" ref="FileSpec"/>
@@ -4425,10 +4425,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for DieLayout ** -->
-    <xs:element name="DieLayout" substitutionGroup="ResourceType" type="DieLayout"/>
+    <xs:element name="DieLayout" substitutionGroup="SpecificResource" type="DieLayout"/>
     <xs:complexType name="DieLayout">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Device"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -4460,10 +4460,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for DieLayoutProductionParams ** -->
-    <xs:element name="DieLayoutProductionParams" substitutionGroup="ResourceType" type="DieLayoutProductionParams"/>
+    <xs:element name="DieLayoutProductionParams" substitutionGroup="SpecificResource" type="DieLayoutProductionParams"/>
     <xs:complexType name="DieLayoutProductionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="RepeatDesc"/>
@@ -4475,10 +4475,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for DigitalMedia ** -->
-    <xs:element name="DigitalMedia" substitutionGroup="ResourceType" type="DigitalMedia"/>
+    <xs:element name="DigitalMedia" substitutionGroup="SpecificResource" type="DigitalMedia"/>
     <xs:complexType name="DigitalMedia">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Location"/>
@@ -4494,10 +4494,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for DigitalPrintingParams ** -->
-    <xs:element name="DigitalPrintingParams" substitutionGroup="ResourceType" type="DigitalPrintingParams"/>
+    <xs:element name="DigitalPrintingParams" substitutionGroup="SpecificResource" type="DigitalPrintingParams"/>
     <xs:complexType name="DigitalPrintingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Collate" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -4604,10 +4604,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ExposedMedia ** -->
-    <xs:element name="ExposedMedia" substitutionGroup="ResourceType" type="ExposedMedia"/>
+    <xs:element name="ExposedMedia" substitutionGroup="SpecificResource" type="ExposedMedia"/>
     <xs:complexType name="ExposedMedia">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
@@ -4705,10 +4705,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for FeedingParams ** -->
-    <xs:element name="FeedingParams" substitutionGroup="ResourceType" type="FeedingParams"/>
+    <xs:element name="FeedingParams" substitutionGroup="SpecificResource" type="FeedingParams"/>
     <xs:complexType name="FeedingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="CollatingItem"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Feeder"/>
@@ -4778,18 +4778,18 @@
     </xs:element>
 
     <!-- ** Complex type definition for FoldOperation ** -->
-    <xs:element name="FoldOperation" substitutionGroup="ResourceType" type="FoldOperation"/>
+    <xs:element name="FoldOperation" substitutionGroup="SpecificResource" type="FoldOperation"/>
     <xs:complexType name="FoldOperation">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for FontPolicy ** -->
-    <xs:element name="FontPolicy" substitutionGroup="ResourceType" type="FontPolicy"/>
+    <xs:element name="FontPolicy" substitutionGroup="SpecificResource" type="FontPolicy"/>
     <xs:complexType name="FontPolicy">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="UseDefaultFont" type="boolean" use="optional"/>
                 <xs:attribute name="UseFontEmulation" type="boolean" use="optional"/>
                 <xs:attribute name="PreferredFont" type="NMTOKEN" use="optional"/>
@@ -4862,10 +4862,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ImageCompressionParams ** -->
-    <xs:element name="ImageCompressionParams" substitutionGroup="ResourceType" type="ImageCompressionParams"/>
+    <xs:element name="ImageCompressionParams" substitutionGroup="SpecificResource" type="ImageCompressionParams"/>
     <xs:complexType name="ImageCompressionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ImageCompression"/>
                 </xs:sequence>
@@ -4873,10 +4873,10 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="ImageEnhancementParams" substitutionGroup="ResourceType" type="ImageEnhancementParams"/>
+    <xs:element name="ImageEnhancementParams" substitutionGroup="SpecificResource" type="ImageEnhancementParams"/>
     <xs:complexType name="ImageEnhancementParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ImageEnhancementOp"/>
                 </xs:sequence>
@@ -4895,10 +4895,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ImageSetterParams ** -->
-    <xs:element name="ImageSetterParams" substitutionGroup="ResourceType" type="ImageSetterParams"/>
+    <xs:element name="ImageSetterParams" substitutionGroup="SpecificResource" type="ImageSetterParams"/>
     <xs:complexType name="ImageSetterParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FitPolicy"/>
                 </xs:sequence>
@@ -4942,10 +4942,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for InterpretedPDLData ** -->
-    <xs:element name="InterpretedPDLData" substitutionGroup="ResourceType" type="InterpretedPDLData"/>
+    <xs:element name="InterpretedPDLData" substitutionGroup="SpecificResource" type="InterpretedPDLData"/>
     <xs:complexType name="InterpretedPDLData">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -4981,10 +4981,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Layout ** -->
-    <xs:element name="Layout" substitutionGroup="ResourceType" type="Layout"/>
+    <xs:element name="Layout" substitutionGroup="SpecificResource" type="Layout"/>
     <xs:complexType name="Layout">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ExternalImpositionTemplate"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PlacedObject"/>
@@ -5055,11 +5055,11 @@
     </xs:element>
 
     <!-- ** Complex type definition for LayoutElementProductionParams ** -->
-    <xs:element name="LayoutElementProductionParams" substitutionGroup="ResourceType"
+    <xs:element name="LayoutElementProductionParams" substitutionGroup="SpecificResource"
                 type="LayoutElementProductionParams"/>
     <xs:complexType name="LayoutElementProductionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
@@ -5070,10 +5070,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for LayoutShift ** -->
-    <xs:element name="LayoutShift" substitutionGroup="ResourceType" type="LayoutShift"/>
+    <xs:element name="LayoutShift" substitutionGroup="SpecificResource" type="LayoutShift"/>
     <xs:complexType name="LayoutShift">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ShiftPoint"/>
                 </xs:sequence>
@@ -5082,11 +5082,11 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for LongitudinalRibbonOperationParams ** -->
-    <xs:element name="LongitudinalRibbonOperationParams" substitutionGroup="ResourceType"
+    <xs:element name="LongitudinalRibbonOperationParams" substitutionGroup="SpecificResource"
                 type="LongitudinalRibbonOperationParams"/>
     <xs:complexType name="LongitudinalRibbonOperationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -5100,20 +5100,20 @@
     </xs:element>
 
     <!-- ** Complex type definition for ManualLaborParams ** -->
-    <xs:element name="ManualLaborParams" substitutionGroup="ResourceType" type="ManualLaborParams"/>
+    <xs:element name="ManualLaborParams" substitutionGroup="SpecificResource" type="ManualLaborParams"/>
     <xs:complexType name="ManualLaborParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="LaborType" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for Media ** -->
-    <xs:element name="Media" substitutionGroup="ResourceType" type="Media"/>
+    <xs:element name="Media" substitutionGroup="SpecificResource" type="Media"/>
     <xs:complexType name="Media">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
@@ -5260,10 +5260,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for MediaSource ** -->
-    <xs:element name="MediaSource" substitutionGroup="ResourceType" type="MediaSource"/>
+    <xs:element name="MediaSource" substitutionGroup="SpecificResource" type="MediaSource"/>
     <xs:complexType name="MediaSource">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
                 <xs:attribute name="ComponentRef" type="IDREF" use="optional"/>
             </xs:extension>
@@ -5284,10 +5284,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for MiscConsumable ** -->
-    <xs:element name="MiscConsumable" substitutionGroup="ResourceType" type="MiscConsumable"/>
+    <xs:element name="MiscConsumable" substitutionGroup="SpecificResource" type="MiscConsumable"/>
     <xs:complexType name="MiscConsumable">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
@@ -5397,10 +5397,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for OrderingParams ** -->
-    <xs:element name="OrderingParams" substitutionGroup="ResourceType" type="OrderingParams"/>
+    <xs:element name="OrderingParams" substitutionGroup="SpecificResource" type="OrderingParams"/>
     <xs:complexType name="OrderingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Contact"/>
                 </xs:sequence>
@@ -5409,10 +5409,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for PackingParams ** -->
-    <xs:element name="PackingParams" substitutionGroup="ResourceType" type="PackingParams"/>
+    <xs:element name="PackingParams" substitutionGroup="SpecificResource" type="PackingParams"/>
     <xs:complexType name="PackingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -5442,10 +5442,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PDLCreationParams ** -->
-    <xs:element name="PDLCreationParams" substitutionGroup="ResourceType" type="PDLCreationParams"/>
+    <xs:element name="PDLCreationParams" substitutionGroup="SpecificResource" type="PDLCreationParams"/>
     <xs:complexType name="PDLCreationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FontParams"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="PDFCreationDetails"/>
@@ -5495,10 +5495,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PlateCopyParams ** -->
-    <xs:element name="PlateCopyParams" substitutionGroup="ResourceType" type="PlateCopyParams"/>
+    <xs:element name="PlateCopyParams" substitutionGroup="SpecificResource" type="PlateCopyParams"/>
     <xs:complexType name="PlateCopyParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -5541,10 +5541,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PreflightParams ** -->
-    <xs:element name="PreflightParams" substitutionGroup="ResourceType" type="PreflightParams"/>
+    <xs:element name="PreflightParams" substitutionGroup="SpecificResource" type="PreflightParams"/>
     <xs:complexType name="PreflightParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PreflightTest"/>
@@ -5569,10 +5569,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PreflightReport ** -->
-    <xs:element name="PreflightReport" substitutionGroup="ResourceType" type="PreflightReport"/>
+    <xs:element name="PreflightReport" substitutionGroup="SpecificResource" type="PreflightReport"/>
     <xs:complexType name="PreflightReport">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PreflightCheck"/>
@@ -5601,10 +5601,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Preview ** -->
-    <xs:element name="Preview" substitutionGroup="ResourceType" type="Preview"/>
+    <xs:element name="Preview" substitutionGroup="SpecificResource" type="Preview"/>
     <xs:complexType name="Preview">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
@@ -5616,20 +5616,20 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ProductionPath ** -->
-    <xs:element name="ProductionPath" substitutionGroup="ResourceType" type="ProductionPath"/>
+    <xs:element name="ProductionPath" substitutionGroup="SpecificResource" type="ProductionPath"/>
     <xs:complexType name="ProductionPath">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="ProductionPathID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for QualityControlParams ** -->
-    <xs:element name="QualityControlParams" substitutionGroup="ResourceType" type="QualityControlParams"/>
+    <xs:element name="QualityControlParams" substitutionGroup="SpecificResource" type="QualityControlParams"/>
     <xs:complexType name="QualityControlParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQualityParams"/>
                 </xs:sequence>
@@ -5640,10 +5640,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for QualityControlResult ** -->
-    <xs:element name="QualityControlResult" substitutionGroup="ResourceType" type="QualityControlResult"/>
+    <xs:element name="QualityControlResult" substitutionGroup="SpecificResource" type="QualityControlResult"/>
     <xs:complexType name="QualityControlResult">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BindingQualityMeasurement"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -5677,10 +5677,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for RegisterMark ** -->
-    <xs:element name="RegisterMark" substitutionGroup="ResourceType" type="RegisterMark"/>
+    <xs:element name="RegisterMark" substitutionGroup="SpecificResource" type="RegisterMark"/>
     <xs:complexType name="RegisterMark">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Center" type="XYPair" use="optional"/>
                 <xs:attribute name="MarkType" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="MarkUsage" use="optional">
@@ -5739,10 +5739,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for RunList ** -->
-    <xs:element name="RunList" substitutionGroup="ResourceType" type="RunList"/>
+    <xs:element name="RunList" substitutionGroup="SpecificResource" type="RunList"/>
     <xs:complexType name="RunList">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ByteMap"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -5835,10 +5835,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for SeparationControlParams ** -->
-    <xs:element name="SeparationControlParams" substitutionGroup="ResourceType" type="SeparationControlParams"/>
+    <xs:element name="SeparationControlParams" substitutionGroup="SpecificResource" type="SeparationControlParams"/>
     <xs:complexType name="SeparationControlParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="AutomatedOverPrintParams"/>
                 </xs:sequence>
@@ -5847,10 +5847,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ShapeDef ** -->
-    <xs:element name="ShapeDef" substitutionGroup="ResourceType" type="ShapeDef"/>
+    <xs:element name="ShapeDef" substitutionGroup="SpecificResource" type="ShapeDef"/>
     <xs:complexType name="ShapeDef">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Shape"/>
@@ -5885,10 +5885,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ShapeDefProductionParams ** -->
-    <xs:element name="ShapeDefProductionParams" substitutionGroup="ResourceType" type="ShapeDefProductionParams"/>
+    <xs:element name="ShapeDefProductionParams" substitutionGroup="SpecificResource" type="ShapeDefProductionParams"/>
     <xs:complexType name="ShapeDefProductionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ObjectModel"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="ShapeTemplate"/>
@@ -5919,10 +5919,10 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="SheetOptimizingParams" substitutionGroup="ResourceType" type="SheetOptimizingParams"/>
+    <xs:element name="SheetOptimizingParams" substitutionGroup="SpecificResource" type="SheetOptimizingParams"/>
     <xs:complexType name="SheetOptimizingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="GangElement"/>
@@ -6168,10 +6168,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for Tile ** -->
-    <xs:element name="Tile" substitutionGroup="ResourceType" type="Tile"/>
+    <xs:element name="Tile" substitutionGroup="SpecificResource" type="Tile"/>
     <xs:complexType name="Tile">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkObject"/>
                 </xs:sequence>
@@ -6184,10 +6184,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for TransferCurve ** -->
-    <xs:element name="TransferCurve" substitutionGroup="ResourceType" type="TransferCurve"/>
+    <xs:element name="TransferCurve" substitutionGroup="SpecificResource" type="TransferCurve"/>
     <xs:complexType name="TransferCurve">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
                 <xs:attribute name="Curve" type="TransferFunction" use="required"/>
             </xs:extension>
@@ -6195,10 +6195,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for UsageCounter ** -->
-    <xs:element name="UsageCounter" substitutionGroup="ResourceType" type="UsageCounter"/>
+    <xs:element name="UsageCounter" substitutionGroup="SpecificResource" type="UsageCounter"/>
     <xs:complexType name="UsageCounter">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="CounterID" type="string" use="optional"/>
                 <xs:attribute name="CounterTypes" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Scope" use="required">
@@ -6215,10 +6215,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for BundlingParams ** -->
-    <xs:element name="BundlingParams" substitutionGroup="ResourceType" type="BundlingParams"/>
+    <xs:element name="BundlingParams" substitutionGroup="SpecificResource" type="BundlingParams"/>
     <xs:complexType name="BundlingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Copies" type="integer" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
             </xs:extension>
@@ -6331,10 +6331,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for FoldingParams ** -->
-    <xs:element name="FoldingParams" substitutionGroup="ResourceType" type="FoldingParams"/>
+    <xs:element name="FoldingParams" substitutionGroup="SpecificResource" type="FoldingParams"/>
     <xs:complexType name="FoldingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Fold"/>
                 </xs:sequence>
@@ -6421,10 +6421,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for HoleMakingParams ** -->
-    <xs:element name="HoleMakingParams" substitutionGroup="ResourceType" type="HoleMakingParams"/>
+    <xs:element name="HoleMakingParams" substitutionGroup="SpecificResource" type="HoleMakingParams"/>
     <xs:complexType name="HoleMakingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
                 </xs:sequence>
@@ -6478,10 +6478,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for SaddleStitchingParams ** -->
-    <xs:element name="SaddleStitchingParams" substitutionGroup="ResourceType" type="SaddleStitchingParams"/>
+    <xs:element name="SaddleStitchingParams" substitutionGroup="SpecificResource" type="SaddleStitchingParams"/>
     <xs:complexType name="SaddleStitchingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -6502,10 +6502,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for SideSewingParams ** -->
-    <xs:element name="SideSewingParams" substitutionGroup="ResourceType" type="SideSewingParams"/>
+    <xs:element name="SideSewingParams" substitutionGroup="SpecificResource" type="SideSewingParams"/>
     <xs:complexType name="SideSewingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType"/>
+            <xs:extension base="SpecificResource"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -6518,10 +6518,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for StitchingParams ** -->
-    <xs:element name="StitchingParams" substitutionGroup="ResourceType" type="StitchingParams"/>
+    <xs:element name="StitchingParams" substitutionGroup="SpecificResource" type="StitchingParams"/>
     <xs:complexType name="StitchingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
@@ -6584,10 +6584,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ThreadSewingParams ** -->
-    <xs:element name="ThreadSewingParams" substitutionGroup="ResourceType" type="ThreadSewingParams"/>
+    <xs:element name="ThreadSewingParams" substitutionGroup="SpecificResource" type="ThreadSewingParams"/>
     <xs:complexType name="ThreadSewingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
                 </xs:sequence>
@@ -6632,10 +6632,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for TrimmingParams ** -->
-    <xs:element name="TrimmingParams" substitutionGroup="ResourceType" type="TrimmingParams"/>
+    <xs:element name="TrimmingParams" substitutionGroup="SpecificResource" type="TrimmingParams"/>
     <xs:complexType name="TrimmingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Height" type="double" use="optional"/>
                 <xs:attribute name="TrimCover" use="optional">
                     <xs:simpleType>
@@ -6654,10 +6654,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for WebInlineFinishingParams ** -->
-    <xs:element name="WebInlineFinishingParams" substitutionGroup="ResourceType" type="WebInlineFinishingParams"/>
+    <xs:element name="WebInlineFinishingParams" substitutionGroup="SpecificResource" type="WebInlineFinishingParams"/>
     <xs:complexType name="WebInlineFinishingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="FolderProduction"/>
                 </xs:sequence>
@@ -6689,10 +6689,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ColorCorrectionParams ** -->
-    <xs:element name="ColorCorrectionParams" substitutionGroup="ResourceType" type="ColorCorrectionParams"/>
+    <xs:element name="ColorCorrectionParams" substitutionGroup="SpecificResource" type="ColorCorrectionParams"/>
     <xs:complexType name="ColorCorrectionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorCorrectionOp"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -6764,10 +6764,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ColorSpaceConversionParams ** -->
-    <xs:element name="ColorSpaceConversionParams" substitutionGroup="ResourceType" type="ColorSpaceConversionParams"/>
+    <xs:element name="ColorSpaceConversionParams" substitutionGroup="SpecificResource" type="ColorSpaceConversionParams"/>
     <xs:complexType name="ColorSpaceConversionParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorSpaceConversionOp"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -6785,10 +6785,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for Ink ** -->
-    <xs:element name="Ink" substitutionGroup="ResourceType" type="Ink"/>
+    <xs:element name="Ink" substitutionGroup="SpecificResource" type="Ink"/>
     <xs:complexType name="Ink">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
@@ -6800,10 +6800,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for InkZoneCalculationParams ** -->
-    <xs:element name="InkZoneCalculationParams" substitutionGroup="ResourceType" type="InkZoneCalculationParams"/>
+    <xs:element name="InkZoneCalculationParams" substitutionGroup="SpecificResource" type="InkZoneCalculationParams"/>
     <xs:complexType name="InkZoneCalculationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Device"/>
                 </xs:sequence>
@@ -6817,10 +6817,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for InkZoneProfile ** -->
-    <xs:element name="InkZoneProfile" substitutionGroup="ResourceType" type="InkZoneProfile"/>
+    <xs:element name="InkZoneProfile" substitutionGroup="SpecificResource" type="InkZoneProfile"/>
     <xs:complexType name="InkZoneProfile">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="ZoneWidth" type="double" use="optional"/>
                 <xs:attribute name="ZoneHeight" type="double" use="optional"/>
                 <xs:attribute name="ZoneSettingsX" type="string" use="optional"/>
@@ -6885,10 +6885,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for PreviewGenerationParams ** -->
-    <xs:element name="PreviewGenerationParams" substitutionGroup="ResourceType" type="PreviewGenerationParams"/>
+    <xs:element name="PreviewGenerationParams" substitutionGroup="SpecificResource" type="PreviewGenerationParams"/>
     <xs:complexType name="PreviewGenerationParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="AspectRatio" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -6956,10 +6956,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for RenderingParams ** -->
-    <xs:element name="RenderingParams" substitutionGroup="ResourceType" type="RenderingParams"/>
+    <xs:element name="RenderingParams" substitutionGroup="SpecificResource" type="RenderingParams"/>
     <xs:complexType name="RenderingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="AutomatedOverPrintParams"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ObjectResolution"/>
@@ -6983,10 +6983,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ScreeningParams ** -->
-    <xs:element name="ScreeningParams" substitutionGroup="ResourceType" type="ScreeningParams"/>
+    <xs:element name="ScreeningParams" substitutionGroup="SpecificResource" type="ScreeningParams"/>
     <xs:complexType name="ScreeningParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScreenSelector"/>
                 </xs:sequence>
@@ -6996,10 +6996,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for TrappingParams ** -->
-    <xs:element name="TrappingParams" substitutionGroup="ResourceType" type="TrappingParams"/>
+    <xs:element name="TrappingParams" substitutionGroup="SpecificResource" type="TrappingParams"/>
     <xs:complexType name="TrappingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorantZoneDetails"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ObjectResolution"/>
@@ -7039,10 +7039,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for PrintCondition ** -->
-    <xs:element name="PrintCondition" substitutionGroup="ResourceType" type="PrintCondition"/>
+    <xs:element name="PrintCondition" substitutionGroup="SpecificResource" type="PrintCondition"/>
     <xs:complexType name="PrintCondition">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Device"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
@@ -7054,10 +7054,10 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="WindingParams" substitutionGroup="ResourceType" type="WindingParams"/>
+    <xs:element name="WindingParams" substitutionGroup="SpecificResource" type="WindingParams"/>
     <xs:complexType name="WindingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:attribute name="Copies" type="integer" use="optional"/>
                 <xs:attribute name="Diameter" type="double" use="optional"/>
                 <xs:attribute name="Fixation" type="NMTOKEN" use="optional"/>
@@ -7066,10 +7066,10 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="RasterReadingParams" substitutionGroup="ResourceType" type="RasterReadingParams"/>
+    <xs:element name="RasterReadingParams" substitutionGroup="SpecificResource" type="RasterReadingParams"/>
     <xs:complexType name="RasterReadingParams">
         <xs:complexContent>
-            <xs:extension base="ResourceType">
+            <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FitPolicy"/>
                 </xs:sequence>

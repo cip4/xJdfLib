@@ -5,7 +5,7 @@ import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.cip4.lib.xjdf.schema.ResourceType;
+import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,14 +66,14 @@ public class Resources {
     /**
      * Add an Resource to the corresponding ResourceSet.
      *
-     * @param resourceType Resource to add
+     * @param specificResource Resource to add
      * @param part Partition to add the resource to
      * @param processUsage Process usage of the resource
      */
     public final void addResource(
-        @NotNull final ResourceType resourceType, @Nullable final Part part, @Nullable final String processUsage
+        @NotNull final SpecificResource specificResource, @Nullable final Part part, @Nullable final String processUsage
     ) {
-        addResource(createResource(resourceType, part), processUsage);
+        addResource(createResource(specificResource, part), processUsage);
     }
 
     /**
@@ -126,12 +126,12 @@ public class Resources {
      * @return Factory for creating xjdf nodes.
      */
     @NotNull
-    <V extends ResourceType> Resource createResource(
+    <V extends SpecificResource> Resource createResource(
         @NotNull final V resourceType, @Nullable final Part partition
     ) {
         Resource resource = getNodeFactory().createResource(resourceType, partition);
         if (null == resource.getID()) {
-            resource.setID(resource.getResourceType().getName().getLocalPart() + "_" + UUID.randomUUID());
+            resource.setID(resource.getSpecificResource().getName().getLocalPart() + "_" + UUID.randomUUID());
         }
         return resource;
     }
@@ -145,7 +145,7 @@ public class Resources {
      */
     @NotNull
     final String getResourceName(@NotNull final Resource resource) {
-        return resource.getResourceType().getName().getLocalPart();
+        return resource.getSpecificResource().getName().getLocalPart();
     }
 
     /**

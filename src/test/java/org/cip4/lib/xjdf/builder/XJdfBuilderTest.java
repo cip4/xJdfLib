@@ -7,7 +7,7 @@ import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.ResourceType;
+import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
@@ -255,7 +255,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String urlContent_1 = "http://www.example.org/w2p/Content_1.pdf";
         final String urlContent_2 = "http://www.example.org/w2p/Content_2.pdf";
 
-        List<ResourceType> runLists = new ArrayList<>();
+        List<SpecificResource> runLists = new ArrayList<>();
 
         runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover))));
         runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_1))));
@@ -317,10 +317,10 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         String processUsage_1 = "PROCESS_USAGE_1";
         String processUsage_2 = "PROCESS_USAGE_2";
 
-        List<ResourceType> runList_1 = new ArrayList<>();
+        List<SpecificResource> runList_1 = new ArrayList<>();
         runList_1.add(nf.createRunList(new URI(new java.net.URI(urlCover))));
 
-        List<ResourceType> runList_2 = new ArrayList<>();
+        List<SpecificResource> runList_2 = new ArrayList<>();
         runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_1))));
         runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_2))));
 

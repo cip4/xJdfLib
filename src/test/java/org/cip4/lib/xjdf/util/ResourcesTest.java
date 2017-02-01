@@ -5,7 +5,7 @@ import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.cip4.lib.xjdf.schema.ResourceType;
+import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -38,12 +38,12 @@ public class ResourcesTest {
     @Test
     public void createResource() throws Exception {
         Resources resources = new Resources(new ArrayList<ResourceSet>());
-        ResourceType resourceType = Mockito.mock(ResourceType.class);
+        SpecificResource specificResource = Mockito.mock(SpecificResource.class);
         Part part = Mockito.mock(Part.class);
-        Resource resource = resources.createResource(resourceType, part);
+        Resource resource = resources.createResource(specificResource, part);
         assertEquals(1, resource.getPart().size());
         assertSame(part, resource.getPart().get(0));
-        assertSame(resourceType, resource.getResourceType().getValue());
+        assertSame(specificResource, resource.getSpecificResource().getValue());
     }
 
     @Test
@@ -211,11 +211,11 @@ public class ResourcesTest {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
 
-        ResourceType resourceType = Mockito.mock(ResourceType.class);
+        SpecificResource specificResource = Mockito.mock(SpecificResource.class);
         Part part = Mockito.mock(Part.class);
         String processUsage = "Testing";
 
-        resources.addResource(resourceType, part, processUsage);
+        resources.addResource(specificResource, part, processUsage);
 
         assertEquals(1, resourceSets.size());
         ResourceSet resourceSet = resourceSets.get(0);
@@ -223,6 +223,6 @@ public class ResourcesTest {
         assertEquals(1, resourceSet.getResource().size());
         Resource resource = resourceSet.getResource().get(0);
         assertSame(part, resource.getPart().get(0));
-        assertSame(resourceType, resource.getResourceType().getValue());
+        assertSame(specificResource, resource.getSpecificResource().getValue());
     }
 }

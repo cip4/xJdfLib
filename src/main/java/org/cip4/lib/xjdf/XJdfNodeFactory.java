@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.Matrix;
 import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
@@ -20,38 +19,38 @@ public class XJdfNodeFactory extends ObjectFactory {
     /**
      * Create a new Resource node from ResourceType.
      *
-     * @param resourceType The ResourceType Node
+     * @param specificResource The ResourceType Node
      *
      * @return New Resource node from ResourceType node.
      */
-    public final Resource createResource(final ResourceType resourceType) {
+    public final Resource createResource(final SpecificResource specificResource) {
 
-        return createResource(resourceType, null);
+        return createResource(specificResource, null);
     }
 
     /**
      * Create a new Resource node from ResourceType and Part.
      *
-     * @param resourceType The ResourceType Node
+     * @param specificResource The ResourceType Node
      * @param part The Part Node
      *
      * @return New Resource node from ResourceType and Part node.
      */
-    public final Resource createResource(final ResourceType resourceType, final Part part) {
+    public final Resource createResource(final SpecificResource specificResource, final Part part) {
 
-        if (resourceType == null) {
+        if (specificResource == null) {
             return null;
         }
 
         // get resource name
-        String paramName = resourceType.getClass().getSimpleName();
+        String paramName = specificResource.getClass().getSimpleName();
 
         // create resource
         Resource resource = super.createResource();
 
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement obj = new JAXBElement(qname, resourceType.getClass(), null, resourceType);
-        resource.setResourceType(obj);
+        JAXBElement obj = new JAXBElement(qname, specificResource.getClass(), null, specificResource);
+        resource.setSpecificResource(obj);
 
         if (part != null) {
             resource.withPart(part);

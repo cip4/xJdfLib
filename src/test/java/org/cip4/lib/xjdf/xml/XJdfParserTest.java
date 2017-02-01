@@ -280,7 +280,7 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ResourceSet resourceSet = xjdf.getResourceSet().get(0);
-        Contact contact = (Contact) resourceSet.getResource().get(0).getContact().getResourceType().getValue();
+        Contact contact = (Contact) resourceSet.getResource().get(0).getContact().getSpecificResource().getValue();
         assertEquals("CONTACT_REF_1", resourceSet.getResource().get(0).getContact().getID());
         assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
     }
@@ -291,9 +291,9 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         ResourceSet resourceSet = xjdf.getResourceSet().get(6);
-        ApprovalDetails approvalDetails = (ApprovalDetails) resourceSet.getResource().get(0).getResourceType().getValue();
+        ApprovalDetails approvalDetails = (ApprovalDetails) resourceSet.getResource().get(0).getSpecificResource().getValue();
         ApprovalPerson approvalPerson = approvalDetails.getApprovalPerson();
-        Contact contact = (Contact) approvalPerson.getContact().getResourceType().getValue();
+        Contact contact = (Contact) approvalPerson.getContact().getSpecificResource().getValue();
 
         assertEquals("CONTACT_REF_1", approvalPerson.getContact().getID());
         assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());

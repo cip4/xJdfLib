@@ -12,10 +12,9 @@ import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.cip4.lib.xjdf.schema.ResourceType;
+import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.Resources;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 /**
  * Implementation of a XJdf builder class.
@@ -161,72 +160,72 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     /**
      * Append Resource node to xJdf Document.
      *
-     * @param resourceType Resource object to append.
+     * @param specificResource Resource object to append.
      */
-    public final void addResource(final ResourceType resourceType) {
-        addResource(resourceType, null, null);
+    public final void addResource(final SpecificResource specificResource) {
+        addResource(specificResource, null, null);
     }
 
     /**
      * Append Resource node to xJdf Document.
      *
-     * @param resourceType Resource object to append.
+     * @param specificResource Resource object to append.
      * @param processUsage ProcessUsage of resource.
      */
-    public final void addResource(final ResourceType resourceType, final String processUsage) {
-        addResource(resourceType, null, processUsage);
+    public final void addResource(final SpecificResource specificResource, final String processUsage) {
+        addResource(specificResource, null, processUsage);
     }
 
     /**
      * Append Resource list to xJdf Document.
      *
-     * @param resourceTypes Resource objects to append.
+     * @param specificResources Resource objects to append.
      */
-    public final void addResource(final List<ResourceType> resourceTypes) {
-        addResource(resourceTypes, null);
+    public final void addResource(final List<SpecificResource> specificResources) {
+        addResource(specificResources, null);
     }
 
     /**
      * Append Resource List to xJdf Document.
      *
-     * @param resourceTypes Resource objects to append.
+     * @param specificResources Resource objects to append.
      * @param processUsage ProcessUsage of resource.
      */
-    public final void addResource(final List<ResourceType> resourceTypes, final String processUsage) {
-        for (ResourceType resourceType : resourceTypes) {
-            addResource(resourceType, null, processUsage);
+    public final void addResource(final List<SpecificResource> specificResources, final String processUsage) {
+        for (SpecificResource specificResource : specificResources) {
+            addResource(specificResource, null, processUsage);
         }
     }
 
     /**
      * Append Resource node to xJdf Document.
      *
-     * @param resourceType Resource object to append.
+     * @param specificResource Resource object to append.
      * @param part Partitioning definitions.
      *
      * @return Resource that was added.
      */
-    public final Resource addResource(final ResourceType resourceType, final Part part) {
-        return addResource(resourceType, part, null);
+    public final Resource addResource(final SpecificResource specificResource, final Part part) {
+        return addResource(specificResource, part, null);
     }
 
     /**
      * Append Resource node to xJdf Document.
      *
-     * @param resourceType Resource object to append.
+     * @param specificResource Resource object to append.
      * @param part Partitioning definitions.
      * @param processUsage ProcessUsage of resource.
      *
      * @return Resource that was added.
      */
-    public final Resource addResource(final ResourceType resourceType, final Part part, final String processUsage) {
-        if (resourceType == null) {
+    public final Resource addResource(final SpecificResource specificResource, final Part part, final String processUsage) {
+        if (specificResource == null) {
             throw new IllegalArgumentException("Resource may not be null.");
         }
 
-        Resource resource = xJdfNodeFactory.createResource(resourceType, part);
+        Resource resource = xJdfNodeFactory.createResource(specificResource, part);
 
-        resource.setID(resource.getResourceType().getName().getLocalPart() + "_" + UUID.randomUUID().toString());
+        resource.setID(resource.getSpecificResource().getName().getLocalPart() + "_" + UUID.randomUUID().toString());
 
         addResource(resource, processUsage);
         return resource;
