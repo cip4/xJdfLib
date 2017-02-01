@@ -480,7 +480,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumISOPaperSubstrate">
+    <xs:simpleType name="ISOPaperSubstrate">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="PS1"/>
             <xs:enumeration value="PS2"/>
@@ -3377,14 +3377,14 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                 </xs:sequence>
                 <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="BackISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="Brand" type="string" use="optional"/>
                 <xs:attribute name="BuyerSupplied" type="boolean" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
-                <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
-                <xs:attribute name="ISOPaperSubstrateBack" type="EnumISOPaperSubstrate" use="optional"/>
+                <xs:attribute name="ISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
@@ -5107,8 +5107,7 @@
                 <xs:attribute name="BackCoatingDetail" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
                 <xs:attribute name="BackGlossValue" type="double" use="optional"/>
-                <xs:attribute name="BackGrade" type="integer" use="optional"/>
-                <xs:attribute name="BackISOPaperSubstrate" type="integer" use="optional"/>
+                <xs:attribute name="BackISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="Brightness" type="double" use="optional"/>
                 <xs:attribute name="CIETint" type="double" use="optional"/>
                 <xs:attribute name="CIEWhiteness" type="double" use="optional"/>
@@ -5178,7 +5177,7 @@
                 </xs:attribute>
                 <xs:attribute name="InnerCoreDiameter" type="double" use="optional"/>
                 <xs:attribute name="InsideLoss" type="double" use="optional"/>
-                <xs:attribute name="ISOPaperSubstrate" type="EnumISOPaperSubstrate" use="optional"/>
+                <xs:attribute name="ISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="LabColorValue" type="LabColor" use="optional"/>
                 <xs:attribute name="MediaColorName" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
