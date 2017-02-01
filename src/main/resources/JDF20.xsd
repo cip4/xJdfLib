@@ -1914,18 +1914,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DeviceMark ** -->
-    <xs:element name="DeviceMark">
-        <xs:complexType>
-            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="Font" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="FontSize" type="double" use="optional"/>
-            <xs:attribute name="HorizontalFitPolicy" type="EnumFitPolicy" use="optional"/>
-            <xs:attribute name="VerticalFitPolicy" type="EnumFitPolicy" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for EdgeGluing ** -->
     <xs:element name="EdgeGluing">
         <xs:complexType>
@@ -2368,17 +2356,11 @@
     <xs:element name="MarkObject">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="CIELABMeasuringField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="CIELABMeasuringField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="DensityMeasuringField"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="DeviceMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="DynamicField"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkActivation"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
             </xs:sequence>
@@ -2410,8 +2392,8 @@
 
     <xs:element name="MarkColor">
         <xs:complexType>
-            <xs:attribute name="Name" type="string" use="optional"/>
-            <xs:attribute name="Tint" type="double" use="optional"/>
+            <xs:attribute name="Name" type="string" use="required"/>
+            <xs:attribute name="Tint" type="double" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2725,8 +2707,8 @@
     <!-- ** Complex type definition for RefAnchor ** -->
     <xs:element name="RefAnchor">
         <xs:complexType>
-            <xs:attribute name="Anchor" type="Anchor" use="optional"/>
-            <xs:attribute name="AnchorType" use="optional">
+            <xs:attribute name="Anchor" type="Anchor" use="required"/>
+            <xs:attribute name="AnchorType" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Parent"/>
@@ -6039,9 +6021,10 @@
     <xs:element name="StripMark">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkColor"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
+                <xs:element maxOccurs="1" minOccurs="1" ref="RefAnchor"/>
             </xs:sequence>
             <xs:attribute name="AbsoluteHeight" type="double" use="optional"/>
             <xs:attribute name="AbsoluteWidth" type="double" use="optional"/>
@@ -6050,31 +6033,7 @@
             <xs:attribute name="FontSize" type="double" use="optional"/>
             <xs:attribute name="HorizontalFitPolicy" type="EnumFitPolicy" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="MarkContext" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="BinderySignature"/>
-                        <xs:enumeration value="Cell"/>
-                        <xs:enumeration value="CellPair"/>
-                        <xs:enumeration value="Sheet"/>
-                        <xs:enumeration value="Tab"/>
-                        <xs:enumeration value="Tile"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="MarkName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="MarkSide" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="BinderySignature"/>
-                        <xs:enumeration value="Cell"/>
-                        <xs:enumeration value="CellPair"/>
-                        <xs:enumeration value="Sheet"/>
-                        <xs:enumeration value="Tab"/>
-                        <xs:enumeration value="Tile"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
             <xs:attribute name="Orientation" type="Orientation" use="optional"/>
             <xs:attribute name="RelativeHeight" type="double" use="optional"/>
