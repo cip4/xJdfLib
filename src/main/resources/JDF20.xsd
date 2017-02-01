@@ -934,12 +934,12 @@
             <xs:attribute name="CommentURL" type="URL" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="ICSVersions" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProjectID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Types" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Types" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2132,7 +2132,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
             </xs:sequence>
-            <xs:attribute name="BitDepth" type="integer" use="optional"/>
+            <xs:attribute name="BitDepth" type="integer" use="required"/>
             <xs:attribute name="IconUsage" use="optional">
                 <xs:simpleType>
                     <xs:list>
@@ -2151,7 +2151,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Size" type="XYPair" use="optional"/>
+            <xs:attribute name="Size" type="XYPair" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -3198,7 +3198,7 @@
                 </xs:sequence>
                 <xs:attribute name="BinderBrand" type="string" use="optional"/>
                 <xs:attribute name="BinderMaterial" type="EnumBindingMaterial" use="optional"/>
-                <xs:attribute name="BindingType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="BindingType" type="NMTOKEN" use="required"/>
                 <xs:attribute name="CoverMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="HoleType" type="string" use="optional"/>
                 <xs:attribute name="Length" type="double" use="optional"/>
@@ -3618,7 +3618,7 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="Comment"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
-                <xs:attribute name="ApprovalState" use="optional">
+                <xs:attribute name="ApprovalState" use="required">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
                             <xs:enumeration value="Approved"/>
@@ -4465,8 +4465,8 @@
         <xs:complexContent>
             <xs:extension base="ResourceType">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ConvertingConfig"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="RepeatDesc"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ConvertingConfig"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="RepeatDesc"/>
                 </xs:sequence>
                 <xs:attribute name="Estimate" type="boolean" use="optional"/>
                 <xs:attribute name="Position" type="Anchor" use="optional"/>
@@ -5030,7 +5030,7 @@
             <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
             <xs:attribute name="CompensationCTMFormat" type="string" use="optional"/>
             <xs:attribute name="CompensationCTMTemplate" type="string" use="optional"/>
-            <xs:attribute name="CTM" type="matrix" use="optional"/>
+            <xs:attribute name="CTM" type="matrix" use="required"/>
             <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
             <xs:attribute name="LogicalStackOrd" type="integer" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
@@ -5277,8 +5277,8 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Expr"/>
             </xs:sequence>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
-            <xs:attribute name="ValueFormat" type="string" use="optional"/>
-            <xs:attribute name="ValueTemplate" type="string" use="optional"/>
+            <xs:attribute name="ValueFormat" type="string" use="required"/>
+            <xs:attribute name="ValueTemplate" type="string" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -6288,7 +6288,7 @@
     <xs:element name="EndSheet">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Glue"/>
+                <xs:element maxOccurs="1" minOccurs="1" ref="Glue"/>
             </xs:sequence>
             <xs:attribute name="Side" type="EnumSurface" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -6383,8 +6383,8 @@
     <!-- ** Complex type definition for HolePatter ** -->
     <xs:element name="HolePattern">
         <xs:complexType>
-            <xs:attribute name="Center" type="XYPair" use="optional"/>
-            <xs:attribute name="CenterReference" use="optional">
+            <xs:attribute name="Center" type="XYPair" use="required"/>
+            <xs:attribute name="CenterReference" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="TrailingEdge"/>
@@ -6392,11 +6392,11 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="Extent" type="XYPair" use="optional"/>
+            <xs:attribute name="Extent" type="XYPair" use="required"/>
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
             <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Pitch" type="XYPair" use="optional"/>
-            <xs:attribute name="Shape" use="optional">
+            <xs:attribute name="Shape" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Elliptic"/>
