@@ -4972,7 +4972,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PlacedObject"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Position"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="SheetActivation"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="SignatureCell"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="StripMark"/>
                 </xs:sequence>
                 <xs:attribute name="Automated" type="boolean" use="optional"/>
