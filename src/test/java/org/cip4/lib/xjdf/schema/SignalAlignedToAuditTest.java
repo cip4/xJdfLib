@@ -34,6 +34,7 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
+    @Ignore("XJDF-1069")
     public void signalResourceAndAuditResourceAreAligned() throws Exception {
         Collection<Node> signalResourceProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalResource")
@@ -45,6 +46,7 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
+    @Ignore("XJDF-1069")
     public void signalStatusAndAuditStatusAreAligned() throws Exception {
         Collection<Node> signalResourceProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalStatus")
