@@ -419,9 +419,9 @@
 
     <xs:simpleType name="SheetLay">
         <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Center"/>
             <xs:enumeration value="Left"/>
             <xs:enumeration value="Right"/>
-            <xs:enumeration value="Center"/>
         </xs:restriction>
     </xs:simpleType>
 
