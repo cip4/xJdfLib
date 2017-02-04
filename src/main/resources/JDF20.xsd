@@ -1341,6 +1341,7 @@
     <xs:element name="QueueFilter">
         <xs:complexType>
             <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangSource"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
             </xs:sequence>
             <xs:attribute name="FirstEntry" type="NMTOKEN" use="optional"/>
@@ -1349,6 +1350,8 @@
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LastEntry" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MaxEntries" type="integer" use="optional"/>
+            <xs:attribute name="MaxPriority" type="integer" use="optional"/>
+            <xs:attribute name="MinPriority" type="integer" use="optional"/>
             <xs:attribute name="NewerThan" type="dateTime" use="optional"/>
             <xs:attribute name="OlderThan" type="dateTime" use="optional"/>
             <xs:attribute name="QueueEntryDetails" use="optional">
@@ -1363,20 +1366,7 @@
             <xs:attribute name="QueueEntryIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="StatusList" use="optional">
                 <xs:simpleType>
-                    <xs:list>
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:enumeration value="Running"/>
-                                <xs:enumeration value="Waiting"/>
-                                <xs:enumeration value="Held"/>
-                                <xs:enumeration value="Removed"/>
-                                <xs:enumeration value="Suspended"/>
-                                <xs:enumeration value="PendingReturn"/>
-                                <xs:enumeration value="Completed"/>
-                                <xs:enumeration value="Aborted"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:list>
+                    <xs:list itemType="NodeStatus"/>
                 </xs:simpleType>
             </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
