@@ -919,6 +919,7 @@
             <xs:attribute name="ProjectID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RelatedJobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="RelatedProjectID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Types" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
