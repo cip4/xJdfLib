@@ -2440,6 +2440,8 @@
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
             </xs:sequence>
+            <xs:attribute name="MaxDoc" type="integer" use="optional"/>
+            <xs:attribute name="MaxSet" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4184,9 +4186,7 @@
                 <xs:element maxOccurs="1" minOccurs="0" ref="PageActivation"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="PageCondition"/>
             </xs:sequence>
-            <xs:attribute name="DocOrd" type="integer" use="optional"/>
             <xs:attribute name="ID" type="ID" use="optional"/>
-            <xs:attribute name="SetOrd" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
