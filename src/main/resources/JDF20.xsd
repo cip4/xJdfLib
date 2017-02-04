@@ -4058,24 +4058,11 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="Bundle"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
                 <xs:attribute name="Columns" type="integer" use="optional"/>
-                <xs:attribute name="ComponentType" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:string">
-                            <xs:enumeration value="Block"/>
-                            <xs:enumeration value="Other"/>
-                            <xs:enumeration value="Ribbon"/>
-                            <xs:enumeration value="Sheet"/>
-                            <xs:enumeration value="Web"/>
-                            <xs:enumeration value="Proof"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="Dimensions" type="shape" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="MaxHeat" type="double" use="optional"/>
@@ -4085,7 +4072,6 @@
                 <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="ReaderPageCount" type="integer" use="optional"/>
-                <xs:attribute name="SheetPart" type="rectangle" use="optional"/>
                 <xs:attribute name="SpineThickness" type="double" use="optional"/>
                 <xs:attribute name="SurfaceCount" type="integer" use="optional"/>
                 <xs:attribute name="WindingResult" type="integer" use="optional"/>

@@ -805,9 +805,6 @@
 
 
 
-    <xjb:bindings node="//xs:complexType[@name='Component']//xs:attribute[@name='ComponentType']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="ComponentType"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='HoleType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="HoleType"/>
     </xjb:bindings>
