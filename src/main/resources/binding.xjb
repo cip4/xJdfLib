@@ -825,6 +825,9 @@
     <xjb:bindings node="//xs:complexType[@name='Preview']//xs:attribute[@name='Compensation']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Compensation"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='MappingSelection']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MappingSelection"/>
+    </xjb:bindings>
 </xjb:bindings>
 
 	

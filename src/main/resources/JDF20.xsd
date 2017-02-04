@@ -377,14 +377,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumColorMapping">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="UsePDLValues"/>
-            <xs:enumeration value="UseLocalPrinterValues"/>
-            <xs:enumeration value="UseProcessColorValues"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumDeviceAxis">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
@@ -1929,7 +1921,7 @@
             <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="ShapeName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Separation" type="string" use="optional"/>
+            <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ToolName" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -3946,14 +3938,11 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="DeviceNColor"/>
-                    <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="ActualColorName" type="string" use="optional"/>
                 <xs:attribute name="CMYK" type="CMYKColor" use="optional"/>
                 <xs:attribute name="ColorBook" type="string" use="optional"/>
                 <xs:attribute name="ColorBookEntry" type="string" use="optional"/>
-                <xs:attribute name="ColorBookPrefix" type="string" use="optional"/>
-                <xs:attribute name="ColorBookSuffix" type="string" use="optional"/>
                 <xs:attribute name="ColorDetails" type="string" use="optional"/>
                 <xs:attribute name="ColorName" type="NamedColor" use="optional"/>
                 <xs:attribute name="ColorType" use="optional">
@@ -3972,8 +3961,6 @@
                 <xs:attribute name="Density" type="double" use="optional"/>
                 <xs:attribute name="Gray" type="double" use="optional"/>
                 <xs:attribute name="Lab" type="LabColor" use="optional"/>
-                <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NeutralDensity" type="double" use="optional"/>
                 <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="RawName" type="hexBinary" use="optional"/>
@@ -3998,14 +3985,12 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorantAlias"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="DeviceNSpace"/>
                 </xs:sequence>
                 <xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="ForceSeparations" type="boolean" use="optional"/>
                 <xs:attribute name="InternalColorModel" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -4015,7 +4000,15 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="MappingSelection" type="EnumColorMapping" use="optional"/>
+                <xs:attribute name="MappingSelection" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="UsePDLValues"/>
+                            <xs:enumeration value="UseLocalPrinterValues"/>
+                            <xs:enumeration value="UseProcessColorValues"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="ProcessColorModel" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -4344,7 +4337,7 @@
             <xs:attribute name="DotGain" type="double" use="required"/>
             <xs:attribute name="Percentage" type="double" use="required"/>
             <xs:attribute name="Screen" type="string" use="required"/>
-            <xs:attribute name="Separation" type="string" use="required"/>
+            <xs:attribute name="Separation" type="NMTOKEN" use="required"/>
             <xs:attribute name="Setup" type="string" use="optional"/>
             <xs:attribute name="ToleranceBlack" type="XYPair" use="required"/>
             <xs:attribute name="ToleranceCyan" type="XYPair" use="required"/>
@@ -5774,7 +5767,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="Separation" type="string" use="optional"/>
+            <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
             <xs:attribute name="SourceFrequencyMax" type="double" use="optional"/>
             <xs:attribute name="SourceFrequencyMin" type="double" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
