@@ -4549,8 +4549,7 @@
     <xs:element name="Expr">
         <xs:complexType>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
-            <xs:attribute name="Path" type="XPath" use="optional"/>
-            <xs:attribute name="Value" type="string" use="optional"/>
+            <xs:attribute name="Path" type="XPath" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
