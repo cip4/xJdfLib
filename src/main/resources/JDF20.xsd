@@ -2243,7 +2243,7 @@
     <xs:element name="JobField">
         <xs:complexType>
             <xs:attribute name="JobFormat" type="string" use="optional"/>
-            <xs:attribute name="JobTemplate" type="string" use="optional"/>
+            <xs:attribute name="JobTemplate" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4647,7 +4647,7 @@
             <xs:attribute name="Encoding" type="NMTOKEN" use="optional"/>
             <xs:attribute name="FileFormat" type="string" use="optional"/>
             <xs:attribute name="FileSize" type="integer" use="optional"/>
-            <xs:attribute name="FileTemplate" type="string" use="optional"/>
+            <xs:attribute name="FileTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="MimeType" type="string" use="optional"/>
             <xs:attribute name="MimeTypeVersion" type="string" use="optional"/>
             <xs:attribute name="OverwritePolicy" use="optional">
@@ -4776,7 +4776,7 @@
             <xs:attribute name="PurposeDetails" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Value" type="string" use="optional"/>
             <xs:attribute name="ValueFormat" type="string" use="optional"/>
-            <xs:attribute name="ValueTemplate" type="string" use="optional"/>
+            <xs:attribute name="ValueTemplate" type="NMTOKENS" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -5192,7 +5192,7 @@
             </xs:sequence>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="ValueFormat" type="string" use="required"/>
-            <xs:attribute name="ValueTemplate" type="string" use="required"/>
+            <xs:attribute name="ValueTemplate" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
