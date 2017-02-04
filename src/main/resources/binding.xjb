@@ -340,6 +340,24 @@
         </xjb:property>
     </xjb:bindings>
 
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.1']">
+        <xjb:typesafeEnumMember name="V1_1"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.2']">
+        <xjb:typesafeEnumMember name="V1_2"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.3']">
+        <xjb:typesafeEnumMember name="V1_3"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.4']">
+        <xjb:typesafeEnumMember name="V1_4"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.5']">
+        <xjb:typesafeEnumMember name="V1_5"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.6']">
+        <xjb:typesafeEnumMember name="V1_6"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.0']">
         <xjb:typesafeEnumMember name="V2_0"/>
     </xjb:bindings>
