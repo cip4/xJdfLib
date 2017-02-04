@@ -1454,7 +1454,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="ResourceName" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="Scope" type="Scope" use="optional"/>
+            <xs:attribute name="Scope" type="Scope" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
