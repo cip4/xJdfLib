@@ -1264,11 +1264,11 @@
     <xs:element name="PipeParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="AmountPool"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="MISDetails"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ResourceSet"/>
             </xs:sequence>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
             <xs:attribute name="Operation" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -1280,8 +1280,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="PipeID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="Status" type="NodeStatus" use="optional"/>
-            <xs:attribute name="UpdatedStatus" type="NodeStatus" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
