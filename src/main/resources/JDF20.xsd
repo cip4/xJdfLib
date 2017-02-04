@@ -2258,9 +2258,7 @@
     <xs:complexType name="LaminatingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:attribute name="AdhesiveType" type="string" use="optional"/>
                 <xs:attribute name="GapList" type="string" use="optional"/>
-                <xs:attribute name="HardenerType" type="string" use="optional"/>
                 <xs:attribute name="LaminatingBox" type="rectangle" use="optional"/>
                 <xs:attribute name="LaminatingMethod" use="optional">
                     <xs:simpleType>
