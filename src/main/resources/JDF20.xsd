@@ -1519,6 +1519,7 @@
                     <xs:list itemType="EnumChannelMode"/>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:attribute name="Languages" type="languages" use="optional"/>
             <xs:attribute name="RepeatTime" type="double" use="optional"/>
             <xs:attribute name="RetryPolicy" use="optional">
                 <xs:simpleType>
