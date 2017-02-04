@@ -47,9 +47,9 @@ public class XjdfValidator implements Validator<XJDF> {
         if (null != xjdf.getProductList()) {
             for (Product product : xjdf.getProductList().getProduct()) {
                 for (Intent intent : product.getIntent()) {
-                    if (intent.getIntentType().getValue() instanceof FoldingIntent) {
+                    if (intent.getProductIntent().getValue() instanceof FoldingIntent) {
                         result.append(
-                            foldingIntentValidator.validate((FoldingIntent) intent.getIntentType().getValue())
+                            foldingIntentValidator.validate((FoldingIntent) intent.getProductIntent().getValue())
                         );
                     }
                 }

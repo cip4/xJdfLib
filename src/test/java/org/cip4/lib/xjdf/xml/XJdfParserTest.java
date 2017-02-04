@@ -240,7 +240,7 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct = xjdf.getProductList().getProduct().get(6);
-        final BindingIntent bindingIntent = (BindingIntent) mainProduct.getIntent().get(2).getIntentType().getValue();
+        final BindingIntent bindingIntent = (BindingIntent) mainProduct.getIntent().get(2).getProductIntent().getValue();
         assertEquals(0, bindingIntent.getChildren().size());
     }
 
@@ -253,7 +253,7 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         final Product mainProduct1 = xjdf.getProductList().getProduct().get(3);
-        final BindingIntent bindingIntent1 = (BindingIntent) mainProduct1.getIntent().get(2).getIntentType().getValue();
+        final BindingIntent bindingIntent1 = (BindingIntent) mainProduct1.getIntent().get(2).getProductIntent().getValue();
         assertEquals(2, bindingIntent1.getChildren().size());
         final Product childProduct11 = bindingIntent1.getChildren().get(0);
         assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
@@ -263,14 +263,14 @@ public class XJdfParserTest {
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
-        final BindingIntent bindingIntent2 = (BindingIntent) mainProduct2.getIntent().get(2).getIntentType().getValue();
+        final BindingIntent bindingIntent2 = (BindingIntent) mainProduct2.getIntent().get(2).getProductIntent().getValue();
         assertEquals(1, bindingIntent2.getChildren().size());
         final Product childProduct21 = bindingIntent2.getChildren().get(0);
         assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
-        final BindingIntent bindingIntent3 = (BindingIntent) mainProduct3.getIntent().get(2).getIntentType().getValue();
+        final BindingIntent bindingIntent3 = (BindingIntent) mainProduct3.getIntent().get(2).getProductIntent().getValue();
         assertEquals(0, bindingIntent3.getChildren().size());
     }
 

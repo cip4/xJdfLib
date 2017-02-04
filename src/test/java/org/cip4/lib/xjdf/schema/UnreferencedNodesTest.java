@@ -47,7 +47,7 @@ public class UnreferencedNodesTest {
         NodeList elements = (NodeList) xPath.evaluate(
             "/xs:schema/xs:element[not(@substitutionGroup='ResourceType') "
                 + "and not(@substitutionGroup='Message') "
-                + "and not(@substitutionGroup='IntentType')]",
+                + "and not(@substitutionGroup='ProductIntent')]",
             XJDF_SCHEMA,
             XPathConstants.NODESET
         );

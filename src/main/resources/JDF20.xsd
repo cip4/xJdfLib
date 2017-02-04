@@ -749,7 +749,7 @@
     <xs:element name="Intent">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="IntentType"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="ProductIntent"/>
                 <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
             </xs:sequence>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
@@ -758,8 +758,8 @@
     </xs:element>
 
     <!--** abstract type for substitution only ** -->
-    <xs:element abstract="true" name="IntentType" type="IntentType"/>
-    <xs:complexType abstract="true" name="IntentType">
+    <xs:element abstract="true" name="ProductIntent" type="ProductIntent"/>
+    <xs:complexType abstract="true" name="ProductIntent">
         <xs:sequence>
             <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
         </xs:sequence>
@@ -3006,10 +3006,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for BindingIntent ** -->
-    <xs:element name="BindingIntent" substitutionGroup="IntentType" type="BindingIntent"/>
+    <xs:element name="BindingIntent" substitutionGroup="ProductIntent" type="BindingIntent"/>
     <xs:complexType name="BindingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="AdhesiveNote"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="EdgeGluing"/>
@@ -3130,10 +3130,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ColorIntent ** -->
-    <xs:element name="ColorIntent" substitutionGroup="IntentType" type="ColorIntent"/>
+    <xs:element name="ColorIntent" substitutionGroup="ProductIntent" type="ColorIntent"/>
     <xs:complexType name="ColorIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="2" minOccurs="0" ref="SurfaceColor"/>
                 </xs:sequence>
@@ -3142,10 +3142,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ProductionIntent ** -->
-    <xs:element name="ProductionIntent" substitutionGroup="IntentType" type="ProductionIntent"/>
+    <xs:element name="ProductionIntent" substitutionGroup="ProductIntent" type="ProductionIntent"/>
     <xs:complexType name="ProductionIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:attribute name="PrintPreference" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3162,10 +3162,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for EmbossingIntent ** -->
-    <xs:element name="EmbossingIntent" substitutionGroup="IntentType" type="EmbossingIntent"/>
+    <xs:element name="EmbossingIntent" substitutionGroup="ProductIntent" type="EmbossingIntent"/>
     <xs:complexType name="EmbossingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="EmbossingItem"/>
                 </xs:sequence>
@@ -3174,10 +3174,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for FoldingIntent ** -->
-    <xs:element name="FoldingIntent" substitutionGroup="IntentType" type="FoldingIntent"/>
+    <xs:element name="FoldingIntent" substitutionGroup="ProductIntent" type="FoldingIntent"/>
     <xs:complexType name="FoldingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Crease"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Fold"/>
@@ -3191,10 +3191,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for HoleMakingIntent ** -->
-    <xs:element name="HoleMakingIntent" substitutionGroup="IntentType" type="HoleMakingIntent"/>
+    <xs:element name="HoleMakingIntent" substitutionGroup="ProductIntent" type="HoleMakingIntent"/>
     <xs:complexType name="HoleMakingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
                 </xs:sequence>
@@ -3203,10 +3203,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for AssemblingIntent ** -->
-    <xs:element name="AssemblingIntent" substitutionGroup="IntentType" type="AssemblingIntent"/>
+    <xs:element name="AssemblingIntent" substitutionGroup="ProductIntent" type="AssemblingIntent"/>
     <xs:complexType name="AssemblingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="AssemblyItem"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="BindIn"/>
@@ -3263,18 +3263,18 @@
     </xs:element>
 
     <!-- ** Complex type definition for IntentResource ** -->
-    <xs:element name="IntentResource" substitutionGroup="IntentType" type="IntentResource"/>
+    <xs:element name="IntentResource" substitutionGroup="ProductIntent" type="IntentResource"/>
     <xs:complexType name="IntentResource">
         <xs:complexContent>
-            <xs:extension base="IntentType"/>
+            <xs:extension base="ProductIntent"/>
         </xs:complexContent>
     </xs:complexType>
 
     <!-- ** Complex type definition for LaminatingIntent ** -->
-    <xs:element name="LaminatingIntent" substitutionGroup="IntentType" type="LaminatingIntent"/>
+    <xs:element name="LaminatingIntent" substitutionGroup="ProductIntent" type="LaminatingIntent"/>
     <xs:complexType name="LaminatingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:attribute name="Surface" type="EnumSurface" use="optional"/>
                 <xs:attribute name="Temperature" use="optional">
                     <xs:simpleType>
@@ -3291,10 +3291,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for LayoutIntent ** -->
-    <xs:element name="LayoutIntent" substitutionGroup="IntentType" type="LayoutIntent"/>
+    <xs:element name="LayoutIntent" substitutionGroup="ProductIntent" type="LayoutIntent"/>
     <xs:complexType name="LayoutIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:attribute name="Bleed" type="double" use="optional"/>
                 <xs:attribute name="Dimensions" type="XYPair" use="optional"/>
                 <xs:attribute name="FinishedDimensions" type="shape" use="optional"/>
@@ -3308,10 +3308,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for MediaIntent ** -->
-    <xs:element name="MediaIntent" substitutionGroup="IntentType" type="MediaIntent"/>
+    <xs:element name="MediaIntent" substitutionGroup="ProductIntent" type="MediaIntent"/>
     <xs:complexType name="MediaIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                 </xs:sequence>
@@ -3350,10 +3350,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for VariableIntent ** -->
-    <xs:element name="VariableIntent" substitutionGroup="IntentType" type="VariableIntent"/>
+    <xs:element name="VariableIntent" substitutionGroup="ProductIntent" type="VariableIntent"/>
     <xs:complexType name="VariableIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:attribute name="Area" type="double" use="optional"/>
                 <xs:attribute name="AveragePages" type="integer" use="optional"/>
                 <xs:attribute name="ChildRefs" type="IDREFS" use="optional"/>
@@ -3386,10 +3386,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for ContentCheckIntent ** -->
-    <xs:element name="ContentCheckIntent" substitutionGroup="IntentType" type="ContentCheckIntent"/>
+    <xs:element name="ContentCheckIntent" substitutionGroup="ProductIntent" type="ContentCheckIntent"/>
     <xs:complexType name="ContentCheckIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="PreflightItem"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ProofItem"/>
@@ -3454,10 +3454,10 @@
     </xs:element>
 
     <!-- ** Complex type definition for ShapeCuttingIntent ** -->
-    <xs:element name="ShapeCuttingIntent" substitutionGroup="IntentType" type="ShapeCuttingIntent"/>
+    <xs:element name="ShapeCuttingIntent" substitutionGroup="ProductIntent" type="ShapeCuttingIntent"/>
     <xs:complexType name="ShapeCuttingIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType">
+            <xs:extension base="ProductIntent">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ShapeCut"/>
                 </xs:sequence>
@@ -3466,10 +3466,10 @@
     </xs:complexType>
 
     <!-- ** Complex type definition for SizeIntent ** -->
-    <xs:element name="SizeIntent" substitutionGroup="IntentType" type="SizeIntent"/>
+    <xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
     <xs:complexType name="SizeIntent">
         <xs:complexContent>
-            <xs:extension base="IntentType"/>
+            <xs:extension base="ProductIntent"/>
         </xs:complexContent>
     </xs:complexType>
 

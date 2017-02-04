@@ -2,7 +2,7 @@ package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
-import org.cip4.lib.xjdf.schema.IntentType;
+import org.cip4.lib.xjdf.schema.ProductIntent;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.w3c.dom.Node;
@@ -112,7 +112,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
      * Append Intent node to Product Definition.
      * @param intent Intent object to append to.
      */
-    public void addIntent(IntentType intent) {
+    public void addIntent(ProductIntent intent) {
 
         if (intent == null)
             return;
@@ -124,8 +124,8 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
         it.setName(intentName);
 
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
-        JAXBElement<IntentType> obj = new JAXBElement(qname, intent.getClass(), intent);
-        it.setIntentType(obj);
+        JAXBElement<ProductIntent> obj = new JAXBElement(qname, intent.getClass(), intent);
+        it.setProductIntent(obj);
 
         // append intent to product
         getProduct().getIntent().add(it);
