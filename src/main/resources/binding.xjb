@@ -192,11 +192,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='TransferFunctionControl']//xs:attribute[@name='TransferCurveRefs']">
-        <xjb:property name="transferCurves">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='DeviceRefs']">
         <xjb:property name="devices">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -632,9 +627,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='AdvancedParams']//xs:attribute[@name='TransferFunctionInfo']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="TransferFunctionInfo"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='TransferFunctionControl']//xs:attribute[@name='TransferFunctionSource']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="TransferFunctionSource"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='AdvancedParams']//xs:attribute[@name='UCRandBGInfo']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="UCRandBGInfo"/>

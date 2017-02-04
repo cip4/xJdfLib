@@ -2928,29 +2928,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for TransferFunctionControl ** -->
-    <xs:element name="TransferFunctionControl" substitutionGroup="SpecificResource" type="TransferFunctionControl"/>
-    <xs:complexType name="TransferFunctionControl">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="TransferCurveRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="TransferFunctionSource" use="required">
-                    <xs:simpleType>
-                        <xs:list>
-                            <xs:simpleType>
-                                <xs:restriction base="xs:NMTOKEN">
-                                    <xs:enumeration value="Custom"/>
-                                    <xs:enumeration value="Device"/>
-                                    <xs:enumeration value="Document"/>
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:list>
-                    </xs:simpleType>
-                </xs:attribute>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for VarnishingParams ** -->
     <xs:element name="VarnishingParams" substitutionGroup="SpecificResource" type="VarnishingParams"/>
     <xs:complexType name="VarnishingParams">
