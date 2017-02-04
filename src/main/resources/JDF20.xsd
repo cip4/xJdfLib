@@ -3400,7 +3400,7 @@
                 <xs:attribute name="MaxPages" type="integer" use="optional"/>
                 <xs:attribute name="MinPages" type="integer" use="optional"/>
                 <xs:attribute name="NumberOfCopies" type="integer" use="optional"/>
-                <xs:attribute name="VariableType" use="optional">
+                <xs:attribute name="VariableType" use="required">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
                             <xs:enumeration value="OneLine"/>
