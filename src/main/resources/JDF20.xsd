@@ -6918,7 +6918,19 @@
                 <xs:element maxOccurs="1" minOccurs="1" ref="QueueFilter"/>
             </xs:sequence>
             <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Operation" type="NMTOKEN" use="required"/>
+            <xs:attribute name="Operation" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="NMTOKEN">
+                        <xs:enumeration value="Abort"/>
+                        <xs:enumeration value="Complete"/>
+                        <xs:enumeration value="Hold"/>
+                        <xs:enumeration value="Move"/>
+                        <xs:enumeration value="Remove"/>
+                        <xs:enumeration value="Resume"/>
+                        <xs:enumeration value="Suspend"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Position" type="integer" use="optional"/>
             <xs:attribute name="PrevQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
