@@ -5697,7 +5697,7 @@
                 <xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
-                <xs:attribute name="Docs" type="RegExp" use="optional"/>
+                <xs:attribute name="Docs" type="IntegerList" use="optional"/>
                 <xs:attribute name="ElementType" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -5721,8 +5721,6 @@
                 <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
                 <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
                 <xs:attribute name="FinishedPages" type="integer" use="optional"/>
-                <xs:attribute name="FirstPage" type="integer" use="optional"/>
-                <xs:attribute name="IsPage" type="boolean" use="optional"/>
                 <xs:attribute name="LogicalPage" type="integer" use="optional"/>
                 <xs:attribute name="NPage" type="integer" use="optional"/>
                 <xs:attribute name="Pages" type="IntegerRange" use="optional"/>
@@ -5737,7 +5735,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="SkipPage" type="integer" use="optional"/>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceMediaBox" type="rectangle" use="optional"/>
