@@ -1950,14 +1950,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for Error ** -->
-    <xs:element name="Error">
-        <xs:complexType>
-            <xs:attribute name="ErrorID" type="string" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Event ** -->
     <xs:element name="Event">
         <xs:complexType>
@@ -2376,7 +2368,6 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Comment"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="Error"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="Event"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="Milestone"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
@@ -2385,7 +2376,6 @@
             <xs:attribute name="Class" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">
-                        <xs:enumeration value="Event"/>
                         <xs:enumeration value="Information"/>
                         <xs:enumeration value="Warning"/>
                         <xs:enumeration value="Error"/>
@@ -2396,17 +2386,7 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ModuleType" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Type" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Error"/>
-                        <xs:enumeration value="Event"/>
-                        <xs:enumeration value="Milestone"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>

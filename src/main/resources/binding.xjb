@@ -466,9 +466,6 @@
     <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Class']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Class"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Type']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Type"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Part']//xs:attribute[@name='PreviewType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PreviewType"/>
     </xjb:bindings>
