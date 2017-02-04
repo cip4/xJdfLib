@@ -699,12 +699,11 @@
 
     <xs:simpleType name="SourceObjects">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="All"/>
             <xs:enumeration value="ImagePhotographic"/>
             <xs:enumeration value="ImageScreenShot"/>
-            <xs:enumeration value="Text"/>
             <xs:enumeration value="LineArt"/>
             <xs:enumeration value="SmoothShades"/>
+            <xs:enumeration value="Text"/>
         </xs:restriction>
     </xs:simpleType>
 
