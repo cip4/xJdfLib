@@ -206,6 +206,18 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="PreviewType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Animation"/>
+            <xs:enumeration value="Identification"/>
+            <xs:enumeration value="SeparatedThumbNail"/>
+            <xs:enumeration value="Separation"/>
+            <xs:enumeration value="SeparationRaw"/>
+            <xs:enumeration value="Static3D"/>
+            <xs:enumeration value="ThumbNail"/>
+            <xs:enumeration value="Viewable"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="EnumUsage">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Input"/>
@@ -2466,20 +2478,7 @@
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PageNumber" type="IntegerRange" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PreviewType" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Animation"/>
-                        <xs:enumeration value="Identification"/>
-                        <xs:enumeration value="SeparatedThumbNail"/>
-                        <xs:enumeration value="Separation"/>
-                        <xs:enumeration value="SeparationRaw"/>
-                        <xs:enumeration value="Static3D"/>
-                        <xs:enumeration value="ThumbNail"/>
-                        <xs:enumeration value="Viewable"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="PreviewType" type="PreviewType" use="optional"/>
             <xs:attribute name="PrintCondition" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProductPart" type="NMTOKEN" use="optional"/>
             <xs:attribute name="QualityMeasurement" type="NMTOKEN" use="optional"/>
@@ -7145,24 +7144,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="QueueFilter"/>
             </xs:sequence>
-            <xs:attribute name="PreviewUsages" use="optional">
-                <xs:simpleType>
-                    <xs:list>
-                        <xs:simpleType>
-                            <xs:restriction base="xs:NMTOKEN">
-                                <xs:enumeration value="Animation"/>
-                                <xs:enumeration value="Identification"/>
-                                <xs:enumeration value="SeparatedThumbNail"/>
-                                <xs:enumeration value="Separation"/>
-                                <xs:enumeration value="SeparationRaw"/>
-                                <xs:enumeration value="Static3D"/>
-                                <xs:enumeration value="ThumbNail"/>
-                                <xs:enumeration value="Viewable"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:list>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="PreviewType" type="PreviewType" use="optional" />
             <xs:attribute name="UpdateGranularity" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">

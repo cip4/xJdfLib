@@ -466,9 +466,6 @@
     <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Class']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Class"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Part']//xs:attribute[@name='PreviewType']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="PreviewType"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='ImagableSide']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ImagableSide"/>
     </xjb:bindings>
@@ -600,9 +597,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='GrainDirection']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="GrainDirection"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='QueueStatusParams']//xs:attribute[@name='PreviewUsages']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="PreviewUsages"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GluingTechnique']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="GluingTechnique"/>
