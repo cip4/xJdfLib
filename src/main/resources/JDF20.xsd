@@ -6233,6 +6233,7 @@
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
             <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Pitch" type="XYPair" use="optional"/>
+            <xs:attribute name="Reinforcement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Shape" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
