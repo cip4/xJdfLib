@@ -5254,7 +5254,7 @@
     <!-- ** Complex type definition for OCGControl ** -->
     <xs:element name="OCGControl">
         <xs:complexType>
-            <xs:attribute name="IncludeOCG" type="boolean" use="optional"/>
+            <xs:attribute name="IncludeOCG" type="boolean" use="required"/>
             <xs:attribute name="OCGName" type="string" use="optional"/>
             <xs:attribute name="ProcStepsGroup" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ProcStepsType" type="NMTOKEN" use="optional"/>
