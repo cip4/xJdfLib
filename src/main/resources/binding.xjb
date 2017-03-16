@@ -802,6 +802,12 @@
     <xjb:bindings node="//xs:element[@name='ModifyQueueEntryParams']//xs:attribute[@name='Operation']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Operation"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResubmissionParams']//xs:attribute[@name='UpdateMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="UpdateMethod"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResourceCmdParams']//xs:attribute[@name='UpdateMethod']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="UpdateMethod"/>
+    </xjb:bindings>
 
 
 

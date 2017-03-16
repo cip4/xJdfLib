@@ -255,14 +255,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumUpdateMethod">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Complete"/>
-            <xs:enumeration value="Incremental"/>
-            <xs:enumeration value="Remove"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumGangPolicy">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Gang"/>
@@ -1384,7 +1376,17 @@
             </xs:sequence>
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ResourceName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="optional"/>
+            <xs:attribute name="UpdateMethod" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Complete"/>
+                        <xs:enumeration value="CompleteSet"/>
+                        <xs:enumeration value="Incremental"/>
+                        <xs:enumeration value="Remove"/>
+                        <xs:enumeration value="RemoveSet"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -1451,7 +1453,15 @@
     <xs:element name="ResubmissionParams">
         <xs:complexType>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="UpdateMethod" type="EnumUpdateMethod" use="required"/>
+            <xs:attribute name="UpdateMethod" use="required">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Complete"/>
+                        <xs:enumeration value="Incremental"/>
+                        <xs:enumeration value="Remove"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="URL" type="URL" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
