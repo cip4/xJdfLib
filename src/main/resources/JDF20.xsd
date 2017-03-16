@@ -1283,6 +1283,7 @@
     <xs:element name="QueueEntry">
         <xs:complexType>
             <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangSource"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
             </xs:sequence>
@@ -4354,9 +4355,8 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="FileSpec"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Location"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="Contact"/>
                 </xs:sequence>
                 <xs:attribute name="Capacity" type="integer" use="optional"/>
                 <xs:attribute name="MediaTypeDetails" type="string" use="optional"/>
@@ -5901,10 +5901,8 @@
     <!-- ** Complex type definition for Station ** -->
     <xs:element name="Station">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="ShapeDef"/>
-            </xs:sequence>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="ShpeDefRef" type="IDREF" use="optional"/>
             <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
