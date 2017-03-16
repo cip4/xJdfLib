@@ -4267,15 +4267,12 @@
             <xs:attribute name="Density" type="DoubleList" use="required"/>
             <xs:attribute name="Diameter" type="double" use="required"/>
             <xs:attribute name="DotGain" type="double" use="required"/>
-            <xs:attribute name="Percentage" type="double" use="required"/>
-            <xs:attribute name="Screen" type="string" use="required"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="required"/>
-            <xs:attribute name="Setup" type="string" use="optional"/>
-            <xs:attribute name="ToleranceBlack" type="XYPair" use="required"/>
-            <xs:attribute name="ToleranceCyan" type="XYPair" use="required"/>
-            <xs:attribute name="ToleranceDotGain" type="XYPair" use="required"/>
-            <xs:attribute name="ToleranceMagenta" type="XYPair" use="required"/>
-            <xs:attribute name="ToleranceYellow" type="XYPair" use="required"/>
+            <xs:attribute name="ToleranceBlack" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceCyan" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceDotGain" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceMagenta" type="XYPair" use="optional"/>
+            <xs:attribute name="ToleranceYellow" type="XYPair" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
