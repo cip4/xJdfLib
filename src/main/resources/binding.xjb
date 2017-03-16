@@ -66,6 +66,11 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Station']//xs:attribute[@name='ShapeDefRef']">
+        <xjb:property name="shapeDef">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.ShapeDef"/>
+        </xjb:property>
+    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ApprovalPerson']//xs:attribute[@name='ContactRef']">
         <xjb:property name="contact">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>

@@ -5898,7 +5898,7 @@
     <xs:element name="Station">
         <xs:complexType>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
-            <xs:attribute name="ShpeDefRef" type="IDREF" use="optional"/>
+            <xs:attribute name="ShapeDefRef" type="IDREF" use="optional"/>
             <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
