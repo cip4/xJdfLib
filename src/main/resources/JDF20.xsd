@@ -788,6 +788,7 @@
             <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Waste" type="double" use="required"/>
             <xs:attribute name="WasteDetails" type="NMTOKEN" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
 
@@ -1855,10 +1856,6 @@
                 <xs:attribute name="KnownLocalizations" type="languages" use="optional"/>
                 <xs:attribute name="Manufacturer" type="string" use="optional"/>
                 <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
-                <xs:attribute name="ModelDescription" type="string" use="optional"/>
-                <xs:attribute name="ModelName" type="string" use="optional"/>
-                <xs:attribute name="ModelNumber" type="string" use="optional"/>
-                <xs:attribute name="ModelURL" type="URL" use="optional"/>
                 <xs:attribute name="Packaging" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
@@ -1870,7 +1867,6 @@
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
                 <xs:attribute name="SecureXJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
-                <xs:attribute name="UPC" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="XJMFURL" type="URL" use="optional"/>
             </xs:extension>
@@ -2955,6 +2951,9 @@
     <!-- ** Complex type definition for Module ** -->
     <xs:element name="Module">
         <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
+            </xs:sequence>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
             <xs:attribute name="Manufacturer" type="string" use="optional"/>
             <xs:attribute name="ManufacturerURL" type="URL" use="optional"/>
