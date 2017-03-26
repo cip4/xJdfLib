@@ -321,14 +321,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumEmbossLevel">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="SingleLevel"/>
-            <xs:enumeration value="MultiLevel"/>
-            <xs:enumeration value="Sculpted"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Sides">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="OneSided"/>
@@ -1912,7 +1904,6 @@
             <xs:attribute name="Face" type="Face" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
-            <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="ToolRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -1929,7 +1920,6 @@
             <xs:attribute name="FoilColorDetails" type="string" use="optional"/>
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
-            <xs:attribute name="Level" type="EnumEmbossLevel" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
             <xs:attribute name="ShapeName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
