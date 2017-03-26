@@ -1373,10 +1373,8 @@
     <xs:element name="ResourceCmdParams">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="ResourceSet"/>
+                <xs:element maxOccurs="1" minOccurs="1" ref="ResourceSet"/>
             </xs:sequence>
-            <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ResourceName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="UpdateMethod" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -7188,7 +7186,7 @@
         <xs:complexContent>
             <xs:extension base="Command">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ResourceCmdParams"/>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="ResourceCmdParams"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -7199,7 +7197,7 @@
         <xs:complexContent>
             <xs:extension base="Query">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ResourceQuParams"/>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="ResourceQuParams"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
