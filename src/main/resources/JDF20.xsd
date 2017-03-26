@@ -1032,12 +1032,10 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="Contact"/>
                 <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
             </xs:sequence>
             <xs:attribute name="CounterUnit" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="HourCounter" type="duration" use="optional"/>
             <xs:attribute name="IdleStartTime" type="dateTime" use="optional"/>
             <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
