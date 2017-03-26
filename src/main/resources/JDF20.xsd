@@ -2657,7 +2657,7 @@
             <xs:complexContent>
                 <xs:extension base="Audit">
                     <xs:sequence>
-                        <xs:element maxOccurs="unbounded" minOccurs="0" ref="ResourceInfo"/>
+                        <xs:element maxOccurs="1" minOccurs="1" ref="ResourceInfo"/>
                     </xs:sequence>
                     <xs:attribute name="PreviousAudit" type="NMTOKEN" use="optional"/>
                 </xs:extension>
@@ -7307,7 +7307,7 @@
         <xs:complexContent>
             <xs:extension base="Response">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="DeviceInfo"/>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="DeviceInfo"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -7318,7 +7318,7 @@
         <xs:complexContent>
             <xs:extension base="Signal">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="DeviceInfo"/>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="DeviceInfo"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
