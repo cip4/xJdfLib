@@ -364,15 +364,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumPreflightSeverity">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Fatal"/>
-            <xs:enumeration value="Error"/>
-            <xs:enumeration value="Warning"/>
-            <xs:enumeration value="Information"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="EnumDeviceAxis">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="None"/>
@@ -701,6 +692,16 @@
 
     <xs:simpleType name="textElement">
         <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="Severity">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Event"/>
+            <xs:enumeration value="Information"/>
+            <xs:enumeration value="Warning"/>
+            <xs:enumeration value="Error"/>
+            <xs:enumeration value="Fatal"/>
+        </xs:restriction>
     </xs:simpleType>
 
     <xs:element name="Resource">
@@ -2349,16 +2350,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
                 <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other" processContents="lax"/>
             </xs:sequence>
-            <xs:attribute name="Class" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:string">
-                        <xs:enumeration value="Information"/>
-                        <xs:enumeration value="Warning"/>
-                        <xs:enumeration value="Error"/>
-                        <xs:enumeration value="Fatal"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Class" type="Severity" use="required"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="ModuleID" type="NMTOKEN" use="optional"/>
@@ -5393,7 +5385,7 @@
             </xs:sequence>
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="DescriptiveName" type="string" use="optional"/>
-            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
+            <xs:attribute name="Severity" type="Severity" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TestID" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -5425,7 +5417,7 @@
             <xs:attribute name="Action" type="EnumPreflightAction" use="optional"/>
             <xs:attribute name="Count" type="integer" use="optional"/>
             <xs:attribute name="Pages" type="IntegerList" use="optional"/>
-            <xs:attribute name="Severity" type="EnumPreflightSeverity" use="optional"/>
+            <xs:attribute name="Severity" type="Severity" use="optional"/>
             <xs:attribute name="TestID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TestClass" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>

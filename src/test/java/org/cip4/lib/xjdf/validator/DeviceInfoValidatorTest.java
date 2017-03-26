@@ -56,12 +56,4 @@ public class DeviceInfoValidatorTest {
 
         assertFalse(validator.validate(deviceInfo).isValid());
     }
-
-    @Test
-    public void validateAllowsRandomDeviceIDIfNoDeviceGiven() throws Exception {
-        DeviceInfo deviceInfo = new DeviceInfo().withDeviceID("Foo");
-        DeviceInfoValidator validator = new DeviceInfoValidator();
-
-        assertTrue(validator.validate(deviceInfo).isValid());
-    }
 }

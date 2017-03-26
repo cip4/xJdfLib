@@ -468,9 +468,6 @@
     <xjb:bindings node="//xs:element[@name='NotificationFilter']//xs:attribute[@name='Classes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Class"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Notification']//xs:attribute[@name='Class']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Class"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='ImagableSide']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ImagableSide"/>
     </xjb:bindings>
