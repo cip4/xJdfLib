@@ -679,17 +679,13 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumCoatings">
+    <xs:simpleType name="Coatings">
         <xs:restriction base="xs:string">
             <xs:enumeration value="None"/>
             <xs:enumeration value="Coated"/>
             <xs:enumeration value="Glossy"/>
-            <xs:enumeration value="HighGloss"/>
             <xs:enumeration value="Matte"/>
-            <xs:enumeration value="Polymer"/>
-            <xs:enumeration value="Silver"/>
             <xs:enumeration value="Satin"/>
-            <xs:enumeration value="Semigloss"/>
         </xs:restriction>
     </xs:simpleType>
 
@@ -3274,13 +3270,13 @@
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
                 </xs:sequence>
-                <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="BackCoatings" type="Coatings" use="optional"/>
                 <xs:attribute name="BackISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="Brand" type="string" use="optional"/>
                 <xs:attribute name="BuyerSupplied" type="boolean" use="optional"/>
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
-                <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="FrontCoatings" type="Coatings" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
@@ -4976,7 +4972,7 @@
                 </xs:sequence>
                 <xs:attribute name="BackBrightness" type="double" use="optional"/>
                 <xs:attribute name="BackCoatingDetail" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="BackCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="BackCoatings" type="Coatings" use="optional"/>
                 <xs:attribute name="BackGlossValue" type="double" use="optional"/>
                 <xs:attribute name="BackISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="Brightness" type="double" use="optional"/>
@@ -4987,7 +4983,7 @@
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="FrontCoatingDetail" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="FrontCoatings" type="EnumCoatings" use="optional"/>
+                <xs:attribute name="FrontCoatings" type="Coatings" use="optional"/>
                 <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
                 <xs:attribute name="Grade" type="integer" use="optional"/>
                 <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
