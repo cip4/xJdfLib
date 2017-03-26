@@ -5967,7 +5967,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="Curve" type="TransferFunction" use="required"/>
+                <xs:attribute name="Curve" type="TransferFunction" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
