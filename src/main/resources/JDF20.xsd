@@ -1832,6 +1832,7 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Module"/>
                 </xs:sequence>
                 <xs:attribute name="CostCenterID" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="DescriptiveName" type="string" use="optional"/>
                 <xs:attribute name="DeviceClass" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="DeviceType" type="string" use="optional"/>
