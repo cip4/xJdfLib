@@ -3869,6 +3869,7 @@
                 <xs:attribute name="Lab" type="LabColor" use="optional"/>
                 <xs:attribute name="NeutralDensity" type="double" use="optional"/>
                 <xs:attribute name="PrintingTechnology" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PrintStandard" type="string" use="optional"/>
                 <xs:attribute name="RawName" type="hexBinary" use="optional"/>
                 <xs:attribute name="sRGB" type="sRGBColor" use="optional"/>
             </xs:extension>
