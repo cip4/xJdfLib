@@ -866,9 +866,7 @@
                     </xs:list>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="PipePause" type="double" use="optional"/>
             <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipeResume" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
