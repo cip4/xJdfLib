@@ -773,14 +773,21 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="PartWaste"/>
             </xs:sequence>
             <xs:attribute name="Amount" type="double" use="optional"/>
             <xs:attribute name="MaxAmount" type="double" use="optional"/>
             <xs:attribute name="MinAmount" type="double" use="optional"/>
-            <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Waste" type="double" use="optional"/>
-            <xs:attribute name="WasteDetails" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="PartWaste">
+        <xs:complexType>
+            <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="Waste" type="double" use="required"/>
+            <xs:attribute name="WasteDetails" type="NMTOKEN" use="optional"/>
         </xs:complexType>
     </xs:element>
 
