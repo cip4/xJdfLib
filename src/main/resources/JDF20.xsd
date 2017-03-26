@@ -7250,11 +7250,7 @@
     <xs:element name="ResponseShutDown" substitutionGroup="Response" type="ResponseShutDown"/>
     <xs:complexType name="ResponseShutDown">
         <xs:complexContent>
-            <xs:extension base="Response">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="DeviceInfo"/>
-                </xs:sequence>
-            </xs:extension>
+            <xs:extension base="Response"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -7346,11 +7342,7 @@
     <xs:element name="ResponseWakeUp" substitutionGroup="Response" type="ResponseWakeUp"/>
     <xs:complexType name="ResponseWakeUp">
         <xs:complexContent>
-            <xs:extension base="Response">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="DeviceInfo"/>
-                </xs:sequence>
-            </xs:extension>
+            <xs:extension base="Response"/>
         </xs:complexContent>
     </xs:complexType>
 
