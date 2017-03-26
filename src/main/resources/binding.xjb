@@ -633,9 +633,6 @@
     <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='Ownership']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Ownership"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='SurplusHandling']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="SurplusHandling"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='DeliveryParams']//xs:attribute[@name='Transfer']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Transfer"/>
     </xjb:bindings>

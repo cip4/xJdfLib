@@ -4162,7 +4162,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="DropItem"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="DropItem"/>
                     <xs:element maxOccurs="3" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="BuyerAccount" type="string" use="optional"/>
@@ -4189,20 +4189,7 @@
                 </xs:attribute>
                 <xs:attribute name="Required" type="dateTime" use="optional"/>
                 <xs:attribute name="RequiredDuration" type="duration" use="optional"/>
-                <xs:attribute name="ReturnMethod" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ServiceLevel" type="string" use="optional"/>
-                <xs:attribute name="SurplusHandling" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="ReturnWithProduct"/>
-                            <xs:enumeration value="Return"/>
-                            <xs:enumeration value="Pickup"/>
-                            <xs:enumeration value="Destroy"/>
-                            <xs:enumeration value="PrinterOwns"/>
-                            <xs:enumeration value="Store"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="TrackingID" type="string" use="optional"/>
                 <xs:attribute name="Transfer" use="optional">
                     <xs:simpleType>
