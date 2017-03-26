@@ -1141,14 +1141,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for KnownMsgQuParams ** -->
-    <xs:element name="KnownMsgQuParams">
-        <xs:complexType>
-            <xs:attribute name="Exact" type="boolean" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for Message ** -->
     <xs:element abstract="true" name="Message" type="Message"/>
     <xs:complexType name="Message">
@@ -1220,10 +1212,7 @@
     <!-- ** Complex type definition for MessageService ** -->
     <xs:element name="MessageService">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
-            </xs:sequence>
-            <xs:attribute name="ResponseModes" use="optional">
+            <xs:attribute name="ResponseModes" use="required">
                 <xs:simpleType>
                     <xs:list>
                         <xs:simpleType>
@@ -1235,14 +1224,6 @@
                         </xs:simpleType>
 
                     </xs:list>
-                </xs:simpleType>
-            </xs:attribute>
-            <xs:attribute name="JMFRole" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="Receiver"/>
-                        <xs:enumeration value="Sender"/>
-                    </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Type" type="NMTOKEN" use="required"/>
@@ -6994,11 +6975,7 @@
     <xs:element name="QueryKnownMessages" substitutionGroup="Query" type="QueryKnownMessages"/>
     <xs:complexType name="QueryKnownMessages">
         <xs:complexContent>
-            <xs:extension base="Query">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="KnownMsgQuParams"/>
-                </xs:sequence>
-            </xs:extension>
+            <xs:extension base="Query"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -7006,17 +6983,6 @@
     <xs:complexType name="ResponseKnownMessages">
         <xs:complexContent>
             <xs:extension base="Response">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="MessageService"/>
-                </xs:sequence>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:element name="SignalKnownMessages" substitutionGroup="Signal" type="SignalKnownMessages"/>
-    <xs:complexType name="SignalKnownMessages">
-        <xs:complexContent>
-            <xs:extension base="Signal">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="MessageService"/>
                 </xs:sequence>

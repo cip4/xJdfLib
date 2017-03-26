@@ -480,9 +480,6 @@
     <xjb:bindings node="//xs:element[@name='Subscription']//xs:attribute[@name='RetryPolicy']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="RetryPolicy"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='JMFRole']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="JMFRole"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ResourceQuParams']//xs:attribute[@name='ResourceDetails']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResourceDetails"/>
     </xjb:bindings>
