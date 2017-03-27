@@ -5000,7 +5000,6 @@
                 <xs:attribute name="Texture" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Thickness" type="double" use="optional"/>
                 <xs:attribute name="Weight" type="double" use="optional"/>
-                <xs:attribute name="WrapperWeight" type="double" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
