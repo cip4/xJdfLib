@@ -4192,6 +4192,7 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="Station"/>
                 </xs:sequence>
                 <xs:attribute name="CutBox" type="rectangle" use="optional"/>
+                <xs:attribute name="CutLines" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="DieSide" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
