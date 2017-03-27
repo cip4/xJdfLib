@@ -2267,15 +2267,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for MarkActivation ** -->
-    <xs:element name="MarkActivation">
-        <xs:complexType>
-            <xs:attribute name="Context" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Index" type="IntegerRange" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for MarkObject ** -->
     <xs:element name="MarkObject">
         <xs:complexType>
@@ -2284,7 +2275,6 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CIELABMeasuringField"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="DynamicField"/>
-                <xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkActivation"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
             </xs:sequence>
@@ -2375,7 +2365,7 @@
     <xs:element name="PageCondition">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
             </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -2384,10 +2374,20 @@
     <xs:element name="PageActivation">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
             </xs:sequence>
             <xs:attribute name="MaxDoc" type="integer" use="optional"/>
             <xs:attribute name="MaxSet" type="integer" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="Condition">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
+            </xs:sequence>
+            <xs:attribute name="PartContext" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4073,10 +4073,6 @@
     <!-- ** Complex type definition for ContentObject ** -->
     <xs:element name="ContentObject">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="PageActivation"/>
-                <xs:element maxOccurs="1" minOccurs="0" ref="PageCondition"/>
-            </xs:sequence>
             <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -4834,6 +4830,8 @@
                     <xs:element ref="ContentObject"/>
                     <xs:element ref="MarkObject"/>
                 </xs:choice>
+                <xs:element maxOccurs="1" minOccurs="0" ref="PageActivation"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="PageCondition"/>
             </xs:sequence>
             <xs:attribute name="Anchor" type="Anchor" use="optional"/>
             <xs:attribute name="BinderySignatureIDs" type="NMTOKENS" use="optional"/>
@@ -4858,7 +4856,7 @@
     <xs:element name="SheetActivation">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Part"/>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
             </xs:sequence>
             <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
