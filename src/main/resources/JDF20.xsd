@@ -6522,7 +6522,6 @@
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
                 </xs:sequence>
-                <xs:attribute name="InkName" type="string" use="optional"/>
                 <xs:attribute name="InkType" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="SpecificYield" type="double" use="optional"/>
             </xs:extension>
