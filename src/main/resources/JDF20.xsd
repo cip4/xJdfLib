@@ -225,15 +225,8 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumSide">
+    <xs:simpleType name="Side">
         <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Front"/>
-            <xs:enumeration value="Back"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumSurface">
-        <xs:restriction base="xs:string">
             <xs:enumeration value="Front"/>
             <xs:enumeration value="Back"/>
         </xs:restriction>
@@ -2384,7 +2377,7 @@
             <xs:attribute name="SetIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="SheetIndex" type="IntegerRange" use="optional"/>
             <xs:attribute name="SheetName" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Side" type="EnumSide" use="optional"/>
+            <xs:attribute name="Side" type="Side" use="optional"/>
             <xs:attribute name="StationName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TileID" type="XYPair" use="optional"/>
             <xs:attribute name="TransferCurveName" use="optional">
@@ -3174,7 +3167,7 @@
     <xs:complexType name="LaminatingIntent">
         <xs:complexContent>
             <xs:extension base="ProductIntent">
-                <xs:attribute name="Surface" type="EnumSurface" use="optional"/>
+                <xs:attribute name="Surface" type="Side" use="optional"/>
                 <xs:attribute name="Temperature" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -3957,7 +3950,7 @@
                 <xs:attribute name="MaxHeat" type="double" use="optional"/>
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
                 <xs:attribute name="Overfold" type="double" use="optional"/>
-                <xs:attribute name="OverfoldSide" type="EnumSide" use="optional"/>
+                <xs:attribute name="OverfoldSide" type="Side" use="optional"/>
                 <xs:attribute name="ProductType" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="ProductTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="ReaderPageCount" type="integer" use="optional"/>
@@ -4048,7 +4041,7 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="ApprovalParams"/>
                 </xs:sequence>
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
-                <xs:attribute name="FirstSurface" type="EnumSide" use="optional"/>
+                <xs:attribute name="FirstSurface" type="Side" use="optional"/>
                 <xs:attribute name="FountainSolution" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -5629,7 +5622,7 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="MediaRef" type="IDREF" use="optional"/>
-                <xs:attribute name="MediaSide" type="EnumSide" use="optional"/>
+                <xs:attribute name="MediaSide" type="Side" use="optional"/>
                 <xs:attribute name="ResourceWeight" type="double" use="optional"/>
                 <xs:attribute name="CutLines" type="NMTOKENS" use="optional"/>
             </xs:extension>
@@ -6002,7 +5995,7 @@
         <xs:attribute name="ColorsUsed" type="NMTOKENS" use="optional"/>
         <xs:attribute name="Coverage" type="double" use="optional"/>
         <xs:attribute name="PrintStandard" type="NMTOKEN" use="optional"/>
-        <xs:attribute name="Surface" type="EnumSide" use="required"/>
+        <xs:attribute name="Surface" type="Side" use="required"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
 

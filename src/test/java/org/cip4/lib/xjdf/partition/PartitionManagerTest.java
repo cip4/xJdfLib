@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.partition;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.EnumSide;
+import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
@@ -64,10 +64,10 @@ public class PartitionManagerTest {
     public final void testGetResourceByPartEmptyPart() throws Exception {
         // arrange
         createResource("CYAN_FRONT");
-        createPartSeparationSide("Cyan", EnumSide.FRONT, "CYAN_FRONT");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT");
 
         createResource("CYAN_BACK");
-        createPartSeparationSide("Cyan", EnumSide.BACK, "CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
 
         // act / assert
         Part part;
@@ -88,24 +88,24 @@ public class PartitionManagerTest {
     public final void testGetResourceByPartCatchAllMiddle() throws Exception {
         // arrange
         createResource("CYAN_FRONT");
-        createPartSeparationSide("Cyan", EnumSide.FRONT, "CYAN_FRONT");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT");
 
         createResource("CYAN_CATCH_ALL");
 
         createResource("CYAN_BACK");
-        createPartSeparationSide("Cyan", EnumSide.BACK, "CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
 
         // act / assert
         Part part;
 
-        part = createPartSeparationSide("Cyan", EnumSide.FRONT, null);
+        part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_FRONT",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Cyan", EnumSide.BACK, null);
+        part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_CATCH_ALL",
@@ -122,42 +122,42 @@ public class PartitionManagerTest {
     public final void testGetResourceByPartOnePartPerResource() throws Exception {
         // arrange
         createResource("CYAN_FRONT");
-        createPartSeparationSide("Cyan", EnumSide.FRONT, "CYAN_FRONT");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT");
 
         createResource("CYAN_BACK");
-        createPartSeparationSide("Cyan", EnumSide.BACK, "CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
 
         createResource("BLACK_FRONT");
-        createPartSeparationSide("Black", EnumSide.FRONT, "BLACK_FRONT");
+        createPartSeparationSide("Black", Side.FRONT, "BLACK_FRONT");
 
         createResource("BLACK_BACK");
-        createPartSeparationSide("Black", EnumSide.BACK, "BLACK_BACK");
+        createPartSeparationSide("Black", Side.BACK, "BLACK_BACK");
 
         // act / assert
         Part part;
 
-        part = createPartSeparationSide("Cyan", EnumSide.FRONT, null);
+        part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_FRONT",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Cyan", EnumSide.BACK, null);
+        part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_BACK",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Black", EnumSide.FRONT, null);
+        part = createPartSeparationSide("Black", Side.FRONT, null);
         assertEquals(
             "Resource ID is wrong.",
             "BLACK_FRONT",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Black", EnumSide.BACK, null);
+        part = createPartSeparationSide("Black", Side.BACK, null);
         assertEquals(
             "Resource ID is wrong.",
             "BLACK_BACK",
@@ -174,38 +174,38 @@ public class PartitionManagerTest {
     public final void testGetResourceByPartTwoPartsPerResource() throws Exception {
         // arrange
         createResource("CYAN_FRONT_BACK");
-        createPartSeparationSide("Cyan", EnumSide.FRONT, "CYAN_FRONT_BACK");
-        createPartSeparationSide("Cyan", EnumSide.BACK, "CYAN_FRONT_BACK");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_FRONT_BACK");
 
         createResource("BLACK_FRONT_BACK");
-        createPartSeparationSide("Black", EnumSide.FRONT, "BLACK_FRONT_BACK");
-        createPartSeparationSide("Black", EnumSide.BACK, "BLACK_FRONT_BACK");
+        createPartSeparationSide("Black", Side.FRONT, "BLACK_FRONT_BACK");
+        createPartSeparationSide("Black", Side.BACK, "BLACK_FRONT_BACK");
 
         // act / assert
         Part part;
 
-        part = createPartSeparationSide("Cyan", EnumSide.FRONT, null);
+        part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_FRONT_BACK",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Cyan", EnumSide.BACK, null);
+        part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
             "Resource ID is wrong.",
             "CYAN_FRONT_BACK",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Black", EnumSide.FRONT, null);
+        part = createPartSeparationSide("Black", Side.FRONT, null);
         assertEquals(
             "Resource ID is wrong.",
             "BLACK_FRONT_BACK",
             partitionManager.getResourceByPart(resourceSet, part).getID()
         );
 
-        part = createPartSeparationSide("Black", EnumSide.BACK, null);
+        part = createPartSeparationSide("Black", Side.BACK, null);
         assertEquals(
             "Resource ID is wrong.",
             "BLACK_FRONT_BACK",
@@ -220,7 +220,7 @@ public class PartitionManagerTest {
      * @param resourceId The id of the given Resource object.
      * @return The initialized Part object.
      */
-    private Part createPartSide(final EnumSide side, final String resourceId) {
+    private Part createPartSide(final Side side, final String resourceId) {
 
         // create part
         Part part = NF.createPart();
@@ -241,7 +241,7 @@ public class PartitionManagerTest {
      * @param resourceId The id of the given Resource object.
      * @return The initialized Part object.
      */
-    private Part createPartSeparationSide(final String separation, final EnumSide side, final String resourceId) {
+    private Part createPartSeparationSide(final String separation, final Side side, final String resourceId) {
 
         // create part
         Part part = NF.createPart();
@@ -264,7 +264,7 @@ public class PartitionManagerTest {
      * @param partVersion The part Version of the given Resource object
      */
     private Part createPartSeparationSideVersion(
-        final String separation, final EnumSide side, final String resourceId, final String partVersion
+        final String separation, final Side side, final String resourceId, final String partVersion
     ) {
 
         // create part
