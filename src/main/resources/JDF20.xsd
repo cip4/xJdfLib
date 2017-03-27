@@ -4333,7 +4333,6 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="DispositionUsage" type="EnumUsage" use="optional"/>
             <xs:attribute name="ExtraDuration" type="duration" use="optional"/>
             <xs:attribute name="MinDuration" type="duration" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
