@@ -1052,6 +1052,7 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="GangSource"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="MISDetails"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="ModuleStatus"/>
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
