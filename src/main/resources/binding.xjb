@@ -657,9 +657,6 @@
     <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']//xs:attribute[@name='Masking']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Masking"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='TrappingParams']//xs:attribute[@name='ImageTrapPlacement']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="ImageTrapPlacement"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='PreviewGenerationParams']//xs:attribute[@name='AspectRatio']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="AspectRatio"/>
     </xjb:bindings>

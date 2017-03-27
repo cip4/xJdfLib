@@ -6651,39 +6651,15 @@
     <xs:complexType name="TrappingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ObjectResolution"/>
-                </xs:sequence>
-                <xs:attribute name="BlackColorLimit" type="double" use="optional"/>
-                <xs:attribute name="BlackDensityLimit" type="double" use="optional"/>
-                <xs:attribute name="BlackWidth" type="double" use="optional"/>
-                <xs:attribute name="HalftoneName" type="string" use="optional"/>
                 <xs:attribute name="ImageInternalTrapping" type="boolean" use="optional"/>
                 <xs:attribute name="ImageMaskTrapping" type="boolean" use="optional"/>
-                <xs:attribute name="ImageResolution" type="integer" use="optional"/>
                 <xs:attribute name="ImageToImageTrapping" type="boolean" use="optional"/>
                 <xs:attribute name="ImageToObjectTrapping" type="boolean" use="optional"/>
-                <xs:attribute name="ImageTrapPlacement" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Center"/>
-                            <xs:enumeration value="Choke"/>
-                            <xs:enumeration value="Normal"/>
-                            <xs:enumeration value="Spread"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
-                <xs:attribute name="ImageTrapWidth" type="double" use="optional"/>
-                <xs:attribute name="ImageTrapWidthY" type="double" use="optional"/>
                 <xs:attribute name="MinimumBlackWidth" type="double" use="optional"/>
-                <xs:attribute name="SlidingTrapLimit" type="double" use="optional"/>
                 <xs:attribute name="StepLimit" type="double" use="optional"/>
                 <xs:attribute name="TrapColorScaling" type="double" use="optional"/>
-                <xs:attribute name="TrapEndStyle" type="NMTOKEN" use="optional"/>
-                <xs:attribute name="TrapJoinStyle" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="TrappingOrder" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="TrapWidth" type="double" use="optional"/>
-                <xs:attribute name="TrapWidthY" type="double" use="optional"/>
+                <xs:attribute name="TrapWidth" type="XYPair" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
