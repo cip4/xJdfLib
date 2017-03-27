@@ -332,15 +332,6 @@
 
     <xs:simpleType name="MediaDirection">
         <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="LongEdge"/>
-            <xs:enumeration value="ShortEdge"/>
-            <xs:enumeration value="XDirection"/>
-            <xs:enumeration value="YDirection"/>
-        </xs:restriction>
-    </xs:simpleType>
-
-    <xs:simpleType name="EnumGrainDirection">
-        <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Any"/>
             <xs:enumeration value="SameDirection"/>
             <xs:enumeration value="XDirection"/>
@@ -3211,7 +3202,7 @@
                 <xs:attribute name="Flute" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="FluteDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="FrontCoatings" type="Coatings" use="optional"/>
-                <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
+                <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="ISOPaperSubstrate" type="ISOPaperSubstrate" use="optional"/>
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
@@ -4894,7 +4885,7 @@
                 <xs:attribute name="FrontCoatings" type="Coatings" use="optional"/>
                 <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
                 <xs:attribute name="Grade" type="integer" use="optional"/>
-                <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
+                <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
                 <xs:attribute name="HoleType" use="optional">
                     <xs:simpleType>
                         <xs:list>
@@ -5691,7 +5682,7 @@
             <xs:attribute name="ExternalID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="FillPriority" type="integer" use="optional"/>
             <xs:attribute name="GangElementID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="GrainDirection" type="EnumGrainDirection" use="optional"/>
+            <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
             <xs:attribute name="GroupCode" type="NMTOKEN" use="optional"/>
             <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MaxQuantity" type="integer" use="optional"/>
