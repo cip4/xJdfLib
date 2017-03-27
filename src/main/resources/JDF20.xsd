@@ -2608,7 +2608,6 @@
     <xs:complexType name="ShrinkingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:attribute name="Duration" type="duration" use="optional"/>
                 <xs:attribute name="ShrinkingMethod" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
