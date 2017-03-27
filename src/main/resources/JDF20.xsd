@@ -5549,16 +5549,6 @@
                 <xs:attribute name="NPage" type="integer" use="optional"/>
                 <xs:attribute name="Pages" type="IntegerRange" use="optional"/>
                 <xs:attribute name="Sets" type="IntegerRange" use="optional"/>
-                <xs:attribute name="SheetSides" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Front"/>
-                            <xs:enumeration value="Back"/>
-                            <xs:enumeration value="FrontBack"/>
-                            <xs:enumeration value="BackFront"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceClipBox" type="rectangle" use="optional"/>
                 <xs:attribute name="SourceMediaBox" type="rectangle" use="optional"/>

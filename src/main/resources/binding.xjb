@@ -555,9 +555,6 @@
     <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='PrintQuality']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PrintQuality"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='SheetSides']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="SheetSides"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='ElementType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ElementType"/>
     </xjb:bindings>
