@@ -5389,6 +5389,7 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="BindingQualityParams"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="SampleInterval" type="integer" use="optional"/>
                 <xs:attribute name="TimeInterval" type="duration" use="optional"/>
