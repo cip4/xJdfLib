@@ -813,6 +813,7 @@
     <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='MappingSelection']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="MappingSelection"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutIntent']//xs:attribute[@name='SpreadType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SpreadType"/>
+    </xjb:bindings>
 </xjb:bindings>
-
-	

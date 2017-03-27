@@ -3232,6 +3232,16 @@
                 <xs:attribute name="Orientation" type="Orientation" use="optional"/>
                 <xs:attribute name="Pages" type="integer" use="optional"/>
                 <xs:attribute name="Sides" type="Sides" use="optional"/>
+                <xs:attribute name="SpreadType" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="NMTOKEN">
+                        <xs:enumeration value="Combine"/>
+                        <xs:enumeration value="FoldOut"/>
+                        <xs:enumeration value="SinglePage"/>
+                        <xs:enumeration value="Spread"/>
+                    </xs:restriction>
+                </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
