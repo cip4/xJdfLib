@@ -3546,7 +3546,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="CompensationValue" type="double" use="optional"/>
+                <xs:attribute name="CompensationValue" type="double" use="required"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
