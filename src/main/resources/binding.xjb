@@ -795,4 +795,7 @@
     <xjb:bindings node="//xs:complexType[@name='LayoutIntent']//xs:attribute[@name='SpreadType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="SpreadType"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='OrdType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="OrdType"/>
+    </xjb:bindings>
 </xjb:bindings>
