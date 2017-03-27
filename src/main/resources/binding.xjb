@@ -197,11 +197,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='DeviceRefs']">
-        <xjb:property name="devices">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Layout']//xs:attribute[@name='ProofPaperRef']">
         <xjb:property name="proofPaper">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -323,6 +318,11 @@
         </xjb:property>
     </xjb:bindings>
 
+    <xjb:bindings node="//xs:element[@name='XJMF']/xs:complexType//xs:element[@ref='Message']">
+        <xjb:property>
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Message"/>
+        </xjb:property>
+    </xjb:bindings>
 
     <xjb:bindings node="//xs:element[@name='AuditPool']//xs:complexType//xs:choice">
         <xjb:property name="Audits">
