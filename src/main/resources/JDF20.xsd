@@ -955,7 +955,6 @@
                 <xs:attribute name="Status" type="NodeStatus" use="optional"/>
                 <xs:attribute name="StatusDetails" type="string" use="optional"/>
                 <xs:attribute name="TotalDuration" type="duration" use="optional"/>
-                <xs:attribute name="WorkStepID" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
