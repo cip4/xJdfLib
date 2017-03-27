@@ -8,6 +8,7 @@ import org.cip4.lib.xjdf.type.DateTime;
 import org.junit.Test;
 
 import javax.xml.bind.ValidationException;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,8 +20,6 @@ import static org.junit.Assert.*;
  * JUnit test case for XJmfParser.
  */
 public class XJmfParserTest {
-
-    private static final String RES_TEST_XJMF = "/org/cip4/lib/xjdf/test.xjmf";
 
     @Test(expected = ValidationException.class)
     public void parseXJmf_ByteArray() throws Exception {
@@ -62,8 +61,10 @@ public class XJmfParserTest {
         byte[] actual = new XJmfParser().parseXJmf(xjmf, true);
 
         // assert
-        byte[] expected = IOUtils.toByteArray(XJmfParserTest.class.getResourceAsStream(RES_TEST_XJMF));
-        assertEquals("XJMF is wrong", new String(expected), new String(actual));
+        String jmf = new String(actual);
+        assertTrue("Cannot find time.", jmf.contains("Time=\"2017-03-27T21:31:54Z\""));
+        assertTrue("Cannot find DeviceId.", jmf.contains("DeviceID=\"MyDevice\""));
+        assertTrue("Cannot find ID.", jmf.contains("ID=\"ID\""));
     }
 
     @Test
@@ -79,7 +80,9 @@ public class XJmfParserTest {
         byte[] actual = bos.toByteArray();
 
         // assert
-        byte[] expected = IOUtils.toByteArray(XJmfParserTest.class.getResourceAsStream(RES_TEST_XJMF));
-        assertEquals("XJMF is wrong", new String(expected), new String(actual));
+        String jmf = new String(actual);
+        assertTrue("Cannot find time.", jmf.contains("Time=\"2017-03-27T21:31:54Z\""));
+        assertTrue("Cannot find DeviceId.", jmf.contains("DeviceID=\"MyDevice\""));
+        assertTrue("Cannot find ID.", jmf.contains("ID=\"ID\""));
     }
 }
