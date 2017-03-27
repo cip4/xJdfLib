@@ -2844,7 +2844,7 @@
     <xs:complexType name="WrappingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:attribute name="WrappingKind" use="optional">
+                <xs:attribute name="WrappingKind" use="required">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
                             <xs:enumeration value="Band"/>
@@ -2853,7 +2853,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="WrappingKindDetails" type="string" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
