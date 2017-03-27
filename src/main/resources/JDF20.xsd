@@ -3873,16 +3873,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ColorantZoneDetails ** -->
-    <xs:element name="ColorantZoneDetails">
-        <xs:complexType>
-            <xs:attribute name="Colorant" type="NMTOKEN" use="required"/>
-            <xs:attribute name="StepLimit" type="double" use="optional"/>
-            <xs:attribute name="TrapColorScaling" type="double" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ColorControlStrip ** -->
     <xs:element name="ColorControlStrip">
         <xs:complexType>
@@ -6662,7 +6652,6 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorantZoneDetails"/>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ObjectResolution"/>
                 </xs:sequence>
                 <xs:attribute name="BlackColorLimit" type="double" use="optional"/>
