@@ -2945,11 +2945,19 @@
         <xs:complexType>
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="HolePattern"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="CoilBinding"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="CombBinding"/>
+                <xs:element maxOccurs="1" minOccurs="0" ref="RingBinding"/>
             </xs:sequence>
-            <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Brand" type="string" use="optional"/>
-            <xs:attribute name="CombShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Diameter" type="double" use="optional"/>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CoilBinding">
+        <xs:complexType>
+            <xs:attribute name="CoilShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Material" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -2959,6 +2967,29 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="CombBinding">
+        <xs:complexType>
+            <xs:attribute name="CombShape" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="Material" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Steel"/>
+                        <xs:enumeration value="ColorCoatedSteel"/>
+                        <xs:enumeration value="Plastic"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="RingBinding">
+        <xs:complexType>
+            <xs:attribute name="BinderMaterial" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RingShape" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RivetsExposed" type="boolean" use="optional"/>
             <xs:attribute name="ViewBinder" type="NMTOKEN" use="optional"/>

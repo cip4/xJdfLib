@@ -765,7 +765,10 @@
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='ResponseModes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResponseModes"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='LooseBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='CoilBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Material"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='CombBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Material"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ModifyQueueEntryParams']//xs:attribute[@name='Operation']//xs:simpleType[xs:restriction]">
