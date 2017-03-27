@@ -1879,7 +1879,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="2" minOccurs="0" ref="EndSheet"/>
+                    <xs:element maxOccurs="1" minOccurs="1" ref="Glue"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
@@ -5991,17 +5991,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Position" type="XYPair" use="required"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for EndSheet ** -->
-    <xs:element name="EndSheet">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="1" ref="Glue"/>
-            </xs:sequence>
-            <xs:attribute name="Side" type="EnumSurface" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
