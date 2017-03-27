@@ -704,6 +704,16 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="DeviceStatus">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Idle"/>
+            <xs:enumeration value="Production"/>
+            <xs:enumeration value="Offline"/>
+            <xs:enumeration value="Stopped"/>
+            <xs:enumeration value="NonProductive"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:element name="Resource">
         <xs:complexType>
             <xs:sequence>
@@ -1041,17 +1051,7 @@
             <xs:attribute name="PowerOnTime" type="dateTime" use="optional"/>
             <xs:attribute name="ProductionCounter" type="double" use="optional"/>
             <xs:attribute name="Speed" type="double" use="optional"/>
-            <xs:attribute name="Status" use="required">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="Idle"/>
-                        <xs:enumeration value="Production"/>
-                        <xs:enumeration value="Offline"/>
-                        <xs:enumeration value="Stopped"/>
-                        <xs:enumeration value="NonProductive"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="Status" type="DeviceStatus" use="required" />
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="TotalProductionCounter" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -2047,23 +2047,7 @@
                 <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
             </xs:sequence>
             <xs:attribute name="BitDepth" type="integer" use="required"/>
-            <xs:attribute name="IconUsage" use="optional">
-                <xs:simpleType>
-                    <xs:list>
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:enumeration value="Unknown"/>
-                                <xs:enumeration value="Idle"/>
-                                <xs:enumeration value="Down"/>
-                                <xs:enumeration value="Setup"/>
-                                <xs:enumeration value="Running"/>
-                                <xs:enumeration value="Cleanup"/>
-                                <xs:enumeration value="Stopped"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:list>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="IconUsage" type="DeviceStatus" use="optional"/>
             <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Size" type="XYPair" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>

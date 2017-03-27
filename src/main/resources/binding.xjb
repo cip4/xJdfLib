@@ -471,9 +471,6 @@
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='ImagableSide']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ImagableSide"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='DeviceInfo']//xs:attribute[@name='Status']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Status"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Subscription']//xs:attribute[@name='RetryPolicy']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="RetryPolicy"/>
     </xjb:bindings>
@@ -776,9 +773,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Device']//xs:attribute[@name='Packaging']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Packaging"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Icon']//xs:attribute[@name='IconUsage']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="IconUsage"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='ResponseModes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResponseModes"/>
