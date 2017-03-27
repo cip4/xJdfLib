@@ -985,10 +985,10 @@
                 <xs:attribute name="LastEnd" type="dateTime" use="optional"/>
                 <xs:attribute name="LastStart" type="dateTime" use="optional"/>
                 <xs:attribute name="NaturalLang" type="language" use="optional"/>
-                <xs:attribute name="NodeStatus" type="NodeStatus" use="optional"/>
-                <xs:attribute name="NodeStatusDetails" type="string" use="optional"/>
                 <xs:attribute name="SetupDuration" type="duration" use="optional"/>
                 <xs:attribute name="Start" type="dateTime" use="optional"/>
+                <xs:attribute name="Status" type="NodeStatus" use="optional"/>
+                <xs:attribute name="StatusDetails" type="string" use="optional"/>
                 <xs:attribute name="TotalDuration" type="duration" use="optional"/>
                 <xs:attribute name="WorkStepID" type="NMTOKEN" use="optional"/>
             </xs:extension>
