@@ -1473,9 +1473,7 @@
     <!-- ** Complex type definition for SubscriptionFilter ** -->
     <xs:element name="SubscriptionFilter">
         <xs:complexType>
-            <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="MessageTypes" type="NMTOKENS" use="optional"/>
             <xs:attribute name="URL" type="URL" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1487,7 +1485,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="1" ref="Subscription"/>
             </xs:sequence>
-            <xs:attribute name="ChannelID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="ChannelID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
             <xs:attribute name="MessageType" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
