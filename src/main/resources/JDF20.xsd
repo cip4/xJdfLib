@@ -4756,7 +4756,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="StripMark"/>
                 </xs:sequence>
                 <xs:attribute name="Automated" type="boolean" use="optional"/>
-                <xs:attribute name="DeviceRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="FilmRef" type="IDREF" use="optional"/>
                 <xs:attribute name="InnermostShingling" type="double" use="optional"/>
                 <xs:attribute name="MaxCollect" type="integer" use="optional"/>
