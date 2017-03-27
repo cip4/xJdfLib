@@ -5381,15 +5381,15 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for ProductionPath ** -->
-    <xs:element name="ProductionPath" substitutionGroup="SpecificResource" type="ProductionPath"/>
-    <xs:complexType name="ProductionPath">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="ProductionPathID" type="NMTOKEN" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+    <xs:element name="ProductionPath">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="SpecificResource">
+                    <xs:attribute name="ProductionPathID" type="NMTOKEN" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
 
     <!-- ** Complex type definition for QualityControlParams ** -->
     <xs:element name="QualityControlParams" substitutionGroup="SpecificResource" type="QualityControlParams"/>
@@ -6323,6 +6323,7 @@
             <xs:extension base="SpecificResource">
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="FolderProduction"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="ProductionPath"/>
                 </xs:sequence>
             </xs:extension>
         </xs:complexContent>
