@@ -1076,16 +1076,14 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="JobID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
             <xs:attribute name="ModuleIDs" type="NMTOKENS" use="optional"/>
             <xs:attribute name="PercentCompleted" type="double" use="optional"/>
             <xs:attribute name="QueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="RestTime" type="duration" use="optional"/>
-            <xs:attribute name="SpawnID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Speed" type="double" use="optional"/>
             <xs:attribute name="StartTime" type="dateTime" use="optional"/>
-            <xs:attribute name="Status" type="NodeStatus" use="optional"/>
+            <xs:attribute name="Status" type="NodeStatus" use="required"/>
             <xs:attribute name="StatusDetails" type="string" use="optional"/>
             <xs:attribute name="Waste" type="double" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
