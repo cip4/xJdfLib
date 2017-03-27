@@ -4039,9 +4039,6 @@
     <xs:complexType name="ConventionalPrintingParams">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ApprovalParams"/>
-                </xs:sequence>
                 <xs:attribute name="Drying" type="EnumDrying" use="optional"/>
                 <xs:attribute name="FirstSurface" type="Side" use="optional"/>
                 <xs:attribute name="FountainSolution" use="optional">
