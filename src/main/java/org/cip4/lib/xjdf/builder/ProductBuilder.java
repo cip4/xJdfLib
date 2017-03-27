@@ -36,7 +36,6 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
      * @throws JAXBException
      */
     public ProductBuilder(Node productNode) throws JAXBException {
-
         super(productNode, Product.class);
 
         // init factory

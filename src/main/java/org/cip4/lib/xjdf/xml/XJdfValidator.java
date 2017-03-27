@@ -10,7 +10,7 @@ import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 /**
  * Validation of XJDF Documents based on XJDF schema file.
  */
-public class XJdfValidator extends AbstractXmlValidator<XJDF> {
+public class XJdfValidator extends AbstractXmlValidator {
 
     /**
      * URL of the internal XJDF schema.

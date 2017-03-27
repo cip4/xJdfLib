@@ -109,7 +109,7 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
     }
 
     @Override
-    protected final AbstractXmlValidator<XJDF> createValidator() {
+    protected final AbstractXmlValidator createValidator() {
         return new XJdfValidator();
     }
 

@@ -13,7 +13,9 @@ import javax.xml.namespace.QName;
 
 /**
  * Static Factory Class which is managing the creation of XJdfNodes.
+ * @deprecated Has been replaced by a fluent interface implementation.
  */
+@Deprecated
 public class XJdfNodeFactory extends ObjectFactory {
 
     /**
