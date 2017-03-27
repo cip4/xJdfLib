@@ -1781,7 +1781,6 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="PresentationURL" type="URL" use="optional"/>
-                <xs:attribute name="SecureXJMFURL" type="URL" use="optional"/>
                 <xs:attribute name="SerialNumber" type="string" use="optional"/>
                 <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="XJMFURL" type="URL" use="optional"/>
