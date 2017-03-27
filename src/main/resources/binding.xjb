@@ -783,6 +783,9 @@
     <xjb:bindings node="//xs:element[@name='Part']//xs:attribute[@name='PreviewType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PreviewType"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ResourceSet']//xs:attribute[@name='Usage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Usage"/>
+    </xjb:bindings>
 
 
 

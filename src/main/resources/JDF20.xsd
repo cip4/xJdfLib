@@ -206,13 +206,6 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <xs:simpleType name="EnumUsage">
-        <xs:restriction base="xs:NMTOKEN">
-            <xs:enumeration value="Input"/>
-            <xs:enumeration value="Output"/>
-        </xs:restriction>
-    </xs:simpleType>
-
     <xs:simpleType name="Side">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Front"/>
@@ -860,7 +853,14 @@
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="ProcessUsage" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Usage" type="EnumUsage" use="optional"/>
+            <xs:attribute name="Usage" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Input"/>
+                        <xs:enumeration value="Output"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4392,16 +4392,6 @@
         <xs:complexType>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="Path" type="XPath" use="required"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
-    <!-- ** Complex type definition for ExternalImpositionTemplate ** -->
-    <xs:element name="ExternalImpositionTemplate">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="1" ref="FileSpec"/>
-            </xs:sequence>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
