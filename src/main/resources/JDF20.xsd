@@ -1677,6 +1677,10 @@
             </xs:attribute>
             <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
             <xs:attribute name="TotalAmount" type="integer" use="optional"/>
+            <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
+            <xs:attribute name="TotalVolume" type="double" use="optional"/>
+            <xs:attribute name="TotalWeight" type="double" use="optional"/>
+            <xs:attribute name="Unit" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -2566,8 +2570,8 @@
         </xs:attribute>
         <xs:attribute name="Contract" type="boolean" use="optional"/>
         <xs:attribute name="HalfTone" type="boolean" use="optional"/>
+        <xs:attribute name="ID" type="ID" use="required"/>
         <xs:attribute name="PageIndex" type="IntegerRange" use="optional"/>
-        <xs:attribute name="ProofName" type="NMTOKEN" use="optional"/>
         <xs:attribute name="ProofTarget" type="URL" use="optional"/>
         <xs:anyAttribute namespace="##other" processContents="lax"/>
     </xs:complexType>
@@ -4382,7 +4386,6 @@
         <xs:complexType>
             <xs:attribute name="Amount" type="integer" use="required"/>
             <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
-            <xs:attribute name="Proof" type="NMTOKEN" use="optional"/>
             <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
             <xs:attribute name="TotalVolume" type="double" use="optional"/>
             <xs:attribute name="TotalWeight" type="double" use="optional"/>
