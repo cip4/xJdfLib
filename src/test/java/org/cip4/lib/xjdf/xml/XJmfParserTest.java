@@ -1,18 +1,12 @@
 package org.cip4.lib.xjdf.xml;
 
-import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.schema.Header;
-import org.cip4.lib.xjdf.schema.QueryNotification;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.junit.Test;
 
 import javax.xml.bind.ValidationException;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.net.URI;
 
 import static org.junit.Assert.*;
 
