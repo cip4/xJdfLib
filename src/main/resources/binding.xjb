@@ -768,9 +768,6 @@
     <xjb:bindings node="//xs:complexType[@name='VarnishingParams']//xs:attribute[@name='VarnishMethod']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="VarnishMethod"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Dependent']//xs:attribute[@name='PipePartPartIDKeys']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="PipePartPartIDKeys"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Device']//xs:attribute[@name='Packaging']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Packaging"/>
     </xjb:bindings>

@@ -842,41 +842,6 @@
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
             <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
             <xs:attribute name="PipeID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="PipePartPartIDKeys" use="optional">
-                <xs:simpleType>
-                    <xs:list>
-                        <xs:simpleType>
-                            <xs:restriction base="xs:string">
-                                <xs:enumeration value="BinderySignatureID"/>
-                                <xs:enumeration value="BlockName"/>
-                                <xs:enumeration value="DocIndex"/>
-                                <xs:enumeration value="DropID"/>
-                                <xs:enumeration value="Location"/>
-                                <xs:enumeration value="LotID"/>
-                                <xs:enumeration value="Metadata"/>
-                                <xs:enumeration value="Option"/>
-                                <xs:enumeration value="PageNumber"/>
-                                <xs:enumeration value="PartVersion"/>
-                                <xs:enumeration value="PreviewType"/>
-                                <xs:enumeration value="PrintCondition"/>
-                                <xs:enumeration value="ProductPart"/>
-                                <xs:enumeration value="QualityMeasurement"/>
-                                <xs:enumeration value="Run"/>
-                                <xs:enumeration value="RunIndex"/>
-                                <xs:enumeration value="Separation"/>
-                                <xs:enumeration value="SetIndex"/>
-                                <xs:enumeration value="SheetIndex"/>
-                                <xs:enumeration value="SheetName"/>
-                                <xs:enumeration value="Side"/>
-                                <xs:enumeration value="StationName"/>
-                                <xs:enumeration value="TileID"/>
-                                <xs:enumeration value="TransferCurveName"/>
-                                <xs:enumeration value="WebName"/>
-                            </xs:restriction>
-                        </xs:simpleType>
-                    </xs:list>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
