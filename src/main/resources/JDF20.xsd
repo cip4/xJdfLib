@@ -5499,31 +5499,20 @@
                 <xs:attribute name="ClipPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="ContentRefs" type="IDREFS" use="optional"/>
                 <xs:attribute name="Docs" type="IntegerList" use="optional"/>
-                <xs:attribute name="ElementType" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Auxiliary"/>
-                            <xs:enumeration value="Barcode"/>
-                            <xs:enumeration value="Composed"/>
-                            <xs:enumeration value="Document"/>
-                            <xs:enumeration value="Graphic"/>
-                            <xs:enumeration value="IdentificationField"/>
-                            <xs:enumeration value="Image"/>
-                            <xs:enumeration value="MultiDocument"/>
-                            <xs:enumeration value="MultiSet"/>
-                            <xs:enumeration value="Page"/>
-                            <xs:enumeration value="Reservation"/>
-                            <xs:enumeration value="Surface"/>
-                            <xs:enumeration value="Text"/>
-                            <xs:enumeration value="Tile"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="EndOfDocument" type="boolean" use="optional"/>
                 <xs:attribute name="EndOfSet" type="boolean" use="optional"/>
                 <xs:attribute name="FinishedPages" type="integer" use="optional"/>
                 <xs:attribute name="LogicalPage" type="integer" use="optional"/>
                 <xs:attribute name="NPage" type="integer" use="optional"/>
+                <xs:attribute name="OrdType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="Content"/>
+                            <xs:enumeration value="Insert"/>
+                            <xs:enumeration value="Reservation"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="Pages" type="IntegerRange" use="optional"/>
                 <xs:attribute name="Sets" type="IntegerRange" use="optional"/>
                 <xs:attribute name="SourceBleedBox" type="rectangle" use="optional"/>
