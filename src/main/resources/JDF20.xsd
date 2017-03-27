@@ -2707,6 +2707,7 @@
                 <xs:attribute name="MaxHeight" type="integer" use="optional"/>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
                 <xs:attribute name="MinAmount" type="integer" use="optional"/>
+                <xs:attribute name="OutputBin" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="PreStackAmount" type="integer" use="optional"/>
                 <xs:attribute name="PreStackMethod" use="optional">
                     <xs:simpleType>
@@ -2717,6 +2718,7 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
+                <xs:attribute name="StackAmount" type="integer" use="optional"/>
                 <xs:attribute name="StackCompression" type="boolean" use="optional"/>
                 <xs:attribute name="StandardAmount" type="integer" use="optional"/>
                 <xs:attribute name="UnderLays" type="IntegerList" use="optional"/>
@@ -4277,7 +4279,6 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="ManualFeed" type="boolean" use="optional"/>
-                <xs:attribute name="OutputBin" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="PageDelivery" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
@@ -4299,7 +4300,6 @@
                         </xs:restriction>
                     </xs:simpleType>
                 </xs:attribute>
-                <xs:attribute name="StackAmount" type="integer" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
