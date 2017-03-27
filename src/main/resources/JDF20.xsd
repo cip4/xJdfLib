@@ -4018,8 +4018,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="GeneralID"/>
             </xs:sequence>
             <xs:attribute name="ContactRefs" type="IDREFS" use="optional"/>
-            <xs:attribute name="ISBN10" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ISBN13" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="ISBN" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Title" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
