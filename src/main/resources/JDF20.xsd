@@ -6337,12 +6337,9 @@
                 <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
             </xs:sequence>
             <xs:attribute name="AdjustContrast" type="double" use="optional"/>
-            <xs:attribute name="AdjustCyanRed" type="double" use="optional"/>
             <xs:attribute name="AdjustHue" type="double" use="optional"/>
             <xs:attribute name="AdjustLightness" type="double" use="optional"/>
-            <xs:attribute name="AdjustMagentaGreen" type="double" use="optional"/>
             <xs:attribute name="AdjustSaturation" type="double" use="optional"/>
-            <xs:attribute name="AdjustYellowBlue" type="double" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="SourceObjects"/>
