@@ -3908,15 +3908,6 @@
                 <xs:attribute name="ColorantConvertProcess" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantOrder" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="ColorantParams" type="NMTOKENS" use="optional"/>
-                <xs:attribute name="InternalColorModel" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="Basic"/>
-                            <xs:enumeration value="Enhanced"/>
-                            <xs:enumeration value="Explicit"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
                 <xs:attribute name="MappingSelection" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">

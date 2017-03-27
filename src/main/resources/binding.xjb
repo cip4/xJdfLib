@@ -585,9 +585,6 @@
     <xjb:bindings node="//xs:complexType[@name='ExposedMedia']//xs:attribute[@name='PlateType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PlateType"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='InternalColorModel']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="InternalColorModel"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='ProcessColorModel']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ProcessColorModel"/>
     </xjb:bindings>
