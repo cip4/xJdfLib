@@ -4650,7 +4650,6 @@
 
     <xs:element name="ImageEnhancementOp">
         <xs:complexType>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Operation" type="NMTOKEN" use="required"/>
             <xs:attribute name="OperationDetails" type="string" use="optional"/>
             <xs:attribute name="SourceObjects" type="SourceObjects" use="optional"/>
@@ -5135,7 +5134,6 @@
     <xs:element name="ObjectResolution">
         <xs:complexType>
             <xs:attribute name="AntiAliasing" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Resolution" type="XYPair" use="required"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
@@ -5563,7 +5561,6 @@
             <xs:attribute name="Angle" type="double" use="optional"/>
             <xs:attribute name="DotSize" type="double" use="optional"/>
             <xs:attribute name="Frequency" type="double" use="optional"/>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="ScreeningFamily" type="string" use="optional"/>
             <xs:attribute name="ScreeningType" use="optional">
                 <xs:simpleType>
@@ -6367,7 +6364,6 @@
             <xs:attribute name="AdjustMagentaGreen" type="double" use="optional"/>
             <xs:attribute name="AdjustSaturation" type="double" use="optional"/>
             <xs:attribute name="AdjustYellowBlue" type="double" use="optional"/>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="SourceObjects" use="optional">
                 <xs:simpleType>
                     <xs:list itemType="SourceObjects"/>
@@ -6398,7 +6394,6 @@
                 <xs:element maxOccurs="3" minOccurs="0" ref="FileSpec"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="ScreenSelector"/>
             </xs:sequence>
-            <xs:attribute name="ObjectTags" type="NMTOKENS" use="optional"/>
             <xs:attribute name="Operation" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
@@ -6664,7 +6659,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="ScreenSelector"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="ScreenSelector"/>
                 </xs:sequence>
                 <xs:attribute name="IgnoreSourceFile" type="boolean" use="optional"/>
             </xs:extension>
