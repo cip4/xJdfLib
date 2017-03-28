@@ -141,25 +141,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new ApprovalParams Node which already contains values for attributes MinApprovals.
-     *
-     * @param minApprovals Value for MinApprovals attribute.
-     *
-     * @return ApprovalParams Node which already contains defined attributes.
-     */
-    public final ApprovalParams createApprovalParams(final int minApprovals) {
-
-        // create node
-        ApprovalParams approvalParams = super.createApprovalParams();
-
-        // set attributes
-        approvalParams.setMinApprovals(minApprovals);
-
-        // return object
-        return approvalParams;
-    }
-
-    /**
      * Create a new CustomerInfo Node which already contains values for attribute CustomerID.
      *
      * @param customerID Value for CustomerID attribute.

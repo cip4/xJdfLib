@@ -4,10 +4,13 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Address;
+import org.cip4.lib.xjdf.schema.ApprovalParams;
+import org.cip4.lib.xjdf.schema.ApprovalPerson;
 import org.cip4.lib.xjdf.schema.ComChannel;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.Sides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
@@ -195,7 +198,7 @@ public class XJdfValidatorTest {
                 )
             )
         );
-        xJdfBuilder.addResource(nf.createApprovalParams(1));
+
         // TODO xJdfBuilder.addResource(nf.createNodeInfo());
         // TODO ColorIntent
         xJdfBuilder.addResource(contact);

@@ -3,10 +3,7 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
-import org.cip4.lib.xjdf.type.Matrix;
-import org.cip4.lib.xjdf.type.Rectangle;
 import org.cip4.lib.xjdf.type.URI;
-import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -83,19 +80,6 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals("Comment is wrong", COMMENT, comment.getValue());
-    }
-
-    @Test
-    public void testCreateApprovalParams() {
-
-        // arrange
-        final Integer MIN_APPROVALS = 5;
-
-        // act
-        ApprovalParams approvalParams = xJdfNodeFactory.createApprovalParams(MIN_APPROVALS);
-
-        // assert
-        assertEquals("MinApprovals is wrong", MIN_APPROVALS, approvalParams.getMinApprovals());
     }
 
     @Test
