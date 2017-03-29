@@ -158,7 +158,7 @@
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
-    <xs:simpleType name="RegExp">
+    <xs:simpleType name="regExp">
         <xs:restriction base="xs:string"/>
     </xs:simpleType>
 
@@ -937,7 +937,7 @@
                 <xs:attribute name="CutPath" type="PDFPath" use="optional"/>
                 <xs:attribute name="DDESCutType" type="integer" use="optional"/>
                 <xs:attribute name="ShapeDepth" type="double" use="optional"/>
-                <xs:attribute name="ShapeType" use="optional">
+                <xs:attribute name="ShapeType" use="required">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
                             <xs:enumeration value="Path"/>
@@ -2332,7 +2332,7 @@
             <xs:attribute name="DropID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Location" type="NMTOKEN" use="optional"/>
             <xs:attribute name="LotID" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Metadata" type="RegExp" use="optional"/>
+            <xs:attribute name="Metadata" type="regExp" use="optional"/>
             <xs:attribute name="Option" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PageNumber" type="IntegerRange" use="optional"/>
             <xs:attribute name="PartVersion" type="NMTOKEN" use="optional"/>
@@ -3316,7 +3316,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="ShapeType" use="required">
+            <xs:attribute name="ShapeType" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Line"/>
@@ -4557,7 +4557,7 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Format" type="RegExp" use="optional"/>
+            <xs:attribute name="Format" type="regExp" use="optional"/>
             <xs:attribute name="Orientation" type="matrix" use="optional"/>
             <xs:attribute name="Page" type="integer" use="optional"/>
             <xs:attribute name="Position" type="Face" use="optional"/>
