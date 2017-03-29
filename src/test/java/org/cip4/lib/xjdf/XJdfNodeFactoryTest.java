@@ -158,38 +158,6 @@ public class XJdfNodeFactoryTest {
     }
 
     @Test
-    public void testCreateBindingIntent() {
-
-		// arrange
-		final BindingIntent.BindingType BINDING_TYPE = BindingIntent.BindingType.CORNER_STITCH;
-
-        // act
-        BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(BINDING_TYPE);
-
-        // assert
-        assertEquals("BindingType is wrong", BINDING_TYPE, bindingIntent.getBindingType());
-    }
-
-    @Test
-    public void testCreateBindingIntent_2() {
-
-        // arrange
-        BindingIntent.BindingType bindingType = BindingIntent.BindingType.LOOSE_BINDING;
-        EnumEdge bindingEdge = EnumEdge.BOTTOM;
-        BindingIntent.BindingOrder bindingOrder = BindingIntent.BindingOrder.GATHERING;
-
-
-        // act
-        BindingIntent bindingIntent = xJdfNodeFactory.createBindingIntent(bindingType, bindingEdge, bindingOrder);
-
-        // assert
-        assertEquals("BindingType is wrong", bindingType, bindingIntent.getBindingType());
-        assertEquals("BindingType is wrong", EnumEdge.BOTTOM, bindingIntent.getBindingSide());
-        assertEquals("BindingType is wrong", BindingIntent.BindingOrder.GATHERING, bindingIntent.getBindingOrder());
-
-    }
-
-    @Test
     public void testCreateFoldingIntent() {
 
         // arrange

@@ -352,46 +352,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create new BindingIntent Node which already contains values for attribute BindingType.
-     *
-     * @param bindingType Value for BindingType attribute.
-     *
-     * @return BindingIntent Node which already contains defined attributes.
-     */
-    public final BindingIntent createBindingIntent(final BindingIntent.BindingType bindingType) {
-
-        // return object
-        return createBindingIntent(bindingType, null, null);
-    }
-
-    /**
-     * Create new BindingIntent Node which already contains values for attribute BindingType.
-     *
-     * @param bindingType Value for BindingType attribute.
-     * @param bindingSide Value for BindingSide attribute.
-     * @param bindingOrder Value for BindingOrder attribute.
-     *
-     * @return BindingIntent Node which already contains defined attributes.
-     */
-    public final BindingIntent createBindingIntent(
-        final BindingIntent.BindingType bindingType,
-        final EnumEdge bindingSide,
-        final BindingIntent.BindingOrder bindingOrder
-    ) {
-
-        // create node
-        BindingIntent bindingIntent = super.createBindingIntent();
-
-        // set attributes
-        bindingIntent.setBindingType(bindingType);
-        bindingIntent.setBindingSide(bindingSide);
-        bindingIntent.setBindingOrder(bindingOrder);
-
-        // return object
-        return bindingIntent;
-    }
-
-    /**
      * Create new FoldingIntent Node which already contains values for attribute FoldCatalog.
      *
      * @param foldCatalog Value for FoldCatalog attribute.

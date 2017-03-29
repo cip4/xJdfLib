@@ -61,11 +61,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Product"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Resource']//xs:attribute[@name='ContactRef']">
-        <xjb:property name="contact">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Station']//xs:attribute[@name='ShapeDefRef']">
         <xjb:property name="shapeDef">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -548,12 +543,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='ProcessColorModel']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ProcessColorModel"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='FluteDirection']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="FluteDirection"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ShapeDef']//xs:attribute[@name='GrainDirection']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="GrainDirection"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GluingTechnique']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="GluingTechnique"/>
