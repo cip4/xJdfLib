@@ -29,10 +29,8 @@ import java.util.Map;
 
 /**
  * Abstract Validation of XML Documents based on XSD schema file.
- *
- * @param <T> Document type that will be validated.
  */
-public abstract class AbstractXmlValidator<T> {
+public abstract class AbstractXmlValidator {
 
     /**
      * XJdf Error Handler Implementation for Validation.

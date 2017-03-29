@@ -192,6 +192,6 @@ public abstract class AbstractXmlParser<T> {
      *
      * @return Validator
      */
-    protected abstract AbstractXmlValidator<T> createValidator();
+    protected abstract AbstractXmlValidator createValidator();
 
 }

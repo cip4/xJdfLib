@@ -12,7 +12,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
@@ -59,11 +58,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(
+            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
+        );
 
         XJDF xJdf = xJdfBuilder.build();
 
@@ -93,11 +92,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(
+            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
+        );
 
         XJDF xJdf = xJdfBuilder.build();
 
@@ -125,11 +124,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
 
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(
+            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
+        );
 
         XJDF xJdf = xJdfBuilder.build();
         // empty list of types is invalid
@@ -150,11 +149,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
 
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(
+            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
+        );
 
         xJdfBuilder.build().getTypes().add("MyType");
 
@@ -186,11 +185,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
 
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", VALUE);
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(
+            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
+        );
 
         xJdfBuilder.build().getTypes().add("MyType");
 
