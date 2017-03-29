@@ -5,8 +5,6 @@ import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -29,11 +27,6 @@ import java.util.zip.ZipOutputStream;
  * @param <T> Object type to create the abstract xml packager for.
  */
 public abstract class AbstractXmlPackager<T> {
-
-    /**
-     * Logger.
-     */
-    public static final Logger LOGGER = LoggerFactory.getLogger(AbstractXmlPackager.class);
 
     /**
      * Interface for the extraction of a file reference.
@@ -180,8 +173,6 @@ public abstract class AbstractXmlPackager<T> {
 
             try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
                 for (URI uri : assetReferences) {
-                    LOGGER.debug(String.format("Start processing uri '%s'.", uri));
-
                     final String destPath = uri.getDestinationPath();
                     if (destPath != null) {
                         final java.net.URI srcUri = uri.getSourceUri();
