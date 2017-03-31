@@ -5318,7 +5318,7 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="1" ref="FileSpec"/>
+                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 </xs:sequence>
                 <xs:attribute name="Compensation" use="optional">
                     <xs:simpleType>
