@@ -698,6 +698,14 @@
             <xs:attribute name="ResourceWeight" type="double" use="optional"/>
             <xs:attribute name="Start" type="dateTime" use="optional"/>
             <xs:attribute name="StartOffset" type="duration" use="optional"/>
+            <xs:attribute name="Status" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Available"/>
+                        <xs:enumeration value="Unavailable"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Transformation" type="matrix" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
