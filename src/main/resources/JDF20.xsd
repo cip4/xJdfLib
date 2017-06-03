@@ -1321,7 +1321,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="1" ref="ResourceSet"/>
             </xs:sequence>
-            <xs:attribute name="UpdateMethod" use="optional">
+            <xs:attribute name="UpdateMethod" use="required">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Complete"/>
@@ -2518,7 +2518,6 @@
         <xs:complexContent>
             <xs:extension base="SpecificResource">
                 <xs:attribute name="Center" type="XYPair" use="required"/>
-                <xs:attribute name="Rotation" type="double" use="optional"/>
                 <xs:attribute name="Separations" type="NMTOKENS" use="optional"/>
                 <xs:attribute name="Size" type="XYPair" use="optional"/>
             </xs:extension>
@@ -5180,9 +5179,7 @@
     <xs:complexType name="Preview">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
-                </xs:sequence>
+            <xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
                 <xs:attribute name="Compensation" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
