@@ -745,6 +745,9 @@
     <xjb:bindings node="//xs:element[@name='InsertSheet']//xs:attribute[@name='SheetType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="SheetType"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Resource']//xs:attribute[@name='Status']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Status"/>
+    </xjb:bindings>
 
 
 

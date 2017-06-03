@@ -3968,7 +3968,6 @@
     <!-- ** Complex type definition for ContentObject ** -->
     <xs:element name="ContentObject">
         <xs:complexType>
-            <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4695,6 +4694,7 @@
             <xs:attribute name="CompensationCTMTemplate" type="NMTOKENS" use="optional"/>
             <xs:attribute name="CTM" type="matrix" use="required"/>
             <xs:attribute name="HalfTonePhaseOrigin" type="XYPair" use="optional"/>
+            <xs:attribute name="ID" type="ID" use="optional"/>
             <xs:attribute name="Ord" type="integer" use="optional"/>
             <xs:attribute name="PositionRef" type="IDREF" use="optional"/>
             <xs:attribute name="SourceClipPath" type="PDFPath" use="optional"/>
