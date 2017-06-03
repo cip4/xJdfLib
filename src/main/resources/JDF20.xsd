@@ -1556,17 +1556,8 @@
                 <xs:attribute name="BoxTypeDetails" type="string" use="optional"/>
                 <xs:attribute name="ComponentsPerRow" type="integer" use="optional"/>
                 <xs:attribute name="Columns" type="integer" use="optional"/>
-                <xs:attribute name="ComponentOrientation" use="optional">
-                    <xs:simpleType>
-                        <xs:restriction base="xs:NMTOKEN">
-                            <xs:enumeration value="XY"/>
-                            <xs:enumeration value="XZ"/>
-                            <xs:enumeration value="YZ"/>
-                        </xs:restriction>
-                    </xs:simpleType>
-                </xs:attribute>
+                <xs:attribute name="FaceDown" type="Face" use="optional"/>
                 <xs:attribute name="Copies" type="integer" use="optional"/>
-                <xs:attribute name="FillMaterial" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="Layers" type="integer" use="optional"/>
                 <xs:attribute name="MaxWeight" type="double" use="optional"/>
                 <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
@@ -3327,6 +3318,7 @@
                 <xs:element minOccurs="0" name="ExtendedAddress" type="textElement"/>
             </xs:sequence>
             <xs:attribute name="City" type="string" use="optional"/>
+            <xs:attribute name="CivicNumber" type="string" use="optional"/>
             <xs:attribute name="Country" type="string" use="optional"/>
             <xs:attribute name="CountryCode" type="string" use="optional"/>
             <xs:attribute name="PostalCode" type="string" use="optional"/>
@@ -6542,6 +6534,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="1" ref="QueueFilter"/>
             </xs:sequence>
+            <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Operation" use="required">
                 <xs:simpleType>
