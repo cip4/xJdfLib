@@ -723,6 +723,14 @@
             <xs:attribute name="ResourceWeight" type="double" use="optional"/>
             <xs:attribute name="Start" type="dateTime" use="optional"/>
             <xs:attribute name="StartOffset" type="duration" use="optional"/>
+            <xs:attribute name="Status" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Available"/>
+                        <xs:enumeration value="Unavailable"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="Transformation" type="matrix" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -6133,9 +6141,6 @@
     <!-- ** Complex type definition for ColorCorrectionOp ** -->
     <xs:element name="ColorCorrectionOp">
         <xs:complexType>
-            <xs:sequence>
-                <xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
-            </xs:sequence>
             <xs:attribute name="AdjustContrast" type="double" use="optional"/>
             <xs:attribute name="AdjustHue" type="double" use="optional"/>
             <xs:attribute name="AdjustLightness" type="double" use="optional"/>
@@ -6166,7 +6171,6 @@
     <xs:element name="ColorSpaceConversionOp">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="DeviceNSpace"/>
                 <xs:element maxOccurs="3" minOccurs="0" ref="FileSpec"/>
                 <xs:element maxOccurs="1" minOccurs="0" ref="ScreenSelector"/>
             </xs:sequence>
