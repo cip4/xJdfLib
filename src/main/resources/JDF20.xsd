@@ -206,6 +206,24 @@
         </xs:restriction>
     </xs:simpleType>
 
+                <xs:simpleType name="BundleType">
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="BoundSet"/>
+                        <xs:enumeration value="Box"/>
+                        <xs:enumeration value="Carton"/>
+                        <xs:enumeration value="CollectedStack"/>
+                        <xs:enumeration value="CompensatedStack"/>
+                        <xs:enumeration value="Product"/>
+                        <xs:enumeration value="Pallet"/>
+                        <xs:enumeration value="Roll"/>
+                        <xs:enumeration value="Sheet"/>
+                        <xs:enumeration value="Stack"/>
+                        <xs:enumeration value="StrappedStack"/>
+                        <xs:enumeration value="StrappedCompensatedStack"/>
+                        <xs:enumeration value="WrappedBundle"/>
+                    </xs:restriction>
+                </xs:simpleType>
+
     <xs:simpleType name="Side">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Back"/>
@@ -677,6 +695,13 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <xs:simpleType name="UpdateGranularity">
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="All"/>
+                        <xs:enumeration value="ChangesOnly"/>
+                    </xs:restriction>
+    </xs:simpleType>
+
     <xs:element name="Resource">
         <xs:complexType>
             <xs:sequence>
@@ -802,7 +827,7 @@
     <xs:element name="Dependent">
         <xs:complexType>
             <xs:attribute name="JobID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="JobPartID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="JobPartID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PipeID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PipeProtocol" type="NMTOKEN" use="optional"/>
             <xs:attribute name="XJMFURL" type="URL" use="optional"/>
@@ -1156,7 +1181,20 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Type" type="NMTOKEN" use="required"/>
-            <xs:attribute name="URLSchemes" type="NMTOKENS" use="optional"/>
+            <xs:attribute name="URLSchemes" use="optional">
+            <xs:simpleType>
+                    <xs:list>
+                        <xs:simpleType>
+                            <xs:restriction base="xs:NMTOKEN">
+                                <xs:enumeration value="file"/>
+                                <xs:enumeration value="ftp"/>
+                                <xs:enumeration value="http"/>
+                                <xs:enumeration value="https"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:list>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -1193,6 +1231,7 @@
             </xs:sequence>
             <xs:attribute name="MaxQueueSize" type="integer" use="optional"/>
             <xs:attribute name="QueueSize" type="integer" use="optional"/>
+            <xs:attribute name="UpdateGranularity" type="UpdateGranularity" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -1253,7 +1292,6 @@
             <xs:attribute name="Activation" type="Activation" use="optional"/>
             <xs:attribute name="GangName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="GangPolicy" type="EnumGangPolicy" use="optional"/>
-            <xs:attribute name="Hold" type="boolean" use="optional"/>
             <xs:attribute name="NextQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="PrevQueueEntryID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Priority" type="integer" use="optional"/>
@@ -1426,14 +1464,6 @@
             </xs:attribute>
             <xs:attribute name="Languages" type="languages" use="optional"/>
             <xs:attribute name="RepeatTime" type="double" use="optional"/>
-            <xs:attribute name="RetryPolicy" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="DiscardAtNextSignal"/>
-                        <xs:enumeration value="RetryForever"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
             <xs:attribute name="URL" type="URL" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1455,7 +1485,7 @@
                 <xs:element maxOccurs="1" minOccurs="1" ref="Subscription"/>
             </xs:sequence>
             <xs:attribute name="ChannelID" type="NMTOKEN" use="required"/>
-            <xs:attribute name="DeviceID" type="NMTOKEN" use="required"/>
+            <xs:attribute name="DeviceID" type="NMTOKEN" use="optional"/>
             <xs:attribute name="MessageType" type="NMTOKEN" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1487,7 +1517,6 @@
     <xs:element name="Band">
         <xs:complexType>
             <xs:attribute name="Height" type="integer" use="optional"/>
-            <xs:attribute name="WasMarked" type="boolean" use="optional"/>
             <xs:attribute name="Width" type="integer" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
@@ -1566,25 +1595,7 @@
                 <xs:element maxOccurs="unbounded" minOccurs="0" ref="BundleItem"/>
             </xs:sequence>
             <xs:attribute name="Amount" type="integer" use="required"/>
-            <xs:attribute name="BundleType" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="BoundSet"/>
-                        <xs:enumeration value="Box"/>
-                        <xs:enumeration value="Carton"/>
-                        <xs:enumeration value="CollectedStack"/>
-                        <xs:enumeration value="CompensatedStack"/>
-                        <xs:enumeration value="Product"/>
-                        <xs:enumeration value="Pallet"/>
-                        <xs:enumeration value="Roll"/>
-                        <xs:enumeration value="Sheet"/>
-                        <xs:enumeration value="Stack"/>
-                        <xs:enumeration value="StrappedStack"/>
-                        <xs:enumeration value="StrappedCompensatedStack"/>
-                        <xs:enumeration value="WrappedBundle"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="BundleType" type="BundleType" use="optional"/>
             <xs:attribute name="ItemRef" type="IDREF" use="optional"/>
             <xs:attribute name="TotalAmount" type="integer" use="optional"/>
             <xs:attribute name="TotalDimensions" type="shape" use="optional"/>
@@ -2633,7 +2644,7 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Disjointing"/>
                 </xs:sequence>
-                <xs:attribute name="BundleDepth" type="integer" use="optional"/>
+                <xs:attribute name="BundleType" type="BundleType" use="optional"/>
                 <xs:attribute name="Compensate" type="boolean" use="optional"/>
                 <xs:attribute name="LayerAmount" type="IntegerList" use="optional"/>
                 <xs:attribute name="LayerCompression" type="boolean" use="optional"/>
@@ -4506,7 +4517,6 @@
             <xs:attribute name="EncodingDetails" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Format" type="regExp" use="optional"/>
             <xs:attribute name="Orientation" type="matrix" use="optional"/>
-            <xs:attribute name="Page" type="integer" use="optional"/>
             <xs:attribute name="Position" type="Face" use="optional"/>
             <xs:attribute name="Purpose" use="optional">
                 <xs:simpleType>
@@ -4708,7 +4718,6 @@
             <xs:sequence>
                 <xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
             </xs:sequence>
-            <xs:attribute name="RunListRef" type="IDREF" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4787,52 +4796,7 @@
                 <xs:attribute name="FrontCoating" type="Coating" use="optional"/>
                 <xs:attribute name="FrontGlossValue" type="double" use="optional"/>
                 <xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
-                <xs:attribute name="HoleType" use="optional">
-                    <xs:simpleType>
-                        <xs:list>
-                            <xs:simpleType>
-                                <xs:restriction base="xs:string">
-                                    <xs:enumeration value="None"/>
-                                    <xs:enumeration value="S1-generic"/>
-                                    <xs:enumeration value="S-generic"/>
-                                    <xs:enumeration value="R2-generic"/>
-                                    <xs:enumeration value="R2m-DIN"/>
-                                    <xs:enumeration value="R2m-ISO"/>
-                                    <xs:enumeration value="R2m-MIB"/>
-                                    <xs:enumeration value="R2i-US-a"/>
-                                    <xs:enumeration value="R2i-US-b"/>
-                                    <xs:enumeration value="R3-generic"/>
-                                    <xs:enumeration value="R3i-US"/>
-                                    <xs:enumeration value="R4-generic"/>
-                                    <xs:enumeration value="R4m-DIN-A4"/>
-                                    <xs:enumeration value="R4m-DIN-A5"/>
-                                    <xs:enumeration value="R4m-swedish"/>
-                                    <xs:enumeration value="R4i-US"/>
-                                    <xs:enumeration value="R5-generic"/>
-                                    <xs:enumeration value="R5i-US-a"/>
-                                    <xs:enumeration value="R5i-US-b"/>
-                                    <xs:enumeration value="R5i-US-c"/>
-                                    <xs:enumeration value="R6-generic"/>
-                                    <xs:enumeration value="R6m-4h2s"/>
-                                    <xs:enumeration value="R6m-DIN-A5"/>
-                                    <xs:enumeration value="R7-generic"/>
-                                    <xs:enumeration value="R7i-US-a"/>
-                                    <xs:enumeration value="R7i-US-b"/>
-                                    <xs:enumeration value="R7i-US-c"/>
-                                    <xs:enumeration value="R11m-7h4s"/>
-                                    <xs:enumeration value="P16_9i-rect-0t"/>
-                                    <xs:enumeration value="P12m-rect-0t"/>
-                                    <xs:enumeration value="W2_1i-round-0t"/>
-                                    <xs:enumeration value="W2_1i-square-0t"/>
-                                    <xs:enumeration value="W3_1i-square-0t"/>
-                                    <xs:enumeration value="C9.5m-round-0t"/>
-                                    <xs:enumeration value="Explicit"/>
-                                </xs:restriction>
-                            </xs:simpleType>
-                        </xs:list>
-                    </xs:simpleType>
-                </xs:attribute>
-                <xs:attribute name="ImagableSide" use="optional">
+                 <xs:attribute name="ImagableSide" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:string">
                             <xs:enumeration value="Front"/>
@@ -5915,8 +5879,47 @@
             </xs:attribute>
             <xs:attribute name="Extent" type="XYPair" use="required"/>
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
-            <xs:attribute name="Pattern" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Pitch" type="XYPair" use="optional"/>
+            <xs:attribute name="Pattern" type="NMTOKEN" use="optional">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:enumeration value="None"/>
+                                    <xs:enumeration value="S1-generic"/>
+                                    <xs:enumeration value="S-generic"/>
+                                    <xs:enumeration value="R2-generic"/>
+                                    <xs:enumeration value="R2m-DIN"/>
+                                    <xs:enumeration value="R2m-ISO"/>
+                                    <xs:enumeration value="R2m-MIB"/>
+                                    <xs:enumeration value="R2i-US-a"/>
+                                    <xs:enumeration value="R2i-US-b"/>
+                                    <xs:enumeration value="R3-generic"/>
+                                    <xs:enumeration value="R3i-US"/>
+                                    <xs:enumeration value="R4-generic"/>
+                                    <xs:enumeration value="R4m-DIN-A4"/>
+                                    <xs:enumeration value="R4m-DIN-A5"/>
+                                    <xs:enumeration value="R4m-swedish"/>
+                                    <xs:enumeration value="R4i-US"/>
+                                    <xs:enumeration value="R5-generic"/>
+                                    <xs:enumeration value="R5i-US-a"/>
+                                    <xs:enumeration value="R5i-US-b"/>
+                                    <xs:enumeration value="R5i-US-c"/>
+                                    <xs:enumeration value="R6-generic"/>
+                                    <xs:enumeration value="R6m-4h2s"/>
+                                    <xs:enumeration value="R6m-DIN-A5"/>
+                                    <xs:enumeration value="R7-generic"/>
+                                    <xs:enumeration value="R7i-US-a"/>
+                                    <xs:enumeration value="R7i-US-b"/>
+                                    <xs:enumeration value="R7i-US-c"/>
+                                    <xs:enumeration value="R11m-7h4s"/>
+                                    <xs:enumeration value="P16_9i-rect-0t"/>
+                                    <xs:enumeration value="P12m-rect-0t"/>
+                                    <xs:enumeration value="W2_1i-round-0t"/>
+                                    <xs:enumeration value="W2_1i-square-0t"/>
+                                    <xs:enumeration value="W3_1i-square-0t"/>
+                                    <xs:enumeration value="C9.5m-round-0t"/>
+                               </xs:restriction>
+                            </xs:simpleType>
+             </xs:attribute>
+           <xs:attribute name="Pitch" type="XYPair" use="optional"/>
             <xs:attribute name="Reinforcement" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Shape" use="required">
                 <xs:simpleType>
@@ -6772,14 +6775,7 @@
             <xs:sequence>
                 <xs:element maxOccurs="1" minOccurs="0" ref="QueueFilter"/>
             </xs:sequence>
-            <xs:attribute name="UpdateGranularity" use="optional">
-                <xs:simpleType>
-                    <xs:restriction base="xs:NMTOKEN">
-                        <xs:enumeration value="All"/>
-                        <xs:enumeration value="ChangesOnly"/>
-                    </xs:restriction>
-                </xs:simpleType>
-            </xs:attribute>
+            <xs:attribute name="UpdateGranularity" type="UpdateGranularity" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
