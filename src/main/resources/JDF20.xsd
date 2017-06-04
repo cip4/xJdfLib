@@ -1826,9 +1826,8 @@
             <xs:attribute name="Height" type="double" use="optional"/>
             <xs:attribute name="ImageSize" type="XYPair" use="optional"/>
             <xs:attribute name="Position" type="XYPair" use="optional"/>
-            <xs:attribute name="ShapeName" type="NMTOKEN" use="optional"/>
             <xs:attribute name="Separation" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="ToolName" type="string" use="optional"/>
+            <xs:attribute name="ToolName" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
@@ -4250,7 +4249,6 @@
                 </xs:simpleType>
             </xs:attribute>
             <xs:attribute name="Offset" type="XYPair" use="optional"/>
-            <xs:attribute name="Units" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
