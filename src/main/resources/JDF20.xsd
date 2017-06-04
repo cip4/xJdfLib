@@ -4117,7 +4117,6 @@
     <!-- ** Complex type definition for DeviceNSpace ** -->
     <xs:element name="DeviceNSpace">
         <xs:complexType>
-            <xs:attribute name="N" type="integer" use="required"/>
             <xs:attribute name="Name" type="NMTOKEN" use="required"/>
             <xs:attribute name="Separations" type="NMTOKENS" use="required"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
