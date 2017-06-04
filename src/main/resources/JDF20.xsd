@@ -6552,6 +6552,7 @@
                         <xs:enumeration value="Move"/>
                         <xs:enumeration value="Remove"/>
                         <xs:enumeration value="Resume"/>
+                        <xs:enumeration value="SetGang"/>
                         <xs:enumeration value="Suspend"/>
                     </xs:restriction>
                 </xs:simpleType>
