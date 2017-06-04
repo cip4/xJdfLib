@@ -2697,11 +2697,11 @@
             <xs:attribute name="TabCount" type="integer" use="optional"/>
             <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="double" use="optional"/>
-            <xs:attribute name="TabExtensionMylar" type="boolean" use="optional"/>
-            <xs:attribute name="TabBindMylar" type="boolean" use="optional"/>
+            <xs:attribute name="ReinforceTabs" type="boolean" use="optional"/>
+            <xs:attribute name="ReinforceBind" type="boolean" use="optional"/>
             <xs:attribute name="TabBodyCopy" type="boolean" use="optional"/>
-            <xs:attribute name="TabMylarColor" type="NamedColor" use="optional"/>
-            <xs:attribute name="TabMylarColorDetails" type="string" use="optional"/>
+            <xs:attribute name="ReinforceColor" type="NamedColor" use="optional"/>
+            <xs:attribute name="ReinforceColorDetails" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
