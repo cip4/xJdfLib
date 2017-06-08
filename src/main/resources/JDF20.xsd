@@ -6849,6 +6849,7 @@
                 <xs:sequence>
                     <xs:element maxOccurs="unbounded" minOccurs="0" ref="ResourceInfo"/>
                 </xs:sequence>
+                <xs:attribute name="PreviousRef" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -6938,6 +6939,7 @@
                 <xs:sequence>
                     <xs:element maxOccurs="1" minOccurs="1" ref="DeviceInfo"/>
                 </xs:sequence>
+                <xs:attribute name="PreviousRef" type="NMTOKEN" use="optional"/>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

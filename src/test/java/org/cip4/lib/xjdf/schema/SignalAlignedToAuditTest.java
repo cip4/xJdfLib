@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class SignalAlignedToAuditTest {
 
     private XsdReader xsdReader;
-    private List<String> signalOnlyAttributes = Arrays.asList("AgentName", "AgentVersion", "ChannelMode", "ICSVersions");
+    private List<String> signalOnlyAttributes = Arrays.asList("ChannelMode");
 
     @Before
     public void setUp() throws Exception {
@@ -34,7 +34,7 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
-    @Ignore("XJDF-1069")
+    @Ignore("XJDF-1020")
     public void signalResourceAndAuditResourceAreAligned() throws Exception {
         Collection<Node> signalResourceProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalResource")
@@ -46,7 +46,6 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
-    @Ignore("XJDF-1069")
     public void signalStatusAndAuditStatusAreAligned() throws Exception {
         Collection<Node> signalResourceProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalStatus")
