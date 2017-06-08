@@ -91,11 +91,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='SheetActivation']//xs:attribute[@name='RunListRef']">
-        <xjb:property name="runList">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='BindIn']//xs:attribute[@name='ChildRef']">
         <xjb:property name="child">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -394,9 +389,6 @@
     <xjb:bindings node="//xs:element[@name='ResourceInfo']//xs:attribute[@name='Level']/xs:simpleType">
         <xjb:typesafeEnumClass name="Level"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='BundleItem']//xs:attribute[@name='BundleType']/xs:simpleType">
-        <xjb:typesafeEnumClass name="BundleType"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='DeviceFilter']//xs:attribute[@name='DeviceDetails']/xs:simpleType">
         <xjb:typesafeEnumClass name="DeviceDetails"/>
     </xjb:bindings>
@@ -436,9 +428,6 @@
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='ImagableSide']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ImagableSide"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='Subscription']//xs:attribute[@name='RetryPolicy']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="RetryPolicy"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ResourceQuParams']//xs:attribute[@name='ResourceDetails']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResourceDetails"/>
     </xjb:bindings>
@@ -447,9 +436,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='JobPhase']//xs:attribute[@name='DeadLine']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="DeadLine"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='QueueFilter']//xs:attribute[@name='QueueEntryDetails']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="QueueEntryDetails"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='BindingOrder']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BindingOrder"/>
@@ -550,9 +536,6 @@
     <xjb:bindings node="//xs:complexType[@name='BoxPackingParams']//xs:attribute[@name='BoxType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BoxType"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BoxPackingParams']//xs:attribute[@name='ComponentOrientation']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="ComponentOrientation"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='PDFCreationDetails']//xs:attribute[@name='AutoRotatePages']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="AutoRotatePages"/>
     </xjb:bindings>
@@ -594,9 +577,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='NodeInfo']//xs:attribute[@name='DueLevel']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="DueLevel"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='QueueStatusParams']//xs:attribute[@name='UpdateGranularity']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="UpdateGranularity"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='MediaUnit']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="MediaUnit"/>
@@ -751,9 +731,6 @@
 
 
 
-    <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='HoleType']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="HoleType"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='LooseBindingParams']//xs:attribute[@name='BindingType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BindingType"/>
     </xjb:bindings>
