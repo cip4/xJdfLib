@@ -443,6 +443,9 @@
     <xjb:bindings node="//xs:element[@name='HolePattern']//xs:attribute[@name='ReferenceEdge']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ReferenceEdge"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='HolePattern']//xs:attribute[@name='Pattern']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Pattern"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='BindingType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BindingType"/>
     </xjb:bindings>
@@ -728,6 +731,9 @@
     <xjb:bindings node="//xs:element[@name='Resource']//xs:attribute[@name='Status']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Status"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='URLSchemes']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="URLSchemes"/>
+    </xjb:bindings>
 
 
 
@@ -745,5 +751,8 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='OrdType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="OrdType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BinderySignature']//xs:attribute[@name='OverfoldSide']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="OverfoldSide"/>
     </xjb:bindings>
 </xjb:bindings>

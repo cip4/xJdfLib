@@ -4286,16 +4286,6 @@
         </xs:complexType>
     </xs:element>
 
-    <!-- ** Complex type definition for DynamicField ** -->
-    <xs:element name="DynamicField">
-        <xs:complexType>
-            <xs:attribute name="Format" type="string" use="required"/>
-            <xs:attribute name="ReplaceField" type="string" use="optional"/>
-            <xs:attribute name="Template" type="NMTOKENS" use="required"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
-
     <!-- ** Complex type definition for ExposedMedia ** -->
     <xs:element name="ExposedMedia" substitutionGroup="SpecificResource" type="ExposedMedia"/>
     <xs:complexType name="ExposedMedia">
