@@ -66,7 +66,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
         // arrange
         MediaIntent mediaIntent = new XJdfNodeFactory().createMediaIntent();
-        mediaIntent.setWeight(135d);
+        mediaIntent.setWeight(135f);
 
         LayoutIntent layoutIntent = new XJdfNodeFactory().createLayoutIntent();
         layoutIntent.setFinishedDimensions(new Shape(595.27559055d, 822.04724409d));

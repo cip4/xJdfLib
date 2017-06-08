@@ -319,7 +319,7 @@ public class XJdfNodeFactory extends ObjectFactory {
     public final MediaIntent createMediaIntent(
         final String mediaQuality,
         final String brand,
-        final Double weight
+        final Float weight
     ) {
 
         // create node
@@ -417,10 +417,10 @@ public class XJdfNodeFactory extends ObjectFactory {
      * @return SignatureCell Node which already contains defined attributes.
      */
     public final SignatureCell createSignatureCell(
-        final Double trim,
+        final Float trim,
         final XYPair trimBox,
-        final Double backOverfold,
-        final Double frontOverfold
+        final Float backOverfold,
+        final Float frontOverfold
     ) {
 
         // create SignatureCell Node

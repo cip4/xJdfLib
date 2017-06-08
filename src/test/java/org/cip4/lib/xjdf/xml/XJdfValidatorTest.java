@@ -155,7 +155,7 @@ public class XJdfValidatorTest {
                 .withSides(Sides.TWO_SIDED_HEAD_TO_HEAD)
                 .withFinishedDimensions(new Shape(595.27559055, 822.04724409))
         );
-        productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135d));
+        productBuilder.addIntent(nf.createMediaIntent("IPG_135", null, 135f));
         productBuilder.addIntent(nf.createProductionIntent("Lithography"));
         productBuilder.addIntent(nf.createFoldingIntent("F6-1"));
         // TODO productBuilder.addIntent(nf.createcol)

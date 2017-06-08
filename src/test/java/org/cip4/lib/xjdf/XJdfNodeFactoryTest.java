@@ -118,7 +118,7 @@ public class XJdfNodeFactoryTest {
         // arrange
         final String MEDIA_QUALITY = UUID.randomUUID().toString();
         final String BRAND = UUID.randomUUID().toString();
-        final Double WEIGHT = 3.22d;
+        final Float WEIGHT = 3.22f;
 
         // act
         MediaIntent mediaIntent = xJdfNodeFactory.createMediaIntent(MEDIA_QUALITY, BRAND, WEIGHT);
