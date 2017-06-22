@@ -380,9 +380,6 @@
     <xjb:bindings node="//xs:element[@name='IdentificationField']//xs:attribute[@name='Purpose']/xs:simpleType">
         <xjb:typesafeEnumClass name="Purpose"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='CoilBindingDetails']//xs:attribute[@name='CoilShape']/xs:simpleType">
-        <xjb:typesafeEnumClass name="CoilShape"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ResourceInfo']//xs:attribute[@name='CommandResult']/xs:simpleType">
         <xjb:typesafeEnumClass name="CommandResult"/>
     </xjb:bindings>
