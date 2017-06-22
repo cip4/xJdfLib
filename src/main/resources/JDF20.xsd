@@ -4576,7 +4576,7 @@
     <xs:element name="InsertSheet">
         <xs:complexType>
             <xs:sequence>
-                <xs:element maxOccurs="1" minOccurs="0" ref="RunList"/>
+                <xs:element maxOccurs="unbounded" minOccurs="0" ref="StripMark"/>
             </xs:sequence>
             <xs:attribute name="IsWaste" type="boolean" use="optional"/>
             <xs:attribute name="SheetFormat" type="NMTOKEN" use="optional"/>
