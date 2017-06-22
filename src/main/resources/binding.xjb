@@ -734,6 +734,9 @@
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='URLSchemes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="URLSchemes"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='GangCmdFilter']//xs:attribute[@name='Policy']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="Policy"/>
+    </xjb:bindings>
 
 
 
