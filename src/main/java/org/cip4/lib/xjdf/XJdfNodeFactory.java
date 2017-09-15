@@ -407,39 +407,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new SignatureCell Node which already contains defined attributes.
-     *
-     * @param trim All Trim attributes (TrimFace, TrimFoot, TrimHead, TrimSpine) as Double.
-     * @param trimBox TrimBox attribute as Double.
-     * @param backOverfold BackOverfold attribute as Double.
-     * @param frontOverfold FrontOverfold attribute as Double.
-     *
-     * @return SignatureCell Node which already contains defined attributes.
-     */
-    public final SignatureCell createSignatureCell(
-        final Float trim,
-        final XYPair trimBox,
-        final Float backOverfold,
-        final Float frontOverfold
-    ) {
-
-        // create SignatureCell Node
-        SignatureCell signatureCell = super.createSignatureCell();
-
-        // set attributes
-        signatureCell.setBackOverfold(backOverfold);
-        signatureCell.setFrontOverfold(frontOverfold);
-        signatureCell.setTrimFace(trim);
-        signatureCell.setTrimFoot(trim);
-        signatureCell.setTrimHead(trim);
-        signatureCell.setSpine(trim);
-        signatureCell.setTrimSize(trimBox);
-
-        // return node
-        return signatureCell;
-    }
-
-    /**
      * Create a new Position Node which already contains defined attributes.
      *
      * @param absoluteBox AbsoluteBox attribute as Rectangle.

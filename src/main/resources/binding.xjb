@@ -278,8 +278,8 @@
         </xjb:property>
     </xjb:bindings>
 
-    <xjb:bindings node="//xs:complexType//xs:element[@ref='Message']">
-        <xjb:property>
+    <xjb:bindings node="//xs:element[@name='XJMF']//xs:choice">
+        <xjb:property name="Messages">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Message"/>
         </xjb:property>
     </xjb:bindings>
