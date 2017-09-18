@@ -1890,7 +1890,7 @@
     <!-- ** Complex type definition for Event ** -->
     <xs:element name="Event">
         <xs:complexType>
-            <xs:attribute name="EventID" type="string" use="required"/>
+            <xs:attribute name="EventID" type="NMTOKEN" use="required"/>
             <xs:attribute name="EventValue" type="string" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
