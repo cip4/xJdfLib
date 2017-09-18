@@ -10,7 +10,7 @@
                 </xjdf:ColorIntent>
             </xjdf:Intent>
             <xjdf:Intent Name="MediaIntent">
-                <xjdf:MediaIntent MediaQuality="AFF_115"/>
+                <xjdf:MediaIntent MediaQuality="AFF_115" MediaType="Paper"/>
             </xjdf:Intent>
             <xjdf:Intent Name="LayoutIntent">
                 <xjdf:LayoutIntent FinishedDimensions="1689.448818897638 2386.7716535433074 0.0" Pages="0"
@@ -25,7 +25,7 @@
                 </xjdf:ColorIntent>
             </xjdf:Intent>
             <xjdf:Intent Name="MediaIntent">
-                <xjdf:MediaIntent MediaQuality="AFF_115"/>
+                <xjdf:MediaIntent MediaQuality="AFF_115" MediaType="Paper"/>
             </xjdf:Intent>
             <xjdf:Intent Name="LayoutIntent">
                 <xjdf:LayoutIntent FinishedDimensions="1689.448818897638 2386.7716535433074 0.0" Pages="0"
@@ -40,7 +40,7 @@
     </xjdf:ResourceSet>
     <xjdf:ResourceSet Name="Media">
         <xjdf:Resource ID="Media_1">
-            <xjdf:Media Dimension="3430.26 2452.21" MediaQuality="AFF_115"/>
+            <xjdf:Media Dimension="3430.26 2452.21" MediaQuality="AFF_115" MediaType="Paper"/>
         </xjdf:Resource>
     </xjdf:ResourceSet>
     <xjdf:ResourceSet Name="CustomerInfo">

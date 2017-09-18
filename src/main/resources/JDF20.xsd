@@ -197,6 +197,30 @@
     </xs:simpleType>
 
     <!-- Enums -->
+    <xs:simpleType name="MediaType">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="Blanket"/>
+            <xs:enumeration value="CorrugatedBoard"/>
+            <xs:enumeration value="Disc"/>
+            <xs:enumeration value="EmbossingFoil"/>
+            <xs:enumeration value="Film"/>
+            <xs:enumeration value="Foil"/>
+            <xs:enumeration value="GravureCylinder"/>
+            <xs:enumeration value="ImagingCylinder"/>
+            <xs:enumeration value="LaminatingFoil"/>
+            <xs:enumeration value="Other"/>
+            <xs:enumeration value="Paper"/>
+            <xs:enumeration value="Plate"/>
+            <xs:enumeration value="Screen"/>
+            <xs:enumeration value="SelfAdhesive"/>
+            <xs:enumeration value="ShrinkFoil"/>
+            <xs:enumeration value="Sleeve"/>
+            <xs:enumeration value="Textile"/>
+            <xs:enumeration value="Transparency"/>
+            <xs:enumeration value="Vinyl"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <xs:simpleType name="Activation">
         <xs:restriction base="xs:NMTOKEN">
             <xs:enumeration value="Informative"/>
@@ -3170,7 +3194,7 @@
                 <xs:attribute name="MediaColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="MediaColorDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaType" type="MediaType" use="required"/>
                 <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="NamedWeight" type="string" use="optional"/>
                 <xs:attribute name="Opacity" type="EnumOpacity" use="optional"/>
@@ -4180,23 +4204,6 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <!-- ** Complex type definition for DigitalMedia ** -->
-    <xs:element name="DigitalMedia" substitutionGroup="SpecificResource" type="DigitalMedia"/>
-    <xs:complexType name="DigitalMedia">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="FileSpec"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
-                </xs:sequence>
-                <xs:attribute name="Capacity" type="integer" use="optional"/>
-                <xs:attribute name="MediaLabel" type="string" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="required"/>
-                <xs:attribute name="MediaTypeDetails" type="string" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
     <!-- ** Complex type definition for DigitalPrintingParams ** -->
     <xs:element name="DigitalPrintingParams" substitutionGroup="SpecificResource" type="DigitalPrintingParams"/>
     <xs:complexType name="DigitalPrintingParams">
@@ -4796,7 +4803,7 @@
                 <xs:attribute name="MediaColorNameDetails" type="string" use="optional"/>
                 <xs:attribute name="MediaQuality" type="string" use="optional"/>
                 <xs:attribute name="MediaSetCount" type="integer" use="optional"/>
-                <xs:attribute name="MediaType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="MediaType" type="MediaType" use="required"/>
                 <xs:attribute name="MediaTypeDetails" type="NMTOKEN" use="optional"/>
                 <xs:attribute name="MediaUnit" use="optional">
                     <xs:simpleType>
