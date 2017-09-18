@@ -6406,7 +6406,7 @@
             <xs:attribute name="InitialResolution" type="XYPair" use="optional"/>
             <xs:attribute name="Optimize" type="boolean" use="optional"/>
             <xs:attribute name="OverPrintMode" type="integer" use="optional"/>
-            <xs:attribute name="PDFVersion" type="float" use="optional"/>
+            <xs:attribute name="PDFVersion" type="NMTOKEN" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
         </xs:complexType>
     </xs:element>
