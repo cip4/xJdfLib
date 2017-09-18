@@ -5591,7 +5591,14 @@
             <xs:attribute name="TabEdge" type="Edge" use="optional"/>
             <xs:attribute name="TabExtensionDistance" type="float" use="optional"/>
             <xs:attribute name="TabOffset" type="float" use="optional"/>
-            <xs:attribute name="TabSetCollationOrder" type="NMTOKEN" use="optional"/>
+            <xs:attribute name="TabSetCollationOrder" use="optional">
+                <xs:simpleType>
+                    <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="Forward"/>
+                        <xs:enumeration value="Reverse"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:attribute>
             <xs:attribute name="TabsPerBank" type="integer" use="optional"/>
             <xs:attribute name="TabWidth" type="float" use="optional"/>
             <xs:anyAttribute namespace="##other" processContents="lax"/>
