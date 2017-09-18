@@ -2868,17 +2868,17 @@
                             <xs:enumeration value="AdhesiveNote"/>
                             <xs:enumeration value="ChannelBinding"/>
                             <xs:enumeration value="CoilBinding"/>
+                            <xs:enumeration value="CombBinding"/>
                             <xs:enumeration value="CornerStitch"/>
                             <xs:enumeration value="EdgeGluing"/>
                             <xs:enumeration value="HardCover"/>
                             <xs:enumeration value="LooseBinding"/>
                             <xs:enumeration value="None"/>
-                            <xs:enumeration value="PlasticComb"/>
-                            <xs:enumeration value="Ring"/>
+                            <xs:enumeration value="RingBinding"/>
                             <xs:enumeration value="SaddleStitch"/>
                             <xs:enumeration value="SideStitch"/>
                             <xs:enumeration value="SoftCover"/>
-                            <xs:enumeration value="StripBind"/>
+                            <xs:enumeration value="StripBinding"/>
                             <xs:enumeration value="Tape"/>
                             <xs:enumeration value="WireComb"/>
                         </xs:restriction>
