@@ -1,33 +1,36 @@
-package org.cip4.lib.xjdf.validator;
+package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.DeviceInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.validator.Ancestors;
+import org.cip4.lib.xjdf.validator.ValidationResult;
+import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 import java.util.List;
 
 /**
  * Extended validation for element //FoldingIntent.
  */
-public class DeviceInfoValidator implements Validator<DeviceInfo> {
+public class DeviceInfoValidator extends SimpleValidator<DeviceInfo> {
 
     @Override
-    public final ValidationResult validate(final DeviceInfo deviceInfo) {
-        ValidationResult result = new ValidationResult();
-        validateFileSpec(deviceInfo, result);
-        validateIdleStartTime(deviceInfo, result);
-        return result;
+    public final void validate(
+        final DeviceInfo deviceInfo, final Ancestors ancestors, ValidationResultBuilder validationResult
+    ) {
+        validateFileSpec(deviceInfo, validationResult);
+        validateIdleStartTime(deviceInfo, validationResult);
     }
 
     /**
      * Validate rules of attribute @IdleStartTime.
      *
      * @param deviceInfo DeviceInfo element to validate.
-     * @param validationResult Container validations will be reported to.
+     * @param resultBuilder Container validations will be reported to.
      */
-    private void validateIdleStartTime(final DeviceInfo deviceInfo, final ValidationResult validationResult) {
+    private void validateIdleStartTime(final DeviceInfo deviceInfo, final ValidationResultBuilder resultBuilder) {
         if (null != deviceInfo.getIdleStartTime()) {
             if (null != deviceInfo.getJobPhase() && !deviceInfo.getJobPhase().isEmpty()) {
-                validationResult.append(
+                resultBuilder.append(
                     "//DeviceInfo/@IdleStartTime SHALL NOT be specified if JobPhase Elements are present in the "
                         + "DeviceInfo"
                 );
@@ -41,7 +44,7 @@ public class DeviceInfoValidator implements Validator<DeviceInfo> {
      * @param deviceInfo DeviceInfo element to validate.
      * @param validationResult Container validations will be reported to.
      */
-    private void validateFileSpec(final DeviceInfo deviceInfo, final ValidationResult validationResult) {
+    private void validateFileSpec(final DeviceInfo deviceInfo, final ValidationResultBuilder validationResult) {
         List<FileSpec> fileSpecs = deviceInfo.getFileSpec();
         for (FileSpec fileSpec : fileSpecs) {
             if (!"Schema".equals(fileSpec.getResourceUsage()) && !"CurrentSchema".equals(fileSpec.getResourceUsage())) {

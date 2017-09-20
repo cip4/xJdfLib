@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.validator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,6 +23,12 @@ public class ValidationResult {
      */
     public ValidationResult(final String... violations) {
         this.violations.addAll(Arrays.asList(violations));
+    }
+
+    public ValidationResult(final Collection<ValidationResult> results) {
+        for (ValidationResult validationResult : results) {
+            append(validationResult);
+        }
     }
 
     /**

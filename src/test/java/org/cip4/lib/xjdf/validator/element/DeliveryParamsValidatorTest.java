@@ -1,9 +1,10 @@
-package org.cip4.lib.xjdf.validator;
+package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.junit.Test;
 
+import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 import static org.junit.Assert.*;
 
 public class DeliveryParamsValidatorTest {
@@ -11,55 +12,37 @@ public class DeliveryParamsValidatorTest {
     @Test
     public void validateAllowsSingleOccurrence() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams("RemoteURL")
-        );
-        assertTrue(validationResult.isValid());
+        assertThat(getDeliveryParams("RemoteURL"), isValid(validator));
     }
 
     @Test
     public void validateAllowsNoOccurrence() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams()
-        );
-        assertTrue(validationResult.isValid());
+        assertThat(getDeliveryParams(), isValid(validator));
     }
 
     @Test
     public void validateDisallowsDuplicate() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams("RemoteURL", "RemoteURL")
-        );
-        assertFalse(validationResult.isValid());
+        ValidationAssertions.assertIsInvalid(validator, getDeliveryParams("RemoteURL", "RemoteURL"));
     }
 
     @Test
     public void validateDisallowsUnknownResourceUsages() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams("SomeInvalidString")
-        );
-        assertFalse(validationResult.isValid());
+        ValidationAssertions.assertIsInvalid(validator, getDeliveryParams("SomeInvalidString"));
     }
 
     @Test
     public void validateDisallowsEmptyResourceUsage() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams("")
-        );
-        assertFalse(validationResult.isValid());
+        ValidationAssertions.assertIsInvalid(validator, getDeliveryParams(""));
     }
 
     @Test
     public void validateDisallowsResourceUsageNull() throws Exception {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        ValidationResult validationResult = validator.validate(
-            getDeliveryParams(new String[]{null})
-        );
-        assertFalse(validationResult.isValid());
+        ValidationAssertions.assertIsInvalid(validator, getDeliveryParams(new String[]{null}));
     }
 
     private DeliveryParams getDeliveryParams(String... fileSpecResourceUsages) {

@@ -1,9 +1,12 @@
-package org.cip4.lib.xjdf.validator;
+package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.FoldingIntent;
+import org.cip4.lib.xjdf.validator.element.FoldingIntentValidator;
+import org.cip4.lib.xjdf.validator.element.Validator;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 
 public class FoldingIntentValidatorTest {
 
@@ -11,7 +14,7 @@ public class FoldingIntentValidatorTest {
     public void validateAllowsFoldingIntentWithoutFoldCatalogOrFoldingDetails() throws Exception {
         FoldingIntent foldingIntent = new FoldingIntent();
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
-        assertTrue(validator.validate(foldingIntent).isValid());
+        assertThat(foldingIntent, isValid(validator));
     }
 
     @Test
@@ -19,7 +22,7 @@ public class FoldingIntentValidatorTest {
         FoldingIntent foldingIntent = new FoldingIntent();
         foldingIntent.withFoldCatalog("F4-1");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
-        assertTrue(validator.validate(foldingIntent).isValid());
+        assertThat(foldingIntent, isValid(validator));
     }
 
     @Test
@@ -28,7 +31,7 @@ public class FoldingIntentValidatorTest {
         foldingIntent.withFoldCatalog("F4-1");
         foldingIntent.withFoldingDetails("CustomFold4");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
-        assertTrue(validator.validate(foldingIntent).isValid());
+        assertThat(foldingIntent, isValid(validator));
     }
 
     @Test
@@ -36,7 +39,7 @@ public class FoldingIntentValidatorTest {
         FoldingIntent foldingIntent = new FoldingIntent();
         foldingIntent.withFoldingDetails("CustomFold4");
         Validator<FoldingIntent> validator = new FoldingIntentValidator();
-        assertFalse(validator.validate(foldingIntent).isValid());
+        ValidationAssertions.assertIsInvalid(validator, foldingIntent);
     }
 
 }

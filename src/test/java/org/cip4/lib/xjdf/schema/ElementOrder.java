@@ -1,8 +1,6 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.cip4.lib.xjdf.validator.XjdfValidator;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
-import org.cip4.lib.xjdf.xml.XJmfParser;
 import org.junit.Test;
 
 import javax.xml.bind.ValidationException;

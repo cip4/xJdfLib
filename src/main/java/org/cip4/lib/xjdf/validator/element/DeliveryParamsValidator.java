@@ -1,7 +1,10 @@
-package org.cip4.lib.xjdf.validator;
+package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.validator.Ancestors;
+import org.cip4.lib.xjdf.validator.ValidationResult;
+import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +12,7 @@ import java.util.List;
 /**
  * Extended validation for element //FoldingIntent.
  */
-public class DeliveryParamsValidator implements Validator<DeliveryParams> {
+public class DeliveryParamsValidator extends SimpleValidator<DeliveryParams> {
 
     /**
      * List of allowed resource usages within FileSpec elements.
@@ -17,17 +20,17 @@ public class DeliveryParamsValidator implements Validator<DeliveryParams> {
     private final List<String> allowedResourceUsages = Arrays.asList("DeliveryContents", "MailingList", "RemoteURL");
 
     @Override
-    public final ValidationResult validate(final DeliveryParams deliveryParams) {
-        ValidationResult result = new ValidationResult();
-
+    public void validate(
+        final DeliveryParams deliveryParams, final Ancestors ancestors, ValidationResultBuilder validationResult
+    ) {
         List<FileSpec> fileSpecs = deliveryParams.getFileSpec();
         for (String resourceUsage : allowedResourceUsages) {
-            result.append(validateResourceUsageCount(fileSpecs, resourceUsage));
+            validationResult.append(validateResourceUsageCount(fileSpecs, resourceUsage));
         }
 
         for (FileSpec fileSpec : fileSpecs) {
             if (!allowedResourceUsages.contains(fileSpec.getResourceUsage())) {
-                result.append(String.format(
+                validationResult.append(String.format(
                     "FileSpec with @ResourceUsage='%s' is not allowed within element '//DeliveryParams'.",
                     fileSpec.getResourceUsage()
                 ));
@@ -35,7 +38,6 @@ public class DeliveryParamsValidator implements Validator<DeliveryParams> {
         }
 
         // Validate FileSpec elements in DeliveryParams
-        return result;
     }
 
     /**

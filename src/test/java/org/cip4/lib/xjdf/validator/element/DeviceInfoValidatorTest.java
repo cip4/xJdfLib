@@ -1,10 +1,10 @@
-package org.cip4.lib.xjdf.validator;
+package org.cip4.lib.xjdf.validator.element;
 
-import org.cip4.lib.xjdf.schema.Device;
 import org.cip4.lib.xjdf.schema.DeviceInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.junit.Test;
 
+import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 import static org.junit.Assert.*;
 
 public class DeviceInfoValidatorTest {
@@ -14,7 +14,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo();
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertTrue(validator.validate(deviceInfo).isValid());
+        assertThat(deviceInfo, isValid(validator));
     }
 
     @Test
@@ -22,7 +22,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("Schema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertTrue(validator.validate(deviceInfo).isValid());
+        assertThat(deviceInfo, isValid(validator));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("CurrentSchema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertTrue(validator.validate(deviceInfo).isValid());
+        assertThat(deviceInfo, isValid(validator));
     }
 
     @Test
@@ -38,7 +38,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage(""));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertFalse(validator.validate(deviceInfo).isValid());
+        ValidationAssertions.assertIsInvalid(validator, deviceInfo);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage(null));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertFalse(validator.validate(deviceInfo).isValid());
+        ValidationAssertions.assertIsInvalid(validator, deviceInfo);
     }
 
     @Test
@@ -54,6 +54,6 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("Foo"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertFalse(validator.validate(deviceInfo).isValid());
+        ValidationAssertions.assertIsInvalid(validator, deviceInfo);
     }
 }
