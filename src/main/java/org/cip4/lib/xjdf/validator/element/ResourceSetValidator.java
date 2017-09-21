@@ -22,14 +22,16 @@ public class ResourceSetValidator extends SimpleValidator<ResourceSet> {
         } else {
             String resourceSetName = resourceSet.getName();
             for (Resource resource : resourceSet.getResource()) {
-                String resourceName = resource.getSpecificResource().getName().getLocalPart();
-                if (!resourceName.equals(resourceSetName)) {
-                    validationResult.append(String.format(
-                        "ResourceSet with @Name='%s' may only contain Resources of type '%s', but '%s' was found.",
-                        resourceSetName,
-                        resourceSetName,
-                        resourceName
-                    ));
+                if (resource.getSpecificResource() != null) {
+                    String resourceName = resource.getSpecificResource().getName().getLocalPart();
+                    if (!resourceName.equals(resourceSetName)) {
+                        validationResult.append(String.format(
+                            "ResourceSet with @Name='%s' may only contain Resources of type '%s', but '%s' was found.",
+                            resourceSetName,
+                            resourceSetName,
+                            resourceName
+                        ));
+                    }
                 }
             }
         }

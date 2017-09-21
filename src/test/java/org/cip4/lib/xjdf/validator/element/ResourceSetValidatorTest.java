@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.DeliveryParams;
+import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 import org.junit.Before;
@@ -62,5 +63,16 @@ public class ResourceSetValidatorTest {
         ResourceSetValidator validator = new ResourceSetValidator();
 
         ValidationAssertions.assertIsInvalid(validator, parameterSet);
+    }
+
+    @Test
+    public void validateAllowsResourceWithoutSpecificResource() throws Exception {
+        ResourceSet parameterSet = new ResourceSet()
+            .withName("Foo")
+            .withResource(new Resource());
+
+        ResourceSetValidator validator = new ResourceSetValidator();
+
+        assertThat(parameterSet, isValid(validator));
     }
 }
