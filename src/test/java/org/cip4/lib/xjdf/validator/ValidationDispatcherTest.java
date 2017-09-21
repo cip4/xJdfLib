@@ -21,8 +21,9 @@ public class ValidationDispatcherTest {
         dispatcher.validate(xjdf);
         Mockito.verify(productListValidator).validate(
             Mockito.eq(productList),
-            Mockito.any(Ancestors.class),
+            Mockito.eq(new Ancestors(xjdf)),
             Mockito.any(ValidationResultBuilder.class)
         );
     }
+
 }

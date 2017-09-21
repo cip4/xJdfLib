@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Ancestors {
 
@@ -42,4 +43,16 @@ public class Ancestors {
         ));
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Ancestors ancestors1 = (Ancestors) o;
+        return Objects.equals(ancestors, ancestors1.ancestors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ancestors);
+    }
 }

@@ -36,8 +36,9 @@ public class ValidationDispatcher {
                 validator.validate(element, ancestors, validationResult);
             }
         }
+        Ancestors newAncestors = ancestors.push(element);
         for (Object child : getChildElements(element)) {
-            validate(child, ancestors, validationResult);
+            validate(child, newAncestors, validationResult);
         }
     }
 
