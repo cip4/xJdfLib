@@ -44,25 +44,24 @@ public class ValidationDispatcher {
 
     public Collection<Object> getChildElements(final Object element) {
         Collection<Object> result = new ArrayList<>();
-        try {
-            for (PropertyDescriptor propertyDescriptor :
-                Introspector.getBeanInfo(element.getClass(), Object.class).getPropertyDescriptors()) {
-                Method propertyReadMethod = propertyDescriptor.getReadMethod();
-                if (propertyReadMethod == null) {
-                    continue;
-                }
-                Object propertyValue = propertyReadMethod.invoke(element);
-                if (propertyValue == null) {
-                    continue;
-                }
-                if (propertyValue instanceof Collection) {
-                    result.addAll((Collection) propertyValue);
-                } else {
-                    result.add(propertyValue);
-                }
+        for (Method method : element.getClass().getMethods()) {
+            if (!method.getName().startsWith("get")) {
+                continue;
             }
-        } catch (IntrospectionException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException("Could not validate descendant elements.", e);
+            Object propertyValue = null;
+            try {
+                propertyValue = method.invoke(element);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                continue;
+            }
+            if (propertyValue == null) {
+                continue;
+            }
+            if (propertyValue instanceof Collection) {
+                result.addAll((Collection) propertyValue);
+            } else {
+                result.add(propertyValue);
+            }
         }
         return result;
     }
