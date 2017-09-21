@@ -3,6 +3,8 @@ package org.cip4.lib.xjdf.validator;
 import org.cip4.lib.xjdf.validator.element.Validator;
 
 import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlIDREF;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -78,7 +80,7 @@ public class ValidationDispatcher {
             return;
         }
         for (Method method : c.getDeclaredMethods()) {
-            if (isGetter(method)) {
+            if (isGetter(method) && !isReference(c, method)) {
                 getters.add(method);
             }
         }
@@ -90,6 +92,19 @@ public class ValidationDispatcher {
             && method.getName().startsWith("get")
             && method.getTypeParameters().length == 0
             && !method.getReturnType().equals(void.class);
+    }
+
+    private boolean isReference(Class c, Method method) {
+        try {
+            return getPropertyByGetter(c, method).isAnnotationPresent(XmlIDREF.class);
+        } catch (NoSuchFieldException e) {
+            return false;
+        }
+    }
+
+    private Field getPropertyByGetter(Class c, Method getter) throws NoSuchFieldException {
+        String propertyName = getter.getName().substring(3);
+        return c.getField(propertyName);
     }
 
 }
