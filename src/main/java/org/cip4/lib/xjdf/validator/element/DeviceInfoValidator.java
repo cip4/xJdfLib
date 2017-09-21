@@ -21,6 +21,11 @@ public class DeviceInfoValidator extends SimpleValidator<DeviceInfo> {
         validateIdleStartTime(deviceInfo, validationResult);
     }
 
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof DeviceInfo;
+    }
+
     /**
      * Validate rules of attribute @IdleStartTime.
      *

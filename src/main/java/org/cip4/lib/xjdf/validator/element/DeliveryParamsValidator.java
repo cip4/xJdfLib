@@ -40,6 +40,11 @@ public class DeliveryParamsValidator extends SimpleValidator<DeliveryParams> {
         // Validate FileSpec elements in DeliveryParams
     }
 
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof DeliveryParams;
+    }
+
     /**
      * Validate that a resourceUsage value is only used for a single FileSpec element.
      *

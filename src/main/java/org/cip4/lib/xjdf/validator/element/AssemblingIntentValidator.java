@@ -19,4 +19,9 @@ public class AssemblingIntentValidator extends SimpleValidator<AssemblingIntent>
             );
         }
     }
+
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof AssemblingIntent;
+    }
 }

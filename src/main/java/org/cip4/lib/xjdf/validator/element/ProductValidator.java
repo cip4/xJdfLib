@@ -26,4 +26,9 @@ public class ProductValidator extends SimpleValidator<Product> {
             discoveredIntentNames.add(intent.getName());
         }
     }
+
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof Product;
+    }
 }

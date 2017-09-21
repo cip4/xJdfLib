@@ -21,4 +21,9 @@ public class FoldingIntentValidator extends SimpleValidator<FoldingIntent> {
         }
     }
 
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof FoldingIntent;
+    }
+
 }

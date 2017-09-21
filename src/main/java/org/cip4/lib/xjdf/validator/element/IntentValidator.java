@@ -19,4 +19,9 @@ public class IntentValidator extends SimpleValidator<Intent> {
             ));
         }
     }
+
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof Intent;
+    }
 }

@@ -37,4 +37,9 @@ public class ResourceSetValidator extends SimpleValidator<ResourceSet> {
         }
     }
 
+    @Override
+    public boolean canValidate(final Object o) {
+        return o instanceof ResourceSet;
+    }
+
 }
