@@ -2,15 +2,14 @@ package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.validator.element.Validator;
 
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 
 public class ValidationDispatcher {
 
@@ -44,11 +43,13 @@ public class ValidationDispatcher {
 
     public Collection<Object> getChildElements(final Object element) {
         Collection<Object> result = new ArrayList<>();
-        for (Method method : element.getClass().getMethods()) {
-            if (!method.getName().startsWith("get")) {
+        Collection<Method> getters = new ArrayList<>();
+        getGetters(element.getClass(), getters);
+        for (Method method : getters) {
+            if (!method.getName().startsWith("get") || method.getGenericParameterTypes().length != 0) {
                 continue;
             }
-            Object propertyValue = null;
+            Object propertyValue;
             try {
                 propertyValue = method.invoke(element);
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -59,11 +60,32 @@ public class ValidationDispatcher {
             }
             if (propertyValue instanceof Collection) {
                 result.addAll((Collection) propertyValue);
+            } else if (propertyValue instanceof Map) {
+                result.addAll(((Map) propertyValue).values());
             } else {
                 result.add(propertyValue);
             }
         }
         return result;
+    }
+
+    private void getGetters(Class c, Collection<Method> getters) {
+        if (c.getClass().equals(Object.class)) {
+            return;
+        }
+        for (Method method : c.getDeclaredMethods()) {
+            if (isGetter(method)) {
+                getters.add(method);
+            }
+        }
+
+    }
+
+    private boolean isGetter(Method method) {
+        return Modifier.isPublic(method.getModifiers())
+            && method.getName().startsWith("get")
+            && method.getTypeParameters().length == 0
+            && !method.getReturnType().equals(void.class);
     }
 
 }

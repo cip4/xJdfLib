@@ -15,6 +15,7 @@ public class ValidationDispatcherTest {
         XJDF xjdf = new XJDF().withProductList(productList);
 
         Validator<ProductList> productListValidator = Mockito.mock(Validator.class);
+        Mockito.when(productListValidator.canValidate(xjdf)).thenReturn(false);
         Mockito.when(productListValidator.canValidate(productList)).thenReturn(true);
 
         ValidationDispatcher dispatcher = new ValidationDispatcher(productListValidator);
