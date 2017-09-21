@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.validator.element.Validator;
 
+import javax.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -54,6 +55,9 @@ public class ValidationDispatcher {
                 propertyValue = method.invoke(element);
             } catch (IllegalAccessException | InvocationTargetException e) {
                 continue;
+            }
+            if (propertyValue instanceof JAXBElement) {
+                propertyValue = ((JAXBElement) propertyValue).getValue();
             }
             if (propertyValue == null) {
                 continue;
