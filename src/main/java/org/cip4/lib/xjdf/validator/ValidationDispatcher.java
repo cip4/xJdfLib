@@ -3,11 +3,8 @@ package org.cip4.lib.xjdf.validator;
 import org.cip4.lib.xjdf.validator.element.Validator;
 
 import javax.xml.bind.JAXBElement;
-import javax.xml.bind.annotation.XmlIDREF;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -46,10 +43,9 @@ public class ValidationDispatcher {
 
     public Collection<Object> getChildElements(final Object element) {
         Collection<Object> result = new ArrayList<>();
-        Collection<Method> getters = new ArrayList<>();
-        getGetters(element.getClass(), getters);
-        for (Method method : getters) {
-            if (!method.getName().startsWith("get") || method.getGenericParameterTypes().length != 0) {
+        ClassInspector inspector = new ClassInspector(element.getClass());
+        for (Method method : inspector.getGetters()) {
+            if (inspector.isReference(method)) {
                 continue;
             }
             Object propertyValue;
@@ -73,38 +69,6 @@ public class ValidationDispatcher {
             }
         }
         return result;
-    }
-
-    private void getGetters(Class c, Collection<Method> getters) {
-        if (c.getClass().equals(Object.class)) {
-            return;
-        }
-        for (Method method : c.getDeclaredMethods()) {
-            if (isGetter(method) && !isReference(c, method)) {
-                getters.add(method);
-            }
-        }
-
-    }
-
-    private boolean isGetter(Method method) {
-        return Modifier.isPublic(method.getModifiers())
-            && method.getName().startsWith("get")
-            && method.getTypeParameters().length == 0
-            && !method.getReturnType().equals(void.class);
-    }
-
-    private boolean isReference(Class c, Method method) {
-        try {
-            return getPropertyByGetter(c, method).isAnnotationPresent(XmlIDREF.class);
-        } catch (NoSuchFieldException e) {
-            return false;
-        }
-    }
-
-    private Field getPropertyByGetter(Class c, Method getter) throws NoSuchFieldException {
-        String propertyName = getter.getName().substring(3);
-        return c.getField(propertyName);
     }
 
 }
