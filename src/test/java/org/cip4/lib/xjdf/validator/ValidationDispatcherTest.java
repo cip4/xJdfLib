@@ -6,11 +6,10 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.VariableIntent;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.validator.element.Validator;
+import org.hamcrest.collection.IsEmptyIterable;
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -41,7 +40,10 @@ public class ValidationDispatcherTest {
         RefAnchor refAnchor = new RefAnchor().withRRef(resource);
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertEquals(Collections.emptyList(), dispatcher.getChildElements(refAnchor));
+        assertThat(
+            dispatcher.getChildElements(refAnchor),
+            IsEmptyIterable.emptyIterable()
+        );
     }
 
     @Test
@@ -50,14 +52,33 @@ public class ValidationDispatcherTest {
         XJDF xjdf = new XJDF().withProductList(productList);
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertEquals(Arrays.asList(productList), dispatcher.getChildElements(xjdf));
+        assertThat(
+            dispatcher.getChildElements(xjdf),
+            IsIterableContainingInAnyOrder.containsInAnyOrder(
+                (Object) productList
+            )
+        );
     }
 
     @Test
     public void enumHasNoChildElements() throws Exception {
-        VariableIntent.VariableType enumValue =VariableIntent.VariableType.AREA;
+        VariableIntent.VariableType enumValue = VariableIntent.VariableType.AREA;
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertEquals(Collections.emptyList(), dispatcher.getChildElements(enumValue));
+        assertThat(
+            dispatcher.getChildElements(enumValue),
+            IsEmptyIterable.emptyIterable()
+        );
+    }
+
+    @Test
+    public void ignoreChildElementsFromForeignPackages() throws Exception {
+        XJDF xjdf = new XJDF().withJobID("JobID");
+
+        ValidationDispatcher dispatcher = new ValidationDispatcher();
+        assertThat(
+            dispatcher.getChildElements(xjdf),
+            IsEmptyIterable.emptyIterable()
+        );
     }
 }

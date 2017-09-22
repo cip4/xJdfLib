@@ -5,13 +5,38 @@ import org.cip4.lib.xjdf.validator.element.Validator;
 import javax.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 
 public class ValidationDispatcher {
+
+    class ChildElements implements Iterable<Object> {
+
+        private Collection<Object> elements = new LinkedList<>();
+
+        public void addIfAppropriate(Object o) {
+            if (o != null
+                && o.getClass().getPackage().getName().startsWith("org.cip4.lib.xjdf")) {
+                elements.add(o);
+            }
+        }
+
+        public void addAllAppropriate(Collection<Object> os) {
+            for (Object o : os) {
+                addIfAppropriate(o);
+            }
+        }
+
+        @Override
+        public Iterator<Object> iterator() {
+            return elements.iterator();
+        }
+
+    }
 
     private Collection<Validator> validators = new HashSet<>();
 
@@ -41,8 +66,8 @@ public class ValidationDispatcher {
         }
     }
 
-    public Collection<Object> getChildElements(final Object element) {
-        Collection<Object> result = new ArrayList<>();
+    public ChildElements getChildElements(final Object element) {
+        ChildElements childElements = new ChildElements();
         ClassInspector inspector = new ClassInspector(element.getClass());
         for (Method method : inspector.getGetters()) {
             if (inspector.isReference(method)) {
@@ -57,18 +82,16 @@ public class ValidationDispatcher {
             if (propertyValue instanceof JAXBElement) {
                 propertyValue = ((JAXBElement) propertyValue).getValue();
             }
-            if (propertyValue == null) {
-                continue;
-            }
             if (propertyValue instanceof Collection) {
-                result.addAll((Collection) propertyValue);
+                childElements.addAllAppropriate((Collection) propertyValue);
             } else if (propertyValue instanceof Map) {
-                result.addAll(((Map) propertyValue).values());
+                childElements.addAllAppropriate(((Map) propertyValue).values());
             } else {
-                result.add(propertyValue);
+                childElements.addIfAppropriate(propertyValue);
             }
         }
-        return result;
+
+        return childElements;
     }
 
 }
