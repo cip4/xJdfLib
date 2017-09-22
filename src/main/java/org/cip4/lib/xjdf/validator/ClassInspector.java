@@ -22,7 +22,7 @@ public class ClassInspector {
     }
 
     private void readGetters(Collection<Method> getters, Class c) {
-        if (c.equals(Object.class)) {
+        if (c.equals(Object.class) || c.equals(Enum.class)) {
             return;
         }
         for (Method method : c.getDeclaredMethods()) {
