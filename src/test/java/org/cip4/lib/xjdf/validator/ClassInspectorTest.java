@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.validator;
 
+import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,7 +28,8 @@ public class ClassInspectorTest {
             return fieldWithReference;
         }
 
-        public void getVoid(){}
+        public void getVoid() {
+        }
 
         public Object getArgument(Object o) {
             return o;
@@ -72,23 +74,23 @@ public class ClassInspectorTest {
 
     @Test
     public void gettersContainsExactlyTheGetters() throws Exception {
-        assertEquals(
-            Arrays.asList(
+        assertThat(
+            stubClassInspector.getGetters(),
+            IsIterableContainingInAnyOrder.containsInAnyOrder(
                 StubClass.class.getDeclaredMethod("getBoringField"),
                 StubClass.class.getDeclaredMethod("getFieldWithReference")
-            ),
-            stubClassInspector.getGetters()
+            )
         );
     }
 
     @Test
     public void gettersContainsGettersOfParentClass() throws Exception {
-        assertEquals(
-            Arrays.asList(
+        assertThat(
+            stubChildClassInspector.getGetters(),
+            IsIterableContainingInAnyOrder.containsInAnyOrder(
                 StubClass.class.getDeclaredMethod("getBoringField"),
                 StubClass.class.getDeclaredMethod("getFieldWithReference")
-            ),
-            stubChildClassInspector.getGetters()
+            )
         );
     }
 
