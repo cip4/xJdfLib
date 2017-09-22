@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.validator.Ancestors;
-import org.cip4.lib.xjdf.validator.ValidationResult;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 public class IntentValidator extends SimpleValidator<Intent> {
@@ -10,7 +9,9 @@ public class IntentValidator extends SimpleValidator<Intent> {
     public void validate(
         final Intent intent, final Ancestors ancestors, ValidationResultBuilder validationResult
     ) {
-        if (!intent.getName().equals(intent.getProductIntent().getName().getLocalPart())) {
+        if (intent.getProductIntent() != null
+            && !intent.getName().equals(intent.getProductIntent().getName().getLocalPart())
+            ) {
             validationResult.append(String.format(
                 "The name of the element within //Intent SHALL be equal to //Intent/@Name. "
                     + "Found //Intent/@Name='%s' containing element with name '%s'",

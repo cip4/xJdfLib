@@ -35,4 +35,15 @@ public class IntentValidatorTest {
             "The name of the element within //Intent SHALL be equal to //Intent/@Name."
         );
     }
+
+    @Test
+    public void allowIntentWithoutSpecificIntent() throws Exception {
+        Intent intent = new Intent()
+            .withName("BindingIntent");
+        IntentValidator validator = new IntentValidator();
+        assertThat(
+            intent,
+            isValid(validator)
+        );
+    }
 }
