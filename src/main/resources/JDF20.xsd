@@ -667,11 +667,11 @@
 
     <xs:simpleType name="WorkStyle">
         <xs:restriction base="xs:string">
+            <xs:enumeration value="Perfecting"/>
             <xs:enumeration value="Simplex"/>
             <xs:enumeration value="WorkAndBack"/>
-            <xs:enumeration value="WorkAndTurn"/>
             <xs:enumeration value="WorkAndTumble"/>
-            <xs:enumeration value="WorkAndTwist"/>
+            <xs:enumeration value="WorkAndTurn"/>
         </xs:restriction>
     </xs:simpleType>
 
