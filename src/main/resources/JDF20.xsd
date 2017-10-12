@@ -4969,7 +4969,15 @@
                     </xs:simpleType>
                 </xs:attribute>
                 <xs:attribute name="CTM" type="matrix" use="optional"/>
-                <xs:attribute name="PreviewFileType" type="NMTOKEN" use="optional"/>
+                <xs:attribute name="PreviewFileType" use="optional">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:NMTOKEN">
+                            <xs:enumeration value="PNG"/>
+                            <xs:enumeration value="CIP3Multiple"/>
+                            <xs:enumeration value="CIP3Single"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:attribute>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>

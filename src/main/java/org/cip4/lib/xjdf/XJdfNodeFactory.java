@@ -260,41 +260,6 @@ public class XJdfNodeFactory extends ObjectFactory {
     }
 
     /**
-     * Create a new Preview Node which already contains a value for attribute URL.
-     *
-     * @param url Value for URL attribute.
-     *
-     * @return Preview Node which already contains defined attributes.
-     */
-    public final Preview createPreview(final URI url) {
-
-        return createPreview(url, null);
-    }
-
-    /**
-     * Create a new Preview Node which already contains values for attributes PreviewUsage, URL and PreviewFileType.
-     *
-     * @param url Value for URL attribute.
-     * @param previewFileType Value for PreviewFileType attribute.
-     *
-     * @return Preview Node which already contains defined attributes.
-     */
-    public final Preview createPreview(final URI url, final String previewFileType) {
-
-        // create node
-        Preview preview = super.createPreview();
-
-        preview.setFileSpec(
-            new FileSpec()
-                .withURL(url)
-        );
-        preview.setPreviewFileType(previewFileType);
-
-        // return object
-        return preview;
-    }
-
-    /**
      * Create new MediaIntent Node which already contains values for attribute MediaQuality.
      *
      * @param mediaQuality Value for MediaQuality attribute.

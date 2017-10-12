@@ -758,4 +758,7 @@
     <xjb:bindings node="//xs:complexType[@name='BinderySignature']//xs:attribute[@name='OverfoldSide']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="OverfoldSide"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Preview']//xs:attribute[@name='PreviewFileType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PreviewFileType"/>
+    </xjb:bindings>
 </xjb:bindings>
