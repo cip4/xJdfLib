@@ -1370,6 +1370,8 @@
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Empty"/>
+                        <xs:enumeration value="Full"/>
+                        <xs:enumeration value="High"/>
                         <xs:enumeration value="Low"/>
                         <xs:enumeration value="OK"/>
                     </xs:restriction>
