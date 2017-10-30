@@ -9,6 +9,8 @@ import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.UUID;
@@ -33,6 +35,10 @@ public class Resources {
      */
     private final XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
 
+
+    public Resources() {
+        this(new ArrayList<ResourceSet>());
+    }
     /**
      * Constructor.
      *
@@ -100,6 +106,37 @@ public class Resources {
     }
 
     /**
+     * Returns a list of parameter types matching the selection.
+     *
+     * @param findClass The class to search for in the list.
+     * @param processUsage ProcessUsage to search for.
+     * @param part The part to search for in the list.
+     *
+     * @return A list of parameter types that matches the input parameters.
+     */
+    public  <T> List<T> findSpecificResource(
+         final Class<T> findClass, final String processUsage, final Part part
+    ) {
+        ResourceSet resourceSet = findResourceSet(findClass.getSimpleName(), processUsage);
+        List<T> foundParameters = new ArrayList<>();
+        if (resourceSet == null) {
+            return foundParameters;
+        }
+
+        for (Resource resource : resourceSet.getResource()) {
+            if (!isAnyPartMatch(part, resource.getPart())) {
+                continue;
+            }
+            SpecificResource parameterType = resource.getSpecificResource().getValue();
+            if (findClass.isInstance(parameterType)) {
+                foundParameters.add((T) resource.getSpecificResource().getValue());
+            }
+        }
+        return foundParameters;
+    }
+
+
+    /**
      * Add an ResourceSet to the known resources.
      * This method will insert the resources in lexicographic order while adding new sets with the same name
      * after existing elements with the same name.
@@ -117,7 +154,7 @@ public class Resources {
                 break;
             }
         }
-        ((ListIterator<ResourceSet>) listIterator).add(resourceSet);
+        listIterator.add(resourceSet);
     }
 
     /**
@@ -154,7 +191,53 @@ public class Resources {
      * @return Factory for creating xjdf nodes.
      */
     @NotNull
-    protected final XJdfNodeFactory getNodeFactory() {
+    private XJdfNodeFactory getNodeFactory() {
         return nodeFactory;
+    }
+
+
+    /**
+     * Returns true if the productPart matches any part in the list.
+     * @param searchingPart The part to search for.
+     * @param parts List of parts used to scan for a matching partitions.
+     * @return boolean.
+     */
+    private boolean isAnyPartMatch(final Part searchingPart, final List<Part> parts) {
+        if (parts == null) {
+            return true;
+        }
+        for (Part part : parts) {
+            if(isPartsMatching(searchingPart, part)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @param searchingPart part to search for
+     * @param part part to check against
+     * @return true if parts matching. According to partition mechanism. See XJDF spec.
+     */
+    boolean isPartsMatching(final Part searchingPart,final Part part){
+        for (Field partField : Part.class.getDeclaredFields()) {
+            try {
+                partField.setAccessible(true);
+                if (partField.get(searchingPart) == null) {
+                    continue;
+                }
+                if (partField.get(part) == null) {
+                    continue;
+                }
+                if (!partField.get(part).equals(partField.get(searchingPart))) {
+                    return false;
+
+                }
+            } catch (IllegalAccessException e) {
+                throw new RuntimeException("I hope, that this can't happen.");
+            }
+        }
+        return true;
     }
 }

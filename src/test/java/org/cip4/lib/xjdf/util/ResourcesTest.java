@@ -1,16 +1,20 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.Layout;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.SpecificResource;
+import org.cip4.lib.xjdf.schema.WrappingParams;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -224,5 +228,61 @@ public class ResourcesTest {
         Resource resource = resourceSet.getResource().get(0);
         assertSame(part, resource.getPart().get(0));
         assertSame(specificResource, resource.getSpecificResource().getValue());
+    }
+
+    @Test
+    public void isPartsMatchingForTheSameParts(){
+        Part part = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(part, part));
+    }
+
+    @Test
+    public void isPartsMatchingForEqualParts(){
+        Part part = new Part().withProductPart("Foo");
+        Part part2 = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey(){
+        Part part = new Part().withProductPart("Foo");
+        Part part2 = new Part().withProductPart("Foo2");
+        assertFalse(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey2(){
+        Part part = new Part().withProductPart("Foo").withBinderySignatureID("Foo");
+        Part part2 = new Part().withProductPart("Foo").withBinderySignatureID("Foo1");
+        assertFalse(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPartsMatchingWhenSearchKeyIsNotContainedInPart() throws Exception {
+        Part searchPart = new Part().withProductPart("Foo");
+        Part part = new Part();
+        assertTrue(new Resources().isPartsMatching(searchPart, part));
+    }
+
+    @Test
+    public void isPartsMatchingWhenPartIsNotContainedInSearchPart() throws Exception {
+        Part searchPart = new Part();
+        Part part = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(searchPart, part));
+    }
+
+    @Test
+    public void findSpecificResourceWithoutMatchingResource() throws Exception {
+        Resources resources = new Resources();
+        resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), "Wrapping");
+        assertEquals(Collections.EMPTY_LIST, resources.findSpecificResource(Layout.class, null, new Part()));
+    }
+
+    @Test
+    public void findSpecificResourceWithMatchingResource() throws Exception {
+        Resources resources = new Resources();
+        WrappingParams specificResource = new WrappingParams();
+        resources.addResource(specificResource, new Part(), null);
+        assertEquals(Collections.singletonList(specificResource), resources.findSpecificResource(specificResource.getClass(), null, new Part()));
     }
 }
