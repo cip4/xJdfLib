@@ -6,6 +6,7 @@ import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
+import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.WrappingParams;
 import org.junit.Before;
@@ -13,7 +14,6 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -231,27 +231,27 @@ public class ResourcesTest {
     }
 
     @Test
-    public void isPartsMatchingForTheSameParts(){
+    public void isPartsMatchingForTheSameParts() {
         Part part = new Part().withProductPart("Foo");
         assertTrue(new Resources().isPartsMatching(part, part));
     }
 
     @Test
-    public void isPartsMatchingForEqualParts(){
+    public void isPartsMatchingForEqualParts() {
         Part part = new Part().withProductPart("Foo");
         Part part2 = new Part().withProductPart("Foo");
         assertTrue(new Resources().isPartsMatching(part, part2));
     }
 
     @Test
-    public void isPatsNotMatchingForDifferentValuesForTheSameKey(){
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey() {
         Part part = new Part().withProductPart("Foo");
         Part part2 = new Part().withProductPart("Foo2");
         assertFalse(new Resources().isPartsMatching(part, part2));
     }
 
     @Test
-    public void isPatsNotMatchingForDifferentValuesForTheSameKey2(){
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey2() {
         Part part = new Part().withProductPart("Foo").withBinderySignatureID("Foo");
         Part part2 = new Part().withProductPart("Foo").withBinderySignatureID("Foo1");
         assertFalse(new Resources().isPartsMatching(part, part2));
@@ -272,10 +272,35 @@ public class ResourcesTest {
     }
 
     @Test
-    public void findSpecificResourceWithoutMatchingResource() throws Exception {
+    public void findSpecificResourceWithoutMatchingResourceSet() throws Exception {
         Resources resources = new Resources();
         resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), "Wrapping");
-        assertEquals(Collections.EMPTY_LIST, resources.findSpecificResource(Layout.class, null, new Part()));
+        assertEquals(Collections.EMPTY_LIST, resources.findSpecificResource(Layout.class, new Part(), null));
+    }
+
+    @Test
+    public void findSpecificResourceWithoutMatchingResource() throws Exception {
+        Resources resources = new Resources();
+        resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), null);
+        assertEquals(
+            Collections.EMPTY_LIST,
+            resources.findSpecificResource(WrappingParams.class, new Part().withProductPart("bar"), null)
+        );
+    }
+
+    @Test
+    public void findSpecificResourceByConsistentPart() throws Exception {
+        Resources resources = new Resources();
+        WrappingParams wrappingParams = new WrappingParams();
+        resources.addResource(wrappingParams, new Part().withProductPart("foo"), null);
+        assertEquals(
+            Collections.singletonList(wrappingParams),
+            resources.findSpecificResource(
+                WrappingParams.class,
+                new Part().withProductPart("foo").withSide(Side.FRONT),
+                null
+            )
+        );
     }
 
     @Test
@@ -283,6 +308,10 @@ public class ResourcesTest {
         Resources resources = new Resources();
         WrappingParams specificResource = new WrappingParams();
         resources.addResource(specificResource, new Part(), null);
-        assertEquals(Collections.singletonList(specificResource), resources.findSpecificResource(specificResource.getClass(), null, new Part()));
+        assertEquals(Collections.singletonList(specificResource), resources.findSpecificResource(
+            specificResource.getClass(),
+            new Part(),
+            null
+        ));
     }
 }

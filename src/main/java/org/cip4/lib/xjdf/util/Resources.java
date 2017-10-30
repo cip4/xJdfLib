@@ -35,10 +35,13 @@ public class Resources {
      */
     private final XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
 
-
+    /**
+     * Constructor.
+     */
     public Resources() {
         this(new ArrayList<ResourceSet>());
     }
+
     /**
      * Constructor.
      *
@@ -109,13 +112,13 @@ public class Resources {
      * Returns a list of parameter types matching the selection.
      *
      * @param findClass The class to search for in the list.
-     * @param processUsage ProcessUsage to search for.
      * @param part The part to search for in the list.
+     * @param processUsage ProcessUsage to search for.
      *
      * @return A list of parameter types that matches the input parameters.
      */
-    public  <T> List<T> findSpecificResource(
-         final Class<T> findClass, final String processUsage, final Part part
+    public <T extends SpecificResource> List<T> findSpecificResource(
+        final Class<T> findClass, final Part part, final String processUsage
     ) {
         ResourceSet resourceSet = findResourceSet(findClass.getSimpleName(), processUsage);
         List<T> foundParameters = new ArrayList<>();
@@ -198,16 +201,15 @@ public class Resources {
 
     /**
      * Returns true if the productPart matches any part in the list.
+     *
      * @param searchingPart The part to search for.
      * @param parts List of parts used to scan for a matching partitions.
+     *
      * @return boolean.
      */
     private boolean isAnyPartMatch(final Part searchingPart, final List<Part> parts) {
-        if (parts == null) {
-            return true;
-        }
         for (Part part : parts) {
-            if(isPartsMatching(searchingPart, part)){
+            if (isPartsMatching(searchingPart, part)) {
                 return true;
             }
         }
@@ -215,12 +217,12 @@ public class Resources {
     }
 
     /**
-     *
      * @param searchingPart part to search for
      * @param part part to check against
+     *
      * @return true if parts matching. According to partition mechanism. See XJDF spec.
      */
-    boolean isPartsMatching(final Part searchingPart,final Part part){
+    boolean isPartsMatching(final Part searchingPart, final Part part) {
         for (Field partField : Part.class.getDeclaredFields()) {
             try {
                 partField.setAccessible(true);
