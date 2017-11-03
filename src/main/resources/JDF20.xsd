@@ -2739,7 +2739,6 @@
                     <xs:element maxOccurs="1" minOccurs="0" ref="SideStitching"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="SoftCoverBinding"/>
                     <xs:element maxOccurs="1" minOccurs="0" ref="Tabs"/>
-                    <xs:element maxOccurs="1" minOccurs="0" ref="ThreadSewing"/>
                 </xs:sequence>
                 <xs:attribute name="BackCoverColor" type="NamedColor" use="optional"/>
                 <xs:attribute name="BackCoverColorDetails" type="string" use="optional"/>
@@ -5823,13 +5822,6 @@
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
-
-    <xs:element name="ThreadSewing">
-        <xs:complexType>
-            <xs:attribute name="Sealing" type="boolean" use="optional"/>
-            <xs:anyAttribute namespace="##other" processContents="lax"/>
-        </xs:complexType>
-    </xs:element>
 
     <xs:element name="ThreadSewingParams" substitutionGroup="SpecificResource" type="ThreadSewingParams"/>
     <xs:complexType name="ThreadSewingParams">
