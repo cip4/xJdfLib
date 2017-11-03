@@ -198,6 +198,13 @@ public class Resources {
         return nodeFactory;
     }
 
+    /**
+     * Getter for the ResourceSets.
+     * @return ResourceSets.
+     */
+    public List<ResourceSet> getResourceSets() {
+        return resourceSets;
+    }
 
     /**
      * Returns true if the productPart matches any part in the list.
