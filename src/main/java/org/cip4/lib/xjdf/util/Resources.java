@@ -200,7 +200,7 @@ public class Resources {
 
     /**
      * Getter for the ResourceSets.
-     * @return ResourceSets.
+     * @return List of ResourceSets.
      */
     public List<ResourceSet> getResourceSets() {
         return resourceSets;
