@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.ColorantControl;
 import org.cip4.lib.xjdf.schema.Layout;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Part;
@@ -17,7 +18,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static java.util.Collections.EMPTY_LIST;
+import static org.cip4.lib.xjdf.schema.ColorantControl.ProcessColorModel.DEVICE_CMYK;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class ResourcesTest {
 
@@ -275,7 +283,7 @@ public class ResourcesTest {
     public void findSpecificResourceWithoutMatchingResourceSet() throws Exception {
         Resources resources = new Resources();
         resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), "Wrapping");
-        assertEquals(Collections.EMPTY_LIST, resources.findSpecificResource(Layout.class, new Part(), null));
+        assertEquals(EMPTY_LIST, resources.findSpecificResource(Layout.class, new Part(), null));
     }
 
     @Test
@@ -283,7 +291,7 @@ public class ResourcesTest {
         Resources resources = new Resources();
         resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), null);
         assertEquals(
-            Collections.EMPTY_LIST,
+            EMPTY_LIST,
             resources.findSpecificResource(WrappingParams.class, new Part().withProductPart("bar"), null)
         );
     }
@@ -313,5 +321,29 @@ public class ResourcesTest {
             new Part(),
             null
         ));
+    }
+
+    @Test
+    public void getResourceSetsReturnsEmptyList() throws Exception {
+        Resources resources = new Resources();
+        assertEquals(EMPTY_LIST, resources.getResourceSets());
+    }
+
+    @Test
+    public void getResourceSetsReturnsCorrectResourceSets() throws Exception {
+        ColorantControl colorantControl = new ColorantControl().withProcessColorModel(DEVICE_CMYK);
+        Part part = new Part().withProductPart("foo");
+        Resources resources = new Resources();
+        resources.addResource(colorantControl, part, null);
+
+        assertEquals(1, resources.getResourceSets().size());
+        List<ColorantControl> resourceList = resources.findSpecificResource(
+            ColorantControl.class,
+            part,
+            null
+        );
+        assertEquals(1, resourceList.size());
+        ColorantControl actual = resourceList.get(0);
+        assertEquals(colorantControl, actual);
     }
 }
