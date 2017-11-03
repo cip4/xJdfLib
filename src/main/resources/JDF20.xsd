@@ -3044,8 +3044,6 @@
                 <xs:attribute name="SpreadType" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="NMTOKEN">
-                            <xs:enumeration value="Combine"/>
-                            <xs:enumeration value="FoldOut"/>
                             <xs:enumeration value="SinglePage"/>
                             <xs:enumeration value="Spread"/>
                         </xs:restriction>
