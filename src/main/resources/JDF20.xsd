@@ -3015,7 +3015,11 @@
     <xs:complexType name="LaminatingIntent">
         <xs:complexContent>
             <xs:extension base="ProductIntent">
-                <xs:attribute name="Surface" type="Side" use="required"/>
+                <xs:attribute name="Surface" use="required">
+                    <xs:simpleType>
+                        <xs:list itemType="Side"/>
+                    </xs:simpleType>
+                </xs:attribute>
                 <xs:attribute name="Temperature" use="optional">
                     <xs:simpleType>
                         <xs:restriction base="xs:NMTOKEN">
