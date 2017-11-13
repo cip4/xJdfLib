@@ -1,19 +1,31 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.ColorantControl;
+import org.cip4.lib.xjdf.schema.Layout;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
+import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.SpecificResource;
+import org.cip4.lib.xjdf.schema.WrappingParams;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static java.util.Collections.EMPTY_LIST;
+import static org.cip4.lib.xjdf.schema.ColorantControl.ProcessColorModel.DEVICE_CMYK;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 
 public class ResourcesTest {
 
@@ -224,5 +236,114 @@ public class ResourcesTest {
         Resource resource = resourceSet.getResource().get(0);
         assertSame(part, resource.getPart().get(0));
         assertSame(specificResource, resource.getSpecificResource().getValue());
+    }
+
+    @Test
+    public void isPartsMatchingForTheSameParts() {
+        Part part = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(part, part));
+    }
+
+    @Test
+    public void isPartsMatchingForEqualParts() {
+        Part part = new Part().withProductPart("Foo");
+        Part part2 = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey() {
+        Part part = new Part().withProductPart("Foo");
+        Part part2 = new Part().withProductPart("Foo2");
+        assertFalse(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPatsNotMatchingForDifferentValuesForTheSameKey2() {
+        Part part = new Part().withProductPart("Foo").withBinderySignatureID("Foo");
+        Part part2 = new Part().withProductPart("Foo").withBinderySignatureID("Foo1");
+        assertFalse(new Resources().isPartsMatching(part, part2));
+    }
+
+    @Test
+    public void isPartsMatchingWhenSearchKeyIsNotContainedInPart() throws Exception {
+        Part searchPart = new Part().withProductPart("Foo");
+        Part part = new Part();
+        assertTrue(new Resources().isPartsMatching(searchPart, part));
+    }
+
+    @Test
+    public void isPartsMatchingWhenPartIsNotContainedInSearchPart() throws Exception {
+        Part searchPart = new Part();
+        Part part = new Part().withProductPart("Foo");
+        assertTrue(new Resources().isPartsMatching(searchPart, part));
+    }
+
+    @Test
+    public void findSpecificResourceWithoutMatchingResourceSet() throws Exception {
+        Resources resources = new Resources();
+        resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), "Wrapping");
+        assertEquals(EMPTY_LIST, resources.findSpecificResource(Layout.class, new Part(), null));
+    }
+
+    @Test
+    public void findSpecificResourceWithoutMatchingResource() throws Exception {
+        Resources resources = new Resources();
+        resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), null);
+        assertEquals(
+            EMPTY_LIST,
+            resources.findSpecificResource(WrappingParams.class, new Part().withProductPart("bar"), null)
+        );
+    }
+
+    @Test
+    public void findSpecificResourceByConsistentPart() throws Exception {
+        Resources resources = new Resources();
+        WrappingParams wrappingParams = new WrappingParams();
+        resources.addResource(wrappingParams, new Part().withProductPart("foo"), null);
+        assertEquals(
+            Collections.singletonList(wrappingParams),
+            resources.findSpecificResource(
+                WrappingParams.class,
+                new Part().withProductPart("foo").withSide(Side.FRONT),
+                null
+            )
+        );
+    }
+
+    @Test
+    public void findSpecificResourceWithMatchingResource() throws Exception {
+        Resources resources = new Resources();
+        WrappingParams specificResource = new WrappingParams();
+        resources.addResource(specificResource, new Part(), null);
+        assertEquals(Collections.singletonList(specificResource), resources.findSpecificResource(
+            specificResource.getClass(),
+            new Part(),
+            null
+        ));
+    }
+
+    @Test
+    public void getResourceSetsReturnsEmptyList() throws Exception {
+        Resources resources = new Resources();
+        assertEquals(EMPTY_LIST, resources.getResourceSets());
+    }
+
+    @Test
+    public void getResourceSetsReturnsCorrectResourceSets() throws Exception {
+        ColorantControl colorantControl = new ColorantControl().withProcessColorModel(DEVICE_CMYK);
+        Part part = new Part().withProductPart("foo");
+        Resources resources = new Resources();
+        resources.addResource(colorantControl, part, null);
+
+        assertEquals(1, resources.getResourceSets().size());
+        List<ColorantControl> resourceList = resources.findSpecificResource(
+            ColorantControl.class,
+            part,
+            null
+        );
+        assertEquals(1, resourceList.size());
+        ColorantControl actual = resourceList.get(0);
+        assertEquals(colorantControl, actual);
     }
 }
