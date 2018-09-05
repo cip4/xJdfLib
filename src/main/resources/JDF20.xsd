@@ -5624,8 +5624,8 @@
 
     <xs:element name="HolePattern">
         <xs:complexType>
-            <xs:attribute name="Center" type="XYPair" use="required"/>
-            <xs:attribute name="CenterReference" use="required">
+            <xs:attribute name="Center" type="XYPair" use="optional"/>
+            <xs:attribute name="CenterReference" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="TrailingEdge"/>
@@ -5633,7 +5633,7 @@
                     </xs:restriction>
                 </xs:simpleType>
             </xs:attribute>
-            <xs:attribute name="Extent" type="XYPair" use="required"/>
+            <xs:attribute name="Extent" type="XYPair" use="optional"/>
             <xs:attribute name="HoleCount" type="IntegerList" use="optional"/>
             <xs:attribute name="Pattern" use="optional">
                 <xs:simpleType>
