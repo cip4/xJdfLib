@@ -1,7 +1,5 @@
 package org.cip4.lib.xjdf.validator;
 
-import jdk.nashorn.internal.ir.annotations.Ignore;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -37,10 +35,7 @@ public class Ancestors {
                 return (T) ancestors.get(i);
             }
         }
-        throw new IllegalArgumentException(String.format(
-            "No ancestor of type '%s' found.",
-            type.getCanonicalName()
-        ));
+        return null;
     }
 
     @Override

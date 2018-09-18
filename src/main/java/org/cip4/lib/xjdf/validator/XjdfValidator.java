@@ -2,11 +2,13 @@ package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.validator.element.AssemblingIntentValidator;
+import org.cip4.lib.xjdf.validator.element.ColorValidator;
 import org.cip4.lib.xjdf.validator.element.DeliveryParamsValidator;
 import org.cip4.lib.xjdf.validator.element.DeviceInfoValidator;
 import org.cip4.lib.xjdf.validator.element.FoldingIntentValidator;
 import org.cip4.lib.xjdf.validator.element.IntentValidator;
 import org.cip4.lib.xjdf.validator.element.ProductValidator;
+import org.cip4.lib.xjdf.validator.element.ResourceSetUsageValidator;
 import org.cip4.lib.xjdf.validator.element.ResourceSetValidator;
 
 public class XjdfValidator {
@@ -22,7 +24,9 @@ public class XjdfValidator {
                 new FoldingIntentValidator(),
                 new IntentValidator(),
                 new ProductValidator(),
-                new ResourceSetValidator()
+                new ResourceSetValidator(),
+                new ResourceSetUsageValidator(),
+                new ColorValidator()
             )
         );
     }
