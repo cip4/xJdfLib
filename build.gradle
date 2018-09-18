@@ -1,11 +1,21 @@
-plugins {
-    id 'io.codearte.nexus-staging' version '0.11.0'
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.1.0'
+    }
 }
 
-apply plugin: 'java'
+plugins {
+    id 'io.codearte.nexus-staging' version '0.11.0'
+    id 'java'
+    id 'idea'
+}
+
 apply plugin: 'maven'
-apply plugin: 'idea'
 apply plugin: "jacoco"
+apply plugin: 'org.junit.platform.gradle.plugin'
 apply from: 'gradle/deploy.gradle'
 
 group = 'org.cip4.lib.xjdf'
@@ -40,9 +50,13 @@ dependencies {
     compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+
     testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
     testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+    testCompile group: 'org.junit-pioneer', name: 'junit-pioneer', version: '0.1.2'
 
     xjc group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.11'

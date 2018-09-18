@@ -3,45 +3,60 @@ package org.cip4.lib.xjdf.xml;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import javax.xml.bind.ValidationException;
 import java.io.ByteArrayOutputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XJmfParser.
  */
 public class XJmfParserTest {
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void parseXJmf_ByteArray() throws Exception {
         // arrange
-        XJMF xjmf = new XJMF().withHeader(
+        final XJMF xjmf = new XJMF().withHeader(
             new Header().withDeviceID("MyDevice").withID("ID").withTime(new DateTime("2017-03-27T21:31:54Z"))
         );
 
         // act
-        new XJmfParser().parseXJmf(xjmf);
-
         // assert
-        // expect exception
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    new XJmfParser().parseXJmf(xjmf);
+                }
+            }
+        );
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void parseXJmf_OutputStream() throws Exception {
         // arrange
-        XJMF xjmf = new XJMF().withHeader(
+        final XJMF xjmf = new XJMF().withHeader(
             new Header().withDeviceID("MyDevice").withID("ID").withTime(new DateTime("2017-03-27T21:31:54Z"))
         );
 
         // act
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        new XJmfParser().parseXJmf(xjmf, bos);
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
 
         // assert
-        // expect exception
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    new XJmfParser().parseXJmf(xjmf, bos);
+                }
+            }
+        );
     }
 
     @Test
@@ -56,9 +71,9 @@ public class XJmfParserTest {
 
         // assert
         String jmf = new String(actual);
-        assertTrue("Cannot find time.", jmf.contains("Time=\"2017-03-27T21:31:54Z\""));
-        assertTrue("Cannot find DeviceId.", jmf.contains("DeviceID=\"MyDevice\""));
-        assertTrue("Cannot find ID.", jmf.contains("ID=\"ID\""));
+        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54Z\""), "Cannot find time.");
+        assertTrue(jmf.contains("DeviceID=\"MyDevice\""), "Cannot find DeviceId.");
+        assertTrue(jmf.contains("ID=\"ID\""), "Cannot find ID.");
     }
 
     @Test
@@ -75,8 +90,8 @@ public class XJmfParserTest {
 
         // assert
         String jmf = new String(actual);
-        assertTrue("Cannot find time.", jmf.contains("Time=\"2017-03-27T21:31:54Z\""));
-        assertTrue("Cannot find DeviceId.", jmf.contains("DeviceID=\"MyDevice\""));
-        assertTrue("Cannot find ID.", jmf.contains("ID=\"ID\""));
+        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54Z\""), "Cannot find time.");
+        assertTrue(jmf.contains("DeviceID=\"MyDevice\""), "Cannot find DeviceId.");
+        assertTrue(jmf.contains("ID=\"ID\""), "Cannot find ID.");
     }
 }

@@ -1,10 +1,12 @@
 package org.cip4.lib.xjdf.type;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
+import org.mockito.internal.matchers.Null;
 
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class URITest {
 
@@ -26,10 +28,18 @@ public class URITest {
         assertEquals("Destination", uriToBeConverted.marshal(uriToBeConverted));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void marshallEmptyUri() throws Exception {
         final URI uri = new URI();
-        assertNotNull(uri.marshal(uri));
+        assertThrows(
+            NullPointerException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    assertNotNull(uri.marshal(uri));
+                }
+            }
+        );
     }
 
     @Test
@@ -48,10 +58,18 @@ public class URITest {
         assertEquals("MyUri", result.getDestinationPath());
     }
 
-    @Test(expected = URISyntaxException.class)
+    @Test
     public void unmarshallFails() throws Exception {
         final URI uri = new URI();
-        uri.unmarshal("[]");
+        assertThrows(
+            URISyntaxException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    uri.unmarshal("[]");
+                }
+            }
+        );
     }
 
     @Test

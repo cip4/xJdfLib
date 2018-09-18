@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
 import java.util.Arrays;
@@ -10,14 +10,14 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SignalAlignedToAuditTest {
 
     private XsdReader xsdReader;
     private List<String> signalOnlyAttributes = Arrays.asList("ChannelMode");
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xsdReader = new XsdReader();
     }
@@ -34,7 +34,7 @@ public class SignalAlignedToAuditTest {
     }
 
     @Test
-    @Ignore("XJDF-1020")
+    @Disabled("XJDF-1020")
     public void signalResourceAndAuditResourceAreAligned() throws Exception {
         Collection<Node> signalResourceProperties = removeSignalOnlyAttributes(
             xsdReader.complexTypeProperties("SignalResource")

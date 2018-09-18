@@ -3,12 +3,11 @@ package org.cip4.lib.xjdf.validator.element;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.validator.ValidationResult;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IntentValidatorTest {
 

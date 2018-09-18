@@ -14,10 +14,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import junit.framework.Assert;
-
 import org.apache.commons.io.IOUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XmlConstants class.
@@ -51,7 +51,7 @@ public class XJdfConstantsTest {
 		String actualNs = XJdfConstants.NAMESPACE_JDF20;
 
 		// assert
-		Assert.assertEquals("Namespace JDF20 is wrong.", expectedNs, actualNs);
+		assertEquals(expectedNs, actualNs, "Namespace JDF20 is wrong.");
 	}
 
 	/**
@@ -67,6 +67,6 @@ public class XJdfConstantsTest {
 		String val = XJdfConstants.XJDF_LIB_VERSION;
 
 		// assert
-		// Assert.assertEquals("XJDF library version is wrong.", "", val);
+		// assertEquals("", val, "XJDF library version is wrong.");
 	}
 }

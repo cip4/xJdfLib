@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 public class XjdfValidatorTest {

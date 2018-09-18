@@ -4,15 +4,12 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Address;
-import org.cip4.lib.xjdf.schema.ApprovalParams;
-import org.cip4.lib.xjdf.schema.ApprovalPerson;
 import org.cip4.lib.xjdf.schema.ComChannel;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.MediaType;
-import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.Sides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
@@ -20,9 +17,10 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.ValidationException;
@@ -30,6 +28,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.Collections;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XJdfValidator.
@@ -53,21 +53,21 @@ public class XJdfValidatorTest {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         // init instance variables
         xJdfNodeFactory = new XJdfNodeFactory();
         xJdfBuilder = new XJdfBuilder(this.getClass().getCanonicalName());
     }
 
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         xJdfValidator = null;
         xJdfNodeFactory = null;
         xJdfBuilder = null;
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void integrationInvalid() throws Exception {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
@@ -76,10 +76,19 @@ public class XJdfValidatorTest {
         xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
         // act
-        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        final InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(xJdfFileStream);
+
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    xJdfValidator.validate(xJdfFileStream);
+                }
+            }
+        );
     }
 
     @Test
@@ -98,7 +107,7 @@ public class XJdfValidatorTest {
         xJdfValidator.validate(xJdfFileStream);
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void integrationAnalyzeMessagesInvalid() throws Exception {
 
         // arrange
@@ -108,21 +117,38 @@ public class XJdfValidatorTest {
         xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
         // act
-        InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
+        final InputStream xJdfFileStream = builder2InputStream(xJdfBuilder);
 
         xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(xJdfFileStream);
+
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    xJdfValidator.validate(xJdfFileStream);
+                }
+            }
+        );
     }
 
-    @Test(expected = ValidationException.class)
+    @Test
     public void isValidXjdfIsInvalid() throws Exception {
         // arrange
-        InputStream is = XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf");
+        final InputStream is = XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf");
 
         // act
         xJdfValidator = new XJdfValidator();
 
-        xJdfValidator.validate(is);
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    xJdfValidator.validate(is);
+                }
+            }
+        );
     }
 
     /**

@@ -4,14 +4,14 @@ import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
 import org.cip4.lib.xjdf.type.URI;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * JUnit test case for XJdfNodeFactory.
@@ -23,7 +23,7 @@ public class XJdfNodeFactoryTest {
     /**
      * Set up unit test.
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xJdfNodeFactory = new XJdfNodeFactory();
     }
@@ -31,7 +31,7 @@ public class XJdfNodeFactoryTest {
     /**
      * Tear down unit test.
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         xJdfNodeFactory = null;
     }
@@ -47,8 +47,8 @@ public class XJdfNodeFactoryTest {
         GeneralID generalId = xJdfNodeFactory.createGeneralID(ID_USAGE, ID_VALUE);
 
         // assert
-        assertEquals("IDUsage is wrong", ID_USAGE, generalId.getIDUsage());
-        assertEquals("IDValue is wrong", ID_VALUE, generalId.getIDValue());
+        assertEquals(ID_USAGE, generalId.getIDUsage(), "IDUsage is wrong");
+        assertEquals(ID_VALUE, generalId.getIDValue(), "IDValue is wrong");
     }
 
     @Test
@@ -63,9 +63,9 @@ public class XJdfNodeFactoryTest {
 
         // assert
         assertEquals(
-            "Attribute URL in Node FileSpec is wrong",
             fileSpecUri,
-            runList.getFileSpec().getURL()
+            runList.getFileSpec().getURL(),
+            "Attribute URL in Node FileSpec is wrong"
         );
     }
 
@@ -79,7 +79,7 @@ public class XJdfNodeFactoryTest {
         Comment comment = xJdfNodeFactory.createComment(COMMENT);
 
         // assert
-        assertEquals("Comment is wrong", COMMENT, comment.getValue());
+        assertEquals(COMMENT, comment.getValue(), "Comment is wrong");
     }
 
     @Test
@@ -92,7 +92,7 @@ public class XJdfNodeFactoryTest {
         CustomerInfo customerInfo = xJdfNodeFactory.createCustomerInfo(CUSTOMER_ID);
 
         // assert
-        assertEquals("CustomerID is wrong", CUSTOMER_ID, customerInfo.getCustomerID());
+        assertEquals(CUSTOMER_ID, customerInfo.getCustomerID(), "CustomerID is wrong");
     }
 
     @Test
@@ -107,9 +107,9 @@ public class XJdfNodeFactoryTest {
         NodeInfo nodeInfo = xJdfNodeFactory.createNodeInfo(TOTAL_DURATION, END, NATURAL_LANG);
 
         // assert
-        assertEquals("TotalDuration is wrong", TOTAL_DURATION, nodeInfo.getTotalDuration());
-        assertEquals("End is wrong", END, nodeInfo.getEnd());
-        assertEquals("NaturalLang is wrong", NATURAL_LANG, nodeInfo.getNaturalLang());
+        assertEquals(TOTAL_DURATION, nodeInfo.getTotalDuration(), "TotalDuration is wrong");
+        assertEquals(END, nodeInfo.getEnd(), "End is wrong");
+        assertEquals(NATURAL_LANG, nodeInfo.getNaturalLang(), "NaturalLang is wrong");
     }
 
 	@Test
@@ -124,9 +124,9 @@ public class XJdfNodeFactoryTest {
         MediaIntent mediaIntent = xJdfNodeFactory.createMediaIntent(MEDIA_QUALITY, BRAND, WEIGHT);
 
         // assert
-        assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-        assertEquals("Brand is wrong", BRAND, mediaIntent.getBrand());
-        assertEquals("Weight is wrong", WEIGHT, mediaIntent.getWeight());
+        assertEquals(MEDIA_QUALITY, mediaIntent.getMediaQuality(), "MediaQuality is wrong");
+        assertEquals(BRAND, mediaIntent.getBrand(), "Brand is wrong");
+        assertEquals(WEIGHT, mediaIntent.getWeight(), "Weight is wrong");
     }
 
     @Test
@@ -139,9 +139,9 @@ public class XJdfNodeFactoryTest {
         MediaIntent mediaIntent = xJdfNodeFactory.createMediaIntent(MEDIA_QUALITY);
 
         // assert
-        assertEquals("MediaQuality is wrong", MEDIA_QUALITY, mediaIntent.getMediaQuality());
-        assertNull("Brand is wrong", mediaIntent.getBrand());
-        assertNull("Weight is wrong", mediaIntent.getWeight());
+        assertEquals(MEDIA_QUALITY, mediaIntent.getMediaQuality(), "MediaQuality is wrong");
+        assertNull(mediaIntent.getBrand(), "Brand is wrong");
+        assertNull(mediaIntent.getWeight(), "Weight is wrong");
     }
 
     @Test
@@ -154,7 +154,7 @@ public class XJdfNodeFactoryTest {
         ProductionIntent productionIntent = xJdfNodeFactory.createProductionIntent(PRINT_PROCESS);
 
         // assert
-        assertEquals("PrintProcess is wrong", PRINT_PROCESS, productionIntent.getPrintProcess());
+        assertEquals(PRINT_PROCESS, productionIntent.getPrintProcess(), "PrintProcess is wrong");
     }
 
     @Test
@@ -167,7 +167,7 @@ public class XJdfNodeFactoryTest {
         FoldingIntent foldingIntent = xJdfNodeFactory.createFoldingIntent(FOLDING_CATALOG);
 
         // assert
-        assertEquals("FoldCatalog is wrong", FOLDING_CATALOG, foldingIntent.getFoldCatalog());
+        assertEquals(FOLDING_CATALOG, foldingIntent.getFoldCatalog(), "FoldCatalog is wrong");
     }
 
 }

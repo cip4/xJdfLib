@@ -10,11 +10,11 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import junit.framework.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XJDF Datatype XYPair.
@@ -27,7 +27,7 @@ public class XYPairTest {
 	 * Set up unit test.
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -35,7 +35,7 @@ public class XYPairTest {
 	 * Tear down unit test.
 	 * @throws java.lang.Exception
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
@@ -51,8 +51,8 @@ public class XYPairTest {
 		XYPair p = new XYPair();
 
 		// assert
-		Assert.assertEquals("X is wrong.", 0d, p.getX());
-		Assert.assertEquals("Y is wrong.", 0d, p.getY());
+		assertEquals(0d, p.getX(), "X is wrong.");
+		assertEquals(0d, p.getY(), "Y is wrong.");
 
 	}
 
@@ -69,8 +69,8 @@ public class XYPairTest {
 		XYPair p = new XYPair(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 612.22d, p.getX());
-		Assert.assertEquals("Y is wrong.", 792.44d, p.getY());
+		assertEquals(612.22d, p.getX(), "X is wrong.");
+		assertEquals(792.44d, p.getY(), "Y is wrong.");
 	}
 
 	/**
@@ -85,8 +85,8 @@ public class XYPairTest {
 		XYPair p = new XYPair(612.22, 792.44);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 612.22d, p.getX());
-		Assert.assertEquals("Y is wrong.", 792.44d, p.getY());
+		assertEquals(612.22d, p.getX(), "X is wrong.");
+		assertEquals(792.44d, p.getY(), "Y is wrong.");
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class XYPairTest {
 		String result = new XYPair(612.22, 792.44).toString();
 
 		// assert
-		Assert.assertEquals("Result is wrong.", "612.22 792.44", result);
+		assertEquals("612.22 792.44", result, "Result is wrong.");
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class XYPairTest {
 		String result = new XYPair().marshal(p);
 
 		// assert
-		Assert.assertEquals("Result is wrong.", "612.22 792.44", result);
+		assertEquals("612.22 792.44", result, "Result is wrong.");
 	}
 
 	/**
@@ -134,8 +134,8 @@ public class XYPairTest {
 		XYPair p = new XYPair().unmarshal(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 612.22d, p.getX());
-		Assert.assertEquals("Y is wrong.", 792.44d, p.getY());
+		assertEquals(612.22d, p.getX(), "X is wrong.");
+		assertEquals(792.44d, p.getY(), "Y is wrong.");
 	}
 
 }

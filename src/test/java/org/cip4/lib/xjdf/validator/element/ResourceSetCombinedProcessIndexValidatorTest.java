@@ -5,9 +5,9 @@ import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.validator.Ancestors;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceSetCombinedProcessIndexValidatorTest {
 

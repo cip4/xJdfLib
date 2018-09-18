@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.binding;
 
 import org.cip4.lib.xjdf.schema.XsdReader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -15,9 +15,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class IdRefs {
 
@@ -53,7 +53,7 @@ public class IdRefs {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         bindingReader = new BindingReader();
         xsdReader = new XsdReader();
@@ -83,7 +83,7 @@ public class IdRefs {
         assertNotEquals(0, attrsInXsd.size());
         attrsInXsd.removeAll(enumsInBindings);
 
-        assertEquals("Not all IDREF/IDREFS are bound to a classname.", Collections.EMPTY_SET, attrsInXsd);
+        assertEquals(Collections.EMPTY_SET, attrsInXsd, "Not all IDREF/IDREFS are bound to a classname.");
     }
 
     @Test
@@ -106,9 +106,9 @@ public class IdRefs {
                 Node propertyNode = bindingNode.getChildNodes().item(j);
                 if ("property".equals(propertyNode.getLocalName())) {
                     assertEquals(
-                        String.format("Property name does not match attribute name for %s", attributeLocation),
                         translateAttributeToProperty(attributeLocation.attributeName),
-                        propertyNode.getAttributes().getNamedItem("name").getNodeValue()
+                        propertyNode.getAttributes().getNamedItem("name").getNodeValue(),
+                        String.format("Property name does not match attribute name for %s", attributeLocation)
                     );
                     continue loopOverBindings;
                 }

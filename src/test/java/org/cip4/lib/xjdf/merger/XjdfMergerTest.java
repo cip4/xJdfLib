@@ -3,9 +3,9 @@ package org.cip4.lib.xjdf.merger;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class XjdfMergerTest {

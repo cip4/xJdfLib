@@ -1,16 +1,25 @@
 package org.cip4.lib.xjdf.merger;
 
 import org.cip4.lib.xjdf.schema.Product;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductMergerTest {
 
-    @Test(expected = MergeConflictException.class)
+    @Test
     public void testMerge() throws Exception {
-        ProductMerger productMerger = new ProductMerger();
-        productMerger.merge(new Product(), new Product());
+        final ProductMerger productMerger = new ProductMerger();
+        assertThrows(
+            MergeConflictException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    productMerger.merge(new Product(), new Product());
+                }
+            }
+        );
     }
 
     @Test

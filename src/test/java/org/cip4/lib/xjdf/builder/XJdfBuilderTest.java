@@ -14,17 +14,16 @@ import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XJdfBuilder.
@@ -42,7 +41,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
      *
      * @throws java.lang.Exception
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xJdfBuilder = new XJdfBuilder();
 
@@ -54,7 +53,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
      *
      * @throws java.lang.Exception
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
         xJdfBuilder = null;
     }
@@ -78,10 +77,10 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualIDUsage = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID/@IDUsage");
-        Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE, actualIDUsage);
+        assertEquals(ID_USAGE, actualIDUsage, "IDUsage in GeneralID is wrong.");
 
         String actualIDValue = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID/@IDValue");
-        Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE, actualIDValue);
+        assertEquals(ID_VALUE, actualIDValue, "IDValue in GeneralID is wrong.");
 
     }
 
@@ -109,19 +108,19 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualIDUsage_1 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[1]/@IDUsage");
-        Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE_1, actualIDUsage_1);
+        assertEquals(ID_USAGE_1, actualIDUsage_1, "IDUsage in GeneralID is wrong.");
 
         String actualIDValue_1 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[1]/@IDValue");
-        Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_1, actualIDValue_1);
+        assertEquals(ID_VALUE_1, actualIDValue_1, "IDValue in GeneralID is wrong.");
 
         String actualIDUsage_2 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[2]/@IDUsage");
-        Assert.assertEquals("IDUsage in GeneralID is wrong.", ID_USAGE_2, actualIDUsage_2);
+        assertEquals(ID_USAGE_2, actualIDUsage_2, "IDUsage in GeneralID is wrong.");
 
         String actualIDValue_2 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[2]/@IDValue");
-        Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_2, actualIDValue_2);
+        assertEquals(ID_VALUE_2, actualIDValue_2, "IDValue in GeneralID is wrong.");
 
         String actualIDValue_3 = getXPathValue(bytes, "/xjdf:XJDF/xjdf:GeneralID[3]/@IDValue");
-        Assert.assertEquals("IDValue in GeneralID is wrong.", ID_VALUE_3, actualIDValue_3);
+        assertEquals(ID_VALUE_3, actualIDValue_3, "IDValue in GeneralID is wrong.");
 
     }
 
@@ -173,16 +172,16 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marshalResult(xJdfBuilder);
 
         String actualName = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@Name");
-        Assert.assertEquals("Name in ResourceSet is wrong.", "RunList", actualName);
+        assertEquals("RunList", actualName, "Name in ResourceSet is wrong.");
 
         String actualPartRun = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource/xjdf:Part/@Run");
-        Assert.assertEquals("RunTag in RunList is wrong.", "Cover", actualPartRun);
+        assertEquals("Cover", actualPartRun, "RunTag in RunList is wrong.");
 
         String actualUrl = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("RunTag in RunList is wrong.", URL, actualUrl);
+        assertEquals(URL, actualUrl, "RunTag in RunList is wrong.");
     }
 
     /**
@@ -217,28 +216,28 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // assert
         byte[] bytes = marshalResult(xJdfBuilder);
 
-        Assert.assertEquals(
-            "ResourceSet for NodeInfo must be first ResourceSet since it is lexicographically smaller than RunList.",
+        assertEquals(
             "NodeInfo",
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[1]/@Name")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[1]/@Name"),
+            "ResourceSet for NodeInfo must be first ResourceSet since it is lexicographically smaller than RunList."
         );
 
-        Assert.assertEquals(
-            "ResourceSet for RunList must be second ResourceSet.",
+        assertEquals(
             "RunList",
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/@Name")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/@Name"),
+            "ResourceSet for RunList must be second ResourceSet."
         );
 
-        Assert.assertEquals(
-            "RunList for Cover must be first entry since it was added first.",
+        assertEquals(
             urlCover,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[1]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[1]//xjdf:FileSpec/@URL"),
+            "RunList for Cover must be first entry since it was added first."
         );
 
-        Assert.assertEquals(
-            "RunList for Content must be second entry since it was added after cover.",
+        assertEquals(
             urlContent,
-            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[2]//xjdf:FileSpec/@URL")
+            getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource[2]//xjdf:FileSpec/@URL"),
+            "RunList for Content must be second entry since it was added after cover."
         );
     }
 
@@ -270,34 +269,34 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet)");
-        Assert.assertEquals("Number of ResourceSet nodes is wrong.", "1", actual);
+        assertEquals("1", actual, "Number of ResourceSet nodes is wrong.");
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet/xjdf:Resource)");
-        Assert.assertEquals("Number of RunList parameters is wrong.", "3", actual);
+        assertEquals("3", actual, "Number of RunList parameters is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@ProcessUsage");
-        Assert.assertEquals("Value Process Usage is wrong.", "", actual);
+        assertEquals("", actual, "Value Process Usage is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet/@Name");
-        Assert.assertEquals("Attribute Name in ResourceSet is wrong.", "RunList", actual);
+        assertEquals("RunList", actual, "Attribute Name in ResourceSet is wrong.");
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[1]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("Attribute FileSpec URL is wrong.", urlCover, actual);
+        assertEquals(urlCover, actual, "Attribute FileSpec URL is wrong.");
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[2]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_1, actual);
+        assertEquals(urlContent_1, actual, "Attribute FileSpec URL is wrong.");
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList']/xjdf:Resource[3]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("Attribute FileSpec URL is wrong.", urlContent_2, actual);
+        assertEquals(urlContent_2, actual, "Attribute FileSpec URL is wrong.");
     }
 
     /**
@@ -334,19 +333,19 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         byte[] bytes = marshalResult(xJdfBuilder);
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet)");
-        Assert.assertEquals("Number of ResourceSet nodes is wrong.", "2", actual);
+        assertEquals("2", actual, "Number of ResourceSet nodes is wrong.");
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet[1]/xjdf:Resource)");
-        Assert.assertEquals("Number of RunList parameters is wrong.", "1", actual);
+        assertEquals("1", actual, "Number of RunList parameters is wrong.");
 
         actual = getXPathValue(bytes, "count(/xjdf:XJDF/xjdf:ResourceSet[2]/xjdf:Resource)");
-        Assert.assertEquals("Number of RunList parameters is wrong.", "2", actual);
+        assertEquals("2", actual, "Number of RunList parameters is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[1]/@ProcessUsage");
-        Assert.assertEquals("Value Process Usage is wrong.", processUsage_1, actual);
+        assertEquals(processUsage_1, actual, "Value Process Usage is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:XJDF/xjdf:ResourceSet[2]/@ProcessUsage");
-        Assert.assertEquals("Value Process Usage is wrong.", processUsage_2, actual);
+        assertEquals(processUsage_2, actual, "Value Process Usage is wrong.");
     }
 
     /**
@@ -381,7 +380,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
                 "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='CustomerInfo'][1]/xjdf:Resource)"
             )
         );
-        Assert.assertEquals("Number of Resource Nodes is wrong.", 2, actual);
+        assertEquals(2, actual, "Number of Resource Nodes is wrong.");
     }
 
     /**
@@ -413,13 +412,13 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
             bytes,
             "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource)"
         );
-        Assert.assertEquals("Number of Resource Nodes is wrong.", "2", actual);
+        assertEquals("2", actual, "Number of Resource Nodes is wrong.");
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource[2]/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
+        assertEquals(FILE_NAME, actual, "Filename is wrong.");
     }
 
     /**
@@ -451,13 +450,13 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
             bytes,
             "count(/xjdf:XJDF/xjdf:ResourceSet[@Name='RunList' and @ProcessUsage='PROCESS_USAGE_1']/xjdf:Resource)"
         );
-        Assert.assertEquals("Number of Resource Nodes is wrong.", "1", actual);
+        assertEquals("1", actual, "Number of Resource Nodes is wrong.");
 
         actual = getXPathValue(
             bytes,
             "/xjdf:XJDF/xjdf:ResourceSet[not(@ProcessUsage)]/xjdf:Resource/xjdf:RunList/xjdf:FileSpec/@URL"
         );
-        Assert.assertEquals("Filename is wrong.", FILE_NAME, actual);
+        assertEquals(FILE_NAME, actual, "Filename is wrong.");
     }
 
     @Test
@@ -468,8 +467,8 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addResource(media2);
 
         byte[] bytes = marshalResult(xJdfBuilder);
-        assertEquals("1", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
-        assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet/xjdf:Resource)"));
+        assertEquals(getXPathValue(bytes, "count(//xjdf:ResourceSet)"), "1");
+        assertEquals(getXPathValue(bytes, "count(//xjdf:ResourceSet/xjdf:Resource)"), "2");
     }
 
     @Test
@@ -480,6 +479,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         xJdfBuilder.addResource(media2, null, "b");
 
         byte[] bytes = marshalResult(xJdfBuilder);
-        assertEquals("2", getXPathValue(bytes, "count(//xjdf:ResourceSet)"));
+        assertEquals(getXPathValue(bytes, "count(//xjdf:ResourceSet)"), "2");
     }
 }

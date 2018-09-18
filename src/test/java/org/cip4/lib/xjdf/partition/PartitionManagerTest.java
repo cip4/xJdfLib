@@ -5,12 +5,12 @@ import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 
 /**
@@ -40,7 +40,7 @@ public class PartitionManagerTest {
      *
      * @throws Exception Catch all Exception.
      */
-    @Before
+    @BeforeEach
     public final void setUp() throws Exception {
         partitionManager = new PartitionManager();
         resourceSet = NF.createResourceSet();
@@ -51,7 +51,7 @@ public class PartitionManagerTest {
      *
      * @throws Exception Catch all Exception
      */
-    @After
+    @AfterEach
     public final void tearDown() throws Exception {
     }
 
@@ -72,11 +72,11 @@ public class PartitionManagerTest {
         // act / assert
         Part part;
 
-        assertNull("Resource is not null.", partitionManager.getResourceByPart(resourceSet, null));
-        assertNull("Resource is not null.", partitionManager.getResourceByPart(resourceSet, NF.createPart()));
+        assertNull(partitionManager.getResourceByPart(resourceSet, null), "Resource is not null.");
+        assertNull(partitionManager.getResourceByPart(resourceSet, NF.createPart()), "Resource is not null.");
 
         part = createPartSeparationSide("Cyan", null, null);
-        assertNull("Resource is not null.", partitionManager.getResourceByPart(resourceSet, part));
+        assertNull(partitionManager.getResourceByPart(resourceSet, part), "Resource is not null.");
     }
 
     /**
@@ -100,16 +100,16 @@ public class PartitionManagerTest {
 
         part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_FRONT",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_CATCH_ALL",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
     }
 
@@ -138,30 +138,30 @@ public class PartitionManagerTest {
 
         part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_FRONT",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Black", Side.FRONT, null);
         assertEquals(
-            "Resource ID is wrong.",
             "BLACK_FRONT",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Black", Side.BACK, null);
         assertEquals(
-            "Resource ID is wrong.",
             "BLACK_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
     }
 
@@ -186,30 +186,30 @@ public class PartitionManagerTest {
 
         part = createPartSeparationSide("Cyan", Side.FRONT, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_FRONT_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Cyan", Side.BACK, null);
         assertEquals(
-            "Resource ID is wrong.",
             "CYAN_FRONT_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Black", Side.FRONT, null);
         assertEquals(
-            "Resource ID is wrong.",
             "BLACK_FRONT_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
 
         part = createPartSeparationSide("Black", Side.BACK, null);
         assertEquals(
-            "Resource ID is wrong.",
             "BLACK_FRONT_BACK",
-            partitionManager.getResourceByPart(resourceSet, part).getID()
+            partitionManager.getResourceByPart(resourceSet, part).getID(),
+            "Resource ID is wrong."
         );
     }
 

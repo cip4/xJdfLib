@@ -10,11 +10,11 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import junit.framework.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit Test case for IntegerList object.
@@ -27,7 +27,7 @@ public class IntegerListTest {
 	 * Setup unit test.
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -35,7 +35,7 @@ public class IntegerListTest {
 	 * Tear down unit test.
 	 * @throws java.lang.Exception
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
@@ -52,9 +52,9 @@ public class IntegerListTest {
 		IntegerList r = new IntegerList(VALUE);
 
 		// assert
-		Assert.assertEquals("Number of Items is wrong.", 4, r.getList().size());
-		Assert.assertEquals("Integer Value is wrong.", new Integer(3), r.getList().get(2));
-		Assert.assertEquals("Integer Value is wrong.", new Integer(4), r.getList().get(3));
+		assertEquals(4, r.getList().size(), "Number of Items is wrong.");
+		assertEquals(new Integer(3), r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(new Integer(4), r.getList().get(3), "Integer Value is wrong.");
 	}
 
 	/**
@@ -69,9 +69,9 @@ public class IntegerListTest {
 		IntegerList r = new IntegerList(6, 7, 8, 9, 10, 11, 12);
 
 		// assert
-		Assert.assertEquals("Number of Items is wrong.", 7, r.getList().size());
-		Assert.assertEquals("Integer Value is wrong.", new Integer(8), r.getList().get(2));
-		Assert.assertEquals("Integer Value is wrong.", new Integer(9), r.getList().get(3));
+		assertEquals(7, r.getList().size(), "Number of Items is wrong.");
+		assertEquals(new Integer(8), r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(new Integer(9), r.getList().get(3), "Integer Value is wrong.");
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class IntegerListTest {
 		String result = new IntegerList().marshal(r);
 
 		// assert
-		Assert.assertEquals("Number of Items is wrong.", "6 7 8 9 10 11 12", result);
+		assertEquals("6 7 8 9 10 11 12", result, "Number of Items is wrong.");
 	}
 
 	/**
@@ -104,9 +104,9 @@ public class IntegerListTest {
 		IntegerList r = (IntegerList) new IntegerList().unmarshal(VALUE);
 
 		// assert
-		Assert.assertEquals("Number of Items is wrong.", 4, r.getList().size());
-		Assert.assertEquals("Integer Value is wrong.", new Integer(3), r.getList().get(2));
-		Assert.assertEquals("Integer Value is wrong.", new Integer(4), r.getList().get(3));
+		assertEquals(4, r.getList().size(), "Number of Items is wrong.");
+		assertEquals(new Integer(3), r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(new Integer(4), r.getList().get(3), "Integer Value is wrong.");
 
 	}
 }

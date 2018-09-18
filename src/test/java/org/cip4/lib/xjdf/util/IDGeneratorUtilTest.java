@@ -1,10 +1,10 @@
 package org.cip4.lib.xjdf.util;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test for IDGenerator
@@ -19,7 +19,7 @@ public class IDGeneratorUtilTest {
      *
      * @throws java.lang.Exception
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
     }
 
@@ -28,7 +28,7 @@ public class IDGeneratorUtilTest {
      *
      * @throws java.lang.Exception
      */
-    @After
+    @AfterEach
     public void tearDown() throws Exception {
     }
 
@@ -45,7 +45,7 @@ public class IDGeneratorUtilTest {
         String result = IDGeneratorUtil.generateID(prefix);
 
         // assert
-        assertTrue("ID is wrong.", result.startsWith(prefix));
+        assertTrue(result.startsWith(prefix), "ID is wrong.");
     }
 
     /**
@@ -60,7 +60,7 @@ public class IDGeneratorUtilTest {
         String result = IDGeneratorUtil.generateID("pre");
 
         // assert
-        assertTrue("ID is wrong.", result.startsWith("PRE_"));
+        assertTrue(result.startsWith("PRE_"), "ID is wrong.");
     }
 
     /**
@@ -75,7 +75,7 @@ public class IDGeneratorUtilTest {
         String result = IDGeneratorUtil.generateID("");
 
         // assert
-        assertTrue("ID is wrong.", result.startsWith("ID_"));
+        assertTrue(result.startsWith("ID_"), "ID is wrong.");
     }
 
     /**
@@ -113,7 +113,7 @@ public class IDGeneratorUtilTest {
 
         // assert
         for (int i = 0; i < array.length; i++) {
-            assertFalse("Character '" + CHARACTERS.charAt(i) + "' isn't used.", array[i] == 0);
+            assertFalse(array[i] == 0, "Character '" + CHARACTERS.charAt(i) + "' isn't used.");
         }
     }
 

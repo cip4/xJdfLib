@@ -1,11 +1,12 @@
 package org.cip4.lib.xjdf.uri.resolver;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.net.URI;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class URIResolverTest {
 
@@ -65,8 +66,16 @@ public class URIResolverTest {
         assertEquals(URI.create("http://localhost:8080/cip4/xJdfSpec.pdf"), resolvedURI);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void resolveURI_Null() throws Exception {
-        URIResolver.resolve(null, null);
+        assertThrows(
+            NullPointerException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    URIResolver.resolve(null, null);
+                }
+            }
+        );
     }
 }

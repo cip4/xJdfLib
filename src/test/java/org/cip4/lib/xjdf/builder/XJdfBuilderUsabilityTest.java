@@ -17,7 +17,7 @@ import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 

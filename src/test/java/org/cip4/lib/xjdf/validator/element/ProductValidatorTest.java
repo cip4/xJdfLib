@@ -3,11 +3,9 @@ package org.cip4.lib.xjdf.validator.element;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.Product;
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ProductValidatorTest {
 

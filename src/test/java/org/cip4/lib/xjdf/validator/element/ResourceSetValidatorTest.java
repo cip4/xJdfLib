@@ -5,16 +5,17 @@ import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResourceSetValidatorTest {
 
     private XJdfNodeFactory xJdfNodeFactory;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xJdfNodeFactory = new XJdfNodeFactory();
     }

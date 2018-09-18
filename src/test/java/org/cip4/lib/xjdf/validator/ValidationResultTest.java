@@ -1,10 +1,11 @@
 package org.cip4.lib.xjdf.validator;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidationResultTest {
 
@@ -16,11 +17,20 @@ public class ValidationResultTest {
         assertEquals("foo", violations.get(0));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void getViolationsDoesNotAllowModifications() throws Exception {
         ValidationResult validation = new ValidationResult("foo");
-        List<String> violations = validation.getViolations();
-        violations.add("bar");
+        final List<String> violations = validation.getViolations();
+
+        assertThrows(
+            UnsupportedOperationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    violations.add("bar");
+                }
+            }
+        );
     }
 
     @Test

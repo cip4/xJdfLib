@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.schema;
 
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -16,15 +16,15 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UnreferencedNodesTest {
 
     private static Document XJDF_SCHEMA;
     private static XPath xPath;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
         builderFactory.setNamespaceAware(true);
@@ -56,8 +56,8 @@ public class UnreferencedNodesTest {
             Node elementNode = elements.item(i);
             String elementName = elementNode.getAttributes().getNamedItem("name").getNodeValue();
             assertTrue(
-                String.format("Element '%s' is defined but not referenced from another element.", elementName),
-                isElementReferenced(elementNode)
+                isElementReferenced(elementNode),
+                String.format("Element '%s' is defined but not referenced from another element.", elementName)
             );
         }
     }
@@ -123,8 +123,8 @@ public class UnreferencedNodesTest {
                 ), XJDF_SCHEMA, XPathConstants.NODESET
             );
             assertTrue(
-                String.format("SimpleType '%s' is defined but not referenced from an element.", elementName),
-                (attributeUsages.getLength() > 0) || (elementUsages.getLength() > 0)
+                (attributeUsages.getLength() > 0) || (elementUsages.getLength() > 0),
+                String.format("SimpleType '%s' is defined but not referenced from an element.", elementName)
             );
         }
     }
@@ -147,8 +147,8 @@ public class UnreferencedNodesTest {
                 ), XJDF_SCHEMA, XPathConstants.NODESET
             );
             assertTrue(
-                String.format("SimpleType '%s' is defined but not referenced from an element.", elementName),
-                elementUsages.getLength() > 0
+                elementUsages.getLength() > 0,
+                String.format("SimpleType '%s' is defined but not referenced from an element.", elementName)
             );
         }
     }

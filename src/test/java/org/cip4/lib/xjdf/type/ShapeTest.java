@@ -10,10 +10,10 @@
  */
 package org.cip4.lib.xjdf.type;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for XJDF data type Shape.
@@ -26,7 +26,7 @@ public class ShapeTest {
 	 * Set up unit test.
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -34,7 +34,7 @@ public class ShapeTest {
 	 * Tear down unit test.
 	 * @throws java.lang.Exception
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
@@ -50,9 +50,9 @@ public class ShapeTest {
 		Shape s = new Shape();
 
 		// assert
-		Assert.assertEquals("X is wrong.", 0d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 0d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 0d, s.getZ(), 0.1d);
+		assertEquals(0d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(0d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(0d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -68,9 +68,9 @@ public class ShapeTest {
 		Shape s = new Shape(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 20.33d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 40d, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(20.33d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -86,9 +86,9 @@ public class ShapeTest {
 		Shape s = new Shape(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 20.33d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 0, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(20.33d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(0, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -104,9 +104,9 @@ public class ShapeTest {
 		Shape s = new Shape(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 0, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 0, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(0, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(0, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -121,9 +121,9 @@ public class ShapeTest {
 		Shape s = new Shape(10.1, 20.33, 40);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 20.33d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 40d, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(20.33d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -138,9 +138,9 @@ public class ShapeTest {
 		Shape s = new Shape(10.1, 20.33);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 20.33d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 0d, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(20.33d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(0d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class ShapeTest {
 		String result = new Shape(10.1, 20.33, 40).toString();
 
 		// assert
-		Assert.assertEquals("String is wrong.", "10.1 20.33 40.0", result);
+		assertEquals("10.1 20.33 40.0", result, "String is wrong.");
 	}
 
 	/**
@@ -171,7 +171,7 @@ public class ShapeTest {
 		String result = new Shape().marshal(s);
 
 		// assert
-		Assert.assertEquals("String is wrong.", "10.1 20.33 40.0", result);
+		assertEquals("10.1 20.33 40.0", result, "String is wrong.");
 	}
 
 	/**
@@ -188,9 +188,9 @@ public class ShapeTest {
 		Shape s = new Shape().unmarshal(value);
 
 		// assert
-		Assert.assertEquals("X is wrong.", 10.1d, s.getX(), 0.1d);
-		Assert.assertEquals("Y is wrong.", 20.33d, s.getY(), 0.1d);
-		Assert.assertEquals("Z is wrong.", 40d, s.getZ(), 0.1d);
+		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
+		assertEquals(20.33d, s.getY(), 0.1d, "Y is wrong.");
+		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
 }

@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.junit.ComparisonFailure;
+import org.opentest4j.AssertionFailedError;
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
@@ -15,7 +15,7 @@ public class Assert {
         List<Node> expectedList = sortNodesByName(expected);
         List<Node> actualList = sortNodesByName(actual);
         if (!isSubset(expectedList, actualList) || !isSubset(actualList, expectedList)) {
-            throw new ComparisonFailure(
+            throw new AssertionFailedError(
                 null,
                 nodeCollectionToString(expectedList),
                 nodeCollectionToString(actualList)

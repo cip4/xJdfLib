@@ -10,11 +10,11 @@
  */
 package org.cip4.lib.xjdf.util;
 
-import junit.framework.Assert;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for DimensionUtil class.
@@ -27,7 +27,7 @@ public class DimensionUtilTest {
 	 * Setup unit test.
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -35,7 +35,7 @@ public class DimensionUtilTest {
 	 * Tear down unit test.
 	 * @throws java.lang.Exception
 	 */
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
@@ -53,7 +53,7 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.mm2Dtp(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.dtp2Mm(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class DimensionUtilTest {
 		float actual = DimensionUtil.mm2Dtp(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
 	/**
@@ -104,7 +104,7 @@ public class DimensionUtilTest {
 		float actual = DimensionUtil.dtp2Mm(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.dtp2MmS(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class DimensionUtilTest {
 		String actual = DimensionUtil.mm2DtpS(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual);
+		assertEquals(expected, actual, "DTP-Points are wrong.");
 	}
 
 }

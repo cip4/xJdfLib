@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
-import org.junit.Assert;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 /**
  * JUnit test case for XJDF Type Rectangle
@@ -22,10 +22,10 @@ public class RectangleTest {
 		Rectangle r = new Rectangle();
 
 		// assert
-		Assert.assertEquals("Llx is wrong.", 0d, r.getLlx(), 0.01);
-		Assert.assertEquals("Lly is wrong.", 0d, r.getLly(), 0.01);
-		Assert.assertEquals("Urx is wrong.", 0d, r.getUrx(), 0.01);
-		Assert.assertEquals("Ury is wrong.", 0d, r.getUry(), 0.01);
+		assertEquals(0d, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(0d, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(0d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
 	/**
@@ -41,10 +41,10 @@ public class RectangleTest {
 		Rectangle r = new Rectangle(value);
 
 		// assert
-		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx(), 0.01);
-		Assert.assertEquals("Lly is wrong.", 0d, r.getLly(), 0.01);
-		Assert.assertEquals("Urx is wrong.", 3.14d, r.getUrx(), 0.01);
-		Assert.assertEquals("Ury is wrong.", 21631.3d, r.getUry(), 0.01);
+		assertEquals(1d, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3.14d, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
 	/**
@@ -59,10 +59,10 @@ public class RectangleTest {
 		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
 
 		// assert
-		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx(), 0.01);
-		Assert.assertEquals("Lly is wrong.", 0d, r.getLly(), 0.01);
-		Assert.assertEquals("Urx is wrong.", 3.14d, r.getUrx(), 0.01);
-		Assert.assertEquals("Ury is wrong.", 21631.3d, r.getUry(), 0.01);
+		assertEquals(1d, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3.14d, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class RectangleTest {
 		String result = new Rectangle(1d, 0d, 3.14d, 21631.3d).toString();
 
 		// assert
-		Assert.assertEquals("Result is wrong.", "1.0 0.0 3.14 21631.3", result);
+		assertEquals("1.0 0.0 3.14 21631.3", result, "Result is wrong.");
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class RectangleTest {
 		String result = new Rectangle().marshal(r);
 
 		// assert
-		Assert.assertEquals("Result is wrong.", "1.0 0.0 3.14 21631.3", result);
+		assertEquals("1.0 0.0 3.14 21631.3", result, "Result is wrong.");
 	}
 
 	/**
@@ -110,39 +110,39 @@ public class RectangleTest {
 		Rectangle r = new Rectangle().unmarshal(value);
 
 		// assert
-		Assert.assertEquals("Llx is wrong.", 1d, r.getLlx(), 0.01);
-		Assert.assertEquals("Lly is wrong.", 0d, r.getLly(), 0.01);
-		Assert.assertEquals("Urx is wrong.", 3.14d, r.getUrx(), 0.01);
-		Assert.assertEquals("Ury is wrong.", 21631.3d, r.getUry(), 0.01);
+		assertEquals(1d, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3.14d, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
     @Test
     public void testEqualsSame() throws Exception {
         Rectangle r = new Rectangle(1,2,3,4);
-        Assert.assertEquals(r, r);
+        assertEquals(r, r);
     }
 
     @Test
     public void testEqualsNull() throws Exception {
         Rectangle r = new Rectangle(1,2,3,4);
-        Assert.assertNotEquals(null, r);
+        assertNotEquals(null, r);
     }
 
     @Test
     public void testEquals() throws Exception {
         Rectangle r = new Rectangle(1,2,3,4);
-        Assert.assertEquals(new Rectangle(1,2,3,4), r);
+        assertEquals(new Rectangle(1,2,3,4), r);
     }
 
     @Test
     public void testHashCodeMatch() throws Exception {
         Rectangle r = new Rectangle(1,2,3,4);
-        Assert.assertEquals(new Rectangle(1,2,3,4).hashCode(), r.hashCode());
+        assertEquals(new Rectangle(1,2,3,4).hashCode(), r.hashCode());
     }
 
     @Test
     public void testHashCodeMissmatch() throws Exception {
         Rectangle r = new Rectangle(1,2,3,4);
-        Assert.assertNotEquals(new Rectangle(0,2,3,4).hashCode(), r.hashCode());
+        assertNotEquals(new Rectangle(0,2,3,4).hashCode(), r.hashCode());
     }
 }

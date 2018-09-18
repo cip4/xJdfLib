@@ -10,8 +10,8 @@ import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.WrappingParams;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -20,18 +20,18 @@ import java.util.List;
 
 import static java.util.Collections.EMPTY_LIST;
 import static org.cip4.lib.xjdf.schema.ColorantControl.ProcessColorModel.DEVICE_CMYK;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResourcesTest {
 
     private XJdfNodeFactory nodeFactory;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         nodeFactory = new XJdfNodeFactory();
     }

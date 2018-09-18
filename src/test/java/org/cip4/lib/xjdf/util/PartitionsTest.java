@@ -2,11 +2,11 @@ package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.Part;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PartitionsTest {
 

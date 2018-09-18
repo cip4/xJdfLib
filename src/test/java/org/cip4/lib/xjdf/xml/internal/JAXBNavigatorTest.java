@@ -10,14 +10,16 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class JAXBNavigatorTest {
 
@@ -40,12 +42,17 @@ public class JAXBNavigatorTest {
         assertTrue(object instanceof FileSpec);
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void evaluateNodeFails() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         builder.addResource(new XJdfNodeFactory().createRunList(new URI(new java.net.URI("MyUri"))));
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
-        navigator.evaluateNode("//xjdf:FileSpec/[]");
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+        assertThrows(XPathExpressionException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                navigator.evaluateNode("//xjdf:FileSpec/[]");
+            }
+        });
     }
 
     @Test
@@ -62,14 +69,23 @@ public class JAXBNavigatorTest {
         assertEquals(2, array.length);
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void evaluateNodeSetFails() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final XJdfNodeFactory xJdfNodeFactory = new XJdfNodeFactory();
         builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("FirstUri"))));
         builder.addResource(xJdfNodeFactory.createRunList(new URI(new java.net.URI("SecondUri"))));
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
-        navigator.evaluateNodeList("//xjdf:FileSpec/[]");
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+
+        assertThrows(
+            XPathExpressionException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    navigator.evaluateNodeList("//xjdf:FileSpec/[]");
+                }
+            }
+        );
     }
 
     @Test
@@ -82,12 +98,21 @@ public class JAXBNavigatorTest {
         assertEquals(100, (int) navigator.evaluateInt("//xjdf:Product/@Amount"));
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void evaluateIntWrongXpath() throws Exception {
         XJdfBuilder builder = new XJdfBuilder();
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-        navigator.evaluateInt("[]");
+
+        assertThrows(
+            XPathExpressionException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    navigator.evaluateInt("[]");
+                }
+            }
+        );
     }
 
     @Test
@@ -116,15 +141,24 @@ public class JAXBNavigatorTest {
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
 
-        assertEquals(100.5d, navigator.evaluateDouble("//xjdf:PartAmount/@Amount"), 0.0);
+        assertEquals(100.5d, navigator.evaluateDouble("//xjdf:PartAmount/@Amount"), 0.001);
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void evaluateDoubleWrongXpath() throws Exception {
         XJdfBuilder builder = new XJdfBuilder();
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-        navigator.evaluateDouble("[]");
+
+        assertThrows(
+            XPathExpressionException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    navigator.evaluateDouble("[]");
+                }
+            }
+        );
     }
 
     @Test
@@ -146,12 +180,21 @@ public class JAXBNavigatorTest {
         assertEquals("Product", navigator.evaluateString("//xjdf:Product/@DescriptiveName"));
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void evaluateStringWrongXpath() throws Exception {
         XJdfBuilder builder = new XJdfBuilder();
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-        navigator.evaluateString("[]");
+
+        assertThrows(
+            XPathExpressionException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    navigator.evaluateString("[]");
+                }
+            }
+        );
     }
 
     @Test
@@ -174,12 +217,21 @@ public class JAXBNavigatorTest {
         assertEquals(fileSpecUrl, ((FileSpec) navigator.evaluateNode("//xjdf:FileSpec")).getURL());
     }
 
-    @Test(expected = XPathExpressionException.class)
+    @Test
     public void addNamespaceOmitted() throws Exception {
         XJdfBuilder builder = new XJdfBuilder("123JobID");
         final URI fileSpecUrl = new URI(new java.net.URI("MyUri"));
         builder.addResource(new XJdfNodeFactory().createRunList(fileSpecUrl));
-        JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
-        navigator.evaluateNode("//xjdf:FileSpec");
+        final JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
+
+        assertThrows(
+            XPathExpressionException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    navigator.evaluateNode("//xjdf:FileSpec");
+                }
+            }
+        );
     }
 }

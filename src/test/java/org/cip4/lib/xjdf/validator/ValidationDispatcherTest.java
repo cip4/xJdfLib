@@ -8,10 +8,10 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.validator.element.Validator;
 import org.hamcrest.collection.IsEmptyIterable;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ValidationDispatcherTest {
 

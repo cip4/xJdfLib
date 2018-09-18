@@ -10,9 +10,9 @@ import org.cip4.lib.xjdf.schema.LooseBinding;
 import org.cip4.lib.xjdf.schema.SaddleStitching;
 import org.cip4.lib.xjdf.schema.SideStitching;
 import org.cip4.lib.xjdf.schema.SoftCoverBinding;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BindingIntentValidatorTest {
 
