@@ -110,11 +110,12 @@ task createRelease (dependsOn: [test, javadoc]) {
         if (!project.hasProperty('projectVersion')) {
             throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
         }
+        String gitTag = "xJdfLib-${version}"
         file('version.properties').text = project.projectVersion
         exec { commandLine gitCommand, 'add', 'version.properties' }
         exec { commandLine gitCommand, 'commit', '-m', "'Prepare for release of ${version}'" }
-        exec { commandLine gitCommand, 'tag', '-m', "Release of ${version}",  "xJdfLib-${version}" }
-        exec { commandLine gitCommand, 'push', 'origin' }
+        exec { commandLine gitCommand, 'tag', '-m', "Release of ${version}",  gitTag }
+        exec { commandLine gitCommand, 'push', 'origin', gitTag }
     }
 }
 
@@ -130,4 +131,9 @@ task updateVersion {
         exec { commandLine gitCommand, 'commit', '-m', "'Incremented version number to ${project.projectVersion}'" }
         exec { commandLine gitCommand, 'push', 'origin' }
     }
+}
+
+nexusStaging {
+    packageGroup = "org.cip4"
+    stagingProfileId = "105e2b532689c6"
 }
