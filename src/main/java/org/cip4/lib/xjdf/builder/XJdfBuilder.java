@@ -225,8 +225,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
         Resource resource = xJdfNodeFactory.createResource(specificResource, part);
 
-        resource.setID(resource.getSpecificResource().getName().getLocalPart() + "_" + UUID.randomUUID().toString());
-
         addResource(resource, processUsage);
         return resource;
     }

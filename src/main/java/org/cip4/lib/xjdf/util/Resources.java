@@ -169,11 +169,7 @@ public class Resources {
     <V extends SpecificResource> Resource createResource(
         @NotNull final V resourceType, @Nullable final Part partition
     ) {
-        Resource resource = getNodeFactory().createResource(resourceType, partition);
-        if (null == resource.getID()) {
-            resource.setID(resource.getSpecificResource().getName().getLocalPart() + "_" + UUID.randomUUID());
-        }
-        return resource;
+        return getNodeFactory().createResource(resourceType, partition);
     }
 
     /**
