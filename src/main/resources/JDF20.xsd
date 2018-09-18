@@ -5677,7 +5677,7 @@
             </xs:attribute>
             <xs:attribute name="Pitch" type="XYPair" use="optional"/>
             <xs:attribute name="Reinforcement" type="NMTOKEN" use="optional"/>
-            <xs:attribute name="Shape" use="required">
+            <xs:attribute name="Shape" use="optional">
                 <xs:simpleType>
                     <xs:restriction base="xs:NMTOKEN">
                         <xs:enumeration value="Elliptic"/>
