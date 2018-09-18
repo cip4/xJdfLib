@@ -1,12 +1,29 @@
 package org.cip4.lib.xjdf.validator.element;
 
+import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class ResourceSetCombinedProcessIndexValidatorTest {
+
+    @Test
+    public void canValidateResourceSet() {
+        assertTrue(
+            new ResourceSetCombinedProcessIndexValidator().canValidate(new ResourceSet())
+        );
+    }
+
+    @Test
+    public void canNotValidateResource() {
+        assertFalse(
+            new ResourceSetCombinedProcessIndexValidator().canValidate(new Resource())
+        );
+    }
 
     @Test
     public void combinedIndexMustBeWithinTheRangeOfTypes() {

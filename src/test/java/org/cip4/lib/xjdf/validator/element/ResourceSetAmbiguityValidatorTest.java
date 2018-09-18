@@ -5,7 +5,19 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 public class ResourceSetAmbiguityValidatorTest {
+
+    @Test
+    public void canValidateXjdf() {
+        assertTrue(new ResourceSetAmbiguityValidator().canValidate(new XJDF()));
+    }
+
+    @Test
+    public void canNotValidateResourceSet() {
+        assertFalse(new ResourceSetAmbiguityValidator().canValidate(new ResourceSet()));
+    }
 
     @Test
     public void resourceSetWithSameNameIsAmbiguous() {
