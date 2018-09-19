@@ -24,7 +24,7 @@ public class XJdfNodeFactoryTest {
      * Set up unit test.
      */
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         xJdfNodeFactory = new XJdfNodeFactory();
     }
 
@@ -32,7 +32,7 @@ public class XJdfNodeFactoryTest {
      * Tear down unit test.
      */
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() {
         xJdfNodeFactory = null;
     }
 

@@ -61,12 +61,12 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 		this.element = resource;
 	}
 
-	public IDREF(Product product) throws ValidationException {
+	public IDREF(Product product) {
 
 		this(product, generateId(product));
 	}
 
-	public IDREF(Product product, String id) throws ValidationException {
+	public IDREF(Product product, String id) {
 		this.id = id;
 		product.setID(id);
 		this.element = product;
@@ -109,7 +109,6 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
 
     /**
      * If necessary, generate a ID for a product
-     * @param product
      * @return ID for a product.
      */
     private static String generateId(Product product) {

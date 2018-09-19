@@ -9,25 +9,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit test case for XJDF Type Duration.
  * @author s.meissner
- * @date 11.01.2013
  */
 public class DurationTest {
-
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Duration#marshal(org.cip4.lib.xjdf.type.Duration)}.

@@ -9,14 +9,14 @@ import static org.junit.jupiter.api.Assertions.*;
 public class BindingIntentTest {
 
     @Test
-    public void productGetChildrenRaw() throws Exception {
+    public void productGetChildrenRaw() {
         Product childProduct = new Product();
         BindingIntent bindingIntent = new BindingIntent().withChildren(childProduct);
         assertEquals(Collections.singletonList(childProduct), bindingIntent.getChildrenRaw());
     }
 
     @Test
-    public void productGetChildrenRawIsEmptyByDefault() throws Exception {
+    public void productGetChildrenRawIsEmptyByDefault() {
         BindingIntent bindingIntent = new BindingIntent();
         assertNull(bindingIntent.getChildrenRaw());
     }

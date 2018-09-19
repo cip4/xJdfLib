@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.util;
 
 /**
@@ -61,9 +51,7 @@ public class IDGeneratorUtil {
 			prefix = DEFAULT_PREFIX;
 		}
 
-		String result = prefix.toUpperCase() + "_" + val;
-
 		// return result
-		return result;
+		return prefix.toUpperCase() + "_" + val;
 	}
 }

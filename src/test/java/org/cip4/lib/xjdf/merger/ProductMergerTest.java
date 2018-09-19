@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductMergerTest {
 
     @Test
-    public void testMerge() throws Exception {
+    public void testMerge() {
         final ProductMerger productMerger = new ProductMerger();
         assertThrows(
             MergeConflictException.class,
@@ -23,13 +23,13 @@ public class ProductMergerTest {
     }
 
     @Test
-    public void testIsMergeableWrongType() throws Exception {
+    public void testIsMergeableWrongType() {
         ProductMerger productMerger = new ProductMerger();
         assertFalse(productMerger.isMergeable(1, 1));
     }
 
     @Test
-    public void testIsMergeableTrue() throws Exception {
+    public void testIsMergeableTrue() {
         ProductMerger productMerger = new ProductMerger();
         Product product = new Product().withID("42");
         assertTrue(productMerger.isMergeable(product, product));

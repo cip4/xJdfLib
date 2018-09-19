@@ -4,7 +4,6 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 
 /**

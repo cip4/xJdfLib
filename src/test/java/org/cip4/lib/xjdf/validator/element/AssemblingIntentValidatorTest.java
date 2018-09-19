@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AssemblingIntentValidatorTest {
 
     @Test
-    public void allowReferenceToForeignProduct() throws Exception {
+    public void allowReferenceToForeignProduct() {
         AssemblingIntent assemblingIntent = new AssemblingIntent().withContainer(new Product().withID("foo"));
         assertThat(
             assemblingIntent,
@@ -22,7 +22,7 @@ public class AssemblingIntentValidatorTest {
     }
 
     @Test
-    public void disallowReferencingParentProductAsContainer() throws Exception {
+    public void disallowReferencingParentProductAsContainer() {
         Product product = new Product().withID("foo");
         AssemblingIntent assemblingIntent = new AssemblingIntent().withContainer(product);
         ValidationAssertions.assertIsInvalid(

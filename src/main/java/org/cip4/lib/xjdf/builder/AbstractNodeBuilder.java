@@ -31,8 +31,7 @@ public abstract class AbstractNodeBuilder<T> {
 
 		Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
 		JAXBElement<T> element = u.unmarshal(node, typeResourceClass);
-		T obj = element.getValue();
-		this.node = obj;
+		this.node = element.getValue();
 	}
 
 	/**

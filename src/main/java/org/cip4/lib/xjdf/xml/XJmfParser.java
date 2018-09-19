@@ -56,7 +56,7 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     public final void parseXJmf(final XJMF xjmf, final OutputStream os, final boolean skipValidation)
-        throws IOException, ParserConfigurationException, SAXException, JAXBException {
+        throws JAXBException {
         parseXml(xjmf, os, skipValidation);
     }
 

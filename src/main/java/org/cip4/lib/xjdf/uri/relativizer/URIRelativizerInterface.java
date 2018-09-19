@@ -18,5 +18,5 @@ interface URIRelativizerInterface {
      *
      * @throws URISyntaxException If the uri could not be relativized.
      */
-    String relativize(final URI baseUri, final URI uri) throws URISyntaxException;
+    String relativize(final URI baseUri, final URI uri);
 }

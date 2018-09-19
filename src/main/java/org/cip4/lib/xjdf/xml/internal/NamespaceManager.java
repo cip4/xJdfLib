@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
 import java.util.HashMap;
@@ -29,7 +19,7 @@ public class NamespaceManager implements NamespaceContext {
 	 */
 	public NamespaceManager() {
 		// initialize namespaces
-		namespaces = new HashMap<String, String>(5);
+		namespaces = new HashMap<>(5);
 	}
 
 	/**

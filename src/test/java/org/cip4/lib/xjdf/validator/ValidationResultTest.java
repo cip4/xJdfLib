@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ValidationResultTest {
 
     @Test
-    public void getViolations() throws Exception {
+    public void getViolations() {
         ValidationResult validation = new ValidationResult("foo");
         List<String> violations = validation.getViolations();
         assertEquals(1, violations.size());
@@ -18,7 +18,7 @@ public class ValidationResultTest {
     }
 
     @Test
-    public void getViolationsDoesNotAllowModifications() throws Exception {
+    public void getViolationsDoesNotAllowModifications() {
         ValidationResult validation = new ValidationResult("foo");
         final List<String> violations = validation.getViolations();
 
@@ -26,7 +26,7 @@ public class ValidationResultTest {
             UnsupportedOperationException.class,
             new Executable() {
                 @Override
-                public void execute() throws Throwable {
+                public void execute() {
                     violations.add("bar");
                 }
             }
@@ -34,19 +34,19 @@ public class ValidationResultTest {
     }
 
     @Test
-    public void isValidWhenNoViolationWasReported() throws Exception {
+    public void isValidWhenNoViolationWasReported() {
         ValidationResult validation = new ValidationResult();
         assertTrue(validation.isValid());
     }
 
     @Test
-    public void isNotValidWhenViolationWasReported() throws Exception {
+    public void isNotValidWhenViolationWasReported() {
         ValidationResult validation = new ValidationResult("foo");
         assertFalse(validation.isValid());
     }
 
     @Test
-    public void append() throws Exception {
+    public void append() {
         ValidationResult validation = new ValidationResult();
         List<String> violations = validation.getViolations();
         assertEquals(0, violations.size());

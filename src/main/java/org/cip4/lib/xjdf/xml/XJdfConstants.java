@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.IOException;
@@ -87,8 +77,6 @@ public class XJdfConstants {
 
     /**
      * Load the JDF20 Namespace from schema file.
-     *
-     * @return
      */
     private static String loadNamespaceJdf20() {
 

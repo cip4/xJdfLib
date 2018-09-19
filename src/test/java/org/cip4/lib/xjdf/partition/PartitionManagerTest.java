@@ -41,18 +41,9 @@ public class PartitionManagerTest {
      * @throws Exception Catch all Exception.
      */
     @BeforeEach
-    public final void setUp() throws Exception {
+    public final void setUp() {
         partitionManager = new PartitionManager();
         resourceSet = NF.createResourceSet();
-    }
-
-    /**
-     * Tear down unit test.
-     *
-     * @throws Exception Catch all Exception
-     */
-    @AfterEach
-    public final void tearDown() throws Exception {
     }
 
     /**

@@ -4,7 +4,7 @@ import org.cip4.lib.xjdf.schema.XJDF;
 
 public class XjdfValidator {
 
-    private ValidationDispatcher validationDispatcher;
+    private final ValidationDispatcher validationDispatcher;
 
     public XjdfValidator() {
         this(

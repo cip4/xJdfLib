@@ -64,7 +64,7 @@ public class JAXBNavigatorTest {
         JAXBNavigator<XJDF> navigator = new JAXBNavigator<>(builder.build());
         navigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Object object = navigator.evaluateNodeList("//xjdf:FileSpec");
-        assertTrue(object != null);
+        assertNotNull(object);
         Object[] array = (Object[]) object;
         assertEquals(2, array.length);
     }

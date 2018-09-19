@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.AfterEach;
@@ -19,29 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit Test case for IntegerList object.
  * @author s.meissner
- * @date 10.01.2013
  */
 public class IntegerListTest {
 
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.IntegerList#newInstance(java.lang.String)}.
-	 */
 	@Test
 	public void testNewInstanceString() {
 
@@ -57,9 +27,6 @@ public class IntegerListTest {
 		assertEquals(new Integer(4), r.getList().get(3), "Integer Value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.IntegerList#newInstance(Integer...)}.
-	 */
 	@Test
 	public void testNewInstanceIntegerArray() {
 
@@ -74,9 +41,6 @@ public class IntegerListTest {
 		assertEquals(new Integer(9), r.getList().get(3), "Integer Value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Marshall}.
-	 */
 	@Test
 	public void testMarshal() {
 
@@ -87,13 +51,9 @@ public class IntegerListTest {
 		String result = new IntegerList().marshal(r);
 
 		// assert
-		assertEquals("6 7 8 9 10 11 12", result, "Number of Items is wrong.");
+		assertEquals("6 7 8 9 10 11 12", result);
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Unmarshall}.
-	 * @throws Exception
-	 */
 	@Test
 	public void testUnmarshal() throws Exception {
 

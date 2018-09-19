@@ -47,7 +47,7 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      */
     public final void packageXjdf(
         final XJDF xjdf
-    ) throws PackagerException, XPathExpressionException {
+    ) throws PackagerException {
         packageXjdf(xjdf, xjdf.getJobID());
     }
 
@@ -63,7 +63,7 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
     public final void packageXjdf(
         final XJDF xjdf,
         String docName
-    ) throws PackagerException, XPathExpressionException {
+    ) throws PackagerException {
         if (StringUtils.isBlank(docName)) {
             docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
         } else {

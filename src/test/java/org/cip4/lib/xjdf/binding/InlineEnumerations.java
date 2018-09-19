@@ -84,7 +84,7 @@ public class InlineEnumerations {
     }
 
     @Test
-    public void attributeNameMatchesClassname() throws Exception {
+    public void attributeNameMatchesClassname() {
         NodeList bindings;
         try {
             bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");

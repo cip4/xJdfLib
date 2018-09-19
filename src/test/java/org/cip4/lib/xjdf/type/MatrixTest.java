@@ -9,29 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit test case for XJDF Type Matrix.
  * @author stefan.meissner
- * @date 18.12.2012
  */
 public class MatrixTest {
 
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#newInstance()}.
-	 */
 	@Test
 	public void testNewInstance() {
 
@@ -49,9 +29,6 @@ public class MatrixTest {
 		assertEquals(0d, r.getTy(), "Ty value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#newInstance(java.lang.String)}.
-	 */
 	@Test
 	public void testNewInstanceString() {
 
@@ -70,9 +47,6 @@ public class MatrixTest {
 		assertEquals(21631.3d, r.getTy(), "Ty value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#newInstance(double, double, double, double, double, double)}.
-	 */
 	@Test
 	public void testNewInstanceDoubleDoubleDoubleDoubleDoubleDouble() {
 
@@ -101,7 +75,7 @@ public class MatrixTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testToString() throws Exception {
+	public void testToString() {
 
 		// arrange
 		final double a = 1d;
@@ -123,7 +97,7 @@ public class MatrixTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testMarshalMatrix() throws Exception {
+	public void testMarshalMatrix() {
 
 		// arrange
 		final double a = 1d;
@@ -146,7 +120,7 @@ public class MatrixTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testUnmarshalString() throws Exception {
+	public void testUnmarshalString() {
 		// arrange
 		final String VALUE = "1 0 0 1 3.14 21631.3";
 

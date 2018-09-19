@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.IOException;
@@ -23,7 +13,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	/**
 	 * Custom constructor. Accepting a XJDF Package Path for initializing.
 	 * @param pathPackage Path to XJDF Package.
-	 * @throws IOException
 	 */
 	public XJdfUnpackager(String pathPackage) throws IOException {
 		super(pathPackage);
@@ -32,7 +21,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	/**
 	 * Returns the XJDF Document covered by the XJDFNavigator.
 	 * @return XJDF Document coverd by the XJDFNavigator.
-	 * @throws Exception
 	 */
 	public XJdfNavigator getXJdfDocument() throws Exception {
 
@@ -49,8 +37,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
      * @param namespaceAware Flag whether or not the navigator should be aware of the namespaces.
      *
      * @return XJDF document covered by the XJDFNavigator.
-     *
-     * @throws Exception
      */
     public final XJdfNavigator getXJdfDocument(boolean namespaceAware) throws Exception {
         byte[] bytes = super.findMasterDocument();
@@ -60,7 +46,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
 	 * @return The path of the master document.
-	 * @throws IOException
 	 */
 	public String unpackageXJdfTemp(String appName) throws IOException {
 
@@ -71,7 +56,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	/**
 	 * Unpackage an XJDF Package to a temporary directory.
 	 * @return The path of the master document.
-	 * @throws IOException
 	 */
 	public String unpackageXJdfTemp() throws IOException {
 
@@ -83,7 +67,6 @@ public class XJdfUnpackager extends AbstractXmlUnpackager {
 	 * Unpackage an XJDF Package to a target directory.
 	 * @param targetDir Target directory for unpackaging.
 	 * @return The path of the master document.
-	 * @throws IOException
 	 */
 	public String unpackageXJdf(String targetDir) throws IOException {
 

@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class Ancestors {
 
-    private List<Object> ancestors;
+    private final List<Object> ancestors;
 
     public Ancestors() {
         ancestors = Collections.emptyList();

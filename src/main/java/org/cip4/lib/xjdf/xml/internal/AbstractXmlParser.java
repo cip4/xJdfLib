@@ -54,7 +54,6 @@ public abstract class AbstractXmlParser<T> {
      * @param w3cNode The W3C Node to be parsed.
      *
      * @return The XML Node as object.
-     * @throws JAXBException
      */
     protected final Object parseNode(final Node w3cNode) throws JAXBException {
         Unmarshaller u = jaxbContext.createUnmarshaller();
@@ -66,8 +65,6 @@ public abstract class AbstractXmlParser<T> {
      *
      * @param xmlNode The XML Node to be parsed.
      * @param w3cNode The W3C Result node.
-     *
-     * @throws JAXBException
      */
     protected final void parseNode(final Object xmlNode, final Node w3cNode) throws JAXBException {
         Marshaller m = createMarshaller();
@@ -95,7 +92,7 @@ public abstract class AbstractXmlParser<T> {
      * @throws ValidationException Is thrown in case document is not valid and validation process is not being skipped.
      */
     protected final void parseXml(final T obj, final OutputStream os)
-        throws IOException, ParserConfigurationException, SAXException, JAXBException {
+        throws JAXBException {
         parseXml(obj, os, false);
     }
 
@@ -108,13 +105,12 @@ public abstract class AbstractXmlParser<T> {
      * @return Document as Byte Array.
      */
     protected final byte[] parseXml(final T obj, final boolean skipValidation)
-        throws IOException, ParserConfigurationException, SAXException, JAXBException {
+        throws IOException, JAXBException {
         // parse object tree
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         parseXml(obj, bos, skipValidation);
         bos.close();
 
-        // retrun byte array
         return bos.toByteArray();
     }
 
@@ -129,7 +125,7 @@ public abstract class AbstractXmlParser<T> {
      * skipped.
      */
     protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation)
-        throws JAXBException, IOException, ParserConfigurationException, SAXException {
+        throws JAXBException {
         if (!skipValidation) {
             AbstractXmlValidator validator = createValidator();
             Source xmlSource = new JAXBSource(jaxbContext, obj);
@@ -176,7 +172,6 @@ public abstract class AbstractXmlParser<T> {
      * Creates and returns a new marshaller object.
      *
      * @return New Marshaller object.
-     * @throws JAXBException
      */
     private Marshaller createMarshaller() throws JAXBException {
         // create marshaller

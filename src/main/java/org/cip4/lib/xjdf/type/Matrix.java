@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 /**
@@ -156,18 +146,14 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
 		double tx = matrix.getTx();
 		double ty = matrix.getTy();
 
-		// create string
-		String result = String.format("%s %s %s %s %s %s", a, b, c, d, tx, ty);
-
-		// return result
-		return result;
+		return String.format("%s %s %s %s %s %s", a, b, c, d, tx, ty);
 	}
 
 	/**
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
 	 */
 	@Override
-	public Matrix unmarshal(String v) throws Exception {
+	public Matrix unmarshal(String v) {
 
 		return new Matrix(v);
 	}

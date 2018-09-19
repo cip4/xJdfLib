@@ -34,7 +34,7 @@ public class JAXBNavigator<T> {
     /**
      * JAXB object to bind.
      */
-    private T jaxbObj;
+    private final T jaxbObj;
 
     /**
      * XPath.
@@ -54,7 +54,7 @@ public class JAXBNavigator<T> {
     /**
      * Namespace manager.
      */
-    private NamespaceManager namespaceManager = new NamespaceManager();
+    private final NamespaceManager namespaceManager = new NamespaceManager();
 
     /**
      * Constructor performing the setup for simplifying XPath handling using any JAXB object.

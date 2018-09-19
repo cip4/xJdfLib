@@ -23,7 +23,7 @@ public class JAXBElementMergerTest {
     }
 
     @Test
-    public void testIsMergeable() throws Exception {
+    public void testIsMergeable() {
         BaseMerger<Integer> wrappedMerger = mock(BaseMerger.class);
         when(wrappedMerger.isMergeable(any(), any())).thenReturn(false);
 
@@ -35,7 +35,7 @@ public class JAXBElementMergerTest {
     }
 
     @Test
-    public void testIsMergeableWithDifferentClass() throws Exception {
+    public void testIsMergeableWithDifferentClass() {
         BaseMerger<Integer> wrappedMerger = mock(BaseMerger.class);
         when(wrappedMerger.isMergeable(any(), any())).thenReturn(true);
 

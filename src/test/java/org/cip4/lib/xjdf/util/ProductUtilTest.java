@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ProductUtilTest {
 
     @Test
-    public void getIntent() throws Exception {
+    public void getIntent() {
         ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
         productBuilder.addIntent(new LayoutIntent());
@@ -22,7 +22,7 @@ public class ProductUtilTest {
     }
 
     @Test
-    public void getIntentReturnsNull() throws Exception {
+    public void getIntentReturnsNull() {
         ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
         productBuilder.addIntent(colorIntent);

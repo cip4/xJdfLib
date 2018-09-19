@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DateTimeTest {
 
 	@Test
-	public void dateTimeToString() throws Exception {
+	public void dateTimeToString() {
 		final String expected = "2012-03-04T16:20:45Z";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45).toString();
@@ -31,7 +31,7 @@ public class DateTimeTest {
     }
 
 	@Test
-	public void dateTimeToStringUTC() throws Exception {
+	public void dateTimeToStringUTC() {
         final String expected = "2012-03-04T16:20:45Z";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45)
@@ -41,7 +41,7 @@ public class DateTimeTest {
 	}
 
 	@Test
-	public void dateTimeToStringBerlin() throws Exception {
+	public void dateTimeToStringBerlin() {
         final String expected = "2012-03-04T13:20:40+01:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 12, 20, 40)
@@ -51,7 +51,7 @@ public class DateTimeTest {
 	}
 
 	@Test
-	public void dateTimeToStringPacific() throws Exception {
+	public void dateTimeToStringPacific() {
         final String expected = "2012-03-04T06:20:40-08:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 14, 20, 40)
@@ -61,7 +61,7 @@ public class DateTimeTest {
 	}
 
 	@Test
-	public void dateTimeToStringHawaii() throws Exception {
+	public void dateTimeToStringHawaii() {
 		final String expected = "2012-03-04T06:20:40-10:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 40)

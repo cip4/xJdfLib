@@ -1,17 +1,6 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +8,6 @@ import java.net.URISyntaxException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,30 +23,6 @@ public class XJdfUnpackagerTest {
     private final static String RES_PGK = "/org/cip4/lib/xjdf/testPackage.zip";
     private final static String RES_PGK_WITH_SPACES = "/org/cip4/lib/xjdf/package with spaces.zip";
 
-    /**
-     * Setup unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-    }
-
-    /**
-     * Tear down unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @AfterEach
-    public void tearDown() throws Exception {
-    }
-
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager#unpackageZip(java.lang.String,
-     * java.lang.String)}.
-     *
-     * @throws IOException
-     */
     @Test
     public void testUnpackageZip() throws IOException, URISyntaxException {
 
@@ -119,12 +83,6 @@ public class XJdfUnpackagerTest {
         assertFalse(targetFile.exists(), "Target destination was not removed.");
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager#unpackageZip(java.lang.String,
-     * java.lang.String)}.
-     *
-     * @throws IOException
-     */
     @Test
     public void testUnpackageZipTempDir() throws IOException, URISyntaxException {
 
@@ -152,11 +110,6 @@ public class XJdfUnpackagerTest {
         assertFalse(targetFile.exists(), "Target destination was not removed.");
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackageManager#getXJdfDocument()}.
-     *
-     * @throws FileNotFoundException
-     */
     @Test
     public void testGetXJdfDocument() throws Exception {
 

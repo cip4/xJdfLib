@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf.validator.element;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.validator.Ancestors;
-import org.cip4.lib.xjdf.validator.ValidationResult;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 /**

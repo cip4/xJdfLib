@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 
@@ -84,18 +74,14 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
 		double x = xyPair.getX();
 		double y = xyPair.getY();
 
-		// create string
-		String result = String.format("%s %s", x, y);
-
-		// return result
-		return result;
+		return String.format("%s %s", x, y);
 	}
 
 	/**
 	 * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
 	 */
 	@Override
-	public XYPair unmarshal(String v) throws Exception {
+	public XYPair unmarshal(String v) {
 		return new XYPair(v);
 	}
 

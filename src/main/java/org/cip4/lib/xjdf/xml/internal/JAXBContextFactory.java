@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
 import javax.xml.bind.JAXBContext;
@@ -44,7 +34,6 @@ public class JAXBContextFactory {
 	/**
 	 * Create and return a new Marshaller Instance.
 	 * @return New Marshaller instance.
-	 * @throws JAXBException
 	 */
 	public static JAXBContext getInstance() throws JAXBException {
 

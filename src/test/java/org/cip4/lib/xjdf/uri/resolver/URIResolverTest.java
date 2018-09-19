@@ -67,7 +67,7 @@ public class URIResolverTest {
     }
 
     @Test
-    public void resolveURI_Null() throws Exception {
+    public void resolveURI_Null() {
         assertThrows(
             NullPointerException.class,
             new Executable() {

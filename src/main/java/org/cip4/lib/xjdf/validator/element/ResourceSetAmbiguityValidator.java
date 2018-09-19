@@ -13,10 +13,10 @@ import java.util.Objects;
 public class ResourceSetAmbiguityValidator implements Validator<XJDF> {
 
     private class ResourceSetIdentity {
-        String name;
-        ResourceSet.Usage usage;
-        String processUsage;
-        IntegerList combinedProcessIndex;
+        final String name;
+        final ResourceSet.Usage usage;
+        final String processUsage;
+        final IntegerList combinedProcessIndex;
 
         public ResourceSetIdentity(
             final String name, final ResourceSet.Usage usage, final String processUsage,

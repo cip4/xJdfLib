@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf;
 
 import javax.xml.bind.JAXBException;
@@ -42,7 +32,6 @@ public class XJdfFactory implements Runnable {
 
 	/**
 	 * Initialize the xJdf Library.
-	 * @throws JAXBException
 	 */
 	public static void init() throws JAXBException {
 
@@ -55,7 +44,6 @@ public class XJdfFactory implements Runnable {
 
 	/**
 	 * Initialize the JAXB framework.
-	 * @throws JAXBException
 	 */
 	public static void initXJdf() throws JAXBException {
 

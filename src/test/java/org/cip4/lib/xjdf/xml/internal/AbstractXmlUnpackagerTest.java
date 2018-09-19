@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junitpioneer.jupiter.TempDirectory;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +16,6 @@ public class AbstractXmlUnpackagerTest {
 
     private final String PACKAGE = AbstractXmlUnpackagerTest.class.getResource("../package.zip").getFile();
     private final String INDEX_FILE = "index.xml";
-    private final String INDEX_CONTENT = "<?xml version=\"1.0\"?>";
     private final String RESOURCE_FILE = "foo.txt";
     private final String RESOURCE_CONTENT = "bar";
 
@@ -84,7 +82,9 @@ public class AbstractXmlUnpackagerTest {
 
     @Test
     @ExtendWith(TempDirectory.class)
-    public void unpackageZipMultipleTimes(@TempDirectory.TempDir Path target1, @TempDirectory.TempDir Path target2) throws Exception {
+    public void unpackageZipMultipleTimes(@TempDirectory.TempDir Path target) throws Exception {
+        Path target1 = target.resolve("folder1");
+        Path target2 = target.resolve("folder2");
 
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
         unpackager.unpackageZip(target1.toString());
@@ -107,6 +107,7 @@ public class AbstractXmlUnpackagerTest {
     @Test
     public void findMasterDocument() throws Exception {
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
+        String INDEX_CONTENT = "<?xml version=\"1.0\"?>";
         assertEquals(INDEX_CONTENT, new String(unpackager.findMasterDocument()));
     }
 

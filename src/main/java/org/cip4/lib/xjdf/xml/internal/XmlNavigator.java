@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.output.XmlStreamWriter;
@@ -199,10 +189,7 @@ public class XmlNavigator {
 
         // convert to data type
         Constructor ctor = xJdfType.getDeclaredConstructor(String.class);
-        AbstractXJdfType validator = (AbstractXJdfType) ctor.newInstance(value);
-
-        // return object
-        return validator;
+        return ctor.newInstance(value);
     }
 
     /**
@@ -217,10 +204,7 @@ public class XmlNavigator {
     private Object evaluate(String xPath, QName qname) throws XPathExpressionException {
 
         // execute xpath
-        Object result = this.xPath.evaluate(xPath, xmlDocument, qname);
-
-        // return result
-        return result;
+        return this.xPath.evaluate(xPath, xmlDocument, qname);
     }
 
     /**
@@ -360,7 +344,6 @@ public class XmlNavigator {
      *
      * @return Expression result as parsed XML Node object.
      * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
-     * @throws JAXBException
      */
     protected Object extractNode(String xPath, AbstractXmlParser parser)
         throws XPathExpressionException, JAXBException {
@@ -368,22 +351,15 @@ public class XmlNavigator {
         // evaluate and return result.
         Node node = evaluateNode(xPath);
 
-        // parse node
-        Object obj = parser.parseNode(node);
-
-        // return node object
-        return obj;
+        return parser.parseNode(node);
     }
 
     /**
      * Remove a node from XML Document locaed by the XPath expression.
      *
      * @param xPath Location of the node to be removed.
-     *
-     * @throws ParserConfigurationException
-     * @throws XPathExpressionException
      */
-    public void removeNode(String xPath) throws ParserConfigurationException, XPathExpressionException {
+    public void removeNode(String xPath) throws XPathExpressionException {
 
         // load old node for removal
         Node node = (Node) evaluate(xPath, XPathConstants.NODE);
@@ -464,11 +440,8 @@ public class XmlNavigator {
      */
     public void updateAttribute(String xPath, String value) throws XPathExpressionException {
 
-        // finalize XPath expression
-        String exprString = xPath;
-
         // locate and modify the node
-        Attr result = (Attr) evaluate(exprString, XPathConstants.NODE);
+        Attr result = (Attr) evaluate(xPath, XPathConstants.NODE);
         result.setValue(value);
     }
 
@@ -482,11 +455,7 @@ public class XmlNavigator {
      */
     public InputStream getXmlStream() throws TransformerException, IOException {
 
-        // get bytes
-        InputStream resultStream = new ByteArrayInputStream(getXmlBytes());
-
-        // return result stream
-        return resultStream;
+        return new ByteArrayInputStream(getXmlBytes());
     }
 
     /**

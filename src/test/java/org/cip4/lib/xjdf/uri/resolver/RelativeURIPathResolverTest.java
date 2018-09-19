@@ -40,24 +40,24 @@ public class RelativeURIPathResolverTest {
     }
 
     @Test
-    public void canResolve() throws Exception {
+    public void canResolve() {
         assertTrue(new RelativeURIPathResolver().canResolve("pub/document-archives/xJdfSpec.pdf"));
     }
 
     @Test
-    public void canResolve_AbsoluteURI() throws Exception {
+    public void canResolve_AbsoluteURI() {
         assertTrue(
             new RelativeURIPathResolver().canResolve("http://localhost:8080/pub/document-archives/xJdfSpec.pdf")
         );
     }
 
     @Test
-    public void canResolve_AbsoluteURIPath() throws Exception {
+    public void canResolve_AbsoluteURIPath() {
         assertTrue(new RelativeURIPathResolver().canResolve("/pub/document-archives/xJdfSpec.pdf"));
     }
 
     @Test
-    public void canResolve_AuthorityURI() throws Exception {
+    public void canResolve_AuthorityURI() {
         assertTrue(
             new RelativeURIPathResolver().canResolve("//cip4@localhost:8080/pub/document-archives/xJdfSpec.pdf")
         );

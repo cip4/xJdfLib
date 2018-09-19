@@ -33,7 +33,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      * @throws java.lang.Exception
      */
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         productBuilder = new ProductBuilder();
     }
 
@@ -42,7 +42,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      * @throws java.lang.Exception
      */
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() {
         productBuilder = null;
     }
 
@@ -101,7 +101,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      * @throws Exception
      */
     @Test
-    public void testWithoutChildren() throws Exception {
+    public void testWithoutChildren() {
 
         // arrange
         ProductBuilder dbRoot = new ProductBuilder(1000);
@@ -122,7 +122,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
      * @throws Exception
      */
     @Test
-    public void newProductIdIsNull() throws Exception {
+    public void newProductIdIsNull() {
         Product product = new Product();
         assertNull(product.getID(), "Product ID is not null.");
     }

@@ -34,26 +34,26 @@ public class AbsoluteURIResolverTest {
     }
 
     @Test
-    public void canResolve() throws Exception {
+    public void canResolve() {
         assertTrue(new AbsoluteURIResolver().canResolve("http://localhost:8080/pub/document-archives/xJdfSpec.pdf"));
     }
 
     @Test
-    public void canNotResolve_AbsoluteURIPath() throws Exception {
+    public void canNotResolve_AbsoluteURIPath() {
         assertFalse(
             new AbsoluteURIResolver().canResolve("/pub/document-archives/xJdfSpec.pdf")
         );
     }
 
     @Test
-    public void canNotResolve_AuthorityURI() throws Exception {
+    public void canNotResolve_AuthorityURI() {
         assertFalse(
             new AbsoluteURIResolver().canResolve("//cip4@localhost:8080/pub/document-archives/xJdfSpec.pdf")
         );
     }
 
     @Test
-    public void canNotResolve_RelativeURI() throws Exception {
+    public void canNotResolve_RelativeURI() {
         assertFalse(new AbsoluteURIResolver().canResolve("pub/document-archives/xJdfSpec.pdf"));
     }
 }

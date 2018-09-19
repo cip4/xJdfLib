@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ProductValidatorTest {
 
     @Test
-    public void duplicateIntentsAllowed() throws Exception {
+    public void duplicateIntentsAllowed() {
         Product product = new Product().withIntent(
             new Intent().withName("LayoutIntent")
         ).withIntent(
@@ -25,7 +25,7 @@ public class ProductValidatorTest {
     }
 
     @Test
-    public void distinctIntentsAllowed() throws Exception {
+    public void distinctIntentsAllowed() {
         Product product = new Product().withIntent(
             new Intent().withName("LayoutIntent")
         );
@@ -34,7 +34,7 @@ public class ProductValidatorTest {
     }
 
     @Test
-    public void noIntentsAllowed() throws Exception {
+    public void noIntentsAllowed() {
         Product product = new Product();
         ProductValidator validator = new ProductValidator();
         assertThat(product, isValid(validator));

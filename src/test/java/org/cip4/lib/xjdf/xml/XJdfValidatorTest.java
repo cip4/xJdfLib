@@ -54,14 +54,14 @@ public class XJdfValidatorTest {
     }
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         // init instance variables
         xJdfNodeFactory = new XJdfNodeFactory();
         xJdfBuilder = new XJdfBuilder(this.getClass().getCanonicalName());
     }
 
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() {
         xJdfValidator = null;
         xJdfNodeFactory = null;
         xJdfBuilder = null;
@@ -133,7 +133,7 @@ public class XJdfValidatorTest {
     }
 
     @Test
-    public void isValidXjdfIsInvalid() throws Exception {
+    public void isValidXjdfIsInvalid() {
         // arrange
         final InputStream is = XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf");
 

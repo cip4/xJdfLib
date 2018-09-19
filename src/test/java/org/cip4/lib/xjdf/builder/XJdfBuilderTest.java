@@ -54,7 +54,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
      * @throws java.lang.Exception
      */
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() {
         xJdfBuilder = null;
     }
 

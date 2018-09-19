@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.util;
 
 import org.junit.jupiter.api.AfterEach;
@@ -19,29 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit test case for DimensionUtil class.
  * @author s.meissner
- * @date 28.06.2012
  */
 public class DimensionUtilTest {
 
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
-	 */
 	@Test
 	public void testMm2Dtp() {
 
@@ -56,9 +26,6 @@ public class DimensionUtilTest {
 		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
-	 */
 	@Test
 	public void testDtp2Mm() {
 
@@ -73,9 +40,6 @@ public class DimensionUtilTest {
 		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
-	 */
 	@Test
 	public void testMm2DtpFloat() {
 
@@ -90,9 +54,6 @@ public class DimensionUtilTest {
 		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
-	 */
 	@Test
 	public void testDtp2MmFloat() {
 
@@ -107,9 +68,6 @@ public class DimensionUtilTest {
 		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2MmS(java.lang.String)}.
-	 */
 	@Test
 	public void testDtp2MmS() {
 
@@ -124,9 +82,6 @@ public class DimensionUtilTest {
 		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2DtpS(float)}.
-	 */
 	@Test
 	public void testMm2DtpS() {
 

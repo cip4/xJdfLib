@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayOutputStream;
@@ -30,7 +20,6 @@ import org.w3c.dom.NodeList;
 /**
  * JUnit test case for XPathNavigator.
  * @author s.meissner
- * @date 06.03.2012
  */
 public class XJdfNavigatorTest {
 
@@ -39,23 +28,6 @@ public class XJdfNavigatorTest {
 	private final String RES_TEST_JDF = "/org/cip4/lib/xjdf/layout.jdf";
 
 	private final String RES_TEST_JOB_1 = "/org/cip4/lib/xjdf/JOB_1.xjdf";
-
-	/**
-	 * Set up unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#readAttribute(java.lang.String)}.

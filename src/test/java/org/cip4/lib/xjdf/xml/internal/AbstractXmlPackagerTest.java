@@ -4,6 +4,7 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Preview;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
@@ -31,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AbstractXmlPackagerTest {
 
     private class MinimalXmlPackager extends AbstractXmlPackager<XJDF> {
-        MinimalXmlPackager(final OutputStream out) throws Exception {
+        MinimalXmlPackager(final OutputStream out) {
             super(out);
         }
 
@@ -216,13 +217,13 @@ public class AbstractXmlPackagerTest {
 
                 final XJdfNodeFactory nf = new XJdfNodeFactory();
                 xjdf.withResourceSet(
-                    nf.createResourceSet()
+                    new ResourceSet()
                         .withName("RunList")
                         .withResource(
                             nf.createResource(
-                                nf.createRunList()
+                                new RunList()
                                     .withFileSpec(
-                                        nf.createFileSpec()
+                                        new FileSpec()
                                             .withURL(
                                                 new URI(
                                                     AbstractXmlPackagerTest.class.getResource("../../test.pdf")

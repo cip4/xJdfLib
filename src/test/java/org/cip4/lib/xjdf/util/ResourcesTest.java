@@ -32,7 +32,7 @@ public class ResourcesTest {
     private XJdfNodeFactory nodeFactory;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         nodeFactory = new XJdfNodeFactory();
     }
 
@@ -41,14 +41,14 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testGetResourceName() throws Exception {
+    public void testGetResourceName() {
 
         Resources Resources = new Resources(new ArrayList<ResourceSet>());
         assertEquals("Media", Resources.getResourceName(getMediaResource()));
     }
 
     @Test
-    public void createResource() throws Exception {
+    public void createResource() {
         Resources resources = new Resources(new ArrayList<ResourceSet>());
         SpecificResource specificResource = Mockito.mock(SpecificResource.class);
         Part part = Mockito.mock(Part.class);
@@ -59,7 +59,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testAddResource() throws Exception {
+    public void testAddResource() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
         Resource resource = getMediaResource();
@@ -73,7 +73,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testAddResourceWithCorrespondingSetPresent() throws Exception {
+    public void testAddResourceWithCorrespondingSetPresent() {
         Resource resource = getMediaResource();
         List<ResourceSet> resourceSets = new ArrayList<>();
         ResourceSet set = new ResourceSet().withProcessUsage("Testing").withName("Media");
@@ -91,7 +91,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSetNoMatchingName() throws Exception {
+    public void testFindResourceSetNoMatchingName() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         ResourceSet set = Mockito.mock(ResourceSet.class);
         Mockito.when(set.getName()).thenReturn("Resource1");
@@ -104,7 +104,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSetNoMatchingProcessUsage() throws Exception {
+    public void testFindResourceSetNoMatchingProcessUsage() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         ResourceSet set = Mockito.mock(ResourceSet.class);
         Mockito.when(set.getName()).thenReturn("Resource");
@@ -117,7 +117,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSet() throws Exception {
+    public void testFindResourceSet() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         ResourceSet set1 = Mockito.mock(ResourceSet.class);
         Mockito.when(set1.getName()).thenReturn("Resource1");
@@ -130,7 +130,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSetRespectsProcessUsage() throws Exception {
+    public void testFindResourceSetRespectsProcessUsage() {
         List<ResourceSet> resourceSets = new ArrayList<>();
 
         ResourceSet set = Mockito.mock(ResourceSet.class);
@@ -144,7 +144,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSetRespectsName() throws Exception {
+    public void testFindResourceSetRespectsName() {
         List<ResourceSet> resourceSets = new ArrayList<>();
 
         ResourceSet set = Mockito.mock(ResourceSet.class);
@@ -158,7 +158,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testFindResourceSetRespectsOrder() throws Exception {
+    public void testFindResourceSetRespectsOrder() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         ResourceSet set1 = Mockito.mock(ResourceSet.class);
         Mockito.when(set1.getName()).thenReturn("Resource");
@@ -177,7 +177,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testAddResourceSetLexicographic1() throws Exception {
+    public void testAddResourceSetLexicographic1() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
 
@@ -191,7 +191,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testAddResourceSetLexicographic2() throws Exception {
+    public void testAddResourceSetLexicographic2() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
 
@@ -205,7 +205,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void testAddResourceSetSameName() throws Exception {
+    public void testAddResourceSetSameName() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
 
@@ -219,7 +219,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void addResource() throws Exception {
+    public void addResource() {
         List<ResourceSet> resourceSets = new ArrayList<>();
         Resources resources = new Resources(resourceSets);
 
@@ -266,28 +266,28 @@ public class ResourcesTest {
     }
 
     @Test
-    public void isPartsMatchingWhenSearchKeyIsNotContainedInPart() throws Exception {
+    public void isPartsMatchingWhenSearchKeyIsNotContainedInPart() {
         Part searchPart = new Part().withProductPart("Foo");
         Part part = new Part();
         assertTrue(new Resources().isPartsMatching(searchPart, part));
     }
 
     @Test
-    public void isPartsMatchingWhenPartIsNotContainedInSearchPart() throws Exception {
+    public void isPartsMatchingWhenPartIsNotContainedInSearchPart() {
         Part searchPart = new Part();
         Part part = new Part().withProductPart("Foo");
         assertTrue(new Resources().isPartsMatching(searchPart, part));
     }
 
     @Test
-    public void findSpecificResourceWithoutMatchingResourceSet() throws Exception {
+    public void findSpecificResourceWithoutMatchingResourceSet() {
         Resources resources = new Resources();
         resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), "Wrapping");
         assertEquals(EMPTY_LIST, resources.findSpecificResource(Layout.class, new Part(), null));
     }
 
     @Test
-    public void findSpecificResourceWithoutMatchingResource() throws Exception {
+    public void findSpecificResourceWithoutMatchingResource() {
         Resources resources = new Resources();
         resources.addResource(new WrappingParams(), new Part().withProductPart("foo"), null);
         assertEquals(
@@ -297,7 +297,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void findSpecificResourceByConsistentPart() throws Exception {
+    public void findSpecificResourceByConsistentPart() {
         Resources resources = new Resources();
         WrappingParams wrappingParams = new WrappingParams();
         resources.addResource(wrappingParams, new Part().withProductPart("foo"), null);
@@ -312,7 +312,7 @@ public class ResourcesTest {
     }
 
     @Test
-    public void findSpecificResourceWithMatchingResource() throws Exception {
+    public void findSpecificResourceWithMatchingResource() {
         Resources resources = new Resources();
         WrappingParams specificResource = new WrappingParams();
         resources.addResource(specificResource, new Part(), null);
@@ -324,13 +324,13 @@ public class ResourcesTest {
     }
 
     @Test
-    public void getResourceSetsReturnsEmptyList() throws Exception {
+    public void getResourceSetsReturnsEmptyList() {
         Resources resources = new Resources();
         assertEquals(EMPTY_LIST, resources.getResourceSets());
     }
 
     @Test
-    public void getResourceSetsReturnsCorrectResourceSets() throws Exception {
+    public void getResourceSetsReturnsCorrectResourceSets() {
         ColorantControl colorantControl = new ColorantControl().withProcessColorModel(DEVICE_CMYK);
         Part part = new Part().withProductPart("foo");
         Resources resources = new Resources();

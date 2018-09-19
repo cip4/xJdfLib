@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SignalAlignedToAuditTest {
 
     private XsdReader xsdReader;
-    private List<String> signalOnlyAttributes = Arrays.asList("ChannelMode");
+    private final List<String> signalOnlyAttributes = Arrays.asList("ChannelMode");
 
     @BeforeEach
     public void setUp() throws Exception {

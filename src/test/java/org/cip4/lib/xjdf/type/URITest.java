@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
-import org.mockito.internal.matchers.Null;
 
 import java.net.URISyntaxException;
 
@@ -11,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class URITest {
 
     @Test
-    public void marshalNullParam() throws Exception {
+    public void marshalNullParam() {
         final URI uri = new URI();
         assertNull(uri.marshal(null));
     }
@@ -29,13 +28,13 @@ public class URITest {
     }
 
     @Test
-    public void marshallEmptyUri() throws Exception {
+    public void marshallEmptyUri() {
         final URI uri = new URI();
         assertThrows(
             NullPointerException.class,
             new Executable() {
                 @Override
-                public void execute() throws Throwable {
+                public void execute() {
                     assertNotNull(uri.marshal(uri));
                 }
             }
@@ -59,7 +58,7 @@ public class URITest {
     }
 
     @Test
-    public void unmarshallFails() throws Exception {
+    public void unmarshallFails() {
         final URI uri = new URI();
         assertThrows(
             URISyntaxException.class,

@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.AfterEach;
@@ -18,29 +8,9 @@ import org.junit.jupiter.api.Test;
 /**
  * JUnit test case for XJDF data type Shape.
  * @author stefan.meissner
- * @date 18.12.2012
  */
 public class ShapeTest {
 
-	/**
-	 * Set up unit test.
-	 * @throws java.lang.Exception
-	 */
-	@BeforeEach
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@AfterEach
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance()}.
-	 */
 	@Test
 	public void testNewInstance() {
 
@@ -55,9 +25,6 @@ public class ShapeTest {
 		assertEquals(0d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance(java.lang.String)}.
-	 */
 	@Test
 	public void testNewInstanceString() {
 
@@ -73,9 +40,6 @@ public class ShapeTest {
 		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance(java.lang.String)}.
-	 */
 	@Test
 	public void testNewInstanceString_2() {
 
@@ -91,9 +55,6 @@ public class ShapeTest {
 		assertEquals(0, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance(java.lang.String)}.
-	 */
 	@Test
 	public void testNewInstanceString_3() {
 
@@ -109,9 +70,6 @@ public class ShapeTest {
 		assertEquals(0, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance(double, double, double)}.
-	 */
 	@Test
 	public void testNewInstanceDoubleDoubleDouble() {
 
@@ -126,9 +84,6 @@ public class ShapeTest {
 		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#newInstance(double, double, double)}.
-	 */
 	@Test
 	public void testNewInstanceDoubleDouble() {
 
@@ -148,7 +103,7 @@ public class ShapeTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testToString() throws Exception {
+	public void testToString() {
 
 		// arrange / act
 		String result = new Shape(10.1, 20.33, 40).toString();
@@ -162,7 +117,7 @@ public class ShapeTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testMarshalShape() throws Exception {
+	public void testMarshalShape() {
 
 		// arrange
 		Shape s = new Shape(10.1, 20.33, 40);
@@ -179,7 +134,7 @@ public class ShapeTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testUnmarshalString() throws Exception {
+	public void testUnmarshalString() {
 
 		// arrange
 		final String value = "10.1 20.33 40";

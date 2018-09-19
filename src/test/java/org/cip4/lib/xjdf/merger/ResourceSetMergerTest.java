@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ResourceSetMergerTest {
 
     @Test
-    public void testMerge() throws Exception {
+    public void testMerge() {
         ResourceSet baseSet = new ResourceSet();
         ResourceSet mergeSet = new ResourceSet();
         Resource resource = new Resource();

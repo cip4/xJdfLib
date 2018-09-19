@@ -87,7 +87,7 @@ public class IdRefs {
     }
 
     @Test
-    public void attributeNameMatchesPropertyName() throws Exception {
+    public void attributeNameMatchesPropertyName() {
         NodeList bindings;
         try {
             bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:property/xjb:baseType[@name]]");

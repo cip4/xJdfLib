@@ -70,7 +70,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableNoIds() throws Exception {
+    public void testIsMergeableNoIds() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");
@@ -80,7 +80,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableBaseWithoutName() throws Exception {
+    public void testIsMergeableBaseWithoutName() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         ResourceSet mergerSet = new ResourceSet();
@@ -89,7 +89,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableMergeWithoutName() throws Exception {
+    public void testIsMergeableMergeWithoutName() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");
@@ -98,7 +98,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableDifferentClasses() throws Exception {
+    public void testIsMergeableDifferentClasses() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");

@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
@@ -48,11 +38,10 @@ public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<
 			return false;
 		AbstractXJdfType other = (AbstractXJdfType) obj;
 		if (toString() == null) {
-			if (other.toString() != null)
-				return false;
-		} else if (!toString().equals(other.toString()))
-			return false;
-		return true;
+			return other.toString() == null;
+		} else  {
+			return toString().equals(other.toString());
+		}
 	}
 
 }

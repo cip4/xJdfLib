@@ -4,8 +4,6 @@ import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 
-import java.util.Collection;
-
 /**
  * Class for merging xjdf documents recursively.
  */
@@ -71,6 +69,6 @@ public class XjdfMerger extends BaseMerger<XJDF> {
             }
         }
         baseObject.getGeneralID().addAll(mergeObject.getGeneralID());
-        resourceSetMerger.merge((Collection) baseObject.getResourceSet(), (Collection) mergeObject.getResourceSet());
+        resourceSetMerger.merge(baseObject.getResourceSet(), mergeObject.getResourceSet());
     }
 }

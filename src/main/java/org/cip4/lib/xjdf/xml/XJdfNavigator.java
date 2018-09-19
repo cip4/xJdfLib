@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
@@ -239,8 +229,6 @@ public class XJdfNavigator extends XmlNavigator {
      * @param xPath XPath expression to execute to.
      *
      * @return The parsed XJDF Node object.
-     * @throws XPathExpressionException
-     * @throws JAXBException
      */
     public Object extractNode(String xPath) throws XPathExpressionException, JAXBException {
         return super.extractNode(xPath, new XJdfParser());
@@ -251,10 +239,6 @@ public class XJdfNavigator extends XmlNavigator {
      *
      * @param xPath Location of the node to be replaced.
      * @param replacement The new node.
-     *
-     * @throws ParserConfigurationException
-     * @throws JAXBException
-     * @throws XPathExpressionException
      */
     public void replaceNode(String xPath, Object replacement)
         throws XPathExpressionException, JAXBException, ParserConfigurationException {

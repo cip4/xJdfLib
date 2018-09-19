@@ -10,37 +10,37 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class DeliveryParamsValidatorTest {
 
     @Test
-    public void validateAllowsSingleOccurrence() throws Exception {
+    public void validateAllowsSingleOccurrence() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         assertThat(getDeliveryParams("RemoteURL"), isValid(validator));
     }
 
     @Test
-    public void validateAllowsNoOccurrence() throws Exception {
+    public void validateAllowsNoOccurrence() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         assertThat(getDeliveryParams(), isValid(validator));
     }
 
     @Test
-    public void validateDisallowsDuplicate() throws Exception {
+    public void validateDisallowsDuplicate() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         ValidationAssertions.assertIsInvalid(validator, getDeliveryParams("RemoteURL", "RemoteURL"));
     }
 
     @Test
-    public void validateDisallowsUnknownResourceUsages() throws Exception {
+    public void validateDisallowsUnknownResourceUsages() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         ValidationAssertions.assertIsInvalid(validator, getDeliveryParams("SomeInvalidString"));
     }
 
     @Test
-    public void validateDisallowsEmptyResourceUsage() throws Exception {
+    public void validateDisallowsEmptyResourceUsage() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         ValidationAssertions.assertIsInvalid(validator, getDeliveryParams(""));
     }
 
     @Test
-    public void validateDisallowsResourceUsageNull() throws Exception {
+    public void validateDisallowsResourceUsageNull() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
         ValidationAssertions.assertIsInvalid(validator, getDeliveryParams(new String[]{null}));
     }

@@ -70,7 +70,7 @@ public class RectangleTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testToString() throws Exception {
+	public void testToString() {
 
 		// arrange / act
 		String result = new Rectangle(1d, 0d, 3.14d, 21631.3d).toString();
@@ -84,7 +84,7 @@ public class RectangleTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testMarshalRectangle() throws Exception {
+	public void testMarshalRectangle() {
 
 		// arrange
 		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
@@ -101,7 +101,7 @@ public class RectangleTest {
 	 * @throws Exception
 	 */
 	@Test
-	public void testUnmarshalString() throws Exception {
+	public void testUnmarshalString() {
 
 		// arrange
 		final String value = "1 0 3.14 21631.3";
@@ -117,31 +117,31 @@ public class RectangleTest {
 	}
 
     @Test
-    public void testEqualsSame() throws Exception {
+    public void testEqualsSame() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertEquals(r, r);
     }
 
     @Test
-    public void testEqualsNull() throws Exception {
+    public void testEqualsNull() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertNotEquals(null, r);
     }
 
     @Test
-    public void testEquals() throws Exception {
+    public void testEquals() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertEquals(new Rectangle(1,2,3,4), r);
     }
 
     @Test
-    public void testHashCodeMatch() throws Exception {
+    public void testHashCodeMatch() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertEquals(new Rectangle(1,2,3,4).hashCode(), r.hashCode());
     }
 
     @Test
-    public void testHashCodeMissmatch() throws Exception {
+    public void testHashCodeMissmatch() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertNotEquals(new Rectangle(0,2,3,4).hashCode(), r.hashCode());
     }

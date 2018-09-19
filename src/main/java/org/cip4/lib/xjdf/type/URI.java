@@ -82,7 +82,7 @@ public class URI extends AbstractXJdfType<String, URI> {
     }
 
     @Override
-    public final String marshal(final URI v) throws Exception {
+    public final String marshal(final URI v) {
         if (v == null) {
             return null;
         }

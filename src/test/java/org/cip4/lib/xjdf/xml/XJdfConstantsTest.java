@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayOutputStream;
@@ -22,16 +12,11 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * JUnit test case for XmlConstants class.
  * @author s.meissner
- * @date 06.03.2012
  */
 public class XJdfConstantsTest {
 
 	private static final String RES_JDF20_XSD = "/JDF20.xsd";
 
-	/**
-	 * JUnit test
-	 * @throws IOException
-	 */
 	@Test
 	public void testNamespaceJdf20() throws IOException {
 
@@ -59,7 +44,7 @@ public class XJdfConstantsTest {
 	 * @throws IOException
 	 */
 	@Test
-	public void testLoadLibraryVersion() throws IOException {
+	public void testLoadLibraryVersion() {
 
 		// arrange
 

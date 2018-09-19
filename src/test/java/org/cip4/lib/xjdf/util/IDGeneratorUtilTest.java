@@ -15,24 +15,6 @@ import org.junit.jupiter.api.Test;
 public class IDGeneratorUtilTest {
 
     /**
-     * Setup unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @BeforeEach
-    public void setUp() throws Exception {
-    }
-
-    /**
-     * Tear down unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @AfterEach
-    public void tearDown() throws Exception {
-    }
-
-    /**
      * Test method for {@link org.cip4.lib.xjdf.util.IDGeneratorUtil#generateID(java.lang.String)}.
      */
     @Test

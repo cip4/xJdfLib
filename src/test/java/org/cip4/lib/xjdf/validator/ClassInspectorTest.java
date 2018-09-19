@@ -28,9 +28,6 @@ public class ClassInspectorTest {
             return fieldWithReference;
         }
 
-        public void getVoid() {
-        }
-
         public Object getArgument(Object o) {
             return o;
         }
@@ -55,7 +52,7 @@ public class ClassInspectorTest {
     private ClassInspector stubChildClassInspector;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    public void setUp() {
         stubClassInspector = new ClassInspector(StubClass.class);
         stubChildClassInspector = new ClassInspector(StubChildClass.class);
     }

@@ -5,12 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.ValidationException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 public class ElementOrder {
 
     @Test
-    public void queryHeaderBeforeSubscription() throws Exception {
+    public void queryHeaderBeforeSubscription() {
         XJdfValidator validator = new XJdfValidator();
         try {
             validator.validate(this.getClass().getResourceAsStream("elementOrderInQuery.xjdf"));

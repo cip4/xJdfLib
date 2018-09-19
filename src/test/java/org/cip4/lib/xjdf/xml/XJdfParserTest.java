@@ -14,10 +14,8 @@ import javax.xml.xpath.XPathFactory;
 
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.validator.element.ValidationAssertions;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.jupiter.api.AfterEach;
-import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -49,7 +47,7 @@ public class XJdfParserTest {
      * Tear down unit test.
      */
     @AfterEach
-    public void tearDown() throws Exception {
+    public void tearDown() {
         // clean up
         xJdfParser = null;
     }
@@ -121,7 +119,7 @@ public class XJdfParserTest {
     }
 
     @Test
-    public void testParseXJdfInvalid() throws Exception {
+    public void testParseXJdfInvalid() {
 
         // arrange
         final String VALUE = UUID.randomUUID().toString();
@@ -352,7 +350,7 @@ public class XJdfParserTest {
     }
 
     @Test
-    public void parseXjdfValidatesDocument() throws Exception {
+    public void parseXjdfValidatesDocument() {
         assertThrows(
             ValidationException.class,
             new Executable() {

@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.UUID;
 
 /**
  * This class provides access to Resources within ResourceSets.
@@ -169,7 +168,7 @@ public class Resources {
     <V extends SpecificResource> Resource createResource(
         @NotNull final V resourceType, @Nullable final Part partition
     ) {
-        return getNodeFactory().createResource(resourceType, partition);
+        return nodeFactory.createResource(resourceType, partition);
     }
 
     /**
@@ -182,16 +181,6 @@ public class Resources {
     @NotNull
     final String getResourceName(@NotNull final Resource resource) {
         return resource.getSpecificResource().getName().getLocalPart();
-    }
-
-    /**
-     * Getter for the factory for xjdf nodes.
-     *
-     * @return Factory for creating xjdf nodes.
-     */
-    @NotNull
-    private XJdfNodeFactory getNodeFactory() {
-        return nodeFactory;
     }
 
     /**

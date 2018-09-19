@@ -1,16 +1,7 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.type;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,8 +19,6 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 	 * Default constructor.
 	 */
 	public AbstractList() {
-
-		// create empty list
 		this(new ArrayList<T>());
 	}
 
@@ -38,11 +27,9 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 	 */
 	public AbstractList(T... values) {
 
-		List<T> list = new ArrayList<T>(values.length);
+		List<T> list = new ArrayList<>(values.length);
 
-		for (int i = 0; i < values.length; i++) {
-			list.add(values[i]);
-		}
+		list.addAll(Arrays.asList(values));
 
 		// make list unmodifiable
 		this.list = Collections.unmodifiableList(list);
@@ -66,10 +53,10 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 		String[] items = value.split(LIST_SEPARATOR);
 
 		// convert items
-		List<T> lst = new ArrayList<T>(items.length);
+		List<T> lst = new ArrayList<>(items.length);
 
-		for (int i = 0; i < items.length; i++) {
-			lst.add(convertFromString(items[i]));
+		for (String item : items) {
+			lst.add(convertFromString(item));
 		}
 
 		this.list = Collections.unmodifiableList(lst);
@@ -117,21 +104,18 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 			return null;
 
 		// build result
-		String result = null;
+		StringBuilder result = new StringBuilder();
 
 		for (int i = 0; i < obj.list.size(); i++) {
 
-			if (result == null) {
-				result = obj.list.get(i).toString();
-
-			} else {
-				result += LIST_SEPARATOR + obj.list.get(i).toString();
+			if (result.length() > 0) {
+				result.append(LIST_SEPARATOR);
 			}
-
+			result.append(obj.list.get(i).toString());
 		}
 
 		// return result
-		return result;
+		return result.toString();
 	}
 
 	/**
