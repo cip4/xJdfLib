@@ -36,6 +36,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Custom Constructor. Creates a new instance of ProductBuilder which already contains attribute Amount.
+     *
      * @param amount Value of Amount attribute
      */
     public ProductBuilder(Integer amount) {
@@ -79,6 +80,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Custom Constructor. Creates a new instance of ProductBuilder based on a existing Product Node.
+     *
      * @param product Product node for initializing.
      */
     public ProductBuilder(Product product) {
@@ -91,6 +93,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Getter for product attribute.
+     *
      * @return the product
      */
     protected Product getProduct() {
@@ -99,6 +102,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Append Intent node to Product Definition.
+     *
      * @param intent Intent object to append to.
      */
     public void addIntent(ProductIntent intent) {

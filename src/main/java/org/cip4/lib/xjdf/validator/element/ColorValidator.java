@@ -20,7 +20,7 @@ public class ColorValidator extends SimpleValidator<Color> {
         if (resource.getPart().isEmpty()) {
             validationResult.append(
                 "Resource/Part/@Separation SHALL be specified for each ResourceSet[@Name=\"Color\"]/Resource. "
-                + "But there was no Part element at all."
+                    + "But there was no Part element at all."
             );
         }
 

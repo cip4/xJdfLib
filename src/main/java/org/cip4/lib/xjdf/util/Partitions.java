@@ -79,7 +79,7 @@ public final class Partitions {
             if (method.getName().startsWith("get")
                 && method.getParameterTypes().length == 0
                 && method.getDeclaringClass().equals(Part.class)
-                ) {
+            ) {
                 getters.add(method);
             }
         }

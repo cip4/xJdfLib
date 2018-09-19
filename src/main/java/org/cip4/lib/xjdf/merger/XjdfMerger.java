@@ -21,6 +21,7 @@ public class XjdfMerger extends BaseMerger<XJDF> {
 
     /**
      * Internal constructor for testing purposes.
+     *
      * @param productListMerger Merger tu use for merging product lists.
      * @param resourceSetMerger Merger to use for merging reseourcesets.
      */

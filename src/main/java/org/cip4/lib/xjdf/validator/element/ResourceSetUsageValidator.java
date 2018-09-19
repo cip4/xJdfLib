@@ -27,8 +27,8 @@ public class ResourceSetUsageValidator extends SimpleValidator<ResourceSet> {
             if (null == resource.getID()) {
                 validationResult.append(String.format(
                     "If no @Usage is specified, the ResourceSet or its Resource children SHALL"
-                    + " contain @ID and be referenced from elsewhere within the XJDF."
-                    + " This rule is violated by ResourceSet[Name=%s]",
+                        + " contain @ID and be referenced from elsewhere within the XJDF."
+                        + " This rule is violated by ResourceSet[Name=%s]",
                     resourceSet.getName()
                 ));
             }

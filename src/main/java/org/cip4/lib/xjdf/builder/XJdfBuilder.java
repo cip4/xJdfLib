@@ -217,7 +217,9 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      *
      * @return Resource that was added.
      */
-    public final Resource addResource(final SpecificResource specificResource, final Part part, final String processUsage) {
+    public final Resource addResource(
+        final SpecificResource specificResource, final Part part, final String processUsage
+    ) {
         if (specificResource == null) {
             throw new IllegalArgumentException("Resource may not be null.");
         }

@@ -100,7 +100,7 @@ public class Resources {
                 && (
                 (processUsage == null && resourceSet.getProcessUsage() == null)
                     || (processUsage != null && processUsage.equals(resourceSet.getProcessUsage())))
-                ) {
+            ) {
                 return resourceSet;
             }
         }
@@ -164,8 +164,7 @@ public class Resources {
      *
      * @return Factory for creating xjdf nodes.
      */
-    @NotNull
-    <V extends SpecificResource> Resource createResource(
+    @NotNull <V extends SpecificResource> Resource createResource(
         @NotNull final V resourceType, @Nullable final Part partition
     ) {
         return nodeFactory.createResource(resourceType, partition);
@@ -185,6 +184,7 @@ public class Resources {
 
     /**
      * Getter for the ResourceSets.
+     *
      * @return List of ResourceSets.
      */
     public List<ResourceSet> getResourceSets() {

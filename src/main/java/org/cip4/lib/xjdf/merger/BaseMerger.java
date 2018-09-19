@@ -61,6 +61,7 @@ abstract class BaseMerger<T> {
      *
      * @param baseObjects Collection of objects to merge into.
      * @param mergeObject Object that will be merged.
+     *
      * @throws MergeConflictException if merging with the first candidate fails.
      */
     void merge(final Collection<T> baseObjects, final T mergeObject) throws MergeConflictException {

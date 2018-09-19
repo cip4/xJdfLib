@@ -12,41 +12,45 @@ import org.w3c.dom.Node;
  */
 public abstract class AbstractNodeBuilder<T> {
 
-	private final T node;
+    private final T node;
 
-	/**
-	 * Default constructor.
-	 */
-	protected AbstractNodeBuilder(T node) {
-		// initialize node
-		this.node = node;
-	}
+    /**
+     * Default constructor.
+     */
+    protected AbstractNodeBuilder(T node) {
+        // initialize node
+        this.node = node;
+    }
 
-	/**
-	 * Custom constructor. Accepting a Node object for initializing. !! THIS NODE MUST BE NAMESPACE AWARE !!
-	 * @param node Namespace aware node object.
-	 * @throws JAXBException Is thrown in case an exception.
-	 */
-	protected AbstractNodeBuilder(Node node, Class<T> typeResourceClass) throws JAXBException {
+    /**
+     * Custom constructor. Accepting a Node object for initializing. !! THIS NODE MUST BE NAMESPACE AWARE !!
+     *
+     * @param node Namespace aware node object.
+     *
+     * @throws JAXBException Is thrown in case an exception.
+     */
+    protected AbstractNodeBuilder(Node node, Class<T> typeResourceClass) throws JAXBException {
 
-		Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
-		JAXBElement<T> element = u.unmarshal(node, typeResourceClass);
-		this.node = element.getValue();
-	}
+        Unmarshaller u = JAXBContextFactory.getInstance().createUnmarshaller();
+        JAXBElement<T> element = u.unmarshal(node, typeResourceClass);
+        this.node = element.getValue();
+    }
 
-	/**
-	 * Getter for node attribute.
-	 * @return the node
-	 */
-	protected T getNode() {
-		return node;
-	}
+    /**
+     * Getter for node attribute.
+     *
+     * @return the node
+     */
+    protected T getNode() {
+        return node;
+    }
 
-	/**
-	 * Build and return the Node.
-	 * @return Node as DOM tree.
-	 */
-	public final T build() {
-		return node;
-	}
+    /**
+     * Build and return the Node.
+     *
+     * @return Node as DOM tree.
+     */
+    public final T build() {
+        return node;
+    }
 }

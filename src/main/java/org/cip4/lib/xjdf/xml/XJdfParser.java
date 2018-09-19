@@ -67,7 +67,6 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param xJdf XJDF Object Tree for parsing.
      *
      * @return XJDF as byte array.
-     *
      * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws IOException Is thrown in case any IO error occurs.
      * @throws SAXException Is thrown in case parsing an xml document fails.
@@ -85,7 +84,6 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param skipValidation Skip validation.
      *
      * @return XJDF as byte array.
-     *
      * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      * @throws SAXException Is thrown in case parsing an xml document fails.

@@ -30,7 +30,7 @@ public class Ancestors {
 
     @SuppressWarnings("unchecked")
     public <T> T getNearestAncestor(Class<T> type) {
-        for (int i = ancestors.size()-1; i>=0; i--) {
+        for (int i = ancestors.size() - 1; i >= 0; i--) {
             if (type.isInstance(ancestors.get(i))) {
                 return (T) ancestors.get(i);
             }

@@ -10,9 +10,9 @@ import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.Shape;
-import org.junit.jupiter.api.AfterEach;
+
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;

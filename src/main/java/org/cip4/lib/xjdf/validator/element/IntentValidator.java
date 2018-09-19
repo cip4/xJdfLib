@@ -11,7 +11,7 @@ public class IntentValidator extends SimpleValidator<Intent> {
     ) {
         if (intent.getProductIntent() != null
             && !intent.getName().equals(intent.getProductIntent().getName().getLocalPart())
-            ) {
+        ) {
             validationResult.append(String.format(
                 "The name of the element within //Intent SHALL be equal to //Intent/@Name. "
                     + "Found //Intent/@Name='%s' containing element with name '%s'",

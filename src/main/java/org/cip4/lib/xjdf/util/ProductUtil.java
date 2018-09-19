@@ -21,6 +21,7 @@ public final class ProductUtil {
      * @param product Product te read intent from.
      * @param productIntent Type of the intent.
      * @param <T> Type of the intent.
+     *
      * @return Requested Intent or null if no matching intent was found.
      */
     @SuppressWarnings("unchecked")

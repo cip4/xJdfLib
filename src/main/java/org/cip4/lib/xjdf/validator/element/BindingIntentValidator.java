@@ -11,7 +11,7 @@ public class BindingIntentValidator implements Validator<BindingIntent> {
     ) {
         if (
             BindingIntent.BindingOrder.NONE.equals(element.getBindingOrder())
-            && null != element.getBindingSide()
+                && null != element.getBindingSide()
         ) {
             validationResult.append(
                 "BindingIntent/@BindingSide SHALL NOT be provided if BindingIntent/@BindingOrder=\"None\"."

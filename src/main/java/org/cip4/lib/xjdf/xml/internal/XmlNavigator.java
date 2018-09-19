@@ -176,7 +176,6 @@ public class XmlNavigator {
      * @param xJdfType Target JDF Data Type of attribute.
      *
      * @return Value as JDF Data Type.
-     *
      * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
      * @throws ReflectiveOperationException Is thrown in case reflection fails.
      */
@@ -319,7 +318,6 @@ public class XmlNavigator {
      * @param <T> Type of the desired value object.
      *
      * @return Result as desired data type.
-     *
      * @throws XPathExpressionException Is thrown in case an XPath Exception occurs.
      * @throws ReflectiveOperationException Is thrown in case reflection fails.
      */
@@ -449,7 +447,6 @@ public class XmlNavigator {
      * Return the XML Document as input stream.
      *
      * @return XML document as input stream.
-     *
      * @throws TransformerException If this document could not be transformed.
      * @throws IOException If any IO errors occur.
      */
@@ -462,7 +459,6 @@ public class XmlNavigator {
      * Return the XML Document as Byte Array.
      *
      * @return XML Document as Byte Array.
-     *
      * @throws TransformerException If this document could not be transformed.
      * @throws IOException - If any IO errors occur.
      */
