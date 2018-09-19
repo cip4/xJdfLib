@@ -1,3 +1,5 @@
+import groovy.json.JsonSlurper
+
 apply plugin: 'maven'
 apply plugin: 'signing'
 
@@ -119,16 +121,52 @@ task createRelease (dependsOn: [test, javadoc]) {
     }
 }
 
+String readNextDevVersion(String jiraProject, String releaseVersion) {
+    logger.info("Find next developer-version for project ${project} after version ${releaseVersion}")
+
+    URL versionsUrl = new URL("https://jira.cip4.org/rest/api/2/project/${jiraProject}/versions")
+    List versions = new JsonSlurper().parseText(versionsUrl.text) as List
+
+    def releaseVersionIndex = findVersionIndex(versions, releaseVersion)
+    def nextReleaseVersion = findNextUnreleased(versions, releaseVersionIndex)
+    return "${nextReleaseVersion.name}-SNAPSHOT"
+}
+
+int findVersionIndex(List versions, String version) {
+    for (int i = 0; i < versions.size; ++i) {
+        if (versions.get(i).name == version) {
+            return i;
+        }
+    }
+    throw new InvalidUserDataException("Version ${version} is not configured in Jira.")
+}
+
+def findNextUnreleased(List versions, int after) {
+    for (int i = after+1; i < versions.size; i++) {
+        if (!versions.get(i).released) {
+            return versions.get(i)
+        }
+    }
+    throw new InvalidUserDataException("No unreleased version greater than ${versions.get(after).name} is not configured in Jira.")
+}
+
 task updateVersion {
+    inputs.file('version.properties')
     outputs.file('version.properties')
     String gitCommand = 'git'
     doLast {
-        if (!project.hasProperty('projectVersion')) {
-            throw new RuntimeException('Version has to be supplied using -PprojectVersion=');
+        String nextVersion;
+        if (project.hasProperty('projectVersion')) {
+            nextVersion = project.projectVersion
+            logger.info("Next version was provided by command line (-PprojectVersion=${nextVersion}).")
+        } else {
+            String currentVersion = file('version.properties').text
+            nextVersion = readNextDevVersion('XJDFLIB', currentVersion.replaceFirst('-SNAPSHOT$', ''))
+            logger.info("Next version '${nextVersion}' was derived from current version and jira releases.")
         }
-        file('version.properties').text = project.projectVersion
+        file('version.properties').text = nextVersion
         exec { commandLine gitCommand, 'add', 'version.properties' }
-        exec { commandLine gitCommand, 'commit', '-m', "'Incremented version number to ${project.projectVersion}'" }
+        exec { commandLine gitCommand, 'commit', '-m', "'Incremented version number to ${nextVersion}'" }
         exec { commandLine gitCommand, 'push', 'origin' }
     }
 }
