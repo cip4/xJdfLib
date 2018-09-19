@@ -50,7 +50,7 @@ public class ValidationDispatcher {
 
     public ValidationResult validate(Object element) {
         ValidationResultBuilder validationResult = new ValidationResultBuilder();
-        this.validate(element, new Ancestors(), new ValidationResultBuilder());
+        this.validate(element, new Ancestors(), validationResult);
         return validationResult.build();
     }
 

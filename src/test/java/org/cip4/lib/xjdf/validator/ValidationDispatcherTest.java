@@ -10,6 +10,10 @@ import org.hamcrest.collection.IsEmptyIterable;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
+
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -80,5 +84,23 @@ public class ValidationDispatcherTest {
             dispatcher.getChildElements(xjdf),
             IsEmptyIterable.emptyIterable()
         );
+    }
+
+    @Test
+    public void violationsAreReturned() {
+        Validator validator = Mockito.mock(Validator.class);
+        Mockito.when(validator.canValidate(Mockito.any())).thenReturn(true);
+        Mockito.doAnswer(new Answer() {
+            @Override
+            public Object answer(final InvocationOnMock invocation) throws Throwable {
+                ValidationResultBuilder resultBuilder = invocation.getArgument(2);
+                resultBuilder.append("some violation");
+                return null;
+            }
+        }).when(validator).validate(Mockito.any(), Mockito.any(Ancestors.class), Mockito.any(ValidationResultBuilder.class));
+        ValidationDispatcher dispatcher = new ValidationDispatcher(validator);
+        ValidationResult result = dispatcher.validate(new XJDF());
+        assertFalse(result.isValid());
+        assertEquals(Collections.singletonList("some violation"), result.getViolations());
     }
 }
