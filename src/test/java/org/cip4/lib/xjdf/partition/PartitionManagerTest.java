@@ -34,11 +34,6 @@ public class PartitionManagerTest {
      */
     private ResourceSet resourceSet;
 
-    /**
-     * Setup unit test.
-     *
-     * @throws Exception Catch all Exception.
-     */
     @BeforeEach
     public final void setUp() {
         partitionManager = new PartitionManager();

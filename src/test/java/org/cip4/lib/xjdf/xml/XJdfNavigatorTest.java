@@ -75,7 +75,6 @@ public class XJdfNavigatorTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUpdateAttribute() throws Exception {
@@ -100,7 +99,6 @@ public class XJdfNavigatorTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUpdateAttributeXJdfType() throws Exception {

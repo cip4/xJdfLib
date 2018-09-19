@@ -53,7 +53,6 @@ public class XYPairTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#toString()}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testToString() {
@@ -67,7 +66,6 @@ public class XYPairTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#marshal(org.cip4.lib.xjdf.type.XYPair)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testMarshalXYPair() {
@@ -84,7 +82,6 @@ public class XYPairTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#unmarshal(java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUnmarshalString() {

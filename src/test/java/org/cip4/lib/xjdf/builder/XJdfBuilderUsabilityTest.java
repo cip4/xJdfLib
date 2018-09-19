@@ -13,7 +13,6 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 	/**
 	 * Add Multiple Resource o XJDF document.
-	 * @throws Exception
 	 */
 	@Test
 	public void testCreateXJdfDocumentSimple() throws Exception {
@@ -67,7 +66,6 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 	/**
 	 * Add Multiple Resource o XJDF document.
-	 * @throws Exception
 	 */
 	@Test
 	public void testCreateXJdfDocumentWithProduct() throws Exception {

@@ -70,7 +70,6 @@ public class MatrixTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#toString()}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testToString() {
@@ -92,7 +91,6 @@ public class MatrixTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#marshal(org.cip4.lib.xjdf.type.Matrix)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testMarshalMatrix() {
@@ -115,7 +113,6 @@ public class MatrixTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#unmarshal(java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUnmarshalString() {

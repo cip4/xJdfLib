@@ -124,7 +124,6 @@ public abstract class AbstractXmlUnpackager {
      * Find the master document path in package file.
      *
      * @return The master document as byte array.
-     * @throws IOException Is thrown in case an IOExcetion occurs.
      */
     protected String findMasterDocumentPath() {
 

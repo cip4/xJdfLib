@@ -34,13 +34,10 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param xJdf XJDF Object Tree for parsing.
      * @param os Target OutputStream where XJdfDocument is being parsed.
      *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
      */
     public final void parseXJdf(final XJDF xJdf, final OutputStream os)
-        throws ParserConfigurationException, JAXBException, SAXException, IOException {
+        throws JAXBException {
         parseXml(xJdf, os);
     }
 
@@ -51,9 +48,6 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param os Target OutputStream where XJdfDocument is being parsed.
      * @param skipValidation Skip validation.
      *
-     * @throws IOException Is thrown in case any IO error occurs.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     public final void parseXJdf(final XJDF xJdf, final OutputStream os, final boolean skipValidation)
@@ -67,13 +61,11 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param xJdf XJDF Object Tree for parsing.
      *
      * @return XJDF as byte array.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws IOException Is thrown in case any IO error occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     public final byte[] parseXJdf(final XJDF xJdf)
-        throws ParserConfigurationException, IOException, SAXException, JAXBException {
+        throws IOException, JAXBException {
         return parseXml(xJdf);
     }
 
@@ -84,13 +76,11 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
      * @param skipValidation Skip validation.
      *
      * @return XJDF as byte array.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
      * @throws IOException Is thrown in case any IO error occurs.
      */
     public final byte[] parseXJdf(final XJDF xJdf, final boolean skipValidation)
-        throws ParserConfigurationException, JAXBException, SAXException, IOException {
+        throws JAXBException, IOException {
         return parseXml(xJdf, skipValidation);
     }
 

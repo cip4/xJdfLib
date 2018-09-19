@@ -36,11 +36,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     private XJdfBuilder xJdfBuilder;
 
-    /**
-     * Setup unit test.
-     *
-     * @throws java.lang.Exception
-     */
     @BeforeEach
     public void setUp() throws Exception {
         xJdfBuilder = new XJdfBuilder();
@@ -48,21 +43,11 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         JAXBContextFactory.init();
     }
 
-    /**
-     * Tear down unit test.
-     *
-     * @throws java.lang.Exception
-     */
     @AfterEach
     public void tearDown() {
         xJdfBuilder = null;
     }
 
-    /**
-     * Add one GeneralID Resource to XJDF document.
-     *
-     * @throws Exception
-     */
     @Test
     public void testAddGeneralIDParams() throws Exception {
         // arrange
@@ -86,8 +71,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Multiple GeneralID Resource to XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddGeneralIDParamsMultiple() throws Exception {
@@ -126,8 +109,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Resource "Product" to XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddProductSimple() throws Exception {
@@ -144,8 +125,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Resource "RunList" to XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddResourceRunList() throws Exception {
@@ -186,8 +165,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Multiple Resource o XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddResourceMultiple() throws Exception {
@@ -243,8 +220,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Multiple Resource o XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddResourceList() throws Exception {
@@ -301,8 +276,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Add Multiple Resource o XJDF document.
-     *
-     * @throws Exception
      */
     @Test
     public void testAddResourceListProcessUsage() throws Exception {
@@ -350,8 +323,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Test of the initializing with an XJDF Document.
-     *
-     * @throws Exception
      */
     @Test
     public void testXJDFConstructor() throws Exception {
@@ -385,8 +356,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Test of the initializing with an XJDF Document with process usage.
-     *
-     * @throws Exception
      */
     @Test
     public void testXJDFConstructorProcessUsage() throws Exception {
@@ -423,8 +392,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
     /**
      * Test of the initializing with an XJDF Document with process usage.
-     *
-     * @throws Exception
      */
     @Test
     public void testXJDFConstructorProcessUsageNull() throws Exception {

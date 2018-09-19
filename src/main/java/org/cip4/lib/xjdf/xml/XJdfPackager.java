@@ -43,7 +43,6 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      * @param xjdf The XJDF document to package.
      *
      * @throws PackagerException If the XML document could not be packaged.
-     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
      */
     public final void packageXjdf(
         final XJDF xjdf
@@ -58,7 +57,6 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      * @param docName Document's name in the zipped package.
      *
      * @throws PackagerException If the XML document could not be packaged.
-     * @throws XPathExpressionException If the JobId of the XJDF could not be read.
      */
     public final void packageXjdf(
         final XJDF xjdf,

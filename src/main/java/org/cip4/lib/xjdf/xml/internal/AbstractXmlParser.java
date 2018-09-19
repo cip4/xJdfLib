@@ -79,7 +79,7 @@ public abstract class AbstractXmlParser<T> {
      * @return XML-representation of the document as array of bytes.
      */
     protected final byte[] parseXml(final T obj)
-        throws ParserConfigurationException, JAXBException, SAXException, IOException {
+        throws JAXBException, IOException {
         return parseXml(obj, false);
     }
 

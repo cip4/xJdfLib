@@ -99,7 +99,6 @@ public class ShapeTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#toString()}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testToString() {
@@ -113,7 +112,6 @@ public class ShapeTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#marshal(org.cip4.lib.xjdf.type.Shape)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testMarshalShape() {
@@ -130,7 +128,6 @@ public class ShapeTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#unmarshal(java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUnmarshalString() {

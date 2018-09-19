@@ -67,7 +67,6 @@ public class RectangleTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#toString()}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testToString() {
@@ -81,7 +80,6 @@ public class RectangleTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#marshal(org.cip4.lib.xjdf.type.Rectangle)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testMarshalRectangle() {
@@ -98,7 +96,6 @@ public class RectangleTest {
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#unmarshal(java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUnmarshalString() {

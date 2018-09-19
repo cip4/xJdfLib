@@ -166,7 +166,7 @@ public class AbstractXmlPackagerTest {
     }
 
     @Test
-    public void collectReferencesExtractedValueIsNull() throws Exception {
+    public void collectReferencesExtractedValueIsNull() {
         AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
         XJdfBuilder builder = new XJdfBuilder();
         assertTrue(packager.collectReferences(

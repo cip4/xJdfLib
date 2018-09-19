@@ -41,7 +41,6 @@ public class XJdfConstantsTest {
 
 	/**
 	 * JUnit test
-	 * @throws IOException
 	 */
 	@Test
 	public void testLoadLibraryVersion() {

@@ -51,7 +51,6 @@ public abstract class AbstractBuilderTest<T> {
 	/**
 	 * Marshall a builder
 	 * @return Document as byte array.
-	 * @throws Exception
 	 */
 	private byte[] marshall(Object obj) throws Exception {
 

@@ -28,19 +28,11 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     private ProductBuilder productBuilder;
 
-    /**
-     * Set up unit test.
-     * @throws java.lang.Exception
-     */
     @BeforeEach
     public void setUp() {
         productBuilder = new ProductBuilder();
     }
 
-    /**
-     * Tear down unit test.
-     * @throws java.lang.Exception
-     */
     @AfterEach
     public void tearDown() {
         productBuilder = null;
@@ -98,7 +90,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     /**
      * Simple XJDF with single product
-     * @throws Exception
      */
     @Test
     public void testWithoutChildren() {
@@ -119,7 +110,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     /**
      * Create product with without id.
-     * @throws Exception
      */
     @Test
     public void newProductIdIsNull() {
@@ -129,7 +119,6 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     /**
      * Create new Builder instance from W3C Node object.
-     * @throws Exception
      */
     @Test
     public void testConstructorNode() throws Exception {
