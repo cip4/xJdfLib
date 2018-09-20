@@ -348,9 +348,6 @@
     <xjb:bindings node="//xs:element[@name='Score']//xs:attribute[@name='Side']/xs:simpleType">
         <xjb:typesafeEnumClass name="Side"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='StapleShape']/xs:simpleType">
-        <xjb:typesafeEnumClass name="StapleShape"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='StitchingParams']//xs:attribute[@name='StitchOrigin']/xs:simpleType">
         <xjb:typesafeEnumClass name="StitchOrigin"/>
     </xjb:bindings>
