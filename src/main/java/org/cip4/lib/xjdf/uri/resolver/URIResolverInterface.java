@@ -15,7 +15,6 @@ interface URIResolverInterface {
      * @param uriString The uri string to resolve.
      *
      * @return The resolved uri.
-     *
      * @throws URISyntaxException If the string could not be resolved.
      */
     URI resolve(final URI baseUri, final String uriString) throws URISyntaxException;

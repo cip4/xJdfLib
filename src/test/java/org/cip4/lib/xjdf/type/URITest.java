@@ -1,15 +1,16 @@
 package org.cip4.lib.xjdf.type;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
 import java.net.URISyntaxException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class URITest {
 
     @Test
-    public void marshalNullParam() throws Exception {
+    public void marshalNullParam() {
         final URI uri = new URI();
         assertNull(uri.marshal(null));
     }
@@ -26,10 +27,18 @@ public class URITest {
         assertEquals("Destination", uriToBeConverted.marshal(uriToBeConverted));
     }
 
-    @Test(expected = NullPointerException.class)
-    public void marshallEmptyUri() throws Exception {
+    @Test
+    public void marshallEmptyUri() {
         final URI uri = new URI();
-        assertNotNull(uri.marshal(uri));
+        assertThrows(
+            NullPointerException.class,
+            new Executable() {
+                @Override
+                public void execute() {
+                    assertNotNull(uri.marshal(uri));
+                }
+            }
+        );
     }
 
     @Test
@@ -48,10 +57,18 @@ public class URITest {
         assertEquals("MyUri", result.getDestinationPath());
     }
 
-    @Test(expected = URISyntaxException.class)
-    public void unmarshallFails() throws Exception {
+    @Test
+    public void unmarshallFails() {
         final URI uri = new URI();
-        uri.unmarshal("[]");
+        assertThrows(
+            URISyntaxException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    uri.unmarshal("[]");
+                }
+            }
+        );
     }
 
     @Test

@@ -1,11 +1,11 @@
 package org.cip4.lib.xjdf.merger;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class BaseMergerTest {
 
@@ -42,7 +42,7 @@ public class BaseMergerTest {
 
     private class MockClass extends BaseMerger<Mutable> {
         @Override
-        void merge(final Mutable baseObject, final Mutable mergeObject) throws MergeConflictException {
+        void merge(final Mutable baseObject, final Mutable mergeObject) {
             baseObject.value = mergeObject.value;
         }
 
@@ -57,13 +57,13 @@ public class BaseMergerTest {
     }
 
     @Test
-    public void testIsMergeableDifferentClasses() throws Exception {
+    public void testIsMergeableDifferentClasses() {
         BaseMerger<Mutable> merger = new MockClass();
         assertFalse(merger.isMergeable(1, 2d));
     }
 
     @Test
-    public void testIsMergeableIdenticalClasses() throws Exception {
+    public void testIsMergeableIdenticalClasses() {
         BaseMerger<Mutable> merger = new MockClass();
         assertTrue(merger.isMergeable(1, 2));
     }

@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.binding;
 
 import org.cip4.lib.xjdf.schema.XsdReader;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -15,7 +15,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class InlineEnumerations {
 
@@ -51,7 +51,7 @@ public class InlineEnumerations {
         }
     }
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         bindingReader = new BindingReader();
         xsdReader = new XsdReader();
@@ -80,11 +80,11 @@ public class InlineEnumerations {
 
         enumsInXsd.removeAll(enumsInBindings);
 
-        assertEquals("Not all inline enumerations are bound to a classname.", Collections.EMPTY_SET, enumsInXsd);
+        assertEquals(Collections.EMPTY_SET, enumsInXsd, "Not all inline enumerations are bound to a classname.");
     }
 
     @Test
-    public void attributeNameMatchesClassname() throws Exception {
+    public void attributeNameMatchesClassname() {
         NodeList bindings;
         try {
             bindings = bindingReader.evaluateNodeList("//xjb:bindings[xjb:typesafeEnumClass[@name]]");

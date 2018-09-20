@@ -4,13 +4,14 @@ import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Preview;
+import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfPackager;
 import org.cip4.lib.xjdf.xml.XJdfParser;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -24,14 +25,14 @@ import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.zip.ZipInputStream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AbstractXmlPackagerTest {
 
     private class MinimalXmlPackager extends AbstractXmlPackager<XJDF> {
-        MinimalXmlPackager(final OutputStream out) throws Exception {
+        MinimalXmlPackager(final OutputStream out) {
             super(out);
         }
 
@@ -165,7 +166,7 @@ public class AbstractXmlPackagerTest {
     }
 
     @Test
-    public void collectReferencesExtractedValueIsNull() throws Exception {
+    public void collectReferencesExtractedValueIsNull() {
         AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
         XJdfBuilder builder = new XJdfBuilder();
         assertTrue(packager.collectReferences(
@@ -216,13 +217,13 @@ public class AbstractXmlPackagerTest {
 
                 final XJdfNodeFactory nf = new XJdfNodeFactory();
                 xjdf.withResourceSet(
-                    nf.createResourceSet()
+                    new ResourceSet()
                         .withName("RunList")
                         .withResource(
                             nf.createResource(
-                                nf.createRunList()
+                                new RunList()
                                     .withFileSpec(
-                                        nf.createFileSpec()
+                                        new FileSpec()
                                             .withURL(
                                                 new URI(
                                                     AbstractXmlPackagerTest.class.getResource("../../test.pdf")
@@ -246,20 +247,20 @@ public class AbstractXmlPackagerTest {
 
             try (final FileSystem zipfs = FileSystems.newFileSystem(tmpXjdfArchive, null)) {
                 assertTrue(
-                    "/testPackage.xjdf was not added to archive",
-                    Files.isReadable(zipfs.getPath("/", "testPackage.xjdf"))
+                    Files.isReadable(zipfs.getPath("/", "testPackage.xjdf")),
+                    "/testPackage.xjdf was not added to archive"
                 );
                 assertTrue(
-                    "/artwork/testArtwork.pdf was not added to archive",
-                    Files.isReadable(zipfs.getPath("/", "artwork", "testArtwork.pdf"))
+                    Files.isReadable(zipfs.getPath("/", "artwork", "testArtwork.pdf")),
+                    "/artwork/testArtwork.pdf was not added to archive"
                 );
                 assertTrue(
-                    "/artwork/another_artwork.pdf was not added to archive",
-                    Files.isReadable(zipfs.getPath("/", "artwork", "another_artwork.pdf"))
+                    Files.isReadable(zipfs.getPath("/", "artwork", "another_artwork.pdf")),
+                    "/artwork/another_artwork.pdf was not added to archive"
                 );
                 assertTrue(
-                    "/preview/testPrevierw.pdf was not added to archive",
-                    Files.isReadable(zipfs.getPath("/", "preview", "testPreview.pdf"))
+                    Files.isReadable(zipfs.getPath("/", "preview", "testPreview.pdf")),
+                    "/preview/testPrevierw.pdf was not added to archive"
                 );
             }
         } finally {

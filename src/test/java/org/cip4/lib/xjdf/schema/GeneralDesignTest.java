@@ -1,19 +1,19 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GeneralDesignTest {
 
     private XsdReader xsdReader;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xsdReader = new XsdReader();
     }
@@ -25,9 +25,9 @@ public class GeneralDesignTest {
 
         for (Node elementNode : elements) {
             assertEquals(
-                "All attributes in XJDF with a data type of ID SHALL be named ID.",
                 "ID",
-                elementNode.getAttributes().getNamedItem("name").getNodeValue()
+                elementNode.getAttributes().getNamedItem("name").getNodeValue(),
+                "All attributes in XJDF with a data type of ID SHALL be named ID."
             );
         }
     }
@@ -38,9 +38,9 @@ public class GeneralDesignTest {
 
         for (Node elementNode : elements) {
             assertEquals(
-                "All attributes in XJDF with a name 'ExternalID' SHALL be have type NMTOKEN.",
                 "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
+                elementNode.getAttributes().getNamedItem("type").getNodeValue(),
+                "All attributes in XJDF with a name 'ExternalID' SHALL be have type NMTOKEN."
             );
         }
     }
@@ -51,9 +51,9 @@ public class GeneralDesignTest {
 
         for (Node elementNode : elements) {
             assertEquals(
-                "All attributes in XJDF with a name 'CostCenterID' SHALL be have type NMTOKEN.",
                 "NMTOKEN",
-                elementNode.getAttributes().getNamedItem("type").getNodeValue()
+                elementNode.getAttributes().getNamedItem("type").getNodeValue(),
+                "All attributes in XJDF with a name 'CostCenterID' SHALL be have type NMTOKEN."
             );
         }
     }
@@ -69,9 +69,9 @@ public class GeneralDesignTest {
         List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[not(@type) and not(xs:simpleType)]");
 
         assertEquals(
-            "All attributes in XJDF SHALL have a @type.",
             Collections.EMPTY_LIST,
-            elements
+            elements,
+            "All attributes in XJDF SHALL have a @type."
         );
     }
 
@@ -80,9 +80,9 @@ public class GeneralDesignTest {
         List<Node> elements = xsdReader.evaluateNodeList("//xs:attribute[not(@use)]");
 
         assertEquals(
-            "All attributes in XJDF SHALL have a @use.",
             Collections.EMPTY_LIST,
-            elements
+            elements,
+            "All attributes in XJDF SHALL have a @use."
         );
     }
 

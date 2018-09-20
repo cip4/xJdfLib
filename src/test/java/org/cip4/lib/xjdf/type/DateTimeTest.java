@@ -1,12 +1,11 @@
 package org.cip4.lib.xjdf.type;
 
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit Test Case for XJDF DateTime
@@ -14,12 +13,12 @@ import static org.junit.Assert.assertEquals;
 public class DateTimeTest {
 
 	@Test
-	public void dateTimeToString() throws Exception {
+	public void dateTimeToString() {
 		final String expected = "2012-03-04T16:20:45Z";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45).toString();
 
-		assertEquals("DateTime format is wrong.", expected, actual);
+		assertEquals(expected, actual, "DateTime format is wrong.");
 	}
 
     @Test
@@ -28,47 +27,47 @@ public class DateTimeTest {
 
         final String actual = new DateTime(expected).toString();
 
-        assertEquals("Date is wrong.", expected, actual);
+        assertEquals(expected, actual, "Date is wrong.");
     }
 
 	@Test
-	public void dateTimeToStringUTC() throws Exception {
+	public void dateTimeToStringUTC() {
         final String expected = "2012-03-04T16:20:45Z";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 45)
             .toString(TimeZone.getTimeZone("UTC"));
 
-		assertEquals("DateTime format is wrong.", expected, actual);
+		assertEquals(expected, actual, "DateTime format is wrong.");
 	}
 
 	@Test
-	public void dateTimeToStringBerlin() throws Exception {
+	public void dateTimeToStringBerlin() {
         final String expected = "2012-03-04T13:20:40+01:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 12, 20, 40)
             .toString(TimeZone.getTimeZone("Europe/Berlin"));
 
-		assertEquals("Date format is wrong.", expected, actual);
+		assertEquals(expected, actual, "Date format is wrong.");
 	}
 
 	@Test
-	public void dateTimeToStringPacific() throws Exception {
+	public void dateTimeToStringPacific() {
         final String expected = "2012-03-04T06:20:40-08:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 14, 20, 40)
             .toString(TimeZone.getTimeZone("US/Pacific"));
 
-		assertEquals("Date format is wrong.", expected, actual);
+		assertEquals(expected, actual, "Date format is wrong.");
 	}
 
 	@Test
-	public void dateTimeToStringHawaii() throws Exception {
+	public void dateTimeToStringHawaii() {
 		final String expected = "2012-03-04T06:20:40-10:00";
 
         final String actual = new DateTime(2012, Calendar.MARCH, 4, 16, 20, 40)
             .toString(TimeZone.getTimeZone("US/Hawaii"));
 
-		assertEquals("Date format is wrong.", expected, actual);
+		assertEquals(expected, actual, "Date format is wrong.");
 	}
 
 	@Test
@@ -78,13 +77,13 @@ public class DateTimeTest {
         final DateTime dateTime = new DateTime(dateTimeString);
 		final Calendar cal = dateTime.getCalendar();
 
-		assertEquals("Year is wrong.", 2012, cal.get(Calendar.YEAR));
-		assertEquals("Month is wrong.", Calendar.MARCH, cal.get(Calendar.MONTH));
-		assertEquals("Day is wrong.", 4, cal.get(Calendar.DAY_OF_MONTH));
-		assertEquals("Hour is wrong.", 13, cal.get(Calendar.HOUR_OF_DAY));
-		assertEquals("Minutes are wrong.", 20, cal.get(Calendar.MINUTE));
-		assertEquals("Secondes are wrong.", 40, cal.get(Calendar.SECOND));
-		assertEquals("TimeZone is wrong.", 0, cal.get(Calendar.ZONE_OFFSET));
+		assertEquals(2012, cal.get(Calendar.YEAR), "Year is wrong.");
+		assertEquals(Calendar.MARCH, cal.get(Calendar.MONTH), "Month is wrong.");
+		assertEquals(4, cal.get(Calendar.DAY_OF_MONTH), "Day is wrong.");
+		assertEquals(13, cal.get(Calendar.HOUR_OF_DAY), "Hour is wrong.");
+		assertEquals(20, cal.get(Calendar.MINUTE), "Minutes are wrong.");
+		assertEquals(40, cal.get(Calendar.SECOND), "Secondes are wrong.");
+		assertEquals(0, cal.get(Calendar.ZONE_OFFSET), "TimeZone is wrong.");
 	}
 
     @Test
@@ -94,9 +93,9 @@ public class DateTimeTest {
 
         final DateTime dateTime = new DateTime(dateTimeString);
 
-        assertEquals("Date format is wrong.", dateTimeString, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")));
-        assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")));
-        assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString());
+        assertEquals(dateTimeString, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")), "Date format is wrong.");
+        assertEquals(expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")), "Date format is wrong.");
+        assertEquals(expectedDateTimeStringUTC, dateTime.toString(), "Date format is wrong.");
     }
 
 	@Test
@@ -107,9 +106,9 @@ public class DateTimeTest {
 
 		final DateTime dateTime = new DateTime(dateTimeString);
 
-		assertEquals("Date format is wrong.", dateTimeStringISO8601, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")));
-		assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")));
-		assertEquals("Date format is wrong.", expectedDateTimeStringUTC, dateTime.toString());
+		assertEquals(dateTimeStringISO8601, dateTime.toString(TimeZone.getTimeZone("Europe/Berlin")), "Date format is wrong.");
+		assertEquals(expectedDateTimeStringUTC, dateTime.toString(TimeZone.getTimeZone("UTC")), "Date format is wrong.");
+		assertEquals(expectedDateTimeStringUTC, dateTime.toString(), "Date format is wrong.");
 	}
 
 }

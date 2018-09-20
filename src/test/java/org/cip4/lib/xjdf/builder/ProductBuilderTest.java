@@ -10,14 +10,14 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfNavigator;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
 import java.io.InputStream;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for Product Builder class.
@@ -28,21 +28,13 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     private ProductBuilder productBuilder;
 
-    /**
-     * Set up unit test.
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         productBuilder = new ProductBuilder();
     }
 
-    /**
-     * Tear down unit test.
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         productBuilder = null;
     }
 
@@ -58,7 +50,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         byte[] bytes = marshalResult(productBuilder);
 
         String actual = getXPathValue(bytes, "/xjdf:Product/@Amount");
-        assertEquals("Attribute Amount in Node Product is wrong.", "5000", actual);
+        assertEquals("5000", actual, "Attribute Amount in Node Product is wrong.");
     }
 
     @Test
@@ -83,25 +75,24 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         String actual;
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:MediaIntent/@Weight");
-        assertEquals("Attribute Weight in Node MediaIntent is wrong.", "135.0", actual);
+        assertEquals("135.0", actual, "Attribute Weight in Node MediaIntent is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/@Name");
-        assertEquals("Attribute Name in Node Intent is wrong.", "MediaIntent", actual);
+        assertEquals("MediaIntent", actual, "Attribute Name in Node Intent is wrong.");
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:LayoutIntent/@FinishedDimensions");
         assertEquals(
-            "Attribute FinishedDimensions in Node LayoutIntent is wrong.",
             "595.27559055 822.04724409 0.0",
-            actual
+            actual,
+            "Attribute FinishedDimensions in Node LayoutIntent is wrong."
         );
     }
 
     /**
      * Simple XJDF with single product
-     * @throws Exception
      */
     @Test
-    public void testWithoutChildren() throws Exception {
+    public void testWithoutChildren() {
 
         // arrange
         ProductBuilder dbRoot = new ProductBuilder(1000);
@@ -119,17 +110,15 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
     /**
      * Create product with without id.
-     * @throws Exception
      */
     @Test
-    public void newProductIdIsNull() throws Exception {
+    public void newProductIdIsNull() {
         Product product = new Product();
-        assertNull("Product ID is not null.", product.getID());
+        assertNull(product.getID(), "Product ID is not null.");
     }
 
     /**
      * Create new Builder instance from W3C Node object.
-     * @throws Exception
      */
     @Test
     public void testConstructorNode() throws Exception {
@@ -147,7 +136,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
         // assert
         Product product = builder.build();
 
-        assertNotNull("Amount is null.", product.getAmount());
-        assertEquals("Amount is wrong.", 15000, product.getAmount().intValue());
+        assertNotNull(product.getAmount(), "Amount is null.");
+        assertEquals(15000, product.getAmount().intValue(), "Amount is wrong.");
     }
 }

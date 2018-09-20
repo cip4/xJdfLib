@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.builder;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
@@ -10,6 +9,7 @@ import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Product;
+import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.SpecificResource;
@@ -120,8 +120,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      * @param comment Comment to append to.
      */
     public final void addComment(final String comment) {
-        Comment obj = xJdfNodeFactory.createComment(comment);
-        getNode().getComment().add(obj);
+        getNode().getComment().add(new Comment().withValue(comment));
     }
 
     /**
@@ -150,7 +149,7 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
         // if necessary, create new ProductList object
         if (getXJdf().getProductList() == null) {
-            getXJdf().setProductList(xJdfNodeFactory.createProductList());
+            getXJdf().setProductList(new ProductList());
         }
 
         // add product
@@ -218,14 +217,14 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
      *
      * @return Resource that was added.
      */
-    public final Resource addResource(final SpecificResource specificResource, final Part part, final String processUsage) {
+    public final Resource addResource(
+        final SpecificResource specificResource, final Part part, final String processUsage
+    ) {
         if (specificResource == null) {
             throw new IllegalArgumentException("Resource may not be null.");
         }
 
         Resource resource = xJdfNodeFactory.createResource(specificResource, part);
-
-        resource.setID(resource.getSpecificResource().getName().getLocalPart() + "_" + UUID.randomUUID().toString());
 
         addResource(resource, processUsage);
         return resource;

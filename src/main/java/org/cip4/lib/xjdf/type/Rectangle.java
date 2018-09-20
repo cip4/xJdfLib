@@ -115,17 +115,14 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         double ury = v.getUry();
 
         // process marshalling
-        String result = String.format("%s %s %s %s", llx, lly, urx, ury);
-
-        // return result
-        return result;
+        return String.format("%s %s %s %s", llx, lly, urx, ury);
     }
 
     /**
      * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
-    public Rectangle unmarshal(String v) throws Exception {
+    public Rectangle unmarshal(String v) {
 
         return new Rectangle(v);
     }

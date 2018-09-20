@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf.validator.element;
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.validator.Ancestors;
-import org.cip4.lib.xjdf.validator.ValidationResult;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 /**

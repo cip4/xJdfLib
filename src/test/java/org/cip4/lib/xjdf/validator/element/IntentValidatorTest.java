@@ -3,19 +3,18 @@ package org.cip4.lib.xjdf.validator.element;
 import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.validator.ValidationResult;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class IntentValidatorTest {
 
-    XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
+    private final XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
 
     @Test
-    public void equalNamesAllowed() throws Exception {
+    public void equalNamesAllowed() {
         Intent intent = new Intent()
             .withName("LayoutIntent")
             .withProductIntent(nodeFactory.createLayoutIntent(new LayoutIntent()));
@@ -24,7 +23,7 @@ public class IntentValidatorTest {
     }
 
     @Test
-    public void divergentNamesNotAllowed() throws Exception {
+    public void divergentNamesNotAllowed() {
         Intent intent = new Intent()
             .withName("BindingIntent")
             .withProductIntent(nodeFactory.createLayoutIntent(new LayoutIntent()));
@@ -37,7 +36,7 @@ public class IntentValidatorTest {
     }
 
     @Test
-    public void allowIntentWithoutSpecificIntent() throws Exception {
+    public void allowIntentWithoutSpecificIntent() {
         Intent intent = new Intent()
             .withName("BindingIntent");
         IntentValidator validator = new IntentValidator();

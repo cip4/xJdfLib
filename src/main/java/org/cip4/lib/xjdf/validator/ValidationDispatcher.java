@@ -1,13 +1,13 @@
 package org.cip4.lib.xjdf.validator;
 
 import org.cip4.lib.xjdf.validator.element.Validator;
+import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class ValidationDispatcher {
 
     class ChildElements implements Iterable<Object> {
 
-        private Collection<Object> elements = new LinkedList<>();
+        private final Collection<Object> elements = new LinkedList<>();
 
         public void addIfAppropriate(Object o) {
             if (o != null
@@ -31,6 +31,7 @@ public class ValidationDispatcher {
             }
         }
 
+        @NotNull
         @Override
         public Iterator<Object> iterator() {
             return elements.iterator();
@@ -38,7 +39,7 @@ public class ValidationDispatcher {
 
     }
 
-    private Collection<Validator> validators = new HashSet<>();
+    private final Collection<Validator> validators;
 
     public ValidationDispatcher(final Validator... validators) {
         this.validators = Arrays.asList(validators);
@@ -54,6 +55,7 @@ public class ValidationDispatcher {
         return validationResult.build();
     }
 
+    @SuppressWarnings("unchecked")
     private void validate(Object element, Ancestors ancestors, ValidationResultBuilder validationResult) {
         for (Validator validator : validators) {
             if (validator.canValidate(element)) {

@@ -1,16 +1,16 @@
 package org.cip4.lib.xjdf.validator;
 
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.annotation.XmlIDREF;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ClassInspectorTest {
 
@@ -26,9 +26,6 @@ public class ClassInspectorTest {
 
         public Object getFieldWithReference() {
             return fieldWithReference;
-        }
-
-        public void getVoid() {
         }
 
         public Object getArgument(Object o) {
@@ -54,8 +51,8 @@ public class ClassInspectorTest {
     private ClassInspector stubClassInspector;
     private ClassInspector stubChildClassInspector;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         stubClassInspector = new ClassInspector(StubClass.class);
         stubChildClassInspector = new ClassInspector(StubChildClass.class);
     }

@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
 import java.io.ByteArrayInputStream;
@@ -61,7 +51,6 @@ public abstract class AbstractBuilderTest<T> {
 	/**
 	 * Marshall a builder
 	 * @return Document as byte array.
-	 * @throws Exception
 	 */
 	private byte[] marshall(Object obj) throws Exception {
 

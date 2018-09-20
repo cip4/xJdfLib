@@ -23,10 +23,9 @@ public class PartitionManager {
      *
      * @return The Resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
-     * @throws NoSuchFieldException Is thrown in case the partition key wasn't found in Part class.
      */
     public final Resource getResourceByPart(final ResourceSet resourceSet, final Part part)
-        throws IllegalAccessException, NoSuchFieldException {
+        throws IllegalAccessException {
 
         // iterate over all parts in all resources from top to bottom
         for (Resource resource : resourceSet.getResource()) {
@@ -75,10 +74,9 @@ public class PartitionManager {
      *
      * @return True in case the resource partition key value is equal or a subset of the given partition key value.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
-     * @throws NoSuchFieldException Is thrown in case the partition key wasn't found in Part class.
      */
     private boolean comparePartKeyValues(final String fieldName, final Part resourcePart, final Part givenPart)
-        throws NoSuchFieldException, IllegalAccessException {
+        throws IllegalAccessException {
 
         Object resValue = FieldUtils.readField(resourcePart, fieldName, true);
         Object givenValue = FieldUtils.readField(givenPart, fieldName, true);

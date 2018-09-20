@@ -1,27 +1,15 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XJdfUnpackager
@@ -33,30 +21,6 @@ public class XJdfUnpackagerTest {
     private final static String RES_PGK = "/org/cip4/lib/xjdf/testPackage.zip";
     private final static String RES_PGK_WITH_SPACES = "/org/cip4/lib/xjdf/package with spaces.zip";
 
-    /**
-     * Setup unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    /**
-     * Tear down unit test.
-     *
-     * @throws java.lang.Exception
-     */
-    @After
-    public void tearDown() throws Exception {
-    }
-
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager#unpackageZip(java.lang.String,
-     * java.lang.String)}.
-     *
-     * @throws IOException
-     */
     @Test
     public void testUnpackageZip() throws IOException, URISyntaxException {
 
@@ -72,19 +36,19 @@ public class XJdfUnpackagerTest {
 
         // act
         File targetFile = new File(targetDir);
-        Assert.assertTrue("Target destination does not exist.", targetFile.exists());
+        assertTrue(targetFile.exists(), "Target destination does not exist.");
 
         String pathPtk = FilenameUtils.concat(targetDir, "testPackage.xjdf");
-        Assert.assertTrue("File does not exist.", new File(pathPtk).exists());
+        assertTrue(new File(pathPtk).exists(), "File does not exist.");
 
         String pathArtwork = FilenameUtils.concat(targetDir, "artwork/testArtwork.pdf");
-        Assert.assertTrue("Artwork does not exist.", new File(pathArtwork).exists());
+        assertTrue(new File(pathArtwork).exists(), "Artwork does not exist.");
 
         String pathPreview = FilenameUtils.concat(targetDir, "preview/testPreview.pdf");
-        Assert.assertTrue("Preview does not exist.", new File(pathPreview).exists());
+        assertTrue(new File(pathPreview).exists(), "Preview does not exist.");
 
         FileUtils.deleteDirectory(targetFile); // clean up
-        Assert.assertFalse("Target destination was not removed.", targetFile.exists());
+        assertFalse(targetFile.exists(), "Target destination was not removed.");
     }
 
     @Test
@@ -102,27 +66,21 @@ public class XJdfUnpackagerTest {
 
         // act
         File targetFile = new File(targetDir);
-        Assert.assertTrue("Target destination does not exist.", targetFile.exists());
+        assertTrue(targetFile.exists(), "Target destination does not exist.");
 
         String pathPtk = FilenameUtils.concat(targetDir, "testPackage.xjdf");
-        Assert.assertTrue("File does not exist.", new File(pathPtk).exists());
+        assertTrue(new File(pathPtk).exists(), "File does not exist.");
 
         String pathArtwork = FilenameUtils.concat(targetDir, "artwork/testArtwork.pdf");
-        Assert.assertTrue("Artwork does not exist.", new File(pathArtwork).exists());
+        assertTrue(new File(pathArtwork).exists(), "Artwork does not exist.");
 
         String pathPreview = FilenameUtils.concat(targetDir, "preview/testPreview.pdf");
-        Assert.assertTrue("Preview does not exist.", new File(pathPreview).exists());
+        assertTrue(new File(pathPreview).exists(), "Preview does not exist.");
 
         FileUtils.deleteDirectory(targetFile); // clean up
-        Assert.assertFalse("Target destination was not removed.", targetFile.exists());
+        assertFalse(targetFile.exists(), "Target destination was not removed.");
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.internal.AbstractXmlUnpackager#unpackageZip(java.lang.String,
-     * java.lang.String)}.
-     *
-     * @throws IOException
-     */
     @Test
     public void testUnpackageZipTempDir() throws IOException, URISyntaxException {
 
@@ -135,26 +93,21 @@ public class XJdfUnpackagerTest {
 
         // act
         File targetFile = new File(targetDir);
-        Assert.assertTrue("Target destination does not exist.", targetFile.exists());
+        assertTrue(targetFile.exists(), "Target destination does not exist.");
 
         String pathPtk = FilenameUtils.concat(targetDir, "testPackage.xjdf");
-        Assert.assertTrue("File does not exist.", new File(pathPtk).exists());
+        assertTrue(new File(pathPtk).exists(), "File does not exist.");
 
         String pathArtwork = FilenameUtils.concat(targetDir, "artwork/testArtwork.pdf");
-        Assert.assertTrue("Artwork does not exist.", new File(pathArtwork).exists());
+        assertTrue(new File(pathArtwork).exists(), "Artwork does not exist.");
 
         String pathPreview = FilenameUtils.concat(targetDir, "preview/testPreview.pdf");
-        Assert.assertTrue("Preview does not exist.", new File(pathPreview).exists());
+        assertTrue(new File(pathPreview).exists(), "Preview does not exist.");
 
         FileUtils.deleteDirectory(targetFile); // clean up
-        Assert.assertFalse("Target destination was not removed.", targetFile.exists());
+        assertFalse(targetFile.exists(), "Target destination was not removed.");
     }
 
-    /**
-     * Test method for {@link org.cip4.lib.xjdf.xml.XJdfPackageManager#getXJdfDocument()}.
-     *
-     * @throws FileNotFoundException
-     */
     @Test
     public void testGetXJdfDocument() throws Exception {
 
@@ -171,8 +124,8 @@ public class XJdfUnpackagerTest {
         byte[] bytes = unpackager.extractFile(pathPreview);
 
         // assert
-        Assert.assertEquals("XJDF ID is wrong.", "95733854-01", nav.evaluateString(XJdfNavigator.JOB_ID));
-        Assert.assertNotEquals("Preview is null.", 0, bytes.length);
+        assertEquals(nav.evaluateString(XJdfNavigator.JOB_ID), "95733854-01", "XJDF ID is wrong.");
+        assertNotEquals(0, bytes.length, "Preview is null.");
     }
 
     @Test
@@ -185,7 +138,7 @@ public class XJdfUnpackagerTest {
         // act
         XJdfNavigator nav = unpackager.getXJdfDocument(true);
 
-        Assert.assertTrue(nav != null);
-        Assert.assertTrue(nav.extractNode("//xjdf:XJDF") != null);
+        assertNotNull(nav);
+        assertNotNull(nav.extractNode("//xjdf:XJDF"));
     }
 }

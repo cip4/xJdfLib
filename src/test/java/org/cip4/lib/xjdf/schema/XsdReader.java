@@ -56,7 +56,7 @@ public class XsdReader {
         );
     }
 
-    private Set<Node> typeProperties(Node complexType) throws Exception {
+    private Set<Node> typeProperties(Node complexType) {
         Set<Node> properties = new HashSet<>();
         properties.addAll(typeProperties(complexType, "element"));
         properties.addAll(typeProperties(complexType, "attribute"));

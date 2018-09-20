@@ -3,15 +3,15 @@ package org.cip4.lib.xjdf.util;
 import org.cip4.lib.xjdf.schema.ColorIntent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.Product;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductUtilTest {
 
     @Test
-    public void getIntent() throws Exception {
+    public void getIntent() {
         ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
         productBuilder.addIntent(new LayoutIntent());
@@ -22,7 +22,7 @@ public class ProductUtilTest {
     }
 
     @Test
-    public void getIntentReturnsNull() throws Exception {
+    public void getIntentReturnsNull() {
         ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
         productBuilder.addIntent(colorIntent);

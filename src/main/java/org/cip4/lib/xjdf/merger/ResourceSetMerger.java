@@ -23,7 +23,7 @@ class ResourceSetMerger extends BaseMerger<ResourceSet> {
             || baseResourceSet.getID().equals(mergeResourceSet.getID())
         );
     }
-    
+
     @Override
     void merge(final ResourceSet baseObject, final ResourceSet mergeObject) {
         for (Resource resource : mergeObject.getResource()) {

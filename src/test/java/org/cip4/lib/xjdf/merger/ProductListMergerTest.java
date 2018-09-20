@@ -1,12 +1,9 @@
 package org.cip4.lib.xjdf.merger;
 
-import org.cip4.lib.xjdf.schema.Comment;
-import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.ProductList;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 

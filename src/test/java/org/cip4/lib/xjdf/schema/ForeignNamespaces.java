@@ -1,20 +1,21 @@
 package org.cip4.lib.xjdf.schema;
 
 import org.cip4.lib.xjdf.xml.XJdfValidator;
-import org.junit.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class ForeignNamespaces {
 
     private XsdReader xsdReader;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xsdReader = new XsdReader();
     }
@@ -32,12 +33,12 @@ public class ForeignNamespaces {
         for (Node complexType : complexTypes) {
             Collection<Node> anyAttributeNodes = xsdReader.typeProperties(complexType, "anyAttribute");
             assertEquals(
+                1,
+                anyAttributeNodes.size(),
                 String.format(
                     "Complex type '%s' must contain exactly one xs:anyAttribute.",
                     xsdReader.localNameOfComplexType(complexType)
-                ),
-                1,
-                anyAttributeNodes.size()
+                )
             );
             Node anyAttributeNode = anyAttributeNodes.iterator().next();
             assertEquals(

@@ -5,22 +5,22 @@ import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResourceSetValidatorTest {
 
     private XJdfNodeFactory xJdfNodeFactory;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    public void setUp() {
         xJdfNodeFactory = new XJdfNodeFactory();
     }
 
     @Test
-    public void validateAllowsResourceOfCorrectName() throws Exception {
+    public void validateAllowsResourceOfCorrectName() {
         ResourceSet parameterSet = new ResourceSet().withName("DeliveryParams");
         parameterSet.withResource(xJdfNodeFactory.createResource(new DeliveryParams()));
 
@@ -29,7 +29,7 @@ public class ResourceSetValidatorTest {
     }
 
     @Test
-    public void validateAllowsSetWithoutResource() throws Exception {
+    public void validateAllowsSetWithoutResource() {
         ResourceSet parameterSet = new ResourceSet().withName("DeliveryParams");
 
         ResourceSetValidator validator = new ResourceSetValidator();
@@ -38,7 +38,7 @@ public class ResourceSetValidatorTest {
     }
 
     @Test
-    public void validateDisallowsResourceOfDifferentName() throws Exception {
+    public void validateDisallowsResourceOfDifferentName() {
         ResourceSet parameterSet = new ResourceSet().withName("PreflightParams");
         parameterSet.withResource(xJdfNodeFactory.createResource(new DeliveryParams()));
 
@@ -48,7 +48,7 @@ public class ResourceSetValidatorTest {
     }
 
     @Test
-    public void validateDisallowsNameEmpty() throws Exception {
+    public void validateDisallowsNameEmpty() {
         ResourceSet parameterSet = new ResourceSet().withName("");
 
         ResourceSetValidator validator = new ResourceSetValidator();
@@ -57,7 +57,7 @@ public class ResourceSetValidatorTest {
     }
 
     @Test
-    public void validateDisallowsNameNull() throws Exception {
+    public void validateDisallowsNameNull() {
         ResourceSet parameterSet = new ResourceSet().withName(null);
 
         ResourceSetValidator validator = new ResourceSetValidator();
@@ -66,7 +66,7 @@ public class ResourceSetValidatorTest {
     }
 
     @Test
-    public void validateAllowsResourceWithoutSpecificResource() throws Exception {
+    public void validateAllowsResourceWithoutSpecificResource() {
         ResourceSet parameterSet = new ResourceSet()
             .withName("Foo")
             .withResource(new Resource());

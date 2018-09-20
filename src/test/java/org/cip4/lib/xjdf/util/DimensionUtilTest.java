@@ -1,47 +1,15 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.util;
 
-import junit.framework.Assert;
+import org.junit.jupiter.api.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for DimensionUtil class.
  * @author s.meissner
- * @date 28.06.2012
  */
 public class DimensionUtilTest {
 
-	/**
-	 * Setup unit test.
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
-	 */
 	@Test
 	public void testMm2Dtp() {
 
@@ -53,12 +21,9 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.mm2Dtp(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
-	 */
 	@Test
 	public void testDtp2Mm() {
 
@@ -70,12 +35,9 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.dtp2Mm(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2Dtp(float)}.
-	 */
 	@Test
 	public void testMm2DtpFloat() {
 
@@ -87,12 +49,9 @@ public class DimensionUtilTest {
 		float actual = DimensionUtil.mm2Dtp(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "DTP-Points are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2Mm(float)}.
-	 */
 	@Test
 	public void testDtp2MmFloat() {
 
@@ -104,12 +63,9 @@ public class DimensionUtilTest {
 		float actual = DimensionUtil.dtp2Mm(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#dtp2MmS(java.lang.String)}.
-	 */
 	@Test
 	public void testDtp2MmS() {
 
@@ -121,12 +77,9 @@ public class DimensionUtilTest {
 		double actual = DimensionUtil.dtp2MmS(dtp);
 
 		// assert
-		Assert.assertEquals("Millimeters are wrong.", expected, actual, 0.00001);
+		assertEquals(expected, actual, 0.00001, "Millimeters are wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.util.ConversionUtils#mm2DtpS(float)}.
-	 */
 	@Test
 	public void testMm2DtpS() {
 
@@ -138,7 +91,7 @@ public class DimensionUtilTest {
 		String actual = DimensionUtil.mm2DtpS(mm);
 
 		// assert
-		Assert.assertEquals("DTP-Points are wrong.", expected, actual);
+		assertEquals(expected, actual, "DTP-Points are wrong.");
 	}
 
 }

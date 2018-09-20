@@ -37,7 +37,6 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     );
 
 
-
     /**
      * Calendar which holds the date information.
      */
@@ -53,9 +52,9 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     /**
      * Custom constructor. Accepting values for initializing.
      *
-     * @param year  The value used to set the YEAR.
+     * @param year The value used to set the YEAR.
      * @param month The value used to set the MONTH in year. January is "0".
-     * @param day   The value used to set the DAY in month.
+     * @param day The value used to set the DAY in month.
      */
     public DateTime(final int year, final int month, final int day) {
         this(year, month, day, 0, 0);
@@ -64,10 +63,10 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     /**
      * Custom constructor. Accepting values for initializing.
      *
-     * @param year   The value used to set the YEAR.
-     * @param month  The value used to set the MONTH in year. January is "0".
-     * @param day    The value used to set the DAY in month.
-     * @param hour   The value used to set the HOUR of day.
+     * @param year The value used to set the YEAR.
+     * @param month The value used to set the MONTH in year. January is "0".
+     * @param day The value used to set the DAY in month.
+     * @param hour The value used to set the HOUR of day.
      * @param minute The value used to set the MINUTE in of.
      */
     public DateTime(final int year, final int month, final int day, final int hour, final int minute) {
@@ -77,15 +76,17 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     /**
      * Custom constructor. Accepting values for initializing.
      *
-     * @param year   The value used to set the YEAR.
-     * @param month  The value used to set the MONTH in year. January is "0".
-     * @param day    The value used to set the DAY in month.
-     * @param hour   The value used to set the HOUR of day.
+     * @param year The value used to set the YEAR.
+     * @param month The value used to set the MONTH in year. January is "0".
+     * @param day The value used to set the DAY in month.
+     * @param hour The value used to set the HOUR of day.
      * @param minute The value used to set the MINUTE.
      * @param second The value used to set the SECOND.
      */
-    public DateTime(final int year, final int month, final int day,
-                    final int hour, final int minute, final int second) {
+    public DateTime(
+        final int year, final int month, final int day,
+        final int hour, final int minute, final int second
+    ) {
         calendar.set(year, month, day, hour, minute, second);
     }
 

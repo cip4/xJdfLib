@@ -1,7 +1,6 @@
 package org.cip4.lib.xjdf.uri.relativizer;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Objects;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Objects;
 public class AuthorityURIRelativizer implements URIRelativizerInterface {
 
     @Override
-    public String relativize(final URI baseUri, final URI uri) throws URISyntaxException {
+    public String relativize(final URI baseUri, final URI uri) {
         return String.format(
             "//%s%s",
             uri.getAuthority(),

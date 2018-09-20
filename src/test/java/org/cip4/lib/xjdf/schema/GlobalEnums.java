@@ -1,21 +1,21 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GlobalEnums {
 
     private XsdReader xsdReader;
 
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         xsdReader = new XsdReader();
     }
@@ -37,14 +37,14 @@ public class GlobalEnums {
             }
         }
         assertEquals(
-            "Global Enums SHALL be references more than one time",
             Collections.EMPTY_LIST,
-            singleReferencedEnums
+            singleReferencedEnums,
+            "Global Enums SHALL be references more than one time"
         );
     }
 
     @Test
-    @Ignore("Used to generate draft for XJDF-197")
+    @Disabled("Used to generate draft for XJDF-197")
     public void globalEnums() throws Exception {
         List<Node> enumNodes = xsdReader.evaluateNodeList("//xs:simpleType[@name and xs:restriction/xs:enumeration]");
 

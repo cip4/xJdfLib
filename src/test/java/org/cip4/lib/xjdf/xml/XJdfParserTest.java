@@ -15,13 +15,13 @@ import javax.xml.xpath.XPathFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 import org.xml.sax.InputSource;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * JUnit test case for XmlParser class.
@@ -37,7 +37,7 @@ public class XJdfParserTest {
     /**
      * Set up unit test.
      */
-    @Before
+    @BeforeEach
     public void setUp() throws Exception {
         // new instance
         xJdfParser = new XJdfParser();
@@ -46,8 +46,8 @@ public class XJdfParserTest {
     /**
      * Tear down unit test.
      */
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    public void tearDown() {
         // clean up
         xJdfParser = null;
     }
@@ -83,7 +83,7 @@ public class XJdfParserTest {
         InputStream is = new ByteArrayInputStream(bos.toByteArray());
         String actual = xPathExpression.evaluate(new InputSource(is));
 
-        Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+        assertEquals(VALUE, actual, "Expected value is wrong.");
     }
 
     @Test
@@ -115,11 +115,11 @@ public class XJdfParserTest {
         InputStream is = new ByteArrayInputStream(bytes);
         String actual = xPathExpression.evaluate(new InputSource(is));
 
-        Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+        assertEquals(VALUE, actual, "Expected value is wrong.");
     }
 
-    @Test(expected = ValidationException.class)
-    public void testParseXJdfInvalid() throws Exception {
+    @Test
+    public void testParseXJdfInvalid() {
 
         // arrange
         final String VALUE = UUID.randomUUID().toString();
@@ -130,17 +130,22 @@ public class XJdfParserTest {
             new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
         );
 
-        XJDF xJdf = xJdfBuilder.build();
+        final XJDF xJdf = xJdfBuilder.build();
         // empty list of types is invalid
         xJdf.withTypes(Collections.EMPTY_LIST);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         // act
-        xJdfParser.parseXJdf(xJdf, bos);
-
-        // assert
-        // exception expected
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    xJdfParser.parseXJdf(xJdf, bos);
+                }
+            }
+        );
     }
 
     @Test
@@ -176,7 +181,7 @@ public class XJdfParserTest {
         InputStream is = new ByteArrayInputStream(bos.toByteArray());
         String actual = xPathExpression.evaluate(new InputSource(is));
 
-        Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+        assertEquals(VALUE, actual, "Expected value is wrong.");
     }
 
     @Test
@@ -210,7 +215,7 @@ public class XJdfParserTest {
         InputStream is = new ByteArrayInputStream(bytes);
         String actual = xPathExpression.evaluate(new InputSource(is));
 
-        Assert.assertEquals("Expected value is wrong.", VALUE, actual);
+        assertEquals(VALUE, actual, "Expected value is wrong.");
     }
 
     /**
@@ -227,7 +232,7 @@ public class XJdfParserTest {
         XJDF xJdf = xJdfParser.parseStream(is);
 
         // assert
-        Assert.assertEquals("Result is wrong.", RESULT, xJdf.getGeneralID().get(0).getIDValue());
+        assertEquals(RESULT, xJdf.getGeneralID().get(0).getIDValue(), "Result is wrong.");
     }
 
     /**
@@ -255,17 +260,17 @@ public class XJdfParserTest {
         final BindingIntent bindingIntent1 = (BindingIntent) mainProduct1.getIntent().get(2).getProductIntent().getValue();
         assertEquals(2, bindingIntent1.getChildren().size());
         final Product childProduct11 = bindingIntent1.getChildren().get(0);
-        assertEquals("PRD_MAIN01_SUB01", childProduct11.getID());
+        assertEquals(childProduct11.getID(), "PRD_MAIN01_SUB01");
         assertEquals(11000, (int) childProduct11.getAmount());
         final Product childProduct12 = bindingIntent1.getChildren().get(1);
-        assertEquals("PRD_MAIN01_SUB02", childProduct12.getID());
+        assertEquals(childProduct12.getID(), "PRD_MAIN01_SUB02");
         assertEquals(12000, (int) childProduct12.getAmount());
 
         final Product mainProduct2 = xjdf.getProductList().getProduct().get(4);
         final BindingIntent bindingIntent2 = (BindingIntent) mainProduct2.getIntent().get(2).getProductIntent().getValue();
         assertEquals(1, bindingIntent2.getChildren().size());
         final Product childProduct21 = bindingIntent2.getChildren().get(0);
-        assertEquals("PRD_MAIN02_SUB01", childProduct21.getID());
+        assertEquals(childProduct21.getID(), "PRD_MAIN02_SUB01");
         assertEquals(21000, (int) childProduct21.getAmount());
 
         final Product mainProduct3 = xjdf.getProductList().getProduct().get(5);
@@ -283,8 +288,8 @@ public class XJdfParserTest {
         ApprovalPerson approvalPerson = approvalDetails.getApprovalPerson();
         Contact contact = (Contact) approvalPerson.getContact().getSpecificResource().getValue();
 
-        assertEquals("CONTACT_REF_1", approvalPerson.getContact().getID());
-        assertEquals("FLYERALARM GmbH", contact.getCompany().getOrganizationName());
+        assertEquals(approvalPerson.getContact().getID(), "CONTACT_REF_1");
+        assertEquals(contact.getCompany().getOrganizationName(), "FLYERALARM GmbH");
     }
 
     @Test
@@ -294,9 +299,9 @@ public class XJdfParserTest {
 
         AuditStatus auditStatusB = (AuditStatus) xjdf.getAuditPool().getAudits().get(4);
         String auditStatusA = auditStatusB.getHeader().getRefID();
-        assertEquals("PhaseTime_B", auditStatusB.getHeader().getID());
-        assertEquals("PhaseTime_A", auditStatusA);
-        assertEquals("author B", auditStatusB.getHeader().getAuthor());
+        assertEquals(auditStatusB.getHeader().getID(), "PhaseTime_B");
+        assertEquals(auditStatusA, "PhaseTime_A");
+        assertEquals(auditStatusB.getHeader().getAuthor(), "author B");
     }
 
     @Test
@@ -305,8 +310,8 @@ public class XJdfParserTest {
         XJDF xjdf = xJdfParser.parseStream(is);
 
         AuditProcessRun processRunB = (AuditProcessRun) xjdf.getAuditPool().getAudits().get(6);
-        assertEquals("ProcessRun_A", processRunB.getHeader().getRefID());
-        assertEquals("ProcessRun_B", processRunB.getHeader().getID());
+        assertEquals(processRunB.getHeader().getRefID(), "ProcessRun_A");
+        assertEquals(processRunB.getHeader().getID(), "ProcessRun_B");
     }
 
     @Test
@@ -316,9 +321,9 @@ public class XJdfParserTest {
 
         AuditResource auditResourceB = (AuditResource) xjdf.getAuditPool().getAudits().get(8);
         String resourceAuditA = auditResourceB.getHeader().getRefID();
-        assertEquals("ResourceAudit_B", auditResourceB.getHeader().getID());
-        assertEquals("ResourceAudit_A", resourceAuditA);
-        assertEquals("author B", auditResourceB.getHeader().getAuthor());
+        assertEquals(auditResourceB.getHeader().getID(), "ResourceAudit_B");
+        assertEquals(resourceAuditA, "ResourceAudit_A");
+        assertEquals(auditResourceB.getHeader().getAuthor(), "author B");
     }
 
     @Test
@@ -328,7 +333,7 @@ public class XJdfParserTest {
 
         Comment comment = xjdf.getComment().get(0);
 
-        assertEquals("aÄoÖuÜsß", comment.getValue());
+        assertEquals(comment.getValue(), "aÄoÖuÜsß");
     }
 
     @Test
@@ -344,9 +349,17 @@ public class XJdfParserTest {
         assertTrue(xjdfString.contains("<xjdf:Comment>aÄoÖuÜsß</xjdf:Comment>"));
     }
 
-    @Test(expected = ValidationException.class)
-    public void parseXjdfValidatesDocument() throws Exception {
-        xJdfParser.parseXJdf(getInvalidXjdfDocument());
+    @Test
+    public void parseXjdfValidatesDocument() {
+        assertThrows(
+            ValidationException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    xJdfParser.parseXJdf(getInvalidXjdfDocument());
+                }
+            }
+        );
     }
 
     @Test

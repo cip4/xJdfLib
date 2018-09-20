@@ -2,16 +2,16 @@ package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.Part;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PartitionsTest {
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueForEmptyPart1() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueForEmptyPart1() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
@@ -21,7 +21,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueForEmptyPart2() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueForEmptyPart2() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part().withBinderySignatureID("foo"),
@@ -31,7 +31,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueWhenPart1IsASubsetOfPart2() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueWhenPart1IsASubsetOfPart2() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part().withProductPart("foo").withSide(Side.FRONT),
@@ -41,7 +41,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueWhenPart2IsASubsetOfPart1() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueWhenPart2IsASubsetOfPart1() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part().withProductPart("foo"),
@@ -51,7 +51,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueIfPartsDoNotOverlap() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueIfPartsDoNotOverlap() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part().withSheetName("bar"),
@@ -61,7 +61,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnTrueForListAttribute() throws Exception {
+    public void hasMismatchingAttributesWillReturnTrueForListAttribute() {
         assertFalse(
             Partitions.hasMismatchingAttributes(
                 new Part(),
@@ -71,7 +71,7 @@ public class PartitionsTest {
     }
 
     @Test
-    public void hasMismatchingAttributesWillReturnFalseOnMismatch() throws Exception {
+    public void hasMismatchingAttributesWillReturnFalseOnMismatch() {
         assertTrue(
             Partitions.hasMismatchingAttributes(
                 new Part().withBlockName("bar"),
@@ -81,14 +81,14 @@ public class PartitionsTest {
     }
 
     @Test
-    public void getGettersDoesNotIncludeGetClass() throws Exception {
+    public void getGettersDoesNotIncludeGetClass() {
         for (Method getter : Partitions.readGetters()) {
-            assertFalse(getter.getName().equals("getClass"));
+            assertNotEquals("getClass", getter.getName());
         }
     }
 
     @Test
-    public void getGettersIsNotEmpty() throws Exception {
+    public void getGettersIsNotEmpty() {
         assertNotEquals(0, Partitions.readGetters().size());
     }
 }

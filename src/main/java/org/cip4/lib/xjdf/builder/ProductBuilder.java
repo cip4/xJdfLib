@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.builder;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.ProductIntent;
 import org.cip4.lib.xjdf.schema.Product;
@@ -18,8 +17,6 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     private static final String ID_PREFIX = "PRD";
 
-    private final XJdfNodeFactory xJdfNodeFactory;
-
     /**
      * Default constructor.
      */
@@ -32,18 +29,14 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
      * Custom constructor. Accepting a W3C Node object for initializing.
      *
      * @param productNode W2C Node object for
-     *
-     * @throws JAXBException
      */
     public ProductBuilder(Node productNode) throws JAXBException {
         super(productNode, Product.class);
-
-        // init factory
-        xJdfNodeFactory = new XJdfNodeFactory();
     }
 
     /**
      * Custom Constructor. Creates a new instance of ProductBuilder which already contains attribute Amount.
+     *
      * @param amount Value of Amount attribute
      */
     public ProductBuilder(Integer amount) {
@@ -76,8 +69,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
     public ProductBuilder(Integer amount, String productType, String productTypeDetails, String descriptiveName) {
 
         // initialize objects
-        super(new XJdfNodeFactory().createProduct());
-        xJdfNodeFactory = new XJdfNodeFactory();
+        super(new Product());
 
         // set attributes
         getProduct().setAmount(amount);
@@ -88,6 +80,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Custom Constructor. Creates a new instance of ProductBuilder based on a existing Product Node.
+     *
      * @param product Product node for initializing.
      */
     public ProductBuilder(Product product) {
@@ -96,11 +89,11 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
         super(product);
 
         // init
-        xJdfNodeFactory = new XJdfNodeFactory();
     }
 
     /**
      * Getter for product attribute.
+     *
      * @return the product
      */
     protected Product getProduct() {
@@ -109,6 +102,7 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
 
     /**
      * Append Intent node to Product Definition.
+     *
      * @param intent Intent object to append to.
      */
     public void addIntent(ProductIntent intent) {
@@ -119,8 +113,8 @@ public class ProductBuilder extends AbstractNodeBuilder<Product> {
         String intentName = intent.getClass().getSimpleName();
 
         // create intent node
-        Intent it = xJdfNodeFactory.createIntent();
-        it.setName(intentName);
+        Intent it = new Intent()
+            .withName(intentName);
 
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, intentName);
         JAXBElement<ProductIntent> obj = new JAXBElement(qname, intent.getClass(), intent);

@@ -4,8 +4,6 @@ import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.XJDF;
 
-import java.util.Collection;
-
 /**
  * Class for merging xjdf documents recursively.
  */
@@ -23,6 +21,7 @@ public class XjdfMerger extends BaseMerger<XJDF> {
 
     /**
      * Internal constructor for testing purposes.
+     *
      * @param productListMerger Merger tu use for merging product lists.
      * @param resourceSetMerger Merger to use for merging reseourcesets.
      */
@@ -71,6 +70,6 @@ public class XjdfMerger extends BaseMerger<XJDF> {
             }
         }
         baseObject.getGeneralID().addAll(mergeObject.getGeneralID());
-        resourceSetMerger.merge((Collection) baseObject.getResourceSet(), (Collection) mergeObject.getResourceSet());
+        resourceSetMerger.merge(baseObject.getResourceSet(), mergeObject.getResourceSet());
     }
 }

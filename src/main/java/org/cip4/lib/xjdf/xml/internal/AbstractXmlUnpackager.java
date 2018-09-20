@@ -1,19 +1,10 @@
-/**
- * All rights reserved by
- *
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * Email: info@flyeralarm.com
- * Website: http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml.internal;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -68,7 +59,6 @@ public abstract class AbstractXmlUnpackager {
      * Unpackages a ZIP Package to a temporarily directory..
      *
      * @return Path to master file.
-     * @throws IOException
      */
     protected String unpackageZipTemp() throws IOException {
 
@@ -81,7 +71,6 @@ public abstract class AbstractXmlUnpackager {
      * @param appName Application name.
      *
      * @return Path to master file.
-     * @throws IOException
      */
     protected String unpackageZipTemp(String appName) throws IOException {
 
@@ -100,25 +89,20 @@ public abstract class AbstractXmlUnpackager {
      * @param targetDir Target destionation.
      *
      * @return Path to master file.
-     * @throws IOException
      */
     protected String unpackageZip(String targetDir) throws IOException {
-
+        Path targetPath = Paths.get(targetDir);
         // unpackage
         try (ZipInputStream zis = new ZipInputStream(new FileInputStream(pathPackage))) {
             ZipEntry entry = zis.getNextEntry();
 
             while (entry != null) {
-                String targetPath = FilenameUtils.concat(targetDir, entry.getName());
-                File targetFile = new File(targetPath);
+                Path targetFile = targetPath.resolve(entry.getName());
 
-                File td = new File(FilenameUtils.getFullPath(targetPath));
-                td.mkdirs();
+                Files.createDirectories(targetFile.getParent());
 
-                if(!entry.isDirectory()) {
-                    try (FileOutputStream fos = new FileOutputStream(targetFile)) {
-                        IOUtils.copy(zis, fos);
-                    }
+                if (!entry.isDirectory()) {
+                    Files.copy(zis, targetFile);
                 }
 
                 entry = zis.getNextEntry();
@@ -140,9 +124,8 @@ public abstract class AbstractXmlUnpackager {
      * Find the master document path in package file.
      *
      * @return The master document as byte array.
-     * @throws IOException Is thrown in case an IOExcetion occurs.
      */
-    protected String findMasterDocumentPath() throws IOException {
+    protected String findMasterDocumentPath() {
 
         // find master document by extension (first match)
         String masterPath = null;
@@ -191,7 +174,6 @@ public abstract class AbstractXmlUnpackager {
      * @param relativePath The relative path of the file which should be extracted.
      *
      * @return File as byte array.
-     * @throws IOException
      */
     public byte[] extractFile(String relativePath) throws IOException {
 

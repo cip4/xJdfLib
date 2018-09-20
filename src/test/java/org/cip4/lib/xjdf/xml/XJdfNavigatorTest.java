@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.xml;
 
 import java.io.ByteArrayOutputStream;
@@ -20,17 +10,16 @@ import java.util.UUID;
 import org.apache.commons.io.IOUtils;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.type.Shape;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
  * JUnit test case for XPathNavigator.
  * @author s.meissner
- * @date 06.03.2012
  */
 public class XJdfNavigatorTest {
 
@@ -39,23 +28,6 @@ public class XJdfNavigatorTest {
 	private final String RES_TEST_JDF = "/org/cip4/lib/xjdf/layout.jdf";
 
 	private final String RES_TEST_JOB_1 = "/org/cip4/lib/xjdf/JOB_1.xjdf";
-
-	/**
-	 * Set up unit test.
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-
-	}
-
-	/**
-	 * Tear down unit test.
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#readAttribute(java.lang.String)}.
@@ -77,9 +49,9 @@ public class XJdfNavigatorTest {
 		String actual_3 = xJdfNavigator.readAttribute("/XJDF/GeneralID/@IDValue1111");
 
 		// assert
-		Assert.assertEquals("Value IDUsage is wrong.", expected_1, actual_1);
-		Assert.assertEquals("Value IDValue is wrong.", expected_2, actual_2);
-		Assert.assertEquals("Value IDValue is wrong.", expected_3, actual_3);
+		assertEquals(expected_1, actual_1, "Value IDUsage is wrong.");
+		assertEquals(expected_2, actual_2, "Value IDValue is wrong.");
+		assertEquals(expected_3, actual_3, "Value IDValue is wrong.");
 	}
 
 	/**
@@ -98,12 +70,11 @@ public class XJdfNavigatorTest {
 		Shape actual = (Shape) xJdfNavigator.readAttribute("/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions", Shape.class);
 
 		// assert
-		Assert.assertEquals("Shape is wrong.", expected, actual);
+		assertEquals(expected, actual, "Shape is wrong.");
 	}
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUpdateAttribute() throws Exception {
@@ -123,12 +94,11 @@ public class XJdfNavigatorTest {
 
 		int i = doc.indexOf(NEW_VALUE);
 
-		Assert.assertFalse(i == -1);
+		assertFalse(i == -1);
 	}
 
 	/**
 	 * Test method for {@link org.cip4.lib.xjdf.xml.XJdfNavigator#updateAttribute(java.lang.String, java.lang.String)}.
-	 * @throws Exception
 	 */
 	@Test
 	public void testUpdateAttributeXJdfType() throws Exception {
@@ -148,7 +118,7 @@ public class XJdfNavigatorTest {
 
 		int i = doc.indexOf("10.0 20.0 30.0");
 
-		Assert.assertFalse(i == -1);
+		assertFalse(i == -1);
 	}
 
 	@Test
@@ -188,7 +158,7 @@ public class XJdfNavigatorTest {
 		long readSecondFinished = System.currentTimeMillis();
 
 		// assert
-		Assert.assertEquals("New value is wrong.", NEW_VALUE, actual);
+		assertEquals(NEW_VALUE, actual, "New value is wrong.");
 	}
 
 	@Test
@@ -202,43 +172,43 @@ public class XJdfNavigatorTest {
 
 		// act / assert
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.JOB_ID);
-		Assert.assertEquals("Value 'JobID' is wrong.", "Job258596", actual);
+		assertEquals("Job258596", actual, "Value 'JobID' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.CATEGORY);
-		Assert.assertEquals("Value 'Category' is wrong.", "Web2Print", actual);
+		assertEquals("Web2Print", actual, "Value 'Category' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.GENERAL_CATALOG_ID);
-		Assert.assertEquals("Value 'CatalogID' is wrong.", "890e81ed-6830-4868-b23d-8ab8af8a4047", actual);
+		assertEquals("890e81ed-6830-4868-b23d-8ab8af8a4047", actual, "Value 'CatalogID' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.GENERAL_LINE_ID);
-		Assert.assertEquals("Value 'LineID' is wrong.", "", actual);
+		assertEquals("", actual, "Value 'LineID' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.FILE_SPEC_URL);
-		Assert.assertEquals("Value 'FileSpec/Url' is wrong.", "http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf", actual);
+		assertEquals("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf", actual, "Value 'FileSpec/Url' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.MIN_APPROVALS);
-		Assert.assertEquals("Value 'MinApprovals' is wrong.", "1", actual);
+		assertEquals("1", actual, "Value 'MinApprovals' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.CUSTOMER_ID);
-		Assert.assertEquals("Value 'CustomerID' is wrong.", "FA-WEB-DE", actual);
+		assertEquals("FA-WEB-DE", actual, "Value 'CustomerID' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.AMOUNT);
-		Assert.assertEquals("Value 'Amount' is wrong.", "1000", actual);
+		assertEquals("1000", actual, "Value 'Amount' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.MEDIA_QUALITY);
-		Assert.assertEquals("Value 'MediaQuality' is wrong.", "IPG_135", actual);
+		assertEquals("IPG_135", actual, "Value 'MediaQuality' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.LAYOUT_FINISHED_DIMENSIONS);
-		Assert.assertEquals("Value 'FinishedDimensions' is wrong.", "595.27559055 822.04724409 0.0", actual);
+		assertEquals("595.27559055 822.04724409 0.0", actual, "Value 'FinishedDimensions' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.PRODUCTION_PRINT_PROCESS);
-		Assert.assertEquals("Value 'PrintProcess' is wrong.", "Lithography", actual);
+		assertEquals("Lithography", actual, "Value 'PrintProcess' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.FOLD_CATALOG);
-		Assert.assertEquals("Value 'FoldCatalog' is wrong.", "F6-1", actual);
+		assertEquals("F6-1", actual, "Value 'FoldCatalog' is wrong.");
 
 		actual = xJdfNavigator.readAttribute(XJdfNavigator.COLOR_NUM_COLORS);
-		Assert.assertEquals("Value 'NumColors' is wrong.", "4 4", actual);
+		assertEquals("4 4", actual, "Value 'NumColors' is wrong.");
 
 	}
 
@@ -253,7 +223,7 @@ public class XJdfNavigatorTest {
 		double version = xJdfNavigator.evaluateDouble("/JDF/@Version");
 
 		// assert
-		Assert.assertEquals("Version is wrong.", 1.2d, version, 0);
+		assertEquals(1.2d, version, 0.001, "Version is wrong.");
 	}
 
 	@Test
@@ -267,7 +237,7 @@ public class XJdfNavigatorTest {
 		int val = xJdfNavigator.evaluateInt("/XJDF/ResourceSet[@Name='ApprovalParams']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
-		Assert.assertEquals("Value is wrong.", 1, val);
+		assertEquals(1, val, "Value is wrong.");
 	}
 
 	@Test
@@ -281,7 +251,7 @@ public class XJdfNavigatorTest {
 		long val = xJdfNavigator.evaluateLong("/XJDF/ResourceSet[@Name='ApprovalParams']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
-		Assert.assertEquals("Value is wrong.", 1, val);
+		assertEquals(1, val, "Value is wrong.");
 	}
 
 	@Test
@@ -295,7 +265,7 @@ public class XJdfNavigatorTest {
 		Integer val = xJdfNavigator.evaluateInt("/XJDF/ResourceSet[@Name='xxx']/Resource/ApprovalParams/@MinApprovals");
 
 		// assert
-		Assert.assertNull("Integer Value is not null.", val);
+		assertNull(val, "Integer Value is not null.");
 	}
 
 	@Test
@@ -309,7 +279,7 @@ public class XJdfNavigatorTest {
 		Integer val = xJdfNavigator.evaluateInt("/XJDF/@Category");
 
 		// assert
-		Assert.assertNull("Integer Value is not null.", val);
+		assertNull(val, "Integer Value is not null.");
 	}
 
 	@Test
@@ -323,7 +293,7 @@ public class XJdfNavigatorTest {
 		String version = xJdfNavigator.evaluateString("/XJDF/@Category");
 
 		// assert
-		Assert.assertEquals("Category is wrong.", "Web2Print", version);
+		assertEquals("Web2Print", version, "Category is wrong.");
 	}
 
 	@Test
@@ -342,8 +312,8 @@ public class XJdfNavigatorTest {
 		Node node = xJdfNavigator.evaluateNode("/XJDF/ProductList/Product");
 
 		// assert
-		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
-		Assert.assertEquals("Node-Name is wrong.", null, node.getNamespaceURI());
+		assertEquals("Product", node.getNodeName(), "Node-Name is wrong.");
+		assertNull(node.getNamespaceURI(), "Node-Name is wrong.");
 	}
 
 	@Test
@@ -362,8 +332,8 @@ public class XJdfNavigatorTest {
 		Node node = xJdfNavigator.evaluateNode("/xjdf:XJDF/xjdf:ProductList/xjdf:Product");
 
 		// assert
-		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
-		Assert.assertEquals("Node-Name is wrong.", "http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI());
+		assertEquals("Product", node.getNodeName(), "Node-Name is wrong.");
+		assertEquals("http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI(), "Node-Name is wrong.");
 	}
 
 	@Test
@@ -377,8 +347,8 @@ public class XJdfNavigatorTest {
 		Node node = xJdfNavigator.evaluateNode("/XJDF/ProductList/Product");
 
 		// assert
-		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
-		Assert.assertEquals("Node-Name is wrong.", null, node.getNamespaceURI());
+		assertEquals("Product", node.getNodeName(), "Node-Name is wrong.");
+		assertNull(node.getNamespaceURI(), "Node-Name is wrong.");
 	}
 
 	@Test
@@ -392,8 +362,8 @@ public class XJdfNavigatorTest {
 		Node node = xJdfNavigator.evaluateNode("/xjdf:XJDF/xjdf:ProductList/xjdf:Product");
 
 		// assert
-		Assert.assertEquals("Node-Name is wrong.", "Product", node.getNodeName());
-		Assert.assertEquals("Node-Name is wrong.", "http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI());
+		assertEquals("Product", node.getNodeName(), "Node-Name is wrong.");
+		assertEquals("http://www.CIP4.org/JDFSchema_2_0", node.getNamespaceURI(), "Node-Name is wrong.");
 	}
 
 	@Test
@@ -407,7 +377,7 @@ public class XJdfNavigatorTest {
 		NodeList nodeList = xJdfNavigator.evaluateNodeList("/XJDF/ProductList/Product/Intent");
 
 		// assert
-		Assert.assertEquals("Number intent elements is wrong.", 5, nodeList.getLength());
+		assertEquals(5, nodeList.getLength(), "Number intent elements is wrong.");
 	}
 
 	@Test
@@ -421,7 +391,7 @@ public class XJdfNavigatorTest {
 		boolean val = xJdfNavigator.evaluateBoolean("/XJDF/ProductList/Product/@IsRoot");
 
 		// assert
-		Assert.assertEquals("Value is wrong.", true, val);
+		assertTrue(val, "Value is wrong.");
 	}
 
 	@Test
@@ -450,8 +420,8 @@ public class XJdfNavigatorTest {
 		XJdfNavigator navAfter = new XJdfNavigator(fileAfter);
 		int cntItemsAfter = navAfter.evaluateInt("count(//XJDF/ProductList/Product/Intent)");
 
-		Assert.assertEquals("Number of Intents before is wrong.", 3, cntItemsBefore);
-		Assert.assertEquals("Number of Intents after is wrong.", 2, cntItemsAfter);
+		assertEquals(3, cntItemsBefore, "Number of Intents before is wrong.");
+		assertEquals(2, cntItemsAfter, "Number of Intents after is wrong.");
 	}
 
 	@Test
@@ -478,7 +448,7 @@ public class XJdfNavigatorTest {
 		XJdfNavigator navAfter = new XJdfNavigator(fileAfter);
 		int cntItemsAfter = navAfter.evaluateInt("count(//XJDF/ProductList/Product/Intent)");
 
-		Assert.assertEquals("Number of Intents before is wrong.", 3, cntItemsBefore);
-		Assert.assertEquals("Number of Intents after is wrong.", 2, cntItemsAfter);
+		assertEquals(3, cntItemsBefore, "Number of Intents before is wrong.");
+		assertEquals(2, cntItemsAfter, "Number of Intents after is wrong.");
 	}
 }

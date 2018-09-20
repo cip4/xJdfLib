@@ -1,26 +1,35 @@
 package org.cip4.lib.xjdf.merger;
 
 import org.cip4.lib.xjdf.schema.Product;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductMergerTest {
 
-    @Test(expected = MergeConflictException.class)
-    public void testMerge() throws Exception {
-        ProductMerger productMerger = new ProductMerger();
-        productMerger.merge(new Product(), new Product());
+    @Test
+    public void testMerge() {
+        final ProductMerger productMerger = new ProductMerger();
+        assertThrows(
+            MergeConflictException.class,
+            new Executable() {
+                @Override
+                public void execute() throws Throwable {
+                    productMerger.merge(new Product(), new Product());
+                }
+            }
+        );
     }
 
     @Test
-    public void testIsMergeableWrongType() throws Exception {
+    public void testIsMergeableWrongType() {
         ProductMerger productMerger = new ProductMerger();
         assertFalse(productMerger.isMergeable(1, 1));
     }
 
     @Test
-    public void testIsMergeableTrue() throws Exception {
+    public void testIsMergeableTrue() {
         ProductMerger productMerger = new ProductMerger();
         Product product = new Product().withID("42");
         assertTrue(productMerger.isMergeable(product, product));

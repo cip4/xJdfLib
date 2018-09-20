@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class ClassInspector {
 
-    private Class aClass;
+    private final Class aClass;
 
     public ClassInspector(final Class aClass) {
         this.aClass = aClass;

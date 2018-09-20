@@ -3,9 +3,9 @@ package org.cip4.lib.xjdf.merger;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.ProductList;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class XjdfMergerTest {
@@ -70,7 +70,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableNoIds() throws Exception {
+    public void testIsMergeableNoIds() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");
@@ -80,7 +80,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableBaseWithoutName() throws Exception {
+    public void testIsMergeableBaseWithoutName() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         ResourceSet mergerSet = new ResourceSet();
@@ -89,7 +89,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableMergeWithoutName() throws Exception {
+    public void testIsMergeableMergeWithoutName() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");
@@ -98,7 +98,7 @@ public class XjdfMergerTest {
     }
 
     @Test
-    public void testIsMergeableDifferentClasses() throws Exception {
+    public void testIsMergeableDifferentClasses() {
         ResourceSetMerger merger = new ResourceSetMerger();
         ResourceSet baseSet = new ResourceSet();
         baseSet.setName("ColorantControl");

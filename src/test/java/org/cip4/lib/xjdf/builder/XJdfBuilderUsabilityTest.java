@@ -1,13 +1,3 @@
-/**
- * All rights reserved by
- * 
- * flyeralarm GmbH
- * Alfred-Nobel-Straße 18
- * 97080 Würzburg
- *
- * info@flyeralarm.com
- * http://www.flyeralarm.com
- */
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
@@ -17,13 +7,12 @@ import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 	/**
 	 * Add Multiple Resource o XJDF document.
-	 * @throws Exception
 	 */
 	@Test
 	public void testCreateXJdfDocumentSimple() throws Exception {
@@ -77,7 +66,6 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 
 	/**
 	 * Add Multiple Resource o XJDF document.
-	 * @throws Exception
 	 */
 	@Test
 	public void testCreateXJdfDocumentWithProduct() throws Exception {

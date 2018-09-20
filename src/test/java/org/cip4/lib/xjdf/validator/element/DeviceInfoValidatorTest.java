@@ -2,15 +2,15 @@ package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.DeviceInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class DeviceInfoValidatorTest {
 
     @Test
-    public void validateAllowsNoFileSpec() throws Exception {
+    public void validateAllowsNoFileSpec() {
         DeviceInfo deviceInfo = new DeviceInfo();
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
@@ -18,7 +18,7 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
-    public void validateAllowsSchemaFileSpec() throws Exception {
+    public void validateAllowsSchemaFileSpec() {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("Schema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
@@ -26,7 +26,7 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
-    public void validateAllowsCurrentSchemaFileSpec() throws Exception {
+    public void validateAllowsCurrentSchemaFileSpec() {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("CurrentSchema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
@@ -34,7 +34,7 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
-    public void validateDisallowsEmptyResourceUsage() throws Exception {
+    public void validateDisallowsEmptyResourceUsage() {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage(""));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
@@ -42,7 +42,7 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
-    public void validateDisallowsNullResourceUsage() throws Exception {
+    public void validateDisallowsNullResourceUsage() {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage(null));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
@@ -50,7 +50,7 @@ public class DeviceInfoValidatorTest {
     }
 
     @Test
-    public void validateDisallowsDifferentResourceUsage() throws Exception {
+    public void validateDisallowsDifferentResourceUsage() {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("Foo"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 

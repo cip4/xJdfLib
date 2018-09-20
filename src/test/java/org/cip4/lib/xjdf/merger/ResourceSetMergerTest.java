@@ -2,14 +2,14 @@ package org.cip4.lib.xjdf.merger;
 
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceSetMergerTest {
 
     @Test
-    public void testMerge() throws Exception {
+    public void testMerge() {
         ResourceSet baseSet = new ResourceSet();
         ResourceSet mergeSet = new ResourceSet();
         Resource resource = new Resource();

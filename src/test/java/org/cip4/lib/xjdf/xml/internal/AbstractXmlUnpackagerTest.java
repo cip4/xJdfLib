@@ -1,28 +1,23 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junitpioneer.jupiter.TempDirectory;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractXmlUnpackagerTest {
 
     private final String PACKAGE = AbstractXmlUnpackagerTest.class.getResource("../package.zip").getFile();
     private final String INDEX_FILE = "index.xml";
-    private final String INDEX_CONTENT = "<?xml version=\"1.0\"?>";
     private final String RESOURCE_FILE = "foo.txt";
     private final String RESOURCE_CONTENT = "bar";
-
-    @Rule
-    public TemporaryFolder targetDir = new TemporaryFolder();
 
     private class ConcreteXmlUnpackager extends AbstractXmlUnpackager {
 
@@ -74,31 +69,33 @@ public class AbstractXmlUnpackagerTest {
     }
 
     @Test
-    public void unpackageZip() throws Exception {
+    @ExtendWith(TempDirectory.class)
+    public void unpackageZip(@TempDirectory.TempDir Path targetDir) throws Exception {
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
-        String index = unpackager.unpackageZip(targetDir.getRoot().toString());
+        String index = unpackager.unpackageZip(targetDir.toString());
         Path indexPath = Paths.get(index);
         assertTrue(Files.exists(indexPath));
         assertTrue(Files.exists(indexPath.getParent().resolve(RESOURCE_FILE)));
         assertTrue(indexPath.endsWith(INDEX_FILE));
-        assertEquals(targetDir.getRoot().toPath(), indexPath.getParent());
+        assertEquals(targetDir, indexPath.getParent());
     }
 
     @Test
-    public void unpackageZipMultipleTimes() throws Exception {
+    @ExtendWith(TempDirectory.class)
+    public void unpackageZipMultipleTimes(@TempDirectory.TempDir Path target) throws Exception {
+        Path target1 = target.resolve("folder1");
+        Path target2 = target.resolve("folder2");
 
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
-        File target1 = targetDir.newFolder();
         unpackager.unpackageZip(target1.toString());
 
-        File target2 = targetDir.newFolder();
         String index = unpackager.unpackageZip(target2.toString());
 
         Path indexPath = Paths.get(index);
         assertTrue(Files.exists(indexPath));
         assertTrue(Files.exists(indexPath.getParent().resolve(RESOURCE_FILE)));
         assertTrue(indexPath.endsWith(INDEX_FILE));
-        assertEquals(target2.toPath(), indexPath.getParent());
+        assertEquals(target2, indexPath.getParent());
     }
 
     @Test
@@ -110,6 +107,7 @@ public class AbstractXmlUnpackagerTest {
     @Test
     public void findMasterDocument() throws Exception {
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
+        String INDEX_CONTENT = "<?xml version=\"1.0\"?>";
         assertEquals(INDEX_CONTENT, new String(unpackager.findMasterDocument()));
     }
 

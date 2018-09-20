@@ -8,20 +8,20 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.validator.element.Validator;
 import org.hamcrest.collection.IsEmptyIterable;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import java.util.Collections;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ValidationDispatcherTest {
 
 
     @Test
-    public void validateProductList() throws Exception {
+    public void validateProductList() {
         ProductList productList = new ProductList();
         XJDF xjdf = new XJDF().withProductList(productList);
 
@@ -39,7 +39,7 @@ public class ValidationDispatcherTest {
     }
 
     @Test
-    public void getChildElementsDoesNotContainRefElements() throws Exception {
+    public void getChildElementsDoesNotContainRefElements() {
         Resource resource = new Resource();
         RefAnchor refAnchor = new RefAnchor().withRRef(resource);
 
@@ -51,7 +51,7 @@ public class ValidationDispatcherTest {
     }
 
     @Test
-    public void getChildElementsContainsChildElement() throws Exception {
+    public void getChildElementsContainsChildElement() {
         ProductList productList = new ProductList();
         XJDF xjdf = new XJDF().withProductList(productList);
 
@@ -65,7 +65,7 @@ public class ValidationDispatcherTest {
     }
 
     @Test
-    public void enumHasNoChildElements() throws Exception {
+    public void enumHasNoChildElements() {
         VariableIntent.VariableType enumValue = VariableIntent.VariableType.AREA;
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
@@ -76,7 +76,7 @@ public class ValidationDispatcherTest {
     }
 
     @Test
-    public void ignoreChildElementsFromForeignPackages() throws Exception {
+    public void ignoreChildElementsFromForeignPackages() {
         XJDF xjdf = new XJDF().withJobID("JobID");
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();

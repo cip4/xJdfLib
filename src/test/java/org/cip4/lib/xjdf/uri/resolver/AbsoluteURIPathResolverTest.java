@@ -1,11 +1,11 @@
 package org.cip4.lib.xjdf.uri.resolver;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.net.URI;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AbsoluteURIPathResolverTest {
 
@@ -35,26 +35,26 @@ public class AbsoluteURIPathResolverTest {
     }
 
     @Test
-    public void canResolve() throws Exception {
+    public void canResolve() {
         assertTrue(new AbsoluteURIPathResolver().canResolve("/pub/document-archives/xJdfSpec.pdf"));
     }
 
     @Test
-    public void canNotResolve_AbsoluteURI() throws Exception {
+    public void canNotResolve_AbsoluteURI() {
         assertFalse(
             new AbsoluteURIPathResolver().canResolve("http://localhost:8080/pub/document-archives/xJdfSpec.pdf")
         );
     }
 
     @Test
-    public void canNotResolve_AuthorityURI() throws Exception {
+    public void canNotResolve_AuthorityURI() {
         assertFalse(
             new AbsoluteURIPathResolver().canResolve("//cip4@localhost:8080/pub/document-archives/xJdfSpec.pdf")
         );
     }
 
     @Test
-    public void canNotResolve_RelativeURI() throws Exception {
+    public void canNotResolve_RelativeURI() {
         assertFalse(new AbsoluteURIPathResolver().canResolve("pub/document-archives/xJdfSpec.pdf"));
     }
 }

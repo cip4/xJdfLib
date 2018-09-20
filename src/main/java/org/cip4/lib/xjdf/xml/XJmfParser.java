@@ -33,13 +33,10 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
      * @param xjmf XJMF Object Tree for parsing.
      * @param os Target OutputStream where XJMF is being parsed.
      *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws IOException Is thrown in case any IO error occurs.
      */
     public final void parseXJmf(final XJMF xjmf, final OutputStream os)
-        throws ParserConfigurationException, JAXBException, SAXException, IOException {
+        throws JAXBException {
         parseXml(xjmf, os);
     }
 
@@ -49,14 +46,9 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
      * @param xjmf XJMF Object Tree for parsing.
      * @param os Target OutputStream where XJMF is being parsed.
      * @param skipValidation Skip validation.
-     *
-     * @throws IOException Is thrown in case any IO error occurs.
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     public final void parseXJmf(final XJMF xjmf, final OutputStream os, final boolean skipValidation)
-        throws IOException, ParserConfigurationException, SAXException, JAXBException {
+        throws JAXBException {
         parseXml(xjmf, os, skipValidation);
     }
 
@@ -66,14 +58,10 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
      * @param xjmf XJMF Object Tree for parsing.
      *
      * @return XJMF as byte array.
-     *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws IOException Is thrown in case any IO error occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
      */
     public final byte[] parseXJmf(final XJMF xjmf)
-        throws ParserConfigurationException, IOException, SAXException, JAXBException {
+        throws IOException, JAXBException {
         return parseXml(xjmf);
     }
 
@@ -84,14 +72,11 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
      * @param skipValidation Skip validation.
      *
      * @return XJMF as byte array.
-     *
-     * @throws ParserConfigurationException Is thrown in case a serious configuration error occurs.
      * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws SAXException Is thrown in case parsing an xml document fails.
      * @throws IOException Is thrown in case any IO error occurs.
      */
     public final byte[] parseXJmf(final XJMF xjmf, final boolean skipValidation)
-        throws ParserConfigurationException, JAXBException, SAXException, IOException {
+        throws JAXBException, IOException {
         return parseXml(xjmf, skipValidation);
     }
 

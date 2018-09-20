@@ -25,7 +25,7 @@ public final class URIResolver {
      * Creates an absolute uri based on the passed arguments.
      *
      * See the xJDF specification
-     *  <i>Appendix: Resolving RunList/@Directory and FileSpec/@URL URI References</i>
+     * <i>Appendix: Resolving RunList/@Directory and FileSpec/@URL URI References</i>
      * for further details.
      *
      * @param baseUri The base uri to resolve against.
