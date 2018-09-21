@@ -16,6 +16,7 @@ import org.mockito.stubbing.Answer;
 import java.util.Collections;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidationDispatcherTest {
 
