@@ -1,5 +1,6 @@
 plugins {
     id 'io.codearte.nexus-staging' version '0.11.0'
+    id "de.undercouch.download" version "3.4.3"
     id 'java'
     id 'idea'
     id 'maven'
@@ -22,6 +23,7 @@ wrapper {
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
+def schema = file('src/main/resources/JDF20.xsd')
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
@@ -74,7 +76,6 @@ task createBuildInfoFile(dependsOn: processResources) {
 }
 
 task xjc() {
-    def schema = file('src/main/resources/JDF20.xsd')
     def bindings = file('src/main/resources/binding.xjb')
     inputs.files(schema, bindings)
     outputs.dir(generatedSources)
@@ -154,3 +155,15 @@ task zipTestPackage(type: Zip) {
     destinationDir(file("$buildDir/resources/test/org/cip4/lib/xjdf"))
 }
 processTestResources.dependsOn(zipTestPackage)
+
+task updateSchema(type: Download) {
+    src 'https://bitbucket.cip4.org/projects/SCHEMA/repos/xjdf-schema/raw/xjdf.xsd?at=refs%2Fheads%2Fmaster'
+    dest schema
+    overwrite true
+    doFirst {
+        schema.setWritable(true)
+    }
+    doLast {
+        schema.setWritable(false)
+    }
+}
