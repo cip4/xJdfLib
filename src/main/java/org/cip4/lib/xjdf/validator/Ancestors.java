@@ -38,6 +38,14 @@ public class Ancestors {
         return null;
     }
 
+    public Object parent() {
+        if (ancestors.isEmpty()) {
+            return null;
+        } else {
+            return ancestors.get(ancestors.size() - 1);
+        }
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

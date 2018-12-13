@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.validator.element;
 
 import org.cip4.lib.xjdf.schema.Resource;
+import org.cip4.lib.xjdf.schema.ResourceInfo;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
@@ -20,6 +21,10 @@ public class ResourceSetUsageValidator extends SimpleValidator<ResourceSet> {
         }
 
         if (null != resourceSet.getID()) {
+            return;
+        }
+
+        if (ancestors.parent() instanceof ResourceInfo) {
             return;
         }
 
