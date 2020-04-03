@@ -62,7 +62,7 @@ public class IdRefs {
     @Test
     public void attributesOfTypeIdrefAreBoundToDatatype() throws Exception {
         Set<AttributeLocation> attrsInXsd = new HashSet<>();
-        List<Node> attributes = xsdReader.evaluateNodeList("//xs:attribute[@type='IDREF' or @type='IDREFS']");
+        List<Node> attributes = xsdReader.evaluateNodeList("//xs:attribute[@type='xs:IDREF' or @type='xs:IDREFS']");
         for (Node attributeNode : attributes) {
             attrsInXsd.add(extractAttrLocationFromXsdAttribute(attributeNode));
         }

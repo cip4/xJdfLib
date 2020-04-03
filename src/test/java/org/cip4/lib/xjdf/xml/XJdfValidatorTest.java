@@ -209,7 +209,7 @@ public class XJdfValidatorTest {
                     .withPostalCode("12345")
                     .withCity("Stadt")
                     .withCountry("Deutschland")
-                    .withCountryCode("de")
+                    .withCountryCode("DE")
             ).withComChannel(
                 new ComChannel()
                     .withChannelType("Email")

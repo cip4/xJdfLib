@@ -13,7 +13,7 @@ group = 'org.cip4.lib.xjdf'
 version = project.hasProperty('projectVersion') ? project.projectVersion : file('version.properties').text.trim()
 description = """CIP4 xJdfLib"""
 
-sourceCompatibility = 1.7
+sourceCompatibility = 1.8
 targetCompatibility = sourceCompatibility
 
 wrapper {
@@ -29,37 +29,43 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+jacoco {
+    toolVersion = "0.8.5"
+}
+
 configurations {
     xjc
 }
 repositories {
-    maven { url "https://repository.apache.org/content/groups/public/" }
-    maven { url "https://repository.jboss.org/nexus/content/groups/public-jboss/" }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://repo.maven.apache.org/maven2" }
 }
 dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0.1'
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
+    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
-    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.9.1'
-    compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
+    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.12.0'
+    compile group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
 
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.3.1'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.3.1'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.22.0'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
-    testCompile group: 'org.junit-pioneer', name: 'junit-pioneer', version: '0.1.2'
 
-    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.6.1'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.1'
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '2.2'
+    testCompile group: 'org.junit-pioneer', name: 'junit-pioneer', version: '0.5.6'
+
+    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.1'
 
     xjc group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
-    xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.11'
-    xjc group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0.1'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.9.5'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.9.5'
+    xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.2'
+    xjc group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
+    xjc group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.12.0'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.12.0'
     xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
 }
 

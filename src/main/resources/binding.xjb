@@ -25,7 +25,7 @@
     <xjb:bindings scd="/~xjdf:XYPair">
         <xjc:javaType name="org.cip4.lib.xjdf.type.XYPair" adapter="org.cip4.lib.xjdf.type.XYPair"/>
     </xjb:bindings>
-    <xjb:bindings scd="/~xjdf:dateTime">
+    <xjb:bindings scd="/~xs:dateTime">
         <xjc:javaType name="org.cip4.lib.xjdf.type.DateTime" adapter="org.cip4.lib.xjdf.type.DateTime"/>
     </xjb:bindings>
     <xjb:bindings scd="/~xjdf:URL">
@@ -34,7 +34,7 @@
     <xjb:bindings scd="/~xjdf:IntegerList">
         <xjc:javaType name="org.cip4.lib.xjdf.type.IntegerList" adapter="org.cip4.lib.xjdf.type.IntegerList"/>
     </xjb:bindings>
-    <xjb:bindings scd="/~xjdf:duration">
+    <xjb:bindings scd="/~xs:duration">
         <xjc:javaType name="org.cip4.lib.xjdf.type.Duration" adapter="org.cip4.lib.xjdf.type.Duration"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']">
@@ -137,6 +137,11 @@
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='MediaRef']">
+        <xjb:property name="media">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+        </xjb:property>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='InsertSheet']//xs:attribute[@name='MediaRef']">
         <xjb:property name="media">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
@@ -247,16 +252,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='MediaSource']//xs:attribute[@name='MediaRef']">
-        <xjb:property name="media">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='MediaSource']//xs:attribute[@name='ComponentRef']">
-        <xjb:property name="component">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='ContentRefs']">
         <xjb:property name="contents">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -303,6 +298,13 @@
                         printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
             </xjb:baseType>
         </xjb:property>
+    </xjb:bindings>
+
+    <xjb:bindings node="//xs:simpleType[@name='Version']//xs:enumeration[@value='2.0']">
+        <xjb:typesafeEnumMember name="V2_0"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:simpleType[@name='Version']//xs:enumeration[@value='2.1']">
+        <xjb:typesafeEnumMember name="V2_1"/>
     </xjb:bindings>
 
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.1']">
@@ -504,9 +506,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ByteMap']//xs:attribute[@name='BandOrdering']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BandOrdering"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']//xs:attribute[@name='PrintQuality']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="PrintQuality"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ConventionalPrintingParams']//xs:attribute[@name='FountainSolution']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="FountainSolution"/>
@@ -733,15 +732,44 @@
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='URLSchemes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="URLSchemes"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='GangCmdFilter']//xs:attribute[@name='Policy']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Policy"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='TabDimensions']//xs:attribute[@name='TabSetCollationOrder']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="TabSetCollationOrder"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='VerticalGridDirection']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="VerticalGridDirection"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='ExpansionPolicy']//xs:simpleType[xs:restriction]">
+         <xjb:typesafeEnumClass name="ExpansionPolicy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='HorizontalGridDirection']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="HorizontalGridDirection"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ColorMeasurementConditions']//xs:attribute[@name='MeasurementFilter']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MeasurementFilter"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ColorMeasurementConditions']//xs:attribute[@name='SampleBacking']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SampleBacking"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ColorMeasurementConditions']//xs:attribute[@name='WhiteBase']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="WhiteBase"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='ColorMeasurementConditions']//xs:attribute[@name='InkState']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="InkState"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Defect']//xs:attribute[@name='DefectType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="DefectType"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='Patch']//xs:attribute[@name='PatchUsage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="PatchUsage"/>
+    </xjb:bindings>
 
 
-
+    <xjb:bindings node="//xs:complexType[@name='QualityControlParams']//xs:attribute[@name='QualityBase']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="QualityBase"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QualityControlResult']//xs:attribute[@name='MeasurementUsage']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="MeasurementUsage"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='LooseBindingParams']//xs:attribute[@name='BindingType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BindingType"/>
     </xjb:bindings>
@@ -750,9 +778,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ColorantControl']//xs:attribute[@name='MappingSelection']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="MappingSelection"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='LayoutIntent']//xs:attribute[@name='SpreadType']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="SpreadType"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='RunList']//xs:attribute[@name='OrdType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="OrdType"/>

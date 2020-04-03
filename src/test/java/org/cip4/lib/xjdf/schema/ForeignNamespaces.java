@@ -31,7 +31,14 @@ public class ForeignNamespaces {
         List<Node> complexTypes = xsdReader.evaluateNodeList("//xs:complexType");
 
         for (Node complexType : complexTypes) {
-            Collection<Node> anyAttributeNodes = xsdReader.typeProperties(complexType, "anyAttribute");
+            Collection<Node> anyAttributeNodes;
+
+            try {
+                anyAttributeNodes = xsdReader.typeProperties(complexType, "anyAttribute");
+            } catch (Exception ex) {
+                fail("Error processing " + getXPath(complexType), ex);
+                return;
+            }
             assertEquals(
                 1,
                 anyAttributeNodes.size(),
@@ -50,5 +57,22 @@ public class ForeignNamespaces {
                 anyAttributeNode.getAttributes().getNamedItem("processContents").getNodeValue()
             );
         }
+    }
+
+    private String getXPath(Node complexType) {
+        final String xPath;
+        Node attrName;
+
+        // complexType
+        attrName = complexType.getAttributes().getNamedItem("name");
+
+        if(attrName != null) {
+            xPath = "//" + complexType.getLocalName() + "[@name='" + attrName.getNodeValue() + "']";
+        } else {
+            attrName = complexType.getParentNode().getAttributes().getNamedItem("name");
+            xPath = "//" + complexType.getParentNode().getLocalName() + "[@name='" + attrName.getNodeValue() + "']/" + complexType.getLocalName();
+        }
+
+        return xPath;
     }
 }

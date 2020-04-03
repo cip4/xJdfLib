@@ -90,7 +90,7 @@
             <xjdf:Contact>
                 <xjdf:Company OrganizationName="FLYERALARM GmbH"/>
                 <xjdf:ComChannel ChannelType="Email" Locator="mailto:info@flyeralarm.com"/>
-                <xjdf:Address City="Würzburg" Country="GERMANY" CountryCode="de" PostalCode="97080"
+                <xjdf:Address City="Würzburg" Country="GERMANY" CountryCode="DE" PostalCode="97080"
                               Street="Alfred-Nobel-Straße 18"/>
             </xjdf:Contact>
         </xjdf:Resource>

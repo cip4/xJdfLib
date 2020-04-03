@@ -38,7 +38,7 @@ public class GeneralDesignTest {
 
         for (Node elementNode : elements) {
             assertEquals(
-                "NMTOKEN",
+                "xs:NMTOKEN",
                 elementNode.getAttributes().getNamedItem("type").getNodeValue(),
                 "All attributes in XJDF with a name 'ExternalID' SHALL be have type NMTOKEN."
             );
@@ -51,7 +51,7 @@ public class GeneralDesignTest {
 
         for (Node elementNode : elements) {
             assertEquals(
-                "NMTOKEN",
+                "xs:NMTOKEN",
                 elementNode.getAttributes().getNamedItem("type").getNodeValue(),
                 "All attributes in XJDF with a name 'CostCenterID' SHALL be have type NMTOKEN."
             );
