@@ -21,9 +21,9 @@ jobs:
       with:
         java-version: 11
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew check build jacocoTestReport
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
-        name: my-artifact
+        name: libs
         path: build/libs
