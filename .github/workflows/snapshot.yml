@@ -30,4 +30,7 @@ jobs:
       with:
         name: jar
         path: build/libs
+        
+    - name: Build with Gradle
+      run: ./gradlew uploadArchives 
 
