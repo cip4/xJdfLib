@@ -25,14 +25,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew check build jacocoTestReport
       
-    - name: Upload JAR Artifact
+    - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
         name: jar
-        path: build/libs/*-SNAPSHOT.jar
-        
-    - name: Upload JavaDoc Artifact
-      uses: actions/upload-artifact@v1
-      with:
-        name: doc
-        path: build/libs/*-SNAPSHOT-javadoc.jar
+        path: build/libs
+
