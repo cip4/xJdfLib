@@ -31,6 +31,6 @@ jobs:
         name: jar
         path: build/libs
         
-    - name: Build with Gradle
+    - name: Upload Archives to Sonatype
       run: ./gradlew uploadArchives 
 
