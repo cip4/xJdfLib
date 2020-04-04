@@ -2,6 +2,7 @@ import groovy.json.JsonSlurper
 
 apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'groovy'
 
 // javadoc.jar generation
 task javadocJar(type: Jar, dependsOn: javadoc) {
@@ -73,15 +74,15 @@ uploadArchives {
                         id 'r.prosi'
                         name 'Dr. Rainer Prosi'
                         organization 'Heidelberger Druckmaschinen AG'
-                        organizationUrl 'http://www.heidelberg.com'
+                        organizationUrl 'https://www.heidelberg.com'
                         email 'rainer.prosi@heidelberg.com'
                     }
                     developer {
                         id 's.meissner'
                         name 'Stefan Meissner'
-                        organization 'flyeralarm GmbH'
-                        organizationUrl 'https://www.flyeralarm.com'
-                        email 'stefan.meissner@flyeralarm.com'
+                        organization 'Cimpress Technology'
+                        organizationUrl 'https://www.cimpress.com'
+                        email 'stefan.meissner@cimpress.com'
                     }
                     developer {
                         id 'm.hartmann'
