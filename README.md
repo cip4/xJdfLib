@@ -1,2 +1,2 @@
 # xJdfLib
-The XJDF Library.
+The CIP4 XJDF Library.
