@@ -25,6 +25,9 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew check build jacocoTestReport
       
+    - name: Decrypt GGP Ring File
+      run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.gpg
+      
     - name: Upload Artifacts
       uses: actions/upload-artifact@v1
       with:
