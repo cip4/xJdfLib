@@ -37,7 +37,7 @@ jobs:
       run: gpg --quiet --batch --yes --decrypt --passphrase="$SIGNING_PASSWORD" --output secring.gpg secring.gpg.gpg
 
     - name: Debug
-      run: ls -l
+      run: echo $PWD/secring.gpg && ls -l
         
     - name: Upload Archives to Maven Central Snapshot
       env:
