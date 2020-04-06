@@ -21,8 +21,7 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-    archives javadocJar
-    archives sourcesJar
+    archives javadocJar, sourcesJar
 }
 
 signing {
@@ -51,9 +50,9 @@ uploadArchives {
                 url 'http://www.cip4.org'
 
                 scm {
-                    url 'https://stash.cip4.org/scm/lib/xjdflib.git'
-                    connection 'scm:git:https://stash.cip4.org/scm/lib/xjdflib.git'
-                    developerConnection 'scm:git:https://stash.cip4.org/scm/lib/xjdflib.git'
+                    url 'https://github.com/cip4/xJdfLib.git'
+                    connection 'scm:git:https://github.com/cip4/xJdfLib.git'
+                    developerConnection 'scm:git:https://github.com/cip4/xJdfLib.git'
                 }
 
                 issueManagement {
