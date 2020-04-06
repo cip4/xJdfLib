@@ -21,11 +21,12 @@ task sourcesJar(type: Jar) {
 }
 
 artifacts {
-    archives javadocJar, sourcesJar
+    archives javadocJar
+    archives sourcesJar
 }
 
 signing {
-    required { gradle.taskGraph.hasTask(uploadArchives) }
+    // required { gradle.taskGraph.hasTask(uploadArchives) }
     sign configurations.archives
 }
 
