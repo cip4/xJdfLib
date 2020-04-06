@@ -39,5 +39,6 @@ jobs:
     - name: Attach files to GitHub Release
       uses: AButler/upload-release-assets@v2.0
       with:
-        files: 'build/libs/*
+        files: 'build/libs/*'
         repo-token: ${{ secrets.GITHUB_TOKEN }}
+
