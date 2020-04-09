@@ -35,10 +35,10 @@ jobs:
         OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
         OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       run: ./gradlew uploadArchives closeAndReleaseRepository -PprojectVersion=${GITHUB_REF##*-} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
-      
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v1
+
+    - name: Attach files to GitHub Release
+      uses: AButler/upload-release-assets@v2.0
       with:
-        name: jar
-        path: build/libs
+        files: 'build/libs/*'
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
 
