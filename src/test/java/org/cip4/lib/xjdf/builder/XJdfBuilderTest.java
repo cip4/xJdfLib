@@ -1,8 +1,10 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
+import org.cip4.lib.xjdf.schema.AuditCreated;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
+import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.Media;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.Part;
@@ -121,6 +123,23 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // assert
         marshalResult(xJdfBuilder);
+    }
+
+    @Test
+    public void addAudit() throws Exception {
+
+        // arrange
+        Header header = new Header();
+        header.setAgentName("MyAgent");
+
+        AuditCreated auditCreated = new AuditCreated();
+        auditCreated.setHeader(header);
+
+        // act
+        xJdfBuilder.addAudit(auditCreated);
+
+        // assert
+        assertEquals("MyAgent", xJdfBuilder.getXJdf().getAuditPool().getAudits().get(0).getHeader().getAgentName());
     }
 
     /**

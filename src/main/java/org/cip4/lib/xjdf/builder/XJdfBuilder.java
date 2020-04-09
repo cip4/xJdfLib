@@ -3,8 +3,9 @@ package org.cip4.lib.xjdf.builder;
 import java.util.Collections;
 import java.util.List;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
+import org.cip4.lib.xjdf.schema.Audit;
+import org.cip4.lib.xjdf.schema.AuditPool;
 import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Part;
@@ -15,16 +16,15 @@ import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.Resources;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
+
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 /**
  * Implementation of a XJdf builder class.
  */
 public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
-
-    /**
-     * Factory for creating xjdf nodes.
-     */
-    private final XJdfNodeFactory xJdfNodeFactory;
 
     /**
      * Accessor for resources.
@@ -81,9 +81,8 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
         final String jobID, final String category, final String descriptiveName, final String relatedJobID
     ) {
         // initialize objects
-        super(new XJdfNodeFactory().createXJDF());
+        super(new XJDF());
         resourceSets = new Resources(getNode().getResourceSet());
-        xJdfNodeFactory = new XJdfNodeFactory();
 
         // preconfiguration
         getXJdf().setJobID(jobID);
@@ -100,7 +99,6 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
     public XJdfBuilder(final XJDF xjdf) {
         super(xjdf);
         resourceSets = new Resources(getNode().getResourceSet());
-        xJdfNodeFactory = new XJdfNodeFactory();
 
         Collections.sort(getNode().getResourceSet(), new ResourceSetComparator());
     }
@@ -154,6 +152,22 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
 
         // add product
         getXJdf().getProductList().getProduct().add(product);
+    }
+
+    /**
+     * Append a Audit to the XJDF Document.
+     *
+     * @param audit The audit to be attended append.
+     */
+    public final void addAudit(Audit audit) {
+
+        // create audit pool if necessary
+        if(getXJdf().getAuditPool() == null) {
+            getXJdf().setAuditPool(new AuditPool());
+        }
+
+        // add audit
+        getXJdf().getAuditPool().getAudits().add(audit);
     }
 
     /**
@@ -224,7 +238,13 @@ public class XJdfBuilder extends AbstractNodeBuilder<XJDF> {
             throw new IllegalArgumentException("Resource may not be null.");
         }
 
-        Resource resource = xJdfNodeFactory.createResource(specificResource, part);
+        String paramName = specificResource.getClass().getSimpleName();
+        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
+        JAXBElement<SpecificResource> obj = new JAXBElement(qname, SpecificResource.class, null, specificResource);
+
+        Resource resource = new Resource();
+        resource.setSpecificResource(obj);
+        resource.getPart().add(part);
 
         addResource(resource, processUsage);
         return resource;

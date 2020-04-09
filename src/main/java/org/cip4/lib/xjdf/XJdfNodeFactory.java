@@ -417,23 +417,5 @@ public class XJdfNodeFactory extends ObjectFactory {
         return amountPool;
     }
 
-    /**
-     * Create a new ColorantControl Node which already contains a processColorModel.
-     *
-     * @param processColorModel ProcessColorModel attribute as String.
-     *
-     * @return ColorantControl Node which already contains defined attributes.
-     */
-    public final ColorantControl createColorantControl(final ColorantControl.ProcessColorModel processColorModel) {
-
-        // create node
-        ColorantControl colorantControl = super.createColorantControl();
-
-        // set attributes
-        colorantControl.setProcessColorModel(processColorModel);
-
-        // return node
-        return colorantControl;
-    }
 
 }
