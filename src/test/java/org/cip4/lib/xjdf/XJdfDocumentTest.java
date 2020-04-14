@@ -58,7 +58,7 @@ public class XJdfDocumentTest {
         runListMap.get(back).setFileSpec(new FileSpec());
         runListMap.get(back).getFileSpec().setURL(new URI(new java.net.URI("https://example.org/back.pdf")));
 
-        xjdfDoc.addResource(runListMap, ResourceSet.Usage.INPUT);
+        xjdfDoc.addResourceSet(runListMap, ResourceSet.Usage.INPUT);
 
         // ACT
         XJDF xjdf = xjdfDoc.getXjdf();

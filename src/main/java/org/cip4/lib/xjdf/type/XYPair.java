@@ -80,7 +80,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
         double x = xyPair.getX();
         double y = xyPair.getY();
 
-        return String.format("%s %s", x, y);
+        return String.format("%.3f %.3f", x, y);
     }
 
     /**

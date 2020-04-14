@@ -160,7 +160,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
         double tx = matrix.getTx();
         double ty = matrix.getTy();
 
-        return String.format("%s %s %s %s %s %s", a, b, c, d, tx, ty);
+        return String.format("%.3f %.3f %.3f %.3f %.3f %.3f", a, b, c, d, tx, ty);
     }
 
     /**

@@ -6,10 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -74,7 +71,7 @@ public class XJdfDocument {
         return resourceSet;
     }
 
-    public ResourceSet addResource(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage) {
+    public ResourceSet addResourceSet(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage) {
 
         // create resource set
         ResourceSet resourceSet = new ResourceSet();
@@ -90,6 +87,7 @@ public class XJdfDocument {
             resource.setSpecificResource(specificResourceJaxB);
 
             resourceSet.getResource().add(resource);
+            resourceSet.setName(paramName);
         }
 
         // add resource set to XJDF and return the object
