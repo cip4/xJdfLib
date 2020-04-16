@@ -107,7 +107,7 @@ public class ShapeTest {
 		String result = new Shape(10.1, 20.33, 40).toString();
 
 		// assert
-		assertEquals("10.1 20.33 40.0", result, "String is wrong.");
+		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
 	}
 
 	/**
@@ -123,7 +123,7 @@ public class ShapeTest {
 		String result = new Shape().marshal(s);
 
 		// assert
-		assertEquals("10.1 20.33 40.0", result, "String is wrong.");
+		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
 	}
 
 	/**

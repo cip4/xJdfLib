@@ -116,7 +116,7 @@ public class XJdfNavigatorTest {
 		byte[] bytes = xJdfNavigator.getXmlBytes();
 		String doc = new String(bytes);
 
-		int i = doc.indexOf("10.0 20.0 30.0");
+		int i = doc.indexOf("10.000 20.000 30.000");
 
 		assertFalse(i == -1);
 	}

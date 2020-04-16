@@ -86,7 +86,7 @@ public class MatrixTest {
 		String actual = new Matrix(a, b, c, d, tx, ty).toString();
 
 		// assert
-		assertEquals("1.0 0.0 0.0 1.0 3.14 21631.3", actual, "String value is wrong.");
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.300", actual, "String value is wrong.");
 	}
 
 	/**
@@ -108,7 +108,7 @@ public class MatrixTest {
 		String actual = new Matrix().marshal(r);
 
 		// assert
-		assertEquals("1.0 0.0 0.0 1.0 3.14 21631.3", actual, "String value is wrong.");
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.300", actual, "String value is wrong.");
 	}
 
 	/**

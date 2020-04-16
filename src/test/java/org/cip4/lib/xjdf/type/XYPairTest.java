@@ -61,7 +61,7 @@ public class XYPairTest {
 		String result = new XYPair(612.22, 792.44).toString();
 
 		// assert
-		assertEquals("612.22 792.44", result, "Result is wrong.");
+		assertEquals("612.220 792.440", result, "Result is wrong.");
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class XYPairTest {
 		String result = new XYPair().marshal(p);
 
 		// assert
-		assertEquals("612.22 792.44", result, "Result is wrong.");
+		assertEquals("612.220 792.440", result, "Result is wrong.");
 	}
 
 	/**
