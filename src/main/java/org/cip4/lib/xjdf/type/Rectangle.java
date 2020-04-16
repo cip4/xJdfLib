@@ -115,7 +115,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         double ury = v.getUry();
 
         // process marshalling
-        return String.format("%s %s %s %s", llx, lly, urx, ury);
+        return String.format("%.3f %.3f %.3f %.3f", llx, lly, urx, ury);
     }
 
     /**

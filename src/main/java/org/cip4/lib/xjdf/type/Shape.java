@@ -118,7 +118,7 @@ public class Shape extends AbstractXJdfType<String, Shape> {
         double z = shape.getZ();
 
         // create string
-        return String.format("%s %s %s", x, y, z);
+        return String.format("%.3f %.3f %.3f", x, y, z);
     }
 
     /**

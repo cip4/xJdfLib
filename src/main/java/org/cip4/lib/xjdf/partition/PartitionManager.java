@@ -24,7 +24,7 @@ public class PartitionManager {
      * @return The Resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public final Resource getResourceByPart(final ResourceSet resourceSet, final Part part)
+    public static Resource getResourceByPart(final ResourceSet resourceSet, final Part part)
         throws IllegalAccessException {
 
         // iterate over all parts in all resources from top to bottom
@@ -75,7 +75,7 @@ public class PartitionManager {
      * @return True in case the resource partition key value is equal or a subset of the given partition key value.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    private boolean comparePartKeyValues(final String fieldName, final Part resourcePart, final Part givenPart)
+    private static boolean comparePartKeyValues(final String fieldName, final Part resourcePart, final Part givenPart)
         throws IllegalAccessException {
 
         Object resValue = FieldUtils.readField(resourcePart, fieldName, true);
@@ -92,7 +92,7 @@ public class PartitionManager {
      * @return List of active parition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    private Set<String> getPartitionKeys(final Part part) throws IllegalAccessException {
+    private static Set<String> getPartitionKeys(final Part part) throws IllegalAccessException {
         Set<String> partKeys = new HashSet<>();
 
         if (part != null) {
