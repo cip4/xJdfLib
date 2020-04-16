@@ -75,7 +75,7 @@ public class RectangleTest {
 		String result = new Rectangle(1d, 0d, 3.14d, 21631.3d).toString();
 
 		// assert
-		assertEquals("1.0 0.0 3.14 21631.3", result, "Result is wrong.");
+		assertEquals("1.000 0.000 3.140 21631.300", result, "Result is wrong.");
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class RectangleTest {
 		String result = new Rectangle().marshal(r);
 
 		// assert
-		assertEquals("1.0 0.0 3.14 21631.3", result, "Result is wrong.");
+		assertEquals("1.000 0.000 3.140 21631.300", result, "Result is wrong.");
 	}
 
 	/**

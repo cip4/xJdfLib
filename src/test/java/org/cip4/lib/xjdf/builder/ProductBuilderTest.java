@@ -82,7 +82,7 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
 
         actual = getXPathValue(bytes, "/xjdf:Product/xjdf:Intent/xjdf:LayoutIntent/@FinishedDimensions");
         assertEquals(
-            "595.27559055 822.04724409 0.0",
+            "595.276 822.047 0.000",
             actual,
             "Attribute FinishedDimensions in Node LayoutIntent is wrong."
         );
