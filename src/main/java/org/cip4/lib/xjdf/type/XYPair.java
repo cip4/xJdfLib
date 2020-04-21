@@ -68,6 +68,30 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
+     * Adds another XYPair the the current one.
+     * @param other The other one.
+     * @return The sum of both XYPairs.
+     */
+    public XYPair add(XYPair other) {
+        return new XYPair(
+                this.getX() + other.getX(),
+                this.getY() + other.getY()
+        );
+    }
+
+    /**
+     * Subtracts another XYPair from the current one.
+     * @param other The other one.
+     * @return The difference of both XYPairs.
+     */
+    public XYPair subtract(XYPair other) {
+        return new XYPair(
+                this.getX() - other.getX(),
+                this.getY() - other.getY()
+        );
+    }
+
+    /**
      * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override

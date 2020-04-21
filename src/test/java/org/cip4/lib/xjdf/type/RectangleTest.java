@@ -142,4 +142,22 @@ public class RectangleTest {
         Rectangle r = new Rectangle(1,2,3,4);
         assertNotEquals(new Rectangle(0,2,3,4).hashCode(), r.hashCode());
     }
+
+    @Test
+    public void testWidth() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(3, r.getWidth(), 0.001, "Width is wrong.");
+	}
+
+	@Test
+	public void testHeight() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(6, r.getHeight(), 0.001, "Height is wrong.");
+	}
+
+	@Test
+	public void testSize() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(new XYPair(3,6), r.getSize(),  "Size is wrong.");
+	}
 }

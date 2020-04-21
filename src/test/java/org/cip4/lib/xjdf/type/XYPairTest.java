@@ -97,4 +97,31 @@ public class XYPairTest {
 		assertEquals(792.44d, p.getY(), 0.01f, "Y is wrong.");
 	}
 
+	@Test
+	public void testAdd() {
+
+		// arrange
+		XYPair p1 = new XYPair(1,2);
+		XYPair p2 = new XYPair(3,4);
+
+		// act
+		XYPair result = p1.add(p2);
+
+		// assert
+		assertEquals(new XYPair(4,6), result, "The addition was wrong.");
+	}
+
+	@Test
+	public void testSubtract() {
+
+		// arrange
+		XYPair p1 = new XYPair(1,2);
+		XYPair p2 = new XYPair(3,4);
+
+		// act
+		XYPair result = p1.subtract(p2);
+
+		// assert
+		assertEquals(new XYPair(-2,-2), result, "The subtraction was wrong.");
+	}
 }

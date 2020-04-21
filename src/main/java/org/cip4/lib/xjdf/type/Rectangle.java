@@ -102,6 +102,28 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Returns the width of the rectangle.
+     * @return The rectangles width.
+     */
+    public float getWidth() {
+        return urx - llx;
+    }
+
+    /**
+     * Returns the height of the rectangle.
+     * @return The rectangles height.
+     */
+    public float getHeight() {
+        return ury - lly;
+    }
+
+    /**
+     * Returns the size of the rectangle.
+     * @return The rectangles size.
+     */
+    public XYPair getSize() { return new XYPair(getWidth(), getHeight());}
+
+    /**
      * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
