@@ -9,11 +9,11 @@ package org.cip4.lib.xjdf.type;
  */
 public class Shape extends AbstractXJdfType<String, Shape> {
 
-    private final double x;
+    private final float x;
 
-    private final double y;
+    private final float y;
 
-    private final double z;
+    private final float z;
 
     /**
      * Default constructor.
@@ -27,18 +27,18 @@ public class Shape extends AbstractXJdfType<String, Shape> {
     /**
      * Custom constructor, accepting several values for initializing.
      */
-    public Shape(double x, double y) {
+    public Shape(float x, float y) {
 
         // init class
         this.x = x;
         this.y = y;
-        this.z = 0d;
+        this.z = 0f;
     }
 
     /**
      * Custom constructor, accepting several values for initializing.
      */
-    public Shape(double x, double y, double z) {
+    public Shape(float x, float y, float z) {
 
         // init class
         this.x = x;
@@ -58,19 +58,19 @@ public class Shape extends AbstractXJdfType<String, Shape> {
 
         // extract values
         if (s.length >= 1) {
-            this.x = Double.valueOf(s[0]);
+            this.x = Float.parseFloat(s[0]);
         } else {
             this.x = 0;
         }
 
         if (s.length >= 2) {
-            this.y = Double.valueOf(s[1]);
+            this.y = Float.parseFloat(s[1]);
         } else {
             this.y = 0;
         }
 
         if (s.length >= 3) {
-            this.z = Double.valueOf(s[2]);
+            this.z = Float.parseFloat(s[2]);
         } else {
             this.z = 0;
         }

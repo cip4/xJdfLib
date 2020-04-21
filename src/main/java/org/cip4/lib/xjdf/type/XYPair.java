@@ -12,9 +12,9 @@ package org.cip4.lib.xjdf.type;
  */
 public class XYPair extends AbstractXJdfType<String, XYPair> {
 
-    private final double x;
+    private final float x;
 
-    private final double y;
+    private final float y;
 
     /**
      * Default constructor. Creates an default XYPair object.
@@ -27,7 +27,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     /**
      * Custom constructor, accepting several values for initializing.
      */
-    public XYPair(double x, double y) {
+    public XYPair(float x, float y) {
 
         // init class
         this.x = x;
@@ -45,8 +45,8 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
         String[] s = expression.split(" ");
 
         // extract values
-        this.x = Double.valueOf(s[0]);
-        this.y = Double.valueOf(s[1]);
+        this.x = Float.valueOf(s[0]);
+        this.y = Float.valueOf(s[1]);
     }
 
     /**
@@ -54,7 +54,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
      *
      * @return the x
      */
-    public double getX() {
+    public float getX() {
         return x;
     }
 
@@ -63,7 +63,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
      *
      * @return the y
      */
-    public double getY() {
+    public float getY() {
         return y;
     }
 
@@ -77,8 +77,8 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
             return null;
 
         // get params
-        double x = xyPair.getX();
-        double y = xyPair.getY();
+        float x = xyPair.getX();
+        float y = xyPair.getY();
 
         return String.format("%.3f %.3f", x, y);
     }
