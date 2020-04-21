@@ -75,7 +75,7 @@ public class ShapeTest {
 		// arrange
 
 		// act
-		Shape s = new Shape(10.1, 20.33, 40);
+		Shape s = new Shape(10.1f, 20.33f, 40f);
 
 		// assert
 		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
@@ -89,7 +89,7 @@ public class ShapeTest {
 		// arrange
 
 		// act
-		Shape s = new Shape(10.1, 20.33);
+		Shape s = new Shape(10.1f, 20.33f);
 
 		// assert
 		assertEquals(10.1d, s.getX(), 0.1d, "X is wrong.");
@@ -104,7 +104,7 @@ public class ShapeTest {
 	public void testToString() {
 
 		// arrange / act
-		String result = new Shape(10.1, 20.33, 40).toString();
+		String result = new Shape(10.1f, 20.33f, 40f).toString();
 
 		// assert
 		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
@@ -117,7 +117,7 @@ public class ShapeTest {
 	public void testMarshalShape() {
 
 		// arrange
-		Shape s = new Shape(10.1, 20.33, 40);
+		Shape s = new Shape(10.1f, 20.33f, 40f);
 
 		// act
 		String result = new Shape().marshal(s);

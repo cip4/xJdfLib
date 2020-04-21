@@ -56,13 +56,13 @@ public class RectangleTest {
 		// arrange
 
 		// act
-		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
+		Rectangle r = new Rectangle(1f, 0f, 3.14f, 21631.3f);
 
 		// assert
-		assertEquals(1d, r.getLlx(), 0.01, "Llx is wrong.");
-		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
-		assertEquals(3.14d, r.getUrx(), 0.01, "Urx is wrong.");
-		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
+		assertEquals(1f, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0f, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3.14f, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(21631.3f, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
 	/**
@@ -72,10 +72,10 @@ public class RectangleTest {
 	public void testToString() {
 
 		// arrange / act
-		String result = new Rectangle(1d, 0d, 3.14d, 21631.3d).toString();
+		String result = new Rectangle(1f, 0f, 3.14f, 21631.3f).toString();
 
 		// assert
-		assertEquals("1.000 0.000 3.140 21631.300", result, "Result is wrong.");
+		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
 	}
 
 	/**
@@ -85,13 +85,13 @@ public class RectangleTest {
 	public void testMarshalRectangle() {
 
 		// arrange
-		Rectangle r = new Rectangle(1d, 0d, 3.14d, 21631.3d);
+		Rectangle r = new Rectangle(1f, 0f, 3.14f, 21631.3f);
 
 		// act
 		String result = new Rectangle().marshal(r);
 
 		// assert
-		assertEquals("1.000 0.000 3.140 21631.300", result, "Result is wrong.");
+		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
 	}
 
 	/**
@@ -107,10 +107,10 @@ public class RectangleTest {
 		Rectangle r = new Rectangle().unmarshal(value);
 
 		// assert
-		assertEquals(1d, r.getLlx(), 0.01, "Llx is wrong.");
-		assertEquals(0d, r.getLly(), 0.01, "Lly is wrong.");
-		assertEquals(3.14d, r.getUrx(), 0.01, "Urx is wrong.");
-		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
+		assertEquals(1f, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(0f, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3.14f, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(21631.3f, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
     @Test

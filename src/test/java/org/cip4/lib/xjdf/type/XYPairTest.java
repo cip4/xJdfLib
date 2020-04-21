@@ -34,8 +34,8 @@ public class XYPairTest {
 		XYPair p = new XYPair(value);
 
 		// assert
-		assertEquals(612.22d, p.getX(), "X is wrong.");
-		assertEquals(792.44d, p.getY(), "Y is wrong.");
+		assertEquals(612.22d, p.getX(), 0.01f, "X is wrong.");
+		assertEquals(792.44d, p.getY(), 0.01f, "Y is wrong.");
 	}
 
 	@Test
@@ -44,11 +44,11 @@ public class XYPairTest {
 		// arrange
 
 		// act
-		XYPair p = new XYPair(612.22, 792.44);
+		XYPair p = new XYPair(612.22f, 792.44f);
 
 		// assert
-		assertEquals(612.22d, p.getX(), "X is wrong.");
-		assertEquals(792.44d, p.getY(), "Y is wrong.");
+		assertEquals(612.22f, p.getX(), 0.01f, "X is wrong.");
+		assertEquals(792.44f, p.getY(), 0.01f, "Y is wrong.");
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class XYPairTest {
 	public void testToString() {
 
 		// arrange / act
-		String result = new XYPair(612.22, 792.44).toString();
+		String result = new XYPair(612.22f, 792.44f).toString();
 
 		// assert
 		assertEquals("612.220 792.440", result, "Result is wrong.");
@@ -71,7 +71,7 @@ public class XYPairTest {
 	public void testMarshalXYPair() {
 
 		// arrange
-		XYPair p = new XYPair(612.22, 792.44);
+		XYPair p = new XYPair(612.22f, 792.44f);
 
 		// act
 		String result = new XYPair().marshal(p);
@@ -93,8 +93,8 @@ public class XYPairTest {
 		XYPair p = new XYPair().unmarshal(value);
 
 		// assert
-		assertEquals(612.22d, p.getX(), "X is wrong.");
-		assertEquals(792.44d, p.getY(), "Y is wrong.");
+		assertEquals(612.22d, p.getX(), 0.01f, "X is wrong.");
+		assertEquals(792.44d, p.getY(), 0.01f, "Y is wrong.");
 	}
 
 }

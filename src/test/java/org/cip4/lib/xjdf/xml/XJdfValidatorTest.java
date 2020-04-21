@@ -181,7 +181,7 @@ public class XJdfValidatorTest {
             new LayoutIntent()
                 .withPages(32)
                 .withSides(Sides.TWO_SIDED_HEAD_TO_HEAD)
-                .withFinishedDimensions(new Shape(595.27559055, 822.04724409))
+                .withFinishedDimensions(new Shape(595.27559055f, 822.04724409f))
         );
         productBuilder.addIntent(
             new MediaIntent()

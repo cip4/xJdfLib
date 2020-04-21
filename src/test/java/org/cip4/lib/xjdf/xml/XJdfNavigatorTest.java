@@ -107,7 +107,7 @@ public class XJdfNavigatorTest {
 		InputStream is = XJdfNavigator.class.getResourceAsStream(RES_TEST_XJDF);
 		XJdfNavigator xJdfNavigator = new XJdfNavigator(is);
 
-		final Shape fdim = new Shape(10d, 20d, 30d);
+		final Shape fdim = new Shape(10f, 20f, 30f);
 
 		// act
 		xJdfNavigator.updateAttribute("/XJDF/ProductList/Product/Intent[@Name='LayoutIntent']/LayoutIntent/@FinishedDimensions", fdim);

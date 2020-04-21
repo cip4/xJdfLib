@@ -37,35 +37,35 @@ public class MatrixTest {
 		Matrix r = new Matrix(VALUE);
 
 		// assert
-		assertEquals(1d, r.getA(), "a value is wrong.");
-		assertEquals(0d, r.getB(), "b value is wrong.");
-		assertEquals(0d, r.getC(), "c value is wrong.");
-		assertEquals(1d, r.getD(), "d value is wrong.");
-		assertEquals(3.14d, r.getTx(), "Tx value is wrong.");
-		assertEquals(21631.3d, r.getTy(), "Ty value is wrong.");
+		assertEquals(1f, r.getA(), "a value is wrong.");
+		assertEquals(0f, r.getB(), "b value is wrong.");
+		assertEquals(0f, r.getC(), "c value is wrong.");
+		assertEquals(1f, r.getD(), "d value is wrong.");
+		assertEquals(3.14f, r.getTx(), "Tx value is wrong.");
+		assertEquals(21631.3f, r.getTy(), "Ty value is wrong.");
 	}
 
 	@Test
 	public void testNewInstanceDoubleDoubleDoubleDoubleDoubleDouble() {
 
 		// arrange
-		final double a = 1d;
-		final double b = 0d;
-		final double c = 0d;
-		final double d = 1d;
-		final double tx = 3.14d;
-		final double ty = 21631.3d;
+		final float a = 1f;
+		final float b = 0f;
+		final float c = 0f;
+		final float d = 1f;
+		final float tx = 3.14f;
+		final float ty = 21631.3f;
 
 		// act
 		Matrix r = new Matrix(a, b, c, d, tx, ty);
 
 		// assert
-		assertEquals(1d, r.getA(), "a value is wrong.");
-		assertEquals(0d, r.getB(), "b value is wrong.");
-		assertEquals(0d, r.getC(), "c value is wrong.");
-		assertEquals(1d, r.getD(), "d value is wrong.");
-		assertEquals(3.14d, r.getTx(), "Tx value is wrong.");
-		assertEquals(21631.3d, r.getTy(), "Ty value is wrong.");
+		assertEquals(1d, r.getA(), 0.01f, "a value is wrong.");
+		assertEquals(0d, r.getB(), 0.01f, "b value is wrong.");
+		assertEquals(0d, r.getC(), 0.01f, "c value is wrong.");
+		assertEquals(1d, r.getD(), 0.01f, "d value is wrong.");
+		assertEquals(3.14d, r.getTx(), 0.01f, "Tx value is wrong.");
+		assertEquals(21631.3d, r.getTy(), 0.01f, "Ty value is wrong.");
 	}
 
 	/**
@@ -75,18 +75,18 @@ public class MatrixTest {
 	public void testToString() {
 
 		// arrange
-		final double a = 1d;
-		final double b = 0d;
-		final double c = 0d;
-		final double d = 1d;
-		final double tx = 3.14d;
-		final double ty = 21631.3d;
+		final float a = 1f;
+		final float b = 0f;
+		final float c = 0f;
+		final float d = 1f;
+		final float tx = 3.14f;
+		final float ty = 21631.3f;
 
 		// act
 		String actual = new Matrix(a, b, c, d, tx, ty).toString();
 
 		// assert
-		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.300", actual, "String value is wrong.");
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
 	}
 
 	/**
@@ -96,19 +96,19 @@ public class MatrixTest {
 	public void testMarshalMatrix() {
 
 		// arrange
-		final double a = 1d;
-		final double b = 0d;
-		final double c = 0d;
-		final double d = 1d;
-		final double tx = 3.14d;
-		final double ty = 21631.3d;
+		final float a = 1f;
+		final float b = 0f;
+		final float c = 0f;
+		final float d = 1f;
+		final float tx = 3.14f;
+		final float ty = 21631.3f;
 
 		// act
 		Matrix r = new Matrix(a, b, c, d, tx, ty);
 		String actual = new Matrix().marshal(r);
 
 		// assert
-		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.300", actual, "String value is wrong.");
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
 	}
 
 	/**
@@ -123,12 +123,12 @@ public class MatrixTest {
 		Matrix r = new Matrix().unmarshal(VALUE);
 
 		// assert
-		assertEquals(1d, r.getA(), "a value is wrong.");
-		assertEquals(0d, r.getB(), "b value is wrong.");
-		assertEquals(0d, r.getC(), "c value is wrong.");
-		assertEquals(1d, r.getD(), "d value is wrong.");
-		assertEquals(3.14d, r.getTx(), "Tx value is wrong.");
-		assertEquals(21631.3d, r.getTy(), "Ty value is wrong.");
+		assertEquals(1f, r.getA(), "a value is wrong.");
+		assertEquals(0f, r.getB(), "b value is wrong.");
+		assertEquals(0f, r.getC(), "c value is wrong.");
+		assertEquals(1f, r.getD(), "d value is wrong.");
+		assertEquals(3.14f, r.getTx(), "Tx value is wrong.");
+		assertEquals(21631.3f, r.getTy(), "Ty value is wrong.");
 	}
 
 }
