@@ -1,12 +1,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.BindingIntent;
-import org.cip4.lib.xjdf.schema.ColorIntent;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
-import org.cip4.lib.xjdf.schema.MediaIntent;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfNavigator;
@@ -57,13 +52,14 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     public void testAddIntent() throws Exception {
 
         // arrange
-        MediaIntent mediaIntent = new XJdfNodeFactory().createMediaIntent();
-        mediaIntent.setWeight(135f);
+        MediaIntent mediaIntent = new MediaIntent()
+                .withWeight(135f);
 
-        LayoutIntent layoutIntent = new XJdfNodeFactory().createLayoutIntent();
-        layoutIntent.setFinishedDimensions(new Shape(595.27559055f, 822.04724409f));
-        BindingIntent bindingIntent = new XJdfNodeFactory().createBindingIntent();
-        bindingIntent.setBindingType(BindingIntent.BindingType.SADDLE_STITCH);
+        LayoutIntent layoutIntent = new LayoutIntent()
+                .withFinishedDimensions(new Shape(595.27559055f, 822.04724409f));
+
+        BindingIntent bindingIntent = new BindingIntent()
+                .withBindingType(BindingIntent.BindingType.SADDLE_STITCH);
 
         // act
         productBuilder.addIntent(mediaIntent);

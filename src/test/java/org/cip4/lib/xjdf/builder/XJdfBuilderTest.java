@@ -1,17 +1,7 @@
 package org.cip4.lib.xjdf.builder;
 
 import org.cip4.lib.xjdf.XJdfNodeFactory;
-import org.cip4.lib.xjdf.schema.AuditCreated;
-import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.GeneralID;
-import org.cip4.lib.xjdf.schema.Header;
-import org.cip4.lib.xjdf.schema.Media;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.Product;
-import org.cip4.lib.xjdf.schema.SpecificResource;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.XJDF;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfParser;
@@ -57,7 +47,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String ID_VALUE = UUID.randomUUID().toString();
 
         // act
-        GeneralID generalId = new XJdfNodeFactory().createGeneralID(ID_USAGE, ID_VALUE);
+        GeneralID generalId = new GeneralID().withIDUsage(ID_USAGE).withIDValue(ID_VALUE);
         xJdfBuilder.addGeneralID(generalId);
 
         // assert
@@ -86,8 +76,8 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String ID_VALUE_3 = "";
 
         // act
-        xJdfBuilder.addGeneralID(new XJdfNodeFactory().createGeneralID(ID_USAGE_1, ID_VALUE_1));
-        xJdfBuilder.addGeneralID(new XJdfNodeFactory().createGeneralID(ID_USAGE_2, ID_VALUE_2));
+        xJdfBuilder.addGeneralID(new GeneralID().withIDUsage(ID_USAGE_1).withIDValue(ID_VALUE_1));
+        xJdfBuilder.addGeneralID(new GeneralID().withIDUsage(ID_USAGE_2).withIDValue(ID_VALUE_2));
 
         // assert
         byte[] bytes = marshalResult(xJdfBuilder);
@@ -115,7 +105,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     @Test
     public void testAddProductSimple() throws Exception {
         // arrange
-        Product product = new XJdfNodeFactory().createProduct();
+        Product product = new Product();
         product.setAmount(1000);
 
         // act
@@ -151,16 +141,16 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         // arrange
         final String URL = "http://www.example.org/w2p/Cover.pdf";
 
-        FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
+        FileSpec fileSpec = new FileSpec();
         fileSpec.setURL(new URI(new java.net.URI(URL)));
 
-        RunList runList = new XJdfNodeFactory().createRunList();
+        RunList runList = new RunList();
         runList.setFileSpec(fileSpec);
 
-        Part partCover = new XJdfNodeFactory().createPart();
+        Part partCover = new Part();
         partCover.setRun("Cover");
 
-        Part partContent = new XJdfNodeFactory().createPart();
+        Part partContent = new Part();
         partContent.setRun("Content");
 
         // act
@@ -192,13 +182,23 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         final String urlContent = "http://www.example.org/w2p/Content.pdf";
         final String urlCover = "http://www.example.org/w2p/Cover.pdf";
 
-        RunList runListCover = new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover)));
-        RunList runListContent = new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent)));
 
-        Part partCover = new XJdfNodeFactory().createPart();
+        new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlCover)))
+        );
+
+        RunList runListCover = new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlCover)))
+        );
+
+        RunList runListContent = new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlContent)))
+        );
+
+        Part partCover = new Part();
         partCover.setRun("Cover");
 
-        Part partContent = new XJdfNodeFactory().createPart();
+        Part partContent = new Part();
         partContent.setRun("Content");
 
         NodeInfo nodeInfo = new NodeInfo();
@@ -250,9 +250,15 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         List<SpecificResource> runLists = new ArrayList<>();
 
-        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlCover))));
-        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_1))));
-        runLists.add(new XJdfNodeFactory().createRunList(new URI(new java.net.URI(urlContent_2))));
+        runLists.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlCover)))
+        ));
+        runLists.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlContent_1)))
+        ));
+        runLists.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlContent_2)))
+        ));
 
         // act
         xJdfBuilder.addResource(runLists);
@@ -300,8 +306,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
     public void testAddResourceListProcessUsage() throws Exception {
 
         // arrange
-        XJdfNodeFactory nf = new XJdfNodeFactory();
-
         final String urlCover = "http://www.example.org/w2p/Cover.pdf";
         final String urlContent_1 = "http://www.example.org/w2p/Content_1.pdf";
         final String urlContent_2 = "http://www.example.org/w2p/Content_2.pdf";
@@ -309,11 +313,17 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
         String processUsage_2 = "PROCESS_USAGE_2";
 
         List<SpecificResource> runList_1 = new ArrayList<>();
-        runList_1.add(nf.createRunList(new URI(new java.net.URI(urlCover))));
+        runList_1.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlCover)))
+        ));
 
         List<SpecificResource> runList_2 = new ArrayList<>();
-        runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_1))));
-        runList_2.add(nf.createRunList(new URI(new java.net.URI(urlContent_2))));
+        runList_2.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlContent_1)))
+        ));
+        runList_2.add(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(urlContent_2)))
+        ));
 
         // act
         xJdfBuilder.addResource(runList_1, processUsage_1);
@@ -348,7 +358,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // arrange
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_GANGJOB);
-        XJdfNodeFactory nf = new XJdfNodeFactory();
 
         final String CUSTOMER_ID = "myCustomerID";
 
@@ -357,7 +366,7 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addResource(nf.createCustomerInfo(CUSTOMER_ID));
+        xJdfBuilder.addResource(new CustomerInfo().withCustomerID(CUSTOMER_ID));
 
         // assert
         int actual;
@@ -381,7 +390,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // arrange
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
-        XJdfNodeFactory nf = new XJdfNodeFactory();
 
         final String FILE_NAME = "myTestFile.pdf";
 
@@ -390,7 +398,9 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addResource(nf.createRunList(new URI(new java.net.URI(FILE_NAME))), "PROCESS_USAGE_1");
+        xJdfBuilder.addResource(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(FILE_NAME)))
+        ), "PROCESS_USAGE_1");
 
         String actual;
 
@@ -417,7 +427,6 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // arrange
         InputStream is = XJdfBuilderTest.class.getResourceAsStream(RES_XJDF_RUNLIST);
-        XJdfNodeFactory nf = new XJdfNodeFactory();
 
         final String FILE_NAME = "myTestFile.pdf";
 
@@ -426,7 +435,9 @@ public class XJdfBuilderTest extends AbstractBuilderTest<XJDF> {
 
         // act
         XJdfBuilder xJdfBuilder = new XJdfBuilder(xjdf);
-        xJdfBuilder.addResource(nf.createRunList(new URI(new java.net.URI(FILE_NAME))));
+        xJdfBuilder.addResource(new RunList().withFileSpec(
+                new FileSpec().withURL(new URI(new java.net.URI(FILE_NAME)))
+        ));
 
         String actual;
 
