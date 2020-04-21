@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
+import static java.lang.Float.parseFloat;
+
 /**
  * XML Attributes of type rectangle are used to describe rectangular locations on the page, Sheet or other printable
  * surface. A rectangle is represented as an array of four numbers — llx lly urx ury — specifying the lower-left x,
@@ -11,13 +13,13 @@ package org.cip4.lib.xjdf.type;
  */
 public class Rectangle extends AbstractXJdfType<String, Rectangle> {
 
-    private final double llx;
+    private final float llx;
 
-    private final double lly;
+    private final float lly;
 
-    private final double urx;
+    private final float urx;
 
-    private final double ury;
+    private final float ury;
 
     /**
      * Default constructor.
@@ -37,7 +39,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @param urx Upper-right x.
      * @param ury Upper-right y.
      */
-    public Rectangle(double llx, double lly, double urx, double ury) {
+    public Rectangle(float llx, float lly, float urx, float ury) {
 
         // init class
         this.llx = llx;
@@ -57,10 +59,10 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         String[] s = expression.split(" ");
 
         // extract values
-        this.llx = Double.valueOf(s[0]);
-        this.lly = Double.valueOf(s[1]);
-        this.urx = Double.valueOf(s[2]);
-        this.ury = Double.valueOf(s[3]);
+        this.llx = parseFloat(s[0]);
+        this.lly = parseFloat(s[1]);
+        this.urx = parseFloat(s[2]);
+        this.ury = parseFloat(s[3]);
     }
 
     /**
@@ -68,7 +70,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      *
      * @return the llx
      */
-    public double getLlx() {
+    public float getLlx() {
         return llx;
     }
 
@@ -77,7 +79,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      *
      * @return the lly
      */
-    public double getLly() {
+    public float getLly() {
         return lly;
     }
 
@@ -86,7 +88,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      *
      * @return the urx
      */
-    public double getUrx() {
+    public float getUrx() {
         return urx;
     }
 
@@ -95,7 +97,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      *
      * @return the ury
      */
-    public double getUry() {
+    public float getUry() {
         return ury;
     }
 
@@ -109,10 +111,10 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
             return null;
 
         // read values
-        double llx = v.getLlx();
-        double lly = v.getLly();
-        double urx = v.getUrx();
-        double ury = v.getUry();
+        float llx = v.getLlx();
+        float lly = v.getLly();
+        float urx = v.getUrx();
+        float ury = v.getUry();
 
         // process marshalling
         return String.format("%.3f %.3f %.3f %.3f", llx, lly, urx, ury);
@@ -143,10 +145,10 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
 
         Rectangle rectangle = (Rectangle) o;
 
-        if (Double.compare(rectangle.llx, llx) != 0) return false;
-        if (Double.compare(rectangle.lly, lly) != 0) return false;
-        if (Double.compare(rectangle.urx, urx) != 0) return false;
-        if (Double.compare(rectangle.ury, ury) != 0) return false;
+        if (Float.compare(rectangle.llx, llx) != 0) return false;
+        if (Float.compare(rectangle.lly, lly) != 0) return false;
+        if (Float.compare(rectangle.urx, urx) != 0) return false;
+        if (Float.compare(rectangle.ury, ury) != 0) return false;
 
         return true;
     }
@@ -155,13 +157,13 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     public int hashCode() {
         int result = super.hashCode();
         long temp;
-        temp = Double.doubleToLongBits(llx);
+        temp = Float.floatToIntBits(llx);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(lly);
+        temp = Float.floatToIntBits(lly);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(urx);
+        temp = Float.floatToIntBits(urx);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(ury);
+        temp = Float.floatToIntBits(ury);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }

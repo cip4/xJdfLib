@@ -9,7 +9,7 @@ package org.cip4.lib.xjdf.type;
  * specification. When another matrix is factored
  * against a matrix with the identity matrix value, the result is that the original matrix remains unchanged. Coordinate
  * transformation matrices are primitive
- * data types and are encoded as a list of six numbers (as doubles), separated by whitespace: "a b c d Tx Ty". The
+ * data types and are encoded as a list of six numbers (as floats), separated by whitespace: "a b c d Tx Ty". The
  * variables Tx and Ty describe distances and
  * are defined in points.
  *
@@ -17,35 +17,35 @@ package org.cip4.lib.xjdf.type;
  */
 public class Matrix extends AbstractXJdfType<String, Matrix> {
 
-    private final double a;
+    private final float a;
 
-    private final double b;
+    private final float b;
 
-    private final double c;
+    private final float c;
 
-    private final double d;
+    private final float d;
 
-    private final double tx;
+    private final float tx;
 
-    private final double ty;
+    private final float ty;
 
     /**
      * Default constructor. Creates the "identity matrix", which is "1 0 0 1 0 0" and often used as a default throughout
      * in XJDF Specification.
      */
     public Matrix() {
-        this.a = 1d;
-        this.b = 0d;
-        this.c = 0d;
-        this.d = 1d;
-        this.tx = 0d;
-        this.ty = 0d;
+        this.a = 1f;
+        this.b = 0f;
+        this.c = 0f;
+        this.d = 1f;
+        this.tx = 0f;
+        this.ty = 0f;
     }
 
     /**
      * Custom constructor, accepting several values for initializing.
      */
-    public Matrix(double a, double b, double c, double d, double tx, double ty) {
+    public Matrix(float a, float b, float c, float d, float tx, float ty) {
 
         // init class
         this.a = a;
@@ -59,13 +59,13 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
     /**
      * Custom constructor, accepting several values for initializing.
      */
-    public Matrix(double tx, double ty) {
+    public Matrix(float tx, float ty) {
 
         // init class
-        this.a = 1d;
-        this.b = 0d;
-        this.c = 0d;
-        this.d = 1d;
+        this.a = 1f;
+        this.b = 0f;
+        this.c = 0f;
+        this.d = 1f;
         this.tx = tx;
         this.ty = ty;
     }
@@ -81,12 +81,12 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
         String[] s = expression.split(" ");
 
         // extract values
-        this.a = Double.valueOf(s[0]);
-        this.b = Double.valueOf(s[1]);
-        this.c = Double.valueOf(s[2]);
-        this.d = Double.valueOf(s[3]);
-        this.tx = Double.valueOf(s[4]);
-        this.ty = Double.valueOf(s[5]);
+        this.a = Float.parseFloat(s[0]);
+        this.b = Float.parseFloat(s[1]);
+        this.c = Float.parseFloat(s[2]);
+        this.d = Float.parseFloat(s[3]);
+        this.tx = Float.parseFloat(s[4]);
+        this.ty = Float.parseFloat(s[5]);
     }
 
     /**
@@ -94,7 +94,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the a
      */
-    public double getA() {
+    public float getA() {
         return a;
     }
 
@@ -103,7 +103,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the b
      */
-    public double getB() {
+    public float getB() {
         return b;
     }
 
@@ -112,7 +112,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the c
      */
-    public double getC() {
+    public float getC() {
         return c;
     }
 
@@ -121,7 +121,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the d
      */
-    public double getD() {
+    public float getD() {
         return d;
     }
 
@@ -130,7 +130,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the tx
      */
-    public double getTx() {
+    public float getTx() {
         return tx;
     }
 
@@ -139,7 +139,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      *
      * @return the ty
      */
-    public double getTy() {
+    public float getTy() {
         return ty;
     }
 
@@ -153,12 +153,12 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
             return null;
 
         // get params
-        double a = matrix.getA();
-        double b = matrix.getB();
-        double c = matrix.getC();
-        double d = matrix.getD();
-        double tx = matrix.getTx();
-        double ty = matrix.getTy();
+        float a = matrix.getA();
+        float b = matrix.getB();
+        float c = matrix.getC();
+        float d = matrix.getD();
+        float tx = matrix.getTx();
+        float ty = matrix.getTy();
 
         return String.format("%.3f %.3f %.3f %.3f %.3f %.3f", a, b, c, d, tx, ty);
     }
