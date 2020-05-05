@@ -10,9 +10,6 @@ import org.junit.jupiter.api.Test;
  */
 public class RectangleTest {
 
-	/**
-	 * Test method for {@link Rectangle#Rectangle()}}.
-	 */
 	@Test
 	public void testNewInstance() {
 
@@ -28,9 +25,6 @@ public class RectangleTest {
 		assertEquals(0d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
-	/**
-	 * Test method for {@link Rectangle#Rectangle(String)}.
-	 */
 	@Test
 	public void testNewInstanceString() {
 
@@ -47,9 +41,6 @@ public class RectangleTest {
 		assertEquals(21631.3d, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
-	/**
-	 * Test method for {@link Rectangle#Rectangle(double, double, double, double)}}.
-	 */
 	@Test
 	public void testNewInstanceDoubleDoubleDoubleDouble() {
 
@@ -63,6 +54,23 @@ public class RectangleTest {
 		assertEquals(0f, r.getLly(), 0.01, "Lly is wrong.");
 		assertEquals(3.14f, r.getUrx(), 0.01, "Urx is wrong.");
 		assertEquals(21631.3f, r.getUry(), 0.01, "Ury is wrong.");
+	}
+
+	@Test
+	public void testNewInstanceXYPair() {
+
+		// arrange
+		XYPair ll = new XYPair(1,2);
+		XYPair ur = new XYPair(3,4);
+
+		// act
+		Rectangle r = new Rectangle(ll, ur);
+
+		// assert
+		assertEquals(1f, r.getLlx(), 0.01, "Llx is wrong.");
+		assertEquals(2f, r.getLly(), 0.01, "Lly is wrong.");
+		assertEquals(3f, r.getUrx(), 0.01, "Urx is wrong.");
+		assertEquals(4f, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
 	/**
@@ -159,5 +167,17 @@ public class RectangleTest {
 	public void testSize() {
 		Rectangle r = new Rectangle(1,2,4,8);
 		assertEquals(new XYPair(3,6), r.getSize(),  "Size is wrong.");
+	}
+
+	@Test
+	public void testLowerLeft() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(new XYPair(1,2), r.getLowerLeft(),  "Size is wrong.");
+	}
+
+	@Test
+	public void testUpperRight() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(new XYPair(4,8), r.getUpperRight(),  "Size is wrong.");
 	}
 }

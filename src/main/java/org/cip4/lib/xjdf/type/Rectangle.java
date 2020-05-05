@@ -49,6 +49,21 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Custom constructor, accepting two points.
+     *
+     * @param lowerLeft The lower left coordinates
+     * @param upperRight The upper right coordinates
+     */
+    public Rectangle(XYPair lowerLeft, XYPair upperRight) {
+
+        // init class
+        this.llx = lowerLeft.getX();
+        this.lly = lowerLeft.getY();
+        this.urx = upperRight.getX();
+        this.ury = upperRight.getY();
+    }
+
+    /**
      * Custom Constructor. Creates a new Rectangle instance by a String expression.
      *
      * @param expression Rectangle as String expression.
@@ -122,6 +137,22 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return The rectangles size.
      */
     public XYPair getSize() { return new XYPair(getWidth(), getHeight());}
+
+    /**
+     * Returns the lower left point as XYPair.
+     * @return lower left as XYPair object.
+     */
+    public XYPair getLowerLeft() {
+        return new XYPair(llx, lly);
+    }
+
+    /**
+     * Returns the upper right point as XYPair.
+     * @return upper right as XYPair object.
+     */
+    public XYPair getUpperRight() {
+        return new XYPair(urx, ury);
+    }
 
     /**
      * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
