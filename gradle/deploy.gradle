@@ -175,4 +175,6 @@ task updateVersion {
 nexusStaging {
     packageGroup = "org.cip4"
     stagingProfileId = "105e2b532689c6"
+    numberOfRetries = 400
+    delayBetweenRetriesInMillis = 2500
 }
