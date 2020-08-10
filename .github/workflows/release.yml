@@ -7,7 +7,7 @@ name: Release
 on:
   push:
     tags:
-      - xJdfLib-*
+      - '*'
 
 jobs:
   build:
@@ -22,7 +22,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Build with Gradle
-        run: ./gradlew check build jacocoTestReport -PprojectVersion=${GITHUB_REF##*-}
+        run: ./gradlew check build jacocoTestReport -PprojectVersion=${GITHUB_REF##*/}
 
       - name: Debug
         run: ls -l build/libs/
@@ -53,4 +53,4 @@ jobs:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
           OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-        run: ./gradlew uploadArchives closeAndReleaseRepository -PprojectVersion=${GITHUB_REF:18} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
+        run: ./gradlew uploadArchives closeAndReleaseRepository -PprojectVersion=${GITHUB_REF##*/} -Psigning.keyId=$SIGNING_KEY_ID -Psigning.password=$SIGNING_PASSWORD -Psigning.secretKeyRingFile=$PWD/secring.gpg -PossrhUsername=$OSSRH_USERNAME -PossrhPassword=$OSSRH_PASSWORD
