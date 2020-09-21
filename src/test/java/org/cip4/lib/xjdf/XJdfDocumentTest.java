@@ -5,13 +5,15 @@ import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.NodeInfo;
 import org.cip4.lib.xjdf.schema.Part;
+import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.Side;
-import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
+import org.cip4.lib.xjdf.xml.XJdfPackager;
+import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
 import org.junit.jupiter.api.Test;
@@ -71,6 +73,45 @@ public class XJdfDocumentTest {
         System.out.println(new String(bytes));
         System.out.println("");
         System.out.println("----------------");
+    }
+
+    @Test
+    public void createXJDF_2() throws Exception {
+
+        // arrange
+        final String jobId = "SHEET_ID";
+
+        XJdfDocument xJdfDoc = new XJdfDocument(jobId, new String[]{"ConventionalPrinting", "Cutting"});
+
+        Map<Part, Preview> previews = new HashMap<>();
+
+        previews.put(
+            new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
+            new Preview().withFileSpec(new FileSpec().withURL(new URI("identification".getBytes(), "preview/" + jobId + "-identification.pdf")))
+        );
+
+        previews.put(
+            new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
+            new Preview().withFileSpec(new FileSpec().withURL(new URI("thumb".getBytes(), "preview/" + jobId + ".jpg")))
+        );
+
+        xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
+
+        xJdfDoc.addResourceSet(
+            new RunList().withFileSpec(new FileSpec().withURL(new URI("artwork".getBytes(), "runlist/" + jobId + ".pdf"))),
+            ResourceSet.Usage.INPUT
+        );
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        XJdfPackager packager = new XJdfPackager(bos);
+        packager.setCompressionLevel(AbstractXmlPackager.CompressionLevel.NO_COMPRESSION);
+
+        // act
+        packager.packageXjdf(xJdfDoc.getXjdf());
+
+        // assert
+        byte[] result = bos.toByteArray();
+        System.out.println(new String(result));
     }
 
     /**
