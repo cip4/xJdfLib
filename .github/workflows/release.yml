@@ -42,6 +42,13 @@ jobs:
           name: libs
           path: build/libs
 
+      - name: Upload Test Results to GitHub Build Artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v1
+        with:
+          name: test-results
+          path: build/reports/tests/test
+
       - name: Decrypt GGP Ring File
         env:
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
