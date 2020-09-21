@@ -45,6 +45,16 @@ publishing {
                         url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
                     }
                 }
+                organization {
+                    name = "CIP4 Organization"
+                    url = "https://www.cip4.org"
+                }
+                developers {
+                    developer {
+                        id = "cip4-development"
+                        name = "CIP4 Development"
+                    }
+                }
                 scm {
                     connection = 'https://github.com/cip4/xJdfLib.git'
                     developerConnection = 'scm:git:https://github.com/cip4/xJdfLib.git'
