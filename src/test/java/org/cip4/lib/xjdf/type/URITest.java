@@ -1,8 +1,11 @@
 package org.cip4.lib.xjdf.type;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -76,6 +79,7 @@ public class URITest {
         final java.net.URI sourceUri = new java.net.URI("MyUri");
         URI uri = new URI(sourceUri);
         assertEquals(sourceUri, uri.getSourceUri());
+        assertNull(uri.getSourceInputStream());
     }
 
     @Test
@@ -84,6 +88,7 @@ public class URITest {
         URI uri = new URI(new java.net.URI("MyUri"), destination);
         uri.complete();
         assertEquals(destination, uri.getDestinationPath());
+        assertNull(uri.getSourceInputStream());
     }
 
     @Test
@@ -93,5 +98,36 @@ public class URITest {
         assertNull(uri.getDestinationPath());
         assertSame(uri, uri.complete());
         assertEquals(destination, uri.getDestinationPath());
+        assertNull(uri.getSourceInputStream());
+    }
+
+    @Test
+    public void getSourceInputStream_1() throws Exception {
+
+        // arrange
+        final String destination = "/dest";
+        byte[] bytes = "BODY".getBytes();
+
+        // act
+        URI uri = new URI(bytes, destination);
+
+        // assert
+        byte[] result = IOUtils.toByteArray(uri.getSourceInputStream());
+        assertEquals("BODY", new String(result));
+    }
+
+    @Test
+    public void getSourceInputStream_2() throws Exception {
+
+        // arrange
+        final String destination = "/dest";
+        InputStream is = new ByteArrayInputStream("BODY".getBytes());
+
+        // act
+        URI uri = new URI(is, destination);
+
+        // assert
+        byte[] result = IOUtils.toByteArray(uri.getSourceInputStream());
+        assertEquals("BODY", new String(result));
     }
 }

@@ -126,8 +126,66 @@ public class AbstractXmlPackagerTest {
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
+        String strDoc = new String(zin.readAllBytes());
+        assertEquals(116, strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
+        assertEquals(330, strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
+        assertEquals(553, strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
+
         assertEquals(preview, zin.getNextEntry().getName());
         assertEquals(fileSpec, zin.getNextEntry().getName());
+        assertEquals(doc, zin.getNextEntry().getName());
+    }
+
+    @Test
+    public void packageXmlWritesAssets_2() throws Exception {
+        final ByteArrayOutputStream out = new ByteArrayOutputStream();
+        final AbstractXmlPackager<XJDF> packager = new MinimalXmlPackager(out);
+
+        final String preview = "preview/datei.pdf";
+        final String fileSpec = "filespec/datei.pdf";
+        final String doc = "doc/datei.pdf";
+        XJdfBuilder builder = new XJdfBuilder("Foo");
+
+        builder.addResource(
+            new RunList().withFileSpec(
+                new FileSpec().withURL(
+                    new URI(
+                        "Content_RunList".getBytes(),
+                        fileSpec
+                    )
+                )
+            )
+        );
+
+        builder.addResource(
+            new Preview().withFileSpec(
+                new FileSpec().withURL(
+                    new URI(
+                        "Content_FileSpec".getBytes(),
+                        preview
+                    )
+                )
+            )
+        );
+
+        final XJDF xjdf = builder.build();
+        xjdf.withTypes("Product");
+        xjdf.setCommentURL(new URI("Content_CommentURL".getBytes(), doc));
+        packager.packageXml(xjdf, "document.xml");
+
+        final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
+        assertEquals("document.xml", zin.getNextEntry().getName());
+        String strDoc = new String(zin.readAllBytes());
+        assertEquals(116, strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
+        assertEquals(330, strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
+        assertEquals(553, strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
+
+        assertEquals(preview, zin.getNextEntry().getName());
+        assertEquals("Content_FileSpec", new String(zin.readAllBytes()));
+
+        assertEquals(fileSpec, zin.getNextEntry().getName());
+        assertEquals("Content_RunList", new String(zin.readAllBytes()));
+
         assertEquals(doc, zin.getNextEntry().getName());
     }
 

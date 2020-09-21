@@ -139,44 +139,45 @@ public abstract class AbstractXmlPackager<T> {
      *
      * @throws PackagerException If the XML document could not be packaged.
      */
-    protected final void packageXml(
-        final T document,
-        final String docName
-    ) throws PackagerException {
+    protected final void packageXml(final T document, final String docName) throws PackagerException {
+
         try {
+            // add namespace
             final JAXBNavigator<T> jaxbNavigator = new JAXBNavigator<>(document);
             jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
             jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
             Collection<URI> assetReferences = new LinkedList<>();
 
+            // process FileSpec assets
             assetReferences.addAll(collectReferences(
-                new URIExtractor<FileSpec>() {
-                    @Override
-                    public org.cip4.lib.xjdf.type.URI extract(final FileSpec fileSpec) {
-                        return fileSpec.getURL();
-                    }
-                },
+                (URIExtractor<FileSpec>) FileSpec::getURL,
                 jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
             ));
 
+            // process XJDF assets
             assetReferences.addAll(collectReferences(
-                new URIExtractor<XJDF>() {
-                    @Override
-                    public org.cip4.lib.xjdf.type.URI extract(final XJDF xjdf) {
-                        return xjdf.getCommentURL();
-                    }
-                },
+                (URIExtractor<XJDF>) XJDF::getCommentURL,
                 new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
             ));
 
+            // write XJDF Document to ZIP Archive
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
 
+            // write assets to ZIP Archive
             try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
+
+                // for each asset reference
                 for (URI uri : assetReferences) {
                     final String destPath = uri.getDestinationPath();
+
                     if (destPath != null) {
                         final java.net.URI srcUri = uri.getSourceUri();
-                        if (!srcUri.isAbsolute()) {
+
+                        if (uri.getSourceInputStream() != null) {
+                            try (InputStream is = uri.getSourceInputStream()) {
+                                writeZipEntry(new ZipEntry(destPath), is);
+                            }
+                        } else if (!srcUri.isAbsolute()) {
                             try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
                                 writeZipEntry(new ZipEntry(destPath), is);
                             }

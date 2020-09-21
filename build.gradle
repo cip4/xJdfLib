@@ -137,7 +137,6 @@ clean {
 sourceSets {
     main {
         java.srcDir('src/generated')
-        // output.dir(generatedResources, builtBy: 'xjc')
     }
 }
 
