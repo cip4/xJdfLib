@@ -1,126 +1,141 @@
-plugins {
-    id 'io.codearte.nexus-staging' version '0.11.0'
-    id "de.undercouch.download" version "3.4.3"
-    id 'java'
-    id 'idea'
-    id 'maven'
-    id 'jacoco'
-}
+import org.apache.tools.ant.filters.ReplaceTokens
 
-apply from: 'gradle/deploy.gradle'
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+    id 'io.codearte.nexus-staging' version '0.21.2'
+    id 'org.hibernate.build.xjc' version '2.0.1'
+}
 
 group = 'org.cip4.lib.xjdf'
 version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
-description = """CIP4 xJdfLib"""
+description = 'CIP4 xJdfLib'
 
-
-
-wrapper {
-    gradleVersion = '4.10.1'
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
-def generatedFiles = file("src/generated")
-def generatedSources = file("${generatedFiles}/java")
-def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/JDF20.xsd')
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId = project.name
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+            from components.java
+            versionMapping {
+                usage('java-api') {
+                    fromResolutionOf('runtimeClasspath')
+                }
+                usage('java-runtime') {
+                    fromResolutionResult()
+                }
+            }
+            pom {
+                name = project.description
+                description = 'CIP4 XJDF Library'
+                url = 'https://github.com/cip4/xJdfLib'
+
+                licenses {
+                    license {
+                        name = 'CIP4 Software License'
+                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
+                    }
+                }
+                scm {
+                    connection = 'https://github.com/cip4/xJdfLib.git'
+                    developerConnection = 'scm:git:https://github.com/cip4/xJdfLib.git'
+                    url = 'https://github.com/cip4/xJdfLib'
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+
+            credentials {
+                username ossrhUsername
+                password ossrhPassword
+            }
+        }
+    }
 }
 
-jacoco {
-    toolVersion = "0.8.5"
+nexusStaging {
+    packageGroup = 'org.cip4'
+    stagingProfileId = '105e2b532689c6'
+    numberOfRetries = 400
+    delayBetweenRetriesInMillis = 2500
+    username ossrhUsername
+    password ossrhPassword
 }
 
-configurations {
-    xjc
+processResources {
+    filesMatching(['**/*.properties']) {
+        filter(ReplaceTokens, tokens:  [
+                'version': project.properties['version'],
+                'buildtime': new Date().format("yyyy-MM-dd HH:mm:ss'Z'", TimeZone.getTimeZone("GMT"))
+        ])
+    }
 }
+
 repositories {
     maven { url "https://repo.maven.apache.org/maven2" }
 }
+
 dependencies {
-    compile group: 'commons-io', name: 'commons-io', version: '2.6'
-    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.10'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
-    compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
-    compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.12.0'
-    compile group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
-    compile group: 'javax.annotation', name: 'javax.annotation-api', version: '1.3.2'
-    compile group: 'xerces', name: 'xercesImpl', version: '2.12.0'
+    implementation 'commons-io:commons-io:2.6'
+    implementation 'org.apache.commons:commons-lang3:3.10'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.12.0'
+    implementation 'org.jetbrains:annotations:19.0.0'
+    implementation 'org.reflections:reflections:0.9.12'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'xerces:xercesImpl:2.12.0'
 
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.6.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
+    testImplementation 'org.mockito:mockito-core:3.3.3'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation 'org.junit-pioneer:junit-pioneer:0.5.6'
 
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.1'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.6.1'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.1'
-    testCompile group: 'org.mockito', name: 'mockito-core', version: '3.3.3'
-    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '2.2'
-    testCompile group: 'org.junit-pioneer', name: 'junit-pioneer', version: '0.5.6'
-
-    testRuntime group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.6.1'
-
-    xjc group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
-    xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.3.2'
-    xjc group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.2'
-    xjc group: 'javax.xml.bind', name: 'jaxb-api', version: '2.3.1'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.12.0'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.12.0'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
+    xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    xjc 'com.sun.xml.bind:jaxb-xjc:2.3.2'
+    xjc 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    xjc 'javax.xml.bind:jaxb-api:2.3.1'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.12.0'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.12.0'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
 
-task createBuildInfoFile(dependsOn: processResources) {
-    def buildInfoFile = new File("$buildDir/resources/main/org/cip4/lib/xjdf/build.properties")
-    outputs.file(buildInfoFile)
-    doLast {
-        def date = new Date()
-        Properties props = new Properties()
-        props.setProperty('version', project.version.toString())
-        props.setProperty('build.date', date.format('yyyy-MM-dd HH:mm:ss'))
-        props.store(buildInfoFile.newWriter(), null)
-    }
-}
+xjc {
+    xjcTaskName = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
+    outputDir = file('src/generated')
 
-task xjc() {
-    def bindings = file('src/main/resources/binding.xjb')
-    inputs.files(schema, bindings)
-    outputs.dir(generatedSources)
-    outputs.dir(generatedResources)
-    doLast {
-        generatedSources.mkdirs()
-        file("$generatedResources/META-INF").mkdirs()
-        Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US)
-        ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
-        ant.xjc(
-                destdir: generatedSources,
-                schema: schema,
-                binding: bindings,
-                readonly: true,
-                header: false,
-                removeOldOutput: true,
-                extension: true,
-        ) {
-            arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -Xinject-code" +
-                    " -episode $generatedResources/META-INF/sun-jaxb.episode")
+    schemas {
+        xjdf {
+            xsd = file( 'src/main/resources/JDF20.xsd' )
+            xjcBinding = file( 'src/main/resources/binding.xjb' )
+            xjcExtensions = ['fluent-api', 'equals', 'hashCode', 'inject-code']
         }
-        Locale.setDefault(defaultLocale)
     }
 }
 
-clean.doFirst {
-    delete generatedFiles
+clean {
+    delete 'src/generated'
 }
 
 sourceSets {
     main {
-        java.srcDir(generatedSources)
-        output.dir(generatedResources, builtBy: 'xjc')
+        java.srcDir('src/generated')
+        // output.dir(generatedResources, builtBy: 'xjc')
     }
-}
-
-compileJava {
-    dependsOn(xjc)
 }
 
 test {
@@ -129,7 +144,6 @@ test {
 }
 
 jar {
-    dependsOn createBuildInfoFile
     manifest {
         attributes(
             "Implementation-Title": project.description,
@@ -142,17 +156,6 @@ jar {
     }
 }
 
-idea {
-    module {
-        generatedSourceDirs += file(generatedSources)
-        downloadJavadoc = true
-        downloadSources = true
-    }
-    project {
-        languageLevel = targetCompatibility
-    }
-}
-
 task zipTestPackage(type: Zip) {
     from 'src/test/resources/org/cip4/lib/xjdf/testPackage'
     include '*'
@@ -160,16 +163,5 @@ task zipTestPackage(type: Zip) {
     archiveName 'testPackage.zip'
     destinationDir(file("$buildDir/resources/test/org/cip4/lib/xjdf"))
 }
-processTestResources.dependsOn(zipTestPackage)
 
-task updateSchema(type: Download) {
-    src 'https://bitbucket.cip4.org/projects/SCHEMA/repos/xjdf-schema/raw/xjdf.xsd?at=refs%2Fheads%2Fmaster'
-    dest schema
-    overwrite true
-    doFirst {
-        schema.setWritable(true)
-    }
-    doLast {
-        schema.setWritable(false)
-    }
-}
+processTestResources.dependsOn(zipTestPackage)

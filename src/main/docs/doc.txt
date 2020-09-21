@@ -1,1 +1,0 @@
-JDK 7 is required (ISO Date)

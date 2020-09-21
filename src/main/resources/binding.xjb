@@ -121,11 +121,6 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='RunListRef']">
-        <xjb:property name="runList">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='BlowIn']//xs:attribute[@name='ChildRef']">
         <xjb:property name="child">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
@@ -133,11 +128,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='StickOn']//xs:attribute[@name='ChildRef']">
         <xjb:property name="child">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
-        </xjb:property>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='GangElement']//xs:attribute[@name='MediaRef']">
-        <xjb:property name="media">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
         </xjb:property>
     </xjb:bindings>
@@ -329,6 +319,12 @@
         <xjb:typesafeEnumMember name="V2_0"/>
     </xjb:bindings>
 
+    <xjb:bindings node="//xs:element[@name='GangCmdFilter']//xs:attribute[@name='Policy']/xs:simpleType">
+        <xjb:typesafeEnumClass name="Policy"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SheetOptimizingParams']//xs:attribute[@name='Policy']/xs:simpleType">
+        <xjb:typesafeEnumClass name="Policy"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='TIFFFormatParams']//xs:attribute[@name='Segmentation']/xs:simpleType">
         <xjb:typesafeEnumClass name="Segmentation"/>
     </xjb:bindings>
