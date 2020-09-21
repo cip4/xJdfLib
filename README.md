@@ -18,21 +18,21 @@ XJdfDocument xJdfDoc = new XJdfDocument(jobId, new String[]{"ConventionalPrintin
 Map<Part, Preview> previews = new HashMap<>();
 
 previews.put(
- new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
- new Preview().withFileSpec(new FileSpec().withURL(new URI(identification, jobId + "-identification.pdf")))
+    new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
+    new Preview().withFileSpec(new FileSpec().withURL(new URI(identification, jobId + "-identification.pdf")))
 );
 
 previews.put(
- new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
- new Preview().withFileSpec(new FileSpec().withURL(new URI(thumb, jobId + ".jpg")))
+    new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
+    new Preview().withFileSpec(new FileSpec().withURL(new URI(thumb, jobId + ".jpg")))
 );
 
 xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
 
 // create runlist resources
 xJdfDoc.addResourceSet(
- new RunList().withFileSpec(new FileSpec().withURL(new URI(artwork, jobId + ".pdf"))),
- ResourceSet.Usage.INPUT
+    new RunList().withFileSpec(new FileSpec().withURL(new URI(artwork, jobId + ".pdf"))),
+    ResourceSet.Usage.INPUT
 );
 
 // create xjdf package
