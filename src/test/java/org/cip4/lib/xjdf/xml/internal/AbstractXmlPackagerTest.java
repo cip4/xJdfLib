@@ -127,9 +127,10 @@ public class AbstractXmlPackagerTest {
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
         String strDoc = new String(zin.readAllBytes());
-        assertEquals(116, strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
-        assertEquals(330, strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
-        assertEquals(553, strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
+        System.out.println(strDoc);
+        assertTrue(100 < strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
+        assertTrue(315 < strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
+        assertTrue(535 < strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
 
         assertEquals(preview, zin.getNextEntry().getName());
         assertEquals(fileSpec, zin.getNextEntry().getName());
@@ -176,9 +177,9 @@ public class AbstractXmlPackagerTest {
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
         String strDoc = new String(zin.readAllBytes());
-        assertEquals(116, strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
-        assertEquals(330, strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
-        assertEquals(553, strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
+        assertTrue(100 < strDoc.indexOf("CommentURL=\"doc/datei.pdf\""));
+        assertTrue(315 < strDoc.indexOf("FileSpec URL=\"preview/datei.pdf\""));
+        assertTrue(535 < strDoc.indexOf("FileSpec URL=\"filespec/datei.pdf\""));
 
         assertEquals(preview, zin.getNextEntry().getName());
         assertEquals("Content_FileSpec", new String(zin.readAllBytes()));
