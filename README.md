@@ -11,37 +11,37 @@
 ```java
 final String jobId = "JOB_42";
 
- // create new XJDF Document
- XJdfDocument xJdfDoc = new XJdfDocument(jobId, new String[]{"ConventionalPrinting", "Cutting"});
+// create new XJDF Document
+XJdfDocument xJdfDoc = new XJdfDocument(jobId, new String[]{"ConventionalPrinting", "Cutting"});
 
- // create preview resources (partitioned by PreviewType)
- Map<Part, Preview> previews = new HashMap<>();
+// create preview resources (partitioned by PreviewType)
+Map<Part, Preview> previews = new HashMap<>();
 
- previews.put(
-     new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
-     new Preview().withFileSpec(new FileSpec().withURL(new URI(identification, jobId + "-identification.pdf")))
- );
+previews.put(
+ new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
+ new Preview().withFileSpec(new FileSpec().withURL(new URI(identification, jobId + "-identification.pdf")))
+);
 
- previews.put(
-     new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
-     new Preview().withFileSpec(new FileSpec().withURL(new URI(thumb, jobId + ".jpg")))
- );
+previews.put(
+ new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
+ new Preview().withFileSpec(new FileSpec().withURL(new URI(thumb, jobId + ".jpg")))
+);
 
- xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
+xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
 
- // create runlist resources
- xJdfDoc.addResourceSet(
-     new RunList().withFileSpec(new FileSpec().withURL(new URI(artwork, jobId + ".pdf"))),
-     ResourceSet.Usage.INPUT
- );
+// create runlist resources
+xJdfDoc.addResourceSet(
+ new RunList().withFileSpec(new FileSpec().withURL(new URI(artwork, jobId + ".pdf"))),
+ ResourceSet.Usage.INPUT
+);
 
- // create xjdf package
- ByteArrayOutputStream bos = new ByteArrayOutputStream();
- XJdfPackager xjdfPackager = new XJdfPackager(bos);
- xjdfPackager.setCompressionLevel(AbstractXmlPackager.CompressionLevel.DEFAULT_COMPRESSION); // optional
- xjdfPackager.packageXjdf(xJdfDoc.getXjdf());
+// create xjdf package
+ByteArrayOutputStream bos = new ByteArrayOutputStream();
+XJdfPackager xjdfPackager = new XJdfPackager(bos);
+xjdfPackager.setCompressionLevel(AbstractXmlPackager.CompressionLevel.DEFAULT_COMPRESSION); // optional
+xjdfPackager.packageXjdf(xJdfDoc.getXjdf());
 
- // write result
+// write result
 System.out.println(new String(bos.toByteArray()));
 ```
 **Result:**
