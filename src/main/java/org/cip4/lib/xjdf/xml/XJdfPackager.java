@@ -44,9 +44,7 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      *
      * @throws PackagerException If the XML document could not be packaged.
      */
-    public final void packageXjdf(
-        final XJDF xjdf
-    ) throws PackagerException {
+    public final void packageXjdf(final XJDF xjdf) throws PackagerException {
         packageXjdf(xjdf, xjdf.getJobID());
     }
 
@@ -58,12 +56,10 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      *
      * @throws PackagerException If the XML document could not be packaged.
      */
-    public final void packageXjdf(
-        final XJDF xjdf,
-        String docName
-    ) throws PackagerException {
+    public final void packageXjdf(final XJDF xjdf, String docName) throws PackagerException {
         if (StringUtils.isBlank(docName)) {
             docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+
         } else {
             if (StringUtils.isBlank(FilenameUtils.getExtension(docName))) {
                 docName += ".xjdf";
@@ -74,7 +70,7 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
     }
 
     @Override
-    protected final byte[] parseDocument(final XJDF xjdf) throws Exception {
-        return new XJdfParser().parseXJdf(xjdf);
+    protected final byte[] parseDocument(final XJDF xjdf, final boolean validation) throws Exception {
+        return new XJdfParser().parseXJdf(xjdf, !validation);
     }
 }

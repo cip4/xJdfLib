@@ -3,13 +3,18 @@ package org.cip4.lib.xjdf;
 import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.xml.XJdfPackager;
 import org.cip4.lib.xjdf.xml.XJdfParser;
+import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
+import org.cip4.lib.xjdf.xml.internal.PackagerException;
 import org.jetbrains.annotations.NotNull;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -19,6 +24,8 @@ import java.util.*;
 public class XJdfDocument {
 
     private final XJDF xjdf;
+
+    private boolean validation = true;
 
     /**
      * Custom Constructor. Accepting the fundamentals of an XJDF Document for initializing
@@ -49,6 +56,54 @@ public class XJdfDocument {
      */
     public XJDF getXJdf() {
         return xjdf;
+    }
+
+    /**
+     * Returns true in case the XJDF Document should be validated before writing.
+     * @return True in case the XJDF Document should be validated before writing
+     */
+    public boolean isValidation() {
+        return validation;
+    }
+
+    /**
+     * Set true if the document should become validated before writing.
+     * @param validation True in case for validation, otherwise false.
+     */
+    public void setValidation(final boolean validation) {
+        this.validation = validation;
+    }
+
+    /**
+     * Returns the current XJDF Node as String
+     * @return The XJDF Node as String.
+     */
+    public String toXml() throws JAXBException, IOException {
+        return new String(new XJdfParser().parseXJdf(this.xjdf, !validation));
+    }
+
+    /**
+     * Returns an XJDF Zip Package containing the document and all assets.
+     * @return The XJDF Zip Pacakge.
+     */
+    public byte[] getXJdfPackage() throws PackagerException {
+        return getXJdfPackage(AbstractXmlPackager.CompressionLevel.DEFAULT_COMPRESSION);
+    }
+
+    /**
+     * Returns an XJDF Zip Package containing the document and all assets.
+     * @param compressionLevel The compression level of the XJDF ZIP Package.
+     * @return The XJDF Zip Package as byte array.
+     */
+    public byte[] getXJdfPackage(AbstractXmlPackager.CompressionLevel compressionLevel) throws PackagerException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        XJdfPackager xJdfPackager = new XJdfPackager(bos);
+        xJdfPackager.setValidation(validation);
+        xJdfPackager.setCompressionLevel(compressionLevel);
+        xJdfPackager.packageXjdf(this.xjdf);
+
+        return bos.toByteArray();
     }
 
     /**
@@ -89,7 +144,8 @@ public class XJdfDocument {
         return resourceSet;
     }
 
-    public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage, Part part) {
+    public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage, Part part)
+        throws IOException {
         if(part == null) {
             return addResourceSet(specificResource, usage);
         }
@@ -99,7 +155,11 @@ public class XJdfDocument {
         return addResourceSet(map, usage);
     }
 
-    public ResourceSet addResourceSet(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage) {
+    public ResourceSet addResourceSet(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage)
+        throws IOException {
+        if(map.size() == 0) {
+            throw new IOException("The resource map requries at leaset one entry.");
+        }
 
         // create resource set
         ResourceSet resourceSet = new ResourceSet();

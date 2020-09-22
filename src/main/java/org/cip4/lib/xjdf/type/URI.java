@@ -44,6 +44,15 @@ public class URI extends AbstractXJdfType<String, URI> {
      *
      * @param sourceUri Source uri of the file.
      */
+    public URI(final String sourceUri) throws URISyntaxException {
+        this(new java.net.URI(sourceUri));
+    }
+
+    /**
+     * Constructor. Using this constructor will not package the file.
+     *
+     * @param sourceUri Source uri of the file.
+     */
     public URI(final java.net.URI sourceUri) {
         this.sourceInputStream = null;
         this.sourceUri = sourceUri.normalize();

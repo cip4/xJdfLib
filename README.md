@@ -9,40 +9,32 @@
  The following code sample illustrates how to use the XJDF Library to create XJDF Documents:
 
 ```java
-final String jobId = "JOB_42";
+// create new XJdfDocument object
+XJdfDocument xJdfDoc = new XJdfDocument("JOB_42", new String[]{"ConventionalPrinting", "Cutting"});
 
-// create new XJDF Document
-XJdfDocument xJdfDoc = new XJdfDocument(jobId, new String[]{"ConventionalPrinting", "Cutting"});
-
-// create preview resources (partitioned by PreviewType)
+// create Preview resources
 Map<Part, Preview> previews = new HashMap<>();
 
 previews.put(
     new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
-    new Preview().withFileSpec(new FileSpec().withURL(new URI(identification, jobId + "-identification.pdf")))
+    new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/identification.pdf")))
 );
 
 previews.put(
     new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
-    new Preview().withFileSpec(new FileSpec().withURL(new URI(thumb, jobId + ".jpg")))
+    new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/preview.jpg")))
 );
 
 xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
 
-// create runlist resources
+// create RunList resource
 xJdfDoc.addResourceSet(
-    new RunList().withFileSpec(new FileSpec().withURL(new URI(artwork, jobId + ".pdf"))),
+    new RunList().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/artwork.pdf"))),
     ResourceSet.Usage.INPUT
 );
 
-// create xjdf package
-ByteArrayOutputStream bos = new ByteArrayOutputStream();
-XJdfPackager xjdfPackager = new XJdfPackager(bos);
-xjdfPackager.setCompressionLevel(AbstractXmlPackager.CompressionLevel.DEFAULT_COMPRESSION); // optional
-xjdfPackager.packageXjdf(xJdfDoc.getXjdf());
-
-// write result
-System.out.println(new String(bos.toByteArray()));
+// write xml
+System.out.println(xJdfDoc.toXml());
 ```
 **Result:**
 ```xml
@@ -53,20 +45,20 @@ System.out.println(new String(bos.toByteArray()));
         <xjdf:Resource>
             <xjdf:Part PreviewType="ThumbNail"/>
             <xjdf:Preview>
-                <xjdf:FileSpec URL="JOB_42.jpg"/>
+                <xjdf:FileSpec URL="https://cip4.example.org/preview.jpg"/>
             </xjdf:Preview>
         </xjdf:Resource>
         <xjdf:Resource>
             <xjdf:Part PreviewType="Identification"/>
             <xjdf:Preview>
-                <xjdf:FileSpec URL="JOB_42-identification.pdf"/>
+                <xjdf:FileSpec URL="https://cip4.example.org/identification.pdf"/>
             </xjdf:Preview>
         </xjdf:Resource>
     </xjdf:ResourceSet>
     <xjdf:ResourceSet Name="RunList" Usage="Input">
         <xjdf:Resource>
             <xjdf:RunList>
-                <xjdf:FileSpec URL="JOB_42.pdf"/>
+                <xjdf:FileSpec URL="https://cip4.example.org/artwork.pdf"/>
             </xjdf:RunList>
         </xjdf:Resource>
     </xjdf:ResourceSet>

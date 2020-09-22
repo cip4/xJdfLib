@@ -86,6 +86,11 @@ public abstract class AbstractXmlPackager<T> {
     private Path zipPath;
 
     /**
+     * True, in case the document should become validated before packaging.
+     */
+    private boolean validation = true;
+
+    /**
      * The ZipOutputStream to write to.
      */
     private final ZipOutputStream zout;
@@ -120,6 +125,23 @@ public abstract class AbstractXmlPackager<T> {
     public final AbstractXmlPackager<T> withZipPath(final Path zipPath) {
         this.zipPath = zipPath;
         return this;
+    }
+
+    /**
+     * Returns the validation value.
+     * @return True in case the docuemnt should become validated before packaging.
+     */
+    public boolean isValidation() {
+        return validation;
+    }
+
+    /**
+     * Setter for validation attribute.
+     *
+     * @param validation True in case the XML should become validated before packaging.
+     */
+    public void setValidation(final boolean validation) {
+        this.validation = validation;
     }
 
     /**
@@ -161,7 +183,7 @@ public abstract class AbstractXmlPackager<T> {
             ));
 
             // write XJDF Document to ZIP Archive
-            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document)));
+            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document, validation)));
 
             // write assets to ZIP Archive
             try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
@@ -234,9 +256,10 @@ public abstract class AbstractXmlPackager<T> {
      * Parses an XML document into a byte array.
      *
      * @param document XML document to parse.
+     * @param validation true, in case XML validation should be validated before packaging.
      *
      * @return Parsed document as byte array.
      * @throws Exception If parsing fails.
      */
-    protected abstract byte[] parseDocument(final T document) throws Exception;
+    protected abstract byte[] parseDocument(final T document, boolean validation) throws Exception;
 }

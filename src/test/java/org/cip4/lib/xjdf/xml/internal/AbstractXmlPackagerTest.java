@@ -37,8 +37,8 @@ public class AbstractXmlPackagerTest {
         }
 
         @Override
-        protected byte[] parseDocument(final XJDF xjdf) throws Exception {
-            return new XJdfParser().parseXJdf(xjdf);
+        protected byte[] parseDocument(final XJDF xjdf, final boolean validation) throws Exception {
+            return new XJdfParser().parseXJdf(xjdf, !validation);
         }
     }
 
