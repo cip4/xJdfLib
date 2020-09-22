@@ -47,7 +47,7 @@ public class XJdfDocument {
      * Returns the documents XJDF root node.
      * @return The XJDF node.
      */
-    public XJDF getXjdf() {
+    public XJDF getXJdf() {
         return xjdf;
     }
 

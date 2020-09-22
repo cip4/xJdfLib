@@ -63,7 +63,7 @@ public class XJdfDocumentTest {
         xjdfDoc.addResourceSet(runListMap, ResourceSet.Usage.INPUT);
 
         // ACT
-        XJDF xjdf = xjdfDoc.getXjdf();
+        XJDF xjdf = xjdfDoc.getXJdf();
 
         // ASSERT
         byte[] bytes = marshall(xjdf);
@@ -107,7 +107,7 @@ public class XJdfDocumentTest {
         packager.setCompressionLevel(AbstractXmlPackager.CompressionLevel.NO_COMPRESSION);
 
         // act
-        packager.packageXjdf(xJdfDoc.getXjdf());
+        packager.packageXjdf(xJdfDoc.getXJdf());
 
         // assert
         byte[] result = bos.toByteArray();
