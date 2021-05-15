@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.builder;
 import java.util.Collections;
 import java.util.List;
 
+import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
 import org.cip4.lib.xjdf.schema.Audit;
 import org.cip4.lib.xjdf.schema.AuditPool;
@@ -18,7 +19,6 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.Resources;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 /**

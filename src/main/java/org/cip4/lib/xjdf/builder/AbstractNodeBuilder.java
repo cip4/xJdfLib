@@ -1,9 +1,9 @@
 package org.cip4.lib.xjdf.builder;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.w3c.dom.Node;
 
@@ -16,6 +16,7 @@ public abstract class AbstractNodeBuilder<T> {
 
     /**
      * Default constructor.
+     * @param node The node.
      */
     protected AbstractNodeBuilder(T node) {
         // initialize node

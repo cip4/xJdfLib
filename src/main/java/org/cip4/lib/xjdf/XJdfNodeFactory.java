@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf;
 
+import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.Duration;
@@ -8,7 +9,6 @@ import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 /**

@@ -115,8 +115,8 @@ repositories {
 dependencies {
     compile 'commons-io:commons-io:2.6'
     compile 'org.apache.commons:commons-lang3:3.10'
-    compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
-    compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    compile 'com.sun.xml.bind:jaxb-impl:3.0.1'
+    compile 'com.sun.xml.bind:jaxb-core:3.0.1'
     compile 'javax.xml.bind:jaxb-api:2.3.1'
     compile 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.12.0'
     compile 'org.jetbrains:annotations:19.0.0'
@@ -131,9 +131,9 @@ dependencies {
     testCompile 'org.hamcrest:hamcrest-library:2.2'
     testCompile 'org.junit-pioneer:junit-pioneer:0.5.6'
 
-    xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    xjc 'com.sun.xml.bind:jaxb-xjc:2.3.2'
-    xjc 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    xjc 'com.sun.xml.bind:jaxb-core:3.0.1'
+    xjc 'com.sun.xml.bind:jaxb-xjc:3.0.1'
+    xjc 'com.sun.xml.bind:jaxb-impl:3.0.1'
     xjc 'javax.xml.bind:jaxb-api:2.3.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.12.0'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.12.0'
@@ -146,9 +146,10 @@ xjc {
 
     schemas {
         xjdf {
-            xsd = file( 'src/main/resources/JDF20.xsd' )
+            xsd = file( 'src/main/resources/xjdf.xsd' )
             xjcBinding = file( 'src/main/resources/binding.xjb' )
             xjcExtensions = ['fluent-api', 'equals', 'hashCode', 'inject-code']
+            jaxbVersion = "3.0"
         }
     }
 }
@@ -179,6 +180,16 @@ jar {
             "Build-Jdk": JavaVersion.current(),
         )
     }
+}
+
+task downloadXSD(type: Copy) {
+    File file = new File("src/main/resources/xjdf.xsd")
+
+    if(file.exists()) {
+        file.delete()
+    }
+
+    file << new URL ("http://schema.cip4.org/jdfschema_2_1/xjdf.xsd").getText()
 }
 
 task zipTestPackage(type: Zip) {

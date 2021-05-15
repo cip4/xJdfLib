@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import jakarta.xml.bind.ValidationException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.dom.DOMInputImpl;
 import org.w3c.dom.Document;
@@ -10,7 +11,6 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 import javax.xml.XMLConstants;
-import javax.xml.bind.ValidationException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xjb:bindings version="2.1"
-          xmlns:xjb="http://java.sun.com/xml/ns/jaxb"
-          xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
-          xmlns:xs="http://www.w3.org/2001/XMLSchema"
-          xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
-          xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
-          schemaLocation="JDF20.xsd">
+<xjb:bindings version="3.0"
+    xmlns:xjb="https://jakarta.ee/xml/ns/jaxb"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
+    xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector" schemaLocation="xjdf.xsd">
 
     <xjb:globalBindings typesafeEnumMemberName="generateError">
         <xjc:serializable/>
@@ -39,7 +38,7 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']">
         <ci:code><![CDATA[
-     /*
+     /**
       * Gets the value of the children property <b>WITHOUT</b> lazy initialization.
       *
       * @see Product#getChildren()
@@ -282,10 +281,7 @@
     <xjb:bindings node="//xs:element[@name='PartAmount']//xs:attribute[@name='Amount']">
         <xjb:property>
             <xjb:baseType>
-                <xjb:javaType
-                        name="java.lang.Double"
-                        parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.stringToDouble"
-                        printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
+                <xjb:javaType name="java.lang.Double" parseMethod="org.cip4.lib.xjdf.type.DoubleAdapter.stringToDouble" printMethod="org.cip4.lib.xjdf.type.DoubleAdapter.doubleToString"/>
             </xjb:baseType>
         </xjb:property>
     </xjb:bindings>
@@ -735,7 +731,7 @@
         <xjb:typesafeEnumClass name="VerticalGridDirection"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='ExpansionPolicy']//xs:simpleType[xs:restriction]">
-         <xjb:typesafeEnumClass name="ExpansionPolicy"/>
+        <xjb:typesafeEnumClass name="ExpansionPolicy"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='FitPolicy']//xs:attribute[@name='HorizontalGridDirection']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="HorizontalGridDirection"/>
