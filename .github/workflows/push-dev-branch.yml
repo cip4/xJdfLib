@@ -6,7 +6,9 @@ name: Snapshot
 
 on:
   push:
-    branches-ignore: [ master ]
+    branches:
+      - '*'
+      - '!master'
 
 jobs:
   linux-test:
