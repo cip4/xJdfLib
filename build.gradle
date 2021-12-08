@@ -39,12 +39,6 @@ publishing {
                 description = 'CIP4 XJDF Library'
                 url = 'https://github.com/cip4/xJdfLib'
 
-                licenses {
-                    license {
-                        name = 'CIP4 Software License'
-                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
-                    }
-                }
                 organization {
                     name = "CIP4 Organization"
                     url = "https://www.cip4.org"
@@ -53,6 +47,12 @@ publishing {
                     developer {
                         id = "cip4-development"
                         name = "CIP4 Development"
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'CIP4 Software License'
+                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
                     }
                 }
                 scm {
@@ -86,6 +86,10 @@ nexusStaging {
     password ossrhPassword
 }
 
+repositories {
+    maven { url "https://repo.maven.apache.org/maven2" }
+}
+
 signing {
     if (!version.endsWith("SNAPSHOT")) {
         sign publishing.publications.mavenJava
@@ -106,10 +110,6 @@ processResources {
                 'buildtime': new Date().format("yyyy-MM-dd HH:mm:ss'Z'", TimeZone.getTimeZone("GMT"))
         ])
     }
-}
-
-repositories {
-    maven { url "https://repo.maven.apache.org/maven2" }
 }
 
 dependencies {
