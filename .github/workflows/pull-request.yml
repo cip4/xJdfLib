@@ -19,11 +19,6 @@ jobs:
 
       - name: Check out sources...
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Guess version from git history
-        run: git describe --tags --always --first-parent
 
       - name: Test with Gradle
         run: ./gradlew test
