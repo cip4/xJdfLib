@@ -6,9 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.junitpioneer.jupiter.TempDirectory;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipOutputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +29,6 @@ public class AbstractXmlUnpackagerTest {
          * Custom constructor. Accepting a package path for initializing.
          *
          * @param pathPackage Path of the package.
-         *
          * @throws IOException Is thrown in case an IOExcetion occurs.
          */
         public ConcreteXmlUnpackager(final String pathPackage) throws IOException {
@@ -79,6 +82,27 @@ public class AbstractXmlUnpackagerTest {
         assertTrue(indexPath.endsWith(INDEX_FILE));
         assertEquals(targetDir, indexPath.getParent());
     }
+
+    @Test
+    @ExtendWith(TempDirectory.class)
+    public void unpackageZipWithBadEntry(@TempDirectory.TempDir Path targetDir) throws Exception {
+        Path zipPath = targetDir.resolve("badZip.zip");
+        try (
+            OutputStream out = Files.newOutputStream(zipPath);
+            ZipOutputStream zout = new ZipOutputStream(out)
+        ) {
+            zout.putNextEntry(new ZipEntry("../../bad-file.txt"));
+            zout.write("apple-pie".getBytes());
+        }
+
+        AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(zipPath.toString());
+        assertThrows(
+            ZipException.class,
+            () -> unpackager.unpackageZip(targetDir.toString()),
+            "Bad zip entry"
+        );
+    }
+
 
     @Test
     @ExtendWith(TempDirectory.class)
