@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
 import java.util.zip.ZipInputStream;
 
 import org.apache.commons.io.FileUtils;
@@ -91,13 +92,16 @@ public abstract class AbstractXmlUnpackager {
      * @return Path to master file.
      */
     protected String unpackageZip(String targetDir) throws IOException {
-        Path targetPath = Paths.get(targetDir);
+        Path targetPath = Paths.get(targetDir).normalize();
         // unpackage
         try (ZipInputStream zis = new ZipInputStream(new FileInputStream(pathPackage))) {
             ZipEntry entry = zis.getNextEntry();
 
             while (entry != null) {
                 Path targetFile = targetPath.resolve(entry.getName());
+                if (!targetFile.normalize().startsWith(targetPath)) {
+                    throw new ZipException("Bad zip entry");
+                }
 
                 Files.createDirectories(targetFile.getParent());
 
