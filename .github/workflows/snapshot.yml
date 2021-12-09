@@ -6,12 +6,12 @@ name: Snapshot
 
 on:
   push:
-    branches: [ master, normalize-build ]
+    branches: [ master]
 
 jobs:
   call-snapshot:
     name: 🏭
-    uses: cip4/.github/.github/workflows/library-snapshot.yml@master
+    uses: cip4/.github/.github/workflows/library-snapshot.yml@v2
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}

@@ -12,7 +12,7 @@ on:
 jobs:
   call-release:
     name: 🏭
-    uses: cip4/.github/.github/workflows/library-release.yml@master
+    uses: cip4/.github/.github/workflows/library-release.yml@v2
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
