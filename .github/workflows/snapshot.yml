@@ -9,7 +9,7 @@ on:
     branches: [ master, normalize-build ]
 
 jobs:
-  call-tool-snapshot:
+  call-snapshot:
     name: 🏭
     uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     secrets:
