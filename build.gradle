@@ -1,7 +1,7 @@
 import org.apache.tools.ant.filters.ReplaceTokens
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'maven-publish'
     id 'signing'
     id 'io.codearte.nexus-staging' version '0.30.0'
@@ -9,13 +9,15 @@ plugins {
 }
 
 group = 'org.cip4.lib.xjdf'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
 description = 'CIP4 xJdfLib'
+version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
 
 java {
     withJavadocJar()
     withSourcesJar()
 }
+
+targetCompatibility = JavaVersion.VERSION_11
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -39,12 +41,6 @@ publishing {
                 description = 'CIP4 XJDF Library'
                 url = 'https://github.com/cip4/xJdfLib'
 
-                licenses {
-                    license {
-                        name = 'CIP4 Software License'
-                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
-                    }
-                }
                 organization {
                     name = "CIP4 Organization"
                     url = "https://www.cip4.org"
@@ -53,6 +49,12 @@ publishing {
                     developer {
                         id = "cip4-development"
                         name = "CIP4 Development"
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'CIP4 Software License'
+                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
                     }
                 }
                 scm {
@@ -86,6 +88,10 @@ nexusStaging {
     password ossrhPassword
 }
 
+repositories {
+    maven { url "https://repo.maven.apache.org/maven2" }
+}
+
 signing {
     if (!version.endsWith("SNAPSHOT")) {
         sign publishing.publications.mavenJava
@@ -94,22 +100,18 @@ signing {
 
 javadoc {
     failOnError = false
-    if(JavaVersion.current().isJava9Compatible()) {
+    if (JavaVersion.current().isJava9Compatible()) {
         options.addBooleanOption('html5', true)
     }
 }
 
 processResources {
     filesMatching(['**/*.properties']) {
-        filter(ReplaceTokens, tokens:  [
-                'version': project.properties['version'],
+        filter(ReplaceTokens, tokens: [
+                'version'  : project.properties['version'],
                 'buildtime': new Date().format("yyyy-MM-dd HH:mm:ss'Z'", TimeZone.getTimeZone("GMT"))
         ])
     }
-}
-
-repositories {
-    maven { url "https://repo.maven.apache.org/maven2" }
 }
 
 dependencies {
@@ -146,8 +148,8 @@ xjc {
 
     schemas {
         xjdf {
-            xsd = file( 'src/main/resources/JDF20.xsd' )
-            xjcBinding = file( 'src/main/resources/binding.xjb' )
+            xsd = file('src/main/resources/JDF20.xsd')
+            xjcBinding = file('src/main/resources/binding.xjb')
             xjcExtensions = ['fluent-api', 'equals', 'hashCode', 'inject-code']
         }
     }
@@ -171,12 +173,12 @@ test {
 jar {
     manifest {
         attributes(
-            "Implementation-Title": project.description,
-            "Implementation-Version": project.version,
-            "Implementation-Vendor-Id": project.group,
-            "Specification-Title": project.description,
-            "Specification-Version": project.version,
-            "Build-Jdk": JavaVersion.current(),
+                "Implementation-Title": project.description,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor-Id": project.group,
+                "Specification-Title": project.description,
+                "Specification-Version": project.version,
+                "Build-Jdk": JavaVersion.current(),
         )
     }
 }
