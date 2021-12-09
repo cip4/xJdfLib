@@ -127,7 +127,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.6.1'
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
-    testCompile 'org.mockito:mockito-core:3.3.3'
+    testCompile 'org.mockito:mockito-core:4.1.0'
     testCompile 'org.hamcrest:hamcrest-library:2.2'
     testCompile 'org.junit-pioneer:junit-pioneer:0.5.6'
 
