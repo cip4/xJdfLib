@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,11 +69,9 @@ public class MatrixTest {
 		assertEquals(21631.3d, r.getTy(), 0.01f, "Ty value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#toString()}.
-	 */
 	@Test
-	public void testToString() {
+	@DefaultLocale("de-de")
+	public void testToStringDeDe() {
 
 		// arrange
 		final float a = 1f;
@@ -89,11 +88,28 @@ public class MatrixTest {
 		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#marshal(org.cip4.lib.xjdf.type.Matrix)}.
-	 */
 	@Test
-	public void testMarshalMatrix() {
+	@DefaultLocale("en-us")
+	public void testToStringEnUs() {
+
+		// arrange
+		final float a = 1f;
+		final float b = 0f;
+		final float c = 0f;
+		final float d = 1f;
+		final float tx = 3.14f;
+		final float ty = 21631.3f;
+
+		// act
+		String actual = new Matrix(a, b, c, d, tx, ty).toString();
+
+		// assert
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
+	}
+
+	@Test
+	@DefaultLocale("de-de")
+	public void testMarshalMatrixDeDe() {
 
 		// arrange
 		final float a = 1f;
@@ -111,9 +127,26 @@ public class MatrixTest {
 		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Matrix#unmarshal(java.lang.String)}.
-	 */
+	@Test
+	@DefaultLocale("en-us")
+	public void testMarshalMatrixEnUs() {
+
+		// arrange
+		final float a = 1f;
+		final float b = 0f;
+		final float c = 0f;
+		final float d = 1f;
+		final float tx = 3.14f;
+		final float ty = 21631.3f;
+
+		// act
+		Matrix r = new Matrix(a, b, c, d, tx, ty);
+		String actual = new Matrix().marshal(r);
+
+		// assert
+		assertEquals("1.000 0.000 0.000 1.000 3.140 21631.301", actual, "String value is wrong.");
+	}
+
 	@Test
 	public void testUnmarshalString() {
 		// arrange
