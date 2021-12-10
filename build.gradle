@@ -134,7 +134,7 @@ dependencies {
     testCompile 'org.junit-pioneer:junit-pioneer:0.5.6'
 
     xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    xjc 'com.sun.xml.bind:jaxb-xjc:2.3.2'
+    xjc 'com.sun.xml.bind:jaxb-xjc:3.0.2'
     xjc 'com.sun.xml.bind:jaxb-impl:2.3.2'
     xjc 'javax.xml.bind:jaxb-api:2.3.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.12.0'
