@@ -117,7 +117,7 @@ processResources {
 dependencies {
     compile 'commons-io:commons-io:2.11.0'
     compile 'org.apache.commons:commons-lang3:3.12.0'
-    compile 'com.sun.xml.bind:jaxb-impl:2.3.2'
+    compile 'com.sun.xml.bind:jaxb-impl:2.3.5'
     compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     compile 'javax.xml.bind:jaxb-api:2.3.1'
     compile 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.12.0'
