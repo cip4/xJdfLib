@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
+import java.util.Locale;
+
 import static java.lang.Float.parseFloat;
 
 /**
@@ -170,7 +172,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         float ury = v.getUry();
 
         // process marshalling
-        return String.format("%.3f %.3f %.3f %.3f", llx, lly, urx, ury);
+        return String.format(Locale.US, "%.3f %.3f %.3f %.3f", llx, lly, urx, ury);
     }
 
     /**

@@ -5,12 +5,16 @@ plugins {
     id 'maven-publish'
     id 'signing'
     id 'io.codearte.nexus-staging' version '0.30.0'
-    id 'org.hibernate.build.xjc' version '2.0.1'
 }
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
 version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
+
+def generatedFiles = file("src/generated")
+def generatedSources = file("${generatedFiles}/java")
+def generatedResources = file("${generatedFiles}/resources")
+def schema = file('src/main/resources/JDF20.xsd')
 
 java {
     withJavadocJar()
@@ -88,6 +92,10 @@ nexusStaging {
     password ossrhPassword
 }
 
+configurations {
+    xjc
+}
+
 repositories {
     maven { url "https://repo.maven.apache.org/maven2" }
 }
@@ -131,6 +139,7 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testCompile 'org.mockito:mockito-core:4.1.0'
     testCompile 'org.hamcrest:hamcrest-library:2.2'
+    testCompile 'org.junit-pioneer:junit-pioneer:1.5.0'
 
     xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     xjc 'com.sun.xml.bind:jaxb-xjc:2.3.2'
@@ -141,27 +150,46 @@ dependencies {
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
 
-xjc {
-    xjcTaskName = 'org.jvnet.jaxb2_commons.xjc.XJC2Task'
-    outputDir = file('src/generated')
-
-    schemas {
-        xjdf {
-            xsd = file('src/main/resources/JDF20.xsd')
-            xjcBinding = file('src/main/resources/binding.xjb')
-            xjcExtensions = ['fluent-api', 'equals', 'hashCode', 'inject-code']
+task xjc() {
+    def bindings = file('src/main/resources/binding.xjb')
+    inputs.files(schema, bindings)
+    outputs.dir(generatedSources)
+    outputs.dir(generatedResources)
+    doLast {
+        generatedSources.mkdirs()
+        file("$generatedResources/META-INF").mkdirs()
+        Locale defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US)
+        ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
+        ant.xjc(
+                destdir: generatedSources,
+                schema: schema,
+                binding: bindings,
+                readonly: true,
+                header: false,
+                removeOldOutput: true,
+                extension: true,
+        ) {
+            arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -Xinject-code" +
+                    " -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
+        Locale.setDefault(defaultLocale)
     }
 }
 
 clean {
-    delete 'src/generated'
+    delete generatedFiles
 }
 
 sourceSets {
     main {
-        java.srcDir('src/generated')
+        java.srcDir(generatedSources)
+        output.dir(generatedResources, builtBy: 'xjc')
     }
+}
+
+compileJava {
+    dependsOn(xjc)
 }
 
 test {
