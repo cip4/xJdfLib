@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class XJdfConstantsTest {
 
-	private static final String RES_JDF20_XSD = "/JDF20.xsd";
+	private static final String RES_JDF20_XSD = "/JDF21.xsd";
 
 	@Test
 	public void testNamespaceJdf20() throws IOException {

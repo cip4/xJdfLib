@@ -14,7 +14,7 @@ public class XJdfValidator extends AbstractXmlValidator {
     /**
      * URL of the internal XJDF schema.
      */
-    private static final URL SCHEMA = XJdfValidator.class.getResource("/JDF20.xsd");
+    private static final URL SCHEMA = XJdfValidator.class.getResource("/JDF21.xsd");
 
     /**
      * Custom constructor.
@@ -35,7 +35,7 @@ public class XJdfValidator extends AbstractXmlValidator {
      */
     private static Map<String, byte[]> loadXsdDependencies() {
         Map<String, byte[]> map = new HashMap<>(2);
-        map.put("./JDF20.xsd", XJdfConstants.XJDF_XSD_BYTES);
+        map.put("./JDF21.xsd", XJdfConstants.XJDF_XSD_BYTES);
 
         return map;
     }

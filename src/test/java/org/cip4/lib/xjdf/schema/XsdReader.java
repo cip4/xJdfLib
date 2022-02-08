@@ -30,7 +30,7 @@ public class XsdReader {
         builderFactory.setNamespaceAware(true);
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
 
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/JDF20.xsd")) {
+        try (InputStream inputStream = this.getClass().getResourceAsStream("/JDF21.xsd")) {
             schema = builder.parse(new InputSource(inputStream));
         }
 
