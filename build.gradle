@@ -137,9 +137,9 @@ dependencies {
     testCompile 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testCompile 'org.junit.jupiter:junit-jupiter-params:5.8.2'
     testCompile 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
-    testCompile 'org.mockito:mockito-core:4.3.1'
+    testCompile 'org.mockito:mockito-core:4.4.0'
     testCompile 'org.hamcrest:hamcrest-library:2.2'
-    testCompile 'org.junit-pioneer:junit-pioneer:1.5.0'
+    testCompile 'org.junit-pioneer:junit-pioneer:1.6.2'
 
     xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     xjc 'com.sun.xml.bind:jaxb-xjc:2.3.6'
