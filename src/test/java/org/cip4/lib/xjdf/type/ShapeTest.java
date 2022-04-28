@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.type;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
  * JUnit test case for XJDF data type Shape.
@@ -97,32 +98,33 @@ public class ShapeTest {
 		assertEquals(0d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#toString()}.
-	 */
 	@Test
-	public void testToString() {
-
-		// arrange / act
+	@DefaultLocale("de-de")
+	public void testToStringDeDe() {
 		String result = new Shape(10.1f, 20.33f, 40f).toString();
-
-		// assert
 		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Shape#marshal(org.cip4.lib.xjdf.type.Shape)}.
-	 */
 	@Test
-	public void testMarshalShape() {
+	@DefaultLocale("en-us")
+	public void testToStringEnUs() {
+		String result = new Shape(10.1f, 20.33f, 40f).toString();
+		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
+	}
 
-		// arrange
+	@Test
+	@DefaultLocale("de-de")
+	public void testMarshalShapeDeDe() {
 		Shape s = new Shape(10.1f, 20.33f, 40f);
-
-		// act
 		String result = new Shape().marshal(s);
+		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
+	}
 
-		// assert
+	@Test
+	@DefaultLocale("en-us")
+	public void testMarshalShapeEnUs() {
+		Shape s = new Shape(10.1f, 20.33f, 40f);
+		String result = new Shape().marshal(s);
 		assertEquals("10.100 20.330 40.000", result, "String is wrong.");
 	}
 

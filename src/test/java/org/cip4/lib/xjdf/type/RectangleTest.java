@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.type;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
  * JUnit test case for XJDF Type Rectangle
@@ -73,32 +74,33 @@ public class RectangleTest {
 		assertEquals(4f, r.getUry(), 0.01, "Ury is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#toString()}.
-	 */
 	@Test
-	public void testToString() {
-
-		// arrange / act
+	@DefaultLocale("de-de")
+	public void testToStringDeDe() {
 		String result = new Rectangle(1f, 0f, 3.14f, 21631.3f).toString();
-
-		// assert
 		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.Rectangle#marshal(org.cip4.lib.xjdf.type.Rectangle)}.
-	 */
 	@Test
-	public void testMarshalRectangle() {
+	@DefaultLocale("en-us")
+	public void testToStringEnUs() {
+		String result = new Rectangle(1f, 0f, 3.14f, 21631.3f).toString();
+		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
+	}
 
-		// arrange
+	@Test
+	@DefaultLocale("de-de")
+	public void testMarshalRectangleDeDe() {
 		Rectangle r = new Rectangle(1f, 0f, 3.14f, 21631.3f);
-
-		// act
 		String result = new Rectangle().marshal(r);
+		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
+	}
 
-		// assert
+	@Test
+	@DefaultLocale("en-us")
+	public void testMarshalRectangleEnUs() {
+		Rectangle r = new Rectangle(1f, 0f, 3.14f, 21631.3f);
+		String result = new Rectangle().marshal(r);
 		assertEquals("1.000 0.000 3.140 21631.301", result, "Result is wrong.");
 	}
 

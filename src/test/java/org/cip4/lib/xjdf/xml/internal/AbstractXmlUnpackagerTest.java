@@ -2,8 +2,7 @@ package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junitpioneer.jupiter.TempDirectory;
+import org.junit.jupiter.api.io.TempDir;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -72,8 +71,7 @@ public class AbstractXmlUnpackagerTest {
     }
 
     @Test
-    @ExtendWith(TempDirectory.class)
-    public void unpackageZip(@TempDirectory.TempDir Path targetDir) throws Exception {
+    public void unpackageZip(@TempDir Path targetDir) throws Exception {
         AbstractXmlUnpackager unpackager = new ConcreteXmlUnpackager(PACKAGE);
         String index = unpackager.unpackageZip(targetDir.toString());
         Path indexPath = Paths.get(index);
@@ -84,8 +82,7 @@ public class AbstractXmlUnpackagerTest {
     }
 
     @Test
-    @ExtendWith(TempDirectory.class)
-    public void unpackageZipWithBadEntry(@TempDirectory.TempDir Path targetDir) throws Exception {
+    public void unpackageZipWithBadEntry(@TempDir Path targetDir) throws Exception {
         Path zipPath = targetDir.resolve("badZip.zip");
         try (
             OutputStream out = Files.newOutputStream(zipPath);
@@ -105,8 +102,7 @@ public class AbstractXmlUnpackagerTest {
 
 
     @Test
-    @ExtendWith(TempDirectory.class)
-    public void unpackageZipMultipleTimes(@TempDirectory.TempDir Path target) throws Exception {
+    public void unpackageZipMultipleTimes(@TempDir Path target) throws Exception {
         Path target1 = target.resolve("folder1");
         Path target2 = target.resolve("folder2");
 

@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.Test;
+import org.junitpioneer.jupiter.DefaultLocale;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,32 +52,33 @@ public class XYPairTest {
 		assertEquals(792.44f, p.getY(), 0.01f, "Y is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#toString()}.
-	 */
 	@Test
-	public void testToString() {
-
-		// arrange / act
+	@DefaultLocale("de-de")
+	public void testToStringDeDe() {
 		String result = new XYPair(612.22f, 792.44f).toString();
-
-		// assert
 		assertEquals("612.220 792.440", result, "Result is wrong.");
 	}
 
-	/**
-	 * Test method for {@link org.cip4.lib.xjdf.type.XYPair#marshal(org.cip4.lib.xjdf.type.XYPair)}.
-	 */
 	@Test
-	public void testMarshalXYPair() {
+	@DefaultLocale("en-us")
+	public void testToStringEnUs() {
+		String result = new XYPair(612.22f, 792.44f).toString();
+		assertEquals("612.220 792.440", result, "Result is wrong.");
+	}
 
-		// arrange
+	@Test
+	@DefaultLocale("de-de")
+	public void testMarshalXYPairDeDe() {
 		XYPair p = new XYPair(612.22f, 792.44f);
-
-		// act
 		String result = new XYPair().marshal(p);
+		assertEquals("612.220 792.440", result, "Result is wrong.");
+	}
 
-		// assert
+	@Test
+	@DefaultLocale("en-us")
+	public void testMarshalXYPairEnUs() {
+		XYPair p = new XYPair(612.22f, 792.44f);
+		String result = new XYPair().marshal(p);
 		assertEquals("612.220 792.440", result, "Result is wrong.");
 	}
 
