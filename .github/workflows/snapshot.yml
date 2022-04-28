@@ -12,6 +12,10 @@ jobs:
   call-snapshot:
     name: 🏭
     uses: cip4/.github/.github/workflows/library-snapshot.yml@v2
+    with:
+      java-version: 11
+      java-distribution: 'temurin'
+      codecov-enabled: true
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
       SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
