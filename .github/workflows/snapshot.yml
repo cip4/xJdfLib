@@ -11,7 +11,7 @@ on:
 jobs:
   call-snapshot:
     name: 🏭
-    uses: cip4/.github/.github/workflows/library-snapshot.yml@v2
+    uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     with:
       java-version: 11
       java-distribution: 'temurin'
