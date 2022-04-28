@@ -6,6 +6,7 @@ plugins {
     id 'signing'
     id 'io.codearte.nexus-staging' version '0.30.0'
     id 'org.hibernate.build.xjc' version '2.0.1'
+    id 'jacoco'
 }
 
 group = 'org.cip4.lib.xjdf'
@@ -89,7 +90,7 @@ nexusStaging {
 }
 
 repositories {
-    maven { url "https://repo.maven.apache.org/maven2" }
+    mavenCentral()
 }
 
 signing {
@@ -162,6 +163,14 @@ clean {
 sourceSets {
     main {
         java.srcDir('src/generated')
+    }
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        xml.required = true
+        html.required = false
     }
 }
 
