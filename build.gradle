@@ -35,14 +35,14 @@ configurations {
 repositories {
     maven { url "https://repository.apache.org/content/groups/public/" }
     maven { url "https://repository.jboss.org/nexus/content/groups/public-jboss/" }
-    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "https://repo.maven.apache.org/maven2" }
 }
 dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8'
     compile group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0.1'
     compile group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
-    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.9.1'
+    compile group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-runtime', version: '0.12.0'
     compile group: 'org.jetbrains', name: 'annotations', version: '15.0'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 
@@ -58,8 +58,8 @@ dependencies {
     xjc group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0.1'
     xjc group: 'com.sun.xml.bind', name: 'jaxb-xjc', version: '2.2.11'
     xjc group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0.1'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.9.5'
-    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.9.5'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics', version: '0.12.0'
+    xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-basics-ant', version: '0.12.0'
     xjc group: 'org.jvnet.jaxb2_commons', name: 'jaxb2-fluent-api', version: '3.0'
 }
 
@@ -126,12 +126,12 @@ jar {
     dependsOn createBuildInfoFile
     manifest {
         attributes(
-            "Implementation-Title": project.description,
-            "Implementation-Version": project.version,
-            "Implementation-Vendor-Id": project.group,
-            "Specification-Title": project.description,
-            "Specification-Version": project.version,
-            "Build-Jdk": JavaVersion.current(),
+                "Implementation-Title": project.description,
+                "Implementation-Version": project.version,
+                "Implementation-Vendor-Id": project.group,
+                "Specification-Title": project.description,
+                "Specification-Version": project.version,
+                "Build-Jdk": JavaVersion.current(),
         )
     }
 }

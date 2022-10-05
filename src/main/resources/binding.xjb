@@ -143,7 +143,7 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='DropItem']//xs:attribute[@name='ItemRef']">
         <xjb:property name="item">
-            <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
+            <xjb:baseType name="java.lang.Object"/>
         </xjb:property>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='Glue']//xs:attribute[@name='GlueRef']">
