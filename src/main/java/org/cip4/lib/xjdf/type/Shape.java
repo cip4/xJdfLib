@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
+import java.util.Locale;
+
 /**
  * XML Attributes of type shape are used to describe a three dimensional box. A shape is represented as an array of
  * three (positive or zero) numbers — x y z —
@@ -118,7 +120,7 @@ public class Shape extends AbstractXJdfType<String, Shape> {
         double z = shape.getZ();
 
         // create string
-        return String.format("%s %s %s", x, y, z);
+        return String.format(Locale.US, "%s %s %s", x, y, z);
     }
 
     /**
