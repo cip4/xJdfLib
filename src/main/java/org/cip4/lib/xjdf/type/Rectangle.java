@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
+import java.util.Locale;
+
 /**
  * XML Attributes of type rectangle are used to describe rectangular locations on the page, Sheet or other printable
  * surface. A rectangle is represented as an array of four numbers — llx lly urx ury — specifying the lower-left x,
@@ -115,7 +117,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         double ury = v.getUry();
 
         // process marshalling
-        return String.format("%s %s %s %s", llx, lly, urx, ury);
+        return String.format(Locale.US, "%s %s %s %s", llx, lly, urx, ury);
     }
 
     /**

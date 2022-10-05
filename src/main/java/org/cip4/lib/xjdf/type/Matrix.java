@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
+import java.util.Locale;
+
 /**
  * Coordinate transformation matrices are widely used throughout the whole printing Process, especially in Layout
  * Resources. They represent two dimensional
@@ -160,7 +162,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
         double tx = matrix.getTx();
         double ty = matrix.getTy();
 
-        return String.format("%s %s %s %s %s %s", a, b, c, d, tx, ty);
+        return String.format(Locale.US, "%s %s %s %s %s %s", a, b, c, d, tx, ty);
     }
 
     /**

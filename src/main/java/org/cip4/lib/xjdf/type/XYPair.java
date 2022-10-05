@@ -1,6 +1,8 @@
 package org.cip4.lib.xjdf.type;
 
 
+import java.util.Locale;
+
 /**
  * XML Attributes of type XYPair are used to describe sizes like Dimensions and StartPosition. They can also be used to
  * describe positions on a page. All
@@ -80,7 +82,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
         double x = xyPair.getX();
         double y = xyPair.getY();
 
-        return String.format("%s %s", x, y);
+        return String.format(Locale.US, "%s %s", x, y);
     }
 
     /**
