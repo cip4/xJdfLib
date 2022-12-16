@@ -124,29 +124,29 @@ processResources {
 }
 
 dependencies {
-    compile 'commons-io:commons-io:2.11.0'
-    compile 'org.apache.commons:commons-lang3:3.12.0'
-    compile 'com.sun.xml.bind:jaxb-impl:2.3.6'
-    compile 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    compile 'javax.xml.bind:jaxb-api:2.3.1'
-    compile 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.13.1'
-    compile 'org.jetbrains:annotations:23.0.0'
-    compile 'org.reflections:reflections:0.10.2'
-    compile 'javax.annotation:javax.annotation-api:1.3.2'
-    compile 'xerces:xercesImpl:2.12.2'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'com.sun.xml.bind:jaxb-impl:2.3.6'
+    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
+    implementation 'javax.xml.bind:jaxb-api:2.3.1'
+    implementation 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.13.1'
+    implementation 'org.jetbrains:annotations:23.0.0'
+    implementation 'org.reflections:reflections:0.10.2'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'xerces:xercesImpl:2.12.2'
 
-    testCompile 'org.junit.jupiter:junit-jupiter-api:5.8.2'
-    testCompile 'org.junit.jupiter:junit-jupiter-params:5.8.2'
-    testCompile 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    testCompile 'org.mockito:mockito-core:4.6.1'
-    testCompile 'org.hamcrest:hamcrest-library:2.2'
-    testCompile 'org.junit-pioneer:junit-pioneer:1.7.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'org.mockito:mockito-core:4.6.1'
+    testImplementation 'org.hamcrest:hamcrest-library:2.2'
+    testImplementation 'org.junit-pioneer:junit-pioneer:1.7.1'
 
     xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
     xjc 'com.sun.xml.bind:jaxb-xjc:2.3.6'
     xjc 'com.sun.xml.bind:jaxb-impl:2.3.6'
     xjc 'javax.xml.bind:jaxb-api:2.3.1'
-    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.12.0'
+    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.13.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.13.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
@@ -162,7 +162,7 @@ task xjc() {
         Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US)
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
-        ant.xjc(
+         ant.xjc(
                 destdir: generatedSources,
                 schema: schema,
                 binding: bindings,
