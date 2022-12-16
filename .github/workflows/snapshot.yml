@@ -6,7 +6,7 @@ name: Snapshot
 
 on:
   push:
-    branches: [ master]
+    branches: [ main]
 
 jobs:
   call-snapshot:

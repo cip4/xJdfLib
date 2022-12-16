@@ -6,7 +6,7 @@ name: Pull-Request
 
 on:
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   call-release:
