@@ -162,7 +162,7 @@ task xjc() {
         Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US)
         ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
-         ant.xjc(
+        ant.xjc(
                 destdir: generatedSources,
                 schema: schema,
                 binding: bindings,
