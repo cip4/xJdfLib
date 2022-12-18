@@ -21,8 +21,8 @@ public class IntegerListTest {
 
 		// assert
 		assertEquals(4, r.getList().size(), "Number of Items is wrong.");
-		assertEquals(new Integer(3), r.getList().get(2), "Integer Value is wrong.");
-		assertEquals(new Integer(4), r.getList().get(3), "Integer Value is wrong.");
+		assertEquals(3, r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(4, r.getList().get(3), "Integer Value is wrong.");
 	}
 
 	@Test
@@ -35,8 +35,8 @@ public class IntegerListTest {
 
 		// assert
 		assertEquals(7, r.getList().size(), "Number of Items is wrong.");
-		assertEquals(new Integer(8), r.getList().get(2), "Integer Value is wrong.");
-		assertEquals(new Integer(9), r.getList().get(3), "Integer Value is wrong.");
+		assertEquals(8, r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(9, r.getList().get(3), "Integer Value is wrong.");
 	}
 
 	@Test
@@ -63,8 +63,8 @@ public class IntegerListTest {
 
 		// assert
 		assertEquals(4, r.getList().size(), "Number of Items is wrong.");
-		assertEquals(new Integer(3), r.getList().get(2), "Integer Value is wrong.");
-		assertEquals(new Integer(4), r.getList().get(3), "Integer Value is wrong.");
+		assertEquals(3, r.getList().get(2), "Integer Value is wrong.");
+		assertEquals(4, r.getList().get(3), "Integer Value is wrong.");
 
 	}
 }
