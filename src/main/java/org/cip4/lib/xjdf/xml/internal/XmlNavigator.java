@@ -237,7 +237,7 @@ public class XmlNavigator {
         Integer result = null;
 
         if (!StringUtils.isEmpty(s) && StringUtils.isNumeric(s)) {
-            result = new Integer(s);
+            result = Integer.parseInt(s);
         }
 
         // return result
@@ -261,7 +261,7 @@ public class XmlNavigator {
         Long result = null;
 
         if (!StringUtils.isEmpty(s) && StringUtils.isNumeric(s)) {
-            result = new Long(s);
+            result = Long.parseLong(s);
         }
 
         // return result

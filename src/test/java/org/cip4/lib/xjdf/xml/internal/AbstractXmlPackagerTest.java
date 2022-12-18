@@ -269,7 +269,7 @@ public class AbstractXmlPackagerTest {
     public void packageExistingArchive() throws Exception {
         final XJDF xjdf;
         final Path zipPath = Paths.get(AbstractXmlPackagerTest.class.getResource("../../testPackage.zip").toURI());
-        try (final FileSystem fs = FileSystems.newFileSystem(zipPath, null)) {
+        try (final FileSystem fs = FileSystems.newFileSystem(zipPath, (ClassLoader) null)) {
             final Path xjdfDocumentPath = fs.getPath("/", "testPackage.xjdf");
             try (final InputStream is = Files.newInputStream(xjdfDocumentPath)) {
                 xjdf = new XJdfParser().parseStream(is);
@@ -304,7 +304,7 @@ public class AbstractXmlPackagerTest {
                 packager.packageXjdf(xjdf, "testPackage.xjdf");
             }
 
-            try (final FileSystem zipfs = FileSystems.newFileSystem(tmpXjdfArchive, null)) {
+            try (final FileSystem zipfs = FileSystems.newFileSystem(tmpXjdfArchive, (ClassLoader) null)) {
                 assertTrue(
                     Files.isReadable(zipfs.getPath("/", "testPackage.xjdf")),
                     "/testPackage.xjdf was not added to archive"

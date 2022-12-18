@@ -186,7 +186,7 @@ public abstract class AbstractXmlPackager<T> {
             writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document, validation)));
 
             // write assets to ZIP Archive
-            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, null) : null) {
+            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, (ClassLoader) null) : null) {
 
                 // for each asset reference
                 for (URI uri : assetReferences) {

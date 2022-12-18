@@ -22,7 +22,7 @@ java {
     withSourcesJar()
 }
 
-targetCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_17
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -149,6 +149,7 @@ dependencies {
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.13.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.13.1'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
+    xjc 'org.apache.logging.log4j:log4j-slf4j-impl:2.19.0'
 }
 
 task xjc() {
