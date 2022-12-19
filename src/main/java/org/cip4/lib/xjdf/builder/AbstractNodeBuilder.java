@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.builder;
 
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
+import jakarta.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Unmarshaller;
 
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.w3c.dom.Node;

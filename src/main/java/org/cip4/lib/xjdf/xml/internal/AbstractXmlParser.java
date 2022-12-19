@@ -8,13 +8,12 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationException;
-import javax.xml.bind.util.JAXBSource;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationException;
+import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 
 import org.w3c.dom.Node;

@@ -1,15 +1,14 @@
 package org.cip4.lib.xjdf.xml;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import jakarta.xml.bind.JAXBException;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
-import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
