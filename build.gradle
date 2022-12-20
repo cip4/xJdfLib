@@ -127,9 +127,9 @@ processResources {
 dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:3.0.2'
-    implementation 'com.sun.xml.bind:jaxb-core:3.0.2'
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.1'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.1'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.0'
     implementation 'org.patrodyne.jvnet:hisrc-basicjaxb-runtime:2.0.0'
     implementation 'org.jetbrains:annotations:23.0.0'
@@ -144,10 +144,10 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.junit-pioneer:junit-pioneer:1.9.1'
 
-    xjc 'com.sun.xml.bind:jaxb-core:3.0.2'
-    xjc 'com.sun.xml.bind:jaxb-xjc:3.0.2'
-    xjc 'com.sun.xml.bind:jaxb-impl:3.0.2'
-    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    xjc 'com.sun.xml.bind:jaxb-core:4.0.1'
+    xjc 'com.sun.xml.bind:jaxb-xjc:4.0.1'
+    xjc 'com.sun.xml.bind:jaxb-impl:4.0.1'
+    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
 
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.0.0'
