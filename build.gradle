@@ -142,7 +142,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testImplementation 'org.mockito:mockito-core:4.5.1'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
-    testImplementation 'org.junit-pioneer:junit-pioneer:1.7.0'
+    testImplementation 'org.junit-pioneer:junit-pioneer:1.9.1'
 
     xjc 'com.sun.xml.bind:jaxb-core:3.0.2'
     xjc 'com.sun.xml.bind:jaxb-xjc:3.0.2'
