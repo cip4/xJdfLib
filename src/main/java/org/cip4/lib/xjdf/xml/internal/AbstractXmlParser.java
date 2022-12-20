@@ -16,10 +16,8 @@ import jakarta.xml.bind.ValidationException;
 import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 
+import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 import org.w3c.dom.Node;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-import org.xml.sax.SAXException;
 
 /**
  * Parsing logic for building a XML Document from DOM-Tree and the way around.

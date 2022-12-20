@@ -1,10 +1,9 @@
 package org.cip4.lib.xjdf.validator;
 
+import jakarta.xml.bind.annotation.XmlIDREF;
 import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import javax.xml.bind.annotation.XmlIDREF;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

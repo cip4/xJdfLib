@@ -1,9 +1,9 @@
 package org.cip4.lib.xjdf.schema;
 
+import jakarta.xml.bind.ValidationException;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.ValidationException;
 
 public class ElementOrder {
 
