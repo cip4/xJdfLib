@@ -1,9 +1,9 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

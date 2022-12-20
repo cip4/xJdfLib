@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.merger;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 
 /**
  * Class for merging objects that are wrapped in an JAXBElement.

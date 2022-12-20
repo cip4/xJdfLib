@@ -3,16 +3,14 @@ package org.cip4.lib.xjdf.xml;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.xml.bind.JAXBException;
 
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
-import org.xml.sax.SAXException;
+import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 
 /**
  * Parsing logic for building a XML Document from XJDF DOM-Tree and the way around.

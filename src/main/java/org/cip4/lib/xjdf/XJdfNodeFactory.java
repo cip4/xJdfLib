@@ -8,7 +8,7 @@ import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 /**

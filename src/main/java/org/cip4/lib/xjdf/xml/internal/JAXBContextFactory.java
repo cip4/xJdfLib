@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
 
 import org.cip4.lib.xjdf.schema.XJDF;
 

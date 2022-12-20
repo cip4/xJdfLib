@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.xml;
 import org.cip4.lib.xjdf.xml.internal.XmlNavigator;
 import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.ByteArrayInputStream;

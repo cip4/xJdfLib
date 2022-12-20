@@ -9,17 +9,10 @@ import org.cip4.lib.xjdf.schema.Preview;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.Side;
-import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
-import org.cip4.lib.xjdf.xml.XJdfPackager;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
-import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.Marshaller;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

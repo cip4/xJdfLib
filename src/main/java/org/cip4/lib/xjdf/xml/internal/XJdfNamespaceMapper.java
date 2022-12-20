@@ -1,8 +1,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
+import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 
 /**
  * XJDF Namespace Prefix Mapper for organizing namespace prefixes.

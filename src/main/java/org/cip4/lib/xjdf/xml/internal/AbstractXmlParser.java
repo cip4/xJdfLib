@@ -8,19 +8,16 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.ValidationException;
-import javax.xml.bind.util.JAXBSource;
-import javax.xml.parsers.ParserConfigurationException;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import jakarta.xml.bind.ValidationException;
+import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 
+import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 import org.w3c.dom.Node;
-
-import com.sun.xml.bind.marshaller.NamespacePrefixMapper;
-import org.xml.sax.SAXException;
 
 /**
  * Parsing logic for building a XML Document from DOM-Tree and the way around.
@@ -135,7 +132,7 @@ public abstract class AbstractXmlParser<T> {
         Marshaller m = createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
-        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
+        m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
 
         OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
         m.marshal(obj, writer);
@@ -176,7 +173,7 @@ public abstract class AbstractXmlParser<T> {
     private Marshaller createMarshaller() throws JAXBException {
         // create marshaller
         Marshaller m = jaxbContext.createMarshaller();
-        m.setProperty("com.sun.xml.bind.namespacePrefixMapper", getNamespacePrefixMapper());
+        m.setProperty("org.glassfish.jaxb.namespacePrefixMapper", getNamespacePrefixMapper());
 
         // return marshaller
         return m;

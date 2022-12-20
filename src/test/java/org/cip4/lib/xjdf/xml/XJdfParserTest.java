@@ -7,11 +7,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.UUID;
 
-import javax.xml.bind.ValidationException;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
+import jakarta.xml.bind.ValidationException;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;

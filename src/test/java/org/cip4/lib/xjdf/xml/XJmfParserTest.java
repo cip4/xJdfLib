@@ -1,12 +1,12 @@
 package org.cip4.lib.xjdf.xml;
 
+import jakarta.xml.bind.ValidationException;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import javax.xml.bind.ValidationException;
 import java.io.ByteArrayOutputStream;
 
 import static org.junit.jupiter.api.Assertions.*;

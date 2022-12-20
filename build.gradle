@@ -22,7 +22,8 @@ java {
     withSourcesJar()
 }
 
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -126,10 +127,11 @@ processResources {
 dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:2.3.6'
-    implementation 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    implementation 'javax.xml.bind:jaxb-api:2.3.1'
-    implementation 'org.jvnet.jaxb2_commons:jaxb2-basics-runtime:0.13.1'
+    implementation 'com.sun.xml.bind:jaxb-impl:3.0.2'
+    implementation 'com.sun.xml.bind:jaxb-core:3.0.2'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.0'
+    implementation 'org.patrodyne.jvnet:hisrc-basicjaxb-runtime:2.0.0'
     implementation 'org.jetbrains:annotations:23.0.0'
     implementation 'org.reflections:reflections:0.10.2'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
@@ -137,19 +139,19 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
-    testImplementation 'org.mockito:mockito-core:4.6.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+    testImplementation 'org.mockito:mockito-core:4.5.1'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.junit-pioneer:junit-pioneer:1.9.1'
 
-    xjc 'com.sun.xml.bind:jaxb-core:2.3.0.1'
-    xjc 'com.sun.xml.bind:jaxb-xjc:2.3.6'
-    xjc 'com.sun.xml.bind:jaxb-impl:2.3.6'
-    xjc 'javax.xml.bind:jaxb-api:2.3.1'
-    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics:0.13.1'
-    xjc 'org.jvnet.jaxb2_commons:jaxb2-basics-ant:0.13.1'
+    xjc 'com.sun.xml.bind:jaxb-core:3.0.2'
+    xjc 'com.sun.xml.bind:jaxb-xjc:3.0.2'
+    xjc 'com.sun.xml.bind:jaxb-impl:3.0.2'
+    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:3.0.1'
+
+    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
+    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.0.0'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
-    xjc 'org.apache.logging.log4j:log4j-slf4j-impl:2.19.0'
 }
 
 task xjc() {
@@ -162,7 +164,11 @@ task xjc() {
         file("$generatedResources/META-INF").mkdirs()
         Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US)
-        ant.taskdef(name: 'xjc', classname: 'org.jvnet.jaxb2_commons.xjc.XJC2Task', classpath: configurations.xjc.asPath)
+        ant.taskdef(
+                name: 'xjc',
+                classname: 'com.sun.tools.xjc.XJCTask',
+                classpath: configurations.xjc.asPath
+        )
         ant.xjc(
                 destdir: generatedSources,
                 schema: schema,
@@ -172,7 +178,7 @@ task xjc() {
                 removeOldOutput: true,
                 extension: true,
         ) {
-            arg(line: "-mark-generated -Xfluent-api -Xequals -XhashCode -Xinject-code" +
+            arg(line: "-mark-generated -Xfluent-api -Xinject-code -verbose" +
                     " -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
         Locale.setDefault(defaultLocale)

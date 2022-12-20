@@ -13,7 +13,7 @@ jobs:
     name: 🏭
     uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     with:
-      java-version: 17
+      java-version: 11
       java-distribution: 'temurin'
       codecov-enabled: true
     secrets:
