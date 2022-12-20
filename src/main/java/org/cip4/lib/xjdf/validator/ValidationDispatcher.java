@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.validator;
 import org.cip4.lib.xjdf.validator.element.Validator;
 import org.jetbrains.annotations.NotNull;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;

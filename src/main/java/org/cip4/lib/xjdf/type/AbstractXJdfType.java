@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.type;
 
-import javax.xml.bind.annotation.adapters.XmlAdapter;
+import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
  * Abstract XJdf Data Type.

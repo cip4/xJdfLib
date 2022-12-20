@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.xml;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import javax.xml.bind.JAXBException;
+import jakarta.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import com.sun.xml.bind.marshaller.NamespacePrefixMapper;

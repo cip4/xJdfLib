@@ -18,7 +18,7 @@ import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.util.Resources;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 /**

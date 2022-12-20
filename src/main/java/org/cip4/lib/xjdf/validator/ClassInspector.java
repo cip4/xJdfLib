@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.validator;
 
-import javax.xml.bind.annotation.XmlIDREF;
+import jakarta.xml.bind.annotation.XmlIDREF;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
