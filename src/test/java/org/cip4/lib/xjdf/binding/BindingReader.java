@@ -30,7 +30,7 @@ class BindingReader {
 
         NamespaceManager nsManager = new NamespaceManager();
         nsManager.addNamespace("xs", XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        nsManager.addNamespace("xjb", "http://java.sun.com/xml/ns/jaxb");
+        nsManager.addNamespace("xjb", "https://jakarta.ee/xml/ns/jaxb");
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
         xPath = xPathFactory.newXPath();
