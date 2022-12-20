@@ -132,7 +132,7 @@ public abstract class AbstractXmlParser<T> {
         Marshaller m = createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
-        m.setProperty("com.sun.xml.bind.xmlHeaders", getXmlHeader());
+        m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
 
         OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
         m.marshal(obj, writer);
@@ -173,7 +173,7 @@ public abstract class AbstractXmlParser<T> {
     private Marshaller createMarshaller() throws JAXBException {
         // create marshaller
         Marshaller m = jaxbContext.createMarshaller();
-        m.setProperty("com.sun.xml.bind.namespacePrefixMapper", getNamespacePrefixMapper());
+        m.setProperty("org.glassfish.jaxb.namespacePrefixMapper", getNamespacePrefixMapper());
 
         // return marshaller
         return m;

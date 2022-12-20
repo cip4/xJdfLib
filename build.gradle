@@ -154,7 +154,7 @@ dependencies {
 }
 
 task xjc() {
-    def bindings = file('src/main/resources/binding.xjb.origin')
+    def bindings = file('src/main/resources/binding.xjb')
     inputs.files(schema, bindings)
     outputs.dir(generatedSources)
     outputs.dir(generatedResources)
