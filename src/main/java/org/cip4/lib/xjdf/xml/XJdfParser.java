@@ -17,13 +17,25 @@ import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
  */
 public class XJdfParser extends AbstractXmlParser<XJDF> {
 
+    private final boolean enforceNamespacePrefix;
+
     /**
      * Default constructor.
      *
      * @throws JAXBException Thrown in case a JAXBException occurs.
      */
     public XJdfParser() throws JAXBException {
+        this(true);
+    }
+
+    /**
+     * Custom constructor. Accepting a flag for initializing.
+     * @param enforceNamespacePrefix True in case namespace prefix is requried.
+     * @throws JAXBException Thrown in case a JAXBException occurs.
+     */
+    public XJdfParser(boolean enforceNamespacePrefix) throws JAXBException {
         super(JAXBContextFactory.getInstance());
+        this.enforceNamespacePrefix = enforceNamespacePrefix;
     }
 
     /**
@@ -84,7 +96,7 @@ public class XJdfParser extends AbstractXmlParser<XJDF> {
 
     @Override
     protected final NamespacePrefixMapper getNamespacePrefixMapper() {
-        return new XJdfNamespaceMapper();
+        return new XJdfNamespaceMapper(enforceNamespacePrefix);
     }
 
     @Override

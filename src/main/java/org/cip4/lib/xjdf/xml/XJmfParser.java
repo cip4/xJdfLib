@@ -17,13 +17,25 @@ import java.io.OutputStream;
  */
 public class XJmfParser extends AbstractXmlParser<XJMF> {
 
+    private final boolean enforceNamespacePrefix;
+
     /**
      * Default constructor.
      *
      * @throws JAXBException Thrown in case a JAXBException occurs.
      */
     public XJmfParser() throws JAXBException {
+        this(true);
+    }
+
+    /**
+     * Custom constructor. Accepting a flag for initializing.
+     * @param enforceNamespacePrefix True in case namespace prefix is requried.
+     * @throws JAXBException Thrown in case a JAXBException occurs.
+     */
+    public XJmfParser(boolean enforceNamespacePrefix) throws JAXBException {
         super(JAXBContextFactory.getInstance());
+        this.enforceNamespacePrefix = enforceNamespacePrefix;
     }
 
     /**
@@ -81,7 +93,7 @@ public class XJmfParser extends AbstractXmlParser<XJMF> {
 
     @Override
     protected final NamespacePrefixMapper getNamespacePrefixMapper() {
-        return new XJdfNamespaceMapper();
+        return new XJdfNamespaceMapper(enforceNamespacePrefix);
     }
 
     @Override
