@@ -10,37 +10,32 @@ import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
  */
 public class XJdfNamespaceMapper extends NamespacePrefixMapper {
 
-    private final String nsDefaultNamespace;
+    private final boolean enforceNamespacePrefix;
 
     /**
      * Default constructor.
      */
-    public XJdfNamespaceMapper() {
-        nsDefaultNamespace = null;
+    public XJdfNamespaceMapper(boolean enforceNamespacePrefix) {
+        this.enforceNamespacePrefix = enforceNamespacePrefix;
     }
 
-    /**
-     * Custom constructor. <br>
-     * Accepting a String object as place holder for default namespace. This place holder later can be replaced by empty
-     * string.
-     */
-    public XJdfNamespaceMapper(String nsDefaultNamespace) {
-        this.nsDefaultNamespace = nsDefaultNamespace;
-    }
 
     /**
-     * @see com.sun.xml.bind.marshaller.NamespacePrefixMapper#getPreferredPrefix(java.lang.String, java.lang.String, boolean)
+     * @see org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper#getPreferredPrefix(java.lang.String, java.lang.String, boolean)
      */
     @Override
     public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
-
         String result;
 
-        if (namespaceUri.equals(XJdfConstants.NAMESPACE_JDF20)) {
-            result = "xjdf";
+        if(enforceNamespacePrefix || requirePrefix) {
+            if (namespaceUri.equals(XJdfConstants.NAMESPACE_JDF20)) {
+                result = "xjdf";
+            } else {
+                // other namespace
+                result = suggestion;
+            }
         } else {
-            // other namespace
-            result = suggestion;
+            result = "";
         }
 
         // return result

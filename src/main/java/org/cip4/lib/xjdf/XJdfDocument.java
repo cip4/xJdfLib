@@ -79,7 +79,7 @@ public class XJdfDocument {
      * @return The XJDF Node as String.
      */
     public String toXml() throws JAXBException, IOException {
-        return new String(new XJdfParser().parseXJdf(this.xjdf, !validation));
+        return new String(new XJdfParser(false).parseXJdf(this.xjdf, !validation));
     }
 
     /**
