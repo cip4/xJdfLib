@@ -15,7 +15,7 @@ version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/JDF20.xsd')
+def schema = file('src/main/resources/JDF21.xsd')
 
 java {
     withJavadocJar()

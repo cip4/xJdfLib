@@ -157,7 +157,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(Rectangle v) {
@@ -176,7 +176,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Rectangle unmarshal(String v) {

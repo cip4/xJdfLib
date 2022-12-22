@@ -146,7 +146,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(Matrix matrix) {
@@ -166,7 +166,7 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public Matrix unmarshal(String v) {

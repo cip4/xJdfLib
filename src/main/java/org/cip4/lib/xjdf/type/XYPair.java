@@ -94,7 +94,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(XYPair xyPair) {
@@ -110,7 +110,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public XYPair unmarshal(String v) {

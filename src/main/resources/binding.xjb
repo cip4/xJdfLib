@@ -5,7 +5,7 @@
           xmlns:xs="http://www.w3.org/2001/XMLSchema"
           xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
           xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
-          schemaLocation="JDF20.xsd">
+          schemaLocation="JDF21.xsd">
 
     <xjb:globalBindings typesafeEnumMemberName="generateError">
         <xjc:serializable/>

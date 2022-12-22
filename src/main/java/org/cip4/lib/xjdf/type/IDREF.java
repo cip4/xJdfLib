@@ -80,7 +80,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(IDREF idRef) {
@@ -91,7 +91,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public IDREF unmarshal(String v) {

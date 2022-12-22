@@ -141,7 +141,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public final String marshal(final DateTime dateTime) {
@@ -153,7 +153,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public final DateTime unmarshal(final String dateTime) throws Exception {
