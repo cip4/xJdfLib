@@ -150,6 +150,7 @@ dependencies {
 
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.0.0'
+    xjc 'org.patrodyne.jvnet:hisrc-hyperjaxb-annox-plugin:1.1.2'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
 
@@ -177,7 +178,7 @@ task xjc() {
                 removeOldOutput: true,
                 extension: true,
         ) {
-            arg(line: "-mark-generated -Xfluent-api -Xinject-code -XsimpleEquals -XsimpleHashCode -verbose" +
+            arg(line: "-mark-generated -Xfluent-api -Xinject-code -XsimpleEquals -XsimpleHashCode -Xannotate -verbose" +
                     " -episode $generatedResources/META-INF/sun-jaxb.episode")
         }
         Locale.setDefault(defaultLocale)

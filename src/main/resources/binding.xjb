@@ -5,6 +5,7 @@
           xmlns:xs="http://www.w3.org/2001/XMLSchema"
           xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
           xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
+          xmlns:annox="http://annox.dev.java.net"
           schemaLocation="JDF21.xsd">
 
     <xjb:globalBindings typesafeEnumMemberName="generateError">
@@ -50,6 +51,7 @@
      }
                 ]]>
         </ci:code>
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BindingIntent")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BindingIntent']//xs:attribute[@name='ChildRefs']">
         <xjb:property name="children">
@@ -783,5 +785,492 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='Preview']//xs:attribute[@name='PreviewFileType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PreviewFileType"/>
+    </xjb:bindings>
+
+    <xjb:bindings node="//xs:complexType[@name='UsageCounter']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "UsageCounter")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BoxFoldingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BoxFoldingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CreasingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CreasingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PackingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PackingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorantControl']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ColorantControl")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseStopPersistentChannel']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseStopPersistentChannel")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorCorrectionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ColorCorrectionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShrinkingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ShrinkingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RasterReadingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "RasterReadingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='MiscConsumable']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "MiscConsumable")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PerforatingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PerforatingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LaminatingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LaminatingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BlockPreparationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BlockPreparationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ConventionalPrintingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ConventionalPrintingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryKnownSubscriptions']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryKnownSubscriptions")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ImageCompressionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ImageCompressionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PrintCondition']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PrintCondition")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandSubmitQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandSubmitQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandResource']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandResource")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='FontPolicy']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "FontPolicy")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='HoleMakingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "HoleMakingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalKnownDevices']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalKnownDevices")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeCuttingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ShapeCuttingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='GluingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "GluingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PDLCreationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PDLCreationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeCuttingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ShapeCuttingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ColorIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='EndSheetGluingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "EndSheetGluingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RunList']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "RunList")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VerificationResult']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "VerificationResult")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DieLayout']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "DieLayout")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ExposedMedia']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ExposedMedia")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='NodeInfo']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "NodeInfo")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseSubmitQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseSubmitQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VarnishingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "VarnishingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InsertingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "InsertingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryGangStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryGangStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='WindingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "WindingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='WrappingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "WrappingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ImageEnhancementParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ImageEnhancementParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryNotification']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryNotification")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Shape']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Shape")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseReturnQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseReturnQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='FoldingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "FoldingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='EmbossingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "EmbossingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandModifyQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandModifyQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Signal']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Signal")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='FeedingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "FeedingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ColorSpaceConversionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ColorSpaceConversionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalNotification']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalNotification")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeDefProductionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ShapeDefProductionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ScreeningParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ScreeningParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandRequestQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandRequestQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CuttingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CuttingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LayoutIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponsePipeControl']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponsePipeControl")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseRequestQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseRequestQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StrappingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "StrappingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandShutDown']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandShutDown")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalResource']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalResource")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='MediaIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "MediaIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ApprovalDetails']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ApprovalDetails")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='EmbossingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "EmbossingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryKnownDevices']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryKnownDevices")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Layout']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Layout")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutElementProductionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LayoutElementProductionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryKnownMessages']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryKnownMessages")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSealingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ThreadSealingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BarcodeCompParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BarcodeCompParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BundlingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BundlingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseResource']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseResource")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseGangStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseGangStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryQueueStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryQueueStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TrappingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "TrappingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SpinePreparationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SpinePreparationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalQueueStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalQueueStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LabelingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LabelingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='FoldingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "FoldingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseModifyQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseModifyQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ThreadSewingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ThreadSewingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SheetOptimizingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SheetOptimizingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandStopPersistentChannel']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandStopPersistentChannel")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DevelopingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "DevelopingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VariableIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "VariableIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BendingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BendingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseKnownMessages']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseKnownMessages")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DieLayoutProductionParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "DieLayoutProductionParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StackingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "StackingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Assembly']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Assembly")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Tool']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Tool")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BinderySignature']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BinderySignature")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LaminatingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LaminatingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PreviewGenerationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PreviewGenerationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QueryResource']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryResource")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Device']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Device")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Color']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Color")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Media']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Media")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ShapeDef']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ShapeDef")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ManualLaborParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ManualLaborParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CasingInParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CasingInParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TransferCurve']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "TransferCurve")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='IntentResource']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "IntentResource")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CoverApplicationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CoverApplicationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='JacketingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "JacketingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalGangStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalGangStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Content']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Content")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseKnownDevices']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseKnownDevices")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SignalKnownSubscriptions']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SignalKnownSubscriptions")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PreflightReport']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PreflightReport")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InkZoneProfile']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "InkZoneProfile")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BoxPackingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BoxPackingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ContentCheckIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ContentCheckIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CustomerInfo']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CustomerInfo")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseKnownSubscriptions']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseKnownSubscriptions")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SizeIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SizeIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandResubmitQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandResubmitQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='WebInlineFinishingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "WebInlineFinishingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandPipeControl']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandPipeControl")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InterpretingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "InterpretingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseQueueStatus']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseQueueStatus")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Ink']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Ink")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='VerificationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "VerificationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='AssemblingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "AssemblingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PalletizingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PalletizingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BarcodeReproParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseShutDown']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseShutDown")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Pallet']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Pallet")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RegisterMark']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "RegisterMark")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SpineTapingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SpineTapingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ApprovalParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ApprovalParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ProductionIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ProductionIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseForceGang']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseForceGang")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseResubmitQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseResubmitQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='PreflightParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PreflightParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='HoleMakingIntent']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "HoleMakingIntent")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='TrimmingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "TrimmingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DigitalPrintingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "DigitalPrintingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Component']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Component")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SeparationControlParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SeparationControlParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='InkZoneCalculationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "InkZoneCalculationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QualityControlResult']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QualityControlResult")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='HeadBandApplicationParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "HeadBandApplicationParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ScavengerArea']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ScavengerArea")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseNotification']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseNotification")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Bundle']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Bundle")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='DeliveryParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "DeliveryParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ImageSetterParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ImageSetterParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='QualityControlParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QualityControlParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LooseBindingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LooseBindingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Preview']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Preview")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandReturnQueueEntry']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandReturnQueueEntry")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='Contact']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Contact")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CaseMakingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CaseMakingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='ResponseWakeUp']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseWakeUp")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='LayoutShift']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "LayoutShift")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandWakeUp']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandWakeUp")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='StitchingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "StitchingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='CommandForceGang']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandForceGang")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='RenderingParams']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "RenderingParams")</annox:annotate>
     </xjb:bindings>
 </xjb:bindings>

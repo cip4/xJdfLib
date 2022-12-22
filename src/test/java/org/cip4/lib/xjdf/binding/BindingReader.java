@@ -13,6 +13,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.InputStream;
+import org.w3c.dom.Node;
 
 class BindingReader {
 
@@ -31,6 +32,7 @@ class BindingReader {
         NamespaceManager nsManager = new NamespaceManager();
         nsManager.addNamespace("xs", XMLConstants.W3C_XML_SCHEMA_NS_URI);
         nsManager.addNamespace("xjb", "https://jakarta.ee/xml/ns/jaxb");
+        nsManager.addNamespace("annox", "http://annox.dev.java.net");
 
         XPathFactory xPathFactory = XPathFactory.newInstance();
         xPath = xPathFactory.newXPath();
@@ -41,6 +43,14 @@ class BindingReader {
         return (NodeList) xPath.evaluate(
             xPathExpression,
             schema,
+            XPathConstants.NODESET
+        );
+    }
+
+    public NodeList evaluateNodeList(final Node node, final String xPathExpression) throws XPathExpressionException {
+        return (NodeList) xPath.evaluate(
+            xPathExpression,
+            node,
             XPathConstants.NODESET
         );
     }
