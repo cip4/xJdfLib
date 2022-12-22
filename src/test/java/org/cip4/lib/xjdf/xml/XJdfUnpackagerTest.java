@@ -7,6 +7,8 @@ import java.net.URISyntaxException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.schema.Preview;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -116,29 +118,13 @@ public class XJdfUnpackagerTest {
         XJdfUnpackager unpackager = new XJdfUnpackager(path);
 
         // act
-        XJdfNavigator nav = unpackager.getXJdfDocument();
+        XJdfDocument xJdfDocument = unpackager.getXJdfDocument();
 
-        String pathPreview = nav.evaluateString(
-            "/xjdf:XJDF/xjdf:ResourceSet[@Name='Preview']/xjdf:Resource/xjdf:Preview/xjdf:FileSpec/@URL"
-        );
+        String pathPreview = xJdfDocument.getSpecificResourceByPart(Preview.class).getFileSpec().getURL().getSourceUri().getPath();
         byte[] bytes = unpackager.extractFile(pathPreview);
 
         // assert
-        assertEquals(nav.evaluateString(XJdfNavigator.JOB_ID), "95733854-01", "XJDF ID is wrong.");
+        assertEquals(xJdfDocument.getXJdf().getJobID(), "95733854-01", "XJDF ID is wrong.");
         assertNotEquals(0, bytes.length, "Preview is null.");
-    }
-
-    @Test
-    public void getXjdfDocumentIsNamespaceAware() throws Exception{
-
-        // arrange
-        String path = XJdfUnpackagerTest.class.getResource(RES_PGK).toURI().getPath();
-        XJdfUnpackager unpackager = new XJdfUnpackager(path);
-
-        // act
-        XJdfNavigator nav = unpackager.getXJdfDocument(true);
-
-        assertNotNull(nav);
-        assertNotNull(nav.extractNode("//xjdf:XJDF"));
     }
 }

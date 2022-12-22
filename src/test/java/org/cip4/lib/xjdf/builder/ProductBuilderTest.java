@@ -3,7 +3,6 @@ package org.cip4.lib.xjdf.builder;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfNavigator;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -110,28 +109,5 @@ public class ProductBuilderTest extends AbstractBuilderTest<Product> {
     public void newProductIdIsNull() {
         Product product = new Product();
         assertNull(product.getID(), "Product ID is not null.");
-    }
-
-    /**
-     * Create new Builder instance from W3C Node object.
-     */
-    @Test
-    public void testConstructorNode() throws Exception {
-
-        // arrange
-        InputStream is = ProductBuilderTest.class.getResourceAsStream(RES_XJDF);
-        XJdfNavigator nav = new XJdfNavigator(is, true);
-        nav.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-
-        Node node = nav.evaluateNode("//xjdf:XJDF/xjdf:ProductList/xjdf:Product");
-
-        // act
-        ProductBuilder builder = new ProductBuilder(node);
-
-        // assert
-        Product product = builder.build();
-
-        assertNotNull(product.getAmount(), "Amount is null.");
-        assertEquals(15000, product.getAmount().intValue(), "Amount is wrong.");
     }
 }

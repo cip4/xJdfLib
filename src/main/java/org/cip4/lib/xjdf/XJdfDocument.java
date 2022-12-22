@@ -186,20 +186,20 @@ public class XJdfDocument {
     /**
      * Identifies and returns the first resource within the XJDF Document using partition keys.
      *
-     * @param resourceClazz The class of the specific resource.
+     * @param resourceType The class of the specific resource.
      * @param part The given Partition Keys used to identify a particular Resource
      *
      * @return The first Resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public Resource getResourceByPart(Class<? extends SpecificResource> resourceClazz, Part part) throws IllegalAccessException {
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType, Part part) throws IllegalAccessException {
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
         Resource result = null;
 
         for(int i = 0; i < resourceSets.size() && result == null; i ++) {
             ResourceSet resourceSet = resourceSets.get(i);
 
-            if(resourceClazz.getSimpleName().equals(resourceSet.getName())) {
+            if(resourceType.getSimpleName().equals(resourceSet.getName())) {
                 result = PartitionManager.getResourceByPart(resourceSet, part);
             }
         }
@@ -208,17 +208,41 @@ public class XJdfDocument {
     }
 
     /**
-     * Identifies and returns the first specific resource within the XJDF Document using partition keys.
+     * Identifies and returns the first matching resource within the XJDF Document.
      *
-     * @param resourceClazz The class of the specific resource.
+     * @param resourceType The class of the specific resource.
+     *
+     * @return The first Resource identified.
+     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
+     */
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType) throws IllegalAccessException {
+        return getResourceByPart(resourceType, null);
+    }
+
+    /**
+     * Identifies and returns the first matching specific resource within the XJDF Document using partition keys.
+     *
+     * @param resourceType The type of the specific resource.
      * @param part The given Partition Keys used to identify a particular Resource
      *
      * @return The first specific resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceClazz, Part part) throws IllegalAccessException {
-        Resource resource = getResourceByPart(resourceClazz, part);
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part) throws IllegalAccessException {
+        Resource resource = getResourceByPart(resourceType, part);
 
         return (T) resource.getSpecificResource().getValue();
+    }
+
+    /**
+     * Identifies and returns the first matching specific resource within the XJDF Document.
+     *
+     * @param resourceType The class of the specific resource.
+     *
+     * @return The first specific resource identified using partition keys.
+     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
+     */
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType) throws IllegalAccessException {
+        return getSpecificResourceByPart(resourceType, null);
     }
 }
