@@ -20,7 +20,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      * Default constructor.
      */
     public AbstractList() {
-        this(new ArrayList<T>());
+        this(new ArrayList<>());
     }
 
     /**

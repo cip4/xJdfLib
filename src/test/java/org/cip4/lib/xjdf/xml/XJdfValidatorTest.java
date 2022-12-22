@@ -2,16 +2,22 @@ package org.cip4.lib.xjdf.xml;
 
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.ValidationException;
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.ProductBuilder;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.Address;
 import org.cip4.lib.xjdf.schema.ComChannel;
+import org.cip4.lib.xjdf.schema.Comment;
 import org.cip4.lib.xjdf.schema.Company;
 import org.cip4.lib.xjdf.schema.Contact;
+import org.cip4.lib.xjdf.schema.CustomerInfo;
+import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.FoldingIntent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.MediaIntent;
 import org.cip4.lib.xjdf.schema.MediaType;
+import org.cip4.lib.xjdf.schema.ObjectFactory;
+import org.cip4.lib.xjdf.schema.ProductionIntent;
+import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.Sides;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Person;
@@ -38,7 +44,7 @@ public class XJdfValidatorTest {
 
     private XJdfValidator xJdfValidator;
 
-    private XJdfNodeFactory xJdfNodeFactory;
+    private ObjectFactory objectFactory;
 
     private XJdfBuilder xJdfBuilder;
 
@@ -56,14 +62,14 @@ public class XJdfValidatorTest {
     @BeforeEach
     public void setUp() {
         // init instance variables
-        xJdfNodeFactory = new XJdfNodeFactory();
+        objectFactory = new ObjectFactory();
         xJdfBuilder = new XJdfBuilder(this.getClass().getCanonicalName());
     }
 
     @AfterEach
     public void tearDown() {
         xJdfValidator = null;
-        xJdfNodeFactory = null;
+        objectFactory = null;
         xJdfBuilder = null;
     }
 
@@ -71,7 +77,7 @@ public class XJdfValidatorTest {
     public void integrationInvalid() throws Exception {
         // arrange
         XJdfBuilder xJdfBuilder = new XJdfBuilder();
-        xJdfBuilder.addGeneralID(xJdfNodeFactory.createGeneralID("CatalobID", "42"));
+        xJdfBuilder.addGeneralID(new GeneralID());
         // Empty list of types is invalid...
         xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
@@ -95,8 +101,7 @@ public class XJdfValidatorTest {
     public void integrationValid() throws Exception {
 
         // arrange
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(new GeneralID().withIDUsage("CatalogID").withIDValue("42"));
 
         xJdfBuilder.build().getTypes().add("Web2Print");
 
@@ -111,8 +116,7 @@ public class XJdfValidatorTest {
     public void integrationAnalyzeMessagesInvalid() throws Exception {
 
         // arrange
-        GeneralID generalId = xJdfNodeFactory.createGeneralID("CatalobID", "42");
-        xJdfBuilder.addGeneralID(generalId);
+        xJdfBuilder.addGeneralID(new GeneralID().withIDUsage("CatalogID").withIDValue("42"));
         // Empty list of types is invalid...
         xJdfBuilder.build().withTypes(Collections.EMPTY_LIST);
 
@@ -173,8 +177,6 @@ public class XJdfValidatorTest {
     @Test
     public void createTestXJDFDocument() throws Exception {
 
-        XJdfNodeFactory nf = new XJdfNodeFactory();
-
         // create product
         ProductBuilder productBuilder = new ProductBuilder(1000, "Brochure", "4 Page Brochure");
         productBuilder.addIntent(
@@ -189,8 +191,8 @@ public class XJdfValidatorTest {
                 .withWeight(135f)
                 .withMediaType(MediaType.PAPER)
         );
-        productBuilder.addIntent(nf.createProductionIntent("Lithography"));
-        productBuilder.addIntent(nf.createFoldingIntent("F6-1"));
+        productBuilder.addIntent(new ProductionIntent().withPrintProcess("Lithography"));
+        productBuilder.addIntent(new FoldingIntent().withFoldCatalog("F6-1"));
         // TODO productBuilder.addIntent(nf.createcol)
 
         // create contact
@@ -221,14 +223,12 @@ public class XJdfValidatorTest {
 
         // create XJDF
         XJdfBuilder xJdfBuilder = new XJdfBuilder("Web2Print", "Job258596");
-        xJdfBuilder.addGeneralID(nf.createGeneralID("CatalogID", "890e81ed-6830-4868-b23d-8ab8af8a4047"));
+        xJdfBuilder.addGeneralID(new GeneralID().withIDUsage("CatalogID").withIDValue("890e81ed-6830-4868-b23d-8ab8af8a4047"));
         xJdfBuilder.addProduct(productBuilder.build());
-        xJdfBuilder.addResource(nf.createCustomerInfo("FA-WEB-DE"));
-        xJdfBuilder.addResource(
-            nf.createRunList(
-                new URI(
-                    new java.net.URI("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf")
-                )
+        xJdfBuilder.addResource(new CustomerInfo().withCustomerID("FA-WEB-DE"));
+        xJdfBuilder.addResource(new RunList()
+            .withFileSpec(new FileSpec()
+                .withURL(new URI("http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf"))
             )
         );
 
@@ -238,7 +238,7 @@ public class XJdfValidatorTest {
 
         XJDF xJdf = xJdfBuilder.build();
         xJdf.withTypes("Product");
-        xJdf.getComment().add(nf.createComment("This is a multiline\nuser comment."));
+        xJdf.getComment().add(new Comment().withValue("This is a multiline\nuser comment."));
 
         // parse
         ByteArrayOutputStream bos = new ByteArrayOutputStream();

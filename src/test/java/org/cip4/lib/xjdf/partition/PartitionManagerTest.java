@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.partition;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
@@ -20,11 +19,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 public class PartitionManagerTest {
 
     /**
-     * NodeFactory for creating XJDF Nodes.
-     */
-    private static final XJdfNodeFactory NF = new XJdfNodeFactory();
-
-    /**
      * The current Partition Manager.
      */
     private PartitionManager partitionManager;
@@ -37,7 +31,7 @@ public class PartitionManagerTest {
     @BeforeEach
     public final void setUp() {
         partitionManager = new PartitionManager();
-        resourceSet = NF.createResourceSet();
+        resourceSet = new ResourceSet();
     }
 
     /**
@@ -58,7 +52,7 @@ public class PartitionManagerTest {
         Part part;
 
         assertNull(partitionManager.getResourceByPart(resourceSet, null), "Resource is not null.");
-        assertNull(partitionManager.getResourceByPart(resourceSet, NF.createPart()), "Resource is not null.");
+        assertNull(partitionManager.getResourceByPart(resourceSet, new Part()), "Resource is not null.");
 
         part = createPartSeparationSide("Cyan", null, null);
         assertNull(partitionManager.getResourceByPart(resourceSet, part), "Resource is not null.");
@@ -208,7 +202,7 @@ public class PartitionManagerTest {
     private Part createPartSide(final Side side, final String resourceId) {
 
         // create part
-        Part part = NF.createPart();
+        Part part = new Part();
         part.setSide(side);
 
         // add to referenced resource
@@ -229,7 +223,7 @@ public class PartitionManagerTest {
     private Part createPartSeparationSide(final String separation, final Side side, final String resourceId) {
 
         // create part
-        Part part = NF.createPart();
+        Part part = new Part();
         part.setSeparation(separation);
         part.setSide(side);
 
@@ -253,7 +247,7 @@ public class PartitionManagerTest {
     ) {
 
         // create part
-        Part part = NF.createPart();
+        Part part = new Part();
         part.setSeparation(separation);
         part.setSide(side);
         part.withPartVersion(partVersion);
@@ -287,7 +281,7 @@ public class PartitionManagerTest {
      * @return The created Resource element.
      */
     private Resource createResource(final String id) {
-        Resource resource = NF.createResource();
+        Resource resource = new Resource();
         resource.setID(id);
 
         resourceSet.getResource().add(resource);

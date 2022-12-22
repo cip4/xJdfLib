@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.builder;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.GeneralID;
 import org.cip4.lib.xjdf.schema.Part;
@@ -25,7 +24,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.getXJdf().setJobID("Job-12345");
 
 		// append GeneralID
-		GeneralID generalId = new XJdfNodeFactory().createGeneralID("CatalobID", "46");
+		GeneralID generalId = new GeneralID().withIDUsage("CatalobID").withIDValue("46");
 		xJdfBuilder.addGeneralID(generalId);
 
 		// append Product
@@ -34,29 +33,19 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addProduct(productBuilder.build());
 
 		// append Cover File (using the detailed way - for customization)
-		FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
-		fileSpec.setURL(
-            new URI(
-                new java.net.URI(
-                    "http://www.example.org/xjdf/myCover.pdf"
-                )
-            )
-		);
-		RunList runCover = new XJdfNodeFactory().createRunList();
+		FileSpec fileSpec = new FileSpec().withURL(new URI(
+			"http://www.example.org/xjdf/myCover.pdf"
+		));
+
+		RunList runCover = new RunList();
 		runCover.setFileSpec(fileSpec);
-		Part partCover = new XJdfNodeFactory().createPart();
+		Part partCover = new Part();
 		partCover.setRun("Cover");
 		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-		RunList runContent = new XJdfNodeFactory().createRunList(
-            new URI(
-                new java.net.URI(
-                    "http://www.example.org/xjdf/myContent.pdf"
-                )
-            )
-        );
-		Part partContent = new XJdfNodeFactory().createPart();
+		RunList runContent = new RunList().withFileSpec(new FileSpec().withURL(new URI("http://www.example.org/xjdf/myContent.pdf")));
+		Part partContent = new Part();
 		partContent.setRun("Content");
 		xJdfBuilder.addResource(runContent, partContent);
 
@@ -78,7 +67,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.getXJdf().setJobID("Job-12345");
 
 		// append GeneralID
-		GeneralID generalId = new XJdfNodeFactory().createGeneralID("CatalobID", "46");
+		GeneralID generalId = new GeneralID().withIDUsage("CatalobID").withIDValue("46");
 		xJdfBuilder.addGeneralID(generalId);
 
 		// create and append Product
@@ -87,7 +76,7 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
 		xJdfBuilder.addProduct(productBuilder.build());
 
 		// append Cover File (using the detailed way - for customization)
-		FileSpec fileSpec = new XJdfNodeFactory().createFileSpec();
+		FileSpec fileSpec = new FileSpec();
         fileSpec.setURL(
             new URI(
                 new java.net.URI(
@@ -95,21 +84,19 @@ public class XJdfBuilderUsabilityTest extends AbstractBuilderTest<XJDF> {
                 )
             )
         );
-		RunList runCover = new XJdfNodeFactory().createRunList();
+		RunList runCover = new RunList();
 		runCover.setFileSpec(fileSpec);
-		Part partCover = new XJdfNodeFactory().createPart();
+		Part partCover = new Part();
 		partCover.setRun("Cover");
 		xJdfBuilder.addResource(runCover, partCover);
 
 		// append Content File (using the straight way - based on common default settings)
-        RunList runContent = new XJdfNodeFactory().createRunList(
-            new URI(
-                new java.net.URI(
-                    "http://www.example.org/xjdf/myContent.pdf"
-                )
-            )
-        );
-		Part partContent = new XJdfNodeFactory().createPart();
+        RunList runContent = new RunList().withFileSpec(new FileSpec().withURL(
+			new URI(
+				"http://www.example.org/xjdf/myContent.pdf"
+			)
+		));
+		Part partContent = new Part();
 		partContent.setRun("Content");
 		xJdfBuilder.addResource(runContent, partContent);
 

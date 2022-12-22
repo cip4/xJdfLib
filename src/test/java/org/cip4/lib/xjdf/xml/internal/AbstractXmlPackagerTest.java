@@ -1,9 +1,10 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.builder.XJdfBuilder;
 import org.cip4.lib.xjdf.schema.FileSpec;
+import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Preview;
+import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.XJDF;
@@ -274,12 +275,11 @@ public class AbstractXmlPackagerTest {
             try (final InputStream is = Files.newInputStream(xjdfDocumentPath)) {
                 xjdf = new XJdfParser().parseStream(is);
 
-                final XJdfNodeFactory nf = new XJdfNodeFactory();
                 xjdf.withResourceSet(
                     new ResourceSet()
                         .withName("RunList")
                         .withResource(
-                            nf.createResource(
+                            new Resource().withSpecificResource(new ObjectFactory().createRunList(
                                 new RunList()
                                     .withFileSpec(
                                         new FileSpec()
@@ -290,9 +290,8 @@ public class AbstractXmlPackagerTest {
                                                     "artwork/another_artwork.pdf"
                                                 )
                                             )
-                                    )
+                                    )))
                             ).withID("Artwork")
-                        )
                 );
             }
         }
