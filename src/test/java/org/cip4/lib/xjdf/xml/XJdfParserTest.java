@@ -12,7 +12,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
 import jakarta.xml.bind.ValidationException;
-import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.XJdfDocument;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.jupiter.api.AfterEach;
@@ -58,18 +58,12 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
-
-        xJdfBuilder.addGeneralID(
-            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
-        );
-
-        XJDF xJdf = xJdfBuilder.build();
-
+        XJdfDocument xJdfDocument = new XJdfDocument();
+        xJdfDocument.getXJdf().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         // act
-        xJdfParser.parseXJdf(xJdf, bos, true);
+        xJdfParser.parseXJdf(xJdfDocument.getXJdf(), bos, true);
 
         // assert
         NamespaceManager nsManager = new NamespaceManager();
@@ -92,16 +86,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
-
-        xJdfBuilder.addGeneralID(
-            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
-        );
-
-        XJDF xJdf = xJdfBuilder.build();
+        XJdfDocument xJdfDocument = new XJdfDocument();
+        xJdfDocument.getXJdf().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
 
         // act
-        byte[] bytes = xJdfParser.parseXJdf(xJdf, true);
+        byte[] bytes = xJdfParser.parseXJdf(xJdfDocument.getXJdf(), true);
 
         // assert
         NamespaceManager nsManager = new NamespaceManager();
@@ -124,15 +113,9 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfBuilder xJdfBuilder = new XJdfBuilder();
+        XJdfDocument xJdfDocument = new XJdfDocument();
+        xJdfDocument.getXJdf().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
 
-        xJdfBuilder.addGeneralID(
-            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
-        );
-
-        final XJDF xJdf = xJdfBuilder.build();
-        // empty list of types is invalid
-        xJdf.withTypes(Collections.EMPTY_LIST);
 
         final ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
@@ -142,7 +125,7 @@ public class XJdfParserTest {
             new Executable() {
                 @Override
                 public void execute() throws Throwable {
-                    xJdfParser.parseXJdf(xJdf, bos);
+                    xJdfParser.parseXJdf(xJdfDocument.getXJdf(), bos);
                 }
             }
         );
@@ -154,20 +137,13 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
-
-        xJdfBuilder.addGeneralID(
-            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
-        );
-
-        xJdfBuilder.build().getTypes().add("MyType");
-
-        XJDF xJdf = xJdfBuilder.build();
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "MyType");
+        xJdfDocument.getXJdf().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
 
         // act
-        xJdfParser.parseXJdf(xJdf, bos);
+        xJdfParser.parseXJdf(xJdfDocument.getXJdf(), bos);
 
         // assert
         NamespaceManager nsManager = new NamespaceManager();
@@ -190,18 +166,11 @@ public class XJdfParserTest {
         // arrange
         final String VALUE = UUID.randomUUID().toString();
 
-        XJdfBuilder xJdfBuilder = new XJdfBuilder("Foo");
-
-        xJdfBuilder.addGeneralID(
-            new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE)
-        );
-
-        xJdfBuilder.build().getTypes().add("MyType");
-
-        XJDF xJdf = xJdfBuilder.build();
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "MyType");
+        xJdfDocument.getXJdf().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
 
         // act
-        byte[] bytes = xJdfParser.parseXJdf(xJdf);
+        byte[] bytes = xJdfParser.parseXJdf(xJdfDocument.getXJdf());
 
         // assert
         NamespaceManager nsManager = new NamespaceManager();

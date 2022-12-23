@@ -1,10 +1,12 @@
 package org.cip4.lib.xjdf.util;
 
+import org.cip4.lib.xjdf.schema.Color;
 import org.cip4.lib.xjdf.schema.ColorIntent;
+import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Product;
 import org.junit.jupiter.api.Test;
-import org.cip4.lib.xjdf.builder.ProductBuilder;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -12,21 +14,21 @@ public class ProductUtilTest {
 
     @Test
     public void getIntent() {
-        ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
-        productBuilder.addIntent(new LayoutIntent());
-        productBuilder.addIntent(colorIntent);
-        Product product = productBuilder.build();
+
+        Product product = new Product()
+            .withIntent(new Intent().withProductIntent(new ObjectFactory().createColorIntent(colorIntent)))
+            .withIntent(new Intent().withProductIntent(new ObjectFactory().createLayoutIntent(new LayoutIntent())));
 
         assertSame(colorIntent, ProductUtil.getIntent(product, ColorIntent.class));
     }
 
     @Test
     public void getIntentReturnsNull() {
-        ProductBuilder productBuilder = new ProductBuilder();
         ColorIntent colorIntent = new ColorIntent();
-        productBuilder.addIntent(colorIntent);
-        Product product = productBuilder.build();
+
+        Product product = new Product()
+            .withIntent(new Intent().withProductIntent(new ObjectFactory().createColorIntent(colorIntent)));
 
         assertNull(ProductUtil.getIntent(product, LayoutIntent.class));
     }

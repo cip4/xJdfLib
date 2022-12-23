@@ -1,7 +1,9 @@
 package org.cip4.lib.xjdf.xml.internal;
 
+import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.dom.DOMInputImpl;
+import org.cip4.lib.xjdf.XJdfDocument;
 import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
@@ -111,6 +113,28 @@ public abstract class AbstractXmlValidator {
      */
     public AbstractXmlValidator(final Map<String, byte[]> xsdDependencies) {
         this.xsdDependencies = xsdDependencies;
+    }
+
+    /**
+     * Validation of XJDF Document based on XJDF Schema.
+     *
+     * @param xJdfDocument Byte array to read document from.
+     *
+     * @throws ValidationException Is thrown in case the underlying document is invalid.
+     */
+    public final void validate(final XJdfDocument xJdfDocument) throws JAXBException, IOException {
+        validate(xJdfDocument.toXml());
+    }
+
+    /**
+     * Validation of XJDF Document based on XJDF Schema.
+     *
+     * @param document Byte array to read document from.
+     *
+     * @throws ValidationException Is thrown in case the underlying document is invalid.
+     */
+    public final void validate(final byte[] document) throws ValidationException {
+        validate(new ByteArrayInputStream(document));
     }
 
     /**

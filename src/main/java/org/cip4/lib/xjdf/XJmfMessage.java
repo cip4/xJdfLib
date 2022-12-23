@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
+import org.apache.commons.lang3.NotImplementedException;
 import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.Message;
@@ -28,6 +29,10 @@ public class XJmfMessage {
      */
     public XJmfMessage() throws JAXBException {
         this.xjmf = new XJMF();
+    }
+
+    public void send() {
+        throw new NotImplementedException("Send needs to be implemented.");
     }
 
     public void addMessage(@NotNull Message message) {

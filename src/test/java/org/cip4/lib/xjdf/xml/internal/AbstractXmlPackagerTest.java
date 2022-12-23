@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import org.cip4.lib.xjdf.builder.XJdfBuilder;
+import org.cip4.lib.xjdf.XJdfDocument;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Preview;
@@ -51,34 +51,13 @@ public class AbstractXmlPackagerTest {
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder("Foo");
 
-        builder.addResource(
-            new RunList().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        sourceUri,
-                        fileSpec
-                    )
-                )
-            )
-        );
+        XJdfDocument xJdfDocument = new XJdfDocument("JobID", "Product");
+        xJdfDocument.addResourceSet(new Preview().withFileSpec(new FileSpec().withURL(new URI(sourceUri, preview))), ResourceSet.Usage.INPUT);
+        xJdfDocument.addResourceSet(new RunList().withFileSpec(new FileSpec().withURL(new URI(sourceUri, fileSpec))), ResourceSet.Usage.INPUT);
 
-        builder.addResource(
-            new Preview().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        sourceUri,
-                        preview
-                    )
-                )
-            )
-        );
-
-        final XJDF xjdf = builder.build();
-        xjdf.withTypes("Product");
-        xjdf.setCommentURL(new URI(sourceUri));
-        packager.packageXml(xjdf, "document.xml");
+        xJdfDocument.getXJdf().withCommentURL(new URI(sourceUri));
+        packager.packageXml(xJdfDocument.getXJdf(), "document.xml");
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
@@ -96,34 +75,13 @@ public class AbstractXmlPackagerTest {
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
         final String doc = "doc/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder("Foo");
 
-        builder.addResource(
-            new RunList().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        sourceUri,
-                        fileSpec
-                    )
-                )
-            )
-        );
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "Product");
+        xJdfDocument.addResourceSet(new Preview().withFileSpec(new FileSpec().withURL(new URI(sourceUri, preview))), ResourceSet.Usage.INPUT);
+        xJdfDocument.addResourceSet(new RunList().withFileSpec(new FileSpec().withURL(new URI(sourceUri, fileSpec))), ResourceSet.Usage.INPUT);
 
-        builder.addResource(
-            new Preview().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        sourceUri,
-                        preview
-                    )
-                )
-            )
-        );
-
-        final XJDF xjdf = builder.build();
-        xjdf.withTypes("Product");
-        xjdf.setCommentURL(new URI(sourceUri, doc));
-        packager.packageXml(xjdf, "document.xml");
+        xJdfDocument.getXJdf().withCommentURL(new URI(sourceUri, doc));
+        packager.packageXml(xJdfDocument.getXJdf(), "document.xml");
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
@@ -146,34 +104,13 @@ public class AbstractXmlPackagerTest {
         final String preview = "preview/datei.pdf";
         final String fileSpec = "filespec/datei.pdf";
         final String doc = "doc/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder("Foo");
 
-        builder.addResource(
-            new RunList().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        "Content_RunList".getBytes(),
-                        fileSpec
-                    )
-                )
-            )
-        );
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "Product");
+        xJdfDocument.addResourceSet(new Preview().withFileSpec(new FileSpec().withURL(new URI("Content_FileSpec".getBytes(), preview))), ResourceSet.Usage.INPUT);
+        xJdfDocument.addResourceSet(new RunList().withFileSpec(new FileSpec().withURL(new URI("Content_RunList".getBytes(), fileSpec))), ResourceSet.Usage.INPUT);
 
-        builder.addResource(
-            new Preview().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        "Content_FileSpec".getBytes(),
-                        preview
-                    )
-                )
-            )
-        );
-
-        final XJDF xjdf = builder.build();
-        xjdf.withTypes("Product");
-        xjdf.setCommentURL(new URI("Content_CommentURL".getBytes(), doc));
-        packager.packageXml(xjdf, "document.xml");
+        xJdfDocument.getXJdf().withCommentURL(new URI("Content_CommentURL".getBytes(), doc));
+        packager.packageXml(xJdfDocument.getXJdf(), "document.xml");
 
         final ZipInputStream zin = new ZipInputStream(new ByteArrayInputStream(out.toByteArray()));
         assertEquals("document.xml", zin.getNextEntry().getName());
@@ -195,20 +132,14 @@ public class AbstractXmlPackagerTest {
     public void collectReferencesExtractedValueExists() throws Exception {
         final java.net.URI sourceUri = AbstractXmlPackagerTest.class.getResource("../../test.pdf").toURI();
         final String preview = "preview/datei.pdf";
-        XJdfBuilder builder = new XJdfBuilder();
-        builder.addResource(
-            new Preview().withFileSpec(
-                new FileSpec().withURL(
-                    new URI(
-                        sourceUri,
-                        preview
-                    )
-                )
-            )
-        );
+
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "Product");
+        xJdfDocument.addResourceSet(new Preview().withFileSpec(new FileSpec().withURL(new URI(sourceUri, preview))), ResourceSet.Usage.INPUT);
+
+
         AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
 
-        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
+        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(xJdfDocument.getXJdf());
         jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         assertEquals(
             1,
@@ -228,16 +159,9 @@ public class AbstractXmlPackagerTest {
     @Test
     public void collectReferencesExtractedValueIsNull() {
         AbstractXmlPackager packager = new MinimalXmlPackager(new ByteArrayOutputStream());
-        XJdfBuilder builder = new XJdfBuilder();
         assertTrue(packager.collectReferences(
-            new AbstractXmlPackager.URIExtractor<XJDF>() {
-                @Override
-                public URI extract(final XJDF xjdf) {
-                    return xjdf.getCommentURL();
-                }
-
-            },
-            new Object[]{builder.build()}
+            (AbstractXmlPackager.URIExtractor<XJDF>) XJDF::getCommentURL,
+            new Object[]{new XJDF()}
             ).isEmpty()
         );
     }
@@ -246,13 +170,12 @@ public class AbstractXmlPackagerTest {
     public void extract() throws Exception {
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         AbstractXmlPackager packager = new MinimalXmlPackager(out);
-        XJdfBuilder builder = new XJdfBuilder();
-        builder.addResource(
-            new RunList().withFileSpec(
-                new FileSpec().withURL(new URI(new java.net.URI("MyUri")))
-            )
-        );
-        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(builder.build());
+
+
+        XJdfDocument xJdfDocument = new XJdfDocument("Foo", "Product");
+        xJdfDocument.addResourceSet(new RunList().withFileSpec(new FileSpec().withURL(new URI(new java.net.URI("MyUri")))), ResourceSet.Usage.INPUT);
+
+        final JAXBNavigator<XJDF> jaxbNavigator = new JAXBNavigator<>(xJdfDocument.getXJdf());
         jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
         final Collection uriCollection = packager.collectReferences(
             new AbstractXmlPackager.URIExtractor<FileSpec>() {
