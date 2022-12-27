@@ -1,9 +1,10 @@
 package org.cip4.lib.xjdf.xml.internal;
 
-import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.xerces.dom.DOMInputImpl;
 import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
+import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.ls.LSInput;
 import org.w3c.dom.ls.LSResourceResolver;
@@ -18,13 +19,13 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Source;
 import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,7 @@ import java.util.Map;
 public abstract class AbstractXmlValidator {
 
     /**
-     * XJdf Error Handler Implementation for Validation.
+     * XJDF Error Handler Implementation for Validation.
      */
     private class XJdfErrorHandler implements ErrorHandler {
 
@@ -80,8 +81,6 @@ public abstract class AbstractXmlValidator {
 
     /**
      * Resolver class for resolving XSD Imports.
-     *
-     * @author s.meissner
      */
     private class ResourceResolver implements LSResourceResolver {
 
@@ -102,6 +101,11 @@ public abstract class AbstractXmlValidator {
     }
 
     /**
+     * The XSD Schema for validation.
+     */
+    private final byte[] xsd;
+
+    /**
      * Map of dependent XSD files.
      */
     private final Map<String, byte[]> xsdDependencies;
@@ -109,9 +113,20 @@ public abstract class AbstractXmlValidator {
     /**
      * Custom constructor.
      *
+     * @param xsd The xsd schema.
+     */
+    public AbstractXmlValidator(byte[] xsd) {
+        this(xsd, null);
+    }
+
+    /**
+     * Custom constructor.
+     *
+     * @param xsd The XSD schema for validation.
      * @param xsdDependencies Dependencies for the XSD.
      */
-    public AbstractXmlValidator(final Map<String, byte[]> xsdDependencies) {
+    public AbstractXmlValidator(final byte[] xsd, final Map<String, byte[]> xsdDependencies) {
+        this.xsd = xsd;
         this.xsdDependencies = xsdDependencies;
     }
 
@@ -122,7 +137,7 @@ public abstract class AbstractXmlValidator {
      *
      * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
-    public final void validate(final XJdfDocument xJdfDocument) throws JAXBException, IOException {
+    public final void validate(final XJdfDocument xJdfDocument) throws IOException, XJdfParseException, XJdfValidationException {
         validate(xJdfDocument.toXml());
     }
 
@@ -133,7 +148,7 @@ public abstract class AbstractXmlValidator {
      *
      * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
-    public final void validate(final byte[] document) throws ValidationException {
+    public final void validate(final byte[] document) throws XJdfValidationException {
         validate(new ByteArrayInputStream(document));
     }
 
@@ -144,7 +159,7 @@ public abstract class AbstractXmlValidator {
      *
      * @throws ValidationException Is thrown in case the underlying document is invalid.
      */
-    public final void validate(final InputStream documentStream) throws ValidationException {
+    public final void validate(final InputStream documentStream) throws XJdfValidationException {
         XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
         try {
@@ -156,15 +171,20 @@ public abstract class AbstractXmlValidator {
 
             if (!errorHandler.getMessages().isEmpty()) {
                 final List<String> messages = errorHandler.getMessages();
-                throw new ValidationException(
+                throw new XJdfValidationException(
                     "Validation of the document failed due to following error messages: "
                         + System.lineSeparator()
                         + StringUtils.join(messages, System.lineSeparator())
                 );
             }
-            validate(new DOMSource(doc));
+
+            try {
+                validate(new DOMSource(doc));
+            } catch (ValidationException e) {
+                throw new XJdfValidationException(e);
+            }
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            throw new ValidationException(e.getMessage(), e);
+            throw new XJdfValidationException(e.getMessage(), e);
         }
     }
 
@@ -180,7 +200,7 @@ public abstract class AbstractXmlValidator {
             // create a SchemaFactory and a Schema
             SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             schemaFactory.setResourceResolver(new ResourceResolver());
-            Schema schema = schemaFactory.newSchema(getSchema());
+            Schema schema = schemaFactory.newSchema(new StreamSource(new ByteArrayInputStream(this.xsd)));
 
             // new error handler
             XJdfErrorHandler errorHandler = new XJdfErrorHandler();
@@ -203,12 +223,4 @@ public abstract class AbstractXmlValidator {
             throw new ValidationException(e.getMessage(), e);
         }
     }
-
-    /**
-     * Get the URL of the schema to validate against.
-     *
-     * @return Internal URL to of the schema.
-     */
-    protected abstract URL getSchema();
-
 }

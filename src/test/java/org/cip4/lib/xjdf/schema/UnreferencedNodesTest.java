@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.schema;
 
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +15,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
-import java.io.InputStream;
+import java.io.ByteArrayInputStream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -29,9 +30,7 @@ public class UnreferencedNodesTest {
         builderFactory.setNamespaceAware(true);
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
 
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/JDF20.xsd")) {
-            XJDF_SCHEMA = builder.parse(new InputSource(inputStream));
-        }
+        XJDF_SCHEMA = builder.parse(new ByteArrayInputStream(XJdfConstants.XJDF_XSD_BYTES_CURRENT));
 
         NamespaceManager nsManager = new NamespaceManager();
         nsManager.addNamespace("xs", XMLConstants.W3C_XML_SCHEMA_NS_URI);

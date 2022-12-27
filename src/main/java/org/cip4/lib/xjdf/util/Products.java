@@ -7,12 +7,12 @@ import org.cip4.lib.xjdf.schema.Product;
 /**
  * Utility for performing reoccuring operations on products.
  */
-public final class ProductUtil {
+public final class Products {
 
     /**
      * Private constructor for utility class.
      */
-    private ProductUtil() {
+    private Products() {
     }
 
     /**

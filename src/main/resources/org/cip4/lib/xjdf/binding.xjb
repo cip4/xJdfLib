@@ -6,7 +6,7 @@
           xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
           xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
           xmlns:annox="http://annox.dev.java.net"
-          schemaLocation="JDF21.xsd">
+          schemaLocation="./schema/jdfschema_2_1.xsd">
 
     <xjb:globalBindings typesafeEnumMemberName="generateError">
         <xjc:serializable/>
@@ -317,8 +317,14 @@
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.6']">
         <xjb:typesafeEnumMember name="V1_6"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.7']">
+        <xjb:typesafeEnumMember name="V1_7"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.0']">
         <xjb:typesafeEnumMember name="V2_0"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.1']">
+        <xjb:typesafeEnumMember name="V2_1"/>
     </xjb:bindings>
 
     <xjb:bindings node="//xs:element[@name='GangCmdFilter']//xs:attribute[@name='Policy']/xs:simpleType">

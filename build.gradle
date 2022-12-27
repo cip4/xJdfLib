@@ -10,20 +10,25 @@ plugins {
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '0.x-SNAPSHOT'
+
+if (project.hasProperty('projectVersion')) {
+    version = project.projectVersion
+} else {
+    version = '2.1.x-DEV'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
 
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/JDF21.xsd')
+def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd')
 
 java {
     withJavadocJar()
     withSourcesJar()
 }
-
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
@@ -85,6 +90,18 @@ publishing {
     }
 }
 
+task updateSchema() {
+    def schemes = ["jdfschema_2_0", "jdfschema_2_1"]
+
+    schemes.forEach { schemaName ->
+        println "Update ${schemaName} from https://schema.cip4.org..."
+        def dest = new File("src/main/resources/org/cip4/lib/xjdf/schema/${schemaName}.xsd")
+        dest.delete()
+
+        dest << new URL ("https://schema.cip4.org/${schemaName}/xjdf.xsd").getText()
+    }
+}
+
 nexusStaging {
     packageGroup = 'org.cip4'
     stagingProfileId = '105e2b532689c6'
@@ -119,7 +136,7 @@ processResources {
     filesMatching(['**/*.properties']) {
         filter(ReplaceTokens, tokens: [
                 'version'  : project.properties['version'],
-                'buildtime': new Date().format("yyyy-MM-dd HH:mm:ss'Z'", TimeZone.getTimeZone("GMT"))
+                'buildtime': new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", TimeZone.getTimeZone("GMT"))
         ])
     }
 }
@@ -155,7 +172,7 @@ dependencies {
 }
 
 task xjc() {
-    def bindings = file('src/main/resources/binding.xjb')
+    def bindings = file('src/main/resources/org/cip4/lib/xjdf/binding.xjb')
     inputs.files(schema, bindings)
     outputs.dir(generatedSources)
     outputs.dir(generatedResources)

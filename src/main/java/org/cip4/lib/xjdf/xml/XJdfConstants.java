@@ -1,17 +1,11 @@
 package org.cip4.lib.xjdf.xml;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathFactory;
-
-import org.apache.commons.io.IOUtils;
-import org.cip4.lib.xjdf.schema.Device;
-import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
-import org.xml.sax.InputSource;
+import org.cip4.lib.xjdf.schema.Version;
 
 /**
  * This class provides common XJdf default values.
@@ -22,145 +16,126 @@ import org.xml.sax.InputSource;
 public class XJdfConstants {
 
     /**
-     * Default Namespace xJdf,
+     * Namespace XJDF,
      */
-    public static final String NAMESPACE_JDF20 = loadNamespaceJdf20();
-
-    public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
-
-    public static final Device.JDFVersions XJDF_CURRENT_VERSION = Device.JDFVersions.V2_0;
-
-    public static final String XJDF_LIB_VERSION = loadLibraryVersion();
-
-    public static final String XJDF_LIB_BUILD_DATE = loadLibraryBuildDate();
-
-    public static final String JMF_ICS_VERSION = "JMF_L1-2.0";
-
-    public static final byte[] XJDF_XSD_BYTES = loadXJdfXsdByteArray();
-
-    public static final String MEDIA_TYPE_VND_JMF = "application/vnd.cip4-jmf+xml";
-
-    public static final String MEDIA_TYPE_VND_JDF = "application/vnd.cip4-jdf+xml";
+    public static final String NAMESPACE_JDF20 = "http://www.CIP4.org/JDFSchema_2_0";
 
     /**
-     * Media type for XJDF documents.
+     * Namespace XML
+     */
+    public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
+
+    /**
+     * XJdfLib Version
+     */
+    public static final String XJDFLIB_VERSION = loadLibraryVersion();
+
+    /**
+     * XJdfLib Build datetime
+     */
+    public static final String XJDFLIB_BUILD_DATE = loadLibraryBuildDate();
+
+    /**
+     * A map containing all XJDF Schemes as byte array.
+     */
+    public static final Map<Version, byte[]> XJDF_XSD_BYTES = loadXJdfXsdByteArray();
+
+    /**
+     * Returns the current XJDF Version
+     */
+    public static final Version XJDF_CURRENT_VERSION = Version.V2_1;
+
+    /**
+     * Returns the current XJDF Version
+     */
+    public static final byte[] XJDF_XSD_BYTES_CURRENT = XJDF_XSD_BYTES.get(XJDF_CURRENT_VERSION);
+
+    /**
+     * Media Type for XJDF Documents.
      */
     public static final String MEDIA_TYPE_XJDF = "application/vnd.cip4-xjdf+xml";
 
     /**
-     * Media type for XJDF packages.
+     * Media Type for XJMF Messages.
+     */
+    public static final String MEDIA_TYPE_XJMF = "application/vnd.cip4-xjmf+xml";
+
+    /**
+     * Media Type for XJDF packages.
      */
     public static final String MEDIA_TYPE_XJDF_ZIP = "application/vnd.cip4-xjdf+zip";
 
-    private static final String RES_BUILD_PROPS = "/org/cip4/lib/xjdf/build.properties";
-
-    private static final String RES_JDF20_XSD = "/JDF20.xsd";
+    /**
+     * Media Type for XJMF packages.
+     */
+    public static final String MEDIA_TYPE_XJMF_ZIP = "application/vnd.cip4-xjmf+zip";
 
     /**
-     * Load XJDF XSD as byte array.
+     * Helper method to load all XJDF schemes as a map of byte array.
      *
-     * @return XJDF Schema as byte array.
+     * @return XJDF Schemes as byte array map.
      */
-    private static byte[] loadXJdfXsdByteArray() {
-
-        // load xsd
-        byte[] bytes = null;
-
-        try (InputStream is = XJdfConstants.class.getResourceAsStream(RES_JDF20_XSD)) {
-            bytes = IOUtils.toByteArray(is);
-        } catch (Exception ex) {
-        }
-
-        // return
-        return bytes;
-    }
-
-    /**
-     * Load the JDF20 Namespace from schema file.
-     */
-    private static String loadNamespaceJdf20() {
-
-        String result;
-
-        // new namespace manager
-        NamespaceManager nsManager = new NamespaceManager();
-        nsManager.addNamespace("xs", NAMESPACE_W3_XML);
-
-        // create xpath query
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
-        xPath.setNamespaceContext(nsManager);
+    private static Map<Version, byte[]> loadXJdfXsdByteArray() {
+        Map<Version, byte[]> xsdMap = new HashMap<>();
 
         try {
-            XPathExpression xPathExpression = xPath.compile("/xs:schema/@targetNamespace");
-
-            // execute xPath query
-            InputStream is = XJdfConstants.class.getResourceAsStream(RES_JDF20_XSD);
-            result = xPathExpression.evaluate(new InputSource(is));
-
-        } catch (Exception ex) {
-            // throw error
-            throw new AssertionError(ex);
+            xsdMap.put(
+                    Version.V2_0,
+                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_0.xsd"
+                    ).readAllBytes());
+        } catch (Exception e) {
+            throw new RuntimeException("Error loading XJDF Schema 2.0", e);
         }
 
-        // return result
-        return result;
+        try{
+            xsdMap.put(
+                    Version.V2_1,
+                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd"
+                    ).readAllBytes());
+        } catch (Exception e) {
+            throw new RuntimeException("Error loading XJDF Schema 2.1", e);
+        }
+
+        return xsdMap;
     }
 
     /**
-     * Load Version Number from Package.
+     * Helper method to load the version number of the library.
      *
-     * @return Version Number as String
+     * @return The libraries version.
      */
     private static String loadLibraryVersion() {
+        String result;
 
-        String result = null;
-
-        // load Version
         Properties props = new Properties();
 
         try {
-            props.load(XJdfConstants.class.getResourceAsStream(RES_BUILD_PROPS));
-            result = props.getProperty("version", "UNKNOWN");
-
+            props.load(XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/build.properties"));
+            result = props.getProperty("version", "n. a.");
         } catch (IOException e) {
+            result = "n. a.";
         }
 
-        // default
-        if (result == null) {
-            // result = "[version not specified]";
-            result = "";
-        }
-
-        // return result
         return result;
     }
 
     /**
-     * Load Build Date from Package.
+     * Helper method to load the build date of the library.
      *
-     * @return Version Number as String
+     * @return The libraries build date.
      */
     private static String loadLibraryBuildDate() {
+        String result;
 
-        String result = null;
-
-        // load Version
         Properties props = new Properties();
 
         try {
-            props.load(XJdfConstants.class.getResourceAsStream(RES_BUILD_PROPS));
-            result = props.getProperty("build.date", "UNKNOWN");
-
+            props.load(XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/build.properties"));
+            result = props.getProperty("build.date", "n. a.");
         } catch (IOException e) {
+            result = "n. a.";
         }
 
-        // default
-        if (result == null) {
-            result = "";
-        }
-
-        // return result
         return result;
     }
 }

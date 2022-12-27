@@ -5,7 +5,7 @@ import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.SpecificResource;
-import org.cip4.lib.xjdf.util.IDGeneratorUtil;
+import org.cip4.lib.xjdf.util.IDGenerator;
 import org.cip4.lib.xjdf.util.Resources;
 
 
@@ -44,7 +44,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     public IDREF(SpecificResource specificResource) {
-        this(specificResource, null, IDGeneratorUtil.generateID("PAR"));
+        this(specificResource, null, IDGenerator.generateID("PAR"));
     }
 
     public IDREF(SpecificResource specificResource, Part part, String id) {
@@ -116,7 +116,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
         String productId = product.getID();
 
         if (StringUtils.isEmpty(productId)) {
-            productId = IDGeneratorUtil.generateID("PRD");
+            productId = IDGenerator.generateID("PRD");
         }
 
         return productId;

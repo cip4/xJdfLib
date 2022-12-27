@@ -1,18 +1,14 @@
 package org.cip4.lib.xjdf;
 
-import jakarta.xml.bind.JAXBElement;
 import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang3.NotImplementedException;
-import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
-import org.cip4.lib.xjdf.schema.Header;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
-import org.cip4.lib.xjdf.type.DateTime;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJmfParser;
 import org.jetbrains.annotations.NotNull;
 
-import javax.xml.namespace.QName;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
@@ -25,10 +21,31 @@ public class XJmfMessage {
     private boolean validation = false;
 
     /**
-     * Default constructor
+     * Default constructor. <br>
+     * Creates an empty XJMF Message.
      */
     public XJmfMessage() throws JAXBException {
         this.xjmf = new XJMF();
+    }
+
+    /**
+     * Custom Constructor. <br>
+     * Accepting an XJMF Message as byte array for initializing.
+     *
+     * @param bytes The XJMF Message as byte array.
+     */
+    public XJmfMessage(byte[] bytes) throws XJdfParseException {
+        this.xjmf = new XJmfParser().parseStream(new ByteArrayInputStream(bytes));
+    }
+
+    /**
+     * Custom Constructor. <br>
+     * Accepting an XJMF root node for initializing.
+     *
+     * @param xjmf The XJMF root node.
+     */
+    public XJmfMessage(XJMF xjmf) {
+        this.xjmf = xjmf;
     }
 
     public void send() {
@@ -57,7 +74,34 @@ public class XJmfMessage {
      * Returns the current XJMF Message as String
      * @return The XJMF Message as String.
      */
-    public String toXml() throws JAXBException, IOException {
+    public String toXml() throws XJdfParseException, IOException {
         return new String(new XJmfParser(false).parseXJmf(this.xjmf, !validation));
+    }
+
+    /**
+     * An XJMF Message builder class.
+     */
+    public static class Builder {
+
+        private final XJMF xjmf;
+
+        /**
+         * Default constructor.
+         */
+        public Builder() {
+            this.xjmf = new XJMF();
+        }
+
+        public Builder withMessage() {
+            return this;
+        }
+
+        /**
+         * Build XJMF Message object.
+         * @return The XJMF Message object
+         */
+        public XJmfMessage build() {
+            return new XJmfMessage(xjmf);
+        }
     }
 }

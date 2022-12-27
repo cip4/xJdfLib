@@ -25,7 +25,7 @@ class BindingReader {
         builderFactory.setNamespaceAware(true);
         DocumentBuilder builder = builderFactory.newDocumentBuilder();
 
-        try (InputStream inputStream = this.getClass().getResourceAsStream("/binding.xjb")) {
+        try (InputStream inputStream = this.getClass().getResourceAsStream("/org/cip4/lib/xjdf/binding.xjb")) {
             schema = builder.parse(new InputSource(inputStream));
         }
 

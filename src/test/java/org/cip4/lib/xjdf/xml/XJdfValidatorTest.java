@@ -1,8 +1,8 @@
 package org.cip4.lib.xjdf.xml;
 
 import jakarta.xml.bind.JAXBException;
-import jakarta.xml.bind.ValidationException;
 import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.junit.jupiter.api.AfterEach;
@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -59,7 +58,7 @@ public class XJdfValidatorTest {
         xJdfValidator = new XJdfValidator();
 
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {
@@ -97,7 +96,7 @@ public class XJdfValidatorTest {
         xJdfValidator = new XJdfValidator();
 
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {
@@ -108,7 +107,7 @@ public class XJdfValidatorTest {
     }
 
     @Test
-    public void isValidXjdfIsInvalid() throws IOException, JAXBException {
+    public void isValidXjdfIsInvalid() throws Exception {
         // arrange
         XJdfDocument xJdfDocument = new XJdfDocument(XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf").readAllBytes());
 
@@ -116,7 +115,7 @@ public class XJdfValidatorTest {
         xJdfValidator = new XJdfValidator();
 
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {

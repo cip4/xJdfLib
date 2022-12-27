@@ -1,20 +1,16 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfPackager;
 import org.cip4.lib.xjdf.xml.XJdfParser;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
-import org.cip4.lib.xjdf.xml.internal.PackagerException;
 import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
-import jakarta.xml.bind.JAXBException;
 
 import javax.xml.namespace.QName;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -56,7 +52,7 @@ public class XJdfDocument {
      *
      * @param bytes The XJDF Document as byte array.
      */
-    public XJdfDocument(byte[] bytes) throws JAXBException {
+    public XJdfDocument(byte[] bytes) throws XJdfParseException {
         this.xjdf = new XJdfParser().parseStream(new ByteArrayInputStream(bytes));
     }
 
@@ -84,7 +80,7 @@ public class XJdfDocument {
      *
      * @return The XJDF Document as XML byte array.
      */
-    public byte[] toXml() throws JAXBException, IOException {
+    public byte[] toXml() throws XJdfParseException, IOException {
         return new XJdfParser(false).parseXJdf(this.xjdf, DEFAULT_SKIP_VALIDATION);
     }
 

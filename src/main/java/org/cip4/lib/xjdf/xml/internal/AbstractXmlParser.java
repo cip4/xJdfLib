@@ -16,6 +16,7 @@ import jakarta.xml.bind.ValidationException;
 import jakarta.xml.bind.util.JAXBSource;
 import javax.xml.transform.Source;
 
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 import org.w3c.dom.Node;
 
@@ -52,9 +53,15 @@ public abstract class AbstractXmlParser<T> {
      *
      * @return The XML Node as object.
      */
-    protected final Object parseNode(final Node w3cNode) throws JAXBException {
-        Unmarshaller u = jaxbContext.createUnmarshaller();
-        return u.unmarshal(w3cNode);
+    protected final Object parseNode(final Node w3cNode) throws XJdfParseException {
+
+        try {
+            Unmarshaller u = jaxbContext.createUnmarshaller();
+            return u.unmarshal(w3cNode);
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
     }
 
     /**
@@ -63,34 +70,14 @@ public abstract class AbstractXmlParser<T> {
      * @param xmlNode The XML Node to be parsed.
      * @param w3cNode The W3C Result node.
      */
-    protected final void parseNode(final Object xmlNode, final Node w3cNode) throws JAXBException {
+    protected final void parseNode(final Object xmlNode, final Node w3cNode) throws XJdfParseException {
         Marshaller m = createMarshaller();
-        m.marshal(xmlNode, w3cNode);
-    }
 
-    /**
-     * Parse the object tree of an document to a byte array.
-     *
-     * @param obj Object tree for parsing.
-     *
-     * @return XML-representation of the document as array of bytes.
-     */
-    protected final byte[] parseXml(final T obj)
-        throws JAXBException, IOException {
-        return parseXml(obj, false);
-    }
-
-    /**
-     * Parse the object tree of an document to a binary output stream.
-     *
-     * @param obj Object tree for parsing.
-     * @param os OutputStream the write the document to.
-     *
-     * @throws ValidationException Is thrown in case document is not valid and validation process is not being skipped.
-     */
-    protected final void parseXml(final T obj, final OutputStream os)
-        throws JAXBException {
-        parseXml(obj, os, false);
+        try {
+            m.marshal(xmlNode, w3cNode);
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
     }
 
     /**
@@ -102,7 +89,7 @@ public abstract class AbstractXmlParser<T> {
      * @return Document as Byte Array.
      */
     protected final byte[] parseXml(final T obj, final boolean skipValidation)
-        throws IOException, JAXBException {
+            throws XJdfParseException, IOException {
         // parse object tree
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         parseXml(obj, bos, skipValidation);
@@ -112,7 +99,7 @@ public abstract class AbstractXmlParser<T> {
     }
 
     /**
-     * Parse a object tree to a binary output stream.
+     * Parse an object tree to a binary output stream.
      *
      * @param obj Object tree object for parsing.
      * @param os Target OutputStream where document is being parsed.
@@ -122,20 +109,26 @@ public abstract class AbstractXmlParser<T> {
      * skipped.
      */
     protected final void parseXml(final T obj, final OutputStream os, final boolean skipValidation)
-        throws JAXBException {
-        if (!skipValidation) {
-            AbstractXmlValidator validator = createValidator();
-            Source xmlSource = new JAXBSource(jaxbContext, obj);
-            validator.validate(xmlSource);
+        throws XJdfParseException {
+
+        try {
+            if (!skipValidation) {
+                AbstractXmlValidator validator = createValidator();
+                Source xmlSource = new JAXBSource(jaxbContext, obj);
+                validator.validate(xmlSource);
+            }
+
+            Marshaller m = createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
+            m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
+
+            OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
+            m.marshal(obj, writer);
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
         }
-
-        Marshaller m = createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
-        m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
-
-        OutputStreamWriter writer = new OutputStreamWriter(os, CHARSET);
-        m.marshal(obj, writer);
     }
 
     /**
@@ -146,9 +139,14 @@ public abstract class AbstractXmlParser<T> {
      * @return Object tree parsed from binary input stream.
      */
     @SuppressWarnings("unchecked")
-    public final T parseStream(final InputStream is) throws JAXBException {
-        Unmarshaller u = jaxbContext.createUnmarshaller();
-        return (T) u.unmarshal(is);
+    public final T parseStream(final InputStream is) throws XJdfParseException {
+        try {
+            Unmarshaller u = jaxbContext.createUnmarshaller();
+            return (T) u.unmarshal(is);
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
     }
 
     /**
@@ -170,10 +168,17 @@ public abstract class AbstractXmlParser<T> {
      *
      * @return New Marshaller object.
      */
-    private Marshaller createMarshaller() throws JAXBException {
-        // create marshaller
-        Marshaller m = jaxbContext.createMarshaller();
-        m.setProperty("org.glassfish.jaxb.namespacePrefixMapper", getNamespacePrefixMapper());
+    private Marshaller createMarshaller() throws XJdfParseException {
+        Marshaller m;
+
+        try {
+            // create marshaller
+            m = jaxbContext.createMarshaller();
+            m.setProperty("org.glassfish.jaxb.namespacePrefixMapper", getNamespacePrefixMapper());
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
 
         // return marshaller
         return m;

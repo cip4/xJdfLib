@@ -13,6 +13,7 @@ import javax.xml.xpath.XPathFactory;
 
 import jakarta.xml.bind.ValidationException;
 import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.junit.jupiter.api.AfterEach;
@@ -121,7 +122,7 @@ public class XJdfParserTest {
 
         // act
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {
@@ -321,7 +322,7 @@ public class XJdfParserTest {
     @Test
     public void parseXjdfValidatesDocument() {
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {

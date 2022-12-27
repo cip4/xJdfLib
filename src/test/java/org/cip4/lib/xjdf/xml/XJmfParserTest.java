@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.xml;
 
-import jakarta.xml.bind.ValidationException;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
@@ -26,7 +26,7 @@ public class XJmfParserTest {
         // act
         // assert
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {
@@ -49,7 +49,7 @@ public class XJmfParserTest {
 
         // assert
         assertThrows(
-            ValidationException.class,
+            XJdfParseException.class,
             new Executable() {
                 @Override
                 public void execute() throws Throwable {

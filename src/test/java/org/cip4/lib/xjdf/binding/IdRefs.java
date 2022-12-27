@@ -80,8 +80,13 @@ public class IdRefs {
             enumsInBindings.add(extractAttrLocationFromXPath(node));
         }
 
+        Set<AttributeLocation> exceptions = new HashSet<>();
+        exceptions.add(new AttributeLocation("GangElement", "MediaRef"));
+        exceptions.add(new AttributeLocation("GangElement", "RunListRef"));
+
         assertNotEquals(0, attrsInXsd.size());
         attrsInXsd.removeAll(enumsInBindings);
+        attrsInXsd.removeAll(exceptions);
 
         assertEquals(Collections.EMPTY_SET, attrsInXsd, "Not all IDREF/IDREFS are bound to a classname.");
     }

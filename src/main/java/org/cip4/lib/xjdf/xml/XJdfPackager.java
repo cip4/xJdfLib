@@ -3,11 +3,10 @@ package org.cip4.lib.xjdf.xml;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.util.IDGeneratorUtil;
+import org.cip4.lib.xjdf.util.IDGenerator;
 import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
 import org.cip4.lib.xjdf.xml.internal.PackagerException;
 
-import javax.xml.xpath.XPathExpressionException;
 import java.io.OutputStream;
 import java.nio.file.Path;
 
@@ -58,7 +57,7 @@ public class XJdfPackager extends AbstractXmlPackager<XJDF> {
      */
     public final void packageXjdf(final XJDF xjdf, String docName) throws PackagerException {
         if (StringUtils.isBlank(docName)) {
-            docName = IDGeneratorUtil.generateID("XJDF") + ".xjdf";
+            docName = IDGenerator.generateID("XJDF") + ".xjdf";
 
         } else {
             if (StringUtils.isBlank(FilenameUtils.getExtension(docName))) {
