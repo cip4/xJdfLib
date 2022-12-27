@@ -9,9 +9,6 @@ import org.cip4.lib.xjdf.schema.Version;
 
 /**
  * This class provides common XJdf default values.
- *
- * @author s.meissner
- * @author michel hartmann
  */
 public class XJdfConstants {
 

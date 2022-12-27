@@ -1,30 +1,25 @@
 package org.cip4.lib.xjdf;
 
-import jakarta.xml.bind.JAXBException;
 import org.apache.commons.lang3.NotImplementedException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
-import org.cip4.lib.xjdf.xml.XJmfParser;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
- * XJMF Message is designed to be the main class when dealing with XJMF messages.
+ * This class provides functionality all about XJMF Messages.
  */
 public class XJmfMessage {
 
     private final XJMF xjmf;
 
-    private boolean validation = false;
-
     /**
      * Default constructor. <br>
      * Creates an empty XJMF Message.
      */
-    public XJmfMessage() throws JAXBException {
+    public XJmfMessage() {
         this.xjmf = new XJMF();
     }
 
@@ -35,7 +30,7 @@ public class XJmfMessage {
      * @param bytes The XJMF Message as byte array.
      */
     public XJmfMessage(byte[] bytes) throws XJdfParseException {
-        this.xjmf = new XJmfParser().parseStream(new ByteArrayInputStream(bytes));
+        this.xjmf = null; // new XJmfParser().(new ByteArrayInputStream(bytes));
     }
 
     /**
@@ -75,7 +70,7 @@ public class XJmfMessage {
      * @return The XJMF Message as String.
      */
     public String toXml() throws XJdfParseException, IOException {
-        return new String(new XJmfParser(false).parseXJmf(this.xjmf, !validation));
+        return null; //new String(new XJmfParser(false).parseXJmf(this.xjmf, !validation));
     }
 
     /**

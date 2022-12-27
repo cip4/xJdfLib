@@ -1,16 +1,16 @@
-package org.cip4.lib.xjdf.xml.internal;
+package org.cip4.lib.xjdf.exception;
 
 /**
  * Exception in the packaging process.
  */
-public class PackagerException extends Exception {
+public class XJdfPackagerException extends Exception {
 
     /**
      * Constructor.
      *
      * @param message Exception message.
      */
-    PackagerException(final String message) {
+    XJdfPackagerException(final String message) {
         super(message);
     }
 
@@ -20,7 +20,7 @@ public class PackagerException extends Exception {
      * @param message Exception message.
      * @param cause the cause.
      */
-    PackagerException(final String message, final Throwable cause) {
+    XJdfPackagerException(final String message, final Throwable cause) {
         super(message, cause);
     }
 

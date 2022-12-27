@@ -1,26 +1,31 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
+import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
 
 import javax.xml.namespace.QName;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.*;
 
 /**
- * XJDF Document is the main object when dealing with XJDF documents.
- * Most of the logic covered by the XJDF library is covered by this class.
+ * This class provides functionality all about XJDF Documents.
  */
 public class XJdfDocument {
 
     private final boolean DEFAULT_SKIP_VALIDATION = false;
+
+    private final XJdfParser<XJDF> xjdfParser;
+
+    private final XJdfValidator xJdfValidator;
 
     private final XJDF xjdf;
 
@@ -28,7 +33,7 @@ public class XJdfDocument {
      * Default constructor. <br>
      * Creates an empty XJDF Document.
      */
-    public XJdfDocument() {
+    public XJdfDocument() throws XJdfInitException {
         this(new XJDF());
     }
 
@@ -39,7 +44,7 @@ public class XJdfDocument {
      * @param jobId The documents JobID.
      * @param types The documents types.
      */
-    public XJdfDocument(String jobId, String... types) {
+    public XJdfDocument(String jobId, String... types) throws XJdfInitException {
         this(new XJDF()
             .withJobID(jobId)
             .withTypes(types)
@@ -52,8 +57,8 @@ public class XJdfDocument {
      *
      * @param bytes The XJDF Document as byte array.
      */
-    public XJdfDocument(byte[] bytes) throws XJdfParseException {
-        this.xjdf = new XJdfParser().parseStream(new ByteArrayInputStream(bytes));
+    public XJdfDocument(byte[] bytes) throws XJdfInitException, XJdfParseException {
+        this(new XJdfParser<XJDF>().readXml(bytes));
     }
 
     /**
@@ -62,8 +67,11 @@ public class XJdfDocument {
      *
      * @param xjdf The XJDF root node.
      */
-    public XJdfDocument(XJDF xjdf) {
+    public XJdfDocument(XJDF xjdf) throws XJdfInitException {
         this.xjdf = xjdf;
+
+        this.xjdfParser = new XJdfParser<>();
+        this.xJdfValidator = new XJdfValidator();
     }
 
     /**
@@ -80,8 +88,22 @@ public class XJdfDocument {
      *
      * @return The XJDF Document as XML byte array.
      */
-    public byte[] toXml() throws XJdfParseException, IOException {
-        return new XJdfParser(false).parseXJdf(this.xjdf, DEFAULT_SKIP_VALIDATION);
+    public byte[] toXml() throws XJdfParseException, XJdfValidationException {
+        return toXml(true);
+    }
+
+    public byte[] toXml(boolean validate) throws XJdfParseException, XJdfValidationException {
+
+        // write xml
+        final byte[] xml = xjdfParser.writeXml(this.xjdf);
+
+        // validate
+        if(validate) {
+            xJdfValidator.validate(xml);
+        }
+
+        // return result
+        return xml;
     }
 
     /**

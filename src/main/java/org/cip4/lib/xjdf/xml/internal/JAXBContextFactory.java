@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.xml.internal;
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 
+import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.schema.XJDF;
 
 /**
@@ -19,16 +20,20 @@ public class JAXBContextFactory {
      */
     private JAXBContextFactory() {
         // protection from reflection
-        throw new AssertionError("Factory Class cannot be instantiated.");
+        throw new AssertionError("Factory class cannot be instantiated.");
     }
 
     /**
      * Initialize the marshaller instance.
      */
-    public static void init() throws JAXBException {
+    public static void init() throws XJdfInitException {
         if (jaxbContext == null) {
             // initialize
-            jaxbContext = JAXBContext.newInstance(XJDF.class);
+            try {
+                jaxbContext = JAXBContext.newInstance(XJDF.class);
+            } catch (JAXBException e) {
+                throw new XJdfInitException(e);
+            }
         }
     }
 
@@ -37,7 +42,7 @@ public class JAXBContextFactory {
      *
      * @return New Marshaller instance.
      */
-    public static JAXBContext getInstance() throws JAXBException {
+    public static JAXBContext getInstance() throws XJdfInitException {
 
         // if necessary initialize
         if (jaxbContext == null) {

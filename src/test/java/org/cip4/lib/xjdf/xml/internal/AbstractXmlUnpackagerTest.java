@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AbstractXmlUnpackagerTest {
 
-    private final String PACKAGE = AbstractXmlUnpackagerTest.class.getResource("../package.zip").getFile();
+    private final String PACKAGE = AbstractXmlUnpackagerTest.class.getResource("../../package.zip").getFile();
     private final String INDEX_FILE = "index.xml";
     private final String RESOURCE_FILE = "foo.txt";
     private final String RESOURCE_CONTENT = "bar";

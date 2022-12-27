@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.xml.internal;
 
 import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.exception.XJdfPackagerException;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.type.URI;
@@ -159,63 +160,63 @@ public abstract class AbstractXmlPackager<T> {
      * @param document Document to package.
      * @param docName File name of the document in the zip package.
      *
-     * @throws PackagerException If the XML document could not be packaged.
+     * @throws XJdfPackagerException If the XML document could not be packaged.
      */
-    protected final void packageXml(final T document, final String docName) throws PackagerException {
+    protected final void packageXml(final T document, final String docName) throws XJdfPackagerException {
 
-        try {
-            // add namespace
-            final JAXBNavigator<T> jaxbNavigator = new JAXBNavigator<>(document);
-            jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
-            jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
-            Collection<URI> assetReferences = new LinkedList<>();
-
-            // process FileSpec assets
-            assetReferences.addAll(collectReferences(
-                (URIExtractor<FileSpec>) FileSpec::getURL,
-                jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
-            ));
-
-            // process XJDF assets
-            assetReferences.addAll(collectReferences(
-                (URIExtractor<XJDF>) XJDF::getCommentURL,
-                new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
-            ));
-
-            // write XJDF Document to ZIP Archive
-            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document, validation)));
-
-            // write assets to ZIP Archive
-            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, (ClassLoader) null) : null) {
-
-                // for each asset reference
-                for (URI uri : assetReferences) {
-                    final String destPath = uri.getDestinationPath();
-
-                    if (destPath != null) {
-                        final java.net.URI srcUri = uri.getSourceUri();
-
-                        if (uri.getSourceInputStream() != null) {
-                            try (InputStream is = uri.getSourceInputStream()) {
-                                writeZipEntry(new ZipEntry(destPath), is);
-                            }
-                        } else if (!srcUri.isAbsolute()) {
-                            try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
-                                writeZipEntry(new ZipEntry(destPath), is);
-                            }
-                        } else {
-                            try (InputStream is = srcUri.toURL().openStream()) {
-                                writeZipEntry(new ZipEntry(destPath), is);
-                            }
-                        }
-                    }
-                }
-            }
-
-            zout.finish();
-        } catch (Exception e) {
-            throw new PackagerException("Error while packaging XML document.", e);
-        }
+//        try {
+//            // add namespace
+//            final JAXBNavigator<T> jaxbNavigator = new JAXBNavigator<>(document);
+//            jaxbNavigator.addNamespace("xjdf", XJdfConstants.NAMESPACE_JDF20);
+//            jaxbNavigator.addNamespace("ptk", XJdfConstants.NAMESPACE_JDF20);
+//            Collection<URI> assetReferences = new LinkedList<>();
+//
+//            // process FileSpec assets
+//            assetReferences.addAll(collectReferences(
+//                (URIExtractor<FileSpec>) FileSpec::getURL,
+//                jaxbNavigator.evaluateNodeList("//xjdf:FileSpec")
+//            ));
+//
+//            // process XJDF assets
+//            assetReferences.addAll(collectReferences(
+//                (URIExtractor<XJDF>) XJDF::getCommentURL,
+//                new Object[]{document instanceof XJDF ? document : jaxbNavigator.evaluateNode("//xjdf:XJDF")}
+//            ));
+//
+//            // write XJDF Document to ZIP Archive
+//            writeZipEntry(new ZipEntry(docName), new ByteArrayInputStream(parseDocument(document, validation)));
+//
+//            // write assets to ZIP Archive
+//            try (final FileSystem zipfs = zipPath != null ? FileSystems.newFileSystem(zipPath, (ClassLoader) null) : null) {
+//
+//                // for each asset reference
+//                for (URI uri : assetReferences) {
+//                    final String destPath = uri.getDestinationPath();
+//
+//                    if (destPath != null) {
+//                        final java.net.URI srcUri = uri.getSourceUri();
+//
+//                        if (uri.getSourceInputStream() != null) {
+//                            try (InputStream is = uri.getSourceInputStream()) {
+//                                writeZipEntry(new ZipEntry(destPath), is);
+//                            }
+//                        } else if (!srcUri.isAbsolute()) {
+//                            try (InputStream is = Files.newInputStream(zipfs.getPath("/", srcUri.getPath()))) {
+//                                writeZipEntry(new ZipEntry(destPath), is);
+//                            }
+//                        } else {
+//                            try (InputStream is = srcUri.toURL().openStream()) {
+//                                writeZipEntry(new ZipEntry(destPath), is);
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            zout.finish();
+//        } catch (Exception e) {
+//            throw new XJdfPackagerException("Error while packaging XML document.", e);
+//        }
     }
 
     /**

@@ -23,7 +23,7 @@ public class ForeignNamespaces {
     @Test
     public void attributesAllowedAnywhere() throws Exception {
         XJdfValidator validator = new XJdfValidator();
-        validator.validate(this.getClass().getResourceAsStream("attributeFromForeignNS.xjdf"));
+        validator.validate(this.getClass().getResourceAsStream("attributeFromForeignNS.xjdf").readAllBytes());
     }
 
     @Test

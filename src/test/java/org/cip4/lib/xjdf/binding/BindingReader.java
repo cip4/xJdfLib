@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf.binding;
 
-import org.cip4.lib.xjdf.xml.internal.NamespaceManager;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;

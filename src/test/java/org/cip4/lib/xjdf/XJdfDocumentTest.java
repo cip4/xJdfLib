@@ -11,7 +11,6 @@ import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
-import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -62,7 +61,7 @@ public class XJdfDocumentTest {
         // ASSERT
         System.out.println("----------------");
         System.out.println("");
-        System.out.println(new String(new XJdfParser().parseXJdf(xjdfDoc.getXJdf(), true)));
+        System.out.println(new String(xjdfDoc.toXml(false)));
         System.out.println("");
         System.out.println("----------------");
     }
@@ -95,7 +94,7 @@ public class XJdfDocumentTest {
         // act
 
         // assert
-        System.out.println(new String(new XJdfParser().parseXJdf(xJdfDoc.getXJdf(), true)));
+        System.out.println(new String(xJdfDoc.toXml()));
     }
 
     @Test

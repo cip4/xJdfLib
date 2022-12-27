@@ -1,16 +1,24 @@
 package org.cip4.lib.xjdf.xml;
 
-import jakarta.xml.bind.JAXBException;
 import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
+import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
+import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,29 +29,104 @@ public class XJdfValidatorTest {
 
     private XJdfValidator xJdfValidator;
 
-    private ObjectFactory objectFactory;
-
-    /**
-     * Default constructor.
-     */
-    public XJdfValidatorTest() {
-        try {
-            JAXBContextFactory.init();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-    }
-
     @BeforeEach
     public void setUp() {
-        // init instance variables
-        objectFactory = new ObjectFactory();
+        xJdfValidator = new XJdfValidator();
     }
 
     @AfterEach
     public void tearDown() {
         xJdfValidator = null;
-        objectFactory = null;
+    }
+
+    @Test
+    public void validate_invalid_semantic_1() throws Exception {
+
+        // arrange
+        byte[] xjdf = loadFile("validator-invalid_semantic-1.xjdf");
+
+        // act / assert
+        xJdfValidator.validateSyntax(xjdf);
+
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validateSemantic(xjdf)
+        );
+    }
+
+    @Test
+    public void validate_invalid_syntax_1() throws Exception {
+
+        // arrange
+        byte[] xjdf = loadFile("validator-invalid_syntax-1.xjdf");
+
+        // act / assert
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validateSyntax(xjdf)
+        );
+
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validateSemantic(xjdf)
+        );
+    }
+
+    @Test
+    public void validate_valid_1() throws Exception {
+
+        // arrange
+        byte[] xjdf = loadFile("validator-valid.xjdf");
+
+        // act / assert (no exception)
+        xJdfValidator.validateSyntax(xjdf);
+
+        xJdfValidator.validateSemantic(xjdf);
+
+        xJdfValidator.validate(xjdf);
+    }
+
+    @Test
+    public void validate_foreign_namespace_1() throws Exception {
+
+        // arrange
+        byte[] xjdf = loadFile("validator_foreign-namespace.xjdf");
+
+        // act / assert (no exception)
+        xJdfValidator.validateSyntax(xjdf);
+
+        xJdfValidator.validateSemantic(xjdf);
+
+        xJdfValidator.validate(xjdf);
+    }
+
+    @Test
+    public void validate_test() throws Exception {
+
+        // arrange
+        byte[] xjdf = loadFile("validator-test.xjdf");
+
+        // act / assert (no exception)
+        xJdfValidator.validateSyntax(xjdf);
+
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validateSemantic(xjdf)
+        );
+
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(xjdf)
+        );
+    }
+
+    /**
+     * Helper method to load a file.
+     * @param filename The files name.
+     * @return The file as byte array.
+     */
+    private byte[] loadFile(String filename) throws IOException {
+        return XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/xml/" + filename).readAllBytes();
     }
 
     @Test
@@ -54,81 +137,90 @@ public class XJdfValidatorTest {
             new GeneralID()
         );
 
-        // act
-        xJdfValidator = new XJdfValidator();
+        byte[] bytes = new XJdfParser<XJDF>().writeXml(xjdf);
+
+
+        // act / assert
+        xJdfValidator.validateSyntax(bytes);
 
         assertThrows(
-            XJdfParseException.class,
-            new Executable() {
-                @Override
-                public void execute() throws Throwable {
-                    xJdfValidator.validate(new XJdfDocument(xjdf));
-                }
-            }
+            XJdfValidationException.class,
+            () -> xJdfValidator.validateSemantic(bytes)
         );
-    }
-
-    @Test
-    public void integrationValid() throws Exception {
-
-        // arrange
-        XJDF xjdf = new XJDF()
-            .withJobID("JOB_ID")
-            .withTypes("Web2Print")
-            .withGeneralID(
-                new GeneralID().withIDUsage("CatalogID").withIDValue("42")
-            );
-
-        // act
-        xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(new XJdfDocument(xjdf));
-    }
-
-    @Test
-    public void integrationAnalyzeMessagesInvalid() throws Exception {
-
-        // arrange
-        XJDF xjdf = new XJDF().withGeneralID(
-            new GeneralID()
-        );
-
-        // act
-        xJdfValidator = new XJdfValidator();
 
         assertThrows(
-            XJdfParseException.class,
-            new Executable() {
-                @Override
-                public void execute() throws Throwable {
-                    xJdfValidator.validate(new XJdfDocument(xjdf));
-                }
-            }
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(bytes)
         );
     }
 
     @Test
-    public void isValidXjdfIsInvalid() throws Exception {
+    public void testParseXJdfInvalid() throws Exception {
+
         // arrange
-        XJdfDocument xJdfDocument = new XJdfDocument(XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/test.xjdf").readAllBytes());
+        final String VALUE = UUID.randomUUID().toString();
+
+        XJDF xjdf = new XJDF().withGeneralID(new GeneralID().withIDUsage("CatalobID").withIDValue(VALUE));
+        byte[] bytes = new XJdfParser<XJDF>().writeXml(xjdf);
 
         // act
-        xJdfValidator = new XJdfValidator();
-
         assertThrows(
-            XJdfParseException.class,
-            new Executable() {
-                @Override
-                public void execute() throws Throwable {
-                    xJdfValidator.validate(xJdfDocument);
-                }
-            }
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(bytes)
         );
     }
 
     @Test
-    public void foreignNamespaceInResource() throws Exception {
-        InputStream is = XJdfValidatorTest.class.getResourceAsStream("../foreignNamespace.xjdf");
-        xJdfValidator = new XJdfValidator();
-        xJdfValidator.validate(is);
+    public void parseXjdfValidatesDocument() throws Exception {
+
+        XJDF xjdf = new XJDF().withTypes(Collections.EMPTY_LIST);
+        byte[] bytes = new XJdfParser<XJDF>().writeXml(xjdf);
+
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(bytes)
+        );
+    }
+
+    private XJDF getInvalidXjdfDocument() {
+        // xjdf is invalid, because empty list of types is not allowed.
+        return new XJDF().withTypes(Collections.EMPTY_LIST);
+    }
+
+    @Test
+    public void parseXJmf_ByteArray() throws Exception {
+        // arrange
+        final XJMF xjmf = new XJMF().withHeader(
+            new Header().withDeviceID("MyDevice").withID("ID").withTime(new DateTime("2017-03-27T21:31:54Z"))
+        );
+
+        byte[] bytes = new XJdfParser<XJMF>().writeXml(xjmf);
+
+        // act
+        // assert
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(bytes)
+        );
+    }
+
+    @Test
+    public void parseXJmf_OutputStream() throws Exception {
+        // arrange
+        final XJMF xjmf = new XJMF().withHeader(
+            new Header().withDeviceID("MyDevice").withID("ID").withTime(new DateTime("2017-03-27T21:31:54Z"))
+        );
+
+        byte[] bytes = new XJdfParser<XJMF>().writeXml(xjmf);
+
+        // act
+        final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+
+        // assert
+        assertThrows(
+            XJdfValidationException.class,
+            () -> xJdfValidator.validate(bytes)
+        );
     }
 }

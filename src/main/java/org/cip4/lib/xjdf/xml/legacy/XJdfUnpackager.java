@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.xml;
+package org.cip4.lib.xjdf.xml.legacy;
 
 import java.io.IOException;
 
