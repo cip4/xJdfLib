@@ -21,8 +21,6 @@ import java.util.*;
  */
 public class XJdfDocument {
 
-    private final boolean DEFAULT_SKIP_VALIDATION = false;
-
     private final XJdfParser<XJDF> xjdfParser;
 
     private final XJdfValidator xJdfValidator;
@@ -92,6 +90,12 @@ public class XJdfDocument {
         return toXml(true);
     }
 
+    /**
+     * Returns the current XJDF Document as XML byte array.
+     *
+     * @param validate 'false' in case validation should be skipped.
+     * @return The XJDF Document as XML byte array.
+     */
     public byte[] toXml(boolean validate) throws XJdfParseException, XJdfValidationException {
 
         // write xml

@@ -1,12 +1,9 @@
 package org.cip4.lib.xjdf.xml;
 
-import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
-import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.ByteArrayOutputStream;
 
@@ -29,7 +26,7 @@ public class XJmfParser2Test {
 
         // assert
         String jmf = new String(actual);
-        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54Z\""), "Cannot find time.");
+        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54.000Z\""), "Cannot find time.");
         assertTrue(jmf.contains("DeviceID=\"MyDevice\""), "Cannot find DeviceId.");
         assertTrue(jmf.contains("ID=\"ID\""), "Cannot find ID.");
     }
@@ -48,7 +45,7 @@ public class XJmfParser2Test {
 
         // assert
         String jmf = new String(actual);
-        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54Z\""), "Cannot find time.");
+        assertTrue(jmf.contains("Time=\"2017-03-27T21:31:54.000Z\""), "Cannot find time.");
         assertTrue(jmf.contains("DeviceID=\"MyDevice\""), "Cannot find DeviceId.");
         assertTrue(jmf.contains("ID=\"ID\""), "Cannot find ID.");
     }
