@@ -1,9 +1,6 @@
 package org.cip4.lib.xjdf.type;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URISyntaxException;
-import java.util.Objects;
 
 /**
  * Implementation of the XJDF URI data type.
@@ -11,97 +8,35 @@ import java.util.Objects;
 public class URI extends AbstractXJdfType<String, URI> {
 
     /**
-     * The source as input stream.
-     */
-    private final InputStream sourceInputStream;
-
-    /**
      * Source uri.
      */
-    private final java.net.URI sourceUri;
+    private final java.net.URI uri;
 
     /**
-     * Destination path.
-     */
-    private String destinationPath;
-
-    /**
-     * The stashed destination path.
-     */
-    private final String stashedDestinationPath;
-
-    /**
-     * Constructor.
+     * Default Constructor.
      */
     public URI() {
-        this.sourceInputStream = null;
-        this.sourceUri = null;
-        this.stashedDestinationPath = null;
+        this.uri = null;
     }
 
     /**
-     * Constructor. Using this constructor will not package the file.
+     * Custom Constructor. <br />
+     * Using this constructor will not package the file.
      *
-     * @param sourceUri Source uri of the file.
+     * @param uri The uri of the file.
      */
-    public URI(final String sourceUri) throws URISyntaxException {
-        this(new java.net.URI(sourceUri));
+    public URI(final String uri) throws URISyntaxException {
+        this(new java.net.URI(uri));
     }
 
     /**
-     * Constructor. Using this constructor will not package the file.
+     * Custom Constructor. <br />
+     * Using this constructor will not package the file.
      *
-     * @param sourceUri Source uri of the file.
+     * @param uri Source uri of the file.
      */
-    public URI(final java.net.URI sourceUri) {
-        this.sourceInputStream = null;
-        this.sourceUri = sourceUri.normalize();
-        this.stashedDestinationPath = null;
-    }
-
-    /**
-     * Constructor. Using this constructor the file will be packaged into given destination path.
-     *
-     * @param sourceUri Source uri.
-     * @param destPath  Destination path. Should be given in case the file has to be packaged.
-     */
-    public URI(final java.net.URI sourceUri, final String destPath) throws URISyntaxException {
-        this(sourceUri, null, destPath);
-    }
-
-    /**
-     * Constructor. Using this constructor the file will be packaged into given destination path.
-     *
-     * @param source   The Source as bytes.
-     * @param destPath Destination path. Should be given in case the file has to be packaged.
-     */
-    public URI(final byte[] source, final String destPath) throws URISyntaxException {
-        this(new ByteArrayInputStream(source), destPath);
-    }
-
-    /**
-     * Constructor. Using this constructor the file will be packaged into given destination path.
-     *
-     * @param source   The Source as InputStream.
-     * @param destPath Destination path. Should be given in case the file has to be packaged.
-     */
-    public URI(final InputStream source, final String destPath) throws URISyntaxException {
-        this(new java.net.URI(destPath), source, destPath);
-    }
-
-    /**
-     * Constructor. Using this constructor the file will be packaged into given destination path.
-     *
-     * @param sourceUri         Source uri.
-     * @param sourceInputStream Source input stream.
-     * @param destPath          Destination path. Should be given in case the file has to be packaged.
-     */
-    private URI(final java.net.URI sourceUri, InputStream sourceInputStream, final String destPath)
-        throws URISyntaxException {
-        Objects.requireNonNull(destPath, "destPath must not be null");
-        this.sourceInputStream = sourceInputStream;
-        this.sourceUri = sourceUri.normalize();
-        this.stashedDestinationPath = new java.net.URI(null, null, destPath, null).normalize().getPath();
+    public URI(final java.net.URI uri) {
+        this.uri = uri.normalize();
     }
 
     /**
@@ -109,36 +44,8 @@ public class URI extends AbstractXJdfType<String, URI> {
      *
      * @return Source uri.
      */
-    public final java.net.URI getSourceUri() {
-        return sourceUri;
-    }
-
-    /**
-     * Get the source input stream.
-     *
-     * @return Source input stream.
-     */
-    public final InputStream getSourceInputStream() {
-        return sourceInputStream;
-    }
-
-    /**
-     * Get the destination path.
-     *
-     * @return Destination path
-     */
-    public final String getDestinationPath() {
-        return destinationPath;
-    }
-
-    /**
-     * Completes this URI in order to marshal the correct file reference.
-     *
-     * @return This URI
-     */
-    public final URI complete() {
-        this.destinationPath = stashedDestinationPath;
-        return this;
+    public final java.net.URI getUri() {
+        return uri;
     }
 
     @Override
@@ -146,23 +53,16 @@ public class URI extends AbstractXJdfType<String, URI> {
         if (v == null) {
             return null;
         }
-        return v.destinationPath == null
-            ? v.sourceUri.toString()
-            : v.destinationPath;
+        return v.uri.toString();
     }
 
     @Override
-    public final URI unmarshal(final String v) throws Exception {
-        final java.net.URI source = new java.net.URI(v);
-        if (source.isAbsolute()) {
-            return new URI(source);
-        } else {
-            return new URI(source, source.getPath());
-        }
+    public final URI unmarshal(final String value) throws Exception {
+        return new URI(new java.net.URI(value));
     }
 
     @Override
     public final String toString() {
-        return "URI{" + "sourceUri=" + sourceUri + ", destinationPath=" + destinationPath + '}';
+        return this.uri.toString();
     }
 }

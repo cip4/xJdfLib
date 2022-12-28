@@ -1,12 +1,13 @@
 package org.cip4.lib.xjdf.type;
 
 import org.apache.commons.lang3.StringUtils;
-import org.cip4.lib.xjdf.XJdfNodeFactory;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.schema.SpecificResource;
-import org.cip4.lib.xjdf.util.IDGeneratorUtil;
+import org.cip4.lib.xjdf.util.IDGenerator;
+import org.cip4.lib.xjdf.util.Resources;
+
 
 /**
  * DataType for IDRefs
@@ -43,7 +44,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     public IDREF(SpecificResource specificResource) {
-        this(specificResource, null, IDGeneratorUtil.generateID("PAR"));
+        this(specificResource, null, IDGenerator.generateID("PAR"));
     }
 
     public IDREF(SpecificResource specificResource, Part part, String id) {
@@ -52,8 +53,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
         this.id = id;
 
         // create resource
-        XJdfNodeFactory nf = new XJdfNodeFactory();
-        Resource resource = nf.createResource(specificResource, part);
+        Resource resource = Resources.createResource(specificResource, part);
         resource.setID(this.id);
 
         // set element
@@ -80,7 +80,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(IDREF idRef) {
@@ -91,7 +91,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public IDREF unmarshal(String v) {
@@ -116,7 +116,7 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
         String productId = product.getID();
 
         if (StringUtils.isEmpty(productId)) {
-            productId = IDGeneratorUtil.generateID("PRD");
+            productId = IDGenerator.generateID("PRD");
         }
 
         return productId;

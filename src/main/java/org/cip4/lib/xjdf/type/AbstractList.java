@@ -20,7 +20,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      * Default constructor.
      */
     public AbstractList() {
-        this(new ArrayList<T>());
+        this(new ArrayList<>());
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     protected abstract T convertFromString(String value);
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(AbstractList<T> obj) {
@@ -126,7 +126,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public AbstractList<T> unmarshal(String v) throws Exception {

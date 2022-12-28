@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XJDF Category="Web2Print" JobID="Job258596" xmlns="http://www.CIP4.org/JDFSchema_2_0" Version="2.0">
+	<GeneralID IDUsage="CatalogID" IDValue="890e81ed-6830-4868-b23d-8ab8af8a4047" />
+	<Comment>
+		This is a multiline
+		user comment
+	</Comment>
+	<ProductList>
+		<Product IsRoot="true" Amount="1000" ProductType="Brochure" ProductTypeDetails="4 Page Brochure">
+			<Intent Name="LayoutIntent">
+				<LayoutIntent FinishedDimensions="595.27559055 822.04724409 0.0" Pages="32" Sides="TwoSidedHeadToHead" />
+			</Intent>
+			<Intent Name="MediaIntent">
+				<MediaIntent MediaQuality="IPG_135" Weight="135" />
+			</Intent>
+			<Intent Name="ProductionIntent">
+				<ProductionIntent PrintProcess="Lithography" />
+			</Intent>
+			<Intent Name="FoldingIntent">
+				<FoldingIntent FoldCatalog="F6-1" />
+			</Intent>
+			<Intent Name="ColorIntent">
+				<ColorIntent NumColors="4 4" />
+			</Intent>
+		</Product>
+	</ProductList>
+	<ResourceSet Name="CustomerInfo">
+		<Resource ID="CustomerInfo_1">
+			<CustomerInfo CustomerID="FA-WEB-DE" CustomerOrderID="Web2Print System JobID" />
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="RunList">
+		<Resource ID="RunList_1">
+			<RunList>
+				<FileSpec URL="http://www.w2p.com:8080/w2p/getPDF/w2p/hd_a5_32.pdf" />
+			</RunList>
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="ApprovalParams">
+		<Resource ID="ApprovalParams_1">
+			<ApprovalParams MinApprovals="1" />
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="NodeInfo">
+		<Resource ID="NodeInfo_2">
+			<NodeInfo End="1286557458599" />
+		</Resource>
+	</ResourceSet>
+	<ResourceSet Name="Contact">
+		<Resource ID="Contact_1">
+			<Contact ContactTypes="Customer Delivery DeliveryCharge">
+				<Person FamilyName="Mustermann" FirstName="Max" NamePrefix="Dr." />
+				<Company OrganizationName="Firma Muster GmbH" />
+				<Address City="Stadt" Country="Deutschland" CountryCode="De"
+					PostalCode="12345" Street="Musterstraße 12" />
+				<ComChannel ChannelType="Email" Locator="mailto:info@muster.com" />
+				<ComChannel ChannelType="Phone" Locator="tel:+49.173.5678.901" />
+				<ComChannel ChannelType="Phone" Locator="tel:+0123.456.789" />
+			</Contact>
+		</Resource>
+	</ResourceSet>
+</XJDF>

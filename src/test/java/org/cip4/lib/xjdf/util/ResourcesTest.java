@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.util;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
+import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.schema.ColorantControl;
 import org.cip4.lib.xjdf.schema.Layout;
 import org.cip4.lib.xjdf.schema.Media;
@@ -10,10 +10,12 @@ import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.schema.SpecificResource;
 import org.cip4.lib.xjdf.schema.WrappingParams;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import javax.xml.namespace.QName;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,15 +31,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ResourcesTest {
 
-    private XJdfNodeFactory nodeFactory;
-
-    @BeforeEach
-    public void setUp() {
-        nodeFactory = new XJdfNodeFactory();
-    }
-
     private Resource getMediaResource() {
-        return nodeFactory.createResource(new Media(), null);
+        Resource resource = new Resource();
+
+        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, "Media");
+        JAXBElement<Media> media = new JAXBElement<>(qname, Media.class, null, new Media());
+        resource.setSpecificResource(media);
+
+        return resource;
     }
 
     @Test

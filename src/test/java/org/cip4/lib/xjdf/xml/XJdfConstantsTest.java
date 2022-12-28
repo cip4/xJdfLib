@@ -1,56 +1,84 @@
 package org.cip4.lib.xjdf.xml;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.ByteArrayInputStream;
 
-import org.apache.commons.io.IOUtils;
+import org.cip4.lib.xjdf.schema.Version;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.w3c.dom.Document;
 
-import static org.junit.jupiter.api.Assertions.*;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathFactory;
 
 /**
  * JUnit test case for XmlConstants class.
- * @author s.meissner
  */
 public class XJdfConstantsTest {
 
-	private static final String RES_JDF20_XSD = "/JDF20.xsd";
+    @Test
+    public void loadXJdfXsdByteArray_2_0() throws Exception {
 
-	@Test
-	public void testNamespaceJdf20() throws IOException {
+        // arrange
 
-		// arrange
-		InputStream is = XJdfConstantsTest.class.getResourceAsStream(RES_JDF20_XSD);
+        // act
+        byte[] xsdBytes = XJdfConstants.XJDF_XSD_BYTES.get(Version.V2_0);
 
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		IOUtils.copy(is, os);
-		String doc = new String(os.toByteArray());
+        // assert
+        Document xml = DocumentBuilderFactory.newInstance()
+                .newDocumentBuilder()
+                .parse(new ByteArrayInputStream(xsdBytes));
 
-		int i = doc.indexOf("xmlns=\"") + 7;
-		int n = doc.indexOf("\"", i);
+		XPath xPath = XPathFactory.newInstance().newXPath();
+		String version = (String) xPath.compile("/schema/@version").evaluate(xml, XPathConstants.STRING);
 
-		String expectedNs = doc.substring(i, n);
+        System.out.println("Version: " + version);
+        Assertions.assertTrue(version.startsWith("2.0."), "Wrong version.");
+    }
 
-		// act
-		String actualNs = XJdfConstants.NAMESPACE_JDF20;
+    @Test
+    public void loadXJdfXsdByteArray_2_1() throws Exception {
 
-		// assert
-		assertEquals(expectedNs, actualNs, "Namespace JDF20 is wrong.");
-	}
+        // arrange
 
-	/**
-	 * JUnit test
-	 */
-	@Test
-	public void testLoadLibraryVersion() {
-
-		// arrange
-
-		// act
-		String val = XJdfConstants.XJDF_LIB_VERSION;
+        // act
+        byte[] xsdBytes = XJdfConstants.XJDF_XSD_BYTES.get(Version.V2_1);
 
 		// assert
-		// assertEquals("", val, "XJDF library version is wrong.");
-	}
+		Document xml = DocumentBuilderFactory.newInstance()
+				.newDocumentBuilder()
+				.parse(new ByteArrayInputStream(xsdBytes));
+
+		XPath xPath = XPathFactory.newInstance().newXPath();
+		String version = (String) xPath.compile("/schema/@version").evaluate(xml, XPathConstants.STRING);
+
+		System.out.println("Version: " + version);
+		Assertions.assertTrue(version.startsWith("2.1."), "Wrong version.");
+    }
+
+    @Test
+    public void loadLibraryVersion() {
+
+        // arrange
+
+        // act
+        String version = XJdfConstants.XJDFLIB_VERSION;
+
+        // assert
+        Assertions.assertEquals("2.1.x-DEV", version);
+    }
+
+    @Test
+    public void loadLibraryBuildDate() {
+
+        // arrange
+
+        // act
+        String buildDate = XJdfConstants.XJDFLIB_BUILD_DATE;
+
+        // assert
+        System.out.println(buildDate);
+        Assertions.assertTrue(buildDate.matches("20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z"));// ISO8601
+    }
 }

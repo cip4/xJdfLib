@@ -1,114 +1,179 @@
 package org.cip4.lib.xjdf.xml;
 
-import java.io.IOException;
-import java.io.OutputStream;
-
+import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
-
-import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlParser;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlValidator;
+import jakarta.xml.bind.Marshaller;
+import jakarta.xml.bind.Unmarshaller;
+import org.cip4.lib.xjdf.exception.XJdfInitException;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
-import org.cip4.lib.xjdf.xml.internal.XJdfNamespaceMapper;
 import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 
-/**
- * Parsing logic for building a XML Document from XJDF DOM-Tree and the way around.
- */
-public class XJdfParser extends AbstractXmlParser<XJDF> {
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
-    private final boolean enforceNamespacePrefix;
+/**
+ * This class is a parser based on the XJDF Schema.
+ *
+ * @param <T> The root node this parser applies to. Valid values are 'XJDF' and 'XJMF'
+ */
+public class XJdfParser<T> {
+
+    /**
+     * Context for JAXB-handling.
+     */
+    private final JAXBContext jaxbContext;
+
+    /**
+     * Character encoding for xml files.
+     */
+    private static final Charset CHARSET = StandardCharsets.UTF_8;
 
     /**
      * Default constructor.
-     *
-     * @throws JAXBException Thrown in case a JAXBException occurs.
      */
-    public XJdfParser() throws JAXBException {
-        this(true);
+    public XJdfParser() throws XJdfInitException {
+        this.jaxbContext = JAXBContextFactory.getInstance();
     }
 
     /**
-     * Custom constructor. Accepting a flag for initializing.
-     * @param enforceNamespacePrefix True in case namespace prefix is requried.
-     * @throws JAXBException Thrown in case a JAXBException occurs.
+     * Read an XML byte array and converts it to an object tree.
+     *
+     * @param bytes The XML byte array to be parsed.
+     * @return The parsed object tree.
      */
-    public XJdfParser(boolean enforceNamespacePrefix) throws JAXBException {
-        super(JAXBContextFactory.getInstance());
-        this.enforceNamespacePrefix = enforceNamespacePrefix;
+    @SuppressWarnings("unchecked")
+    public final T readXml(final byte[] bytes) throws XJdfParseException {
+        if(bytes == null) {
+            throw new XJdfParseException("Cannot read an XML byte array of null.");
+        }
+
+        return readXml(new ByteArrayInputStream(bytes));
     }
 
     /**
-     * Parse a XJDF Object Tree to a binary output stream.
+     * Read an XML input stream and converts it to an object tree.
      *
-     * @param xJdf XJDF Object Tree for parsing.
-     * @param os Target OutputStream where XJdfDocument is being parsed.
-     *
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
+     * @param inputStream The XML input stream to be parsed.
+     * @return The parsed object tree.
      */
-    public final void parseXJdf(final XJDF xJdf, final OutputStream os)
-        throws JAXBException {
-        parseXml(xJdf, os);
+    @SuppressWarnings("unchecked")
+    public final T readXml(final InputStream inputStream) throws XJdfParseException {
+        try {
+            Unmarshaller u = jaxbContext.createUnmarshaller();
+            return (T) u.unmarshal(inputStream);
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
     }
 
     /**
-     * Parse a XJDF Object Tree to a binary output stream.
+     * Write an XJDF object tree to a binary array.
      *
-     * @param xJdf XJDF Object Tree for parsing.
-     * @param os Target OutputStream where XJdfDocument is being parsed.
-     * @param skipValidation Skip validation.
-     *
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
+     * @param node Object tree to be written.
+     * @return The XJDF Document as xml byte array.
      */
-    public final void parseXJdf(final XJDF xJdf, final OutputStream os, final boolean skipValidation)
-        throws JAXBException {
-        parseXml(xJdf, os, skipValidation);
+    public final byte[] writeXml(final T node)
+        throws XJdfParseException {
+
+        try {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            writeXml(node, bos);
+            bos.close();
+
+            return bos.toByteArray();
+
+        } catch (Exception exception) {
+            throw new XJdfParseException(exception);
+        }
     }
 
     /**
-     * Parse a XJDF Object Tree to a byte array.
+     * Write an XJDF object tree to a binary output stream.
      *
-     * @param xJdf XJDF Object Tree for parsing.
-     *
-     * @return XJDF as byte array.
-     * @throws IOException Is thrown in case any IO error occurs.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
+     * @param node         Object tree to be written.
+     * @param outputStream The output stream the XML stream is written to.
      */
-    public final byte[] parseXJdf(final XJDF xJdf)
-        throws IOException, JAXBException {
-        return parseXml(xJdf);
+    public final void writeXml(final T node, final OutputStream outputStream)
+        throws XJdfParseException {
+
+        try {
+            Marshaller m = createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
+            m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
+
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream, CHARSET);
+            m.marshal(node, writer);
+        } catch (Exception exception) {
+            throw new XJdfParseException(exception);
+        }
     }
 
-    /**
-     * Parse a XJDF Object Tree to a byte array.
-     *
-     * @param xJdf XJDF Object Tree for parsing.
-     * @param skipValidation Skip validation.
-     *
-     * @return XJDF as byte array.
-     * @throws JAXBException Is thrown in case any error while un-/marshalling occurs.
-     * @throws IOException Is thrown in case any IO error occurs.
-     */
-    public final byte[] parseXJdf(final XJDF xJdf, final boolean skipValidation)
-        throws JAXBException, IOException {
-        return parseXml(xJdf, skipValidation);
-    }
-
-    @Override
-    protected final NamespacePrefixMapper getNamespacePrefixMapper() {
-        return new XJdfNamespaceMapper(enforceNamespacePrefix);
-    }
-
-    @Override
-    protected final String getXmlHeader() {
-        String header = "<!-- Generated by CIP4 xJdfLib " + XJdfConstants.XJDF_LIB_VERSION + " -->\r\n";
+    private String getXmlHeader() {
+        String header = "<!-- Generated by CIP4 xJdfLib " + XJdfConstants.XJDFLIB_VERSION + " -->\r\n";
         header = header.replaceAll("  ", " ");
         return header;
     }
 
-    @Override
-    protected final AbstractXmlValidator createValidator() {
-        return new XJdfValidator();
+    /**
+     * Creates and returns a new marshaller object.
+     *
+     * @return New Marshaller object.
+     */
+    Marshaller createMarshaller() throws XJdfParseException {
+        Marshaller m;
+
+        try {
+            // create marshaller
+            m = jaxbContext.createMarshaller();
+            m.setProperty("org.glassfish.jaxb.namespacePrefixMapper", new XJdfNamespacePrefixMapper());
+
+        } catch (JAXBException jaxbException) {
+            throw new XJdfParseException(jaxbException);
+        }
+
+        // return marshaller
+        return m;
     }
 
+    /**
+     * XJDF Namespace Prefix Mapper class for organizing namespace prefixes.
+     */
+    static class XJdfNamespacePrefixMapper extends NamespacePrefixMapper {
+
+        /**
+         * Default constructor.
+         */
+        public XJdfNamespacePrefixMapper() {
+        }
+
+        /**
+         * @see org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper#getPreferredPrefix(java.lang.String, java.lang.String, boolean)
+         */
+        @Override
+        public String getPreferredPrefix(String namespaceUri, String suggestion, boolean requirePrefix) {
+            String result;
+
+            if (requirePrefix) {
+                if (namespaceUri.equals(XJdfConstants.NAMESPACE_JDF20)) {
+                    result = "xjdf";
+                } else {
+                    // other namespace
+                    result = suggestion;
+                }
+            } else {
+                result = "";
+            }
+
+            // return result
+            return result;
+        }
+    }
 }

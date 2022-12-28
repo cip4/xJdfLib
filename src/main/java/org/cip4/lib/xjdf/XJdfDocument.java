@@ -1,133 +1,166 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfInitException;
+import org.cip4.lib.xjdf.exception.XJdfParseException;
+import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfPackager;
 import org.cip4.lib.xjdf.xml.XJdfParser;
-import org.cip4.lib.xjdf.xml.internal.AbstractXmlPackager;
-import org.cip4.lib.xjdf.xml.internal.PackagerException;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
-import jakarta.xml.bind.JAXBException;
+
 import javax.xml.namespace.QName;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
 /**
- * XJDF Document is designed to be the main class when dealing with XJDF documents.
- * Most of the logic covered by the XJDF library is covered by this class.
+ * This class provides functionality all about XJDF Documents.
  */
 public class XJdfDocument {
 
+    private final XJdfParser<XJDF> xjdfParser;
+
+    private final XJdfValidator xJdfValidator;
+
     private final XJDF xjdf;
 
-    private boolean validation = true;
-
     /**
-     * Custom Constructor. Accepting the fundamentals of an XJDF Document for initializing
+     * Default constructor. <br>
+     * Creates an empty XJDF Document.
      */
-    public XJdfDocument(String jobId, String[] types) {
-        this.xjdf = new XJDF();
-        this.xjdf.setJobID(jobId);
-        this.xjdf.getTypes().addAll(Arrays.asList(types));
+    public XJdfDocument() throws XJdfInitException {
+        this(new XJDF());
     }
 
     /**
-     * Custom Constructor. Accepting an XJDF byte array for initializing
+     * Custom Constructor. <br>
+     * Accepting the required attributes of an XJDF Document for initializing.
+     *
+     * @param jobId The documents JobID.
+     * @param types The documents types.
      */
-    public XJdfDocument(byte[] bytes) throws JAXBException {
-        this.xjdf = new XJdfParser().parseStream(new ByteArrayInputStream(bytes));
+    public XJdfDocument(String jobId, String... types) throws XJdfInitException {
+        this(new XJDF()
+            .withJobID(jobId)
+            .withTypes(types)
+            .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
+        );
     }
 
     /**
-     * Custom Constructor. Accepting an XJDF Node for initializing
+     * Custom Constructor. <br>
+     * Accepting an XJDF Document as byte array for initializing.
+     *
+     * @param bytes The XJDF Document as byte array.
      */
-    public XJdfDocument(XJDF xjdf) {
+    public XJdfDocument(byte[] bytes) throws XJdfInitException, XJdfParseException {
+        this(new XJdfParser<XJDF>().readXml(bytes));
+    }
+
+    /**
+     * Custom Constructor. <br>
+     * Accepting an XJDF root node for initializing.
+     *
+     * @param xjdf The XJDF root node.
+     */
+    public XJdfDocument(XJDF xjdf) throws XJdfInitException {
         this.xjdf = xjdf;
+
+        this.xjdfParser = new XJdfParser<>();
+        this.xJdfValidator = new XJdfValidator();
     }
 
     /**
-     * Returns the documents XJDF root node.
-     * @return The XJDF node.
+     * Returns the XJDF Documents XJDF root node.
+     *
+     * @return The XJDF root node.
      */
     public XJDF getXJdf() {
         return xjdf;
     }
 
     /**
-     * Returns true in case the XJDF Document should be validated before writing.
-     * @return True in case the XJDF Document should be validated before writing
-     */
-    public boolean isValidation() {
-        return validation;
-    }
-
-    /**
-     * Set true if the document should become validated before writing.
-     * @param validation True in case for validation, otherwise false.
-     */
-    public void setValidation(final boolean validation) {
-        this.validation = validation;
-    }
-
-    /**
-     * Returns the current XJDF Node as String
-     * @return The XJDF Node as String.
-     */
-    public String toXml() throws JAXBException, IOException {
-        return new String(new XJdfParser(false).parseXJdf(this.xjdf, !validation));
-    }
-
-    /**
-     * Returns an XJDF Zip Package containing the document and all assets.
-     * @return The XJDF Zip Pacakge.
-     */
-    public byte[] getXJdfPackage() throws PackagerException {
-        return getXJdfPackage(AbstractXmlPackager.CompressionLevel.DEFAULT_COMPRESSION);
-    }
-
-    /**
-     * Returns an XJDF Zip Package containing the document and all assets.
-     * @param compressionLevel The compression level of the XJDF ZIP Package.
-     * @return The XJDF Zip Package as byte array.
-     */
-    public byte[] getXJdfPackage(AbstractXmlPackager.CompressionLevel compressionLevel) throws PackagerException {
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-        XJdfPackager xJdfPackager = new XJdfPackager(bos);
-        xJdfPackager.setValidation(validation);
-        xJdfPackager.setCompressionLevel(compressionLevel);
-        xJdfPackager.packageXjdf(this.xjdf);
-
-        return bos.toByteArray();
-    }
-
-    /**
-     * Append a Audit to the XJDF Document.
+     * Returns the current XJDF Document as XML byte array.
      *
-     * @param audit The audit to be attended append.
+     * @return The XJDF Document as XML byte array.
      */
-    public void addAudit(Audit audit) {
+    public byte[] toXml() throws XJdfParseException, XJdfValidationException {
+        return toXml(true);
+    }
 
-        // create audit pool if necessary
-        if(this.xjdf.getAuditPool() == null) {
-            this.xjdf.setAuditPool(new AuditPool());
+    /**
+     * Returns the current XJDF Document as XML byte array.
+     *
+     * @param validate 'false' in case validation should be skipped.
+     * @return The XJDF Document as XML byte array.
+     */
+    public byte[] toXml(boolean validate) throws XJdfParseException, XJdfValidationException {
+
+        // write xml
+        final byte[] xml = xjdfParser.writeXml(this.xjdf);
+
+        // validate
+        if(validate) {
+            xJdfValidator.validate(xml);
         }
 
-        // add audit
-        this.xjdf.getAuditPool().getAudits().add(audit);
+        // return result
+        return xml;
     }
 
+    /**
+     * Append Audit elements to the XJDF Document.
+     *
+     * @param audits The audits to be appended.
+     */
+    public void addAudits(Audit... audits) {
+
+        // create audit pool if no present
+        if (xjdf.getAuditPool() == null) {
+            xjdf.setAuditPool(new AuditPool());
+        }
+
+        // add audits
+        xjdf.getAuditPool().withAudits(audits);
+    }
+
+    /**
+     * Append Product elements to the XJDF Document.
+     *
+     * @param products The products to be appended.
+     */
+    public void addProduct(Product... products) {
+
+        // create audit pool if no present
+        if (xjdf.getProductList() == null) {
+            xjdf.setProductList(new ProductList());
+        }
+
+        // add audits
+        xjdf.getProductList().withProduct(products);
+    }
+
+    /**
+     * Add a specific resource to the XJDF Document.
+     *
+     * @param specificResource The specific resource to be added.
+     * @param usage            The resource's usage.
+     * @return The appropriate ResourceSet element for further processing.
+     */
     public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage) {
 
         // prepare specific resource
         String paramName = specificResource.getClass().getSimpleName();
         QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(qname, SpecificResource.class, null, specificResource);
+        JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(
+            qname,
+            SpecificResource.class,
+            null,
+            specificResource
+        );
 
         // create resource
         Resource resource = new Resource();
@@ -144,9 +177,17 @@ public class XJdfDocument {
         return resourceSet;
     }
 
+    /**
+     * Add a specific resource to the XJDF Document.
+     *
+     * @param specificResource The specific resource to be added.
+     * @param usage            The resource's usage.
+     * @param part             The partitioning of the resource.
+     * @return The appropriate ResourceSet element for further processing.
+     */
     public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage, Part part)
         throws IOException {
-        if(part == null) {
+        if (part == null) {
             return addResourceSet(specificResource, usage);
         }
 
@@ -155,9 +196,16 @@ public class XJdfDocument {
         return addResourceSet(map, usage);
     }
 
+    /**
+     * Add a map of specific resources to the XJDF Document.
+     *
+     * @param map       Partitioned specific resources as map.
+     * @param usage            The resource's usage.
+     * @return The appropriate ResourceSet element for further processing.
+     */
     public ResourceSet addResourceSet(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage)
         throws IOException {
-        if(map.size() == 0) {
+        if (map.size() == 0) {
             throw new IOException("The resource map requries at leaset one entry.");
         }
 
@@ -165,10 +213,15 @@ public class XJdfDocument {
         ResourceSet resourceSet = new ResourceSet();
         resourceSet.setUsage(usage);
 
-        for(Part part: map.keySet()) {
+        for (Part part : map.keySet()) {
             String paramName = map.get(part).getClass().getSimpleName();
             QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-            JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(qname, SpecificResource.class, null, map.get(part));
+            JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(
+                qname,
+                SpecificResource.class,
+                null,
+                map.get(part)
+            );
 
             Resource resource = new Resource();
             resource.getPart().add(part);
@@ -186,20 +239,20 @@ public class XJdfDocument {
     /**
      * Identifies and returns the first resource within the XJDF Document using partition keys.
      *
-     * @param resourceClazz The class of the specific resource.
-     * @param part The given Partition Keys used to identify a particular Resource
-     *
+     * @param resourceType The class of the specific resource.
+     * @param part         The given Partition Keys used to identify a particular Resource
      * @return The first Resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public Resource getResourceByPart(Class<? extends SpecificResource> resourceClazz, Part part) throws IllegalAccessException {
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType, Part part)
+        throws IllegalAccessException {
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
         Resource result = null;
 
-        for(int i = 0; i < resourceSets.size() && result == null; i ++) {
+        for (int i = 0; i < resourceSets.size() && result == null; i++) {
             ResourceSet resourceSet = resourceSets.get(i);
 
-            if(resourceClazz.getSimpleName().equals(resourceSet.getName())) {
+            if (resourceType.getSimpleName().equals(resourceSet.getName())) {
                 result = PartitionManager.getResourceByPart(resourceSet, part);
             }
         }
@@ -208,17 +261,40 @@ public class XJdfDocument {
     }
 
     /**
-     * Identifies and returns the first specific resource within the XJDF Document using partition keys.
+     * Identifies and returns the first matching resource within the XJDF Document.
      *
-     * @param resourceClazz The class of the specific resource.
-     * @param part The given Partition Keys used to identify a particular Resource
+     * @param resourceType The class of the specific resource.
+     * @return The first Resource identified.
+     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
+     */
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType) throws IllegalAccessException {
+        return getResourceByPart(resourceType, null);
+    }
+
+    /**
+     * Identifies and returns the first matching specific resource within the XJDF Document using partition keys.
      *
+     * @param resourceType The type of the specific resource.
+     * @param part         The given Partition Keys used to identify a particular Resource
      * @return The first specific resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceClazz, Part part) throws IllegalAccessException {
-        Resource resource = getResourceByPart(resourceClazz, part);
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part)
+        throws IllegalAccessException {
+        Resource resource = getResourceByPart(resourceType, part);
 
         return (T) resource.getSpecificResource().getValue();
+    }
+
+    /**
+     * Identifies and returns the first matching specific resource within the XJDF Document.
+     *
+     * @param resourceType The class of the specific resource.
+     * @return The first specific resource identified using partition keys.
+     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
+     */
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType)
+        throws IllegalAccessException {
+        return getSpecificResourceByPart(resourceType, null);
     }
 }

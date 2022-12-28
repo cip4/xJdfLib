@@ -1,14 +1,18 @@
 package org.cip4.lib.xjdf.util;
 
-import org.cip4.lib.xjdf.XJdfNodeFactory;
+import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
+import org.cip4.lib.xjdf.schema.LayoutIntent;
+import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.cip4.lib.xjdf.schema.SpecificResource;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.xml.namespace.QName;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,11 +32,6 @@ public class Resources {
      * Comparator to use for ordering resource sets.
      */
     private final ResourceSetComparator resourceSetComparator = new ResourceSetComparator();
-
-    /**
-     * Factory to use for creating xjdf nodes.
-     */
-    private final XJdfNodeFactory nodeFactory = new XJdfNodeFactory();
 
     /**
      * Constructor.
@@ -164,10 +163,25 @@ public class Resources {
      *
      * @return Factory for creating xjdf nodes.
      */
-    @NotNull <V extends SpecificResource> Resource createResource(
+    public static @NotNull <V extends SpecificResource> Resource createResource(
         @NotNull final V resourceType, @Nullable final Part partition
     ) {
-        return nodeFactory.createResource(resourceType, partition);
+
+        // get resource name
+        String paramName = resourceType.getClass().getSimpleName();
+
+        // create resource
+        Resource resource = new ObjectFactory().createResource();
+        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
+        JAXBElement obj = new JAXBElement(qname, resourceType.getClass(), null, resourceType);
+        resource.setSpecificResource(obj);
+
+        if (partition != null) {
+            resource.withPart(partition);
+        }
+
+        // return node
+        return resource;
     }
 
     /**

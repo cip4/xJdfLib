@@ -47,8 +47,8 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
         String[] s = expression.split(" ");
 
         // extract values
-        this.x = Float.valueOf(s[0]);
-        this.y = Float.valueOf(s[1]);
+        this.x = Float.parseFloat(s[0]);
+        this.y = Float.parseFloat(s[1]);
     }
 
     /**
@@ -70,7 +70,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * Adds another XYPair the the current one.
+     * Adds another XYPair the current one.
      * @param other The other one.
      * @return The sum of both XYPairs.
      */
@@ -94,7 +94,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
     public String marshal(XYPair xyPair) {
@@ -110,7 +110,7 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see javax.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
     public XYPair unmarshal(String v) {

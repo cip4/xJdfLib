@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xjdf:XJDF xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
+           JobID="Foo"
+           Types="Product">
+  <xjdf:ResourceSet Name="foo:bar" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <xjdf:Resource>
+      <xhtml:h1>myAttrinb"</xhtml:h1>
+    </xjdf:Resource>
+  </xjdf:ResourceSet>
+  <xjdf:ResourceSet Name="NodeInfo">
+    <xjdf:Resource ID="N1">
+      <xjdf:NodeInfo/>
+    </xjdf:Resource>
+  </xjdf:ResourceSet>
+</xjdf:XJDF>
