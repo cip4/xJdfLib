@@ -49,6 +49,10 @@ public class XJdfParser<T> {
      */
     @SuppressWarnings("unchecked")
     public final T readXml(final byte[] bytes) throws XJdfParseException {
+        if(bytes == null) {
+            throw new XJdfParseException("Cannot read an XML byte array of null.");
+        }
+
         return readXml(new ByteArrayInputStream(bytes));
     }
 

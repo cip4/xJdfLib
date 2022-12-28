@@ -9,6 +9,10 @@ public class XJdfParseException extends Exception {
         super(throwable);
     }
 
+    public XJdfParseException(String message) {
+        super(message);
+    }
+
     public XJdfParseException(String message, Throwable throwable) {
         super(message, throwable);
     }

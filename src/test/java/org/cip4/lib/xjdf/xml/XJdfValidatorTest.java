@@ -1,22 +1,14 @@
 package org.cip4.lib.xjdf.xml;
 
-import org.cip4.lib.xjdf.XJdfDocument;
-import org.cip4.lib.xjdf.exception.XJdfInitException;
-import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
-import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Method;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.UUID;
 

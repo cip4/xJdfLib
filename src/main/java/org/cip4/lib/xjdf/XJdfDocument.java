@@ -46,6 +46,7 @@ public class XJdfDocument {
         this(new XJDF()
             .withJobID(jobId)
             .withTypes(types)
+            .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
         );
     }
 

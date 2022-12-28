@@ -31,7 +31,10 @@ public class XJmfMessage {
      * Creates an XJMF Message initialized with default values.
      */
     public XJmfMessage() throws XJdfInitException {
-        this(new XJMF().withHeader(createDefaultHeader()));
+        this(new XJMF()
+            .withHeader(createDefaultHeader())
+            .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
+        );
     }
 
     /**

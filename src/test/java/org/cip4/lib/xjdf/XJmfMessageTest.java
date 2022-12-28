@@ -4,6 +4,7 @@ import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.QueryKnownDevices;
 import org.cip4.lib.xjdf.schema.QueryKnownMessages;
 import org.cip4.lib.xjdf.schema.QueryKnownSubscriptions;
+import org.cip4.lib.xjdf.schema.Version;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -35,6 +36,7 @@ class XJmfMessageTest {
         // assert
         byte[] result = xJmfMessage.toXml();
         System.out.println(new String(result));
+        Assertions.assertEquals(Version.V2_1, xJmfMessage.getXJmf().getVersion());
 
         Header xjmfHeader = xJmfMessage.getXJmf().getHeader();
         Assertions.assertEquals("MY_AGENT", xjmfHeader.getAgentName());

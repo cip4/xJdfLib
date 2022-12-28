@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml;
 
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.xml.XJdfParser.XJdfNamespacePrefixMapper;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,20 @@ class XJdfParserTest {
         assertEquals(1, xjdf.getTypes().size());
 
         assertEquals("aÄoÖuÜsß", xjdf.getComment().get(0).getValue());
+    }
+
+    @Test
+    void readXml_2() throws Exception {
+
+        // arrange
+        XJdfParser<XJDF> xJdfParser = new XJdfParser<>();
+        byte[] bytes = null;
+
+        // act
+        Exception exception = assertThrows(XJdfParseException.class, () -> xJdfParser.readXml(bytes));
+
+        // assert
+        assertEquals("Cannot read an XML byte array of null.", exception.getMessage());
     }
 
     /**

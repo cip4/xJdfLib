@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.AuditCreated;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.cip4.lib.xjdf.schema.Header;
@@ -25,7 +26,7 @@ public class XJdfDocumentTest {
     public void createXJDF_1() throws Exception {
 
         // ARRANGE
-        XJdfDocument xjdfDoc = new XJdfDocument("JobID", new String[] {"ConventionalPrinting", "Cutting"});
+        XJdfDocument xjdfDoc = new XJdfDocument("JobID", "ConventionalPrinting", "Cutting");
 
         // audit pool
         AuditCreated auditCreated = new AuditCreated();
@@ -112,5 +113,19 @@ public class XJdfDocumentTest {
 
         // assert
         assertEquals("The resource map requries at leaset one entry.", exception.getMessage());
+    }
+
+    @Test
+    public void createXJDF_4() throws Exception {
+
+        // arrange
+
+        // act
+        Exception exception = assertThrows(XJdfParseException.class, () -> {
+            new XJdfDocument((byte[]) null);
+        });
+
+        // assert
+        assertEquals("Cannot read an XML byte array of null.", exception.getMessage());
     }
 }
