@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf;
 
+import jakarta.xml.bind.JAXBElement;
 import org.apache.commons.lang3.NotImplementedException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
@@ -13,7 +14,8 @@ import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This class provides functionality all about XJMF Messages.
@@ -87,6 +89,21 @@ public class XJmfMessage {
         // add message
         this.xjmf.getMessages().add(message);
 
+    }
+
+    /**
+     * Return the list of all specific messages contained by this XJMF Message.
+     * @return List of specific messages.
+     */
+    public List<Message> getMessages() {
+        List<Message> messages = new ArrayList<>(getXJmf().getMessages().size());
+
+        for(Object obj: getXJmf().getMessages()) {
+            JAXBElement jaxbElement = (JAXBElement) obj;
+            messages.add((Message) jaxbElement.getValue());
+        }
+
+        return messages;
     }
 
     /**

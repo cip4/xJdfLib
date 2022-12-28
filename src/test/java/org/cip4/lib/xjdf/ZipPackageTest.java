@@ -47,7 +47,7 @@ class ZipPackageTest {
         System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(1, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
     }
 
     @Test
@@ -72,7 +72,7 @@ class ZipPackageTest {
         System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(2, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
         Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
     }
 
@@ -98,7 +98,7 @@ class ZipPackageTest {
         System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(2, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
         Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
     }
 
@@ -166,7 +166,7 @@ class ZipPackageTest {
         System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(3, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
         Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
         Assertions.assertTrue(files.contains(new URI("assets/test.pdf")));
     }
@@ -279,7 +279,7 @@ class ZipPackageTest {
         System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(1, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
 
         Assertions.assertEquals("DEEPTHOUGHT", xjmfRoot.getXJmf().getHeader().getDeviceID());
     }
@@ -324,7 +324,7 @@ class ZipPackageTest {
 
         Set<URI> files = resultZipPackage.listFiles();
         Assertions.assertEquals(2, files.size());
-        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("CommandSubmitQueueEntry.xjmf")));
         Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
 
         XJdfDocument resultXJdfDoc = resultZipPackage.getXJdfDocument("assets/myxjdf.xjdf");

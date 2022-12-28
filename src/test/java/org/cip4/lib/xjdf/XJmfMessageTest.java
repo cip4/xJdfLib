@@ -1,15 +1,22 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
 import org.cip4.lib.xjdf.schema.Header;
+import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.QueryKnownDevices;
 import org.cip4.lib.xjdf.schema.QueryKnownMessages;
 import org.cip4.lib.xjdf.schema.QueryKnownSubscriptions;
+import org.cip4.lib.xjdf.schema.QueueSubmissionParams;
 import org.cip4.lib.xjdf.schema.Version;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
+
+import java.io.IOException;
+import java.util.List;
 
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
@@ -89,4 +96,57 @@ class XJmfMessageTest {
         Assertions.assertEquals("MY_DEVICE", messageHeader_2.getDeviceID());
     }
 
+    @Test
+    void readXJmf_1() throws Exception {
+
+        // arrange
+        byte[] xjmf = loadFile("CommandSubmitQueueEntry.xjmf");
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        List<Message> messages = xJmfMessage.getMessages();
+
+        // assert
+        Assertions.assertEquals(1, messages.size());
+        Assertions.assertTrue(messages.get(0) instanceof CommandSubmitQueueEntry);
+
+        CommandSubmitQueueEntry commandSubmitQueueEntry = (CommandSubmitQueueEntry) messages.get(0);
+        Assertions.assertEquals("preview.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString());
+    }
+
+    @Test
+    void readXJmf_2() throws Exception {
+
+        // arrange
+        XJmfMessage xJmfExample = new XJmfMessage();
+
+        xJmfExample.addMessage(new CommandSubmitQueueEntry()
+            .withQueueSubmissionParams(new QueueSubmissionParams()
+                .withURL(new URI("myUrl.xjdf"))));
+
+        xJmfExample.addMessage(new QueryKnownMessages());
+
+        xJmfExample.addMessage(new QueryKnownDevices());
+
+        byte[] xjmf = xJmfExample.toXml();
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        List<Message> messages = xJmfMessage.getMessages();
+
+        // assert
+        Assertions.assertEquals(3, messages.size());
+        Assertions.assertSame(messages.get(0).getClass(), CommandSubmitQueueEntry.class);
+        Assertions.assertTrue(messages.get(1) instanceof QueryKnownMessages);
+        Assertions.assertTrue(messages.get(2) instanceof QueryKnownDevices);
+    }
+
+    /**
+     * Helper method to load a file.
+     * @param filename The files name.
+     * @return The file as byte array.
+     */
+    private byte[] loadFile(String filename) throws IOException {
+        return ZipPackageTest.class.getResourceAsStream("/org/cip4/lib/xjdf/" + filename).readAllBytes();
+    }
 }
