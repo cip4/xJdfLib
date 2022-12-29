@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<XJMF xmlns="http://www.CIP4.org/JDFSchema_2_0">
+    <Header DeviceID="DEV_ID" Time="2019-10-15T21:26:07+02:00" />
+    <CommandSubmitQueueEntry>
+        <Header DeviceID="DEV_ID" Time="2019-10-15T21:26:07+02:00"/>
+        <QueueSubmissionParams URL="preview.xjdf"/>
+    </CommandSubmitQueueEntry>
+</XJMF>

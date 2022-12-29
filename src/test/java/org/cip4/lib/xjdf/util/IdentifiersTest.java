@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
  * @author s.meissner
  * @author m.hartmann
  */
-public class IDGeneratorTest {
+public class IdentifiersTest {
 
     /**
-     * Test method for {@link IDGenerator#generateID(java.lang.String)}.
+     * Test method for {@link Identifiers#generate(java.lang.String)}.
      */
     @Test
     public void testGenerateID1_PREFIX() {
@@ -22,14 +22,14 @@ public class IDGeneratorTest {
         final String prefix = "ID";
 
         // act
-        String result = IDGenerator.generateID(prefix);
+        String result = Identifiers.generate(prefix);
 
         // assert
         assertTrue(result.startsWith(prefix), "ID is wrong.");
     }
 
     /**
-     * Test method for {@link IDGenerator#generateID(java.lang.String)}.
+     * Test method for {@link Identifiers#generate(java.lang.String)}.
      */
     @Test
     public void testGenerateID2_PREFIX() {
@@ -37,14 +37,14 @@ public class IDGeneratorTest {
         // arrange
 
         // act
-        String result = IDGenerator.generateID("pre");
+        String result = Identifiers.generate("pre");
 
         // assert
         assertTrue(result.startsWith("PRE_"), "ID is wrong.");
     }
 
     /**
-     * Test method for {@link IDGenerator#generateID(java.lang.String)}.
+     * Test method for {@link Identifiers#generate(java.lang.String)}.
      */
     @Test
     public void testGenerateID3_PREFIX() {
@@ -52,14 +52,14 @@ public class IDGeneratorTest {
         // arrange
 
         // act
-        String result = IDGenerator.generateID("");
+        String result = Identifiers.generate("");
 
         // assert
         assertTrue(result.startsWith("ID_"), "ID is wrong.");
     }
 
     /**
-     * Test method for {@link IDGenerator#generateID(java.lang.String)}.
+     * Test method for {@link Identifiers#generate(java.lang.String)}.
      */
     @Test
     public void testGenerateID4_PREFIX() {
@@ -70,7 +70,7 @@ public class IDGeneratorTest {
 
         // act
         for (int i = 0; i < 4000; i++) {
-            String result = IDGenerator.generateID("");
+            String result = Identifiers.generate("");
 
             String id = result.split("_")[1];
 
@@ -81,7 +81,7 @@ public class IDGeneratorTest {
         }
 
         for (int i = 0; i < 4000; i++) {
-            String result = IDGenerator.generateID("abc");
+            String result = Identifiers.generate("abc");
 
             String id = result.split("_")[1];
 

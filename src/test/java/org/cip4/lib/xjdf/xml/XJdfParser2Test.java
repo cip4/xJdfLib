@@ -15,15 +15,19 @@ import org.cip4.lib.xjdf.XJdfDocument;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.binding.NamespaceManager;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
 import org.xml.sax.InputSource;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 /**
  * JUnit test case for XmlParser class.
  */
+@Execution(SAME_THREAD)
 public class XJdfParser2Test {
 
     private static final String RES_TEST_XJDF = "/org/cip4/lib/xjdf/test.xjdf";
@@ -31,6 +35,13 @@ public class XJdfParser2Test {
     private static final String RES_IDREF = "/org/cip4/lib/xjdf/idref.xjdf";
 
     private XJdfParser<XJDF> xJdfParser;
+
+    @BeforeAll
+    static void initTests() {
+        XJdfConstants.AGENT_NAME = "MY_AGENT";
+        XJdfConstants.AGENT_VERSION = "MY_AGENT_VERSION";
+        XJdfConstants.DEVICE_ID = "MY_DEVICE";
+    }
 
     /**
      * Set up unit test.

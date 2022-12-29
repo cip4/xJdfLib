@@ -5,7 +5,7 @@ import org.cip4.lib.xjdf.schema.ProductIntent;
 import org.cip4.lib.xjdf.schema.Product;
 
 /**
- * Utility for performing reoccuring operations on products.
+ * Products utility class providing Product management functionality.
  */
 public final class Products {
 

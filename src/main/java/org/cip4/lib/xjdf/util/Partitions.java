@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Utility class for handling partitions of resources.
+ * Partitions utility class providing partitioning functionality.
  */
 public final class Partitions {
 
