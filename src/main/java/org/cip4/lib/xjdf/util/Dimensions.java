@@ -1,20 +1,14 @@
 package org.cip4.lib.xjdf.util;
 
 /**
- * Static helper class which provides dimension conversion functionality.
- *
- * @author s.meissner
+ * Dimensions utility class providing conversion functionality.
  */
 public class Dimensions {
 
     /**
-     * Private constructor.<br>
-     * This class cannot be instantiated.
+     * Private constructor for utility class.
      */
     private Dimensions() {
-
-        // protection from reflection
-        throw new AssertionError("Class cannot be instantiated.");
     }
 
     /**

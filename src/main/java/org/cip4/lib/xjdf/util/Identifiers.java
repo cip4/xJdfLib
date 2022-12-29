@@ -1,11 +1,9 @@
 package org.cip4.lib.xjdf.util;
 
 /**
- * Static helper class for generating IDs.
- *
- * @author s.meissner
+ * Identifiers utility class providing generation functionality.
  */
-public class IDGenerator {
+public class Identifiers {
 
     private final static String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
@@ -14,13 +12,9 @@ public class IDGenerator {
     private final static int ID_LENGTH = 8;
 
     /**
-     * Private constructor.<br>
-     * This class cannot be instantiated.
+     * Private constructor for utility class.
      */
-    private IDGenerator() {
-
-        // protection from reflection
-        throw new AssertionError("Class cannot be instantiated.");
+    private Identifiers() {
     }
 
     /**
@@ -28,8 +22,8 @@ public class IDGenerator {
      *
      * @return An almost unique ID.
      */
-    public static String generateID() {
-        return generateID(null);
+    public static String generate() {
+        return generate(null);
     }
 
     /**
@@ -37,7 +31,7 @@ public class IDGenerator {
      *
      * @return An almost unique ID.
      */
-    public static String generateID(String prefix) {
+    public static String generate(String prefix) {
 
         // generate random part
         char[] id = new char[ID_LENGTH];

@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf.util;
 
 import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.comparator.ResourceSetComparator;
-import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
@@ -19,7 +18,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 /**
- * This class provides access to Resources within ResourceSets.
+ * Resources utility class providing Resources management functionality.
  */
 public class Resources {
 

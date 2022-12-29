@@ -5,6 +5,7 @@ import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
@@ -46,7 +47,6 @@ public class XJdfDocument {
         this(new XJDF()
             .withJobID(jobId)
             .withTypes(types)
-            .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
         );
     }
 
@@ -67,10 +67,23 @@ public class XJdfDocument {
      * @param xjdf The XJDF root node.
      */
     public XJdfDocument(XJDF xjdf) throws XJdfInitException {
-        this.xjdf = xjdf;
 
+        // set instance variables
+        this.xjdf = xjdf;
         this.xjdfParser = new XJdfParser<>();
         this.xJdfValidator = new XJdfValidator();
+
+        // set preferred values (if not yet set)
+        if(xjdf.getVersion() == null) {
+            xjdf.setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
+        }
+
+        if(xjdf.getAuditPool() == null) {
+            xjdf.setAuditPool(new AuditPool()
+                .withAudits(new AuditCreated()
+                    .withHeader(Headers.createDefaultHeader()))
+            );
+        }
     }
 
     /**

@@ -5,10 +5,9 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
-import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
-import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
@@ -34,7 +33,7 @@ public class XJmfMessage {
      */
     public XJmfMessage() throws XJdfInitException {
         this(new XJMF()
-            .withHeader(createDefaultHeader())
+            .withHeader(Headers.createDefaultHeader())
             .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
         );
     }
@@ -83,7 +82,7 @@ public class XJmfMessage {
 
         // add default header if no header is present
         if(message.getHeader() == null) {
-            message.setHeader(createDefaultHeader());
+            message.setHeader(Headers.createDefaultHeader());
         }
 
         // add message
@@ -104,18 +103,6 @@ public class XJmfMessage {
         }
 
         return messages;
-    }
-
-    /**
-     * Helper method to create a default header.
-     * @return The default header.
-     */
-    private static Header createDefaultHeader() {
-        return new Header()
-            .withDeviceID(XJdfConstants.DEVICE_ID)
-            .withAgentName(XJdfConstants.AGENT_NAME)
-            .withAgentVersion(XJdfConstants.AGENT_VERSION)
-            .withTime(new DateTime());
     }
 
     /**

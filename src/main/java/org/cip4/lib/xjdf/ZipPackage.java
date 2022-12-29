@@ -10,9 +10,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -43,7 +45,7 @@ public class ZipPackage {
      * Default constructor.
      */
     public ZipPackage() {
-        this.files = new HashMap<>();
+        this.files = Collections.unmodifiableMap(new HashMap<>());
     }
 
     /**
@@ -79,17 +81,19 @@ public class ZipPackage {
      */
     public ZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments, @NotNull Map<URI, byte[]> files)
         throws XJdfValidationException, XJdfParseException {
-        this();
 
-        this.files.put(URI_ROOT_XJMF, rootJmf.toXml());
+        Map<URI, byte[]> fileMap = new HashMap<>();
+        fileMap.put(URI_ROOT_XJMF, rootJmf.toXml());
 
         for(URI uri: xJdfDocuments.keySet()) {
-            this.files.put(uri, xJdfDocuments.get(uri).toXml());
+            fileMap.put(uri, xJdfDocuments.get(uri).toXml());
         }
 
         for(URI uri: files.keySet()) {
-            this.files.put(uri, files.get(uri));
+            fileMap.put(uri, files.get(uri));
         }
+
+        this.files = Collections.unmodifiableMap(fileMap);
     }
 
     /**
@@ -97,14 +101,12 @@ public class ZipPackage {
      * Accepting a zip archive for initializing.
      */
     public ZipPackage(byte[] zipArchive) throws IOException, URISyntaxException {
-        this();
-
         try (
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(zipArchive);
             ZipInputStream packageStream = new ZipInputStream(byteArrayInputStream)
         ) {
             ZipEntry entry = packageStream.getNextEntry();
-
+            Map<URI, byte[]> files = new HashMap<>();
 
             while (entry != null) {
                 files.put(
@@ -114,6 +116,8 @@ public class ZipPackage {
 
                 entry = packageStream.getNextEntry();
             }
+
+            this.files = Collections.unmodifiableMap(files);
         }
     }
 
@@ -194,5 +198,44 @@ public class ZipPackage {
 
         // return zip archive
         return result;
+    }
+
+    /**
+     * ZipPackage builder class.
+     */
+    public static class Builder {
+
+        private XJmfMessage xjmfRoot;
+
+        private final Map<URI, XJdfDocument> xJdfDocumentMap;
+
+        private final Map<URI, byte[]> fileMap;
+
+        /**
+         * Default constructor.
+         */
+        public Builder() {
+            xJdfDocumentMap = new HashMap<>();
+            fileMap = new HashMap<>();
+        }
+
+        public Builder withXJmfRoot(XJmfMessage xJmfRoot) {
+            this.xjmfRoot = xJmfRoot;
+            return this;
+        }
+
+        public Builder withXJdfDocument(URI uri, XJdfDocument xJdfDocument) {
+            xJdfDocumentMap.put(uri, xJdfDocument);
+            return this;
+        }
+
+        public Builder withFile(URI uri, byte[] bytes) {
+            fileMap.put(uri, bytes);
+            return this;
+        }
+
+        public ZipPackage build() throws XJdfValidationException, XJdfParseException {
+            return new ZipPackage(xjmfRoot, xJdfDocumentMap, fileMap);
+        }
     }
 }

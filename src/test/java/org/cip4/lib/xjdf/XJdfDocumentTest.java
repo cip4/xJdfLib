@@ -12,15 +12,27 @@ import org.cip4.lib.xjdf.schema.RunList;
 import org.cip4.lib.xjdf.schema.Side;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
+@Execution(SAME_THREAD)
 public class XJdfDocumentTest {
+
+    @BeforeAll
+    static void initTests() {
+        XJdfConstants.AGENT_NAME = "MY_AGENT";
+        XJdfConstants.AGENT_VERSION = "MY_AGENT_VERSION";
+        XJdfConstants.DEVICE_ID = "MY_DEVICE";
+    }
 
     @Test
     public void createXJDF_1() throws Exception {

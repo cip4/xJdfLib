@@ -67,11 +67,11 @@ public class XJdfConstants {
      */
     public static final String MEDIA_TYPE_XJMF_ZIP = "application/vnd.cip4-xjmf+zip";
 
-    public static String DEVICE_ID = "NOT_SET";
+    public static String DEVICE_ID = null;
 
-    public static String AGENT_NAME = "NOT_SET";
+    public static String AGENT_NAME = null;
 
-    public static String AGENT_VERSION = "NOT_SET";
+    public static String AGENT_VERSION = null;
 
     /**
      * Helper method to load all XJDF schemes as a map of byte array.
