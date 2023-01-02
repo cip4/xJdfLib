@@ -66,7 +66,9 @@ public class XJdfConstantsTest {
         String version = XJdfConstants.XJDFLIB_VERSION;
 
         // assert
-        Assertions.assertEquals("2.1.x-DEV", version);
+
+
+        Assertions.assertTrue(version.startsWith(XJdfConstants.XJDF_CURRENT_VERSION.value()), "Wrong version.");
     }
 
     @Test
