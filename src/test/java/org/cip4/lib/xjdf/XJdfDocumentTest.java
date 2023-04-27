@@ -49,23 +49,23 @@ public class XJdfDocumentTest {
 
         // resources simple
         NodeInfo nodeInfo = new NodeInfo();
-        nodeInfo.setEnd(new DateTime(2018,7,23,9,23,0));
+        nodeInfo.setEnd(new DateTime(2018, 7, 23, 9, 23, 0));
         xjdfDoc.addResourceSet(nodeInfo, ResourceSet.Usage.INPUT);
 
         // resource multiple
-        Map<Part, RunList> runListMap = new HashMap<>();
+        Map<Part[], RunList> runListMap = new HashMap<>();
 
-        Part front = new Part();
-        front.setSide(Side.FRONT);
-        runListMap.put(front, new RunList());
-        runListMap.get(front).setFileSpec(new FileSpec());
-        runListMap.get(front).getFileSpec().setURL(new URI(new java.net.URI("https://example.org/front.pdf")));
+        runListMap.put(
+                new Part[]{new Part().withSide(Side.FRONT)},
+                new RunList().withFileSpec(
+                        new FileSpec().withURL(new URI(new java.net.URI("https://example.org/front.pdf"))))
+        );
 
-        Part back = new Part();
-        back.setSide(Side.BACK);
-        runListMap.put(back, new RunList());
-        runListMap.get(back).setFileSpec(new FileSpec());
-        runListMap.get(back).getFileSpec().setURL(new URI(new java.net.URI("https://example.org/back.pdf")));
+        runListMap.put(
+                new Part[]{new Part().withSide(Side.BACK)},
+                new RunList().withFileSpec(
+                        new FileSpec().withURL(new URI(new java.net.URI("https://example.org/back.pdf"))))
+        );
 
         xjdfDoc.addResourceSet(runListMap, ResourceSet.Usage.INPUT);
 
@@ -85,23 +85,23 @@ public class XJdfDocumentTest {
         // arrange
         XJdfDocument xJdfDoc = new XJdfDocument("JOB_42", new String[]{"ConventionalPrinting", "Cutting"});
 
-        Map<Part, Preview> previews = new HashMap<>();
+        Map<Part[], Preview> previews = new HashMap<>();
 
         previews.put(
-            new Part().withPreviewType(Part.PreviewType.IDENTIFICATION),
-            new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/identification.pdf")))
+                new Part[]{new Part().withPreviewType(Part.PreviewType.IDENTIFICATION)},
+                new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/identification.pdf")))
         );
 
         previews.put(
-            new Part().withPreviewType(Part.PreviewType.THUMB_NAIL),
-            new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/preview.jpg")))
+                new Part[]{new Part().withPreviewType(Part.PreviewType.THUMB_NAIL)},
+                new Preview().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/preview.jpg")))
         );
 
         xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
 
         xJdfDoc.addResourceSet(
-            new RunList().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/artwork.pdf"))),
-            ResourceSet.Usage.INPUT
+                new RunList().withFileSpec(new FileSpec().withURL(new URI("https://cip4.example.org/artwork.pdf"))),
+                ResourceSet.Usage.INPUT
         );
 
         // act
@@ -116,10 +116,10 @@ public class XJdfDocumentTest {
         // arrange
         XJdfDocument xJdfDoc = new XJdfDocument("JOB_42", new String[]{"ConventionalPrinting", "Cutting"});
 
-        Map<Part, Preview> previews = new HashMap<>();
+        Map<Part[], Preview> previews = new HashMap<>();
 
         // act
-        Exception exception = assertThrows(IOException.class, () -> {
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             xJdfDoc.addResourceSet(previews, ResourceSet.Usage.INPUT);
         });
 
