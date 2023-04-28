@@ -16,6 +16,7 @@ import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * This class provides functionality all about XJDF Documents.
@@ -141,71 +142,54 @@ public class XJdfDocument {
     }
 
     /**
-     * Append Product elements to the XJDF Document.
+     * Append final products to the XJDF Document.
      *
-     * @param products The products to be appended.
+     * @param finalProducts The final products to be appended.
      */
-    public void addProduct(Product... products) {
+    public void addFinalProduct(FinalProduct... finalProducts) {
 
-        // create audit pool if no present
+        // create product list if noy present
         if (xjdf.getProductList() == null) {
             xjdf.setProductList(new ProductList());
         }
 
-        // add audits
-        xjdf.getProductList().withProduct(products);
+        // add product parts
+        for(FinalProduct finalProduct: finalProducts) {
+            xjdf.getProductList().withProduct(finalProduct.getProductParts());
+        }
     }
 
     /**
-     * Add a specific resource to the XJDF Document.
-     *
-     * @param specificResource The specific resource to be added.
-     * @param usage            The resource's usage.
-     * @return The appropriate ResourceSet element for further processing.
+     * Returns a list of all final products contained by the XJDF Document.
+     * @return List of final products.
      */
-    public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage) {
+    public List<FinalProduct> getFinalProducts() {
+        List<FinalProduct> finalProducts = new ArrayList<>();
 
-        // prepare specific resource
-        String paramName = specificResource.getClass().getSimpleName();
-        QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
-        JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(
-            qname,
-            SpecificResource.class,
-            null,
-            specificResource
-        );
+        if(xjdf.getProductList() != null) {
+            List<Product> productParts = xjdf.getProductList().getProduct();
 
-        // create resource
-        Resource resource = new Resource();
-        resource.setSpecificResource(specificResourceJaxB);
-
-        // create resource set
-        ResourceSet resourceSet = new ResourceSet();
-        resourceSet.getResource().add(resource);
-        resourceSet.setName(paramName);
-        resourceSet.setUsage(usage);
-
-        // add resource set to XJDF and return the object
-        this.xjdf.getResourceSet().add(resourceSet);
-        return resourceSet;
-    }
-
-    /**
-     * Add a specific resource to the XJDF Document.
-     *
-     * @param specificResource The specific resource to be added.
-     * @param usage            The resource's usage.
-     * @param part             The partitioning of the resource.
-     * @return The appropriate ResourceSet element for further processing.
-     */
-    public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage, Part part)
-        throws IOException {
-        if (part == null) {
-            return addResourceSet(specificResource, usage);
+            for (Product product : productParts) {
+                if(product.isIsRoot()) {
+                    finalProducts.add(new FinalProduct(product, productParts));
+                }
+            }
         }
 
-        Map<Part, SpecificResource> map = new HashMap<>();
-        map.put(part, specificResource);
+        return finalProducts;
+    }
+
+    /**
+     * Add a specific resource to the XJDF Document.
+     *
+     * @param specificResource The specific resource to be added.
+     * @param usage            The resource's usage.
+     * @param parts             The partitioning of the resource.
+     * @return The appropriate ResourceSet element for further processing.
+     */
+    public ResourceSet addResourceSet(@NotNull SpecificResource specificResource, ResourceSet.Usage usage, Part... parts) {
+        Map<Part[], SpecificResource> map = new HashMap<>();
+        map.put(parts, specificResource);
         return addResourceSet(map, usage);
     }
 
@@ -216,28 +200,30 @@ public class XJdfDocument {
      * @param usage            The resource's usage.
      * @return The appropriate ResourceSet element for further processing.
      */
-    public ResourceSet addResourceSet(Map<Part, ? extends SpecificResource> map, ResourceSet.Usage usage)
-        throws IOException {
+    public ResourceSet addResourceSet(Map<Part[], ? extends SpecificResource> map, ResourceSet.Usage usage) {
         if (map.size() == 0) {
-            throw new IOException("The resource map requries at leaset one entry.");
+            throw new IllegalArgumentException("The resource map requries at leaset one entry.");
         }
 
         // create resource set
         ResourceSet resourceSet = new ResourceSet();
         resourceSet.setUsage(usage);
 
-        for (Part part : map.keySet()) {
-            String paramName = map.get(part).getClass().getSimpleName();
+        for (Part[] parts : map.keySet()) {
+            String paramName = map.get(parts).getClass().getSimpleName();
             QName qname = new QName(XJdfConstants.NAMESPACE_JDF20, paramName);
             JAXBElement<SpecificResource> specificResourceJaxB = new JAXBElement(
                 qname,
                 SpecificResource.class,
                 null,
-                map.get(part)
+                map.get(parts)
             );
 
             Resource resource = new Resource();
-            resource.getPart().add(part);
+
+            for(Part part: parts) {
+                resource.getPart().add(part);
+            }
             resource.setSpecificResource(specificResourceJaxB);
 
             resourceSet.getResource().add(resource);
@@ -250,15 +236,50 @@ public class XJdfDocument {
     }
 
     /**
+     * Returns the generic resources of a resource set for a given specific resource.
+     * @param resourceType the specific resource.
+     * @return List of resources of the resource set.
+     */
+    public List<Resource> getResourcesByPartKeys(Class<? extends SpecificResource> resourceType, String... partKeys) {
+        List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
+        List<Resource> result = null;
+
+        for (int i = 0; i < resourceSets.size() && result == null; i++) {
+            ResourceSet resourceSet = resourceSets.get(i);
+
+            if (resourceType.getSimpleName().equals(resourceSet.getName())) {
+                result = PartitionManager.getResourcesByPartKeys(resourceSet, partKeys);
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the generic resources of a resource set for a given specific resource.
+     * @param resourceType the specific resource.
+     * @return List of resources of the resource set.
+     */
+    public <T extends SpecificResource> List<T> getSpecificResourcesByPartKeys(Class<T> resourceType, String... partKeys) {
+        List<Resource> resources = getResourcesByPartKeys(resourceType, partKeys);
+
+        if(resources == null) {
+            return null;
+        }
+
+        return resources.stream()
+                .map(resource -> (T) resource.getSpecificResource().getValue())
+                .collect(Collectors.toList());
+    }
+
+    /**
      * Identifies and returns the first resource within the XJDF Document using partition keys.
      *
      * @param resourceType The class of the specific resource.
      * @param part         The given Partition Keys used to identify a particular Resource
      * @return The first Resource identified using partition keys.
-     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType, Part part)
-        throws IllegalAccessException {
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType, Part part) {
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
         Resource result = null;
 
@@ -278,9 +299,8 @@ public class XJdfDocument {
      *
      * @param resourceType The class of the specific resource.
      * @return The first Resource identified.
-     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType) throws IllegalAccessException {
+    public Resource getResourceByPart(Class<? extends SpecificResource> resourceType) {
         return getResourceByPart(resourceType, null);
     }
 
@@ -309,5 +329,14 @@ public class XJdfDocument {
     public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType)
         throws IllegalAccessException {
         return getSpecificResourceByPart(resourceType, null);
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new String(toXml(false));
+        } catch (Exception e) {
+            return "Error creating an XML preview.";
+        }
     }
 }

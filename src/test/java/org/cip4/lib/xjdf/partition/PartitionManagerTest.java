@@ -6,6 +6,9 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.util.collections.Sets;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,6 +35,100 @@ public class PartitionManagerTest {
     public final void setUp() {
         partitionManager = new PartitionManager();
         resourceSet = new ResourceSet();
+    }
+
+    @Test
+    public void getResourcesByPartKeys_0() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT");
+
+        createResource("CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet, "Side", "Separation");
+
+        // assert
+        assertEquals(2, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_1() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+        createPartSeparationSide("Cyan", Side.FRONT, "CYAN_FRONT");
+
+        createResource("CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet, "Side");
+
+        // assert
+        assertEquals(0, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_2() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+        createPartSide(Side.FRONT, "CYAN_FRONT");
+
+        createResource("CYAN_BACK");
+        createPartSide(Side.BACK, "CYAN_BACK");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet, "Side");
+
+        // assert
+        assertEquals(2, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_3() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+        createPartSide(Side.FRONT, "CYAN_FRONT");
+
+        createResource("CYAN_BACK");
+        createPartSeparationSide("Cyan", Side.BACK, "CYAN_BACK");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet, "Side");
+
+        // assert
+        assertEquals(1, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_4() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet, "Side");
+
+        // assert
+        assertEquals(0, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_5() {
+
+        // arrange
+        createResource("CYAN_FRONT");
+
+        // act
+        List<Resource> resources = PartitionManager.getResourcesByPartKeys(resourceSet);
+
+        // assert
+        assertEquals(0, resources.size(), "Number of resources is wrong.");
     }
 
     /**
