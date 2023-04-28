@@ -7,10 +7,8 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Manager class containing all the partitioning logic.
@@ -24,10 +22,17 @@ public class PartitionManager {
         for (Resource resource : resourceSet.getResource()) {
             for (Part resPart : resource.getPart()) {
 
-                // check if all partition keys are in the set of given keys
-                Set<String> resourceKeys = getPartitionKeys(resPart);
+                // make all keys lowercase
+                Set<String> resourceKeysSet = getPartitionKeys(resPart).stream()
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toSet());
 
-                if (Set.of(partKeys).containsAll(resourceKeys) && resourceKeys.containsAll(Set.of(partKeys))) {
+                Set<String> partKeysSet = Arrays.stream(partKeys)
+                        .map(String::toLowerCase)
+                        .collect(Collectors.toSet());
+
+                // check if all partition keys are in the set of given keys
+                if (partKeysSet.containsAll(resourceKeysSet) && resourceKeysSet.containsAll(partKeysSet)) {
                     result.add(resource);
                     break;
                 }
@@ -123,7 +128,7 @@ public class PartitionManager {
 
                 try {
                     if (FieldUtils.readField(field, part, true) != null && !field.getName().equals("otherAttributes")) {
-                        partKeys.add(field.getAnnotation(XmlAttribute.class).name());
+                        partKeys.add(field.getName());
                     }
                 } catch (IllegalAccessException ex) {
                     throw new IllegalArgumentException(ex);
