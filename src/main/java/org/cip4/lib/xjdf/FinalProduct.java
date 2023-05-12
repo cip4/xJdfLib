@@ -71,7 +71,7 @@ public class FinalProduct {
      */
     public void addIntents(ProductIntent... productIntents) {
         for(ProductIntent productIntent : productIntents) {
-            addIntent(productIntent)
+            addIntent(productIntent);
         }
     }
 
