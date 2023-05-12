@@ -65,6 +65,17 @@ public class FinalProduct {
     }
 
     /**
+     * Add intents to the product.
+     *
+     * @param productIntents The intents to be added.
+     */
+    public void addIntents(ProductIntent... productIntents) {
+        for(ProductIntent productIntent : productIntents) {
+            addIntent(productIntent)
+        }
+    }
+
+    /**
      * Add an intent to the product.
      *
      * @param productIntent The intent to be added.
