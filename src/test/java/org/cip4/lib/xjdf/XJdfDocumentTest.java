@@ -1,15 +1,8 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
-import org.cip4.lib.xjdf.schema.AuditCreated;
-import org.cip4.lib.xjdf.schema.FileSpec;
-import org.cip4.lib.xjdf.schema.Header;
-import org.cip4.lib.xjdf.schema.NodeInfo;
-import org.cip4.lib.xjdf.schema.Part;
-import org.cip4.lib.xjdf.schema.Preview;
-import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.cip4.lib.xjdf.schema.RunList;
-import org.cip4.lib.xjdf.schema.Side;
+import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
@@ -17,7 +10,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -139,5 +131,34 @@ public class XJdfDocumentTest {
 
         // assert
         assertEquals("Cannot read an XML byte array of null.", exception.getMessage());
+    }
+
+    @Test
+    public void getAuditCreated_1() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("42", "Product");
+
+        // act
+        Header actual = xJdfDocument.getAuditCreated();
+
+        // assert
+        assertEquals("MY_DEVICE", actual.getDeviceID(), "Device Id is wrong.");
+        assertEquals("MY_AGENT", actual.getAgentName(), "Agent Name is wrong.");
+        assertEquals("MY_AGENT_VERSION", actual.getAgentVersion(), "Agent Version is wrong.");
+    }
+
+    @Test
+    public void getAuditCreated_2() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+        xJdfDocument.getXJdf().setAuditPool(null);
+
+        // act
+        Header actual = xJdfDocument.getAuditCreated();
+
+        // assert
+        assertNull(actual, "AuditCreated is not null.");
     }
 }
