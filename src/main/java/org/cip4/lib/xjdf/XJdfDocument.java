@@ -142,6 +142,26 @@ public class XJdfDocument {
     }
 
     /**
+     * Returns the AuditCreated's header element of the XJDF Document.
+     * @return The AuditCreated header element.
+     */
+    public Header getAuditCreated() {
+
+        // create audit pool if no present
+        if (xjdf.getAuditPool() != null) {
+            for(Audit audit: xjdf.getAuditPool().getAudits()) {
+                if(audit instanceof AuditCreated) {
+                    AuditCreated auditCreated = (AuditCreated) audit;
+                    return auditCreated.getHeader();
+                }
+            }
+        }
+
+        // return null if not present
+        return null;
+    }
+
+    /**
      * Append final products to the XJDF Document.
      *
      * @param finalProducts The final products to be appended.
