@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -103,6 +104,15 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      */
     public DateTime(final Date date) {
         zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+    }
+
+    /**
+     * Creates a XJDF DateTime instance by a Date object.
+     *
+     * @param epochMillis Epoch millis.
+     */
+    public DateTime(final long epochMillis) {
+        zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), ZoneId.systemDefault());
     }
 
     /**
