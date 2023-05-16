@@ -161,4 +161,20 @@ public class XJdfDocumentTest {
         // assert
         assertNull(actual, "AuditCreated is not null.");
     }
+
+    @Test
+    public void addGeneralId() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID(new GeneralID()
+                .withIDUsage("USAGE")
+                .withIDValue("VALUE"));
+
+        // assert
+        assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
+        assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+    }
 }

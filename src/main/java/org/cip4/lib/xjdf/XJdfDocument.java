@@ -126,6 +126,22 @@ public class XJdfDocument {
     }
 
     /**
+     * Add a general id to the XJDF Document.
+     * @param generalID The GeneralID to be added.
+     */
+    public void addGeneralID(GeneralID generalID) {
+        addGeneralIDs(generalID);
+    }
+
+    /**
+     * Add multiple general ids to the XJDF Document.
+     * @param generalIDs The GeneralIDs to be added.
+     */
+    public void addGeneralIDs(GeneralID... generalIDs) {
+        xjdf.getGeneralID().addAll(Arrays.asList(generalIDs));
+    }
+
+    /**
      * Append Audit elements to the XJDF Document.
      *
      * @param audits The audits to be appended.
