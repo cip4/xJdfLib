@@ -1,5 +1,8 @@
 package org.cip4.lib.xjdf.util;
 
+import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.type.XYPair;
+
 /**
  * Dimensions utility class providing conversion functionality.
  */
@@ -9,6 +12,66 @@ public class Dimensions {
      * Private constructor for utility class.
      */
     private Dimensions() {
+    }
+
+    /**
+     * Convert Millimeter to DTP-Points.
+     *
+     * @param rectangleMm Rectangle in millimeters.
+     *
+     * @return Rectangle object in DTP-Points.
+     */
+    public static Rectangle mm2Dtp(Rectangle rectangleMm) {
+        return new Rectangle(
+                mm2Dtp(rectangleMm.getLlx()),
+                mm2Dtp(rectangleMm.getLly()),
+                mm2Dtp(rectangleMm.getUrx()),
+                mm2Dtp(rectangleMm.getUry())
+        );
+    }
+
+    /**
+     * Convert DTP-Points to Millimeter.
+     *
+     * @param rectangleDtp Rectangle object in DTP-Pointse.
+     *
+     * @return Rectangle object value in millimeters.
+     */
+    public static Rectangle dtp2Mm(Rectangle rectangleDtp) {
+        return new Rectangle(
+                dtp2Mm(rectangleDtp.getLlx()),
+                dtp2Mm(rectangleDtp.getLly()),
+                dtp2Mm(rectangleDtp.getUrx()),
+                dtp2Mm(rectangleDtp.getUry())
+        );
+    }
+
+    /**
+     * Convert Millimeter to DTP-Points.
+     *
+     * @param xyPairMm XYPair in millimeters.
+     *
+     * @return XYPair object in DTP-Points.
+     */
+    public static XYPair mm2Dtp(XYPair xyPairMm) {
+        return new XYPair(
+                mm2Dtp(xyPairMm.getX()),
+                mm2Dtp(xyPairMm.getY())
+        );
+    }
+
+    /**
+     * Convert DTP-Points to Millimeter.
+     *
+     * @param xyPairDtp XYPair object in DTP-Pointse.
+     *
+     * @return XYPair object value in millimeters.
+     */
+    public static XYPair dtp2Mm(XYPair xyPairDtp) {
+        return new XYPair(
+                dtp2Mm(xyPairDtp.getX()),
+                dtp2Mm(xyPairDtp.getY())
+        );
     }
 
     /**
