@@ -348,8 +348,7 @@ public class XJdfDocument {
      * @return The first specific resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part)
-        throws IllegalAccessException {
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part) {
         Resource resource = getResourceByPart(resourceType, part);
 
         return (T) resource.getSpecificResource().getValue();
@@ -362,8 +361,7 @@ public class XJdfDocument {
      * @return The first specific resource identified using partition keys.
      * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
-    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType)
-        throws IllegalAccessException {
+    public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType) {
         return getSpecificResourceByPart(resourceType, null);
     }
 
