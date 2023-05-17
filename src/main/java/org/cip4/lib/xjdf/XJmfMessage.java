@@ -31,7 +31,7 @@ public class XJmfMessage {
      * Default constructor. <br>
      * Creates an XJMF Message initialized with default values.
      */
-    public XJmfMessage() throws XJdfInitException {
+    public XJmfMessage() {
         this(new XJMF()
             .withHeader(Headers.createDefaultHeader())
             .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
@@ -44,7 +44,7 @@ public class XJmfMessage {
      *
      * @param bytes The XJMF Message as byte array.
      */
-    public XJmfMessage(byte[] bytes) throws XJdfInitException, XJdfParseException {
+    public XJmfMessage(byte[] bytes) throws XJdfParseException {
         this(new XJdfParser<XJMF>().readXml(bytes));
     }
 
@@ -54,7 +54,7 @@ public class XJmfMessage {
      *
      * @param xjmf The XJMF root node.
      */
-    public XJmfMessage(XJMF xjmf) throws XJdfInitException {
+    public XJmfMessage(XJMF xjmf) {
         this.xjmf = xjmf;
 
         this.xjmfParser = new XJdfParser<>();
