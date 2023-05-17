@@ -37,7 +37,7 @@ public class XJdfParser<T> {
     /**
      * Default constructor.
      */
-    public XJdfParser() throws XJdfInitException {
+    public XJdfParser() {
         this.jaxbContext = JAXBContextFactory.getInstance();
     }
 

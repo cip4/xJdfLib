@@ -33,7 +33,7 @@ public class XJdfDocument {
      * Default constructor. <br>
      * Creates an empty XJDF Document.
      */
-    public XJdfDocument() throws XJdfInitException {
+    public XJdfDocument() {
         this(new XJDF());
     }
 
@@ -44,7 +44,7 @@ public class XJdfDocument {
      * @param jobId The documents JobID.
      * @param types The documents types.
      */
-    public XJdfDocument(String jobId, String... types) throws XJdfInitException {
+    public XJdfDocument(String jobId, String... types) {
         this(new XJDF()
             .withJobID(jobId)
             .withTypes(types)
@@ -57,7 +57,7 @@ public class XJdfDocument {
      *
      * @param bytes The XJDF Document as byte array.
      */
-    public XJdfDocument(byte[] bytes) throws XJdfInitException, XJdfParseException {
+    public XJdfDocument(byte[] bytes) throws XJdfParseException {
         this(new XJdfParser<XJDF>().readXml(bytes));
     }
 
@@ -67,7 +67,7 @@ public class XJdfDocument {
      *
      * @param xjdf The XJDF root node.
      */
-    public XJdfDocument(XJDF xjdf) throws XJdfInitException {
+    public XJdfDocument(XJDF xjdf) {
 
         // set instance variables
         this.xjdf = xjdf;
@@ -346,7 +346,6 @@ public class XJdfDocument {
      * @param resourceType The type of the specific resource.
      * @param part         The given Partition Keys used to identify a particular Resource
      * @return The first specific resource identified using partition keys.
-     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
     public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part) {
         Resource resource = getResourceByPart(resourceType, part);
@@ -359,7 +358,6 @@ public class XJdfDocument {
      *
      * @param resourceType The class of the specific resource.
      * @return The first specific resource identified using partition keys.
-     * @throws IllegalAccessException Is thrown in case the partition isn't accessible in Part class.
      */
     public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType) {
         return getSpecificResourceByPart(resourceType, null);

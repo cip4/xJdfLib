@@ -26,7 +26,7 @@ public class JAXBContextFactory {
     /**
      * Initialize the marshaller instance.
      */
-    public static void init() throws XJdfInitException {
+    public static void init() {
         if (jaxbContext == null) {
             // initialize
             try {
@@ -42,7 +42,7 @@ public class JAXBContextFactory {
      *
      * @return New Marshaller instance.
      */
-    public static JAXBContext getInstance() throws XJdfInitException {
+    public static JAXBContext getInstance() {
 
         // if necessary initialize
         if (jaxbContext == null) {
