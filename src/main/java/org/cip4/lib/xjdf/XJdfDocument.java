@@ -350,7 +350,7 @@ public class XJdfDocument {
     public <T extends SpecificResource> T getSpecificResourceByPart(Class<T> resourceType, Part part) {
         Resource resource = getResourceByPart(resourceType, part);
 
-        return (T) resource.getSpecificResource().getValue();
+        return resource == null ? null : (T) resource.getSpecificResource().getValue();
     }
 
     /**

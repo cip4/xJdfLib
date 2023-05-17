@@ -177,4 +177,17 @@ public class XJdfDocumentTest {
         assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
         assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
     }
+
+    @Test
+    public void getSpecificResourceByPart_Null() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        RunList runList = xJdfDocument.getSpecificResourceByPart(RunList.class);
+
+        // assert
+        assertNull(runList, "RunList is not null.");
+    }
 }
