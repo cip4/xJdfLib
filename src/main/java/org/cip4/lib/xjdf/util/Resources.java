@@ -36,7 +36,7 @@ public class Resources {
      * Constructor.
      */
     public Resources() {
-        this(new ArrayList<ResourceSet>());
+        this(new ArrayList<>());
     }
 
     /**
@@ -184,7 +184,7 @@ public class Resources {
     }
 
     /**
-     * Get the name of an resource.
+     * Get the name of a resource.
      *
      * @param resource Resource to get the name of
      *

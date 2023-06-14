@@ -272,20 +272,37 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns the generic resources of a resource set for a given specific resource.
-     * @param resourceType the specific resource.
-     * @return List of resources of the resource set.
+     * Returns the first resource set of a specific resource.
+     * @param resourceType The resource type of the specific resource
+     * @return The first resource set matching the specific resource
      */
-    public List<Resource> getResourcesByPartKeys(Class<? extends SpecificResource> resourceType, String... partKeys) {
+    public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType) {
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
-        List<Resource> result = null;
+        ResourceSet result = null;
 
         for (int i = 0; i < resourceSets.size() && result == null; i++) {
             ResourceSet resourceSet = resourceSets.get(i);
 
             if (resourceType.getSimpleName().equals(resourceSet.getName())) {
-                result = PartitionManager.getResourcesByPartKeys(resourceSet, partKeys);
+                result = resourceSet;
             }
+        }
+
+        return result;
+    }
+
+    /**
+     * Returns the generic resources of a resource set for a given specific resource.
+     * @param resourceType the specific resource.
+     * @return List of resources of the resource set.
+     */
+    public List<Resource> getResourcesByPartKeys(Class<? extends SpecificResource> resourceType, String... partKeys) {
+        List<Resource> result = null;
+
+        ResourceSet resourceSet = getResourceSet(resourceType);
+
+        if(resourceSet != null) {
+            result = PartitionManager.getResourcesByPartKeys(resourceSet, partKeys);
         }
 
         return result;
@@ -316,15 +333,12 @@ public class XJdfDocument {
      * @return The first Resource identified using partition keys.
      */
     public Resource getResourceByPart(Class<? extends SpecificResource> resourceType, Part part) {
-        List<ResourceSet> resourceSets = this.xjdf.getResourceSet();
         Resource result = null;
 
-        for (int i = 0; i < resourceSets.size() && result == null; i++) {
-            ResourceSet resourceSet = resourceSets.get(i);
+        ResourceSet resourceSet = getResourceSet(resourceType);
 
-            if (resourceType.getSimpleName().equals(resourceSet.getName())) {
-                result = PartitionManager.getResourceByPart(resourceSet, part);
-            }
+        if(resourceSet != null) {
+            result = PartitionManager.getResourceByPart(resourceSet, part);
         }
 
         return result;

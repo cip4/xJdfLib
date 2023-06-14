@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,11 +20,77 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 @Execution(SAME_THREAD)
 public class XJdfDocumentTest {
 
+    private final String RES_ROOT = "/org/cip4/lib/xjdf/";
+
     @BeforeAll
     static void initTests() {
         XJdfConstants.AGENT_NAME = "MY_AGENT";
         XJdfConstants.AGENT_VERSION = "MY_AGENT_VERSION";
         XJdfConstants.DEVICE_ID = "MY_DEVICE";
+    }
+
+    @Test
+    public void getResourceSet_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(BinderySignature.class);
+
+        // assert
+        assertNotNull(resourceSet, "ResourceSet is null.");
+        assertEquals("BinderySignature", resourceSet.getName(), "Name is wrong.");
+        assertEquals(3, resourceSet.getResource().size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourceSet_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(Contact.class);
+
+        // assert
+        assertNull(resourceSet, "ResourceSet is not null.");
+    }
+
+    @Test
+    public void getResourcesByPartKeys_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        List<Resource> resources = xJdfDocument.getResourcesByPartKeys(BinderySignature.class, "BinderySignatureID");
+
+        // assert
+        assertNotNull(resources, "Resources are null.");
+        assertEquals(3, resources.size(), "Number of resources is wrong.");
+    }
+
+    @Test
+    public void getResourcesByPart_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        Part part = new Part().withBinderySignatureID("BS-2");
+
+        // act
+        Resource resource = xJdfDocument.getResourceByPart(BinderySignature.class, part);
+
+        // assert
+        assertNotNull(resource, "Resource is null.");
+
+        BinderySignature binderySignature = (BinderySignature) resource.getSpecificResource().getValue();
+        assertEquals("F6-1", binderySignature.getFoldCatalog(), "FoldCatalog is wrong.");
     }
 
     @Test
