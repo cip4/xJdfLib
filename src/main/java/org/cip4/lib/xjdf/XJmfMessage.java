@@ -133,4 +133,13 @@ public class XJmfMessage {
         // return result
         return xml;
     }
+
+    @Override
+    public String toString() {
+        try {
+            return new String(toXml(false));
+        } catch (Exception e) {
+            return "Error creating an XML preview.";
+        }
+    }
 }
