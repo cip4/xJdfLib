@@ -26,6 +26,14 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Custom constructor. Accepting a ZonedDateTime object for initializing.
+     */
+    public DateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
+    }
+
+
+    /**
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
