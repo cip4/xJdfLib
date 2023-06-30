@@ -211,7 +211,7 @@ xJmfMessage.addMessage(
 );
 
 // create and return zip package
-byte[] zipPackage = ZipPackage.Builder()
+byte[] xjmfZipPackage = new XJmfZipPackage.Builder()
         .withXJmfRoot(xJmfMessage)
         .withXJdfDocument(xJdfDocumentUri, xJdfDocument)
         .withFile(artworkUri, artwork)
