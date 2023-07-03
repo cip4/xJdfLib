@@ -133,6 +133,15 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Returns the zoned date time object representing the date times value.
+     *
+     * @return The ZonedDateTime object.
+     */
+    public final ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
+    }
+
+    /**
      * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
