@@ -186,7 +186,53 @@ public class XJdfDocument {
      * @param generalIDs The GeneralIDs to be added.
      */
     public void addGeneralIDs(GeneralID... generalIDs) {
+
+        // add ids
         xjdf.getGeneralID().addAll(Arrays.asList(generalIDs));
+
+        // sort
+        xjdf.getGeneralID().sort(Comparator.comparing(GeneralID::getIDUsage));
+    }
+
+    /**
+     * Return GeneralID object by IDUsage value.
+     * @param idUsage The IDUsage value.
+     * @return The GeneralID object.
+     */
+    public GeneralID getGeneralID(String idUsage) {
+
+        // filter general ids by idusage
+        List<GeneralID> generalIDs = xjdf.getGeneralID().stream()
+                .filter(generalID -> Objects.equals(generalID.getIDUsage(), idUsage))
+                .collect(Collectors.toList());
+
+        // validate result
+        if(generalIDs.size() > 1) {
+            throw new IllegalArgumentException("IDUsage '" + idUsage + "' is not unique.");
+        }
+
+        // return result
+        return generalIDs.size() == 0 ? null : generalIDs.get(0);
+    }
+
+    /**
+     * Remove a GeneralID object by IDUsage.
+     * @param idUsage The generalId object's idUsage value.
+     * @return true in case the document had contained such a GeneralID.
+     */
+    public boolean removeGeneralID(String idUsage) {
+        return removeGeneralID(
+                getGeneralID(idUsage)
+        );
+    }
+
+    /**
+     * Remove a GeneralID object.
+     * @param generalID The generalId object to be removed.
+     * @return true in case the document had contained such a GeneralID.
+     */
+    public boolean removeGeneralID(GeneralID generalID) {
+        return xjdf.getGeneralID().remove(generalID);
     }
 
     /**
@@ -318,7 +364,7 @@ public class XJdfDocument {
         resourceSet.setName(resourceType.getSimpleName());
 
         // add to document
-        this.xjdf.getResourceSet().add(resourceSet);
+        xjdf.getResourceSet().add(resourceSet);
 
         // sort resource sets
         Comparator<ResourceSet> usageComparator = (rs1, rs2) -> StringUtils.compare(
@@ -326,8 +372,14 @@ public class XJdfDocument {
                 rs2.getUsage() == null ? null : rs2.getUsage().name()
         );
 
-        this.xjdf.getResourceSet().sort(usageComparator
+        Comparator<ResourceSet> combinedProcessIndexComparator = (rs1, rs2) -> StringUtils.compare(
+                rs1.getCombinedProcessIndex() == null ? null : rs1.getCombinedProcessIndex().toString(),
+                rs2.getCombinedProcessIndex() == null ? null : rs2.getCombinedProcessIndex().toString()
+        );
+
+        xjdf.getResourceSet().sort(usageComparator
                 .thenComparing(ResourceSet::getName)
+                .thenComparing(combinedProcessIndexComparator)
         );
 
         // return resource set
@@ -414,13 +466,12 @@ public class XJdfDocument {
      * @param specificResource The specific resource to be added.
      * @param parts            Partitioning of the specific resource.
      * @return The resource object.
-     * @throws XJdfDocumentException Thrown in case of validation issues.
      */
-    public Resource addSpecificResource(ResourceSet resourceSet, SpecificResource specificResource, List<Part> parts) throws XJdfDocumentException {
+    public Resource addSpecificResource(ResourceSet resourceSet, SpecificResource specificResource, List<Part> parts) {
 
         // resource type validation
         if (!Objects.equals(resourceSet.getName(), specificResource.getClass().getSimpleName())) {
-            throw new XJdfDocumentException("Resource type does not match ResourceSet type.");
+            throw new IllegalArgumentException("Resource type does not match ResourceSet type.");
         }
 
         // create resource element and add specific one
