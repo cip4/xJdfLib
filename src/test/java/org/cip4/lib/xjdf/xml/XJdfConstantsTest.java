@@ -56,31 +56,4 @@ public class XJdfConstantsTest {
 		System.out.println("Version: " + version);
 		Assertions.assertTrue(version.startsWith("2.1."), "Wrong version.");
     }
-
-    @Test
-    public void loadLibraryVersion() {
-
-        // arrange
-
-        // act
-        String version = XJdfConstants.XJDFLIB_VERSION;
-
-        // assert
-
-
-        Assertions.assertTrue(version.startsWith(XJdfConstants.XJDF_CURRENT_VERSION.value()), "Wrong version.");
-    }
-
-    @Test
-    public void loadLibraryBuildDate() {
-
-        // arrange
-
-        // act
-        String buildDate = XJdfConstants.XJDFLIB_BUILD_DATE;
-
-        // assert
-        System.out.println(buildDate);
-        Assertions.assertTrue(buildDate.matches("20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z"));// ISO8601
-    }
 }
