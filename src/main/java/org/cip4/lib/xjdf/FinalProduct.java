@@ -100,7 +100,10 @@ public class FinalProduct {
 
 
         // add intent to product
-        productParts.get(ROOT_PRODUCT).withIntent(intent);
+        productParts.get(ROOT_PRODUCT).getIntent().add(intent);
+
+        // sort
+        productParts.get(ROOT_PRODUCT).getIntent().sort(Comparator.comparing(Intent::getName));
 
         // return the created intent
         return intent;
