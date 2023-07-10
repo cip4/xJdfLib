@@ -23,16 +23,6 @@ public class XJdfConstants {
     public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
     /**
-     * XJdfLib Version
-     */
-    public static final String XJDFLIB_VERSION = loadLibraryVersion();
-
-    /**
-     * XJdfLib Build datetime
-     */
-    public static final String XJDFLIB_BUILD_DATE = loadLibraryBuildDate();
-
-    /**
      * A map containing all XJDF Schemes as byte array.
      */
     public static final Map<Version, byte[]> XJDF_XSD_BYTES = loadXJdfXsdByteArray();
@@ -100,45 +90,5 @@ public class XJdfConstants {
         }
 
         return xsdMap;
-    }
-
-    /**
-     * Helper method to load the version number of the library.
-     *
-     * @return The libraries version.
-     */
-    private static String loadLibraryVersion() {
-        String result;
-
-        Properties props = new Properties();
-
-        try {
-            props.load(XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/build.properties"));
-            result = props.getProperty("version", "n. a.");
-        } catch (IOException e) {
-            result = "n. a.";
-        }
-
-        return result;
-    }
-
-    /**
-     * Helper method to load the build date of the library.
-     *
-     * @return The libraries build date.
-     */
-    private static String loadLibraryBuildDate() {
-        String result;
-
-        Properties props = new Properties();
-
-        try {
-            props.load(XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/build.properties"));
-            result = props.getProperty("build.date", "n. a.");
-        } catch (IOException e) {
-            result = "n. a.";
-        }
-
-        return result;
     }
 }
