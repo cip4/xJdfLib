@@ -1,7 +1,6 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
 

@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.xml;
+package org.cip4.lib.xjdf.xml.internal;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
@@ -6,6 +6,7 @@ import jakarta.xml.bind.Marshaller;
 import jakarta.xml.bind.Unmarshaller;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
+import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
 import org.glassfish.jaxb.runtime.marshaller.NamespacePrefixMapper;
 
