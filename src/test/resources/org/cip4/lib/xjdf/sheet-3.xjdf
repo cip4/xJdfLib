@@ -7,6 +7,7 @@
         </AuditCreated>
     </AuditPool>
     <GeneralID IDUsage="RATING_EFFICIENCY" IDValue="0.67811143"/>
+    <GeneralID IDUsage="RATING_EFFICIENCY" IDValue="0.67811143"/>
     <ResourceSet Name="Media" Usage="Input">
         <Resource ID="MEDIA_3MM45FWL">
             <Media Coating="Gloss" Dimension="2571.023 1896.378" MediaQuality="IPG_250" MediaType="Paper" Thickness="250.0" Weight="250.0"/>

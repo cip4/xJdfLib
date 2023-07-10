@@ -190,6 +190,47 @@ public class XJdfDocument {
     }
 
     /**
+     * Return GeneralID object by IDUsage value.
+     * @param idUsage The IDUsage value.
+     * @return The GeneralID object.
+     */
+    public GeneralID getGeneralID(String idUsage) {
+
+        // filter general ids by idusage
+        List<GeneralID> generalIDs = xjdf.getGeneralID().stream()
+                .filter(generalID -> Objects.equals(generalID.getIDUsage(), idUsage))
+                .collect(Collectors.toList());
+
+        // validate result
+        if(generalIDs.size() > 1) {
+            throw new IllegalArgumentException("IDUsage '" + idUsage + "' is not unique.");
+        }
+
+        // return result
+        return generalIDs.size() == 0 ? null : generalIDs.get(0);
+    }
+
+    /**
+     * Remove a GeneralID object by IDUsage.
+     * @param idUsage The generalId object's idUsage value.
+     * @return true in case the document had contained such a GeneralID.
+     */
+    public boolean removeGeneralID(String idUsage) {
+        return removeGeneralID(
+                getGeneralID(idUsage)
+        );
+    }
+
+    /**
+     * Remove a GeneralID object.
+     * @param generalID The generalId object to be removed.
+     * @return true in case the document had contained such a GeneralID.
+     */
+    public boolean removeGeneralID(GeneralID generalID) {
+        return xjdf.getGeneralID().remove(generalID);
+    }
+
+    /**
      * Append Audit elements to the XJDF Document.
      *
      * @param audits The audits to be appended.
@@ -414,13 +455,12 @@ public class XJdfDocument {
      * @param specificResource The specific resource to be added.
      * @param parts            Partitioning of the specific resource.
      * @return The resource object.
-     * @throws XJdfDocumentException Thrown in case of validation issues.
      */
-    public Resource addSpecificResource(ResourceSet resourceSet, SpecificResource specificResource, List<Part> parts) throws XJdfDocumentException {
+    public Resource addSpecificResource(ResourceSet resourceSet, SpecificResource specificResource, List<Part> parts) {
 
         // resource type validation
         if (!Objects.equals(resourceSet.getName(), specificResource.getClass().getSimpleName())) {
-            throw new XJdfDocumentException("Resource type does not match ResourceSet type.");
+            throw new IllegalArgumentException("Resource type does not match ResourceSet type.");
         }
 
         // create resource element and add specific one

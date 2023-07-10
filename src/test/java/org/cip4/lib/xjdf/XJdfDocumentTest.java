@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf;
 
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
@@ -646,6 +647,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResource_2() throws Exception {
 
+        // arrange
         byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
@@ -658,5 +660,112 @@ public class XJdfDocumentTest {
         System.out.println(xJdfDocument);
 
         assertFalse(result, "Removal return value is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        GeneralID generalID = xJdfDocument.getGeneralID("RATING_EFFICIENCY");
+
+        // assert
+        assertNotNull(generalID);
+        assertEquals("0.94", generalID.getIDValue(), "IDValue is wrong");
+    }
+
+    @Test
+    public void getGeneralID_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        GeneralID generalID = xJdfDocument.getGeneralID("NOT_EXIST");
+
+        // assert
+        assertNull(generalID);
+    }
+
+    @Test
+    public void getGeneralID_3() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-3.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
+
+        // assert
+        assertEquals("IDUsage 'RATING_EFFICIENCY' is not unique.", t.getMessage(), "Error message is wrong.");
+    }
+
+    @Test
+    public void removeGeneralID_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        GeneralID generalID = xJdfDocument.getGeneralID("RATING_EFFICIENCY");
+
+        // act
+        boolean result = xJdfDocument.removeGeneralID(generalID);
+
+        // assert
+        assertTrue(result, "Return value remove is wrong.");
+        assertNull(xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
+    }
+
+    @Test
+    public void removeGeneralID_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        GeneralID generalID = new GeneralID().withIDUsage("RATING_EFFICIENCY");
+
+        // act
+        boolean result = xJdfDocument.removeGeneralID(generalID);
+
+        // assert
+        assertFalse(result, "Return value remove is wrong.");
+        assertNotNull(xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
+    }
+
+    @Test
+    public void removeGeneralID_3() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        boolean result = xJdfDocument.removeGeneralID("RATING_EFFICIENCY");
+
+        // assert
+        assertTrue(result, "Return value remove is wrong.");
+        assertNull(xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
+    }
+
+    @Test
+    public void removeGeneralID_4() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        boolean result = xJdfDocument.removeGeneralID("NOT_EXIST");
+
+        // assert
+        assertFalse(result, "Return value remove is wrong.");
+        assertNotNull(xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
     }
 }
