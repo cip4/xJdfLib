@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
 import org.apache.commons.lang3.NotImplementedException;
-import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.Message;

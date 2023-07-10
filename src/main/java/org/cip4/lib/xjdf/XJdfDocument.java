@@ -16,7 +16,6 @@ import org.jetbrains.annotations.NotNull;
 import jakarta.xml.bind.JAXBElement;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
