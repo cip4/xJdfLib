@@ -186,7 +186,12 @@ public class XJdfDocument {
      * @param generalIDs The GeneralIDs to be added.
      */
     public void addGeneralIDs(GeneralID... generalIDs) {
+
+        // add ids
         xjdf.getGeneralID().addAll(Arrays.asList(generalIDs));
+
+        // sort
+        xjdf.getGeneralID().sort(Comparator.comparing(GeneralID::getIDUsage));
     }
 
     /**
@@ -359,7 +364,7 @@ public class XJdfDocument {
         resourceSet.setName(resourceType.getSimpleName());
 
         // add to document
-        this.xjdf.getResourceSet().add(resourceSet);
+        xjdf.getResourceSet().add(resourceSet);
 
         // sort resource sets
         Comparator<ResourceSet> usageComparator = (rs1, rs2) -> StringUtils.compare(
@@ -367,8 +372,14 @@ public class XJdfDocument {
                 rs2.getUsage() == null ? null : rs2.getUsage().name()
         );
 
-        this.xjdf.getResourceSet().sort(usageComparator
+        Comparator<ResourceSet> combinedProcessIndexComparator = (rs1, rs2) -> StringUtils.compare(
+                rs1.getCombinedProcessIndex() == null ? null : rs1.getCombinedProcessIndex().toString(),
+                rs2.getCombinedProcessIndex() == null ? null : rs2.getCombinedProcessIndex().toString()
+        );
+
+        xjdf.getResourceSet().sort(usageComparator
                 .thenComparing(ResourceSet::getName)
+                .thenComparing(combinedProcessIndexComparator)
         );
 
         // return resource set

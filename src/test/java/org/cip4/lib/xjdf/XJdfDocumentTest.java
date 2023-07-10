@@ -391,7 +391,7 @@ public class XJdfDocumentTest {
     }
 
     @Test
-    public void addGeneralId() throws XJdfInitException {
+    public void addGeneralId_1() throws XJdfInitException {
 
         // arrange
         XJdfDocument xJdfDocument = new XJdfDocument();
@@ -399,11 +399,42 @@ public class XJdfDocumentTest {
         // act
         xJdfDocument.addGeneralID(new GeneralID()
                 .withIDUsage("USAGE")
-                .withIDValue("VALUE"));
+                .withIDValue("VALUE")
+        );
 
         // assert
+        System.out.println(xJdfDocument);
+
         assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
         assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+    }
+
+    @Test
+    public void addGeneralId_2() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID(new GeneralID()
+                .withIDUsage("3")
+                .withIDValue("v")
+        );
+        xJdfDocument.addGeneralID(new GeneralID()
+                .withIDUsage("1")
+                .withIDValue("v")
+        );
+        xJdfDocument.addGeneralID(new GeneralID()
+                .withIDUsage("2")
+                .withIDValue("v")
+        );
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals("1", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+        assertEquals("2", xJdfDocument.getXJdf().getGeneralID().get(1).getIDUsage(), "IDUsage is wrong.");
+        assertEquals("3", xJdfDocument.getXJdf().getGeneralID().get(2).getIDUsage(), "IDUsage is wrong.");
     }
 
     @Test
@@ -489,6 +520,8 @@ public class XJdfDocumentTest {
         Resource resource = xJdfDocument.getResource("R4");
 
         // assert
+        System.out.println(xJdfDocument);
+
         assertNull(resource, "Resource is not null.");
     }
 
