@@ -1,15 +1,14 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.apache.commons.lang3.NotImplementedException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfParser;
-import org.cip4.lib.xjdf.xml.XJdfValidator;
+import org.cip4.lib.xjdf.xml.internal.XJdfParser;
+import org.cip4.lib.xjdf.xml.internal.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -67,10 +66,6 @@ public class XJmfMessage {
      */
     public XJMF getXJmf() {
         return xjmf;
-    }
-
-    public void send() {
-        throw new NotImplementedException("Send needs to be implemented.");
     }
 
     /**

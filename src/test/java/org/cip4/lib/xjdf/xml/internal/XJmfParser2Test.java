@@ -1,8 +1,9 @@
-package org.cip4.lib.xjdf.xml;
+package org.cip4.lib.xjdf.xml.internal;
 
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.xml.internal.XJdfParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

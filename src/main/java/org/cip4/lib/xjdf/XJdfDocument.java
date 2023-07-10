@@ -4,13 +4,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
-import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.util.Headers;
+import org.cip4.lib.xjdf.util.Partitions;
 import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.XJdfParser;
-import org.cip4.lib.xjdf.xml.XJdfValidator;
+import org.cip4.lib.xjdf.xml.internal.XJdfParser;
+import org.cip4.lib.xjdf.xml.internal.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
@@ -80,6 +80,7 @@ public class XJdfDocument {
             xjdf.setVersion(XJdfConstants.XJDF_CURRENT_VERSION);
         }
 
+        // create audit created (if not yet created)
         if (xjdf.getAuditPool() == null) {
             xjdf.setAuditPool(new AuditPool()
                     .withAudits(new AuditCreated()
@@ -575,7 +576,7 @@ public class XJdfDocument {
         List<Resource> result = null;
 
         if (resourceSet != null) {
-            result = PartitionManager.getResourcesByPartKeys(resourceSet, partKeys);
+            result = Partitions.getResourcesByPartKeys(resourceSet, partKeys);
         }
 
         return result;
@@ -604,7 +605,7 @@ public class XJdfDocument {
         Resource result = null;
 
         if (resourceSet != null) {
-            result = PartitionManager.getResourceByPart(resourceSet, part);
+            result = Partitions.getResourceByPart(resourceSet, part);
         }
 
         return result;
