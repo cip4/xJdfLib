@@ -1,27 +1,82 @@
 package org.cip4.lib.xjdf.util;
 
-import org.cip4.lib.xjdf.schema.Resource;
-import org.cip4.lib.xjdf.schema.ResourceSet;
-import org.cip4.lib.xjdf.schema.Side;
-import org.cip4.lib.xjdf.schema.Part;
+import org.cip4.lib.xjdf.XJdfDocument;
+import org.cip4.lib.xjdf.XJdfDocumentTest;
+import org.cip4.lib.xjdf.schema.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PartitionsTest {
+    private final String RES_ROOT = "/org/cip4/lib/xjdf/";
 
     /**
      * The current Resource Set.
      */
     private ResourceSet resourceSet;
 
+
     @BeforeEach
     public final void setUp() {
         resourceSet = new ResourceSet();
+    }
+
+    @Test
+    public void getPartKeyValues_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(BinderySignature.class);
+
+        // act
+        Map<String, List<Object>> partKeyValues = Partitions.getPartKeyValues(resourceSet);
+
+        // assert
+        assertNotNull(partKeyValues, "Result is null.");
+        assertEquals(1, partKeyValues.size(), "Number of PartKeys is wrong.");
+        assertEquals(3, partKeyValues.get("BinderySignatureID").size(), "Number of BinderSignatureID values is wrong.");
+    }
+
+    @Test
+    public void getPartKeyValues_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(Contact.class);
+
+        // act
+        Map<String, List<Object>> partKeyValues = Partitions.getPartKeyValues(resourceSet);
+
+        // assert
+        assertNotNull(partKeyValues, "Result is null.");
+        assertEquals(0, partKeyValues.size(), "Number of PartKeys is wrong.");
+    }
+
+    @Test
+    public void getPartKeyValues_3() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(RunList.class);
+
+        // act
+        Map<String, List<Object>> partKeyValues = Partitions.getPartKeyValues(resourceSet);
+
+        // assert
+        assertNotNull(partKeyValues, "Result is null.");
+        assertEquals(1, partKeyValues.size(), "Number of PartKeys is wrong.");
+        assertEquals(1, partKeyValues.get("BinderySignatureID").size(), "Number of BinderSignatureID values is wrong.");
     }
 
     @Test

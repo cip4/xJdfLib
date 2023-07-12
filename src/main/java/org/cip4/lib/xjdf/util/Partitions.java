@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.util;
 
+import jakarta.xml.bind.annotation.XmlAttribute;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.cip4.lib.xjdf.schema.Part;
 import org.cip4.lib.xjdf.schema.Resource;
@@ -27,6 +28,46 @@ public final class Partitions {
      * Private constructor for utility class.
      */
     private Partitions() {
+    }
+
+    /**
+     * Get partition keys plus values of a given resource set.
+     * @param resourceSet The resource set to be analyzed.
+     * @return Map of partition keys plus values.
+     */
+    public static Map<String, List<Object>> getPartKeyValues(ResourceSet resourceSet) throws IllegalAccessException {
+        Map<String, List<Object>> partKeyValues = new HashMap<>();
+
+        if(resourceSet != null) {
+            for (Resource resource : resourceSet.getResource()) {
+                for (Part part : resource.getPart()) {
+
+                    // get active partition keys
+                    Field[] fields = FieldUtils.getAllFields(Part.class);
+
+                    for (Field field : fields) {
+                        if (FieldUtils.readField(field, part, true) != null && !field.getName().equals("otherAttributes")) {
+
+                            // get part key
+                            String partKey = field.getAnnotation(XmlAttribute.class).name();
+                            Object value = FieldUtils.readField(field, part, true);
+
+                            // create new part key in result list - if not yet there
+                            if (!partKeyValues.containsKey(partKey)) {
+                                partKeyValues.put(partKey, new ArrayList<>());
+                            }
+
+                            // add value if not present
+                            if (!partKeyValues.get(partKey).contains(value)) {
+                                partKeyValues.get(partKey).add(value);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return partKeyValues;
     }
 
     public static List<Resource> getResourcesByPartKeys(final ResourceSet resourceSet, final String... partKeys) {

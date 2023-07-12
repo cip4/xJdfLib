@@ -2,7 +2,6 @@ package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 import javax.xml.namespace.QName;
 import java.util.*;

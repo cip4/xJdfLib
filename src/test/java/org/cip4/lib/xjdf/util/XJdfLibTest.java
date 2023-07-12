@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.util;
 
-import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.XJdfConstants;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

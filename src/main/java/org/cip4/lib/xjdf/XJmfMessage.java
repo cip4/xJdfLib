@@ -6,9 +6,8 @@ import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.util.Headers;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.internal.XJdfParser;
-import org.cip4.lib.xjdf.xml.internal.XJdfValidator;
+import org.cip4.lib.xjdf.xml.XJdfParser;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;

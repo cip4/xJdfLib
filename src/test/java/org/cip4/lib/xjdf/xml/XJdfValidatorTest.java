@@ -1,4 +1,4 @@
-package org.cip4.lib.xjdf.xml.internal;
+package org.cip4.lib.xjdf.xml;
 
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
