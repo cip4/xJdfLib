@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf;
 
-import net.bytebuddy.implementation.bytecode.Throw;
 import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
@@ -8,7 +7,6 @@ import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.URI;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
@@ -800,5 +798,79 @@ public class XJdfDocumentTest {
         // assert
         assertFalse(result, "Return value remove is wrong.");
         assertNotNull(xJdfDocument.getGeneralID("RATING_EFFICIENCY"));
+    }
+
+    @Test
+    public void getParts_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+
+        // act
+        List<Part> parts = xJdfDocument.getParts(resourceSet);
+
+        // assert
+        assertNotNull(parts, "Return is null.");
+        assertEquals(2, parts.size(), "Number of parts is wrong.");
+
+        assertEquals("09b5d583-3e1d-450d-927a-3b1a2dba53b7", parts.get(0).getBinderySignatureID(),"BS-ID 1 is wrong.");
+        assertEquals("29b5d583-3e1d-450d-927a-3b1a2dba53b7", parts.get(1).getBinderySignatureID(),"BS-ID 2 is wrong.");
+    }
+
+    @Test
+    public void getParts_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(Media.class);
+
+        // act
+        List<Part> parts = xJdfDocument.getParts(resourceSet);
+
+        // assert
+        assertNotNull(parts, "Return is null.");
+        assertEquals(1, parts.size(), "Number of parts is wrong.");
+
+        assertNull(parts.get(0),"BS-ID 1 is wrong.");
+    }
+
+    @Test
+    public void getParts_3() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        List<Part> parts = xJdfDocument.getParts(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+
+        // assert
+        assertNotNull(parts, "Return is null.");
+        assertEquals(2, parts.size(), "Number of parts is wrong.");
+
+        assertEquals("09b5d583-3e1d-450d-927a-3b1a2dba53b7", parts.get(0).getBinderySignatureID(),"BS-ID 1 is wrong.");
+        assertEquals("29b5d583-3e1d-450d-927a-3b1a2dba53b7", parts.get(1).getBinderySignatureID(),"BS-ID 2 is wrong.");
+    }
+
+    @Test
+    public void getParts_4() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        List<Part> parts = xJdfDocument.getParts(Media.class);
+
+        // assert
+        assertNotNull(parts, "Return is null.");
+        assertEquals(1, parts.size(), "Number of parts is wrong.");
+
+        assertNull(parts.get(0),"BS-ID 1 is wrong.");
     }
 }

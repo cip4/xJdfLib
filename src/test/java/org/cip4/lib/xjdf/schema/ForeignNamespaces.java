@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.schema;
 
-import org.cip4.lib.xjdf.xml.internal.XJdfValidator;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Node;

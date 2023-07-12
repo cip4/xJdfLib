@@ -8,9 +8,8 @@ import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.util.Partitions;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.internal.XJdfParser;
-import org.cip4.lib.xjdf.xml.internal.XJdfValidator;
+import org.cip4.lib.xjdf.xml.XJdfParser;
+import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import jakarta.xml.bind.JAXBElement;
@@ -196,6 +195,7 @@ public class XJdfDocument {
 
     /**
      * Return GeneralID object by IDUsage value.
+     *
      * @param idUsage The IDUsage value.
      * @return The GeneralID object.
      */
@@ -207,7 +207,7 @@ public class XJdfDocument {
                 .collect(Collectors.toList());
 
         // validate result
-        if(generalIDs.size() > 1) {
+        if (generalIDs.size() > 1) {
             throw new IllegalArgumentException("IDUsage '" + idUsage + "' is not unique.");
         }
 
@@ -217,6 +217,7 @@ public class XJdfDocument {
 
     /**
      * Remove a GeneralID object by IDUsage.
+     *
      * @param idUsage The generalId object's idUsage value.
      * @return true in case the document had contained such a GeneralID.
      */
@@ -228,6 +229,7 @@ public class XJdfDocument {
 
     /**
      * Remove a GeneralID object.
+     *
      * @param generalID The generalId object to be removed.
      * @return true in case the document had contained such a GeneralID.
      */
@@ -388,7 +390,8 @@ public class XJdfDocument {
 
     /**
      * Remove a resource set from xjdf document.
-     * @param resourceType              The resource type of the resource set
+     *
+     * @param resourceType The resource type of the resource set
      * @return true if this list contained the specified element
      */
     public boolean removeResourceSet(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
@@ -399,10 +402,11 @@ public class XJdfDocument {
 
     /**
      * Remove a resource set from xjdf document.
-     * @param resourceType              The resource type of the resource set
-     * @param usage                     The usage of the resource set
-     * @param processUsage              The process usage of the resource set
-     * @param processName               The process name of the resource set
+     *
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The process name of the resource set
      * @return true if this list contained the specified element
      */
     public boolean removeResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
@@ -413,10 +417,11 @@ public class XJdfDocument {
 
     /**
      * Remove a resource set from xjdf document.
-     * @param resourceType              The resource type of the resource set
-     * @param usage                     The usage of the resource set
-     * @param processUsage              The process usage of the resource set
-     * @param combinedProcessIndices    The combined process indexes of the resource set
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param combinedProcessIndices The combined process indexes of the resource set
      * @return true if this list contained the specified element
      */
     public boolean removeResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
@@ -427,6 +432,7 @@ public class XJdfDocument {
 
     /**
      * Remove a resource set from xjdf document.
+     *
      * @param resourceSet The resource set to be removed.
      * @return true if this list contained the specified element
      */
@@ -520,10 +526,10 @@ public class XJdfDocument {
     /**
      * Returns the matching resource set.
      *
-     * @param resourceType              The resource type of the resource set
-     * @param usage                     The usage of the resource set
-     * @param processUsage              The process usage of the resource set
-     * @param combinedProcessIndices    The combined process indexes of the resource set
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param combinedProcessIndices The combined process indexes of the resource set
      * @return The matching resource set
      * @throws XJdfDocumentException Thrown in case the resource set cannot be identified uniquely
      */
@@ -534,7 +540,7 @@ public class XJdfDocument {
                 .filter(resourceSet -> resourceType == null || Objects.equals(resourceSet.getName(), resourceType.getSimpleName()))
                 .filter(resourceSet -> usage == null || Objects.equals(resourceSet.getUsage(), usage))
                 .filter(resourceSet -> processUsage == null || Objects.equals(resourceSet.getProcessUsage(), processUsage))
-                .filter(resourceSet -> combinedProcessIndices == null ||  Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
+                .filter(resourceSet -> combinedProcessIndices == null || Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
                 .collect(Collectors.toList());
 
         if (resourceSets.size() > 1) {
@@ -551,6 +557,50 @@ public class XJdfDocument {
         }
 
         return resourceSet;
+    }
+
+
+    /**
+     * Return the list of parts for a given resource set.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @return List of part elements in the resource set.
+     */
+    public List<Part> getParts(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
+        return getParts(getResourceSet(resourceType, null, null, (IntegerList) null));
+    }
+
+    /**
+     * Return the list of parts for a given resource set.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param processName            The combined process indexes of the resource set
+     * @return List of part elements in the resource set.
+     */
+    public List<Part> getParts(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+        return getParts(getResourceSet(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName))));
+    }
+
+    /**
+     * Return the list of parts for a given resource set.
+     *
+     * @param resourceSet The resource set to be analyzed.
+     * @return List of part elements in the resource set.
+     */
+    public List<Part> getParts(ResourceSet resourceSet) {
+        List<Part> parts = new ArrayList<>();
+
+        resourceSet.getResource().forEach(resource -> {
+            if (resource.getPart().size() == 0) {
+                parts.add(null);
+            } else {
+                parts.addAll(resource.getPart());
+            }
+        });
+
+        return parts;
     }
 
     /**
@@ -650,7 +700,7 @@ public class XJdfDocument {
         );
 
         // validate result
-        if(matchingResources.size() > 1) {
+        if (matchingResources.size() > 1) {
             throw new IllegalArgumentException("Multiple matching resources has been found. ID must be unique within the XJDF Document.");
         }
 
@@ -660,8 +710,9 @@ public class XJdfDocument {
 
     /**
      * Remove resource from a given resource set by part.
+     *
      * @param resourceSet The resource set
-     * @param part The partitioning of the resource to be deleted.
+     * @param part        The partitioning of the resource to be deleted.
      * @return true in case the resource set contained such an elements
      */
     public boolean removeResource(ResourceSet resourceSet, Part part) {

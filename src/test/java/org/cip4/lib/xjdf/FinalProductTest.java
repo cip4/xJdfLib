@@ -1,7 +1,6 @@
 package org.cip4.lib.xjdf;
 
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

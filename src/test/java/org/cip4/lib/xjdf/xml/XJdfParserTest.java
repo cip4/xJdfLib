@@ -1,9 +1,9 @@
-package org.cip4.lib.xjdf.xml.internal;
+package org.cip4.lib.xjdf.xml;
 
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.XJDF;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
-import org.cip4.lib.xjdf.xml.internal.XJdfParser.XJdfNamespacePrefixMapper;
+import org.cip4.lib.xjdf.XJdfConstants;
+import org.cip4.lib.xjdf.xml.XJdfParser.XJdfNamespacePrefixMapper;
 import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 

@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.exception.XJdfInitException;
-import org.cip4.lib.xjdf.xml.internal.JAXBContextFactory;
+import org.cip4.lib.xjdf.xml.JAXBContextFactory;
 
 import java.io.IOException;
 import java.util.Properties;
