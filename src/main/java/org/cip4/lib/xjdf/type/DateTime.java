@@ -26,6 +26,14 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Custom constructor. Accepting a ZonedDateTime object for initializing.
+     */
+    public DateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
+    }
+
+
+    /**
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
@@ -122,6 +130,15 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      */
     public final Calendar getCalendar() {
         return GregorianCalendar.from(this.zonedDateTime);
+    }
+
+    /**
+     * Returns the zoned date time object representing the date times value.
+     *
+     * @return The ZonedDateTime object.
+     */
+    public final ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
     }
 
     /**

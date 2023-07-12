@@ -1,14 +1,11 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.apache.commons.lang3.NotImplementedException;
-import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.util.Headers;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
@@ -70,10 +67,6 @@ public class XJmfMessage {
         return xjmf;
     }
 
-    public void send() {
-        throw new NotImplementedException("Send needs to be implemented.");
-    }
-
     /**
      * Add a specific to the XJMF Message object.
      * @param message The message to be added. NOTE: If no header is present, a default one will be created.
@@ -132,5 +125,14 @@ public class XJmfMessage {
 
         // return result
         return xml;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new String(toXml(false));
+        } catch (Exception e) {
+            return "Error creating an XML preview.";
+        }
     }
 }

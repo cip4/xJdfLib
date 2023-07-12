@@ -1,9 +1,7 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.cip4.lib.xjdf.partition.PartitionManager;
 import org.cip4.lib.xjdf.schema.*;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 
 import javax.xml.namespace.QName;
 import java.util.*;
@@ -100,7 +98,10 @@ public class FinalProduct {
 
 
         // add intent to product
-        productParts.get(ROOT_PRODUCT).withIntent(intent);
+        productParts.get(ROOT_PRODUCT).getIntent().add(intent);
+
+        // sort
+        productParts.get(ROOT_PRODUCT).getIntent().sort(Comparator.comparing(Intent::getName));
 
         // return the created intent
         return intent;

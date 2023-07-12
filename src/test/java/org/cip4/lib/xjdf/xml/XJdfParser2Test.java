@@ -14,6 +14,7 @@ import javax.xml.xpath.XPathFactory;
 import org.cip4.lib.xjdf.XJdfDocument;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.binding.NamespaceManager;
+import org.cip4.lib.xjdf.XJdfConstants;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
