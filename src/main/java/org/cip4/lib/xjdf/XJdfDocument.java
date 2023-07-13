@@ -89,6 +89,22 @@ public class XJdfDocument {
     }
 
     /**
+     * Sets the documents descriptive name.
+     * @param descriptiveName The human-readable job description.
+     */
+    public void setDescriptiveName(String descriptiveName) {
+        getXJdf().setDescriptiveName(descriptiveName);
+    }
+
+    /**
+     * Getter of the descriptive name.
+     * @return Returns the human-readable job description.
+     */
+    public String getDescriptiveName() {
+        return getXJdf().getDescriptiveName();
+    }
+
+    /**
      * Returns the XJDF Documents XJDF root node.
      *
      * @return The XJDF root node.
