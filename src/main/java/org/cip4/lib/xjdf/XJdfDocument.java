@@ -823,4 +823,74 @@ public class XJdfDocument {
         Resource resource = getResource(resourceId);
         return resource == null ? null : (T) resource.getSpecificResource().getValue();
     }
+
+    /**
+     * Returns the PartAmount of the first matching specific resource within a resource set using partition keys.
+     *
+     * @param resourceSet The given resource set
+     * @param part        The given Partition Keys used to identify a particular Resource
+     * @return The PartAmount of the first Resource identified using partition keys within a given resource set.
+     */
+    public PartAmount getPartAmount(ResourceSet resourceSet, Part part) throws XJdfDocumentException {
+        Resource resource = getResource(resourceSet, part);
+        return getPartAmount(resource);
+    }
+
+    /**
+     * Returns the PartAmount of the first matching specific resource within a resource set .
+     *
+     * @param resourceType The class of the specific resource.
+     * @return The first Resource identified.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
+        Resource resource = getResource(resourceType);
+        return getPartAmount(resource);
+    }
+
+    /**
+     * Returns the PartAmount of the first matching specific resource within a resource set using partition keys.
+     *
+     * @param resourceType The class of the specific resource.
+     * @param part         The given Partition Keys used to identify a particular Resource
+     * @return The first Resource identified using partition keys.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, Part part) throws XJdfDocumentException {
+        Resource resource = getResource(resourceType, part);
+        return getPartAmount(resource);
+    }
+
+    /**
+     * Returns the PartAmount of a resource found by id.
+     *
+     * @param resourceId The resource's unique identifier.
+     * @return The resource object.
+     */
+    public PartAmount getPartAmount(String resourceId) throws XJdfDocumentException {
+        Resource resource = getResource(resourceId);
+        return getPartAmount(resource);
+    }
+
+    /**
+     * Returns the PartAmount of a given resource.
+     * @param resource The resource object to be analyzed.
+     * @return The PartAmount object if present.
+     * @throws XJdfDocumentException In case multiple PartAmount element exist.
+     */
+    public PartAmount getPartAmount(Resource resource) throws XJdfDocumentException {
+
+        // return null if there is no amount pool present.
+        if(resource.getAmountPool() == null) {
+            return null;
+        }
+
+        // ensure 0 or 1 results
+        if (resource.getAmountPool().getPartAmount().size() > 1) {
+            throw new XJdfDocumentException("PartAmount in selected resource is ambiguous.");
+        }
+
+        // return result
+        return resource.getAmountPool().getPartAmount().size() == 1
+                ? resource.getAmountPool().getPartAmount().get(0)
+                : null;
+    }
 }
