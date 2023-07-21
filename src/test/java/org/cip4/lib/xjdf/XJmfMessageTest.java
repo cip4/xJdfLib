@@ -9,7 +9,6 @@ import org.cip4.lib.xjdf.schema.QueryKnownSubscriptions;
 import org.cip4.lib.xjdf.schema.QueueSubmissionParams;
 import org.cip4.lib.xjdf.schema.Version;
 import org.cip4.lib.xjdf.type.URI;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

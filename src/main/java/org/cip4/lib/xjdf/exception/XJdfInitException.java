@@ -1,6 +1,6 @@
 package org.cip4.lib.xjdf.exception;
 
-public class XJdfInitException extends Exception {
+public class XJdfInitException extends IllegalArgumentException {
 
     public XJdfInitException(Throwable throwable) {
         super(throwable);

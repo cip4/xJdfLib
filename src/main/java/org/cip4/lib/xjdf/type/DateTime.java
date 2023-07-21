@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.type;
 
 import java.text.ParseException;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -23,6 +24,14 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     public DateTime() {
         this.zonedDateTime = ZonedDateTime.now();
     }
+
+    /**
+     * Custom constructor. Accepting a ZonedDateTime object for initializing.
+     */
+    public DateTime(ZonedDateTime zonedDateTime) {
+        this.zonedDateTime = zonedDateTime;
+    }
+
 
     /**
      * Custom constructor. Accepting values for initializing.
@@ -106,12 +115,30 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Creates a XJDF DateTime instance by a Date object.
+     *
+     * @param epochMillis Epoch millis.
+     */
+    public DateTime(final long epochMillis) {
+        zonedDateTime = ZonedDateTime.ofInstant(Instant.ofEpochMilli(epochMillis), ZoneId.systemDefault());
+    }
+
+    /**
      * Clones the underlying calendar and returns it.
      *
      * @return the cloned calendar
      */
     public final Calendar getCalendar() {
         return GregorianCalendar.from(this.zonedDateTime);
+    }
+
+    /**
+     * Returns the zoned date time object representing the date times value.
+     *
+     * @return The ZonedDateTime object.
+     */
+    public final ZonedDateTime getZonedDateTime() {
+        return zonedDateTime;
     }
 
     /**
