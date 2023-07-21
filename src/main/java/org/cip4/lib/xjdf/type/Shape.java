@@ -83,7 +83,7 @@ public class Shape extends AbstractXJdfType<String, Shape> {
      *
      * @return the x
      */
-    public double getX() {
+    public float getX() {
         return x;
     }
 
@@ -92,7 +92,7 @@ public class Shape extends AbstractXJdfType<String, Shape> {
      *
      * @return the y
      */
-    public double getY() {
+    public float getY() {
         return y;
     }
 
@@ -101,7 +101,7 @@ public class Shape extends AbstractXJdfType<String, Shape> {
      *
      * @return the z
      */
-    public double getZ() {
+    public float getZ() {
         return z;
     }
 

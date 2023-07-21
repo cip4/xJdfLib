@@ -67,4 +67,34 @@ public class IntegerListTest {
 		assertEquals(4, r.getList().get(3), "Integer Value is wrong.");
 
 	}
+
+	@Test
+	public void testEquals_1() throws Exception {
+
+		// arrange
+		IntegerList list_1 = new IntegerList(1,2,3,4);
+		IntegerList list_2 = new IntegerList(1,2,3,4);
+
+		// act
+		boolean result = list_1.equals(list_2);
+
+		// assert
+		assertTrue(result, "Lists are equal.");
+
+	}
+
+	@Test
+	public void testEquals_2() throws Exception {
+
+		// arrange
+		IntegerList list_1 = new IntegerList(1,2,3,4);
+		IntegerList list_2 = new IntegerList(1,2,4,3);
+
+		// act
+		boolean result = list_1.equals(list_2);
+
+		// assert
+		assertFalse(result, "Lists are NOT equal.");
+
+	}
 }
