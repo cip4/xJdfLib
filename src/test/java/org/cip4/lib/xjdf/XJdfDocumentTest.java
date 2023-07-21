@@ -463,21 +463,6 @@ public class XJdfDocumentTest {
     }
 
     @Test
-    public void getSpecificResource_2() throws Exception {
-
-        // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
-        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
-
-        // act
-        ResourceSet resourceSetComponent = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "ConventionalPrinting");
-        Component component = xJdfDocument.getSpecificResource(resourceSetComponent);
-
-        // assert
-        assertNotNull(component, "Component is null.");
-    }
-
-    @Test
     public void getSpecificResource_3() throws Exception {
 
         // arrange
@@ -872,5 +857,102 @@ public class XJdfDocumentTest {
         assertEquals(1, parts.size(), "Number of parts is wrong.");
 
         assertNull(parts.get(0),"BS-ID 1 is wrong.");
+    }
+
+    @Test
+    public void getPartAmount_0() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        Resource resource = xJdfDocument.getResource(ColorantControl.class);
+
+        // act
+        PartAmount partAmount = xJdfDocument.getPartAmount(resource);
+
+        // assert
+        assertNull(partAmount, "PartAmount is NOT null.");
+    }
+
+    @Test
+    public void getPartAmount_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        Resource resource = xJdfDocument.getResource(componentResourceSet, new Part().withBinderySignatureID("09b5d583-3e1d-450d-927a-3b1a2dba53b7"));
+
+        // act
+        PartAmount partAmount = xJdfDocument.getPartAmount(resource);
+
+        // assert
+        assertNotNull(partAmount, "PartAmount is null.");
+        assertEquals(5000.0, partAmount.getAmount(), "Amount is null.");
+    }
+
+    @Test
+    public void getPartAmount_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        Resource resource = xJdfDocument.getResource(Component.class);
+
+        // act
+        PartAmount partAmount = xJdfDocument.getPartAmount(resource);
+
+        // assert
+        assertNotNull(partAmount, "PartAmount is null.");
+        assertEquals(556, partAmount.getAmount(), "Amount is null.");
+    }
+
+    @Test
+    public void getPartAmount_3() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+
+        // act
+        PartAmount partAmount = xJdfDocument.getPartAmount(componentResourceSet, new Part().withBinderySignatureID("09b5d583-3e1d-450d-927a-3b1a2dba53b7"));
+
+        // assert
+        assertNotNull(partAmount, "PartAmount is null.");
+        assertEquals(5000.0, partAmount.getAmount(), "Amount is null.");
+    }
+
+    @Test
+    public void getPartAmount_4() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        PartAmount partAmount = xJdfDocument.getPartAmount(Component.class);
+
+        // assert
+        assertNotNull(partAmount, "PartAmount is null.");
+        assertEquals(556.0, partAmount.getAmount(), "Amount is null.");
+    }
+
+    @Test
+    public void getPartAmount_5() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-4.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        Throwable t = assertThrows(XJdfDocumentException.class, () -> xJdfDocument.getPartAmount(ColorantControl.class));
+
+        // assert
+        assertEquals("PartAmount in selected resource is ambiguous.", t.getMessage(), "Message is wrong.");
     }
 }
