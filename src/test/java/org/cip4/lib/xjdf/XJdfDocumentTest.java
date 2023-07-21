@@ -463,21 +463,6 @@ public class XJdfDocumentTest {
     }
 
     @Test
-    public void getSpecificResource_2() throws Exception {
-
-        // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
-        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
-
-        // act
-        ResourceSet resourceSetComponent = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "ConventionalPrinting");
-        Component component = xJdfDocument.getSpecificResource(resourceSetComponent);
-
-        // assert
-        assertNotNull(component, "Component is null.");
-    }
-
-    @Test
     public void getSpecificResource_3() throws Exception {
 
         // arrange

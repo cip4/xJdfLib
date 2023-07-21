@@ -559,20 +559,13 @@ public class XJdfDocument {
                 .filter(resourceSet -> combinedProcessIndices == null || Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
                 .collect(Collectors.toList());
 
+        // ambiguity check
         if (resourceSets.size() > 1) {
             throw new XJdfDocumentException("ResourceSet '" + resourceType.getSimpleName() + "' is ambiguous.");
         }
 
         // return result
-        ResourceSet resourceSet;
-
-        if (resourceSets.size() == 1) {
-            resourceSet = resourceSets.get(0);
-        } else {
-            resourceSet = null;
-        }
-
-        return resourceSet;
+        return resourceSets.size() == 0 ? null : resourceSets.get(0);
     }
 
 
@@ -678,23 +671,64 @@ public class XJdfDocument {
     }
 
     /**
-     * Identifies and returns the first matching resource within a resource set.
+     * Returns a resource found by params.
      *
-     * @param resourceType The class of the specific resource.
-     * @return The first Resource identified.
+     * @param resourceType           The resource type of the resource set
+     * @return The resource object.
      */
     public Resource getResource(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
-        return getResource(resourceType, null);
+        return getResource(resourceType, null, null, (IntegerList) null);
     }
 
     /**
-     * Identifies and returns the first matching resource within a resource set.
+     * Returns a resource found by params.
      *
-     * @param resourceSet The resource set.
-     * @return The first Resource identified.
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @return The resource object.
      */
-    public Resource getResource(ResourceSet resourceSet) throws XJdfDocumentException {
-        return getResource(resourceSet, null);
+    public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+        return getResource(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns a resource found by params.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param processName            The combined process indexes of the resource set
+     * @return The resource object.
+     */
+    public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+        return getResource(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
+    }
+
+    /**
+     * Returns a resource found by params.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param combinedProcessIndices The combined process indexes of the resource set
+     * @return The resource object.
+     */
+    public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
+
+        // find resource set
+        ResourceSet resourceSet = getResourceSet(resourceType, usage, processUsage, combinedProcessIndices);
+
+        if(resourceSet == null) {
+            return null;
+        }
+
+        // ambiguity check
+        if (resourceSet.getResource().size() > 1) {
+            throw new XJdfDocumentException("Resource '" + resourceType.getSimpleName() + "' is ambiguous.");
+        }
+
+        // return result
+        return resourceSet.getResource().size() == 0 ? null : resourceSet.getResource().get(0);
     }
 
     /**
@@ -794,26 +828,6 @@ public class XJdfDocument {
     }
 
     /**
-     * Identifies and returns the first matching specific resource within the given resource set.
-     *
-     * @param resourceType The class of the specific resource.
-     * @return The first specific resource identified using partition keys.
-     */
-    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType) throws XJdfDocumentException {
-        return getSpecificResource(resourceType, null);
-    }
-
-    /**
-     * Identifies and returns the first matching specific resource within the given resource set.
-     *
-     * @param resourceSet The resource set.
-     * @return The first specific resource identified using partition keys.
-     */
-    public <T extends SpecificResource> T getSpecificResource(ResourceSet resourceSet) throws XJdfDocumentException {
-        return getSpecificResource(resourceSet, null);
-    }
-
-    /**
      * Returns a specific resource found by id.
      *
      * @param resourceId The resource's unique identifier.
@@ -821,6 +835,54 @@ public class XJdfDocument {
      */
     public <T extends SpecificResource> T getSpecificResource(String resourceId) {
         Resource resource = getResource(resourceId);
+        return resource == null ? null : (T) resource.getSpecificResource().getValue();
+    }
+
+    /**
+     * Identifies and returns the first matching specific resource within the given resource set.
+     *
+     * @param resourceType The class of the specific resource.
+     * @return The first specific resource identified using partition keys.
+     */
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType) throws XJdfDocumentException {
+        return getSpecificResource(resourceType, null, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns a specific resource found by params.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @return The specific resource object.
+     */
+    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+        return getSpecificResource(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns a specific resource found by params.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param processName            The combined process indexes of the resource set
+     * @return The specific resource object.
+     */
+    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+        return getSpecificResource(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns a specific resource found by params.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param combinedProcessIndices The combined process indexes of the resource set
+     * @return The specific resource object.
+     */
+    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
+        Resource resource = getResource(resourceType, usage, processUsage, combinedProcessIndices);
         return resource == null ? null : (T) resource.getSpecificResource().getValue();
     }
 
