@@ -75,6 +75,15 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     }
 
     /**
+     * Returns true in case obj is conatined in the list.
+     * @param obj The object to be checked.
+     * @return True in case the obj is contained. Otherwise false.
+     */
+    public boolean contains(T obj) {
+        return getList().contains(obj);
+    }
+
+    /**
      * Getter for list attribute.
      *
      * @return the list

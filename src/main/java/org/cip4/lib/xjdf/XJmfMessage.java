@@ -1,14 +1,11 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.apache.commons.lang3.NotImplementedException;
-import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.util.Headers;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +28,7 @@ public class XJmfMessage {
      * Default constructor. <br>
      * Creates an XJMF Message initialized with default values.
      */
-    public XJmfMessage() throws XJdfInitException {
+    public XJmfMessage() {
         this(new XJMF()
             .withHeader(Headers.createDefaultHeader())
             .withVersion(XJdfConstants.XJDF_CURRENT_VERSION)
@@ -44,7 +41,7 @@ public class XJmfMessage {
      *
      * @param bytes The XJMF Message as byte array.
      */
-    public XJmfMessage(byte[] bytes) throws XJdfInitException, XJdfParseException {
+    public XJmfMessage(byte[] bytes) throws XJdfParseException {
         this(new XJdfParser<XJMF>().readXml(bytes));
     }
 
@@ -54,7 +51,7 @@ public class XJmfMessage {
      *
      * @param xjmf The XJMF root node.
      */
-    public XJmfMessage(XJMF xjmf) throws XJdfInitException {
+    public XJmfMessage(XJMF xjmf) {
         this.xjmf = xjmf;
 
         this.xjmfParser = new XJdfParser<>();
@@ -68,10 +65,6 @@ public class XJmfMessage {
      */
     public XJMF getXJmf() {
         return xjmf;
-    }
-
-    public void send() {
-        throw new NotImplementedException("Send needs to be implemented.");
     }
 
     /**
@@ -132,5 +125,14 @@ public class XJmfMessage {
 
         // return result
         return xml;
+    }
+
+    @Override
+    public String toString() {
+        try {
+            return new String(toXml(false));
+        } catch (Exception e) {
+            return "Error creating an XML preview.";
+        }
     }
 }

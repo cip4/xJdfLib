@@ -1,8 +1,9 @@
-package org.cip4.lib.xjdf.xml.internal;
+package org.cip4.lib.xjdf.xml;
 
 import jakarta.xml.bind.JAXBContext;
 import jakarta.xml.bind.JAXBException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
+import org.cip4.lib.xjdf.xml.JAXBContextFactory;
 import org.junit.jupiter.api.Test;
 
 
