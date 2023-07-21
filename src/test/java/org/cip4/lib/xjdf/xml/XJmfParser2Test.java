@@ -3,6 +3,7 @@ package org.cip4.lib.xjdf.xml;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.type.DateTime;
+import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;

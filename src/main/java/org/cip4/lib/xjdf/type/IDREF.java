@@ -26,23 +26,6 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
         element = null;
     }
 
-    /**
-     * Getter for id attribute.
-     *
-     * @return the id
-     */
-    public String getId() {
-        return id;
-    }
-
-    public Resource getResource() {
-        return (Resource) element;
-    }
-
-    public Product getProduct() {
-        return (Product) element;
-    }
-
     public IDREF(SpecificResource specificResource) {
         this(specificResource, null, Identifiers.generate("PAR"));
     }
@@ -77,6 +60,23 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
     public IDREF(final String expression) {
         id = expression;
         this.element = null;
+    }
+
+    /**
+     * Getter for id attribute.
+     *
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    public Resource getResource() {
+        return (Resource) element;
+    }
+
+    public Product getProduct() {
+        return (Product) element;
     }
 
     /**

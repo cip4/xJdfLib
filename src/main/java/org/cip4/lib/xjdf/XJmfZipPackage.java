@@ -14,7 +14,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -22,7 +21,7 @@ import java.util.zip.ZipOutputStream;
 /**
  * This class provides functionality all about packaging.
  */
-public class ZipPackage {
+public class XJmfZipPackage {
 
     private final Map<URI, byte[]> files;
 
@@ -44,7 +43,7 @@ public class ZipPackage {
     /**
      * Default constructor.
      */
-    public ZipPackage() {
+    public XJmfZipPackage() {
         this.files = Collections.unmodifiableMap(new HashMap<>());
     }
 
@@ -54,7 +53,7 @@ public class ZipPackage {
      *
      * @param rootJmf The root xjmf message.
      */
-    public ZipPackage(XJmfMessage rootJmf)
+    public XJmfZipPackage(XJmfMessage rootJmf)
         throws XJdfValidationException, XJdfParseException {
         this(rootJmf, new HashMap<>(), new HashMap<>());
     }
@@ -66,7 +65,7 @@ public class ZipPackage {
      * @param rootJmf The root xjmf message.
      * @param xJdfDocuments Map of XJDF Documents
      */
-    public ZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments)
+    public XJmfZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments)
         throws XJdfValidationException, XJdfParseException {
         this(rootJmf, xJdfDocuments, new HashMap<>());
     }
@@ -79,7 +78,7 @@ public class ZipPackage {
      * @param xJdfDocuments Map of XJDF Documents
      * @param files Map of files
      */
-    public ZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments, @NotNull Map<URI, byte[]> files)
+    public XJmfZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments, @NotNull Map<URI, byte[]> files)
         throws XJdfValidationException, XJdfParseException {
 
         Map<URI, byte[]> fileMap = new HashMap<>();
@@ -100,7 +99,7 @@ public class ZipPackage {
      * Custom constructor. <br />
      * Accepting a zip archive for initializing.
      */
-    public ZipPackage(byte[] zipArchive) throws IOException, URISyntaxException {
+    public XJmfZipPackage(byte[] zipArchive) throws IOException, URISyntaxException {
         try (
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(zipArchive);
             ZipInputStream packageStream = new ZipInputStream(byteArrayInputStream)
@@ -234,8 +233,8 @@ public class ZipPackage {
             return this;
         }
 
-        public ZipPackage build() throws XJdfValidationException, XJdfParseException {
-            return new ZipPackage(xjmfRoot, xJdfDocumentMap, fileMap);
+        public XJmfZipPackage build() throws XJdfValidationException, XJdfParseException {
+            return new XJmfZipPackage(xjmfRoot, xJdfDocumentMap, fileMap);
         }
     }
 }

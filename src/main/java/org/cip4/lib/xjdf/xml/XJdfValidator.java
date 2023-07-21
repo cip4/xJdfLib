@@ -2,6 +2,7 @@ package org.cip4.lib.xjdf.xml;
 
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
+import org.cip4.lib.xjdf.XJdfConstants;
 import org.w3c.dom.Document;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;

@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.util;
 import org.apache.commons.lang3.StringUtils;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.type.DateTime;
-import org.cip4.lib.xjdf.xml.XJdfConstants;
+import org.cip4.lib.xjdf.XJdfConstants;
 
 /**
  * Headers utility class providing creation functionality.
