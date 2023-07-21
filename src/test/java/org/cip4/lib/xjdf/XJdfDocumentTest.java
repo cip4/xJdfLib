@@ -955,4 +955,34 @@ public class XJdfDocumentTest {
         // assert
         assertEquals("PartAmount in selected resource is ambiguous.", t.getMessage(), "Message is wrong.");
     }
+
+    @Test
+    public void getCuttingParams_ProcessUsage_1() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-5.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, ResourceSet.Usage.INPUT, "CIP3", (IntegerList) null);
+
+        // assert
+        assertNotNull(cuttingParams, "CuttingParams is null.");
+        assertEquals("https://assets.ven.vpsvc.com/v1/asset/orca/sheet/SH-LHQ0-L03U/SH-LHQ0-L03U.ppf", cuttingParams.getFileSpec().getURL().toString(), "URL is wrong.");
+    }
+
+    @Test
+    public void getCuttingParams_ProcessUsage_2() throws Exception {
+
+        // arrange
+        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-5.xjdf").readAllBytes();
+        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
+
+        // act
+        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, ResourceSet.Usage.INPUT, null, (IntegerList) null);
+
+        // assert
+        assertNotNull(cuttingParams, "CuttingParams is null.");
+        assertEquals("Left", cuttingParams.getSheetLay().value(), "SheetLay is wrong.");
+    }
 }
