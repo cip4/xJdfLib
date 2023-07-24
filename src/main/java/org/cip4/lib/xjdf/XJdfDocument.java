@@ -381,7 +381,7 @@ public class XJdfDocument {
         resourceSet.setCombinedProcessIndex(combinedProcessIndices);
         resourceSet.setName(resourceType.getSimpleName());
 
-        // add to document
+        // add to dgetResourceSetocument
         xjdf.getResourceSet().add(resourceSet);
 
         // sort resource sets
@@ -538,6 +538,18 @@ public class XJdfDocument {
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
         return getResourceSet(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns the resource set of a specific resource.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @return The resource set matching the parameters.
+     */
+    public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage) throws XJdfDocumentException {
+        return getResourceSet(resourceType, usage, processUsage, (IntegerList) null);
     }
 
     /**
