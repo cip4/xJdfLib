@@ -105,6 +105,22 @@ public class XJdfDocument {
     }
 
     /**
+     * Sets the documents job id.
+     * @param jobID The document's job id.
+     */
+    public void setJobID(String jobID) {
+        getXJdf().setJobID(jobID);
+    }
+
+    /**
+     * Getter of the job id.
+     * @return The job id.
+     */
+    public String getJobID() {
+        return getXJdf().getJobID();
+    }
+
+    /**
      * Returns the XJDF Documents XJDF root node.
      *
      * @return The XJDF root node.
