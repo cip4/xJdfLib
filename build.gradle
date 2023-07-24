@@ -145,7 +145,7 @@ dependencies {
     implementation 'commons-io:commons-io:2.11.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.sun.xml.bind:jaxb-impl:4.0.3'
-    implementation 'com.sun.xml.bind:jaxb-core:4.0.2'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.3'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
     implementation 'org.jetbrains:annotations:24.0.1'
@@ -160,7 +160,7 @@ dependencies {
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
     testImplementation 'org.junit-pioneer:junit-pioneer:2.0.0'
 
-    xjc 'com.sun.xml.bind:jaxb-core:4.0.2'
+    xjc 'com.sun.xml.bind:jaxb-core:4.0.3'
     xjc 'com.sun.xml.bind:jaxb-xjc:4.0.2'
     xjc 'com.sun.xml.bind:jaxb-impl:4.0.3'
     xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
