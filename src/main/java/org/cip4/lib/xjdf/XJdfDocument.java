@@ -523,7 +523,7 @@ public class XJdfDocument {
      * Returns the resource set of a specific resource.
      *
      * @param resourceType The resource type of the specific resource
-     * @return The first resource set matching the specific resource
+     * @return The resource set matching the parameters.
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
         return getResourceSet(resourceType, null, null, (IntegerList) null);
@@ -532,8 +532,22 @@ public class XJdfDocument {
     /**
      * Returns the resource set of a specific resource.
      *
-     * @param resourceType The resource type of the specific resource
-     * @return The first resource set matching the specific resource
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @return The resource set matching the parameters.
+     */
+    public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+        return getResourceSet(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns the resource set of a specific resource.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param processName            The linked process name (via CombinedProcessIndex).
+     * @return The resource set matching the parameters.
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
         return getResourceSet(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
@@ -577,6 +591,17 @@ public class XJdfDocument {
      */
     public List<Part> getParts(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
         return getParts(getResourceSet(resourceType, null, null, (IntegerList) null));
+    }
+
+    /**
+     * Return the list of parts for a given resource set.
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @return List of part elements in the resource set.
+     */
+    public List<Part> getParts(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+        return getParts(getResourceSet(resourceType, usage, null, (IntegerList) null));
     }
 
     /**
