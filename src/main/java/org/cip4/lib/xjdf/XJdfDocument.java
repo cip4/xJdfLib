@@ -395,8 +395,8 @@ public class XJdfDocument {
                 rs2.getCombinedProcessIndex() == null ? null : rs2.getCombinedProcessIndex().toString()
         );
 
-        xjdf.getResourceSet().sort(usageComparator
-                .thenComparing(ResourceSet::getName)
+        xjdf.getResourceSet().sort(Comparator.comparing(ResourceSet::getName)
+                .thenComparing(usageComparator)
                 .thenComparing(combinedProcessIndexComparator)
         );
 
@@ -553,7 +553,7 @@ public class XJdfDocument {
 
         // find resource set
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet().stream()
-                .filter(resourceSet -> resourceType == null || Objects.equals(resourceSet.getName(), resourceType.getSimpleName()))
+                .filter(resourceSet -> Objects.equals(resourceSet.getName(), resourceType.getSimpleName()))
                 .filter(resourceSet -> usage == null || Objects.equals(resourceSet.getUsage(), usage))
                 .filter(resourceSet -> Objects.equals(resourceSet.getProcessUsage(), processUsage))
                 .filter(resourceSet -> combinedProcessIndices == null || Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
