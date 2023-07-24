@@ -555,7 +555,7 @@ public class XJdfDocument {
         List<ResourceSet> resourceSets = this.xjdf.getResourceSet().stream()
                 .filter(resourceSet -> resourceType == null || Objects.equals(resourceSet.getName(), resourceType.getSimpleName()))
                 .filter(resourceSet -> usage == null || Objects.equals(resourceSet.getUsage(), usage))
-                .filter(resourceSet -> processUsage == null || Objects.equals(resourceSet.getProcessUsage(), processUsage))
+                .filter(resourceSet -> Objects.equals(resourceSet.getProcessUsage(), processUsage))
                 .filter(resourceSet -> combinedProcessIndices == null || Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
                 .collect(Collectors.toList());
 
@@ -899,17 +899,6 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns the PartAmount of the first matching specific resource within a resource set .
-     *
-     * @param resourceType The class of the specific resource.
-     * @return The first Resource identified.
-     */
-    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
-        Resource resource = getResource(resourceType);
-        return getPartAmount(resource);
-    }
-
-    /**
      * Returns the PartAmount of the first matching specific resource within a resource set using partition keys.
      *
      * @param resourceType The class of the specific resource.
@@ -922,10 +911,58 @@ public class XJdfDocument {
     }
 
     /**
+     * Returns the PartAmount of the resource found by params .
+     *
+     * @param resourceType           The resource type of the resource set
+     * @return The PartAmount of the identified resource.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
+        return getPartAmount(resourceType, null, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns the PartAmount of the resource found by params .
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @return The PartAmount of the identified resource.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+        return getPartAmount(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns the PartAmount of the resource found by params .
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param processName            The combined process indexes of the resource set
+     * @return The PartAmount of the identified resource.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+        return getPartAmount(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
+    }
+
+    /**
+     * Returns the PartAmount of the resource found by params .
+     *
+     * @param resourceType           The resource type of the resource set
+     * @param usage                  The usage of the resource set
+     * @param processUsage           The process usage of the resource set
+     * @param combinedProcessIndices The combined process indexes of the resource set
+     * @return The first Resource identified using partition keys.
+     */
+    public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
+        Resource resource = getResource(resourceType, usage, processUsage, combinedProcessIndices);
+        return getPartAmount(resource);
+    }
+
+    /**
      * Returns the PartAmount of a resource found by id.
      *
      * @param resourceId The resource's unique identifier.
-     * @return The resource object.
+     * @return The PartAmount object of the identified resource object.
      */
     public PartAmount getPartAmount(String resourceId) throws XJdfDocumentException {
         Resource resource = getResource(resourceId);
