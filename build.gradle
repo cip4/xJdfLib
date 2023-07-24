@@ -142,10 +142,10 @@ processResources {
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'commons-io:commons-io:2.13.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'com.sun.xml.bind:jaxb-impl:4.0.3'
-    implementation 'com.sun.xml.bind:jaxb-core:4.0.2'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.3'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
     implementation 'org.jetbrains:annotations:24.0.1'
@@ -154,13 +154,13 @@ dependencies {
     implementation 'xerces:xercesImpl:2.12.2'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.9.3'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
     testImplementation 'org.mockito:mockito-core:5.4.0'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
-    testImplementation 'org.junit-pioneer:junit-pioneer:2.0.0'
+    testImplementation 'org.junit-pioneer:junit-pioneer:2.0.1'
 
-    xjc 'com.sun.xml.bind:jaxb-core:4.0.2'
+    xjc 'com.sun.xml.bind:jaxb-core:4.0.3'
     xjc 'com.sun.xml.bind:jaxb-xjc:4.0.2'
     xjc 'com.sun.xml.bind:jaxb-impl:4.0.3'
     xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
