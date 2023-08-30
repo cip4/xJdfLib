@@ -208,7 +208,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_ID", "ConventionalPrinting", "Cutting", "Folding", "Cutting");
 
         // act
-        Throwable t = assertThrows(AssertionError.class, () -> xJdfDocument.getCombinedProcessIndex(null));
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> xJdfDocument.getCombinedProcessIndex(null));
 
         // assert
         assertEquals("ProcessName cannot be null or empty.", t.getMessage(), "Exception message is wrong.");
@@ -221,7 +221,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_ID", "ConventionalPrinting", "Cutting", "Folding", "Cutting");
 
         // act
-        Throwable t = assertThrows(AssertionError.class, () -> xJdfDocument.getCombinedProcessIndex(""));
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> xJdfDocument.getCombinedProcessIndex(""));
 
         // assert
         assertEquals("ProcessName cannot be null or empty.", t.getMessage(), "Exception message is wrong.");
