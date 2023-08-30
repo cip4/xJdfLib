@@ -188,7 +188,7 @@ public class XJdfDocument {
     public int getCombinedProcessIndex(String processName) throws XJdfDocumentException {
 
         // check input
-        assert StringUtils.isNoneEmpty(processName) : "ProcessName cannot be null or empty.";
+        if(StringUtils.isEmpty(processName)) throw new IllegalArgumentException("ProcessName cannot be null or empty.");
 
         // find matching process names
         List<String> matchingProcessNames = getCombinedProcess().stream()
@@ -937,7 +937,7 @@ public class XJdfDocument {
      * @return The specific resource object.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
-        return getSpecificResource(resourceType, usage, null, (IntegerList) null);
+        return getSpecificResource(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
     }
 
     /**
