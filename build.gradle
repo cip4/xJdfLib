@@ -143,7 +143,7 @@ processResources {
 
 dependencies {
     implementation 'commons-io:commons-io:2.13.0'
-    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.commons:commons-lang3:3.13.0'
     implementation 'com.sun.xml.bind:jaxb-impl:4.0.3'
     implementation 'com.sun.xml.bind:jaxb-core:4.0.3'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
