@@ -923,7 +923,7 @@ public class XJdfDocument {
      * @param usage        The usage of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, null, (IntegerList) null);
     }
 
@@ -936,7 +936,7 @@ public class XJdfDocument {
      * @param processName  The combined process indexes of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
     }
 
@@ -949,7 +949,7 @@ public class XJdfDocument {
      * @param combinedProcessIndices The combined process indexes of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
         Resource resource = getResource(resourceType, usage, processUsage, combinedProcessIndices);
         return resource == null ? null : (T) resource.getSpecificResource().getValue();
     }
