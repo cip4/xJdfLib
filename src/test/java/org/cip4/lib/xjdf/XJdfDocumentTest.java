@@ -436,6 +436,38 @@ public class XJdfDocumentTest {
     }
 
     @Test
+    public void addGeneralId_3() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID("USAGE", "VALUE");
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
+        assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+    }
+
+    @Test
+    public void addGeneralId_4() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID("USAGE", 5);
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals("5", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
+        assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+    }
+
+    @Test
     public void getSpecificResource_Null() throws Exception {
 
         // arrange

@@ -190,7 +190,8 @@ public class XJdfDocument {
     public int getCombinedProcessIndex(String processName) throws XJdfDocumentException {
 
         // check input
-        if(StringUtils.isEmpty(processName)) throw new IllegalArgumentException("ProcessName cannot be null or empty.");
+        if (StringUtils.isEmpty(processName))
+            throw new IllegalArgumentException("ProcessName cannot be null or empty.");
 
         // find matching process names
         List<String> matchingProcessNames = getCombinedProcess().stream()
@@ -215,6 +216,30 @@ public class XJdfDocument {
      */
     public void addGeneralID(GeneralID generalID) {
         addGeneralIDs(generalID);
+    }
+
+    /**
+     * Add a general id to the XJDF Document.
+     *
+     * @param idUsage The IDUsage value.
+     * @param idValue The IDValue value.
+     */
+    public void addGeneralID(String idUsage, String idValue) {
+        addGeneralIDs(
+                new GeneralID()
+                        .withIDUsage(idUsage)
+                        .withIDValue(idValue)
+        );
+    }
+
+    /**
+     * Add a general id to the XJDF Document.
+     *
+     * @param idUsage The IDUsage value.
+     * @param idValue The IDValue value.
+     */
+    public void addGeneralID(String idUsage, Object idValue) {
+        addGeneralID(idUsage, idValue.toString());
     }
 
     /**
@@ -257,7 +282,7 @@ public class XJdfDocument {
      * Return the typed value of a GeneralID.
      *
      * @param idUsage The IDUsage value.
-     * @param type The target type of the IDValue value.
+     * @param type    The target type of the IDValue value.
      * @return The typed value.
      */
     public <T> T getGeneralID(String idUsage, Class<T> type) throws ParseException {
@@ -274,15 +299,15 @@ public class XJdfDocument {
 
         if (String.class == type) {
             value = (T) generalID.getIDValue();
-        } else if(Float.class == type) {
+        } else if (Float.class == type) {
             value = (T) Float.valueOf(generalID.getIDValue());
-        } else if(Double.class == type) {
+        } else if (Double.class == type) {
             value = (T) Double.valueOf(generalID.getIDValue());
-        } else if(Integer.class == type) {
+        } else if (Integer.class == type) {
             value = (T) Integer.valueOf(generalID.getIDValue());
-        } else if(Boolean.class == type) {
+        } else if (Boolean.class == type) {
             value = (T) Boolean.valueOf(generalID.getIDValue());
-        } else if(DateTime.class == type) {
+        } else if (DateTime.class == type) {
             value = (T) new DateTime(generalID.getIDValue());
         } else {
             throw new UnsupportedOperationException("Type '" + type.toString() + " is not supported.");
