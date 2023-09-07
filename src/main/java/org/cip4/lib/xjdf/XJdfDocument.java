@@ -5,6 +5,7 @@ import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.util.Partitions;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import jakarta.xml.bind.JAXBElement;
 
 import javax.xml.namespace.QName;
+import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -249,6 +251,45 @@ public class XJdfDocument {
 
         // return result
         return generalIDs.size() == 0 ? null : generalIDs.get(0);
+    }
+
+    /**
+     * Return the typed value of a GeneralID.
+     *
+     * @param idUsage The IDUsage value.
+     * @param type The target type of the IDValue value.
+     * @return The typed value.
+     */
+    public <T> T getGeneralID(String idUsage, Class<T> type) throws ParseException {
+
+        // get general id
+        GeneralID generalID = getGeneralID(idUsage);
+
+        if (generalID == null) {
+            return null;
+        }
+
+        // parse value
+        T value;
+
+        if (String.class == type) {
+            value = (T) generalID.getIDValue();
+        } else if(Float.class == type) {
+            value = (T) Float.valueOf(generalID.getIDValue());
+        } else if(Double.class == type) {
+            value = (T) Double.valueOf(generalID.getIDValue());
+        } else if(Integer.class == type) {
+            value = (T) Integer.valueOf(generalID.getIDValue());
+        } else if(Boolean.class == type) {
+            value = (T) Boolean.valueOf(generalID.getIDValue());
+        } else if(DateTime.class == type) {
+            value = (T) new DateTime(generalID.getIDValue());
+        } else {
+            throw new UnsupportedOperationException("Type '" + type.toString() + " is not supported.");
+        }
+
+        // return parsed value
+        return value;
     }
 
     /**
