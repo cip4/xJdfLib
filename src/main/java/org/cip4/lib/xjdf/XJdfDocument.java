@@ -5,6 +5,7 @@ import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.util.Partitions;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import jakarta.xml.bind.JAXBElement;
 
 import javax.xml.namespace.QName;
+import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -90,6 +92,7 @@ public class XJdfDocument {
 
     /**
      * Sets the documents descriptive name.
+     *
      * @param descriptiveName The human-readable job description.
      */
     public void setDescriptiveName(String descriptiveName) {
@@ -98,6 +101,7 @@ public class XJdfDocument {
 
     /**
      * Getter of the descriptive name.
+     *
      * @return Returns the human-readable job description.
      */
     public String getDescriptiveName() {
@@ -106,6 +110,7 @@ public class XJdfDocument {
 
     /**
      * Sets the documents job id.
+     *
      * @param jobID The document's job id.
      */
     public void setJobID(String jobID) {
@@ -114,6 +119,7 @@ public class XJdfDocument {
 
     /**
      * Getter of the job id.
+     *
      * @return The job id.
      */
     public String getJobID() {
@@ -184,7 +190,8 @@ public class XJdfDocument {
     public int getCombinedProcessIndex(String processName) throws XJdfDocumentException {
 
         // check input
-        assert StringUtils.isNoneEmpty(processName) : "ProcessName cannot be null or empty.";
+        if (StringUtils.isEmpty(processName))
+            throw new IllegalArgumentException("ProcessName cannot be null or empty.");
 
         // find matching process names
         List<String> matchingProcessNames = getCombinedProcess().stream()
@@ -209,6 +216,30 @@ public class XJdfDocument {
      */
     public void addGeneralID(GeneralID generalID) {
         addGeneralIDs(generalID);
+    }
+
+    /**
+     * Add a general id to the XJDF Document.
+     *
+     * @param idUsage The IDUsage value.
+     * @param idValue The IDValue value.
+     */
+    public void addGeneralID(String idUsage, String idValue) {
+        addGeneralIDs(
+                new GeneralID()
+                        .withIDUsage(idUsage)
+                        .withIDValue(idValue)
+        );
+    }
+
+    /**
+     * Add a general id to the XJDF Document.
+     *
+     * @param idUsage The IDUsage value.
+     * @param idValue The IDValue value.
+     */
+    public void addGeneralID(String idUsage, Object idValue) {
+        addGeneralID(idUsage, idValue.toString());
     }
 
     /**
@@ -245,6 +276,45 @@ public class XJdfDocument {
 
         // return result
         return generalIDs.size() == 0 ? null : generalIDs.get(0);
+    }
+
+    /**
+     * Return the typed value of a GeneralID.
+     *
+     * @param idUsage The IDUsage value.
+     * @param type    The target type of the IDValue value.
+     * @return The typed value.
+     */
+    public <T> T getGeneralID(String idUsage, Class<T> type) throws ParseException {
+
+        // get general id
+        GeneralID generalID = getGeneralID(idUsage);
+
+        if (generalID == null) {
+            return null;
+        }
+
+        // parse value
+        T value;
+
+        if (String.class == type) {
+            value = (T) generalID.getIDValue();
+        } else if (Float.class == type) {
+            value = (T) Float.valueOf(generalID.getIDValue());
+        } else if (Double.class == type) {
+            value = (T) Double.valueOf(generalID.getIDValue());
+        } else if (Integer.class == type) {
+            value = (T) Integer.valueOf(generalID.getIDValue());
+        } else if (Boolean.class == type) {
+            value = (T) Boolean.valueOf(generalID.getIDValue());
+        } else if (DateTime.class == type) {
+            value = (T) new DateTime(generalID.getIDValue());
+        } else {
+            throw new UnsupportedOperationException("Type '" + type.toString() + " is not supported.");
+        }
+
+        // return parsed value
+        return value;
     }
 
     /**
@@ -397,7 +467,21 @@ public class XJdfDocument {
         resourceSet.setCombinedProcessIndex(combinedProcessIndices);
         resourceSet.setName(resourceType.getSimpleName());
 
-        // add to dgetResourceSetocument
+        // add to document
+        addResourceSet(resourceSet);
+
+        // return resource set
+        return resourceSet;
+    }
+
+    /**
+     * Add resource set to the xjdf document.
+     *
+     * @param resourceSet The resource set to be added.
+     */
+    public void addResourceSet(ResourceSet resourceSet) {
+
+        // add to document
         xjdf.getResourceSet().add(resourceSet);
 
         // sort resource sets
@@ -415,9 +499,6 @@ public class XJdfDocument {
                 .thenComparing(usageComparator)
                 .thenComparing(combinedProcessIndexComparator)
         );
-
-        // return resource set
-        return resourceSet;
     }
 
     /**
@@ -548,8 +629,8 @@ public class XJdfDocument {
     /**
      * Returns the resource set of a specific resource.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
      * @return The resource set matching the parameters.
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
@@ -559,9 +640,9 @@ public class XJdfDocument {
     /**
      * Returns the resource set of a specific resource.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
      * @return The resource set matching the parameters.
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage) throws XJdfDocumentException {
@@ -571,10 +652,10 @@ public class XJdfDocument {
     /**
      * Returns the resource set of a specific resource.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param processName            The linked process name (via CombinedProcessIndex).
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The linked process name (via CombinedProcessIndex).
      * @return The resource set matching the parameters.
      */
     public ResourceSet getResourceSet(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
@@ -614,7 +695,7 @@ public class XJdfDocument {
     /**
      * Return the list of parts for a given resource set.
      *
-     * @param resourceType           The resource type of the resource set
+     * @param resourceType The resource type of the resource set
      * @return List of part elements in the resource set.
      */
     public List<Part> getParts(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
@@ -624,8 +705,8 @@ public class XJdfDocument {
     /**
      * Return the list of parts for a given resource set.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
      * @return List of part elements in the resource set.
      */
     public List<Part> getParts(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
@@ -635,10 +716,10 @@ public class XJdfDocument {
     /**
      * Return the list of parts for a given resource set.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param processName            The combined process indexes of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The combined process indexes of the resource set
      * @return List of part elements in the resource set.
      */
     public List<Part> getParts(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
@@ -726,7 +807,7 @@ public class XJdfDocument {
     /**
      * Returns a resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
+     * @param resourceType The resource type of the resource set
      * @return The resource object.
      */
     public Resource getResource(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
@@ -736,8 +817,8 @@ public class XJdfDocument {
     /**
      * Returns a resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
      * @return The resource object.
      */
     public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
@@ -747,10 +828,10 @@ public class XJdfDocument {
     /**
      * Returns a resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param processName            The combined process indexes of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The combined process indexes of the resource set
      * @return The resource object.
      */
     public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
@@ -771,7 +852,7 @@ public class XJdfDocument {
         // find resource set
         ResourceSet resourceSet = getResourceSet(resourceType, usage, processUsage, combinedProcessIndices);
 
-        if(resourceSet == null) {
+        if (resourceSet == null) {
             return null;
         }
 
@@ -904,25 +985,25 @@ public class XJdfDocument {
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, null, (IntegerList) null);
     }
 
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param processName            The combined process indexes of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The combined process indexes of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
-        return getSpecificResource(resourceType, usage, null, (IntegerList) null);
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
+        return getSpecificResource(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
     }
 
     /**
@@ -934,7 +1015,7 @@ public class XJdfDocument {
      * @param combinedProcessIndices The combined process indexes of the resource set
      * @return The specific resource object.
      */
-    public <T extends SpecificResource> T getSpecificResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
         Resource resource = getResource(resourceType, usage, processUsage, combinedProcessIndices);
         return resource == null ? null : (T) resource.getSpecificResource().getValue();
     }
@@ -966,7 +1047,7 @@ public class XJdfDocument {
     /**
      * Returns the PartAmount of the resource found by params .
      *
-     * @param resourceType           The resource type of the resource set
+     * @param resourceType The resource type of the resource set
      * @return The PartAmount of the identified resource.
      */
     public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
@@ -976,8 +1057,8 @@ public class XJdfDocument {
     /**
      * Returns the PartAmount of the resource found by params .
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
      * @return The PartAmount of the identified resource.
      */
     public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
@@ -987,10 +1068,10 @@ public class XJdfDocument {
     /**
      * Returns the PartAmount of the resource found by params .
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param processName            The combined process indexes of the resource set
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @param processName  The combined process indexes of the resource set
      * @return The PartAmount of the identified resource.
      */
     public PartAmount getPartAmount(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
@@ -1024,6 +1105,7 @@ public class XJdfDocument {
 
     /**
      * Returns the PartAmount of a given resource.
+     *
      * @param resource The resource object to be analyzed.
      * @return The PartAmount object if present.
      * @throws XJdfDocumentException In case multiple PartAmount element exist.
@@ -1031,7 +1113,7 @@ public class XJdfDocument {
     public PartAmount getPartAmount(Resource resource) throws XJdfDocumentException {
 
         // return null if there is no amount pool present.
-        if(resource.getAmountPool() == null) {
+        if (resource.getAmountPool() == null) {
             return null;
         }
 

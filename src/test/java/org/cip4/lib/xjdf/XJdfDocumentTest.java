@@ -208,7 +208,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_ID", "ConventionalPrinting", "Cutting", "Folding", "Cutting");
 
         // act
-        Throwable t = assertThrows(AssertionError.class, () -> xJdfDocument.getCombinedProcessIndex(null));
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> xJdfDocument.getCombinedProcessIndex(null));
 
         // assert
         assertEquals("ProcessName cannot be null or empty.", t.getMessage(), "Exception message is wrong.");
@@ -221,7 +221,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_ID", "ConventionalPrinting", "Cutting", "Folding", "Cutting");
 
         // act
-        Throwable t = assertThrows(AssertionError.class, () -> xJdfDocument.getCombinedProcessIndex(""));
+        Throwable t = assertThrows(IllegalArgumentException.class, () -> xJdfDocument.getCombinedProcessIndex(""));
 
         // assert
         assertEquals("ProcessName cannot be null or empty.", t.getMessage(), "Exception message is wrong.");
@@ -433,6 +433,38 @@ public class XJdfDocumentTest {
         assertEquals("1", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
         assertEquals("2", xJdfDocument.getXJdf().getGeneralID().get(1).getIDUsage(), "IDUsage is wrong.");
         assertEquals("3", xJdfDocument.getXJdf().getGeneralID().get(2).getIDUsage(), "IDUsage is wrong.");
+    }
+
+    @Test
+    public void addGeneralId_3() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID("USAGE", "VALUE");
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
+        assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
+    }
+
+    @Test
+    public void addGeneralId_4() throws XJdfInitException {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addGeneralID("USAGE", 5);
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals("5", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
+        assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
     }
 
     @Test
@@ -719,6 +751,102 @@ public class XJdfDocumentTest {
 
         // assert
         assertEquals("IDUsage 'RATING_EFFICIENCY' is not unique.", t.getMessage(), "Error message is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_4() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("20")
+        );
+
+        // act
+        String result = xJdfDocument.getGeneralID("G_ID_1", String.class);
+
+        // assert
+        assertEquals("20", result, "Value is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_5() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("20")
+        );
+
+        // act
+        int result = xJdfDocument.getGeneralID("G_ID_1", Integer.class);
+
+        // assert
+        assertEquals(20, result, "Value is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_6() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("20")
+        );
+
+        // act
+        float result = xJdfDocument.getGeneralID("G_ID_1", Float.class);
+
+        // assert
+        assertEquals(20f, result, 0.0001, "Value is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_7() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("20")
+        );
+
+        // act
+        Throwable t = assertThrows(UnsupportedOperationException.class, () -> xJdfDocument.getGeneralID("G_ID_1", Void.class));
+
+        // assert
+        assertEquals("Type 'class java.lang.Void is not supported.", t.getMessage(), "Error message is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_8() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("20")
+        );
+
+        // act
+        Object result = xJdfDocument.getGeneralID("XXX", Float.class);
+
+        // assert
+        assertNull(result, "Value is wrong.");
+    }
+
+    @Test
+    public void getGeneralID_9() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("TEST", "Product");
+        xJdfDocument.addGeneralIDs(
+                new GeneralID().withIDUsage("G_ID_1").withIDValue("2012-03-04T13:20:40.123+03:00")
+        );
+
+        // act
+        DateTime result = xJdfDocument.getGeneralID("G_ID_1", DateTime.class);
+
+        // assert
+        assertEquals(1330856440123L, result.getCalendar().getTimeInMillis(), "Value is wrong.");
     }
 
     @Test

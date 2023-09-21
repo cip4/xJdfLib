@@ -1,5 +1,7 @@
 package org.cip4.lib.xjdf;
 
+import org.cip4.lib.xjdf.exception.XJdfDocumentException;
+import org.cip4.lib.xjdf.exception.XJmfMessageException;
 import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
 import org.cip4.lib.xjdf.schema.Header;
 import org.cip4.lib.xjdf.schema.Message;
@@ -17,6 +19,7 @@ import org.junit.jupiter.api.parallel.Execution;
 import java.io.IOException;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 
 @Execution(SAME_THREAD)
@@ -138,6 +141,89 @@ class XJmfMessageTest {
         Assertions.assertSame(messages.get(0).getClass(), CommandSubmitQueueEntry.class);
         Assertions.assertTrue(messages.get(1) instanceof QueryKnownMessages);
         Assertions.assertTrue(messages.get(2) instanceof QueryKnownDevices);
+    }
+
+    @Test
+    void getMessage_0() throws Exception {
+
+        // arrange
+        XJmfMessage xJmfExample = new XJmfMessage();
+        xJmfExample.addMessage(new CommandSubmitQueueEntry()
+                .withQueueSubmissionParams(new QueueSubmissionParams()
+                        .withURL(new URI("myUrl.xjdf"))));
+
+        byte[] xjmf = xJmfExample.toXml();
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        CommandSubmitQueueEntry commandSubmitQueueEntry = xJmfMessage.getMessage(CommandSubmitQueueEntry.class);
+
+        // assert
+        assertNotNull(commandSubmitQueueEntry, "CommandSubmitQueueEntry is null");
+        assertEquals("myUrl.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString(), "QueueSubmissionURL is wrong.");
+    }
+
+    @Test
+    void getMessage_1() throws Exception {
+
+        // arrange
+        XJmfMessage xJmfExample = new XJmfMessage();
+        xJmfExample.addMessage(new CommandSubmitQueueEntry()
+                .withQueueSubmissionParams(new QueueSubmissionParams()
+                        .withURL(new URI("myUrl.xjdf"))));
+        xJmfExample.addMessage(new QueryKnownMessages());
+        xJmfExample.addMessage(new QueryKnownDevices());
+
+        byte[] xjmf = xJmfExample.toXml();
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        QueryKnownMessages queryKnownMessages = xJmfMessage.getMessage(QueryKnownMessages.class);
+
+        // assert
+        assertNotNull(queryKnownMessages, "QueryKnownMessages is null");
+    }
+
+    @Test
+    void getMessage_2() throws Exception {
+
+        // arrange
+        XJmfMessage xJmfExample = new XJmfMessage();
+        xJmfExample.addMessage(new CommandSubmitQueueEntry()
+                .withQueueSubmissionParams(new QueueSubmissionParams()
+                        .withURL(new URI("myUrl.xjdf"))));
+        xJmfExample.addMessage(new QueryKnownMessages());
+        xJmfExample.addMessage(new QueryKnownMessages());
+        xJmfExample.addMessage(new QueryKnownDevices());
+        xJmfExample.addMessage(new QueryKnownDevices());
+
+        byte[] xjmf = xJmfExample.toXml();
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        Throwable t = assertThrows(XJmfMessageException.class, () -> xJmfMessage.getMessage(QueryKnownMessages.class));
+
+        // assert
+        assertEquals("Message 'QueryKnownMessages' is ambiguous.", t.getMessage(), "Error message is wrong");
+    }
+
+    @Test
+    void getMessage_3() throws Exception {
+
+        // arrange
+        XJmfMessage xJmfExample = new XJmfMessage();
+        xJmfExample.addMessage(new CommandSubmitQueueEntry()
+                .withQueueSubmissionParams(new QueueSubmissionParams()
+                        .withURL(new URI("myUrl.xjdf"))));
+
+        byte[] xjmf = xJmfExample.toXml();
+
+        // act
+        XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
+        QueryKnownMessages queryKnownMessages = xJmfMessage.getMessage(QueryKnownMessages.class);
+
+        // assert
+        assertNull(queryKnownMessages, "QueryKnownMessages is not null");
     }
 
     /**
