@@ -1,8 +1,10 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
+import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
+import org.cip4.lib.xjdf.exception.XJmfMessageException;
 import org.cip4.lib.xjdf.schema.Message;
 import org.cip4.lib.xjdf.schema.XJMF;
 import org.cip4.lib.xjdf.util.Headers;
@@ -12,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * This class provides functionality all about XJMF Messages.
@@ -81,6 +84,27 @@ public class XJmfMessage {
         // add message
         this.xjmf.getMessages().add(message);
 
+    }
+
+    /**
+     * Return the typed message in the XJMF body.
+     * @param type The message's type.
+     * @return The typed message.
+     */
+    public <T extends Message> T getMessage(Class<T> type) throws XJmfMessageException {
+
+        // filter messages
+        List<Message> matchingMessages = getMessages().stream()
+                .filter(message -> message.getClass() == type)
+                .collect(Collectors.toList());
+
+        // ambiguity check
+        if (matchingMessages.size() > 1) {
+            throw new XJmfMessageException("Message '" + type.getSimpleName() + "' is ambiguous.");
+        }
+
+        // return result
+        return matchingMessages.size() == 0 ? null : (T) matchingMessages.get(0);
     }
 
     /**
