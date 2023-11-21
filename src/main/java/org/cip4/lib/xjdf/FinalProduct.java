@@ -63,6 +63,22 @@ public class FinalProduct {
     }
 
     /**
+     * Returns the (root) product's amount.
+     * @return The (root) product's amount
+     */
+    public Integer getAmount() {
+        return getProduct().getAmount();
+    }
+
+    /**
+     * Set's the (root) product's amount.
+     * @param amount The amount value to be set.
+     */
+    public void setAmount(Integer amount) {
+        getProduct().setAmount(amount);
+    }
+
+    /**
      * Add intents to the product.
      *
      * @param productIntents The intents to be added.
@@ -130,6 +146,16 @@ public class FinalProduct {
     public <T extends ProductIntent> T getProductIntent(Class<T> productIntentType) {
         Intent intent = getIntent(productIntentType);
         return intent == null ? null : (T) intent.getProductIntent().getValue();
+    }
+
+    public List<Class<?>> getProductIntentTypes() {
+        List<Class<?>> classes = new ArrayList<>();
+
+        for(Intent intent: productParts.get(ROOT_PRODUCT).getIntent()) {
+            classes.add(intent.getProductIntent().getValue().getClass());
+        }
+
+        return classes;
     }
 
     /**
