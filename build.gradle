@@ -1,4 +1,6 @@
 import org.apache.tools.ant.filters.ReplaceTokens
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id 'java-library'
@@ -10,15 +12,7 @@ plugins {
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
-
-if (project.hasProperty('projectVersion')) {
-    version = project.projectVersion
-} else {
-    version = '2.1.x-DEV'
-}
-
-sourceCompatibility = JavaVersion.VERSION_11
-targetCompatibility = JavaVersion.VERSION_11
+version = project.hasProperty('projectVersion') ? project.projectVersion : '2.1.x-DEV'
 
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
@@ -28,6 +22,9 @@ def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd
 java {
     withJavadocJar()
     withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+    }
 }
 
 compileJava.options.encoding = "UTF-8"
@@ -135,38 +132,40 @@ javadoc {
 processResources {
     filesMatching(['**/*.properties']) {
         filter(ReplaceTokens, tokens: [
-                'version'  : project.properties['version'],
-                'buildtime': new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", TimeZone.getTimeZone("GMT"))
+                'name': project.properties['description'],
+                'version': project.properties['version'],
+                'artifactId': project.properties['name'],
+                'timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", TimeZone.getTimeZone("GMT"))
         ])
     }
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:2.13.0'
+    implementation 'commons-io:commons-io:2.15.0'
     implementation 'org.apache.commons:commons-lang3:3.13.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:4.0.3'
-    implementation 'com.sun.xml.bind:jaxb-core:4.0.3'
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.4'
+    implementation 'com.sun.xml.bind:jaxb-core:4.0.4'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    implementation 'org.jetbrains:annotations:24.0.1'
+    implementation 'org.jetbrains:annotations:24.1.0'
     implementation 'org.reflections:reflections:0.10.2'
     implementation 'javax.annotation:javax.annotation-api:1.3.2'
     implementation 'xerces:xercesImpl:2.12.2'
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
-    testImplementation 'org.mockito:mockito-core:5.4.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.1'
+    testImplementation 'org.mockito:mockito-core:5.7.0'
     testImplementation 'org.hamcrest:hamcrest-library:2.2'
-    testImplementation 'org.junit-pioneer:junit-pioneer:2.0.1'
+    testImplementation 'org.junit-pioneer:junit-pioneer:2.2.0'
 
-    xjc 'com.sun.xml.bind:jaxb-core:4.0.3'
-    xjc 'com.sun.xml.bind:jaxb-xjc:4.0.2'
-    xjc 'com.sun.xml.bind:jaxb-impl:4.0.3'
-    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.0'
+    xjc 'com.sun.xml.bind:jaxb-core:4.0.4'
+    xjc 'com.sun.xml.bind:jaxb-xjc:4.0.4'
+    xjc 'com.sun.xml.bind:jaxb-impl:4.0.4'
+    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
 
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
-    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.1.0'
+    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.1.1'
     xjc 'org.patrodyne.jvnet:hisrc-hyperjaxb-annox-plugin:1.1.2'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
@@ -252,3 +251,14 @@ task zipTestPackage(type: Zip) {
 }
 
 processTestResources.dependsOn(zipTestPackage)
+
+tasks.withType(Test) {
+    testLogging {
+        events TestLogEvent.FAILED,
+               TestLogEvent.SKIPPED
+        exceptionFormat TestExceptionFormat.FULL
+        showExceptions true
+        showCauses true
+        showStackTraces true
+    }
+}
