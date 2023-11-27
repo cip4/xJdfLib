@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.XYPair;
 
 /**
@@ -63,7 +64,7 @@ public class Dimensions {
     /**
      * Convert DTP-Points to Millimeter.
      *
-     * @param xyPairDtp XYPair object in DTP-Pointse.
+     * @param xyPairDtp XYPair object in DTP-Points.
      *
      * @return XYPair object value in millimeters.
      */
@@ -71,6 +72,36 @@ public class Dimensions {
         return new XYPair(
                 dtp2Mm(xyPairDtp.getX()),
                 dtp2Mm(xyPairDtp.getY())
+        );
+    }
+
+    /**
+     * Convert Millimeter to DTP-Points.
+     *
+     * @param shapeMm Shape in millimeters.
+     *
+     * @return Shape object in DTP-Points.
+     */
+    public static Shape mm2Dtp(Shape shapeMm) {
+        return new Shape(
+                mm2Dtp(shapeMm.getX()),
+                mm2Dtp(shapeMm.getY()),
+                mm2Dtp(shapeMm.getZ())
+        );
+    }
+
+    /**
+     * Convert DTP-Points to Millimeter.
+     *
+     * @param shapeDtp Shape object in DTP-Points.
+     *
+     * @return Shape object value in millimeters.
+     */
+    public static Shape dtp2Mm(Shape shapeDtp) {
+        return new Shape(
+                dtp2Mm(shapeDtp.getX()),
+                dtp2Mm(shapeDtp.getY()),
+                dtp2Mm(shapeDtp.getZ())
         );
     }
 

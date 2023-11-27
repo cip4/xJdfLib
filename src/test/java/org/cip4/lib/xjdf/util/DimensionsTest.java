@@ -1,6 +1,7 @@
 package org.cip4.lib.xjdf.util;
 
 import org.cip4.lib.xjdf.type.Rectangle;
+import org.cip4.lib.xjdf.type.Shape;
 import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.jupiter.api.Test;
 
@@ -72,6 +73,35 @@ public class DimensionsTest {
 		assertEquals(7.05555f, xyPairMm.getY(), 0.00001, "Y is wrong.");
 	}
 
+	@Test
+	public void mm2Dtp_shape() {
+
+		// arrange
+		Shape shapeMm = new Shape(10, 20, 30);
+
+		// act
+		Shape shapeDtp = Dimensions.mm2Dtp(shapeMm);
+
+		// assert
+		assertEquals(28.34645f, shapeDtp.getX(), 0.00001, "X is wrong.");
+		assertEquals(56.69291f, shapeDtp.getY(), 0.00001, "Y is wrong.");
+		assertEquals(85.03937f, shapeDtp.getZ(), 0.00001, "Z is wrong.");
+	}
+
+	@Test
+	public void dtp2Mm_shape() {
+
+		// arrange
+		Shape shapeDtp = new Shape(10, 20, 30);
+
+		// act
+		Shape shapeMm = Dimensions.dtp2Mm(shapeDtp);
+
+		// assert
+		assertEquals(3.52777f, shapeMm.getX(), 0.00001, "X is wrong.");
+		assertEquals(7.05555f, shapeMm.getY(), 0.00001, "Y is wrong.");
+		assertEquals(10.58333f, shapeMm.getZ(), 0.00001, "Z is wrong.");
+	}
 
 	@Test
 	public void testMm2Dtp() {
