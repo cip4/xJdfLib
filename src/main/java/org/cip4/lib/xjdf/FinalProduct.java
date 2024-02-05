@@ -63,6 +63,22 @@ public class FinalProduct {
     }
 
     /**
+     * Returns the (root) product's descriptive name.
+     * @return The (root) product's descriptive name
+     */
+    public String getDescriptiveName() {
+        return getProduct().getDescriptiveName();
+    }
+
+    /**
+     * Set's the (root) product's descriptive name.
+     * @param descriptiveName The descriptive name to be set.
+     */
+    public void setDescriptiveName(String descriptiveName) {
+        getProduct().setDescriptiveName(descriptiveName);
+    }
+
+    /**
      * Returns the (root) product's amount.
      * @return The (root) product's amount
      */
