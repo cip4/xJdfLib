@@ -29,6 +29,20 @@ public class XJdfDocumentTest {
     }
 
     @Test
+    public void addFinalProduct_0() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        // act
+        xJdfDocument.addFinalProduct(null);
+
+        // assert
+        assertEquals(0, xJdfDocument.getFinalProducts().size(), "Number of final products is wrong");
+
+    }
+
+    @Test
     public void addResourceSet_1() throws Exception {
 
         // arrange
