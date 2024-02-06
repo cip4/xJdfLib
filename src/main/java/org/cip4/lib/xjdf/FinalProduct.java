@@ -155,6 +155,14 @@ public class FinalProduct {
     }
 
     /**
+     * Return list of all intents.
+     * @return the list of intents.
+     */
+    public List<Intent> getIntents() {
+        return getProduct().getIntent();
+    }
+
+    /**
      * Returns a specific product intent.
      * @param productIntentType The type of the product intent.
      * @return The specific product intent.

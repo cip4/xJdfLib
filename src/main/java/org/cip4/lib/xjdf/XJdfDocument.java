@@ -382,6 +382,7 @@ public class XJdfDocument {
      * @param finalProducts The final products to be appended.
      */
     public void addFinalProduct(FinalProduct... finalProducts) {
+        if(finalProducts == null) return;
 
         // create product list if noy present
         if (xjdf.getProductList() == null) {
