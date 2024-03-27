@@ -95,6 +95,22 @@ public class FinalProduct {
     }
 
     /**
+     * Returns the (root) product's id.
+     * @return The (root) product's id
+     */
+    public String getId() {
+        return getProduct().getID();
+    }
+
+    /**
+     * Set's the (root) product's id.
+     * @param id The id to be set.
+     */
+    public void setId(String id) {
+        getProduct().setID(id);
+    }
+
+    /**
      * Add intents to the product.
      *
      * @param productIntents The intents to be added.
