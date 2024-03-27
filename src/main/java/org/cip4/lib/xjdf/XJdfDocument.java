@@ -382,7 +382,7 @@ public class XJdfDocument {
      * @param finalProducts The final products to be appended.
      */
     public void addFinalProduct(FinalProduct... finalProducts) {
-        if(finalProducts == null) return;
+        if (finalProducts == null) return;
 
         // create product list if noy present
         if (xjdf.getProductList() == null) {
@@ -414,6 +414,20 @@ public class XJdfDocument {
         }
 
         return finalProducts;
+    }
+
+    /**
+     * Returns a final products identifierd by its product id.
+     *
+     * @return The final product if exists. Otherwise null.
+     */
+    public FinalProduct getFinalProduct(String id) {
+        return id == null
+                ? null
+                : getFinalProducts().stream()
+                .filter(finalProduct -> Objects.equals(finalProduct.getId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
     /**

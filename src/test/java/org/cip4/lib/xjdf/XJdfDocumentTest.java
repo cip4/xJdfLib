@@ -43,6 +43,69 @@ public class XJdfDocumentTest {
     }
 
     @Test
+    public void getFinalProduct_1() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        FinalProduct finalProduct_1 = new FinalProduct(42, "P1");
+        finalProduct_1.setId("1");
+        xJdfDocument.addFinalProduct(finalProduct_1);
+
+        FinalProduct finalProduct_2 = new FinalProduct(84, "P2");
+        finalProduct_2.setId("2");
+        xJdfDocument.addFinalProduct(finalProduct_2);
+
+        // act
+        FinalProduct finalProduct = xJdfDocument.getFinalProduct("2");
+
+        // assert
+        assertEquals("P2", finalProduct.getDescriptiveName(), "Product is wrong");
+
+    }
+
+    @Test
+    public void getFinalProduct_2() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        FinalProduct finalProduct_1 = new FinalProduct(42, "P1");
+        finalProduct_1.setId("1");
+        xJdfDocument.addFinalProduct(finalProduct_1);
+
+        FinalProduct finalProduct_2 = new FinalProduct(84, "P2");
+        finalProduct_2.setId("2");
+        xJdfDocument.addFinalProduct(finalProduct_2);
+
+        // act
+        FinalProduct finalProduct = xJdfDocument.getFinalProduct("3");
+
+        // assert
+        assertNull(finalProduct, "Product is wrong");
+    }
+
+    @Test
+    public void getFinalProduct_3() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument();
+
+        FinalProduct finalProduct_1 = new FinalProduct(42, "P1");
+        xJdfDocument.addFinalProduct(finalProduct_1);
+
+        FinalProduct finalProduct_2 = new FinalProduct(84, "P2");
+        finalProduct_2.setId("2");
+        xJdfDocument.addFinalProduct(finalProduct_2);
+
+        // act
+        FinalProduct finalProduct = xJdfDocument.getFinalProduct(null);
+
+        // assert
+        assertNull(finalProduct, "Product is wrong");
+    }
+
+    @Test
     public void addResourceSet_1() throws Exception {
 
         // arrange
