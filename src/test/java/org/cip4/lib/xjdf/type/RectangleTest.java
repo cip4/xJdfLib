@@ -182,4 +182,16 @@ public class RectangleTest {
 		Rectangle r = new Rectangle(1,2,4,8);
 		assertEquals(new XYPair(4,8), r.getUpperRight(),  "Size is wrong.");
 	}
+
+	@Test
+	public void testLowerRight() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(new XYPair(4,2), r.getLowerRight(),  "Size is wrong.");
+	}
+
+	@Test
+	public void testUpperLeft() {
+		Rectangle r = new Rectangle(1,2,4,8);
+		assertEquals(new XYPair(1,8), r.getUpperLeft(),  "Size is wrong.");
+	}
 }
