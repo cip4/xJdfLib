@@ -149,11 +149,27 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Returns the lower right point as XYPair.
+     * @return lower right as XYPair object.
+     */
+    public XYPair getLowerRight() {
+        return new XYPair(urx, lly);
+    }
+
+    /**
      * Returns the upper right point as XYPair.
      * @return upper right as XYPair object.
      */
     public XYPair getUpperRight() {
         return new XYPair(urx, ury);
+    }
+
+    /**
+     * Returns the upper left point as XYPair.
+     * @return upper left as XYPair object.
+     */
+    public XYPair getUpperLeft() {
+        return new XYPair(llx, ury);
     }
 
     /**
