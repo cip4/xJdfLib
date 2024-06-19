@@ -496,6 +496,10 @@ public class XJdfDocument {
      */
     public void addResourceSet(ResourceSet resourceSet) {
 
+        if(resourceSet == null) {
+            return;
+        }
+
         // add to document
         xjdf.getResourceSet().add(resourceSet);
 
