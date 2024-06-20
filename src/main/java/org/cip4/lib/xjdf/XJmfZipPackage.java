@@ -48,7 +48,7 @@ public class XJmfZipPackage {
     }
 
     /**
-     * Custom constructor. <br />
+     * Custom constructor.
      * Accepting a root XJMF and a map of XJDF Documents for initializing.
      *
      * @param rootJmf The root xjmf message.
@@ -59,7 +59,7 @@ public class XJmfZipPackage {
     }
 
     /**
-     * Custom constructor. <br />
+     * Custom constructor.
      * Accepting a root XJMF and a map of XJDF Documents for initializing.
      *
      * @param rootJmf The root xjmf message.
@@ -71,7 +71,7 @@ public class XJmfZipPackage {
     }
 
     /**
-     * Custom constructor. <br />
+     * Custom constructor.
      * Accepting a root XJMF and a map of XJDF Documents for initializing.
      *
      * @param rootJmf The root xjmf message.
@@ -96,7 +96,7 @@ public class XJmfZipPackage {
     }
 
     /**
-     * Custom constructor. <br />
+     * Custom constructor.
      * Accepting a zip archive for initializing.
      */
     public XJmfZipPackage(byte[] zipArchive) throws IOException, URISyntaxException {

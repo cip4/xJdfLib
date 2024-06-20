@@ -45,7 +45,7 @@ class XJmfMessageTest {
         // assert
         byte[] result = xJmfMessage.toXml();
         System.out.println(new String(result));
-        Assertions.assertEquals(Version.V2_1, xJmfMessage.getXJmf().getVersion());
+        Assertions.assertEquals(Version.V2_2, xJmfMessage.getXJmf().getVersion());
 
         Header xjmfHeader = xJmfMessage.getXJmf().getHeader();
         Assertions.assertEquals("MY_AGENT", xjmfHeader.getAgentName());

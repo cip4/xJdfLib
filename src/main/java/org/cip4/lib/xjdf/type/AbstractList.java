@@ -25,6 +25,8 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 
     /**
      * Custom constructor. Accepting a variable number of integers.
+     *
+     * @param values List of values.
      */
     public AbstractList(T... values) {
 
@@ -38,6 +40,8 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 
     /**
      * Custom constructor, accepting a list object for initializing.
+     *
+     * @param list List of elements.
      */
     public AbstractList(List<T> list) {
 
@@ -47,6 +51,8 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
 
     /**
      * Custom constructor, accepting a String object for initializing.
+     *
+     * @param value A single String value.
      */
     public AbstractList(String value) {
 

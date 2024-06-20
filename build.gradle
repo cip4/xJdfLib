@@ -12,12 +12,12 @@ plugins {
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '2.1.x-DEV'
+version = project.hasProperty('projectVersion') ? project.projectVersion : '2.2.x-DEV'
 
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd')
+def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_2.xsd')
 
 java {
     withJavadocJar()
@@ -88,7 +88,7 @@ publishing {
 }
 
 task updateSchema() {
-    def schemes = ["jdfschema_2_0", "jdfschema_2_1"]
+    def schemes = ["jdfschema_2_0", "jdfschema_2_1", "jdfschema_2_2", "jdfschema_2_x"]
 
     schemes.forEach { schemaName ->
         println "Update ${schemaName} from https://schema.cip4.org..."

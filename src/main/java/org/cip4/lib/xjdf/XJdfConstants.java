@@ -28,7 +28,7 @@ public class XJdfConstants {
     /**
      * Returns the current XJDF Version
      */
-    public static final Version XJDF_CURRENT_VERSION = Version.V2_1;
+    public static final Version XJDF_CURRENT_VERSION = Version.V2_2;
 
     /**
      * Returns the current XJDF Version
@@ -82,6 +82,15 @@ public class XJdfConstants {
             xsdMap.put(
                     Version.V2_1,
                     XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd"
+                    ).readAllBytes());
+        } catch (Exception e) {
+            throw new RuntimeException("Error loading XJDF Schema 2.1", e);
+        }
+
+        try{
+            xsdMap.put(
+                    Version.V2_2,
+                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_2.xsd"
                     ).readAllBytes());
         } catch (Exception e) {
             throw new RuntimeException("Error loading XJDF Schema 2.1", e);

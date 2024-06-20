@@ -20,7 +20,7 @@ public class URI extends AbstractXJdfType<String, URI> {
     }
 
     /**
-     * Custom Constructor. <br />
+     * Custom Constructor.
      * Using this constructor will not package the file.
      *
      * @param uri The uri of the file.
@@ -30,7 +30,7 @@ public class URI extends AbstractXJdfType<String, URI> {
     }
 
     /**
-     * Custom Constructor. <br />
+     * Custom Constructor.
      * Using this constructor will not package the file.
      *
      * @param uri Source uri of the file.
