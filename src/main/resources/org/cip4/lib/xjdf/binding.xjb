@@ -6,7 +6,7 @@
           xmlns:xjdf="http://www.CIP4.org/JDFSchema_2_0"
           xmlns:ci="http://jaxb.dev.java.net/plugin/code-injector"
           xmlns:annox="http://annox.dev.java.net"
-          schemaLocation="./schema/jdfschema_2_1.xsd">
+          schemaLocation="./schema/jdfschema_2_x.xsd">
 
     <xjb:globalBindings typesafeEnumMemberName="generateError">
         <xjc:serializable/>
@@ -298,6 +298,13 @@
     <xjb:bindings node="//xs:simpleType[@name='Version']//xs:enumeration[@value='2.1']">
         <xjb:typesafeEnumMember name="V2_1"/>
     </xjb:bindings>
+     <xjb:bindings node="//xs:simpleType[@name='Version']//xs:enumeration[@value='2.2']">
+         <xjb:typesafeEnumMember name="V2_2"/>
+     </xjb:bindings>
+     <xjb:bindings node="//xs:simpleType[@name='Version']//xs:enumeration[@value='2.3']">
+         <xjb:typesafeEnumMember name="V2_3"/>
+     </xjb:bindings>
+
 
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.1']">
         <xjb:typesafeEnumMember name="V1_1"/>
@@ -320,11 +327,20 @@
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.7']">
         <xjb:typesafeEnumMember name="V1_7"/>
     </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='1.8']">
+        <xjb:typesafeEnumMember name="V1_8"/>
+    </xjb:bindings>
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.0']">
         <xjb:typesafeEnumMember name="V2_0"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.1']">
         <xjb:typesafeEnumMember name="V2_1"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.2']">
+        <xjb:typesafeEnumMember name="V2_2"/>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:attribute[@name='JDFVersions']//xs:enumeration[@value='2.3']">
+        <xjb:typesafeEnumMember name="V2_3"/>
     </xjb:bindings>
 
     <xjb:bindings node="//xs:element[@name='GangCmdFilter']//xs:attribute[@name='Policy']/xs:simpleType">
@@ -766,7 +782,9 @@
     <xjb:bindings node="//xs:element[@name='Patch']//xs:attribute[@name='PatchUsage']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PatchUsage"/>
     </xjb:bindings>
-
+    <xjb:bindings node="//xs:element[@name='Patch']//xs:attribute[@name='SpotType']//xs:simpleType[xs:restriction]">
+        <xjb:typesafeEnumClass name="SpotType"/>
+    </xjb:bindings>
 
     <xjb:bindings node="//xs:complexType[@name='QualityControlParams']//xs:attribute[@name='QualityBase']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="QualityBase"/>
@@ -1041,6 +1059,9 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='SheetOptimizingParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SheetOptimizingParams")</annox:annotate>
+    </xjb:bindings>
+    <xjb:bindings node="//xs:complexType[@name='SheetOptimizingReport']">
+        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SheetOptimizingReport")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='CommandStopPersistentChannel']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandStopPersistentChannel")</annox:annotate>

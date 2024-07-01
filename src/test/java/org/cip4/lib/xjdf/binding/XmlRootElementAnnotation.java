@@ -28,7 +28,7 @@ public class XmlRootElementAnnotation {
     public void attributesOfTypeIdrefAreBoundToDatatype(String substitute) throws Exception {
         String xPath = String.format("//xjb:bindings[@node=\"//xs:complexType[@name='%s']\"]/annox:annotate", substitute);
         NodeList annoxNodes = bindingReader.evaluateNodeList(xPath);
-        assertEquals(1, annoxNodes.getLength(), "annotation not present");
+        assertEquals(1, annoxNodes.getLength(), "annotation not present for " + substitute);
         Node annox = annoxNodes.item(0);
         assertEquals(
             String.format("@jakarta.xml.bind.annotation.XmlRootElement(name = \"%s\")", substitute),

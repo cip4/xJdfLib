@@ -133,6 +133,14 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Returns the DateTime value as epoch millis.
+     * @return The DateTime value as epoch millis.
+     */
+    public final long toEpochMillis() {
+        return getZonedDateTime().toInstant().toEpochMilli();
+    }
+
+    /**
      * Returns the zoned date time object representing the date times value.
      *
      * @return The ZonedDateTime object.
