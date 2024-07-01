@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    XJDF Schema 2.x.76-SNAPSHOT-be8db3f (2024-05-03 17:34:17Z)
+    XJDF Schema 2.x.78-SNAPSHOT-d007aec (2024-07-01 07:53:38Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -13,7 +13,7 @@
     Copyright (c) 2001-2024. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/main/LICENSE.md
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.76-SNAPSHOT-be8db3f">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.78-SNAPSHOT-d007aec">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -88,6 +88,7 @@
 			<xs:enumeration value="2.0"/>
 			<xs:enumeration value="2.1"/>
 			<xs:enumeration value="2.2"/>
+			<xs:enumeration value="2.3"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="sRGBColor">
@@ -1622,6 +1623,7 @@
 									<xs:enumeration value="2.0"/>
 									<xs:enumeration value="2.1"/>
 									<xs:enumeration value="2.2"/>
+									<xs:enumeration value="2.3"/>
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:list>
@@ -2122,6 +2124,7 @@
 		<xs:complexType>
 			<xs:attribute name="BinderySignatureID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="BlockName" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="BundleItemName" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ContactType" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="DocIndex" type="IntegerRange" use="optional"/>
 			<xs:attribute name="DropID" type="xs:NMTOKEN" use="optional"/>

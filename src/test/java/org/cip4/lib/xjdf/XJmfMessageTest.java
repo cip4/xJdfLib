@@ -1,6 +1,5 @@
 package org.cip4.lib.xjdf;
 
-import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJmfMessageException;
 import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
 import org.cip4.lib.xjdf.schema.Header;
@@ -45,7 +44,7 @@ class XJmfMessageTest {
         // assert
         byte[] result = xJmfMessage.toXml();
         System.out.println(new String(result));
-        Assertions.assertEquals(Version.V2_2, xJmfMessage.getXJmf().getVersion());
+        Assertions.assertEquals(Version.V2_3, xJmfMessage.getXJmf().getVersion());
 
         Header xjmfHeader = xJmfMessage.getXJmf().getHeader();
         Assertions.assertEquals("MY_AGENT", xjmfHeader.getAgentName());

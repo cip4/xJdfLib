@@ -12,12 +12,12 @@ plugins {
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '2.2.x-DEV'
+version = project.hasProperty('projectVersion') ? project.projectVersion : '2.3.x-DEV'
 
 def generatedFiles = file("src/generated")
 def generatedSources = file("${generatedFiles}/java")
 def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_2.xsd')
+def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd')
 
 java {
     withJavadocJar()
