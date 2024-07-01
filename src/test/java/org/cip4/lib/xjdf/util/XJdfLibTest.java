@@ -16,7 +16,7 @@ class XJdfLibTest {
         String version = XJdfLib.VERSION;
 
         // assert
-        assertTrue(version.startsWith(XJdfConstants.XJDF_CURRENT_VERSION.value()), String.format("Version '%s' does not start with '%s'.", version, XJdfConstants.XJDF_CURRENT_VERSION.value()));
+        assertTrue(version.startsWith(XJdfConstants.XJDF_CURRENT_VERSION.value()), String.format("The version '%s' does not start with '%s'.", version, XJdfConstants.XJDF_CURRENT_VERSION.value()));
     }
 
     @Test
