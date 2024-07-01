@@ -165,7 +165,7 @@ dependencies {
     xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
 
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
-    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.1.1'
+    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.2.1'
     xjc 'org.patrodyne.jvnet:hisrc-hyperjaxb-annox-plugin:1.1.2'
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
