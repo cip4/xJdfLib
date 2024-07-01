@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    XJDF Schema 2.x.78-SNAPSHOT-d007aec (2024-07-01 07:53:38Z)
+    XJDF Schema 2.x.79-SNAPSHOT-8b3587c (2024-07-01 11:39:41Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -13,7 +13,7 @@
     Copyright (c) 2001-2024. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/main/LICENSE.md
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.78-SNAPSHOT-d007aec">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.79-SNAPSHOT-8b3587c">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -1455,6 +1455,7 @@
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="BundleItem"/>
 			</xs:sequence>
 			<xs:attribute name="Amount" type="xs:int" use="required"/>
+			<xs:attribute name="BundleItemName" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="BundleType" type="BundleType" use="optional"/>
 			<xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
 			<xs:attribute name="TotalAmount" type="xs:int" use="optional"/>
