@@ -769,26 +769,26 @@ public class XJdfDocument {
      * Returns the generic resources of a resource set for a given specific resource by part keys.
      *
      * @param resourceType the specific resource.
-     * @param partKeys     The list of partition keys.
+     * @param part         The given Partition Keys used to identify a particular Resource
      * @return List of resources of the resource set matching the part keys.
      */
-    public List<Resource> getResources(Class<? extends SpecificResource> resourceType, String... partKeys) throws XJdfDocumentException {
+    public List<Resource> getResources(Class<? extends SpecificResource> resourceType, Part part) throws XJdfDocumentException {
         ResourceSet resourceSet = getResourceSet(resourceType);
-        return getResources(resourceSet, partKeys);
+        return getResources(resourceSet, part);
     }
 
     /**
      * Returns the generic resources of a given resource set by part keys.
      *
      * @param resourceSet the given resource set.
-     * @param partKeys    The list of partition keys.
+     * @param part         The given Partition Keys used to identify a particular Resource
      * @return List of resources of the resource set matching the part keys.
      */
-    public List<Resource> getResources(ResourceSet resourceSet, String... partKeys) {
+    public List<Resource> getResources(ResourceSet resourceSet, Part part) {
         List<Resource> result = null;
 
         if (resourceSet != null) {
-            result = Partitions.getResourcesByPartKeys(resourceSet, partKeys);
+            result = Partitions.getResourcesByPart(resourceSet, part);
         }
 
         return result;
@@ -927,23 +927,23 @@ public class XJdfDocument {
      * Returns the specific resources of a resource set for given partition keys
      *
      * @param resourceType the specific resource.
-     * @param partKeys     The given partition keys
+     * @param part     The given partition
      * @return List of resources of the resource set.
      */
-    public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType, String... partKeys) throws XJdfDocumentException {
+    public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType, Part part) throws XJdfDocumentException {
         ResourceSet resourceSet = getResourceSet(resourceType);
-        return getSpecificResources(resourceSet, partKeys);
+        return getSpecificResources(resourceSet, part);
     }
 
     /**
      * Returns the specific resources of a resource set for given partition keys
      *
      * @param resourceSet the resource set.
-     * @param partKeys    The given partition keys
+     * @param part    The given partition
      * @return List of resources of the resource set.
      */
-    public <T extends SpecificResource> List<T> getSpecificResources(ResourceSet resourceSet, String... partKeys) {
-        List<Resource> resources = getResources(resourceSet, partKeys);
+    public <T extends SpecificResource> List<T> getSpecificResources(ResourceSet resourceSet, Part part) {
+        List<Resource> resources = getResources(resourceSet, part);
 
         if (resources == null) {
             return null;

@@ -305,21 +305,6 @@ public class XJdfDocumentTest {
     }
 
     @Test
-    public void getResources_0() throws Exception {
-
-        // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
-        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
-
-        // act
-        List<Resource> resources = xJdfDocument.getResources(BinderySignature.class, "BinderySignatureID");
-
-        // assert
-        assertNotNull(resources, "Resources are null.");
-        assertEquals(3, resources.size(), "Number of resources is wrong.");
-    }
-
-    @Test
     public void getResources_1() throws Exception {
 
         // arrange
@@ -555,20 +540,6 @@ public class XJdfDocumentTest {
 
         // assert
         assertNull(runList, "RunList is not null.");
-    }
-
-    @Test
-    public void getSpecificResource_1() throws Exception {
-
-        // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
-        XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
-
-        // act
-        Throwable t = assertThrows(XJdfDocumentException.class, () -> xJdfDocument.getSpecificResources(Component.class));
-
-        // assert
-        assertEquals("ResourceSet 'Component' is ambiguous.", t.getMessage(), "Exception message is wrong.");
     }
 
     @Test
