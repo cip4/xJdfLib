@@ -131,8 +131,8 @@ public class IdentifiersTest {
         Throwable t = assertThrows(XJdfValidationException.class, xJdfDocument::toXml);
 
         // assert
-        String expectedMessage = "Validation of the document's semantic failed due to following error messages: \n" +
-                "ERROR in XJDF Doc at line 13, column 29: cvc-id.2: There are multiple occurrences of ID value 'ID_1'.\n" +
+        String expectedMessage = "Validation of the document's semantic failed due to following error messages: " + System.lineSeparator() +
+                "ERROR in XJDF Doc at line 13, column 29: cvc-id.2: There are multiple occurrences of ID value 'ID_1'." + System.lineSeparator() +
                 "ERROR in XJDF Doc at line 13, column 29: cvc-attribute.3: The value 'ID_1' of attribute 'ID' on element 'Resource' is not valid with respect to its type, 'ID'.";
 
         assertEquals(expectedMessage, t.getMessage(), "Error message is wrong.");
