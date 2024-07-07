@@ -643,7 +643,7 @@ public class XJdfDocument {
     public Resource addResource(ResourceSet resourceSet, Resource resource) {
 
         // resource type validation
-        if (!Objects.equals(resourceSet.getName(), resource.getSpecificResource().getClass().getSimpleName())) {
+        if (!Objects.equals(resourceSet.getName(), resource.getSpecificResource().getValue().getClass().getSimpleName())) {
             throw new IllegalArgumentException("Resource type does not match ResourceSet type.");
         }
 
