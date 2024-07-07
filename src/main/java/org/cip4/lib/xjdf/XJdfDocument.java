@@ -629,6 +629,25 @@ public class XJdfDocument {
         }
 
         resource.setSpecificResource(specificResourceJaxB);
+
+        // add and return resource
+        return addResource(resourceSet, resource);
+    }
+
+    /**
+     * Add a resource to a given resource set.
+     * @param resourceSet The given resource set.
+     * @param resource The resource to be added.
+     * @return The resource.
+     */
+    public Resource addResource(ResourceSet resourceSet, Resource resource) {
+
+        // resource type validation
+        if (!Objects.equals(resourceSet.getName(), resource.getSpecificResource().getValue().getClass().getSimpleName())) {
+            throw new IllegalArgumentException("Resource type does not match ResourceSet type.");
+        }
+
+        // add resource
         resourceSet.getResource().add(resource);
 
         // return resource
