@@ -70,6 +70,11 @@ public final class Partitions {
 
     public static Resource getResourceByPart(final ResourceSet resourceSet, final Part part) {
         List<Resource> resources = getResourcesByPart(resourceSet, part);
+
+        if(resources.size() > 1) {
+            throw new IllegalArgumentException("Multiple resources have been found matching this part object.");
+        }
+
         return resources.isEmpty() ? null : resources.get(0);
     }
 
