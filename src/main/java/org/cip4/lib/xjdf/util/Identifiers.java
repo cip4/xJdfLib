@@ -9,7 +9,7 @@ public class Identifiers {
 
     private final static String DEFAULT_PREFIX = "ID";
 
-    private final static int ID_LENGTH = 12;
+    private final static int ID_LENGTH = 15;
 
     /**
      * Private constructor for utility class.

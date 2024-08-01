@@ -904,18 +904,18 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns a resource found by id.
+     * Returns a resource found by its unique identifier (ID or ExternalID).
      *
-     * @param resourceId The resource's unique identifier.
+     * @param id The resource's unique identifier (ID or ExternalID).
      * @return The resource object.
      */
-    public Resource getResource(String resourceId) {
+    public Resource getResource(String id) {
         List<Resource> matchingResources = new ArrayList<>();
 
         // find matching resources
-        this.xjdf.getResourceSet().stream().forEach(resourceSet -> resourceSet.getResource()
+        this.xjdf.getResourceSet().forEach(resourceSet -> resourceSet.getResource()
                 .forEach(resource -> {
-                    if (Objects.equals(resource.getID(), resourceId)) {
+                    if (Objects.equals(resource.getID(), id) || Objects.equals(resource.getExternalID(), id)) {
                         matchingResources.add(resource);
                     }
                 })

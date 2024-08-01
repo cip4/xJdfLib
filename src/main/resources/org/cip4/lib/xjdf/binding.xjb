@@ -500,7 +500,7 @@
     <xjb:bindings node="//xs:element[@name='ShapeCut']//xs:attribute[@name='CutDepth']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="CutDepth"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='Shape']//xs:attribute[@name='ShapeType']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='Shape']//xs:attribute[@name='ShapeType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ShapeType"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ApprovalDetails']//xs:attribute[@name='ApprovalState']//xs:simpleType[xs:restriction]">
@@ -605,10 +605,10 @@
     <xjb:bindings node="//xs:complexType[@name='Media']//xs:attribute[@name='PlateTechnology']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="PlateTechnology"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']//xs:attribute[@name='BearerBars']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='BarcodeReproParams']//xs:attribute[@name='BearerBars']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="BearerBars"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']//xs:attribute[@name='Masking']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='BarcodeReproParams']//xs:attribute[@name='Masking']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Masking"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='PreviewGenerationParams']//xs:attribute[@name='AspectRatio']//xs:simpleType[xs:restriction]">
@@ -671,7 +671,7 @@
     <xjb:bindings node="//xs:complexType[@name='StrappingParams']//xs:attribute[@name='StrappingType']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="StrappingType"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BarcodeCompParams']//xs:attribute[@name='CompensationProcess']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='BarcodeCompParams']//xs:attribute[@name='CompensationProcess']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="CompensationProcess"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='DCTParams']//xs:attribute[@name='ColorTransform']//xs:simpleType[xs:restriction]">
@@ -698,7 +698,7 @@
     <xjb:bindings node="//xs:element[@name='JPEG2000Params']//xs:attribute[@name='ProgressionOrder']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ProgressionOrder"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='RegisterMark']//xs:attribute[@name='MarkUsage']//xs:simpleType[xs:restriction]">
+    <xjb:bindings node="//xs:element[@name='RegisterMark']//xs:attribute[@name='MarkUsage']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="MarkUsage"/>
     </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='RepeatDesc']//xs:attribute[@name='AllowedRotate']//xs:simpleType[xs:restriction]">
@@ -937,7 +937,7 @@
     <xjb:bindings node="//xs:complexType[@name='QueryNotification']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "QueryNotification")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='Shape']">
+    <xjb:bindings node="//xs:element[@name='Shape']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Shape")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ResponseReturnQueueEntry']">
@@ -1018,7 +1018,7 @@
     <xjb:bindings node="//xs:complexType[@name='ThreadSealingParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ThreadSealingParams")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BarcodeCompParams']">
+    <xjb:bindings node="//xs:element[@name='BarcodeCompParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BarcodeCompParams")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='BundlingParams']">
@@ -1195,7 +1195,7 @@
     <xjb:bindings node="//xs:complexType[@name='PalletizingParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PalletizingParams")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='BarcodeReproParams']">
+    <xjb:bindings node="//xs:element[@name='BarcodeReproParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "BarcodeReproParams")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ResponseShutDown']">
@@ -1204,7 +1204,7 @@
     <xjb:bindings node="//xs:complexType[@name='Pallet']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "Pallet")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='RegisterMark']">
+    <xjb:bindings node="//xs:element[@name='RegisterMark']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "RegisterMark")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='SpineTapingParams']">
@@ -1249,7 +1249,7 @@
     <xjb:bindings node="//xs:complexType[@name='HeadBandApplicationParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "HeadBandApplicationParams")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='ScavengerArea']">
+    <xjb:bindings node="//xs:element[@name='ScavengerArea']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ScavengerArea")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ResponseNotification']">
