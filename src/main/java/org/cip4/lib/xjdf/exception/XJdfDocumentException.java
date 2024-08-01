@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.exception;
 /**
  * Exception related to the XJDF Document processing.
  */
-public class XJdfDocumentException extends Exception {
+public class XJdfDocumentException extends RuntimeException {
 
     /**
      * Constructor.
