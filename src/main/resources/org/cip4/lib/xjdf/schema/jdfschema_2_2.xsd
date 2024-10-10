@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    XJDF Schema 2.2.26-be28798 (2024-07-26 14:50:48Z)
+    XJDF Schema 2.2.31-75fad4f (2024-08-07 17:36:16Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -13,7 +13,7 @@
     Copyright (c) 2001-2024. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/release/JDF_2.2/LICENSE.md
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.2.26-be28798">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.2.31-75fad4f">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -2307,15 +2307,12 @@
 			</xs:complexContent>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="ScavengerArea" substitutionGroup="SpecificResource" type="ScavengerArea"/>
+	<xs:element name="ScavengerArea" type="ScavengerArea"/>
 	<xs:complexType name="ScavengerArea">
-		<xs:complexContent>
-			<xs:extension base="SpecificResource">
-				<xs:attribute name="Center" type="XYPair" use="required"/>
-				<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
-				<xs:attribute name="Size" type="XYPair" use="optional"/>
-			</xs:extension>
-		</xs:complexContent>
+		<xs:attribute name="Center" type="XYPair" use="required"/>
+		<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
+		<xs:attribute name="Size" type="XYPair" use="optional"/>
+		<xs:anyAttribute namespace="##other" processContents="lax"/>
 	</xs:complexType>
 	<xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
 	<xs:complexType name="ShapeCuttingParams">
@@ -3045,12 +3042,6 @@
 					<xs:element maxOccurs="unbounded" minOccurs="1" ref="ShapeCut"/>
 				</xs:sequence>
 			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
-	<xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-	<xs:complexType name="SizeIntent">
-		<xs:complexContent>
-			<xs:extension base="ProductIntent"/>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:element name="Address">
