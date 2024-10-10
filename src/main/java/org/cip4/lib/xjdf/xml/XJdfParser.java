@@ -107,6 +107,7 @@ public class XJdfParser<T> {
             Marshaller m = createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.setProperty(Marshaller.JAXB_ENCODING, CHARSET.name());
+            m.setProperty(Marshaller.JAXB_SCHEMA_LOCATION, XJdfConstants.NAMESPACE_JDF20 + " " + XJdfConstants.XJDF_SCHEMA_LOCATION);
             m.setProperty("org.glassfish.jaxb.xmlHeaders", getXmlHeader());
 
             OutputStreamWriter writer = new OutputStreamWriter(outputStream, CHARSET);

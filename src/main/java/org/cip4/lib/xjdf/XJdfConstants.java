@@ -31,6 +31,11 @@ public class XJdfConstants {
     public static final Version XJDF_CURRENT_VERSION = Version.V2_3;
 
     /**
+     * Returns the current XJDF Schema location
+     */
+    public static final String XJDF_SCHEMA_LOCATION = "https://schema.cip4.org/jdfschema_2_x/xjdf.xsd";
+
+    /**
      * Returns the current XJDF Version
      */
     public static final byte[] XJDF_XSD_BYTES_CURRENT = XJDF_XSD_BYTES.get(XJDF_CURRENT_VERSION);
