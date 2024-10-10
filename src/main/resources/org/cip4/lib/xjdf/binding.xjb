@@ -1165,9 +1165,6 @@
     <xjb:bindings node="//xs:complexType[@name='ResponseKnownSubscriptions']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ResponseKnownSubscriptions")</annox:annotate>
     </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='SizeIntent']">
-        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "SizeIntent")</annox:annotate>
-    </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='CommandResubmitQueueEntry']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CommandResubmitQueueEntry")</annox:annotate>
     </xjb:bindings>
