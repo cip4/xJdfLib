@@ -108,6 +108,25 @@ public class XJdfDocument {
         return getXJdf().getDescriptiveName();
     }
 
+
+    /**
+     * Sets the documents related job id.
+     *
+     * @param relatedJobID The documents  related job id.
+     */
+    public void setRelatedJobID(String relatedJobID) {
+        getXJdf().setRelatedJobID(relatedJobID);
+    }
+
+    /**
+     * Getter of the related job id.
+     *
+     * @return The related job id.
+     */
+    public String getRelatedJobID() {
+        return getXJdf().getRelatedJobID();
+    }
+
     /**
      * Sets the documents job id.
      *

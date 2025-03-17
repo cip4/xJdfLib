@@ -23,7 +23,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -170,6 +170,10 @@ dependencies {
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
 
+tasks.named('sourcesJar') {
+    dependsOn(':xjc')
+}
+
 task xjc() {
     def bindings = file('src/main/resources/org/cip4/lib/xjdf/binding.xjb')
     inputs.files(schema, bindings)
@@ -246,8 +250,8 @@ task zipTestPackage(type: Zip) {
     from 'src/test/resources/org/cip4/lib/xjdf/testPackage'
     include '*'
     include '*/*'
-    archiveName 'testPackage.zip'
-    destinationDir(file("$buildDir/resources/test/org/cip4/lib/xjdf"))
+    archiveFileName = 'testPackage.zip'
+    destinationDirectory = file("$buildDir/resources/test/org/cip4/lib/xjdf/")
 }
 
 processTestResources.dependsOn(zipTestPackage)

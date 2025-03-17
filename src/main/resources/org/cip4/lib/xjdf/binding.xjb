@@ -722,12 +722,6 @@
     <xjb:bindings node="//xs:element[@name='MessageService']//xs:attribute[@name='ResponseModes']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="ResponseModes"/>
     </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='CoilBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Material"/>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:element[@name='CombBinding']//xs:attribute[@name='Material']//xs:simpleType[xs:restriction]">
-        <xjb:typesafeEnumClass name="Material"/>
-    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='ModifyQueueEntryParams']//xs:attribute[@name='Operation']//xs:simpleType[xs:restriction]">
         <xjb:typesafeEnumClass name="Operation"/>
     </xjb:bindings>
@@ -819,9 +813,6 @@
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='CreasingParams']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "CreasingParams")</annox:annotate>
-    </xjb:bindings>
-    <xjb:bindings node="//xs:complexType[@name='PackingParams']">
-        <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "PackingParams")</annox:annotate>
     </xjb:bindings>
     <xjb:bindings node="//xs:complexType[@name='ColorantControl']">
         <annox:annotate>@jakarta.xml.bind.annotation.XmlRootElement(name = "ColorantControl")</annox:annotate>
