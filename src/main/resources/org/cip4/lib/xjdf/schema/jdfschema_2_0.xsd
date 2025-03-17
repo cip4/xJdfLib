@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-    XJDF Schema 2.0.17-fda9dbe (2021-12-28 19:16:03Z)
+    XJDF Schema 2.0.44-f76e1d9 (2025-02-24 21:54:54Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -8,7 +8,7 @@
     Published on: https://schema.cip4.org
     Issue Tracking: https://jira.cip4.org/projects/JDF
     
-    Copyright (c) 2001-2021. All rights reserved.
+    Copyright (c) 2001-2025. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/release/JDF_2.0/LICENSE.md
 -->
 <xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0"
@@ -16,7 +16,7 @@
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            elementFormDefault="qualified"
            attributeFormDefault="unqualified"
-           version="2.0.17-fda9dbe">
+           version="2.0.44-f76e1d9">
            
     <xs:simpleType name="language">
         <xs:restriction base="xs:string"/>
@@ -1209,8 +1209,8 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="Signal" substitutionGroup="Message" type="Signal"/>
-    <xs:complexType name="Signal">
+    <xs:element abstract="true" name="Signal" substitutionGroup="Message" type="Signal"/>
+    <xs:complexType abstract="true"  name="Signal">
         <xs:complexContent>
             <xs:extension base="Message">
                 <xs:attribute name="ChannelMode" type="EnumChannelMode" use="optional"/>
@@ -2467,16 +2467,13 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="ScavengerArea" substitutionGroup="SpecificResource" type="ScavengerArea"/>
-    <xs:complexType name="ScavengerArea">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource">
-                <xs:attribute name="Center" type="XYPair" use="required"/>
-                <xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
-                <xs:attribute name="Size" type="XYPair" use="optional"/>
-            </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
+ 	<xs:element name="ScavengerArea" type="ScavengerArea"/>
+	<xs:complexType name="ScavengerArea">
+		<xs:attribute name="Center" type="XYPair" use="required"/>
+		<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
+		<xs:attribute name="Size" type="XYPair" use="optional"/>
+		<xs:anyAttribute namespace="##other" processContents="lax"/>
+	</xs:complexType>
 
     <xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
     <xs:complexType name="ShapeCuttingParams">
@@ -2718,7 +2715,7 @@
         </xs:complexContent>
     </xs:complexType>
 
-    <xs:element name="VerificationResult" substitutionGroup="SpecificResource" type="VerificationParams"/>
+    <xs:element name="VerificationResult" substitutionGroup="SpecificResource" type="VerificationResult"/>
     <xs:complexType name="VerificationResult">
         <xs:complexContent>
             <xs:extension base="SpecificResource">
@@ -3244,13 +3241,6 @@
                     <xs:element maxOccurs="unbounded" minOccurs="1" ref="ShapeCut"/>
                 </xs:sequence>
             </xs:extension>
-        </xs:complexContent>
-    </xs:complexType>
-
-    <xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-    <xs:complexType name="SizeIntent">
-        <xs:complexContent>
-            <xs:extension base="ProductIntent"/>
         </xs:complexContent>
     </xs:complexType>
 
@@ -4829,12 +4819,6 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="PackingParams" substitutionGroup="SpecificResource" type="PackingParams"/>
-    <xs:complexType name="PackingParams">
-        <xs:complexContent>
-            <xs:extension base="SpecificResource"/>
-        </xs:complexContent>
-    </xs:complexType>
 
     <xs:element name="PDFXParams">
         <xs:complexType>
