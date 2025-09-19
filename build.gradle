@@ -76,9 +76,7 @@ publishing {
     repositories {
         maven {
             name = "sonatype"
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            url = uri("https://central.sonatype.com/api/v1/publisher/")
 
             credentials {
                 username ossrhUsername
@@ -103,8 +101,8 @@ task updateSchema() {
 nexusPublishing {
     repositories {
         sonatype { // The name here must match the repository name in the publishing block
-            nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
-            snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+            nexusUrl = uri("https://central.sonatype.com/api/v1/")
+            snapshotRepositoryUrl = uri("https://central.sonatype.com/api/v1/publisher/")
             username = ossrhUsername
             password = ossrhPassword
             stagingProfileId = '105e2b532689c6' // This can often be omitted if your packageGroup is unique
