@@ -76,7 +76,7 @@ publishing {
     repositories {
         maven {
             name = "sonatype"
-            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2"
+            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
             def snapshotsRepoUrl = "https://ossrh-staging-api.central.sonatype.com/content/repositories/snapshots"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
@@ -102,10 +102,7 @@ task updateSchema() {
 
 nexusPublishing {
     repositories {
-        sonatype()
-    }
-    repositories {
-        sonatype { // The name here must match the repository name in the publishing block
+        sonatype {
             nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
             snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
             username = ossrhUsername
