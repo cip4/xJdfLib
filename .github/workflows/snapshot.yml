@@ -5,6 +5,7 @@ name: Snapshot
 # to the Central Maven SNAPSHOT Repository.
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main]
 
