@@ -241,6 +241,7 @@ test {
 jar {
     manifest {
         attributes(
+                "Implementation-Build-Date": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "Implementation-Title": project.description,
                 "Implementation-Version": project.version,
                 "Implementation-Vendor-Id": project.group,
