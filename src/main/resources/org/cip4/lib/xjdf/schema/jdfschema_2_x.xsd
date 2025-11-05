@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
     
-	XJDF Schema 2.x.124-SNAPSHOT-4b7c1c1 (2025-02-26 21:27:44Z)
+    XJDF Schema 2.x.133-SNAPSHOT-cdee6d2 (2025-11-05 12:24:31Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -15,7 +15,7 @@
     License: https://github.com/cip4/XJDF-Schema/blob/main/LICENSE.md
 	
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.124-SNAPSHOT-4b7c1c1">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.133-SNAPSHOT-cdee6d2">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -310,6 +310,12 @@
 			<xs:enumeration value="Off"/>
 			<xs:enumeration value="On"/>
 			<xs:enumeration value="UV"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeedSheetLay">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Leading"/>
+			<xs:enumeration value="Trailing"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SheetLay">
@@ -3697,6 +3703,7 @@
 			<xs:extension base="SpecificResource">
 				<xs:sequence>
 					<xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="SurfaceMark"/>
 				</xs:sequence>
 				<xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
 				<xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
@@ -3780,6 +3787,7 @@
 		<xs:complexContent>
 			<xs:extension base="SpecificResource">
 				<xs:attribute name="Drying" type="EnumDrying" use="optional"/>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="FirstSurface" type="Side" use="optional"/>
 				<xs:attribute name="FountainSolution" use="optional">
 					<xs:simpleType>
@@ -3970,6 +3978,7 @@
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:attribute>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="ManualFeed" type="xs:boolean" use="optional"/>
 				<xs:attribute name="PageDelivery" use="optional">
 					<xs:simpleType>
@@ -4378,6 +4387,7 @@
 				<xs:attribute name="Anchor" type="Anchor" use="optional"/>
 				<xs:attribute name="Automated" type="xs:boolean" use="optional"/>
 				<xs:attribute name="ExpansionBox" type="rectangle" use="optional"/>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="FilmRef" type="xs:IDREF" use="optional"/>
 				<xs:attribute name="InnermostShingling" type="xs:float" use="optional"/>
 				<xs:attribute name="MaxCollect" type="xs:int" use="optional"/>
@@ -4896,8 +4906,10 @@
 							<xs:enumeration value="CIP3Multiple"/>
 							<xs:enumeration value="CIP3Single"/>
 						</xs:restriction>
-					</xs:simpleType>
+					</xs:simpleType>					
 				</xs:attribute>
+				<xs:attribute name="Resolution" type="XYPair" use="optional"/>
+				<xs:attribute name="Size" type="XYPair" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -5381,9 +5393,9 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="1" minOccurs="0" ref="BarcodeReproParams"/>
-				<xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
@@ -5400,10 +5412,23 @@
 			<xs:attribute name="MarkName" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="Offset" type="XYPair" use="optional"/>
 			<xs:attribute name="Orientation" type="Orientation" use="optional"/>
+			<xs:attribute name="PositionRef" type="xs:IDREF" use="optional"/>
 			<xs:attribute name="RelativeHeight" type="xs:float" use="optional"/>
 			<xs:attribute name="RelativeWidth" type="xs:float" use="optional"/>
 			<xs:attribute name="StripMarkDetails" type="xs:string" use="optional"/>
 			<xs:attribute name="VerticalFitPolicy" type="EnumFitPolicy" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SurfaceMark">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
+				</xs:sequence>
+			<xs:attribute name="Surface" type="Face" use="required"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
