@@ -83,6 +83,11 @@
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Position"/>
         </xjb:property>
     </xjb:bindings>
+    <xjb:bindings node="//xs:element[@name='StripMark']//xs:attribute[@name='PositionRef']">
+        <xjb:property name="position">
+            <xjb:baseType name="org.cip4.lib.xjdf.schema.Position"/>
+        </xjb:property>
+    </xjb:bindings>
     <xjb:bindings node="//xs:element[@name='FillMark']//xs:attribute[@name='KnockoutRefs']">
         <xjb:property name="knockouts">
             <xjb:baseType name="org.cip4.lib.xjdf.schema.Resource"/>
