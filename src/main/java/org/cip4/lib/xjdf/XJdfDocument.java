@@ -108,6 +108,25 @@ public class XJdfDocument {
         return getXJdf().getDescriptiveName();
     }
 
+
+    /**
+     * Sets the documents related job id.
+     *
+     * @param relatedJobID The documents  related job id.
+     */
+    public void setRelatedJobID(String relatedJobID) {
+        getXJdf().setRelatedJobID(relatedJobID);
+    }
+
+    /**
+     * Getter of the related job id.
+     *
+     * @return The related job id.
+     */
+    public String getRelatedJobID() {
+        return getXJdf().getRelatedJobID();
+    }
+
     /**
      * Sets the documents job id.
      *
@@ -785,6 +804,16 @@ public class XJdfDocument {
     }
 
     /**
+     * Returns the generic resources of a resource set for a given specific resource.
+     *
+     * @param resourceType the specific resource.
+     * @return List of resources of the resource set matching the part keys.
+     */
+    public List<Resource> getResources(Class<? extends SpecificResource> resourceType) throws XJdfDocumentException {
+        return getResources(resourceType, null);
+    }
+
+    /**
      * Returns the generic resources of a resource set for a given specific resource by part keys.
      *
      * @param resourceType the specific resource.
@@ -940,6 +969,16 @@ public class XJdfDocument {
     public boolean removeResource(ResourceSet resourceSet, Part part) {
         Resource resource = getResource(resourceSet, part);
         return resourceSet.getResource().remove(resource);
+    }
+
+    /**
+     * Returns the specific resources of a resource set
+     *
+     * @param resourceType the specific resource.
+     * @return List of resources of the resource set.
+     */
+    public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType) throws XJdfDocumentException {
+        return getSpecificResources(resourceType, null);
     }
 
     /**

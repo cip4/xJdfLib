@@ -5,6 +5,7 @@ name: Snapshot
 # to the Central Maven SNAPSHOT Repository.
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main]
 
@@ -13,7 +14,7 @@ jobs:
     name: 🏭
     uses: cip4/.github/.github/workflows/library-snapshot.yml@master
     with:
-      java-version: 11
+      java-version: 21
       codecov-enabled: true
     secrets:
       SIGNING_KEY: ${{ secrets.SIGNING_KEY }}

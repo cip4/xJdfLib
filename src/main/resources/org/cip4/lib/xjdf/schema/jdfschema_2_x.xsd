@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
     
-	XJDF Schema 2.x.87-SNAPSHOT-d0b3352 (2024-07-29 16:11:57Z)
+    XJDF Schema 2.x.133-SNAPSHOT-cdee6d2 (2025-11-05 12:24:31Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -11,11 +11,11 @@
 
     Published on: https://schema.cip4.org
     
-    Copyright (c) 2001-2024. All rights reserved.
+    Copyright (c) 2001-2025. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/main/LICENSE.md
 	
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.87-SNAPSHOT-d0b3352">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.133-SNAPSHOT-cdee6d2">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -82,6 +82,12 @@
 			<xs:length value="4"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="Percentage">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+			<xs:maxInclusive value="100"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TransferFunction">
 		<xs:restriction base="FloatList"/>
 	</xs:simpleType>
@@ -143,8 +149,8 @@
 			<xs:enumeration value="Carton"/>
 			<xs:enumeration value="CollectedStack"/>
 			<xs:enumeration value="CompensatedStack"/>
-			<xs:enumeration value="Product"/>
 			<xs:enumeration value="Pallet"/>
+			<xs:enumeration value="Product"/>
 			<xs:enumeration value="Roll"/>
 			<xs:enumeration value="Sheet"/>
 			<xs:enumeration value="Stack"/>
@@ -226,6 +232,13 @@
 			<xs:enumeration value="FlatBacked"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="LooseBindMaterial">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Steel"/>
+			<xs:enumeration value="ColorCoatedSteel"/>
+			<xs:enumeration value="Plastic"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="EnumEmbossDirection">
 		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Both"/>
@@ -297,6 +310,12 @@
 			<xs:enumeration value="Off"/>
 			<xs:enumeration value="On"/>
 			<xs:enumeration value="UV"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FeedSheetLay">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="Leading"/>
+			<xs:enumeration value="Trailing"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SheetLay">
@@ -374,7 +393,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Anchor">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="BottomCenter"/>
 			<xs:enumeration value="BottomLeft"/>
 			<xs:enumeration value="BottomRight"/>
@@ -538,7 +557,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Orientation">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Rotate0"/>
 			<xs:enumeration value="Rotate90"/>
 			<xs:enumeration value="Rotate180"/>
@@ -550,7 +569,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="WorkStyle">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Perfecting"/>
 			<xs:enumeration value="Simplex"/>
 			<xs:enumeration value="WorkAndBack"/>
@@ -559,7 +578,7 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="Coating">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Coated"/>
 			<xs:enumeration value="Gloss"/>
 			<xs:enumeration value="Matte"/>
@@ -570,7 +589,7 @@
 	<xs:simpleType name="SourceObjects">
 		<xs:list>
 			<xs:simpleType>
-				<xs:restriction base="xs:string">
+				<xs:restriction base="xs:NMTOKEN">
 					<xs:enumeration value="ImagePhotographic"/>
 					<xs:enumeration value="ImageScreenShot"/>
 					<xs:enumeration value="LineArt"/>
@@ -604,8 +623,16 @@
 			<xs:enumeration value="Fatal"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="DeviceCondition">
+		<xs:restriction base="xs:NMTOKEN">
+			<xs:enumeration value="OK"/>
+			<xs:enumeration value="NeedsAttention"/>
+			<xs:enumeration value="Failure"/>
+			<xs:enumeration value="Offline"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="DeviceStatus">
-		<xs:restriction base="xs:string">
+		<xs:restriction base="xs:NMTOKEN">
 			<xs:enumeration value="Cleanup"/>
 			<xs:enumeration value="Idle"/>
 			<xs:enumeration value="NonProductive"/>
@@ -858,26 +885,23 @@
 	</xs:complexType>
 	<xs:element name="Shape">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:attribute name="CutBox" type="rectangle" use="optional"/>
-					<xs:attribute name="CutOut" type="xs:boolean" use="optional"/>
-					<xs:attribute name="CutPath" type="PDFPath" use="optional"/>
-					<xs:attribute name="DDESCutType" type="xs:int" use="optional"/>
-					<xs:attribute name="ShapeDepth" type="xs:float" use="optional"/>
-					<xs:attribute name="ShapeType" use="required">
-						<xs:simpleType>
-							<xs:restriction base="xs:NMTOKEN">
-								<xs:enumeration value="Path"/>
-								<xs:enumeration value="Rectangular"/>
-								<xs:enumeration value="Round"/>
-								<xs:enumeration value="RoundedRectangle"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="TeethPerDimension" type="xs:float" use="optional"/>
-				</xs:extension>
-			</xs:complexContent>
+			<xs:attribute name="CutBox" type="rectangle" use="optional"/>
+			<xs:attribute name="CutOut" type="xs:boolean" use="optional"/>
+			<xs:attribute name="CutPath" type="PDFPath" use="optional"/>
+			<xs:attribute name="DDESCutType" type="xs:int" use="optional"/>
+			<xs:attribute name="ShapeDepth" type="xs:float" use="optional"/>
+			<xs:attribute name="ShapeType" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Path"/>
+						<xs:enumeration value="Rectangular"/>
+						<xs:enumeration value="Round"/>
+						<xs:enumeration value="RoundedRectangle"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="TeethPerDimension" type="xs:float" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="DeviceFilter">
@@ -898,11 +922,14 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Employee"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
 				<xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="JobPhase"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ModuleInfo"/>
 			</xs:sequence>
 			<xs:attribute name="CounterUnit" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="DeviceCondition" type="DeviceCondition" use="optional"/>
 			<xs:attribute name="EndTime" type="xs:dateTime" use="optional"/>
 			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
 			<xs:attribute name="IdleStartTime" type="xs:dateTime" use="optional"/>
@@ -914,6 +941,17 @@
 			<xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
 			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="Employee">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Person"/>
+			</xs:sequence>
+			<xs:attribute name="CostCenterID" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="PersonalID" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="Role" type="xs:NMTOKEN" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -980,7 +1018,7 @@
 			<xs:attribute name="JobID" type="xs:NMTOKEN" use="required"/>
 			<xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ModuleIDs" type="xs:NMTOKENS" use="optional"/>
-			<xs:attribute name="PercentCompleted" type="xs:float" use="optional"/>
+			<xs:attribute name="PercentCompleted" type="Percentage" use="optional"/>
 			<xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>
@@ -991,6 +1029,22 @@
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
 			<xs:attribute name="Waste" type="xs:float" use="optional"/>
 			<xs:attribute name="WorkStepID" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ModuleInfo">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Part"/>
+			</xs:sequence>
+			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
+			<xs:attribute name="ModuleCondition" type="DeviceCondition" use="optional"/>
+			<xs:attribute name="ModuleID" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="ProductionCounter" type="xs:float" use="optional"/>
+			<xs:attribute name="Status" type="DeviceStatus" use="required"/>
+			<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
+			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -1641,7 +1695,7 @@
 					<xs:simpleType>
 						<xs:list>
 							<xs:simpleType>
-								<xs:restriction base="xs:string">
+								<xs:restriction base="xs:NMTOKEN">
 									<xs:enumeration value="XML"/>
 									<xs:enumeration value="Zip"/>
 								</xs:restriction>
@@ -2140,8 +2194,9 @@
 			<xs:attribute name="PartVersion" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="PreviewType" use="optional">
 				<xs:simpleType>
-					<xs:restriction base="xs:string">
+					<xs:restriction base="xs:NMTOKEN">
 						<xs:enumeration value="Animation"/>
+						<xs:enumeration value="Icon"/>
 						<xs:enumeration value="Identification"/>
 						<xs:enumeration value="SeparatedThumbNail"/>
 						<xs:enumeration value="Separation"/>
@@ -2316,13 +2371,10 @@
 	</xs:element>
 	<xs:element name="ScavengerArea">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:attribute name="Center" type="XYPair" use="required"/>
-					<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
-					<xs:attribute name="Size" type="XYPair" use="optional"/>
-				</xs:extension>
-			</xs:complexContent>
+			<xs:attribute name="Center" type="XYPair" use="required"/>
+			<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="Size" type="XYPair" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="ShapeCuttingParams" substitutionGroup="SpecificResource" type="ShapeCuttingParams"/>
@@ -2525,7 +2577,7 @@
 				</xs:attribute>
 				<xs:attribute name="VarnishArea" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Full"/>
 							<xs:enumeration value="Spot"/>
 						</xs:restriction>
@@ -2533,7 +2585,7 @@
 				</xs:attribute>
 				<xs:attribute name="VarnishMethod" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Blanket"/>
 							<xs:enumeration value="Plate"/>
 							<xs:enumeration value="Independent"/>
@@ -2640,6 +2692,7 @@
 							<xs:enumeration value="None"/>
 							<xs:enumeration value="RingBinding"/>
 							<xs:enumeration value="SaddleStitch"/>
+							<xs:enumeration value="ScrewBinding"/>
 							<xs:enumeration value="SideStitch"/>
 							<xs:enumeration value="SoftCover"/>
 							<xs:enumeration value="StripBinding"/>
@@ -2675,6 +2728,7 @@
 				<xs:element maxOccurs="1" minOccurs="0" ref="CoilBinding"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="CombBinding"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="RingBinding"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="ScrewBinding"/>
 			</xs:sequence>
 			<xs:attribute name="Brand" type="xs:string" use="optional"/>
 			<xs:attribute name="Diameter" type="xs:float" use="optional"/>
@@ -2684,30 +2738,14 @@
 	<xs:element name="CoilBinding">
 		<xs:complexType>
 			<xs:attribute name="CoilShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" use="optional">
-				<xs:simpleType>
-					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="Steel"/>
-						<xs:enumeration value="ColorCoatedSteel"/>
-						<xs:enumeration value="Plastic"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="CombBinding">
 		<xs:complexType>
 			<xs:attribute name="CombShape" type="xs:NMTOKEN" use="optional"/>
-			<xs:attribute name="Material" use="optional">
-				<xs:simpleType>
-					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="Steel"/>
-						<xs:enumeration value="ColorCoatedSteel"/>
-						<xs:enumeration value="Plastic"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:attribute>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -2717,6 +2755,12 @@
 			<xs:attribute name="RingShape" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RivetsExposed" type="xs:boolean" use="optional"/>
 			<xs:attribute name="ViewBinder" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ScrewBinding">
+		<xs:complexType>
+			<xs:attribute name="Material" type="LooseBindMaterial" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -2730,6 +2774,7 @@
 					<xs:element maxOccurs="1" minOccurs="0" ref="CombBindingDetails"/>
 					<xs:element maxOccurs="unbounded" minOccurs="0" ref="HolePattern"/>
 					<xs:element maxOccurs="1" minOccurs="0" ref="RingBindingDetails"/>
+					<xs:element maxOccurs="1" minOccurs="0" ref="ScrewBindingDetails"/>
 					<xs:element maxOccurs="1" minOccurs="0" ref="StripBindingDetails"/>
 				</xs:sequence>
 				<xs:attribute name="BindingType" use="required">
@@ -2739,6 +2784,7 @@
 							<xs:enumeration value="CoilBinding"/>
 							<xs:enumeration value="CombBinding"/>
 							<xs:enumeration value="RingBinding"/>
+							<xs:enumeration value="ScrewBinding"/>
 							<xs:enumeration value="StripBinding"/>
 						</xs:restriction>
 					</xs:simpleType>
@@ -3055,12 +3101,6 @@
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:element name="SizeIntent" substitutionGroup="ProductIntent" type="SizeIntent"/>
-	<xs:complexType name="SizeIntent">
-		<xs:complexContent>
-			<xs:extension base="ProductIntent"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:element name="Address">
 		<xs:complexType>
 			<xs:sequence>
@@ -3222,19 +3262,16 @@
 	</xs:element>
 	<xs:element name="BarcodeCompParams">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:attribute name="CompensationProcess" use="required">
-						<xs:simpleType>
-							<xs:restriction base="xs:NMTOKEN">
-								<xs:enumeration value="Printing"/>
-								<xs:enumeration value="Platemaking"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="CompensationValue" type="xs:float" use="required"/>
-				</xs:extension>
-			</xs:complexContent>
+			<xs:attribute name="CompensationProcess" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="Printing"/>
+						<xs:enumeration value="Platemaking"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="CompensationValue" type="xs:float" use="required"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="BarcodeDetails">
@@ -3257,36 +3294,33 @@
 	</xs:element>
 	<xs:element name="BarcodeReproParams">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:sequence>
-						<xs:element maxOccurs="unbounded" minOccurs="0" ref="BarcodeCompParams"/>
-					</xs:sequence>
-					<xs:attribute name="BearerBars" use="optional">
-						<xs:simpleType>
-							<xs:restriction base="xs:NMTOKEN">
-								<xs:enumeration value="None"/>
-								<xs:enumeration value="TopBottom"/>
-								<xs:enumeration value="Box"/>
-								<xs:enumeration value="BoxHMarks"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="Height" type="xs:float" use="optional"/>
-					<xs:attribute name="Magnification" type="xs:float" use="optional"/>
-					<xs:attribute name="Masking" use="optional">
-						<xs:simpleType>
-							<xs:restriction base="xs:NMTOKEN">
-								<xs:enumeration value="None"/>
-								<xs:enumeration value="WhiteBox"/>
-							</xs:restriction>
-						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="ModuleHeight" type="xs:float" use="optional"/>
-					<xs:attribute name="ModuleWidth" type="xs:float" use="optional"/>
-					<xs:attribute name="Ratio" type="xs:float" use="optional"/>
-				</xs:extension>
-			</xs:complexContent>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="BarcodeCompParams"/>
+			</xs:sequence>
+			<xs:attribute name="BearerBars" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="None"/>
+						<xs:enumeration value="TopBottom"/>
+						<xs:enumeration value="Box"/>
+						<xs:enumeration value="BoxHMarks"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Height" type="xs:float" use="optional"/>
+			<xs:attribute name="Magnification" type="xs:float" use="optional"/>
+			<xs:attribute name="Masking" use="optional">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="None"/>
+						<xs:enumeration value="WhiteBox"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="ModuleHeight" type="xs:float" use="optional"/>
+			<xs:attribute name="ModuleWidth" type="xs:float" use="optional"/>
+			<xs:attribute name="Ratio" type="xs:float" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="BendingParams" substitutionGroup="SpecificResource" type="BendingParams"/>
@@ -3669,6 +3703,7 @@
 			<xs:extension base="SpecificResource">
 				<xs:sequence>
 					<xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" ref="SurfaceMark"/>
 				</xs:sequence>
 				<xs:attribute name="Automation" type="EnumAutomation" use="optional"/>
 				<xs:attribute name="CartonTopFlaps" type="XYPair" use="optional"/>
@@ -3752,6 +3787,7 @@
 		<xs:complexContent>
 			<xs:extension base="SpecificResource">
 				<xs:attribute name="Drying" type="EnumDrying" use="optional"/>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="FirstSurface" type="Side" use="optional"/>
 				<xs:attribute name="FountainSolution" use="optional">
 					<xs:simpleType>
@@ -3762,7 +3798,7 @@
 					</xs:simpleType>
 				</xs:attribute>
 				<xs:attribute name="ModuleDrying" type="EnumDrying" use="optional"/>
-				<xs:attribute name="Powder" type="xs:float" use="optional"/>
+				<xs:attribute name="Powder" type="Percentage" use="optional"/>
 				<xs:attribute name="SheetLay" type="SheetLay" use="optional"/>
 				<xs:attribute name="Speed" type="xs:float" use="optional"/>
 				<xs:attribute name="WorkStyle" type="WorkStyle" use="optional"/>
@@ -3913,7 +3949,7 @@
 					</xs:simpleType>
 				</xs:attribute>
 				<xs:attribute name="Rotated" type="xs:boolean" use="optional"/>
-				<xs:attribute name="Waste" type="xs:float" use="optional"/>
+				<xs:attribute name="Waste" type="Percentage" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -3942,6 +3978,7 @@
 						</xs:restriction>
 					</xs:simpleType>
 				</xs:attribute>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="ManualFeed" type="xs:boolean" use="optional"/>
 				<xs:attribute name="PageDelivery" use="optional">
 					<xs:simpleType>
@@ -4176,14 +4213,14 @@
 			<xs:attribute name="DataType" use="optional">
 				<xs:simpleType>
 					<xs:restriction base="xs:NMTOKEN">
-						<xs:enumeration value="xs:string"/>
-						<xs:enumeration value="xs:int"/>
-						<xs:enumeration value="xs:float"/>
-						<xs:enumeration value="xs:NMTOKEN"/>
-						<xs:enumeration value="xs:boolean"/>
-						<xs:enumeration value="xs:dateTime"/>
-						<xs:enumeration value="xs:duration"/>
+						<xs:enumeration value="boolean"/>
+						<xs:enumeration value="dateTime"/>
+						<xs:enumeration value="duration"/>
+						<xs:enumeration value="float"/>
+						<xs:enumeration value="integer"/>
 						<xs:enumeration value="NamedFeature"/>
+						<xs:enumeration value="NMTOKEN"/>
+						<xs:enumeration value="string"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:attribute>
@@ -4350,6 +4387,7 @@
 				<xs:attribute name="Anchor" type="Anchor" use="optional"/>
 				<xs:attribute name="Automated" type="xs:boolean" use="optional"/>
 				<xs:attribute name="ExpansionBox" type="rectangle" use="optional"/>
+				<xs:attribute name="FeedSheetLay" type="FeedSheetLay" use="optional"/>
 				<xs:attribute name="FilmRef" type="xs:IDREF" use="optional"/>
 				<xs:attribute name="InnermostShingling" type="xs:float" use="optional"/>
 				<xs:attribute name="MaxCollect" type="xs:int" use="optional"/>
@@ -4393,6 +4431,7 @@
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="1" ref="Condition"/>
 			</xs:sequence>
+			<xs:attribute name="Amount" type="xs:int" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -4468,7 +4507,7 @@
 				<xs:attribute name="GrainDirection" type="MediaDirection" use="optional"/>
 				<xs:attribute name="ImagableSide" use="optional">
 					<xs:simpleType>
-						<xs:restriction base="xs:string">
+						<xs:restriction base="xs:NMTOKEN">
 							<xs:enumeration value="Front"/>
 							<xs:enumeration value="Back"/>
 							<xs:enumeration value="Both"/>
@@ -4517,7 +4556,7 @@
 				</xs:attribute>
 				<xs:attribute name="Polarity" type="Polarity" use="optional"/>
 				<xs:attribute name="PrintingTechnology" type="xs:NMTOKEN" use="optional"/>
-				<xs:attribute name="RecycledPercentage" type="xs:float" use="optional"/>
+				<xs:attribute name="RecycledPercentage" type="Percentage" use="optional"/>
 				<xs:attribute name="ReliefThickness" type="xs:float" use="optional"/>
 				<xs:attribute name="RollDiameter" type="xs:float" use="optional"/>
 				<xs:attribute name="ShrinkIndex" type="XYPair" use="optional"/>
@@ -4650,12 +4689,6 @@
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="PackingParams" substitutionGroup="SpecificResource" type="PackingParams"/>
-	<xs:complexType name="PackingParams">
-		<xs:complexContent>
-			<xs:extension base="SpecificResource"/>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:element name="Patch">
 		<xs:complexType>
 			<xs:sequence>
@@ -4873,18 +4906,17 @@
 							<xs:enumeration value="CIP3Multiple"/>
 							<xs:enumeration value="CIP3Single"/>
 						</xs:restriction>
-					</xs:simpleType>
+					</xs:simpleType>					
 				</xs:attribute>
+				<xs:attribute name="Resolution" type="XYPair" use="optional"/>
+				<xs:attribute name="Size" type="XYPair" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
 	<xs:element name="ProductionPath">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:attribute name="ProductionPathID" type="xs:NMTOKEN" use="optional"/>
-				</xs:extension>
-			</xs:complexContent>
+			<xs:attribute name="ProductionPathID" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="QualityControlParams" substitutionGroup="SpecificResource" type="QualityControlParams"/>
@@ -5012,32 +5044,29 @@
 	</xs:element>
 	<xs:element name="RegisterMark">
 		<xs:complexType>
-			<xs:complexContent>
-				<xs:extension base="SpecificResource">
-					<xs:sequence>
-						<xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkElement"/>
-					</xs:sequence>
-					<xs:attribute name="Center" type="XYPair" use="optional"/>
-					<xs:attribute name="MarkName" type="xs:NMTOKEN" use="optional"/>
-					<xs:attribute name="MarkType" type="xs:NMTOKENS" use="optional"/>
-					<xs:attribute name="MarkUsage" use="optional">
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="MarkElement"/>
+			</xs:sequence>
+			<xs:attribute name="Center" type="XYPair" use="optional"/>
+			<xs:attribute name="MarkName" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="MarkType" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="MarkUsage" use="optional">
+				<xs:simpleType>
+					<xs:list>
 						<xs:simpleType>
-							<xs:list>
-								<xs:simpleType>
-									<xs:restriction base="xs:NMTOKEN">
-										<xs:enumeration value="Color"/>
-										<xs:enumeration value="PaperPath"/>
-										<xs:enumeration value="Tile"/>
-									</xs:restriction>
-								</xs:simpleType>
-							</xs:list>
+							<xs:restriction base="xs:NMTOKEN">
+								<xs:enumeration value="Color"/>
+								<xs:enumeration value="PaperPath"/>
+								<xs:enumeration value="Tile"/>
+							</xs:restriction>
 						</xs:simpleType>
-					</xs:attribute>
-					<xs:attribute name="Rotation" type="xs:float" use="optional"/>
-					<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
-					<xs:attribute name="Size" type="XYPair" use="optional"/>
-				</xs:extension>
-			</xs:complexContent>
+					</xs:list>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Rotation" type="xs:float" use="optional"/>
+			<xs:attribute name="Separations" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="Size" type="XYPair" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="MarkElement">
@@ -5236,6 +5265,9 @@
 	<xs:complexType name="SheetOptimizingReport">
 		<xs:complexContent>
 			<xs:extension base="SpecificResource">
+				<xs:sequence>
+					<xs:element maxOccurs="1" minOccurs="0" ref="FileSpec"/>
+				</xs:sequence>
 				<xs:attribute name="AreaUse" type="Use" use="required"/>
 				<xs:attribute name="BackUse" type="Use" use="optional"/>
 				<xs:attribute name="DateSpread" type="xs:duration" use="optional"/>
@@ -5361,9 +5393,9 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="1" minOccurs="0" ref="BarcodeReproParams"/>
-				<xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="FillMark"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="IdentificationField"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="JobField"/>
 				<xs:element maxOccurs="1" minOccurs="0" ref="RefAnchor"/>
@@ -5380,10 +5412,23 @@
 			<xs:attribute name="MarkName" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="Offset" type="XYPair" use="optional"/>
 			<xs:attribute name="Orientation" type="Orientation" use="optional"/>
+			<xs:attribute name="PositionRef" type="xs:IDREF" use="optional"/>
 			<xs:attribute name="RelativeHeight" type="xs:float" use="optional"/>
 			<xs:attribute name="RelativeWidth" type="xs:float" use="optional"/>
 			<xs:attribute name="StripMarkDetails" type="xs:string" use="optional"/>
 			<xs:attribute name="VerticalFitPolicy" type="EnumFitPolicy" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="SurfaceMark">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ColorControlStrip"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="CutMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="RegisterMark"/>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="ScavengerArea"/>
+				</xs:sequence>
+			<xs:attribute name="Surface" type="Face" use="required"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
@@ -5442,7 +5487,7 @@
 			<xs:attribute name="RowsPerStrip" type="xs:int" use="optional"/>
 			<xs:attribute name="Segmentation" use="optional">
 				<xs:simpleType>
-					<xs:restriction base="xs:string">
+					<xs:restriction base="xs:NMTOKEN">
 						<xs:enumeration value="SingleStrip"/>
 						<xs:enumeration value="Stripped"/>
 						<xs:enumeration value="Tiled"/>
@@ -5548,18 +5593,19 @@
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="SurfaceColor" type="SurfaceColor"/>
-	<xs:complexType name="SurfaceColor">
-		<xs:sequence>
-			<xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
-		</xs:sequence>
-		<xs:attribute name="Coatings" type="xs:NMTOKENS" use="optional"/>
-		<xs:attribute name="ColorsUsed" type="xs:NMTOKENS" use="optional"/>
-		<xs:attribute name="Coverage" type="xs:float" use="optional"/>
-		<xs:attribute name="PrintStandard" type="xs:NMTOKEN" use="optional"/>
-		<xs:attribute name="Surface" type="Side" use="required"/>
-		<xs:anyAttribute namespace="##other" processContents="lax"/>
-	</xs:complexType>
+	<xs:element name="SurfaceColor">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Certification"/>
+			</xs:sequence>
+			<xs:attribute name="Coatings" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="ColorsUsed" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="Coverage" type="xs:float" use="optional"/>
+			<xs:attribute name="PrintStandard" type="xs:NMTOKEN" use="optional"/>
+			<xs:attribute name="Surface" type="Side" use="required"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
 	<xs:element name="Fold">
 		<xs:complexType>
 			<xs:attribute name="From" use="required">
@@ -5736,6 +5782,12 @@
 			<xs:attribute name="RivetsExposed" type="xs:boolean" use="optional"/>
 			<xs:attribute name="SpineWidth" type="xs:float" use="optional"/>
 			<xs:attribute name="ViewBinder" type="xs:NMTOKEN" use="optional"/>
+			<xs:anyAttribute namespace="##other" processContents="lax"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ScrewBindingDetails">
+		<xs:complexType>
+			<xs:attribute name="Length" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
 		</xs:complexType>
 	</xs:element>

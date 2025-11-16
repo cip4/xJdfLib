@@ -6,7 +6,7 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'signing'
-    id 'io.codearte.nexus-staging' version '0.30.0'
+    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
     id 'jacoco'
 }
 
@@ -23,7 +23,7 @@ java {
     withJavadocJar()
     withSourcesJar()
     toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
+        languageVersion = JavaLanguageVersion.of(21)
     }
 }
 
@@ -75,8 +75,9 @@ publishing {
     }
     repositories {
         maven {
-            def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2"
-            def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+            name = "sonatype"
+            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
+            def snapshotsRepoUrl = "https://central.sonatype.com/repository/maven-snapshots/"
             url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
 
             credentials {
@@ -99,13 +100,17 @@ task updateSchema() {
     }
 }
 
-nexusStaging {
-    packageGroup = 'org.cip4'
-    stagingProfileId = '105e2b532689c6'
-    numberOfRetries = 400
-    delayBetweenRetriesInMillis = 2500
-    username ossrhUsername
-    password ossrhPassword
+nexusPublishing {
+    repositories {
+        sonatype {
+            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+            username = ossrhUsername
+            password = ossrhPassword
+            stagingProfileId = '105e2b532689c6' // This can often be omitted if your packageGroup is unique
+            packageGroup = 'org.cip4'
+        }
+    }
 }
 
 configurations {
@@ -170,6 +175,10 @@ dependencies {
     xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
 }
 
+tasks.named('sourcesJar') {
+    dependsOn(':xjc')
+}
+
 task xjc() {
     def bindings = file('src/main/resources/org/cip4/lib/xjdf/binding.xjb')
     inputs.files(schema, bindings)
@@ -232,6 +241,7 @@ test {
 jar {
     manifest {
         attributes(
+                "Implementation-Build-Date": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "Implementation-Title": project.description,
                 "Implementation-Version": project.version,
                 "Implementation-Vendor-Id": project.group,
@@ -246,8 +256,8 @@ task zipTestPackage(type: Zip) {
     from 'src/test/resources/org/cip4/lib/xjdf/testPackage'
     include '*'
     include '*/*'
-    archiveName 'testPackage.zip'
-    destinationDir(file("$buildDir/resources/test/org/cip4/lib/xjdf"))
+    archiveFileName = 'testPackage.zip'
+    destinationDirectory = file("$buildDir/resources/test/org/cip4/lib/xjdf/")
 }
 
 processTestResources.dependsOn(zipTestPackage)
