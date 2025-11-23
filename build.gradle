@@ -148,7 +148,7 @@ processResources {
 dependencies {
     implementation 'commons-io:commons-io:2.16.1'
     implementation 'org.apache.commons:commons-lang3:3.18.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:4.0.5'
+    implementation 'com.sun.xml.bind:jaxb-impl:4.0.6'
     implementation 'com.sun.xml.bind:jaxb-core:4.0.4'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
     implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
@@ -166,7 +166,7 @@ dependencies {
 
     xjc 'com.sun.xml.bind:jaxb-core:4.0.4'
     xjc 'com.sun.xml.bind:jaxb-xjc:4.0.4'
-    xjc 'com.sun.xml.bind:jaxb-impl:4.0.5'
+    xjc 'com.sun.xml.bind:jaxb-impl:4.0.6'
     xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
 
     xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
