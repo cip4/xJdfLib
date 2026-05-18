@@ -51,6 +51,20 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Custom constructor, accepting one point.
+     *
+     * @param xyPair The point
+     */
+    public Rectangle(XYPair xyPair) {
+
+        // init class
+        this.llx = 0;
+        this.lly = 0;
+        this.urx = xyPair.getX();
+        this.ury = xyPair.getY();
+    }
+
+    /**
      * Custom constructor, accepting two points.
      *
      * @param lowerLeft The lower left coordinates
