@@ -1,20 +1,22 @@
 package org.cip4.lib.xjdf;
 
 import jakarta.xml.bind.JAXBElement;
-import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.exception.XJmfMessageException;
+import org.cip4.lib.xjdf.schema.CommandSubmitQueueEntry;
 import org.cip4.lib.xjdf.schema.Message;
+import org.cip4.lib.xjdf.schema.QueueSubmissionParams;
 import org.cip4.lib.xjdf.schema.XJMF;
+import org.cip4.lib.xjdf.type.URI;
 import org.cip4.lib.xjdf.util.Headers;
 import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * This class provides functionality all about XJMF Messages.
@@ -94,9 +96,10 @@ public class XJmfMessage {
     public <T extends Message> T getMessage(Class<T> type) throws XJmfMessageException {
 
         // filter messages
-        List<Message> matchingMessages = getMessages().stream()
+        List<T> matchingMessages = getMessages().stream()
                 .filter(message -> message.getClass() == type)
-                .collect(Collectors.toList());
+                .map(message -> (T) message)
+                .toList();
 
         // ambiguity check
         if (matchingMessages.size() > 1) {
@@ -104,7 +107,7 @@ public class XJmfMessage {
         }
 
         // return result
-        return matchingMessages.size() == 0 ? null : (T) matchingMessages.get(0);
+        return matchingMessages.isEmpty() ? null : matchingMessages.getFirst();
     }
 
     /**
@@ -115,11 +118,15 @@ public class XJmfMessage {
         List<Message> messages = new ArrayList<>(getXJmf().getMessages().size());
 
         for(Object obj: getXJmf().getMessages()) {
-            JAXBElement jaxbElement = (JAXBElement) obj;
-            messages.add((Message) jaxbElement.getValue());
+            if(obj instanceof JAXBElement) {
+                JAXBElement jaxbElement = (JAXBElement) obj;
+                messages.add((Message) jaxbElement.getValue());
+            } else {
+                messages.add((Message) obj);
+            }
         }
 
-        return messages;
+        return Collections.unmodifiableList(messages);
     }
 
     /**
@@ -158,5 +165,16 @@ public class XJmfMessage {
         } catch (Exception e) {
             return "Error creating an XML preview.";
         }
+    }
+
+    /**
+     * Factory method to create a submit queue entry command message.
+     * @return The XJMF message containing a submit queue entry command.
+     */
+    public static XJmfMessage createSubmitQueueEntry(URI url, URI returnJmf) {
+        XJmfMessage xJmfMessage = new XJmfMessage();
+        xJmfMessage.addMessage(new CommandSubmitQueueEntry()
+                .withQueueSubmissionParams(new QueueSubmissionParams().withURL(url).withReturnJMF(returnJmf)));
+        return xJmfMessage;
     }
 }

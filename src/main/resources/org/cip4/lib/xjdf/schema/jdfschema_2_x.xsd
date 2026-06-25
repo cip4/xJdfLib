@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
     
-    XJDF Schema 2.x.133-SNAPSHOT-cdee6d2 (2025-11-05 12:24:31Z)
+    XJDF Schema 2.x.145-SNAPSHOT-c3b65ff (2026-03-18 12:50:35Z)
 
     CIP4 Organization
     https://www.cip4.org
@@ -11,11 +11,11 @@
 
     Published on: https://schema.cip4.org
     
-    Copyright (c) 2001-2025. All rights reserved.
+    Copyright (c) 2001-2026. All rights reserved.
     License: https://github.com/cip4/XJDF-Schema/blob/main/LICENSE.md
 	
 -->
-<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.133-SNAPSHOT-cdee6d2">
+<xs:schema targetNamespace="http://www.CIP4.org/JDFSchema_2_0" xmlns="http://www.CIP4.org/JDFSchema_2_0" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.x.145-SNAPSHOT-c3b65ff">
 	<xs:simpleType name="language">
 		<xs:restriction base="xs:string"/>
 	</xs:simpleType>
@@ -88,6 +88,11 @@
 			<xs:maxInclusive value="100"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="PositiveFloat">
+		<xs:restriction base="xs:float">
+			<xs:minInclusive value="0"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TransferFunction">
 		<xs:restriction base="FloatList"/>
 	</xs:simpleType>
@@ -128,6 +133,7 @@
 			<xs:enumeration value="SelfAdhesive"/>
 			<xs:enumeration value="ShrinkFoil"/>
 			<xs:enumeration value="Sleeve"/>
+			<xs:enumeration value="Synthetic"/>
 			<xs:enumeration value="Textile"/>
 			<xs:enumeration value="Transparency"/>
 			<xs:enumeration value="Vinyl"/>
@@ -922,6 +928,7 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Activity"/>
+				<xs:element maxOccurs="1" minOccurs="0" ref="Device"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Employee"/>
 				<xs:element maxOccurs="unbounded" minOccurs="0" ref="Event"/>
 				<xs:element maxOccurs="2" minOccurs="0" ref="FileSpec"/>
@@ -1018,7 +1025,7 @@
 			<xs:attribute name="JobID" type="xs:NMTOKEN" use="required"/>
 			<xs:attribute name="JobPartID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ModuleIDs" type="xs:NMTOKENS" use="optional"/>
-			<xs:attribute name="PercentCompleted" type="Percentage" use="optional"/>
+			<xs:attribute name="PercentCompleted" type="PositiveFloat" use="optional"/>
 			<xs:attribute name="QueueEntryID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobID" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="RelatedJobPartID" type="xs:NMTOKEN" use="optional"/>
@@ -1027,6 +1034,7 @@
 			<xs:attribute name="Status" type="NodeStatus" use="required"/>
 			<xs:attribute name="StatusDetails" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ToolIDs" type="xs:NMTOKENS" use="optional"/>
+			<xs:attribute name="TotalAmount" type="xs:float" use="optional"/>
 			<xs:attribute name="Waste" type="xs:float" use="optional"/>
 			<xs:attribute name="WorkStepID" type="xs:NMTOKEN" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>
@@ -1040,9 +1048,9 @@
 			<xs:attribute name="HourCounter" type="xs:duration" use="optional"/>
 			<xs:attribute name="ModuleCondition" type="DeviceCondition" use="optional"/>
 			<xs:attribute name="ModuleID" type="xs:NMTOKEN" use="required"/>
+			<xs:attribute name="ModuleStatus" type="DeviceStatus" use="required"/>
 			<xs:attribute name="ModuleType" type="xs:NMTOKEN" use="optional"/>
 			<xs:attribute name="ProductionCounter" type="xs:float" use="optional"/>
-			<xs:attribute name="Status" type="DeviceStatus" use="required"/>
 			<xs:attribute name="StatusDetails" type="xs:string" use="optional"/>
 			<xs:attribute name="TotalProductionCounter" type="xs:float" use="optional"/>
 			<xs:anyAttribute namespace="##other" processContents="lax"/>

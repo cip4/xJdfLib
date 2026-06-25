@@ -1066,7 +1066,7 @@ public class XJdfDocumentTest {
 
         // assert
         assertNotNull(partAmount, "PartAmount is null.");
-        assertEquals(5000.0, partAmount.getAmount(), "Amount is null.");
+        assertEquals(5000.0f, partAmount.getAmount(), "Amount is null.");
     }
 
     @Test
@@ -1100,7 +1100,7 @@ public class XJdfDocumentTest {
 
         // assert
         assertNotNull(partAmount, "PartAmount is null.");
-        assertEquals(5000.0, partAmount.getAmount(), "Amount is null.");
+        assertEquals(5000.0f, partAmount.getAmount(), "Amount is null.");
     }
 
     @Test
@@ -1115,7 +1115,7 @@ public class XJdfDocumentTest {
 
         // assert
         assertNotNull(partAmount, "PartAmount is null.");
-        assertEquals(556.0, partAmount.getAmount(), "Amount is null.");
+        assertEquals(556.0f, partAmount.getAmount(), "Amount is null.");
     }
 
     @Test

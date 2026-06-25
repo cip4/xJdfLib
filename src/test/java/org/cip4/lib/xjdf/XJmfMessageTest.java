@@ -81,17 +81,17 @@ class XJmfMessageTest {
 
         Assertions.assertEquals(3, xJmfMessage.getXJmf().getMessages().size());
 
-        Header messageHeader_0 = xJmfMessage.getXJmf().getMessages().get(0).getHeader();
+        Header messageHeader_0 = xJmfMessage.getXJmf().getMessages().getFirst().getHeader();
         Assertions.assertEquals("MY_AGENT", messageHeader_0.getAgentName());
         Assertions.assertEquals("MY_AGENT_VERSION", messageHeader_0.getAgentVersion());
         Assertions.assertEquals("MY_DEVICE", messageHeader_0.getDeviceID());
 
-        Header messageHeader_1 = xJmfMessage.getXJmf().getMessages().get(0).getHeader();
+        Header messageHeader_1 = xJmfMessage.getXJmf().getMessages().getFirst().getHeader();
         Assertions.assertEquals("MY_AGENT", messageHeader_1.getAgentName());
         Assertions.assertEquals("MY_AGENT_VERSION", messageHeader_1.getAgentVersion());
         Assertions.assertEquals("MY_DEVICE", messageHeader_1.getDeviceID());
 
-        Header messageHeader_2 = xJmfMessage.getXJmf().getMessages().get(0).getHeader();
+        Header messageHeader_2 = xJmfMessage.getXJmf().getMessages().getFirst().getHeader();
         Assertions.assertEquals("MY_AGENT", messageHeader_2.getAgentName());
         Assertions.assertEquals("MY_AGENT_VERSION", messageHeader_2.getAgentVersion());
         Assertions.assertEquals("MY_DEVICE", messageHeader_2.getDeviceID());
@@ -109,7 +109,7 @@ class XJmfMessageTest {
 
         // assert
         Assertions.assertEquals(1, messages.size());
-        Assertions.assertTrue(messages.get(0) instanceof CommandSubmitQueueEntry);
+        assertInstanceOf(CommandSubmitQueueEntry.class, messages.getFirst());
 
         CommandSubmitQueueEntry commandSubmitQueueEntry = (CommandSubmitQueueEntry) messages.get(0);
         Assertions.assertEquals("preview.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString());
@@ -223,6 +223,44 @@ class XJmfMessageTest {
 
         // assert
         assertNull(queryKnownMessages, "QueryKnownMessages is not null");
+    }
+
+    @Test
+    void createSubmitQueueEntry_1() throws Exception {
+
+        // arrange
+        URI url = new URI("https://example.org/job.xjdf");
+        URI returnJmf = new URI("https://workflow-int.orca.vpsvc.com/v1/worker/CANON-IX-1/jmf");
+
+        // act
+        byte[] xjmf = XJmfMessage.createSubmitQueueEntry(url, returnJmf).toXml();
+
+        // assert
+        System.out.println(new String(xjmf));
+        assertNotNull(xjmf, "createSubmitQueueEntry is null");
+
+        XJmfMessage result = new XJmfMessage(xjmf);
+        CommandSubmitQueueEntry commandSubmitQueueEntry = result.getMessage(CommandSubmitQueueEntry.class);
+        assertEquals("https://workflow-int.orca.vpsvc.com/v1/worker/CANON-IX-1/jmf", commandSubmitQueueEntry.getQueueSubmissionParams().getReturnJMF().toString(), "QueueSubmissionURL is wrong.");
+        assertEquals("https://example.org/job.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString(), "QueueSubmissionURL is wrong.");
+    }
+
+    @Test
+    void createSubmitQueueEntry_2() throws Exception {
+
+        // arrange
+        URI url = new URI("https://example.org/job.xjdf");
+        URI returnJmf = new URI("https://workflow-int.orca.vpsvc.com/v1/worker/CANON-IX-1/jmf");
+
+        // act
+        XJmfMessage result = XJmfMessage.createSubmitQueueEntry(url, returnJmf);
+
+        // assert
+        assertNotNull(result, "createSubmitQueueEntry is null");
+
+        CommandSubmitQueueEntry commandSubmitQueueEntry = result.getMessage(CommandSubmitQueueEntry.class);
+        assertEquals("https://workflow-int.orca.vpsvc.com/v1/worker/CANON-IX-1/jmf", commandSubmitQueueEntry.getQueueSubmissionParams().getReturnJMF().toString(), "QueueSubmissionURL is wrong.");
+        assertEquals("https://example.org/job.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString(), "QueueSubmissionURL is wrong.");
     }
 
     /**
