@@ -4,6 +4,7 @@ import org.cip4.lib.xjdf.exception.XJdfDocumentException;
 import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.*;
+import org.cip4.lib.xjdf.schema.ResourceSet.Usage;
 import org.cip4.lib.xjdf.type.DateTime;
 import org.cip4.lib.xjdf.type.IntegerList;
 import org.cip4.lib.xjdf.type.URI;
@@ -113,7 +114,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        ResourceSet resourceSet = xJdfDocument.addResourceSet(Preview.class, ResourceSet.Usage.INPUT);
+        ResourceSet resourceSet = xJdfDocument.addResourceSet(Preview.class, Usage.INPUT);
 
         // assert
         System.out.println(xJdfDocument);
@@ -203,7 +204,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.INPUT, null, "Cutting");
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, Usage.INPUT, null, "Cutting");
 
         // assert
         assertNull(componentResourceSet, "ResourceSet is not null.");
@@ -217,7 +218,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Layout.class, ResourceSet.Usage.INPUT, null, "Cutting");
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Layout.class, Usage.INPUT, null, "Cutting");
 
         // assert
         assertNull(componentResourceSet, "ResourceSet is not null.");
@@ -330,7 +331,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_ID", "ConventionalPrinting", "Cutting");
 
         // resources simple
-        ResourceSet nodeInfoResourceSet = xJdfDocument.addResourceSet(NodeInfo.class, ResourceSet.Usage.INPUT);
+        ResourceSet nodeInfoResourceSet = xJdfDocument.addResourceSet(NodeInfo.class, Usage.INPUT);
 
         xJdfDocument.addSpecificResource(
                 nodeInfoResourceSet,
@@ -339,7 +340,7 @@ public class XJdfDocumentTest {
         );
 
         // resources multiple
-        ResourceSet runListResourceSet = xJdfDocument.addResourceSet(RunList.class, ResourceSet.Usage.INPUT);
+        ResourceSet runListResourceSet = xJdfDocument.addResourceSet(RunList.class, Usage.INPUT);
 
         xJdfDocument.addSpecificResource(
                 runListResourceSet,
@@ -374,7 +375,7 @@ public class XJdfDocumentTest {
         // arrange
         XJdfDocument xJdfDocument = new XJdfDocument("JOB_42", "ConventionalPrinting", "Cutting");
 
-        ResourceSet previewResourceSet = xJdfDocument.addResourceSet(Preview.class, ResourceSet.Usage.INPUT, null, "Cutting");
+        ResourceSet previewResourceSet = xJdfDocument.addResourceSet(Preview.class, Usage.INPUT, null, "Cutting");
 
         xJdfDocument.addSpecificResource(
                 previewResourceSet,
@@ -387,7 +388,7 @@ public class XJdfDocumentTest {
                 new Part().withPreviewType(Part.PreviewType.THUMB_NAIL)
         );
 
-        ResourceSet runListResourceSet = xJdfDocument.addResourceSet(RunList.class, ResourceSet.Usage.OUTPUT);
+        ResourceSet runListResourceSet = xJdfDocument.addResourceSet(RunList.class, Usage.OUTPUT);
 
         xJdfDocument.addSpecificResource(
                 runListResourceSet,
@@ -401,10 +402,10 @@ public class XJdfDocumentTest {
 
         assertEquals("Preview", xJdfDocument.getXJdf().getResourceSet().get(0).getName(), "ResourceSet is wrong.");
         assertEquals(new IntegerList(1), xJdfDocument.getXJdf().getResourceSet().get(0).getCombinedProcessIndex(), "CombinedProcessIndex is wrong.");
-        assertEquals(ResourceSet.Usage.INPUT, xJdfDocument.getXJdf().getResourceSet().get(0).getUsage(), "Usage is wrong.");
+        assertEquals(Usage.INPUT, xJdfDocument.getXJdf().getResourceSet().get(0).getUsage(), "Usage is wrong.");
 
         assertEquals("RunList", xJdfDocument.getXJdf().getResourceSet().get(1).getName(), "ResourceSet is wrong.");
-        assertEquals(ResourceSet.Usage.OUTPUT, xJdfDocument.getXJdf().getResourceSet().get(1).getUsage(), "CombinedProcessIndex is wrong.");
+        assertEquals(Usage.OUTPUT, xJdfDocument.getXJdf().getResourceSet().get(1).getUsage(), "CombinedProcessIndex is wrong.");
     }
 
     @Test
@@ -619,7 +620,7 @@ public class XJdfDocumentTest {
         assertNotNull(xJdfDocument.getSpecificResource(Layout.class), "Layout is missing.");
 
         // act
-        boolean result = xJdfDocument.removeResourceSet(Layout.class, ResourceSet.Usage.INPUT, null, (IntegerList) null);
+        boolean result = xJdfDocument.removeResourceSet(Layout.class, Usage.INPUT, null, (IntegerList) null);
 
         // assert
         System.out.println(xJdfDocument);
@@ -640,7 +641,7 @@ public class XJdfDocumentTest {
 
         // act
         Throwable t = assertThrows(XJdfDocumentException.class, () ->
-                xJdfDocument.removeResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, (IntegerList) null)
+                xJdfDocument.removeResourceSet(Component.class, Usage.OUTPUT, null, (IntegerList) null)
         );
 
         // assert
@@ -658,7 +659,7 @@ public class XJdfDocumentTest {
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
 
         // act
-        boolean result = xJdfDocument.removeResourceSet(Layout.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        boolean result = xJdfDocument.removeResourceSet(Layout.class, Usage.OUTPUT, null, "Cutting");
 
         // assert
         System.out.println(xJdfDocument);
@@ -676,7 +677,7 @@ public class XJdfDocumentTest {
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
 
         // act
-        boolean result = xJdfDocument.removeResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        boolean result = xJdfDocument.removeResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
 
         // assert
         System.out.println(xJdfDocument);
@@ -968,7 +969,7 @@ public class XJdfDocumentTest {
         byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
-        ResourceSet resourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        ResourceSet resourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
 
         // act
         List<Part> parts = xJdfDocument.getParts(resourceSet);
@@ -1008,7 +1009,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        List<Part> parts = xJdfDocument.getParts(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        List<Part> parts = xJdfDocument.getParts(Component.class, Usage.OUTPUT, null, "Cutting");
 
         // assert
         assertNotNull(parts, "Return is null.");
@@ -1058,7 +1059,7 @@ public class XJdfDocumentTest {
         byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
-        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
         Resource resource = xJdfDocument.getResource(componentResourceSet, new Part().withBinderySignatureID("09b5d583-3e1d-450d-927a-3b1a2dba53b7"));
 
         // act
@@ -1093,7 +1094,7 @@ public class XJdfDocumentTest {
         byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
-        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, ResourceSet.Usage.OUTPUT, null, "Cutting");
+        ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
 
         // act
         PartAmount partAmount = xJdfDocument.getPartAmount(componentResourceSet, new Part().withBinderySignatureID("09b5d583-3e1d-450d-927a-3b1a2dba53b7"));
@@ -1140,7 +1141,7 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, ResourceSet.Usage.INPUT, "CIP3", (IntegerList) null);
+        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, Usage.INPUT, "CIP3", (IntegerList) null);
 
         // assert
         assertNotNull(cuttingParams, "CuttingParams is null.");
@@ -1155,10 +1156,68 @@ public class XJdfDocumentTest {
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
-        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, ResourceSet.Usage.INPUT, null, (IntegerList) null);
+        CuttingParams cuttingParams = xJdfDocument.getSpecificResource(CuttingParams.class, Usage.INPUT, null, (IntegerList) null);
 
         // assert
         assertNotNull(cuttingParams, "CuttingParams is null.");
         assertEquals("Left", cuttingParams.getSheetLay().value(), "SheetLay is wrong.");
+    }
+
+    @Test
+    public void insertProcessAt_1() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("MY_JOB_ID", "ConventionalPrinting", "Cutting", "Delivery");
+
+        ResourceSet conventionalPrintingParamsSet = xJdfDocument.addResourceSet(ConventionalPrintingParams.class, Usage.INPUT, null, "ConventionalPrinting");
+        xJdfDocument.addSpecificResource(conventionalPrintingParamsSet, new ConventionalPrintingParams().withWorkStyle(WorkStyle.PERFECTING));
+
+        ResourceSet deliveryParamsSet = xJdfDocument.addResourceSet(DeliveryParams.class, Usage.INPUT, null, "Delivery");
+        xJdfDocument.addSpecificResource(deliveryParamsSet, new DeliveryParams().withMethod("BestWay"));
+
+        // act
+        xJdfDocument.insertProcessAt("Folding", 2);
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals(List.of("ConventionalPrinting", "Cutting", "Folding", "Delivery"), xJdfDocument.getCombinedProcess(), "Combined Process is wrong.");
+
+        ConventionalPrintingParams conventionalPrintingParams = xJdfDocument.getSpecificResource(ConventionalPrintingParams.class, Usage.INPUT, null, "ConventionalPrinting");
+        assertNotNull(conventionalPrintingParams, "ConventionalPrintingParams is null.");
+        assertEquals(WorkStyle.PERFECTING, conventionalPrintingParams.getWorkStyle(), "WorkStyle is wrong.");
+
+        DeliveryParams deliveryParams = xJdfDocument.getSpecificResource(DeliveryParams.class, Usage.INPUT, null, "Delivery");
+        assertNotNull(deliveryParams, "DeliveryParams is null.");
+        assertEquals("BestWay", deliveryParams.getMethod(), "Method is wrong.");
+    }
+
+    @Test
+    public void insertProcessAt_2() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDocument = new XJdfDocument("MY_JOB_ID", "ConventionalPrinting", "Cutting", "Delivery");
+
+        ResourceSet conventionalPrintingParamsSet = xJdfDocument.addResourceSet(ConventionalPrintingParams.class, Usage.INPUT, null, "ConventionalPrinting");
+        xJdfDocument.addSpecificResource(conventionalPrintingParamsSet, new ConventionalPrintingParams().withWorkStyle(WorkStyle.PERFECTING));
+
+        ResourceSet deliveryParamsSet = xJdfDocument.addResourceSet(DeliveryParams.class, Usage.INPUT, null, "Delivery");
+        xJdfDocument.addSpecificResource(deliveryParamsSet, new DeliveryParams().withMethod("BestWay"));
+
+        // act
+        xJdfDocument.insertProcessAt("Preflight", 0);
+
+        // assert
+        System.out.println(xJdfDocument);
+
+        assertEquals(List.of("Preflight", "ConventionalPrinting", "Cutting", "Delivery"), xJdfDocument.getCombinedProcess(), "Combined Process is wrong.");
+
+        ConventionalPrintingParams conventionalPrintingParams = xJdfDocument.getSpecificResource(ConventionalPrintingParams.class, Usage.INPUT, null, "ConventionalPrinting");
+        assertNotNull(conventionalPrintingParams, "ConventionalPrintingParams is null.");
+        assertEquals(WorkStyle.PERFECTING, conventionalPrintingParams.getWorkStyle(), "WorkStyle is wrong.");
+
+        DeliveryParams deliveryParams = xJdfDocument.getSpecificResource(DeliveryParams.class, Usage.INPUT, null, "Delivery");
+        assertNotNull(deliveryParams, "DeliveryParams is null.");
+        assertEquals("BestWay", deliveryParams.getMethod(), "Method is wrong.");
     }
 }

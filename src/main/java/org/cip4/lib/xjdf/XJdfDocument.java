@@ -193,6 +193,29 @@ public class XJdfDocument {
     }
 
     /**
+     * Insert a new process at a position defined by combinedProcessIndex.
+     *
+     * @param processName          The process name to be added.
+     * @param combinedProcessIndex The position where this process should be added.
+     */
+    public void insertProcessAt(String processName, int combinedProcessIndex) {
+
+        // update XJDF
+        this.xjdf.getTypes().add(combinedProcessIndex, processName);
+
+        // update combinedProcessIndex attribute in resource sets where necessary
+        this.xjdf.getResourceSet().forEach(resourceSet -> {
+            if (resourceSet.getCombinedProcessIndex() != null) {
+                resourceSet.setCombinedProcessIndex(new IntegerList(
+                        resourceSet.getCombinedProcessIndex().getList().stream()
+                                .map(i -> i < combinedProcessIndex ? i : i + 1)
+                                .toList()
+                ));
+            }
+        });
+    }
+
+    /**
      * Returns the combined process (types) specified in the XJDF Document.
      *
      * @return The combined process specified in this document.
@@ -515,7 +538,7 @@ public class XJdfDocument {
      */
     public void addResourceSet(ResourceSet resourceSet) {
 
-        if(resourceSet == null) {
+        if (resourceSet == null) {
             return;
         }
 
@@ -655,8 +678,9 @@ public class XJdfDocument {
 
     /**
      * Add a resource to a given resource set.
+     *
      * @param resourceSet The given resource set.
-     * @param resource The resource to be added.
+     * @param resource    The resource to be added.
      * @return The resource.
      */
     public Resource addResource(ResourceSet resourceSet, Resource resource) {
@@ -829,7 +853,7 @@ public class XJdfDocument {
      * Returns the generic resources of a given resource set by part keys.
      *
      * @param resourceSet the given resource set.
-     * @param part         The given Partition Keys used to identify a particular Resource
+     * @param part        The given Partition Keys used to identify a particular Resource
      * @return List of resources of the resource set matching the part keys.
      */
     public List<Resource> getResources(ResourceSet resourceSet, Part part) {
@@ -985,7 +1009,7 @@ public class XJdfDocument {
      * Returns the specific resources of a resource set for given partition keys
      *
      * @param resourceType the specific resource.
-     * @param part     The given partition
+     * @param part         The given partition
      * @return List of resources of the resource set.
      */
     public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType, Part part) throws XJdfDocumentException {
@@ -997,7 +1021,7 @@ public class XJdfDocument {
      * Returns the specific resources of a resource set for given partition keys
      *
      * @param resourceSet the resource set.
-     * @param part    The given partition
+     * @param part        The given partition
      * @return List of resources of the resource set.
      */
     public <T extends SpecificResource> List<T> getSpecificResources(ResourceSet resourceSet, Part part) {
