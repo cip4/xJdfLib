@@ -922,6 +922,18 @@ public class XJdfDocument {
      * @param resourceType The resource type of the resource set
      * @param usage        The usage of the resource set
      * @param processUsage The process usage of the resource set
+     * @return The resource object.
+     */
+    public Resource getResource(Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage) throws XJdfDocumentException {
+        return getResource(resourceType, usage, processUsage, (IntegerList) null);
+    }
+
+    /**
+     * Returns a resource found by params.
+     *
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
      * @param processName  The combined process indexes of the resource set
      * @return The resource object.
      */
@@ -1092,6 +1104,18 @@ public class XJdfDocument {
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, null, (IntegerList) null);
+    }
+
+    /**
+     * Returns a specific resource found by params.
+     *
+     * @param resourceType The resource type of the resource set
+     * @param usage        The usage of the resource set
+     * @param processUsage The process usage of the resource set
+     * @return The specific resource object.
+     */
+    public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage) throws XJdfDocumentException {
+        return getSpecificResource(resourceType, usage, processUsage, (IntegerList) null);
     }
 
     /**
