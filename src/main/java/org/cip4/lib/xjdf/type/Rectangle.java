@@ -95,19 +95,28 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @param expression Rectangle as String expression.
      */
     public Rectangle(String expression) {
-        this(parseRectangleValue(expression, 0), parseRectangleValue(expression, 1),
-                parseRectangleValue(expression, 2), parseRectangleValue(expression, 3));
+        this(parseRectangle(expression));
     }
 
     /**
-     * Splits a Rectangle String expression and parses the value at the given index.
+     * Private constructor, accepting the four coordinates as an array so the String constructor
+     * can delegate to the primary constructor after splitting the expression exactly once.
+     *
+     * @param v Coordinates in the order llx, lly, urx, ury.
+     */
+    private Rectangle(float[] v) {
+        this(v[0], v[1], v[2], v[3]);
+    }
+
+    /**
+     * Splits a Rectangle String expression once and parses all four coordinates.
      *
      * @param expression Rectangle as String expression.
-     * @param index Index of the value to parse.
-     * @return The parsed float value.
+     * @return The parsed coordinates in the order llx, lly, urx, ury.
      */
-    private static float parseRectangleValue(String expression, int index) {
-        return parseFloat(expression.split(" ")[index]);
+    private static float[] parseRectangle(String expression) {
+        String[] s = expression.split(" ");
+        return new float[] { parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]) };
     }
 
     /**
