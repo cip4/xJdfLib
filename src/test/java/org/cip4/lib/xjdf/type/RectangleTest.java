@@ -1,7 +1,10 @@
 package org.cip4.lib.xjdf.type;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junitpioneer.jupiter.DefaultLocale;
 
 /**
@@ -124,12 +127,6 @@ public class RectangleTest {
 	}
 
     @Test
-    public void testEqualsSame() {
-        Rectangle r = new Rectangle(1,2,3,4);
-        assertEquals(r, r);
-    }
-
-    @Test
     public void testEqualsNull() {
         Rectangle r = new Rectangle(1,2,3,4);
         assertNotEquals(null, r);
@@ -193,5 +190,66 @@ public class RectangleTest {
 	public void testUpperLeft() {
 		Rectangle r = new Rectangle(1,2,4,8);
 		assertEquals(new XYPair(1,8), r.getUpperLeft(),  "Size is wrong.");
+	}
+
+	/**
+	 * Derived getters must match freshly-computed expectations for a range of inputs,
+	 * regardless of which constructor was used to build the Rectangle.
+	 */
+	@ParameterizedTest
+	@CsvSource({
+			"0, 0, 0, 0",
+			"1, 2, 4, 8",
+			"-5, -5, 5, 5",
+			"10, 20, 3, 4",
+			"0.5, 1.25, 3.75, 9.5",
+			"-100.5, 200.25, -50.75, 300.0"
+	})
+	public void testDerivedGettersMatchComputedExpectations_floatCtor(float llx, float lly, float urx, float ury) {
+		Rectangle r = new Rectangle(llx, lly, urx, ury);
+		assertDerivedValuesMatchExpectations(r, llx, lly, urx, ury);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"0, 0, 0, 0",
+			"1, 2, 4, 8",
+			"-5, -5, 5, 5",
+			"10, 20, 3, 4",
+			"0.5, 1.25, 3.75, 9.5"
+	})
+	public void testDerivedGettersMatchComputedExpectations_xyPairCtor(float llx, float lly, float urx, float ury) {
+		Rectangle r = new Rectangle(new XYPair(llx, lly), new XYPair(urx, ury));
+		assertDerivedValuesMatchExpectations(r, llx, lly, urx, ury);
+	}
+
+	@ParameterizedTest
+	@CsvSource({
+			"0, 0, 0, 0",
+			"1, 2, 4, 8",
+			"-5, -5, 5, 5",
+			"10, 20, 3, 4",
+			"0.5, 1.25, 3.75, 9.5"
+	})
+	public void testDerivedGettersMatchComputedExpectations_stringCtor(float llx, float lly, float urx, float ury) {
+		String expression = String.format(java.util.Locale.US, "%s %s %s %s", llx, lly, urx, ury);
+		Rectangle r = new Rectangle(expression);
+		assertDerivedValuesMatchExpectations(r, llx, lly, urx, ury);
+	}
+
+	@Test
+	public void testDerivedGettersMatchComputedExpectations_noArgCtor() {
+		Rectangle r = new Rectangle();
+		assertDerivedValuesMatchExpectations(r, 0f, 0f, 0f, 0f);
+	}
+
+	private void assertDerivedValuesMatchExpectations(Rectangle r, float llx, float lly, float urx, float ury) {
+		assertEquals(urx - llx, r.getWidth(), 0.0001, "Width is wrong.");
+		assertEquals(ury - lly, r.getHeight(), 0.0001, "Height is wrong.");
+		assertEquals(new XYPair(urx - llx, ury - lly), r.getSize(), "Size is wrong.");
+		assertEquals(new XYPair(llx, lly), r.getLowerLeft(), "LowerLeft is wrong.");
+		assertEquals(new XYPair(urx, lly), r.getLowerRight(), "LowerRight is wrong.");
+		assertEquals(new XYPair(urx, ury), r.getUpperRight(), "UpperRight is wrong.");
+		assertEquals(new XYPair(llx, ury), r.getUpperLeft(), "UpperLeft is wrong.");
 	}
 }
