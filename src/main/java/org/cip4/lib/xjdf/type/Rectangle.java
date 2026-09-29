@@ -23,14 +23,25 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
 
     private final float ury;
 
+    private final float width;
+
+    private final float height;
+
+    private final XYPair size;
+
+    private final XYPair lowerLeft;
+
+    private final XYPair lowerRight;
+
+    private final XYPair upperRight;
+
+    private final XYPair upperLeft;
+
     /**
      * Default constructor.
      */
     public Rectangle() {
-        this.llx = 0;
-        this.lly = 0;
-        this.urx = 0;
-        this.ury = 0;
+        this(0, 0, 0, 0);
     }
 
     /**
@@ -48,6 +59,15 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         this.lly = lly;
         this.urx = urx;
         this.ury = ury;
+
+        // compute derived values once
+        this.width = urx - llx;
+        this.height = ury - lly;
+        this.size = new XYPair(width, height);
+        this.lowerLeft = new XYPair(llx, lly);
+        this.lowerRight = new XYPair(urx, lly);
+        this.upperRight = new XYPair(urx, ury);
+        this.upperLeft = new XYPair(llx, ury);
     }
 
     /**
@@ -56,12 +76,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @param xyPair The point
      */
     public Rectangle(XYPair xyPair) {
-
-        // init class
-        this.llx = 0;
-        this.lly = 0;
-        this.urx = xyPair.getX();
-        this.ury = xyPair.getY();
+        this(0, 0, xyPair.getX(), xyPair.getY());
     }
 
     /**
@@ -71,12 +86,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @param upperRight The upper right coordinates
      */
     public Rectangle(XYPair lowerLeft, XYPair upperRight) {
-
-        // init class
-        this.llx = lowerLeft.getX();
-        this.lly = lowerLeft.getY();
-        this.urx = upperRight.getX();
-        this.ury = upperRight.getY();
+        this(lowerLeft.getX(), lowerLeft.getY(), upperRight.getX(), upperRight.getY());
     }
 
     /**
@@ -85,15 +95,28 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @param expression Rectangle as String expression.
      */
     public Rectangle(String expression) {
+        this(parseRectangle(expression));
+    }
 
-        // split string
+    /**
+     * Private constructor, accepting the four coordinates as an array so the String constructor
+     * can delegate to the primary constructor after splitting the expression exactly once.
+     *
+     * @param v Coordinates in the order llx, lly, urx, ury.
+     */
+    private Rectangle(float[] v) {
+        this(v[0], v[1], v[2], v[3]);
+    }
+
+    /**
+     * Splits a Rectangle String expression once and parses all four coordinates.
+     *
+     * @param expression Rectangle as String expression.
+     * @return The parsed coordinates in the order llx, lly, urx, ury.
+     */
+    private static float[] parseRectangle(String expression) {
         String[] s = expression.split(" ");
-
-        // extract values
-        this.llx = parseFloat(s[0]);
-        this.lly = parseFloat(s[1]);
-        this.urx = parseFloat(s[2]);
-        this.ury = parseFloat(s[3]);
+        return new float[] { parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]) };
     }
 
     /**
@@ -137,7 +160,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return The rectangles width.
      */
     public float getWidth() {
-        return urx - llx;
+        return width;
     }
 
     /**
@@ -145,21 +168,23 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return The rectangles height.
      */
     public float getHeight() {
-        return ury - lly;
+        return height;
     }
 
     /**
      * Returns the size of the rectangle.
      * @return The rectangles size.
      */
-    public XYPair getSize() { return new XYPair(getWidth(), getHeight());}
+    public XYPair getSize() {
+        return size;
+    }
 
     /**
      * Returns the lower left point as XYPair.
      * @return lower left as XYPair object.
      */
     public XYPair getLowerLeft() {
-        return new XYPair(llx, lly);
+        return lowerLeft;
     }
 
     /**
@@ -167,7 +192,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return lower right as XYPair object.
      */
     public XYPair getLowerRight() {
-        return new XYPair(urx, lly);
+        return lowerRight;
     }
 
     /**
@@ -175,7 +200,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return upper right as XYPair object.
      */
     public XYPair getUpperRight() {
-        return new XYPair(urx, ury);
+        return upperRight;
     }
 
     /**
@@ -183,7 +208,7 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
      * @return upper left as XYPair object.
      */
     public XYPair getUpperLeft() {
-        return new XYPair(llx, ury);
+        return upperLeft;
     }
 
     /**
