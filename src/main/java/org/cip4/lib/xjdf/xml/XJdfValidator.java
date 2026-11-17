@@ -21,6 +21,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Validates XJDF XML against the XML schema and checks the XML syntax.
+ *
+ * <p>
+ * Validation runs in two steps: the document is first parsed to verify that it is well-formed XML, then validated
+ * against the XJDF schema that is bundled with the library.
+ * </p>
+ *
+ * <pre>{@code
+ * new XJdfValidator().validate(document.toXml());
+ * }</pre>
+ *
+ * <p>
+ * This class checks the XML structure only. Rules that the schema cannot express are validated by
+ * {@link org.cip4.lib.xjdf.validator.XjdfValidator}.
+ * </p>
+ */
 public class XJdfValidator {
 
     /**
@@ -33,6 +50,8 @@ public class XJdfValidator {
      * Validation of xml based on the XJDF Schema.
      *
      * @param xjdf The xjdf document to be checked as byte array.
+     *
+     * @throws XJdfValidationException in case the document is not well-formed or not schema-valid.
      */
     public final void validate(final byte[] xjdf) throws XJdfValidationException {
 

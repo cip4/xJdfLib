@@ -5,8 +5,10 @@ import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 import java.io.Serializable;
 
 /**
- * Abstract XJdf Data Type.
+ * Base class for immutable XJDF values that also act as JAXB adapters.
  *
+ * @param <ValueType> The XML representation type, usually {@link String}.
+ * @param <BoundType> The Java value type.
  * @author stefan.meissner
  */
 public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType>
@@ -15,13 +17,23 @@ public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<
     private static final long serialVersionUID = 1L;
 
     /**
-     * @see java.lang.Object#toString()
+     * Creates a new value.
+     */
+    protected AbstractXJdfType() {
+    }
+
+    /**
+     * Returns the XML representation of this value.
+     *
+     * @return The XML representation.
      */
     @Override
     public abstract String toString();
 
     /**
-     * @see java.lang.Object#hashCode()
+     * Returns a hash code derived from the XML representation.
+     *
+     * @return The hash code.
      */
     @Override
     public int hashCode() {
@@ -32,7 +44,11 @@ public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<
     }
 
     /**
-     * @see java.lang.Object#equals(java.lang.Object)
+     * Compares two values by their XML representation and exact runtime type.
+     *
+     * @param obj The object to compare with.
+     *
+     * @return True in case both values have the same type and XML representation.
      */
     @Override
     public boolean equals(Object obj) {

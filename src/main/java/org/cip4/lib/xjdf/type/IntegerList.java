@@ -18,7 +18,9 @@ public final class IntegerList extends AbstractList<Integer> {
     }
 
     /**
-     * Custom constructor. Accepting a variable number of integers.
+     * Creates a list from the given values.
+     *
+     * @param values The list values.
      */
     public IntegerList(Integer... values) {
 
@@ -26,7 +28,9 @@ public final class IntegerList extends AbstractList<Integer> {
     }
 
     /**
-     * Custom constructor. Accepting a list object for initializing.
+     * Creates a list from the given values.
+     *
+     * @param list The list values. The list is copied.
      */
     public IntegerList(List<Integer> list) {
 
@@ -34,14 +38,24 @@ public final class IntegerList extends AbstractList<Integer> {
     }
 
     /**
-     * Custom constructor. Accepting a String object for initializing.
+     * Parses a space separated list of integers.
+     *
+     * @param value The space separated list.
+     *
+     * @throws IllegalArgumentException in case an item is not an integer.
      */
     public IntegerList(String value) {
         super(value);
     }
 
     /**
-     * @see org.cip4.lib.xjdf.type.AbstractList#convertFromString(java.lang.String)
+     * Parses a single integer item.
+     *
+     * @param value The raw item.
+     *
+     * @return The parsed integer.
+     *
+     * @throws IllegalArgumentException in case the value is not an integer.
      */
     @Override
     protected Integer convertFromString(String value) {
@@ -51,7 +65,9 @@ public final class IntegerList extends AbstractList<Integer> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the values as a space separated string.
+     *
+     * @return The space separated values.
      */
     @Override
     public String toString() {

@@ -8,10 +8,23 @@ import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 import java.util.Collections;
 
 /**
- * Validator for element ResourceSet.
+ * Validates that {@code ResourceSet/@CombinedProcessIndex} only references existing entries of {@code XJDF/@Types}.
  */
 public class ResourceSetCombinedProcessIndexValidator extends SimpleValidator<ResourceSet> {
 
+    /**
+     * Creates the validator.
+     */
+    public ResourceSetCombinedProcessIndexValidator() {
+    }
+
+    /**
+     * Validates the resource set.
+     *
+     * @param resourceSet The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final ResourceSet resourceSet, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -34,6 +47,13 @@ public class ResourceSetCombinedProcessIndexValidator extends SimpleValidator<Re
         }
     }
 
+    /**
+     * Returns true for {@link ResourceSet} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a resource set.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof ResourceSet;

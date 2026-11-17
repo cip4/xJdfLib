@@ -25,6 +25,11 @@ public class ValidationResult {
         this.violations.addAll(Arrays.asList(violations));
     }
 
+    /**
+     * Combines several validation results into one.
+     *
+     * @param results The results to combine.
+     */
     public ValidationResult(final Collection<ValidationResult> results) {
         for (ValidationResult validationResult : results) {
             append(validationResult);

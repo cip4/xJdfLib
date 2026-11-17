@@ -30,7 +30,9 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * Custom constructor. Accepting a ZonedDateTime object for initializing.
+     * Creates a value for the given zoned date time.
+     *
+     * @param zonedDateTime The zoned date time.
      */
     public DateTime(ZonedDateTime zonedDateTime) {
         this.zonedDateTime = zonedDateTime;
@@ -176,7 +178,11 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the value to an xs:dateTime string.
+     *
+     * @param dateTime The value to serialize.
+     *
+     * @return The xs:dateTime string, or null in case the value is null.
      */
     @Override
     public final String marshal(final DateTime dateTime) {
@@ -188,7 +194,13 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses an xs:dateTime string.
+     *
+     * @param dateTime The xs:dateTime string.
+     *
+     * @return The parsed value.
+     *
+     * @throws Exception in case the value cannot be parsed.
      */
     @Override
     public final DateTime unmarshal(final String dateTime) throws Exception {
@@ -196,7 +208,9 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Formats the value with milliseconds and an ISO offset, for example {@code 2024-08-06T12:00:00.000+02:00}.
+     *
+     * @return The formatted value.
      */
     @Override
     public final String toString() {
@@ -204,7 +218,11 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Formats the value in the given time zone with milliseconds and an ISO offset.
+     *
+     * @param zoneId The time zone to format in.
+     *
+     * @return The formatted value.
      */
     public final String toString(ZoneId zoneId) {
         return ZonedDateTime.ofInstant(zonedDateTime.toInstant(), zoneId).format(OUTPUT_FORMAT);

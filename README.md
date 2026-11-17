@@ -1,6 +1,7 @@
 # CIP4 XJDF Java Library
 
 [![Maven Central](https://img.shields.io/maven-central/v/org.cip4.lib.xjdf/xJdfLib?label=Maven%20Central)](https://central.sonatype.com/artifact/org.cip4.lib.xjdf/xJdfLib)
+[![Javadoc](https://javadoc.io/badge2/org.cip4.lib.xjdf/xJdfLib/javadoc.svg)](https://javadoc.io/doc/org.cip4.lib.xjdf/xJdfLib)
 [![Build](https://github.com/cip4/xJdfLib/actions/workflows/pull-request.yml/badge.svg?branch=main)](https://github.com/cip4/xJdfLib/actions/workflows/pull-request.yml)
 [![Java](https://img.shields.io/badge/Java-21-orange)](https://adoptium.net/)
 [![License](https://img.shields.io/badge/license-CIP4%20Software%20License-blue)](https://github.com/cip4/xJdfLib/blob/main/LICENSE.md)
@@ -266,6 +267,7 @@ Build and test with the Gradle wrapper (JDK 21):
 ```bash
 ./gradlew build     # compile, generate schema classes, test, create jars
 ./gradlew test      # run the tests
+./gradlew javadoc   # generate the API documentation in build/docs/javadoc
 ./gradlew test --tests "org.cip4.lib.xjdf.type.*"
 ```
 
@@ -293,4 +295,5 @@ git push origin :refs/tags/2.3.18
 - XJDF schemas: https://schema.cip4.org/
 - Issue tracking: https://cip4.atlassian.net/browse/XJDFLIB
 - Maven Central: https://central.sonatype.com/artifact/org.cip4.lib.xjdf/xJdfLib
+- API documentation: https://javadoc.io/doc/org.cip4.lib.xjdf/xJdfLib
 - License: https://github.com/cip4/xJdfLib/blob/main/LICENSE.md

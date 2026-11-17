@@ -9,6 +9,8 @@ Guidance for AI coding agents working on xJdfLib, the CIP4 Java library for gene
   `src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd` using
   `src/main/resources/org/cip4/lib/xjdf/binding.xjb`. Output goes to `src/generated`.
   Never edit `src/generated`; change the XSD or `binding.xjb` instead.
+  After generation, `build.gradle` moves the package javadoc from the binding into the generated
+  `schema/package-info.java`, because javadoc ignores `package.html` when `package-info.java` exists.
 - Handwritten code lives in `src/main/java/org/cip4/lib/xjdf`, tests in `src/test/java`.
 - Version comes from `-PprojectVersion`, otherwise it defaults to `2.3.x-DEV`.
 - `gradle/deploy.gradle` is legacy, unapplied, and not part of the build.
@@ -20,9 +22,12 @@ Guidance for AI coding agents working on xJdfLib, the CIP4 Java library for gene
 .\gradlew.bat test                      # tests only
 .\gradlew.bat test --tests "org.cip4.lib.xjdf.type.*"   # one package
 .\gradlew.bat compileJava               # quick compile including xjc
+.\gradlew.bat javadoc                   # API docs, validated by doclint
 ```
 
 Always run `.\gradlew.bat test` (or at least the affected package) before reporting a task as done. There is no separate lint or typecheck task.
+
+Public API Javadoc is enforced: the `javadoc` task enables doclint (without the `missing` group, so undocumented private fields do not fail) and excludes the generated `schema` package. New public API needs Javadoc and working `{@link}` references.
 
 ### Known build side effect
 

@@ -8,7 +8,23 @@ import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Validates that a product does not contain two intents with the same {@code Intent/@Name}.
+ */
 public class ProductValidator extends SimpleValidator<Product> {
+
+    /**
+     * Creates the validator.
+     */
+    public ProductValidator() {
+    }
+    /**
+     * Validates the product.
+     *
+     * @param product The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final Product product, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -26,6 +42,13 @@ public class ProductValidator extends SimpleValidator<Product> {
         }
     }
 
+    /**
+     * Returns true for {@link Product} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a product.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof Product;

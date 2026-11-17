@@ -6,7 +6,23 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
+/**
+ * Validates that every Color resource has a {@code Part/@Separation}.
+ */
 public class ColorValidator extends SimpleValidator<Color> {
+
+    /**
+     * Creates the validator.
+     */
+    public ColorValidator() {
+    }
+    /**
+     * Validates the color resource.
+     *
+     * @param color The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final Color color, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -33,6 +49,13 @@ public class ColorValidator extends SimpleValidator<Color> {
         }
     }
 
+    /**
+     * Returns true for {@link Color} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a color resource.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof Color;

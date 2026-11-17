@@ -21,7 +21,32 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * This class provides functionality all about XJDF Documents.
+ * Create, read and modify XJDF documents.
+ *
+ * <p>
+ * An XJDF document describes a single transaction between two applications. This class wraps the generated
+ * {@link org.cip4.lib.xjdf.schema.XJDF} root element and adds convenience methods for the tasks that are repeated for
+ * almost every document: setting the job ID and types, adding resource sets, adding specific resources and
+ * serializing with validation.
+ * </p>
+ *
+ * <p>
+ * Before the first document is created, {@link org.cip4.lib.xjdf.XJdfConstants} must be initialized, because the
+ * audit pool is generated from those values.
+ * </p>
+ *
+ * <pre>{@code
+ * XJdfDocument document = new XJdfDocument("42", "Interpreting", "Rendering");
+ * ResourceSet previews = document.addResourceSet(Preview.class, ResourceSet.Usage.INPUT);
+ * document.addSpecificResource(previews, new Preview()
+ *     .withPreviewFileType(Preview.PreviewFileType.PNG)
+ *     .withFileSpec(new FileSpec().withURL(new URI("preview.png"))));
+ * byte[] xml = document.toXml();
+ * }</pre>
+ *
+ * <p>
+ * Instances are not thread-safe. Create one document per thread, or synchronize access.
+ * </p>
  */
 public class XJdfDocument {
 
@@ -54,10 +79,11 @@ public class XJdfDocument {
     }
 
     /**
-     * Custom Constructor. <br>
-     * Accepting an XJDF Document as byte array for initializing.
+     * Creates a document by parsing the given XML.
      *
-     * @param bytes The XJDF Document as byte array.
+     * @param bytes The XJDF document as byte array.
+     *
+     * @throws XJdfParseException in case the XML cannot be parsed.
      */
     public XJdfDocument(byte[] bytes) throws XJdfParseException {
         this(new XJdfParser<XJDF>().readXml(bytes));
@@ -158,6 +184,9 @@ public class XJdfDocument {
      * Returns the current XJDF Document as XML byte array.
      *
      * @return The XJDF Document as XML byte array.
+     *
+     * @throws XJdfParseException in case the document cannot be serialized.
+     * @throws XJdfValidationException in case the document is invalid.
      */
     public byte[] toXml() throws XJdfParseException, XJdfValidationException {
         return toXml(true);
@@ -168,6 +197,9 @@ public class XJdfDocument {
      *
      * @param validate 'false' in case validation should be skipped.
      * @return The XJDF Document as XML byte array.
+     *
+     * @throws XJdfParseException in case the document cannot be serialized.
+     * @throws XJdfValidationException in case the document is invalid and validation is enabled.
      */
     public byte[] toXml(boolean validate) throws XJdfParseException, XJdfValidationException {
 
@@ -183,6 +215,11 @@ public class XJdfDocument {
         return xml;
     }
 
+    /**
+     * Returns the document as an XML string without validation.
+     *
+     * @return The XML representation, or an error text if serialization fails.
+     */
     @Override
     public String toString() {
         try {
@@ -227,7 +264,10 @@ public class XJdfDocument {
     /**
      * Returns the combined-process-index of a given process name.
      *
+     * @param processName The process name, for example {@code "Rendering"}.
      * @return The combined process index as integer.
+     *
+     * @throws XJdfDocumentException in case the process name is not part of {@code XJDF/@Types}.
      */
     public int getCombinedProcessIndex(String processName) throws XJdfDocumentException {
 
@@ -325,7 +365,10 @@ public class XJdfDocument {
      *
      * @param idUsage The IDUsage value.
      * @param type    The target type of the IDValue value.
+     * @param <T> The target type.
      * @return The typed value.
+     *
+     * @throws ParseException in case the value cannot be converted to the target type.
      */
     public <T> T getGeneralID(String idUsage, Class<T> type) throws ParseException {
 
@@ -459,8 +502,9 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns a final products identifierd by its product id.
+     * Returns a final products identified by its product id.
      *
+     * @param id The product ID.
      * @return The final product if exists. Otherwise null.
      */
     public FinalProduct getFinalProduct(String id) {
@@ -499,8 +543,12 @@ public class XJdfDocument {
      * Add resource set to the xjdf document.
      *
      * @param resourceType The type of the resource set.
-     * @param usage        The usgae of the resource set.
+     * @param usage        The usage of the resource set.
+     * @param processUsage The process usage of the resource set.
+     * @param processName  The process name used to resolve the combined process index.
      * @return The newly created resource set element.
+     *
+     * @throws XJdfDocumentException in case the process name is not part of {@code XJDF/@Types}.
      */
     public ResourceSet addResourceSet(@NotNull Class<? extends SpecificResource> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
         return addResourceSet(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
@@ -1008,21 +1056,27 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns the specific resources of a resource set
+     * Returns the specific resources of a resource set.
      *
      * @param resourceType the specific resource.
+     * @param <T> The specific resource type.
      * @return List of resources of the resource set.
+     *
+     * @throws XJdfDocumentException in case no unique resource set exists for the type.
      */
     public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType) throws XJdfDocumentException {
         return getSpecificResources(resourceType, null);
     }
 
     /**
-     * Returns the specific resources of a resource set for given partition keys
+     * Returns the specific resources of a resource set for given partition keys.
      *
      * @param resourceType the specific resource.
-     * @param part         The given partition
+     * @param part         The given partition.
+     * @param <T> The specific resource type.
      * @return List of resources of the resource set.
+     *
+     * @throws XJdfDocumentException in case no unique resource set exists for the type.
      */
     public <T extends SpecificResource> List<T> getSpecificResources(Class<T> resourceType, Part part) throws XJdfDocumentException {
         ResourceSet resourceSet = getResourceSet(resourceType);
@@ -1030,10 +1084,11 @@ public class XJdfDocument {
     }
 
     /**
-     * Returns the specific resources of a resource set for given partition keys
+     * Returns the specific resources of a resource set for given partition keys.
      *
      * @param resourceSet the resource set.
-     * @param part        The given partition
+     * @param part        The given partition.
+     * @param <T> The specific resource type.
      * @return List of resources of the resource set.
      */
     public <T extends SpecificResource> List<T> getSpecificResources(ResourceSet resourceSet, Part part) {
@@ -1052,8 +1107,11 @@ public class XJdfDocument {
      * Identifies and returns the first matching specific resource within a resource set using partition keys.
      *
      * @param resourceType The type of the specific resource.
-     * @param part         The given Partition Keys used to identify a particular Resource
+     * @param part         The given partition keys used to identify a particular resource.
+     * @param <T> The specific resource type.
      * @return The first specific resource identified using partition keys.
+     *
+     * @throws XJdfDocumentException in case no unique resource set exists for the type.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, Part part) throws XJdfDocumentException {
         ResourceSet resourceSet = getResourceSet(resourceType);
@@ -1065,8 +1123,11 @@ public class XJdfDocument {
      * Identifies and returns the first matching specific resource within a resource set using partition keys.
      *
      * @param resourceSet The resource set.
-     * @param part        The given Partition Keys used to identify a particular Resource
+     * @param part        The given partition keys used to identify a particular resource.
+     * @param <T> The specific resource type.
      * @return The first specific resource identified using partition keys.
+     *
+     * @throws XJdfDocumentException in case more than one resource matches the partition.
      */
     public <T extends SpecificResource> T getSpecificResource(ResourceSet resourceSet, Part part) throws XJdfDocumentException {
         Resource resource = getResource(resourceSet, part);
@@ -1078,7 +1139,8 @@ public class XJdfDocument {
      * Returns a specific resource found by id.
      *
      * @param resourceId The resource's unique identifier.
-     * @return The specific resource object.
+     * @param <T> The specific resource type.
+     * @return The specific resource object, or null if no resource with the ID exists.
      */
     public <T extends SpecificResource> T getSpecificResource(String resourceId) {
         Resource resource = getResource(resourceId);
@@ -1089,7 +1151,10 @@ public class XJdfDocument {
      * Identifies and returns the first matching specific resource within the given resource set.
      *
      * @param resourceType The class of the specific resource.
+     * @param <T> The specific resource type.
      * @return The first specific resource identified using partition keys.
+     *
+     * @throws XJdfDocumentException in case no unique resource set exists for the type.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType) throws XJdfDocumentException {
         return getSpecificResource(resourceType, null, null, (IntegerList) null);
@@ -1098,9 +1163,12 @@ public class XJdfDocument {
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType The resource type of the resource set
-     * @param usage        The usage of the resource set
+     * @param resourceType The resource type of the resource set.
+     * @param usage        The usage of the resource set.
+     * @param <T> The specific resource type.
      * @return The specific resource object.
+     *
+     * @throws XJdfDocumentException in case no unique resource set matches the parameters.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, null, (IntegerList) null);
@@ -1109,10 +1177,13 @@ public class XJdfDocument {
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType The resource type of the resource set
-     * @param usage        The usage of the resource set
-     * @param processUsage The process usage of the resource set
+     * @param resourceType The resource type of the resource set.
+     * @param usage        The usage of the resource set.
+     * @param processUsage The process usage of the resource set.
+     * @param <T> The specific resource type.
      * @return The specific resource object.
+     *
+     * @throws XJdfDocumentException in case no unique resource set matches the parameters.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, processUsage, (IntegerList) null);
@@ -1121,11 +1192,14 @@ public class XJdfDocument {
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType The resource type of the resource set
-     * @param usage        The usage of the resource set
-     * @param processUsage The process usage of the resource set
-     * @param processName  The combined process indexes of the resource set
+     * @param resourceType The resource type of the resource set.
+     * @param usage        The usage of the resource set.
+     * @param processUsage The process usage of the resource set.
+     * @param processName  The process name used to resolve the combined process index.
+     * @param <T> The specific resource type.
      * @return The specific resource object.
+     *
+     * @throws XJdfDocumentException in case no unique resource set matches the parameters.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, String processName) throws XJdfDocumentException {
         return getSpecificResource(resourceType, usage, processUsage, new IntegerList(getCombinedProcessIndex(processName)));
@@ -1134,11 +1208,14 @@ public class XJdfDocument {
     /**
      * Returns a specific resource found by params.
      *
-     * @param resourceType           The resource type of the resource set
-     * @param usage                  The usage of the resource set
-     * @param processUsage           The process usage of the resource set
-     * @param combinedProcessIndices The combined process indexes of the resource set
+     * @param resourceType           The resource type of the resource set.
+     * @param usage                  The usage of the resource set.
+     * @param processUsage           The process usage of the resource set.
+     * @param combinedProcessIndices The combined process indexes of the resource set.
+     * @param <T> The specific resource type.
      * @return The specific resource object.
+     *
+     * @throws XJdfDocumentException in case no unique resource set matches the parameters.
      */
     public <T extends SpecificResource> T getSpecificResource(Class<T> resourceType, ResourceSet.Usage usage, String processUsage, IntegerList combinedProcessIndices) throws XJdfDocumentException {
         Resource resource = getResource(resourceType, usage, processUsage, combinedProcessIndices);

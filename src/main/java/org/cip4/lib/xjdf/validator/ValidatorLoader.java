@@ -7,10 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Discovers and caches the validators that live in the {@code validator.element} package.
+ */
 class ValidatorLoader {
 
     private static Validator[] validators;
 
+    /**
+     * Returns all discovered validators, discovering them on first use.
+     *
+     * @return The validators.
+     */
     public static Validator[] loadedValidators() {
         if (null == validators) {
             Reflections reflections = new Reflections(Validator.class.getPackage().getName());

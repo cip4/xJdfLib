@@ -6,10 +6,23 @@ import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 /**
- * Extended validation for element //FoldingIntent.
+ * Validates that {@code @FoldingDetails} is only present when {@code @FoldCatalog} is set.
  */
 public class FoldingIntentValidator extends SimpleValidator<FoldingIntent> {
 
+    /**
+     * Creates the validator.
+     */
+    public FoldingIntentValidator() {
+    }
+
+    /**
+     * Validates the folding intent.
+     *
+     * @param foldingIntent The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public final void validate(
         final FoldingIntent foldingIntent, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -20,6 +33,13 @@ public class FoldingIntentValidator extends SimpleValidator<FoldingIntent> {
         }
     }
 
+    /**
+     * Returns true for {@link FoldingIntent} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a folding intent.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof FoldingIntent;

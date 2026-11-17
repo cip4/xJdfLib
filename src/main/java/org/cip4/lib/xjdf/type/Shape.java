@@ -29,7 +29,10 @@ public final class Shape extends AbstractXJdfType<String, Shape> {
     }
 
     /**
-     * Custom constructor, accepting several values for initializing.
+     * Creates a shape with the given width and height and a depth of zero.
+     *
+     * @param x The width.
+     * @param y The height.
      */
     public Shape(float x, float y) {
 
@@ -40,7 +43,11 @@ public final class Shape extends AbstractXJdfType<String, Shape> {
     }
 
     /**
-     * Custom constructor, accepting several values for initializing.
+     * Creates a shape from all three dimensions.
+     *
+     * @param x The width.
+     * @param y The height.
+     * @param z The depth.
      */
     public Shape(float x, float y, float z) {
 
@@ -111,7 +118,11 @@ public final class Shape extends AbstractXJdfType<String, Shape> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the shape as three numbers with three decimals.
+     *
+     * @param shape The shape to serialize.
+     *
+     * @return The formatted value, or null in case the shape is null.
      */
     @Override
     public String marshal(Shape shape) {
@@ -129,7 +140,13 @@ public final class Shape extends AbstractXJdfType<String, Shape> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses a shape from one to three whitespace separated numbers.
+     *
+     * @param v The shape string.
+     *
+     * @return The parsed shape.
+     *
+     * @throws IllegalArgumentException in case the value contains more than three values or an invalid number.
      */
     @Override
     public Shape unmarshal(String v) {
@@ -137,7 +154,9 @@ public final class Shape extends AbstractXJdfType<String, Shape> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the shape as three numbers with three decimals.
+     *
+     * @return The formatted value.
      */
     @Override
     public String toString() {

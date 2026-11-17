@@ -19,7 +19,25 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * This class provides functionality all about XJMF Messages.
+ * Create and read XJMF messages.
+ *
+ * <p>
+ * An XJMF message is the envelope used to exchange commands, queries and signals between applications. This class
+ * wraps the generated {@link org.cip4.lib.xjdf.schema.XJMF} root element, adds the default header and exposes the
+ * contained messages.
+ * </p>
+ *
+ * <pre>{@code
+ * XJmfMessage message = new XJmfMessage();
+ * message.addMessage(new CommandSubmitQueueEntry().withQueueSubmissionParams(
+ *     new QueueSubmissionParams().withURL(new URI("https://example.org/my-job.xjdf"))));
+ * byte[] xml = message.toXml();
+ * }</pre>
+ *
+ * <p>
+ * {@link org.cip4.lib.xjdf.XJdfConstants} must be initialized before the first message is created, because the
+ * headers are generated from those values.
+ * </p>
  */
 public class XJmfMessage {
 
@@ -41,10 +59,11 @@ public class XJmfMessage {
     }
 
     /**
-     * Custom Constructor. <br>
-     * Accepting an XJMF Message as byte array for initializing.
+     * Creates a message by parsing the given XML.
      *
-     * @param bytes The XJMF Message as byte array.
+     * @param bytes The XJMF message as byte array.
+     *
+     * @throws XJdfParseException in case the XML cannot be parsed.
      */
     public XJmfMessage(byte[] bytes) throws XJdfParseException {
         this(new XJdfParser<XJMF>().readXml(bytes));
@@ -90,8 +109,12 @@ public class XJmfMessage {
 
     /**
      * Return the typed message in the XJMF body.
+     *
      * @param type The message's type.
+     * @param <T> The message type.
      * @return The typed message.
+     *
+     * @throws XJmfMessageException in case there is not exactly one message of the given type.
      */
     public <T extends Message> T getMessage(Class<T> type) throws XJmfMessageException {
 
@@ -132,17 +155,23 @@ public class XJmfMessage {
     /**
      * Returns the current XJMF Message as XML byte array.
      *
-     * @return The XJDF Document as XML byte array.
+     * @return The XJMF message as XML byte array.
+     *
+     * @throws XJdfParseException in case the message cannot be serialized.
+     * @throws XJdfValidationException in case the message is invalid.
      */
     public byte[] toXml() throws XJdfParseException, XJdfValidationException {
         return toXml(true);
     }
 
     /**
-     * Returns the current XJDF Document as XML byte array.
+     * Returns the current XJMF Message as XML byte array.
      *
      * @param validate 'false' in case validation should be skipped.
-     * @return The XJDF Document as XML byte array.
+     * @return The XJMF message as XML byte array.
+     *
+     * @throws XJdfParseException in case the message cannot be serialized.
+     * @throws XJdfValidationException in case the message is invalid and validation is enabled.
      */
     public byte[] toXml(boolean validate) throws XJdfParseException, XJdfValidationException {
 
@@ -158,6 +187,11 @@ public class XJmfMessage {
         return xml;
     }
 
+    /**
+     * Returns the message as an XML string without validation.
+     *
+     * @return The XML representation, or an error text if serialization fails.
+     */
     @Override
     public String toString() {
         try {
@@ -169,6 +203,10 @@ public class XJmfMessage {
 
     /**
      * Factory method to create a submit queue entry command message.
+     *
+     * @param url The URL of the XJDF document to submit.
+     * @param returnJmf The URL to which the return JMF should be sent, may be null.
+     *
      * @return The XJMF message containing a submit queue entry command.
      */
     public static XJmfMessage createSubmitQueueEntry(URI url, URI returnJmf) {

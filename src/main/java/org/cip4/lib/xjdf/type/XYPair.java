@@ -123,7 +123,11 @@ public final class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the pair as {@code "x y"} with three decimals.
+     *
+     * @param xyPair The pair to serialize.
+     *
+     * @return The formatted value, or null in case the pair is null.
      */
     @Override
     public String marshal(XYPair xyPair) {
@@ -139,7 +143,13 @@ public final class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses a pair from {@code "x y"}.
+     *
+     * @param v The pair string.
+     *
+     * @return The parsed pair.
+     *
+     * @throws IllegalArgumentException in case the value is not two whitespace separated numbers.
      */
     @Override
     public XYPair unmarshal(String v) {
@@ -147,7 +157,9 @@ public final class XYPair extends AbstractXJdfType<String, XYPair> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the pair as {@code "x y"} with three decimals.
+     *
+     * @return The formatted value.
      */
     @Override
     public String toString() {

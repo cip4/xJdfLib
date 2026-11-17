@@ -4,7 +4,23 @@ import org.cip4.lib.xjdf.schema.Intent;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
+/**
+ * Validates that {@code Intent/@Name} matches the name of the contained product intent element.
+ */
 public class IntentValidator extends SimpleValidator<Intent> {
+
+    /**
+     * Creates the validator.
+     */
+    public IntentValidator() {
+    }
+    /**
+     * Validates the intent.
+     *
+     * @param intent The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final Intent intent, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -21,6 +37,13 @@ public class IntentValidator extends SimpleValidator<Intent> {
         }
     }
 
+    /**
+     * Returns true for {@link Intent} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is an intent.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof Intent;

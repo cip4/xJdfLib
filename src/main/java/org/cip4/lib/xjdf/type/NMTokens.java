@@ -18,7 +18,9 @@ public final class NMTokens extends AbstractList<String> {
     }
 
     /**
-     * Custom constructor. Accepting a variable number of strings.
+     * Creates a list from the given values.
+     *
+     * @param values The list values.
      */
     public NMTokens(String... values) {
 
@@ -26,7 +28,9 @@ public final class NMTokens extends AbstractList<String> {
     }
 
     /**
-     * Custom constructor. Accepting a list object for initializing.
+     * Creates a list from the given values.
+     *
+     * @param list The list values. The list is copied.
      */
     public NMTokens(List<String> list) {
 
@@ -34,14 +38,20 @@ public final class NMTokens extends AbstractList<String> {
     }
 
     /**
-     * Custom constructor. Accepting a String object for initializing.
+     * Parses a space separated list of NMTOKEN values.
+     *
+     * @param value The space separated list.
      */
     public NMTokens(String value) {
         super(value);
     }
 
     /**
-     * @see org.cip4.lib.xjdf.type.AbstractList#convertFromString(java.lang.String)
+     * Returns the item unchanged.
+     *
+     * @param value The raw item.
+     *
+     * @return The item.
      */
     @Override
     protected String convertFromString(String value) {
@@ -51,7 +61,9 @@ public final class NMTokens extends AbstractList<String> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the values as a space separated string.
+     *
+     * @return The space separated values.
      */
     @Override
     public String toString() {

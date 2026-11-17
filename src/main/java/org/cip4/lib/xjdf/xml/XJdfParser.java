@@ -18,9 +18,24 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 /**
- * This class is a parser based on the XJDF Schema.
+ * Reads and writes XJDF and XJMF XML using JAXB.
  *
- * @param <T> The root node this parser applies to. Valid values are 'XJDF' and 'XJMF'
+ * <p>
+ * The parser is typed by the root element it handles, {@link org.cip4.lib.xjdf.schema.XJDF} or
+ * {@link org.cip4.lib.xjdf.schema.XJMF}:
+ * </p>
+ *
+ * <pre>{@code
+ * XJDF xjdf = new XJdfParser<XJDF>().readXml(bytes);
+ * byte[] xml = new XJdfParser<XJDF>().writeXml(xjdf);
+ * }</pre>
+ *
+ * <p>
+ * XML is always written as UTF-8. Namespaces are written without a prefix where possible and with the prefix
+ * {@code xjdf} when a prefix is required.
+ * </p>
+ *
+ * @param <T> The root node this parser applies to. Valid values are {@code XJDF} and {@code XJMF}.
  */
 public class XJdfParser<T> {
 
@@ -46,6 +61,8 @@ public class XJdfParser<T> {
      *
      * @param bytes The XML byte array to be parsed.
      * @return The parsed object tree.
+     *
+     * @throws XJdfParseException in case the XML cannot be parsed.
      */
     @SuppressWarnings("unchecked")
     public final T readXml(final byte[] bytes) throws XJdfParseException {
@@ -61,6 +78,8 @@ public class XJdfParser<T> {
      *
      * @param inputStream The XML input stream to be parsed.
      * @return The parsed object tree.
+     *
+     * @throws XJdfParseException in case the XML cannot be parsed.
      */
     @SuppressWarnings("unchecked")
     public final T readXml(final InputStream inputStream) throws XJdfParseException {
@@ -78,6 +97,8 @@ public class XJdfParser<T> {
      *
      * @param node Object tree to be written.
      * @return The XJDF Document as xml byte array.
+     *
+     * @throws XJdfParseException in case the object tree cannot be serialized.
      */
     public final byte[] writeXml(final T node)
         throws XJdfParseException {
@@ -99,6 +120,8 @@ public class XJdfParser<T> {
      *
      * @param node         Object tree to be written.
      * @param outputStream The output stream the XML stream is written to.
+     *
+     * @throws XJdfParseException in case the object tree cannot be serialized.
      */
     public final void writeXml(final T node, final OutputStream outputStream)
         throws XJdfParseException {

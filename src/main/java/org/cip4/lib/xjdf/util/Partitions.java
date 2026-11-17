@@ -31,6 +31,7 @@ public final class Partitions {
      *
      * @param resourceSet The resource set to be analyzed.
      * @return Map of partition keys plus values.
+     * @throws IllegalAccessException in case a partition field cannot be read.
      */
     public static Map<String, List<Object>> getPartKeyValues(ResourceSet resourceSet) throws IllegalAccessException {
         Map<String, List<Object>> partKeyValues = new HashMap<>();
@@ -68,6 +69,16 @@ public final class Partitions {
     }
 
 
+    /**
+     * Returns the resource matching the given part.
+     *
+     * @param resourceSet The resource set to search.
+     * @param part The partition to match.
+     *
+     * @return The matching resource, or null if none matches.
+     *
+     * @throws IllegalArgumentException in case more than one resource matches.
+     */
     public static Resource getResourceByPart(final ResourceSet resourceSet, final Part part) {
         List<Resource> resources = getResourcesByPart(resourceSet, part);
 
@@ -78,6 +89,14 @@ public final class Partitions {
         return resources.isEmpty() ? null : resources.get(0);
     }
 
+    /**
+     * Returns all resources matching the given part.
+     *
+     * @param resourceSet The resource set to search.
+     * @param part The partition to match.
+     *
+     * @return The matching resources. A resource without parts or with unpartitioned parts matches every query.
+     */
     public static List<Resource> getResourcesByPart(final ResourceSet resourceSet, final Part part) {
         List<Resource> result = new ArrayList<>();
 
