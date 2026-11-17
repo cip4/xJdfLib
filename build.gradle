@@ -3,21 +3,25 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
+    alias(libs.plugins.nexusPublish)
     id 'java-library'
     id 'maven-publish'
     id 'signing'
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0'
-    id 'jacoco'
 }
 
 group = 'org.cip4.lib.xjdf'
 description = 'CIP4 xJdfLib'
-version = project.hasProperty('projectVersion') ? project.projectVersion : '2.3.x-DEV'
+version = providers.gradleProperty('projectVersion').getOrElse('2.3.x-DEV')
 
-def generatedFiles = file("src/generated")
-def generatedSources = file("${generatedFiles}/java")
-def generatedResources = file("${generatedFiles}/resources")
-def schema = file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd')
+def generatedDir = layout.projectDirectory.dir('src/generated')
+def generatedSources = layout.projectDirectory.dir('src/generated/java')
+def generatedResources = layout.projectDirectory.dir('src/generated/resources')
+def schemaFile = layout.projectDirectory.file('src/main/resources/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd')
+def bindingFile = layout.projectDirectory.file('src/main/resources/org/cip4/lib/xjdf/binding.xjb')
+
+def buildInstant = new Date()
+def buildTimestamp = buildInstant.format("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", TimeZone.getTimeZone('UTC'))
+def manifestBuildDate = buildInstant.format("yyyy-MM-dd'T'HH:mm:ssZ", TimeZone.getTimeZone('UTC'))
 
 java {
     withJavadocJar()
@@ -27,8 +31,9 @@ java {
     }
 }
 
-compileJava.options.encoding = "UTF-8"
-compileTestJava.options.encoding = "UTF-8"
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
 
 publishing {
     publications {
@@ -50,64 +55,60 @@ publishing {
                 url = 'https://github.com/cip4/xJdfLib'
 
                 organization {
-                    name = "CIP4 Organization"
-                    url = "https://www.cip4.org"
+                    name = 'CIP4 Organization'
+                    url = 'https://www.cip4.org'
                 }
                 developers {
                     developer {
-                        id = "cip4-development"
-                        name = "CIP4 Development"
+                        id = 'cip4-development'
+                        name = 'CIP4 Development'
                     }
                 }
                 licenses {
                     license {
                         name = 'CIP4 Software License'
-                        url = 'https://github.com/cip4/xJdfLib/blob/master/LICENSE.md'
+                        url = 'https://github.com/cip4/xJdfLib/blob/main/LICENSE.md'
                     }
                 }
                 scm {
-                    connection = 'https://github.com/cip4/xJdfLib.git'
+                    connection = 'scm:git:https://github.com/cip4/xJdfLib.git'
                     developerConnection = 'scm:git:https://github.com/cip4/xJdfLib.git'
                     url = 'https://github.com/cip4/xJdfLib'
                 }
             }
         }
     }
-    repositories {
-        maven {
-            name = "sonatype"
-            def releasesRepoUrl = "https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/"
-            def snapshotsRepoUrl = "https://central.sonatype.com/repository/maven-snapshots/"
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+}
 
-            credentials {
-                username ossrhUsername
-                password ossrhPassword
-            }
-        }
+// Downloads the XSDs from schema.cip4.org during configuration on every build.
+// This behaviour is intentional; see AGENTS.md before changing it. The existing file is kept if the
+// download fails, so an unreachable schema host does not break or delete the tracked schemas.
+def schemaNames = ['jdfschema_2_0', 'jdfschema_2_1', 'jdfschema_2_2', 'jdfschema_2_x']
+schemaNames.forEach { schemaName ->
+    println "Update ${schemaName} from https://schema.cip4.org..."
+    def dest = layout.projectDirectory.file(
+        "src/main/resources/org/cip4/lib/xjdf/schema/${schemaName}.xsd"
+    ).asFile
+    try {
+        dest.text = URI.create("https://schema.cip4.org/${schemaName}/xjdf.xsd").toURL().text
+    } catch (Exception e) {
+        logger.warn("Could not update ${schemaName}, keeping the existing file: ${e.message}")
     }
 }
 
-task updateSchema() {
-    def schemes = ["jdfschema_2_0", "jdfschema_2_1", "jdfschema_2_2", "jdfschema_2_x"]
-
-    schemes.forEach { schemaName ->
-        println "Update ${schemaName} from https://schema.cip4.org..."
-        def dest = new File("src/main/resources/org/cip4/lib/xjdf/schema/${schemaName}.xsd")
-        dest.delete()
-
-        dest << new URL ("https://schema.cip4.org/${schemaName}/xjdf.xsd").getText()
-    }
+tasks.register('updateSchema') {
+    group = 'build'
+    description = 'Downloads the XJDF schemas from schema.cip4.org (also downloaded during configuration of every build).'
 }
 
 nexusPublishing {
     repositories {
         sonatype {
-            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
-            username = ossrhUsername
-            password = ossrhPassword
-            stagingProfileId = '105e2b532689c6' // This can often be omitted if your packageGroup is unique
+            nexusUrl = uri('https://ossrh-staging-api.central.sonatype.com/service/local/')
+            snapshotRepositoryUrl = uri('https://central.sonatype.com/repository/maven-snapshots/')
+            username = providers.gradleProperty('ossrhUsername').getOrElse('')
+            password = providers.gradleProperty('ossrhPassword').getOrElse('')
+            stagingProfileId = '105e2b532689c6'
             packageGroup = 'org.cip4'
         }
     }
@@ -122,106 +123,111 @@ repositories {
 }
 
 signing {
-    if (!version.endsWith("SNAPSHOT")) {
-        sign publishing.publications.mavenJava
-    }
+    required = !version.endsWith('SNAPSHOT')
+        && (providers.gradleProperty('signing.keyId').isPresent() || providers.gradleProperty('signingKey').isPresent())
+    sign publishing.publications.mavenJava
 }
 
-javadoc {
+tasks.named('javadoc') {
     failOnError = true
     options.encoding = 'UTF-8'
     options.charSet = 'UTF-8'
-    options.overview = file('src/main/javadoc/overview.html')
+    options.overview = layout.projectDirectory.file('src/main/javadoc/overview.html').asFile
     options.windowTitle = "CIP4 xJdfLib ${version} API"
     options.docTitle = "CIP4 xJdfLib ${version} API"
     options.addBooleanOption('notimestamp', true)
     options.addBooleanOption('Xdoclint:all,-missing', true)
     options.addBooleanOption('Xdoclint/package:-org.cip4.lib.xjdf.schema', true)
-    options.links += [
-        'https://docs.oracle.com/en/java/javase/21/docs/api/',
-        'https://jakarta.ee/specifications/xml-binding/4.0/apidocs/'
-    ]
-    if (JavaVersion.current().isJava9Compatible()) {
-        options.addBooleanOption('html5', true)
+    // External links make offline builds fail, so they are enabled in CI and with -PjavadocLinks.
+    if (providers.environmentVariable('CI').isPresent() || providers.gradleProperty('javadocLinks').isPresent()) {
+        options.links += [
+            'https://docs.oracle.com/en/java/javase/21/docs/api/',
+            'https://jakarta.ee/specifications/xml-binding/4.0/apidocs/'
+        ]
     }
 }
 
-processResources {
+def resourceTokens = [
+    name      : project.name,
+    version   : project.version.toString(),
+    artifactId: project.name,
+    timestamp : buildTimestamp
+]
+
+tasks.named('processResources', ProcessResources) {
     filesMatching(['**/*.properties']) {
-        filter(ReplaceTokens, tokens: [
-                'name': project.properties['description'],
-                'version': project.properties['version'],
-                'artifactId': project.properties['name'],
-                'timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSXXX", TimeZone.getTimeZone("GMT"))
-        ])
+        filter(ReplaceTokens, tokens: resourceTokens)
     }
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:2.16.1'
-    implementation 'org.apache.commons:commons-lang3:3.18.0'
-    implementation 'com.sun.xml.bind:jaxb-impl:4.0.5'
-    implementation 'com.sun.xml.bind:jaxb-core:4.0.4'
-    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
-    implementation 'jakarta.annotation:jakarta.annotation-api:2.1.1'
-    implementation 'org.jetbrains:annotations:24.1.0'
-    implementation 'org.reflections:reflections:0.10.2'
-    implementation 'javax.annotation:javax.annotation-api:1.3.2'
-    implementation 'xerces:xercesImpl:2.12.2'
+    api libs.jakartaXmlBindApi
+    compileOnlyApi libs.jetbrainsAnnotations
+    implementation libs.jaxbRuntime
+    compileOnly libs.jakartaAnnotationApi
+    implementation libs.commonsLang3
+    implementation libs.reflections
 
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.3'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.3'
-    testImplementation 'org.mockito:mockito-core:5.12.0'
-    testImplementation 'org.hamcrest:hamcrest-library:2.2'
-    testImplementation 'org.junit-pioneer:junit-pioneer:2.2.0'
+    testImplementation platform(libs.junitBom)
+    testImplementation libs.junitJupiter
+    testRuntimeOnly libs.junitPlatformLauncher
+    testImplementation libs.mockitoCore
+    testImplementation libs.hamcrest
+    testImplementation libs.junitPioneer
 
-    xjc 'com.sun.xml.bind:jaxb-core:4.0.4'
-    xjc 'com.sun.xml.bind:jaxb-xjc:4.0.4'
-    xjc 'com.sun.xml.bind:jaxb-impl:4.0.5'
-    xjc 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
-
-    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb:0.12.2'
-    xjc 'org.patrodyne.jvnet:hisrc-basicjaxb-ant:2.1.1'
-    xjc 'org.patrodyne.jvnet:hisrc-hyperjaxb-annox-plugin:1.1.2'
-    xjc 'org.jvnet.jaxb2_commons:jaxb2-fluent-api:3.0'
+    xjc libs.jaxbCore
+    xjc libs.jaxbXjc
+    xjc libs.jaxbImpl
+    xjc libs.jakartaXmlBindApi
+    xjc libs.hisrcBasicjaxb
+    xjc libs.hisrcBasicjaxbAnt
+    xjc libs.hisrcHyperjaxbAnnoxPlugin
+    xjc libs.jaxb2FluentApi
 }
 
-tasks.named('sourcesJar') {
-    dependsOn(':xjc')
-}
+def xjcTask = tasks.register('xjc', JavaExec) {
+    group = 'build'
+    description = 'Generates JAXB classes from the XJDF schema.'
+    classpath = configurations.xjc
+    mainClass = 'com.sun.tools.xjc.Driver'
+    jvmArgs '-Duser.language=en', '-Duser.country=US'
 
-task xjc() {
-    def bindings = file('src/main/resources/org/cip4/lib/xjdf/binding.xjb')
-    inputs.files(schema, bindings)
+    inputs.files(schemaFile, bindingFile)
+    inputs.files(configurations.xjc)
     outputs.dir(generatedSources)
     outputs.dir(generatedResources)
+
+    def episodeFile = generatedResources.file('META-INF/sun-jaxb.episode').asFile
+    args = [
+        '-d', generatedSources.asFile.absolutePath,
+        '-b', bindingFile.asFile.absolutePath,
+        '-episode', episodeFile.absolutePath,
+        '-extension',
+        '-mark-generated',
+        '-noDate',
+        '-no-header',
+        '-readOnly',
+        '-Xfluent-api',
+        '-Xinject-code',
+        '-XsimpleEquals',
+        '-XsimpleHashCode',
+        '-Xannotate',
+        '-quiet',
+        schemaFile.asFile.absolutePath
+    ]
+
+    doFirst {
+        delete generatedSources
+        delete generatedResources
+        generatedSources.asFile.mkdirs()
+        generatedResources.dir('META-INF').asFile.mkdirs()
+    }
+
     doLast {
-        generatedSources.mkdirs()
-        file("$generatedResources/META-INF").mkdirs()
-        Locale defaultLocale = Locale.getDefault();
-        Locale.setDefault(Locale.US)
-        ant.taskdef(
-                name: 'xjc',
-                classname: 'com.sun.tools.xjc.XJCTask',
-                classpath: configurations.xjc.asPath
-        )
-        ant.xjc(
-                destdir: generatedSources,
-                schema: schema,
-                binding: bindings,
-                readonly: true,
-                header: false,
-                removeOldOutput: true,
-                extension: true,
-        ) {
-            arg(line: "-mark-generated -Xfluent-api -Xinject-code -XsimpleEquals -XsimpleHashCode -Xannotate -verbose" +
-                    " -episode $generatedResources/META-INF/sun-jaxb.episode")
-        }
         // Move the package javadoc generated by the bindings into package-info.java, because javadoc
         // prefers package-info.java and ignores package.html when both files are present.
-        def schemaPackageInfo = file("$generatedSources/org/cip4/lib/xjdf/schema/package-info.java")
-        def schemaPackageHtml = file("$generatedSources/org/cip4/lib/xjdf/schema/package.html")
+        def schemaPackageInfo = generatedSources.file('org/cip4/lib/xjdf/schema/package-info.java').asFile
+        def schemaPackageHtml = generatedSources.file('org/cip4/lib/xjdf/schema/package.html').asFile
         if (schemaPackageHtml.exists() && schemaPackageInfo.exists()) {
             def javadoc = schemaPackageHtml.text.trim().readLines().collect { " * $it" }.join('\n')
             schemaPackageInfo.setWritable(true)
@@ -230,69 +236,51 @@ task xjc() {
             schemaPackageHtml.setWritable(true)
             schemaPackageHtml.delete()
         }
-        Locale.setDefault(defaultLocale)
     }
 }
 
-clean {
-    delete generatedFiles
+tasks.named('clean') {
+    delete generatedDir
 }
 
 sourceSets {
     main {
-        java.srcDir(generatedSources)
-        output.dir(generatedResources, builtBy: 'xjc')
+        java.srcDir(xjcTask.map { generatedSources })
+        output.dir(generatedResources, builtBy: xjcTask)
     }
 }
 
-compileJava {
-    dependsOn(xjc)
-}
-
-jacocoTestReport {
-    dependsOn test
-    reports {
-        xml.required = true
-        html.required = false
-    }
-}
-
-test {
+tasks.named('test') {
     useJUnitPlatform()
     maxParallelForks = Runtime.runtime.availableProcessors()
 }
 
-jar {
+tasks.named('jar') {
     manifest {
         attributes(
-                "Implementation-Build-Date": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "Implementation-Title": project.description,
-                "Implementation-Version": project.version,
-                "Implementation-Vendor-Id": project.group,
-                "Specification-Title": project.description,
-                "Specification-Version": project.version,
-                "Build-Jdk": JavaVersion.current(),
+            'Implementation-Build-Date': manifestBuildDate,
+            'Implementation-Title': project.description,
+            'Implementation-Version': project.version,
+            'Implementation-Vendor-Id': project.group,
+            'Specification-Title': project.description,
+            'Specification-Version': project.version,
+            'Build-Jdk': java.toolchain.languageVersion.get().toString(),
         )
     }
 }
 
-task zipTestPackage(type: Zip) {
-    from 'src/test/resources/org/cip4/lib/xjdf/testPackage'
-    include '*'
-    include '*/*'
-    archiveFileName = 'testPackage.zip'
-    destinationDirectory = file("$buildDir/resources/test/org/cip4/lib/xjdf/")
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
 }
 
-processTestResources.dependsOn(zipTestPackage)
-
-tasks.withType(Test) {
+tasks.withType(Test).configureEach {
     testLogging {
         events TestLogEvent.FAILED,
                TestLogEvent.SKIPPED
-        exceptionFormat TestExceptionFormat.FULL
-        showExceptions true
-        showCauses true
-        showStackTraces true
+        exceptionFormat = TestExceptionFormat.FULL
+        showExceptions = true
+        showCauses = true
+        showStackTraces = true
     }
 }
