@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 import java.time.ZoneId;
-import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -84,15 +83,15 @@ public class DateTimeTest {
 		final String dateTimeString = "2012-03-04T13:20:40Z";
 
         final DateTime dateTime = new DateTime(dateTimeString);
-		final Calendar cal = dateTime.getCalendar();
+		final java.time.ZonedDateTime zonedDateTime = dateTime.getZonedDateTime();
 
-		assertEquals(2012, cal.get(Calendar.YEAR), "Year is wrong.");
-		assertEquals(Calendar.MARCH, cal.get(Calendar.MONTH), "Month is wrong.");
-		assertEquals(4, cal.get(Calendar.DAY_OF_MONTH), "Day is wrong.");
-		assertEquals(13, cal.get(Calendar.HOUR_OF_DAY), "Hour is wrong.");
-		assertEquals(20, cal.get(Calendar.MINUTE), "Minutes are wrong.");
-		assertEquals(40, cal.get(Calendar.SECOND), "Secondes are wrong.");
-		assertEquals(0, cal.get(Calendar.ZONE_OFFSET), "TimeZone is wrong.");
+		assertEquals(2012, zonedDateTime.getYear(), "Year is wrong.");
+		assertEquals(java.time.Month.MARCH, zonedDateTime.getMonth(), "Month is wrong.");
+		assertEquals(4, zonedDateTime.getDayOfMonth(), "Day is wrong.");
+		assertEquals(13, zonedDateTime.getHour(), "Hour is wrong.");
+		assertEquals(20, zonedDateTime.getMinute(), "Minutes are wrong.");
+		assertEquals(40, zonedDateTime.getSecond(), "Secondes are wrong.");
+		assertEquals(java.time.ZoneOffset.UTC, zonedDateTime.getOffset(), "TimeZone is wrong.");
 	}
 
     @Test

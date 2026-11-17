@@ -4,9 +4,6 @@ import org.cip4.lib.xjdf.schema.DeviceInfo;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.junit.jupiter.api.Test;
 
-import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class DeviceInfoValidatorTest {
 
     @Test
@@ -14,7 +11,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo();
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertThat(deviceInfo, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, deviceInfo);
     }
 
     @Test
@@ -22,7 +19,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("Schema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertThat(deviceInfo, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, deviceInfo);
     }
 
     @Test
@@ -30,7 +27,7 @@ public class DeviceInfoValidatorTest {
         DeviceInfo deviceInfo = new DeviceInfo().withFileSpec(new FileSpec().withResourceUsage("CurrentSchema"));
         DeviceInfoValidator validator = new DeviceInfoValidator();
 
-        assertThat(deviceInfo, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, deviceInfo);
     }
 
     @Test

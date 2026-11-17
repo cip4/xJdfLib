@@ -15,7 +15,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 
-import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,8 +41,7 @@ class XJmfMessageTest {
         xJmfMessage.addMessage(queryKnownMessages);
 
         // assert
-        byte[] result = xJmfMessage.toXml();
-        System.out.println(new String(result));
+        xJmfMessage.toXml();
         Assertions.assertEquals(Version.V2_3, xJmfMessage.getXJmf().getVersion());
 
         Header xjmfHeader = xJmfMessage.getXJmf().getHeader();
@@ -71,8 +69,7 @@ class XJmfMessageTest {
         xJmfMessage.addMessage(new QueryKnownSubscriptions());
 
         // assert
-        byte[] result = xJmfMessage.toXml();
-        System.out.println(new String(result));
+        xJmfMessage.toXml();
 
         Header xjmfHeader = xJmfMessage.getXJmf().getHeader();
         Assertions.assertEquals("MY_AGENT", xjmfHeader.getAgentName());
@@ -101,7 +98,7 @@ class XJmfMessageTest {
     void readXJmf_1() throws Exception {
 
         // arrange
-        byte[] xjmf = loadFile("CommandSubmitQueueEntry.xjmf");
+        byte[] xjmf = TestResources.load("CommandSubmitQueueEntry.xjmf");
 
         // act
         XJmfMessage xJmfMessage = new XJmfMessage(xjmf);
@@ -236,7 +233,6 @@ class XJmfMessageTest {
         byte[] xjmf = XJmfMessage.createSubmitQueueEntry(url, returnJmf).toXml();
 
         // assert
-        System.out.println(new String(xjmf));
         assertNotNull(xjmf, "createSubmitQueueEntry is null");
 
         XJmfMessage result = new XJmfMessage(xjmf);
@@ -263,12 +259,4 @@ class XJmfMessageTest {
         assertEquals("https://example.org/job.xjdf", commandSubmitQueueEntry.getQueueSubmissionParams().getURL().toString(), "QueueSubmissionURL is wrong.");
     }
 
-    /**
-     * Helper method to load a file.
-     * @param filename The files name.
-     * @return The file as byte array.
-     */
-    private byte[] loadFile(String filename) throws IOException {
-        return ZipPackageTest.class.getResourceAsStream("/org/cip4/lib/xjdf/" + filename).readAllBytes();
-    }
 }

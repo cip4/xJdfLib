@@ -5,19 +5,15 @@ import org.cip4.lib.xjdf.schema.Product;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class AssemblingIntentValidatorTest {
 
     @Test
     public void allowReferenceToForeignProduct() {
         AssemblingIntent assemblingIntent = new AssemblingIntent().withContainer(new Product().withID("foo"));
-        assertThat(
-            assemblingIntent,
-            ElementValid.isValid(
-                new AssemblingIntentValidator(),
-                new Ancestors(new Product().withID("bar"))
-            )
+        ValidationAssertions.assertIsValid(
+            new AssemblingIntentValidator(),
+            new Ancestors(new Product().withID("bar")),
+            assemblingIntent
         );
     }
 

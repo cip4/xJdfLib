@@ -1,0 +1,45 @@
+[versions]
+nexusPublish = "2.0.0"
+
+jakartaXmlBind = "4.0.5"
+jakartaAnnotation = "2.1.1"
+jaxbRuntime = "4.0.9"
+commonsLang3 = "3.22.0"
+reflections = "0.10.2"
+jetbrainsAnnotations = "26.1.0"
+
+junit = "5.14.4"
+mockito = "5.24.0"
+junitPioneer = "2.3.0"
+
+jaxbXjc = "4.0.4"
+jaxbImpl = "4.0.5"
+hisrcBasicjaxb = "0.12.2"
+hisrcBasicjaxbAnt = "2.1.1"
+hisrcHyperjaxbAnnox = "1.1.2"
+jaxb2FluentApi = "3.0"
+
+[libraries]
+jakartaXmlBindApi = { module = "jakarta.xml.bind:jakarta.xml.bind-api", version.ref = "jakartaXmlBind" }
+jakartaAnnotationApi = { module = "jakarta.annotation:jakarta.annotation-api", version.ref = "jakartaAnnotation" }
+jaxbRuntime = { module = "org.glassfish.jaxb:jaxb-runtime", version.ref = "jaxbRuntime" }
+commonsLang3 = { module = "org.apache.commons:commons-lang3", version.ref = "commonsLang3" }
+reflections = { module = "org.reflections:reflections", version.ref = "reflections" }
+jetbrainsAnnotations = { module = "org.jetbrains:annotations", version.ref = "jetbrainsAnnotations" }
+
+junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
+mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
+junitPioneer = { module = "org.junit-pioneer:junit-pioneer", version.ref = "junitPioneer" }
+
+jaxbXjc = { module = "com.sun.xml.bind:jaxb-xjc", version.ref = "jaxbXjc" }
+jaxbCore = { module = "com.sun.xml.bind:jaxb-core", version.ref = "jaxbXjc" }
+jaxbImpl = { module = "com.sun.xml.bind:jaxb-impl", version.ref = "jaxbImpl" }
+hisrcBasicjaxb = { module = "org.patrodyne.jvnet:hisrc-basicjaxb", version.ref = "hisrcBasicjaxb" }
+hisrcBasicjaxbAnt = { module = "org.patrodyne.jvnet:hisrc-basicjaxb-ant", version.ref = "hisrcBasicjaxbAnt" }
+hisrcHyperjaxbAnnoxPlugin = { module = "org.patrodyne.jvnet:hisrc-hyperjaxb-annox-plugin", version.ref = "hisrcHyperjaxbAnnox" }
+jaxb2FluentApi = { module = "org.jvnet.jaxb2_commons:jaxb2-fluent-api", version.ref = "jaxb2FluentApi" }
+
+[plugins]
+nexusPublish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublish" }

@@ -39,7 +39,7 @@ public class Identifiers {
         char[] id = new char[ID_LENGTH];
 
         for (int i = 0; i < ID_LENGTH; i++) {
-            int pos = (int) (Math.random() * CHARACTERS.length());
+            int pos = java.util.concurrent.ThreadLocalRandom.current().nextInt(CHARACTERS.length());
             id[i] = CHARACTERS.charAt(pos);
         }
 

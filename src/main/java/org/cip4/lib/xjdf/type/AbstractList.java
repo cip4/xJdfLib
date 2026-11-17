@@ -99,9 +99,10 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      *
      * @param list the list to set
      *
-     * @deprecated The list is immutable. Use the constructor instead.
+     * @deprecated The list is immutable. Use the constructor instead; this method will be removed in a future
+     *     release.
      */
-    @Deprecated
+    @Deprecated(since = "2.3", forRemoval = true)
     public void setList(List<T> list) {
         this.list = Collections.unmodifiableList(new ArrayList<>(list));
     }

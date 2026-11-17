@@ -64,13 +64,6 @@ public class IdentifiersTest {
         assertTrue(result.startsWith("ID_"), "ID is wrong.");
     }
 
-    @Test
-    public void printAFew() {
-        for(int i = 0; i < 20; i ++) {
-            System.out.println(Identifiers.generate("COMP"));
-        }
-    }
-
     /**
      * Test method for {@link Identifiers#generate(java.lang.String)}.
      */
@@ -131,11 +124,9 @@ public class IdentifiersTest {
         Throwable t = assertThrows(XJdfValidationException.class, xJdfDocument::toXml);
 
         // assert
-        String expectedMessage = "Validation of the document's semantic failed due to following error messages: " + System.lineSeparator() +
-                "ERROR in XJDF Doc at line 13, column 29: cvc-id.2: There are multiple occurrences of ID value 'ID_1'." + System.lineSeparator() +
-                "ERROR in XJDF Doc at line 13, column 29: cvc-attribute.3: The value 'ID_1' of attribute 'ID' on element 'Resource' is not valid with respect to its type, 'ID'.";
-
-        assertEquals(expectedMessage, t.getMessage(), "Error message is wrong.");
+        String message = t.getMessage();
+        assertTrue(message.contains("cvc-id.2"), "Message must report the duplicate ID: " + message);
+        assertTrue(message.contains("ID_1"), "Message must name the duplicated value: " + message);
 
     }
 

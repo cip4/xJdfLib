@@ -4,21 +4,18 @@ import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.FileSpec;
 import org.junit.jupiter.api.Test;
 
-import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class DeliveryParamsValidatorTest {
 
     @Test
     public void validateAllowsSingleOccurrence() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        assertThat(getDeliveryParams("RemoteURL"), isValid(validator));
+        ValidationAssertions.assertIsValid(validator, getDeliveryParams("RemoteURL"));
     }
 
     @Test
     public void validateAllowsNoOccurrence() {
         DeliveryParamsValidator validator = new DeliveryParamsValidator();
-        assertThat(getDeliveryParams(), isValid(validator));
+        ValidationAssertions.assertIsValid(validator, getDeliveryParams());
     }
 
     @Test

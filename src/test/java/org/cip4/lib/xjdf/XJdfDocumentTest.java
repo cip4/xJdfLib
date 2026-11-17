@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.parallel.ExecutionMode.SAME_THREAD;
 @Execution(SAME_THREAD)
 public class XJdfDocumentTest {
 
-    private final String RES_ROOT = "/org/cip4/lib/xjdf/";
 
     @BeforeAll
     static void initTests() {
@@ -110,21 +109,24 @@ public class XJdfDocumentTest {
     public void addResourceSet_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
         ResourceSet resourceSet = xJdfDocument.addResourceSet(Preview.class, Usage.INPUT);
 
         // assert
-        System.out.println(xJdfDocument);
+        assertEquals("Preview", resourceSet.getName(), "Name of the resource set is wrong.");
+        assertEquals(Usage.INPUT, resourceSet.getUsage(), "Usage of the resource set is wrong.");
+        assertTrue(xJdfDocument.getXJdf().getResourceSet().contains(resourceSet),
+            "The resource set is not part of the document.");
     }
 
     @Test
     public void addSpecificResource_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet resourceSet = xJdfDocument.addResourceSet(Preview.class, null, null, (IntegerList) null);
@@ -135,14 +137,16 @@ public class XJdfDocumentTest {
         Resource resource = xJdfDocument.addSpecificResource(resourceSet, preview, List.of());
 
         // assert
-        System.out.println(xJdfDocument);
+        assertNotNull(resource, "Resource is null.");
+        assertSame(preview, resource.getSpecificResource().getValue(), "The specific resource was not wrapped.");
+        assertTrue(resourceSet.getResource().contains(resource), "The resource is not part of the resource set.");
     }
 
     @Test
     public void getResourceSet_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -158,7 +162,7 @@ public class XJdfDocumentTest {
     public void getResourceSet_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -172,7 +176,7 @@ public class XJdfDocumentTest {
     public void getResourceSet_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -186,7 +190,7 @@ public class XJdfDocumentTest {
     public void getResourceSet_4() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -200,7 +204,7 @@ public class XJdfDocumentTest {
     public void getResourceSet_5() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -214,7 +218,7 @@ public class XJdfDocumentTest {
     public void getResourceSet_6() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -228,7 +232,7 @@ public class XJdfDocumentTest {
     public void getCombinedProcessIndex_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -242,7 +246,7 @@ public class XJdfDocumentTest {
     public void getCombinedProcessIndex_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -256,7 +260,7 @@ public class XJdfDocumentTest {
     public void getCombinedProcessIndex_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -309,7 +313,7 @@ public class XJdfDocumentTest {
     public void getResources_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         Part part = new Part().withBinderySignatureID("BS-2");
@@ -359,11 +363,6 @@ public class XJdfDocumentTest {
         // ACT
 
         // ASSERT
-        System.out.println("----------------");
-        System.out.println();
-        System.out.println(xJdfDocument);
-        System.out.println();
-        System.out.println("----------------");
 
         assertEquals("NodeInfo", xJdfDocument.getXJdf().getResourceSet().get(0).getName(), "ResourceSet is wrong.");
         assertEquals("RunList", xJdfDocument.getXJdf().getResourceSet().get(1).getName(), "ResourceSet is wrong.");
@@ -398,7 +397,6 @@ public class XJdfDocumentTest {
         // act
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("Preview", xJdfDocument.getXJdf().getResourceSet().get(0).getName(), "ResourceSet is wrong.");
         assertEquals(new IntegerList(1), xJdfDocument.getXJdf().getResourceSet().get(0).getCombinedProcessIndex(), "CombinedProcessIndex is wrong.");
@@ -464,7 +462,6 @@ public class XJdfDocumentTest {
         );
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
         assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
@@ -491,7 +488,6 @@ public class XJdfDocumentTest {
         );
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("1", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
         assertEquals("2", xJdfDocument.getXJdf().getGeneralID().get(1).getIDUsage(), "IDUsage is wrong.");
@@ -508,7 +504,6 @@ public class XJdfDocumentTest {
         xJdfDocument.addGeneralID("USAGE", "VALUE");
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("VALUE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
         assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
@@ -524,7 +519,6 @@ public class XJdfDocumentTest {
         xJdfDocument.addGeneralID("USAGE", 5);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("5", xJdfDocument.getXJdf().getGeneralID().get(0).getIDValue(), "IDValue is wrong.");
         assertEquals("USAGE", xJdfDocument.getXJdf().getGeneralID().get(0).getIDUsage(), "IDUsage is wrong.");
@@ -547,7 +541,7 @@ public class XJdfDocumentTest {
     public void getSpecificResource_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-3.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-3.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -562,7 +556,7 @@ public class XJdfDocumentTest {
     public void getResource_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-3.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-3.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -577,14 +571,13 @@ public class XJdfDocumentTest {
     public void getResource_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-3.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-3.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
         Resource resource = xJdfDocument.getResource("R4");
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertNull(resource, "Resource is not null.");
     }
@@ -592,7 +585,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_1() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -603,7 +596,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResourceSet(layoutResourceSet);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertTrue(result, "Result is wrong.");
         assertEquals(9, xJdfDocument.getXJdf().getResourceSet().size());
@@ -613,7 +605,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_2() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -623,7 +615,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResourceSet(Layout.class, Usage.INPUT, null, (IntegerList) null);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertTrue(result, "Result is wrong.");
         assertEquals(9, xJdfDocument.getXJdf().getResourceSet().size());
@@ -633,7 +624,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_3() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -645,7 +636,6 @@ public class XJdfDocumentTest {
         );
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("ResourceSet 'Component' is ambiguous.", t.getMessage(), "Error message is wrong.");
     }
@@ -653,7 +643,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_4() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -662,7 +652,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResourceSet(Layout.class, Usage.OUTPUT, null, "Cutting");
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertFalse(result, "Removals return value is wrong.");
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -671,7 +660,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_5() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -680,7 +669,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertTrue(result, "Removals return value is wrong.");
         assertEquals(9, xJdfDocument.getXJdf().getResourceSet().size());
@@ -689,7 +677,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_6() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -698,7 +686,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResourceSet(Layout.class);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertTrue(result, "Removals return value is wrong.");
         assertEquals(9, xJdfDocument.getXJdf().getResourceSet().size());
@@ -707,7 +694,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResourceSet_7() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         assertEquals(10, xJdfDocument.getXJdf().getResourceSet().size());
@@ -719,7 +706,6 @@ public class XJdfDocumentTest {
         );
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals("ResourceSet 'Component' is ambiguous.", t.getMessage(), "Error message is wrong.");
     }
@@ -727,7 +713,7 @@ public class XJdfDocumentTest {
     @Test
     public void removeResource_1() throws Exception {
 
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet binderySignatureResourceSet = xJdfDocument.getResourceSet(BinderySignature.class);
@@ -736,7 +722,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResource(binderySignatureResourceSet, new Part().withBinderySignatureID("BS-1"));
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertTrue(result, "Removal return value is wrong.");
     }
@@ -745,7 +730,7 @@ public class XJdfDocumentTest {
     public void removeResource_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet binderySignatureResourceSet = xJdfDocument.getResourceSet(BinderySignature.class);
@@ -754,7 +739,6 @@ public class XJdfDocumentTest {
         boolean result = xJdfDocument.removeResource(binderySignatureResourceSet, new Part().withBinderySignatureID("NOT_EXIST"));
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertFalse(result, "Removal return value is wrong.");
     }
@@ -763,7 +747,7 @@ public class XJdfDocumentTest {
     public void getGeneralID_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -778,7 +762,7 @@ public class XJdfDocumentTest {
     public void getGeneralID_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -792,7 +776,7 @@ public class XJdfDocumentTest {
     public void getGeneralID_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-3.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-3.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -863,7 +847,7 @@ public class XJdfDocumentTest {
         Throwable t = assertThrows(UnsupportedOperationException.class, () -> xJdfDocument.getGeneralID("G_ID_1", Void.class));
 
         // assert
-        assertEquals("Type 'class java.lang.Void is not supported.", t.getMessage(), "Error message is wrong.");
+        assertEquals("Type 'Void' is not supported.", t.getMessage(), "Error message is wrong.");
     }
 
     @Test
@@ -902,7 +886,7 @@ public class XJdfDocumentTest {
     public void removeGeneralID_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         GeneralID generalID = xJdfDocument.getGeneralID("RATING_EFFICIENCY");
@@ -919,7 +903,7 @@ public class XJdfDocumentTest {
     public void removeGeneralID_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         GeneralID generalID = new GeneralID().withIDUsage("RATING_EFFICIENCY");
@@ -936,7 +920,7 @@ public class XJdfDocumentTest {
     public void removeGeneralID_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -951,7 +935,7 @@ public class XJdfDocumentTest {
     public void removeGeneralID_4() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -966,7 +950,7 @@ public class XJdfDocumentTest {
     public void getParts_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet resourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
@@ -986,7 +970,7 @@ public class XJdfDocumentTest {
     public void getParts_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet resourceSet = xJdfDocument.getResourceSet(Media.class);
@@ -1005,7 +989,7 @@ public class XJdfDocumentTest {
     public void getParts_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1023,7 +1007,7 @@ public class XJdfDocumentTest {
     public void getParts_4() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1040,7 +1024,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_0() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         Resource resource = xJdfDocument.getResource(ColorantControl.class);
@@ -1056,7 +1040,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
@@ -1074,7 +1058,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         Resource resource = xJdfDocument.getResource(Component.class);
@@ -1091,7 +1075,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_3() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-2.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-2.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         ResourceSet componentResourceSet = xJdfDocument.getResourceSet(Component.class, Usage.OUTPUT, null, "Cutting");
@@ -1108,7 +1092,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_4() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1123,7 +1107,7 @@ public class XJdfDocumentTest {
     public void getPartAmount_5() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-4.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-4.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1137,7 +1121,7 @@ public class XJdfDocumentTest {
     public void getCuttingParams_ProcessUsage_1() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-5.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-5.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1152,7 +1136,7 @@ public class XJdfDocumentTest {
     public void getCuttingParams_ProcessUsage_2() throws Exception {
 
         // arrange
-        byte[] xjdfBytes = XJdfDocumentTest.class.getResourceAsStream(RES_ROOT + "sheet-5.xjdf").readAllBytes();
+        byte[] xjdfBytes = TestResources.load("sheet-5.xjdf");
         XJdfDocument xJdfDocument = new XJdfDocument(xjdfBytes);
 
         // act
@@ -1179,7 +1163,6 @@ public class XJdfDocumentTest {
         xJdfDocument.insertProcessAt("Folding", 2);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals(List.of("ConventionalPrinting", "Cutting", "Folding", "Delivery"), xJdfDocument.getCombinedProcess(), "Combined Process is wrong.");
 
@@ -1208,7 +1191,6 @@ public class XJdfDocumentTest {
         xJdfDocument.insertProcessAt("Preflight", 0);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals(List.of("Preflight", "ConventionalPrinting", "Cutting", "Delivery"), xJdfDocument.getCombinedProcess(), "Combined Process is wrong.");
 

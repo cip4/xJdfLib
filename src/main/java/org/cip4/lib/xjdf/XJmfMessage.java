@@ -14,6 +14,7 @@ import org.cip4.lib.xjdf.xml.XJdfParser;
 import org.cip4.lib.xjdf.xml.XJdfValidator;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -195,9 +196,9 @@ public class XJmfMessage {
     @Override
     public String toString() {
         try {
-            return new String(toXml(false));
-        } catch (Exception e) {
-            return "Error creating an XML preview.";
+            return new String(toXml(false), StandardCharsets.UTF_8);
+        } catch (XJdfParseException | XJdfValidationException e) {
+            return "Error creating an XML preview: " + e.getMessage();
         }
     }
 

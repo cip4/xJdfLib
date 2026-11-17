@@ -128,7 +128,11 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
      * Creates a XJDF DateTime instance by a Date object.
      *
      * @param date Date object.
+     *
+     * @deprecated Use {@link #DateTime(ZonedDateTime)} or {@link #toInstant()} instead; it will be removed in a
+     *     future release.
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public DateTime(final Date date) {
         zonedDateTime = ZonedDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
     }
@@ -146,7 +150,10 @@ public final class DateTime extends AbstractXJdfType<String, DateTime> {
      * Clones the underlying calendar and returns it.
      *
      * @return the cloned calendar
+     *
+     * @deprecated Use {@link #getZonedDateTime()} instead; it will be removed in a future release.
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public final Calendar getCalendar() {
         return GregorianCalendar.from(this.zonedDateTime);
     }

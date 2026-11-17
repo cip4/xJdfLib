@@ -3,9 +3,8 @@ package org.cip4.lib.xjdf.validator.element;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResult;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
-import org.hamcrest.core.StringContains;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ValidationAssertions {
 
@@ -41,6 +40,7 @@ public class ValidationAssertions {
         ValidationResult result = resultBuilder.build();
         assertFalse(result.isValid());
         assertEquals(1, result.getViolations().size());
-        assertThat(result.getViolations().get(0), StringContains.containsString(messagePart));
+        assertTrue(result.getViolations().get(0).contains(messagePart),
+            "Expected violation containing '" + messagePart + "' but was: " + result.getViolations().get(0));
     }
 }

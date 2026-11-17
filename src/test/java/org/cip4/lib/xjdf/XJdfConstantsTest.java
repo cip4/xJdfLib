@@ -34,7 +34,6 @@ public class XJdfConstantsTest {
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String version = (String) xPath.compile("/schema/@version").evaluate(xml, XPathConstants.STRING);
 
-        System.out.println("Version: " + version);
         Assertions.assertTrue(version.startsWith("2.0."), "Wrong version.");
     }
 
@@ -54,7 +53,6 @@ public class XJdfConstantsTest {
 		XPath xPath = XPathFactory.newInstance().newXPath();
 		String version = (String) xPath.compile("/schema/@version").evaluate(xml, XPathConstants.STRING);
 
-		System.out.println("Version: " + version);
 		Assertions.assertTrue(version.startsWith("2.1."), "Wrong version.");
     }
 }

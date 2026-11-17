@@ -16,8 +16,6 @@ import org.cip4.lib.xjdf.schema.XJDF;
  */
 public class JAXBContextFactory {
 
-    private static JAXBContext jaxbContext;
-
     /**
      * Private constructor. This class cannot be instantiated.
      */
@@ -27,17 +25,27 @@ public class JAXBContextFactory {
     }
 
     /**
-     * Initialize the marshaller instance.
+     * Holder idiom: guarantees a thread-safe, single lazily created JAXB context.
      */
-    public static void init() {
-        if (jaxbContext == null) {
-            // initialize
+    private static class Holder {
+
+        private static final JAXBContext JAXB_CONTEXT = createContext();
+
+        private static JAXBContext createContext() {
             try {
-                jaxbContext = JAXBContext.newInstance(XJDF.class);
+                return JAXBContext.newInstance(XJDF.class);
             } catch (JAXBException e) {
                 throw new XJdfInitException(e);
             }
         }
+    }
+
+    /**
+     * Initialize the JAXB context.
+     */
+    public static void init() {
+        // touch the holder, which creates the context if necessary
+        Holder.JAXB_CONTEXT.getClass();
     }
 
     /**
@@ -46,13 +54,6 @@ public class JAXBContextFactory {
      * @return New Marshaller instance.
      */
     public static JAXBContext getInstance() {
-
-        // if necessary initialize
-        if (jaxbContext == null) {
-            init();
-        }
-
-        // return JAXBContext instance
-        return jaxbContext;
+        return Holder.JAXB_CONTEXT;
     }
 }

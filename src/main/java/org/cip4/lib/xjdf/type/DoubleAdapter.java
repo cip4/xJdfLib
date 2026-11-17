@@ -2,7 +2,11 @@ package org.cip4.lib.xjdf.type;
 
 /**
  * Adapter for the double values.
+ *
+ * @deprecated Not referenced by the generated schema classes or any binding; it will be removed in a future
+ *     release.
  */
+@Deprecated(since = "2.3", forRemoval = true)
 public final class DoubleAdapter {
 
     /**

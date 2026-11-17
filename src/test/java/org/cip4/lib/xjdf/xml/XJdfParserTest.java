@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml;
 
+import org.cip4.lib.xjdf.TestResources;
 import org.cip4.lib.xjdf.exception.XJdfParseException;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.XJdfConstants;
@@ -14,7 +15,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathFactory;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -35,8 +35,6 @@ class XJdfParserTest {
         byte[] result = xJdfParser.writeXml(xjdf);
 
         // assert
-        System.out.print(new String(result, StandardCharsets.UTF_8));
-
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newDefaultInstance().newDocumentBuilder();
         Document xmlDocument = documentBuilder.parse(new ByteArrayInputStream(result));
 
@@ -53,7 +51,7 @@ class XJdfParserTest {
 
         // arrange
         XJdfParser<XJDF> xJdfParser = new XJdfParser<>();
-        byte[] bytes = loadFile("parser-read-1.xjdf");
+        byte[] bytes = TestResources.loadXml("parser-read-1.xjdf");
 
         // act
         XJDF xjdf = xJdfParser.readXml(bytes);
@@ -80,14 +78,6 @@ class XJdfParserTest {
         assertEquals("Cannot read an XML byte array of null.", exception.getMessage());
     }
 
-    /**
-     * Helper method to load a file.
-     * @param filename The files name.
-     * @return The file as byte array.
-     */
-    private byte[] loadFile(String filename) throws IOException {
-        return XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/xml/" + filename).readAllBytes();
-    }
 
     @Test
     public void getPreferredPrefix_optional() throws Exception {

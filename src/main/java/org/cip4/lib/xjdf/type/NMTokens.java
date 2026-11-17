@@ -5,8 +5,11 @@ import java.util.List;
 /**
  * NMTOKENS is an enumerated set of NMTOKEN, which is expressed as a list of space separated values.
  *
+ * @deprecated NMTOKENS attributes are bound as {@code List<String>} by the generated schema classes; this type is
+ *     not referenced by any binding and will be removed in a future release.
  * @author s.meissner
  */
+@Deprecated(since = "2.3", forRemoval = true)
 public final class NMTokens extends AbstractList<String> {
 
     /**
