@@ -1,10 +1,12 @@
 package org.cip4.lib.xjdf.type;
 
+
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -12,11 +14,13 @@ import java.util.GregorianCalendar;
 /**
  * Implementation of the XJDF DateTime data type.
  */
-public class DateTime extends AbstractXJdfType<String, DateTime> {
+public final class DateTime extends AbstractXJdfType<String, DateTime> {
+
+    private static final long serialVersionUID = 1L;
+
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     private final ZonedDateTime zonedDateTime;
-
-    private final DateTimeFormatter DATETIME_OUTPUT_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
 
     /**
      * Default constructor.
@@ -37,7 +41,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
-     * @param month The value used to set the MONTH in year. January is "0".
+     * @param month The value used to set the MONTH in year. January is "1".
      * @param day The value used to set the DAY in month.
      */
     public DateTime(final int year, final int month, final int day) {
@@ -48,7 +52,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
-     * @param month The value used to set the MONTH in year. January is "0".
+     * @param month The value used to set the MONTH in year. January is "1".
      * @param day The value used to set the DAY in month.
      * @param hour The value used to set the HOUR of day.
      * @param minute The value used to set the MINUTE in of.
@@ -61,7 +65,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
-     * @param month The value used to set the MONTH in year. January is "0".
+     * @param month The value used to set the MONTH in year. January is "1".
      * @param day The value used to set the DAY in month.
      * @param hour The value used to set the HOUR of day.
      * @param minute The value used to set the MINUTE.
@@ -78,7 +82,7 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      * Custom constructor. Accepting values for initializing.
      *
      * @param year The value used to set the YEAR.
-     * @param month The value used to set the MONTH in year. January is "0".
+     * @param month The value used to set the MONTH in year. January is "1".
      * @param day The value used to set the DAY in month.
      * @param hour The value used to set the HOUR of day.
      * @param minute The value used to set the MINUTE.
@@ -97,12 +101,25 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     /**
      * Creates a XJDF DateTime instance by a String expression object.
      *
-     * @param dateTime XJDF DateTime String expression. Should match the format yyyy-MM-dd'T'HH:mm:ss'Z'.
+     * @param dateTime XJDF DateTime String expression. Values without a timezone are interpreted in the system
+     * default timezone.
      *
-     * @throws ParseException if the passed expression
+     * @throws ParseException if the passed expression cannot be parsed as xs:dateTime.
      */
     public DateTime(final String dateTime) throws ParseException {
-        zonedDateTime = ZonedDateTime.parse(dateTime, DateTimeFormatter.ISO_DATE_TIME);
+        try {
+            final java.time.temporal.TemporalAccessor parsed = DateTimeFormatter.ISO_DATE_TIME.parseBest(
+                dateTime, ZonedDateTime::from, java.time.LocalDateTime::from
+            );
+
+            zonedDateTime = parsed instanceof ZonedDateTime
+                ? (ZonedDateTime) parsed
+                : ((java.time.LocalDateTime) parsed).atZone(ZoneId.systemDefault());
+        } catch (DateTimeParseException | NullPointerException e) {
+            throw new ParseException(
+                String.format("Invalid xs:dateTime expression: \"%s\".", dateTime), 0
+            );
+        }
     }
 
     /**
@@ -141,6 +158,15 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
     }
 
     /**
+     * Returns the DateTime value as {@link Instant}.
+     *
+     * @return The DateTime value as an Instant.
+     */
+    public final Instant toInstant() {
+        return zonedDateTime.toInstant();
+    }
+
+    /**
      * Returns the zoned date time object representing the date times value.
      *
      * @return The ZonedDateTime object.
@@ -174,13 +200,13 @@ public class DateTime extends AbstractXJdfType<String, DateTime> {
      */
     @Override
     public final String toString() {
-        return zonedDateTime.format(DATETIME_OUTPUT_FORMAT);
+        return zonedDateTime.format(OUTPUT_FORMAT);
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     public final String toString(ZoneId zoneId) {
-        return ZonedDateTime.ofInstant(zonedDateTime.toInstant(), zoneId).format(DATETIME_OUTPUT_FORMAT);
+        return ZonedDateTime.ofInstant(zonedDateTime.toInstant(), zoneId).format(OUTPUT_FORMAT);
     }
 }

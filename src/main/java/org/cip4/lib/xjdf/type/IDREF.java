@@ -12,11 +12,13 @@ import org.cip4.lib.xjdf.util.Resources;
 /**
  * DataType for IDRefs
  */
-public class IDREF extends AbstractXJdfType<String, IDREF> {
+public final class IDREF extends AbstractXJdfType<String, IDREF> {
+
+    private static final long serialVersionUID = 1L;
 
     private final String id;
 
-    private final Object element;
+    private final transient Object element;
 
     /**
      * Default constructor.
@@ -71,12 +73,30 @@ public class IDREF extends AbstractXJdfType<String, IDREF> {
         return id;
     }
 
+    /**
+     * Returns the referenced resource in case this IDREF has been created from a resource.
+     *
+     * @return The referenced resource or null if this IDREF does not reference a resource.
+     * @throws IllegalStateException in case this IDREF references another element type.
+     */
     public Resource getResource() {
-        return (Resource) element;
+        if (element == null || element instanceof Resource) {
+            return (Resource) element;
+        }
+        throw new IllegalStateException("IDREF does not reference a Resource but a " + element.getClass().getSimpleName() + ".");
     }
 
+    /**
+     * Returns the referenced product in case this IDREF has been created from a product.
+     *
+     * @return The referenced product or null if this IDREF does not reference a product.
+     * @throws IllegalStateException in case this IDREF references another element type.
+     */
     public Product getProduct() {
-        return (Product) element;
+        if (element == null || element instanceof Product) {
+            return (Product) element;
+        }
+        throw new IllegalStateException("IDREF does not reference a Product but a " + element.getClass().getSimpleName() + ".");
     }
 
     /**

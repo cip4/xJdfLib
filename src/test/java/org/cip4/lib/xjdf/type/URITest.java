@@ -18,10 +18,8 @@ public class URITest {
     @Test
     public void marshallEmptyUri() {
         final URI uri = new URI();
-        assertThrows(
-            NullPointerException.class,
-            () -> assertNotNull(uri.marshal(uri))
-        );
+        assertEquals("", uri.marshal(uri));
+        assertEquals("", uri.toString());
     }
 
     @Test

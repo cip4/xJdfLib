@@ -1,11 +1,14 @@
 package org.cip4.lib.xjdf.type;
 
+
 import java.net.URISyntaxException;
 
 /**
  * Implementation of the XJDF URI data type.
  */
-public class URI extends AbstractXJdfType<String, URI> {
+public final class URI extends AbstractXJdfType<String, URI> {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * Source uri.
@@ -36,7 +39,7 @@ public class URI extends AbstractXJdfType<String, URI> {
      * @param uri Source uri of the file.
      */
     public URI(final java.net.URI uri) {
-        this.uri = uri.normalize();
+        this.uri = uri == null ? null : uri.normalize();
     }
 
     /**
@@ -53,7 +56,7 @@ public class URI extends AbstractXJdfType<String, URI> {
         if (v == null) {
             return null;
         }
-        return v.uri.toString();
+        return v.toString();
     }
 
     @Override
@@ -63,6 +66,6 @@ public class URI extends AbstractXJdfType<String, URI> {
 
     @Override
     public final String toString() {
-        return this.uri.toString();
+        return uri == null ? "" : uri.toString();
     }
 }

@@ -12,7 +12,14 @@ import java.util.Locale;
  *
  * @author stefan.meissner
  */
-public class XYPair extends AbstractXJdfType<String, XYPair> {
+public final class XYPair extends AbstractXJdfType<String, XYPair> {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * An XYPair with both coordinates set to zero.
+     */
+    public static final XYPair ZERO = new XYPair(0, 0);
 
     private final float x;
 
@@ -44,11 +51,22 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
     public XYPair(String expression) {
 
         // split string
-        String[] s = expression.split(" ");
+        final String[] s = XmlValues.split("XYPair", expression, 2);
 
         // extract values
-        this.x = Float.parseFloat(s[0]);
-        this.y = Float.parseFloat(s[1]);
+        this.x = XmlValues.parseFloat("XYPair", s[0]);
+        this.y = XmlValues.parseFloat("XYPair", s[1]);
+    }
+
+    /**
+     * Creates a new XYPair instance by a String expression.
+     *
+     * @param expression XYPair as String expression.
+     *
+     * @return The parsed XYPair.
+     */
+    public static XYPair parse(final String expression) {
+        return new XYPair(expression);
     }
 
     /**
@@ -91,6 +109,17 @@ public class XYPair extends AbstractXJdfType<String, XYPair> {
                 this.getX() - other.getX(),
                 this.getY() - other.getY()
         );
+    }
+
+    /**
+     * Scales both coordinates with the given factor.
+     *
+     * @param factor The scale factor.
+     *
+     * @return The scaled XYPair.
+     */
+    public XYPair scale(final float factor) {
+        return new XYPair(this.x * factor, this.y * factor);
     }
 
     /**

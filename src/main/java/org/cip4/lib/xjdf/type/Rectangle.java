@@ -2,8 +2,6 @@ package org.cip4.lib.xjdf.type;
 
 import java.util.Locale;
 
-import static java.lang.Float.parseFloat;
-
 /**
  * XML Attributes of type rectangle are used to describe rectangular locations on the page, Sheet or other printable
  * surface. A rectangle is represented as an array of four numbers — llx lly urx ury — specifying the lower-left x,
@@ -13,7 +11,9 @@ import static java.lang.Float.parseFloat;
  * @author stefan.meissner
  * @author michel.hartmann
  */
-public class Rectangle extends AbstractXJdfType<String, Rectangle> {
+public final class Rectangle extends AbstractXJdfType<String, Rectangle> {
+
+    private static final long serialVersionUID = 1L;
 
     private final float llx;
 
@@ -109,14 +109,30 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Creates a new Rectangle instance by a String expression.
+     *
+     * @param expression Rectangle as String expression.
+     *
+     * @return The parsed Rectangle.
+     */
+    public static Rectangle parse(final String expression) {
+        return new Rectangle(expression);
+    }
+
+    /**
      * Splits a Rectangle String expression once and parses all four coordinates.
      *
      * @param expression Rectangle as String expression.
      * @return The parsed coordinates in the order llx, lly, urx, ury.
      */
     private static float[] parseRectangle(String expression) {
-        String[] s = expression.split(" ");
-        return new float[] { parseFloat(s[0]), parseFloat(s[1]), parseFloat(s[2]), parseFloat(s[3]) };
+        final String[] s = XmlValues.split("Rectangle", expression, 4);
+        return new float[] {
+            XmlValues.parseFloat("Rectangle", s[0]),
+            XmlValues.parseFloat("Rectangle", s[1]),
+            XmlValues.parseFloat("Rectangle", s[2]),
+            XmlValues.parseFloat("Rectangle", s[3])
+        };
     }
 
     /**
@@ -212,6 +228,42 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
+     * Returns true in case the point is located inside this rectangle (inclusive its edges).
+     *
+     * @param point The point to check.
+     *
+     * @return True in case the point is contained.
+     */
+    public boolean contains(final XYPair point) {
+        return point.getX() >= llx && point.getX() <= urx
+            && point.getY() >= lly && point.getY() <= ury;
+    }
+
+    /**
+     * Returns true in case the other rectangle overlaps with this rectangle.
+     *
+     * @param other The other rectangle.
+     *
+     * @return True in case both rectangles overlap.
+     */
+    public boolean intersects(final Rectangle other) {
+        return llx <= other.urx && urx >= other.llx
+            && lly <= other.ury && ury >= other.lly;
+    }
+
+    /**
+     * Moves this rectangle.
+     *
+     * @param dx Offset along the x axis, in points.
+     * @param dy Offset along the y axis, in points.
+     *
+     * @return The translated rectangle.
+     */
+    public Rectangle translate(final float dx, final float dy) {
+        return new Rectangle(llx + dx, lly + dy, urx + dx, ury + dy);
+    }
+
+    /**
      * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
      */
     @Override
@@ -247,34 +299,30 @@ public class Rectangle extends AbstractXJdfType<String, Rectangle> {
         return marshal(this);
     }
 
+    /**
+     * Two rectangles are equal in case all four coordinates are equal. This intentionally matches the behavior of
+     * {@link AbstractXJdfType#equals(Object)} but avoids the loss of precision of the string based comparison.
+     */
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
 
         Rectangle rectangle = (Rectangle) o;
 
-        if (Float.compare(rectangle.llx, llx) != 0) return false;
-        if (Float.compare(rectangle.lly, lly) != 0) return false;
-        if (Float.compare(rectangle.urx, urx) != 0) return false;
-        if (Float.compare(rectangle.ury, ury) != 0) return false;
-
-        return true;
+        return Float.compare(rectangle.llx, llx) == 0
+            && Float.compare(rectangle.lly, lly) == 0
+            && Float.compare(rectangle.urx, urx) == 0
+            && Float.compare(rectangle.ury, ury) == 0;
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        long temp;
-        temp = Float.floatToIntBits(llx);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Float.floatToIntBits(lly);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Float.floatToIntBits(urx);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        temp = Float.floatToIntBits(ury);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        int result = 1;
+        result = 31 * result + Float.floatToIntBits(llx);
+        result = 31 * result + Float.floatToIntBits(lly);
+        result = 31 * result + Float.floatToIntBits(urx);
+        result = 31 * result + Float.floatToIntBits(ury);
         return result;
     }
 }

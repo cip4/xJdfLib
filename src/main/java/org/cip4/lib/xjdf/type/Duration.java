@@ -1,6 +1,10 @@
 package org.cip4.lib.xjdf.type;
 
 
+
+import java.math.BigDecimal;
+import java.time.Period;
+
 /**
  * Durations are a component of time intervals and define the amount of intervening time in a time interval. Durations
  * are represented by the format
@@ -8,7 +12,24 @@ package org.cip4.lib.xjdf.type;
  *
  * @author s.meissner
  */
-public class Duration extends AbstractXJdfType<String, Duration> {
+public final class Duration extends AbstractXJdfType<String, Duration> {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * xs:duration pattern as defined by XML Schema Part 2.
+     */
+    private static final java.util.regex.Pattern XS_DURATION = java.util.regex.Pattern.compile(
+        "^(?<sign>-)?P" +
+            "(?:(?<years>\\d+)Y)?" +
+            "(?:(?<months>\\d+)M)?" +
+            "(?:(?<days>\\d+)D)?" +
+            "(?:T" +
+            "(?:(?<hours>\\d+)H)?" +
+            "(?:(?<minutes>\\d+)M)?" +
+            "(?:(?<seconds>\\d+(?:\\.\\d+)?)S)?" +
+            ")?$"
+    );
 
     private final int year;
 
@@ -23,6 +44,16 @@ public class Duration extends AbstractXJdfType<String, Duration> {
     private final int second;
 
     /**
+     * Fractional part of the seconds, e.g. 0.5 for "PT0.5S".
+     */
+    private final BigDecimal fractionalSecond;
+
+    /**
+     * True in case the duration is negative, e.g. "-P1D".
+     */
+    private final boolean negative;
+
+    /**
      * Default constructor.
      */
     public Duration() {
@@ -32,6 +63,8 @@ public class Duration extends AbstractXJdfType<String, Duration> {
         hour = 0;
         minute = 0;
         second = 0;
+        fractionalSecond = BigDecimal.ZERO;
+        negative = false;
     }
 
     /**
@@ -62,99 +95,38 @@ public class Duration extends AbstractXJdfType<String, Duration> {
             hour = 0;
             minute = 0;
             second = 0;
+            fractionalSecond = BigDecimal.ZERO;
+            negative = false;
 
             // return
             return;
         }
 
-        // format: P[n]Y[n]M[n]DT[n]H[n]M[n]S
-        String expr = expression;
+        // format: -?P[n]Y[n]M[n]DT[n]H[n]M[n]S
+        final String normalized = normalize(expression);
+        final java.util.regex.Matcher matcher = XS_DURATION.matcher(normalized);
 
-        // extract daytime
-        int posDaytime = expr.indexOf("T");
-
-        if (posDaytime != -1) {
-            String daytime = expr.substring(posDaytime + 1);
-            expr = expr.substring(0, posDaytime);
-
-            // extract hour
-            int posHour = daytime.indexOf("H");
-
-            if (posHour != -1) {
-                hour = Integer.parseInt(daytime.substring(0, posHour));
-            } else {
-                hour = 0;
-            }
-
-            daytime = daytime.substring(posHour + 1);
-
-            // extract minute
-            int posMinute = daytime.indexOf("M");
-
-            if (posMinute != -1) {
-                minute = Integer.parseInt(daytime.substring(0, posMinute));
-            } else {
-                minute = 0;
-            }
-
-            daytime = daytime.substring(posMinute + 1);
-
-            // extract second
-            int posSecond = daytime.indexOf("S");
-
-            if (posSecond != -1) {
-                second = Integer.parseInt(daytime.substring(0, posSecond));
-            } else {
-                second = 0;
-            }
-
-        } else {
-            hour = 0;
-            minute = 0;
-            second = 0;
+        if (!matcher.matches() || normalized.equals("P") || normalized.equals("PT")) {
+            throw new IllegalArgumentException(
+                String.format("Invalid xs:duration expression: \"%s\".", expression)
+            );
         }
 
-        // extract date
-        int posDate = expression.indexOf("P");
+        negative = matcher.group("sign") != null;
+        year = parseGroup(matcher, "years");
+        month = parseGroup(matcher, "months");
+        day = parseGroup(matcher, "days");
+        hour = parseGroup(matcher, "hours");
+        minute = parseGroup(matcher, "minutes");
 
-        if (posDate != -1) {
-            String date = expr.substring(posDate + 1);
-
-            // extract year
-            int posYear = date.indexOf("Y");
-
-            if (posYear != -1) {
-                year = Integer.parseInt(date.substring(0, posYear));
-            } else {
-                year = 0;
-            }
-
-            date = date.substring(posYear + 1);
-
-            // extract month
-            int posMonth = date.indexOf("M");
-
-            if (posMonth != -1) {
-                month = Integer.parseInt(date.substring(0, posMonth));
-            } else {
-                month = 0;
-            }
-
-            date = date.substring(posMonth + 1);
-
-            // extract day
-            int posDay = date.indexOf("D");
-
-            if (posDay != -1) {
-                day = Integer.parseInt(date.substring(0, posDay));
-            } else {
-                day = 0;
-            }
-
+        final String seconds = matcher.group("seconds");
+        if (seconds == null) {
+            second = 0;
+            fractionalSecond = BigDecimal.ZERO;
         } else {
-            year = 0;
-            month = 0;
-            day = 0;
+            final BigDecimal value = new BigDecimal(seconds);
+            second = value.intValue();
+            fractionalSecond = value.subtract(BigDecimal.valueOf(second));
         }
     }
 
@@ -168,6 +140,32 @@ public class Duration extends AbstractXJdfType<String, Duration> {
         this.hour = hour;
         this.minute = minute;
         this.second = second;
+        this.fractionalSecond = BigDecimal.ZERO;
+        this.negative = false;
+    }
+
+    private static int parseGroup(final java.util.regex.Matcher matcher, final String group) {
+        final String value = matcher.group(group);
+        return value == null ? 0 : Integer.parseInt(value);
+    }
+
+    /**
+     * Normalizes legacy expressions such as "T4H" (missing the leading "P") into the xs:duration format "PT4H".
+     *
+     * @param expression The raw duration expression.
+     *
+     * @return The normalized expression.
+     */
+    private static String normalize(final String expression) {
+        String value = expression.trim();
+
+        if (value.startsWith("-")) {
+            value = "-" + normalize(value.substring(1));
+        } else if (value.startsWith("T")) {
+            value = "P" + value;
+        }
+
+        return value;
     }
 
     /**
@@ -225,6 +223,50 @@ public class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
+     * Returns the fractional part of the seconds, e.g. 0.5 for "PT0.5S".
+     *
+     * @return The fractional seconds in the range [0, 1).
+     */
+    public BigDecimal getFractionalSecond() {
+        return fractionalSecond;
+    }
+
+    /**
+     * Returns true in case this duration is negative, e.g. "-P1D".
+     *
+     * @return True in case the duration is negative.
+     */
+    public boolean isNegative() {
+        return negative;
+    }
+
+    /**
+     * Converts the day and time part of this XJDF duration into a {@link java.time.Duration}. Years and months are not
+     * convertible into a fixed duration and are therefore ignored; use {@link #toPeriod()} for the date part.
+     *
+     * @return The day and time part as java.time.Duration.
+     */
+    public java.time.Duration toJavaDuration() {
+        final java.time.Duration duration = java.time.Duration.ofDays(day)
+            .plusHours(hour)
+            .plusMinutes(minute)
+            .plusSeconds(second)
+            .plusNanos(fractionalSecond.movePointRight(9).longValueExact());
+
+        return negative ? duration.negated() : duration;
+    }
+
+    /**
+     * Converts the year, month and day part of this XJDF duration into a {@link Period}.
+     *
+     * @return The date part as java.time.Period.
+     */
+    public Period toPeriod() {
+        final Period period = Period.of(year, month, day);
+        return negative ? period.negated() : period;
+    }
+
+    /**
      * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
      */
     @Override
@@ -241,49 +283,66 @@ public class Duration extends AbstractXJdfType<String, Duration> {
         if (duration == null)
             return null;
 
-        // format: P[n]Y[n]M[n]DT[n]H[n]M[n]S
+        // format: -?P[n]Y[n]M[n]DT[n]H[n]M[n]S
         StringBuilder b = new StringBuilder(25);
 
-        if (duration.year != 0 || duration.month != 0 || duration.day != 0) {
-            b.append("P");
+        if (duration.negative) {
+            b.append("-");
+        }
 
+        final boolean hasDate = duration.year != 0 || duration.month != 0 || duration.day != 0;
+        final boolean hasTime = duration.hour != 0 || duration.minute != 0 || duration.second != 0
+            || duration.fractionalSecond.signum() != 0;
+
+        if (!hasDate && !hasTime) {
+            // zero duration
+            return (duration.negative ? "-" : "") + "PT0S";
+        }
+
+        b.append("P");
+
+        if (hasDate) {
             // year expression
-            if (duration.year > 0) {
+            if (duration.year != 0) {
                 b.append(duration.year);
                 b.append("Y");
             }
 
             // month expression
-            if (duration.month > 0) {
+            if (duration.month != 0) {
                 b.append(duration.month);
                 b.append("M");
             }
 
             // day expression
-            if (duration.day > 0) {
+            if (duration.day != 0) {
                 b.append(duration.day);
                 b.append("D");
             }
         }
 
-        if (duration.hour != 0 || duration.minute != 0 || duration.second != 0) {
+        if (hasTime) {
             b.append("T");
 
             // hour expression
-            if (duration.hour > 0) {
+            if (duration.hour != 0) {
                 b.append(duration.hour);
                 b.append("H");
             }
 
             // minute expression
-            if (duration.minute > 0) {
+            if (duration.minute != 0) {
                 b.append(duration.minute);
                 b.append("M");
             }
 
             // second expression
-            if (duration.second > 0) {
-                b.append(duration.second);
+            if (duration.second != 0 || duration.fractionalSecond.signum() != 0) {
+                if (duration.fractionalSecond.signum() == 0) {
+                    b.append(duration.second);
+                } else {
+                    b.append(BigDecimal.valueOf(duration.second).add(duration.fractionalSecond).toPlainString());
+                }
                 b.append("S");
             }
         }

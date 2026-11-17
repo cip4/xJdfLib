@@ -126,4 +126,30 @@ public class XYPairTest {
 		// assert
 		assertEquals(new XYPair(-2,-2), result, "The subtraction was wrong.");
 	}
+
+	@Test
+	public void testScale() {
+		assertEquals(new XYPair(2, 4), new XYPair(1, 2).scale(2), "The scaling was wrong.");
+	}
+
+	@Test
+	public void testZeroConstant() {
+		assertEquals(new XYPair(0, 0), XYPair.ZERO);
+	}
+
+	@Test
+	public void testParseWithMixedWhitespace() {
+		final XYPair p = XYPair.parse("  612.22\t792.44 ");
+
+		assertEquals(612.22f, p.getX(), 0.01f);
+		assertEquals(792.44f, p.getY(), 0.01f);
+	}
+
+	@Test
+	public void testParseInvalid() {
+		assertThrows(IllegalArgumentException.class, () -> XYPair.parse("1"));
+		assertThrows(IllegalArgumentException.class, () -> XYPair.parse("1 2 3"));
+		assertThrows(IllegalArgumentException.class, () -> XYPair.parse("a b"));
+		assertThrows(IllegalArgumentException.class, () -> XYPair.parse(""));
+	}
 }

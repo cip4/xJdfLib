@@ -3,7 +3,7 @@ package org.cip4.lib.xjdf.type;
 /**
  * Adapter for the double values.
  */
-public class DoubleAdapter {
+public final class DoubleAdapter {
 
     /**
      * Prevent instances.

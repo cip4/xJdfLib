@@ -17,7 +17,14 @@ import java.util.Locale;
  *
  * @author stefan.meissner
  */
-public class Matrix extends AbstractXJdfType<String, Matrix> {
+public final class Matrix extends AbstractXJdfType<String, Matrix> {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * The identity matrix "1 0 0 1 0 0".
+     */
+    public static final Matrix IDENTITY = new Matrix();
 
     private final float a;
 
@@ -80,15 +87,63 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
     public Matrix(String expression) {
 
         // split string
-        String[] s = expression.split(" ");
+        final String[] s = XmlValues.split("Matrix", expression, 6);
 
         // extract values
-        this.a = Float.parseFloat(s[0]);
-        this.b = Float.parseFloat(s[1]);
-        this.c = Float.parseFloat(s[2]);
-        this.d = Float.parseFloat(s[3]);
-        this.tx = Float.parseFloat(s[4]);
-        this.ty = Float.parseFloat(s[5]);
+        this.a = XmlValues.parseFloat("Matrix", s[0]);
+        this.b = XmlValues.parseFloat("Matrix", s[1]);
+        this.c = XmlValues.parseFloat("Matrix", s[2]);
+        this.d = XmlValues.parseFloat("Matrix", s[3]);
+        this.tx = XmlValues.parseFloat("Matrix", s[4]);
+        this.ty = XmlValues.parseFloat("Matrix", s[5]);
+    }
+
+    /**
+     * Creates a new Matrix instance by a String expression.
+     *
+     * @param expression Matrix as String expression.
+     *
+     * @return The parsed Matrix.
+     */
+    public static Matrix parse(final String expression) {
+        return new Matrix(expression);
+    }
+
+    /**
+     * Creates a translation matrix.
+     *
+     * @param tx Translation along the x axis, in points.
+     * @param ty Translation along the y axis, in points.
+     *
+     * @return The translation matrix.
+     */
+    public static Matrix translation(final float tx, final float ty) {
+        return new Matrix(tx, ty);
+    }
+
+    /**
+     * Creates a scaling matrix.
+     *
+     * @param sx Scale factor along the x axis.
+     * @param sy Scale factor along the y axis.
+     *
+     * @return The scaling matrix.
+     */
+    public static Matrix scaling(final float sx, final float sy) {
+        return new Matrix(sx, 0f, 0f, sy, 0f, 0f);
+    }
+
+    /**
+     * Creates a rotation matrix.
+     *
+     * @param radians Rotation angle in radians, counter clockwise.
+     *
+     * @return The rotation matrix.
+     */
+    public static Matrix rotation(final double radians) {
+        final float cos = (float) Math.cos(radians);
+        final float sin = (float) Math.sin(radians);
+        return new Matrix(cos, sin, -sin, cos, 0f, 0f);
     }
 
     /**
@@ -143,6 +198,39 @@ public class Matrix extends AbstractXJdfType<String, Matrix> {
      */
     public float getTy() {
         return ty;
+    }
+
+    /**
+     * Multiplies this matrix with another matrix. The resulting matrix applies this transformation first and the
+     * other transformation afterwards.
+     *
+     * @param other The matrix to factor against this matrix.
+     *
+     * @return The resulting matrix.
+     */
+    public Matrix multiply(final Matrix other) {
+        return new Matrix(
+            a * other.a + b * other.c,
+            a * other.b + b * other.d,
+            c * other.a + d * other.c,
+            c * other.b + d * other.d,
+            tx * other.a + ty * other.c + other.tx,
+            tx * other.b + ty * other.d + other.ty
+        );
+    }
+
+    /**
+     * Applies the transformation to a point.
+     *
+     * @param point The point to transform.
+     *
+     * @return The transformed point.
+     */
+    public XYPair transform(final XYPair point) {
+        return new XYPair(
+            a * point.getX() + c * point.getY() + tx,
+            b * point.getX() + d * point.getY() + ty
+        );
     }
 
     /**

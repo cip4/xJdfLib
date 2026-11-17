@@ -164,4 +164,60 @@ public class MatrixTest {
 		assertEquals(21631.3f, r.getTy(), "Ty value is wrong.");
 	}
 
+	@Test
+	public void testParseWithMixedWhitespace() {
+		final Matrix matrix = Matrix.parse(" 1\t0  0 1 3.14\n21631.3 ");
+		assertEquals(21631.3f, matrix.getTy());
+	}
+
+	@Test
+	public void testParseInvalid() {
+		assertThrows(IllegalArgumentException.class, () -> Matrix.parse("1 0 0 1 0"));
+		assertThrows(IllegalArgumentException.class, () -> Matrix.parse("1 0 0 1 0 a"));
+	}
+
+	@Test
+	public void testIdentityConstant() {
+		assertEquals("1.000 0.000 0.000 1.000 0.000 0.000", Matrix.IDENTITY.toString());
+	}
+
+	@Test
+	public void testTranslation() {
+		final Matrix matrix = Matrix.translation(10, 20);
+		assertEquals(new XYPair(11, 22), matrix.transform(new XYPair(1, 2)));
+	}
+
+	@Test
+	public void testScaling() {
+		final Matrix matrix = Matrix.scaling(2, 3);
+		assertEquals(new XYPair(2, 6), matrix.transform(new XYPair(1, 2)));
+	}
+
+	@Test
+	public void testRotation() {
+		final Matrix matrix = Matrix.rotation(Math.PI / 2);
+		final XYPair result = matrix.transform(new XYPair(1, 0));
+
+		assertEquals(0f, result.getX(), 0.0001f);
+		assertEquals(1f, result.getY(), 0.0001f);
+	}
+
+	@Test
+	public void testMultiplyWithIdentity() {
+		final Matrix matrix = new Matrix(1, 2, 3, 4, 5, 6);
+		assertEquals(matrix, matrix.multiply(Matrix.IDENTITY));
+		assertEquals(matrix, Matrix.IDENTITY.multiply(matrix));
+	}
+
+	@Test
+	public void testMultiplyAppliesThisThenOther() {
+		final Matrix translate = Matrix.translation(10, 0);
+		final Matrix scale = Matrix.scaling(2, 2);
+
+		// translate first, then scale
+		assertEquals(new XYPair(22, 2), translate.multiply(scale).transform(new XYPair(1, 1)));
+
+		// scale first, then translate
+		assertEquals(new XYPair(12, 2), scale.multiply(translate).transform(new XYPair(1, 1)));
+	}
 }
