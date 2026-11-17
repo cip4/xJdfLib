@@ -7,9 +7,12 @@ import org.cip4.lib.xjdf.exception.XJdfInitException;
 import org.cip4.lib.xjdf.schema.XJDF;
 
 /**
- * Static Factory Class which is managing a JAXB2 Marshaller instance.
+ * Creates and caches the shared JAXB context.
  *
- * @author s.meissner
+ * <p>
+ * The context is created lazily on first use and reused afterwards. {@link #init()} may be called eagerly at
+ * application start to surface initialization problems early.
+ * </p>
  */
 public class JAXBContextFactory {
 

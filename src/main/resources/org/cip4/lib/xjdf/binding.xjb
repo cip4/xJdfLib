@@ -12,7 +12,18 @@
         <xjc:serializable/>
     </xjb:globalBindings>
     <xjb:schemaBindings>
-        <xjb:package name="org.cip4.lib.xjdf.schema"/>
+        <xjb:package name="org.cip4.lib.xjdf.schema">
+            <xjb:javadoc>JAXB classes generated from the official CIP4 XJDF 2.x XML schema.
+
+The classes in this package are generated at build time from jdfschema_2_x.xsd and binding.xjb. Do not edit them
+manually; change the schema or the binding file instead.
+
+The generated classes form the type-safe object model behind XJdfDocument and XJmfMessage. Most types offer fluent
+withXyz(...) setters. XJDF primitive types such as XYPair, Rectangle, DateTime and Duration are mapped to the value
+classes in the org.cip4.lib.xjdf.type package.
+
+See the xjdf:documentation in the schema for the specification text of each element and attribute.</xjb:javadoc>
+        </xjb:package>
     </xjb:schemaBindings>
     <xjb:bindings scd="/~xjdf:matrix">
         <xjc:javaType name="org.cip4.lib.xjdf.type.Matrix" adapter="org.cip4.lib.xjdf.type.Matrix"/>

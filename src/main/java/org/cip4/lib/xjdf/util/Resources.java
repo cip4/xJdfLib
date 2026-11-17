@@ -11,13 +11,24 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.xml.namespace.QName;
 
+/**
+ * Helper methods for creating XJDF {@code Resource} elements.
+ */
 public class Resources {
+
+    /**
+     * Private constructor for utility class.
+     */
+    private Resources() {
+    }
 
     /**
      * Create a resource element containing a specific resource.
      *
-     * @param resourceType The specific resources type
-     * @param partition The partition to be added.
+     * @param resourceType The specific resource type.
+     * @param partition The partition to be added, may be null.
+     * @param <T> The specific resource type.
+     *
      * @return The generated resource element.
      */
     public static @NotNull <T extends SpecificResource> Resource createResource(

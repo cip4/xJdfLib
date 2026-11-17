@@ -7,11 +7,29 @@ import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
 /**
- * Validator for element ResourceSet.
+ * Validates that a resource set without {@code @Usage} is referenced by ID.
+ *
+ * <p>
+ * If no {@code @Usage} is specified, the resource set or its resources must have an ID and be referenced from
+ * elsewhere in the document. Resource sets inside a {@code ResourceInfo} are exempt.
+ * </p>
  */
 public class ResourceSetUsageValidator extends SimpleValidator<ResourceSet> {
 
+    /**
+     * Creates the validator.
+     */
+    public ResourceSetUsageValidator() {
+    }
 
+
+    /**
+     * Validates the resource set.
+     *
+     * @param resourceSet The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final ResourceSet resourceSet, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -40,6 +58,13 @@ public class ResourceSetUsageValidator extends SimpleValidator<ResourceSet> {
         }
     }
 
+    /**
+     * Returns true for {@link ResourceSet} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a resource set.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof ResourceSet;

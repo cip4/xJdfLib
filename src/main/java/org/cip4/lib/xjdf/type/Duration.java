@@ -68,21 +68,30 @@ public final class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
-     * Custom constructor. Accepting a value for day.
+     * Creates a duration of the given number of days.
+     *
+     * @param day The number of days.
      */
     public Duration(int day) {
         this(0, 0, day, 0, 0, 0);
     }
 
     /**
-     * Custom constructor. Accepting values for day and hour.
+     * Creates a duration of the given number of days and hours.
+     *
+     * @param day The number of days.
+     * @param hour The number of hours.
      */
     public Duration(int day, int hour) {
         this(0, 0, day, hour, 0, 0);
     }
 
     /**
-     * Custom constructor. Accepting accepting a String expression for initializing..
+     * Parses an xs:duration expression. A null value creates a zero duration.
+     *
+     * @param expression The xs:duration expression, for example {@code "P1Y2M3DT4H5M6S"}.
+     *
+     * @throws IllegalArgumentException in case the expression is not a valid duration.
      */
     public Duration(final String expression) {
 
@@ -131,7 +140,14 @@ public final class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
-     * Custom constructor. Accepting values for all attributes.
+     * Creates a duration from all components.
+     *
+     * @param year The number of years.
+     * @param month The number of months.
+     * @param day The number of days.
+     * @param hour The number of hours.
+     * @param minute The number of minutes.
+     * @param second The number of seconds.
      */
     public Duration(int year, int month, int day, int hour, int minute, int second) {
         this.year = year;
@@ -267,7 +283,13 @@ public final class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses an xs:duration string. Legacy expressions such as {@code "T4H"} are accepted and normalized.
+     *
+     * @param v The duration string.
+     *
+     * @return The parsed duration.
+     *
+     * @throws IllegalArgumentException in case the value is not a valid duration.
      */
     @Override
     public Duration unmarshal(String v) {
@@ -275,7 +297,11 @@ public final class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the duration to an xs:duration string. A zero duration is written as {@code "PT0S"}.
+     *
+     * @param duration The duration to serialize.
+     *
+     * @return The xs:duration string, or null in case the value is null.
      */
     @Override
     public String marshal(Duration duration) {
@@ -352,7 +378,9 @@ public final class Duration extends AbstractXJdfType<String, Duration> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the duration as an xs:duration string.
+     *
+     * @return The xs:duration string.
      */
     @Override
     public String toString() {

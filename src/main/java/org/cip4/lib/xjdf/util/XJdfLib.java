@@ -6,7 +6,22 @@ import org.cip4.lib.xjdf.xml.JAXBContextFactory;
 import java.io.IOException;
 import java.util.Properties;
 
+/**
+ * Library version information and JAXB initialization.
+ *
+ * <p>
+ * {@link #VERSION} and {@link #BUILD_DATE} are read from the build properties generated at build time.
+ * {@link #init()} initializes the shared JAXB context eagerly; it is optional, because the document and message
+ * classes initialize JAXB lazily.
+ * </p>
+ */
 public class XJdfLib {
+
+    /**
+     * Private constructor for utility class.
+     */
+    private XJdfLib() {
+    }
 
     /**
      * XJdfLib Version

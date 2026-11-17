@@ -6,9 +6,27 @@ import java.util.Map;
 import org.cip4.lib.xjdf.schema.Version;
 
 /**
- * This class provides common XJdf default values.
+ * Common XJDF defaults and global agent settings.
+ *
+ * <p>
+ * The constants in this class are process-wide defaults: namespaces, the supported schema versions and media types.
+ * The mutable fields {@link #DEVICE_ID}, {@link #AGENT_NAME} and {@link #AGENT_VERSION} must be set once at
+ * application start. They are used by {@link org.cip4.lib.xjdf.util.Headers} to generate headers and audit entries.
+ * </p>
+ *
+ * <pre>{@code
+ * XJdfConstants.AGENT_NAME = "PreviewService";
+ * XJdfConstants.AGENT_VERSION = "1.2.34";
+ * XJdfConstants.DEVICE_ID = "PREVIEW_SERVICE";
+ * }</pre>
  */
 public class XJdfConstants {
+
+    /**
+     * Private constructor for constants class.
+     */
+    private XJdfConstants() {
+    }
 
     /**
      * Namespace XJDF,
@@ -60,10 +78,19 @@ public class XJdfConstants {
      */
     public static final String MEDIA_TYPE_XJMF_ZIP = "application/vnd.cip4-xjmf+zip";
 
+    /**
+     * The device ID reported in generated headers, for example {@code "PREVIEW_SERVICE"}.
+     */
     public static String DEVICE_ID = null;
 
+    /**
+     * The agent name reported in generated headers, for example {@code "PreviewService"}.
+     */
     public static String AGENT_NAME = null;
 
+    /**
+     * The agent version reported in generated headers, for example {@code "1.2.34"}.
+     */
     public static String AGENT_VERSION = null;
 
     /**

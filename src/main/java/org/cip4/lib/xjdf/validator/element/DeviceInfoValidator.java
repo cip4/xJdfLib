@@ -8,10 +8,28 @@ import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 import java.util.List;
 
 /**
- * Extended validation for element //FoldingIntent.
+ * Validates the {@code DeviceInfo} element.
+ *
+ * <p>
+ * Only {@code Schema} and {@code CurrentSchema} file specs are allowed, and {@code @IdleStartTime} must not be
+ * combined with {@code JobPhase} elements.
+ * </p>
  */
 public class DeviceInfoValidator extends SimpleValidator<DeviceInfo> {
 
+    /**
+     * Creates the validator.
+     */
+    public DeviceInfoValidator() {
+    }
+
+    /**
+     * Validates the device info.
+     *
+     * @param deviceInfo The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public final void validate(
         final DeviceInfo deviceInfo, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -20,6 +38,13 @@ public class DeviceInfoValidator extends SimpleValidator<DeviceInfo> {
         validateIdleStartTime(deviceInfo, validationResult);
     }
 
+    /**
+     * Returns true for {@link DeviceInfo} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a device info element.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof DeviceInfo;

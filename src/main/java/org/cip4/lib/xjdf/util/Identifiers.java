@@ -27,7 +27,9 @@ public class Identifiers {
     }
 
     /**
-     * Generates an (almost) unique ID.
+     * Generates an (almost) unique ID with the given prefix.
+     *
+     * @param prefix The prefix, for example {@code "PAR"}. Defaults to {@code "ID"} for null or empty values.
      *
      * @return An almost unique ID.
      */

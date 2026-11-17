@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * A list is an enumerated set of values, which is expressed as a list of space separated values.
  *
+ * @param <T> The type of the list items.
  * @author s.meissner
  */
 public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractList<T>> {
@@ -115,7 +116,11 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     protected abstract T convertFromString(String value);
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the list to a space separated XML value.
+     *
+     * @param obj The list to serialize.
+     *
+     * @return The space separated value, or null in case the list is null.
      */
     @Override
     public String marshal(AbstractList<T> obj) {
@@ -139,7 +144,13 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses a space separated XML value into a new list of this type.
+     *
+     * @param v The space separated value.
+     *
+     * @return The parsed list.
+     *
+     * @throws Exception in case the concrete list type cannot be instantiated or contains invalid items.
      */
     @Override
     public AbstractList<T> unmarshal(String v) throws Exception {

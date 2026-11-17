@@ -10,15 +10,33 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Extended validation for element //FoldingIntent.
+ * Validates the {@code FileSpec} elements of a {@code DeliveryParams} element.
+ *
+ * <p>
+ * Only the resource usages {@code DeliveryContents}, {@code MailingList} and {@code RemoteURL} are allowed, and each
+ * of them may appear at most once.
+ * </p>
  */
 public class DeliveryParamsValidator extends SimpleValidator<DeliveryParams> {
+
+    /**
+     * Creates the validator.
+     */
+    public DeliveryParamsValidator() {
+    }
 
     /**
      * List of allowed resource usages within FileSpec elements.
      */
     private final List<String> allowedResourceUsages = Arrays.asList("DeliveryContents", "MailingList", "RemoteURL");
 
+    /**
+     * Validates the delivery params.
+     *
+     * @param deliveryParams The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final DeliveryParams deliveryParams, final Ancestors ancestors, ValidationResultBuilder validationResult
@@ -40,6 +58,13 @@ public class DeliveryParamsValidator extends SimpleValidator<DeliveryParams> {
         // Validate FileSpec elements in DeliveryParams
     }
 
+    /**
+     * Returns true for {@link DeliveryParams} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a delivery params element.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof DeliveryParams;

@@ -1,7 +1,7 @@
 package org.cip4.lib.xjdf.exception;
 
 /**
- * Exception related to the XJDF Document processing.
+ * Thrown when an operation on an XJMF message is invalid, for example adding a message of an unsupported type.
  */
 public class XJmfMessageException extends Exception {
 

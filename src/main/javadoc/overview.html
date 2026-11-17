@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>CIP4 xJdfLib API</title>
+</head>
+<body>
+
+<h1>CIP4 xJdfLib</h1>
+
+<p>
+    xJdfLib is a Java library for creating, reading, validating and packaging
+    <a href="https://www.cip4.org/">XJDF</a> (JDF 2.0) and XJMF documents.
+</p>
+
+<p>
+    XJDF no longer models an entire job as one large ticket. Each XJDF document describes a single transaction between
+    two applications, and a job is modeled as one or more transactions. An XJMF message is the envelope used to exchange
+    commands, queries and signals between those applications.
+</p>
+
+<h2>Getting Started</h2>
+
+<p>
+    Set the global agent constants once at application start. They are used to create default headers and audit
+    entries:
+</p>
+
+<pre>{@code
+XJdfConstants.AGENT_NAME = "PreviewService";
+XJdfConstants.AGENT_VERSION = "1.2.34";
+XJdfConstants.DEVICE_ID = "PREVIEW_SERVICE";
+}</pre>
+
+<p>
+    Create an XJDF document, add a resource set and serialize it:
+</p>
+
+<pre>{@code
+XJdfDocument document = new XJdfDocument("42", "Interpreting", "Rendering");
+ResourceSet previews = document.addResourceSet(Preview.class, ResourceSet.Usage.INPUT);
+document.addSpecificResource(previews, new Preview()
+    .withPreviewFileType(Preview.PreviewFileType.PNG)
+    .withFileSpec(new FileSpec().withURL(new URI("preview.png"))));
+byte[] xml = document.toXml();
+}</pre>
+
+<p>
+    Create and parse XJMF messages with {@link org.cip4.lib.xjdf.XJmfMessage}, and bundle messages, XJDF documents and
+    referenced files with {@link org.cip4.lib.xjdf.XJmfZipPackage}.
+</p>
+
+<h2>Package Guide</h2>
+
+<ul>
+    <li>{@link org.cip4.lib.xjdf} - entry points for documents, messages and packages.</li>
+    <li>{@link org.cip4.lib.xjdf.type} - immutable value objects for the XJDF data types.</li>
+    <li>{@link org.cip4.lib.xjdf.xml} - XML parsing, serialization and schema validation.</li>
+    <li>{@link org.cip4.lib.xjdf.validator} - the element validator framework.</li>
+    <li>{@link org.cip4.lib.xjdf.util} - helpers for headers, identifiers, resources, partitions and unit conversion.</li>
+    <li>{@link org.cip4.lib.xjdf.exception} - checked exceptions thrown by xJdfLib.</li>
+    <li>{@link org.cip4.lib.xjdf.schema} - JAXB classes generated from the official CIP4 XJDF schema.</li>
+</ul>
+
+<h2>Conventions</h2>
+
+<ul>
+    <li>All lengths are expressed in points, as required by XJDF.</li>
+    <li>Numeric XML values are written with the US locale and a fixed number of decimals.</li>
+    <li>The classes in {@link org.cip4.lib.xjdf.type} are immutable and thread-safe.</li>
+    <li>{@link org.cip4.lib.xjdf.XJdfConstants} is global mutable state and must be initialized before creating
+        documents or messages.</li>
+</ul>
+
+<h2>Further Reading</h2>
+
+<ul>
+    <li><a href="https://www.cip4.org/">CIP4 Organization</a></li>
+    <li><a href="https://schema.cip4.org/">XJDF schemas</a></li>
+    <li><a href="https://github.com/cip4/xJdfLib">xJdfLib on GitHub</a></li>
+    <li><a href="https://central.sonatype.com/artifact/org.cip4.lib.xjdf/xJdfLib">xJdfLib on Maven Central</a></li>
+    <li><a href="https://cip4.atlassian.net/browse/XJDFLIB">Issue tracker</a></li>
+</ul>
+
+</body>
+</html>

@@ -52,7 +52,14 @@ public final class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * Custom constructor, accepting several values for initializing.
+     * Creates a matrix from all six values.
+     *
+     * @param a The a value.
+     * @param b The b value.
+     * @param c The c value.
+     * @param d The d value.
+     * @param tx The x translation in points.
+     * @param ty The y translation in points.
      */
     public Matrix(float a, float b, float c, float d, float tx, float ty) {
 
@@ -66,7 +73,10 @@ public final class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * Custom constructor, accepting several values for initializing.
+     * Creates a translation matrix.
+     *
+     * @param tx The x translation in points.
+     * @param ty The y translation in points.
      */
     public Matrix(float tx, float ty) {
 
@@ -234,7 +244,11 @@ public final class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the matrix as six numbers with three decimals.
+     *
+     * @param matrix The matrix to serialize.
+     *
+     * @return The formatted value, or null in case the matrix is null.
      */
     @Override
     public String marshal(Matrix matrix) {
@@ -254,7 +268,13 @@ public final class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses a matrix from six whitespace separated numbers.
+     *
+     * @param v The matrix string.
+     *
+     * @return The parsed matrix.
+     *
+     * @throws IllegalArgumentException in case the value is not six whitespace separated numbers.
      */
     @Override
     public Matrix unmarshal(String v) {
@@ -263,7 +283,9 @@ public final class Matrix extends AbstractXJdfType<String, Matrix> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the matrix as six numbers with three decimals.
+     *
+     * @return The formatted value.
      */
     @Override
     public String toString() {

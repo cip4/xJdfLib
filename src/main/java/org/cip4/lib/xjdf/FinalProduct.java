@@ -23,7 +23,10 @@ public class FinalProduct {
     }
 
     /**
-     * Custom constructor. Accepting multiple parameters for initializing.
+     * Creates a final product.
+     *
+     * @param amount The number of products, may be null.
+     * @param descriptiveName The descriptive name of the product, may be null.
      */
     public FinalProduct(Integer amount, String descriptiveName) {
 
@@ -157,8 +160,11 @@ public class FinalProduct {
 
     /**
      * Returns a product intent's intent element.
+     *
      * @param productIntentType The type of the product intent.
-     * @return The generic intent element.
+     * @param <T> The product intent type.
+     *
+     * @return The generic intent element, or null if no such intent exists.
      */
     public <T extends ProductIntent> Intent getIntent(Class<T> productIntentType) {
         for(Intent intent: productParts.get(ROOT_PRODUCT).getIntent()) {
@@ -180,14 +186,22 @@ public class FinalProduct {
 
     /**
      * Returns a specific product intent.
+     *
      * @param productIntentType The type of the product intent.
-     * @return The specific product intent.
+     * @param <T> The product intent type.
+     *
+     * @return The specific product intent, or null if no such intent exists.
      */
     public <T extends ProductIntent> T getProductIntent(Class<T> productIntentType) {
         Intent intent = getIntent(productIntentType);
         return intent == null ? null : (T) intent.getProductIntent().getValue();
     }
 
+    /**
+     * Returns the types of all product intents attached to the root product.
+     *
+     * @return The intent classes, for example {@code PreviewGenerationParams}.
+     */
     public List<Class<?>> getProductIntentTypes() {
         List<Class<?>> classes = new ArrayList<>();
 

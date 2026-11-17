@@ -4,7 +4,23 @@ import org.cip4.lib.xjdf.schema.BindingIntent;
 import org.cip4.lib.xjdf.validator.Ancestors;
 import org.cip4.lib.xjdf.validator.ValidationResultBuilder;
 
+/**
+ * Validates the consistency between {@code BindingIntent/@BindingType} and the binding-specific child attributes.
+ */
 public class BindingIntentValidator implements Validator<BindingIntent> {
+
+    /**
+     * Creates the validator.
+     */
+    public BindingIntentValidator() {
+    }
+    /**
+     * Validates the binding intent.
+     *
+     * @param element The element to validate.
+     * @param ancestors The ancestors of the element.
+     * @param validationResult Collector for violations.
+     */
     @Override
     public void validate(
         final BindingIntent element, final Ancestors ancestors, final ValidationResultBuilder validationResult
@@ -74,6 +90,13 @@ public class BindingIntentValidator implements Validator<BindingIntent> {
         }
     }
 
+    /**
+     * Returns true for {@link BindingIntent} elements.
+     *
+     * @param o The candidate element.
+     *
+     * @return True in case the element is a binding intent.
+     */
     @Override
     public boolean canValidate(final Object o) {
         return o instanceof BindingIntent;

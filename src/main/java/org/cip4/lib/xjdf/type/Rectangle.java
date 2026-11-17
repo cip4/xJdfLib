@@ -264,7 +264,11 @@ public final class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#marshal(java.lang.Object)
+     * Serializes the rectangle as {@code "llx lly urx ury"} with three decimals.
+     *
+     * @param v The rectangle to serialize.
+     *
+     * @return The formatted value, or null in case the rectangle is null.
      */
     @Override
     public String marshal(Rectangle v) {
@@ -283,7 +287,13 @@ public final class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
-     * @see jakarta.xml.bind.annotation.adapters.XmlAdapter#unmarshal(java.lang.Object)
+     * Parses a rectangle from {@code "llx lly urx ury"}.
+     *
+     * @param v The rectangle string.
+     *
+     * @return The parsed rectangle.
+     *
+     * @throws IllegalArgumentException in case the value is not four whitespace separated numbers.
      */
     @Override
     public Rectangle unmarshal(String v) {
@@ -292,7 +302,9 @@ public final class Rectangle extends AbstractXJdfType<String, Rectangle> {
     }
 
     /**
-     * @see java.lang.Object#toString()
+     * Returns the rectangle as {@code "llx lly urx ury"} with three decimals.
+     *
+     * @return The formatted value.
      */
     @Override
     public String toString() {
@@ -316,6 +328,11 @@ public final class Rectangle extends AbstractXJdfType<String, Rectangle> {
             && Float.compare(rectangle.ury, ury) == 0;
     }
 
+    /**
+     * Returns a hash code based on the four coordinates.
+     *
+     * @return The hash code.
+     */
     @Override
     public int hashCode() {
         int result = 1;

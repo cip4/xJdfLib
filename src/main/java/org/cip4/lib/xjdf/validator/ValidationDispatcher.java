@@ -12,12 +12,29 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 
+/**
+ * Applies all known validators to an element and recursively to its children.
+ *
+ * <p>
+ * For each element, every validator whose {@link Validator#canValidate(Object)} returns true is invoked. The
+ * dispatcher then walks the public getters of the element to find child elements and validates them with the same
+ * set of validators. JAXB reference properties are skipped to avoid cycles.
+ * </p>
+ */
 public class ValidationDispatcher {
 
+    /**
+     * Collection of child elements discovered while walking an element.
+     */
     class ChildElements implements Iterable<Object> {
 
         private final Collection<Object> elements = new LinkedList<>();
 
+        /**
+         * Adds the element if it belongs to xJdfLib and is not null.
+         *
+         * @param o The candidate element.
+         */
         public void addIfAppropriate(Object o) {
             if (o != null
                 && o.getClass().getPackage().getName().startsWith("org.cip4.lib.xjdf")) {
@@ -25,12 +42,22 @@ public class ValidationDispatcher {
             }
         }
 
+        /**
+         * Adds all elements that belong to xJdfLib.
+         *
+         * @param os The candidate elements.
+         */
         public void addAllAppropriate(Collection<Object> os) {
             for (Object o : os) {
                 addIfAppropriate(o);
             }
         }
 
+        /**
+         * Returns an iterator over the collected elements.
+         *
+         * @return The iterator.
+         */
         @NotNull
         @Override
         public Iterator<Object> iterator() {
@@ -41,14 +68,31 @@ public class ValidationDispatcher {
 
     private final Collection<Validator> validators;
 
+    /**
+     * Creates a dispatcher with the given validators.
+     *
+     * @param validators The validators to apply.
+     */
     public ValidationDispatcher(final Validator... validators) {
         this.validators = Arrays.asList(validators);
     }
 
+    /**
+     * Creates a dispatcher with the given validators.
+     *
+     * @param validators The validators to apply.
+     */
     public ValidationDispatcher(final Collection<Validator> validators) {
         this.validators = validators;
     }
 
+    /**
+     * Validates an element and all of its children.
+     *
+     * @param element The root element to validate.
+     *
+     * @return The collected violations.
+     */
     public ValidationResult validate(Object element) {
         ValidationResultBuilder validationResult = new ValidationResultBuilder();
         this.validate(element, new Ancestors(), validationResult);
@@ -68,6 +112,13 @@ public class ValidationDispatcher {
         }
     }
 
+    /**
+     * Collects the direct child elements of an element.
+     *
+     * @param element The parent element.
+     *
+     * @return The child elements that belong to xJdfLib.
+     */
     public ChildElements getChildElements(final Object element) {
         ChildElements childElements = new ChildElements();
         ClassInspector inspector = new ClassInspector(element.getClass());

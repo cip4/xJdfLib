@@ -28,10 +28,22 @@ public final class IDREF extends AbstractXJdfType<String, IDREF> {
         element = null;
     }
 
+    /**
+     * Creates a reference to a new resource that wraps the given specific resource, using a generated partition ID.
+     *
+     * @param specificResource The resource to reference.
+     */
     public IDREF(SpecificResource specificResource) {
         this(specificResource, null, Identifiers.generate("PAR"));
     }
 
+    /**
+     * Creates a reference to a new resource that wraps the given specific resource and partition.
+     *
+     * @param specificResource The resource to reference.
+     * @param part The partition of the resource, may be null.
+     * @param id The ID to assign to the created resource.
+     */
     public IDREF(SpecificResource specificResource, Part part, String id) {
 
         // generate ID
@@ -45,11 +57,22 @@ public final class IDREF extends AbstractXJdfType<String, IDREF> {
         this.element = resource;
     }
 
+    /**
+     * Creates a reference to the given product. An ID is generated if the product does not have one.
+     *
+     * @param product The product to reference.
+     */
     public IDREF(Product product) {
 
         this(product, generateId(product));
     }
 
+    /**
+     * Creates a reference to the given product and assigns the given ID to it.
+     *
+     * @param product The product to reference.
+     * @param id The ID to assign to the product.
+     */
     public IDREF(Product product, String id) {
         this.id = id;
         product.setID(id);
@@ -57,7 +80,9 @@ public final class IDREF extends AbstractXJdfType<String, IDREF> {
     }
 
     /**
-     * Custom constructor. Accepting accepting a String expression for initializing..
+     * Creates a reference to an existing ID.
+     *
+     * @param expression The referenced ID.
      */
     public IDREF(final String expression) {
         id = expression;
