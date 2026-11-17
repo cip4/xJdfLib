@@ -2,10 +2,12 @@ package org.cip4.lib.xjdf.type;
 
 import org.junit.jupiter.api.Test;
 
+import java.text.ParseException;
 import java.time.ZoneId;
 import java.util.Calendar;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * JUnit Test Case for XJDF DateTime
@@ -114,6 +116,29 @@ public class DateTimeTest {
 
 		assertEquals(dateTimeStringISO8601, dateTime.toString(ZoneId.of("Europe/Berlin")), "Date format is wrong.");
 		assertEquals(expectedDateTimeStringUTC, dateTime.toString(ZoneId.of("UTC")), "Date format is wrong.");
+	}
+
+	@Test
+	public void createDateTimeWithoutTimeZone() throws Exception {
+		final DateTime dateTime = new DateTime("2015-08-06T12:00:00");
+
+		assertEquals(2015, dateTime.getZonedDateTime().getYear(), "Year is wrong.");
+		assertEquals(8, dateTime.getZonedDateTime().getMonthValue(), "Month is wrong.");
+		assertEquals(6, dateTime.getZonedDateTime().getDayOfMonth(), "Day is wrong.");
+		assertEquals(12, dateTime.getZonedDateTime().getHour(), "Hour is wrong.");
+	}
+
+	@Test
+	public void createDateTimeInvalid() {
+		assertThrows(ParseException.class, () -> new DateTime("not a date"));
+		assertThrows(ParseException.class, () -> new DateTime(""));
+	}
+
+	@Test
+	public void toInstantMatchesEpochMillis() throws Exception {
+		final DateTime dateTime = new DateTime("2015-08-06T12:00:00.000+02:00");
+
+		assertEquals(dateTime.toEpochMillis(), dateTime.toInstant().toEpochMilli());
 	}
 
 }

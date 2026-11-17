@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author s.meissner
  */
-public class NMTokens extends AbstractList<String> {
+public final class NMTokens extends AbstractList<String> {
 
     /**
      * Default constructor.

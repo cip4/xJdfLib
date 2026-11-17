@@ -2,12 +2,17 @@ package org.cip4.lib.xjdf.type;
 
 import jakarta.xml.bind.annotation.adapters.XmlAdapter;
 
+import java.io.Serializable;
+
 /**
  * Abstract XJdf Data Type.
  *
  * @author stefan.meissner
  */
-public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType> {
+public abstract class AbstractXJdfType<ValueType, BoundType> extends XmlAdapter<ValueType, BoundType>
+    implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * @see java.lang.Object#toString()

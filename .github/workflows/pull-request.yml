@@ -1,17 +1,40 @@
 name: Pull-Request
 
-# This build process is triggered in case a new pull request on master has been created.
-# This process takes the latest changes of the branch, and build and test the new version. The process's aim is to
-# check validity of changes prior to merging to master.
+# This build process is triggered in case a new pull request on main has been created.
+# It builds and tests the changes on all supported platforms to check validity prior to merging.
 
 on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+
+concurrency:
+  group: pull-request-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  call-release:
-    name: 🏭
-    uses: cip4/.github/.github/workflows/pull-request.yml@master
-    with:
-      java-version: 21
-      codecov-enabled: true
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, macos-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Java build on ${{ matrix.os }} with JDK 21
+    steps:
+      - name: Check out sources...
+        uses: actions/checkout@v4
+
+      - name: Set up build environment
+        uses: ./.github/actions/setup
+
+      - name: Test with Gradle
+        run: ./gradlew test
+
+      - name: Upload Test Results to GitHub Build Artifacts
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results for ${{ matrix.os }},JDK-21
+          path: build/reports/tests/test

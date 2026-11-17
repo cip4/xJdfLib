@@ -28,14 +28,9 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      *
      * @param values List of values.
      */
+    @SafeVarargs
     public AbstractList(T... values) {
-
-        List<T> list = new ArrayList<>(values.length);
-
-        list.addAll(Arrays.asList(values));
-
-        // make list unmodifiable
-        this.list = Collections.unmodifiableList(list);
+        this(Arrays.asList(values));
     }
 
     /**
@@ -45,8 +40,8 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      */
     public AbstractList(List<T> list) {
 
-        // make list unmodifiable
-        this.list = Collections.unmodifiableList(list);
+        // make list unmodifiable and detach it from the caller's list
+        this.list = Collections.unmodifiableList(new ArrayList<>(list));
     }
 
     /**
@@ -57,7 +52,7 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
     public AbstractList(String value) {
 
         // split string
-        String[] items = value.split(LIST_SEPARATOR);
+        final String[] items = XmlValues.split(value);
 
         // convert items
         List<T> lst = new ArrayList<>(items.length);
@@ -102,9 +97,12 @@ public abstract class AbstractList<T> extends AbstractXJdfType<String, AbstractL
      * Setter for list attribute.
      *
      * @param list the list to set
+     *
+     * @deprecated The list is immutable. Use the constructor instead.
      */
+    @Deprecated
     public void setList(List<T> list) {
-        this.list = list;
+        this.list = Collections.unmodifiableList(new ArrayList<>(list));
     }
 
     /**

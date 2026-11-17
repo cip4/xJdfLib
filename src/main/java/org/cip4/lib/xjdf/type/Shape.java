@@ -9,7 +9,9 @@ import java.util.Locale;
  *
  * @author stefan.meissner
  */
-public class Shape extends AbstractXJdfType<String, Shape> {
+public final class Shape extends AbstractXJdfType<String, Shape> {
+
+    private static final long serialVersionUID = 1L;
 
     private final float x;
 
@@ -56,26 +58,29 @@ public class Shape extends AbstractXJdfType<String, Shape> {
     public Shape(String expression) {
 
         // split string
-        String[] s = expression.split(" ");
+        final String[] s = XmlValues.split(expression);
+
+        if (s.length > 3) {
+            throw new IllegalArgumentException(String.format(
+                "Shape accepts at most 3 whitespace separated values but got %d: \"%s\".", s.length, expression
+            ));
+        }
 
         // extract values
-        if (s.length >= 1) {
-            this.x = Float.parseFloat(s[0]);
-        } else {
-            this.x = 0;
-        }
+        this.x = s.length >= 1 ? XmlValues.parseFloat("Shape", s[0]) : 0;
+        this.y = s.length >= 2 ? XmlValues.parseFloat("Shape", s[1]) : 0;
+        this.z = s.length >= 3 ? XmlValues.parseFloat("Shape", s[2]) : 0;
+    }
 
-        if (s.length >= 2) {
-            this.y = Float.parseFloat(s[1]);
-        } else {
-            this.y = 0;
-        }
-
-        if (s.length >= 3) {
-            this.z = Float.parseFloat(s[2]);
-        } else {
-            this.z = 0;
-        }
+    /**
+     * Creates a new Shape instance by a String expression.
+     *
+     * @param expression Shape as String expression.
+     *
+     * @return The parsed Shape.
+     */
+    public static Shape parse(final String expression) {
+        return new Shape(expression);
     }
 
     /**

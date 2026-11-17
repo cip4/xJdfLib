@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author s.meissner
  */
-public class IntegerList extends AbstractList<Integer> {
+public final class IntegerList extends AbstractList<Integer> {
 
     /**
      * Default constructor.
@@ -47,7 +47,7 @@ public class IntegerList extends AbstractList<Integer> {
     protected Integer convertFromString(String value) {
 
         // convert to Integer
-        return Integer.valueOf(value);
+        return XmlValues.parseInt("IntegerList", value);
     }
 
     /**

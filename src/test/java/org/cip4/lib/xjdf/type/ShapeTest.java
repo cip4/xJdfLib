@@ -146,4 +146,16 @@ public class ShapeTest {
 		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
 	}
 
+	@Test
+	public void testParseWithMixedWhitespace() {
+		final Shape s = Shape.parse(" 10.1\t20.33 \n 40 ");
+		assertEquals(40d, s.getZ(), 0.1d, "Z is wrong.");
+	}
+
+	@Test
+	public void testParseInvalid() {
+		assertThrows(IllegalArgumentException.class, () -> Shape.parse("1 2 3 4"));
+		assertThrows(IllegalArgumentException.class, () -> Shape.parse("a b c"));
+	}
+
 }

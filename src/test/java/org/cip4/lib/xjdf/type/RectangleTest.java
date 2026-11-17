@@ -252,4 +252,48 @@ public class RectangleTest {
 		assertEquals(new XYPair(urx, ury), r.getUpperRight(), "UpperRight is wrong.");
 		assertEquals(new XYPair(llx, ury), r.getUpperLeft(), "UpperLeft is wrong.");
 	}
+
+	@Test
+	public void testParseWithMixedWhitespace() {
+		final Rectangle r = Rectangle.parse(" 1\t0  3.14\n21631.3 ");
+		assertEquals(21631.3f, r.getUry(), 0.01, "Ury is wrong.");
+	}
+
+	@Test
+	public void testParseInvalid() {
+		assertThrows(IllegalArgumentException.class, () -> Rectangle.parse("1 0 3.14"));
+		assertThrows(IllegalArgumentException.class, () -> Rectangle.parse("1 0 3.14 21631.3 5"));
+		assertThrows(IllegalArgumentException.class, () -> Rectangle.parse("a b c d"));
+	}
+
+	@Test
+	public void testEqualsIgnoresFormattingPrecision() {
+		assertNotEquals(new Rectangle(1.0001f, 0, 1, 1), new Rectangle(1.0004f, 0, 1, 1));
+	}
+
+	@Test
+	public void testContains() {
+		final Rectangle r = new Rectangle(1, 2, 4, 8);
+
+		assertTrue(r.contains(new XYPair(2, 5)));
+		assertTrue(r.contains(new XYPair(1, 2)));
+		assertTrue(r.contains(new XYPair(4, 8)));
+		assertFalse(r.contains(new XYPair(0, 5)));
+		assertFalse(r.contains(new XYPair(2, 9)));
+	}
+
+	@Test
+	public void testIntersects() {
+		final Rectangle r = new Rectangle(1, 2, 4, 8);
+
+		assertTrue(r.intersects(new Rectangle(0, 0, 2, 3)));
+		assertTrue(r.intersects(new Rectangle(4, 8, 5, 9)));
+		assertFalse(r.intersects(new Rectangle(5, 5, 6, 6)));
+		assertFalse(r.intersects(new Rectangle(0, 0, 0, 1)));
+	}
+
+	@Test
+	public void testTranslate() {
+		assertEquals(new Rectangle(11, 22, 14, 28), new Rectangle(1, 2, 4, 8).translate(10, 20));
+	}
 }
