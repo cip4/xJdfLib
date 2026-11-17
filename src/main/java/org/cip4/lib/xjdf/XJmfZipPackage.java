@@ -6,17 +6,12 @@ import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.type.URI;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-import java.util.zip.ZipOutputStream;
 
 /**
  * Create and read XJMF ZIP packages.
@@ -58,7 +53,7 @@ public class XJmfZipPackage {
      * Default constructor.
      */
     public XJmfZipPackage() {
-        this.files = Collections.unmodifiableMap(new HashMap<>());
+        this.files = Collections.unmodifiableMap(new LinkedHashMap<>());
     }
 
     /**
@@ -71,7 +66,7 @@ public class XJmfZipPackage {
      */
     public XJmfZipPackage(XJmfMessage rootJmf)
         throws XJdfValidationException, XJdfParseException {
-        this(rootJmf, new HashMap<>(), new HashMap<>());
+        this(rootJmf, new LinkedHashMap<>(), new LinkedHashMap<>());
     }
 
     /**
@@ -83,7 +78,7 @@ public class XJmfZipPackage {
      */
     public XJmfZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments)
         throws XJdfValidationException, XJdfParseException {
-        this(rootJmf, xJdfDocuments, new HashMap<>());
+        this(rootJmf, xJdfDocuments, new LinkedHashMap<>());
     }
 
     /**
@@ -97,7 +92,7 @@ public class XJmfZipPackage {
     public XJmfZipPackage(XJmfMessage rootJmf, @NotNull Map<URI, XJdfDocument> xJdfDocuments, @NotNull Map<URI, byte[]> files)
         throws XJdfValidationException, XJdfParseException {
 
-        Map<URI, byte[]> fileMap = new HashMap<>();
+        Map<URI, byte[]> fileMap = new LinkedHashMap<>();
         fileMap.put(URI_ROOT_XJMF, rootJmf.toXml());
 
         for (Map.Entry<URI, XJdfDocument> entry : xJdfDocuments.entrySet()) {
@@ -113,29 +108,12 @@ public class XJmfZipPackage {
      * Accepting a zip archive for initializing.
      */
     public XJmfZipPackage(byte[] zipArchive) throws IOException, URISyntaxException {
-        try (
-            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(zipArchive);
-            ZipInputStream packageStream = new ZipInputStream(byteArrayInputStream)
-        ) {
-            ZipEntry entry = packageStream.getNextEntry();
-            Map<URI, byte[]> files = new HashMap<>();
-
-            while (entry != null) {
-                files.put(
-                    new URI(entry.getName()),
-                    packageStream.readAllBytes()
-                );
-
-                entry = packageStream.getNextEntry();
-            }
-
-            this.files = Collections.unmodifiableMap(files);
-        }
+        this.files = Collections.unmodifiableMap(ZipArchive.read(zipArchive));
     }
 
     /**
      * Returns list of all files.
-     * @return Set of file URIs.
+     * @return Set of file URIs, in archive order.
      */
     public Set<URI> listFiles() {
         return files.keySet();
@@ -202,26 +180,7 @@ public class XJmfZipPackage {
      * @return The zip packaged files as byte array.
      */
     public byte[] packageFiles() throws IOException {
-        byte[] result;
-
-        try (
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            ZipOutputStream packageStream = new ZipOutputStream(byteArrayOutputStream)
-        ) {
-
-            for (Map.Entry<URI, byte[]> entry : files.entrySet()) {
-                ZipEntry zipEntry = new ZipEntry(entry.getKey().toString());
-                packageStream.putNextEntry(zipEntry);
-                packageStream.write(entry.getValue());
-                packageStream.closeEntry();
-            }
-
-            packageStream.close();
-            result = byteArrayOutputStream.toByteArray();
-        }
-
-        // return zip archive
-        return result;
+        return ZipArchive.write(files);
     }
 
     /**
@@ -239,8 +198,8 @@ public class XJmfZipPackage {
          * Default constructor.
          */
         public Builder() {
-            xJdfDocumentMap = new HashMap<>();
-            fileMap = new HashMap<>();
+            xJdfDocumentMap = new LinkedHashMap<>();
+            fileMap = new LinkedHashMap<>();
         }
 
         /**
@@ -265,6 +224,24 @@ public class XJmfZipPackage {
          */
         public Builder withXJdfDocument(URI uri, XJdfDocument xJdfDocument) {
             xJdfDocumentMap.put(uri, xJdfDocument);
+            return this;
+        }
+
+        /**
+         * Adds an XJDF document and all its referenced files to the package.
+         *
+         * <p>
+         * The entries keep the entry names of the source package. Point
+         * {@code QueueSubmissionParams/@URL} to {@link XJdfZipPackage#getXJdfUri()} to reference the document.
+         * If an entry name is added twice, the later one wins.
+         * </p>
+         *
+         * @param xJdfZipPackage The XJDF package to add.
+         *
+         * @return This builder.
+         */
+        public Builder withXJdfZipPackage(XJdfZipPackage xJdfZipPackage) {
+            fileMap.putAll(xJdfZipPackage.getFiles());
             return this;
         }
 

@@ -7,6 +7,8 @@
  * <ul>
  *     <li>{@link org.cip4.lib.xjdf.XJdfDocument} - create, read and modify XJDF documents.</li>
  *     <li>{@link org.cip4.lib.xjdf.XJmfMessage} - create and read XJMF messages.</li>
+ *     <li>{@link org.cip4.lib.xjdf.XJdfZipPackage} - bundle an XJDF document and the files it references in a
+ *         ZIP package.</li>
  *     <li>{@link org.cip4.lib.xjdf.XJmfZipPackage} - bundle an XJMF message, XJDF documents and referenced files in a
  *         ZIP package.</li>
  *     <li>{@link org.cip4.lib.xjdf.FinalProduct} - manage the products of an XJDF document.</li>
@@ -26,8 +28,8 @@
  * <ol>
  *     <li>Create or parse an {@link org.cip4.lib.xjdf.XJdfDocument}.</li>
  *     <li>Add resource sets and specific resources using the fluent builders of the generated schema classes.</li>
- *     <li>Wrap the document in an {@link org.cip4.lib.xjdf.XJmfMessage} or an
- *         {@link org.cip4.lib.xjdf.XJmfZipPackage}.</li>
+ *     <li>Wrap the document in an {@link org.cip4.lib.xjdf.XJdfZipPackage}, an
+ *         {@link org.cip4.lib.xjdf.XJmfMessage} or an {@link org.cip4.lib.xjdf.XJmfZipPackage}.</li>
  *     <li>Serialize with {@code toXml()} and optionally validate the result.</li>
  * </ol>
  *

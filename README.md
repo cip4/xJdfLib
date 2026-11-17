@@ -212,6 +212,22 @@ byte[] bytes = xJdfDocument.toXml();
 ```
 </details>
 
+### Create an XJDF ZIP package
+
+An XJDF ZIP package bundles a single XJDF document together with the files it references. The entry names of the
+files must match the relative URLs used by the document. The XJDF document is always the first entry of the archive:
+
+```java
+XJdfZipPackage xJdfZipPackage = new XJdfZipPackage.Builder()
+    .withXJdfDocument(new URI("0b520d.xjdf"), xJdfDocument)
+    .withFile(new URI("artwork/my-artwork.pdf"), artwork)
+    .build();
+
+byte[] zip = xJdfZipPackage.packageFiles();
+```
+
+Omitting the entry name in `withXJdfDocument(xJdfDocument)` derives it from the JobID of the document.
+
 ### Create a ZIP package
 
 An XJMF ZIP package bundles the XJMF root message, one or more XJDF documents and referenced files:
@@ -252,6 +268,17 @@ byte[] xjmfZipPackage = new XJmfZipPackage.Builder()
     .withXJmfRoot(xJmfMessage)
     .withXJdfDocument(xJdfDocumentUri, xJdfDocument)
     .withFile(artworkUri, artwork)
+    .build()
+    .packageFiles();
+```
+
+Alternatively, compose the package from a ready-made `XJdfZipPackage`. Its entries keep their names, so
+`QueueSubmissionParams/@URL` refers to `xJdfZipPackage.getXJdfUri()`:
+
+```java
+byte[] xjmfZipPackage = new XJmfZipPackage.Builder()
+    .withXJmfRoot(xJmfMessage)
+    .withXJdfZipPackage(xJdfZipPackage)
     .build()
     .packageFiles();
 ```

@@ -72,7 +72,7 @@ public class XJdfConstants {
     public static final String MEDIA_TYPE_XJMF = "application/vnd.cip4-xjmf+xml";
 
     /**
-     * Media Type for XJDF packages.
+     * Media Type for XJDF packages, as created by {@link org.cip4.lib.xjdf.XJdfZipPackage}.
      */
     public static final String MEDIA_TYPE_XJDF_ZIP = "application/vnd.cip4-xjdf+zip";
 

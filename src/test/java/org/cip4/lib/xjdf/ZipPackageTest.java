@@ -339,4 +339,63 @@ class ZipPackageTest {
         Assertions.assertEquals("95733854-01", resultXJdfDoc.getXJdf().getJobID());
     }
 
+    @Test
+    void withXJdfZipPackage_1() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDoc = new XJdfDocument("MY_PACKAGE", "Product");
+        XJdfZipPackage xJdfZipPackage = new XJdfZipPackage.Builder()
+            .withXJdfDocument(new URI("assets/myxjdf.xjdf"), xJdfDoc)
+            .withFile(new URI("artwork/my-artwork.pdf"), "ARTWORK".getBytes())
+            .build();
+
+        XJmfMessage xJmfMessage = new XJmfMessage();
+        xJmfMessage.addMessage(new CommandSubmitQueueEntry()
+            .withQueueSubmissionParams(new QueueSubmissionParams().withURL(xJdfZipPackage.getXJdfUri())));
+
+        // act
+        XJmfZipPackage xjmfZipPackage = new XJmfZipPackage.Builder()
+            .withXJmfRoot(xJmfMessage)
+            .withXJdfZipPackage(xJdfZipPackage)
+            .build();
+
+        // assert
+        Set<URI> files = xjmfZipPackage.listFiles();
+        Assertions.assertEquals(3, files.size());
+        Assertions.assertTrue(files.contains(new URI("root.xjmf")));
+        Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
+        Assertions.assertTrue(files.contains(new URI("artwork/my-artwork.pdf")));
+
+        XJdfDocument resultXJdfDoc = xjmfZipPackage.getXJdfDocument("assets/myxjdf.xjdf");
+        Assertions.assertEquals("MY_PACKAGE", resultXJdfDoc.getXJdf().getJobID());
+    }
+
+    @Test
+    void rootXjmfIsTheFirstEntry() throws Exception {
+
+        // arrange
+        XJdfDocument xJdfDoc = new XJdfDocument("MY_PACKAGE", "Product");
+
+        XJmfMessage xJmfMessage = new XJmfMessage();
+        xJmfMessage.addMessage(new CommandSubmitQueueEntry()
+            .withQueueSubmissionParams(new QueueSubmissionParams().withURL(new URI("myxjdf.xjdf"))));
+
+        XJmfZipPackage xjmfZipPackage = new XJmfZipPackage.Builder()
+            .withXJmfRoot(xJmfMessage)
+            .withXJdfDocument(new URI("myxjdf.xjdf"), xJdfDoc)
+            .withFile(new URI("artwork/my-artwork.pdf"), "ARTWORK".getBytes())
+            .build();
+
+        // act
+        byte[] zip = xjmfZipPackage.packageFiles();
+
+        // assert
+        Map<URI, byte[]> entries = ZipArchive.read(zip);
+        Assertions.assertEquals(
+            new URI("root.xjmf"),
+            entries.keySet().iterator().next(),
+            "root.xjmf must be the first entry of the archive."
+        );
+    }
+
 }
