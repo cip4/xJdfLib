@@ -16,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import jakarta.xml.bind.JAXBElement;
 
 import javax.xml.namespace.QName;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -223,9 +224,9 @@ public class XJdfDocument {
     @Override
     public String toString() {
         try {
-            return new String(toXml(false));
-        } catch (Exception e) {
-            return "Error creating an XML preview.";
+            return new String(toXml(false), StandardCharsets.UTF_8);
+        } catch (XJdfParseException | XJdfValidationException e) {
+            return "Error creating an XML preview: " + e.getMessage();
         }
     }
 
@@ -278,12 +279,12 @@ public class XJdfDocument {
         // find matching process names
         List<String> matchingProcessNames = getCombinedProcess().stream()
                 .filter(entry -> StringUtils.equalsIgnoreCase(entry, processName))
-                .collect(Collectors.toList());
+                .toList();
 
         // throw exception in case process name is ambiguous
         if (matchingProcessNames.size() > 1) {
             throw new XJdfDocumentException("ProcessName '" + processName + "' is not unique.");
-        } else if (matchingProcessNames.size() == 0) {
+        } else if (matchingProcessNames.isEmpty()) {
             throw new XJdfDocumentException("ProcessName '" + processName + "' has not been found.");
         }
 
@@ -349,7 +350,7 @@ public class XJdfDocument {
         // filter general ids by idusage
         List<GeneralID> generalIDs = xjdf.getGeneralID().stream()
                 .filter(generalID -> Objects.equals(generalID.getIDUsage(), idUsage))
-                .collect(Collectors.toList());
+                .toList();
 
         // validate result
         if (generalIDs.size() > 1) {
@@ -357,7 +358,7 @@ public class XJdfDocument {
         }
 
         // return result
-        return generalIDs.size() == 0 ? null : generalIDs.get(0);
+        return generalIDs.isEmpty() ? null : generalIDs.getFirst();
     }
 
     /**
@@ -395,7 +396,7 @@ public class XJdfDocument {
         } else if (DateTime.class == type) {
             value = (T) new DateTime(generalID.getIDValue());
         } else {
-            throw new UnsupportedOperationException("Type '" + type.toString() + " is not supported.");
+            throw new UnsupportedOperationException("Type '" + type.getSimpleName() + "' is not supported.");
         }
 
         // return parsed value
@@ -809,7 +810,7 @@ public class XJdfDocument {
                 .filter(resourceSet -> usage == null || Objects.equals(resourceSet.getUsage(), usage))
                 .filter(resourceSet -> Objects.equals(resourceSet.getProcessUsage(), processUsage))
                 .filter(resourceSet -> combinedProcessIndices == null || Objects.equals(resourceSet.getCombinedProcessIndex(), combinedProcessIndices))
-                .collect(Collectors.toList());
+                .toList();
 
         // ambiguity check
         if (resourceSets.size() > 1) {
@@ -817,7 +818,7 @@ public class XJdfDocument {
         }
 
         // return result
-        return resourceSets.size() == 0 ? null : resourceSets.get(0);
+        return resourceSets.isEmpty() ? null : resourceSets.get(0);
     }
 
 
@@ -865,7 +866,7 @@ public class XJdfDocument {
         List<Part> parts = new ArrayList<>();
 
         resourceSet.getResource().forEach(resource -> {
-            if (resource.getPart().size() == 0) {
+            if (resource.getPart().isEmpty()) {
                 parts.add(null);
             } else {
                 parts.addAll(resource.getPart());
@@ -1013,7 +1014,7 @@ public class XJdfDocument {
         }
 
         // return result
-        return resourceSet.getResource().size() == 0 ? null : resourceSet.getResource().get(0);
+        return resourceSet.getResource().isEmpty() ? null : resourceSet.getResource().get(0);
     }
 
     /**
@@ -1326,7 +1327,7 @@ public class XJdfDocument {
 
         // return result
         return resource.getAmountPool().getPartAmount().size() == 1
-                ? resource.getAmountPool().getPartAmount().get(0)
+                ? resource.getAmountPool().getPartAmount().getFirst()
                 : null;
     }
 }

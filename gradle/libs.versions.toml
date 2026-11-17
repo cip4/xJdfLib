@@ -10,7 +10,6 @@ jetbrainsAnnotations = "26.1.0"
 
 junit = "5.14.4"
 mockito = "5.24.0"
-hamcrest = "3.0"
 junitPioneer = "2.3.0"
 
 jaxbXjc = "4.0.4"
@@ -32,7 +31,6 @@ junitBom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junitJupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junitPlatformLauncher = { module = "org.junit.platform:junit-platform-launcher" }
 mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
-hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
 junitPioneer = { module = "org.junit-pioneer:junit-pioneer", version.ref = "junitPioneer" }
 
 jaxbXjc = { module = "com.sun.xml.bind:jaxb-xjc", version.ref = "jaxbXjc" }

@@ -31,7 +31,6 @@ class FinalProductTest {
         xJdfDocument.addFinalProduct(finalProduct);
 
         // assert
-        System.out.println(xJdfDocument);
 
         assertEquals(1, xJdfDocument.getXJdf().getProductList().getProduct().size(), "Number of products is wrong.");
 

@@ -6,8 +6,6 @@ import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.VariableIntent;
 import org.cip4.lib.xjdf.schema.XJDF;
 import org.cip4.lib.xjdf.validator.element.Validator;
-import org.hamcrest.collection.IsEmptyIterable;
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -15,7 +13,6 @@ import org.mockito.stubbing.Answer;
 
 import java.util.Collections;
 
-import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidationDispatcherTest {
@@ -45,10 +42,7 @@ public class ValidationDispatcherTest {
         RefAnchor refAnchor = new RefAnchor().withRRef(resource);
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertThat(
-            dispatcher.getChildElements(refAnchor),
-            IsEmptyIterable.emptyIterable()
-        );
+        assertFalse(dispatcher.getChildElements(refAnchor).iterator().hasNext());
     }
 
     @Test
@@ -57,12 +51,7 @@ public class ValidationDispatcherTest {
         XJDF xjdf = new XJDF().withProductList(productList);
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertThat(
-            dispatcher.getChildElements(xjdf),
-            IsIterableContainingInAnyOrder.containsInAnyOrder(
-                (Object) productList
-            )
-        );
+        assertEquals(Collections.singletonList(productList), toList(dispatcher.getChildElements(xjdf)));
     }
 
     @Test
@@ -70,10 +59,7 @@ public class ValidationDispatcherTest {
         VariableIntent.VariableType enumValue = VariableIntent.VariableType.AREA;
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertThat(
-            dispatcher.getChildElements(enumValue),
-            IsEmptyIterable.emptyIterable()
-        );
+        assertFalse(dispatcher.getChildElements(enumValue).iterator().hasNext());
     }
 
     @Test
@@ -81,10 +67,13 @@ public class ValidationDispatcherTest {
         XJDF xjdf = new XJDF().withJobID("JobID");
 
         ValidationDispatcher dispatcher = new ValidationDispatcher();
-        assertThat(
-            dispatcher.getChildElements(xjdf),
-            IsEmptyIterable.emptyIterable()
-        );
+        assertFalse(dispatcher.getChildElements(xjdf).iterator().hasNext());
+    }
+
+    private java.util.List<Object> toList(Iterable<Object> elements) {
+        java.util.List<Object> result = new java.util.ArrayList<>();
+        elements.forEach(result::add);
+        return result;
     }
 
     @Test

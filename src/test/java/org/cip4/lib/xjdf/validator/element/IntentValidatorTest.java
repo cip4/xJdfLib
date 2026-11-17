@@ -5,10 +5,6 @@ import org.cip4.lib.xjdf.schema.LayoutIntent;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.junit.jupiter.api.Test;
 
-import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-
 public class IntentValidatorTest {
 
     @Test
@@ -17,7 +13,7 @@ public class IntentValidatorTest {
             .withName("LayoutIntent")
             .withProductIntent(new ObjectFactory().createLayoutIntent(new LayoutIntent()));
         IntentValidator validator = new IntentValidator();
-        assertThat(intent, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, intent);
     }
 
     @Test
@@ -38,9 +34,6 @@ public class IntentValidatorTest {
         Intent intent = new Intent()
             .withName("BindingIntent");
         IntentValidator validator = new IntentValidator();
-        assertThat(
-            intent,
-            isValid(validator)
-        );
+        ValidationAssertions.assertIsValid(validator, intent);
     }
 }

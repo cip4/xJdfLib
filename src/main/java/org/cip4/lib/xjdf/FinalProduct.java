@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class FinalProduct {
 
-    private final String ROOT_PRODUCT = "ROOT_PRODUCT";
+    private static final String ROOT_PRODUCT = "ROOT_PRODUCT";
 
     private final Map<String, Product> productParts;
 

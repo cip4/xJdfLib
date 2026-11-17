@@ -6,7 +6,11 @@ import org.cip4.lib.xjdf.type.XYPair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class XJdfDocumentExamples {
 
@@ -34,8 +38,10 @@ public class XJdfDocumentExamples {
 
         byte[] bytes = xJdfDocument.toXml();
 
-        // output
-        System.out.println(new String(bytes));
+        // assert
+        String xml = new String(bytes, StandardCharsets.UTF_8);
+        assertTrue(xml.contains("Types=\"Interpreting Rendering PreviewGeneration\""), "Types are wrong.");
+        assertTrue(xml.contains("<Preview PreviewFileType=\"PNG\">"), "Preview resource is missing.");
     }
 
     @Test
@@ -64,8 +70,11 @@ public class XJdfDocumentExamples {
 
         byte[] bytes = xJdfDocument.toXml();
 
-        // output
-        System.out.println(new String(bytes));
+        // assert
+        String xml = new String(bytes, StandardCharsets.UTF_8);
+        assertTrue(xml.contains("PreviewType=\"Viewable\""), "Viewable partition is missing.");
+        assertTrue(xml.contains("PreviewType=\"ThumbNail\""), "ThumbNail partition is missing.");
+        assertEquals(2, previewResourceSet.getResource().size(), "Number of resources is wrong.");
     }
 
     @Test
@@ -107,5 +116,10 @@ public class XJdfDocumentExamples {
                 .build()
                 .packageFiles();
 
+        // assert
+        XJmfZipPackage resultPackage = new XJmfZipPackage(xjmfZipPackage);
+        assertTrue(resultPackage.listFiles().contains(new URI("root.xjmf")), "root.xjmf is missing.");
+        assertTrue(resultPackage.listFiles().contains(xJdfDocumentUri), "The XJDF document is missing.");
+        assertTrue(resultPackage.listFiles().contains(artworkUri), "The artwork is missing.");
     }
 }

@@ -172,7 +172,6 @@ dependencies {
     testImplementation libs.junitJupiter
     testRuntimeOnly libs.junitPlatformLauncher
     testImplementation libs.mockitoCore
-    testImplementation libs.hamcrest
     testImplementation libs.junitPioneer
 
     xjc libs.jaxbCore

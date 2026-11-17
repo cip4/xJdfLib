@@ -44,18 +44,13 @@ public class XJmfZipPackage {
 
     private final Map<URI, byte[]> files;
 
-    private static final URI URI_ROOT_XJMF = initUriRootXJMF();
+    private static final URI URI_ROOT_XJMF;
 
-    /**
-     * Initialize URI root XJMF.
-     * @return The root xjmf name.
-     */
-    private static URI initUriRootXJMF() {
+    static {
         try {
-            return new URI("root.xjmf");
-
+            URI_ROOT_XJMF = new URI("root.xjmf");
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            throw new IllegalStateException("The root XJMF entry name is not a valid URI.", e);
         }
     }
 
@@ -105,13 +100,10 @@ public class XJmfZipPackage {
         Map<URI, byte[]> fileMap = new HashMap<>();
         fileMap.put(URI_ROOT_XJMF, rootJmf.toXml());
 
-        for(URI uri: xJdfDocuments.keySet()) {
-            fileMap.put(uri, xJdfDocuments.get(uri).toXml());
+        for (Map.Entry<URI, XJdfDocument> entry : xJdfDocuments.entrySet()) {
+            fileMap.put(entry.getKey(), entry.getValue().toXml());
         }
-
-        for(URI uri: files.keySet()) {
-            fileMap.put(uri, files.get(uri));
-        }
+        files.forEach(fileMap::put);
 
         this.files = Collections.unmodifiableMap(fileMap);
     }
@@ -217,10 +209,10 @@ public class XJmfZipPackage {
             ZipOutputStream packageStream = new ZipOutputStream(byteArrayOutputStream)
         ) {
 
-            for(URI uri: files.keySet()) {
-                ZipEntry zipEntry = new ZipEntry(uri.toString());
+            for (Map.Entry<URI, byte[]> entry : files.entrySet()) {
+                ZipEntry zipEntry = new ZipEntry(entry.getKey().toString());
                 packageStream.putNextEntry(zipEntry);
-                packageStream.write(files.get(uri));
+                packageStream.write(entry.getValue());
                 packageStream.closeEntry();
             }
 
@@ -232,9 +224,6 @@ public class XJmfZipPackage {
         return result;
     }
 
-    /**
-     * ZipPackage builder class.
-     */
     /**
      * Builder for {@link XJmfZipPackage} instances.
      */

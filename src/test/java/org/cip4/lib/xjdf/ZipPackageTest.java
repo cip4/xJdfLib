@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.parallel.Execution;
 
-import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -40,10 +38,8 @@ class ZipPackageTest {
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(xJmfMessage);
 
         // assert
-        System.out.println(new String(xJmfMessage.toXml()));
 
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(1, files.size());
         Assertions.assertTrue(files.contains(new URI("root.xjmf")));
@@ -68,7 +64,6 @@ class ZipPackageTest {
 
         // assert
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(2, files.size());
         Assertions.assertTrue(files.contains(new URI("root.xjmf")));
@@ -94,7 +89,6 @@ class ZipPackageTest {
 
         // assert
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(2, files.size());
         Assertions.assertTrue(files.contains(new URI("root.xjmf")));
@@ -105,14 +99,13 @@ class ZipPackageTest {
     void createZipArchive_3() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package.zip");
+        byte[] bytes = TestResources.load("package.zip");
 
         // act
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // assert
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(2, files.size());
         Assertions.assertTrue(files.contains(new URI("index.xml")));
@@ -123,14 +116,13 @@ class ZipPackageTest {
     void createZipArchive_4() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package with spaces.zip");
+        byte[] bytes = TestResources.load("package with spaces.zip");
 
         // act
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // assert
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(3, files.size());
         Assertions.assertTrue(files.contains(new URI("artwork/testArtwork.pdf")));
@@ -142,7 +134,7 @@ class ZipPackageTest {
     void createZipArchive_5() throws Exception {
 
         // arrange
-        byte[] file = loadFile("test.pdf");
+        byte[] file = TestResources.load("test.pdf");
         URI uriCommentUrl = new URI("assets/test.pdf");
         Map<URI, byte[]> mapFiles = new HashMap<>();
         mapFiles.put(uriCommentUrl, file);
@@ -162,7 +154,6 @@ class ZipPackageTest {
 
         // assert
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(3, files.size());
         Assertions.assertTrue(files.contains(new URI("root.xjmf")));
@@ -174,14 +165,13 @@ class ZipPackageTest {
     void getFile_1() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package with spaces.zip");
+        byte[] bytes = TestResources.load("package with spaces.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
         byte[] file = xjmfZipPackage.getFile("artwork/testArtwork.pdf");
 
         // assert
-        System.out.println("File size: " + file.length);
         Assertions.assertTrue(file.length > 0);
     }
 
@@ -189,14 +179,13 @@ class ZipPackageTest {
     void getFile_2() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package with spaces.zip");
+        byte[] bytes = TestResources.load("package with spaces.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
         byte[] file = xjmfZipPackage.getFile(new URI("testPackage.xjdf"));
 
         // assert
-        System.out.println("File size: " + file.length);
         Assertions.assertTrue(file.length > 0);
     }
 
@@ -204,7 +193,7 @@ class ZipPackageTest {
     void getFile_3() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package with spaces.zip");
+        byte[] bytes = TestResources.load("package with spaces.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
@@ -218,14 +207,13 @@ class ZipPackageTest {
     void getXJdfDocument_1() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("package with spaces.zip");
+        byte[] bytes = TestResources.load("package with spaces.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
         XJdfDocument xJdfDocument = xjmfZipPackage.getXJdfDocument("testPackage.xjdf");
 
         // assert
-        System.out.println(new String(xJdfDocument.toXml(false)));
         Assertions.assertEquals("95733854-01", xJdfDocument.getXJdf().getJobID());
     }
 
@@ -233,14 +221,13 @@ class ZipPackageTest {
     void getXJdfDocument_2() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("testPackage.zip");
+        byte[] bytes = TestResources.load("testPackage.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
         XJdfDocument xJdfDocument = xjmfZipPackage.getXJdfDocument(new URI("./testPackage.xjdf"));
 
         // assert
-        System.out.println(new String(xJdfDocument.toXml(false)));
         Assertions.assertEquals("95733854-01", xJdfDocument.getXJdf().getJobID());
     }
 
@@ -248,7 +235,7 @@ class ZipPackageTest {
     void getXJdfDocument_3() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("testPackage.zip");
+        byte[] bytes = TestResources.load("testPackage.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
@@ -272,10 +259,8 @@ class ZipPackageTest {
         XJmfMessage xjmfRoot = xjmfZipPackage.getXJmfRoot();
 
         // assert
-        System.out.println(new String(xjmfRoot.toXml()));
 
         Set<URI> files = xjmfZipPackage.listFiles();
-        System.out.println(Arrays.toString(files.toArray()));
 
         Assertions.assertEquals(1, files.size());
         Assertions.assertTrue(files.contains(new URI("root.xjmf")));
@@ -288,7 +273,7 @@ class ZipPackageTest {
     void getXJmfRoot_2() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("testPackage.zip");
+        byte[] bytes = TestResources.load("testPackage.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
@@ -319,7 +304,6 @@ class ZipPackageTest {
 
         // assert
         XJmfZipPackage resultXJmfZipPackage = new XJmfZipPackage(result);
-        System.out.println(Arrays.toString(resultXJmfZipPackage.listFiles().toArray()));
 
         Set<URI> files = resultXJmfZipPackage.listFiles();
         Assertions.assertEquals(2, files.size());
@@ -327,7 +311,6 @@ class ZipPackageTest {
         Assertions.assertTrue(files.contains(new URI("assets/myxjdf.xjdf")));
 
         XJdfDocument resultXJdfDoc = resultXJmfZipPackage.getXJdfDocument("assets/myxjdf.xjdf");
-        System.out.println(new String(resultXJdfDoc.toXml()));
 
         Assertions.assertEquals("MY_PACKAGE", resultXJdfDoc.getXJdf().getJobID());
     }
@@ -336,7 +319,7 @@ class ZipPackageTest {
     void packageFiles_2() throws Exception {
 
         // arrange
-        byte[] bytes = loadFile("testPackage.zip");
+        byte[] bytes = TestResources.load("testPackage.zip");
         XJmfZipPackage xjmfZipPackage = new XJmfZipPackage(bytes);
 
         // act
@@ -344,7 +327,6 @@ class ZipPackageTest {
 
         // assert
         XJmfZipPackage resultXJmfZipPackage = new XJmfZipPackage(result);
-        System.out.println(Arrays.toString(resultXJmfZipPackage.listFiles().toArray()));
 
         Set<URI> files = resultXJmfZipPackage.listFiles();
         Assertions.assertEquals(3, files.size());
@@ -353,17 +335,8 @@ class ZipPackageTest {
         Assertions.assertTrue(files.contains(new URI("preview/testPreview.pdf")));
 
         XJdfDocument resultXJdfDoc = resultXJmfZipPackage.getXJdfDocument("testPackage.xjdf");
-        System.out.println(new String(resultXJdfDoc.toXml(false)));
 
         Assertions.assertEquals("95733854-01", resultXJdfDoc.getXJdf().getJobID());
     }
 
-    /**
-     * Helper method to load a file.
-     * @param filename The files name.
-     * @return The file as byte array.
-     */
-    private byte[] loadFile(String filename) throws IOException {
-        return ZipPackageTest.class.getResourceAsStream("/org/cip4/lib/xjdf/" + filename).readAllBytes();
-    }
 }

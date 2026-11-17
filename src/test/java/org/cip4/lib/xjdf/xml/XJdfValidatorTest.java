@@ -1,5 +1,6 @@
 package org.cip4.lib.xjdf.xml;
 
+import org.cip4.lib.xjdf.TestResources;
 import org.cip4.lib.xjdf.exception.XJdfValidationException;
 import org.cip4.lib.xjdf.schema.*;
 import org.cip4.lib.xjdf.type.DateTime;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -35,7 +35,7 @@ public class XJdfValidatorTest {
     public void validate_invalid_semantic_1() throws Exception {
 
         // arrange
-        byte[] xjdf = loadFile("validator-invalid_semantic-1.xjdf");
+        byte[] xjdf = TestResources.loadXml("validator-invalid_semantic-1.xjdf");
 
         // act / assert
         xJdfValidator.validateSyntax(xjdf);
@@ -50,7 +50,7 @@ public class XJdfValidatorTest {
     public void validate_invalid_syntax_1() throws Exception {
 
         // arrange
-        byte[] xjdf = loadFile("validator-invalid_syntax-1.xjdf");
+        byte[] xjdf = TestResources.loadXml("validator-invalid_syntax-1.xjdf");
 
         // act / assert
         assertThrows(
@@ -68,7 +68,7 @@ public class XJdfValidatorTest {
     public void validate_valid_1() throws Exception {
 
         // arrange
-        byte[] xjdf = loadFile("validator-valid.xjdf");
+        byte[] xjdf = TestResources.loadXml("validator-valid.xjdf");
 
         // act / assert (no exception)
         xJdfValidator.validateSyntax(xjdf);
@@ -82,7 +82,7 @@ public class XJdfValidatorTest {
     public void validate_foreign_namespace_1() throws Exception {
 
         // arrange
-        byte[] xjdf = loadFile("validator_foreign-namespace.xjdf");
+        byte[] xjdf = TestResources.loadXml("validator_foreign-namespace.xjdf");
 
         // act / assert (no exception)
         xJdfValidator.validateSyntax(xjdf);
@@ -96,7 +96,7 @@ public class XJdfValidatorTest {
     public void validate_test() throws Exception {
 
         // arrange
-        byte[] xjdf = loadFile("validator-test.xjdf");
+        byte[] xjdf = TestResources.loadXml("validator-test.xjdf");
 
         // act / assert (no exception)
         xJdfValidator.validateSyntax(xjdf);
@@ -112,14 +112,6 @@ public class XJdfValidatorTest {
         );
     }
 
-    /**
-     * Helper method to load a file.
-     * @param filename The files name.
-     * @return The file as byte array.
-     */
-    private byte[] loadFile(String filename) throws IOException {
-        return XJdfValidatorTest.class.getResourceAsStream("/org/cip4/lib/xjdf/xml/" + filename).readAllBytes();
-    }
 
     @Test
     public void integrationInvalid() throws Exception {

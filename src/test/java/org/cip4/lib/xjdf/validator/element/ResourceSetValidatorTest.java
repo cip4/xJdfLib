@@ -4,11 +4,8 @@ import org.cip4.lib.xjdf.schema.DeliveryParams;
 import org.cip4.lib.xjdf.schema.ObjectFactory;
 import org.cip4.lib.xjdf.schema.Resource;
 import org.cip4.lib.xjdf.schema.ResourceSet;
-import static org.cip4.lib.xjdf.validator.element.ElementValid.isValid;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ResourceSetValidatorTest {
 
@@ -25,7 +22,7 @@ public class ResourceSetValidatorTest {
         parameterSet.withResource(objectFactory.createResource().withSpecificResource(objectFactory.createDeliveryParams(new DeliveryParams())));
 
         ResourceSetValidator validator = new ResourceSetValidator();
-        assertThat(parameterSet, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, parameterSet);
     }
 
     @Test
@@ -34,7 +31,7 @@ public class ResourceSetValidatorTest {
 
         ResourceSetValidator validator = new ResourceSetValidator();
 
-        assertThat(parameterSet, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, parameterSet);
     }
 
     @Test
@@ -73,6 +70,6 @@ public class ResourceSetValidatorTest {
 
         ResourceSetValidator validator = new ResourceSetValidator();
 
-        assertThat(parameterSet, isValid(validator));
+        ValidationAssertions.assertIsValid(validator, parameterSet);
     }
 }

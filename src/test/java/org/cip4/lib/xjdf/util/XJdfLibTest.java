@@ -28,7 +28,6 @@ class XJdfLibTest {
         String buildDate = XJdfLib.BUILD_DATE;
 
         // assert
-        System.out.println(buildDate);
         assertTrue(buildDate.matches("20[0-9]{2}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z"));// ISO8601
     }
 

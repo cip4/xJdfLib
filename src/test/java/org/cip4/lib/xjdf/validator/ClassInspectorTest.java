@@ -1,15 +1,15 @@
 package org.cip4.lib.xjdf.validator;
 
 import jakarta.xml.bind.annotation.XmlIDREF;
-import org.hamcrest.collection.IsIterableContainingInAnyOrder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ClassInspectorTest {
 
@@ -70,24 +70,20 @@ public class ClassInspectorTest {
 
     @Test
     public void gettersContainsExactlyTheGetters() throws Exception {
-        assertThat(
-            stubClassInspector.getGetters(),
-            IsIterableContainingInAnyOrder.containsInAnyOrder(
-                StubClass.class.getDeclaredMethod("getBoringField"),
-                StubClass.class.getDeclaredMethod("getFieldWithReference")
-            )
-        );
+        assertGettersAreExactlyTheExpectedOnes(stubClassInspector);
     }
 
     @Test
     public void gettersContainsGettersOfParentClass() throws Exception {
-        assertThat(
-            stubChildClassInspector.getGetters(),
-            IsIterableContainingInAnyOrder.containsInAnyOrder(
-                StubClass.class.getDeclaredMethod("getBoringField"),
-                StubClass.class.getDeclaredMethod("getFieldWithReference")
-            )
-        );
+        assertGettersAreExactlyTheExpectedOnes(stubChildClassInspector);
+    }
+
+    private void assertGettersAreExactlyTheExpectedOnes(ClassInspector inspector) throws Exception {
+        List<Method> getters = new ArrayList<>(inspector.getGetters());
+
+        assertEquals(2, getters.size());
+        assertTrue(getters.contains(StubClass.class.getDeclaredMethod("getBoringField")));
+        assertTrue(getters.contains(StubClass.class.getDeclaredMethod("getFieldWithReference")));
     }
 
     @Test

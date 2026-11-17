@@ -41,6 +41,11 @@ import java.util.List;
 public class XJdfValidator {
 
     /**
+     * The compiled XJDF schema, created lazily and reused across validations.
+     */
+    private static volatile Schema xjdfSchema;
+
+    /**
      * Default constructor.
      */
     public XJdfValidator() {
@@ -100,17 +105,11 @@ public class XJdfValidator {
      */
     final void validateSemantic(final byte[] xjdf) throws XJdfValidationException {
         try {
-            // create a SchemaFactory and a Schema
-            SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-
-            StreamSource xsdSource = new StreamSource(new ByteArrayInputStream(XJdfConstants.XJDF_XSD_BYTES_CURRENT));
-            Schema schema = schemaFactory.newSchema(xsdSource);
-
             // new error handler
             XJdfErrorHandler errorHandler = new XJdfErrorHandler();
 
             // validate
-            Validator validator = schema.newValidator();
+            Validator validator = getXjdfSchema().newValidator();
             validator.setErrorHandler(errorHandler);
             validator.validate(new StreamSource(new ByteArrayInputStream(xjdf)));
 
@@ -126,6 +125,34 @@ public class XJdfValidator {
         } catch (SAXException | IOException e) {
             throw new XJdfValidationException(e.getMessage(), e);
         }
+    }
+
+    /**
+     * Returns the compiled XJDF schema, creating it once on first use.
+     *
+     * @return The compiled schema.
+     *
+     * @throws SAXException in case the bundled XJDF schema cannot be compiled.
+     */
+    private static Schema getXjdfSchema() throws SAXException {
+        Schema result = xjdfSchema;
+
+        if (result == null) {
+            synchronized (XJdfValidator.class) {
+                result = xjdfSchema;
+
+                if (result == null) {
+                    SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+                    StreamSource xsdSource = new StreamSource(
+                        new ByteArrayInputStream(XJdfConstants.XJDF_XSD_BYTES_CURRENT)
+                    );
+                    result = schemaFactory.newSchema(xsdSource);
+                    xjdfSchema = result;
+                }
+            }
+        }
+
+        return result;
     }
 
     /**

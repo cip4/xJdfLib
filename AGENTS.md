@@ -66,8 +66,9 @@ Never commit that file unless the schema update is the point of the change.
 ## Conventions
 
 - Group id `org.cip4.lib.xjdf`; public API in `org.cip4.lib.xjdf`.
-- Tests use JUnit 5 (Jupiter), including `junit-jupiter-params`, junit-pioneer, Mockito and Hamcrest.
+- Tests use JUnit 5 (Jupiter), including `junit-jupiter-params`, junit-pioneer and Mockito.
   Prefer parameterized tests, round-trip tests and explicit invalid-input tests.
+  Assertions use JUnit `Assertions` (no Hamcrest).
 - Keep public API changes backwards compatible unless the change is explicitly a breaking release.
   Return `null` for absent values where the existing API does so; do not switch to `Optional` in public signatures.
 - Do not add comments to code unless they explain non-obvious behaviour.

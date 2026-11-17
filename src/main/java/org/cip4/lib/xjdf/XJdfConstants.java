@@ -29,17 +29,20 @@ public class XJdfConstants {
     }
 
     /**
-     * Namespace XJDF,
+     * Namespace XJDF.
      */
     public static final String NAMESPACE_JDF20 = "http://www.CIP4.org/JDFSchema_2_0";
 
     /**
-     * Namespace XML
+     * Namespace XML.
+     *
+     * @deprecated Not used by xJdfLib; it will be removed in a future release.
      */
+    @Deprecated(since = "2.3", forRemoval = true)
     public static final String NAMESPACE_W3_XML = "http://www.w3.org/2001/XMLSchema";
 
     /**
-     * A map containing all XJDF Schemes as byte array.
+     * A map containing all XJDF schemas as byte arrays. The map is unmodifiable.
      */
     public static final Map<Version, byte[]> XJDF_XSD_BYTES = loadXJdfXsdByteArray();
 
@@ -54,7 +57,7 @@ public class XJdfConstants {
     public static final String XJDF_SCHEMA_LOCATION = "https://schema.cip4.org/jdfschema_2_x/xjdf.xsd";
 
     /**
-     * Returns the current XJDF Version
+     * Returns the current XJDF schema as byte array. Do not modify the returned array.
      */
     public static final byte[] XJDF_XSD_BYTES_CURRENT = XJDF_XSD_BYTES.get(XJDF_CURRENT_VERSION);
 
@@ -94,49 +97,31 @@ public class XJdfConstants {
     public static String AGENT_VERSION = null;
 
     /**
-     * Helper method to load all XJDF schemes as a map of byte array.
+     * Helper method to load all XJDF schemas as a map of byte arrays.
      *
-     * @return XJDF Schemes as byte array map.
+     * @return XJDF schemas as an unmodifiable byte array map.
      */
     private static Map<Version, byte[]> loadXJdfXsdByteArray() {
+        Map<Version, String> schemas = Map.of(
+            Version.V2_0, "/org/cip4/lib/xjdf/schema/jdfschema_2_0.xsd",
+            Version.V2_1, "/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd",
+            Version.V2_2, "/org/cip4/lib/xjdf/schema/jdfschema_2_2.xsd",
+            Version.V2_3, "/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd"
+        );
+
         Map<Version, byte[]> xsdMap = new HashMap<>();
 
-        try {
-            xsdMap.put(
-                    Version.V2_0,
-                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_0.xsd"
-                    ).readAllBytes());
-        } catch (Exception e) {
-            throw new RuntimeException("Error loading XJDF Schema 2.0", e);
-        }
+        schemas.forEach((version, resource) -> {
+            try (java.io.InputStream stream = XJdfConstants.class.getResourceAsStream(resource)) {
+                if (stream == null) {
+                    throw new RuntimeException("XJDF schema not found: " + resource);
+                }
+                xsdMap.put(version, stream.readAllBytes());
+            } catch (java.io.IOException e) {
+                throw new RuntimeException("Error loading XJDF schema: " + resource, e);
+            }
+        });
 
-        try{
-            xsdMap.put(
-                    Version.V2_1,
-                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_1.xsd"
-                    ).readAllBytes());
-        } catch (Exception e) {
-            throw new RuntimeException("Error loading XJDF Schema 2.1", e);
-        }
-
-        try{
-            xsdMap.put(
-                    Version.V2_2,
-                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_2.xsd"
-                    ).readAllBytes());
-        } catch (Exception e) {
-            throw new RuntimeException("Error loading XJDF Schema 2.2", e);
-        }
-
-        try{
-            xsdMap.put(
-                    Version.V2_3,
-                    XJdfConstants.class.getResourceAsStream("/org/cip4/lib/xjdf/schema/jdfschema_2_x.xsd"
-                    ).readAllBytes());
-        } catch (Exception e) {
-            throw new RuntimeException("Error loading XJDF Schema 2.x", e);
-        }
-
-        return xsdMap;
+        return java.util.Collections.unmodifiableMap(xsdMap);
     }
 }
