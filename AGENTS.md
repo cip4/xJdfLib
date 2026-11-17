@@ -75,7 +75,7 @@ Never commit that file unless the schema update is the point of the change.
 
 ## CI
 
-- `.github/workflows/pull-request.yml` runs `gradlew test` on Ubuntu, macOS and Windows.
+- `.github/workflows/pull-request.yml` runs `gradlew test` on Ubuntu and Windows.
 - `.github/workflows/publish.yml` publishes snapshots on pushes to `main` and releases on `X.Y.Z` tag pushes.
   It uses the composite action `.github/actions/setup` and requires the secrets
   `SIGNING_KEY`, `SIGNING_KEY_ID`, `SIGNING_PASSWORD`, `OSSRH_USERNAME`, `OSSRH_PASSWORD`.
