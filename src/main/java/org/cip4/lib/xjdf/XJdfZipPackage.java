@@ -141,6 +141,26 @@ public class XJdfZipPackage {
     }
 
     /**
+     * Returns a copy of this package with the XJDF document replaced. The entry name and all other files are kept
+     * unchanged; the document stays the first entry.
+     *
+     * @param xJdfDocument The new XJDF document.
+     *
+     * @return The new package.
+     *
+     * @throws XJdfValidationException in case the document is invalid.
+     * @throws XJdfParseException in case the document cannot be serialized.
+     */
+    public XJdfZipPackage replaceXJdfDocument(@NotNull final XJdfDocument xJdfDocument)
+        throws XJdfValidationException, XJdfParseException {
+
+        Map<URI, byte[]> otherFiles = new LinkedHashMap<>(files);
+        otherFiles.remove(xjdfUri);
+
+        return new XJdfZipPackage(xjdfUri, xJdfDocument, otherFiles);
+    }
+
+    /**
      * Returns list of all files.
      *
      * @return Set of file URIs, in archive order.

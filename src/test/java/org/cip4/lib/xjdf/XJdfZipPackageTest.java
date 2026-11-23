@@ -199,6 +199,65 @@ class XJdfZipPackageTest {
         );
     }
 
+    @Test
+    void replaceXJdfDocumentReplacesTheDocument() throws Exception {
+
+        // arrange
+        XJdfZipPackage xJdfZipPackage = new XJdfZipPackage.Builder()
+            .withXJdfDocument(new URI("0b520d.xjdf"), newXJdfDocument())
+            .withFile(new URI("artwork/testArtwork.pdf"), ARTWORK)
+            .build();
+        XJdfDocument replacement = new XJdfDocument("c0ffee", "PreviewGeneration");
+
+        // act
+        XJdfZipPackage replaced = xJdfZipPackage.replaceXJdfDocument(replacement);
+
+        // assert
+        Assertions.assertEquals(new URI("0b520d.xjdf"), replaced.getXJdfUri());
+        Assertions.assertEquals("c0ffee", replaced.getXJdfDocument().getXJdf().getJobID());
+    }
+
+    @Test
+    void replaceXJdfDocumentKeepsOtherFilesAndOrder() throws Exception {
+
+        // arrange
+        XJdfZipPackage xJdfZipPackage = new XJdfZipPackage.Builder()
+            .withXJdfDocument(new URI("0b520d.xjdf"), newXJdfDocument())
+            .withFile(new URI("artwork/testArtwork.pdf"), ARTWORK)
+            .build();
+
+        // act
+        XJdfZipPackage replaced =
+            xJdfZipPackage.replaceXJdfDocument(new XJdfDocument("c0ffee", "PreviewGeneration"));
+
+        // assert
+        Assertions.assertEquals(2, replaced.listFiles().size());
+        Assertions.assertArrayEquals(ARTWORK, replaced.getFile("artwork/testArtwork.pdf"));
+        Map<URI, byte[]> entries = ZipArchive.read(replaced.packageFiles());
+        Assertions.assertEquals(
+            new URI("0b520d.xjdf"),
+            entries.keySet().iterator().next(),
+            "The XJDF document must be the first entry of the archive."
+        );
+    }
+
+    @Test
+    void replaceXJdfDocumentLeavesTheOriginalUnchanged() throws Exception {
+
+        // arrange
+        XJdfZipPackage xJdfZipPackage = new XJdfZipPackage.Builder()
+            .withXJdfDocument(new URI("0b520d.xjdf"), newXJdfDocument())
+            .withFile(new URI("artwork/testArtwork.pdf"), ARTWORK)
+            .build();
+
+        // act
+        xJdfZipPackage.replaceXJdfDocument(new XJdfDocument("c0ffee", "PreviewGeneration"));
+
+        // assert
+        Assertions.assertEquals("0b520d", xJdfZipPackage.getXJdfDocument().getXJdf().getJobID());
+        Assertions.assertArrayEquals(ARTWORK, xJdfZipPackage.getFile("artwork/testArtwork.pdf"));
+    }
+
     /**
      * Creates a document that references an artwork file.
      */
