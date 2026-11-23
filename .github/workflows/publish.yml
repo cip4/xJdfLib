@@ -21,6 +21,9 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      # Limit the submitted dependency graph to the dependencies of the library itself.
+      DEPENDENCY_GRAPH_INCLUDE_CONFIGURATIONS: '^(compileClasspath|runtimeClasspath)$'
     steps:
       - name: Check out sources...
         uses: actions/checkout@v7
@@ -30,7 +33,8 @@ jobs:
       - name: Set up build environment
         uses: ./.github/actions/setup
         with:
-          dependency-graph: generate-and-submit
+          # Submit the dependency graph only from the default branch; GitHub ignores snapshots from other refs.
+          dependency-graph: ${{ github.ref_type == 'tag' && 'disabled' || 'generate-and-submit' }}
 
       - name: Determine version
         id: version
@@ -98,43 +102,3 @@ jobs:
           else
             gh release create "$TAG" build/libs/* --generate-notes
           fi
-
-  javadoc-io:
-    name: Warm javadoc.io
-    needs: publish
-    if: github.ref_type == 'tag'
-    runs-on: ubuntu-latest
-    timeout-minutes: 180
-    steps:
-      - name: Wait for Maven Central and javadoc.io
-        env:
-          VERSION: ${{ github.ref_name }}
-          ARTIFACT: xJdfLib
-          GROUP_PATH: org/cip4/lib/xjdf
-        run: |
-          central="https://repo1.maven.org/maven2/${GROUP_PATH}/${ARTIFACT}/${VERSION}/${ARTIFACT}-${VERSION}-javadoc.jar"
-          static="https://javadoc.io/static/org.cip4.lib.xjdf/${ARTIFACT}/${VERSION}/index.html"
-
-          echo "Waiting for ${central} ..."
-          for i in $(seq 1 90); do
-            if [ "$(curl -s -o /dev/null -w '%{http_code}' -I "$central")" = "200" ]; then
-              echo "Maven Central synced after ${i} attempt(s)."
-              break
-            fi
-            if [ "$i" = "90" ]; then
-              echo "::error::Javadoc jar did not appear on Maven Central within 90 minutes."
-              exit 1
-            fi
-            sleep 60
-          done
-
-          echo "Priming javadoc.io ..."
-          for i in $(seq 1 60); do
-            if [ "$(curl -s -o /dev/null -w '%{http_code}' "$static")" = "200" ]; then
-              echo "javadoc.io is serving ${VERSION}."
-              exit 0
-            fi
-            sleep 60
-          done
-          echo "::error::javadoc.io did not serve ${VERSION} within 60 minutes after Central sync."
-          exit 1

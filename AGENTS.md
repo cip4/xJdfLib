@@ -80,5 +80,6 @@ Never commit that file unless the schema update is the point of the change.
 - `.github/workflows/publish.yml` publishes snapshots on pushes to `main` and releases on `X.Y.Z` tag pushes.
   It uses the composite action `.github/actions/setup` and requires the secrets
   `SIGNING_KEY`, `SIGNING_KEY_ID`, `SIGNING_PASSWORD`, `OSSRH_USERNAME`, `OSSRH_PASSWORD`.
-  For tags, a `javadoc-io` job waits for Maven Central and pre-warms the javadoc.io page for the new version.
+- The dependency graph is submitted only from pushes to `main` (not from release tags) and only contains the
+  library's own dependencies (`compileClasspath`/`runtimeClasspath`), not the code generation or build classpath.
 - CodeQL runs through GitHub "Default setup"; there is no CodeQL workflow file.
